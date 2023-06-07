@@ -89,7 +89,7 @@ class CovidMaterialListSearchBarState
             },
             onSearchSubmitted: (value) {
               context.read<CovidMaterialListBloc>().add(
-                    CovidMaterialListEvent.searchMaterialList(
+                    CovidMaterialListEvent.autoSearchMaterialList(
                       user: context.read<UserBloc>().state.user,
                       salesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
@@ -127,9 +127,11 @@ class CovidMaterialListSearchBarState
               context.read<MaterialFilterBloc>().add(
                     const MaterialFilterEvent.clearSelected(),
                   );
+              if (_searchController.text.isEmpty) return;
+              _searchController.clear();
               // fetch code goes here
               context.read<CovidMaterialListBloc>().add(
-                    CovidMaterialListEvent.fetch(
+                    CovidMaterialListEvent.deletedSearchMaterialList(
                       user: context.read<UserBloc>().state.user,
                       salesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,

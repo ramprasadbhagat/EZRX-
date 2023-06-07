@@ -148,7 +148,6 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class MaterialListRepositoryMock extends Mock
     implements MaterialListRepository {}
 
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -1003,7 +1002,7 @@ void main() {
       await tester.pump();
       verify(
         () => materialListBlocMock.add(
-          MaterialListEvent.fetch(
+          MaterialListEvent.deletedSearchMaterialList(
             user: User.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             configs: SalesOrganisationConfigs.empty(),
@@ -1012,6 +1011,7 @@ void main() {
             selectedMaterialFilter: MaterialFilter.empty(),
             orderDocumentType: OrderDocumentType.empty(),
             pickAndPack: '',
+            searchKey: SearchKey(''),
           ),
         ),
       ).called(1);
@@ -1955,7 +1955,6 @@ void main() {
     testWidgets(
         'Opening add to cart after scanning and fetching price successfully',
         (tester) async {
-
       whenListen(
         mockScanMaterialInfoBloc,
         Stream.fromIterable(

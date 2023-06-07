@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({
+    required this.onSearchChanged,
     Key? key,
     required this.suffixIconKey,
     this.prefixIconKey,
@@ -16,7 +17,7 @@ class SearchBar extends StatefulWidget {
     this.isDense,
     required this.onClear,
     this.border,
-    this.onSearchChanged,
+    this.isAutoSearch = true,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -28,7 +29,8 @@ class SearchBar extends StatefulWidget {
   final Key? prefixIconKey;
   final InputBorder? border;
   final bool Function()? customValidator;
-  final void Function(String)? onSearchChanged;
+  final void Function(String) onSearchChanged;
+  final bool isAutoSearch;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -89,13 +91,17 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   void _onSearchChanged(BuildContext context, String value) {
-    final isValid = _isValid();
-    if (isValid) {
       if (_debounce?.isActive ?? false) _debounce?.cancel();
-      _debounce = Timer(const Duration(milliseconds: 3000), () {
-        widget.onSearchChanged?.call(value);
-      });
-    }
+      final isValid = _isValid();
+      if (isValid) {
+        if (widget.isAutoSearch) {
+          _debounce = Timer(const Duration(milliseconds: 3000), () {
+            widget.onSearchChanged.call(value);
+          });
+        } else {
+          widget.onSearchChanged.call(value);
+        }
+      }
   }
 
   void _onClear() {

@@ -136,14 +136,12 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
               context.read<MaterialFilterBloc>().add(
                     const MaterialFilterEvent.clearSelected(),
                   );
-
-              context.read<MaterialListBloc>().add(
-                    const MaterialListEvent.updateSearchKey(
-                      searchKey: '',
-                    ),
-                  );
+              if (_searchController.text.isEmpty) return;
+              _searchController.clear();
               // fetch code goes here
-              context.read<MaterialListBloc>().add(MaterialListEvent.fetch(
+              context
+                  .read<MaterialListBloc>()
+                  .add(MaterialListEvent.deletedSearchMaterialList(
                     user: context.read<UserBloc>().state.user,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
@@ -163,6 +161,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                         .read<EligibilityBloc>()
                         .state
                         .getPNPValueMaterial,
+                    searchKey: SearchKey(''),
                   ));
             },
           );

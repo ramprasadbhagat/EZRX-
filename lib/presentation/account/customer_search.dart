@@ -151,7 +151,7 @@ class _AppBarState extends State<_AppBar> {
               if (_searchController.text.isEmpty) return;
               _searchController.clear();
                 _customerCodeBloc.add(
-                  CustomerCodeEvent.fetch(
+                  CustomerCodeEvent.deletedSearch(
                     userInfo: _userBloc.state.user,
                     selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
                     hidecustomer: _salesOrgBloc.state.hideCustomer,

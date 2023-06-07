@@ -62,6 +62,18 @@ mixin _$MaterialListEvent {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +122,18 @@ mixin _$MaterialListEvent {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -158,6 +182,18 @@ mixin _$MaterialListEvent {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +206,8 @@ mixin _$MaterialListEvent {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -180,6 +218,8 @@ mixin _$MaterialListEvent {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -190,6 +230,8 @@ mixin _$MaterialListEvent {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -295,6 +337,18 @@ class _$_Initialized implements _Initialized {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) {
     return initialized();
   }
@@ -346,6 +400,18 @@ class _$_Initialized implements _Initialized {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) {
     return initialized?.call();
   }
@@ -397,6 +463,18 @@ class _$_Initialized implements _Initialized {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -415,6 +493,8 @@ class _$_Initialized implements _Initialized {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) {
     return initialized(this);
   }
@@ -428,6 +508,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) {
     return initialized?.call(this);
   }
@@ -441,6 +523,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -712,6 +796,18 @@ class _$_Fetch implements _Fetch {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) {
     return fetch(user, salesOrganisation, configs, customerCodeInfo, shipToInfo,
         selectedMaterialFilter, orderDocumentType, pickAndPack);
@@ -764,6 +860,18 @@ class _$_Fetch implements _Fetch {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) {
     return fetch?.call(user, salesOrganisation, configs, customerCodeInfo,
         shipToInfo, selectedMaterialFilter, orderDocumentType, pickAndPack);
@@ -816,6 +924,18 @@ class _$_Fetch implements _Fetch {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -835,6 +955,8 @@ class _$_Fetch implements _Fetch {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) {
     return fetch(this);
   }
@@ -848,6 +970,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) {
     return fetch?.call(this);
   }
@@ -861,6 +985,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -1159,6 +1285,18 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) {
     return searchMaterialList(
         user,
@@ -1219,6 +1357,18 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) {
     return searchMaterialList?.call(
         user,
@@ -1279,6 +1429,18 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (searchMaterialList != null) {
@@ -1306,6 +1468,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) {
     return searchMaterialList(this);
   }
@@ -1319,6 +1483,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) {
     return searchMaterialList?.call(this);
   }
@@ -1332,6 +1498,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (searchMaterialList != null) {
@@ -1632,6 +1800,18 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) {
     return autoSearchMaterialList(
         user,
@@ -1692,6 +1872,18 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) {
     return autoSearchMaterialList?.call(
         user,
@@ -1752,6 +1944,18 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (autoSearchMaterialList != null) {
@@ -1779,6 +1983,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) {
     return autoSearchMaterialList(this);
   }
@@ -1792,6 +1998,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) {
     return autoSearchMaterialList?.call(this);
   }
@@ -1805,6 +2013,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (autoSearchMaterialList != null) {
@@ -1949,6 +2159,18 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) {
     return updateSearchKey(searchKey);
   }
@@ -2000,6 +2222,18 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) {
     return updateSearchKey?.call(searchKey);
   }
@@ -2051,6 +2285,18 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -2069,6 +2315,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) {
     return updateSearchKey(this);
   }
@@ -2082,6 +2330,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -2095,6 +2345,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -2374,6 +2626,18 @@ class _$_LoadMore implements _LoadMore {
             OrderDocumentType orderDocumentType,
             String pickAndPack)
         loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
   }) {
     return loadMore(user, salesOrganisation, configs, customerCodeInfo,
         shipToInfo, selectedMaterialFilter, orderDocumentType, pickAndPack);
@@ -2426,6 +2690,18 @@ class _$_LoadMore implements _LoadMore {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
   }) {
     return loadMore?.call(user, salesOrganisation, configs, customerCodeInfo,
         shipToInfo, selectedMaterialFilter, orderDocumentType, pickAndPack);
@@ -2478,6 +2754,18 @@ class _$_LoadMore implements _LoadMore {
             OrderDocumentType orderDocumentType,
             String pickAndPack)?
         loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -2497,6 +2785,8 @@ class _$_LoadMore implements _LoadMore {
         autoSearchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
   }) {
     return loadMore(this);
   }
@@ -2510,6 +2800,8 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
   }) {
     return loadMore?.call(this);
   }
@@ -2523,6 +2815,8 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -2554,6 +2848,549 @@ abstract class _LoadMore implements MaterialListEvent {
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeletedSearchMaterialListCopyWith<$Res> {
+  factory _$$_DeletedSearchMaterialListCopyWith(
+          _$_DeletedSearchMaterialList value,
+          $Res Function(_$_DeletedSearchMaterialList) then) =
+      __$$_DeletedSearchMaterialListCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {User user,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      MaterialFilter selectedMaterialFilter,
+      OrderDocumentType orderDocumentType,
+      String pickAndPack,
+      SearchKey searchKey,
+      bool isScanSearch});
+
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
+}
+
+/// @nodoc
+class __$$_DeletedSearchMaterialListCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$_DeletedSearchMaterialList>
+    implements _$$_DeletedSearchMaterialListCopyWith<$Res> {
+  __$$_DeletedSearchMaterialListCopyWithImpl(
+      _$_DeletedSearchMaterialList _value,
+      $Res Function(_$_DeletedSearchMaterialList) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? salesOrganisation = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? selectedMaterialFilter = null,
+    Object? orderDocumentType = null,
+    Object? pickAndPack = null,
+    Object? searchKey = null,
+    Object? isScanSearch = null,
+  }) {
+    return _then(_$_DeletedSearchMaterialList(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      selectedMaterialFilter: null == selectedMaterialFilter
+          ? _value.selectedMaterialFilter
+          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
+      orderDocumentType: null == orderDocumentType
+          ? _value.orderDocumentType
+          : orderDocumentType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
+      pickAndPack: null == pickAndPack
+          ? _value.pickAndPack
+          : pickAndPack // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+      isScanSearch: null == isScanSearch
+          ? _value.isScanSearch
+          : isScanSearch // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
+        (value) {
+      return _then(_value.copyWith(selectedMaterialFilter: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType {
+    return $OrderDocumentTypeCopyWith<$Res>(_value.orderDocumentType, (value) {
+      return _then(_value.copyWith(orderDocumentType: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
+  _$_DeletedSearchMaterialList(
+      {required this.user,
+      required this.salesOrganisation,
+      required this.configs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.selectedMaterialFilter,
+      required this.orderDocumentType,
+      required this.pickAndPack,
+      required this.searchKey,
+      this.isScanSearch = false});
+
+  @override
+  final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final MaterialFilter selectedMaterialFilter;
+  @override
+  final OrderDocumentType orderDocumentType;
+  @override
+  final String pickAndPack;
+  @override
+  final SearchKey searchKey;
+  @override
+  @JsonKey()
+  final bool isScanSearch;
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.deletedSearchMaterialList(user: $user, salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, orderDocumentType: $orderDocumentType, pickAndPack: $pickAndPack, searchKey: $searchKey, isScanSearch: $isScanSearch)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeletedSearchMaterialList &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
+                other.selectedMaterialFilter == selectedMaterialFilter) &&
+            (identical(other.orderDocumentType, orderDocumentType) ||
+                other.orderDocumentType == orderDocumentType) &&
+            (identical(other.pickAndPack, pickAndPack) ||
+                other.pickAndPack == pickAndPack) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
+            (identical(other.isScanSearch, isScanSearch) ||
+                other.isScanSearch == isScanSearch));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      salesOrganisation,
+      configs,
+      customerCodeInfo,
+      shipToInfo,
+      selectedMaterialFilter,
+      orderDocumentType,
+      pickAndPack,
+      searchKey,
+      isScanSearch);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeletedSearchMaterialListCopyWith<_$_DeletedSearchMaterialList>
+      get copyWith => __$$_DeletedSearchMaterialListCopyWithImpl<
+          _$_DeletedSearchMaterialList>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack)
+        fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        searchMaterialList,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        autoSearchMaterialList,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack)
+        loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
+  }) {
+    return deletedSearchMaterialList(
+        user,
+        salesOrganisation,
+        configs,
+        customerCodeInfo,
+        shipToInfo,
+        selectedMaterialFilter,
+        orderDocumentType,
+        pickAndPack,
+        searchKey,
+        isScanSearch);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        searchMaterialList,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        autoSearchMaterialList,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack)?
+        loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
+  }) {
+    return deletedSearchMaterialList?.call(
+        user,
+        salesOrganisation,
+        configs,
+        customerCodeInfo,
+        shipToInfo,
+        selectedMaterialFilter,
+        orderDocumentType,
+        pickAndPack,
+        searchKey,
+        isScanSearch);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        searchMaterialList,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        autoSearchMaterialList,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack)?
+        loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
+    required TResult orElse(),
+  }) {
+    if (deletedSearchMaterialList != null) {
+      return deletedSearchMaterialList(
+          user,
+          salesOrganisation,
+          configs,
+          customerCodeInfo,
+          shipToInfo,
+          selectedMaterialFilter,
+          orderDocumentType,
+          pickAndPack,
+          searchKey,
+          isScanSearch);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMaterialList value) searchMaterialList,
+    required TResult Function(_AutoSearchMaterialList value)
+        autoSearchMaterialList,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
+  }) {
+    return deletedSearchMaterialList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SearchMaterialList value)? searchMaterialList,
+    TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
+  }) {
+    return deletedSearchMaterialList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMaterialList value)? searchMaterialList,
+    TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
+    required TResult orElse(),
+  }) {
+    if (deletedSearchMaterialList != null) {
+      return deletedSearchMaterialList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeletedSearchMaterialList implements MaterialListEvent {
+  factory _DeletedSearchMaterialList(
+      {required final User user,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs configs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final MaterialFilter selectedMaterialFilter,
+      required final OrderDocumentType orderDocumentType,
+      required final String pickAndPack,
+      required final SearchKey searchKey,
+      final bool isScanSearch}) = _$_DeletedSearchMaterialList;
+
+  User get user;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get configs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  MaterialFilter get selectedMaterialFilter;
+  OrderDocumentType get orderDocumentType;
+  String get pickAndPack;
+  SearchKey get searchKey;
+  bool get isScanSearch;
+  @JsonKey(ignore: true)
+  _$$_DeletedSearchMaterialListCopyWith<_$_DeletedSearchMaterialList>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

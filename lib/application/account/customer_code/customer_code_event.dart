@@ -39,4 +39,11 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required SalesOrganisation selectedSalesOrg,
     required String searchValue,
   }) = _AutoSearch;
+
+  const factory CustomerCodeEvent.deletedSearch({
+    @Default('') String searchText,
+    required bool hidecustomer,
+    required User userInfo,
+    required SalesOrganisation selectedSalesOrg,
+  }) = _DeletedSearch;
 }

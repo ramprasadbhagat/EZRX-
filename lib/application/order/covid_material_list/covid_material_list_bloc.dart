@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -12,7 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/transformers.dart';
 
 part 'covid_material_list_event.dart';
 part 'covid_material_list_state.dart';
@@ -29,53 +29,58 @@ class CovidMaterialListBloc
     on<_Initialized>((e, emit) async {
       emit(CovidMaterialListState.initial());
     });
-    on<_Fetch>((e, emit) async {
-      emit(
-        state.copyWith(
-          isFetching: true,
-          materialList: <MaterialInfo>[],
-          nextPageIndex: 0,
-          apiFailureOrSuccessOption: none(),
-          searchKey: SearchKey(e.searchKey),
-        ),
-      );
-      final failureOrSuccess = await materialListRepository.getMaterialList(
-        user: e.user,
-        salesOrganisation: e.salesOrganisation,
-        salesOrgConfig: e.configs,
-        customerCodeInfo: e.customerCodeInfo,
-        shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
-        offset: 0,
-        orderBy: 'materialDescription_asc',
-        searchKey: e.searchKey,
-        pickAndPack: e.pickAndPack,
-        isForFoc: !e.user.role.type.isSalesRepRole,
-        selectedMaterialFilter: MaterialFilter.empty(),
-        orderDocumentType: OrderDocumentType.empty(),
-      );
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (materialList) {
-          emit(
-            state.copyWith(
-              materialList: materialList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-              canLoadMore: materialList.length >= _pageSize,
-              nextPageIndex: 1,
-            ),
-          );
-        },
-      );
-    });
+    on<_Fetch>(
+      (e, emit) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            materialList: <MaterialInfo>[],
+            nextPageIndex: 0,
+            apiFailureOrSuccessOption: none(),
+            searchKey: SearchKey(e.searchKey),
+          ),
+        );
+        final failureOrSuccess = await materialListRepository.getMaterialList(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0,
+          orderBy: 'materialDescription_asc',
+          searchKey: e.searchKey,
+          pickAndPack: e.pickAndPack,
+          isForFoc: !e.user.role.type.isSalesRepRole,
+          selectedMaterialFilter: MaterialFilter.empty(),
+          orderDocumentType: OrderDocumentType.empty(),
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialList) {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                materialList: materialList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+                canLoadMore: materialList.length >= _pageSize,
+                nextPageIndex: 1,
+              ),
+            );
+          },
+        );
+      },
+      transformer: restartable(),
+    );
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
       emit(
@@ -124,52 +129,58 @@ class CovidMaterialListBloc
         },
       );
     });
-    on<_SearchMaterialList>((e, emit) async {
-      emit(
-        state.copyWith(
-          searchKey: SearchKey(e.searchKey),
-          materialList: <MaterialInfo>[],
-          nextPageIndex: 0,
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-      final failureOrSuccess = await materialListRepository.searchMaterialList(
-        user: e.user,
-        salesOrganisation: e.salesOrganisation,
-        salesOrgConfig: e.configs,
-        customerCodeInfo: e.customerCodeInfo,
-        shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
-        offset: 0, //state.materialList.length,
-        orderBy: 'materialDescription_asc',
-        searchKey: e.searchKey,
-        selectedMaterialFilter: e.selectedMaterialFilter,
-        pickAndPack: e.pickAndPack,
-        isForFoc: !e.user.role.type.isSalesRepRole,
-      );
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (materialList) async {
-          emit(
-            state.copyWith(
-              materialList: materialList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-              canLoadMore: materialList.length >= _pageSize,
-              nextPageIndex: state.nextPageIndex + 1,
-            ),
-          );
-        },
-      );
-    });
+    on<_SearchMaterialList>(
+      (e, emit) async {
+        emit(
+          state.copyWith(
+            searchKey: SearchKey(e.searchKey),
+            materialList: <MaterialInfo>[],
+            nextPageIndex: 0,
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+        final failureOrSuccess =
+            await materialListRepository.searchMaterialList(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0, //state.materialList.length,
+          orderBy: 'materialDescription_asc',
+          searchKey: e.searchKey,
+          selectedMaterialFilter: e.selectedMaterialFilter,
+          pickAndPack: e.pickAndPack,
+          isForFoc: !e.user.role.type.isSalesRepRole,
+        );
+        await failureOrSuccess.fold(
+          (failure) async {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialList) async {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                materialList: materialList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+                canLoadMore: materialList.length >= _pageSize,
+                nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+          },
+        );
+      },
+      transformer: restartable(),
+    );
     on<_AutoSearchMaterialList>(
       (e, emit) async {
         if (e.searchKey != state.searchKey.getValue()) {
@@ -185,11 +196,19 @@ class CovidMaterialListBloc
           ));
         }
       },
-      transformer: (events, mapper) {
-        return events
-            .debounceTime(const Duration(milliseconds: 3000))
-            .asyncExpand(mapper);
-      },
     );
+    on<_DeletedSearchMaterialList>((e, emit) async {
+      if (e.searchKey != state.searchKey.getValue()) {
+        add(_Fetch(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          configs: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pickAndPack: e.pickAndPack,
+          searchKey: e.searchKey,
+        ));
+      }
+    });
   }
 }

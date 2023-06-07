@@ -260,5 +260,17 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         },
       );
     });
+    on<_DeletedSearch>(
+          (event, emit) {
+        if (event.searchText != state.searchKey.getValue()) {
+          add(_Fetch(
+            hidecustomer: event.hidecustomer,
+            userInfo: event.userInfo,
+            selectedSalesOrg: event.selectedSalesOrg,
+            searchText: event.searchText,
+          ));
+        }
+      },
+    );
   }
 }

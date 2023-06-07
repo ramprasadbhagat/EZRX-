@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ship_to_code_repository.dart';
@@ -18,15 +17,13 @@ class ShipToCodeBloc extends Bloc<ShipToCodeEvent, ShipToCodeState> {
   ShipToCodeBloc({
     required this.shipToCodeRepository,
   }) : super(ShipToCodeState.initial()) {
-    on<ShipToCodeEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    ShipToCodeEvent event,
-    Emitter<ShipToCodeState> emit,
-  ) async {
-    await event.map(
-      loadSavedShipToCode: (e) async {
+    on<_Initialized>(
+      (_, emit) async => emit(
+        ShipToCodeState.initial(),
+      ),
+    );
+    on<LoadShipToCode>(
+      (e, emit) async {
         final shipToCodeSuccessOrFailure =
             await shipToCodeRepository.getShipToCode();
 
@@ -46,30 +43,37 @@ class ShipToCodeBloc extends Bloc<ShipToCodeEvent, ShipToCodeState> {
         );
         add(ShipToCodeEvent.selected(shipToInfo: shipToInfo));
       },
-      initialized: (e) async => emit(ShipToCodeState.initial()),
-      updateSearchKey: (e) {
-        emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
-      },
-      selected: (e) async {
-        await shipToCodeRepository.storeShipToCode(
-          shipToCode: e.shipToInfo.shipToCustomerCode,
-        );
-        emit(state.copyWith(shipToInfo: e.shipToInfo));
-      },
-      load: (e) async {
+    );
+    on<_UpdateSearchKey>((e, emit) async =>
+        emit(state.copyWith(searchKey: SearchKey.search(e.searchKey))));
+    on<_Selected>((e, emit) async {
+      await shipToCodeRepository.storeShipToCode(
+        shipToCode: e.shipToInfo.shipToCustomerCode,
+      );
+      emit(state.copyWith(shipToInfo: e.shipToInfo));
+    });
+    on<_Load>(
+      (e, emit) async {
+        add(const _UpdateSearchKey(''));
+        if (emit.isDone) return;
         emit(state.copyWith(
           searchKey: SearchKey.search(''),
           shipToInfoList: e.shipToInfos,
         ));
       },
-      search: (e) async {
+      transformer: restartable(),
+    );
+    on<_Search>(
+      (e, emit) {
         final shipToInfos = e.shipToInfos
             .where(
               (i) => i.shipToCustomerCode.contains(state.searchKey.getValue()),
             )
             .toList();
+        if (emit.isDone) return;
         emit(state.copyWith(shipToInfoList: shipToInfos));
       },
+      transformer: restartable(),
     );
   }
 

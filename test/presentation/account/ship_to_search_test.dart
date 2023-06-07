@@ -174,6 +174,26 @@ void main() {
       expect(find.text('a@b.c'), findsOneWidget);
     });
 
+    testWidgets('Auto Search', (tester) async {
+      when(() => shipToCodeBlocMock.state).thenReturn(
+        ShipToCodeState.initial().copyWith(
+            searchKey: SearchKey('')
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+
+      await tester.enterText(
+          find.byKey(const Key('shipToCodeSearchField')), 'a@b.c');
+      await tester.pump(const Duration(seconds: 3));
+      verify(
+            () => shipToCodeBlocMock.add(
+          const ShipToCodeEvent.search(
+            shipToInfos: [],
+          ),
+        ),
+      ).called(1);
+    });
+
     testWidgets('snackBarMessage test', (tester) async {
       await tester.pumpWidget(getScopedWidget());
       await tester.enterText(

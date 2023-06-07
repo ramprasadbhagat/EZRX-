@@ -42,4 +42,13 @@ class CovidMaterialListEvent with _$CovidMaterialListEvent {
     required ShipToInfo shipToInfo,
     required String pickAndPack,
   }) = _LoadMore;
+  const factory CovidMaterialListEvent.deletedSearchMaterialList({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String pickAndPack,
+    required String searchKey,
+  }) = _DeletedSearchMaterialList;
 }

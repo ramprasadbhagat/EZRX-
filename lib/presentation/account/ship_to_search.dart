@@ -122,10 +122,23 @@ class _AppBarState extends State<_AppBar> {
               SearchKey.search(_searchController.text).isValid(),
           suffixIconKey: const Key('clearShipToSearch'),
           onClear: () {
+            if (_searchController.text.isEmpty) return;
+            _searchController.clear();
             context.read<ShipToCodeBloc>().add(ShipToCodeEvent.load(
                   shipToInfos:
                       context.read<CustomerCodeBloc>().state.shipToInfos,
                 ));
+          },
+          onSearchChanged: (value) {
+            context
+                .read<ShipToCodeBloc>()
+                .add(ShipToCodeEvent.updateSearchKey(value));
+            context.read<ShipToCodeBloc>().add(
+              ShipToCodeEvent.search(
+                shipToInfos:
+                context.read<CustomerCodeBloc>().state.shipToInfos,
+              ),
+            );
           },
           border: InputBorder.none,
         ),

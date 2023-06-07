@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -12,7 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/transformers.dart';
 
 part 'material_list_bloc.freezed.dart';
 part 'material_list_event.dart';
@@ -35,54 +35,60 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         ),
       );
     });
-    on<_Fetch>((e, emit) async {
-      // if (state.isFetching) return;
-      emit(
-        state.copyWith(
-          isFetching: true,
-          materialList: <MaterialInfo>[],
-          nextPageIndex: 0,
-          apiFailureOrSuccessOption: none(),
-          isScanFromBarcode: false,
-        ),
-      );
-      final failureOrSuccess = await materialListRepository.getMaterialList(
-        user: e.user,
-        salesOrganisation: e.salesOrganisation,
-        salesOrgConfig: e.configs,
-        customerCodeInfo: e.customerCodeInfo,
-        shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
-        offset: 0,
-        orderBy: 'materialDescription_asc',
-        searchKey: state.searchKey.getValue(),
-        selectedMaterialFilter: e.selectedMaterialFilter,
-        orderDocumentType: e.orderDocumentType,
-        pickAndPack: e.pickAndPack,
-      );
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (materialList) {
-          emit(
-            state.copyWith(
-              materialList: materialList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-              canLoadMore: materialList.length >= _pageSize,
-              nextPageIndex: 1,
-              selectedFilters: e.selectedMaterialFilter,
-            ),
-          );
-        },
-      );
-    });
+    on<_Fetch>(
+      (e, emit) async {
+        // if (state.isFetching) return;
+        emit(
+          state.copyWith(
+            isFetching: true,
+            materialList: <MaterialInfo>[],
+            nextPageIndex: 0,
+            apiFailureOrSuccessOption: none(),
+            isScanFromBarcode: false,
+          ),
+        );
+        final failureOrSuccess = await materialListRepository.getMaterialList(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0,
+          orderBy: 'materialDescription_asc',
+          searchKey: state.searchKey.getValue(),
+          selectedMaterialFilter: e.selectedMaterialFilter,
+          orderDocumentType: e.orderDocumentType,
+          pickAndPack: e.pickAndPack,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialList) {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                materialList: materialList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+                canLoadMore: materialList.length >= _pageSize,
+                nextPageIndex: 1,
+                selectedFilters: e.selectedMaterialFilter,
+                searchKey: SearchKey.search(''),
+              ),
+            );
+          },
+        );
+      },
+      transformer: restartable(),
+    );
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
       emit(
@@ -146,57 +152,73 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           ));
         }
       },
-      transformer: (events, mapper) {
-        return events
-            .debounceTime(const Duration(milliseconds: 3000))
-            .asyncExpand(mapper);
-      },
     );
-    on<_SearchMaterialList>((e, emit) async {
-      emit(
-        state.copyWith(
-          isFetching: true,
-          searchKey: e.searchKey,
-          materialList: <MaterialInfo>[],
-          nextPageIndex: 0,
-          apiFailureOrSuccessOption: none(),
-          isScanFromBarcode: e.isScanSearch,
-        ),
-      );
-      final failureOrSuccess = await materialListRepository.searchMaterialList(
-        user: e.user,
-        salesOrganisation: e.salesOrganisation,
-        salesOrgConfig: e.configs,
-        customerCodeInfo: e.customerCodeInfo,
-        shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
-        offset: 0, //state.materialList.length,
-        orderBy: 'materialDescription_asc',
-        searchKey: state.searchKey.getOrDefaultValue(''),
-        selectedMaterialFilter: e.selectedMaterialFilter,
-        pickAndPack: e.pickAndPack, 
-      );
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (materialList) async {
-          emit(
-            state.copyWith(
-              materialList: materialList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-              canLoadMore: materialList.length >= _pageSize,
-              nextPageIndex: state.nextPageIndex + 1,
-            ),
-          );
-        },
-      );
+    on<_SearchMaterialList>(
+      (e, emit) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            searchKey: e.searchKey,
+            materialList: <MaterialInfo>[],
+            nextPageIndex: 0,
+            apiFailureOrSuccessOption: none(),
+            isScanFromBarcode: e.isScanSearch,
+          ),
+        );
+        final failureOrSuccess =
+            await materialListRepository.searchMaterialList(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0, //state.materialList.length,
+          orderBy: 'materialDescription_asc',
+          searchKey: state.searchKey.getOrDefaultValue(''),
+          selectedMaterialFilter: e.selectedMaterialFilter,
+          pickAndPack: e.pickAndPack,
+        );
+        await failureOrSuccess.fold(
+          (failure) async {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialList) async {
+            if (emit.isDone) return;
+            emit(
+              state.copyWith(
+                materialList: materialList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+                canLoadMore: materialList.length >= _pageSize,
+                nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+          },
+        );
+      },
+      transformer: restartable(),
+    );
+    on<_DeletedSearchMaterialList>((e, emit) async {
+      if (e.searchKey.getValue() != state.searchKey.getValue()) {
+        add(const _UpdateSearchKey(searchKey: ''));
+        add(_Fetch(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          configs: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          selectedMaterialFilter: e.selectedMaterialFilter,
+          orderDocumentType: e.orderDocumentType,
+          pickAndPack: e.pickAndPack,
+        ));
+      }
     });
   }
 

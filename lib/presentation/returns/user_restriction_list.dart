@@ -202,11 +202,8 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
             userRestrictionListBloc
                 .add(UserRestrictionListEvent.updateSearchKey(value));
           },
-          onSearchSubmitted: (value) {
-            userRestrictionListBloc
-                .add(UserRestrictionListEvent.updateSearchKey(value));
-          },
           isDense: true,
+          isAutoSearch: false,
         );
       },
     );
