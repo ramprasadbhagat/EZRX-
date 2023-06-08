@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/account/entities/add_payment_advice_footer_response.dart';
+import 'package:ezrxmobile/domain/account/entities/manage_payment_advice_footer_response.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_advice_footer.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_advice_header_logo.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/add_payment_advice_footer_response_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_footer_dto.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_header_logo_dto.dart';
 import 'package:flutter/services.dart';
 
 class PaymentAdviceFooterLocalDataSource {
@@ -23,19 +21,19 @@ class PaymentAdviceFooterLocalDataSource {
         .toList();
   }
 
-  Future<AddPaymentAdviceFooterResponse> addPaymentAdvice() async {
+  Future<ManagePaymentAdviceFooterResponse> addPaymentAdvice() async {
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/addPaymentAdviceMutationResponse.json'),
     );
 
-    return AddPaymentAdviceFooterResponseDto.fromJson(
+    return ManagePaymentAdviceFooterResponseDto.fromJson(
       data['data']['addPaymentAdvice'],
     ).toDomain();
   }
 
 
-  Future<PaymentAdviceHeaderLogo> headerLogoUpload() async {
+  Future<PaymentAdviceLogoNetworkFile> headerLogoUpload() async {
     await Future.delayed(const Duration(seconds: 3));
     final data = json.decode(
       await rootBundle.loadString(
@@ -43,6 +41,17 @@ class PaymentAdviceFooterLocalDataSource {
       ),
     );
 
-    return PaymentAdviceHeaderLogoDto.fromJson(data).toDomain();
+    return PaymentAdviceLogoNetworkFileDto.fromJson(data).toDomain();
+  }
+
+  Future<ManagePaymentAdviceFooterResponse> deletePaymentAdvice() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/deletePaymentAdviceMutationResponse.json'),
+    );
+
+    return ManagePaymentAdviceFooterResponseDto.fromJson(
+      data['data']['deletePaymentAdvice'],
+    ).toDomain();
   }
 }

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer/manage_payment_advice_footer_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_advice_footer.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -9,8 +8,9 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,10 +29,12 @@ class PaymentAdviceFooterPage extends StatelessWidget {
         ).tr(),
       ),
       floatingActionButton: FloatingActionButton(
-        key: const Key('addSalesDistrictKey'),
+        key: const Key('addPaymentAdviceFooterKey'),
         onPressed: () {
           context.read<ManagePaymentAdviceFooterBloc>().add(
-                const ManagePaymentAdviceFooterEvent.initialized(),
+                ManagePaymentAdviceFooterEvent.setPaymentAdvice(
+                  paymentAdviceFooterData: PaymentAdviceFooter.empty(),
+                ),
               );
           context.router.pushNamed('payments/advice_footer/add_advice_footer');
         },
@@ -40,12 +42,19 @@ class PaymentAdviceFooterPage extends StatelessWidget {
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocConsumer<PaymentAdviceFooterBloc, PaymentAdviceFooterState>(
+        child: BlocConsumer<ManagePaymentAdviceFooterBloc,
+            ManagePaymentAdviceFooterState>(
           listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+              previous.isSubmitting != current.isSubmitting,
           listener: (context, state) {
             state.failureOrSuccessOption.fold(
-              () {},
+              () {
+                if (state.isSubmitting) return;
+                showSnackBar(
+                  context: context,
+                  message: state.response.message.getValue().tr(),
+                );
+              },
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
@@ -53,19 +62,17 @@ class PaymentAdviceFooterPage extends StatelessWidget {
                 (_) {},
               ),
             );
-          },
-          buildWhen: (previous, current) =>
+            },
+            buildWhen: (previous, current) =>
+              previous.isSubmitting != current.isSubmitting || 
               previous.isFetching != current.isFetching,
-          builder: (context, state) {
-            return state.isFetching
-                ? LoadingShimmer.logo(
-                    key: const Key('loaderImage'),
-                  )
-                : ScrollList<PaymentAdviceFooter>(
+            builder: (context, state) {
+            return ScrollList<PaymentAdviceFooter>(
               emptyMessage: 'No Payment Advice Footer Found'.tr(),
-              onRefresh: () => context.read<PaymentAdviceFooterBloc>().add(
-                    const PaymentAdviceFooterEvent.fetch(),
-                  ),
+              onRefresh: () =>
+                  context.read<ManagePaymentAdviceFooterBloc>().add(
+                        const ManagePaymentAdviceFooterEvent.fetch(),
+                      ),
               onLoadingMore: () => {},
               isLoading: state.isFetching,
               itemBuilder: (context, index, item) =>
@@ -97,11 +104,24 @@ class _PaymentAdviceFooter extends StatelessWidget {
               CustomSlidableAction(
                 label: 'Delete'.tr(),
                 icon: Icons.delete_outline,
-                onPressed: (context) {},
+                onPressed: (_) =>
+                    context.read<ManagePaymentAdviceFooterBloc>().add(
+                          ManagePaymentAdviceFooterEvent.delete(
+                  paymentAdviceFooter: paymentAdviceFooter,
+                ),
+              ),
               ),
             ],
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                context.read<ManagePaymentAdviceFooterBloc>().add(
+                      ManagePaymentAdviceFooterEvent.setPaymentAdvice(
+                        paymentAdviceFooterData: paymentAdviceFooter,
+                      ),
+                    );
+                context.router
+                    .pushNamed('payments/advice_footer/edit_advice_footer');
+              },
               title: Column(
                 children: [
                   Row(
@@ -109,9 +129,11 @@ class _PaymentAdviceFooter extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: paymentAdviceFooter.headerLogoPath.isNotEmpty
+                        child: paymentAdviceFooter.hasPaymentAdviceLogoUri
                             ? Image.network(
-                                paymentAdviceFooter.headerLogoPath,
+                                paymentAdviceFooter
+                                    .paymentAdviceLogo.logoNetworkFile.url
+                                    .getOrDefaultValue(''),
                                 fit: BoxFit.fitWidth,
                                 gaplessPlayback: true,
                                 errorBuilder: (context, error, stackTrace) =>
@@ -139,7 +161,8 @@ class _PaymentAdviceFooter extends StatelessWidget {
                                     children: [
                                       BalanceTextRow(
                                         keyText: 'Header'.tr(),
-                                        valueText: paymentAdviceFooter.header,
+                                        valueText: paymentAdviceFooter.header
+                                            .getOrDefaultValue(''),
                                         keyFlex: 3,
                                         valueFlex: 4,
                                       ),
@@ -158,8 +181,10 @@ class _PaymentAdviceFooter extends StatelessWidget {
                                       ),
                                       BalanceTextRow(
                                         keyText: 'Sales District'.tr(),
-                                        valueText:
-                                            paymentAdviceFooter.salesDistrict,
+                                        valueText: paymentAdviceFooter
+                                            .salesDistrict
+                                            .salesDistrictHeader
+                                            .displayLabel,
                                         keyFlex: 3,
                                         valueFlex: 4,
                                       ),
@@ -167,10 +192,27 @@ class _PaymentAdviceFooter extends StatelessWidget {
                                   ),
                                 ),
                                 IconButton(
-                                  padding: const EdgeInsets.only(right: 0),
-                                  constraints: const BoxConstraints(),
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.delete),
+                                  iconSize: 24.0,
+                                  icon: paymentAdviceFooter.isDeleteInProgress
+                                      ? const SizedBox(
+                                          height: 20.0,
+                                          width: 20.0,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2.0,
+                                          ),
+                                        )
+                                      : const Icon(
+                                          Icons.delete,
+                                          key: Key('deleteKey'),
+                                        ),
+                                  onPressed:
+                                      paymentAdviceFooter.isDeleteInProgress
+                                          ? null
+                                          : () => _deleteDialog(
+                                                context: context,
+                                                paymentAdviceFooter:
+                                                    paymentAdviceFooter,
+                                              ),
                                 ),
                               ],
                             ),
@@ -184,7 +226,8 @@ class _PaymentAdviceFooter extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        paymentAdviceFooter.footer,
+                                        paymentAdviceFooter.footer
+                                            .getOrDefaultValue(''),
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall
@@ -203,16 +246,32 @@ class _PaymentAdviceFooter extends StatelessWidget {
                           ],
                         ),
                       ),
-                      
                     ],
                   ),
-
                 ],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _deleteDialog({
+    required BuildContext context,
+    required PaymentAdviceFooter paymentAdviceFooter,
+  }) {
+    CustomDialogs.confirmationDialog(
+      context: context,
+      title: 'Delete Payment Advice'.tr(),
+      message: 'Are you sure you want to delete?'.tr(),
+      onAcceptPressed: () async =>
+          context.read<ManagePaymentAdviceFooterBloc>().add(
+                ManagePaymentAdviceFooterEvent.delete(
+                  paymentAdviceFooter: paymentAdviceFooter,
+                ),
+              ),
+      confirmText: 'Delete',
     );
   }
 }
@@ -236,7 +295,7 @@ class _PleaseNote extends StatelessWidget {
           children: [
             Expanded(
               child: Html(
-                data: paymentAdviceFooter.pleaseNote,
+                data: paymentAdviceFooter.pleaseNote.getOrDefaultValue(''),
               ),
             ),
           ],

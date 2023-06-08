@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -603,8 +603,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<ManageDeductionCodeBloc>().add(
             const ManageDeductionCodeEvent.fetch(),
           );
-      context.read<PaymentAdviceFooterBloc>().add(
-            const PaymentAdviceFooterEvent.fetch(),
+      context.read<ManagePaymentAdviceFooterBloc>().add(
+            const ManagePaymentAdviceFooterEvent.fetch(),
           );
     }
   }

@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer/manage_payment_advice_footer_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/add_payment_advice_footer_response.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_advice_footer_data.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_advice_header_logo.dart';
+import 'package:ezrxmobile/domain/account/entities/manage_payment_advice_footer_response.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -12,6 +10,7 @@ import 'package:ezrxmobile/domain/account/entities/payment_advice_footer.dart';
 import 'package:ezrxmobile/domain/account/repository/i_payment_advice_footer_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_footer_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -63,9 +62,9 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
   }
 
   @override
-  Future<Either<ApiFailure, AddPaymentAdviceFooterResponse>> addPaymentAdvice({
-    required PaymentAdviceFooterData paymentAdviceFooterData,
-    required PaymentAdviceHeaderLogo headerLogo,
+  Future<Either<ApiFailure, ManagePaymentAdviceFooterResponse>>
+      addPaymentAdvice({
+    required PaymentAdviceFooter paymentAdviceFooterData,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -76,16 +75,9 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
     }
     try {
       final addPaymentAdvice = await remoteDataSource.addPaymentAdvice(
-        salesOrg: paymentAdviceFooterData.salesOrg.getOrCrash(),
-        salesDistrict:
-            paymentAdviceFooterData.salesDistrict.salesDistrictHeader
-            .getOrDefaultValue(''),
-        footer: paymentAdviceFooterData.footer.getOrCrash(),
-        header: paymentAdviceFooterData.headerTextActive
-            ? paymentAdviceFooterData.header.getOrCrash()
-            : paymentAdviceFooterData.header.getOrDefaultValue(''),
-        headerLogoPath: headerLogo.url,
-        pleaseNote: paymentAdviceFooterData.note.getOrDefaultValue(''),
+          query: PaymentAdviceFooterDto.fromDomain(
+        paymentAdviceFooterData,
+        ).toJson(),
       );
 
       return Right(addPaymentAdvice);
@@ -103,9 +95,7 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
     try {
       final result = await filePickerService.pickFiles(
         allowMultiple: false,
-        fileType: pickFrom == PickFrom.file
-            ? FileType.custom
-            : FileType.image,
+        fileType: pickFrom == PickFrom.file ? FileType.custom : FileType.image,
         allowedExtensions: pickFrom == PickFrom.file
             ? locator<Config>().allowedExtensionsPaymentAdviceLogo
             : null,
@@ -155,7 +145,7 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
   }
 
   @override
-  Future<Either<ApiFailure, PaymentAdviceHeaderLogo>> uploadHeaderLogo({
+  Future<Either<ApiFailure, PaymentAdviceLogoNetworkFile>> uploadHeaderLogo({
     required PlatformFile file,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -178,6 +168,34 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
       return Right(localFile);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, ManagePaymentAdviceFooterResponse>>
+      deletePaymentAdvice({
+    required PaymentAdviceFooter paymentAdviceFooter,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        return Right(await localDataSource.deletePaymentAdvice());
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final addPaymentAdvice = await remoteDataSource.deletePaymentAdvice(
+        salesOrg: paymentAdviceFooter.salesOrg.getOrCrash(),
+        salesDistrict:
+            paymentAdviceFooter.salesDistrict.salesDistrictHeader
+            .getOrDefaultValue(''),
+      );
+
+      return Right(addPaymentAdvice);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
   }
 }

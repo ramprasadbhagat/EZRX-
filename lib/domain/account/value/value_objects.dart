@@ -400,3 +400,15 @@ class PaymentMethod extends ValueObject<String> {
   const PaymentMethod._(this.value);
 }
 
+class PaymentAdviceResponseMessage extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentAdviceResponseMessage(String input) {
+    return PaymentAdviceResponseMessage._(validateStringNotEmpty(input));
+  }
+
+  bool get isEdit => paymentAdviceEdit(value.getOrElse(() => ''));
+
+  const PaymentAdviceResponseMessage._(this.value);
+}

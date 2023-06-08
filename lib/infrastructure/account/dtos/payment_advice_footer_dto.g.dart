@@ -27,3 +27,17 @@ Map<String, dynamic> _$$_PaymentAdviceFooterDtoToJson(
       'header': instance.header,
       'pleaseNote': instance.pleaseNote,
     };
+
+_$_PaymentAdviceLogoNetworkFileDto _$$_PaymentAdviceLogoNetworkFileDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_PaymentAdviceLogoNetworkFileDto(
+      url: json['url'] as String? ?? '',
+      fileName: json['filename'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_PaymentAdviceLogoNetworkFileDtoToJson(
+        _$_PaymentAdviceLogoNetworkFileDto instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'filename': instance.fileName,
+    };

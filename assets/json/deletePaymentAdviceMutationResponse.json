@@ -1,0 +1,11 @@
+{
+    "data": {
+        "deletePaymentAdvice": {
+            "info": "1 Data Deleted Successfully",
+            "__typename": "deletePaymentAdviceResponse"
+        }
+    },
+    "extensions": {
+        "trace-id": "daa10f47488548b0a942d0fb54290e72"
+    }
+}

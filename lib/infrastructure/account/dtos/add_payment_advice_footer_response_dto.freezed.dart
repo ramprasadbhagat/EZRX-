@@ -14,38 +14,39 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AddPaymentAdviceFooterResponseDto _$AddPaymentAdviceFooterResponseDtoFromJson(
-    Map<String, dynamic> json) {
-  return _AddPaymentAdviceFooterResponseDto.fromJson(json);
+ManagePaymentAdviceFooterResponseDto
+    _$ManagePaymentAdviceFooterResponseDtoFromJson(Map<String, dynamic> json) {
+  return _ManagePaymentAdviceFooterResponseDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$AddPaymentAdviceFooterResponseDto {
+mixin _$ManagePaymentAdviceFooterResponseDto {
   @JsonKey(name: 'info', defaultValue: '')
   String get info => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AddPaymentAdviceFooterResponseDtoCopyWith<AddPaymentAdviceFooterResponseDto>
+  $ManagePaymentAdviceFooterResponseDtoCopyWith<
+          ManagePaymentAdviceFooterResponseDto>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AddPaymentAdviceFooterResponseDtoCopyWith<$Res> {
-  factory $AddPaymentAdviceFooterResponseDtoCopyWith(
-          AddPaymentAdviceFooterResponseDto value,
-          $Res Function(AddPaymentAdviceFooterResponseDto) then) =
-      _$AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
-          AddPaymentAdviceFooterResponseDto>;
+abstract class $ManagePaymentAdviceFooterResponseDtoCopyWith<$Res> {
+  factory $ManagePaymentAdviceFooterResponseDtoCopyWith(
+          ManagePaymentAdviceFooterResponseDto value,
+          $Res Function(ManagePaymentAdviceFooterResponseDto) then) =
+      _$ManagePaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
+          ManagePaymentAdviceFooterResponseDto>;
   @useResult
   $Res call({@JsonKey(name: 'info', defaultValue: '') String info});
 }
 
 /// @nodoc
-class _$AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
-        $Val extends AddPaymentAdviceFooterResponseDto>
-    implements $AddPaymentAdviceFooterResponseDtoCopyWith<$Res> {
-  _$AddPaymentAdviceFooterResponseDtoCopyWithImpl(this._value, this._then);
+class _$ManagePaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
+        $Val extends ManagePaymentAdviceFooterResponseDto>
+    implements $ManagePaymentAdviceFooterResponseDtoCopyWith<$Res> {
+  _$ManagePaymentAdviceFooterResponseDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,25 +68,25 @@ class _$AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AddPaymentAdviceFooterResponseDtoCopyWith<$Res>
-    implements $AddPaymentAdviceFooterResponseDtoCopyWith<$Res> {
-  factory _$$_AddPaymentAdviceFooterResponseDtoCopyWith(
-          _$_AddPaymentAdviceFooterResponseDto value,
-          $Res Function(_$_AddPaymentAdviceFooterResponseDto) then) =
-      __$$_AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res>;
+abstract class _$$_ManagePaymentAdviceFooterResponseDtoCopyWith<$Res>
+    implements $ManagePaymentAdviceFooterResponseDtoCopyWith<$Res> {
+  factory _$$_ManagePaymentAdviceFooterResponseDtoCopyWith(
+          _$_ManagePaymentAdviceFooterResponseDto value,
+          $Res Function(_$_ManagePaymentAdviceFooterResponseDto) then) =
+      __$$_ManagePaymentAdviceFooterResponseDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'info', defaultValue: '') String info});
 }
 
 /// @nodoc
-class __$$_AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res>
-    extends _$AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
-        _$_AddPaymentAdviceFooterResponseDto>
-    implements _$$_AddPaymentAdviceFooterResponseDtoCopyWith<$Res> {
-  __$$_AddPaymentAdviceFooterResponseDtoCopyWithImpl(
-      _$_AddPaymentAdviceFooterResponseDto _value,
-      $Res Function(_$_AddPaymentAdviceFooterResponseDto) _then)
+class __$$_ManagePaymentAdviceFooterResponseDtoCopyWithImpl<$Res>
+    extends _$ManagePaymentAdviceFooterResponseDtoCopyWithImpl<$Res,
+        _$_ManagePaymentAdviceFooterResponseDto>
+    implements _$$_ManagePaymentAdviceFooterResponseDtoCopyWith<$Res> {
+  __$$_ManagePaymentAdviceFooterResponseDtoCopyWithImpl(
+      _$_ManagePaymentAdviceFooterResponseDto _value,
+      $Res Function(_$_ManagePaymentAdviceFooterResponseDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +94,7 @@ class __$$_AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res>
   $Res call({
     Object? info = null,
   }) {
-    return _then(_$_AddPaymentAdviceFooterResponseDto(
+    return _then(_$_ManagePaymentAdviceFooterResponseDto(
       info: null == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
@@ -104,15 +105,15 @@ class __$$_AddPaymentAdviceFooterResponseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddPaymentAdviceFooterResponseDto
-    extends _AddPaymentAdviceFooterResponseDto {
-  _$_AddPaymentAdviceFooterResponseDto(
+class _$_ManagePaymentAdviceFooterResponseDto
+    extends _ManagePaymentAdviceFooterResponseDto {
+  _$_ManagePaymentAdviceFooterResponseDto(
       {@JsonKey(name: 'info', defaultValue: '') required this.info})
       : super._();
 
-  factory _$_AddPaymentAdviceFooterResponseDto.fromJson(
+  factory _$_ManagePaymentAdviceFooterResponseDto.fromJson(
           Map<String, dynamic> json) =>
-      _$$_AddPaymentAdviceFooterResponseDtoFromJson(json);
+      _$$_ManagePaymentAdviceFooterResponseDtoFromJson(json);
 
   @override
   @JsonKey(name: 'info', defaultValue: '')
@@ -120,14 +121,14 @@ class _$_AddPaymentAdviceFooterResponseDto
 
   @override
   String toString() {
-    return 'AddPaymentAdviceFooterResponseDto(info: $info)';
+    return 'ManagePaymentAdviceFooterResponseDto(info: $info)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddPaymentAdviceFooterResponseDto &&
+            other is _$_ManagePaymentAdviceFooterResponseDto &&
             (identical(other.info, info) || other.info == info));
   }
 
@@ -138,36 +139,37 @@ class _$_AddPaymentAdviceFooterResponseDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddPaymentAdviceFooterResponseDtoCopyWith<
-          _$_AddPaymentAdviceFooterResponseDto>
-      get copyWith => __$$_AddPaymentAdviceFooterResponseDtoCopyWithImpl<
-          _$_AddPaymentAdviceFooterResponseDto>(this, _$identity);
+  _$$_ManagePaymentAdviceFooterResponseDtoCopyWith<
+          _$_ManagePaymentAdviceFooterResponseDto>
+      get copyWith => __$$_ManagePaymentAdviceFooterResponseDtoCopyWithImpl<
+          _$_ManagePaymentAdviceFooterResponseDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddPaymentAdviceFooterResponseDtoToJson(
+    return _$$_ManagePaymentAdviceFooterResponseDtoToJson(
       this,
     );
   }
 }
 
-abstract class _AddPaymentAdviceFooterResponseDto
-    extends AddPaymentAdviceFooterResponseDto {
-  factory _AddPaymentAdviceFooterResponseDto(
-      {@JsonKey(name: 'info', defaultValue: '')
-          required final String info}) = _$_AddPaymentAdviceFooterResponseDto;
-  _AddPaymentAdviceFooterResponseDto._() : super._();
+abstract class _ManagePaymentAdviceFooterResponseDto
+    extends ManagePaymentAdviceFooterResponseDto {
+  factory _ManagePaymentAdviceFooterResponseDto(
+          {@JsonKey(name: 'info', defaultValue: '')
+              required final String info}) =
+      _$_ManagePaymentAdviceFooterResponseDto;
+  _ManagePaymentAdviceFooterResponseDto._() : super._();
 
-  factory _AddPaymentAdviceFooterResponseDto.fromJson(
+  factory _ManagePaymentAdviceFooterResponseDto.fromJson(
           Map<String, dynamic> json) =
-      _$_AddPaymentAdviceFooterResponseDto.fromJson;
+      _$_ManagePaymentAdviceFooterResponseDto.fromJson;
 
   @override
   @JsonKey(name: 'info', defaultValue: '')
   String get info;
   @override
   @JsonKey(ignore: true)
-  _$$_AddPaymentAdviceFooterResponseDtoCopyWith<
-          _$_AddPaymentAdviceFooterResponseDto>
+  _$$_ManagePaymentAdviceFooterResponseDtoCopyWith<
+          _$_ManagePaymentAdviceFooterResponseDto>
       get copyWith => throw _privateConstructorUsedError;
 }

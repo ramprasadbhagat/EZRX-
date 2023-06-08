@@ -294,3 +294,187 @@ abstract class _PaymentAdviceFooterDto extends PaymentAdviceFooterDto {
   _$$_PaymentAdviceFooterDtoCopyWith<_$_PaymentAdviceFooterDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+PaymentAdviceLogoNetworkFileDto _$PaymentAdviceLogoNetworkFileDtoFromJson(
+    Map<String, dynamic> json) {
+  return _PaymentAdviceLogoNetworkFileDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PaymentAdviceLogoNetworkFileDto {
+  @JsonKey(name: 'url', defaultValue: '')
+  String get url => throw _privateConstructorUsedError;
+  @JsonKey(name: 'filename', defaultValue: '')
+  String get fileName => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PaymentAdviceLogoNetworkFileDtoCopyWith<PaymentAdviceLogoNetworkFileDto>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PaymentAdviceLogoNetworkFileDtoCopyWith<$Res> {
+  factory $PaymentAdviceLogoNetworkFileDtoCopyWith(
+          PaymentAdviceLogoNetworkFileDto value,
+          $Res Function(PaymentAdviceLogoNetworkFileDto) then) =
+      _$PaymentAdviceLogoNetworkFileDtoCopyWithImpl<$Res,
+          PaymentAdviceLogoNetworkFileDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'url', defaultValue: '') String url,
+      @JsonKey(name: 'filename', defaultValue: '') String fileName});
+}
+
+/// @nodoc
+class _$PaymentAdviceLogoNetworkFileDtoCopyWithImpl<$Res,
+        $Val extends PaymentAdviceLogoNetworkFileDto>
+    implements $PaymentAdviceLogoNetworkFileDtoCopyWith<$Res> {
+  _$PaymentAdviceLogoNetworkFileDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+    Object? fileName = null,
+  }) {
+    return _then(_value.copyWith(
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileName: null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PaymentAdviceLogoNetworkFileDtoCopyWith<$Res>
+    implements $PaymentAdviceLogoNetworkFileDtoCopyWith<$Res> {
+  factory _$$_PaymentAdviceLogoNetworkFileDtoCopyWith(
+          _$_PaymentAdviceLogoNetworkFileDto value,
+          $Res Function(_$_PaymentAdviceLogoNetworkFileDto) then) =
+      __$$_PaymentAdviceLogoNetworkFileDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'url', defaultValue: '') String url,
+      @JsonKey(name: 'filename', defaultValue: '') String fileName});
+}
+
+/// @nodoc
+class __$$_PaymentAdviceLogoNetworkFileDtoCopyWithImpl<$Res>
+    extends _$PaymentAdviceLogoNetworkFileDtoCopyWithImpl<$Res,
+        _$_PaymentAdviceLogoNetworkFileDto>
+    implements _$$_PaymentAdviceLogoNetworkFileDtoCopyWith<$Res> {
+  __$$_PaymentAdviceLogoNetworkFileDtoCopyWithImpl(
+      _$_PaymentAdviceLogoNetworkFileDto _value,
+      $Res Function(_$_PaymentAdviceLogoNetworkFileDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+    Object? fileName = null,
+  }) {
+    return _then(_$_PaymentAdviceLogoNetworkFileDto(
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileName: null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PaymentAdviceLogoNetworkFileDto
+    extends _PaymentAdviceLogoNetworkFileDto {
+  _$_PaymentAdviceLogoNetworkFileDto(
+      {@JsonKey(name: 'url', defaultValue: '') required this.url,
+      @JsonKey(name: 'filename', defaultValue: '') required this.fileName})
+      : super._();
+
+  factory _$_PaymentAdviceLogoNetworkFileDto.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_PaymentAdviceLogoNetworkFileDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'url', defaultValue: '')
+  final String url;
+  @override
+  @JsonKey(name: 'filename', defaultValue: '')
+  final String fileName;
+
+  @override
+  String toString() {
+    return 'PaymentAdviceLogoNetworkFileDto(url: $url, fileName: $fileName)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PaymentAdviceLogoNetworkFileDto &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, url, fileName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PaymentAdviceLogoNetworkFileDtoCopyWith<
+          _$_PaymentAdviceLogoNetworkFileDto>
+      get copyWith => __$$_PaymentAdviceLogoNetworkFileDtoCopyWithImpl<
+          _$_PaymentAdviceLogoNetworkFileDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PaymentAdviceLogoNetworkFileDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PaymentAdviceLogoNetworkFileDto
+    extends PaymentAdviceLogoNetworkFileDto {
+  factory _PaymentAdviceLogoNetworkFileDto(
+      {@JsonKey(name: 'url', defaultValue: '')
+          required final String url,
+      @JsonKey(name: 'filename', defaultValue: '')
+          required final String fileName}) = _$_PaymentAdviceLogoNetworkFileDto;
+  _PaymentAdviceLogoNetworkFileDto._() : super._();
+
+  factory _PaymentAdviceLogoNetworkFileDto.fromJson(Map<String, dynamic> json) =
+      _$_PaymentAdviceLogoNetworkFileDto.fromJson;
+
+  @override
+  @JsonKey(name: 'url', defaultValue: '')
+  String get url;
+  @override
+  @JsonKey(name: 'filename', defaultValue: '')
+  String get fileName;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PaymentAdviceLogoNetworkFileDtoCopyWith<
+          _$_PaymentAdviceLogoNetworkFileDto>
+      get copyWith => throw _privateConstructorUsedError;
+}

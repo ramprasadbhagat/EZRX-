@@ -19,7 +19,11 @@ mixin _$ManagePaymentAdviceFooterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -34,7 +38,11 @@ mixin _$ManagePaymentAdviceFooterEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -48,7 +56,11 @@ mixin _$ManagePaymentAdviceFooterEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -63,8 +75,10 @@ mixin _$ManagePaymentAdviceFooterEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -77,8 +91,10 @@ mixin _$ManagePaymentAdviceFooterEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -90,8 +106,10 @@ mixin _$ManagePaymentAdviceFooterEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -163,7 +181,11 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -181,7 +203,11 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -198,7 +224,11 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -219,8 +249,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -236,8 +268,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -252,8 +286,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -274,39 +310,33 @@ abstract class _Initialized implements ManagePaymentAdviceFooterEvent {
 }
 
 /// @nodoc
-abstract class _$$_AddManagePaymentAdviceFooterCopyWith<$Res> {
-  factory _$$_AddManagePaymentAdviceFooterCopyWith(
-          _$_AddManagePaymentAdviceFooter value,
-          $Res Function(_$_AddManagePaymentAdviceFooter) then) =
-      __$$_AddManagePaymentAdviceFooterCopyWithImpl<$Res>;
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AddManagePaymentAdviceFooterCopyWithImpl<$Res>
-    extends _$ManagePaymentAdviceFooterEventCopyWithImpl<$Res,
-        _$_AddManagePaymentAdviceFooter>
-    implements _$$_AddManagePaymentAdviceFooterCopyWith<$Res> {
-  __$$_AddManagePaymentAdviceFooterCopyWithImpl(
-      _$_AddManagePaymentAdviceFooter _value,
-      $Res Function(_$_AddManagePaymentAdviceFooter) _then)
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$ManagePaymentAdviceFooterEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
-  const _$_AddManagePaymentAdviceFooter();
+class _$_Fetch implements _Fetch {
+  const _$_Fetch();
 
   @override
   String toString() {
-    return 'ManagePaymentAdviceFooterEvent.addManagePaymentAdviceFooter()';
+    return 'ManagePaymentAdviceFooterEvent.fetch()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AddManagePaymentAdviceFooter);
+        (other.runtimeType == runtimeType && other is _$_Fetch);
   }
 
   @override
@@ -316,7 +346,11 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -327,14 +361,18 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
     required TResult Function(PickFrom pickFrom) addFile,
     required TResult Function() removePickedFile,
   }) {
-    return addManagePaymentAdviceFooter();
+    return fetch();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -344,14 +382,18 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
     TResult? Function(PickFrom pickFrom)? addFile,
     TResult? Function()? removePickedFile,
   }) {
-    return addManagePaymentAdviceFooter?.call();
+    return fetch?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -362,8 +404,8 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
     TResult Function()? removePickedFile,
     required TResult orElse(),
   }) {
-    if (addManagePaymentAdviceFooter != null) {
-      return addManagePaymentAdviceFooter();
+    if (fetch != null) {
+      return fetch();
     }
     return orElse();
   }
@@ -372,8 +414,10 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -382,15 +426,17 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
     required TResult Function(_AddFile value) addFile,
     required TResult Function(_RemovePickedFile value) removePickedFile,
   }) {
-    return addManagePaymentAdviceFooter(this);
+    return fetch(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -398,15 +444,17 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
     TResult? Function(_AddFile value)? addFile,
     TResult? Function(_RemovePickedFile value)? removePickedFile,
   }) {
-    return addManagePaymentAdviceFooter?.call(this);
+    return fetch?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -415,17 +463,604 @@ class _$_AddManagePaymentAdviceFooter implements _AddManagePaymentAdviceFooter {
     TResult Function(_RemovePickedFile value)? removePickedFile,
     required TResult orElse(),
   }) {
-    if (addManagePaymentAdviceFooter != null) {
-      return addManagePaymentAdviceFooter(this);
+    if (fetch != null) {
+      return fetch(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddManagePaymentAdviceFooter
-    implements ManagePaymentAdviceFooterEvent {
-  const factory _AddManagePaymentAdviceFooter() =
-      _$_AddManagePaymentAdviceFooter;
+abstract class _Fetch implements ManagePaymentAdviceFooterEvent {
+  const factory _Fetch() = _$_Fetch;
+}
+
+/// @nodoc
+abstract class _$$_SetPaymentAdviceCopyWith<$Res> {
+  factory _$$_SetPaymentAdviceCopyWith(
+          _$_SetPaymentAdvice value, $Res Function(_$_SetPaymentAdvice) then) =
+      __$$_SetPaymentAdviceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentAdviceFooter paymentAdviceFooterData});
+
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooterData;
+}
+
+/// @nodoc
+class __$$_SetPaymentAdviceCopyWithImpl<$Res>
+    extends _$ManagePaymentAdviceFooterEventCopyWithImpl<$Res,
+        _$_SetPaymentAdvice> implements _$$_SetPaymentAdviceCopyWith<$Res> {
+  __$$_SetPaymentAdviceCopyWithImpl(
+      _$_SetPaymentAdvice _value, $Res Function(_$_SetPaymentAdvice) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentAdviceFooterData = null,
+  }) {
+    return _then(_$_SetPaymentAdvice(
+      paymentAdviceFooterData: null == paymentAdviceFooterData
+          ? _value.paymentAdviceFooterData
+          : paymentAdviceFooterData // ignore: cast_nullable_to_non_nullable
+              as PaymentAdviceFooter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooterData {
+    return $PaymentAdviceFooterCopyWith<$Res>(_value.paymentAdviceFooterData,
+        (value) {
+      return _then(_value.copyWith(paymentAdviceFooterData: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SetPaymentAdvice implements _SetPaymentAdvice {
+  const _$_SetPaymentAdvice({required this.paymentAdviceFooterData});
+
+  @override
+  final PaymentAdviceFooter paymentAdviceFooterData;
+
+  @override
+  String toString() {
+    return 'ManagePaymentAdviceFooterEvent.setPaymentAdvice(paymentAdviceFooterData: $paymentAdviceFooterData)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetPaymentAdvice &&
+            (identical(
+                    other.paymentAdviceFooterData, paymentAdviceFooterData) ||
+                other.paymentAdviceFooterData == paymentAdviceFooterData));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, paymentAdviceFooterData);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetPaymentAdviceCopyWith<_$_SetPaymentAdvice> get copyWith =>
+      __$$_SetPaymentAdviceCopyWithImpl<_$_SetPaymentAdvice>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
+    required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
+    required TResult Function(SalesDistrictInfo salesDistrictInfo)
+        salesDistrictOnChange,
+    required TResult Function(
+            ManagePaymentAdviceFooterLabel label, String newValue)
+        onValueChange,
+    required TResult Function(bool value) headerTextToggle,
+    required TResult Function(PickFrom pickFrom) addFile,
+    required TResult Function() removePickedFile,
+  }) {
+    return setPaymentAdvice(paymentAdviceFooterData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
+    TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
+    TResult? Function(SalesDistrictInfo salesDistrictInfo)?
+        salesDistrictOnChange,
+    TResult? Function(ManagePaymentAdviceFooterLabel label, String newValue)?
+        onValueChange,
+    TResult? Function(bool value)? headerTextToggle,
+    TResult? Function(PickFrom pickFrom)? addFile,
+    TResult? Function()? removePickedFile,
+  }) {
+    return setPaymentAdvice?.call(paymentAdviceFooterData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
+    TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
+    TResult Function(SalesDistrictInfo salesDistrictInfo)?
+        salesDistrictOnChange,
+    TResult Function(ManagePaymentAdviceFooterLabel label, String newValue)?
+        onValueChange,
+    TResult Function(bool value)? headerTextToggle,
+    TResult Function(PickFrom pickFrom)? addFile,
+    TResult Function()? removePickedFile,
+    required TResult orElse(),
+  }) {
+    if (setPaymentAdvice != null) {
+      return setPaymentAdvice(paymentAdviceFooterData);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
+    required TResult Function(_SalesDistrictOnChange value)
+        salesDistrictOnChange,
+    required TResult Function(_OnValueChange value) onValueChange,
+    required TResult Function(_HeaderTextToggle value) headerTextToggle,
+    required TResult Function(_AddFile value) addFile,
+    required TResult Function(_RemovePickedFile value) removePickedFile,
+  }) {
+    return setPaymentAdvice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
+    TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
+    TResult? Function(_OnValueChange value)? onValueChange,
+    TResult? Function(_HeaderTextToggle value)? headerTextToggle,
+    TResult? Function(_AddFile value)? addFile,
+    TResult? Function(_RemovePickedFile value)? removePickedFile,
+  }) {
+    return setPaymentAdvice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
+    TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
+    TResult Function(_OnValueChange value)? onValueChange,
+    TResult Function(_HeaderTextToggle value)? headerTextToggle,
+    TResult Function(_AddFile value)? addFile,
+    TResult Function(_RemovePickedFile value)? removePickedFile,
+    required TResult orElse(),
+  }) {
+    if (setPaymentAdvice != null) {
+      return setPaymentAdvice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetPaymentAdvice implements ManagePaymentAdviceFooterEvent {
+  const factory _SetPaymentAdvice(
+          {required final PaymentAdviceFooter paymentAdviceFooterData}) =
+      _$_SetPaymentAdvice;
+
+  PaymentAdviceFooter get paymentAdviceFooterData;
+  @JsonKey(ignore: true)
+  _$$_SetPaymentAdviceCopyWith<_$_SetPaymentAdvice> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddOrUpdateCopyWith<$Res> {
+  factory _$$_AddOrUpdateCopyWith(
+          _$_AddOrUpdate value, $Res Function(_$_AddOrUpdate) then) =
+      __$$_AddOrUpdateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AddOrUpdateCopyWithImpl<$Res>
+    extends _$ManagePaymentAdviceFooterEventCopyWithImpl<$Res, _$_AddOrUpdate>
+    implements _$$_AddOrUpdateCopyWith<$Res> {
+  __$$_AddOrUpdateCopyWithImpl(
+      _$_AddOrUpdate _value, $Res Function(_$_AddOrUpdate) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AddOrUpdate implements _AddOrUpdate {
+  const _$_AddOrUpdate();
+
+  @override
+  String toString() {
+    return 'ManagePaymentAdviceFooterEvent.addOrUpdate()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AddOrUpdate);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
+    required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
+    required TResult Function(SalesDistrictInfo salesDistrictInfo)
+        salesDistrictOnChange,
+    required TResult Function(
+            ManagePaymentAdviceFooterLabel label, String newValue)
+        onValueChange,
+    required TResult Function(bool value) headerTextToggle,
+    required TResult Function(PickFrom pickFrom) addFile,
+    required TResult Function() removePickedFile,
+  }) {
+    return addOrUpdate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
+    TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
+    TResult? Function(SalesDistrictInfo salesDistrictInfo)?
+        salesDistrictOnChange,
+    TResult? Function(ManagePaymentAdviceFooterLabel label, String newValue)?
+        onValueChange,
+    TResult? Function(bool value)? headerTextToggle,
+    TResult? Function(PickFrom pickFrom)? addFile,
+    TResult? Function()? removePickedFile,
+  }) {
+    return addOrUpdate?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
+    TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
+    TResult Function(SalesDistrictInfo salesDistrictInfo)?
+        salesDistrictOnChange,
+    TResult Function(ManagePaymentAdviceFooterLabel label, String newValue)?
+        onValueChange,
+    TResult Function(bool value)? headerTextToggle,
+    TResult Function(PickFrom pickFrom)? addFile,
+    TResult Function()? removePickedFile,
+    required TResult orElse(),
+  }) {
+    if (addOrUpdate != null) {
+      return addOrUpdate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
+    required TResult Function(_SalesDistrictOnChange value)
+        salesDistrictOnChange,
+    required TResult Function(_OnValueChange value) onValueChange,
+    required TResult Function(_HeaderTextToggle value) headerTextToggle,
+    required TResult Function(_AddFile value) addFile,
+    required TResult Function(_RemovePickedFile value) removePickedFile,
+  }) {
+    return addOrUpdate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
+    TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
+    TResult? Function(_OnValueChange value)? onValueChange,
+    TResult? Function(_HeaderTextToggle value)? headerTextToggle,
+    TResult? Function(_AddFile value)? addFile,
+    TResult? Function(_RemovePickedFile value)? removePickedFile,
+  }) {
+    return addOrUpdate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
+    TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
+    TResult Function(_OnValueChange value)? onValueChange,
+    TResult Function(_HeaderTextToggle value)? headerTextToggle,
+    TResult Function(_AddFile value)? addFile,
+    TResult Function(_RemovePickedFile value)? removePickedFile,
+    required TResult orElse(),
+  }) {
+    if (addOrUpdate != null) {
+      return addOrUpdate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddOrUpdate implements ManagePaymentAdviceFooterEvent {
+  const factory _AddOrUpdate() = _$_AddOrUpdate;
+}
+
+/// @nodoc
+abstract class _$$_DeleteCopyWith<$Res> {
+  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
+      __$$_DeleteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentAdviceFooter paymentAdviceFooter});
+
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooter;
+}
+
+/// @nodoc
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$ManagePaymentAdviceFooterEventCopyWithImpl<$Res, _$_Delete>
+    implements _$$_DeleteCopyWith<$Res> {
+  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentAdviceFooter = null,
+  }) {
+    return _then(_$_Delete(
+      paymentAdviceFooter: null == paymentAdviceFooter
+          ? _value.paymentAdviceFooter
+          : paymentAdviceFooter // ignore: cast_nullable_to_non_nullable
+              as PaymentAdviceFooter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooter {
+    return $PaymentAdviceFooterCopyWith<$Res>(_value.paymentAdviceFooter,
+        (value) {
+      return _then(_value.copyWith(paymentAdviceFooter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Delete implements _Delete {
+  const _$_Delete({required this.paymentAdviceFooter});
+
+  @override
+  final PaymentAdviceFooter paymentAdviceFooter;
+
+  @override
+  String toString() {
+    return 'ManagePaymentAdviceFooterEvent.delete(paymentAdviceFooter: $paymentAdviceFooter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Delete &&
+            (identical(other.paymentAdviceFooter, paymentAdviceFooter) ||
+                other.paymentAdviceFooter == paymentAdviceFooter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, paymentAdviceFooter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+      __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
+    required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
+    required TResult Function(SalesDistrictInfo salesDistrictInfo)
+        salesDistrictOnChange,
+    required TResult Function(
+            ManagePaymentAdviceFooterLabel label, String newValue)
+        onValueChange,
+    required TResult Function(bool value) headerTextToggle,
+    required TResult Function(PickFrom pickFrom) addFile,
+    required TResult Function() removePickedFile,
+  }) {
+    return delete(paymentAdviceFooter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
+    TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
+    TResult? Function(SalesDistrictInfo salesDistrictInfo)?
+        salesDistrictOnChange,
+    TResult? Function(ManagePaymentAdviceFooterLabel label, String newValue)?
+        onValueChange,
+    TResult? Function(bool value)? headerTextToggle,
+    TResult? Function(PickFrom pickFrom)? addFile,
+    TResult? Function()? removePickedFile,
+  }) {
+    return delete?.call(paymentAdviceFooter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
+    TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
+    TResult Function(SalesDistrictInfo salesDistrictInfo)?
+        salesDistrictOnChange,
+    TResult Function(ManagePaymentAdviceFooterLabel label, String newValue)?
+        onValueChange,
+    TResult Function(bool value)? headerTextToggle,
+    TResult Function(PickFrom pickFrom)? addFile,
+    TResult Function()? removePickedFile,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(paymentAdviceFooter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
+    required TResult Function(_SalesDistrictOnChange value)
+        salesDistrictOnChange,
+    required TResult Function(_OnValueChange value) onValueChange,
+    required TResult Function(_HeaderTextToggle value) headerTextToggle,
+    required TResult Function(_AddFile value) addFile,
+    required TResult Function(_RemovePickedFile value) removePickedFile,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
+    TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
+    TResult? Function(_OnValueChange value)? onValueChange,
+    TResult? Function(_HeaderTextToggle value)? headerTextToggle,
+    TResult? Function(_AddFile value)? addFile,
+    TResult? Function(_RemovePickedFile value)? removePickedFile,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
+    TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
+    TResult Function(_OnValueChange value)? onValueChange,
+    TResult Function(_HeaderTextToggle value)? headerTextToggle,
+    TResult Function(_AddFile value)? addFile,
+    TResult Function(_RemovePickedFile value)? removePickedFile,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements ManagePaymentAdviceFooterEvent {
+  const factory _Delete(
+      {required final PaymentAdviceFooter paymentAdviceFooter}) = _$_Delete;
+
+  PaymentAdviceFooter get paymentAdviceFooter;
+  @JsonKey(ignore: true)
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -494,7 +1129,11 @@ class _$_SalesOrgOnChange implements _SalesOrgOnChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -512,7 +1151,11 @@ class _$_SalesOrgOnChange implements _SalesOrgOnChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -529,7 +1172,11 @@ class _$_SalesOrgOnChange implements _SalesOrgOnChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -550,8 +1197,10 @@ class _$_SalesOrgOnChange implements _SalesOrgOnChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -567,8 +1216,10 @@ class _$_SalesOrgOnChange implements _SalesOrgOnChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -583,8 +1234,10 @@ class _$_SalesOrgOnChange implements _SalesOrgOnChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -688,7 +1341,11 @@ class _$_SalesDistrictOnChange implements _SalesDistrictOnChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -706,7 +1363,11 @@ class _$_SalesDistrictOnChange implements _SalesDistrictOnChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -723,7 +1384,11 @@ class _$_SalesDistrictOnChange implements _SalesDistrictOnChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -744,8 +1409,10 @@ class _$_SalesDistrictOnChange implements _SalesDistrictOnChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -761,8 +1428,10 @@ class _$_SalesDistrictOnChange implements _SalesDistrictOnChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -777,8 +1446,10 @@ class _$_SalesDistrictOnChange implements _SalesDistrictOnChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -880,7 +1551,11 @@ class _$_OnValueChange implements _OnValueChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -898,7 +1573,11 @@ class _$_OnValueChange implements _OnValueChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -915,7 +1594,11 @@ class _$_OnValueChange implements _OnValueChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -936,8 +1619,10 @@ class _$_OnValueChange implements _OnValueChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -953,8 +1638,10 @@ class _$_OnValueChange implements _OnValueChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -969,8 +1656,10 @@ class _$_OnValueChange implements _OnValueChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -1063,7 +1752,11 @@ class _$_HeaderTextToggle implements _HeaderTextToggle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -1081,7 +1774,11 @@ class _$_HeaderTextToggle implements _HeaderTextToggle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -1098,7 +1795,11 @@ class _$_HeaderTextToggle implements _HeaderTextToggle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -1119,8 +1820,10 @@ class _$_HeaderTextToggle implements _HeaderTextToggle {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -1136,8 +1839,10 @@ class _$_HeaderTextToggle implements _HeaderTextToggle {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -1152,8 +1857,10 @@ class _$_HeaderTextToggle implements _HeaderTextToggle {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -1243,7 +1950,11 @@ class _$_AddFile implements _AddFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -1261,7 +1972,11 @@ class _$_AddFile implements _AddFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -1278,7 +1993,11 @@ class _$_AddFile implements _AddFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -1299,8 +2018,10 @@ class _$_AddFile implements _AddFile {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -1316,8 +2037,10 @@ class _$_AddFile implements _AddFile {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -1332,8 +2055,10 @@ class _$_AddFile implements _AddFile {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -1397,7 +2122,11 @@ class _$_RemovePickedFile implements _RemovePickedFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() addManagePaymentAdviceFooter,
+    required TResult Function() fetch,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooterData)
+        setPaymentAdvice,
+    required TResult Function() addOrUpdate,
+    required TResult Function(PaymentAdviceFooter paymentAdviceFooter) delete,
     required TResult Function(SalesOrg salesOrg) salesOrgOnChange,
     required TResult Function(SalesDistrictInfo salesDistrictInfo)
         salesDistrictOnChange,
@@ -1415,7 +2144,11 @@ class _$_RemovePickedFile implements _RemovePickedFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? addManagePaymentAdviceFooter,
+    TResult? Function()? fetch,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult? Function()? addOrUpdate,
+    TResult? Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult? Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult? Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -1432,7 +2165,11 @@ class _$_RemovePickedFile implements _RemovePickedFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? addManagePaymentAdviceFooter,
+    TResult Function()? fetch,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooterData)?
+        setPaymentAdvice,
+    TResult Function()? addOrUpdate,
+    TResult Function(PaymentAdviceFooter paymentAdviceFooter)? delete,
     TResult Function(SalesOrg salesOrg)? salesOrgOnChange,
     TResult Function(SalesDistrictInfo salesDistrictInfo)?
         salesDistrictOnChange,
@@ -1453,8 +2190,10 @@ class _$_RemovePickedFile implements _RemovePickedFile {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AddManagePaymentAdviceFooter value)
-        addManagePaymentAdviceFooter,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetPaymentAdvice value) setPaymentAdvice,
+    required TResult Function(_AddOrUpdate value) addOrUpdate,
+    required TResult Function(_Delete value) delete,
     required TResult Function(_SalesOrgOnChange value) salesOrgOnChange,
     required TResult Function(_SalesDistrictOnChange value)
         salesDistrictOnChange,
@@ -1470,8 +2209,10 @@ class _$_RemovePickedFile implements _RemovePickedFile {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult? Function(_AddOrUpdate value)? addOrUpdate,
+    TResult? Function(_Delete value)? delete,
     TResult? Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult? Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult? Function(_OnValueChange value)? onValueChange,
@@ -1486,8 +2227,10 @@ class _$_RemovePickedFile implements _RemovePickedFile {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AddManagePaymentAdviceFooter value)?
-        addManagePaymentAdviceFooter,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetPaymentAdvice value)? setPaymentAdvice,
+    TResult Function(_AddOrUpdate value)? addOrUpdate,
+    TResult Function(_Delete value)? delete,
     TResult Function(_SalesOrgOnChange value)? salesOrgOnChange,
     TResult Function(_SalesDistrictOnChange value)? salesDistrictOnChange,
     TResult Function(_OnValueChange value)? onValueChange,
@@ -1509,13 +2252,16 @@ abstract class _RemovePickedFile implements ManagePaymentAdviceFooterEvent {
 
 /// @nodoc
 mixin _$ManagePaymentAdviceFooterState {
-  PaymentAdviceFooterData get paymentAdviceFooterData =>
+  List<PaymentAdviceFooter> get paymentAdviceFooters =>
+      throw _privateConstructorUsedError;
+  PaymentAdviceFooter get paymentAdviceFooterData =>
       throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
+  bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  AddPaymentAdviceFooterResponse get response =>
+  ManagePaymentAdviceFooterResponse get response =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1532,14 +2278,16 @@ abstract class $ManagePaymentAdviceFooterStateCopyWith<$Res> {
           ManagePaymentAdviceFooterState>;
   @useResult
   $Res call(
-      {PaymentAdviceFooterData paymentAdviceFooterData,
+      {List<PaymentAdviceFooter> paymentAdviceFooters,
+      PaymentAdviceFooter paymentAdviceFooterData,
       bool isSubmitting,
       bool showErrorMessages,
+      bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      AddPaymentAdviceFooterResponse response});
+      ManagePaymentAdviceFooterResponse response});
 
-  $PaymentAdviceFooterDataCopyWith<$Res> get paymentAdviceFooterData;
-  $AddPaymentAdviceFooterResponseCopyWith<$Res> get response;
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooterData;
+  $ManagePaymentAdviceFooterResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -1556,17 +2304,23 @@ class _$ManagePaymentAdviceFooterStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? paymentAdviceFooters = null,
     Object? paymentAdviceFooterData = null,
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
+    Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? response = null,
   }) {
     return _then(_value.copyWith(
+      paymentAdviceFooters: null == paymentAdviceFooters
+          ? _value.paymentAdviceFooters
+          : paymentAdviceFooters // ignore: cast_nullable_to_non_nullable
+              as List<PaymentAdviceFooter>,
       paymentAdviceFooterData: null == paymentAdviceFooterData
           ? _value.paymentAdviceFooterData
           : paymentAdviceFooterData // ignore: cast_nullable_to_non_nullable
-              as PaymentAdviceFooterData,
+              as PaymentAdviceFooter,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -1575,6 +2329,10 @@ class _$ManagePaymentAdviceFooterStateCopyWithImpl<$Res,
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1582,23 +2340,23 @@ class _$ManagePaymentAdviceFooterStateCopyWithImpl<$Res,
       response: null == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as AddPaymentAdviceFooterResponse,
+              as ManagePaymentAdviceFooterResponse,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $PaymentAdviceFooterDataCopyWith<$Res> get paymentAdviceFooterData {
-    return $PaymentAdviceFooterDataCopyWith<$Res>(
-        _value.paymentAdviceFooterData, (value) {
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooterData {
+    return $PaymentAdviceFooterCopyWith<$Res>(_value.paymentAdviceFooterData,
+        (value) {
       return _then(_value.copyWith(paymentAdviceFooterData: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AddPaymentAdviceFooterResponseCopyWith<$Res> get response {
-    return $AddPaymentAdviceFooterResponseCopyWith<$Res>(_value.response,
+  $ManagePaymentAdviceFooterResponseCopyWith<$Res> get response {
+    return $ManagePaymentAdviceFooterResponseCopyWith<$Res>(_value.response,
         (value) {
       return _then(_value.copyWith(response: value) as $Val);
     });
@@ -1615,16 +2373,18 @@ abstract class _$$_ManagePaymentAdviceFooterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {PaymentAdviceFooterData paymentAdviceFooterData,
+      {List<PaymentAdviceFooter> paymentAdviceFooters,
+      PaymentAdviceFooter paymentAdviceFooterData,
       bool isSubmitting,
       bool showErrorMessages,
+      bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      AddPaymentAdviceFooterResponse response});
+      ManagePaymentAdviceFooterResponse response});
 
   @override
-  $PaymentAdviceFooterDataCopyWith<$Res> get paymentAdviceFooterData;
+  $PaymentAdviceFooterCopyWith<$Res> get paymentAdviceFooterData;
   @override
-  $AddPaymentAdviceFooterResponseCopyWith<$Res> get response;
+  $ManagePaymentAdviceFooterResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -1640,17 +2400,23 @@ class __$$_ManagePaymentAdviceFooterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? paymentAdviceFooters = null,
     Object? paymentAdviceFooterData = null,
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
+    Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? response = null,
   }) {
     return _then(_$_ManagePaymentAdviceFooterState(
+      paymentAdviceFooters: null == paymentAdviceFooters
+          ? _value._paymentAdviceFooters
+          : paymentAdviceFooters // ignore: cast_nullable_to_non_nullable
+              as List<PaymentAdviceFooter>,
       paymentAdviceFooterData: null == paymentAdviceFooterData
           ? _value.paymentAdviceFooterData
           : paymentAdviceFooterData // ignore: cast_nullable_to_non_nullable
-              as PaymentAdviceFooterData,
+              as PaymentAdviceFooter,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -1659,6 +2425,10 @@ class __$$_ManagePaymentAdviceFooterStateCopyWithImpl<$Res>
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1666,7 +2436,7 @@ class __$$_ManagePaymentAdviceFooterStateCopyWithImpl<$Res>
       response: null == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as AddPaymentAdviceFooterResponse,
+              as ManagePaymentAdviceFooterResponse,
     ));
   }
 }
@@ -1676,26 +2446,40 @@ class __$$_ManagePaymentAdviceFooterStateCopyWithImpl<$Res>
 class _$_ManagePaymentAdviceFooterState
     implements _ManagePaymentAdviceFooterState {
   const _$_ManagePaymentAdviceFooterState(
-      {required this.paymentAdviceFooterData,
+      {required final List<PaymentAdviceFooter> paymentAdviceFooters,
+      required this.paymentAdviceFooterData,
       required this.isSubmitting,
       required this.showErrorMessages,
+      required this.isFetching,
       required this.failureOrSuccessOption,
-      required this.response});
+      required this.response})
+      : _paymentAdviceFooters = paymentAdviceFooters;
+
+  final List<PaymentAdviceFooter> _paymentAdviceFooters;
+  @override
+  List<PaymentAdviceFooter> get paymentAdviceFooters {
+    if (_paymentAdviceFooters is EqualUnmodifiableListView)
+      return _paymentAdviceFooters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_paymentAdviceFooters);
+  }
 
   @override
-  final PaymentAdviceFooterData paymentAdviceFooterData;
+  final PaymentAdviceFooter paymentAdviceFooterData;
   @override
   final bool isSubmitting;
   @override
   final bool showErrorMessages;
   @override
+  final bool isFetching;
+  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
-  final AddPaymentAdviceFooterResponse response;
+  final ManagePaymentAdviceFooterResponse response;
 
   @override
   String toString() {
-    return 'ManagePaymentAdviceFooterState(paymentAdviceFooterData: $paymentAdviceFooterData, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption, response: $response)';
+    return 'ManagePaymentAdviceFooterState(paymentAdviceFooters: $paymentAdviceFooters, paymentAdviceFooterData: $paymentAdviceFooterData, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, response: $response)';
   }
 
   @override
@@ -1703,6 +2487,8 @@ class _$_ManagePaymentAdviceFooterState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ManagePaymentAdviceFooterState &&
+            const DeepCollectionEquality()
+                .equals(other._paymentAdviceFooters, _paymentAdviceFooters) &&
             (identical(
                     other.paymentAdviceFooterData, paymentAdviceFooterData) ||
                 other.paymentAdviceFooterData == paymentAdviceFooterData) &&
@@ -1710,6 +2496,8 @@ class _$_ManagePaymentAdviceFooterState
                 other.isSubmitting == isSubmitting) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.response, response) ||
@@ -1717,8 +2505,15 @@ class _$_ManagePaymentAdviceFooterState
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paymentAdviceFooterData,
-      isSubmitting, showErrorMessages, failureOrSuccessOption, response);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_paymentAdviceFooters),
+      paymentAdviceFooterData,
+      isSubmitting,
+      showErrorMessages,
+      isFetching,
+      failureOrSuccessOption,
+      response);
 
   @JsonKey(ignore: true)
   @override
@@ -1731,23 +2526,29 @@ class _$_ManagePaymentAdviceFooterState
 abstract class _ManagePaymentAdviceFooterState
     implements ManagePaymentAdviceFooterState {
   const factory _ManagePaymentAdviceFooterState(
-      {required final PaymentAdviceFooterData paymentAdviceFooterData,
+      {required final List<PaymentAdviceFooter> paymentAdviceFooters,
+      required final PaymentAdviceFooter paymentAdviceFooterData,
       required final bool isSubmitting,
       required final bool showErrorMessages,
+      required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final AddPaymentAdviceFooterResponse
+      required final ManagePaymentAdviceFooterResponse
           response}) = _$_ManagePaymentAdviceFooterState;
 
   @override
-  PaymentAdviceFooterData get paymentAdviceFooterData;
+  List<PaymentAdviceFooter> get paymentAdviceFooters;
+  @override
+  PaymentAdviceFooter get paymentAdviceFooterData;
   @override
   bool get isSubmitting;
   @override
   bool get showErrorMessages;
   @override
+  bool get isFetching;
+  @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  AddPaymentAdviceFooterResponse get response;
+  ManagePaymentAdviceFooterResponse get response;
   @override
   @JsonKey(ignore: true)
   _$$_ManagePaymentAdviceFooterStateCopyWith<_$_ManagePaymentAdviceFooterState>

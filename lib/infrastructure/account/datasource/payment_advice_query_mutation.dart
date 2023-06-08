@@ -23,4 +23,15 @@ class PaymentAdviceQueryMutation {
       }
     ''';
   }
+
+  String deletePaymentAdviceMutation() {
+    return '''
+      mutation deletePaymentAdviceMutation(\$input: deletePaymentAdviceInput!) {
+      deletePaymentAdvice(input: \$input) {
+        info
+      }
+    }
+    ''';
+  }
+
 }

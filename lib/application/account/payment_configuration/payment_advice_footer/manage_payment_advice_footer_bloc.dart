@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/entities/add_payment_advice_footer_response.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_advice_footer_data.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_advice_header_logo.dart';
+import 'package:ezrxmobile/domain/account/entities/manage_payment_advice_footer_response.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_advice_footer.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district_info.dart';
 import 'package:ezrxmobile/domain/account/repository/i_payment_advice_footer_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -33,7 +32,39 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
   ) async {
     await event.map(
       initialized: (e) async => emit(ManagePaymentAdviceFooterState.initial()),
-      addManagePaymentAdviceFooter: (e) async {
+      fetch: (_Fetch e) async {
+        emit(
+          state.copyWith(
+            paymentAdviceFooters: <PaymentAdviceFooter>[],
+            failureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+
+        final failureOrSuccess =
+            await paymentAdviceFooterRepository.getPaymentAdvice();
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (paymentAdvices) {
+            emit(
+              state.copyWith(
+                paymentAdviceFooters: paymentAdvices,
+                failureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      addOrUpdate: (_AddOrUpdate e) async {
         emit(
           state.copyWith(
             showErrorMessages: false,
@@ -54,12 +85,19 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
             failureOrSuccessOption: none(),
           ),
         );
-        final headerLogo =
-            await _uploadLogo(state.paymentAdviceFooterData.uploadFiles);
+        final headerLogo = await _uploadLogo(
+          state.paymentAdviceFooterData.paymentAdviceLogo.logoLocalFile,
+        );
+
+        final paymentAdviceFooter = state.paymentAdviceFooterData.copyWith(
+          paymentAdviceLogo:
+              state.paymentAdviceFooterData.paymentAdviceLogo.copyWith(
+            logoNetworkFile: headerLogo,
+          ),
+        );
         final failureOrSuccess =
             await paymentAdviceFooterRepository.addPaymentAdvice(
-          paymentAdviceFooterData: state.paymentAdviceFooterData,
-          headerLogo: headerLogo,
+          paymentAdviceFooterData: paymentAdviceFooter,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -68,13 +106,29 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (success) => emit(
-            state.copyWith(
-              paymentAdviceFooterData: PaymentAdviceFooterData.empty(),
-              isSubmitting: false,
-              response: success,
-            ),
-          ),
+          (success) {
+            final paymentAdviceList =
+                List<PaymentAdviceFooter>.from(state.paymentAdviceFooters);
+            success.message.isEdit
+                ? paymentAdviceList.removeWhere(
+                    (element) =>
+                    element.salesOrg ==
+                        state.paymentAdviceFooterData.salesOrg &&
+                    element.salesDistrict.salesDistrictHeader ==
+                        state.paymentAdviceFooterData.salesDistrict
+                                .salesDistrictHeader,
+                  )
+                : null;
+            paymentAdviceList.add(paymentAdviceFooter);
+            emit(
+              state.copyWith(
+                paymentAdviceFooters: paymentAdviceList,
+                paymentAdviceFooterData: PaymentAdviceFooter.empty(),
+                isSubmitting: false,
+                response: success,
+              ),
+            );
+          },
         );
       },
       onValueChange: (_OnValueChange e) async => _onValueChange(
@@ -87,7 +141,7 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
           state.copyWith(
             paymentAdviceFooterData: state.paymentAdviceFooterData.copyWith(
               headerTextActive: e.value,
-              uploadFiles: <PlatformFile>[],
+              paymentAdviceLogo: PaymentAdviceLogo.empty(),
               header: StringValue(''),
             ),
           ),
@@ -120,7 +174,9 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
                 state.copyWith(
                   paymentAdviceFooterData:
                       state.paymentAdviceFooterData.copyWith(
-                    uploadFiles: files,
+                    paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
+                      logoLocalFile: files,
+                    ),
                   ),
                 ),
               ),
@@ -131,7 +187,7 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
       removePickedFile: (_RemovePickedFile e) async => emit(
         state.copyWith(
           paymentAdviceFooterData: state.paymentAdviceFooterData.copyWith(
-            uploadFiles: [],
+            paymentAdviceLogo: PaymentAdviceLogo.empty(),
           ),
         ),
       ),
@@ -146,7 +202,60 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
         state.copyWith(
           paymentAdviceFooterData: state.paymentAdviceFooterData.copyWith(
             salesOrg: e.salesOrg,
+            salesDistrict: SalesDistrictInfo.empty(),
           ),
+        ),
+      ),
+      delete: (_Delete e) async {
+        final paymentAdviceFooterList =
+            List<PaymentAdviceFooter>.from(state.paymentAdviceFooters);
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            paymentAdviceFooters: paymentAdviceFooterList
+                .map(
+                  (PaymentAdviceFooter element) => element.copyWith(
+                    isDeleteInProgress:
+                        element.key == e.paymentAdviceFooter.key,
+                  ),
+                )
+                .toList(),
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess =
+            await paymentAdviceFooterRepository.deletePaymentAdvice(
+          paymentAdviceFooter: e.paymentAdviceFooter,
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              isSubmitting: false,
+              paymentAdviceFooters: paymentAdviceFooterList,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (success) => emit(
+            state.copyWith(
+              isSubmitting: false,
+              paymentAdviceFooters:
+                  List<PaymentAdviceFooter>.from(state.paymentAdviceFooters)
+                    ..removeWhere(
+                      (PaymentAdviceFooter element) =>
+                          element.isDeleteInProgress,
+                    ),
+              failureOrSuccessOption: none(),
+              response: success,
+            ),
+          ),
+        );
+      },
+      setPaymentAdvice: (_SetPaymentAdvice e) async => emit(
+        state.copyWith(
+          paymentAdviceFooterData: e.paymentAdviceFooterData,
+          showErrorMessages: false,
+          failureOrSuccessOption: none(),
+          isSubmitting: false,
         ),
       ),
     );
@@ -170,7 +279,7 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
         _emitAfterOnTextChange(
           emit: emit,
           paymentAdviceFooterData: state.paymentAdviceFooterData.copyWith(
-            note: StringValue(newValue),
+            pleaseNote: StringValue(newValue),
           ),
         );
         break;
@@ -185,20 +294,22 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
     }
   }
 
-  Future<PaymentAdviceHeaderLogo> _uploadLogo(List<PlatformFile> files) async {
-    if (files.isEmpty) return PaymentAdviceHeaderLogo.empty();
-    final failureOrSuccess =
-        await paymentAdviceFooterRepository.uploadHeaderLogo(file: files.first);
+  Future<PaymentAdviceLogoNetworkFile> _uploadLogo(
+    List<PlatformFile> localFile,
+  ) async {
+    if (localFile.isEmpty) return PaymentAdviceLogoNetworkFile.empty();
+    final failureOrSuccess = await paymentAdviceFooterRepository
+        .uploadHeaderLogo(file: localFile.first);
 
     return failureOrSuccess.fold(
-      (_) => PaymentAdviceHeaderLogo.empty(),
+      (_) => PaymentAdviceLogoNetworkFile.empty(),
       (paymentAdviceHeaderLogo) => paymentAdviceHeaderLogo,
     );
   }
 
   void _emitAfterOnTextChange({
     required Emitter<ManagePaymentAdviceFooterState> emit,
-    required PaymentAdviceFooterData paymentAdviceFooterData,
+    required PaymentAdviceFooter paymentAdviceFooterData,
   }) {
     emit(
       state.copyWith(

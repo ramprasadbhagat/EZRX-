@@ -16,14 +16,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 
-class AddPaymentAdviceFooterPage extends StatelessWidget {
-  const AddPaymentAdviceFooterPage({Key? key}) : super(key: key);
+class EditPaymentAdviceFooterPage extends StatelessWidget {
+  const EditPaymentAdviceFooterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('addPaymentAdvice'),
-      appBar: AppBar(title: const Text('Add Payment Advice Details').tr()),
+      key: const Key('editPaymentAdvice'),
+      appBar: AppBar(title: const Text('Edit Payment Advice Details').tr()),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: BlocConsumer<ManagePaymentAdviceFooterBloc,
@@ -78,89 +78,26 @@ class _SalesOrgSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ManagePaymentAdviceFooterBloc,
-        ManagePaymentAdviceFooterState>(
-      listener: (context, state) {
-        final salesDistrictDetailsList = context
-            .read<SalesDistrictBloc>()
-            .state
-            .salesDistrictList
-            .firstWhere(
-              (element) =>
-                  element.salesOrg == state.paymentAdviceFooterData.salesOrg,
-              orElse: () => SalesDistrict.empty(),
-            )
-            .salesDistrictInfo;
-        if (salesDistrictDetailsList.isEmpty) return;
-        context.read<ManagePaymentAdviceFooterBloc>().add(
-              ManagePaymentAdviceFooterEvent.salesDistrictOnChange(
-                salesDistrictInfo: salesDistrictDetailsList.first,
-              ),
-            );
-      },
-      listenWhen: (previous, current) =>
-          previous.paymentAdviceFooterData.salesOrg !=
-              current.paymentAdviceFooterData.salesOrg &&
-          current.paymentAdviceFooterData.salesOrg.isValid(),
-      buildWhen: (previous, current) =>
-          previous.paymentAdviceFooterData.salesOrg !=
-          current.paymentAdviceFooterData.salesOrg,
-      builder: (context, state) {
-        final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
+    final salesOrg = context
+        .read<ManagePaymentAdviceFooterBloc>()
+        .state
+        .paymentAdviceFooterData
+        .salesOrg;
 
-        return DropdownButtonFormField<String>(
-          key: ValueKey(
-            'salesOrg${state.paymentAdviceFooterData.salesOrg.getOrDefaultValue('')}',
-          ),
-          isExpanded: true,
-          decoration: InputDecoration(
-            labelText: 'Please Select Sales Org.'.tr(),
-            enabled: salesOrgs.isNotEmpty,
-          ),
-          icon: state.isSubmitting
-              ? const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : null,
-          items: salesOrgs.map(
-            (String val) {
-              return DropdownMenuItem<String>(
-                value: val,
-                child: Text(SalesOrg(val).fullName),
-              );
-            },
-          ).toList(),
-          onChanged: state.isSubmitting
-              ? null
-              : (value) => context.read<ManagePaymentAdviceFooterBloc>().add(
-                    ManagePaymentAdviceFooterEvent.salesOrgOnChange(
-                      salesOrg: SalesOrg(value ?? ''),
-                    ),
-                  ),
-          validator: (_) => state.paymentAdviceFooterData.salesOrg.value.fold(
-            (f) => f.maybeMap(
-              empty: (_) => 'Please Select Sales Org.'.tr(),
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
-          value: context
-                  .read<ManagePaymentAdviceFooterBloc>()
-                  .state
-                  .paymentAdviceFooterData
-                  .salesOrg
-                  .isValid()
-              ? context
-                  .read<ManagePaymentAdviceFooterBloc>()
-                  .state
-                  .paymentAdviceFooterData
-                  .salesOrg
-                  .getOrDefaultValue('')
-              : null,
-        );
-      },
+    return DropdownButtonFormField<String>(
+      decoration: const InputDecoration(
+        enabled: false,
+      ),
+      items: context.read<UserBloc>().state.salesOrgValue.map(
+        (String val) {
+          return DropdownMenuItem<String>(
+            value: val,
+            child: Text(SalesOrg(val).fullName),
+          );
+        },
+      ).toList(),
+      onChanged: null,
+      value: salesOrg.isValid() ? salesOrg.getOrDefaultValue('') : null,
     );
   }
 }
@@ -183,11 +120,18 @@ class _SalesDistrictSelection extends StatelessWidget {
             .state
             .salesDistrictList
             .firstWhere(
-              (element) =>
-                  element.salesOrg == state.paymentAdviceFooterData.salesOrg,
-              orElse: () => SalesDistrict.empty(),
-            )
-            .salesDistrictInfo;
+          (element) {
+            return element.salesOrg == state.paymentAdviceFooterData.salesOrg;
+          },
+          orElse: () => SalesDistrict.empty(),
+        ).salesDistrictInfo;
+        final salesDistrictInfo = salesDistrictList.firstWhere(
+          (element) =>
+              element.salesDistrictHeader.displayLabel ==
+              state.paymentAdviceFooterData.salesDistrict.salesDistrictHeader
+                  .displayLabel,
+          orElse: () => state.paymentAdviceFooterData.salesDistrict,
+        );
 
         return DropdownButtonFormField<SalesDistrictInfo>(
           isExpanded: true,
@@ -220,7 +164,7 @@ class _SalesDistrictSelection extends StatelessWidget {
           value: state.paymentAdviceFooterData.salesDistrict ==
                   SalesDistrictInfo.empty()
               ? null
-              : state.paymentAdviceFooterData.salesDistrict,
+              : salesDistrictInfo,
         );
       },
     );
@@ -267,6 +211,8 @@ class _Header extends StatelessWidget {
                 ? _GenericTextField(
                     fieldKey: 'headerText',
                     labelText: 'Header'.tr(),
+                    initialValue: state.paymentAdviceFooterData.header
+                        .getOrDefaultValue(''),
                     enabled: !state.isSubmitting,
                     validator: (text) =>
                         state.paymentAdviceFooterData.header.value.fold(
@@ -308,6 +254,8 @@ class _FooterText extends StatelessWidget {
           fieldKey: 'footer',
           labelText: 'Footer'.tr(),
           enabled: !state.isSubmitting,
+          initialValue:
+              state.paymentAdviceFooterData.footer.getOrDefaultValue(''),
           validator: (text) => state.paymentAdviceFooterData.footer.value.fold(
             (f) => f.maybeMap(
               empty: (_) => 'Footer cannot be empty.'.tr(),
@@ -357,6 +305,15 @@ class _Notes extends StatelessWidget {
                       ),
                     ),
             onFocus: () => FocusScope.of(context).unfocus(),
+            onInit: () => _controller
+              ..insertHtml(
+                context
+                    .read<ManagePaymentAdviceFooterBloc>()
+                    .state
+                    .paymentAdviceFooterData
+                    .pleaseNote
+                    .getOrDefaultValue(''),
+              ),
           ),
           htmlToolbarOptions: const HtmlToolbarOptions(
             toolbarType: ToolbarType.nativeGrid,
@@ -375,6 +332,7 @@ class _Notes extends StatelessWidget {
             ],
           ),
           otherOptions: OtherOptions(
+            height: 400,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.grey),
@@ -393,17 +351,20 @@ class _GenericTextField extends StatelessWidget {
     required this.validator,
     required this.onChanged,
     required this.enabled,
+    required this.initialValue,
   });
   final String fieldKey;
   final String labelText;
   final Function(String?) validator;
   final Function(String?) onChanged;
   final bool enabled;
+  final String initialValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       key: Key(fieldKey),
+      initialValue: initialValue,
       autocorrect: false,
       enabled: enabled,
       decoration: InputDecoration(labelText: labelText.tr()),

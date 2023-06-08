@@ -7,6 +7,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/edit_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/add_payment_advice_footer.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/edit_deduction_code_page.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/edit_payment_advice_footer.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
@@ -288,6 +289,11 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
       path: 'payments/advice_footer/add_advice_footer',
       page: AddPaymentAdviceFooterPage,
     ),
+    AutoRoute(
+      path: 'payments/advice_footer/edit_advice_footer',
+      page: EditPaymentAdviceFooterPage,
+    ),
+
   ],
 )
 class $AppRouter {}

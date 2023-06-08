@@ -313,7 +313,6 @@ String roleOrderType(String roleType) {
   }
 }
 
-
 bool isZero(int value) => value == 0;
 
 String currencySymbol(String currency) {
@@ -384,3 +383,6 @@ String removeDash(String value) {
       return value;
   }
 }
+
+bool paymentAdviceEdit(String value) =>
+    value.toLowerCase() == 'Data Updated Successfully'.toLowerCase();

@@ -2,18 +2,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/add_payment_advice_footer_response.dart';
-import 'package:ezrxmobile/domain/account/entities/payment_advice_header_logo.dart';
+import 'package:ezrxmobile/domain/account/entities/manage_payment_advice_footer_response.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_advice_footer.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/add_payment_advice_footer_response_dto.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_header_logo_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_footer_dto.dart';
-
-
 
 class PaymentAdviceFooterRemoteDataSource {
   PaymentAdviceFooterRemoteDataSource({
@@ -63,13 +59,8 @@ class PaymentAdviceFooterRemoteDataSource {
     }
   }
 
-  Future<AddPaymentAdviceFooterResponse> addPaymentAdvice({
-    required String salesOrg,
-    required String salesDistrict,
-    required String header,
-    required String footer,
-    required String pleaseNote,
-    required String headerLogoPath,
+  Future<ManagePaymentAdviceFooterResponse> addPaymentAdvice({
+    required Map<String, dynamic> query,
   }) async {
 
     return await dataSourceExceptionHandler.handle(() async {
@@ -80,27 +71,20 @@ class PaymentAdviceFooterRemoteDataSource {
           {
             'query': paymentAdviceQueryMutation.addPaymentAdviceMutation(),
             'variables': {
-              'input': {
-                'salesOrg': salesOrg,
-                'salesDistrict': salesDistrict,
-                'header': header,
-                'footer': footer,
-                'pleaseNote': pleaseNote,
-                'headerLogoPath': headerLogoPath,
-              },
+              'input': query,
             },
           },
         ),
         apiEndpoint: 'addPaymentAdviceMutation',
       );
-      _addPaymentAdviceFooterExceptionChecker(res: res);
+      _managePaymentAdviceFooterExceptionChecker(res: res);
       final data = res.data['data']['addPaymentAdvice'];
 
-      return AddPaymentAdviceFooterResponseDto.fromJson(data).toDomain();
+      return ManagePaymentAdviceFooterResponseDto.fromJson(data).toDomain();
     });
   }
 
-  Future<PaymentAdviceHeaderLogo> headerLogoUpload({
+  Future<PaymentAdviceLogoNetworkFile> headerLogoUpload({
     required MultipartFile file,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -111,13 +95,43 @@ class PaymentAdviceFooterRemoteDataSource {
           'excel': file,
         }),
       );
-      _addPaymentAdviceFooterExceptionChecker(res: res);
+      _managePaymentAdviceFooterExceptionChecker(res: res);
 
-      return PaymentAdviceHeaderLogoDto.fromJson(res.data).toDomain();
+      return PaymentAdviceLogoNetworkFileDto.fromJson(res.data).toDomain();
     });
   }
 
-  void _addPaymentAdviceFooterExceptionChecker(
+ 
+
+  Future<ManagePaymentAdviceFooterResponse> deletePaymentAdvice({
+    required String salesOrg,
+    required String salesDistrict,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ezpayMutation',
+        data: jsonEncode(
+          {
+            'query': paymentAdviceQueryMutation.deletePaymentAdviceMutation(),
+            'variables': {
+              'input': {
+                'salesOrg': salesOrg,
+                'salesDistrict': salesDistrict,
+              },
+            },
+          },
+        ),
+        apiEndpoint: 'deletePaymentAdviceMutation',
+      );
+      _managePaymentAdviceFooterExceptionChecker(res: res);
+      final data = res.data['data']['deletePaymentAdvice'];
+
+      return ManagePaymentAdviceFooterResponseDto.fromJson(data).toDomain();
+    });
+  }
+
+  void _managePaymentAdviceFooterExceptionChecker(
       {
     required Response<dynamic> res,
   }) {

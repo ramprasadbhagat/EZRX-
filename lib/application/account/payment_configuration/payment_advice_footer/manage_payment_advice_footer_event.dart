@@ -3,9 +3,15 @@ part of 'manage_payment_advice_footer_bloc.dart';
 @freezed
 class ManagePaymentAdviceFooterEvent with _$ManagePaymentAdviceFooterEvent {
   const factory ManagePaymentAdviceFooterEvent.initialized() = _Initialized;
-  const factory ManagePaymentAdviceFooterEvent.addManagePaymentAdviceFooter() =
-      _AddManagePaymentAdviceFooter;
-const factory ManagePaymentAdviceFooterEvent.salesOrgOnChange({
+  const factory ManagePaymentAdviceFooterEvent.fetch() = _Fetch;
+  const factory ManagePaymentAdviceFooterEvent.setPaymentAdvice({
+    required PaymentAdviceFooter paymentAdviceFooterData,
+  }) = _SetPaymentAdvice;
+  const factory ManagePaymentAdviceFooterEvent.addOrUpdate() = _AddOrUpdate;
+  const factory ManagePaymentAdviceFooterEvent.delete({
+    required PaymentAdviceFooter paymentAdviceFooter,
+  }) = _Delete;
+  const factory ManagePaymentAdviceFooterEvent.salesOrgOnChange({
     required SalesOrg salesOrg,
   }) = _SalesOrgOnChange;
   const factory ManagePaymentAdviceFooterEvent.salesDistrictOnChange({
@@ -21,7 +27,7 @@ const factory ManagePaymentAdviceFooterEvent.salesOrgOnChange({
     required PickFrom pickFrom,
   }) = _AddFile;
   const factory ManagePaymentAdviceFooterEvent.removePickedFile() =
-      _RemovePickedFile; 
+      _RemovePickedFile;
 }
 
 enum ManagePaymentAdviceFooterLabel {
@@ -29,4 +35,5 @@ enum ManagePaymentAdviceFooterLabel {
   footer,
   note,
 }
+
 enum PickFrom { file, gallery }
