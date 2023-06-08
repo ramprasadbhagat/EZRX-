@@ -3,7 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
+import 'package:ezrxmobile/presentation/home/home_tab.dart';
+import 'package:ezrxmobile/presentation/more/more_tab.dart';
+import 'package:ezrxmobile/presentation/orders/orders_tab.dart';
+import 'package:ezrxmobile/presentation/payments/payments_tab.dart';
+import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -75,28 +81,46 @@ class HomeNavigationTabbar extends StatelessWidget {
                     : BlocBuilder<UserBloc, UserState>(
                         buildWhen: (previous, current) => previous != current,
                         builder: (context, state) {
-                          return AutoTabsScaffold(
-                            lazyLoad: false,
-                            routes: _getTabs(context)
-                                .map((item) => item.route)
-                                .toList(),
-                            bottomNavigationBuilder: (_, tabsRouter) {
-                              return BottomNavigationBar(
-                                key: const Key('homeTabbar'),
-                                currentIndex: tabsRouter.activeIndex,
-                                onTap: (index) {
-                                  tabsRouter.setActiveIndex(index);
-                                },
-                                items: _getTabs(context)
-                                    .map(
-                                      (item) => BottomNavigationBarItem(
-                                        icon: item.icon,
-                                        label: item.label.tr(),
+                          return Material(
+                            color: Colors.white,
+                            child: AutoTabsRouter.tabBar(
+                              routes: _getTabs(context)
+                                  .map((item) => item.route)
+                                  .toList(),
+                              builder: (context, child, tabController) =>
+                                  Column(
+                                children: [
+                                  Expanded(
+                                    child: TabBarView(
+                                      controller: tabController,
+                                      children: _getTabs(context)
+                                          .map((item) => item.page)
+                                          .toList(),
+                                    ),
+                                  ),
+                                  SafeArea(
+                                    bottom: true,
+                                    child: TabBar(
+                                      key: const Key('homeTabbar'),
+                                      indicator: TopIndicator(),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0,
                                       ),
-                                    )
-                                    .toList(),
-                              );
-                            },
+                                      controller: tabController,
+                                      labelPadding: EdgeInsets.zero,
+                                      tabs: _getTabs(context)
+                                          .map(
+                                            (item) => Tab(
+                                              icon: item.icon,
+                                              text: item.label.tr(),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           );
                         },
                       ),
@@ -106,30 +130,67 @@ class HomeNavigationTabbar extends StatelessWidget {
   }
 }
 
-List<RouteItem> _getTabs(BuildContext context) {
-  if (!context.read<UserBloc>().state.userCanCreateOrder) {
-    return context.read<UserBloc>().state.showHistoryTab
-        ? [
-            homeTabRouteItem,
-            historyTabRouteItem,
-            accountTabRouteItem,
-          ]
-        : [
-            homeTabRouteItem,
-            accountTabRouteItem,
-          ];
+class TopIndicator extends Decoration {
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return _TopIndicatorBox();
   }
+}
+
+class _TopIndicatorBox extends BoxPainter {
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
+    final paint = Paint()
+      ..color = ZPColors.primary
+      ..isAntiAlias = true;
+
+    final xPos = offset.dx + cfg.size!.width / 2;
+
+    canvas.drawRRect(
+      RRect.fromRectAndCorners(
+        Rect.fromLTRB(
+          xPos - cfg.size!.width / 2,
+          -6,
+          xPos + cfg.size!.width / 2,
+          2,
+        ),
+        bottomLeft: const Radius.circular(8.0),
+        bottomRight: const Radius.circular(8.0),
+      ),
+      paint,
+    );
+
+    canvas.drawLine(
+      Offset(offset.dx, offset.dy),
+      Offset(cfg.size!.width + offset.dx, 0),
+      paint,
+    );
+  }
+}
+
+List<RouteItem> _getTabs(BuildContext context) {
+  // TODO : userCanCreateOrder is not ready yet
+  // if (!context.read<UserBloc>().state.userCanCreateOrder) {
+  //   return [
+  //     homeTabRouteItem,
+  //     productTabRouteItem,
+  //     paymentsTabRouteItem,
+  //     moreTabRouteItem,
+  //   ];
+  // }
 
   return [
     homeTabRouteItem,
-    historyTabRouteItem,
-    favouritesTabRouteItem,
-    accountTabRouteItem,
+    productTabRouteItem,
+    ordersTabRouteItem,
+    paymentsTabRouteItem,
+    moreTabRouteItem,
   ];
 }
 
 const RouteItem homeTabRouteItem = RouteItem(
   route: HomeTabRoute(),
+  page: HomeTab(),
   icon: Icon(
     Icons.home_outlined,
     key: Key('homeTab'),
@@ -137,40 +198,55 @@ const RouteItem homeTabRouteItem = RouteItem(
   label: 'Home',
 );
 
-RouteItem historyTabRouteItem = RouteItem(
-  route: HistoryTabRoute(),
-  icon: const Icon(
-    Icons.fact_check_outlined,
-    key: Key('historyTab'),
+RouteItem productTabRouteItem = const RouteItem(
+  route: ProductsTabRoute(),
+  page: ProductsTab(),
+  icon: Icon(
+    Icons.storefront_outlined,
+    key: Key('productsTab'),
   ),
-  label: 'History',
+  label: 'Products',
 );
 
-const RouteItem favouritesTabRouteItem = RouteItem(
-  route: FavouritesTabRoute(),
+const RouteItem ordersTabRouteItem = RouteItem(
+  route: OrdersTabRoute(),
+  page: OrdersTab(),
   icon: Icon(
-    Icons.favorite_border_outlined,
-    key: Key('favoritesTab'),
+    Icons.article_outlined,
+    key: Key('ordersTab'),
   ),
-  label: 'Favourites',
+  label: 'Orders',
 );
 
-const RouteItem accountTabRouteItem = RouteItem(
-  route: AccountTabRoute(),
+const RouteItem paymentsTabRouteItem = RouteItem(
+  route: PaymentsTabRoute(),
+  page: PaymentsTab(),
   icon: Icon(
-    Icons.person_outline,
-    key: Key('accountTabbar'),
+    Icons.payments_outlined,
+    key: Key('paymentsTab'),
   ),
-  label: 'Account',
+  label: 'Payments',
+);
+
+const RouteItem moreTabRouteItem = RouteItem(
+  route: MoreTabRoute(),
+  page: MoreTab(),
+  icon: Icon(
+    Icons.reorder_outlined,
+    key: Key('moreTab'),
+  ),
+  label: 'More',
 );
 
 class RouteItem {
   final PageRouteInfo<dynamic> route;
+  final Widget page;
   final Icon icon;
   final String label;
 
   const RouteItem({
     required this.route,
+    required this.page,
     required this.icon,
     required this.label,
   });

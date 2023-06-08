@@ -115,19 +115,20 @@ void main() {
         },
       );
 
-      testWidgets(
-        '=> Tap Go To Order History',
-        (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-          expect(orderSuccessPage, findsOneWidget);
-          final goToOrderHistory = find.text('Go To Order History');
-          expect(goToOrderHistory, findsOneWidget);
-          await tester.tap(goToOrderHistory);
-          await tester.pump();
-        },
-      );
+      //TODO: Redirect not available currently. Change in layout
+      // testWidgets(
+      //   '=> Tap Go To Order History',
+      //   (tester) async {
+      //     await tester.pumpWidget(getWidget());
+      //     await tester.pump();
+      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+      //     expect(orderSuccessPage, findsOneWidget);
+      //     final goToOrderHistory = find.text('Go To Order History');
+      //     expect(goToOrderHistory, findsOneWidget);
+      //     await tester.tap(goToOrderHistory);
+      //     await tester.pump();
+      //   },
+      // );
 
       testWidgets(
         '=> Tap Back Button',

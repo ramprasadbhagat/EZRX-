@@ -59,7 +59,6 @@ class MaterialRoot extends StatelessWidget {
                         ],
                         builder: (context, child, tabController) => TabViewPage(
                           tabController: tabController,
-                          length: length,
                           tabHeaderText: [
                             'Material'.tr(),
                             if (isBundleMaterialEnable) 'Bundles'.tr(),

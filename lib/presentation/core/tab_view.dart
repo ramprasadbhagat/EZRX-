@@ -2,14 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TabViewPage extends StatelessWidget {
-  final int length;
   final List<String> tabHeaderText;
   final List<Widget> tabWidgets;
   final TabController tabController;
 
   const TabViewPage({
     Key? key,
-    required this.length,
     required this.tabHeaderText,
     required this.tabWidgets,
     required this.tabController,

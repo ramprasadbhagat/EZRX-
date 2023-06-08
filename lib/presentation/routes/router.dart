@@ -1,5 +1,6 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/add_deduction_code_page.dart';
@@ -11,6 +12,8 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_ad
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
+import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
+import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
@@ -22,7 +25,6 @@ import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
-import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
@@ -32,8 +34,6 @@ import 'package:ezrxmobile/presentation/account/ship_to_search.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
-import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
-import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
@@ -49,6 +49,7 @@ import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
+import 'package:ezrxmobile/presentation/payments/payments_tab.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
@@ -68,6 +69,9 @@ import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
+import 'package:ezrxmobile/presentation/orders/orders_tab.dart';
+import 'package:ezrxmobile/presentation/products/products_tab.dart';
+import 'package:ezrxmobile/presentation/more/more_tab.dart';
 
 //ignore: unused-code
 @MaterialAutoRouter(
@@ -179,19 +183,38 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
           path: 'home',
         ),
         AutoRoute(
-          page: HistoryTab,
-          path: 'orders/history',
+          page: ProductsTab,
+          path: 'products',
         ),
         AutoRoute(
-          page: FavouritesTab,
-          path: 'orders/favourites',
+          page: OrdersTab,
+          path: 'orders/tab',
         ),
         AutoRoute(
-          page: AccountTab,
-          path: 'core/account',
+          page: PaymentsTab,
+          path: 'payments/tab',
+        ),
+        AutoRoute(
+          page: MoreTab,
+          path: 'more',
         ),
       ],
     ),
+    // =========
+    // TODO:  will remove in future
+    AutoRoute(
+      page: HistoryTab,
+      path: 'orders/history',
+    ),
+    AutoRoute(
+      page: FavouritesTab,
+      path: 'orders/favourites',
+    ),
+    AutoRoute(
+      page: AccountTab,
+      path: 'core/account',
+    ),
+    // =========
     AutoRoute(
       path: 'orders/saved_order_list',
       page: SavedOrderListPage,
@@ -282,9 +305,13 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
       page: AddSalesDistrictPage,
     ),
     AutoRoute(
-        path: 'payments/sales_district/edit_sales_district',
-        page: EditSalesDistrictPage,),
-    AutoRoute(path: 'payments/advice_footer', page: PaymentAdviceFooterPage,),
+      path: 'payments/sales_district/edit_sales_district',
+      page: EditSalesDistrictPage,
+    ),
+    AutoRoute(
+      path: 'payments/advice_footer',
+      page: PaymentAdviceFooterPage,
+    ),
     AutoRoute(
       path: 'payments/advice_footer/add_advice_footer',
       page: AddPaymentAdviceFooterPage,
