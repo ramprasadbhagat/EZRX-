@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -175,7 +176,7 @@ class _SSOLoginButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('ssoLoginButton'),
+          key: WidgetKeys.ssoLoginButton,
           onPressed: state.isSubmitting
               ? null
               : () {
@@ -299,7 +300,7 @@ class _UsernameField extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return TextFieldWithLabel(
-          fieldKey: 'loginUsernameField',
+          fieldKey: WidgetKeys.loginUsernameField,
           labelText: 'Username'.tr(),
           decoration: InputDecoration(
             hintText: 'Enter username'.tr(),
@@ -349,7 +350,7 @@ class _PasswordField extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return TextFieldWithLabel(
-          fieldKey: 'loginPasswordField',
+          fieldKey: WidgetKeys.loginPasswordField,
           labelText: 'Password'.tr(),
           controller: controller,
           validator: (text) => Password.login(text ?? '').value.fold(
@@ -370,7 +371,7 @@ class _PasswordField extends StatelessWidget {
                 const BoxConstraints(maxHeight: 24, minHeight: 24),
             suffixIcon: IconButton(
               padding: EdgeInsets.zero,
-              key: const Key('loginPasswordFieldSuffixIcon'),
+              key: WidgetKeys.loginPasswordFieldSuffixIcon,
               icon: Icon(
                 state.passwordVisible
                     ? Icons.visibility_outlined
@@ -413,7 +414,7 @@ class _RememberPassword extends StatelessWidget {
             Row(
               children: [
                 Checkbox(
-                  key: const Key('loginRememberPasswordCheckbox'),
+                  key: WidgetKeys.loginRememberPasswordCheckbox,
                   value: state.rememberPassword,
                   onChanged: (value) {
                     FocusScope.of(context).unfocus();
@@ -460,7 +461,7 @@ class _LoginButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('loginSubmitButton'),
+          key: WidgetKeys.loginSubmitButton,
           onPressed: state.isSubmitting
               ? null
               : () {

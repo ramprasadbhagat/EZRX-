@@ -16,7 +16,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.obscureText = false,
     this.onDone,
   }) : super(key: key);
-  final String fieldKey;
+  final Key fieldKey;
   final String labelText;
   final TextEditingController controller;
   final Function(String?) validator;
@@ -40,7 +40,7 @@ class TextFieldWithLabel extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         TextFormField(
-          key: Key(fieldKey),
+          key: fieldKey,
           style: Theme.of(context).textTheme.titleMedium,
           autocorrect: autoCorrect,
           enabled: isEnabled,

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
@@ -153,9 +154,9 @@ void main() {
         .thenReturn(const DeepLinkingState.initial());
   });
 
-  group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
+  group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
     testWidgets(
-        'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
+        'Test - AupTc Widget Show AupTcBloc state.showTermsAndCondition=true',
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
@@ -179,12 +180,12 @@ void main() {
         ),
       );
       await tester.pump();
-      final auptcscreen = find.byKey(const Key('auptcscreen'));
-      final homeTabbar = find.byKey(const Key('homeTabbar'));
+      final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
+      final homeTabbar = find.byKey(WidgetKeys.homeTabBar);
       final auptcappBar = find.byKey(const Key('auptcappBar'));
       final auptcwebview = find.byKey(const Key('auptcwebview'));
       final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-      expect(auptcscreen, findsOneWidget);
+      expect(aupTcScreen, findsOneWidget);
       expect(auptcappBar, findsOneWidget);
       expect(homeTabbar, findsNothing);
       expect(auptcwebview, findsOneWidget);
@@ -250,8 +251,8 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      final auptcscreen = find.byKey(const Key('auptcscreen'));
-      expect(auptcscreen, findsNothing);
+      final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
+      expect(aupTcScreen, findsNothing);
     });
   });
 
@@ -278,10 +279,10 @@ void main() {
       ),
     );
 
-    final auptcscreen = find.byKey(const Key('auptcscreen'));
-    expect(auptcscreen, findsOneWidget);
+    final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
+    expect(aupTcScreen, findsOneWidget);
 
-    final auptcscreenElement = tester.state(auptcscreen) as AupTCDialogState;
+    final auptcscreenElement = tester.state(aupTcScreen) as AupTCDialogState;
     auptcscreenElement.isLoading = true;
     // ignore: invalid_use_of_protected_member
     auptcscreenElement.setState(() {});

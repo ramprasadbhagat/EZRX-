@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
 import 'package:ezrxmobile/presentation/orders/orders_tab.dart';
@@ -28,7 +29,7 @@ class HomeNavigationTabbar extends StatelessWidget {
 
         return state.showTermsAndConditon
             ? const AupTCDialog(
-                key: ValueKey('auptcscreen'),
+                key: WidgetKeys.aupTcScreen,
               )
             : WillPopScope(
                 onWillPop: () async => false,
@@ -54,7 +55,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                               return Row(
                                 children: [
                                   NavigationRail(
-                                    key: const Key('homeTabbar'),
+                                    key: WidgetKeys.homeTabBar,
                                     destinations: _getTabs(context)
                                         .map(
                                           (item) => NavigationRailDestination(
@@ -102,7 +103,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                                     bottom: true,
                                     top: false,
                                     child: TabBar(
-                                      key: const Key('homeTabbar'),
+                                      key: WidgetKeys.homeTabBar,
                                       indicator: TopIndicator(),
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 8.0,
@@ -194,7 +195,7 @@ const RouteItem homeTabRouteItem = RouteItem(
   page: HomeTab(),
   icon: Icon(
     Icons.home_outlined,
-    key: Key('homeTab'),
+    key: WidgetKeys.homeTab,
   ),
   label: 'Home',
 );
@@ -204,7 +205,7 @@ RouteItem productTabRouteItem = const RouteItem(
   page: ProductsTab(),
   icon: Icon(
     Icons.storefront_outlined,
-    key: Key('productsTab'),
+    key: WidgetKeys.productsTab,
   ),
   label: 'Products',
 );
@@ -214,7 +215,7 @@ const RouteItem ordersTabRouteItem = RouteItem(
   page: OrdersTab(),
   icon: Icon(
     Icons.article_outlined,
-    key: Key('ordersTab'),
+    key: WidgetKeys.ordersTab,
   ),
   label: 'Orders',
 );
@@ -224,7 +225,7 @@ const RouteItem paymentsTabRouteItem = RouteItem(
   page: PaymentsTab(),
   icon: Icon(
     Icons.payments_outlined,
-    key: Key('paymentsTab'),
+    key: WidgetKeys.paymentsTab,
   ),
   label: 'Payments',
 );
@@ -234,7 +235,7 @@ const RouteItem moreTabRouteItem = RouteItem(
   page: MoreTab(),
   icon: Icon(
     Icons.reorder_outlined,
-    key: Key('moreTab'),
+    key: WidgetKeys.moreTab,
   ),
   label: 'More',
 );
