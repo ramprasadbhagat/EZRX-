@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 
 abstract class ZPColors {
+  static const Color darkBlue = Color.fromRGBO(0, 57, 72, 1.0);
   static const Color darkGray = Color.fromRGBO(128, 128, 128, 1.0);
   static const Color lightGreen = Color.fromRGBO(192, 212, 47, 0.5);
   static const Color green = Color.fromRGBO(76, 175, 80, 1.0);
   static const Color darkGreen = Color.fromRGBO(128, 128, 0, 1.0);
   static const Color darkerGreen = Color.fromRGBO(5, 38, 8, 1.0);
+  static const Color casal = Color.fromRGBO(45, 94, 100, 1.0);
   static const Color lightGray = Color.fromRGBO(170, 170, 170, 1.0);
   static const Color extraLightGray = Color.fromRGBO(238, 238, 238, 1.0);
   static const Color shadowColor = Color.fromRGBO(245, 245, 245, 1.0);
   static const Color unselectedLabelColor = Color.fromRGBO(167, 180, 187, 1.0);
   static const Color inputBorderColor = Color.fromRGBO(207, 210, 210, 1.0);
   static const Color orange = Color.fromRGBO(231, 165, 70, 1);
+  static const Color lightGray2 = Color.fromRGBO(217, 217, 217, 1.0);
+  static const Color shadesGray = Color.fromRGBO(160, 160, 160, 1.0);
+  static const Color dDNeutrals40 = Color.fromRGBO(161, 161, 161, 1.0);
+  static const Color dDPrimary10 = Color.fromRGBO(233, 237, 238, 1.0);
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
+  static const Color neutralsBlack = Color.fromRGBO(19, 19, 19, 1);
+  static const Color shadesBlack = Color.fromRGBO(15, 21, 21, 1);
   static const Color red = Color.fromRGBO(244, 67, 54, 1);
   static const Color lightRed = Color.fromRGBO(251, 208, 208, 1);
   static const Color lightYellow = Color.fromRGBO(250, 234, 176, 1);

@@ -6,9 +6,11 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -64,35 +66,43 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context, state) {
               return Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Form(
-                      autovalidateMode: state.showErrorMessages
-                          ? AutovalidateMode.always
-                          : AutovalidateMode.disabled,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(),
-                          const _Logo(),
-                          // const Spacer(),
-                          // const _SSOLoginButton(),
-                          // const Spacer(),
-                          // const _OrDivider(),
-                          const Spacer(),
-                          _UsernameField(
-                            controller: _usernameController,
+                  Form(
+                    autovalidateMode: state.showErrorMessages
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const _Logo(),
+                        const SizedBox(height: 24),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Column(
+                              children: [
+                                _UsernameField(
+                                  controller: _usernameController,
+                                ),
+                                const SizedBox(height: 15),
+                                _PasswordField(
+                                  controller: _passwordController,
+                                ),
+                                const SizedBox(height: 15),
+                                const _RememberPassword(),
+                                const SizedBox(height: 30),
+                                const _LoginButton(),
+                                const SizedBox(height: 24),
+                                const _OrDivider(),
+                                const SizedBox(height: 24),
+                                const _SSOLoginButton(),
+                                const SizedBox(height: 32),
+                                const _CreateAccount(),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 15),
-                          _PasswordField(
-                            controller: _passwordController,
-                          ),
-                          const _RememberPassword(),
-                          const SizedBox(height: 15),
-                          const _LoginButton(),
-                          const Spacer(flex: 3),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Align(
@@ -122,55 +132,168 @@ class _Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      'assets/svg/ezrxlogo.svg',
-      height: 80,
-      fit: BoxFit.scaleDown,
+    return Container(
+      color: ZPColors.dDPrimary10,
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/svg/ezrx+logo.svg',
+              height: 40,
+              width: 120,
+              fit: BoxFit.scaleDown,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            const VerticalDivider(
+              width: 0,
+              color: ZPColors.dDNeutrals40,
+              indent: 8,
+              thickness: 1,
+              endIndent: 8,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              'Log in'.tr(),
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: ZPColors.neutralsBlack,
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-// class _SSOLoginButton extends StatelessWidget {
-//   const _SSOLoginButton({Key? key}) : super(key: key);
+class _SSOLoginButton extends StatelessWidget {
+  const _SSOLoginButton({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<LoginFormBloc, LoginFormState>(
-//       buildWhen: (previous, current) =>
-//           previous.isSubmitting != current.isSubmitting,
-//       builder: (context, state) {
-//         return ElevatedButton(
-//           key: const Key('ssoLoginButton'),
-//           onPressed: state.isSubmitting
-//               ? null
-//               : () {
-//                   FocusScope.of(context).unfocus();
-//                   context
-//                       .read<LoginFormBloc>()
-//                       .add(const LoginFormEvent.loginWithOktaButtonPressed());
-//                 },
-//           child: LoadingShimmer.withChild(
-//             enabled: state.isSubmitting,
-//             child: const Text('Login with SSO').tr(),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      buildWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting,
+      builder: (context, state) {
+        return ElevatedButton(
+          key: const Key('ssoLoginButton'),
+          onPressed: state.isSubmitting
+              ? null
+              : () {
+                  FocusScope.of(context).unfocus();
+                  // context
+                  //     .read<LoginFormBloc>()
+                  //     .add(const LoginFormEvent.loginWithOktaButtonPressed());
+                },
+          style: ElevatedButton.styleFrom(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: ZPColors.white,
+              height: 1.5,
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            backgroundColor: ZPColors.dDPrimary10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            minimumSize: const Size(169, 40),
+          ),
+          child: IntrinsicWidth(
+            child: LoadingShimmer.withChild(
+              enabled: state.isSubmitting,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.login_outlined,
+                    size: 24,
+                    color: ZPColors.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Log in with SSO'.tr(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: ZPColors.shadesBlack,
+                      height: 21.79 / 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
 
-// class _OrDivider extends StatelessWidget {
-//   const _OrDivider({Key? key}) : super(key: key);
+class _OrDivider extends StatelessWidget {
+  const _OrDivider({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(children: <Widget>[
-//       const Expanded(child: Divider()),
-//       Text('OR', style: Theme.of(context).textTheme.labelLarge),
-//       const Expanded(child: Divider()),
-//     ]);
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: const <Widget>[
+      Expanded(
+        child: Divider(indent: 0),
+      ),
+      Text(
+        'or',
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: ZPColors.dDNeutrals40,
+          height: 21 / 14,
+        ),
+      ),
+      Expanded(
+        child: Divider(
+          endIndent: 0,
+        ),
+      ),
+    ]);
+  }
+}
+
+class _CreateAccount extends StatelessWidget {
+  const _CreateAccount({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      Text(
+        'Don’t have an account yet?'.tr(),
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: ZPColors.neutralsBlack,
+          height: 21 / 14,
+        ),
+      ),
+      const SizedBox(
+        width: 4.0,
+      ),
+      Text(
+        'Create an account'.tr(),
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: ZPColors.casal,
+          height: 19.6 / 14,
+        ),
+      ),
+    ]);
+  }
+}
 
 class _UsernameField extends StatelessWidget {
   final TextEditingController controller;
@@ -198,16 +321,28 @@ class _UsernameField extends StatelessWidget {
           previous.passwordVisible != current.passwordVisible ||
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return TextFormField(
-          key: const Key('loginUsernameField'),
-          enabled: !state.isSubmitting,
+        return TextFieldWithLabel(
+          fieldKey: 'loginUsernameField',
+          labelText: 'Username'.tr(),
+          textStyleLabel: const TextStyle(
+            fontSize: 14,
+            color: ZPColors.neutralsBlack,
+            fontWeight: FontWeight.w700,
+            height: 20 / 14,
+          ),
+          textInputStyle: const TextStyle(
+            fontSize: 16,
+            color: ZPColors.neutralsBlack,
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+          ),
+          decoration: InputDecoration(
+            isDense: true,
+            hintText: 'Enter username'.tr(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          ),
           controller: controller,
-          keyboardType: TextInputType.emailAddress,
-          autocorrect: false,
-          decoration: InputDecoration(labelText: 'Username'.tr()),
-          onChanged: (value) => context.read<LoginFormBloc>().add(
-                LoginFormEvent.usernameChanged(value),
-              ),
           validator: (text) => Username(text ?? '').value.fold(
                 (f) => f.maybeMap(
                   empty: (_) => 'Username cannot be empty.'.tr(),
@@ -215,6 +350,10 @@ class _UsernameField extends StatelessWidget {
                 ),
                 (_) => null,
               ),
+          onChanged: (value) => context.read<LoginFormBloc>().add(
+                LoginFormEvent.usernameChanged(value),
+              ),
+          isEnabled: !state.isSubmitting,
         );
       },
     );
@@ -247,28 +386,16 @@ class _PasswordField extends StatelessWidget {
           previous.passwordVisible != current.passwordVisible ||
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return TextFormField(
-          key: const Key('loginPasswordField'),
-          enabled: !state.isSubmitting,
-          controller: controller,
-          keyboardType: TextInputType.visiblePassword,
-          autocorrect: false,
-          decoration: InputDecoration(
-            labelText: 'Password'.tr(),
-            suffixIcon: IconButton(
-              key: const Key('loginPasswordFieldSuffixIcon'),
-              icon: Icon(
-                state.passwordVisible ? Icons.visibility : Icons.visibility_off,
-              ),
-              onPressed: () => context.read<LoginFormBloc>().add(
-                    const LoginFormEvent.passwordVisibilityChanged(),
-                  ),
-            ),
+        return TextFieldWithLabel(
+          fieldKey: 'loginPasswordField',
+          labelText: 'Password'.tr(),
+          textStyleLabel: const TextStyle(
+            fontSize: 14,
+            color: ZPColors.neutralsBlack,
+            fontWeight: FontWeight.w700,
+            height: 20 / 14,
           ),
-          obscureText: !state.passwordVisible,
-          onChanged: (value) => context.read<LoginFormBloc>().add(
-                LoginFormEvent.passwordChanged(value),
-              ),
+          controller: controller,
           validator: (text) => Password.login(text ?? '').value.fold(
                 (f) => f.maybeMap(
                   empty: (_) => 'Password cannot be empty.'.tr(),
@@ -276,7 +403,41 @@ class _PasswordField extends StatelessWidget {
                 ),
                 (_) => null,
               ),
-          onFieldSubmitted: (value) {
+          onChanged: (value) => context.read<LoginFormBloc>().add(
+                LoginFormEvent.passwordChanged(value),
+              ),
+          textInputStyle: const TextStyle(
+            fontSize: 16,
+            color: ZPColors.neutralsBlack,
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+          ),
+          isEnabled: !state.isSubmitting,
+          keyboardType: TextInputType.visiblePassword,
+          autocorrect: false,
+          decoration: InputDecoration(
+            isDense: true,
+            suffixIconConstraints:
+                const BoxConstraints(maxHeight: 24, minHeight: 24),
+            suffixIcon: IconButton(
+              padding: EdgeInsets.zero,
+              key: const Key('loginPasswordFieldSuffixIcon'),
+              icon: Icon(
+                state.passwordVisible
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                size: 24,
+              ),
+              onPressed: () => context.read<LoginFormBloc>().add(
+                    const LoginFormEvent.passwordVisibilityChanged(),
+                  ),
+            ),
+            hintText: 'Enter password'.tr(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          ),
+          obscureText: !state.passwordVisible,
+          onDone: (value) {
             if (!state.isSubmitting) {
               FocusScope.of(context).unfocus();
               context.read<LoginFormBloc>().add(
@@ -299,18 +460,52 @@ class _RememberPassword extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.rememberPassword != current.rememberPassword,
       builder: (context, state) {
-        return CheckboxListTile(
-          contentPadding: const EdgeInsets.only(top: 5),
-          title: const Text('Remember Password').tr(),
-          controlAffinity: ListTileControlAffinity.leading,
-          key: const Key('loginRememberPasswordCheckbox'),
-          value: state.rememberPassword,
-          onChanged: (value) {
-            FocusScope.of(context).unfocus();
-            context
-                .read<LoginFormBloc>()
-                .add(const LoginFormEvent.rememberCheckChanged());
-          },
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Transform.scale(
+                  scale: 1,
+                  child: Checkbox(
+                    key: const Key('loginRememberPasswordCheckbox'),
+                    value: state.rememberPassword,
+                    onChanged: (value) {
+                      FocusScope.of(context).unfocus();
+                      context.read<LoginFormBloc>().add(
+                            const LoginFormEvent.rememberCheckChanged(),
+                          );
+                    },
+                    side: MaterialStateBorderSide.resolveWith(
+                      (states) => const BorderSide(
+                        width: 2.0,
+                        color: ZPColors.lightGray2,
+                      ),
+                    ),
+                    visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Remember me'.tr(),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: ZPColors.neutralsBlack,
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              'Forgot password?'.tr(),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: ZPColors.casal,
+              ),
+            ),
+          ],
         );
       },
     );
@@ -326,19 +521,36 @@ class _LoginButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return ElevatedButton(
-          key: const Key('loginSubmitButton'),
-          onPressed: state.isSubmitting
-              ? null
-              : () {
-                  FocusScope.of(context).unfocus();
-                  context.read<LoginFormBloc>().add(
-                        const LoginFormEvent.loginWithEmailAndPasswordPressed(),
-                      );
-                },
-          child: LoadingShimmer.withChild(
-            enabled: state.isSubmitting,
-            child: const Text('Login').tr(),
+        return SizedBox(
+          child: ElevatedButton(
+            key: const Key('loginSubmitButton'),
+            onPressed: state.isSubmitting
+                ? null
+                : () {
+                    FocusScope.of(context).unfocus();
+                    context.read<LoginFormBloc>().add(
+                          const LoginFormEvent
+                              .loginWithEmailAndPasswordPressed(),
+                        );
+                  },
+            style: ElevatedButton.styleFrom(
+              textStyle: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: ZPColors.white,
+                height: 1.5,
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              backgroundColor: ZPColors.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              minimumSize: const Size(double.infinity, 48),
+            ),
+            child: LoadingShimmer.withChild(
+              enabled: state.isSubmitting,
+              child: const Text('Log in').tr(),
+            ),
           ),
         );
       },

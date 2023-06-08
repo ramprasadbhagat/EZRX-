@@ -166,14 +166,14 @@ void main() {
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+      final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
       final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsOneWidget);
       expect(passwordTextField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
-      // expect(ssoLoginButton, findsOneWidget);
+      expect(ssoLoginButton, findsOneWidget);
       expect(rememberPasswordCheckBox, findsOneWidget);
     });
 
