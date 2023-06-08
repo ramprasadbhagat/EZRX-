@@ -100,6 +100,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                                   ),
                                   SafeArea(
                                     bottom: true,
+                                    top: false,
                                     child: TabBar(
                                       key: const Key('homeTabbar'),
                                       indicator: TopIndicator(),

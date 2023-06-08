@@ -142,29 +142,35 @@ TextTheme _textTheme() {
         titleLarge: GoogleFonts.notoSans(
           fontSize: 18,
           color: ZPColors.black,
+          letterSpacing: 0.8,
         ),
         titleMedium: GoogleFonts.notoSans(
           fontSize: 16,
           color: ZPColors.black,
+          letterSpacing: 0.8,
         ),
         titleSmall: GoogleFonts.notoSans(
           fontSize: 14,
           color: ZPColors.black,
+          letterSpacing: 0.8,
         ),
         labelLarge: GoogleFonts.notoSans(
           fontSize: 18,
           color: ZPColors.black,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.8,
         ),
         labelMedium: GoogleFonts.notoSans(
           fontSize: 16,
           color: ZPColors.black,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.8,
         ),
         labelSmall: GoogleFonts.notoSans(
           fontSize: 14,
           color: ZPColors.black,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.8,
         ),
       );
 }
@@ -179,8 +185,9 @@ TextSelectionThemeData _textSelectionTheme() {
 
 InputDecorationTheme _inputDecorationTheme() {
   return InputDecorationTheme(
-    contentPadding: const EdgeInsets.all(10),
-    labelStyle: const TextStyle(
+    isDense: true,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    labelStyle: GoogleFonts.notoSans(
       fontSize: 14.0,
     ),
     floatingLabelStyle: const TextStyle(
@@ -254,9 +261,11 @@ ElevatedButtonThemeData _elevatedButtonTheme() {
       textStyle: GoogleFonts.notoSans(
         fontSize: 15,
         color: ZPColors.white,
+        fontWeight: FontWeight.w600,
       ),
       elevation: 0,
-      minimumSize: const Size(120, 40),
+      disabledBackgroundColor: ZPColors.darkGray,
+      minimumSize: const Size(120, 45),
     ),
   );
 }
@@ -264,11 +273,12 @@ ElevatedButtonThemeData _elevatedButtonTheme() {
 TextButtonThemeData _textButtonTheme() {
   return TextButtonThemeData(
     style: TextButton.styleFrom(
-      foregroundColor: ZPColors.primary,
       textStyle: GoogleFonts.notoSans(
-        fontSize: 15,
-        color: ZPColors.white,
-      ),
+          fontSize: 14,
+          color: ZPColors.textButtonColor,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.8,
+        ),
     ),
   );
 }
@@ -282,6 +292,8 @@ OutlinedButtonThemeData _outlinedButtonTheme() {
       textStyle: GoogleFonts.notoSans(
         fontSize: 15,
         color: ZPColors.white,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.8,
       ),
       elevation: 0,
       minimumSize: const Size(120, 40),
@@ -361,6 +373,7 @@ DividerThemeData _dividerTheme() {
     indent: 24,
     endIndent: 24,
     thickness: 1.5,
+    color: ZPColors.dividerColor,
   );
 }
 

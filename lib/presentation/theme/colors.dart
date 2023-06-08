@@ -7,7 +7,7 @@ abstract class ZPColors {
   static const Color green = Color.fromRGBO(76, 175, 80, 1.0);
   static const Color darkGreen = Color.fromRGBO(128, 128, 0, 1.0);
   static const Color darkerGreen = Color.fromRGBO(5, 38, 8, 1.0);
-  static const Color casal = Color.fromRGBO(45, 94, 100, 1.0);
+  static const Color textButtonColor = Color.fromRGBO(45, 94, 100, 1.0);
   static const Color lightGray = Color.fromRGBO(170, 170, 170, 1.0);
   static const Color extraLightGray = Color.fromRGBO(238, 238, 238, 1.0);
   static const Color shadowColor = Color.fromRGBO(245, 245, 245, 1.0);
@@ -16,8 +16,8 @@ abstract class ZPColors {
   static const Color orange = Color.fromRGBO(231, 165, 70, 1);
   static const Color lightGray2 = Color.fromRGBO(217, 217, 217, 1.0);
   static const Color shadesGray = Color.fromRGBO(160, 160, 160, 1.0);
-  static const Color dDNeutrals40 = Color.fromRGBO(161, 161, 161, 1.0);
-  static const Color dDPrimary10 = Color.fromRGBO(233, 237, 238, 1.0);
+  static const Color dividerColor = Color.fromRGBO(161, 161, 161, 1.0);
+  static const Color accentColor = Color.fromRGBO(233, 237, 238, 1.0);
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color neutralsBlack = Color.fromRGBO(19, 19, 19, 1);

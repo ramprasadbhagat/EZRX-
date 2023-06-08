@@ -8,11 +8,9 @@ class TextFieldWithLabel extends StatelessWidget {
     required this.controller,
     required this.validator,
     required this.onChanged,
-    required this.isEnabled,
     required this.decoration,
-    required this.textStyleLabel,
-    required this.textInputStyle,
-    this.autocorrect = true,
+    this.isEnabled = true,
+    this.autoCorrect = true,
     this.keyboardType,
     this.initValue,
     this.obscureText = false,
@@ -21,17 +19,15 @@ class TextFieldWithLabel extends StatelessWidget {
   final String fieldKey;
   final String labelText;
   final TextEditingController controller;
-  final TextInputType? keyboardType;
-  final bool autocorrect;
   final Function(String?) validator;
   final Function(String) onChanged;
-  final bool isEnabled;
-  final String? initValue;
   final InputDecoration decoration;
+  final bool isEnabled;
+  final bool autoCorrect;
+  final TextInputType? keyboardType;
+  final String? initValue;
   final bool obscureText;
   final Function(String)? onDone;
-  final TextStyle textStyleLabel;
-  final TextStyle textInputStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +36,13 @@ class TextFieldWithLabel extends StatelessWidget {
       children: [
         Text(
           labelText,
-          style: textStyleLabel,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
         TextFormField(
           key: Key(fieldKey),
-          autocorrect: autocorrect,
+          style: Theme.of(context).textTheme.titleMedium,
+          autocorrect: autoCorrect,
           enabled: isEnabled,
           controller: controller,
           keyboardType: keyboardType,
@@ -55,7 +52,6 @@ class TextFieldWithLabel extends StatelessWidget {
           validator: (value) => validator(value),
           initialValue: initValue,
           onFieldSubmitted: onDone,
-          style: textInputStyle,
         ),
       ],
     );

@@ -149,14 +149,16 @@ class _OrderTypeSelectorField extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        displayItemText,
-                        key: const Key('displayItemText'),
-                        style: const TextStyle(
-                          color: ZPColors.black,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Noto Sans',
-                          fontSize: 12,
+                      Expanded(
+                        child: Text(
+                          displayItemText,
+                          key: const Key('displayItemText'),
+                          style: const TextStyle(
+                            color: ZPColors.black,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Noto Sans',
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                       const Icon(
