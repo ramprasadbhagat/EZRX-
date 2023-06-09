@@ -1,5 +1,7 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_passoword_confirmation_page.dart';
+import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/add_deduction_code_page.dart';
@@ -78,6 +80,11 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
   routes: <AutoRoute>[
     AutoRoute(path: 'splash', page: SplashPage, initial: true),
     AutoRoute(path: 'login', page: LoginPage),
+    AutoRoute(path: 'forgot_password', page: ForgetPasswordPage),
+    AutoRoute(
+      path: 'forgot_password_confirmation',
+      page: ForgetPasswordConfirmationPage,
+    ),
     AutoRoute(path: 'settings', page: SettingsPage),
     AutoRoute(path: 'payment_configuration', page: PaymentConfigurationPage),
     AutoRoute(path: 'payment_methods', page: PaymentMethodsPage),

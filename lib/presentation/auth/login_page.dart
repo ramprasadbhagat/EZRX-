@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -79,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const _Logo(),
+                      const Logo(),
                       Expanded(
                         child: SingleChildScrollView(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -123,43 +124,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             );
           },
-        ),
-      ),
-    );
-  }
-}
-
-class _Logo extends StatelessWidget {
-  const _Logo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: ZPColors.accentColor,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-      margin: const EdgeInsets.only(bottom: 25),
-      child: IntrinsicHeight(
-        child: Row(
-          children: [
-            SvgPicture.asset(
-              'assets/svg/ezrx+logo.svg',
-              height: 40,
-              width: 120,
-              fit: BoxFit.scaleDown,
-            ),
-            const VerticalDivider(
-              width: 15,
-              indent: 8,
-              endIndent: 8,
-            ),
-            Text(
-              'Log in'.tr(),
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-          ],
         ),
       ),
     );
@@ -442,7 +406,12 @@ class _RememberPassword extends StatelessWidget {
               child: Text(
                 'Forgot password?'.tr(),
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.read<ForgotPasswordBloc>().add(
+                      const ForgotPasswordEvent.initialized(),
+                    );
+                context.router.pushNamed('forgot_password');
+              },
             ),
           ],
         );

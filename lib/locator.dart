@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attac
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
@@ -66,6 +67,9 @@ import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_rem
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_local.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_remote.dart';
+import 'package:ezrxmobile/infrastructure/auth/repository/forget_password_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
@@ -1047,6 +1051,36 @@ void setupLocator() {
       changePasswordRepository: locator<ChangePasswordRepository>(),
     ),
   );
+
+  //============================================================
+  //  forgot Password
+  //
+  //============================================================
+  locator.registerLazySingleton(() => ForgotPasswordLocalDataSource());
+  locator.registerLazySingleton(
+    () => ForgotPasswordRemoteDataSource(
+      httpService: locator<HttpService>(),
+      authQueryMutation: locator<AuthQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ForgotPasswordRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ForgotPasswordLocalDataSource>(),
+      remoteDataSource: locator<ForgotPasswordRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ForgotPasswordBloc(
+      forgotPasswordRepository: locator<ForgotPasswordRepository>(),
+    ),
+  );
+
+
+
 
   //============================================================
   //  Order History

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/payment_configuration/bank_benefi
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
@@ -271,6 +272,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ResetPasswordBloc>(
           create: (context) => locator<ResetPasswordBloc>(),
+        ),
+        BlocProvider<ForgotPasswordBloc>(
+          create: (context) => locator<ForgotPasswordBloc>(),
         ),
         BlocProvider<AupTcBloc>(
           create: (context) => locator<AupTcBloc>(),

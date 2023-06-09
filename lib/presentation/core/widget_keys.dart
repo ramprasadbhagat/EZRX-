@@ -32,5 +32,11 @@ class WidgetKeys {
 
 
 
+  //============================================================
+  //  Reset Password
+  //============================================================
+
+  static const Key forgotUsernameField = Key('forgotUsernameField');
+
 
 }

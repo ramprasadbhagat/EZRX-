@@ -146,4 +146,13 @@ class AuthQueryMutation {
       }
     ''';
   }
+
+  String requestResetPassword(String userName, String language) {
+    return '''
+        mutation requestResetPasswordLink {
+            requestResetPassword(username: "$userName", language: "$language")
+          
+        }
+    ''';
+  }
 }
