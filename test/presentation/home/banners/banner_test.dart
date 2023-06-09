@@ -16,6 +16,7 @@ import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.da
 
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -30,12 +31,6 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
-
-late final Uint8List imageUint8List;
-final options = RequestOptions(
-  responseType: ResponseType.json,
-  path: '',
-);
 
 class MockHTTPService extends Mock implements HttpService {}
 
@@ -62,7 +57,7 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 void main() {
   late GetIt locator;
-  final mockBannerBloc = MockBannerBloc();
+  late MockBannerBloc mockBannerBloc;
   late AuthBloc mockAuthBloc;
   late MockHTTPService mockHTTPService;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -90,6 +85,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockAuthBloc = MockAuthBloc();
     mockSalesOrgBloc = MockSalesOrgBloc();
+    mockBannerBloc = MockBannerBloc();
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
@@ -109,8 +105,26 @@ void main() {
 
     final imageData =
         await rootBundle.load('assets/images/data/banner_image_data');
-    imageUint8List = imageData.buffer
+    final imageUint8List = imageData.buffer
         .asUint8List(imageData.offsetInBytes, imageData.lengthInBytes);
+
+    final options = RequestOptions(
+      responseType: ResponseType.json,
+      path: '',
+    );
+    when(() => mockHTTPService.request(
+          method: 'GET',
+          url: mockUrl,
+          responseType: ResponseType.bytes,
+        )).thenAnswer(
+      (invocation) => Future.value(
+        Response(
+          statusCode: 200,
+          data: imageUint8List,
+          requestOptions: options,
+        ),
+      ),
+    );
   });
 
   group('Home Banner', () {
@@ -170,11 +184,11 @@ void main() {
 
       await tester.pump(const Duration(seconds: 8));
       expect(
-        find.byKey(const Key('homeBanner')),
+        find.byKey(WidgetKeys.homeBanner),
         findsOneWidget,
       );
       final bannerTile = find.byType(BannerTile);
-      expect(bannerTile, findsAtLeastNWidgets(2));
+      expect(bannerTile, findsAtLeastNWidgets(1));
       final smoothPageIndicator = find.byType(SmoothPageIndicator);
       expect(
         smoothPageIndicator,
@@ -268,7 +282,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(const Key('homeBanner')),
+        find.byKey(WidgetKeys.homeBanner),
         findsOneWidget,
       );
     });

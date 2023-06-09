@@ -19,6 +19,7 @@ abstract class ZPColors {
   static const Color dividerColor = Color.fromRGBO(161, 161, 161, 1.0);
   static const Color accentColor = Color.fromRGBO(233, 237, 238, 1.0);
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
+  static const Color translucentWhite = Color.fromRGBO(250, 250, 250, 0.3);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color neutralsBlack = Color.fromRGBO(19, 19, 19, 1);
   static const Color shadesBlack = Color.fromRGBO(15, 21, 21, 1);

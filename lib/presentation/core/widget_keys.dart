@@ -38,5 +38,11 @@ class WidgetKeys {
 
   static const Key forgotUsernameField = Key('forgotUsernameField');
 
+  //============================================================
+  //  BANNER
+  //============================================================
 
+  static const Key visibilityDetector = Key('visibilityDetector');
+
+  static const Key homeBanner = Key('homeBanner');
 }

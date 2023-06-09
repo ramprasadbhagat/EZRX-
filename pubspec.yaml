@@ -43,8 +43,8 @@ dependencies:
   dartz: ^0.10.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  flutter_secure_storage: ^6.0.0
-  flutter_platform_widgets: ^2.0.0
+  flutter_secure_storage: ^8.0.0
+  flutter_platform_widgets: ^3.3.5
   wakelock: ^0.6.2
   okta_oidc: ^0.0.2
   firebase_core: ^2.2.0
@@ -68,14 +68,14 @@ dependencies:
   # responsive_framework: ^0.2.0
   sizer: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
-  shimmer: ^2.0.0
-  flutter_cache_manager: ^3.3.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.2.3
   flutter_inappwebview: ^5.7.1
   scandit_flutter_datacapture_barcode: ^6.16.1
   loading_indicator: ^3.1.0
   file: ^6.1.4
   badges: ^2.0.3
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^3.0.0
   #We need to change this later when web is supported
   open_file_safe:
     git:

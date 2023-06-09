@@ -1,19 +1,16 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart' hide Config;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -25,7 +22,7 @@ class HomeBanner extends StatefulWidget {
 }
 
 class _HomeBannerState extends State<HomeBanner> {
-  final _controller = PageController(viewportFraction: 0.95, keepPage: true);
+  final _controller = PageController();
   Timer? bannerTimer;
   bool isBannerVisible = true;
 
@@ -53,19 +50,20 @@ class _HomeBannerState extends State<HomeBanner> {
         if (state.banner.length > 1) {
           startBannerScrollTimer();
         }
+        final bannerHeight = MediaQuery.of(context).size.width * 0.5;
 
-        return Column(
+        return Stack(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.width * 0.4,
+              height: bannerHeight,
               child: VisibilityDetector(
-                key: const Key('visibilityDetector'),
+                key: WidgetKeys.visibilityDetector,
                 onVisibilityChanged: (info) {
                   final visiblePercentage = info.visibleFraction * 100;
                   isBannerVisible = visiblePercentage >= 80 ? true : false;
                 },
                 child: PageView.builder(
-                  key: const Key('homeBanner'),
+                  key: WidgetKeys.homeBanner,
                   controller: _controller,
                   allowImplicitScrolling: true,
                   itemBuilder: (_, index) {
@@ -87,28 +85,53 @@ class _HomeBannerState extends State<HomeBanner> {
                           .toString()),
                       bannerPosition: index % state.banner.length,
                       banner: state.banner[index % state.banner.length],
-                      httpService: locator<HttpService>(),
-                      config: locator<Config>(),
-                      defaultCacheManager: DefaultCacheManager(),
                     );
                   },
                 ),
               ),
             ),
             state.banner.isNotEmpty
-                ? SmoothPageIndicator(
-                    controller: _controller,
-                    onDotClicked: (index) => _controller.jumpToPage(index),
-                    count: state.banner.length,
-                    effect: ExpandingDotsEffect(
-                      dotHeight: MediaQuery.of(context).size.width * 0.02,
-                      dotWidth: MediaQuery.of(context).size.width * 0.02,
-                      dotColor: ZPColors.secondary,
-                      activeDotColor: ZPColors.primary,
-                      // strokeWidth: 0.5,
+                ? Positioned(
+                    bottom: 12,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      alignment: Alignment.center,
+                      child: SmoothPageIndicator(
+                        controller: _controller,
+                        onDotClicked: (index) => _controller.jumpToPage(index),
+                        count: state.banner.length,
+                        effect: ExpandingDotsEffect(
+                          dotHeight: MediaQuery.of(context).size.width * 0.02,
+                          dotWidth: MediaQuery.of(context).size.width * 0.02,
+                          dotColor: ZPColors.translucentWhite,
+                          activeDotColor: ZPColors.white,
+                        ),
+                      ),
                     ),
                   )
                 : const SizedBox.shrink(),
+            Positioned(
+              left: 12,
+              child: Container(
+                height: bannerHeight,
+                alignment: Alignment.center,
+                child: _CircleButton(
+                  iconData: Icons.chevron_left,
+                  onTap: previousPage,
+                ),
+              ),
+            ),
+            Positioned(
+              right: 12,
+              child: Container(
+                height: bannerHeight,
+                alignment: Alignment.center,
+                child: _CircleButton(
+                  iconData: Icons.chevron_right,
+                  onTap: nextPage,
+                ),
+              ),
+            ),
           ],
         );
       },
@@ -129,13 +152,53 @@ class _HomeBannerState extends State<HomeBanner> {
     bannerTimer = Timer.periodic(
       const Duration(seconds: 8),
       (timer) {
-        if (_controller.hasClients) {
-          _controller.nextPage(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.ease,
-          );
-        }
+        nextPage();
       },
+    );
+  }
+
+  void nextPage() {
+    if (_controller.hasClients) {
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    }
+  }
+
+  void previousPage() {
+    if (_controller.hasClients) {
+      _controller.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    }
+  }
+}
+
+class _CircleButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final IconData iconData;
+  const _CircleButton({
+    Key? key,
+    required this.onTap,
+    required this.iconData,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: ZPColors.translucentWhite,
+        ),
+        child: Icon(
+          iconData,
+          color: ZPColors.white,
+        ),
+      ),
     );
   }
 }

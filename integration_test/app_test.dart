@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/app.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -58,7 +59,7 @@ void main() {
       //
       //============================================================
       tester.printToConsole('Home Screen with banner appear');
-      final homeBanner = find.byKey(const Key('homeBanner'));
+      final homeBanner = find.byKey(WidgetKeys.homeBanner);
       expect(homeBanner, findsOneWidget);
 
       // tester.printToConsole('Swipe banner right to left');
