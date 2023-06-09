@@ -25,6 +25,12 @@ class WidgetKeys {
   static const Key paymentsTab = Key('paymentsTab');
   static const Key moreTab = Key('moreTab');
   static const Key aupTcScreen = Key('aupTcScreen');
+   //============================================================
+  //  MORE TAB BAR
+  //============================================================
+  static const Key profileTile = Key('profileTile');
+
+
 
 
 }

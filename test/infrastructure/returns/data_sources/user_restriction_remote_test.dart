@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restrictions_dto.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:dio/dio.dart';
@@ -16,7 +17,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../presentation/account/account_tab_test.dart';
 
 class UserRestrictionListDtoMock extends Mock
     implements UserRestrictionListDto {}

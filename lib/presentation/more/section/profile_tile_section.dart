@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,25 +30,25 @@ class ProfileTile extends StatelessWidget {
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return ListTile(
-          key: const Key('profileTile'),
+          contentPadding: const EdgeInsets.all(15),
+          key: WidgetKeys.profileTile,
           leading: CircleAvatar(
-            backgroundColor: ZPColors.lightGreen,
+            radius: 30,
+            backgroundColor: ZPColors.orange,
             child: Text(
               state.user.fullName.shortForm(),
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge!
+                  .copyWith(color: ZPColors.white),
             ),
           ),
           title: state.isNotEmpty
               ? Text(
-                  state.userFullName.toString(),
-                  style: Theme.of(context).textTheme.titleLarge,
+                  ('Hello, ${state.userRoleName}'),
+                  style: Theme.of(context).textTheme.labelMedium,
                 )
               : LoadingShimmer.tile(line: 3),
-          subtitle: state.isNotEmpty
-              ? Text(
-                  state.userRoleName,
-                )
-              : LoadingShimmer.tile(line: 1),
           onTap: null,
         );
       },

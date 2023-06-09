@@ -46,6 +46,7 @@ final appThemeData = {
     cardTheme: _cardTheme(),
     dividerTheme: _dividerTheme(),
     chipTheme: _chipTheme(),
+    listTileTheme: _listTileTheme(),
   ),
   AppTheme.dark: ThemeData.dark().copyWith(),
 };
@@ -142,35 +143,50 @@ TextTheme _textTheme() {
         titleLarge: GoogleFonts.notoSans(
           fontSize: 18,
           color: ZPColors.black,
-          letterSpacing: 0.8,
+          letterSpacing: 0.25,
         ),
         titleMedium: GoogleFonts.notoSans(
           fontSize: 16,
           color: ZPColors.black,
-          letterSpacing: 0.8,
+          letterSpacing: 0.25,
         ),
         titleSmall: GoogleFonts.notoSans(
           fontSize: 14,
           color: ZPColors.black,
-          letterSpacing: 0.8,
+          letterSpacing: 0.25,
         ),
         labelLarge: GoogleFonts.notoSans(
           fontSize: 18,
           color: ZPColors.black,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.8,
+          letterSpacing: 0.25,
         ),
         labelMedium: GoogleFonts.notoSans(
           fontSize: 16,
           color: ZPColors.black,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.8,
+          letterSpacing: 0.25,
         ),
         labelSmall: GoogleFonts.notoSans(
           fontSize: 14,
           color: ZPColors.black,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.8,
+          letterSpacing: 0.25,
+        ),
+        bodyLarge: GoogleFonts.notoSans(
+          fontSize: 14,
+          color: ZPColors.black,
+          letterSpacing: 0.25,
+        ),
+        bodyMedium: GoogleFonts.notoSans(
+          fontSize: 13,
+          color: ZPColors.black,
+          letterSpacing: 0.25,
+        ),
+        bodySmall: GoogleFonts.notoSans(
+          fontSize: 12,
+          color: ZPColors.black,
+          letterSpacing: 0.25,
         ),
       );
 }
@@ -274,11 +290,11 @@ TextButtonThemeData _textButtonTheme() {
   return TextButtonThemeData(
     style: TextButton.styleFrom(
       textStyle: GoogleFonts.notoSans(
-          fontSize: 14,
-          color: ZPColors.textButtonColor,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.8,
-        ),
+        fontSize: 14,
+        color: ZPColors.textButtonColor,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.25,
+      ),
     ),
   );
 }
@@ -293,7 +309,7 @@ OutlinedButtonThemeData _outlinedButtonTheme() {
         fontSize: 15,
         color: ZPColors.white,
         fontWeight: FontWeight.w600,
-        letterSpacing: 0.8,
+        letterSpacing: 0.25,
       ),
       elevation: 0,
       minimumSize: const Size(120, 40),
@@ -384,5 +400,12 @@ ChipThemeData _chipTheme() {
     labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
     padding: EdgeInsets.zero,
     shape: const StadiumBorder(),
+  );
+}
+
+ListTileThemeData _listTileTheme() {
+  return const ListTileThemeData(
+    iconColor: ZPColors.primary,
+    textColor: ZPColors.primary,
   );
 }

@@ -39,6 +39,7 @@ abstract class ZPColors {
   static const Color gradient = Color.fromRGBO(0, 133, 138, 1.0);
   static const Color announcementColor = Color(0xffff7c65);
   static const Color secondaryBGColor = Color.fromRGBO(171, 191, 193, 1);
+  static const Color greenIconColor = Color.fromRGBO(79, 105, 119, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

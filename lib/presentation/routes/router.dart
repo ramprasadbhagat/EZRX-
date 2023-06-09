@@ -1,6 +1,5 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/add_deduction_code_page.dart';
@@ -190,6 +189,10 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
           page: OrdersTab,
           path: 'orders/tab',
         ),
+        // AutoRoute(
+        //   page: AccountTab,
+        //   path: 'core/account',
+        // ),
         AutoRoute(
           page: PaymentsTab,
           path: 'payments/tab',
@@ -210,10 +213,7 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
       page: FavouritesTab,
       path: 'orders/favourites',
     ),
-    AutoRoute(
-      page: AccountTab,
-      path: 'core/account',
-    ),
+
     // =========
     AutoRoute(
       path: 'orders/saved_order_list',
