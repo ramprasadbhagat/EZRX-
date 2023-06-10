@@ -152,7 +152,7 @@ stages:
     - task: AppCenterDistribute@3
       displayName: Upload to Microsoft Appcenter
       inputs:
-        serverEndpoint: 'eZRx Appcenter'
+        serverEndpoint: 'eZRx+ Appcenter'
         appSlug: '$(APPCENTER_APP_SLUG_PROD)'
         appFile: 'build/app/outputs/bundle/prodRelease/*.aab'
         destinationType: 'groups'
