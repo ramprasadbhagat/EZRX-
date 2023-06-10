@@ -447,6 +447,7 @@
 				CLEVERTAP_ACCOUNT_ID = "698-WW8-476Z";
 				CLEVERTAP_TOKEN = "b00-bc6";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -586,6 +587,7 @@
 				CLEVERTAP_ACCOUNT_ID = "698-WW8-476Z";
 				CLEVERTAP_TOKEN = "b00-bc6";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -619,6 +621,7 @@
 				CLEVERTAP_ACCOUNT_ID = "698-WW8-476Z";
 				CLEVERTAP_TOKEN = "b00-bc6";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -792,6 +795,7 @@
 				CLEVERTAP_ACCOUNT_ID = "TEST-798-WW8-476Z";
 				CLEVERTAP_TOKEN = "TEST-b00-bca";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -959,6 +963,7 @@
 				CLEVERTAP_ACCOUNT_ID = "TEST-798-WW8-476Z";
 				CLEVERTAP_TOKEN = "TEST-b00-bca";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -1121,6 +1126,7 @@
 				CLEVERTAP_ACCOUNT_ID = "TEST-798-WW8-476Z";
 				CLEVERTAP_TOKEN = "TEST-b00-bca";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
