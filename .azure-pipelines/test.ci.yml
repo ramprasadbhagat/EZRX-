@@ -88,7 +88,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_my_salesorg_config
+          make reset_my_salesorg_config
           make run_my_client_test
           make run_my_external_test
 
@@ -126,7 +126,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_vn_salesorg_config
+          make reset_vn_salesorg_config
           make run_vn_client_test
           make run_vn_external_test
 
@@ -164,7 +164,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_th_salesorg_config
+          make reset_th_salesorg_config
           make run_th_client_test
           make run_th_external_test
 
@@ -202,7 +202,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_tw_salesorg_config
+          make reset_tw_salesorg_config
           make run_tw_client_test
           make run_tw_external_test
 
@@ -240,7 +240,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_ph_salesorg_config
+          make reset_ph_salesorg_config
           make run_ph_client_test
           make run_ph_external_test
 
@@ -278,7 +278,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_mm_salesorg_config
+          make reset_mm_salesorg_config
           make run_mm_client_test
           make run_mm_external_test
 
@@ -316,6 +316,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          reset_kh_salesorg_config
+          make reset_kh_salesorg_config
           make run_kh_client_test
           make run_kh_external_test
