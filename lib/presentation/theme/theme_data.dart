@@ -22,6 +22,7 @@ final appThemeData = {
     iconTheme: _iconTheme(),
     bottomAppBarTheme: _bottomAppBarTheme(),
     bottomNavigationBarTheme: _bottomNavigationBarTheme(),
+    navigationRailTheme: _navigationRailTheme(),
     dialogTheme: _dialogTheme(),
     bottomSheetTheme: _bottomSheetTheme(),
     drawerTheme: _drawerTheme(),
@@ -131,6 +132,27 @@ BottomSheetThemeData _bottomSheetTheme() {
 DrawerThemeData _drawerTheme() {
   return const DrawerThemeData(
     backgroundColor: ZPColors.white,
+  );
+}
+
+NavigationRailThemeData _navigationRailTheme() {
+  return NavigationRailThemeData(
+    elevation: 2,
+    backgroundColor: ZPColors.white,
+    indicatorColor: ZPColors.primary,
+    // useIndicator: true,
+    labelType: NavigationRailLabelType.all,
+    selectedLabelTextStyle: GoogleFonts.notoSans(
+      fontSize: 18,
+      color: ZPColors.primary,
+    ),
+    unselectedLabelTextStyle: GoogleFonts.notoSans(
+      fontSize: 18,
+      color: ZPColors.unselectedLabelColor,
+    ),
+    selectedIconTheme: const IconThemeData(color: ZPColors.primary),
+    unselectedIconTheme:
+        const IconThemeData(color: ZPColors.unselectedLabelColor),
   );
 }
 

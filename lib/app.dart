@@ -114,7 +114,6 @@ import 'package:ezrxmobile/application/account/payment_notification/payment_noti
 
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
-
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -163,10 +162,10 @@ Future<void> initialSetup({required Flavor flavor}) async {
       trackAutomaticEvents: true,
     ),
   );
-  await locator<ClevertapService>().init();
 
   if (!kIsWeb) {
     await Wakelock.enable();
+    await locator<ClevertapService>().init();
     if (locator<RemoteConfigService>().getScanToOrderConfig()) {
       await ScanditFlutterDataCaptureBarcode.initialize();
       await locator<MaterialInfoScanner>().init();

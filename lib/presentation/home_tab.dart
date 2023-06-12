@@ -70,7 +70,6 @@ class HomeNavigationTabbar extends StatelessWidget {
                                         _getTabs(context)[index].route,
                                       );
                                     },
-                                    labelType: NavigationRailLabelType.selected,
                                   ),
                                   Expanded(child: child),
                                 ],

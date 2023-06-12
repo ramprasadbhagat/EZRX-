@@ -244,12 +244,18 @@ flutter_icons:
   remove_alpha_ios: true
   
 flutter_native_splash:
+  android: true
+  ios: true
+  web: true
   color: "#FFFFFF"
   image: assets/images/splash.png
   ios_content_mode: scaleAspectFit
   fullscreen: true
 
+  web_image_mode: center
+  image_web: assets/images/launcher_icon.png
+
   android_12:
   #   image: assets/images/launcher_icon.png
-    icon_background_color: "#ffffff"
-    color: "#ffffff"
+    icon_background_color: "#FFFFFF"
+    color: "#FFFFFF"
