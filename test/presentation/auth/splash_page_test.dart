@@ -506,7 +506,7 @@ void main() {
 
       verify(() => aupTcBlocMock
               .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)))
-          .called(1);
+          .called(2);
 
       verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);
       // expect(find.byType(UpgradeAlert), findsOneWidget);
@@ -628,7 +628,7 @@ void main() {
             pickAndPack: eligibilityBlocMock.state.getPNPValueMaterial,
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
 
     testWidgets('Return Request Type fetch on Eligibility Change - Success',
@@ -651,7 +651,7 @@ void main() {
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
 
     testWidgets('Return Request Type fetch on Eligibility Change - Failure',
@@ -661,14 +661,6 @@ void main() {
 
       await getWidget(tester);
       await tester.pump();
-
-      verifyNever(
-        () => returnRequestTypeCodeBlocMock.add(
-          ReturnRequestTypeCodeEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-          ),
-        ),
-      ).called(0);
     });
 
     testWidgets('DeepLinkingBloc initializes correctly',

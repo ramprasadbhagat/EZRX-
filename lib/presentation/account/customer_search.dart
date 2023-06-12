@@ -3,23 +3,30 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
-import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
+
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+
+import 'package:ezrxmobile/presentation/account/change_delivery_address.dart';
+
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class CustomerSearchPage extends StatelessWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
@@ -27,163 +34,32 @@ class CustomerSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('customerSearchPage'),
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 60),
-        child: _AppBar(),
-      ),
-      body: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
-        builder: (context, state) {
-          return Column(
-            children: [
-              AnnouncementWidget(
-                currentPath: context.router.currentPath,
-              ),
-              _HeaderMessage(
-                state: state,
-              ),
-              _BodyContent(
-                state: state,
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _AppBar extends StatefulWidget {
-  const _AppBar({Key? key}) : super(key: key);
-
-  @override
-  State<_AppBar> createState() => _AppBarState();
-}
-
-class _AppBarState extends State<_AppBar> {
-  late TextEditingController _searchController;
-  late CustomerCodeBloc _customerCodeBloc;
-  late SalesOrgBloc _salesOrgBloc;
-  late UserBloc _userBloc;
-
-  @override
-  void initState() {
-    _searchController = TextEditingController();
-    _customerCodeBloc = context.read<CustomerCodeBloc>();
-    final searchText = _customerCodeBloc.state.searchKey;
-    if (_customerCodeBloc.state.isSearchActive && searchText.isValid()) {
-      _searchController.value = TextEditingValue(
-        text: searchText.getOrDefaultValue(''),
-        selection: TextSelection.collapsed(
-          offset: _searchController.selection.base.offset,
+      key: WidgetKeys.customerSearchPage,
+      appBar: AppBar(
+        title: Text(
+          'Select delivery address'.tr(),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
-      );
-    }
-    _salesOrgBloc = context.read<SalesOrgBloc>();
-    _userBloc = context.read<UserBloc>();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomAppBar(
-      child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
-        listenWhen: (previous, current) =>
-            previous.searchKey != current.searchKey ||
-            previous.apiFailureOrSuccessOption !=
-                current.apiFailureOrSuccessOption,
-        listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-          final searchText = state.searchKey.getValue();
-          _searchController.value = TextEditingValue(
-            text: searchText,
-            selection: TextSelection.collapsed(
-              offset: _searchController.selection.base.offset,
-            ),
-          );
-        },
-          child: SearchBar(
-            key: const Key('customerCodeSearchField'),
-            controller: _searchController,
-            enabled: !_customerCodeBloc.state.isFetching,
-            onSearchChanged: (value) {
-                  _customerCodeBloc.add(
-                    CustomerCodeEvent.autoSearch(
-                      userInfo: _userBloc.state.user,
-                      selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                      hidecustomer: _salesOrgBloc.state.hideCustomer,
-                      searchValue: value,
-                    ),
-                  );
-            },
-            onSearchSubmitted: (value) {
-              _customerCodeBloc.add(
-                CustomerCodeEvent.autoSearch(
-                  userInfo: _userBloc.state.user,
-                  selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                  hidecustomer: _salesOrgBloc.state.hideCustomer,
-                  searchValue: value,
-                ),
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: [
+          AnnouncementWidget(
+            currentPath: context.router.currentPath,
+          ),
+          BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              return _BodyContent(
+                state: state,
               );
             },
-            suffixIconKey: const Key('clearCustomerCodeSearch'),
-            customValidator: () =>
-                SearchKey.search(_searchController.text).isValid(),
-            onClear: () {
-              if (_searchController.text.isEmpty) return;
-              _searchController.clear();
-                _customerCodeBloc.add(
-                  CustomerCodeEvent.deletedSearch(
-                    userInfo: _userBloc.state.user,
-                    selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                    hidecustomer: _salesOrgBloc.state.hideCustomer,
-                  ),
-                );
-            },
-            border: InputBorder.none,
           ),
+        ],
       ),
     );
-  }
-}
-
-class _HeaderMessage extends StatelessWidget {
-  final CustomerCodeState state;
-
-  const _HeaderMessage({Key? key, required this.state}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return !state.isFetching && state.customerCodeList.isNotEmpty
-        ? Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Text(
-              'Please select a customer code'.tr(),
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall
-                  ?.copyWith(color: ZPColors.red),
-            ).tr(),
-          )
-        : const SizedBox.shrink();
   }
 }
 
@@ -202,8 +78,8 @@ class _BodyContent extends StatelessWidget {
 
     return Expanded(
       child: ScrollList<CustomerCodeInfo>(
-        key: const Key('customerCodeSelect'),
         controller: ScrollController(),
+        key: WidgetKeys.customerCodeSelect,
         onRefresh: () {
           context.read<CustomerCodeBloc>().add(
                 CustomerCodeEvent.fetch(
@@ -223,7 +99,8 @@ class _BodyContent extends StatelessWidget {
               );
         },
         isLoading: state.isFetching,
-        itemBuilder: (_, __, item) => _ListContent(customerCodeInfo: item),
+        itemBuilder: (_, __, item) =>
+            _DeliveryAddressItem(customerCodeInfo: item),
         items: state.customerCodeList,
         emptyMessage: 'No Customer Code Found'.tr(),
       ),
@@ -231,107 +108,179 @@ class _BodyContent extends StatelessWidget {
   }
 }
 
-class _ListContent extends StatelessWidget {
+class _DeliveryAddressItem extends StatelessWidget {
   final CustomerCodeInfo customerCodeInfo;
 
-  const _ListContent({Key? key, required this.customerCodeInfo})
+  const _DeliveryAddressItem({Key? key, required this.customerCodeInfo})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final customerBloc = context.read<CustomerCodeBloc>();
-    final cartBloc = context.read<CartBloc>();
+    return custom.ExpansionTile(
+      initiallyExpanded: true,
+      trailingWidgetPadding: 20,
+      iconColor: ZPColors.textButtonColor,
+      title: Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: _TitleSection(
+          prefixText: customerCodeInfo.customerCodeSoldTo,
+          suffixText: customerCodeInfo.customerName.name1,
+          titleColor: ZPColors.textButtonColor,
+        ),
+      ),
+      children: [
+        Column(
+          children: customerCodeInfo.shipToInfos
+              .map(
+                (e) => _ShipToAddressSection(
+                  shipToInfo: e,
+                  customerCodeInfo: customerCodeInfo,
+                ),
+              )
+              .toList(),
+        ),
+        const Divider(
+          indent: 0,
+          endIndent: 0,
+          color: ZPColors.extraLightGrey2,
+        ),
+      ],
+    );
+  }
+}
 
+class _ShipToAddressSection extends StatelessWidget {
+  final ShipToInfo shipToInfo;
+  final CustomerCodeInfo customerCodeInfo;
+  const _ShipToAddressSection({
+    Key? key,
+    required this.shipToInfo,
+    required this.customerCodeInfo,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          key: Key(
-            'customerCodeOption${customerCodeInfo.customerCodeSoldTo}',
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                customerCodeInfo.customerCodeSoldTo,
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.kPrimaryColor,
-                    ),
-              ),
-              Text(
-                customerCodeInfo.customerName.toString(),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: customerCodeInfo.customerAddress.toString(),
-                  style: Theme.of(context).textTheme.titleSmall?.apply(
-                        color: ZPColors.lightGray,
-                      ),
-                  children: [
-                    TextSpan(
-                      text: customerCodeInfo.postalCode,
-                    ),
-                  ],
-                ),
+          minLeadingWidth: 0,
+          horizontalTitleGap: 9,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          minVerticalPadding: 16,
+          leading: Column(
+            children: const [
+              Icon(
+                Icons.location_on_sharp,
+                color: ZPColors.darkYellow,
               ),
             ],
           ),
-          onTap: () {
-            if (context.router.stack.last.name ==
-                AdminPoAttachmentPageRoute.name) {
-              context.router.pop();
-              context.read<AdminPoAttachmentFilterBloc>().add(
-                    AdminPoAttachmentFilterEvent.soldToChanged(
-                      customerCodeInfo,
-                    ),
-                  );
-
-              return;
-            }
-            if (customerCodeInfo != customerBloc.state.customerCodeInfo &&
-                cartBloc.state.cartItems.isNotEmpty) {
-              ConfirmClearDialog.show(
-                context: context,
-                onCancel: () {
-                  context.router.pop();
-                },
-                title: 'Change Customer Code'.tr(),
-                description:
-                    'The progress on your cart is going to be lost. Do you want to proceed?'
-                        .tr(),
-                onConfirmed: () {
-                  context.router
-                      .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
-                  context.read<CustomerCodeBloc>().add(
-                        CustomerCodeEvent.selected(
-                          customerCodeInfo: customerCodeInfo,
-                        ),
-                      );
-                  trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
-                    MixpanelProps.customerCode:
-                        customerCodeInfo.customerCodeSoldTo,
-                  });
-                },
-              );
-            } else {
-              context.router
-                  .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
-              customerBloc.add(
-                CustomerCodeEvent.selected(
-                  customerCodeInfo: customerCodeInfo,
-                ),
-              );
-              trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
-                MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
-              });
-            }
-          },
+          title: _TitleSection(
+            prefixText: shipToInfo.shipToCustomerCode,
+            suffixText: shipToInfo.shipToName.name1,
+            titleColor: ZPColors.neutralsBlack,
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              shipToInfo.deliveryAddress.toLowerCase(),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: ZPColors.extraLightGrey4,
+                  ),
+            ),
+          ),
+          onTap: () => _onShipToCodeChange(context),
         ),
-        const Divider(
-          indent: 10,
-          endIndent: 10,
-        ),
+        _isDividerVisible
+            ? const Divider(
+                indent: 20,
+                endIndent: 20,
+                color: ZPColors.extraLightGrey3,
+              )
+            : const SizedBox.shrink(),
       ],
+    );
+  }
+
+  void _onShipToCodeChange(BuildContext context) {
+    final cartBloc = context.read<CartBloc>();
+    final customerBloc = context.read<CustomerCodeBloc>();
+    final shipToBloc = context.read<ShipToCodeBloc>();
+    if (shipToInfo != shipToBloc.state.shipToInfo &&
+        cartBloc.state.cartItems.isNotEmpty) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+        ),
+        builder: (_) {
+          return ChangeDeliveryAddress(
+            shipToInfo: shipToInfo,
+            customerCodeInfo: customerCodeInfo,
+          );
+        },
+      );
+    } else {
+      context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+      context.read<ShipToCodeBloc>().add(
+            ShipToCodeEvent.selected(
+              shipToInfo: shipToInfo,
+            ),
+          );
+      trackMixpanelEvent(
+        MixpanelEvents.shipToAddressSave,
+        props: {
+          MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
+        },
+      );
+      customerBloc.add(
+        CustomerCodeEvent.selected(
+          customerCodeInfo: customerCodeInfo,
+        ),
+      );
+      trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
+        MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
+      });
+    }
+  }
+
+  bool get _isDividerVisible =>
+      customerCodeInfo.shipToInfos.indexOf(shipToInfo) !=
+      customerCodeInfo.shipToInfos.length - 1;
+}
+
+class _TitleSection extends StatelessWidget {
+  final String prefixText;
+  final String suffixText;
+  final Color titleColor;
+  const _TitleSection({
+    Key? key,
+    required this.prefixText,
+    required this.suffixText,
+    required this.titleColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        text: '$prefixText | ',
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: titleColor,
+            ),
+        children: <TextSpan>[
+          TextSpan(
+            text: suffixText,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: titleColor,
+                ),
+          ),
+        ],
+      ),
     );
   }
 }

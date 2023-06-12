@@ -60,4 +60,6 @@ class ShipToInfo with _$ShipToInfo {
         licenses: <LicenseInfo>[],
         country: '',
       );
+
+String get deliveryAddress => '${shipToAddress.toAddress()} $postalCode';
 }

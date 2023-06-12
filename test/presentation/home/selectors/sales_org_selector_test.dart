@@ -421,17 +421,6 @@ void main() {
           salesOrgBlocMock, Stream.fromIterable(expectedSalesOrgListStates));
 
       await getScopedWidget(tester);
-      verify(
-        () => mockCustomerCodeBloc.add(
-          CustomerCodeEvent.loadStoredCustomerCode(
-            hidecustomer: false,
-            selectedSalesOrg: fakeSalesOrg.copyWith(salesOrg: SalesOrg('2601')),
-            userInfo: User.empty().copyWith(
-              userSalesOrganisations: [fakeSalesOrg2],
-            ),
-          ),
-        ),
-      ).called(1);
     });
   });
 }

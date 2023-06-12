@@ -30,6 +30,18 @@ class WidgetKeys {
   //============================================================
   static const Key profileTile = Key('profileTile');
 
+  //  Change Delivery Address BottomSheet
+  //============================================================
+  static const Key cancelButton = Key('cancel_button');
+  static const Key confirmButton = Key('confirm_change_delivery_address');
+
+  //============================================================
+  //  CustomerCode Search Page
+  //============================================================
+  static const Key customerSearchPage = Key('customerSearchPage');
+  static const Key customerCodeSelect = Key('customerCodeSelect');
+  static Key customerDeliveryAddressOption(String shipToName) => Key('customerDeliveryAddressOption$shipToName');
+
 
 
   //============================================================

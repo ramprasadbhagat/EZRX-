@@ -424,6 +424,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             );
           },
         ),
+        BlocListener<SalesOrgBloc, SalesOrgState>(
+          listenWhen: (previous, current) =>
+              previous.salesOrganisation != current.salesOrganisation,
+          listener: (context, state) {
+            context.read<CustomerCodeBloc>().add(
+                  CustomerCodeEvent.fetch(
+                    hidecustomer: state.hideCustomer,
+                    selectedSalesOrg: state.salesOrganisation,
+                    userInfo: context.read<UserBloc>().state.user,
+                  ),
+                );
+          },
+        ),
         BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
           listenWhen: (previous, current) =>
               context.read<UserBloc>().state.isNotEmpty &&

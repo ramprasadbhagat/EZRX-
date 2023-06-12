@@ -334,7 +334,7 @@ OutlinedButtonThemeData _outlinedButtonTheme() {
         letterSpacing: 0.25,
       ),
       elevation: 0,
-      minimumSize: const Size(120, 40),
+      minimumSize: const Size(120, 45),
     ),
   );
 }

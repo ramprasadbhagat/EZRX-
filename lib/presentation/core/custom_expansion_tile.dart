@@ -36,6 +36,7 @@ class ExpansionTile extends StatefulWidget {
     this.onExpansionChanged,
     this.children = const <Widget>[],
     this.trailing,
+    this.trailingWidgetPadding = 0.0,
     this.initiallyExpanded = false,
     this.keepHeaderBorder =  false,
     this.threeLineTitle = false,
@@ -75,6 +76,9 @@ class ExpansionTile extends StatefulWidget {
 
   /// A widget to display instead of a rotating arrow icon.
   final Widget? trailing;
+
+  /// A padding from right of trailing widget.
+  final double trailingWidgetPadding;
 
   /// Specifies if the list tile is initially expanded (true) or collapsed (false, the default).
   final bool initiallyExpanded;
@@ -192,14 +196,17 @@ class ExpansionTileState extends State<ExpansionTile>
                         .copyWith(color: titleColor),
                     child: widget.title,
                   ),
-                  trailing: widget.trailing ??
-                      RotationTransition(
-                        turns: _iconTurns,
-                        child: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: widget.iconColor ?? Colors.black54,
+                  trailing: Padding(
+                    padding: EdgeInsets.only(right: widget.trailingWidgetPadding),
+                    child: widget.trailing ??
+                        RotationTransition(
+                          turns: _iconTurns,
+                          child: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: widget.iconColor ?? Colors.black54,
+                          ),
                         ),
-                      ),
+                  ),
                 ),
               ),
             ),

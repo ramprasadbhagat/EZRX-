@@ -179,15 +179,5 @@ class SalesOrgSelector extends StatelessWidget {
             role: context.read<UserBloc>().state.user.role.type.getEZReachRoleType,
           ),
         );
-
-    if (fetchCustomer) {
-      context.read<CustomerCodeBloc>().add(
-            CustomerCodeEvent.loadStoredCustomerCode(
-              hidecustomer: state.hideCustomer,
-              selectedSalesOrg: state.salesOrganisation,
-              userInfo: context.read<UserBloc>().state.user,
-            ),
-          );
-    }
   }
 }
