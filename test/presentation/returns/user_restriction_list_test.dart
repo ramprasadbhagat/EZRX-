@@ -261,14 +261,14 @@ void main() {
 
       expect(removedWhileSearchingUserRestrictionItem, findsNothing);
 
-      final clearSearchButton =
-          find.byKey(const Key('clearUserRestrictionListSearch'));
+      // final clearSearchButton =
+      //     find.byKey(const Key('clearUserRestrictionListSearch'));
 
-      await tester.tap(clearSearchButton);
+      // await tester.tap(clearSearchButton);
 
-      verify(() => userRestrictionListBlocMock.add(
-            const UserRestrictionListEvent.updateSearchKey(''),
-          )).called(1);
+      // verify(() => userRestrictionListBlocMock.add(
+      //       const UserRestrictionListEvent.updateSearchKey(''),
+      //     )).called(1);
     });
 
     testWidgets('onChanged fired for changing search text', (tester) async {

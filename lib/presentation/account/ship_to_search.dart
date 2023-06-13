@@ -19,13 +19,15 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class ShiptToSearchPage extends StatelessWidget {
   const ShiptToSearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('shipToSearchPage'),
+      key: WidgetKeys.shipToSearchPage,
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 60),
         child: _AppBar(),
@@ -104,7 +106,7 @@ class _AppBarState extends State<_AppBar> {
           );
         },
         child: SearchBar(
-          key: const Key('shipToCodeSearchField'),
+          key: WidgetKeys.shipToCodeSearchField,
           controller: _searchController,
           enabled: !_shipToCodeBloc.state.isSearching,
           onSearchSubmitted: (value) {
@@ -120,7 +122,7 @@ class _AppBarState extends State<_AppBar> {
           },
           customValidator: () =>
               SearchKey.search(_searchController.text).isValid(),
-          suffixIconKey: const Key('clearShipToSearch'),
+          clearIconKey: WidgetKeys.clearShipToSearch,
           onClear: () {
             if (_searchController.text.isEmpty) return;
             _searchController.clear();
@@ -181,8 +183,8 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ScrollList<ShipToInfo>(
-        key: const Key('shipToCodeSelect'),
         controller: ScrollController(),
+        key: WidgetKeys.shipToCodeSelect,
         isLoading: state.isSearching,
         itemBuilder: (_, __, item) => _ListContent(shipToInfo: item),
         items: state.shipToInfoList,
@@ -205,9 +207,7 @@ class _ListContent extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          key: Key(
-            'shipToOption${shipToInfo.shipToCustomerCode}',
-          ),
+          key: WidgetKeys.shipToAddressOption(shipToInfo.shipToCustomerCode),
           trailing: shipToInfo.defaultShipToAddress
               ? CustomLabel(textValue: 'Default'.tr())
               : const SizedBox.shrink(),

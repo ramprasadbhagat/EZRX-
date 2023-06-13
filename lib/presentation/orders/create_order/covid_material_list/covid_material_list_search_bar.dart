@@ -11,6 +11,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,7 @@ class CovidMaterialListSearchBarState
           _searchController.text = state.searchKey.getOrDefaultValue('');
 
           return SearchBar(
-            key: Key('covidMaterialSearchField${_searchController.text}'),
+            key: WidgetKeys.covidMaterialSearchField(_searchController.text),
             controller: _searchController,
             enabled: !state.isFetching,
             onSearchChanged: (value) {
@@ -118,7 +119,7 @@ class CovidMaterialListSearchBarState
                 },
               );
             },
-            suffixIconKey: const Key('clearSearch'),
+            clearIconKey: WidgetKeys.clearCovidMaterialListSearchBar,
             customValidator: () =>
                 SearchKey.search(_searchController.text).isValid(),
             isDense: true,

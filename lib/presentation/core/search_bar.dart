@@ -4,12 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
+
 class SearchBar extends StatefulWidget {
   const SearchBar({
     required this.onSearchChanged,
     Key? key,
-    required this.suffixIconKey,
-    this.prefixIconKey,
+    this.searchIconKey,
+    required this.clearIconKey,
     required this.controller,
     this.enabled,
     this.customValidator,
@@ -25,8 +26,8 @@ class SearchBar extends StatefulWidget {
   final void Function(String)? onSearchSubmitted;
   final bool? isDense;
   final void Function() onClear;
-  final Key suffixIconKey;
-  final Key? prefixIconKey;
+  final Key? searchIconKey;
+  final Key clearIconKey;
   final InputBorder? border;
   final bool Function()? customValidator;
   final void Function(String) onSearchChanged;
@@ -54,21 +55,22 @@ class _SearchBarState extends State<SearchBar> {
       onFieldSubmitted: (value) => _onSearch(context, value),
       decoration: InputDecoration(
         isDense: widget.isDense,
-        prefixIcon: IconButton(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          key: widget.prefixIconKey,
-          icon: const Icon(Icons.search),
-          onPressed: () => _onSearch(context, widget.controller.text),
-        ),
-        suffixIcon: IconButton(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          key: widget.suffixIconKey,
-          icon: const Icon(Icons.clear),
-          onPressed: () => _onClear(),
-        ),
-        hintText: 'Search...'.tr(),
+        suffixIcon: widget.controller.text.isEmpty
+            ? IconButton(
+                key: widget.searchIconKey,
+                icon: const Icon(
+                  Icons.search,
+                ),
+                onPressed: () => _onSearch(context, widget.controller.text),
+              )
+            : IconButton(
+                key: widget.clearIconKey,
+                icon: const Icon(
+                  Icons.clear,
+                ),
+                onPressed: () => _onClear(),
+              ),
+        hintText: 'Search'.tr(),
         border: widget.border,
       ),
     );
@@ -91,22 +93,22 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   void _onSearchChanged(BuildContext context, String value) {
-      if (_debounce?.isActive ?? false) _debounce?.cancel();
-      final isValid = _isValid();
-      if (isValid) {
-        if (widget.isAutoSearch) {
-          _debounce = Timer(const Duration(milliseconds: 3000), () {
-            widget.onSearchChanged.call(value);
-          });
-        } else {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    final isValid = _isValid();
+    if (isValid) {
+      if (widget.isAutoSearch) {
+        _debounce = Timer(const Duration(milliseconds: 3000), () {
           widget.onSearchChanged.call(value);
-        }
+        });
+      } else {
+        widget.onSearchChanged.call(value);
       }
+    }
   }
 
   void _onClear() {
-      if (_debounce?.isActive ?? false) _debounce?.cancel();
-      widget.onClear.call();
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    widget.onClear.call();
   }
 
   bool _isValid() => widget.customValidator?.call() ?? true;

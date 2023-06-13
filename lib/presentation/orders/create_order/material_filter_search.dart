@@ -1,6 +1,8 @@
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class MaterialFilterSearch extends StatefulWidget {
   final Function onSearchMethod;
   final String searchText;
@@ -40,11 +42,11 @@ class _MaterialFilterSearch extends State<MaterialFilterSearch> {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
-      key: const Key('materialFilterSearchField'),
+      key: WidgetKeys.materialFilterSearchField,
       controller: _searchController,
       onSearchChanged: (value) => widget.onSearchMethod(value),
       onSearchSubmitted: (value) => widget.onSearchMethod(value),
-      suffixIconKey: const Key('clearMaterialFilterSearch'),
+      clearIconKey: WidgetKeys.clearMaterialFilterSearch,
       isDense: true,
       border: InputBorder.none,
       onClear: () {

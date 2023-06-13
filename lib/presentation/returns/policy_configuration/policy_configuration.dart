@@ -17,6 +17,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class PolicyConfigurationPage extends StatelessWidget {
   const PolicyConfigurationPage({Key? key}) : super(key: key);
 
@@ -49,7 +51,7 @@ class PolicyConfigurationPage extends StatelessWidget {
             if (policyConfigurationState.isLoading &&
                 policyConfigurationState.policyConfigurationList.isEmpty) {
               return LoadingShimmer.logo(
-                key: const Key('LoaderImage'),
+                key: WidgetKeys.policyConfigurationLoader,
               );
             }
 
@@ -220,7 +222,7 @@ class _PolicyConfigurationSearchState
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PolicyConfigurationBloc, PolicyConfigurationState>(
-      key: const Key('policyConfigSearchBuilder'),
+      key: WidgetKeys.policyConfigSearchBuilder,
       buildWhen: (previous, current) => previous.searchKey != current.searchKey,
       builder: (context, state) {
         _policyConfigSearchController.text =
@@ -228,9 +230,7 @@ class _PolicyConfigurationSearchState
 
         return SearchBar(
           controller: _policyConfigSearchController,
-          key: Key(
-            'policyConfigurationSearch${state.searchKey.getOrDefaultValue('')}',
-          ),
+          key: WidgetKeys.policyConfigurationSearch(state.searchKey.getOrDefaultValue('')),
           onSearchChanged: (value) {
             final salesOrganisation =
                 context.read<SalesOrgBloc>().state.salesOrganisation;
@@ -263,7 +263,7 @@ class _PolicyConfigurationSearchState
           },
           isDense: true,
           border: InputBorder.none,
-          suffixIconKey: const Key('clearPolicyConfigurationSearch'),
+          clearIconKey: WidgetKeys.clearPolicyConfigurationSearch,
         );
       },
     );

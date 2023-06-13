@@ -281,7 +281,7 @@ void main() {
 
       await tester.pump();
 
-      final noCustomerFound = find.text('No Customer Code Found');
+      final noCustomerFound = find.text('No delivery address found');
       final loadIndicator = find.byKey(const Key('loadIndicator'));
 
       final gesture = await tester

@@ -28,6 +28,12 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
+
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+
 class CustomerSearchPage extends StatelessWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
 
@@ -41,13 +47,13 @@ class CustomerSearchPage extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
-        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
           AnnouncementWidget(
             currentPath: context.router.currentPath,
           ),
+          const _DeliveryAddressSearchSection(),
           BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
             buildWhen: (previous, current) =>
                 previous.isFetching != current.isFetching,
@@ -102,7 +108,7 @@ class _BodyContent extends StatelessWidget {
         itemBuilder: (_, __, item) =>
             _DeliveryAddressItem(customerCodeInfo: item),
         items: state.customerCodeList,
-        emptyMessage: 'No Customer Code Found'.tr(),
+        emptyMessage: 'No delivery address found'.tr(),
       ),
     );
   }
@@ -280,6 +286,113 @@ class _TitleSection extends StatelessWidget {
                 ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _DeliveryAddressSearchSection extends StatefulWidget {
+  const _DeliveryAddressSearchSection({Key? key}) : super(key: key);
+
+  @override
+  State<_DeliveryAddressSearchSection> createState() =>
+      _DeliveryAddressSearchSectionState();
+}
+
+class _DeliveryAddressSearchSectionState
+    extends State<_DeliveryAddressSearchSection> {
+  final _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    _searchController.value = TextEditingValue(
+      text: context.read<CustomerCodeBloc>().state.searchKey.getOrDefaultValue(''),
+      selection: TextSelection.collapsed(
+        offset: _searchController.selection.base.offset,
+      ),
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      child: BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
+        buildWhen: (previous, current) =>
+            previous.isFetching != current.isFetching,
+        listenWhen: (previous, current) =>
+            previous.apiFailureOrSuccessOption !=
+                current.apiFailureOrSuccessOption ||
+            previous.searchKey != current.searchKey,
+        listener: (context, state) {
+          state.apiFailureOrSuccessOption.fold(
+            () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {},
+            ),
+          );
+          final searchText = state.searchKey.getValue();
+          _searchController.value = TextEditingValue(
+            text: searchText,
+            selection: TextSelection.collapsed(
+              offset: _searchController.selection.base.offset,
+            ),
+          );
+        },
+        builder: (context, state) {
+          return SearchBar(
+            key: WidgetKeys.customerCodeSearch,
+            controller: _searchController,
+            enabled: !state.isFetching,
+            onSearchChanged: (value) {
+              context.read<CustomerCodeBloc>().add(
+                CustomerCodeEvent.autoSearch(
+                  userInfo: context.read<UserBloc>().state.user,
+                  selectedSalesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
+                  hidecustomer: context.read<SalesOrgBloc>().state.hideCustomer,
+                  searchValue: value,
+                ),
+              );
+            },
+            onSearchSubmitted: (value) {
+              context.read<CustomerCodeBloc>().add(
+                CustomerCodeEvent.autoSearch(
+                  userInfo: context.read<UserBloc>().state.user,
+                  selectedSalesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
+                  hidecustomer: context.read<SalesOrgBloc>().state.hideCustomer,
+                  searchValue: value,
+                ),
+              );
+            },
+            clearIconKey: WidgetKeys.clearIconKey,
+            customValidator: () =>
+                SearchKey.search(_searchController.text).isValid(),
+            onClear: () {
+              if (_searchController.text.isEmpty) return;
+              _searchController.clear();
+              context.read<CustomerCodeBloc>().add(
+                CustomerCodeEvent.deletedSearch(
+                  userInfo: context.read<UserBloc>().state.user,
+                  selectedSalesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
+                  hidecustomer: context.read<SalesOrgBloc>().state.hideCustomer,
+                ),
+              );
+            },
+            border: InputBorder.none,
+          );
+        },
       ),
     );
   }

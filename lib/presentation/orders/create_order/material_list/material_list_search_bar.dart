@@ -15,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
           _searchController.text = state.searchKey.getOrDefaultValue('');
 
           return SearchBar(
-            key: Key('materialSearchField${_searchController.text}'),
+            key: WidgetKeys.materialSearchField(_searchController.text),
             controller: _searchController,
             enabled: !state.isFetching,
             onSearchChanged: (value) {
@@ -129,7 +130,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
             isDense: true,
             customValidator: () =>
                 SearchKey.search(_searchController.text).isValid(),
-            suffixIconKey: const Key('clearSearch'),
+            clearIconKey: WidgetKeys.clearMaterialListSearchBar,
             onClear: () {
               _resetMixpanelOrderFlow();
               //To reset the filters

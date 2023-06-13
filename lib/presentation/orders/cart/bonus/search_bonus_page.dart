@@ -19,6 +19,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class BonusAddPage extends StatelessWidget {
   final CartItem cartItem;
 
@@ -27,7 +29,7 @@ class BonusAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('addBonus'),
+      key: WidgetKeys.addBonus,
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 60),
         child: _AppBar(),
@@ -41,11 +43,11 @@ class BonusAddPage extends StatelessWidget {
           builder: (context, state) {
             return state.isStarting
                 ? const SizedBox.shrink(
-                    key: Key('empty'),
+                    key: WidgetKeys.addBonusEmpty,
                   )
                 : state.isFetching
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
-                    : _BonusScrollList(state: state,cartItem: cartItem);
+                    : _BonusScrollList(state: state, cartItem: cartItem);
           },
         ),
       ),
@@ -200,9 +202,8 @@ class _AppBarState extends State<_AppBar> {
           _searchController.text = state.searchKey.getOrDefaultValue('');
 
           return SearchBar(
-            key: Key(
-              'addBonusTextField${state.searchKey.getOrDefaultValue('')}',
-            ),
+            key: WidgetKeys.addBonusTextField(
+                state.searchKey.getOrDefaultValue('')),
             controller: _searchController,
             enabled: !state.isFetching,
             customValidator: () =>
@@ -247,7 +248,7 @@ class _AppBarState extends State<_AppBar> {
                 const BonusMaterialEvent.initialized(),
               );
             },
-            suffixIconKey: const ValueKey('addBonusTextFieldClear'),
+            clearIconKey: WidgetKeys.addBonusTextFieldClear,
             border: InputBorder.none,
           );
         },

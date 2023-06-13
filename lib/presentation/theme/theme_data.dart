@@ -74,8 +74,8 @@ AppBarTheme _appBarTheme() {
       fontSize: 18,
       color: ZPColors.black,
     ),
-    elevation: 2,
-    shadowColor: ZPColors.shadowColor,
+    elevation: 5,
+    shadowColor: ZPColors.boxShadowColor,
   );
 }
 
@@ -227,6 +227,11 @@ InputDecorationTheme _inputDecorationTheme() {
     contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
     labelStyle: GoogleFonts.notoSans(
       fontSize: 14.0,
+    ),
+    hintStyle: GoogleFonts.notoSans(
+      fontSize: 16,
+      color: ZPColors.neutralsGrey,
+      letterSpacing: 0.25,
     ),
     floatingLabelStyle: const TextStyle(
       color: ZPColors.primary,

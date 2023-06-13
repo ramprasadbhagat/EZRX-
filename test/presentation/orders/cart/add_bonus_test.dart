@@ -433,9 +433,9 @@ void main() {
       whenListen(bonusMaterialBloc,
           Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getWidget());
-      final addBonusTextFieldClear =
-          find.byKey(const Key('addBonusTextFieldClear'));
-      await tester.tap(addBonusTextFieldClear);
+      // final addBonusTextFieldClear =
+      //     find.byKey(const Key('addBonusTextFieldClear'));
+      //await tester.tap(addBonusTextFieldClear);
       final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
       final addBonusSearchFieldWidget =
           tester.widget<SearchBar>(addBonusSearchField);

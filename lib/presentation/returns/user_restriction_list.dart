@@ -19,13 +19,15 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class UserRestrictionListPage extends StatelessWidget {
   const UserRestrictionListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('UserRestrictionListPage'),
+      key: WidgetKeys.userRestrictionListPage,
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 50),
         child: CustomAppBar(child: UserRestrictionListSearch()),
@@ -50,14 +52,14 @@ class UserRestrictionListPage extends StatelessWidget {
           builder: (context, state) {
             if (state.isFetching) {
               return LoadingShimmer.logo(
-                key: const Key('LoaderImage'),
+                key: WidgetKeys.userRestrictionListLoader,
               );
             }
 
             return Column(
               children: [
                 _HeaderMessage(state: state),
-                _UserRestrictionScrollList(state: state,),
+                _UserRestrictionScrollList(state: state),
               ],
             );
           },
@@ -126,7 +128,7 @@ class _UserRestrictionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        key: Key('userRestrictionTile-$username'),
+        key: WidgetKeys.userRestrictionTile(username),
         onTap: () {
           final eligibilityState = context.read<EligibilityBloc>().state;
           context.read<UserRestrictionDetailsBloc>().add(
@@ -201,8 +203,8 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
       buildWhen: (previous, current) => previous.searchKey != current.searchKey,
       builder: (context, snapshot) {
         return SearchBar(
-          key: const Key('userRestrictionListSearchField'),
-          suffixIconKey: const Key('clearUserRestrictionListSearch'),
+          key: WidgetKeys.userRestrictionListSearchField,
+          clearIconKey: WidgetKeys.clearUserRestrictionListSearch,
           controller: _searchController,
           onClear: () {
             if (_searchController.text.isEmpty) return;

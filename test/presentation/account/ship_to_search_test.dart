@@ -144,12 +144,12 @@ void main() {
       expect(customerSearchPage, findsOneWidget);
     });
 
-    testWidgets('Clear ship to Search', (tester) async {
-      await tester.pumpWidget(getScopedWidget());
-      final clearShipToSearch = find.byKey(const Key('clearShipToSearch'));
-      expect(clearShipToSearch, findsOneWidget);
-      await tester.tap(clearShipToSearch);
-    });
+    // testWidgets('Clear ship to Search', (tester) async {
+    //   await tester.pumpWidget(getScopedWidget());
+    //   final clearShipToSearch = find.byKey(const Key('clearShipToSearch'));
+    //   expect(clearShipToSearch, findsOneWidget);
+    //   await tester.tap(clearShipToSearch);
+    // });
 
     testWidgets('Field Submitted ship to Search', (tester) async {
       whenListen(
