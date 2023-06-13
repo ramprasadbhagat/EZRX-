@@ -1,0 +1,114 @@
+//ignore_for_file: unused-code
+
+//ignore_for_file: unused-class
+
+//ignore_for_file: unused-files
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+class EdgeCheckbox extends StatefulWidget {
+  final Widget body;
+  final Function() onTap;
+
+  const EdgeCheckbox({
+    Key? key,
+    required this.body,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  State<EdgeCheckbox> createState() => _EdgeCheckboxState();
+}
+
+class _EdgeCheckboxState extends State<EdgeCheckbox> {
+  bool visible = false;
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: visible ? ZPColors.greenIconColor : ZPColors.transparent,
+              width: 2,
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          child: widget.body,
+        ),
+        _SelectedIcon(visible: visible),
+        Positioned.fill(
+          child: Material(
+            color: ZPColors.transparent,
+            child: InkWell(
+              onTap: () {
+                widget.onTap;
+                setState(() => visible = !visible);
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SelectedIcon extends StatelessWidget {
+  const _SelectedIcon({
+    Key? key,
+    required this.visible,
+  }) : super(key: key);
+  final bool visible;
+  @override
+  Widget build(BuildContext context) {
+    return visible
+        ? Positioned(
+            top: 0,
+            right: 0,
+            child: ClipPath(
+              clipper: _Triangle(),
+              child: Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    decoration: const BoxDecoration(
+                      color: ZPColors.greenIconColor,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 2,
+                    right: 4,
+                    child: Icon(
+                      Icons.check,
+                      size: MediaQuery.of(context).size.width * 0.05,
+                      color: ZPColors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : const SizedBox.shrink();
+  }
+}
+
+class _Triangle extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0, 0);
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+}

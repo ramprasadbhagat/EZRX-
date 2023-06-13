@@ -328,7 +328,6 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
       page: EditPaymentAdviceFooterPage,
     ),
     AutoRoute(path: 'intro_page', page: IntroPage),
-
   ],
 )
 class $AppRouter {}
