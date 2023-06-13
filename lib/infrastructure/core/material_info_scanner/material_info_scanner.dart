@@ -85,10 +85,14 @@ class MaterialInfoScanner {
     _dataCaptureContext =
         DataCaptureContext.forLicenseKey(config.scanditLicenseKey);
     await _dataCaptureContext.setFrameSource(source);
-    enableSymbologies(config.enabledSymbologies);
+
+    final imageFrameSourceSettings = BarcodeCaptureSettings();
+
+    imageFrameSourceSettings.enableSymbologies(config.enabledSymbologies.toSet());
+
 
     _barcodeCapture =
-        BarcodeCapture.forContext(_dataCaptureContext, _barcodeCaptureSettings);
+        BarcodeCapture.forContext(_dataCaptureContext, imageFrameSourceSettings);
 
     _dataCaptureView = DataCaptureView.forContext(dataCaptureContext);
 
