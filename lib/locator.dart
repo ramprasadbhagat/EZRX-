@@ -23,6 +23,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
@@ -2448,5 +2449,14 @@ void setupLocator() {
     () => ManageDeductionCodeBloc(
       deductionCodeRepository: locator<DeductionCodeRepository>(),
     ),
+  );
+
+  //============================================================
+  //  Intro Code
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => IntroBloc(),
   );
 }

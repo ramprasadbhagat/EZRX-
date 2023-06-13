@@ -408,7 +408,7 @@ void main() {
       await getWidget(tester);
       await tester.pump();
       verify(() => userBlocMock.add(const UserEvent.fetch())).called(1);
-      expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
+      expect(autoRouterMock.current.name, IntroPageRoute.name);
     });
 
     testWidgets('When PaymentCustomerInformation bloc is listening',

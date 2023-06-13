@@ -18,6 +18,7 @@ abstract class ZPColors {
   static const Color shadesGray = Color.fromRGBO(160, 160, 160, 1.0);
   static const Color dividerColor = Color.fromRGBO(161, 161, 161, 1.0);
   static const Color accentColor = Color.fromRGBO(233, 237, 238, 1.0);
+  static const Color unselectedIndicatorColor = Color.fromRGBO(233, 237, 238, 0.18);
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
   static const Color translucentWhite = Color.fromRGBO(250, 250, 250, 0.3);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
@@ -45,6 +46,9 @@ abstract class ZPColors {
   static const Color announcementColor = Color(0xffff7c65);
   static const Color secondaryBGColor = Color.fromRGBO(171, 191, 193, 1);
   static const Color greenIconColor = Color.fromRGBO(79, 105, 119, 1);
+  static const Color navyBlueBGColor = Color.fromRGBO(24,51,96,1);
+  static const Color lightVioletBGColor = Color.fromRGBO(200, 197, 254, 1);
+  static const Color blueBGColor = Color.fromRGBO(106, 141, 241, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

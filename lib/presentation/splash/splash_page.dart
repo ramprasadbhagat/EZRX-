@@ -122,7 +122,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
-                    HomeNavigationTabbarRoute(),
+                    const IntroPageRoute(),
                   ],
                 );
               },
