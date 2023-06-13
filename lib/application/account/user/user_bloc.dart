@@ -44,10 +44,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
       },
       acceptTnc: (e) async {
-        final failureOrSuccess = await userRepository.updateUserTc(
-          state.user,
-          date: e.date, // DateTime.now().toUtc().toIso8601String(),
-        );
+        final failureOrSuccess = await userRepository.updateUserTc();
 
         failureOrSuccess.fold(
           (failure) => emit(
@@ -57,7 +54,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           ),
           (settingTc) => emit(
             state.copyWith(
-              user: state.user.copyWith(settingTc: settingTc),
+              user: state.user.copyWith(
+                acceptPrivacyPolicy: settingTc.acceptTC,
+              ),
               userFailureOrSuccessOption: none(),
             ),
           ),

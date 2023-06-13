@@ -161,20 +161,12 @@ void main() {
         final res = json.decode(
           await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
         );
-        final date = DateTime.now().toUtc().toIso8601String();
         final data = {
-          'input': {
-            'where': {'id': int.parse(userId)},
-            'data': {
-              'acceptPrivacyPolicy': true,
-              'acceptPrivacyPolicyTime': date, // '2022-12-27T09:37:45.843154Z',
-              'privacyPolicyAcceptedPlatform': 'Mobile',
-            },
-          },
+          'isAcceptTC': true,
         };
 
         dioAdapter.onPost(
-          '/api/strapiEngine',
+          '/api/license',
           (server) => server.reply(
             200,
             res,
@@ -186,13 +178,10 @@ void main() {
             'variables': data,
           }),
         );
-        final result = await remoteDataSource.updateUserTC(
-          userId: userId,
-          date: date, //DateTime.now().toUtc().toIso8601String(),
-        );
+        final result = await remoteDataSource.updateUserTC();
         final resTest =
-            SettingTcDto.fromJson(res['data']['updateUser']['user']).toDomain();
-        expect(result.acceptPrivacyPolicy, resTest.acceptPrivacyPolicy);
+            SettingTcDto.fromJson(res['data']).toDomain();
+        expect(result.acceptTC, resTest.acceptTC);
       },
     );
     test(

@@ -2,10 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/aup_tc/entities/tncdate.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
@@ -28,9 +26,7 @@ void main() {
   late AupTcRepository aupTcRepository = MockAupTcRepository();
   late Config config;
   late User user;
-  late SettingTc settingTc;
   late SalesOrganisation salesOrganisation;
-  late TncDate tncDate;
   // late TncDate tncDate;
   // late Role role;
   late TokenStorage tokenStorage;
@@ -42,7 +38,6 @@ void main() {
     config = Config()..appFlavor = Flavor.mock;
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
-    tncDate = TncDate.empty();
     tokenStorage = MockTokenStorage();
     when(() => tokenStorage.get())
         .thenAnswer((invocation) async => JWTDto(access: rootAdminToken));
@@ -51,10 +46,6 @@ void main() {
         .updateUserNotificationAndLanguagePreference();
     await UserLocalDataSource(tokenStorage: tokenStorage).updateUserTC();
 
-    settingTc = SettingTc(
-        acceptPrivacyPolicy: false,
-        acceptPrivacyPolicyTime: tncDate.date,
-        privacyPolicyAcceptedPlatform: 'Mobile');
     // tncDate = TncDate(date: DateTime.parse('1970-01-01 00:00:00'));
     // role = Role.empty().copyWith(type: RoleType('internal_sales_rep'));
   });
@@ -80,18 +71,18 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                    acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime: tncDate.date,
-                    privacyPolicyAcceptedPlatform: 'Mobile'),
+                acceptPrivacyPolicy: false
               ),
               salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
-              url: config.getTCENUrl,
-              initialFile: config.getTCENFile)
+              showTermsAndCondition: true,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,
+          )
         ],
       );
       blocTest<AupTcBloc, AupTcState>(
@@ -104,17 +95,18 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                  acceptPrivacyPolicy: true,
-                ),
+                acceptPrivacyPolicy: true
               ),
               salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: false,
-              url: config.getTCENUrl,
-              initialFile: config.getTCENFile)
+              showTermsAndCondition: false,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,
+          )
         ],
       );
 
@@ -128,18 +120,18 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                    acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime: tncDate.date,
-                    privacyPolicyAcceptedPlatform: 'Mobile'),
+                acceptPrivacyPolicy: false
               ),
               SalesOrg('3070')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
-              url: config.getTCVNUrl,
-              initialFile: config.getTCVNFile)
+             showTermsAndCondition: true,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,
+          )
         ],
       );
 
@@ -153,18 +145,18 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                    acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime: tncDate.date,
-                    privacyPolicyAcceptedPlatform: 'Mobile'),
+                acceptPrivacyPolicy: false
               ),
               SalesOrg('2800')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
-              url: config.getTCTWUrl,
-              initialFile: config.getTCTWFile)
+              showTermsAndCondition: true,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,
+          )
         ],
       );
 
@@ -178,18 +170,17 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                    acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime: tncDate.date,
-                    privacyPolicyAcceptedPlatform: 'Mobile'),
+                acceptPrivacyPolicy: false
               ),
               SalesOrg('2902')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
-              url: config.getTCTHUrl,
-              initialFile: config.getTCTHFile)
+              showTermsAndCondition: true,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,)
         ],
       );
 
@@ -203,18 +194,18 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                    acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime: tncDate.date,
-                    privacyPolicyAcceptedPlatform: 'Mobile'),
+                acceptPrivacyPolicy: false
               ),
               SalesOrg('2201')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
-              url: config.getTCMMUrl,
-              initialFile: config.getTCMMFile)
+              showTermsAndCondition: true,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,
+          )
         ],
       );
 
@@ -228,18 +219,18 @@ void main() {
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
               user.copyWith(
-                settingTc: settingTc.copyWith(
-                    acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime: tncDate.date,
-                    privacyPolicyAcceptedPlatform: 'Mobile'),
+                acceptPrivacyPolicy: false
               ),
               SalesOrg('1500')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
-              url: config.getTCKHUrl,
-              initialFile: config.getTCKHFile)
+              showTermsAndCondition: true,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncFile: config.getTnCFile,
+              tncConsent: false,
+              privacyConsent: false,
+          )
         ],
       );
     },

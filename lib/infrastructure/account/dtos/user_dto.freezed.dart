@@ -46,18 +46,9 @@ mixin _$UserDto {
   @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
   String get languagePreference => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableOrderType', defaultValue: false)
-  bool get enableOrderType =>
-      throw _privateConstructorUsedError; // TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
-  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+  bool get enableOrderType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptTC', defaultValue: true)
   bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'acceptPrivacyPolicyTime',
-      defaultValue: '1970-01-01 00:00:00',
-      readValue: dateTimeStringFormatCheck)
-  String get acceptPrivacyPolicyTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-  String get privacyPolicyAcceptedPlatform =>
-      throw _privateConstructorUsedError;
   @JsonKey(name: 'hasBonusOverride', defaultValue: false)
   bool get hasBonusOverride => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableCreateOrder', defaultValue: false)
@@ -111,12 +102,8 @@ abstract class $UserDtoCopyWith<$Res> {
           String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+      @JsonKey(name: 'acceptTC', defaultValue: true)
           bool acceptPrivacyPolicy,
-      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptPrivacyPolicyTime,
-      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          String privacyPolicyAcceptedPlatform,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
@@ -161,8 +148,6 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? languagePreference = null,
     Object? enableOrderType = null,
     Object? acceptPrivacyPolicy = null,
-    Object? acceptPrivacyPolicyTime = null,
-    Object? privacyPolicyAcceptedPlatform = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
@@ -227,14 +212,6 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.acceptPrivacyPolicy
           : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
-          ? _value.acceptPrivacyPolicyTime
-          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
-          ? _value.privacyPolicyAcceptedPlatform
-          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
-              as String,
       hasBonusOverride: null == hasBonusOverride
           ? _value.hasBonusOverride
           : hasBonusOverride // ignore: cast_nullable_to_non_nullable
@@ -313,12 +290,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+      @JsonKey(name: 'acceptTC', defaultValue: true)
           bool acceptPrivacyPolicy,
-      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptPrivacyPolicyTime,
-      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          String privacyPolicyAcceptedPlatform,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
@@ -362,8 +335,6 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? languagePreference = null,
     Object? enableOrderType = null,
     Object? acceptPrivacyPolicy = null,
-    Object? acceptPrivacyPolicyTime = null,
-    Object? privacyPolicyAcceptedPlatform = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
@@ -428,14 +399,6 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.acceptPrivacyPolicy
           : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
-          ? _value.acceptPrivacyPolicyTime
-          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
-          ? _value.privacyPolicyAcceptedPlatform
-          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
-              as String,
       hasBonusOverride: null == hasBonusOverride
           ? _value.hasBonusOverride
           : hasBonusOverride // ignore: cast_nullable_to_non_nullable
@@ -494,12 +457,8 @@ class _$_UserDto extends _UserDto {
           required this.languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           required this.enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+      @JsonKey(name: 'acceptTC', defaultValue: true)
           required this.acceptPrivacyPolicy,
-      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required this.acceptPrivacyPolicyTime,
-      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          required this.privacyPolicyAcceptedPlatform,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           required this.hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
@@ -565,19 +524,9 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   final bool enableOrderType;
-// TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
   @override
-  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+  @JsonKey(name: 'acceptTC', defaultValue: true)
   final bool acceptPrivacyPolicy;
-  @override
-  @JsonKey(
-      name: 'acceptPrivacyPolicyTime',
-      defaultValue: '1970-01-01 00:00:00',
-      readValue: dateTimeStringFormatCheck)
-  final String acceptPrivacyPolicyTime;
-  @override
-  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-  final String privacyPolicyAcceptedPlatform;
   @override
   @JsonKey(name: 'hasBonusOverride', defaultValue: false)
   final bool hasBonusOverride;
@@ -607,7 +556,7 @@ class _$_UserDto extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification)';
   }
 
   @override
@@ -640,13 +589,6 @@ class _$_UserDto extends _UserDto {
                 other.enableOrderType == enableOrderType) &&
             (identical(other.acceptPrivacyPolicy, acceptPrivacyPolicy) ||
                 other.acceptPrivacyPolicy == acceptPrivacyPolicy) &&
-            (identical(
-                    other.acceptPrivacyPolicyTime, acceptPrivacyPolicyTime) ||
-                other.acceptPrivacyPolicyTime == acceptPrivacyPolicyTime) &&
-            (identical(other.privacyPolicyAcceptedPlatform,
-                    privacyPolicyAcceptedPlatform) ||
-                other.privacyPolicyAcceptedPlatform ==
-                    privacyPolicyAcceptedPlatform) &&
             (identical(other.hasBonusOverride, hasBonusOverride) ||
                 other.hasBonusOverride == hasBonusOverride) &&
             (identical(other.disableCreateOrder, disableCreateOrder) ||
@@ -681,8 +623,6 @@ class _$_UserDto extends _UserDto {
         languagePreference,
         enableOrderType,
         acceptPrivacyPolicy,
-        acceptPrivacyPolicyTime,
-        privacyPolicyAcceptedPlatform,
         hasBonusOverride,
         disableCreateOrder,
         disableReturns,
@@ -733,12 +673,8 @@ abstract class _UserDto extends UserDto {
           required final String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           required final bool enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+      @JsonKey(name: 'acceptTC', defaultValue: true)
           required final bool acceptPrivacyPolicy,
-      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required final String acceptPrivacyPolicyTime,
-      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          required final String privacyPolicyAcceptedPlatform,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           required final bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
@@ -794,18 +730,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType;
-  @override // TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
-  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+  @override
+  @JsonKey(name: 'acceptTC', defaultValue: true)
   bool get acceptPrivacyPolicy;
-  @override
-  @JsonKey(
-      name: 'acceptPrivacyPolicyTime',
-      defaultValue: '1970-01-01 00:00:00',
-      readValue: dateTimeStringFormatCheck)
-  String get acceptPrivacyPolicyTime;
-  @override
-  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-  String get privacyPolicyAcceptedPlatform;
   @override
   @JsonKey(name: 'hasBonusOverride', defaultValue: false)
   bool get hasBonusOverride;

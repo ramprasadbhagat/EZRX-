@@ -1,16 +1,5 @@
 {
   "data": {
-    "updateUser": {
-      "user": {
-        "username": "jstalin",
-        "email": "jstalin@zuelligpharma.com",
-        "acceptPrivacyPolicy": true,
-        "acceptPrivacyPolicyTime": "2023-04-05T05:59:08.350875Z",
-        "privacyPolicyAcceptedPlatform": "Mobile"
-      }
-    }
-  },
-  "extensions": {
-    "trace-id": "297370896dfc479aa70d0ea2b8a183cf"
-  }
+    "updateAcceptanceStatus": true
+  } 
 }

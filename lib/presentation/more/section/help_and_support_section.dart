@@ -41,8 +41,8 @@ class HelpAndSupportTile extends StatelessWidget {
       label: 'Chart support',
       route: null,
     ),
-    MoreDetailsTile(
-      icon: const Icon(
+    const MoreDetailsTile(
+      icon: Icon(
         Icons.feed_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),

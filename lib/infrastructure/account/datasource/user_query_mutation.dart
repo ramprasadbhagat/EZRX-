@@ -138,17 +138,11 @@ class UserQueryMutation {
 
   String updatePrivacyPolicy() {
     return '''
-      mutation updateUserMutation(\$input: UpdateUserInput!) {
-        updateUser(input: \$input) {
-          user {
-            username
-            email
-            acceptPrivacyPolicy
-            acceptPrivacyPolicyTime
-            privacyPolicyAcceptedPlatform
-          }
-        }
-      }
+      mutation updateAcceptanceStatus(\$isAcceptTC: Boolean!) {
+
+        updateAcceptanceStatus(isAcceptTC: \$isAcceptTC)
+
+    }
     ''';
   }
 }

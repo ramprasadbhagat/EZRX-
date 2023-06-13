@@ -55,35 +55,23 @@ class UserRemoteDataSource {
     }
   }
 
-  Future<SettingTc> updateUserTC({
-    required String userId,
-    required String date,
-  }) async {
+  Future<SettingTc> updateUserTC() async {
     return await dataSourceExceptionHandler.handle(() async {
-      final data = {
-        'input': {
-          'where': {'id': int.parse(userId)},
-          'data': {
-            'acceptPrivacyPolicy': true,
-            'acceptPrivacyPolicyTime':
-                date, // DateTime.now().toUtc().toIso8601String(),
-            'privacyPolicyAcceptedPlatform': 'Mobile',
-          },
-        },
-      };
-
+      
       final res = await httpService.request(
         method: 'POST',
-        url: '/api/strapiEngine',
+        url: '${config.urlConstants}license',
         data: jsonEncode({
           'query': userQueryMutation.updatePrivacyPolicy(),
-          'variables': data,
+          'variables': {
+            'isAcceptTC': true,
+          },
         }),
-        apiEndpoint: 'updateUserMutation',
+        apiEndpoint: 'updateAcceptanceStatus',
       );
       _userExceptionChecker(res: res);
 
-      return SettingTcDto.fromJson(res.data['data']['updateUser']['user'])
+      return SettingTcDto.fromJson(res.data['data'])
           .toDomain();
     });
   }

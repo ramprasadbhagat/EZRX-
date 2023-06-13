@@ -1,12 +1,12 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/more/section/profile_tile_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/more/section/help_and_support_section.dart';
 import 'package:ezrxmobile/presentation/more/section/service_tile_section.dart';
 import 'package:ezrxmobile/presentation/more/section/settings_title_section.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

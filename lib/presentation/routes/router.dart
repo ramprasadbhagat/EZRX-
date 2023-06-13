@@ -221,7 +221,6 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
       page: FavouritesTab,
       path: 'orders/favourites',
     ),
-
     // =========
     AutoRoute(
       path: 'orders/saved_order_list',

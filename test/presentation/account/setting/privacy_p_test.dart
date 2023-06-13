@@ -61,12 +61,8 @@ void main() {
     locator<Config>().appFlavor = Flavor.mock;
 
     locator<Config>().appName;
-    locator<Config>().getTCKHUrl;
-    locator<Config>().getTCMMUrl;
-    locator<Config>().getTCTHUrl;
-    locator<Config>().getTCTWUrl;
-    locator<Config>().getTCVNUrl;
-    locator<Config>().getTCENUrl;
+    locator<Config>().getPrivacyPolicyFile;
+    locator<Config>().getTnCFile;
     locator<Config>().oktaConfig;
     locator<Config>().packageName;
   });
@@ -120,7 +116,7 @@ void main() {
               ),
             ],
             child: WebViewPage(
-              initialFile: locator<Config>().getPrivacyInitialFile,
+              initialFile: locator<Config>().getPrivacyPolicyFile,
             ),
           ),
         ),

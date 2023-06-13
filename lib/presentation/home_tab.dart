@@ -23,11 +23,11 @@ class HomeNavigationTabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AupTcBloc, AupTcState>(
       buildWhen: (previous, current) =>
-          previous.showTermsAndConditon != current.showTermsAndConditon,
+          previous.showTermsAndCondition != current.showTermsAndCondition,
       builder: (context, state) {
         final orientation = MediaQuery.of(context).orientation;
 
-        return state.showTermsAndConditon
+        return state.showTermsAndCondition
             ? const AupTCDialog(
                 key: WidgetKeys.aupTcScreen,
               )

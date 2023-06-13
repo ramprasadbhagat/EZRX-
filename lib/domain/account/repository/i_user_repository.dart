@@ -5,9 +5,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 abstract class IUserRepository {
   Future<Either<ApiFailure, User>> getUser();
-  Future<Either<ApiFailure, SettingTc>> updateUserTc(
-    User user, {
-    required String date,
-  });
+  Future<Either<ApiFailure, SettingTc>> updateUserTc();
   Future<Either<ApiFailure, User>> updateNotificationSettings(User user);
 }

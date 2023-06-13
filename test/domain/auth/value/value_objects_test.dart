@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -433,7 +432,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -466,7 +465,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -505,7 +504,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -544,7 +543,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -583,7 +582,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -622,7 +621,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -662,7 +661,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -702,7 +701,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
@@ -741,7 +740,7 @@ void main() {
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
-          settingTc: SettingTc.empty(),
+          acceptPrivacyPolicy: false,
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,

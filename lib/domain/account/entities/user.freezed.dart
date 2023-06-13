@@ -26,7 +26,7 @@ mixin _$User {
       throw _privateConstructorUsedError;
   AccessRight get accessRight => throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
-  SettingTc get settingTc => throw _privateConstructorUsedError;
+  bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
   bool get enableOrderType => throw _privateConstructorUsedError;
   bool get hasBonusOverride => throw _privateConstructorUsedError;
   bool get disableCreateOrder => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $UserCopyWith<$Res> {
       List<SalesOrganisation> userSalesOrganisations,
       AccessRight accessRight,
       Settings settings,
-      SettingTc settingTc,
+      bool acceptPrivacyPolicy,
       bool enableOrderType,
       bool hasBonusOverride,
       bool disableCreateOrder,
@@ -63,7 +63,6 @@ abstract class $UserCopyWith<$Res> {
   $RoleCopyWith<$Res> get role;
   $AccessRightCopyWith<$Res> get accessRight;
   $SettingsCopyWith<$Res> get settings;
-  $SettingTcCopyWith<$Res> get settingTc;
 }
 
 /// @nodoc
@@ -88,7 +87,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? userSalesOrganisations = null,
     Object? accessRight = null,
     Object? settings = null,
-    Object? settingTc = null,
+    Object? acceptPrivacyPolicy = null,
     Object? enableOrderType = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
@@ -132,10 +131,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
-      settingTc: null == settingTc
-          ? _value.settingTc
-          : settingTc // ignore: cast_nullable_to_non_nullable
-              as SettingTc,
+      acceptPrivacyPolicy: null == acceptPrivacyPolicy
+          ? _value.acceptPrivacyPolicy
+          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
@@ -190,14 +189,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       return _then(_value.copyWith(settings: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SettingTcCopyWith<$Res> get settingTc {
-    return $SettingTcCopyWith<$Res>(_value.settingTc, (value) {
-      return _then(_value.copyWith(settingTc: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -216,7 +207,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<SalesOrganisation> userSalesOrganisations,
       AccessRight accessRight,
       Settings settings,
-      SettingTc settingTc,
+      bool acceptPrivacyPolicy,
       bool enableOrderType,
       bool hasBonusOverride,
       bool disableCreateOrder,
@@ -231,8 +222,6 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $AccessRightCopyWith<$Res> get accessRight;
   @override
   $SettingsCopyWith<$Res> get settings;
-  @override
-  $SettingTcCopyWith<$Res> get settingTc;
 }
 
 /// @nodoc
@@ -253,7 +242,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? userSalesOrganisations = null,
     Object? accessRight = null,
     Object? settings = null,
-    Object? settingTc = null,
+    Object? acceptPrivacyPolicy = null,
     Object? enableOrderType = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
@@ -297,10 +286,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
-      settingTc: null == settingTc
-          ? _value.settingTc
-          : settingTc // ignore: cast_nullable_to_non_nullable
-              as SettingTc,
+      acceptPrivacyPolicy: null == acceptPrivacyPolicy
+          ? _value.acceptPrivacyPolicy
+          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
@@ -338,7 +327,7 @@ class _$_User extends _User {
       required final List<SalesOrganisation> userSalesOrganisations,
       required this.accessRight,
       required this.settings,
-      required this.settingTc,
+      required this.acceptPrivacyPolicy,
       required this.enableOrderType,
       required this.hasBonusOverride,
       required this.disableCreateOrder,
@@ -373,7 +362,7 @@ class _$_User extends _User {
   @override
   final Settings settings;
   @override
-  final SettingTc settingTc;
+  final bool acceptPrivacyPolicy;
   @override
   final bool enableOrderType;
   @override
@@ -387,7 +376,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
   }
 
   @override
@@ -410,8 +399,8 @@ class _$_User extends _User {
                 other.accessRight == accessRight) &&
             (identical(other.settings, settings) ||
                 other.settings == settings) &&
-            (identical(other.settingTc, settingTc) ||
-                other.settingTc == settingTc) &&
+            (identical(other.acceptPrivacyPolicy, acceptPrivacyPolicy) ||
+                other.acceptPrivacyPolicy == acceptPrivacyPolicy) &&
             (identical(other.enableOrderType, enableOrderType) ||
                 other.enableOrderType == enableOrderType) &&
             (identical(other.hasBonusOverride, hasBonusOverride) ||
@@ -436,7 +425,7 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(_userSalesOrganisations),
       accessRight,
       settings,
-      settingTc,
+      acceptPrivacyPolicy,
       enableOrderType,
       hasBonusOverride,
       disableCreateOrder,
@@ -461,7 +450,7 @@ abstract class _User extends User {
       required final List<SalesOrganisation> userSalesOrganisations,
       required final AccessRight accessRight,
       required final Settings settings,
-      required final SettingTc settingTc,
+      required final bool acceptPrivacyPolicy,
       required final bool enableOrderType,
       required final bool hasBonusOverride,
       required final bool disableCreateOrder,
@@ -488,7 +477,7 @@ abstract class _User extends User {
   @override
   Settings get settings;
   @override
-  SettingTc get settingTc;
+  bool get acceptPrivacyPolicy;
   @override
   bool get enableOrderType;
   @override

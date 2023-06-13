@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -15,7 +14,6 @@ import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
-import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_dto.freezed.dart';
@@ -54,13 +52,8 @@ class UserDto with _$UserDto {
         required String languagePreference,
     @JsonKey(name: 'enableOrderType', defaultValue: false)
         required bool enableOrderType,
-    // TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
-    @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
+    @JsonKey(name: 'acceptTC', defaultValue: true)
         required bool acceptPrivacyPolicy,
-    @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-        required String acceptPrivacyPolicyTime,
-    @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-        required String privacyPolicyAcceptedPlatform,
     @JsonKey(name: 'hasBonusOverride', defaultValue: false)
         required bool hasBonusOverride,
     @JsonKey(name: 'disableCreateOrder', defaultValue: false)
@@ -94,11 +87,7 @@ class UserDto with _$UserDto {
       languagePreference: user.settings.languagePreference
           .getOrDefaultValue(ApiLanguageCode.english),
       enableOrderType: user.enableOrderType,
-      acceptPrivacyPolicy: user.settingTc.acceptPrivacyPolicy,
-      acceptPrivacyPolicyTime:
-          user.settingTc.acceptPrivacyPolicyTime.toIso8601String(),
-      privacyPolicyAcceptedPlatform:
-          user.settingTc.privacyPolicyAcceptedPlatform,
+      acceptPrivacyPolicy: user.acceptPrivacyPolicy,
       hasBonusOverride: user.hasBonusOverride,
       disableCreateOrder: user.disableCreateOrder,
       disableReturns: user.disableReturns,
@@ -113,7 +102,6 @@ class UserDto with _$UserDto {
   }
   static const emptyUserDto = UserDto(
     acceptPrivacyPolicy: false,
-    acceptPrivacyPolicyTime: '',
     customerCode: '',
     email: '',
     emailNotifications: false,
@@ -124,7 +112,6 @@ class UserDto with _$UserDto {
     languagePreference: '',
     lastName: '',
     mobileNotifications: false,
-    privacyPolicyAcceptedPlatform: '',
     username: '',
     userSalesOrganisations: [],
     disableCreateOrder: false,
@@ -158,13 +145,7 @@ class UserDto with _$UserDto {
               paymentNotification.map((e) => e.toDomain()).toList(),
         ),
       ),
-      settingTc: SettingTc(
-        acceptPrivacyPolicy: acceptPrivacyPolicy,
-        acceptPrivacyPolicyTime: acceptPrivacyPolicyTime.isNotEmpty
-            ? DateTime.parse(acceptPrivacyPolicyTime)
-            : DateTime.now(),
-        privacyPolicyAcceptedPlatform: privacyPolicyAcceptedPlatform,
-      ),
+      acceptPrivacyPolicy: acceptPrivacyPolicy,
       enableOrderType: enableOrderType,
       hasBonusOverride: hasBonusOverride,
       disableCreateOrder: disableCreateOrder,

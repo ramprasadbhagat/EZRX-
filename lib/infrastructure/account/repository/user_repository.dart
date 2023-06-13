@@ -85,10 +85,7 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<ApiFailure, SettingTc>> updateUserTc(
-    User userDetails, {
-    required String date,
-  }) async {
+  Future<Either<ApiFailure, SettingTc>> updateUserTc() async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final settingTc = await localDataSource.updateUserTC();
@@ -99,10 +96,7 @@ class UserRepository implements IUserRepository {
       }
     }
     try {
-      final settingTc = await remoteDataSource.updateUserTC(
-        userId: userDetails.id,
-        date: date,
-      );
+      final settingTc = await remoteDataSource.updateUserTC();
 
       return Right(settingTc);
     } catch (e) {

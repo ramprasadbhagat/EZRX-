@@ -17,9 +17,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final UserRepository userRepoMock = UserRepoMock();
-  late String date;
   group('User Bloc Testing', () {
-    setUp(() => date = DateTime.now().toUtc().toIso8601String());
     blocTest<UserBloc, UserState>(
       'Initialized',
       build: () => UserBloc(
@@ -54,13 +52,13 @@ void main() {
       ),
       setUp: () {
         when(
-          () => userRepoMock.updateUserTc(User.empty(), date: date),
+          () => userRepoMock.updateUserTc(),
         ).thenAnswer(
           (invocation) async => Right(SettingTc.empty()),
         );
       },
       act: (UserBloc bloc) => bloc.add(
-        UserEvent.acceptTnc(date: date),
+        const UserEvent.acceptTnc(),
       ),
       expect: () => [
         UserState.initial().copyWith(user: User.empty()),
@@ -72,12 +70,12 @@ void main() {
         userRepository: userRepoMock,
       ),
       setUp: () {
-        when(() => userRepoMock.updateUserTc(User.empty(), date: date))
+        when(() => userRepoMock.updateUserTc())
             .thenAnswer(
           (invocation) async => const Left(ApiFailure.other('tnc failed')),
         );
       },
-      act: (UserBloc bloc) => bloc.add(UserEvent.acceptTnc(date: date)),
+      act: (UserBloc bloc) => bloc.add(const UserEvent.acceptTnc()),
       expect: () => [
         UserState.initial().copyWith(
             userFailureOrSuccessOption:

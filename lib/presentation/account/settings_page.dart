@@ -62,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                     title: Text('ToS'.tr()),
                     onTap: () async {
                       if (kIsWeb) {
-                        final privacyUrl = context.read<AupTcBloc>().state.url;
+                        final privacyUrl = context.read<AupTcBloc>().state.privacyFile;
                         if (await canLaunchUrl(
                           Uri.tryParse(privacyUrl) ?? Uri(path: ''),
                         )) {
@@ -70,7 +70,7 @@ class SettingsPage extends StatelessWidget {
                         }
                       } else {
                         await context.router
-                            .push(AupTCDialogRoute(fromSetting: true));
+                            .push(const AupTCDialogRoute());
                       }
                     },
                   ),
@@ -80,7 +80,7 @@ class SettingsPage extends StatelessWidget {
                     title: const Text('Privacy Policy').tr(),
                     onTap: () async {
                       final config = locator<Config>();
-                      final privacyUrl = config.getPrivacyUrl;
+                      final privacyUrl = config.getPrivacyPolicyFile;
                       if (kIsWeb) {
                         if (await canLaunchUrl(
                           Uri.tryParse(privacyUrl) ?? Uri(path: ''),
@@ -91,7 +91,7 @@ class SettingsPage extends StatelessWidget {
                         await context.router.push(
                           WebViewPageRoute(
                             url: privacyUrl,
-                            initialFile: config.getPrivacyInitialFile,
+                            initialFile: config.getTnCFile,
                           ),
                         );
                       }

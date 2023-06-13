@@ -16,10 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SettingTc {
-  bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
-  DateTime get acceptPrivacyPolicyTime => throw _privateConstructorUsedError;
-  String get privacyPolicyAcceptedPlatform =>
-      throw _privateConstructorUsedError;
+  bool get acceptTC => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingTcCopyWith<SettingTc> get copyWith =>
@@ -31,10 +28,7 @@ abstract class $SettingTcCopyWith<$Res> {
   factory $SettingTcCopyWith(SettingTc value, $Res Function(SettingTc) then) =
       _$SettingTcCopyWithImpl<$Res, SettingTc>;
   @useResult
-  $Res call(
-      {bool acceptPrivacyPolicy,
-      DateTime acceptPrivacyPolicyTime,
-      String privacyPolicyAcceptedPlatform});
+  $Res call({bool acceptTC});
 }
 
 /// @nodoc
@@ -50,23 +44,13 @@ class _$SettingTcCopyWithImpl<$Res, $Val extends SettingTc>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptPrivacyPolicy = null,
-    Object? acceptPrivacyPolicyTime = null,
-    Object? privacyPolicyAcceptedPlatform = null,
+    Object? acceptTC = null,
   }) {
     return _then(_value.copyWith(
-      acceptPrivacyPolicy: null == acceptPrivacyPolicy
-          ? _value.acceptPrivacyPolicy
-          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+      acceptTC: null == acceptTC
+          ? _value.acceptTC
+          : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
-          ? _value.acceptPrivacyPolicyTime
-          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
-          ? _value.privacyPolicyAcceptedPlatform
-          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -78,10 +62,7 @@ abstract class _$$_SettingTcCopyWith<$Res> implements $SettingTcCopyWith<$Res> {
       __$$_SettingTcCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool acceptPrivacyPolicy,
-      DateTime acceptPrivacyPolicyTime,
-      String privacyPolicyAcceptedPlatform});
+  $Res call({bool acceptTC});
 }
 
 /// @nodoc
@@ -95,23 +76,13 @@ class __$$_SettingTcCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptPrivacyPolicy = null,
-    Object? acceptPrivacyPolicyTime = null,
-    Object? privacyPolicyAcceptedPlatform = null,
+    Object? acceptTC = null,
   }) {
     return _then(_$_SettingTc(
-      acceptPrivacyPolicy: null == acceptPrivacyPolicy
-          ? _value.acceptPrivacyPolicy
-          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+      acceptTC: null == acceptTC
+          ? _value.acceptTC
+          : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
-          ? _value.acceptPrivacyPolicyTime
-          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
-          ? _value.privacyPolicyAcceptedPlatform
-          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -119,22 +90,14 @@ class __$$_SettingTcCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SettingTc extends _SettingTc {
-  const _$_SettingTc(
-      {required this.acceptPrivacyPolicy,
-      required this.acceptPrivacyPolicyTime,
-      required this.privacyPolicyAcceptedPlatform})
-      : super._();
+  const _$_SettingTc({required this.acceptTC}) : super._();
 
   @override
-  final bool acceptPrivacyPolicy;
-  @override
-  final DateTime acceptPrivacyPolicyTime;
-  @override
-  final String privacyPolicyAcceptedPlatform;
+  final bool acceptTC;
 
   @override
   String toString() {
-    return 'SettingTc(acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform)';
+    return 'SettingTc(acceptTC: $acceptTC)';
   }
 
   @override
@@ -142,20 +105,12 @@ class _$_SettingTc extends _SettingTc {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingTc &&
-            (identical(other.acceptPrivacyPolicy, acceptPrivacyPolicy) ||
-                other.acceptPrivacyPolicy == acceptPrivacyPolicy) &&
-            (identical(
-                    other.acceptPrivacyPolicyTime, acceptPrivacyPolicyTime) ||
-                other.acceptPrivacyPolicyTime == acceptPrivacyPolicyTime) &&
-            (identical(other.privacyPolicyAcceptedPlatform,
-                    privacyPolicyAcceptedPlatform) ||
-                other.privacyPolicyAcceptedPlatform ==
-                    privacyPolicyAcceptedPlatform));
+            (identical(other.acceptTC, acceptTC) ||
+                other.acceptTC == acceptTC));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, acceptPrivacyPolicy,
-      acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform);
+  int get hashCode => Object.hash(runtimeType, acceptTC);
 
   @JsonKey(ignore: true)
   @override
@@ -165,18 +120,11 @@ class _$_SettingTc extends _SettingTc {
 }
 
 abstract class _SettingTc extends SettingTc {
-  const factory _SettingTc(
-      {required final bool acceptPrivacyPolicy,
-      required final DateTime acceptPrivacyPolicyTime,
-      required final String privacyPolicyAcceptedPlatform}) = _$_SettingTc;
+  const factory _SettingTc({required final bool acceptTC}) = _$_SettingTc;
   const _SettingTc._() : super._();
 
   @override
-  bool get acceptPrivacyPolicy;
-  @override
-  DateTime get acceptPrivacyPolicyTime;
-  @override
-  String get privacyPolicyAcceptedPlatform;
+  bool get acceptTC;
   @override
   @JsonKey(ignore: true)
   _$$_SettingTcCopyWith<_$_SettingTc> get copyWith =>

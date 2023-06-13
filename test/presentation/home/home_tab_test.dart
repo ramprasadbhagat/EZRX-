@@ -202,7 +202,7 @@ void main() {
                 .copyWith(customerCodeInfo: fakeCustomerCodeInfo));
         when(() => mockAupTcBloc.state).thenReturn(
           AupTcState.initial().copyWith(
-            showTermsAndConditon: false,
+            showTermsAndCondition: false,
           ),
         );
         when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()

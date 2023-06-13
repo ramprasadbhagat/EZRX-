@@ -22,63 +22,35 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
     on<AupTcEvent>(_onEvent);
   }
   Future<void> _onEvent(AupTcEvent event, Emitter<AupTcState> emit) async {
-    await event.map(
-      show: (e) async {
-        emit(
+    event.map(
+        show: (e) async {
+          emit(
+            state.copyWith(
+              showTermsAndCondition: await _showTermsAndConditon(e.user),
+              tncFile: config.getTnCFile,
+              privacyFile: config.getPrivacyPolicyFile,
+              tncConsent: false,
+              privacyConsent: false,
+            ),
+          );
+        },
+        termsOfUseConsent: (e) => emit(
           state.copyWith(
-            initialFile: _getInitialFile(e.salesOrg),
-            showTermsAndConditon: await _showTermsAndConditon(e.user),
-            url: _getLink(e.salesOrg),
+            tncConsent: e.newValue,
           ),
-        );
-      },
+        ),
+        privacyPolicyConsent: (e) => emit(
+          state.copyWith(
+            privacyConsent: e.newValue,
+          ),
+        ),
     );
-  }
-
-  String? _getInitialFile(SalesOrg salesOrg) {
-    final salesOrgCountry = salesOrg.country;
-
-    switch (salesOrgCountry) {
-      case 'VN':
-        return config.getTCVNFile;
-      case 'TH':
-        return config.getTCTHFile;
-      case 'KH':
-        return config.getTCKHFile;
-      case 'MM':
-        return config.getTCMMFile;
-      case 'TW':
-        return config.getTCTWFile;
-      default:
-        return config.getTCENFile;
-    }
-  }
-
-  String _getLink(SalesOrg salesOrg) {
-    final salesOrgCountry = salesOrg.country;
-
-    switch (salesOrgCountry) {
-      case 'VN':
-        return config.getTCVNUrl;
-      case 'TH':
-        return config.getTCTHUrl;
-      case 'KH':
-        return config.getTCKHUrl;
-      case 'MM':
-        return config.getTCMMUrl;
-      case 'TW':
-        return config.getTCTWUrl;
-      default:
-        return config.getTCENUrl;
-    }
   }
 
   Future<bool> _showTermsAndConditon(User user) async {
     final isTncEnabled = aupTcRepository.getTncConfig();
     if (!isTncEnabled) return false;
-
-    final acceptPrivacyPolicy = user.settingTc.acceptPrivacyPolicy;
-
-    return acceptPrivacyPolicy ? false : true;
+    
+    return !user.acceptPrivacyPolicy;
   }
 }

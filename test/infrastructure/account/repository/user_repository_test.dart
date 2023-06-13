@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
@@ -48,7 +49,6 @@ void main() {
   late MixpanelService mixpanelService;
   const rootAdminToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
-  late String date;
   late MockClevertapService mockClevertapService;
 
   setUpAll(
@@ -80,8 +80,6 @@ void main() {
         tokenStorage: tokenStorageMock,
         mixpanelService: mixpanelService,
       );
-
-      date = DateTime.now().toUtc().toIso8601String();
     },
   );
   group('User Repository should - ', () {
@@ -307,9 +305,9 @@ void main() {
             .thenAnswer((invocation) => Flavor.mock);
 
         when(() => localDataSourceMock.updateUserTC())
-            .thenAnswer((invocation) async => User.empty().settingTc);
+            .thenAnswer((invocation) async => const SettingTc(acceptTC: true));
 
-        final result = await repository.updateUserTc(User.empty(), date: date);
+        final result = await repository.updateUserTc();
         expect(result.isRight(), true);
       },
     );
@@ -334,7 +332,7 @@ void main() {
         when(() => localDataSourceMock.updateUserTC())
             .thenThrow(MockException(message: 'mockException'));
 
-        final result = await repository.updateUserTc(User.empty(), date: date);
+        final result = await repository.updateUserTc();
         expect(result.isLeft(), true);
       },
     );
@@ -355,12 +353,10 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.updateUserTC(
-              userId: User.empty().id,
-              date: date,
-            )).thenAnswer((invocation) async => User.empty().settingTc);
+        when(() => remoteDataSourceMock.updateUserTC())
+          .thenAnswer((invocation) async => const SettingTc(acceptTC: true));
 
-        final result = await repository.updateUserTc(User.empty(), date: date);
+        final result = await repository.updateUserTc();
         expect(result.isRight(), true);
       },
     );
@@ -381,12 +377,9 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.updateUserTC(
-              userId: User.empty().id,
-              date: date,
-            )).thenThrow(Error());
+        when(() => remoteDataSourceMock.updateUserTC()).thenThrow(Error());
 
-        final result = await repository.updateUserTc(User.empty(), date: date);
+        final result = await repository.updateUserTc();
         expect(result.isLeft(), true);
       },
     );

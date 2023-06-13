@@ -47,8 +47,7 @@ void main() {
 
     test('updateUserTC successfully', () async {
       final settingTc = await userLocal.updateUserTC();
-      expect(settingTc.privacyPolicyAcceptedPlatform, 'Mobile');
-      expect(settingTc.acceptPrivacyPolicy, true);
+      expect(settingTc.acceptTC, true);
     });
 
     test('updateUserNotificationAndLanguagePreference successfully', () async {

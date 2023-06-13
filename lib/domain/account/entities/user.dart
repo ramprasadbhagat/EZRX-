@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -26,7 +25,7 @@ class User with _$User {
     required List<SalesOrganisation> userSalesOrganisations,
     required AccessRight accessRight,
     required Settings settings,
-    required SettingTc settingTc,
+    required bool acceptPrivacyPolicy,
     required bool enableOrderType,
     required bool hasBonusOverride,
     required bool disableCreateOrder,
@@ -49,11 +48,7 @@ class User with _$User {
           languagePreference: LanguageValue(''),
           paymentNotification: PaymentNotification.empty(),
         ),
-        settingTc: SettingTc(
-          acceptPrivacyPolicy: false,
-          acceptPrivacyPolicyTime: DateTime.parse('1970-01-01 00:00:00'),
-          privacyPolicyAcceptedPlatform: '',
-        ),
+        acceptPrivacyPolicy: false,
         enableOrderType: false,
         hasBonusOverride: false,
         disableCreateOrder: false,

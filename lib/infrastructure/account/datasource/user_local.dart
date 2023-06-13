@@ -29,7 +29,7 @@ class UserLocalDataSource {
       await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
     );
 
-    return SettingTcDto.fromJson(data['data']['updateUser']['user']).toDomain();
+    return SettingTcDto.fromJson(data['data']).toDomain();
   }
 
   Future<User> updateUserNotificationAndLanguagePreference() async {

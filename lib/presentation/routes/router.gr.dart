@@ -324,14 +324,9 @@ class AppRouter extends _i75.RootStackRouter {
       );
     },
     AupTCDialogRoute.name: (routeData) {
-      final args = routeData.argsAs<AupTCDialogRouteArgs>(
-          orElse: () => const AupTCDialogRouteArgs());
       return _i75.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i30.AupTCDialog(
-          key: args.key,
-          fromSetting: args.fromSetting,
-        ),
+        child: const _i30.AupTCDialog(),
       );
     },
     OrderTemplateListPageRoute.name: (routeData) {
@@ -1465,36 +1460,14 @@ class MaterialFilterPageRouteArgs {
 
 /// generated route for
 /// [_i30.AupTCDialog]
-class AupTCDialogRoute extends _i75.PageRouteInfo<AupTCDialogRouteArgs> {
-  AupTCDialogRoute({
-    _i76.Key? key,
-    bool fromSetting = false,
-  }) : super(
+class AupTCDialogRoute extends _i75.PageRouteInfo<void> {
+  const AupTCDialogRoute()
+      : super(
           AupTCDialogRoute.name,
           path: 'terms_of_service',
-          args: AupTCDialogRouteArgs(
-            key: key,
-            fromSetting: fromSetting,
-          ),
         );
 
   static const String name = 'AupTCDialogRoute';
-}
-
-class AupTCDialogRouteArgs {
-  const AupTCDialogRouteArgs({
-    this.key,
-    this.fromSetting = false,
-  });
-
-  final _i76.Key? key;
-
-  final bool fromSetting;
-
-  @override
-  String toString() {
-    return 'AupTCDialogRouteArgs{key: $key, fromSetting: $fromSetting}';
-  }
 }
 
 /// generated route for

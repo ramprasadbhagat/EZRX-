@@ -31,13 +31,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       languagePreference:
           handleEmptyLanguagePreference(json, 'languagePreference') as String,
       enableOrderType: json['enableOrderType'] as bool? ?? false,
-      acceptPrivacyPolicy: json['acceptPrivacyPolicy'] as bool? ?? true,
-      acceptPrivacyPolicyTime:
-          dateTimeStringFormatCheck(json, 'acceptPrivacyPolicyTime')
-                  as String? ??
-              '1970-01-01 00:00:00',
-      privacyPolicyAcceptedPlatform:
-          json['privacyPolicyAcceptedPlatform'] as String? ?? '',
+      acceptPrivacyPolicy: json['acceptTC'] as bool? ?? true,
       hasBonusOverride: json['hasBonusOverride'] as bool? ?? false,
       disableCreateOrder: json['disableCreateOrder'] as bool? ?? false,
       disableReturns: json['disableReturns'] as bool? ?? false,
@@ -67,9 +61,7 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'mobileNotifications': instance.mobileNotifications,
       'languagePreference': instance.languagePreference,
       'enableOrderType': instance.enableOrderType,
-      'acceptPrivacyPolicy': instance.acceptPrivacyPolicy,
-      'acceptPrivacyPolicyTime': instance.acceptPrivacyPolicyTime,
-      'privacyPolicyAcceptedPlatform': instance.privacyPolicyAcceptedPlatform,
+      'acceptTC': instance.acceptPrivacyPolicy,
       'hasBonusOverride': instance.hasBonusOverride,
       'disableCreateOrder': instance.disableCreateOrder,
       'disableReturns': instance.disableReturns,

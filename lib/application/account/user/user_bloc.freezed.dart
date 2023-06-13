@@ -20,7 +20,7 @@ mixin _$UserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(String date) acceptTnc,
+    required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -32,7 +32,7 @@ mixin _$UserEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? fetch,
-    TResult? Function(String date)? acceptTnc,
+    TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -44,7 +44,7 @@ mixin _$UserEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(String date)? acceptTnc,
+    TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -145,7 +145,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(String date) acceptTnc,
+    required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -160,7 +160,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? fetch,
-    TResult? Function(String date)? acceptTnc,
+    TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -175,7 +175,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(String date)? acceptTnc,
+    TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -277,7 +277,7 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(String date) acceptTnc,
+    required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -292,7 +292,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? fetch,
-    TResult? Function(String date)? acceptTnc,
+    TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -307,7 +307,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(String date)? acceptTnc,
+    TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -376,8 +376,6 @@ abstract class _$$_AcceptTncCopyWith<$Res> {
   factory _$$_AcceptTncCopyWith(
           _$_AcceptTnc value, $Res Function(_$_AcceptTnc) then) =
       __$$_AcceptTncCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String date});
 }
 
 /// @nodoc
@@ -387,64 +385,40 @@ class __$$_AcceptTncCopyWithImpl<$Res>
   __$$_AcceptTncCopyWithImpl(
       _$_AcceptTnc _value, $Res Function(_$_AcceptTnc) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? date = null,
-  }) {
-    return _then(_$_AcceptTnc(
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_AcceptTnc implements _AcceptTnc {
-  const _$_AcceptTnc({required this.date});
-
-  @override
-  final String date;
+  const _$_AcceptTnc();
 
   @override
   String toString() {
-    return 'UserEvent.acceptTnc(date: $date)';
+    return 'UserEvent.acceptTnc()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AcceptTnc &&
-            (identical(other.date, date) || other.date == date));
+        (other.runtimeType == runtimeType && other is _$_AcceptTnc);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, date);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AcceptTncCopyWith<_$_AcceptTnc> get copyWith =>
-      __$$_AcceptTncCopyWithImpl<_$_AcceptTnc>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(String date) acceptTnc,
+    required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
   }) {
-    return acceptTnc(date);
+    return acceptTnc();
   }
 
   @override
@@ -452,14 +426,14 @@ class _$_AcceptTnc implements _AcceptTnc {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? fetch,
-    TResult? Function(String date)? acceptTnc,
+    TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
   }) {
-    return acceptTnc?.call(date);
+    return acceptTnc?.call();
   }
 
   @override
@@ -467,7 +441,7 @@ class _$_AcceptTnc implements _AcceptTnc {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(String date)? acceptTnc,
+    TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -475,7 +449,7 @@ class _$_AcceptTnc implements _AcceptTnc {
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
-      return acceptTnc(date);
+      return acceptTnc();
     }
     return orElse();
   }
@@ -528,12 +502,7 @@ class _$_AcceptTnc implements _AcceptTnc {
 }
 
 abstract class _AcceptTnc implements UserEvent {
-  const factory _AcceptTnc({required final String date}) = _$_AcceptTnc;
-
-  String get date;
-  @JsonKey(ignore: true)
-  _$$_AcceptTncCopyWith<_$_AcceptTnc> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _AcceptTnc() = _$_AcceptTnc;
 }
 
 /// @nodoc
@@ -617,7 +586,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(String date) acceptTnc,
+    required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -632,7 +601,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? fetch,
-    TResult? Function(String date)? acceptTnc,
+    TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -648,7 +617,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(String date)? acceptTnc,
+    TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -804,7 +773,7 @@ class _$_UpdatePaymentNotificationSettings
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(String date) acceptTnc,
+    required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -819,7 +788,7 @@ class _$_UpdatePaymentNotificationSettings
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? fetch,
-    TResult? Function(String date)? acceptTnc,
+    TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -834,7 +803,7 @@ class _$_UpdatePaymentNotificationSettings
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(String date)? acceptTnc,
+    TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?

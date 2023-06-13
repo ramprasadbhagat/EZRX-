@@ -16,7 +16,6 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -107,12 +106,6 @@ void main() {
     locator = GetIt.instance;
     locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
-    locator<Config>().getTCKHUrl;
-    locator<Config>().getTCMMUrl;
-    locator<Config>().getTCTHUrl;
-    locator<Config>().getTCTWUrl;
-    locator<Config>().getTCVNUrl;
-    locator<Config>().getTCENUrl;
     locator<Config>().oktaConfig;
     locator<Config>().packageName;
     autoRouterMock = locator<AppRouter>();
@@ -155,12 +148,15 @@ void main() {
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
+    // TODO: V3 break
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndCondition=true',
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
-          showTermsAndConditon: true,
+          showTermsAndCondition: true,
+          privacyConsent: true,
+          tncConsent: true
         ),
       );
       await tester.pumpWidget(
@@ -168,6 +164,7 @@ void main() {
           autoRouterMock: autoRouterMock,
           child: MultiBlocProvider(
             providers: [
+              BlocProvider<UserBloc>(create: (context)=> userBlocMock),
               BlocProvider<AupTcBloc>(
                 create: (context) => mockAupTcBloc,
               ),
@@ -180,15 +177,15 @@ void main() {
         ),
       );
       await tester.pump();
-      final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
-      final homeTabbar = find.byKey(WidgetKeys.homeTabBar);
+      final auptcscreen = find.byKey(const Key('aupTcScreen'));
+      final homeTabbar = find.byKey(const Key('homeTabBar'));
       final auptcappBar = find.byKey(const Key('auptcappBar'));
       final auptcwebview = find.byKey(const Key('auptcwebview'));
       final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-      expect(aupTcScreen, findsOneWidget);
+      expect(auptcscreen, findsOneWidget);
       expect(auptcappBar, findsOneWidget);
       expect(homeTabbar, findsNothing);
-      expect(auptcwebview, findsOneWidget);
+      expect(auptcwebview, findsNWidgets(2));
       await tester.pumpAndSettle(const Duration(seconds: 3));
       expect(auptcAcceptButton, findsOneWidget);
       await tester.tap(auptcAcceptButton);
@@ -197,7 +194,7 @@ void main() {
       final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
       willPopCalled = await widgetsAppState.didPopRoute();
       await tester.pump();
-      expect(willPopCalled, true);
+      expect(willPopCalled, false);
     });
 
     testWidgets(
@@ -205,7 +202,7 @@ void main() {
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
-          showTermsAndConditon: false,
+          showTermsAndCondition: false,
         ),
       );
 
@@ -256,45 +253,12 @@ void main() {
     });
   });
 
-  testWidgets('Test - AupTc Widget Show AupTcBloc on loading', (tester) async {
-    when(() => mockAupTcBloc.state).thenReturn(
-      AupTcState.initial().copyWith(
-        showTermsAndConditon: true,
-      ),
-    );
-    await tester.pumpWidget(
-      WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
-            BlocProvider<AupTcBloc>(
-              create: (context) => mockAupTcBloc,
-            ),
-          ],
-          child: HomeNavigationTabbar(),
-        ),
-      ),
-    );
-
-    final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
-    expect(aupTcScreen, findsOneWidget);
-
-    final auptcscreenElement = tester.state(aupTcScreen) as AupTCDialogState;
-    auptcscreenElement.isLoading = true;
-    // ignore: invalid_use_of_protected_member
-    auptcscreenElement.setState(() {});
-    await tester.pump();
-    final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    expect(auptcAcceptButton, findsNothing);
-  });
-
   testWidgets('Test - AupTc Widget localization test', (tester) async {
     when(() => mockAupTcBloc.state).thenReturn(
       AupTcState.initial().copyWith(
-        showTermsAndConditon: true,
+        showTermsAndCondition: true,
+        privacyConsent: false,
+        tncConsent: false
       ),
     );
     await tester.pumpWidget(
@@ -314,14 +278,14 @@ void main() {
       ),
     );
     await tester.pump();
-    final acceptButtonTextFinder = find.text('Accept');
+    await tester.pump(const Duration(seconds: 1));
+    final acceptButtonTextFinder = find.text('Accept and continue');
     expect(acceptButtonTextFinder, findsOneWidget);
     final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    await tester.pumpAndSettle(const Duration(seconds: 3));
     await tester.tap(auptcAcceptButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
     final snackBarMsgFinder = find
-        .text('You Need To read full Terms and Condition before Accept'.tr());
+        .text('You need to read and accept full Terms of use and Privacy Policy before continue.'.tr());
     expect(snackBarMsgFinder, findsOneWidget);
   });
 
