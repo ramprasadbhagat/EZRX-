@@ -17,6 +17,7 @@ class UserQueryMutation {
             role {
               id
               name
+              type
               description
             }
             initialLogin

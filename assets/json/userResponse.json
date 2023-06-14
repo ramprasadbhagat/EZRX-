@@ -11,6 +11,7 @@
          "role":{
             "id":"7",
             "name":"ROOT Admin",
+            "type": "root_admin",
             "description":"ROOT Admin"
          },
          "initialLogin":true,
