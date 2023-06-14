@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
@@ -221,9 +222,39 @@ class ShipCodeSelector extends StatelessWidget {
                       allCreditsFilter: AllCreditsFilter.empty(),
                     ),
                   );
-                   context.read<AllCreditsFilterBloc>().add(
+              context.read<AllCreditsFilterBloc>().add(
                     AllCreditsFilterEvent.fetch(
                       salesOrganisation: salesOrgState.salesOrganisation,
+                    ),
+                  );
+
+              context.read<AccountSummaryBloc>().add(
+                    AccountSummaryEvent.fetchInvoiceSummary(
+                      custCode: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo
+                          .customerCodeSoldTo,
+                      salesOrg: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation
+                          .salesOrg,
+                    ),
+                  );
+
+              context.read<AccountSummaryBloc>().add(
+                    AccountSummaryEvent.fetchCreditSummary(
+                      custCode: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo
+                          .customerCodeSoldTo,
+                      salesOrg: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation
+                          .salesOrg,
                     ),
                   );
             } else {
@@ -248,6 +279,9 @@ class ShipCodeSelector extends StatelessWidget {
               context
                   .read<OrderHistoryFilterByStatusBloc>()
                   .add(const OrderHistoryFilterByStatusEvent.initialized());
+              context.read<AccountSummaryBloc>().add(
+                    const AccountSummaryEvent.initialize(),
+                  );
             }
           },
           buildWhen: (previous, current) =>

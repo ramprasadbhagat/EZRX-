@@ -51,6 +51,9 @@ import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
+import 'package:ezrxmobile/presentation/payments/payment_overview/account_summary.dart';
+import 'package:ezrxmobile/presentation/payments/payment_overview/payments_summary.dart';
+import 'package:ezrxmobile/presentation/payments/payment_overview/statement_summary.dart';
 import 'package:ezrxmobile/presentation/payments/payments_tab.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
@@ -204,6 +207,20 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
         AutoRoute(
           page: PaymentsTab,
           path: 'payments/tab',
+          children: [
+            AutoRoute(
+              page: StatementSummaryPage,
+              path: 'payments/statement_summary',
+            ),
+            AutoRoute(
+              page: PaymentsSummaryPage,
+              path: 'payments/payments_summary',
+            ),
+            AutoRoute(
+              page: AccountSummaryPage,
+              path: 'payments/account_summary',
+            ),
+          ],
         ),
         AutoRoute(
           page: MoreTab,

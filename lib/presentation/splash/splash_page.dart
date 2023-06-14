@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
@@ -502,6 +503,21 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         .getPNPValueMaterial,
                   ),
                 );
+          },
+        ),
+        BlocListener<AccountSummaryBloc, AccountSummaryState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) {
+            state.failureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (success) {},
+              ),
+            );
           },
         ),
       ],

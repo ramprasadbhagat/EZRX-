@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
@@ -57,6 +58,10 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+
+class AccountSummaryBlocMock
+    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
+    implements AccountSummaryBloc {}
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -165,6 +170,7 @@ void main() {
   late CustomerCodeBlocMock mockCustomerCodeBloc;
   late SalesOrgBlocMock mockSalesOrgBloc;
   late EligibilityBlocMock mockEligibilityBloc;
+  late AccountSummaryBlocMock mockAccountSummaryBloc;
   late ShipToCodeBlocMock mockShipToCodeBloc;
   late UserBlocMock mockUserBloc;
   late MaterialBundleListBloc mockMaterialBundleListBloc;
@@ -203,6 +209,7 @@ void main() {
     mockSalesOrgBloc = SalesOrgBlocMock();
     mockEligibilityBloc = EligibilityBlocMock();
     mockShipToCodeBloc = ShipToCodeBlocMock();
+    mockAccountSummaryBloc = AccountSummaryBlocMock();
     mockUserBloc = UserBlocMock();
     mockMaterialBundleListBloc = MaterialBundleListBlocMock();
     mockSaveOrderListBloc = SaveOrderListBlocMock();
@@ -243,6 +250,8 @@ void main() {
     when(() => mockShipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
     when(() => mockUserBloc.state)
         .thenReturn(UserState.initial().copyWith(user: fakeUser));
+    when(() => mockAccountSummaryBloc.state)
+        .thenReturn(AccountSummaryState.initial());
     when(() => mockSaveOrderListBloc.state)
         .thenReturn(SavedOrderListState.initial());
     when(() => mockMaterialListBloc.state)
@@ -329,6 +338,8 @@ void main() {
                 create: (context) => allCreditsBlocMock),
             BlocProvider<AllCreditsFilterBloc>(
                 create: (context) => alCreditsFilterBlocMock),
+            BlocProvider<AccountSummaryBloc>(
+                create: (context) => mockAccountSummaryBloc),
           ],
           child: Material(
             child: Scaffold(

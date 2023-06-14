@@ -25,7 +25,7 @@ class WidgetKeys {
   static const Key paymentsTab = Key('paymentsTab');
   static const Key moreTab = Key('moreTab');
   static const Key aupTcScreen = Key('aupTcScreen');
-   //============================================================
+  //============================================================
   //  MORE TAB BAR
   //============================================================
   static const Key profileTile = Key('profileTile');
@@ -41,8 +41,10 @@ class WidgetKeys {
   static const Key customerSearchPage = Key('customerSearchPage');
   static const Key customerCodeSelect = Key('customerCodeSelect');
   static const Key customerCodeSearch = Key('customerCodeSearchField');
-  static const Key customerCodeSearchSuffixIcon = Key('customerCodeSearchSuffixIcon');
-  static Key customerDeliveryAddressOption(String shipToName) => Key('customerDeliveryAddressOption$shipToName');
+  static const Key customerCodeSearchSuffixIcon =
+      Key('customerCodeSearchSuffixIcon');
+  static Key customerDeliveryAddressOption(String shipToName) =>
+      Key('customerDeliveryAddressOption$shipToName');
 
   //============================================================
   //  ShipToSearch page Keys
@@ -50,19 +52,22 @@ class WidgetKeys {
   static const Key shipToSearchPage = Key('shipToSearchPage');
   static const Key shipToCodeSearchField = Key('shipToCodeSearchField');
   static const Key shipToCodeSelect = Key('shipToCodeSelect');
-  static Key shipToAddressOption(String shipToCustomerCode) => Key('shipToOption$shipToCustomerCode');
+  static Key shipToAddressOption(String shipToCustomerCode) =>
+      Key('shipToOption$shipToCustomerCode');
 
   //============================================================
   //  CovidMaterialListSearch Page Keys
   //============================================================
 
-  static Key covidMaterialSearchField(String searchKey) => Key('covidMaterialSearchField$searchKey');
+  static Key covidMaterialSearchField(String searchKey) =>
+      Key('covidMaterialSearchField$searchKey');
 
   //============================================================
   //  MaterialListSearch Page Keys
   //============================================================
 
-  static Key materialSearchField(String searchKey) => Key('materialSearchField$searchKey');
+  static Key materialSearchField(String searchKey) =>
+      Key('materialSearchField$searchKey');
 
   //============================================================
   //  MaterialFilterSearch Page Keys
@@ -73,7 +78,8 @@ class WidgetKeys {
   //============================================================
   //  Search Bonus page Keys
   //============================================================
-  static Key addBonusTextField(String searchKey) => Key('addBonusTextField$searchKey');
+  static Key addBonusTextField(String searchKey) =>
+      Key('addBonusTextField$searchKey');
   static Key addItem(String materialNumber) => Key('addItem$materialNumber');
   static const Key addBonus = Key('addBonus');
   static const Key addBonusEmpty = Key('empty');
@@ -85,7 +91,8 @@ class WidgetKeys {
   //============================================================
   static const Key policyConfigurationLoader = Key('LoaderImage');
   static const Key policyConfigSearchBuilder = Key('policyConfigSearchBuilder');
-  static Key policyConfigurationSearch(String searchKey) => Key('policyConfigurationSearch$searchKey');
+  static Key policyConfigurationSearch(String searchKey) =>
+      Key('policyConfigurationSearch$searchKey');
 
   //============================================================
   //  UserRestrictionList page Keys
@@ -93,16 +100,27 @@ class WidgetKeys {
   static const Key userRestrictionListPage = Key('UserRestrictionListPage');
   static const Key userRestrictionListLoader = Key('LoaderImage');
   static const Key userRestrictionList = Key('userRestrictionList');
-  static const Key userRestrictionListSearchField = Key('userRestrictionListSearchField');
-  static Key userRestrictionTile(String userName) => Key('userRestrictionTile-$userName');
+  static const Key userRestrictionListSearchField =
+      Key('userRestrictionListSearchField');
+  static Key userRestrictionTile(String userName) =>
+      Key('userRestrictionTile-$userName');
 
+  //============================================================
+  //  Payment TAB BAR
+  //============================================================
+  static const Key paymentsTabPage = Key('paymentsTabPage');
+  static const Key accountSummaryTab = Key('accountSummaryPage');
+  static const Key paymentsSummaryTab = Key('paymentsSummaryPage');
+  static const Key statementSummaryTab = Key('statementSummaryPage');
 
   //============================================================
   //  SearchBar Keys
   //============================================================
   static const Key clearIconKey = Key('clearIconKey');
-  static const Key clearUserRestrictionListSearch = Key('clearUserRestrictionListSearch');
-  static const Key clearPolicyConfigurationSearch = Key('clearPolicyConfigurationSearch');
+  static const Key clearUserRestrictionListSearch =
+      Key('clearUserRestrictionListSearch');
+  static const Key clearPolicyConfigurationSearch =
+      Key('clearPolicyConfigurationSearch');
   static const Key clearMaterialFilterSearch = Key('clearMaterialFilterSearch');
   static const Key clearMaterialListSearchBar = Key('clearSearch');
   static const Key clearCovidMaterialListSearchBar = Key('clearSearch');

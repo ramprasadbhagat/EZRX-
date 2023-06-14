@@ -1,0 +1,18 @@
+{
+    "data": {
+        "creditLimit": {
+            "results": [
+                {
+                    "partner": "0000101202",
+                    "currency": "MYR",
+                    "creditLimit": "0",
+                    "creditExposure": "-3000",
+                    "creditBalance": "0"
+                }
+            ]
+        }
+    },
+    "extensions": {
+        "trace-id": "2f877c7bdbd0132d5280c99db50f7edc"
+    }
+}

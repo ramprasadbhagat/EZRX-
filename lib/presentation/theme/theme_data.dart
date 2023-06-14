@@ -83,10 +83,13 @@ TabBarTheme _tabBarTheme() {
   return const TabBarTheme(
     labelColor: ZPColors.primary,
     unselectedLabelColor: ZPColors.unselectedLabelColor,
-    indicatorColor: ZPColors.white,
+    indicatorColor: ZPColors.primary,
     indicatorSize: TabBarIndicatorSize.tab,
-    indicator: BoxDecoration(
-      color: ZPColors.white,
+    indicator: UnderlineTabIndicator(
+      borderSide: BorderSide(
+        color: ZPColors.primary,
+        width: 2.0,
+      ),
     ),
   );
 }

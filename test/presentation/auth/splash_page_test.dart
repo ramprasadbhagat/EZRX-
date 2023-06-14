@@ -22,6 +22,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
@@ -73,6 +74,10 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
+
+class AccountSummaryBlocMock
+    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
+    implements AccountSummaryBloc {}
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -168,6 +173,7 @@ void main() {
   late ShipToCodeBloc shipToCodeBLocMock;
   late SalesRepBloc salesRepBlocMock;
   late AupTcBloc aupTcBlocMock;
+  late AccountSummaryBloc accountSummaryMock;
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
@@ -232,6 +238,7 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
+      accountSummaryMock = AccountSummaryBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       shipToCodeBLocMock = ShipToCodeBlocMock();
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
@@ -267,6 +274,8 @@ void main() {
         ),
       );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => accountSummaryMock.state)
+          .thenReturn(AccountSummaryState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -365,6 +374,9 @@ void main() {
                 create: (context) => scanMaterialInfoMockBloc),
             BlocProvider<SettingBloc>(
               create: (context) => settingBlocMock,
+            ),
+            BlocProvider<AccountSummaryBloc>(
+              create: (context) => accountSummaryMock,
             ),
           ],
           child: const SplashPage(),

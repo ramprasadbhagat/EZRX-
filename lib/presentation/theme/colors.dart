@@ -11,6 +11,7 @@ abstract class ZPColors {
   static const Color lightGray = Color.fromRGBO(170, 170, 170, 1.0);
   static const Color extraLightGray = Color.fromRGBO(238, 238, 238, 1.0);
   static const Color shadowColor = Color.fromRGBO(245, 245, 245, 1.0);
+  static const Color skyBlueColor = Color.fromRGBO(68, 131, 219, 1.0);
   static const Color unselectedLabelColor = Color.fromRGBO(167, 180, 187, 1.0);
   static const Color inputBorderColor = Color.fromRGBO(207, 210, 210, 1.0);
   static const Color orange = Color.fromRGBO(231, 165, 70, 1);
@@ -34,6 +35,7 @@ abstract class ZPColors {
   static const Color red = Color.fromRGBO(244, 67, 54, 1);
   static const Color darkerGrey = Color.fromRGBO(101, 101, 101, 1); 
   static const Color lightRed = Color.fromRGBO(251, 208, 208, 1);
+  static const Color unselectedTabColor = Color.fromRGBO(208, 208, 208, 1);
   static const Color lightYellow = Color.fromRGBO(250, 234, 176, 1);
   static const Color systemMessageColor = Color.fromRGBO(240, 248, 230, 1.0);
   static const Color defaultReturnSummaryStatusColor =

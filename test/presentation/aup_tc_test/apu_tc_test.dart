@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -31,6 +32,10 @@ import '../../utils/widget_utils.dart';
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
+
+class AccountSummaryBlocMock
+    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
+    implements AccountSummaryBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -81,6 +86,7 @@ void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
   late AuthBloc authBlocMock;
+  late AccountSummaryBloc accountSummaryMock;
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late MockAupTcBloc mockAupTcBloc;
@@ -100,6 +106,7 @@ void main() {
     mockSalesOrgBloc = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     settingBlocMock = SettingMockBloc();
+    accountSummaryMock = AccountSummaryBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -130,6 +137,8 @@ void main() {
     when(() => userBlocMock.state).thenReturn(UserState.initial());
 
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => accountSummaryMock.state)
+        .thenReturn(AccountSummaryState.initial());
     when(() => settingBlocMock.state).thenReturn(SettingState.initial());
     when(() => paymentCustomerInformationBlocMock.state)
         .thenReturn(PaymentCustomerInformationState.initial());
@@ -242,6 +251,9 @@ void main() {
             ),
             BlocProvider<DeepLinkingBloc>(
               create: (context) => deepLinkingBlocMock,
+            ),
+            BlocProvider<AccountSummaryBloc>(
+              create: (context) => accountSummaryMock,
             ),
           ],
           child: const SplashPage(),

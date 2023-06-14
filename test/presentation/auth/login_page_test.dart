@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -42,6 +43,10 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
+class AccountSummaryBlocMock
+    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
+    implements AccountSummaryBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -79,6 +84,7 @@ void main() {
   late GetIt locator;
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
+  late AccountSummaryBloc accountSummaryMock;
   late AnnouncementBloc announcementBlocMock;
   late DeepLinkingBloc deepLinkingBlocMock;
   final UserBloc userBlocMock = UserBlocMock();
@@ -105,6 +111,7 @@ void main() {
       loginBlocMock = LoginFormBlocMock();
       autoRouterMock = AutoRouterMock();
       authBlocMock = AuthBlocMock();
+      accountSummaryMock = AccountSummaryBlocMock();
       announcementBlocMock = AnnnouncementBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
       deepLinkingBlocMock = DeepLinkingMockBloc();
@@ -112,6 +119,8 @@ void main() {
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => accountSummaryMock.state)
+          .thenReturn(AccountSummaryState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -154,6 +163,9 @@ void main() {
               ),
               BlocProvider<AuthBloc>(
                 create: (context) => authBlocMock,
+              ),
+              BlocProvider<AccountSummaryBloc>(
+                create: (context) => accountSummaryMock,
               ),
             ],
             child: const LoginPage(),
@@ -256,7 +268,10 @@ void main() {
             ),
             BlocProvider<DeepLinkingBloc>(
               create: (context) => deepLinkingBlocMock,
-            )
+            ),
+            BlocProvider<AccountSummaryBloc>(
+              create: (context) => accountSummaryMock,
+            ),
           ],
           child: const SplashPage(),
         ),

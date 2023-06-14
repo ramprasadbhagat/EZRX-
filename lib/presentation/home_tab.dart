@@ -4,11 +4,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/home/home_tab.dart';
-import 'package:ezrxmobile/presentation/more/more_tab.dart';
-import 'package:ezrxmobile/presentation/orders/orders_tab.dart';
-import 'package:ezrxmobile/presentation/payments/payments_tab.dart';
-import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -90,14 +85,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                               builder: (context, child, tabController) =>
                                   Column(
                                 children: [
-                                  Expanded(
-                                    child: TabBarView(
-                                      controller: tabController,
-                                      children: _getTabs(context)
-                                          .map((item) => item.page)
-                                          .toList(),
-                                    ),
-                                  ),
+                                  Expanded(child: child),
                                   SafeArea(
                                     bottom: true,
                                     top: false,
@@ -191,7 +179,6 @@ List<RouteItem> _getTabs(BuildContext context) {
 
 const RouteItem homeTabRouteItem = RouteItem(
   route: HomeTabRoute(),
-  page: HomeTab(),
   icon: Icon(
     Icons.home_outlined,
     key: WidgetKeys.homeTab,
@@ -201,7 +188,6 @@ const RouteItem homeTabRouteItem = RouteItem(
 
 RouteItem productTabRouteItem = const RouteItem(
   route: ProductsTabRoute(),
-  page: ProductsTab(),
   icon: Icon(
     Icons.storefront_outlined,
     key: WidgetKeys.productsTab,
@@ -211,7 +197,6 @@ RouteItem productTabRouteItem = const RouteItem(
 
 const RouteItem ordersTabRouteItem = RouteItem(
   route: OrdersTabRoute(),
-  page: OrdersTab(),
   icon: Icon(
     Icons.article_outlined,
     key: WidgetKeys.ordersTab,
@@ -220,8 +205,13 @@ const RouteItem ordersTabRouteItem = RouteItem(
 );
 
 const RouteItem paymentsTabRouteItem = RouteItem(
-  route: PaymentsTabRoute(),
-  page: PaymentsTab(),
+  route: PaymentsTabRoute(
+    children: [
+      AccountSummaryPageRoute(),
+      PaymentsSummaryPageRoute(),
+      StatementSummaryPageRoute(),
+    ],
+  ),
   icon: Icon(
     Icons.payments_outlined,
     key: WidgetKeys.paymentsTab,
@@ -231,7 +221,6 @@ const RouteItem paymentsTabRouteItem = RouteItem(
 
 const RouteItem moreTabRouteItem = RouteItem(
   route: MoreTabRoute(),
-  page: MoreTab(),
   icon: Icon(
     Icons.reorder_outlined,
     key: WidgetKeys.moreTab,
@@ -241,13 +230,11 @@ const RouteItem moreTabRouteItem = RouteItem(
 
 class RouteItem {
   final PageRouteInfo<dynamic> route;
-  final Widget page;
   final Icon icon;
   final String label;
 
   const RouteItem({
     required this.route,
-    required this.page,
     required this.icon,
     required this.label,
   });
