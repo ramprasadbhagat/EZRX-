@@ -49,6 +49,9 @@ void main() {
   late MixpanelService mixpanelService;
   const rootAdminToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
+  const refreshToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
+
   late MockClevertapService mockClevertapService;
 
   setUpAll(
@@ -354,7 +357,7 @@ void main() {
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
         when(() => remoteDataSourceMock.updateUserTC())
-          .thenAnswer((invocation) async => const SettingTc(acceptTC: true));
+            .thenAnswer((invocation) async => const SettingTc(acceptTC: true));
 
         final result = await repository.updateUserTc();
         expect(result.isRight(), true);
@@ -449,8 +452,8 @@ void main() {
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-        when(() => tokenStorageMock.get())
-            .thenAnswer((invocation) async => JWTDto(access: rootAdminToken));
+        when(() => tokenStorageMock.get()).thenAnswer((invocation) async =>
+            JWTDto(access: rootAdminToken, refresh: refreshToken));
         when(() => remoteDataSourceMock.getUser(userId: '11461'))
             .thenAnswer((invocation) async => User.empty());
 
@@ -490,7 +493,7 @@ void main() {
           mixpanelService: mixpanelService,
         );
         when(() => tokenStorageMock.get())
-            .thenAnswer((invocation) async => JWTDto(access: ''));
+            .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
         when(() => remoteDataSourceMock.getUser(userId: '')).thenThrow(Error());

@@ -11,14 +11,12 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthInterceptor extends Interceptor {
   final TokenStorage tokenStorage;
   final PackageInfoService packageInfoService;
-  final OktaLoginServices oktaLoginServices;
   final Config config;
   final AuthQueryMutation authQueryMutation;
   final PushNotificationService pushNotificationService;
@@ -26,7 +24,6 @@ class AuthInterceptor extends Interceptor {
   AuthInterceptor({
     required this.tokenStorage,
     required this.packageInfoService,
-    required this.oktaLoginServices,
     required this.config,
     required this.authQueryMutation,
     required this.pushNotificationService,
@@ -37,11 +34,14 @@ class AuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     try {
-      final token = await tokenStorage.get();
+      var token = await tokenStorage.get();
       if (token.access.isNotEmpty) {
         final isTokenExpired = token.toDomain().isExpired;
-        final isNotMockflavor = config.appFlavor != Flavor.mock;
-        if (isTokenExpired && isNotMockflavor) await _refreshToken();
+        final isNotMockFlavor = config.appFlavor != Flavor.mock;
+        if (isTokenExpired && isNotMockFlavor) {
+          await _refreshToken();
+          token = await tokenStorage.get();
+        }
         if (options.baseUrl == config.getEZReachUrl) {
           options.headers['Authorization'] = config.eZReachToken;
         } else {
@@ -73,7 +73,7 @@ class AuthInterceptor extends Interceptor {
           response.data['errors'][0]['message'] == 'authentication failed') {
         final newJwt = await _refreshToken();
         if (newJwt != null) {
-          final newResponse = await _retry(response.requestOptions);
+          final newResponse = await _retry(newJwt, response.requestOptions);
 
           return handler.next(newResponse);
         }
@@ -95,42 +95,31 @@ class AuthInterceptor extends Interceptor {
 
   Future<JWTDto?> _refreshToken() async {
     try {
-      // Get okta access token
-      final result = await oktaLoginServices.getAccessToken();
-      final jwt = JWT(result?['message']);
-
-      // Exchange for eZRxJWT with okta access token
+      final token = await tokenStorage.get();
+      final refreshToken = JWT(token.refresh);
       final dio = Dio(
         BaseOptions(
           baseUrl: config.baseUrl,
           method: 'POST',
         ),
       );
-      final response = await dio.request(
-        '${config.urlConstants}license',
+
+      final accessTokenResponse = await dio.request(
+        '${config.urlConstants}regenerateToken',
         data: jsonEncode(
           {
-            'query': authQueryMutation.getLoginQuery(),
+            'query': authQueryMutation.getAccessToken(),
             'variables': {
-              'input': {
-                'isOktaAuthenticated': true,
-                'accessToken': jwt.getOrCrash(),
-                'mobileToken': {
-                  'mobileTokens': [
-                    {
-                      'token': await pushNotificationService.getFCMToken(),
-                      'provider': 'firebase',
-                    },
-                  ],
-                },
-              },
+              'eZRxRefreshToken': refreshToken.getOrDefaultValue(''),
             },
           },
         ),
       );
-      final login =
-          LoginDto.fromJson(response.data['data']['loginV4']).toDomain();
-      final newJwt = JWTDto.fromDomain(login.jwt);
+      final jwt =
+          LoginDto.fromJson(accessTokenResponse.data['data']['getAccessToken'])
+              .toDomain();
+
+      final newJwt = JWTDto.fromDomain(jwt.access, jwt.refresh);
       await tokenStorage.set(newJwt);
 
       return newJwt;
@@ -141,7 +130,10 @@ class AuthInterceptor extends Interceptor {
     }
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
+  Future<Response<dynamic>> _retry(
+    JWTDto jwt,
+    RequestOptions requestOptions,
+  ) async {
     final dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl,
@@ -151,9 +143,8 @@ class AuthInterceptor extends Interceptor {
       ),
     );
 
-    final token = await tokenStorage.get();
-    if (token.access.isNotEmpty) {
-      requestOptions.headers['Authorization'] = 'Bearer V2 ${token.access}1';
+    if (jwt.access.isNotEmpty) {
+      requestOptions.headers['Authorization'] = 'Bearer V2 ${jwt.access}';
     }
 
     return dio.request(

@@ -58,7 +58,7 @@ class ProxyLoginFormBloc
               final isEligibleProxyLoginFailureOrSuccess =
                   await authRepository.isEligibleProxyLogin(
                 user: e.user,
-                jwt: login.jwt,
+                jwt: login.access,
               );
 
               await isEligibleProxyLoginFailureOrSuccess.fold(
@@ -74,7 +74,10 @@ class ProxyLoginFormBloc
                 },
                 (success) async {
                   await authRepository.logout();
-                  await authRepository.storeJWT(jwt: login.jwt);
+                  await authRepository.storeJWT(
+                    access: login.access,
+                    refresh: login.refresh,
+                  );
                   emit(
                     state.copyWith(
                       username: Username(''),

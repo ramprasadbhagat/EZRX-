@@ -17,6 +17,7 @@ final locator = GetIt.instance;
 void main() {
   final AuthRepository authRepoMock = AuthRepoMock();
   final fakeJWT = JWT('fake-success');
+  final fakeRefresh = JWT('fake-refresh');
   group('Auth Bloc ', () {
     setUpAll(() {
       locator.registerLazySingleton(() => LocalAuthentication());
@@ -33,7 +34,9 @@ void main() {
             (invocation) async => const Left(ApiFailure.other('fake-error')));
         when(() => authRepoMock.tokenValid()).thenAnswer(
             (invocation) async => const Left(ApiFailure.tokenExpired()));
-        when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
+        when(() => authRepoMock.getRefreshToken()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.getAccessToken(fakeRefresh)).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')));
       },
       act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
@@ -141,7 +144,7 @@ void main() {
         const AuthState.authenticated(),
       ],
     );
-    blocTest('Unauthenticated On Okta Token Test',
+    blocTest('Unauthenticated On Refresh Token Test',
         build: () => AuthBloc(authRepository: authRepoMock),
         setUp: () {
           when(() => authRepoMock.initTokenStorage()).thenAnswer(
@@ -152,7 +155,7 @@ void main() {
               (invocation) async => const Left(ApiFailure.other('fake-error')));
           when(() => authRepoMock.tokenValid()).thenAnswer(
               (invocation) async => const Left(ApiFailure.tokenExpired()));
-          when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
+          when(() => authRepoMock.getRefreshToken()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('fake-error')));
         },
         act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
@@ -170,11 +173,13 @@ void main() {
               .thenAnswer((invocation) async => const Right(unit));
           when(() => authRepoMock.tokenValid()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('Error')));
-          when(() => authRepoMock.getOktaAccessToken())
-              .thenAnswer((invocation) async => Right(JWT('token')));
-          when(() => authRepoMock.getEZRXJWT(JWT('token'))).thenAnswer(
-              (invocation) async => Right(Login(jwt: JWT('token'))));
-          when(() => authRepoMock.storeJWT(jwt: JWT('token')))
+          when(() => authRepoMock.getRefreshToken())
+              .thenAnswer((invocation) async => Right(JWT('refresh')));
+          when(() => authRepoMock.getAccessToken(JWT('refresh'))).thenAnswer(
+              (invocation) async =>
+                  Right(Login(access: JWT('token'), refresh: JWT('refresh'))));
+          when(() => authRepoMock.storeJWT(
+                  access: JWT('token'), refresh: JWT('refresh')))
               .thenAnswer((invocation) async => const Right(unit));
           when(() => authRepoMock.isBiometricEnabled())
               .thenReturn(const Left(ApiFailure.other('Error')));
@@ -194,9 +199,9 @@ void main() {
               (invocation) async => const Left(ApiFailure.other('fake-error')));
           when(() => authRepoMock.tokenValid()).thenAnswer(
               (invocation) async => const Left(ApiFailure.tokenExpired()));
-          when(() => authRepoMock.getOktaAccessToken())
-              .thenAnswer((invocation) async => Right(fakeJWT));
-          when(() => authRepoMock.getEZRXJWT(fakeJWT)).thenAnswer(
+          when(() => authRepoMock.getRefreshToken())
+              .thenAnswer((invocation) async => Right(fakeRefresh));
+          when(() => authRepoMock.getAccessToken(fakeRefresh)).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('fake-error')));
         },
         act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
@@ -212,11 +217,13 @@ void main() {
               (invocation) async => const Left(ApiFailure.other('fake-error')));
           when(() => authRepoMock.tokenValid()).thenAnswer(
               (invocation) async => const Left(ApiFailure.tokenExpired()));
-          when(() => authRepoMock.getOktaAccessToken())
-              .thenAnswer((invocation) async => Right(fakeJWT));
-          when(() => authRepoMock.getEZRXJWT(fakeJWT))
-              .thenAnswer((invocation) async => Right(Login(jwt: fakeJWT)));
-          when(() => authRepoMock.storeJWT(jwt: fakeJWT))
+          when(() => authRepoMock.getRefreshToken())
+              .thenAnswer((invocation) async => Right(fakeRefresh));
+          when(() => authRepoMock.getAccessToken(fakeRefresh)).thenAnswer(
+              (invocation) async =>
+                  Right(Login(access: fakeJWT, refresh: fakeRefresh)));
+          when(() =>
+                  authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
               .thenAnswer((invocation) async => const Right(unit));
           when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
               .thenAnswer((invocation) async => const Right(true));

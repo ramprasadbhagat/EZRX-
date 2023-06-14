@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -38,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       authCheck: (e) async {
         final result = await authRepository.tokenValid();
         await result.fold(
-          (invalid) async => add(const AuthEvent.refreshOktaToken()),
+          (invalid) async => add(const AuthEvent.refreshEZRXToken()),
           (valid) async {
             final isBiometricEnabledResult =
                 authRepository.isBiometricEnabled();
@@ -58,24 +57,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await oktaResult.fold(
           (failure) async => emit(const AuthState.unauthenticated()),
           (oktaAccessToken) async => add(
-            AuthEvent.refreshEZRXToken(oktaAccessToken),
+            const AuthEvent.refreshEZRXToken(),
           ),
         );
       },
       refreshEZRXToken: (e) async {
-        final ezrxResult = await authRepository.getEZRXJWT(e.oktaAccessToken);
-        await ezrxResult.fold(
+        final refreshResult = await authRepository.getRefreshToken();
+        await refreshResult.fold(
           (failure) async => emit(const AuthState.unauthenticated()),
-          (login) async {
-            await authRepository.storeJWT(jwt: login.jwt);
-            final isBiometricEnabledResult =
-                authRepository.isBiometricEnabled();
-            await isBiometricEnabledResult.fold(
-              (error) async => emit(const AuthState.authenticated()),
-              (isEnable) async {
-                isEnable
-                    ? add(const AuthEvent.bioCheck())
-                    : emit(const AuthState.authenticated());
+          (refreshToken) async {
+            final ezrxResult =
+                await authRepository.getAccessToken(refreshToken);
+            await ezrxResult.fold(
+              (failure) async => emit(const AuthState.unauthenticated()),
+              (login) async {
+                await authRepository.storeJWT(
+                  access: login.access,
+                  refresh: login.refresh,
+                );
+                final isBiometricEnabledResult =
+                    authRepository.isBiometricEnabled();
+                await isBiometricEnabledResult.fold(
+                  (error) async => emit(const AuthState.authenticated()),
+                  (isEnable) async {
+                    isEnable
+                        ? add(const AuthEvent.bioCheck())
+                        : emit(const AuthState.authenticated());
+                  },
+                );
               },
             );
           },

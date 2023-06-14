@@ -22,7 +22,7 @@ mixin _$AuthEvent {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -34,7 +34,7 @@ mixin _$AuthEvent {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -46,7 +46,7 @@ mixin _$AuthEvent {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -152,7 +152,7 @@ class _$_AuthInit implements _AuthInit {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -167,7 +167,7 @@ class _$_AuthInit implements _AuthInit {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -182,7 +182,7 @@ class _$_AuthInit implements _AuthInit {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -291,7 +291,7 @@ class _$_BioCheck implements _BioCheck {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -306,7 +306,7 @@ class _$_BioCheck implements _BioCheck {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -321,7 +321,7 @@ class _$_BioCheck implements _BioCheck {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -430,7 +430,7 @@ class _$_AuthCheck implements _AuthCheck {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -445,7 +445,7 @@ class _$_AuthCheck implements _AuthCheck {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -460,7 +460,7 @@ class _$_AuthCheck implements _AuthCheck {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -569,7 +569,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -584,7 +584,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -599,7 +599,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -671,8 +671,6 @@ abstract class _$$_RefreshEZRXTokenCopyWith<$Res> {
   factory _$$_RefreshEZRXTokenCopyWith(
           _$_RefreshEZRXToken value, $Res Function(_$_RefreshEZRXToken) then) =
       __$$_RefreshEZRXTokenCopyWithImpl<$Res>;
-  @useResult
-  $Res call({JWT oktaAccessToken});
 }
 
 /// @nodoc
@@ -682,51 +680,26 @@ class __$$_RefreshEZRXTokenCopyWithImpl<$Res>
   __$$_RefreshEZRXTokenCopyWithImpl(
       _$_RefreshEZRXToken _value, $Res Function(_$_RefreshEZRXToken) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? oktaAccessToken = null,
-  }) {
-    return _then(_$_RefreshEZRXToken(
-      null == oktaAccessToken
-          ? _value.oktaAccessToken
-          : oktaAccessToken // ignore: cast_nullable_to_non_nullable
-              as JWT,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_RefreshEZRXToken implements _RefreshEZRXToken {
-  const _$_RefreshEZRXToken(this.oktaAccessToken);
-
-  @override
-  final JWT oktaAccessToken;
+  const _$_RefreshEZRXToken();
 
   @override
   String toString() {
-    return 'AuthEvent.refreshEZRXToken(oktaAccessToken: $oktaAccessToken)';
+    return 'AuthEvent.refreshEZRXToken()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RefreshEZRXToken &&
-            (identical(other.oktaAccessToken, oktaAccessToken) ||
-                other.oktaAccessToken == oktaAccessToken));
+        (other.runtimeType == runtimeType && other is _$_RefreshEZRXToken);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, oktaAccessToken);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RefreshEZRXTokenCopyWith<_$_RefreshEZRXToken> get copyWith =>
-      __$$_RefreshEZRXTokenCopyWithImpl<_$_RefreshEZRXToken>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -735,12 +708,12 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
   }) {
-    return refreshEZRXToken(oktaAccessToken);
+    return refreshEZRXToken();
   }
 
   @override
@@ -750,12 +723,12 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
   }) {
-    return refreshEZRXToken?.call(oktaAccessToken);
+    return refreshEZRXToken?.call();
   }
 
   @override
@@ -765,14 +738,14 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (refreshEZRXToken != null) {
-      return refreshEZRXToken(oktaAccessToken);
+      return refreshEZRXToken();
     }
     return orElse();
   }
@@ -829,13 +802,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
 }
 
 abstract class _RefreshEZRXToken implements AuthEvent {
-  const factory _RefreshEZRXToken(final JWT oktaAccessToken) =
-      _$_RefreshEZRXToken;
-
-  JWT get oktaAccessToken;
-  @JsonKey(ignore: true)
-  _$$_RefreshEZRXTokenCopyWith<_$_RefreshEZRXToken> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _RefreshEZRXToken() = _$_RefreshEZRXToken;
 }
 
 /// @nodoc
@@ -878,7 +845,7 @@ class _$_Logout implements _Logout {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -893,7 +860,7 @@ class _$_Logout implements _Logout {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -908,7 +875,7 @@ class _$_Logout implements _Logout {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -1018,7 +985,7 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -1033,7 +1000,7 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -1048,7 +1015,7 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,
@@ -1157,7 +1124,7 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
-    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
     required TResult Function() visitedAppSettings,
@@ -1172,7 +1139,7 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
     TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
     TResult? Function()? visitedAppSettings,
@@ -1187,7 +1154,7 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
-    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
     TResult Function()? visitedAppSettings,

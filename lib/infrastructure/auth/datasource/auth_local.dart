@@ -33,4 +33,14 @@ class AuthLocalDataSource {
 
     return LoginDto.fromJson(data['data']['proxyLoginV4']).toDomain();
   }
+
+  Future<Login> getAccessToken({
+    required String refreshToken,
+  }) async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getAccessToken.json'),
+    );
+
+    return LoginDto.fromJson(data['data']['getAccessToken']).toDomain();
+  }
 }

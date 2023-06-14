@@ -18,15 +18,18 @@ class JWTDtoAdapter extends TypeAdapter<JWTDto> {
     };
     return JWTDto(
       access: fields[0] as String,
+      refresh: fields[1] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, JWTDto obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.access);
+      ..write(obj.access)
+      ..writeByte(1)
+      ..write(obj.refresh);
   }
 
   @override

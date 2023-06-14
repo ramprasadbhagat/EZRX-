@@ -81,6 +81,8 @@ void main() {
 
   const rootAdminToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
+  const refreshToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
   final fakeJWT = JWT(rootAdminToken);
 
   setUpAll(
@@ -120,7 +122,8 @@ void main() {
         () => tokenStorageMock.clear(),
       ).thenAnswer((invocation) async => null);
       when(
-        () => tokenStorageMock.set(JWTDto.fromDomain(JWT(rootAdminToken))),
+        () => tokenStorageMock
+            .set(JWTDto.fromDomain(JWT(rootAdminToken), JWT(refreshToken))),
       ).thenAnswer((invocation) async => null);
       when(
         () => oktaLoginServicesMock.logout(),
@@ -575,7 +578,7 @@ void main() {
           pushNotificationService: pushNotificationServiceMock,
         );
         when(() => tokenStorageMock.get())
-            .thenAnswer((invocation) async => JWTDto(access: ''));
+            .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
         when(() => tokenStorageMock.init());
@@ -670,7 +673,8 @@ void main() {
 
         await repository.tokenValid();
 
-        await repository.storeJWT(jwt: JWT(rootAdminToken));
+        await repository.storeJWT(
+            access: JWT(rootAdminToken), refresh: JWT(refreshToken));
         verify(
           () => tokenStorageMock.get(),
         ).called(1);

@@ -17,6 +17,7 @@ void main() {
   final AuthRepository authRepoMock = AuthRepoMock();
   final fakeUserName = Username('fake-proxy_user');
   final fakeJWT = JWT('fake-porxy_success');
+  final fakeRefresh = JWT('');
   final fakeUser = User.empty().copyWith(
       username: Username('fake-user'),
       role: Role.empty().copyWith(type: RoleType('root_admin')));
@@ -121,7 +122,8 @@ void main() {
         );
 
         when(() => authRepoMock.proxyLogin(username: fakeUserName)).thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
         when(() => authRepoMock.isEligibleProxyLogin(
@@ -135,7 +137,8 @@ void main() {
           (invocation) async => const Right(unit),
         );
 
-        when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
+        when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
+            .thenAnswer(
           (invocation) async => const Right(unit),
         );
       },
@@ -169,7 +172,8 @@ void main() {
         );
 
         when(() => authRepoMock.proxyLogin(username: fakeUserName)).thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
         when(() => authRepoMock.isEligibleProxyLogin(
@@ -219,7 +223,8 @@ void main() {
         );
 
         when(() => authRepoMock.proxyLogin(username: fakeUserName)).thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
         when(() => authRepoMock.isEligibleProxyLogin(
@@ -268,7 +273,8 @@ void main() {
         );
 
         when(() => authRepoMock.proxyLogin(username: fakeUserName)).thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
         when(() => authRepoMock.isEligibleProxyLogin(
@@ -286,7 +292,8 @@ void main() {
           (invocation) async => const Right(unit),
         );
 
-        when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
+        when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
+            .thenAnswer(
           (invocation) async => const Right(unit),
         );
       },
@@ -326,7 +333,8 @@ void main() {
         );
 
         when(() => authRepoMock.proxyLogin(username: fakeUserName)).thenAnswer(
-          (invocation) async => Right(Login(jwt: JWT('fake-JWT-client'))),
+          (invocation) async => Right(
+              Login(access: JWT('fake-JWT-client'), refresh: fakeRefresh)),
         );
 
         when(() => authRepoMock.isEligibleProxyLogin(

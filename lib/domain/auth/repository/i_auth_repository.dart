@@ -12,7 +12,12 @@ abstract class IAuthRepository {
     // required String fcmToken, // not a good design fcm will expired
   });
   Future<Either<ApiFailure, Login>> getEZRXJWT(JWT oktaAccessToken);
-  Future<Either<ApiFailure, Unit>> storeJWT({required JWT jwt});
+  Future<Either<ApiFailure, Login>> getAccessToken(JWT refreshToken);
+  Future<Either<ApiFailure, Unit>> storeJWT({
+    required JWT access,
+    required JWT refresh,
+  });
+  Future<Either<ApiFailure, JWT>> getRefreshToken();
   Future<Either<ApiFailure, Unit>> initTokenStorage();
   Future<Either<ApiFailure, Unit>> initOkta();
   Future<Either<ApiFailure, Unit>> tokenValid();
@@ -40,5 +45,4 @@ abstract class IAuthRepository {
 
   Future<Either<ApiFailure, bool>> canShowBiometricToggle();
   Future<Either<ApiFailure, bool>> checkBiometricPermission();
-
 }

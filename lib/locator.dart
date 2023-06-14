@@ -402,7 +402,6 @@ void setupLocator() {
     () => AuthInterceptor(
       tokenStorage: locator<TokenStorage>(),
       packageInfoService: locator<PackageInfoService>(),
-      oktaLoginServices: locator<OktaLoginServices>(),
       config: locator<Config>(),
       authQueryMutation: locator<AuthQueryMutation>(),
       pushNotificationService: locator<PushNotificationService>(),

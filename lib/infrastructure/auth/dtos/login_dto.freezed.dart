@@ -20,8 +20,10 @@ LoginDto _$LoginDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginDto {
-  @JsonKey(name: 'eZRxJWT')
+  @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
   String get access => throw _privateConstructorUsedError;
+  @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+  String get refresh => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,11 @@ abstract class $LoginDtoCopyWith<$Res> {
   factory $LoginDtoCopyWith(LoginDto value, $Res Function(LoginDto) then) =
       _$LoginDtoCopyWithImpl<$Res, LoginDto>;
   @useResult
-  $Res call({@JsonKey(name: 'eZRxJWT') String access});
+  $Res call(
+      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+          String access,
+      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+          String refresh});
 }
 
 /// @nodoc
@@ -51,11 +57,16 @@ class _$LoginDtoCopyWithImpl<$Res, $Val extends LoginDto>
   @override
   $Res call({
     Object? access = null,
+    Object? refresh = null,
   }) {
     return _then(_value.copyWith(
       access: null == access
           ? _value.access
           : access // ignore: cast_nullable_to_non_nullable
+              as String,
+      refresh: null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -68,7 +79,11 @@ abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
       __$$_LoginDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'eZRxJWT') String access});
+  $Res call(
+      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+          String access,
+      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+          String refresh});
 }
 
 /// @nodoc
@@ -83,11 +98,16 @@ class __$$_LoginDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? access = null,
+    Object? refresh = null,
   }) {
     return _then(_$_LoginDto(
       access: null == access
           ? _value.access
           : access // ignore: cast_nullable_to_non_nullable
+              as String,
+      refresh: null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -96,19 +116,26 @@ class __$$_LoginDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_LoginDto extends _LoginDto {
-  const _$_LoginDto({@JsonKey(name: 'eZRxJWT') required this.access})
+  const _$_LoginDto(
+      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+          required this.access,
+      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+          required this.refresh})
       : super._();
 
   factory _$_LoginDto.fromJson(Map<String, dynamic> json) =>
       _$$_LoginDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'eZRxJWT')
+  @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
   final String access;
+  @override
+  @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+  final String refresh;
 
   @override
   String toString() {
-    return 'LoginDto(access: $access)';
+    return 'LoginDto(access: $access, refresh: $refresh)';
   }
 
   @override
@@ -116,12 +143,13 @@ class _$_LoginDto extends _LoginDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginDto &&
-            (identical(other.access, access) || other.access == access));
+            (identical(other.access, access) || other.access == access) &&
+            (identical(other.refresh, refresh) || other.refresh == refresh));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, access);
+  int get hashCode => Object.hash(runtimeType, access, refresh);
 
   @JsonKey(ignore: true)
   @override
@@ -139,14 +167,20 @@ class _$_LoginDto extends _LoginDto {
 
 abstract class _LoginDto extends LoginDto {
   const factory _LoginDto(
-      {@JsonKey(name: 'eZRxJWT') required final String access}) = _$_LoginDto;
+      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+          required final String access,
+      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+          required final String refresh}) = _$_LoginDto;
   const _LoginDto._() : super._();
 
   factory _LoginDto.fromJson(Map<String, dynamic> json) = _$_LoginDto.fromJson;
 
   @override
-  @JsonKey(name: 'eZRxJWT')
+  @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
   String get access;
+  @override
+  @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+  String get refresh;
   @override
   @JsonKey(ignore: true)
   _$$_LoginDtoCopyWith<_$_LoginDto> get copyWith =>

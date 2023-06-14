@@ -110,6 +110,29 @@ class AuthRemoteDataSource {
     });
   }
 
+  Future<Login> getAccessToken({
+    required String refreshToken,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}regenerateToken',
+        data: jsonEncode(
+          {
+            'query': authQueryMutation.getAccessToken(),
+            'variables': {
+              'eZRxRefreshToken': refreshToken,
+            },
+          },
+        ),
+      );
+
+      _authExceptionChecker(res: res, jsonKey: 'getAccessToken');
+
+      return LoginDto.fromJson(res.data['data']['getAccessToken']).toDomain();
+    });
+  }
+
   void _authExceptionChecker({
     required Response<dynamic> res,
     required String jsonKey,

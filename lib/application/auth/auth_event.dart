@@ -6,12 +6,8 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.bioCheck() = _BioCheck;
   const factory AuthEvent.authCheck() = _AuthCheck;
   const factory AuthEvent.refreshOktaToken() = _RefreshOktaToken;
-  const factory AuthEvent.refreshEZRXToken(JWT oktaAccessToken) =
-      _RefreshEZRXToken;
+  const factory AuthEvent.refreshEZRXToken() = _RefreshEZRXToken;
   const factory AuthEvent.logout() = _Logout;
-  const factory AuthEvent.checkIfBiometricDenied() =
-      _CheckIfBiometricDenied;
-  const factory AuthEvent.visitedAppSettings() =
-      _ToggleAppSettings;
-
+  const factory AuthEvent.checkIfBiometricDenied() = _CheckIfBiometricDenied;
+  const factory AuthEvent.visitedAppSettings() = _ToggleAppSettings;
 }

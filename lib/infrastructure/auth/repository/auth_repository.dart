@@ -196,9 +196,12 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Unit>> storeJWT({required JWT jwt}) async {
+  Future<Either<ApiFailure, Unit>> storeJWT({
+    required JWT access,
+    required JWT refresh,
+  }) async {
     try {
-      await tokenStorage.set(JWTDto.fromDomain(jwt));
+      await tokenStorage.set(JWTDto.fromDomain(access, refresh));
 
       return const Right(unit);
     } catch (e) {
@@ -225,6 +228,17 @@ class AuthRepository implements IAuthRepository {
       return token.toDomain().isExpired && config.appFlavor != Flavor.mock
           ? const Left(ApiFailure.tokenExpired())
           : const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, JWT>> getRefreshToken() async {
+    try {
+      final token = await tokenStorage.get();
+
+      return Right(JWT(token.refresh));
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -417,8 +431,7 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
-  
-@override
+  @override
   Future<Either<ApiFailure, bool>> checkBiometricPermission() async {
     try {
       if (kIsWeb) {
@@ -474,6 +487,30 @@ class AuthRepository implements IAuthRepository {
 
       return const Right(unit);
     } on PlatformException catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Login>> getAccessToken(JWT refreshToken) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final login = await localDataSource.getAccessToken(
+          refreshToken: refreshToken.getOrDefaultValue(''),
+        );
+
+        return Right(login);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final login = await remoteDataSource.getAccessToken(
+        refreshToken: refreshToken.getOrDefaultValue(''),
+      );
+
+      return Right(login);
+    } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
   }

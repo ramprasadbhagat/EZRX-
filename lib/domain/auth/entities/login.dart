@@ -7,8 +7,7 @@ part 'login.freezed.dart';
 class Login with _$Login {
   const Login._();
 
-  const factory Login({required JWT jwt}) = _Login;
-  // TODO: cover refresh token
+  const factory Login({required JWT access, required JWT refresh}) = _Login;
 
-  factory Login.empty() => Login(jwt: JWT(''));
+  factory Login.empty() => Login(access: JWT(''), refresh: JWT(''));
 }

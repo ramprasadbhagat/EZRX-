@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Login {
-  JWT get jwt => throw _privateConstructorUsedError;
+  JWT get access => throw _privateConstructorUsedError;
+  JWT get refresh => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginCopyWith<Login> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +28,7 @@ abstract class $LoginCopyWith<$Res> {
   factory $LoginCopyWith(Login value, $Res Function(Login) then) =
       _$LoginCopyWithImpl<$Res, Login>;
   @useResult
-  $Res call({JWT jwt});
+  $Res call({JWT access, JWT refresh});
 }
 
 /// @nodoc
@@ -43,12 +44,17 @@ class _$LoginCopyWithImpl<$Res, $Val extends Login>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jwt = null,
+    Object? access = null,
+    Object? refresh = null,
   }) {
     return _then(_value.copyWith(
-      jwt: null == jwt
-          ? _value.jwt
-          : jwt // ignore: cast_nullable_to_non_nullable
+      access: null == access
+          ? _value.access
+          : access // ignore: cast_nullable_to_non_nullable
+              as JWT,
+      refresh: null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
               as JWT,
     ) as $Val);
   }
@@ -60,7 +66,7 @@ abstract class _$$_LoginCopyWith<$Res> implements $LoginCopyWith<$Res> {
       __$$_LoginCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({JWT jwt});
+  $Res call({JWT access, JWT refresh});
 }
 
 /// @nodoc
@@ -72,12 +78,17 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jwt = null,
+    Object? access = null,
+    Object? refresh = null,
   }) {
     return _then(_$_Login(
-      jwt: null == jwt
-          ? _value.jwt
-          : jwt // ignore: cast_nullable_to_non_nullable
+      access: null == access
+          ? _value.access
+          : access // ignore: cast_nullable_to_non_nullable
+              as JWT,
+      refresh: null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
               as JWT,
     ));
   }
@@ -86,14 +97,16 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
 /// @nodoc
 
 class _$_Login extends _Login {
-  const _$_Login({required this.jwt}) : super._();
+  const _$_Login({required this.access, required this.refresh}) : super._();
 
   @override
-  final JWT jwt;
+  final JWT access;
+  @override
+  final JWT refresh;
 
   @override
   String toString() {
-    return 'Login(jwt: $jwt)';
+    return 'Login(access: $access, refresh: $refresh)';
   }
 
   @override
@@ -101,11 +114,12 @@ class _$_Login extends _Login {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Login &&
-            (identical(other.jwt, jwt) || other.jwt == jwt));
+            (identical(other.access, access) || other.access == access) &&
+            (identical(other.refresh, refresh) || other.refresh == refresh));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, jwt);
+  int get hashCode => Object.hash(runtimeType, access, refresh);
 
   @JsonKey(ignore: true)
   @override
@@ -115,11 +129,14 @@ class _$_Login extends _Login {
 }
 
 abstract class _Login extends Login {
-  const factory _Login({required final JWT jwt}) = _$_Login;
+  const factory _Login(
+      {required final JWT access, required final JWT refresh}) = _$_Login;
   const _Login._() : super._();
 
   @override
-  JWT get jwt;
+  JWT get access;
+  @override
+  JWT get refresh;
   @override
   @JsonKey(ignore: true)
   _$$_LoginCopyWith<_$_Login> get copyWith =>

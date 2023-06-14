@@ -215,7 +215,8 @@ void main() {
       final expectedStates = [
         LoginFormState.initial().copyWith(
           authFailureOrSuccessOption: optionOf(
-            Right(Login(jwt: JWT('fake-success'))),
+            Right(Login(
+                access: JWT('fake-success'), refresh: JWT('fake-refresh'))),
           ),
         ),
       ];

@@ -147,11 +147,23 @@ class AuthQueryMutation {
     ''';
   }
 
+  String getAccessToken() {
+    return '''
+      query getAccessToken(\$eZRxRefreshToken: String!) {
+        getAccessToken(request: {eZRxRefreshToken: \$eZRxRefreshToken}) {
+          eZRxAccessToken
+          eZRxRefreshToken
+          message
+          __typename
+          }
+        }
+        ''';
+  }
+
   String requestResetPassword(String userName, String language) {
     return '''
         mutation requestResetPasswordLink {
             requestResetPassword(username: "$userName", language: "$language")
-          
         }
     ''';
   }

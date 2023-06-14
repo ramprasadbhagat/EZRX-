@@ -35,7 +35,7 @@ class TokenStorage {
     try {
       return await _encryptedBox.get(
         _tokenKey,
-        defaultValue: JWTDto(access: ''),
+        defaultValue: JWTDto(access: '', refresh: ''),
       );
     } catch (e) {
       throw CacheException(message: e.toString());

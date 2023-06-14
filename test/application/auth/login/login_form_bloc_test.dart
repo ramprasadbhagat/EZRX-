@@ -18,6 +18,7 @@ void main() {
   final fakeUser = Username('fake-user');
   final fakePassword = Password.login('fake-password');
   final fakeJWT = JWT('fake-success');
+  final fakeRefresh = JWT('fake-refresh');
   const fakeOktaToken = 'fake-okta-token';
   late Login loginMockData;
   late Login loginWithOktaMockData;
@@ -361,10 +362,12 @@ void main() {
         when(() =>
                 authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
-        when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
+        when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
+            .thenAnswer(
           (invocation) async => const Right(unit),
         );
 
@@ -389,7 +392,7 @@ void main() {
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
-            Right(Login(jwt: fakeJWT)),
+            Right(Login(access: fakeJWT, refresh: fakeRefresh)),
           ),
         ),
       ],
@@ -420,7 +423,8 @@ void main() {
 
         when(
           () => authRepoMock.storeJWT(
-            jwt: loginMockData.jwt,
+            access: loginMockData.access,
+            refresh: loginMockData.refresh,
           ),
         ).thenAnswer(
           (invocation) async => const Right(unit),
@@ -449,7 +453,8 @@ void main() {
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
-            Right(Login(jwt: loginMockData.jwt)),
+            Right(Login(
+                access: loginMockData.access, refresh: loginMockData.refresh)),
           ),
         ),
       ],
@@ -469,10 +474,12 @@ void main() {
         when(() =>
                 authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
-        when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
+        when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
+            .thenAnswer(
           (invocation) async => const Right(unit),
         );
 
@@ -510,7 +517,7 @@ void main() {
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
-            Right(Login(jwt: fakeJWT)),
+            Right(Login(access: fakeJWT, refresh: fakeRefresh)),
           ),
         ),
       ],
@@ -529,7 +536,8 @@ void main() {
 
         when(() => authRepoMock.login(
             username: Username(''), password: fakePassword)).thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+          (invocation) async =>
+              Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
       },
       act: (LoginFormBloc bloc) =>

@@ -34,13 +34,15 @@ void main() {
   setUpAll(() async {
     const rootAdminToken =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsIkNSRUFURURfQVQiOjE2ODYxMTE2ODcsImV4cCI6MTY4NjExNTI4NywiaWF0IjoxNjg2MTExNjg3LCJpZCI6Mzg2MCwicmlnaHRzIjpbeyJ2YWx1ZSI6W3siY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyMDAxIiwic2hpcFRvQ29kZSI6WyJhbGwiXX1dfV0sInJvbGUiOiJST09UIEFkbWluIiwic2FsZXNPcmdzIjpbIjIwMDEiXSwidXNlcm5hbWUiOiJyb290YWRtaW4ifQ.StCC3ABQsxfsnKud8SL74AV_hHQGqKhf8IoH_9pYGcM';
+    const refreshToken =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
     //final fakeJWT = JWT(rootAdminToken);
     config = Config()..appFlavor = Flavor.mock;
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
     tokenStorage = MockTokenStorage();
-    when(() => tokenStorage.get())
-        .thenAnswer((invocation) async => JWTDto(access: rootAdminToken));
+    when(() => tokenStorage.get()).thenAnswer((invocation) async =>
+        JWTDto(access: rootAdminToken, refresh: refreshToken));
     user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
     await UserLocalDataSource(tokenStorage: tokenStorage)
         .updateUserNotificationAndLanguagePreference();
@@ -57,7 +59,7 @@ void main() {
         salesOrganisation = user.userSalesOrganisations.first
             .copyWith(salesOrg: SalesOrg('2500'));
         when(() => MockTokenStorage().get())
-            .thenAnswer((invocation) async => JWTDto(access: ''));
+            .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
         user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
       });
 

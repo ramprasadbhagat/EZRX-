@@ -80,7 +80,10 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ));
             },
             (login) async {
-              await authRepository.storeJWT(jwt: login.jwt);
+              await authRepository.storeJWT(
+                access: login.access,
+                refresh: login.refresh,
+              );
               if (state.rememberPassword) {
                 await authRepository.storeCredential(
                   username: state.username,
