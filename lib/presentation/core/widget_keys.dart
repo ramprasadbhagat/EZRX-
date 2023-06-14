@@ -139,4 +139,9 @@ class WidgetKeys {
   static const Key visibilityDetector = Key('visibilityDetector');
 
   static const Key homeBanner = Key('homeBanner');
+
+  //============================================================
+  //  Presentation/core Keys
+  //============================================================
+  static const Key staticHtmlViewer = Key('staticHtmlViewer');
 }

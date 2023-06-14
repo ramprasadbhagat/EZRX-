@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/more/more_tile_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -7,7 +9,6 @@ import 'package:easy_localization/easy_localization.dart';
 
 class HelpAndSupportTile extends StatelessWidget {
   HelpAndSupportTile({Key? key}) : super(key: key);
-
   final List<MoreDetailsTile> moreHelpAndSupportTiles = [
     const MoreDetailsTile(
       icon: Icon(
@@ -41,13 +42,16 @@ class HelpAndSupportTile extends StatelessWidget {
       label: 'Chart support',
       route: null,
     ),
-    const MoreDetailsTile(
-      icon: Icon(
+     MoreDetailsTile(
+      icon: const Icon(
         Icons.feed_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'Terms of use',
-      route: AupTCDialogRoute(),
+      route: StaticHtmlViewerRoute(
+        title: 'Terms of Use',
+        htmlPath: locator<Config>().staticTermsOfUseFile,
+      ),
     ),
     MoreDetailsTile(
       icon: const Icon(
@@ -55,7 +59,10 @@ class HelpAndSupportTile extends StatelessWidget {
         color: ZPColors.greenIconColor,
       ),
       label: 'Privacy policy',
-      route: WebViewPageRoute(),
+      route: StaticHtmlViewerRoute(
+        title: 'Privacy policy',
+        htmlPath: locator<Config>().staticPrivacyPolicyFile,
+      ),
     ),
   ];
 

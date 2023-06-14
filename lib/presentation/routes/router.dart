@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_ad
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
+import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
@@ -121,6 +122,10 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
     AutoRoute(
       path: 'web_view',
       page: WebViewPage,
+    ),
+    AutoRoute(
+      path: 'static_html_viewer',
+      page: StaticHtmlViewer,
     ),
     AutoRoute(
       path: 'change_password',
