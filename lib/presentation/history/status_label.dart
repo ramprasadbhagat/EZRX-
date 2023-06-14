@@ -14,7 +14,6 @@ class StatusLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -28,11 +27,9 @@ class StatusLabel extends StatelessWidget {
       ),
       child: Text(
         status.getOrCrash(),
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontSize: 12,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: valueColor,
             ),
-        textAlign: TextAlign.center,
       ),
     );
   }

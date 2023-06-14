@@ -630,7 +630,7 @@ abstract class _LoadMore implements AllInvoicesEvent {
 
 /// @nodoc
 mixin _$AllInvoicesState {
-  List<CreditAndInvoiceItem> get invoices => throw _privateConstructorUsedError;
+  List<CreditAndInvoiceItem> get items => throw _privateConstructorUsedError;
   int get totalCount => throw _privateConstructorUsedError;
   String get sortDirection => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
@@ -650,7 +650,7 @@ abstract class $AllInvoicesStateCopyWith<$Res> {
       _$AllInvoicesStateCopyWithImpl<$Res, AllInvoicesState>;
   @useResult
   $Res call(
-      {List<CreditAndInvoiceItem> invoices,
+      {List<CreditAndInvoiceItem> items,
       int totalCount,
       String sortDirection,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -671,7 +671,7 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoices = null,
+    Object? items = null,
     Object? totalCount = null,
     Object? sortDirection = null,
     Object? failureOrSuccessOption = null,
@@ -679,9 +679,9 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
     Object? canLoadMore = null,
   }) {
     return _then(_value.copyWith(
-      invoices: null == invoices
-          ? _value.invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
@@ -716,7 +716,7 @@ abstract class _$$_AllInvoicesStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CreditAndInvoiceItem> invoices,
+      {List<CreditAndInvoiceItem> items,
       int totalCount,
       String sortDirection,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -735,7 +735,7 @@ class __$$_AllInvoicesStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoices = null,
+    Object? items = null,
     Object? totalCount = null,
     Object? sortDirection = null,
     Object? failureOrSuccessOption = null,
@@ -743,9 +743,9 @@ class __$$_AllInvoicesStateCopyWithImpl<$Res>
     Object? canLoadMore = null,
   }) {
     return _then(_$_AllInvoicesState(
-      invoices: null == invoices
-          ? _value._invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
@@ -773,22 +773,23 @@ class __$$_AllInvoicesStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AllInvoicesState implements _AllInvoicesState {
+class _$_AllInvoicesState extends _AllInvoicesState {
   const _$_AllInvoicesState(
-      {required final List<CreditAndInvoiceItem> invoices,
+      {required final List<CreditAndInvoiceItem> items,
       required this.totalCount,
       required this.sortDirection,
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore})
-      : _invoices = invoices;
+      : _items = items,
+        super._();
 
-  final List<CreditAndInvoiceItem> _invoices;
+  final List<CreditAndInvoiceItem> _items;
   @override
-  List<CreditAndInvoiceItem> get invoices {
-    if (_invoices is EqualUnmodifiableListView) return _invoices;
+  List<CreditAndInvoiceItem> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_invoices);
+    return EqualUnmodifiableListView(_items);
   }
 
   @override
@@ -804,7 +805,7 @@ class _$_AllInvoicesState implements _AllInvoicesState {
 
   @override
   String toString() {
-    return 'AllInvoicesState(invoices: $invoices, totalCount: $totalCount, sortDirection: $sortDirection, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
+    return 'AllInvoicesState(items: $items, totalCount: $totalCount, sortDirection: $sortDirection, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
   }
 
   @override
@@ -812,7 +813,7 @@ class _$_AllInvoicesState implements _AllInvoicesState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllInvoicesState &&
-            const DeepCollectionEquality().equals(other._invoices, _invoices) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.totalCount, totalCount) ||
                 other.totalCount == totalCount) &&
             (identical(other.sortDirection, sortDirection) ||
@@ -828,7 +829,7 @@ class _$_AllInvoicesState implements _AllInvoicesState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_invoices),
+      const DeepCollectionEquality().hash(_items),
       totalCount,
       sortDirection,
       failureOrSuccessOption,
@@ -842,17 +843,18 @@ class _$_AllInvoicesState implements _AllInvoicesState {
       __$$_AllInvoicesStateCopyWithImpl<_$_AllInvoicesState>(this, _$identity);
 }
 
-abstract class _AllInvoicesState implements AllInvoicesState {
+abstract class _AllInvoicesState extends AllInvoicesState {
   const factory _AllInvoicesState(
-      {required final List<CreditAndInvoiceItem> invoices,
+      {required final List<CreditAndInvoiceItem> items,
       required final int totalCount,
       required final String sortDirection,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore}) = _$_AllInvoicesState;
+  const _AllInvoicesState._() : super._();
 
   @override
-  List<CreditAndInvoiceItem> get invoices;
+  List<CreditAndInvoiceItem> get items;
   @override
   int get totalCount;
   @override

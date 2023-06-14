@@ -18,11 +18,10 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/presentation/core/attention_row.dart';
-import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +47,7 @@ class CustomerCodeBlocMock
 class DownloadPaymentAttachmentsBlocMock extends MockBloc<
         DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
     implements DownloadPaymentAttachmentsBloc {}
+
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
@@ -102,7 +102,7 @@ void main() {
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => downloadPaymentAttachmentsBlocMock.state)
-        .thenReturn(DownloadPaymentAttachmentsState.initial());   
+        .thenReturn(DownloadPaymentAttachmentsState.initial());
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -166,16 +166,8 @@ void main() {
       await getWidget(tester);
 
       await tester.pump(const Duration(milliseconds: 100));
-      final filterButton = find.byType(FilterCountButton);
-      expect(filterButton, findsOneWidget);
-      await tester.tap(filterButton);
-      final allInvoicesText = find.text('All Invoices'.tr());
+      final allInvoicesText = find.text('Invoices'.tr());
       expect(allInvoicesText, findsOneWidget);
-
-      final statusText = find.textContaining('Status'.tr());
-      expect(statusText, findsOneWidget);
-      await tester.tap(statusText, warnIfMissed: false);
-      await tester.pump();
     });
 
     testWidgets('=> Body Test when loading', (tester) async {
@@ -255,13 +247,13 @@ void main() {
         AllInvoicesState.initial().copyWith(
           isLoading: false,
           failureOrSuccessOption: optionOf(const Right('')),
-          invoices: [
+          items: [
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456789',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             )
           ],
           totalCount: 1,
@@ -303,48 +295,48 @@ void main() {
         AllInvoicesState.initial().copyWith(
           isLoading: false,
           canLoadMore: true,
-          invoices: [
+          items: [
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456780',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456780',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456780',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456780',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456780',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             ),
             CreditAndInvoiceItem.empty().copyWith(
               accountingDocument: '123456780',
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             ),
           ],
           totalCount: 6,
@@ -363,66 +355,6 @@ void main() {
           const Duration(seconds: 1)); // finish the indicator settle animation
       await tester.pump(
           const Duration(seconds: 1)); // finish the indicator hide animation
-      await tester.pump();
-    });
-    testWidgets('=> All Invoices AttentionRow visible', (tester) async {
-      when(() => allInvoicesBlocMock.state)
-          .thenReturn(AllInvoicesState.initial());
-
-      await getWidget(tester);
-      await tester.pump();
-
-      await tester.pump(const Duration(milliseconds: 100));
-      final attentionRow = find.byType(AttentionRow);
-      expect(attentionRow, findsOneWidget);
-    });
-
-    testWidgets('=> All Invoices Filter By Status Test', (tester) async {
-      when(() => allInvoicesFilterBlocMock.state)
-          .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        statuses: ['Overdue', 'Open', 'Cleared', 'Outstanding'],
-      ));
-      when(() => allInvoicesBlocMock.state)
-          .thenReturn(AllInvoicesState.initial());
-
-      await getWidget(tester);
-      await tester.pump();
-
-      final statusFilterButton = find.byKey(const Key('statusFilterButton'));
-      expect(statusFilterButton, findsOneWidget);
-      await tester.tap(statusFilterButton);
-      await tester.pump(const Duration(seconds: 1));
-
-      final statusFilter =
-          find.byKey(const ValueKey('all_invoices_filter_by_status'));
-      expect(statusFilter, findsOneWidget);
-
-      final findRadioListText = find.text('Overdue');
-      await tester.tap(findRadioListText);
-      await tester.pump();
-
-      final closeButton = find.byKey(const Key('closeButton'));
-      expect(closeButton, findsOneWidget);
-      await tester.tap(closeButton);
-      await tester.pump();
-
-      final expectedState = [
-        AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-            filterStatus: 'Cleared',
-          ),
-        ),
-        AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-            filterStatus: 'Open',
-          ),
-        ),
-      ];
-      whenListen(
-        allInvoicesFilterBlocMock,
-        Stream.fromIterable(expectedState),
-      );
-      await tester.tap(statusFilterButton);
       await tester.pump();
     });
   });

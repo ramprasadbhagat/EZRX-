@@ -1,63 +1,63 @@
 {
-  "operationName": "customerDocumentHeader",
-  "variables": {
-    "input": {
-      "customerCode": "0030032223",
-      "salesOrg": "2601",
-      "first": 11,
-      "after": 0,
-      "excelFor": "Debit",
-      "orderBy": [
-          {
-              "order": "desc",
-              "field": "netDueDate"
-          }
-      ],
-      "filterBy": [
-          {
-              "field": "debitCreditCode",
-              "value": "S"
-          },
-          {
-              "field": "accountingDocument",
-              "value": "321312"
-          },
-          {
-              "field": "netDueDate",
-              "value": "2023-05-11",
-              "type": "ge"
-          },
-          {
-              "field": "netDueDate",
-              "value": "2023-05-16",
-              "type": "le"
-          },
-          {
-              "field": "postingDate",
-              "value": "2023-05-22",
-              "type": "ge"
-          },
-          {
-              "field": "postingDate",
-              "value": "2023-05-27",
-              "type": "le"
-          },
-          {
-              "field": "amountInTransactionCurrency",
-              "value": "1",
-              "type": "ge"
-          },
-          {
-              "field": "amountInTransactionCurrency",
-              "value": "10",
-              "type": "le"
-          },
-          {
-              "field": "invoiceProcessingStatus",
-              "value": "Overdue"
-          }
-      ]
-    }
-  },
-  "query": "query customerDocumentHeader($input: customerDocumentHeaderRequest!) {   customerDocumentHeader(request: $input) {     documentHeaderList {       companyCode       bpCustomerNumber       accountingDocument       accountingDocumentType       fiscalYear       accountingDocumentItem       specialGLCode       postingKey       postingKeyName       netDueDate       postingDate       transactionCurrency       billingDocument       referenceDocumentNumber       payerParty       payerName1       dueCalculationBaseDate       cashDiscount1DueDate       cashDiscount2DueDate       cashDiscount1Percent       cashDiscount2Percent       invoiceProcessingStatus       documentReferenceID       purchaseOrderByCustomer       customerReferenceNumber       openAmountInTransCrcy       grossAmount       netAmount       taxAmount       paymentAmount       iban       bankAccountNumber       bankName       memoLine       paymentCardType       paymentCardTypeName       paymentCardNumber       paymentCardMaskedNumber       paymentCardHolderName       debitCreditCode       postingPeriod       clearingAccountingDocument       clearingDate       documentDate       amountInTransactionCurrency       isDisputed       disputeCaseUUID       disputeCaseStatus       disputeCaseStatusName       invoiceReference       partnerFunctionIsPrintRelevant       functionIsXMLRelevant       invoiceIsResidualForInference       returnId       orderId            }     totalCount        } } "
+    "operationName": "customerDocumentHeader",
+    "variables": {
+        "input": {
+            "customerCode": "0000100120",
+            "salesOrg": "2001",
+            "first": 10,
+            "after": 0,
+            "excelFor": "Debit",
+            "orderBy": [
+                {
+                    "order": "desc",
+                    "field": "documentDate"
+                }
+            ],
+            "filterBy": [
+                {
+                    "field": "debitCreditCode",
+                    "value": "S"
+                },
+                {
+                    "field": "documentDate",
+                    "value": "2023-05-02",
+                    "type": "ge"
+                },
+                {
+                    "field": "documentDate",
+                    "value": "2023-06-13",
+                    "type": "le"
+                },
+                {
+                    "field": "netDueDate",
+                    "value": "2023-04-30",
+                    "type": "ge"
+                },
+                {
+                    "field": "netDueDate",
+                    "value": "2023-05-03",
+                    "type": "le"
+                },
+                {
+                    "field": "amountInTransactionCurrency",
+                    "value": "1.00",
+                    "type": "ge"
+                },
+                {
+                    "field": "amountInTransactionCurrency",
+                    "value": "10.00",
+                    "type": "le"
+                },
+                {
+                    "field": "invoiceProcessingStatus",
+                    "value": "In progress"
+                },
+                {
+                    "field": "accountingDocument",
+                    "value": "2639136"
+                }
+            ]
+        }
+    },
+    "query": "query customerDocumentHeader($input: customerDocumentHeaderRequest!) {   customerDocumentHeader(request: $input) {     documentHeaderList {       companyCode       bpCustomerNumber       accountingDocument       accountingDocumentType       fiscalYear       accountingDocumentItem       specialGLCode       postingKey       postingKeyName       netDueDate       postingDate       transactionCurrency       billingDocument       referenceDocumentNumber       payerParty       payerName1       dueCalculationBaseDate       cashDiscount1DueDate       cashDiscount2DueDate       cashDiscount1Percent       cashDiscount2Percent       invoiceProcessingStatus       documentReferenceID       purchaseOrderByCustomer       customerReferenceNumber       openAmountInTransCrcy       grossAmount       netAmount       taxAmount       paymentAmount       iban       bankAccountNumber       bankName       memoLine       paymentCardType       paymentCardTypeName       paymentCardNumber       paymentCardMaskedNumber       paymentCardHolderName       debitCreditCode       postingPeriod       clearingAccountingDocument       clearingDate       documentDate       amountInTransactionCurrency       isDisputed       disputeCaseUUID       disputeCaseStatus       disputeCaseStatusName       invoiceReference       partnerFunctionIsPrintRelevant       functionIsXMLRelevant       invoiceIsResidualForInference       returnId       orderId            }     totalCount        } } "
 }

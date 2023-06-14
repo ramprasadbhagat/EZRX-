@@ -21,7 +21,7 @@ void main() {
         data['data']['customerDocumentHeader'],
       ).toDomain();
 
-      expect(customerDocumentHeaderDto.invoices.length, 11);
+      expect(customerDocumentHeaderDto.invoices.length, 3);
       
     });
   });

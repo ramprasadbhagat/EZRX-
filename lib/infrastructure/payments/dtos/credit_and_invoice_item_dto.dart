@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -309,7 +310,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       cashDiscount2DueDate: cashDiscount2DueDate,
       cashDiscount1Percent: cashDiscount1Percent,
       cashDiscount2Percent: cashDiscount2Percent,
-      invoiceProcessingStatus: invoiceProcessingStatus,
+      invoiceProcessingStatus: StatusType(invoiceProcessingStatus),
       documentReferenceID: documentReferenceID,
       purchaseOrderByCustomer: purchaseOrderByCustomer,
       customerReferenceNumber: customerReferenceNumber,

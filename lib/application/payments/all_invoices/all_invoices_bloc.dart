@@ -1,8 +1,10 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +14,7 @@ part 'all_invoices_event.dart';
 part 'all_invoices_state.dart';
 part 'all_invoices_bloc.freezed.dart';
 
-const int _pageSize = 20;
+const int _pageSize = 24;
 
 class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
@@ -32,7 +34,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
-            invoices: <CreditAndInvoiceItem>[],
+            items: <CreditAndInvoiceItem>[],
             totalCount: 0,
             isLoading: true,
           ),
@@ -58,7 +60,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           (paymentData) {
             emit(
               state.copyWith(
-                invoices: paymentData.invoices,
+                items: paymentData.invoices,
                 totalCount: paymentData.totalCount,
                 canLoadMore: paymentData.invoices.length >= _pageSize,
                 failureOrSuccessOption: none(),
@@ -83,7 +85,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           customerCodeInfo: value.customerCodeInfo,
           filter: value.filter,
           pageSize: _pageSize,
-          offset: state.invoices.length,
+          offset: state.items.length,
         );
 
         failureOrSuccess.fold(
@@ -96,11 +98,11 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
             );
           },
           (paymentData) {
-            final updateItemList = List<CreditAndInvoiceItem>.from(state.invoices)
+            final updateItemList = List<CreditAndInvoiceItem>.from(state.items)
               ..addAll(paymentData.invoices);
             emit(
               state.copyWith(
-                invoices: updateItemList,
+                items: updateItemList,
                 totalCount: paymentData.totalCount,
                 canLoadMore: paymentData.invoices.length >= _pageSize,
                 failureOrSuccessOption: none(),

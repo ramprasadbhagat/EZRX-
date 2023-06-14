@@ -4,30 +4,24 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/attention_row.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/filter_icon.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/history/status_label.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_drawer.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_status.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 
 class AllInvoicesPage extends StatelessWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
@@ -39,122 +33,11 @@ class AllInvoicesPage extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('All Invoices').tr(),
-        actions: [
-          BlocConsumer<DownloadPaymentAttachmentsBloc,
-              DownloadPaymentAttachmentsState>(
-            listenWhen: (previous, current) =>
-                previous.failureOrSuccessOption !=
-                    current.failureOrSuccessOption,
-            buildWhen: (previous, current) =>
-                previous.isDownloadInProgress != current.isDownloadInProgress,
-            listener: (context, state) {
-              state.failureOrSuccessOption.fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
-                    ErrorUtils.handleApiFailure(context, failure);
-                  },
-                  (_) {
-                    showSnackBar(
-                      context: context,
-                      message: 'File downloaded successfully'.tr(),
-                    );
-                  },
-                ),
-              );
-            },
-            builder: (context, state) {
-              return TextButton(
-                onPressed: state.isDownloadInProgress ? null : () {
-                  final eligibilityState =
-                      context.read<EligibilityBloc>().state;
-                  final allInvoicesFilterState =
-                      context.read<AllInvoicesFilterBloc>().state;
-                  context.read<DownloadPaymentAttachmentsBloc>().add(
-                        DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-                          salesOrganization: eligibilityState.salesOrganisation,
-                          customerCodeInfo: eligibilityState.customerCodeInfo,
-                          queryObject: allInvoicesFilterState.allInvoicesFilter,
-                        ),
-                      );
-                },
-                child: state.isDownloadInProgress
-                    ? const SizedBox(
-                        height: 15,
-                        width: 15,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Text('Download').tr(),
-              );
-            },
-          ),
+        centerTitle: false,
+        title: const Text('Invoices').tr(),
+        actions: const [
+          SizedBox.shrink(),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(30.0),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  key: const Key('statusFilterButton'),
-                  onTap: () {
-                    if (context.read<AllInvoicesBloc>().state.isLoading) return;
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (_) {
-                        return const AllInvoicesStatusFilterBottomSheet();
-                      },
-                    );
-                  },
-                  child: BlocBuilder<AllInvoicesFilterBloc,
-                      AllInvoicesFilterState>(
-                    buildWhen: (previous, current) =>
-                        previous.allInvoicesFilter.filterStatus !=
-                        current.allInvoicesFilter.filterStatus,
-                    builder: (context, state) {
-                      return Row(
-                        children: <Widget>[
-                          Text(
-                            "${'Status'.tr()} : ${state.allInvoicesFilter.filterStatus.tr()}",
-                            key: const ValueKey('status'),
-                            style:
-                                Theme.of(context).textTheme.titleSmall?.apply(
-                                      color: ZPColors.kPrimaryColor,
-                                    ),
-                          ),
-                          const Icon(
-                            Icons.arrow_drop_down_outlined,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
-                  buildWhen: (previous, current) =>
-                      previous.allInvoicesFilter.appliedFilterCount !=
-                      current.allInvoicesFilter.appliedFilterCount,
-                  builder: (context, state) {
-                    return FilterCountButton(
-                      filterCount: state.allInvoicesFilter.appliedFilterCount,
-                      onTap: () {
-                        if (!context.read<AllInvoicesBloc>().state.isLoading) {
-                          context.read<AllInvoicesFilterBloc>().add(
-                                const AllInvoicesFilterEvent.openFilterDrawer(),
-                              );
-                          scaffoldKey.currentState!.openEndDrawer();
-                        }
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
       endDrawer: const AllInvoicesFilterDrawer(),
       body: BlocListener<AllInvoicesFilterBloc, AllInvoicesFilterState>(
@@ -174,175 +57,254 @@ class AllInvoicesPage extends StatelessWidget {
                 ),
               );
         },
-        child: BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
+        child: AnnouncementBanner(
+          currentPath: context.router.currentPath,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SearchBar(
+                        onSearchChanged: (String value) {},
+                        clearIconKey: WidgetKeys.clearIconKey,
+                        controller: TextEditingController(),
+                        onClear: () {},
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        if (context.read<AllInvoicesBloc>().state.isLoading) {
+                          return;
+                        }
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (_) {
+                            return const AllInvoicesStatusFilterBottomSheet();
+                          },
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.tune,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              BlocListener<AllInvoicesFilterBloc, AllInvoicesFilterState>(
+                listenWhen: (previous, current) =>
+                    ((previous.changed != current.changed && current.changed) &&
+                        current.allInvoicesFilter.anyFilterApplied) ||
+                    previous.allInvoicesFilter.filterStatus !=
+                        current.allInvoicesFilter.filterStatus,
+                listener: (context, state) {
+                  context.read<AllInvoicesBloc>().add(
+                        AllInvoicesEvent.fetch(
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          filter: state.allInvoicesFilter,
+                        ),
+                      );
                 },
-                (_) {},
-              ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
-          builder: (context, state) {
-            if (state.isLoading) {
-              return LoadingShimmer.logo(
-                key: const Key('LoaderImage'),
-              );
-            }
+                child: BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
+                  listenWhen: (previous, current) =>
+                      previous.failureOrSuccessOption !=
+                      current.failureOrSuccessOption,
+                  listener: (context, state) {
+                    state.failureOrSuccessOption.fold(
+                      () {},
+                      (either) => either.fold(
+                        (failure) {
+                          ErrorUtils.handleApiFailure(context, failure);
+                        },
+                        (_) {},
+                      ),
+                    );
+                  },
+                  buildWhen: (previous, current) =>
+                      previous.isLoading != current.isLoading,
+                  builder: (context, state) {
+                    if (state.isLoading) {
+                      return LoadingShimmer.logo(
+                        key: const Key('LoaderImage'),
+                      );
+                    }
 
-
-            return AnnouncementBanner(
-              currentPath: context.router.currentPath,
-              child: Column(
-                children: [
-                  const AttentionRow(
-                    valueText:
-                        'All Invoices due dates and document dates pre-set for past 28 days. Change the date ranges from “Filter” for more data',
-                  ),
-                  _InvoiceScrollList(state: state,),
-                ],
+                    return Expanded(
+                      child: ScrollList<CreditAndInvoiceGroup>(
+                        emptyMessage: 'No invoice found'.tr(),
+                        controller: ScrollController(),
+                        onRefresh: () {
+                          context.read<AllInvoicesFilterBloc>().add(
+                                const AllInvoicesFilterEvent.clearFilters(),
+                              );
+                          context.read<AllInvoicesBloc>().add(
+                                AllInvoicesEvent.fetch(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  filter: AllInvoicesFilter.empty(),
+                                ),
+                              );
+                        },
+                        onLoadingMore: () {
+                          context.read<AllInvoicesBloc>().add(
+                                AllInvoicesEvent.loadMore(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  filter: AllInvoicesFilter.empty(),
+                                ),
+                              );
+                        },
+                        isLoading: state.isLoading,
+                        itemBuilder: (context, index, item) => _InvoiceGroup(
+                          data: item,
+                          showDivider: index != 0,
+                        ),
+                        items: state.groups,
+                      ),
+                    );
+                  },
+                ),
               ),
-            );
-          },
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class _InvoiceScrollList extends StatelessWidget {
-  const _InvoiceScrollList({
+class _InvoiceGroup extends StatelessWidget {
+  final CreditAndInvoiceGroup data;
+  final bool showDivider;
+  const _InvoiceGroup({
     Key? key,
-    required this.state,
+    required this.data,
+    required this.showDivider,
   }) : super(key: key);
-
-  final AllInvoicesState state;
 
   @override
   Widget build(BuildContext context) {
-    final configs = context.read<SalesOrgBloc>().state.configs;
-
-    return Expanded(
-      child: ScrollList<CreditAndInvoiceItem>(
-        emptyMessage: 'No invoice found'.tr(),
-        controller: ScrollController(),
-        onRefresh: () {
-          context.read<AllInvoicesFilterBloc>().add(
-                const AllInvoicesFilterEvent.clearFilters(),
-              );
-          context.read<AllInvoicesBloc>().add(
-                AllInvoicesEvent.fetch(
-                  salesOrganisation: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .salesOrganisation,
-                  customerCodeInfo: context
-                      .read<CustomerCodeBloc>()
-                      .state
-                      .customerCodeInfo,
-                  filter: AllInvoicesFilter.empty(),
+    return Column(
+      children: [
+        if (showDivider)
+          const Divider(
+            indent: 0,
+            height: 20,
+            endIndent: 0,
+            color: ZPColors.lightGray2,
+          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Text(
+                  'Documents created on ${data.dueDate.toValidDateString}',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: ZPColors.darkerGrey,
+                      ),
                 ),
-              );
-        },
-        onLoadingMore: () {
-          context.read<AllInvoicesBloc>().add(
-                AllInvoicesEvent.loadMore(
-                  salesOrganisation: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .salesOrganisation,
-                  customerCodeInfo: context
-                      .read<CustomerCodeBloc>()
-                      .state
-                      .customerCodeInfo,
-                  filter: AllInvoicesFilter.empty(),
-                ),
-              );
-        },
-        isLoading: state.isLoading,
-        itemBuilder: (context, index, item) => _InvoiceItem(
-          invoiceItem: item,
-          configs: configs,
+              ),
+              Column(
+                children: data.invoiceItems
+                    .map(
+                      (e) => _InvoiceItem(invoiceItem: e),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
         ),
-        items: state.invoices,
-      ),
+      ],
     );
   }
 }
 
 class _InvoiceItem extends StatelessWidget {
+  final CreditAndInvoiceItem invoiceItem;
   const _InvoiceItem({
     Key? key,
     required this.invoiceItem,
-    required this.configs,
   }) : super(key: key);
-
-  final CreditAndInvoiceItem invoiceItem;
-  final SalesOrganisationConfigs configs;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
       child: ListTile(
-        onTap: () {
-          context.read<CreditAndInvoiceDetailsBloc>().add(
-                CreditAndInvoiceDetailsEvent.fetch(
-                  creditAndInvoiceItem: invoiceItem,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                ),
-              );
-          context.router.push(InvoiceDetailsPageRoute(
-            invoiceItem: invoiceItem,
-          ));
-        },
+        onTap: () {},
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BalanceTextRow(
-              keyText: 'Due Date'.tr(),
-              valueText: invoiceItem.netDueDate.toValidDateString,
-              keyFlex: 1,
-              valueFlex: 1,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Invoice #${invoiceItem.accountingDocument}',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                StatusLabel(
+                  status: StatusType(
+                    invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
+                  ),
+                ),
+              ],
             ),
-            BalanceTextRow(
-              keyText: 'Document Number'.tr(),
-              valueText: invoiceItem.accountingDocument,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Document Date'.tr(),
-              valueText: invoiceItem.documentDate.toValidDateString,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Debit Value'.tr(),
-              valueText: StringUtils.displayPrice(
-                configs,
-                invoiceItem.amountInTransactionCurrency,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Order #${invoiceItem.orderId}',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  Text(
+                    'Due on ${invoiceItem.netDueDate.toSimpleDateString}',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: invoiceItem
+                              .invoiceProcessingStatus.displayDueDateColor,
+                        ),
+                  ),
+                ],
               ),
-              keyFlex: 1,
-              valueFlex: 1,
             ),
-            BalanceTextRow(
-              keyText: 'Status'.tr(),
-              valueText: invoiceItem.invoiceProcessingStatus,
-              keyFlex: 1,
-              valueFlex: 1,
-              valueColor: invoiceItem.invoiceProcessingStatus == 'Overdue'
-                  ? ZPColors.red
-                  : ZPColors.primary,
+            RichText(
+              text: TextSpan(
+                text: '${invoiceItem.transactionCurrency} ',
+                style: Theme.of(context).textTheme.titleSmall,
+                children: [
+                  TextSpan(
+                    text: StringUtils.displayPrice(
+                      context.read<SalesOrgBloc>().state.configs,
+                      invoiceItem.amountInTransactionCurrency,
+                    ),
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

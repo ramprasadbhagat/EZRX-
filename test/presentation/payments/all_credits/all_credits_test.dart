@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -116,7 +117,7 @@ void main() {
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
     when(() => downloadPaymentAttachmentsBlocMock.state)
-        .thenReturn(DownloadPaymentAttachmentsState.initial());   
+        .thenReturn(DownloadPaymentAttachmentsState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
@@ -276,7 +277,7 @@ void main() {
               netDueDate: DateTimeStringValue('2023-12-25'),
               documentDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: 'Cleared',
+              invoiceProcessingStatus: StatusType('Cleared'),
             )
           ],
           totalCount: 1,

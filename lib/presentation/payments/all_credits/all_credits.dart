@@ -359,7 +359,8 @@ class _CreditsItem extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Status'.tr(),
-              valueText: creditItem.invoiceProcessingStatus,
+              valueText:
+                  creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
               keyFlex: 1,
               valueFlex: 1,
               valueColor: ZPColors.kPrimaryColor,

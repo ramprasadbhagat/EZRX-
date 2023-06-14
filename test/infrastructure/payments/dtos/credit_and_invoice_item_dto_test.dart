@@ -21,7 +21,7 @@ void main() {
         data['data']['customerDocumentHeader']['documentHeaderList'][0],
       ).toDomain();
 
-      expect(creditAndInvoiceItemDto.accountingDocument, '0180000153');
+      expect(creditAndInvoiceItemDto.accountingDocument, '0340000002');
       
     });
   });

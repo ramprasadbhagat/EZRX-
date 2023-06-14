@@ -82,6 +82,13 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required int offset,
     required int pageSize,
   }) async {
+    //TODO: remove this line if cover filter feature;
+    filterMap = [
+      {
+        'field': 'debitCreditCode',
+        'value': 'S',
+      },
+    ];
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ezpay',
@@ -99,7 +106,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'orderBy': [
                 {
                   'order': sortDirection,
-                  'field': 'netDueDate',
+                  'field': 'documentDate',
                 },
               ],
               'filterBy': filterMap,

@@ -23,7 +23,6 @@ class StringUtils {
     SalesOrganisationConfigs salesOrgConfig,
     double price,
   ) {
-    
     return price == 0
         ? 'N.A.'
         : displayPrice(

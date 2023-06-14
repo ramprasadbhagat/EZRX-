@@ -100,6 +100,11 @@ class DateTimeStringValue extends ValueObject<String> {
         DateTimeFormatString.displayDateFormat,
       );
 
+  String get toSimpleDateString => displayDateTimeStringOrEmpty(
+        value.getOrElse(() => ''),
+        DateTimeFormatString.displaySimpleDateFormat,
+      );
+
   String get toValidDateStringNaIfEmpty => showDateOrNAIfEmpty(
         naIfEmptyDateTime,
         DateTimeFormatString.displayDateFormat,

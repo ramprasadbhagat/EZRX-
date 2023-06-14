@@ -722,6 +722,9 @@ class StatusType extends ValueObject<String> {
 
   Color get displayStatusLabelColor =>
       getStatusLabelColor(value.getOrElse(() => ''));
+
+  Color get displayDueDateColor => getDueDateColor(value.getOrElse(() => ''));
+
   const StatusType._(this.value);
 }
 

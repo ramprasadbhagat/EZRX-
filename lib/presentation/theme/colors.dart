@@ -38,10 +38,17 @@ abstract class ZPColors {
   static const Color unselectedTabColor = Color.fromRGBO(208, 208, 208, 1);
   static const Color lightYellow = Color.fromRGBO(250, 234, 176, 1);
   static const Color systemMessageColor = Color.fromRGBO(240, 248, 230, 1.0);
+
   static const Color defaultReturnSummaryStatusColor =
       Color.fromRGBO(23, 49, 62, 0.5);
   static const Color returnSummaryStatusTextColor =
       Color.fromRGBO(98, 98, 98, 98);
+
+  static const Color boxShadowGray = Color.fromRGBO(0, 0, 0, 0.06);
+  static const Color invoiceStatusBlue = Color.fromRGBO(221, 232, 255, 1);
+  static const Color invoiceStatusGreen = Color.fromRGBO(229, 235, 177, 1);
+  static const Color invoiceStatusOrange = Color.fromRGBO(250, 234, 176, 1);
+  static const Color invoiceStatusRed = Color.fromRGBO(255, 211, 211, 1);
 
   static const Color error = Color.fromRGBO(227, 23, 16, 1);
   static const Color tender = Color.fromRGBO(246, 138, 37, 1);

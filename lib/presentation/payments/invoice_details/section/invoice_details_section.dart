@@ -3,7 +3,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
@@ -74,11 +73,9 @@ class InvoiceDetailsSection extends StatelessWidget {
           keyFlex: 3,
           valueFlex: 5,
           keyText: 'Status'.tr(),
-          valueText: invoiceItem.invoiceProcessingStatus,
+          valueText: invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
           isStatus: true,
-          valueColor: invoiceItem.invoiceProcessingStatus == 'Overdue'
-              ? ZPColors.darkGray
-              : ZPColors.white,
+          valueColor: invoiceItem.invoiceProcessingStatus.displayDueDateColor,
         ),
       ],
     );

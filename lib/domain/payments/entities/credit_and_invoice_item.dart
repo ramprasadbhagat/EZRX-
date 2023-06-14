@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_and_invoice_item.freezed.dart';
@@ -28,7 +29,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required String cashDiscount2DueDate,
     required String cashDiscount1Percent,
     required String cashDiscount2Percent,
-    required String invoiceProcessingStatus,
+    required StatusType invoiceProcessingStatus,
     required String documentReferenceID,
     required String purchaseOrderByCustomer,
     required String customerReferenceNumber,
@@ -86,7 +87,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         cashDiscount2DueDate: '',
         cashDiscount1Percent: '',
         cashDiscount2Percent: '',
-        invoiceProcessingStatus: '',
+        invoiceProcessingStatus: StatusType(''),
         documentReferenceID: '',
         purchaseOrderByCustomer: '',
         customerReferenceNumber: '',
@@ -122,6 +123,6 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         orderId: '',
       );
 //to convert if amountInTransactionCurrency value is negative
-double get convertIfAmountInTransactionCurrencyIsNegative =>
+  double get convertIfAmountInTransactionCurrencyIsNegative =>
       amountInTransactionCurrency * -1;
 }

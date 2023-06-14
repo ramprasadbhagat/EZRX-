@@ -15,7 +15,7 @@ import 'package:mocktail/mocktail.dart';
 class AllCreditsAndInvoicesRepositoryMock extends Mock
     implements AllCreditsAndInvoicesRepository {}
 
-const _pageSize = 20;
+const _pageSize = 24;
 void main() {
   late AllCreditsAndInvoicesRepository repository;
   late CustomerDocumentHeader fakeResult;
@@ -62,7 +62,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allInvoicesFilter,
               offset: 0,
-              pageSize: 20,
+              pageSize: _pageSize,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -102,7 +102,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allInvoicesFilter,
               offset: 0,
-              pageSize: 20,
+              pageSize: _pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -120,7 +120,7 @@ void main() {
             isLoading: true,
           ),
           AllInvoicesState.initial().copyWith(
-            invoices: invoiceList,
+            items: invoiceList,
             failureOrSuccessOption: none(),
             canLoadMore: false,
             totalCount: 1,
@@ -140,7 +140,7 @@ void main() {
         ),
         seed: () => AllInvoicesState.initial().copyWith(
           isLoading: false,
-          invoices: List.filled(
+          items: List.filled(
             _pageSize,
             CreditAndInvoiceItem.empty(),
           ),
@@ -170,14 +170,14 @@ void main() {
         ),
         expect: () => [
           AllInvoicesState.initial().copyWith(
-              invoices: List.filled(
+              items: List.filled(
                 _pageSize,
                 CreditAndInvoiceItem.empty(),
               ),
               isLoading: true,
               totalCount: 1),
           AllInvoicesState.initial().copyWith(
-              invoices: List.filled(
+              items: List.filled(
                 _pageSize,
                 CreditAndInvoiceItem.empty(),
               ),
@@ -197,7 +197,7 @@ void main() {
         ),
         seed: () => AllInvoicesState.initial().copyWith(
           isLoading: false,
-          invoices: List.filled(
+          items: List.filled(
             _pageSize,
             CreditAndInvoiceItem.empty(),
           ),
@@ -233,7 +233,7 @@ void main() {
         ),
         expect: () => [
           AllInvoicesState.initial().copyWith(
-            invoices: List.filled(
+            items: List.filled(
               _pageSize,
               CreditAndInvoiceItem.empty(),
             ),
@@ -241,7 +241,7 @@ void main() {
             totalCount: _pageSize * 2,
           ),
           AllInvoicesState.initial().copyWith(
-            invoices: List.filled(
+            items: List.filled(
               _pageSize * 2,
               CreditAndInvoiceItem.empty(),
             ),

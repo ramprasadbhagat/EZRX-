@@ -37,7 +37,7 @@ mixin _$CreditAndInvoiceItem {
   String get cashDiscount2DueDate => throw _privateConstructorUsedError;
   String get cashDiscount1Percent => throw _privateConstructorUsedError;
   String get cashDiscount2Percent => throw _privateConstructorUsedError;
-  String get invoiceProcessingStatus => throw _privateConstructorUsedError;
+  StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
   String get documentReferenceID => throw _privateConstructorUsedError;
   String get purchaseOrderByCustomer => throw _privateConstructorUsedError;
   String get customerReferenceNumber => throw _privateConstructorUsedError;
@@ -106,7 +106,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       String cashDiscount2DueDate,
       String cashDiscount1Percent,
       String cashDiscount2Percent,
-      String invoiceProcessingStatus,
+      StatusType invoiceProcessingStatus,
       String documentReferenceID,
       String purchaseOrderByCustomer,
       String customerReferenceNumber,
@@ -300,7 +300,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
       invoiceProcessingStatus: null == invoiceProcessingStatus
           ? _value.invoiceProcessingStatus
           : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
@@ -467,7 +467,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       String cashDiscount2DueDate,
       String cashDiscount1Percent,
       String cashDiscount2Percent,
-      String invoiceProcessingStatus,
+      StatusType invoiceProcessingStatus,
       String documentReferenceID,
       String purchaseOrderByCustomer,
       String customerReferenceNumber,
@@ -658,7 +658,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
       invoiceProcessingStatus: null == invoiceProcessingStatus
           ? _value.invoiceProcessingStatus
           : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
@@ -899,7 +899,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final String cashDiscount2Percent;
   @override
-  final String invoiceProcessingStatus;
+  final StatusType invoiceProcessingStatus;
   @override
   final String documentReferenceID;
   @override
@@ -1160,7 +1160,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final String cashDiscount2DueDate,
       required final String cashDiscount1Percent,
       required final String cashDiscount2Percent,
-      required final String invoiceProcessingStatus,
+      required final StatusType invoiceProcessingStatus,
       required final String documentReferenceID,
       required final String purchaseOrderByCustomer,
       required final String customerReferenceNumber,
@@ -1239,7 +1239,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   String get cashDiscount2Percent;
   @override
-  String get invoiceProcessingStatus;
+  StatusType get invoiceProcessingStatus;
   @override
   String get documentReferenceID;
   @override

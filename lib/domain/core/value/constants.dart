@@ -2,6 +2,7 @@ class DateTimeFormatString {
   static const String apiDateFormat = 'yyyyMMdd';
   static const String apiDateWithDashFormat = 'yyyy-MM-dd';
   static const String displayDateFormat = 'dd MMM yyyy';
+  static const String displaySimpleDateFormat = 'MMM yyyy';
   static const String displayDateTimeFormat = 'dd MMM yyyy HH:mm:ss';
 }
 

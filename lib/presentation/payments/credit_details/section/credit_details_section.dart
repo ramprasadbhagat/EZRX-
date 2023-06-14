@@ -74,7 +74,7 @@ class CreditDetailsSection extends StatelessWidget {
           keyFlex: 3,
           valueFlex: 5,
           keyText: 'Status'.tr(),
-          valueText: creditItem.invoiceProcessingStatus,
+          valueText: creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
           isStatus: true,
           valueColor: ZPColors.white,
         ),

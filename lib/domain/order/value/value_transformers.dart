@@ -81,6 +81,10 @@ bool havingSubmitPrincipalForSalesRep(String principalCode) {
   return principalCode == '100225';
 }
 
+Color getDueDateColor(String statusType) {
+  return statusType == 'Overdue' ? ZPColors.red : ZPColors.black;
+}
+
 Color getStatusLabelColor(String statusType) {
   switch (statusType) {
     case 'Processed':
@@ -90,16 +94,22 @@ Color getStatusLabelColor(String statusType) {
       return ZPColors.lightSecondary;
     case 'Cancelled':
     case 'Failed':
-    case 'Overdue':
     case 'Pending':
     case 'Picking in-progress':
     case 'Order Created':
     case 'Out for delivery':
     case 'Pending Approval':
       return ZPColors.lightRed;
+
     case 'Cleared':
+      return ZPColors.invoiceStatusGreen;
+    case 'Overdue':
+      return ZPColors.invoiceStatusRed;
     case 'Open':
-      return ZPColors.primary;
+      return ZPColors.invoiceStatusBlue;
+    case 'In progress':
+      return ZPColors.invoiceStatusOrange;
+
     case 'In Progress':
       return ZPColors.lightGray;
     case 'Completed':

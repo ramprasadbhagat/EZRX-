@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -90,7 +91,7 @@ void main() {
       fiscalYear: '2023',
       accountingDocument: '1080005528',
       accountingDocumentItem: '001',
-      invoiceProcessingStatus: 'Cleared',
+      invoiceProcessingStatus: StatusType('Cleared'),
     );
     fakeCreditAndInvoiceDetails = <CustomerDocumentDetail>[
       CustomerDocumentDetail.empty(),
@@ -171,7 +172,8 @@ void main() {
           details: fakeCreditAndInvoiceDetails,
         ),
       ];
-      whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+      whenListen(
+          creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
       await getWidget(tester);
 
@@ -204,7 +206,8 @@ void main() {
           details: fakeCreditAndInvoiceDetails,
         ),
       ];
-      whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+      whenListen(
+          creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
       await getWidget(tester);
 
@@ -242,11 +245,12 @@ void main() {
             isLoading: true,
           ),
         ];
-        whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+        whenListen(creditAndInvoiceDetailsBlocMock,
+            Stream.fromIterable(expectedState));
 
         await getWidget(tester);
 
-      await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 100));
 
         expect(find.byType(InvoiceItemsSection), findsOneWidget);
 
@@ -264,7 +268,8 @@ void main() {
             details: <CustomerDocumentDetail>[],
           ),
         ];
-        whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+        whenListen(creditAndInvoiceDetailsBlocMock,
+            Stream.fromIterable(expectedState));
 
         await getWidget(tester);
         await tester.pumpAndSettle();
@@ -286,7 +291,8 @@ void main() {
             details: fakeCreditAndInvoiceDetails,
           ),
         ];
-        whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+        whenListen(creditAndInvoiceDetailsBlocMock,
+            Stream.fromIterable(expectedState));
 
         await getWidget(tester);
         await tester.pumpAndSettle();
