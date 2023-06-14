@@ -91,6 +91,7 @@ class _BankBeneficiaryScrollList extends StatelessWidget {
       builder: (context, state) {
         return ScrollList<BankBeneficiary>(
           emptyMessage: 'No Beneficiary found'.tr(),
+          controller: ScrollController(),
           onRefresh: () => context
               .read<ManageBankBeneficiaryBloc>()
               .add(const ManageBankBeneficiaryEvent.fetch()),

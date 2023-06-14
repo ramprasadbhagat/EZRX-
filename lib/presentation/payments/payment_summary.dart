@@ -102,35 +102,54 @@ class PaymentSummaryPage extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching,
         builder: (context, state) {
-          final eligibilityState = context.read<EligibilityBloc>().state;
 
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
-            child: ScrollList<PaymentSummaryDetails>(
-              emptyMessage: 'No Payment Summary Found'.tr(),
-              onRefresh: () => context.read<PaymentSummaryBloc>().add(
-                    PaymentSummaryEvent.fetchPaymentSummaryList(
-                      salesOrganization: eligibilityState.salesOrganisation,
-                      customerCodeInfo: eligibilityState.customerCodeInfo,
-                    ),
-                  ),
-              onLoadingMore: () => context.read<PaymentSummaryBloc>().add(
-                    PaymentSummaryEvent.loadMorePaymentSummary(
-                      salesOrganization: eligibilityState.salesOrganisation,
-                      customerCodeInfo: eligibilityState.customerCodeInfo,
-                    ),
-                  ),
-              isLoading: state.isFetching,
-              itemBuilder: (context, index, itemInfo) {
-                return PaymentSummaryTile(
-                  paymentSummaryDetails: itemInfo,
-                );
-              },
-              items: state.paymentSummaryList,
-            ),
+            child:
+                _PaymentSummaryScrollList(state: state,),
           );
         },
       ),
+    );
+  }
+}
+
+class _PaymentSummaryScrollList extends StatelessWidget {
+  const _PaymentSummaryScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final PaymentSummaryState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<PaymentSummaryDetails>(
+      emptyMessage: 'No Payment Summary Found'.tr(),
+      controller: ScrollController(),
+      onRefresh: () => context.read<PaymentSummaryBloc>().add(
+            PaymentSummaryEvent.fetchPaymentSummaryList(
+              salesOrganization:
+                  context.read<EligibilityBloc>().state.salesOrganisation,
+              customerCodeInfo:
+                  context.read<EligibilityBloc>().state.customerCodeInfo,
+            ),
+          ),
+      onLoadingMore: () => context.read<PaymentSummaryBloc>().add(
+            PaymentSummaryEvent.loadMorePaymentSummary(
+              salesOrganization:
+                  context.read<EligibilityBloc>().state.salesOrganisation,
+              customerCodeInfo:
+                  context.read<EligibilityBloc>().state.customerCodeInfo,
+            ),
+          ),
+      isLoading: state.isFetching,
+      itemBuilder: (context, index, itemInfo) {
+        return PaymentSummaryTile(
+          paymentSummaryDetails: itemInfo,
+        );
+      },
+      items: state.paymentSummaryList,
     );
   }
 }

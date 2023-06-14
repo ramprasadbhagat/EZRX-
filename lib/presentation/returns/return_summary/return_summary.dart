@@ -164,12 +164,6 @@ class ReturnSummary extends StatelessWidget {
                 previous.isLoading != current.isLoading ||
                 previous.returnSummaryList != current.returnSummaryList,
             builder: (context, returnSummaryState) {
-              final configs = context.read<SalesOrgBloc>().state.configs;
-              final customerCode =
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo;
-              final shipToInfo =
-                  context.read<ShipToCodeBloc>().state.shipToInfo;
-
               if (returnSummaryState.isLoading &&
                   returnSummaryState.returnSummaryList.isEmpty) {
                 return LoadingShimmer.logo(
@@ -214,65 +208,71 @@ class ReturnSummary extends StatelessWidget {
                             ],
                           ),
                         ),
-                  Expanded(
-                    child: ScrollList<ReturnSummaryRequest>(
-                      emptyMessage:
-                          'You have not submitted any return request'.tr(),
-                      onRefresh: () {
-                        context.read<ReturnSummaryFilterBloc>().add(
-                              const ReturnSummaryFilterEvent.initialized(),
-                            );
-                        context.read<ReturnSummaryBloc>().add(
-                              ReturnSummaryEvent.fetch(
-                                user: context.read<UserBloc>().state.user,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                shipToInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                returnSummaryFilter:
-                                    ReturnSummaryFilter.empty(),
-                              ),
-                            );
-                      },
-                      onLoadingMore: () {
-                        context.read<ReturnSummaryBloc>().add(
-                              ReturnSummaryEvent.loadMore(
-                                user: context.read<UserBloc>().state.user,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                shipToInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                returnSummaryFilter: context
-                                    .read<ReturnSummaryFilterBloc>()
-                                    .state
-                                    .returnSummaryFilter,
-                              ),
-                            );
-                      },
-                      isLoading: returnSummaryState.isLoading,
-                      itemBuilder: (context, index, item) =>
-                          ReturnSummaryListItem(
-                        returnSummaryRequests: item,
-                        configs: configs,
-                        customerCodeInfo: customerCode,
-                        shipToInfo: shipToInfo,
-                      ),
-                      items: returnSummaryState.returnSummaryList,
-                    ),
-                  ),
+                  _ReturnSummaryScrollList(
+                      returnSummaryState: returnSummaryState,),
                 ],
               );
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _ReturnSummaryScrollList extends StatelessWidget {
+  const _ReturnSummaryScrollList({
+    Key? key,
+    required this.returnSummaryState,
+  }) : super(key: key);
+
+  final ReturnSummaryState returnSummaryState;
+
+  @override
+  Widget build(BuildContext context) {
+    final configs = context.read<SalesOrgBloc>().state.configs;
+    final customerCodeInfo =
+        context.read<CustomerCodeBloc>().state.customerCodeInfo;
+    final shipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo;
+
+    return Expanded(
+      child: ScrollList<ReturnSummaryRequest>(
+        emptyMessage: 'You have not submitted any return request'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context.read<ReturnSummaryFilterBloc>().add(
+                const ReturnSummaryFilterEvent.initialized(),
+              );
+          context.read<ReturnSummaryBloc>().add(
+                ReturnSummaryEvent.fetch(
+                  user: context.read<UserBloc>().state.user,
+                  customerCodeInfo: customerCodeInfo,
+                  shipToInfo: shipToInfo,
+                  returnSummaryFilter: ReturnSummaryFilter.empty(),
+                ),
+              );
+        },
+        onLoadingMore: () {
+          context.read<ReturnSummaryBloc>().add(
+                ReturnSummaryEvent.loadMore(
+                  user: context.read<UserBloc>().state.user,
+                  customerCodeInfo: customerCodeInfo,
+                  shipToInfo: shipToInfo,
+                  returnSummaryFilter: context
+                      .read<ReturnSummaryFilterBloc>()
+                      .state
+                      .returnSummaryFilter,
+                ),
+              );
+        },
+        isLoading: returnSummaryState.isLoading,
+        itemBuilder: (context, index, item) => ReturnSummaryListItem(
+          returnSummaryRequests: item,
+          configs: configs,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+        ),
+        items: returnSummaryState.returnSummaryList,
       ),
     );
   }

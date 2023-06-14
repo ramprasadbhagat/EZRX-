@@ -80,6 +80,7 @@ class _SalesDistrictScrollList extends StatelessWidget {
       builder: (context, state) {
         return ScrollList<SalesDistrict>(
           emptyMessage: 'No Sales District found'.tr(),
+          controller: ScrollController(),
           onRefresh: () => context
               .read<SalesDistrictBloc>()
               .add(const SalesDistrictEvent.fetch()),

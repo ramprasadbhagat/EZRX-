@@ -11,6 +11,7 @@ class ScrollList<T> extends StatefulWidget {
   final bool isLoading;
   final List<T> items;
   final String emptyMessage;
+  final ScrollController controller;
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   const ScrollList({
     Key? key,
@@ -18,6 +19,7 @@ class ScrollList<T> extends StatefulWidget {
     required this.itemBuilder,
     required this.items,
     required this.emptyMessage,
+    required this.controller,
     this.onRefresh,
     this.onLoadingMore,
   }) : super(key: key);
@@ -27,10 +29,11 @@ class ScrollList<T> extends StatefulWidget {
 }
 
 class _ScrollListState<T> extends State<ScrollList<T>> {
-  final ScrollController _controller = ScrollController();
+  late ScrollController _controller;
 
   @override
   void initState() {
+    _controller = widget.controller;
     _controller.addListener(
       () {
         if (_controller.position.pixels >=

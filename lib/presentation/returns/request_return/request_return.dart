@@ -170,7 +170,6 @@ class _RequestReturnList extends StatelessWidget {
           previous.isLoading != current.isLoading ||
           previous.sortDirection != current.sortDirection,
       builder: (context, state) {
-        final configs = context.read<SalesOrgBloc>().state.configs;
 
         return state.isLoading && state.returnItemList.isEmpty
             ? LoadingShimmer.logo(
@@ -178,63 +177,7 @@ class _RequestReturnList extends StatelessWidget {
               )
             : Column(
                 children: [
-                  Expanded(
-                    child: ScrollList<ReturnItem>(
-                      emptyMessage: 'No Request for Return found'.tr(),
-                      onRefresh: () {
-                        context.read<RequestReturnBloc>().add(
-                              RequestReturnEvent.fetch(
-                                salesOrg: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                shipInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                requestReturnFilter: context
-                                    .read<RequestReturnFilterBloc>()
-                                    .state
-                                    .requestReturnFilter,
-                              ),
-                            );
-                      },
-                      onLoadingMore: () {
-                        context.read<RequestReturnBloc>().add(
-                              RequestReturnEvent.loadMore(
-                                salesOrg: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                shipInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                requestReturnFilter: context
-                                    .read<RequestReturnFilterBloc>()
-                                    .state
-                                    .requestReturnFilter,
-                              ),
-                            );
-                      },
-                      isLoading: state.isLoading,
-                      itemBuilder: (context, index, item) =>
-                          _RequestReturnListItem(
-                        returnItem: item,
-                        configs: configs,
-                        index: index,
-                      ),
-                      items: state.returnItemList,
-                    ),
-                  ),
+                  _RequestReturnScrollList(state: state,),
                   BlocBuilder<RequestReturnBloc, RequestReturnState>(
                     buildWhen: (previous, current) =>
                         previous.returnItemList != current.returnItemList,
@@ -273,6 +216,79 @@ class _RequestReturnList extends StatelessWidget {
                 ],
               );
       },
+    );
+  }
+}
+
+class _RequestReturnScrollList extends StatelessWidget {
+  const _RequestReturnScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final RequestReturnState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final configs = context.read<SalesOrgBloc>().state.configs;
+
+    return Expanded(
+      child: ScrollList<ReturnItem>(
+        emptyMessage: 'No Request for Return found'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context.read<RequestReturnBloc>().add(
+                RequestReturnEvent.fetch(
+                  salesOrg: context
+                      .read<SalesOrgBloc>()
+                      .state
+                      .salesOrganisation,
+                  shipInfo: context
+                      .read<ShipToCodeBloc>()
+                      .state
+                      .shipToInfo,
+                  customerCodeInfo: context
+                      .read<CustomerCodeBloc>()
+                      .state
+                      .customerCodeInfo,
+                  requestReturnFilter: context
+                      .read<RequestReturnFilterBloc>()
+                      .state
+                      .requestReturnFilter,
+                ),
+              );
+        },
+        onLoadingMore: () {
+          context.read<RequestReturnBloc>().add(
+                RequestReturnEvent.loadMore(
+                  salesOrg: context
+                      .read<SalesOrgBloc>()
+                      .state
+                      .salesOrganisation,
+                  shipInfo: context
+                      .read<ShipToCodeBloc>()
+                      .state
+                      .shipToInfo,
+                  customerCodeInfo: context
+                      .read<CustomerCodeBloc>()
+                      .state
+                      .customerCodeInfo,
+                  requestReturnFilter: context
+                      .read<RequestReturnFilterBloc>()
+                      .state
+                      .requestReturnFilter,
+                ),
+              );
+        },
+        isLoading: state.isLoading,
+        itemBuilder: (context, index, item) =>
+            _RequestReturnListItem(
+          returnItem: item,
+          configs: configs,
+          index: index,
+        ),
+        items: state.returnItemList,
+      ),
     );
   }
 }

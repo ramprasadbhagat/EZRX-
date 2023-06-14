@@ -203,6 +203,7 @@ class _BodyContent extends StatelessWidget {
     return Expanded(
       child: ScrollList<CustomerCodeInfo>(
         key: const Key('customerCodeSelect'),
+        controller: ScrollController(),
         onRefresh: () {
           context.read<CustomerCodeBloc>().add(
                 CustomerCodeEvent.fetch(

@@ -57,26 +57,7 @@ class UserRestrictionListPage extends StatelessWidget {
             return Column(
               children: [
                 _HeaderMessage(state: state),
-                Expanded(
-                  child: ScrollList<String>(
-                    emptyMessage: 'No user restrictions found'.tr(),
-                    isLoading: state.isFetching,
-                    onRefresh: () {
-                      final salesOrg =
-                          context.read<SalesOrgBloc>().state.salesOrg;
-                      context.read<UserRestrictionListBloc>().add(
-                            UserRestrictionListEvent.fetch(
-                              salesOrg: salesOrg,
-                            ),
-                          );
-                    },
-                    itemBuilder: (_, __, item) => _UserRestrictionItem(
-                      username: item,
-                    ),
-                    key: const Key('userRestrictionList'),
-                    items: state.getSearchedUsernamesList,
-                  ),
-                ),
+                _UserRestrictionScrollList(state: state,),
               ],
             );
           },
@@ -97,6 +78,39 @@ class UserRestrictionListPage extends StatelessWidget {
           );
         },
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class _UserRestrictionScrollList extends StatelessWidget {
+  const _UserRestrictionScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final UserRestrictionListState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ScrollList<String>(
+        emptyMessage: 'No user restrictions found'.tr(),
+        controller: ScrollController(),
+        isLoading: state.isFetching,
+        onRefresh: () {
+          final salesOrg = context.read<SalesOrgBloc>().state.salesOrg;
+          context.read<UserRestrictionListBloc>().add(
+                UserRestrictionListEvent.fetch(
+                  salesOrg: salesOrg,
+                ),
+              );
+        },
+        itemBuilder: (_, __, item) => _UserRestrictionItem(
+          username: item,
+        ),
+        key: const Key('userRestrictionList'),
+        items: state.getSearchedUsernamesList,
       ),
     );
   }

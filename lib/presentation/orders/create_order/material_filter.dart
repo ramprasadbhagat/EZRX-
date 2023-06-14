@@ -197,6 +197,7 @@ class _BodyContent extends StatelessWidget {
             children: [
               ScrollList(
                 emptyMessage: 'No filter option found'.tr(),
+                controller: ScrollController(),
                 isLoading: state.isFetching,
                 itemBuilder: (context, index, item) => ListTile(
                   key: Key('filterOption-${filterList[index]}'),

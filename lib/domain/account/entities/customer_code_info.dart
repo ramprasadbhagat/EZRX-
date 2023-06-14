@@ -71,11 +71,9 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
       );
 
   bool get hasBillToInfo {
-    final billToInfo =
-        billToInfos.isNotEmpty ? billToInfos.first : BillToInfo.empty();
 
-    return billToInfo.billToCustomerCode.isNotEmpty &&
-        billToInfo.billToCustomerCode != customerCodeSoldTo;
+    return getBillToInfo.billToCustomerCode.isNotEmpty &&
+        getBillToInfo.billToCustomerCode != customerCodeSoldTo;
   }
 
   String get customerEmailAddress {
@@ -85,4 +83,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
   }
 
   int get countWhenValid => this != CustomerCodeInfo.empty() ? 1 : 0;
+
+  BillToInfo get getBillToInfo =>
+      billToInfos.isNotEmpty ? billToInfos.first : BillToInfo.empty();
 }

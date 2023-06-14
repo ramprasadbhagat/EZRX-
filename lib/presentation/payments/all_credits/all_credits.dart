@@ -30,7 +30,6 @@ import 'package:ezrxmobile/application/payments/download_payment_attachments/dow
 
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 
-
 class AllCredits extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -220,7 +219,6 @@ class AllCredits extends StatelessWidget {
                 previous.isLoading != current.isLoading ||
                 previous.credits != current.credits,
             builder: (context, allCreditsState) {
-              final configs = context.read<SalesOrgBloc>().state.configs;
               if (allCreditsState.isLoading &&
                   allCreditsState.credits.isEmpty) {
                 return LoadingShimmer.logo(
@@ -234,66 +232,73 @@ class AllCredits extends StatelessWidget {
                     valueText:
                         'All Credits document dates pre-set for past 28 days. Change the date range from “Filter” for more data',
                   ),
-                  Expanded(
-                    child: ScrollList<CreditAndInvoiceItem>(
-                      emptyMessage: 'No files found'.tr(),
-                      onRefresh: () {
-                        context.read<AllCreditsFilterBloc>().add(
-                              const AllCreditsFilterEvent.initialized(),
-                            );
-                        context.read<AllCreditsFilterBloc>().add(
-                              AllCreditsFilterEvent.fetch(
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                              ),
-                            );
-                        context.read<AllCreditsBloc>().add(
-                              AllCreditsEvent.fetchAllCreditsList(
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                allCreditsFilter: AllCreditsFilter.empty(),
-                              ),
-                            );
-                      },
-                      onLoadingMore: () {
-                        context.read<AllCreditsBloc>().add(
-                              AllCreditsEvent.loadMoreAllCreditsList(
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                allCreditsFilter: context
-                                    .read<AllCreditsFilterBloc>()
-                                    .state
-                                    .allCreditsFilter,
-                              ),
-                            );
-                      },
-                      isLoading: allCreditsState.isLoading,
-                      itemBuilder: (context, index, item) => _CreditsItem(
-                        creditItem: item,
-                        configs: configs,
-                      ),
-                      items: allCreditsState.credits,
-                    ),
-                  ),
+                  _CreditsScrollList(allCreditsState: allCreditsState,),
                 ],
               );
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _CreditsScrollList extends StatelessWidget {
+  const _CreditsScrollList({
+    Key? key,
+    required this.allCreditsState,
+  }) : super(key: key);
+
+  final AllCreditsState allCreditsState;
+
+  @override
+  Widget build(BuildContext context) {
+    final configs = context.read<SalesOrgBloc>().state.configs;
+
+    return Expanded(
+      child: ScrollList<CreditAndInvoiceItem>(
+        emptyMessage: 'No files found'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context.read<AllCreditsFilterBloc>().add(
+                const AllCreditsFilterEvent.initialized(),
+              );
+          context.read<AllCreditsFilterBloc>().add(
+                AllCreditsFilterEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                ),
+              );
+          context.read<AllCreditsBloc>().add(
+                AllCreditsEvent.fetchAllCreditsList(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  allCreditsFilter: AllCreditsFilter.empty(),
+                ),
+              );
+        },
+        onLoadingMore: () {
+          context.read<AllCreditsBloc>().add(
+                AllCreditsEvent.loadMoreAllCreditsList(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  allCreditsFilter: context
+                      .read<AllCreditsFilterBloc>()
+                      .state
+                      .allCreditsFilter,
+                ),
+              );
+        },
+        isLoading: allCreditsState.isLoading,
+        itemBuilder: (context, index, item) => _CreditsItem(
+          creditItem: item,
+          configs: configs,
+        ),
+        items: allCreditsState.credits,
       ),
     );
   }

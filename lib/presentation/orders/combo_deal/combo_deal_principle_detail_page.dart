@@ -167,67 +167,7 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
                   return Column(
                     children: [
                       ComboDealHeaderMessage(comboDeal: state.currentDeal),
-                      Expanded(
-                        child: ScrollList<PriceAggregate>(
-                          emptyMessage: 'Combo bundle is empty'.tr(),
-                          onLoadingMore: () {
-                            final eligibilityBloc =
-                                context.read<EligibilityBloc>();
-                            context.read<ComboDealPrincipleDetailBloc>().add(
-                                  ComboDealPrincipleDetailEvent.loadMore(
-                                    user: eligibilityBloc.state.user,
-                                    salesOrganisation:
-                                        eligibilityBloc.state.salesOrganisation,
-                                    salesConfigs:
-                                        eligibilityBloc.state.salesOrgConfigs,
-                                    customerCodeInfo:
-                                        eligibilityBloc.state.customerCodeInfo,
-                                    shipToInfo:
-                                        eligibilityBloc.state.shipToInfo,
-                                    principles: comboDeal.category.values,
-                                  ),
-                                );
-                          },
-                          isLoading: state.isFetching,
-                          itemBuilder: (context, index, item) => BlocBuilder<
-                              ComboDealPrincipleDetailBloc,
-                              ComboDealPrincipleDetailState>(
-                            builder: (context, state) {
-                              final isSelected =
-                                  state.selectedItems[item.getMaterialNumber] ??
-                                      false;
-                              final material =
-                                  state.items[item.getMaterialNumber] ??
-                                      PriceAggregate.empty();
-
-                              return Card(
-                                child: ComboDealItem(
-                                  material: material,
-                                  isSelected: isSelected,
-                                  onCheckBoxPressed: () => context
-                                      .read<ComboDealPrincipleDetailBloc>()
-                                      .add(
-                                        ComboDealPrincipleDetailEvent
-                                            .updateItemSelection(
-                                          item: item.getMaterialNumber,
-                                        ),
-                                      ),
-                                  onQuantityUpdated: (qty) => context
-                                      .read<ComboDealPrincipleDetailBloc>()
-                                      .add(
-                                        ComboDealPrincipleDetailEvent
-                                            .updateItemQuantity(
-                                          item: item.getMaterialNumber,
-                                          qty: qty,
-                                        ),
-                                      ),
-                                ),
-                              );
-                            },
-                          ),
-                          items: state.items.values.toList(),
-                        ),
-                      ),
+                      _ComboDealScrollList(state: state,comboDeal: comboDeal),
                     ],
                   );
                 },
@@ -278,5 +218,70 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
     } else {
       context.router.popAndPush(const CartPageRoute());
     }
+  }
+}
+
+class _ComboDealScrollList extends StatelessWidget {
+  const _ComboDealScrollList({
+    Key? key,
+    required this.state,
+    required this.comboDeal,
+  }) : super(key: key);
+
+  final ComboDealPrincipleDetailState state;
+  final PriceComboDeal comboDeal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ScrollList<PriceAggregate>(
+        emptyMessage: 'Combo bundle is empty'.tr(),
+        controller: ScrollController(),
+        onLoadingMore: () {
+          final eligibilityBloc = context.read<EligibilityBloc>();
+          context.read<ComboDealPrincipleDetailBloc>().add(
+                ComboDealPrincipleDetailEvent.loadMore(
+                  user: eligibilityBloc.state.user,
+                  salesOrganisation: eligibilityBloc.state.salesOrganisation,
+                  salesConfigs: eligibilityBloc.state.salesOrgConfigs,
+                  customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+                  shipToInfo: eligibilityBloc.state.shipToInfo,
+                  principles: comboDeal.category.values,
+                ),
+              );
+        },
+        isLoading: state.isFetching,
+        itemBuilder: (context, index, item) => BlocBuilder<
+            ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
+          builder: (context, state) {
+            final isSelected =
+                state.selectedItems[item.getMaterialNumber] ?? false;
+            final material =
+                state.items[item.getMaterialNumber] ?? PriceAggregate.empty();
+
+            return Card(
+              child: ComboDealItem(
+                material: material,
+                isSelected: isSelected,
+                onCheckBoxPressed: () =>
+                    context.read<ComboDealPrincipleDetailBloc>().add(
+                          ComboDealPrincipleDetailEvent.updateItemSelection(
+                            item: item.getMaterialNumber,
+                          ),
+                        ),
+                onQuantityUpdated: (qty) =>
+                    context.read<ComboDealPrincipleDetailBloc>().add(
+                          ComboDealPrincipleDetailEvent.updateItemQuantity(
+                            item: item.getMaterialNumber,
+                            qty: qty,
+                          ),
+                        ),
+              ),
+            );
+          },
+        ),
+        items: state.items.values.toList(),
+      ),
+    );
   }
 }

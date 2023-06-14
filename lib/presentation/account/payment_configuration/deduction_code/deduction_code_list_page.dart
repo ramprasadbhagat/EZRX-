@@ -86,6 +86,7 @@ class _DeductionCodeScrollList extends StatelessWidget {
       builder: (context, state) {
         return ScrollList<DeductionCode>(
           emptyMessage: 'No deduction code found'.tr(),
+          controller: ScrollController(),
           onRefresh: () {
             context
                 .read<ManageDeductionCodeBloc>()

@@ -45,102 +45,120 @@ class BonusAddPage extends StatelessWidget {
                   )
                 : state.isFetching
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
-                    : ScrollList<MaterialInfo>(
-                        emptyMessage: 'No materials found'.tr(),
-                        isLoading: state.isFetching,
-                        itemBuilder: (context, i, item) => Card(
-                          child: Padding(
-                            key: const Key('bonusItemList'),
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          state.bonus[i].materialNumber
-                                              .displayMatNo
-                                              .tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall
-                                              ?.apply(
-                                                color: ZPColors.kPrimaryColor,
-                                              ),
-                                        ),
-                                        Text(
-                                          state.bonus[i].materialDescription,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall,
-                                        ),
-                                        Text(
-                                          state.bonus[i].principalData
-                                              .principalName
-                                              .getOrDefaultValue(''),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall
-                                              ?.apply(
-                                                color: ZPColors.lightGray,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: GestureDetector(
-                                    key: Key(
-                                      'addItem${state.bonus[i].materialNumber.getOrDefaultValue('')}',
-                                    ),
-                                    onTap: () {
-                                      CartBottomSheet
-                                          .showUpdateCartBonusBottomSheet(
-                                        context: context,
-                                        cartItem: cartItem,
-                                        item: state.bonus[i],
-                                        isUpdateFromCart: false,
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 50.0,
-                                      height: 23.0,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                        gradient: const LinearGradient(
-                                          colors: [
-                                            ZPColors.kPrimaryColor,
-                                            ZPColors.gradient,
-                                          ],
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'ADD'.tr(),
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        items: state.bonus,
-                      );
+                    : _BonusScrollList(state: state,cartItem: cartItem);
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _BonusScrollList extends StatelessWidget {
+  const _BonusScrollList({
+    Key? key,
+    required this.state,
+    required this.cartItem,
+  }) : super(key: key);
+
+  final BonusMaterialState state;
+  final CartItem cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<MaterialInfo>(
+      emptyMessage: 'No materials found'.tr(),
+      controller: ScrollController(),
+      isLoading: state.isFetching,
+      itemBuilder: (_, __, item) => _BonusItem(item: item, cartItem: cartItem),
+      items: state.bonus,
+    );
+  }
+}
+
+class _BonusItem extends StatelessWidget {
+  const _BonusItem({
+    Key? key,
+    required this.item,
+    required this.cartItem,
+  }) : super(key: key);
+
+  final MaterialInfo item;
+  final CartItem cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        key: const Key('bonusItemList'),
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      item.materialNumber.displayMatNo.tr(),
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.kPrimaryColor,
+                          ),
+                    ),
+                    Text(
+                      item.materialDescription,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    Text(
+                      item.principalData.principalName.getOrDefaultValue(''),
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.lightGray,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                key: Key(
+                  'addItem${item.materialNumber.getOrDefaultValue('')}',
+                ),
+                onTap: () {
+                  CartBottomSheet.showUpdateCartBonusBottomSheet(
+                    context: context,
+                    cartItem: cartItem,
+                    item: item,
+                    isUpdateFromCart: false,
+                  );
+                },
+                child: Container(
+                  width: 50.0,
+                  height: 23.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    gradient: const LinearGradient(
+                      colors: [
+                        ZPColors.kPrimaryColor,
+                        ZPColors.gradient,
+                      ],
+                    ),
+                  ),
+                  child: Text(
+                    'ADD'.tr(),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

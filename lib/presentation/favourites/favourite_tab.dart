@@ -104,52 +104,64 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
                   return LoadingShimmer.logo(key: const Key('LoaderImage'));
                 }
 
-                return BlocBuilder<MaterialPriceDetailBloc,
-                    MaterialPriceDetailState>(
-                  buildWhen: (previous, current) =>
-                      previous.isValidating != current.isValidating,
-                  builder: (context, priceState) {
-                    if (priceState.isValidating) {
-                      return LoadingShimmer.logo(key: const Key('LoaderImage'));
-                    }
-
-                    final validFavoriteItems = favoriteState.favouriteItems
-                        .where(
-                          (item) => priceState.isValidMaterial(
-                            query:
-                                MaterialQueryInfo.fromFavorite(material: item),
-                          ),
-                        )
-                        .toList();
-
-                    return ScrollList<Favourite>(
-                      emptyMessage: 'No favorite found'.tr(),
-                      onRefresh: () {
-                        context.read<MaterialPriceDetailBloc>().add(
-                              const MaterialPriceDetailEvent.initialized(),
-                            );
-                        context.read<FavouriteBloc>().add(
-                              FavouriteEvent.fetch(
-                                user: context.read<UserBloc>().state.user,
-                              ),
-                            );
-                      },
-                      isLoading: false,
-                      itemBuilder: (context, index, itemInfo) {
-                        return FavouriteListTile(
-                          key: Key('FavouriteItem$index'),
-                          favourite: itemInfo,
-                        );
-                      },
-                      items: validFavoriteItems,
-                    );
-                  },
-                );
+                return _FavoriteScrollList(favoriteState: favoriteState,);
               },
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _FavoriteScrollList extends StatelessWidget {
+  const _FavoriteScrollList({
+    Key? key,
+    required this.favoriteState,
+  }) : super(key: key);
+  final FavouriteState favoriteState;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+      buildWhen: (previous, current) =>
+          previous.isValidating != current.isValidating,
+      builder: (context, priceState) {
+        if (priceState.isValidating) {
+          return LoadingShimmer.logo(key: const Key('LoaderImage'));
+        }
+
+        final validFavoriteItems = favoriteState.favouriteItems
+            .where(
+              (item) => priceState.isValidMaterial(
+                query: MaterialQueryInfo.fromFavorite(material: item),
+              ),
+            )
+            .toList();
+
+        return ScrollList<Favourite>(
+          emptyMessage: 'No favorite found'.tr(),
+          controller: ScrollController(),
+          onRefresh: () {
+            context.read<MaterialPriceDetailBloc>().add(
+                  const MaterialPriceDetailEvent.initialized(),
+                );
+            context.read<FavouriteBloc>().add(
+                  FavouriteEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                  ),
+                );
+          },
+          isLoading: false,
+          itemBuilder: (context, index, itemInfo) {
+            return FavouriteListTile(
+              key: Key('FavouriteItem$index'),
+              favourite: itemInfo,
+            );
+          },
+          items: validFavoriteItems,
+        );
+      },
     );
   }
 }

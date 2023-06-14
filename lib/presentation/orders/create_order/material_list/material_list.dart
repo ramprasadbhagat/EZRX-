@@ -135,30 +135,41 @@ class MaterialListPage extends StatelessWidget {
                       ? LoadingShimmer.logo(
                           key: const Key('loaderImage'),
                         )
-                      : ScrollList<MaterialInfo>(
-                          emptyMessage: 'No material found'.tr(),
-                          onRefresh: () => _onRefresh(context),
-                          onLoadingMore: () => _onLoadingMore(context),
-                          isLoading: state.isFetching,
-                          itemBuilder: (context, index, item) {
-                            final salesOrgConfigs = context
-                                .read<EligibilityBloc>()
-                                .state
-                                .salesOrgConfigs;
-
-                            return MaterialListItem(
-                              salesOrgConfigs: salesOrgConfigs,
-                              materialInfo: item,
-                            );
-                          },
-                          items: state.materialList,
-                        ),
+                      : _MaterialListScrollList(state: state,),
                 ),
               ],
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class _MaterialListScrollList extends StatelessWidget {
+  const _MaterialListScrollList({Key? key, required this.state})
+      : super(key: key);
+
+  final MaterialListState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<MaterialInfo>(
+      emptyMessage: 'No material found'.tr(),
+      controller: ScrollController(),
+      onRefresh: () => _onRefresh(context),
+      onLoadingMore: () => _onLoadingMore(context),
+      isLoading: state.isFetching,
+      itemBuilder: (context, index, item) {
+        final salesOrgConfigs =
+            context.read<EligibilityBloc>().state.salesOrgConfigs;
+
+        return MaterialListItem(
+          salesOrgConfigs: salesOrgConfigs,
+          materialInfo: item,
+        );
+      },
+      items: state.materialList,
     );
   }
 

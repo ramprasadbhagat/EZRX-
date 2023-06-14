@@ -53,31 +53,8 @@ class PolicyConfigurationPage extends StatelessWidget {
               );
             }
 
-            return ScrollList<PolicyConfiguration>(
-              emptyMessage: 'No Policy Configurations found'.tr(),
-              onRefresh: () {
-                context.read<PolicyConfigurationBloc>().add(
-                      PolicyConfigurationEvent.fetch(
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        searchKey: '',
-                      ),
-                    );
-              },
-              onLoadingMore: () => context.read<PolicyConfigurationBloc>().add(
-                    PolicyConfigurationEvent.loadMorePolicyConfigurations(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                    ),
-                  ),
-              isLoading: policyConfigurationState.isLoading,
-              itemBuilder: (context, index, item) =>
-                  PolicyConfigurationListItem(
-                policyConfigurationItem: item,
-              ),
-              items: policyConfigurationState.policyConfigurationList,
+            return _PolicyConfigurationScrollList(
+              policyConfigurationState: policyConfigurationState,
             );
           },
         ),
@@ -88,6 +65,43 @@ class PolicyConfigurationPage extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+}
+
+class _PolicyConfigurationScrollList extends StatelessWidget {
+  const _PolicyConfigurationScrollList({
+    Key? key,
+    required this.policyConfigurationState,
+  }) : super(key: key);
+
+  final PolicyConfigurationState policyConfigurationState;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<PolicyConfiguration>(
+      emptyMessage: 'No Policy Configurations found'.tr(),
+      controller: ScrollController(),
+      onRefresh: () {
+        context.read<PolicyConfigurationBloc>().add(
+              PolicyConfigurationEvent.fetch(
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                searchKey: '',
+              ),
+            );
+      },
+      onLoadingMore: () => context.read<PolicyConfigurationBloc>().add(
+            PolicyConfigurationEvent.loadMorePolicyConfigurations(
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+            ),
+          ),
+      isLoading: policyConfigurationState.isLoading,
+      itemBuilder: (context, index, item) => PolicyConfigurationListItem(
+        policyConfigurationItem: item,
+      ),
+      items: policyConfigurationState.policyConfigurationList,
     );
   }
 }
@@ -220,12 +234,12 @@ class _PolicyConfigurationSearchState
           onSearchChanged: (value) {
             final salesOrganisation =
                 context.read<SalesOrgBloc>().state.salesOrganisation;
-              context
-                  .read<PolicyConfigurationBloc>()
-                  .add(PolicyConfigurationEvent.search(
-                salesOrganisation: salesOrganisation,
-                searchKey: value,
-              ));
+            context
+                .read<PolicyConfigurationBloc>()
+                .add(PolicyConfigurationEvent.search(
+                  salesOrganisation: salesOrganisation,
+                  searchKey: value,
+                ));
           },
           onSearchSubmitted: (value) {
             context

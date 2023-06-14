@@ -28,8 +28,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
@@ -72,69 +70,7 @@ class CartPage extends StatelessWidget {
                   currentPath: context.router.currentPath,
                 ),
                 const AccountSuspendedBanner(),
-                Expanded(
-                  child: ScrollList<CartItem>(
-                    emptyMessage: 'Cart is Empty'.tr(),
-                    onRefresh: () {
-                      context.read<CartBloc>().add(
-                            CartEvent.fetch(
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              salesOrganisationConfigs:
-                                  context.read<SalesOrgBloc>().state.configs,
-                              shipToInfo: context
-                                  .read<ShipToCodeBloc>()
-                                  .state
-                                  .shipToInfo,
-                              doNotAllowOutOfStockMaterials: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .doNotAllowOutOfStockMaterials,
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              comboDealEligible: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .comboDealEligible,
-                              isSpecialOrderType: context
-                                  .read<OrderDocumentTypeBloc>()
-                                  .state
-                                  .isSpecialOrderType,
-                            ),
-                          );
-                    },
-                    isLoading: state.isFetching && state.cartItems.isEmpty,
-                    itemBuilder: (context, index, item) {
-                      switch (item.itemType) {
-                        case CartItemType.material:
-                          return CartMaterialItemTile(
-                            cartItem: item,
-                            key: ValueKey(
-                              '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
-                            ),
-                            taxCode: taxCode,
-                            showCheckBox: true,
-                          );
-                        case CartItemType.bundle:
-                          return CartBundleItemTile(
-                            cartItem: item,
-                            taxCode: taxCode,
-                            showCheckBox: true,
-                          );
-                        case CartItemType.comboDeal:
-                          return CartComboDealItem(
-                            cartItem: item,
-                            showCheckBox: true,
-                          );
-                      }
-                    },
-                    items: state.cartItems,
-                  ),
-                ),
+                _CartScrollList(state: state,taxCode: taxCode),
                 state.cartItems.isEmpty
                     ? const SizedBox.shrink()
                     : Container(
@@ -235,6 +171,76 @@ class CartPage extends StatelessWidget {
           ),
         );
     context.router.pushNamed('orders/order_summary');
+  }
+}
+
+class _CartScrollList extends StatelessWidget {
+  const _CartScrollList({
+    Key? key,
+    required this.state,
+    required this.taxCode,
+  }) : super(key: key);
+
+  final CartState state;
+  final String taxCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ScrollList<CartItem>(
+        emptyMessage: 'Cart is Empty'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context.read<CartBloc>().add(
+                CartEvent.fetch(
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrganisationConfigs:
+                      context.read<SalesOrgBloc>().state.configs,
+                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  doNotAllowOutOfStockMaterials: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .doNotAllowOutOfStockMaterials,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  comboDealEligible:
+                      context.read<EligibilityBloc>().state.comboDealEligible,
+                  isSpecialOrderType: context
+                      .read<OrderDocumentTypeBloc>()
+                      .state
+                      .isSpecialOrderType,
+                ),
+              );
+        },
+        isLoading: state.isFetching && state.cartItems.isEmpty,
+        itemBuilder: (context, index, item) {
+          switch (item.itemType) {
+            case CartItemType.material:
+              return CartMaterialItemTile(
+                cartItem: item,
+                key: ValueKey(
+                  '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
+                ),
+                taxCode: taxCode,
+                showCheckBox: true,
+              );
+            case CartItemType.bundle:
+              return CartBundleItemTile(
+                cartItem: item,
+                taxCode: taxCode,
+                showCheckBox: true,
+              );
+            case CartItemType.comboDeal:
+              return CartComboDealItem(
+                cartItem: item,
+                showCheckBox: true,
+              );
+          }
+        },
+        items: state.cartItems,
+      ),
+    );
   }
 }
 

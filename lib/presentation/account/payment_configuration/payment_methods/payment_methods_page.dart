@@ -32,20 +32,7 @@ class PaymentMethodsPage extends StatelessWidget {
                 ? LoadingShimmer.logo(
                     key: const Key('loaderImage'),
                   )
-                : ScrollList<AvailablePaymentMethod>(
-                    emptyMessage: 'No payment method found'.tr(),
-                    onRefresh: () => _onRefresh(context: context),
-                    isLoading: state.isFetching,
-                    onLoadingMore: () {},
-                    itemBuilder: (context, index, item) {
-                      return _PaymentMethodListItem(
-                        paymentMethod: item,
-                        index: index,
-                        state: state,
-                      );
-                    },
-                    items: state.paymentMethodList,
-                  );
+                : _PaymentMethodScrollList(state: state);
           },
         ),
       ),
@@ -59,6 +46,31 @@ class PaymentMethodsPage extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+}
+
+class _PaymentMethodScrollList extends StatelessWidget {
+  const _PaymentMethodScrollList({Key? key, required this.state})
+      : super(key: key);
+  final PaymentMethodsState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<AvailablePaymentMethod>(
+      emptyMessage: 'No payment method found'.tr(),
+      controller: ScrollController(),
+      onRefresh: () => _onRefresh(context: context),
+      isLoading: state.isFetching,
+      onLoadingMore: () {},
+      itemBuilder: (context, index, item) {
+        return _PaymentMethodListItem(
+          paymentMethod: item,
+          index: index,
+          state: state,
+        );
+      },
+      items: state.paymentMethodList,
     );
   }
 

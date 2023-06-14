@@ -160,42 +160,7 @@ class _ComboDealMaterialDetailPageState
                       : Column(
                           children: [
                             ComboDealHeaderMessage(comboDeal: comboDeal),
-                            Expanded(
-                              child: ScrollList<PriceAggregate>(
-                                isLoading: false,
-                                itemBuilder: (context, index, item) {
-                                  final isSelected = state.selectedItems[
-                                          item.getMaterialNumber] ??
-                                      false;
-
-                                  return Card(
-                                    child: ComboDealItem(
-                                      material: item,
-                                      isSelected: isSelected,
-                                      onCheckBoxPressed: () => context
-                                          .read<ComboDealMaterialDetailBloc>()
-                                          .add(
-                                            ComboDealMaterialDetailEvent
-                                                .updateItemSelection(
-                                              item: item.getMaterialNumber,
-                                            ),
-                                          ),
-                                      onQuantityUpdated: (qty) => context
-                                          .read<ComboDealMaterialDetailBloc>()
-                                          .add(
-                                            ComboDealMaterialDetailEvent
-                                                .updateItemQuantity(
-                                              item: item.getMaterialNumber,
-                                              qty: qty,
-                                            ),
-                                          ),
-                                    ),
-                                  );
-                                },
-                                emptyMessage: 'Combo bundle is empty'.tr(),
-                                items: state.items.values.toList(),
-                              ),
-                            ),
+                            _ComboDealScrollList(state: state,),
                           ],
                         );
                 },
@@ -242,6 +207,51 @@ class _ComboDealMaterialDetailPageState
     } else {
       context.router.popAndPush(const CartPageRoute());
     }
+  }
+}
+
+class _ComboDealScrollList extends StatelessWidget {
+  const _ComboDealScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final ComboDealMaterialDetailState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ScrollList<PriceAggregate>(
+        isLoading: false,
+        controller: ScrollController(),
+        itemBuilder: (context, index, item) {
+          final isSelected =
+              state.selectedItems[item.getMaterialNumber] ?? false;
+
+          return Card(
+            child: ComboDealItem(
+              material: item,
+              isSelected: isSelected,
+              onCheckBoxPressed: () =>
+                  context.read<ComboDealMaterialDetailBloc>().add(
+                        ComboDealMaterialDetailEvent.updateItemSelection(
+                          item: item.getMaterialNumber,
+                        ),
+                      ),
+              onQuantityUpdated: (qty) =>
+                  context.read<ComboDealMaterialDetailBloc>().add(
+                        ComboDealMaterialDetailEvent.updateItemQuantity(
+                          item: item.getMaterialNumber,
+                          qty: qty,
+                        ),
+                      ),
+            ),
+          );
+        },
+        emptyMessage: 'Combo bundle is empty'.tr(),
+        items: state.items.values.toList(),
+      ),
+    );
   }
 }
 

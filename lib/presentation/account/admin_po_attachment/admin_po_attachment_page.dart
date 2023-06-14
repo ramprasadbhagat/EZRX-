@@ -20,9 +20,6 @@ class AdminPoAttachmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final adminPoAttachmentBloc = context.read<AdminPoAttachmentBloc>();
-    final adminPoAttachmentFilterBloc =
-        context.read<AdminPoAttachmentFilterBloc>();
 
     return Scaffold(
       key: scaffoldKey,
@@ -36,24 +33,7 @@ class AdminPoAttachmentPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocBuilder<AdminPoAttachmentBloc, AdminPoAttachmentState>(
-                builder: (context, state) {
-                  return TextButton(
-                    onPressed: state.canDownload
-                        ? () {
-                            final selectedPoDocuments = state.selectedItems
-                                .map((e) => e.pooDocuments)
-                                .toList();
-                            if (selectedPoDocuments.isEmpty) return;
-                            context.read<PoAttachmentBloc>().add(
-                                  PoAttachmentEvent.downloadFile(
-                                    files: selectedPoDocuments,
-                                  ),
-                                );
-                          }
-                        : null,
-                    child: const Text('Download').tr(),
-                  );
-                },
+                builder: (context, state) => _DownloadButton(state: state,),
               ),
               BlocBuilder<AdminPoAttachmentFilterBloc,
                   AdminPoAttachmentFilterState>(
@@ -78,11 +58,11 @@ class AdminPoAttachmentPage extends StatelessWidget {
             previous.isSubmitting != current.isSubmitting &&
                 current.isSubmitting ||
             !scaffoldKey.currentState!.isEndDrawerOpen,
-        listener: (context, state) => adminPoAttachmentBloc.add(
-          AdminPoAttachmentEvent.fetch(
-            adminPoAttachmentFilter: state.adminPoAttachmentFilter,
-          ),
-        ),
+        listener: (context, state) => context.read<AdminPoAttachmentBloc>().add(
+              AdminPoAttachmentEvent.fetch(
+                adminPoAttachmentFilter: state.adminPoAttachmentFilter,
+              ),
+            ),
         child: BlocConsumer<AdminPoAttachmentBloc, AdminPoAttachmentState>(
           listenWhen: (previous, current) =>
               previous.failureOrSuccessOption != current.failureOrSuccessOption,
@@ -125,63 +105,9 @@ class AdminPoAttachmentPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(
-                            Icons.info_outline_rounded,
-                            color: ZPColors.darkerGreen,
-                            size: 18,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'Only 15 items can be download at time'.tr(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                    fontSize: 12,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: ScrollList<AdminPoAttachment>(
-                        key: const Key('adminPoAttachment'),
-                        emptyMessage: 'No Attachment found'.tr(),
-                        onRefresh: () {
-                          adminPoAttachmentBloc.add(
-                            AdminPoAttachmentEvent.fetch(
-                              adminPoAttachmentFilter:
-                                  adminPoAttachmentFilterBloc
-                                  .state
-                                  .adminPoAttachmentFilter,
-                            ),
-                          );
-                          adminPoAttachmentFilterBloc.add(
-                                const AdminPoAttachmentFilterEvent
-                                    .initialized(),
-                              );
-                        },
-                        isLoading: state.isFetching,
-                        onLoadingMore: () => adminPoAttachmentBloc.add(
-                          AdminPoAttachmentEvent.loadMore(
-                            adminPoAttachmentFilter: adminPoAttachmentFilterBloc
-                                .state
-                                .adminPoAttachmentFilter,
-                          ),
-                        ),
-                        itemBuilder: (context, index, item) =>
-                            AdminPoAttachmentTile(
-                          adminPoAttachment: item,
-                        ),
-                        items: state.adminPoAttachmentList,
-                      ),
+                    const _HeaderMessage(),
+                    _BodyContent(
+                      state: state,
                     ),
                   ],
                 ),
@@ -189,6 +115,107 @@ class AdminPoAttachmentPage extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class _DownloadButton extends StatelessWidget {
+  const _DownloadButton({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+  final AdminPoAttachmentState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: state.canDownload
+          ? () {
+              final selectedPoDocuments =
+                  state.selectedItems.map((e) => e.pooDocuments).toList();
+              if (selectedPoDocuments.isEmpty) return;
+              context.read<PoAttachmentBloc>().add(
+                    PoAttachmentEvent.downloadFile(
+                      files: selectedPoDocuments,
+                    ),
+                  );
+            }
+          : null,
+      child: const Text('Download').tr(),
+    );
+  }
+}
+
+class _HeaderMessage extends StatelessWidget {
+  const _HeaderMessage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(
+            Icons.info_outline_rounded,
+            color: ZPColors.darkerGreen,
+            size: 18,
+          ),
+          Expanded(
+            child: Text(
+              'Only 15 items can be download at time'.tr(),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
+                  ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BodyContent extends StatelessWidget {
+  const _BodyContent({Key? key, required this.state}) : super(key: key);
+  final AdminPoAttachmentState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ScrollList<AdminPoAttachment>(
+        key: const Key('adminPoAttachment'),
+        emptyMessage: 'No Attachment found'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context.read<AdminPoAttachmentBloc>().add(
+                AdminPoAttachmentEvent.fetch(
+                  adminPoAttachmentFilter: context
+                      .read<AdminPoAttachmentFilterBloc>()
+                      .state
+                      .adminPoAttachmentFilter,
+                ),
+              );
+          context.read<AdminPoAttachmentFilterBloc>().add(
+                const AdminPoAttachmentFilterEvent.initialized(),
+              );
+        },
+        isLoading: state.isFetching,
+        onLoadingMore: () => context.read<AdminPoAttachmentBloc>().add(
+              AdminPoAttachmentEvent.loadMore(
+                adminPoAttachmentFilter: context
+                    .read<AdminPoAttachmentFilterBloc>()
+                    .state
+                    .adminPoAttachmentFilter,
+              ),
+            ),
+        itemBuilder: (context, index, item) => AdminPoAttachmentTile(
+          adminPoAttachment: item,
+        ),
+        items: state.adminPoAttachmentList,
       ),
     );
   }

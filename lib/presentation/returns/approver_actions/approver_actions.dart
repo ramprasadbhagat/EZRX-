@@ -165,50 +165,64 @@ class ApproverActions extends StatelessWidget {
           builder: (context, state) {
             return AnnouncementBanner(
               currentPath: context.router.currentPath,
-              child: ScrollList<RequestInformation>(
-                emptyMessage: 'No Return found'.tr(),
-                onRefresh: () {
-                  if (!context.read<ShipToCodeBloc>().state.haveShipTo) {
-                    return;
-                  }
-                  final returnApproverFilterBloc =
-                      context.read<ReturnApproverFilterBloc>();
-                  returnApproverFilterBloc.add(
-                    const ReturnApproverFilterEvent.initialized(),
-                  );
-                  context.read<ReturnApproverBloc>().add(
-                        ReturnApproverEvent.fetch(
-                          user: context.read<EligibilityBloc>().state.user,
-                          approverReturnFilter:
-                              ReturnApproverFilter.empty().copyWith(
-                            sortBy: returnApproverFilterBloc.state.activeSort,
-                          ),
-                        ),
-                      );
-                },
-                onLoadingMore: () {
-                  context.read<ReturnApproverBloc>().add(
-                        ReturnApproverEvent.loadMore(
-                          user: context.read<EligibilityBloc>().state.user,
-                          approverReturnFilter: context
-                              .read<ReturnApproverFilterBloc>()
-                              .state
-                              .approverReturnFilter,
-                        ),
-                      );
-                },
-                isLoading: state.isFetching,
-                itemBuilder: (context, index, itemInfo) {
-                  return ApproverReturnRequestTile(
-                    approverReturnRequest: itemInfo,
-                  );
-                },
-                items: state.approverReturnRequestList,
-              ),
+              child: _ApproverReturnRequestScrollList(state: state,),
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class _ApproverReturnRequestScrollList extends StatelessWidget {
+  const _ApproverReturnRequestScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final ReturnApproverState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<RequestInformation>(
+      emptyMessage: 'No Return found'.tr(),
+      controller: ScrollController(),
+      onRefresh: () {
+        if (!context.read<ShipToCodeBloc>().state.haveShipTo) {
+          return;
+        }
+        final returnApproverFilterBloc =
+            context.read<ReturnApproverFilterBloc>();
+        returnApproverFilterBloc.add(
+          const ReturnApproverFilterEvent.initialized(),
+        );
+        context.read<ReturnApproverBloc>().add(
+              ReturnApproverEvent.fetch(
+                user: context.read<EligibilityBloc>().state.user,
+                approverReturnFilter: ReturnApproverFilter.empty().copyWith(
+                  sortBy: returnApproverFilterBloc.state.activeSort,
+                ),
+              ),
+            );
+      },
+      onLoadingMore: () {
+        context.read<ReturnApproverBloc>().add(
+              ReturnApproverEvent.loadMore(
+                user: context.read<EligibilityBloc>().state.user,
+                approverReturnFilter: context
+                    .read<ReturnApproverFilterBloc>()
+                    .state
+                    .approverReturnFilter,
+              ),
+            );
+      },
+      isLoading: state.isFetching,
+      itemBuilder: (context, index, itemInfo) {
+        return ApproverReturnRequestTile(
+          approverReturnRequest: itemInfo,
+        );
+      },
+      items: state.approverReturnRequestList,
     );
   }
 }

@@ -68,6 +68,7 @@ class _BodyContent extends StatelessWidget {
           ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<BundleAggregate>(
               emptyMessage: 'No bundle found'.tr(),
+              controller: ScrollController(),
               onRefresh: () {
                 context
                     .read<MaterialPriceDetailBloc>()

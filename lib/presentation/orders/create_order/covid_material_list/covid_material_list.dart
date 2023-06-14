@@ -89,6 +89,7 @@ class _BodyContent extends StatelessWidget {
           ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<MaterialInfo>(
               emptyMessage: 'There are no vaccine in this customer code'.tr(),
+              controller: ScrollController(),
               onRefresh: () {
                 context.read<CovidMaterialListBloc>().add(
                       CovidMaterialListEvent.fetch(

@@ -197,7 +197,6 @@ class AllInvoicesPage extends StatelessWidget {
               );
             }
 
-            final configs = context.read<SalesOrgBloc>().state.configs;
 
             return AnnouncementBanner(
               currentPath: context.router.currentPath,
@@ -207,55 +206,72 @@ class AllInvoicesPage extends StatelessWidget {
                     valueText:
                         'All Invoices due dates and document dates pre-set for past 28 days. Change the date ranges from “Filter” for more data',
                   ),
-                  Expanded(
-                    child: ScrollList<CreditAndInvoiceItem>(
-                      emptyMessage: 'No invoice found'.tr(),
-                      onRefresh: () {
-                        context.read<AllInvoicesFilterBloc>().add(
-                              const AllInvoicesFilterEvent.clearFilters(),
-                            );
-                        context.read<AllInvoicesBloc>().add(
-                              AllInvoicesEvent.fetch(
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                filter: AllInvoicesFilter.empty(),
-                              ),
-                            );
-                      },
-                      onLoadingMore: () {
-                        context.read<AllInvoicesBloc>().add(
-                              AllInvoicesEvent.loadMore(
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                filter: AllInvoicesFilter.empty(),
-                              ),
-                            );
-                      },
-                      isLoading: state.isLoading,
-                      itemBuilder: (context, index, item) => _InvoiceItem(
-                        invoiceItem: item,
-                        configs: configs,
-                      ),
-                      items: state.invoices,
-                    ),
-                  ),
+                  _InvoiceScrollList(state: state,),
                 ],
               ),
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class _InvoiceScrollList extends StatelessWidget {
+  const _InvoiceScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final AllInvoicesState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final configs = context.read<SalesOrgBloc>().state.configs;
+
+    return Expanded(
+      child: ScrollList<CreditAndInvoiceItem>(
+        emptyMessage: 'No invoice found'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context.read<AllInvoicesFilterBloc>().add(
+                const AllInvoicesFilterEvent.clearFilters(),
+              );
+          context.read<AllInvoicesBloc>().add(
+                AllInvoicesEvent.fetch(
+                  salesOrganisation: context
+                      .read<SalesOrgBloc>()
+                      .state
+                      .salesOrganisation,
+                  customerCodeInfo: context
+                      .read<CustomerCodeBloc>()
+                      .state
+                      .customerCodeInfo,
+                  filter: AllInvoicesFilter.empty(),
+                ),
+              );
+        },
+        onLoadingMore: () {
+          context.read<AllInvoicesBloc>().add(
+                AllInvoicesEvent.loadMore(
+                  salesOrganisation: context
+                      .read<SalesOrgBloc>()
+                      .state
+                      .salesOrganisation,
+                  customerCodeInfo: context
+                      .read<CustomerCodeBloc>()
+                      .state
+                      .customerCodeInfo,
+                  filter: AllInvoicesFilter.empty(),
+                ),
+              );
+        },
+        isLoading: state.isLoading,
+        itemBuilder: (context, index, item) => _InvoiceItem(
+          invoiceItem: item,
+          configs: configs,
+        ),
+        items: state.invoices,
       ),
     );
   }

@@ -53,56 +53,62 @@ class SavedOrderListPage extends StatelessWidget {
                 currentPath: context.router.currentPath,
               ),
               const AccountSuspendedBanner(),
-              Expanded(
-                child: ScrollList<SavedOrder>(
-                  emptyMessage: 'No saved order found'.tr(),
-                  onRefresh: () {
-                    context
-                        .read<MaterialPriceDetailBloc>()
-                        .add(const MaterialPriceDetailEvent.initialized());
-                    context.read<SavedOrderListBloc>().add(
-                          SavedOrderListEvent.fetch(
-                            userInfo: context.read<UserBloc>().state.user,
-                            selectedSalesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            selectedCustomerCode: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            selectedShipTo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                          ),
-                        );
-                  },
-                  onLoadingMore: () => context.read<SavedOrderListBloc>().add(
-                        SavedOrderListEvent.loadMore(
-                          userInfo: context.read<UserBloc>().state.user,
-                          selectedSalesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          selectedCustomerCode: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          selectedShipTo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                        ),
-                      ),
-                  isLoading: state.isFetching,
-                  itemBuilder: (context, index, item) => SavedOrderItem(
-                    key: Key('SavedOrder$index'),
-                    order: item,
-                    isDeleting: state.isDeleting,
-                  ),
-                  items: state.savedOrders,
-                ),
-              ),
+              _SavedOrderScrollList(state: state,),
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _SavedOrderScrollList extends StatelessWidget {
+  const _SavedOrderScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final SavedOrderListState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ScrollList<SavedOrder>(
+        emptyMessage: 'No saved order found'.tr(),
+        controller: ScrollController(),
+        onRefresh: () {
+          context
+              .read<MaterialPriceDetailBloc>()
+              .add(const MaterialPriceDetailEvent.initialized());
+          context.read<SavedOrderListBloc>().add(
+                SavedOrderListEvent.fetch(
+                  userInfo: context.read<UserBloc>().state.user,
+                  selectedSalesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  selectedCustomerCode:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  selectedShipTo:
+                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                ),
+              );
+        },
+        onLoadingMore: () => context.read<SavedOrderListBloc>().add(
+              SavedOrderListEvent.loadMore(
+                userInfo: context.read<UserBloc>().state.user,
+                selectedSalesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                selectedCustomerCode:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                selectedShipTo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              ),
+            ),
+        isLoading: state.isFetching,
+        itemBuilder: (context, index, item) => SavedOrderItem(
+          key: Key('SavedOrder$index'),
+          order: item,
+          isDeleting: state.isDeleting,
+        ),
+        items: state.savedOrders,
       ),
     );
   }

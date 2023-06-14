@@ -42,46 +42,58 @@ class PaymentAdviceFooterPage extends StatelessWidget {
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocConsumer<ManagePaymentAdviceFooterBloc,
-            ManagePaymentAdviceFooterState>(
-          listenWhen: (previous, current) =>
-              previous.isSubmitting != current.isSubmitting,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {
-                if (state.isSubmitting) return;
-                showSnackBar(
-                  context: context,
-                  message: state.response.message.getValue().tr(),
-                );
-              },
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-            },
-            buildWhen: (previous, current) =>
-              previous.isSubmitting != current.isSubmitting || 
-              previous.isFetching != current.isFetching,
-            builder: (context, state) {
-            return ScrollList<PaymentAdviceFooter>(
-              emptyMessage: 'No Payment Advice Footer Found'.tr(),
-              onRefresh: () =>
-                  context.read<ManagePaymentAdviceFooterBloc>().add(
-                        const ManagePaymentAdviceFooterEvent.fetch(),
-                      ),
-              onLoadingMore: () => {},
-              isLoading: state.isFetching,
-              itemBuilder: (context, index, item) =>
-                  _PaymentAdviceFooter(paymentAdviceFooter: item),
-              items: state.paymentAdviceFooters,
+        child: const _PaymentAdviceFooterScrollList(),
+      ),
+    );
+  }
+}
+
+class _PaymentAdviceFooterScrollList extends StatelessWidget {
+  const _PaymentAdviceFooterScrollList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<ManagePaymentAdviceFooterBloc,
+        ManagePaymentAdviceFooterState>(
+      listenWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {
+            if (state.isSubmitting) return;
+            showSnackBar(
+              context: context,
+              message: state.response.message.getValue().tr(),
             );
           },
-        ),
-      ),
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {},
+          ),
+        );
+        },
+        buildWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting || 
+          previous.isFetching != current.isFetching,
+        builder: (context, state) {
+        return ScrollList<PaymentAdviceFooter>(
+          emptyMessage: 'No Payment Advice Footer Found'.tr(),
+          controller: ScrollController(),
+          onRefresh: () =>
+              context.read<ManagePaymentAdviceFooterBloc>().add(
+                    const ManagePaymentAdviceFooterEvent.fetch(),
+                  ),
+          onLoadingMore: () => {},
+          isLoading: state.isFetching,
+          itemBuilder: (context, index, item) =>
+              _PaymentAdviceFooter(paymentAdviceFooter: item),
+          items: state.paymentAdviceFooters,
+        );
+      },
     );
   }
 }

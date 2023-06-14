@@ -50,30 +50,44 @@ class OrderTemplateListPage extends StatelessWidget {
               Expanded(
                 child: state.isFetching && state.orderTemplateList.isEmpty
                     ? LoadingShimmer.logo(key: const Key('loading-shimmer'))
-                    : ScrollList<OrderTemplate>(
-                        emptyMessage: 'No order template found'.tr(),
-                        onRefresh: () {
-                          context.read<MaterialPriceDetailBloc>().add(
-                                const MaterialPriceDetailEvent.initialized(),
-                              );
-                          context.read<OrderTemplateListBloc>().add(
-                                OrderTemplateListEvent.fetch(
-                                  context.read<UserBloc>().state.user,
-                                ),
-                              );
-                        },
-                        isLoading: false,
-                        itemBuilder: (context, index, item) =>
-                            OrderTemplateItem(
-                          orderTemplate: state.orderTemplateList[index],
-                        ),
-                        items: state.orderTemplateList,
-                      ),
+                    : _OrderTemplateScrollList(state: state,),
               ),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class _OrderTemplateScrollList extends StatelessWidget {
+  const _OrderTemplateScrollList({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final OrderTemplateListState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollList<OrderTemplate>(
+      emptyMessage: 'No order template found'.tr(),
+      controller: ScrollController(),
+      onRefresh: () {
+        context.read<MaterialPriceDetailBloc>().add(
+              const MaterialPriceDetailEvent.initialized(),
+            );
+        context.read<OrderTemplateListBloc>().add(
+              OrderTemplateListEvent.fetch(
+                context.read<UserBloc>().state.user,
+              ),
+            );
+      },
+      isLoading: false,
+      itemBuilder: (context, index, item) => OrderTemplateItem(
+        orderTemplate: state.orderTemplateList[index],
+      ),
+      items: state.orderTemplateList,
     );
   }
 }
