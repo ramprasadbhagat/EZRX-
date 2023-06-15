@@ -232,25 +232,25 @@ class _ShipToAddressSection extends StatelessWidget {
       );
     } else {
       context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
-      context.read<ShipToCodeBloc>().add(
-            ShipToCodeEvent.selected(
-              shipToInfo: shipToInfo,
-            ),
-          );
+      customerBloc.add(
+        CustomerCodeEvent.selected(
+          customerCodeInfo: customerCodeInfo,
+        ),
+      );
       trackMixpanelEvent(
         MixpanelEvents.shipToAddressSave,
         props: {
           MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
         },
       );
-      customerBloc.add(
-        CustomerCodeEvent.selected(
-          customerCodeInfo: customerCodeInfo,
-        ),
-      );
       trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
         MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
       });
+      context.read<ShipToCodeBloc>().add(
+            ShipToCodeEvent.selected(
+              shipToInfo: shipToInfo,
+            ),
+          );
     }
   }
 

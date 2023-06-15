@@ -205,13 +205,7 @@ const RouteItem ordersTabRouteItem = RouteItem(
 );
 
 const RouteItem paymentsTabRouteItem = RouteItem(
-  route: PaymentsTabRoute(
-    children: [
-      AccountSummaryPageRoute(),
-      PaymentsSummaryPageRoute(),
-      StatementSummaryPageRoute(),
-    ],
-  ),
+  route: PaymentsTabRoute(),
   icon: Icon(
     Icons.payments_outlined,
     key: WidgetKeys.paymentsTab,
@@ -219,7 +213,7 @@ const RouteItem paymentsTabRouteItem = RouteItem(
   label: 'Payments',
 );
 
-const RouteItem moreTabRouteItem = RouteItem(
+RouteItem moreTabRouteItem = const RouteItem(
   route: MoreTabRoute(),
   icon: Icon(
     Icons.reorder_outlined,

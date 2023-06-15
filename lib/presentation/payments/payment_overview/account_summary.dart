@@ -1,17 +1,18 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -63,31 +64,15 @@ class AccountSummaryPage extends StatelessWidget {
                   previous.isFetchingOutstandingBalance !=
                   current.isFetchingOutstandingBalance,
               builder: (context, state) {
-                return LoadingShimmer.withChild(
-                  enabled: state.isFetchingOutstandingBalance,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.read<AllInvoicesBloc>().add(
-                            AllInvoicesEvent.fetch(
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              filter: AllInvoicesFilter.empty(),
-                            ),
-                          );
-                      context.router.pushNamed('payments/all_invoices');
-                    },
-                    child: _ItemCard(
-                      label: 'Invoices',
-                      keyVal: getInvoices(
-                        outstandingBalance: state.outstandingBalance,
-                      ),
+                return BlocProvider(
+                  create: (context) =>
+                      locator<DownloadPaymentAttachmentsBloc>(),
+                  child: _ItemCard(
+                    label: 'Invoices',
+                    keyVal: getInvoices(
+                      outstandingBalance: state.outstandingBalance,
                     ),
+                    isFetching: state.isFetchingOutstandingBalance,
                   ),
                 );
               },
@@ -100,11 +85,13 @@ class AccountSummaryPage extends StatelessWidget {
                   previous.isFetchingCreditLimit !=
                   current.isFetchingCreditLimit,
               builder: (context, state) {
-                return LoadingShimmer.withChild(
-                  enabled: state.isFetchingCreditLimit,
+                return BlocProvider(
+                  create: (context) =>
+                      locator<DownloadPaymentAttachmentsBloc>(),
                   child: _ItemCard(
                     label: 'Credits',
                     keyVal: getCredits(creditLimit: state.creditLimit),
+                    isFetching: state.isFetchingCreditLimit,
                   ),
                 );
               },
@@ -129,14 +116,17 @@ class _ItemCard extends StatelessWidget {
   const _ItemCard({
     required this.label,
     required this.keyVal,
+    required this.isFetching,
   });
   final String label;
   final List<KeyValuePair> keyVal;
+  final bool isFetching;
   @override
   Widget build(BuildContext context) {
     final config = context.read<SalesOrgBloc>().state.configs;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
           contentPadding: const EdgeInsets.all(0),
@@ -144,48 +134,78 @@ class _ItemCard extends StatelessWidget {
             label.tr(),
             style: Theme.of(context).textTheme.labelMedium,
           ),
-          trailing: TextButton.icon(
-            icon: const Icon(
-              Icons.download_outlined,
-              color: ZPColors.skyBlueColor,
-              size: 16,
-            ),
-            label: Text(
-              'Download csv'.tr(),
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.skyBlueColor,
+          trailing: BlocConsumer<DownloadPaymentAttachmentsBloc,
+              DownloadPaymentAttachmentsState>(
+            listenWhen: (previous, current) =>
+                previous.isDownloadInProgress != current.isDownloadInProgress,
+            listener: (context, state) {
+              state.failureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    ErrorUtils.handleApiFailure(context, failure);
+                  },
+                  (_) {
+                    showSnackBar(
+                      context: context,
+                      message: 'File downloaded successfully'.tr(),
+                    );
+                  },
+                ),
+              );
+            },
+            buildWhen: (previous, current) =>
+                previous.isDownloadInProgress != current.isDownloadInProgress,
+            builder: (context, state) {
+              return FittedBox(
+                child: LoadingShimmer.withChild(
+                  enabled: state.isDownloadInProgress,
+                  child: TextButton.icon(
+                    icon: const Icon(
+                      Icons.download_outlined,
+                      color: ZPColors.skyBlueColor,
+                      size: 16,
+                    ),
+                    label: Text(
+                      'Download csv'.tr(),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.skyBlueColor,
+                          ),
+                    ),
+                    onPressed: () {
+                      if (label == 'Invoices') {
+                        context.read<DownloadPaymentAttachmentsBloc>().add(
+                              DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
+                                salesOrganization: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                queryObject: AllInvoicesFilter.fullyEmpty(),
+                              ),
+                            );
+                      } else if (label == 'Credits') {
+                        context.read<DownloadPaymentAttachmentsBloc>().add(
+                              DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
+                                salesOrganization: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                queryObject: AllCreditsFilter.fullyEmpty(),
+                              ),
+                            );
+                      }
+                    },
                   ),
-            ),
-            onPressed: () {
-              if (label == 'Invoices') {
-                context.read<DownloadPaymentAttachmentsBloc>().add(
-                      DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-                        salesOrganization: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        queryObject: AllInvoicesFilter.empty(),
-                      ),
-                    );
-              } else if (label == 'Credits') {
-                context.read<DownloadPaymentAttachmentsBloc>().add(
-                      DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-                        salesOrganization: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        queryObject: AllCreditsFilter.empty(),
-                      ),
-                    );
-              }
+                ),
+              );
             },
           ),
         ),
@@ -210,12 +230,15 @@ class _ItemCard extends StatelessWidget {
                           Text(
                             e.value.key,
                           ),
-                          Text(
-                            StringUtils.displayPrice(
-                              config,
-                              double.parse(e.value.value),
+                          LoadingShimmer.withChild(
+                            enabled: isFetching,
+                            child: Text(
+                              StringUtils.displayPrice(
+                                config,
+                                double.parse(e.value.value),
+                              ),
+                              style: Theme.of(context).textTheme.labelMedium,
                             ),
-                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ],
                       ),

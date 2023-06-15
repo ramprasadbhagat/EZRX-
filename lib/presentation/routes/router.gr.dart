@@ -109,9 +109,9 @@ import '../payments/all_credits/all_credits.dart' as _i50;
 import '../payments/all_invoices/all_invoices.dart' as _i48;
 import '../payments/credit_details/credit_details.dart' as _i51;
 import '../payments/invoice_details/invoice_details.dart' as _i49;
-import '../payments/payment_overview/account_summary.dart' as _i78;
+import '../payments/payment_overview/account_summary.dart' as _i76;
 import '../payments/payment_overview/payments_summary.dart' as _i77;
-import '../payments/payment_overview/statement_summary.dart' as _i76;
+import '../payments/payment_overview/statement_summary.dart' as _i78;
 import '../payments/payment_summary.dart' as _i45;
 import '../payments/payments_tab.dart' as _i74;
 import '../products/products_tab.dart' as _i72;
@@ -700,10 +700,10 @@ class AppRouter extends _i79.RootStackRouter {
         child: const _i75.MoreTab(),
       );
     },
-    StatementSummaryPageRoute.name: (routeData) {
+    AccountSummaryPageRoute.name: (routeData) {
       return _i79.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i76.StatementSummaryPage(),
+        child: const _i76.AccountSummaryPage(),
       );
     },
     PaymentsSummaryPageRoute.name: (routeData) {
@@ -712,10 +712,10 @@ class AppRouter extends _i79.RootStackRouter {
         child: const _i77.PaymentsSummaryPage(),
       );
     },
-    AccountSummaryPageRoute.name: (routeData) {
+    StatementSummaryPageRoute.name: (routeData) {
       return _i79.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i78.AccountSummaryPage(),
+        child: const _i78.StatementSummaryPage(),
       );
     },
   };
@@ -914,8 +914,15 @@ class AppRouter extends _i79.RootStackRouter {
               parent: HomeNavigationTabbarRoute.name,
               children: [
                 _i79.RouteConfig(
-                  StatementSummaryPageRoute.name,
-                  path: 'payments/statement_summary',
+                  '#redirect',
+                  path: '',
+                  parent: PaymentsTabRoute.name,
+                  redirectTo: 'payments/account_summary',
+                  fullMatch: true,
+                ),
+                _i79.RouteConfig(
+                  AccountSummaryPageRoute.name,
+                  path: 'payments/account_summary',
                   parent: PaymentsTabRoute.name,
                 ),
                 _i79.RouteConfig(
@@ -924,8 +931,8 @@ class AppRouter extends _i79.RootStackRouter {
                   parent: PaymentsTabRoute.name,
                 ),
                 _i79.RouteConfig(
-                  AccountSummaryPageRoute.name,
-                  path: 'payments/account_summary',
+                  StatementSummaryPageRoute.name,
+                  path: 'payments/statement_summary',
                   parent: PaymentsTabRoute.name,
                 ),
               ],
@@ -2528,15 +2535,15 @@ class MoreTabRoute extends _i79.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i76.StatementSummaryPage]
-class StatementSummaryPageRoute extends _i79.PageRouteInfo<void> {
-  const StatementSummaryPageRoute()
+/// [_i76.AccountSummaryPage]
+class AccountSummaryPageRoute extends _i79.PageRouteInfo<void> {
+  const AccountSummaryPageRoute()
       : super(
-          StatementSummaryPageRoute.name,
-          path: 'payments/statement_summary',
+          AccountSummaryPageRoute.name,
+          path: 'payments/account_summary',
         );
 
-  static const String name = 'StatementSummaryPageRoute';
+  static const String name = 'AccountSummaryPageRoute';
 }
 
 /// generated route for
@@ -2552,13 +2559,13 @@ class PaymentsSummaryPageRoute extends _i79.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i78.AccountSummaryPage]
-class AccountSummaryPageRoute extends _i79.PageRouteInfo<void> {
-  const AccountSummaryPageRoute()
+/// [_i78.StatementSummaryPage]
+class StatementSummaryPageRoute extends _i79.PageRouteInfo<void> {
+  const StatementSummaryPageRoute()
       : super(
-          AccountSummaryPageRoute.name,
-          path: 'payments/account_summary',
+          StatementSummaryPageRoute.name,
+          path: 'payments/statement_summary',
         );
 
-  static const String name = 'AccountSummaryPageRoute';
+  static const String name = 'StatementSummaryPageRoute';
 }

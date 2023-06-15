@@ -214,16 +214,17 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
           path: 'payments/tab',
           children: [
             AutoRoute(
-              page: StatementSummaryPage,
-              path: 'payments/statement_summary',
+              page: AccountSummaryPage,
+              path: 'payments/account_summary',
+              initial: true,
             ),
             AutoRoute(
               page: PaymentsSummaryPage,
               path: 'payments/payments_summary',
             ),
             AutoRoute(
-              page: AccountSummaryPage,
-              path: 'payments/account_summary',
+              page: StatementSummaryPage,
+              path: 'payments/statement_summary',
             ),
           ],
         ),

@@ -35,7 +35,18 @@ class AccountSummaryRepository extends IAccountSummaryRepository {
         );
       }
     }
-    throw UnimplementedError();
+    try {
+      final response = await remoteDataSource.fetchInvoiceSummary(
+        customerCode: custCode,
+        salesOrg: salesOrg.getOrCrash(),
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
   }
 
   @override
@@ -54,6 +65,17 @@ class AccountSummaryRepository extends IAccountSummaryRepository {
         );
       }
     }
-    throw UnimplementedError();
+    try {
+      final response = await remoteDataSource.fetchCreditLimit(
+        customerCode: custCode,
+        salesOrg: salesOrg.getOrCrash(),
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
   }
 }

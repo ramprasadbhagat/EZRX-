@@ -94,7 +94,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/api/downloadPaymentAttachment',
+        url: '/api/payment/downloads',
         data: {'url': fileUrl},
         responseType: ResponseType.bytes,
       );

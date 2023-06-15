@@ -18,6 +18,15 @@ class AllCreditsFilter with _$AllCreditsFilter {
     required String sortBy,
   }) = _AllCreditsFilter;
 
+  factory AllCreditsFilter.fullyEmpty() => AllCreditsFilter(
+        documentNumber: DocumentNumber(''),
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+        creditAmountTo: RangeValue(''),
+        creditAmountFrom: RangeValue(''),
+        sortBy: 'All',
+      );
+
   factory AllCreditsFilter.empty() => AllCreditsFilter(
         documentNumber: DocumentNumber(''),
         documentDateFrom: DateTimeStringValue(

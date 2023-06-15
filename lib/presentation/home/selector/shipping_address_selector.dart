@@ -230,11 +230,7 @@ class ShipCodeSelector extends StatelessWidget {
 
               context.read<AccountSummaryBloc>().add(
                     AccountSummaryEvent.fetchInvoiceSummary(
-                      custCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo
-                          .customerCodeSoldTo,
+                      custCode: customerCodeInfo.customerCodeSoldTo,
                       salesOrg: context
                           .read<SalesOrgBloc>()
                           .state
@@ -245,11 +241,7 @@ class ShipCodeSelector extends StatelessWidget {
 
               context.read<AccountSummaryBloc>().add(
                     AccountSummaryEvent.fetchCreditSummary(
-                      custCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo
-                          .customerCodeSoldTo,
+                      custCode: customerCodeInfo.customerCodeSoldTo,
                       salesOrg: context
                           .read<SalesOrgBloc>()
                           .state

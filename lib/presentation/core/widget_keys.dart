@@ -61,6 +61,13 @@ class WidgetKeys {
 
   static Key covidMaterialSearchField(String searchKey) =>
       Key('covidMaterialSearchField$searchKey');
+  //============================================================
+  //  Payment TAB BAR
+  //============================================================
+  static const Key paymentsTabPage = Key('paymentsTabPage');
+  static const Key accountSummaryTab = Key('accountSummaryPage');
+  static const Key paymentsSummaryTab = Key('paymentsSummaryPage');
+  static const Key statementSummaryTab = Key('statementSummaryPage');
 
   //============================================================
   //  MaterialListSearch Page Keys
@@ -109,14 +116,6 @@ class WidgetKeys {
       Key('userRestrictionListSearchField');
   static Key userRestrictionTile(String userName) =>
       Key('userRestrictionTile-$userName');
-
-  //============================================================
-  //  Payment TAB BAR
-  //============================================================
-  static const Key paymentsTabPage = Key('paymentsTabPage');
-  static const Key accountSummaryTab = Key('accountSummaryPage');
-  static const Key paymentsSummaryTab = Key('paymentsSummaryPage');
-  static const Key statementSummaryTab = Key('statementSummaryPage');
 
   //============================================================
   //  SearchBar Keys

@@ -1,11 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/tab_view.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/payments/payment_overview/account_summary.dart';
-import 'package:ezrxmobile/presentation/payments/payment_overview/payments_summary.dart';
-import 'package:ezrxmobile/presentation/payments/payment_overview/statement_summary.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
@@ -28,21 +24,28 @@ class PaymentsTab extends StatelessWidget {
           Expanded(
             child: AutoTabsRouter.tabBar(
               routes: const [
-                StatementSummaryPageRoute(),
-                PaymentsSummaryPageRoute(),
                 AccountSummaryPageRoute(),
+                PaymentsSummaryPageRoute(),
+                StatementSummaryPageRoute(),
               ],
-              builder: (context, child, tabController) => TabViewPage(
-                tabController: tabController,
-                tabHeaderText: [
-                  'Account'.tr(),
-                  'Payment'.tr(),
-                  'Statement'.tr(),
-                ],
-                tabWidgets: const [
-                  AccountSummaryPage(),
-                  PaymentsSummaryPage(),
-                  StatementSummaryPage(),
+              builder: (context, child, tabController) => Column(
+                children: [
+                  TabBar(
+                    controller: tabController,
+                    tabs: [
+                      'Account',
+                      'Payment',
+                      'Statement',
+                    ]
+                        .map(
+                          (e) => Tab(
+                            key: Key(e.toLowerCase()),
+                            text: e.tr(),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  Expanded(child: child),
                 ],
               ),
             ),

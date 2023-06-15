@@ -20,6 +20,17 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required String filterStatus,
   }) = _AllInvoicesFilter;
 
+  factory AllInvoicesFilter.fullyEmpty() => AllInvoicesFilter(
+        documentNumber: DocumentNumber(''),
+        dueDateFrom: DateTimeStringValue(''),
+        dueDateTo: DateTimeStringValue(''),
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+        debitValueFrom: RangeValue(''),
+        debitValueTo: RangeValue(''),
+        filterStatus: '',
+      );
+
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
         documentNumber: DocumentNumber(''),
         dueDateFrom: DateTimeStringValue(
