@@ -59,6 +59,10 @@ bool getInStock(String text) {
   return text == 'Yes';
 }
 
+String getMaterialInStockText(bool inStock) {
+  return inStock ? 'Preorder' : 'Out of Stock';
+}
+
 String getTelephoneNotGreaterThan16(String text) {
   return hasLengthGreaterThanN(text, 16) ? text.substring(0, 16) : text;
 }
