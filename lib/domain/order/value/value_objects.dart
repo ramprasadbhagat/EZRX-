@@ -167,6 +167,21 @@ class MaterialNumber extends ValueObject<String> {
   const MaterialNumber._(this.value);
 }
 
+class MaterialInfoType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialInfoType(String input) {
+    return MaterialInfoType._(validateStringNotEmpty(input));
+  }
+
+  bool get typeBundle => isBundle(value.getOrElse(() => ''));
+
+  bool get typeMaterial => isMaterial(value.getOrElse(() => ''));
+
+  const MaterialInfoType._(this.value);
+}
+
 class MaterialInStock extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -862,4 +877,15 @@ class Ean extends ValueObject<String> {
   }
 
   const Ean._(this.value);
+}
+
+class DataTotalHidden extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory DataTotalHidden(int input) => DataTotalHidden._(Right(input));
+
+  const DataTotalHidden._(this.value);
+
+  bool get isDataHidden => notZero(value.getOrElse(() => 0));
 }

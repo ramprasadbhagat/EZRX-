@@ -195,18 +195,10 @@ class _MaterialListScrollList extends StatelessWidget {
         );
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
-            user: eligibilityBloc.state.user,
             salesOrganisation: eligibilityBloc.state.salesOrganisation,
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter: context
-                .read<MaterialFilterBloc>()
-                .state
-                .getEmptyMaterialFilter(),
-            orderDocumentType:
-                context.read<OrderDocumentTypeBloc>().state.selectedOrderType,
-            pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
           ),
         );
   }
@@ -216,16 +208,10 @@ class _MaterialListScrollList extends StatelessWidget {
 
     context.read<MaterialListBloc>().add(
           MaterialListEvent.loadMore(
-            user: eligibilityBloc.state.user,
             salesOrganisation: eligibilityBloc.state.salesOrganisation,
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter:
-                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
-            orderDocumentType:
-                context.read<OrderDocumentTypeBloc>().state.selectedOrderType,
-            pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
           ),
         );
   }

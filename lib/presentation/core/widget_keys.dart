@@ -144,4 +144,22 @@ class WidgetKeys {
   //  Presentation/core Keys
   //============================================================
   static const Key staticHtmlViewer = Key('staticHtmlViewer');
+  static const Key scrollList = Key('scrollList');
+  static const Key loadMoreLoader = Key('loadIndicator');
+
+  //============================================================
+  //  Material List
+  //============================================================
+
+  static const Key materialListPage = Key('materialListPage');
+  static const Key materialListPageAppBar = Key('materialListPageAppBar');
+  static const Key materialListLoader = Key('LoaderImage');
+  static const Key totalMaterialItemCount = Key('totalMaterialCount');
+  static const Key materialListStockLabel = Key('stockLabel');
+  static const Key materialListBundleCard = Key('bundleCard');
+  static const Key materialListMaterialCard = Key('MaterialCard');
+  static Key materialListBundleMaterial(String materialNumber) =>
+      Key('bundleMaterialCard$materialNumber');  
+
+
 }

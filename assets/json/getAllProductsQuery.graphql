@@ -1,0 +1,55 @@
+query ($request: GetAllProductsRequest!) {
+  GetAllProducts(request: $request) {
+    Count
+    Products {
+      Code
+      Name
+      PrincipalCode
+      materialNumber
+      materialDescription
+      Manufactured
+      IsFavourite
+      Type
+      HidePrice
+      BundleInformation {
+        BundleName
+        BundleCode
+        Conditions
+        BonusEligible
+        BundleInformation {
+          Sequence
+          Quantity
+          Type
+          Rate
+        }
+      }
+      Data {
+        MaterialCode
+        Manufactured
+        MaterialDescription
+        DefaultMaterialDescription
+        GenericMaterialName
+        Manufactured
+        MaterialImageURL
+        GovernmentMaterialCode
+      }
+      DataTotalCount
+      DataTotalHidden
+      HidePrice
+      IsGimmick
+    }
+  }
+}
+
+variables:{
+    "request": {
+        "Customer": "0000002011",
+        "SalesOrg": "2001",
+        "ShipTo": "0000002011",
+        "First": 12,
+        "After": 0,
+        "isGimmick": false,
+        "OrderByName": "asc",
+        "Language": "EN"
+    }
+}

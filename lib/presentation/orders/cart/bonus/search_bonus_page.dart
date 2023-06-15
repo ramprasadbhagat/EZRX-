@@ -203,7 +203,8 @@ class _AppBarState extends State<_AppBar> {
 
           return SearchBar(
             key: WidgetKeys.addBonusTextField(
-                state.searchKey.getOrDefaultValue('')),
+              state.searchKey.getOrDefaultValue(''),
+            ),
             controller: _searchController,
             enabled: !state.isFetching,
             customValidator: () =>

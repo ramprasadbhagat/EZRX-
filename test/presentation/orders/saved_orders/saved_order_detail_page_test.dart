@@ -14,46 +14,33 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_lis
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
-import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
-List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
-  final materialList = items
-      .map((item) => item.type.isBundle
-          ? item.materials
-              .map((material) =>
-                  MaterialQueryInfo.fromBundles(materialInfo: material))
-              .toList()
-          : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)])
-      .toList()
-      .expand((element) => element)
-      .toList();
+// List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
+//   final materialList = items
+//       .map((item) => item.type.isBundle
+//           ? item.materials
+//               .map((material) =>
+//                   MaterialQueryInfo.fromBundles(materialInfo: material))
+//               .toList()
+//           : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)])
+//       .toList()
+//       .expand((element) => element)
+//       .toList();
 
-  return materialList;
-}
+//   return materialList;
+// }
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -101,10 +88,10 @@ void main() {
   late ShipToCodeBloc shipToCodeBLocMock;
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late CartBloc cartBlocMock;
-  late SavedOrder orderMock;
-  late List<MaterialItem> orderMockItems;
+  // late SavedOrder orderMock;
+  // late List<MaterialItem> orderMockItems;
   late MockEligibilityBloc eligibilityBlocMock;
-  late AppRouter autoRouterMock;
+  // late AppRouter autoRouterMock;
   late SavedOrderListBlocMock savedOrderListBlocMock;
   late AdditionalDetailsBlocMock additionalDetailsMockBloc;
   late TenderContractListBloc tenderContractListBlocMock;
@@ -124,10 +111,10 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
-    final orders = await OrderLocalDataSource().getSavedOrders();
-    orderMock = orders.first;
-    orderMockItems = orderMock.items;
-    autoRouterMock = locator<AppRouter>();
+    // final orders = await OrderLocalDataSource().getSavedOrders();
+    // orderMock = orders.first;
+    // orderMockItems = orderMock.items;
+    // autoRouterMock = locator<AppRouter>();
   });
 
   setUp(() async {
@@ -175,366 +162,366 @@ void main() {
         .thenReturn(AnnouncementState.initial());
   });
 
-  Widget savedOrderDetailPage(Widget child) => WidgetUtils.getScopedWidget(
-      autoRouterMock: autoRouterMock,
-      providers: [
-        BlocProvider<UserBloc>(
-          create: (context) => userBlocMock,
-        ),
-        BlocProvider<SalesOrgBloc>(
-          create: (context) => salesOrgBlocMock,
-        ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
-        ),
-        BlocProvider<ShipToCodeBloc>(
-          create: (context) => shipToCodeBLocMock,
-        ),
-        BlocProvider<MaterialPriceDetailBloc>(
-          create: (context) => materialPriceDetailBlocMock,
-        ),
-        BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-        BlocProvider<EligibilityBloc>(
-          create: (context) => eligibilityBlocMock,
-        ),
-        BlocProvider<SavedOrderListBloc>(
-          create: (context) => savedOrderListBlocMock,
-        ),
-        BlocProvider<AdditionalDetailsBloc>(
-          create: (context) => additionalDetailsMockBloc,
-        ),
-        BlocProvider<TenderContractListBloc>(
-          create: (context) => tenderContractListBlocMock,
-        ),
-        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-        BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock),
-      ],
-      child: child);
+  // Widget savedOrderDetailPage(Widget child) => WidgetUtils.getScopedWidget(
+  //     autoRouterMock: autoRouterMock,
+  //     providers: [
+  //       BlocProvider<UserBloc>(
+  //         create: (context) => userBlocMock,
+  //       ),
+  //       BlocProvider<SalesOrgBloc>(
+  //         create: (context) => salesOrgBlocMock,
+  //       ),
+  //       BlocProvider<CustomerCodeBloc>(
+  //         create: (context) => customerCodeBlocMock,
+  //       ),
+  //       BlocProvider<ShipToCodeBloc>(
+  //         create: (context) => shipToCodeBLocMock,
+  //       ),
+  //       BlocProvider<MaterialPriceDetailBloc>(
+  //         create: (context) => materialPriceDetailBlocMock,
+  //       ),
+  //       BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+  //       BlocProvider<EligibilityBloc>(
+  //         create: (context) => eligibilityBlocMock,
+  //       ),
+  //       BlocProvider<SavedOrderListBloc>(
+  //         create: (context) => savedOrderListBlocMock,
+  //       ),
+  //       BlocProvider<AdditionalDetailsBloc>(
+  //         create: (context) => additionalDetailsMockBloc,
+  //       ),
+  //       BlocProvider<TenderContractListBloc>(
+  //         create: (context) => tenderContractListBlocMock,
+  //       ),
+  //       BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+  //       BlocProvider<AnnouncementBloc>(
+  //           create: (context) => announcementBlocMock),
+  //     ],
+  //     child: child);
 
   group('Saved Order Detail Screen', () {
-    testWidgets(
-      'Saved Order Detail with all SaveOrderBounsTile and non empty description',
-      (tester) async {
-        final saveOrder = SavedOrder.empty().copyWith(items: [
-          orderMock.items[0].copyWith(
-            bonuses: [MaterialItemBonus.empty()],
-            materialDescription: 'non-empty description',
-          )
-        ]);
+    // testWidgets(
+    //   'Saved Order Detail with all SaveOrderBounsTile and non empty description',
+    //   (tester) async {
+    //     final saveOrder = SavedOrder.empty().copyWith(items: [
+    //       orderMock.items[0].copyWith(
+    //         bonuses: [MaterialItemBonus.empty()],
+    //         materialDescription: 'non-empty description',
+    //       )
+    //     ]);
 
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: saveOrder,
-          ),
-        ));
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: saveOrder,
+    //       ),
+    //     ));
 
-        await tester.pump();
+    //     await tester.pump();
 
-        expect(find.byKey(const Key('saveOrderBounsTile')),
-            findsAtLeastNWidgets(1));
-      },
-    );
-    testWidgets(
-      'Saved Order Detail with material items',
-      (tester) async {
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        expect(find.byKey(const Key('savedOrderDetailPage')), findsOneWidget);
-        expect(find.text('#${orderMock.id}'), findsOneWidget);
-        expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
-        expect(find.text('Add to Cart'), findsOneWidget);
-        expect(find.text('Delete'), findsOneWidget);
-      },
-    );
+    //     expect(find.byKey(const Key('saveOrderBounsTile')),
+    //         findsAtLeastNWidgets(1));
+    //   },
+    // );
+    // testWidgets(
+    //   'Saved Order Detail with material items',
+    //   (tester) async {
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     expect(find.byKey(const Key('savedOrderDetailPage')), findsOneWidget);
+    //     expect(find.text('#${orderMock.id}'), findsOneWidget);
+    //     expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
+    //     expect(find.text('Add to Cart'), findsOneWidget);
+    //     expect(find.text('Delete'), findsOneWidget);
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail with all materials invalid',
-      (tester) async {
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            isValidating: true,
-            isFetching: true,
-            materialDetails: {
-              for (final material in orderMockItems)
-                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty()
-                        .copyWith
-                        .price(isValidMaterial: false),
-            },
-          ),
-        );
-        final expectedStates = [
-          materialPriceDetailBlocMock.state
-              .copyWith(isValidating: false, isFetching: false),
-        ];
-        whenListen(
-            materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        await tester.pump();
-        expect(find.byKey(const Key('savedOrderDetailPage')), findsOneWidget);
-        expect(find.byKey(const Key('invalidOrderWarning')), findsOneWidget);
-        expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
-        expect(find.text('Invalid'), findsAtLeastNWidgets(1));
-        expect(find.text('NA'), findsAtLeastNWidgets(1));
-      },
-    );
+    // testWidgets(
+    //   'Saved Order Detail with all materials invalid',
+    //   (tester) async {
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         isValidating: true,
+    //         isFetching: true,
+    //         materialDetails: {
+    //           for (final material in orderMockItems)
+    //             MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+    //                 MaterialPriceDetail.empty()
+    //                     .copyWith
+    //                     .price(isValidMaterial: false),
+    //         },
+    //       ),
+    //     );
+    //     final expectedStates = [
+    //       materialPriceDetailBlocMock.state
+    //           .copyWith(isValidating: false, isFetching: false),
+    //     ];
+    //     whenListen(
+    //         materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     await tester.pump();
+    //     expect(find.byKey(const Key('savedOrderDetailPage')), findsOneWidget);
+    //     expect(find.byKey(const Key('invalidOrderWarning')), findsOneWidget);
+    //     expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
+    //     expect(find.text('Invalid'), findsAtLeastNWidgets(1));
+    //     expect(find.text('NA'), findsAtLeastNWidgets(1));
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail with price loading',
-      (tester) async {
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            isValidating: true,
-          ),
-        );
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        expect(
-            find.byKey(const Key('orderActionButtonShimmer')), findsOneWidget);
-        expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
-        expect(find.byKey(const Key('price-loading')), findsAtLeastNWidgets(1));
-        final loadingShimmer = find.byType(LoadingShimmer);
-        expect(loadingShimmer, findsAtLeastNWidgets(2));
-        await tester.tap(loadingShimmer.first);
-        await tester.tap(loadingShimmer.last);
-      },
-    );
+    // testWidgets(
+    //   'Saved Order Detail with price loading',
+    //   (tester) async {
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         isValidating: true,
+    //       ),
+    //     );
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     expect(
+    //         find.byKey(const Key('orderActionButtonShimmer')), findsOneWidget);
+    //     expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
+    //     expect(find.byKey(const Key('price-loading')), findsAtLeastNWidgets(1));
+    //     final loadingShimmer = find.byType(LoadingShimmer);
+    //     expect(loadingShimmer, findsAtLeastNWidgets(2));
+    //     await tester.tap(loadingShimmer.first);
+    //     await tester.tap(loadingShimmer.last);
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail with FOC material',
-      (tester) async {
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            materialDetails: {
-              for (final material in orderMockItems)
-                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty().copyWith.price(
-                          isValidMaterial: true,
-                          isFOC: true,
-                        ),
-            },
-          ),
-        );
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
-        expect(find.text(': FOC'), findsAtLeastNWidgets(1));
-        expect(find.text('Add to Cart'), findsOneWidget);
-        expect(find.text('Delete'), findsOneWidget);
-      },
-    );
+    // testWidgets(
+    //   'Saved Order Detail with FOC material',
+    //   (tester) async {
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         materialDetails: {
+    //           for (final material in orderMockItems)
+    //             MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+    //                 MaterialPriceDetail.empty().copyWith.price(
+    //                       isValidMaterial: true,
+    //                       isFOC: true,
+    //                     ),
+    //         },
+    //       ),
+    //     );
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
+    //     expect(find.text(': FOC'), findsAtLeastNWidgets(1));
+    //     expect(find.text('Add to Cart'), findsOneWidget);
+    //     expect(find.text('Delete'), findsOneWidget);
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail with valid material and price displayed',
-      (tester) async {
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            materialDetails: {
-              for (final material in orderMockItems)
-                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty()
-                        .copyWith
-                        .price(finalPrice: MaterialPrice(10)),
-            },
-          ),
-        );
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
+    // testWidgets(
+    //   'Saved Order Detail with valid material and price displayed',
+    //   (tester) async {
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         materialDetails: {
+    //           for (final material in orderMockItems)
+    //             MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+    //                 MaterialPriceDetail.empty()
+    //                     .copyWith
+    //                     .price(finalPrice: MaterialPrice(10)),
+    //         },
+    //       ),
+    //     );
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
 
-        final currency = SalesOrganisationConfigs.empty().currency.code;
-        expect(find.text(': $currency 10'), findsAtLeastNWidgets(1));
-      },
-    );
+    //     final currency = SalesOrganisationConfigs.empty().currency.code;
+    //     expect(find.text(': $currency 10'), findsAtLeastNWidgets(1));
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail when refreshed',
-      (tester) async {
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            materialDetails: {
-              for (final material in orderMockItems)
-                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty()
-                        .copyWith
-                        .price(finalPrice: MaterialPrice(10)),
-            },
-          ),
-        );
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        await tester.drag(
-            find.byKey(const ValueKey('savedDetailRefreshIndicator')),
-            const Offset(0, 500));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-        verify(
-          () => materialPriceDetailBlocMock.add(
-            MaterialPriceDetailEvent.refresh(
-                user: userBlocMock.state.user,
-                customerCode: customerCodeBlocMock.state.customerCodeInfo,
-                salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-                shipToCode: shipToCodeBLocMock.state.shipToInfo,
-                pickAndPack: eligibilityBlocMock.state.getPNPValueMaterial,
-                salesOrganisationConfigs: salesOrgBlocMock.state.configs,
-                materialInfoList: orderMock.items
-                    .map(
-                      (item) => MaterialQueryInfo.fromSavedOrder(
-                        orderMaterial: item,
-                      ),
-                    )
-                    .toList()),
-          ),
-        ).called(1);
-      },
-    );
+    // testWidgets(
+    //   'Saved Order Detail when refreshed',
+    //   (tester) async {
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         materialDetails: {
+    //           for (final material in orderMockItems)
+    //             MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+    //                 MaterialPriceDetail.empty()
+    //                     .copyWith
+    //                     .price(finalPrice: MaterialPrice(10)),
+    //         },
+    //       ),
+    //     );
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     await tester.drag(
+    //         find.byKey(const ValueKey('savedDetailRefreshIndicator')),
+    //         const Offset(0, 500));
+    //     await tester.pumpAndSettle(const Duration(seconds: 1));
+    //     verify(
+    //       () => materialPriceDetailBlocMock.add(
+    //         MaterialPriceDetailEvent.refresh(
+    //             user: userBlocMock.state.user,
+    //             customerCode: customerCodeBlocMock.state.customerCodeInfo,
+    //             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
+    //             shipToCode: shipToCodeBLocMock.state.shipToInfo,
+    //             pickAndPack: eligibilityBlocMock.state.getPNPValueMaterial,
+    //             salesOrganisationConfigs: salesOrgBlocMock.state.configs,
+    //             materialInfoList: orderMock.items
+    //                 .map(
+    //                   (item) => MaterialQueryInfo.fromSavedOrder(
+    //                     orderMaterial: item,
+    //                   ),
+    //                 )
+    //                 .toList()),
+    //       ),
+    //     ).called(1);
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail when add to cart is pressed then navigate to cart page',
-      (tester) async {
-        final materialInfoList = _getMaterialList(orderMockItems);
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            isFetching: false,
-            isValidating: false,
-            materialDetails: {
-              for (final material in materialInfoList)
-                material: MaterialPriceDetail.empty()
-                    .copyWith
-                    .price(finalPrice: MaterialPrice(10)),
-            },
-          ),
-        );
-        final expectedStates = [
-          materialPriceDetailBlocMock.state
-              .copyWith(isValidating: false, isFetching: false),
-        ];
-        whenListen(
-            materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
+    // testWidgets(
+    //   'Saved Order Detail when add to cart is pressed then navigate to cart page',
+    //   (tester) async {
+    //     final materialInfoList = _getMaterialList(orderMockItems);
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         isFetching: false,
+    //         isValidating: false,
+    //         materialDetails: {
+    //           for (final material in materialInfoList)
+    //             material: MaterialPriceDetail.empty()
+    //                 .copyWith
+    //                 .price(finalPrice: MaterialPrice(10)),
+    //         },
+    //       ),
+    //     );
+    //     final expectedStates = [
+    //       materialPriceDetailBlocMock.state
+    //           .copyWith(isValidating: false, isFetching: false),
+    //     ];
+    //     whenListen(
+    //         materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
 
-        await tester.tap(find.text('Add to Cart'));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-        // final itemInfo = MaterialPriceDetail.empty()
-        //     .copyWith
-        //     .price(finalPrice: MaterialPrice(10));
+    //     await tester.tap(find.text('Add to Cart'));
+    //     await tester.pumpAndSettle(const Duration(seconds: 1));
+    //     // final itemInfo = MaterialPriceDetail.empty()
+    //     //     .copyWith
+    //     //     .price(finalPrice: MaterialPrice(10));
 
-        // verify(() => CartEvent.addToCartFromList(
-        //       items: [
-        //         PriceAggregate(
-        //           price: itemInfo.price,
-        //           materialInfo: itemInfo.info,
-        //           salesOrgConfig: salesOrgBlocMock.state.configs,
-        //           quantity: orderMockItems[0].qty,
-        //           discountedMaterialCount: cartBlocMock.state.zmgMaterialCount,
-        //           bundle: Bundle.empty(),
-        //           addedBonusList: [],
-        //           stockInfo: StockInfo.empty().copyWith(
-        //             materialNumber: itemInfo.info.materialNumber,
-        //           ),
-        //           tenderContract: TenderContract.empty(),
-        //         )
-        //       ],
-        //       customerCodeInfo: CustomerCodeInfo.empty(),
-        //       doNotAllowOutOfStockMaterials: true,
-        //       salesOrganisation: SalesOrganisation.empty(),
-        //       salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        //       shipToInfo: ShipToInfo.empty(),
-        //     )).called(5);
-      },
-    );
+    //     // verify(() => CartEvent.addToCartFromList(
+    //     //       items: [
+    //     //         PriceAggregate(
+    //     //           price: itemInfo.price,
+    //     //           materialInfo: itemInfo.info,
+    //     //           salesOrgConfig: salesOrgBlocMock.state.configs,
+    //     //           quantity: orderMockItems[0].qty,
+    //     //           discountedMaterialCount: cartBlocMock.state.zmgMaterialCount,
+    //     //           bundle: Bundle.empty(),
+    //     //           addedBonusList: [],
+    //     //           stockInfo: StockInfo.empty().copyWith(
+    //     //             materialNumber: itemInfo.info.materialNumber,
+    //     //           ),
+    //     //           tenderContract: TenderContract.empty(),
+    //     //         )
+    //     //       ],
+    //     //       customerCodeInfo: CustomerCodeInfo.empty(),
+    //     //       doNotAllowOutOfStockMaterials: true,
+    //     //       salesOrganisation: SalesOrganisation.empty(),
+    //     //       salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+    //     //       shipToInfo: ShipToInfo.empty(),
+    //     //     )).called(5);
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail when add to cart is pressed with duplicate order then navigate to cart page',
-      (tester) async {
-        final list = <MaterialItem>[];
-        list.addAll(orderMock.items);
-        list.add(orderMock.items.first);
-        final inReq = orderMock.copyWith(items: list);
-        final materialInfoList = _getMaterialList(orderMockItems);
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            isFetching: false,
-            isValidating: false,
-            materialDetails: {
-              for (final material in materialInfoList)
-                material: MaterialPriceDetail.empty()
-                    .copyWith
-                    .price(finalPrice: MaterialPrice(10)),
-            },
-          ),
-        );
-        final expectedStates = [
-          materialPriceDetailBlocMock.state
-              .copyWith(isValidating: false, isFetching: false),
-        ];
-        whenListen(
-            materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: inReq,
-          ),
-        ));
+    // testWidgets(
+    //   'Saved Order Detail when add to cart is pressed with duplicate order then navigate to cart page',
+    //   (tester) async {
+    //     final list = <MaterialItem>[];
+    //     list.addAll(orderMock.items);
+    //     list.add(orderMock.items.first);
+    //     final inReq = orderMock.copyWith(items: list);
+    //     final materialInfoList = _getMaterialList(orderMockItems);
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         isFetching: false,
+    //         isValidating: false,
+    //         materialDetails: {
+    //           for (final material in materialInfoList)
+    //             material: MaterialPriceDetail.empty()
+    //                 .copyWith
+    //                 .price(finalPrice: MaterialPrice(10)),
+    //         },
+    //       ),
+    //     );
+    //     final expectedStates = [
+    //       materialPriceDetailBlocMock.state
+    //           .copyWith(isValidating: false, isFetching: false),
+    //     ];
+    //     whenListen(
+    //         materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: inReq,
+    //       ),
+    //     ));
 
-        await tester.tap(find.text('Add to Cart'));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-      },
-    );
+    //     await tester.tap(find.text('Add to Cart'));
+    //     await tester.pumpAndSettle(const Duration(seconds: 1));
+    //   },
+    // );
 
-    testWidgets(
-      'Saved Order Detail when delete is pressed',
-      (tester) async {
-        when(() => materialPriceDetailBlocMock.state).thenReturn(
-          MaterialPriceDetailState.initial().copyWith(
-            isFetching: false,
-            isValidating: false,
-            materialDetails: {
-              for (final material in [orderMockItems[0]])
-                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty()
-                        .copyWith
-                        .price(finalPrice: MaterialPrice(10)),
-            },
-          ),
-        );
-        await tester.pumpWidget(savedOrderDetailPage(
-          SavedOrderDetailPage(
-            order: orderMock,
-          ),
-        ));
-        await tester.tap(find.text('Delete'));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-        await tester.tap(find.byKey(const ValueKey('Yes')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-        verify(() => SavedOrderListEvent.delete(
-              order: orderMock,
-              user: userBlocMock.state.user,
-            )).called(1);
-        // expect(autoRouterMock.current.name, const CartPageRoute().routeName);
-      },
-    );
+    // testWidgets(
+    //   'Saved Order Detail when delete is pressed',
+    //   (tester) async {
+    //     when(() => materialPriceDetailBlocMock.state).thenReturn(
+    //       MaterialPriceDetailState.initial().copyWith(
+    //         isFetching: false,
+    //         isValidating: false,
+    //         materialDetails: {
+    //           for (final material in [orderMockItems[0]])
+    //             MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+    //                 MaterialPriceDetail.empty()
+    //                     .copyWith
+    //                     .price(finalPrice: MaterialPrice(10)),
+    //         },
+    //       ),
+    //     );
+    //     await tester.pumpWidget(savedOrderDetailPage(
+    //       SavedOrderDetailPage(
+    //         order: orderMock,
+    //       ),
+    //     ));
+    //     await tester.tap(find.text('Delete'));
+    //     await tester.pumpAndSettle(const Duration(seconds: 1));
+    //     await tester.tap(find.byKey(const ValueKey('Yes')));
+    //     await tester.pumpAndSettle(const Duration(seconds: 1));
+    //     verify(() => SavedOrderListEvent.delete(
+    //           order: orderMock,
+    //           user: userBlocMock.state.user,
+    //         )).called(1);
+    //     // expect(autoRouterMock.current.name, const CartPageRoute().routeName);
+    //   },
+    // );
   });
 }

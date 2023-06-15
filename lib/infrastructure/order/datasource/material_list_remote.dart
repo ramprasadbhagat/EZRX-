@@ -202,6 +202,48 @@ class MaterialListRemoteDataSource {
     });
   }
 
+  Future<MaterialResponse> getProductList({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required int pageSize,
+    required int offset,
+    required bool gimmickMaterial,
+    required String language,
+    required String orderByName,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.getProductQuery();
+
+      final variables = {
+        'request': {
+          'After': offset,
+          'Customer': customerCode,
+          'First': pageSize,
+          'Language': language,
+          'OrderByName': orderByName,
+          'SalesOrg': salesOrgCode,
+          'ShipTo': shipToCode,
+          'isGimmick': gimmickMaterial,
+          // 'Type': 'bundle'
+        },
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}price',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'GetAllProductsRequest',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData = res.data['data']['GetAllProducts'];
+
+      return MaterialResponseDto.fromJson(finalData).toDomain();
+    });
+  }
+
   Future<List<MaterialInfo>> getMaterialListSalesRep({
     required String userName,
     required String salesOrgCode,
@@ -410,6 +452,41 @@ class MaterialListRemoteDataSource {
       return List.from(finalData)
           .map((e) => MaterialDto.fromJson(e).toDomain())
           .toList();
+    });
+  }
+
+  Future<MaterialInfo> getProductDetails({
+    required String code,
+    required String customerCode,
+    required String salesOrg,
+    required String shipToCode,
+    required String type,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.getProductDetailsQuery();
+
+      final variables = {
+        'request': {
+          'Code': code,
+          'Customer': customerCode,
+          'SalesOrg': salesOrg,
+          'ShipTo': shipToCode,
+          'Type': type,
+        },
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}price',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'GetProductDetails',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData = res.data['data']['GetProductDetails'];
+
+      return MaterialDto.fromJson(finalData).toDomain();
     });
   }
 

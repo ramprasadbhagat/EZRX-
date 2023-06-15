@@ -55,16 +55,16 @@ class BundleInfoDtoAdapter extends TypeAdapter<_$_BundleInfoDto> {
 
 _$_BundleInfoDto _$$_BundleInfoDtoFromJson(Map<String, dynamic> json) =>
     _$_BundleInfoDto(
-      sequence: json['sequence'] as int,
-      quantity: json['quantity'] as int,
-      type: json['type'] as String,
-      rate: (json['rate'] as num).toDouble(),
+      sequence: json['Sequence'] as int,
+      quantity: json['Quantity'] as int,
+      type: json['Type'] as String,
+      rate: (json['Rate'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_BundleInfoDtoToJson(_$_BundleInfoDto instance) =>
     <String, dynamic>{
-      'sequence': instance.sequence,
-      'quantity': instance.quantity,
-      'type': instance.type,
-      'rate': instance.rate,
+      'Sequence': instance.sequence,
+      'Quantity': instance.quantity,
+      'Type': instance.type,
+      'Rate': instance.rate,
     };

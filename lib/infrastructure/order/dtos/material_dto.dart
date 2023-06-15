@@ -14,12 +14,6 @@ class MaterialDto with _$MaterialDto {
 
   @HiveType(typeId: 3, adapterName: 'MaterialDtoAdapter')
   const factory MaterialDto({
-    @JsonKey(name: 'materialNumber', defaultValue: '')
-    @HiveField(0, defaultValue: '')
-        required String materialNumber,
-    @JsonKey(name: 'materialDescription', defaultValue: '')
-    @HiveField(1, defaultValue: '')
-        required String materialDescription,
     @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
     @HiveField(2, defaultValue: '')
         required String governmentMaterialCode,
@@ -32,9 +26,6 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'principalName', defaultValue: '')
     @HiveField(5, defaultValue: '')
         required String principalName,
-    @JsonKey(name: 'principalCode', defaultValue: '')
-    @HiveField(6, defaultValue: '')
-        required String principalCode,
     @JsonKey(name: 'taxClassification', defaultValue: '')
     @HiveField(7, defaultValue: '')
         required String taxClassification,
@@ -53,9 +44,6 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'isSampleMaterial', defaultValue: false)
     @HiveField(12, defaultValue: false)
         required bool isSampleMaterial,
-    @JsonKey(name: 'hidePrice', defaultValue: false)
-    @HiveField(13, defaultValue: false)
-        required bool hidePrice,
     @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
     @HiveField(14, defaultValue: false)
         required bool hasValidTenderContract,
@@ -65,9 +53,6 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
     @HiveField(16, defaultValue: ['0'])
         required List<String> taxes,
-    @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-    @HiveField(17, defaultValue: <BundleDto>[])
-        required List<BundleDto> bundles,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
     @HiveField(18, defaultValue: '')
         required String defaultMaterialDescription,
@@ -86,6 +71,55 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'ean', defaultValue: '')
     @HiveField(23, defaultValue: '')
         required String ean,
+    @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+    @HiveField(17, defaultValue: <BundleDto>[])
+        required List<BundleDto> bundles,
+
+    // new field from v3
+    @JsonKey(name: 'Code', defaultValue: '')
+    @HiveField(24, defaultValue: '')
+        required String code,
+    @JsonKey(name: 'Name', defaultValue: '')
+    @HiveField(25, defaultValue: '')
+    @HiveField(26, defaultValue: '')
+        required String name,
+    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+    @HiveField(27, defaultValue: '')
+        required String principalCode,
+    @JsonKey(name: 'MaterialNumber', defaultValue: '')
+    @HiveField(28, defaultValue: '')
+        required String materialNumber,
+    @HiveField(29, defaultValue: '')
+    @JsonKey(name: 'materialDescription', defaultValue: '')
+    @HiveField(30, defaultValue: '')
+        required String materialDescription,
+    @JsonKey(name: 'Manufactured', defaultValue: '')
+    @HiveField(31, defaultValue: '')
+        required String manufactured,
+    @JsonKey(name: 'IsFavourite', defaultValue: false)
+    @HiveField(32, defaultValue: false)
+        required bool isFavourite,
+    @JsonKey(name: 'Type', defaultValue: '')
+    @HiveField(33, defaultValue: '')
+        required String type,
+    @JsonKey(name: 'HidePrice', defaultValue: false)
+    @HiveField(34, defaultValue: false)
+        required bool hidePrice,
+    @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+    @HiveField(35, defaultValue: 0)
+        required int dataTotalCount,
+    @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+    @HiveField(36, defaultValue: 0)
+        required int dataTotalHidden,
+    @JsonKey(name: 'IsGimmick', defaultValue: false)
+    @HiveField(37, defaultValue: false)
+        required bool isGimmick,
+    @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+    @HiveField(38, defaultValue: [])
+        required List<MaterialDataDto> data,
+    @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+    @HiveField(39, defaultValue: _emptyConstBundleDto)
+        required BundleDto bundle,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -117,6 +151,17 @@ class MaterialDto with _$MaterialDto {
       remarks: materialInfo.remarks,
       genericMaterialName: materialInfo.genericMaterialName,
       ean: materialInfo.ean,
+      code: '',
+      data:
+          materialInfo.data.map((e) => MaterialDataDto.fromDomain(e)).toList(),
+      dataTotalCount: 0,
+      dataTotalHidden: 0,
+      isFavourite: false,
+      isGimmick: false,
+      manufactured: '',
+      name: '',
+      type: '', 
+      bundle: BundleDto.fromDomain(materialInfo.bundle),
     );
   }
 
@@ -148,6 +193,18 @@ class MaterialDto with _$MaterialDto {
       remarks: remarks,
       genericMaterialName: genericMaterialName,
       ean: ean,
+      code: MaterialNumber(code),
+      data: data.map((e) => e.toDomain()).toList(),
+      dataTotalCount: dataTotalCount,
+      dataTotalHidden: DataTotalHidden(dataTotalHidden),
+      isFavourite: isFavourite,
+      isGimmick: isGimmick,
+      manufactured: manufactured,
+      name: name,
+      principalCode: principalCode,
+      type: MaterialInfoType(type),
+      stockInfos: [],
+      bundle: bundle.toDomain(),
     );
   }
 
@@ -170,3 +227,85 @@ int _validateQantity(Map json, String key) {
           ? json['qty']
           : 0;
 }
+Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
+
+
+@freezed
+class MaterialDataDto with _$MaterialDataDto {
+  const MaterialDataDto._();
+  @HiveType(typeId: 3, adapterName: 'MaterialDataDtoAdapter')
+  factory MaterialDataDto({
+    @JsonKey(name: 'Code', defaultValue: '')
+    @HiveField(1, defaultValue: '')
+        required String code,
+    @JsonKey(name: 'Manufactured', defaultValue: '')
+    @HiveField(2, defaultValue: '')
+        required String manufactured,
+    @JsonKey(name: 'MaterialDescription', defaultValue: '')
+    @HiveField(3, defaultValue: '')
+        required String materialDescription,
+    @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+    @HiveField(4, defaultValue: '')
+        required String defaultMaterialDescription,
+    @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+    @HiveField(5, defaultValue: '')
+        required String genericMaterialName,
+    @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+    @HiveField(6, defaultValue: '')
+        required String materialImageURL,
+    @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+    @HiveField(7, defaultValue: '')
+        required String governmentMaterialCode,
+  }) = _MaterialDataDto;
+
+  factory MaterialDataDto.fromJson(Map<String, dynamic> json) =>
+      _$MaterialDataDtoFromJson(json);
+
+  MaterialData toDomain() => MaterialData(
+        code: MaterialNumber(code),
+        manufactured: manufactured,
+        materialDescription: materialDescription,
+        defaultMaterialDescription: defaultMaterialDescription,
+        genericMaterialName: genericMaterialName,
+        governmentMaterialCode: governmentMaterialCode,
+        materialImageURL: materialImageURL,
+      );
+
+  factory MaterialDataDto.fromDomain(MaterialData materialData) =>
+      MaterialDataDto(
+        code: materialData.code.getOrCrash(),
+        manufactured: materialData.manufactured,
+        materialDescription: materialData.materialDescription,
+        defaultMaterialDescription: materialData.defaultMaterialDescription,
+        genericMaterialName: materialData.genericMaterialName,
+        governmentMaterialCode: materialData.governmentMaterialCode,
+        materialImageURL: materialData.materialImageURL,
+      );
+}
+
+@freezed
+class MaterialResponseDto with _$MaterialResponseDto {
+  const MaterialResponseDto._();
+  factory MaterialResponseDto({
+    @JsonKey(name: 'Count', defaultValue: 0) required int count,
+    @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+        required List<MaterialDto> products,
+  }) = _MaterialResponseDto;
+
+  factory MaterialResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$MaterialResponseDtoFromJson(json);
+
+  MaterialResponse toDomain() => MaterialResponse(
+        count: count,
+        products: products.map((e) => e.toDomain()).toList(),
+      );
+}
+
+const _emptyConstBundleDto = BundleDto(
+  bonusEligible: false,
+  bundleCode: '',
+  bundleInformation: [],
+  bundleName: '',
+  conditions: '',
+  materials: [],
+);

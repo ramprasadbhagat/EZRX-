@@ -105,6 +105,8 @@ void main() {
     bundleInformation: [
       BundleInfo.empty(),
     ],
+    bonusEligible: false,
+    conditions: '',
   );
 
   final mockMaterialInfo = MaterialInfo.empty().copyWith(

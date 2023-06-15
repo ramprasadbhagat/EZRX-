@@ -14,22 +14,211 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+MaterialStockInfoDto _$MaterialStockInfoDtoFromJson(Map<String, dynamic> json) {
+  return _MaterialStockInfoDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MaterialStockInfoDto {
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  String get materialNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'StockInformation', defaultValue: [])
+  List<StockInfoDto> get stockInformation => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MaterialStockInfoDtoCopyWith<MaterialStockInfoDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MaterialStockInfoDtoCopyWith<$Res> {
+  factory $MaterialStockInfoDtoCopyWith(MaterialStockInfoDto value,
+          $Res Function(MaterialStockInfoDto) then) =
+      _$MaterialStockInfoDtoCopyWithImpl<$Res, MaterialStockInfoDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'StockInformation', defaultValue: [])
+          List<StockInfoDto> stockInformation});
+}
+
+/// @nodoc
+class _$MaterialStockInfoDtoCopyWithImpl<$Res,
+        $Val extends MaterialStockInfoDto>
+    implements $MaterialStockInfoDtoCopyWith<$Res> {
+  _$MaterialStockInfoDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materialNumber = null,
+    Object? stockInformation = null,
+  }) {
+    return _then(_value.copyWith(
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      stockInformation: null == stockInformation
+          ? _value.stockInformation
+          : stockInformation // ignore: cast_nullable_to_non_nullable
+              as List<StockInfoDto>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MaterialStockInfoDtoCopyWith<$Res>
+    implements $MaterialStockInfoDtoCopyWith<$Res> {
+  factory _$$_MaterialStockInfoDtoCopyWith(_$_MaterialStockInfoDto value,
+          $Res Function(_$_MaterialStockInfoDto) then) =
+      __$$_MaterialStockInfoDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'StockInformation', defaultValue: [])
+          List<StockInfoDto> stockInformation});
+}
+
+/// @nodoc
+class __$$_MaterialStockInfoDtoCopyWithImpl<$Res>
+    extends _$MaterialStockInfoDtoCopyWithImpl<$Res, _$_MaterialStockInfoDto>
+    implements _$$_MaterialStockInfoDtoCopyWith<$Res> {
+  __$$_MaterialStockInfoDtoCopyWithImpl(_$_MaterialStockInfoDto _value,
+      $Res Function(_$_MaterialStockInfoDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materialNumber = null,
+    Object? stockInformation = null,
+  }) {
+    return _then(_$_MaterialStockInfoDto(
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      stockInformation: null == stockInformation
+          ? _value._stockInformation
+          : stockInformation // ignore: cast_nullable_to_non_nullable
+              as List<StockInfoDto>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
+  _$_MaterialStockInfoDto(
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+          required this.materialNumber,
+      @JsonKey(name: 'StockInformation', defaultValue: [])
+          required final List<StockInfoDto> stockInformation})
+      : _stockInformation = stockInformation,
+        super._();
+
+  factory _$_MaterialStockInfoDto.fromJson(Map<String, dynamic> json) =>
+      _$$_MaterialStockInfoDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  final String materialNumber;
+  final List<StockInfoDto> _stockInformation;
+  @override
+  @JsonKey(name: 'StockInformation', defaultValue: [])
+  List<StockInfoDto> get stockInformation {
+    if (_stockInformation is EqualUnmodifiableListView)
+      return _stockInformation;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stockInformation);
+  }
+
+  @override
+  String toString() {
+    return 'MaterialStockInfoDto(materialNumber: $materialNumber, stockInformation: $stockInformation)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MaterialStockInfoDto &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            const DeepCollectionEquality()
+                .equals(other._stockInformation, _stockInformation));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, materialNumber,
+      const DeepCollectionEquality().hash(_stockInformation));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MaterialStockInfoDtoCopyWith<_$_MaterialStockInfoDto> get copyWith =>
+      __$$_MaterialStockInfoDtoCopyWithImpl<_$_MaterialStockInfoDto>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MaterialStockInfoDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MaterialStockInfoDto extends MaterialStockInfoDto {
+  factory _MaterialStockInfoDto(
+          {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+              required final String materialNumber,
+          @JsonKey(name: 'StockInformation', defaultValue: [])
+              required final List<StockInfoDto> stockInformation}) =
+      _$_MaterialStockInfoDto;
+  _MaterialStockInfoDto._() : super._();
+
+  factory _MaterialStockInfoDto.fromJson(Map<String, dynamic> json) =
+      _$_MaterialStockInfoDto.fromJson;
+
+  @override
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  String get materialNumber;
+  @override
+  @JsonKey(name: 'StockInformation', defaultValue: [])
+  List<StockInfoDto> get stockInformation;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MaterialStockInfoDtoCopyWith<_$_MaterialStockInfoDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 StockInfoDto _$StockInfoDtoFromJson(Map<String, dynamic> json) {
   return _StockInfoDto.fromJson(json);
 }
 
 /// @nodoc
 mixin _$StockInfoDto {
-  @JsonKey(name: 'MaterialNumber')
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
   @HiveField(0, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ExpiryDate')
+  @JsonKey(name: 'ExpiryDate', defaultValue: '')
   @HiveField(1, defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Batch')
+  @JsonKey(name: 'Batch', defaultValue: '')
   @HiveField(2, defaultValue: '')
   String get batch => throw _privateConstructorUsedError;
-  @JsonKey(name: 'InStock')
+  @JsonKey(name: 'InStock', defaultValue: '')
   @HiveField(3, defaultValue: '')
   String get inStock => throw _privateConstructorUsedError;
   @JsonKey(name: 'SalesDistrict', defaultValue: '')
@@ -49,16 +238,16 @@ abstract class $StockInfoDtoCopyWith<$Res> {
       _$StockInfoDtoCopyWithImpl<$Res, StockInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber')
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
           String materialNumber,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
           String expiryDate,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
           String batch,
-      @JsonKey(name: 'InStock')
+      @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
           String inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
@@ -119,16 +308,16 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber')
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
           String materialNumber,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
           String expiryDate,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
           String batch,
-      @JsonKey(name: 'InStock')
+      @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
           String inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
@@ -183,16 +372,16 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
 @HiveType(typeId: 18, adapterName: 'StockInfoDtoAdapter')
 class _$_StockInfoDto extends _StockInfoDto {
   const _$_StockInfoDto(
-      {@JsonKey(name: 'MaterialNumber')
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
           required this.materialNumber,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
           required this.expiryDate,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
           required this.batch,
-      @JsonKey(name: 'InStock')
+      @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
           required this.inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
@@ -204,19 +393,19 @@ class _$_StockInfoDto extends _StockInfoDto {
       _$$_StockInfoDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'MaterialNumber')
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
   @HiveField(0, defaultValue: '')
   final String materialNumber;
   @override
-  @JsonKey(name: 'ExpiryDate')
+  @JsonKey(name: 'ExpiryDate', defaultValue: '')
   @HiveField(1, defaultValue: '')
   final String expiryDate;
   @override
-  @JsonKey(name: 'Batch')
+  @JsonKey(name: 'Batch', defaultValue: '')
   @HiveField(2, defaultValue: '')
   final String batch;
   @override
-  @JsonKey(name: 'InStock')
+  @JsonKey(name: 'InStock', defaultValue: '')
   @HiveField(3, defaultValue: '')
   final String inStock;
   @override
@@ -265,16 +454,16 @@ class _$_StockInfoDto extends _StockInfoDto {
 
 abstract class _StockInfoDto extends StockInfoDto {
   const factory _StockInfoDto(
-      {@JsonKey(name: 'MaterialNumber')
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
           required final String materialNumber,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
           required final String expiryDate,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
           required final String batch,
-      @JsonKey(name: 'InStock')
+      @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
           required final String inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
@@ -286,19 +475,19 @@ abstract class _StockInfoDto extends StockInfoDto {
       _$_StockInfoDto.fromJson;
 
   @override
-  @JsonKey(name: 'MaterialNumber')
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
   @HiveField(0, defaultValue: '')
   String get materialNumber;
   @override
-  @JsonKey(name: 'ExpiryDate')
+  @JsonKey(name: 'ExpiryDate', defaultValue: '')
   @HiveField(1, defaultValue: '')
   String get expiryDate;
   @override
-  @JsonKey(name: 'Batch')
+  @JsonKey(name: 'Batch', defaultValue: '')
   @HiveField(2, defaultValue: '')
   String get batch;
   @override
-  @JsonKey(name: 'InStock')
+  @JsonKey(name: 'InStock', defaultValue: '')
   @HiveField(3, defaultValue: '')
   String get inStock;
   @override

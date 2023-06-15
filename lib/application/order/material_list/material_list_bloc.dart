@@ -18,10 +18,11 @@ part 'material_list_bloc.freezed.dart';
 part 'material_list_event.dart';
 part 'material_list_state.dart';
 
-int _pageSize = 20;
+int _pageSize = 24;
 
 class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
+
   MaterialListBloc({
     required this.materialListRepository,
   }) : super(MaterialListState.initial()) {
@@ -37,7 +38,6 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     });
     on<_Fetch>(
       (e, emit) async {
-        // if (state.isFetching) return;
         emit(
           state.copyWith(
             isFetching: true,
@@ -48,46 +48,35 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           ),
         );
         final failureOrSuccess = await materialListRepository.getMaterialList(
-          user: e.user,
           salesOrganisation: e.salesOrganisation,
           salesOrgConfig: e.configs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
           pageSize: _pageSize,
           offset: 0,
-          orderBy: 'materialDescription_asc',
-          searchKey: state.searchKey.getValue(),
-          selectedMaterialFilter: e.selectedMaterialFilter,
-          orderDocumentType: e.orderDocumentType,
-          pickAndPack: e.pickAndPack,
+          orderByName: 'asc',
         );
         failureOrSuccess.fold(
-          (failure) {
-            if (emit.isDone) return;
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          ),
+          (productResponse) {
             emit(
               state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (materialList) {
-            if (emit.isDone) return;
-            emit(
-              state.copyWith(
-                materialList: materialList,
+                materialCount: productResponse.count,
+                materialList: productResponse.products,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: materialList.length >= _pageSize,
+                canLoadMore: productResponse.products.length >= _pageSize,
                 nextPageIndex: 1,
-                selectedFilters: e.selectedMaterialFilter,
-                searchKey: SearchKey.search(''),
               ),
             );
           },
         );
       },
-      transformer: restartable(),
     );
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
@@ -99,38 +88,31 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         ),
       );
       final failureOrSuccess = await materialListRepository.getMaterialList(
-        user: e.user,
         salesOrganisation: e.salesOrganisation,
         salesOrgConfig: e.configs,
         customerCodeInfo: e.customerCodeInfo,
         shipToInfo: e.shipToInfo,
         pageSize: _pageSize,
         offset: state.materialList.length,
-        orderBy: 'materialDescription_asc',
-        searchKey: state.searchKey.getValue(),
-        selectedMaterialFilter: e.selectedMaterialFilter,
-        orderDocumentType: e.orderDocumentType,
-        pickAndPack: e.pickAndPack,
+        orderByName: 'asc',
       );
-
-      await failureOrSuccess.fold(
-        (failure) async {
+      failureOrSuccess.fold(
+        (failure) => emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+            isFetching: false,
+          ),
+        ),
+        (moreProduct) {
+          final productList = List<MaterialInfo>.from(state.materialList)
+            ..addAll(moreProduct.products);
           emit(
             state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (materialList) async {
-          final newSavedOrders = List<MaterialInfo>.from(state.materialList)
-            ..addAll(materialList);
-          emit(
-            state.copyWith(
-              materialList: newSavedOrders,
+              materialCount: moreProduct.count,
+              materialList: productList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore: materialList.length >= _pageSize,
+              canLoadMore: productList.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );
@@ -209,14 +191,10 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
       if (e.searchKey.getValue() != state.searchKey.getValue()) {
         add(const _UpdateSearchKey(searchKey: ''));
         add(_Fetch(
-          user: e.user,
           salesOrganisation: e.salesOrganisation,
           configs: e.configs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          selectedMaterialFilter: e.selectedMaterialFilter,
-          orderDocumentType: e.orderDocumentType,
-          pickAndPack: e.pickAndPack,
         ));
       }
     });

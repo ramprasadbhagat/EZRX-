@@ -229,7 +229,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              context.read<UserBloc>().state.userCanCreateOrder &&
+              // context.read<UserBloc>().state.userCanCreateOrder &&
               (previous.isCovidMaterialEnable !=
                       current.isCovidMaterialEnable ||
                   previous.salesOrgConfigs.disableBundles !=
@@ -238,6 +238,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.customerCodeInfo != current.customerCodeInfo ||
                   previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
+            _initializeProduct();
             if (state.isCovidMaterialEnable) {
               context.read<CovidMaterialListBloc>().add(
                     CovidMaterialListEvent.fetch(
@@ -484,7 +485,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
-                    user: context.read<UserBloc>().state.user,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     configs: context.read<SalesOrgBloc>().state.configs,
@@ -492,15 +492,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<EligibilityBloc>().state.shipToInfo,
-                    selectedMaterialFilter: context
-                        .read<MaterialFilterBloc>()
-                        .state
-                        .getEmptyMaterialFilter(),
-                    orderDocumentType: state.selectedOrderType,
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
                   ),
                 );
           },
@@ -642,6 +633,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             const ManagePaymentAdviceFooterEvent.fetch(),
           );
     }
+  }
+
+  void _initializeProduct() {
+    final eligibilityBloc = context.read<EligibilityBloc>();
+    context.read<MaterialListBloc>().add(
+          MaterialListEvent.fetch(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            configs: eligibilityBloc.state.salesOrgConfigs,
+            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+            shipToInfo: eligibilityBloc.state.shipToInfo,
+          ),
+        );
   }
 }
 

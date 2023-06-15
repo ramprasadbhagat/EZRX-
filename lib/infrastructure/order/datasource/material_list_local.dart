@@ -19,6 +19,15 @@ class MaterialListLocalDataSource {
         .toList();
   }
 
+  Future<MaterialResponse> getProductList() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getAllProductsResponse.json'),
+    );
+    final finalData = data['data']['GetAllProducts'];
+
+    return MaterialResponseDto.fromJson(finalData).toDomain();
+  }
+
   Future<List<MaterialInfo>> getMaterialListSalesRep() async {
     final data = json.decode(
       await rootBundle.loadString(
@@ -55,5 +64,16 @@ class MaterialListLocalDataSource {
     return List.from(finalData)
         .map((e) => MaterialDto.fromJson(e).toDomain())
         .toList();
+  }
+
+  Future<MaterialInfo> getProductDetails() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/getProductDetailsResponse.json',
+      ),
+    );
+    final finalData = data['data']['GetProductDetails'];
+
+    return MaterialDto.fromJson(finalData).toDomain();
   }
 }

@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
@@ -88,7 +87,6 @@ class MaterialFilterPage extends StatelessWidget {
                             .selectedMaterialFilter
                     ? context.read<MaterialListBloc>().add(
                           MaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
                             salesOrganisation: context
                                 .read<SalesOrgBloc>()
                                 .state
@@ -100,18 +98,6 @@ class MaterialFilterPage extends StatelessWidget {
                                 .customerCodeInfo,
                             shipToInfo:
                                 context.read<ShipToCodeBloc>().state.shipToInfo,
-                            selectedMaterialFilter: context
-                                .read<MaterialFilterBloc>()
-                                .state
-                                .selectedMaterialFilter,
-                            orderDocumentType: context
-                                .read<OrderDocumentTypeBloc>()
-                                .state
-                                .selectedOrderType,
-                            pickAndPack: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .getPNPValueMaterial,
                           ),
                         )
                     : true;

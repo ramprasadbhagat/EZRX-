@@ -27,4 +27,16 @@ class StockInfoLocalDataSource {
         .map((e) => StockInfoDto.fromJson(e).toDomain())
         .toList();
   }
+
+
+  Future<List<MaterialStockInfo>> getMaterialStockInfoList() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getStockInformationList.json'),
+    );
+
+    return List.from(data['data']['stockInformationList'])
+        .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
+        .toList();
+  }
 }

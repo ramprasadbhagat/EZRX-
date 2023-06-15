@@ -8,21 +8,42 @@ part 'stock_info_dto.freezed.dart';
 part 'stock_info_dto.g.dart';
 
 @freezed
+class MaterialStockInfoDto with _$MaterialStockInfoDto {
+  const MaterialStockInfoDto._();
+
+  factory MaterialStockInfoDto({
+    @JsonKey(name: 'MaterialNumber', defaultValue: '')
+        required String materialNumber,
+    @JsonKey(name: 'StockInformation', defaultValue: [])
+        required List<StockInfoDto> stockInformation,
+  }) = _MaterialStockInfoDto;
+
+  factory MaterialStockInfoDto.fromJson(Map<String, dynamic> json) =>
+      _$MaterialStockInfoDtoFromJson(json);
+
+  MaterialStockInfo toDomain() => MaterialStockInfo(
+        materialNumber: MaterialNumber(materialNumber),
+        stockInfos: stockInformation.map((e) => e.toDomain()).toList(),
+      );
+}
+
+
+@freezed
 class StockInfoDto with _$StockInfoDto {
   const StockInfoDto._();
 
   @HiveType(typeId: 18, adapterName: 'StockInfoDtoAdapter')
   const factory StockInfoDto({
-    @JsonKey(name: 'MaterialNumber')
+    @JsonKey(name: 'MaterialNumber', defaultValue: '')
     @HiveField(0, defaultValue: '')
         required String materialNumber,
-    @JsonKey(name: 'ExpiryDate')
+    @JsonKey(name: 'ExpiryDate', defaultValue: '')
     @HiveField(1, defaultValue: '')
         required String expiryDate,
-    @JsonKey(name: 'Batch')
+    @JsonKey(name: 'Batch', defaultValue: '')
     @HiveField(2, defaultValue: '')
         required String batch,
-    @JsonKey(name: 'InStock')
+    @JsonKey(name: 'InStock', defaultValue: '')
     @HiveField(3, defaultValue: '')
         required String inStock,
     @JsonKey(name: 'SalesDistrict', defaultValue: '')

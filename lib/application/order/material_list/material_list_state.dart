@@ -4,6 +4,7 @@ part of 'material_list_bloc.dart';
 class MaterialListState with _$MaterialListState {
   const MaterialListState._();
   const factory MaterialListState({
+    required int materialCount,
     required List<MaterialInfo> materialList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool canLoadMore,
@@ -15,6 +16,7 @@ class MaterialListState with _$MaterialListState {
   }) = _MaterialListState;
 
   factory MaterialListState.initial() => MaterialListState(
+        materialCount: 0,
         materialList: <MaterialInfo>[],
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,

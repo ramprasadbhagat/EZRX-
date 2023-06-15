@@ -13,18 +13,24 @@ class BundleDto with _$BundleDto {
   const BundleDto._();
   @HiveType(typeId: 15, adapterName: 'BundleDtoAdapter')
   const factory BundleDto({
-    @JsonKey(name: 'bundleName')
+    @JsonKey(name: 'BundleName', defaultValue: '')
     @HiveField(18, defaultValue: '')
         required String bundleName,
-    @JsonKey(name: 'bundleCode')
+    @JsonKey(name: 'BundleCode', defaultValue: '')
     @HiveField(19, defaultValue: '')
         required String bundleCode,
-    @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
+    @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
     @HiveField(20, defaultValue: <BundleInfoDto>[])
         required List<BundleInfoDto> bundleInformation,
     @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
     @HiveField(21, defaultValue: <MaterialDto>[])
         required List<MaterialDto> materials,
+    @JsonKey(name: 'Conditions', defaultValue: '')
+    @HiveField(22, defaultValue: '')
+        required String conditions,
+    @JsonKey(name: 'BonusEligible', defaultValue: false)
+    @HiveField(23, defaultValue: false)
+        required bool bonusEligible,
   }) = _BundleDto;
 
   Bundle toDomain() {
@@ -33,6 +39,8 @@ class BundleDto with _$BundleDto {
       bundleName: BundleName(bundleName),
       bundleCode: bundleCode,
       bundleInformation: bundleInformation.map((e) => e.toDomain()).toList(),
+      conditions: conditions,
+      bonusEligible: bonusEligible,
     );
   }
 
@@ -45,6 +53,8 @@ class BundleDto with _$BundleDto {
       bundleInformation: bundle.bundleInformation
           .map((e) => BundleInfoDto.fromDomain(e))
           .toList(),
+      conditions: bundle.conditions,
+      bonusEligible: bundle.bonusEligible,
     );
   }
 

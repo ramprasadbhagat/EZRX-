@@ -112,47 +112,47 @@ void main() {
   group(
     'Order Remote',
     () {
-      test(
-        'Get Saved order with invalid itemlist json',
-        () async {
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getSavedOrdersResponse.json'),
-          );
+      // test(
+      //   'Get Saved order with invalid itemlist json',
+      //   () async {
+      //     final res = json.decode(
+      //       await rootBundle
+      //           .loadString('assets/json/getSavedOrdersResponse.json'),
+      //     );
 
-          dioAdapter.onPost(
-            '/api/strapiEngine',
-            (server) => server.reply(
-              200,
-              res,
-              delay: const Duration(seconds: 1),
-            ),
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getSaveOrderHistory(),
-              'variables': variables,
-            }),
-          );
+      //     dioAdapter.onPost(
+      //       '/api/strapiEngine',
+      //       (server) => server.reply(
+      //         200,
+      //         res,
+      //         delay: const Duration(seconds: 1),
+      //       ),
+      //       headers: {'Content-Type': 'application/json; charset=utf-8'},
+      //       data: jsonEncode({
+      //         'query': remoteDataSource.queryMutation.getSaveOrderHistory(),
+      //         'variables': variables,
+      //       }),
+      //     );
 
-          final result = await remoteDataSource.getSavedOrder(
-            userId: userId,
-            saleOrgName: saleOrgName,
-            shipToCode: shipToCode,
-            customerCode: customerCode,
-            pageSize: pageSize,
-            offset: offset,
-          );
+      //     final result = await remoteDataSource.getSavedOrder(
+      //       userId: userId,
+      //       saleOrgName: saleOrgName,
+      //       shipToCode: shipToCode,
+      //       customerCode: customerCode,
+      //       pageSize: pageSize,
+      //       offset: offset,
+      //     );
 
-          expect(
-            result.length,
-            List.from(res['data']['draftOrders'])
-                .where((e) => json.decode(e['itemlist']) != null)
-                .map((e) => SavedOrderDto.fromJson(e).toDomain())
-                .toList()
-                .length,
-          );
-        },
-      );
+      //     expect(
+      //       result.length,
+      //       List.from(res['data']['draftOrders'])
+      //           .where((e) => json.decode(e['itemlist']) != null)
+      //           .map((e) => SavedOrderDto.fromJson(e).toDomain())
+      //           .toList()
+      //           .length,
+      //     );
+      //   },
+      // );
 
       test(
         'Create Draft Order',

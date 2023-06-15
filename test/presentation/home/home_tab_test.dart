@@ -128,7 +128,7 @@ void main() {
   late AppRouter autoRouterMock;
   late RemoteConfigService remoteConfigServiceMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
-  final fakematerialInfo1 = MaterialInfo(
+  final fakematerialInfo1 = MaterialInfo.empty().copyWith(
     quantity: 0,
     materialNumber: fakeMaterialNumber,
     ean: '2234567890',

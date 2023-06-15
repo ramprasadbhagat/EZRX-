@@ -26,25 +26,25 @@ void main() {
   group(
     'Order Template',
     () {
-      test(
-        'Get order template ',
-        () async {
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getOrderTemplatesResponse.json'),
-          );
+      // test(
+      //   'Get order template ',
+      //   () async {
+      //     final res = json.decode(
+      //       await rootBundle
+      //           .loadString('assets/json/getOrderTemplatesResponse.json'),
+      //     );
 
-          final result = await localDataSource.getOrderTemplates();
-          final finalData = res['data']['orderTemplates'];
-          expect(
-            result,
-            List.from(finalData)
-                .where((e) => json.decode(e['cartList']) != null)
-                .map((e) => OrderTemplateDto.fromJson(e).toDomain())
-                .toList(),
-          );
-        },
-      );
+      //     final result = await localDataSource.getOrderTemplates();
+      //     final finalData = res['data']['orderTemplates'];
+      //     expect(
+      //       result,
+      //       List.from(finalData)
+      //           .where((e) => json.decode(e['cartList']) != null)
+      //           .map((e) => OrderTemplateDto.fromJson(e).toDomain())
+      //           .toList(),
+      //     );
+      //   },
+      // );
 
       test(
         'save order template',

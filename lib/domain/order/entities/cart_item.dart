@@ -107,6 +107,8 @@ class CartItem with _$CartItem {
       bundleCode: savedItem.bundleCode,
       bundleInformation: savedItem.bundleInformation,
       materials: validMaterials,
+      conditions: '',
+      bonusEligible: false,
     );
 
     return CartItem.bundle(validMaterials.map(

@@ -42,7 +42,23 @@ class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
               isFOCMaterial: false,
               quantity: 0,
               remarks: '',
-              genericMaterialName: '')
+              genericMaterialName: '',
+              data: [],
+              dataTotalCount: 0,
+              dataTotalHidden: 0,
+              isFavourite: false,
+              isGimmick: false,
+              manufactured: '',
+              name: '',
+              type: '',
+              code: '',
+              bundle: const BundleDto(
+                  bundleName: '',
+                  bundleCode: '',
+                  bundleInformation: [],
+                  materials: [],
+                  conditions: '',
+                  bonusEligible: false))
           : fields[0] as MaterialDto,
       quantity: fields[1] == null ? 1 : fields[1] as int,
       priceDto: fields[2] == null
@@ -130,7 +146,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
               bundleName: '',
               bundleCode: '',
               bundleInformation: [],
-              materials: [])
+              materials: [],
+              conditions: '',
+              bonusEligible: false)
           : fields[5] as BundleDto,
       bonusItem: fields[6] == null
           ? []

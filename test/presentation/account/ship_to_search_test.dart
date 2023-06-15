@@ -64,7 +64,7 @@ void main() {
   late CartBloc cartBlocMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
 
-  final fakematerialInfo = MaterialInfo(
+  final fakematerialInfo = MaterialInfo.empty().copyWith(
     quantity: 0,
     ean: '2234567890',
     materialNumber: fakeMaterialNumber,

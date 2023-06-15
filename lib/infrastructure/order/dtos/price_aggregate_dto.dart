@@ -116,6 +116,16 @@ const MaterialDto _emptyConstMaterialDto = MaterialDto(
   quantity: 0,
   remarks: '',
   genericMaterialName: '',
+  data: <MaterialDataDto>[],
+  dataTotalCount: 0,
+  dataTotalHidden: 0,
+  isFavourite: false,
+  isGimmick: false,
+  manufactured: '',
+  name: '',
+  type: '',
+  code: '',
+  bundle: _emptyBundleDto,
 );
 
 const PriceDto _emptyPriceDto = PriceDto(
@@ -203,6 +213,8 @@ const BundleDto _emptyBundleDto = BundleDto(
   bundleCode: '',
   bundleInformation: [],
   materials: [],
+  conditions: '',
+  bonusEligible: false,
 );
 
 const StockInfoDto _emptyStockInfoDto = StockInfoDto(

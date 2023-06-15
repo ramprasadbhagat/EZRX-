@@ -85,6 +85,36 @@ class StockInfoRemoteDataSource {
     });
   }
 
+  Future<List<MaterialStockInfo>> getMaterialStockInfoList({
+    required List<String> materialNumbers,
+    required String salesOrg,
+    required String selectedCustomerCode,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}/order',
+        data: jsonEncode({
+          'query': stockInfoQueryMutation.getMaterialStockInfoListQuery(),
+          'variables': {
+            'request': {
+              'materialNumbers': materialNumbers,
+              'customerCode': selectedCustomerCode,
+              'salesOrganisation': salesOrg,
+            },
+          },
+        }),
+        apiEndpoint: 'getStockInformationLists',
+      );
+
+      _exceptionChecker(res: res);
+
+      return List.from(res.data['data']['stockInformationList'])
+          .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
   void _exceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

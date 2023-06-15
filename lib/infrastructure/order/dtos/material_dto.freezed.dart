@@ -20,12 +20,6 @@ MaterialDto _$MaterialDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MaterialDto {
-  @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(0, defaultValue: '')
-  String get materialNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'materialDescription', defaultValue: '')
-  @HiveField(1, defaultValue: '')
-  String get materialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   @HiveField(2, defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
@@ -38,9 +32,6 @@ mixin _$MaterialDto {
   @JsonKey(name: 'principalName', defaultValue: '')
   @HiveField(5, defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'principalCode', defaultValue: '')
-  @HiveField(6, defaultValue: '')
-  String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxClassification', defaultValue: '')
   @HiveField(7, defaultValue: '')
   String get taxClassification => throw _privateConstructorUsedError;
@@ -59,9 +50,6 @@ mixin _$MaterialDto {
   @JsonKey(name: 'isSampleMaterial', defaultValue: false)
   @HiveField(12, defaultValue: false)
   bool get isSampleMaterial => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hidePrice', defaultValue: false)
-  @HiveField(13, defaultValue: false)
-  bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
   @HiveField(14, defaultValue: false)
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
@@ -71,9 +59,6 @@ mixin _$MaterialDto {
   @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
   @HiveField(16, defaultValue: ['0'])
   List<String> get taxes => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-  @HiveField(17, defaultValue: <BundleDto>[])
-  List<BundleDto> get bundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   @HiveField(18, defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
@@ -92,6 +77,54 @@ mixin _$MaterialDto {
   @JsonKey(name: 'ean', defaultValue: '')
   @HiveField(23, defaultValue: '')
   String get ean => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+  @HiveField(17, defaultValue: <BundleDto>[])
+  List<BundleDto> get bundles =>
+      throw _privateConstructorUsedError; // new field from v3
+  @JsonKey(name: 'Code', defaultValue: '')
+  @HiveField(24, defaultValue: '')
+  String get code => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Name', defaultValue: '')
+  @HiveField(25, defaultValue: '')
+  @HiveField(26, defaultValue: '')
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @HiveField(27, defaultValue: '')
+  String get principalCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @HiveField(28, defaultValue: '')
+  String get materialNumber => throw _privateConstructorUsedError;
+  @HiveField(29, defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
+  @HiveField(30, defaultValue: '')
+  String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Manufactured', defaultValue: '')
+  @HiveField(31, defaultValue: '')
+  String get manufactured => throw _privateConstructorUsedError;
+  @JsonKey(name: 'IsFavourite', defaultValue: false)
+  @HiveField(32, defaultValue: false)
+  bool get isFavourite => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Type', defaultValue: '')
+  @HiveField(33, defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'HidePrice', defaultValue: false)
+  @HiveField(34, defaultValue: false)
+  bool get hidePrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+  @HiveField(35, defaultValue: 0)
+  int get dataTotalCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+  @HiveField(36, defaultValue: 0)
+  int get dataTotalHidden => throw _privateConstructorUsedError;
+  @JsonKey(name: 'IsGimmick', defaultValue: false)
+  @HiveField(37, defaultValue: false)
+  bool get isGimmick => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+  @HiveField(38, defaultValue: [])
+  List<MaterialDataDto> get data => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+  @HiveField(39, defaultValue: _emptyConstBundleDto)
+  BundleDto get bundle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -106,13 +139,7 @@ abstract class $MaterialDtoCopyWith<$Res> {
       _$MaterialDtoCopyWithImpl<$Res, MaterialDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       @HiveField(2, defaultValue: '')
           String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
@@ -124,9 +151,6 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'principalName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           String principalName,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
       @HiveField(7, defaultValue: '')
           String taxClassification,
@@ -145,9 +169,6 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
       @HiveField(12, defaultValue: false)
           bool isSampleMaterial,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13, defaultValue: false)
-          bool hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       @HiveField(14, defaultValue: false)
           bool hasValidTenderContract,
@@ -158,9 +179,6 @@ abstract class $MaterialDtoCopyWith<$Res> {
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
       @HiveField(16, defaultValue: ['0'])
           List<String> taxes,
-      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17, defaultValue: <BundleDto>[])
-          List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       @HiveField(18, defaultValue: '')
           String defaultMaterialDescription,
@@ -178,7 +196,56 @@ abstract class $MaterialDtoCopyWith<$Res> {
           String genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '')
       @HiveField(23, defaultValue: '')
-          String ean});
+          String ean,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+      @HiveField(17, defaultValue: <BundleDto>[])
+          List<BundleDto> bundles,
+      @JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(24, defaultValue: '')
+          String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+      @HiveField(25, defaultValue: '')
+      @HiveField(26, defaultValue: '')
+          String name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @HiveField(27, defaultValue: '')
+          String principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @HiveField(28, defaultValue: '')
+          String materialNumber,
+      @HiveField(29, defaultValue: '')
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+      @HiveField(30, defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(31, defaultValue: '')
+          String manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+      @HiveField(32, defaultValue: false)
+          bool isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+      @HiveField(33, defaultValue: '')
+          String type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+      @HiveField(34, defaultValue: false)
+          bool hidePrice,
+      @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          int dataTotalCount,
+      @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+      @HiveField(36, defaultValue: 0)
+          int dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+      @HiveField(37, defaultValue: false)
+          bool isGimmick,
+      @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+      @HiveField(38, defaultValue: [])
+          List<MaterialDataDto> data,
+      @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+      @HiveField(39, defaultValue: _emptyConstBundleDto)
+          BundleDto bundle});
+
+  $BundleDtoCopyWith<$Res> get bundle;
 }
 
 /// @nodoc
@@ -194,40 +261,42 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? materialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
     Object? itemBrand = null,
     Object? principalName = null,
-    Object? principalCode = null,
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? unitOfMeasurement = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
     Object? isSampleMaterial = null,
-    Object? hidePrice = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
     Object? taxes = null,
-    Object? bundles = null,
     Object? defaultMaterialDescription = null,
     Object? isFOCMaterial = null,
     Object? quantity = null,
     Object? remarks = null,
     Object? genericMaterialName = null,
     Object? ean = null,
+    Object? bundles = null,
+    Object? code = null,
+    Object? name = null,
+    Object? principalCode = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? manufactured = null,
+    Object? isFavourite = null,
+    Object? type = null,
+    Object? hidePrice = null,
+    Object? dataTotalCount = null,
+    Object? dataTotalHidden = null,
+    Object? isGimmick = null,
+    Object? data = null,
+    Object? bundle = null,
   }) {
     return _then(_value.copyWith(
-      materialNumber: null == materialNumber
-          ? _value.materialNumber
-          : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialDescription: null == materialDescription
-          ? _value.materialDescription
-          : materialDescription // ignore: cast_nullable_to_non_nullable
-              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -243,10 +312,6 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
-              as String,
-      principalCode: null == principalCode
-          ? _value.principalCode
-          : principalCode // ignore: cast_nullable_to_non_nullable
               as String,
       taxClassification: null == taxClassification
           ? _value.taxClassification
@@ -272,10 +337,6 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      hidePrice: null == hidePrice
-          ? _value.hidePrice
-          : hidePrice // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasValidTenderContract: null == hasValidTenderContract
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
@@ -288,10 +349,6 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      bundles: null == bundles
-          ? _value.bundles
-          : bundles // ignore: cast_nullable_to_non_nullable
-              as List<BundleDto>,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -316,7 +373,75 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
               as String,
+      bundles: null == bundles
+          ? _value.bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<BundleDto>,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactured: null == manufactured
+          ? _value.manufactured
+          : manufactured // ignore: cast_nullable_to_non_nullable
+              as String,
+      isFavourite: null == isFavourite
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      dataTotalCount: null == dataTotalCount
+          ? _value.dataTotalCount
+          : dataTotalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      dataTotalHidden: null == dataTotalHidden
+          ? _value.dataTotalHidden
+          : dataTotalHidden // ignore: cast_nullable_to_non_nullable
+              as int,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDataDto>,
+      bundle: null == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as BundleDto,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BundleDtoCopyWith<$Res> get bundle {
+    return $BundleDtoCopyWith<$Res>(_value.bundle, (value) {
+      return _then(_value.copyWith(bundle: value) as $Val);
+    });
   }
 }
 
@@ -329,13 +454,7 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       @HiveField(2, defaultValue: '')
           String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
@@ -347,9 +466,6 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @JsonKey(name: 'principalName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           String principalName,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
       @HiveField(7, defaultValue: '')
           String taxClassification,
@@ -368,9 +484,6 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
       @HiveField(12, defaultValue: false)
           bool isSampleMaterial,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13, defaultValue: false)
-          bool hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       @HiveField(14, defaultValue: false)
           bool hasValidTenderContract,
@@ -381,9 +494,6 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
       @HiveField(16, defaultValue: ['0'])
           List<String> taxes,
-      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17, defaultValue: <BundleDto>[])
-          List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       @HiveField(18, defaultValue: '')
           String defaultMaterialDescription,
@@ -401,7 +511,57 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
           String genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '')
       @HiveField(23, defaultValue: '')
-          String ean});
+          String ean,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+      @HiveField(17, defaultValue: <BundleDto>[])
+          List<BundleDto> bundles,
+      @JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(24, defaultValue: '')
+          String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+      @HiveField(25, defaultValue: '')
+      @HiveField(26, defaultValue: '')
+          String name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @HiveField(27, defaultValue: '')
+          String principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @HiveField(28, defaultValue: '')
+          String materialNumber,
+      @HiveField(29, defaultValue: '')
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+      @HiveField(30, defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(31, defaultValue: '')
+          String manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+      @HiveField(32, defaultValue: false)
+          bool isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+      @HiveField(33, defaultValue: '')
+          String type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+      @HiveField(34, defaultValue: false)
+          bool hidePrice,
+      @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          int dataTotalCount,
+      @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+      @HiveField(36, defaultValue: 0)
+          int dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+      @HiveField(37, defaultValue: false)
+          bool isGimmick,
+      @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+      @HiveField(38, defaultValue: [])
+          List<MaterialDataDto> data,
+      @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+      @HiveField(39, defaultValue: _emptyConstBundleDto)
+          BundleDto bundle});
+
+  @override
+  $BundleDtoCopyWith<$Res> get bundle;
 }
 
 /// @nodoc
@@ -415,40 +575,42 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? materialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
     Object? itemBrand = null,
     Object? principalName = null,
-    Object? principalCode = null,
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? unitOfMeasurement = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
     Object? isSampleMaterial = null,
-    Object? hidePrice = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
     Object? taxes = null,
-    Object? bundles = null,
     Object? defaultMaterialDescription = null,
     Object? isFOCMaterial = null,
     Object? quantity = null,
     Object? remarks = null,
     Object? genericMaterialName = null,
     Object? ean = null,
+    Object? bundles = null,
+    Object? code = null,
+    Object? name = null,
+    Object? principalCode = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? manufactured = null,
+    Object? isFavourite = null,
+    Object? type = null,
+    Object? hidePrice = null,
+    Object? dataTotalCount = null,
+    Object? dataTotalHidden = null,
+    Object? isGimmick = null,
+    Object? data = null,
+    Object? bundle = null,
   }) {
     return _then(_$_MaterialDto(
-      materialNumber: null == materialNumber
-          ? _value.materialNumber
-          : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialDescription: null == materialDescription
-          ? _value.materialDescription
-          : materialDescription // ignore: cast_nullable_to_non_nullable
-              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -464,10 +626,6 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
-              as String,
-      principalCode: null == principalCode
-          ? _value.principalCode
-          : principalCode // ignore: cast_nullable_to_non_nullable
               as String,
       taxClassification: null == taxClassification
           ? _value.taxClassification
@@ -493,10 +651,6 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      hidePrice: null == hidePrice
-          ? _value.hidePrice
-          : hidePrice // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasValidTenderContract: null == hasValidTenderContract
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
@@ -509,10 +663,6 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      bundles: null == bundles
-          ? _value._bundles
-          : bundles // ignore: cast_nullable_to_non_nullable
-              as List<BundleDto>,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -537,6 +687,66 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
               as String,
+      bundles: null == bundles
+          ? _value._bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<BundleDto>,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactured: null == manufactured
+          ? _value.manufactured
+          : manufactured // ignore: cast_nullable_to_non_nullable
+              as String,
+      isFavourite: null == isFavourite
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      dataTotalCount: null == dataTotalCount
+          ? _value.dataTotalCount
+          : dataTotalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      dataTotalHidden: null == dataTotalHidden
+          ? _value.dataTotalHidden
+          : dataTotalHidden // ignore: cast_nullable_to_non_nullable
+              as int,
+      isGimmick: null == isGimmick
+          ? _value.isGimmick
+          : isGimmick // ignore: cast_nullable_to_non_nullable
+              as bool,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDataDto>,
+      bundle: null == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as BundleDto,
     ));
   }
 }
@@ -546,13 +756,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
 @HiveType(typeId: 3, adapterName: 'MaterialDtoAdapter')
 class _$_MaterialDto extends _MaterialDto {
   const _$_MaterialDto(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required this.materialDescription,
-      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       @HiveField(2, defaultValue: '')
           required this.governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
@@ -564,9 +768,6 @@ class _$_MaterialDto extends _MaterialDto {
       @JsonKey(name: 'principalName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           required this.principalName,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required this.principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
       @HiveField(7, defaultValue: '')
           required this.taxClassification,
@@ -585,9 +786,6 @@ class _$_MaterialDto extends _MaterialDto {
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
       @HiveField(12, defaultValue: false)
           required this.isSampleMaterial,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13, defaultValue: false)
-          required this.hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       @HiveField(14, defaultValue: false)
           required this.hasValidTenderContract,
@@ -598,9 +796,6 @@ class _$_MaterialDto extends _MaterialDto {
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
       @HiveField(16, defaultValue: ['0'])
           required final List<String> taxes,
-      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17, defaultValue: <BundleDto>[])
-          required final List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       @HiveField(18, defaultValue: '')
           required this.defaultMaterialDescription,
@@ -618,22 +813,62 @@ class _$_MaterialDto extends _MaterialDto {
           required this.genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '')
       @HiveField(23, defaultValue: '')
-          required this.ean})
+          required this.ean,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+      @HiveField(17, defaultValue: <BundleDto>[])
+          required final List<BundleDto> bundles,
+      @JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(24, defaultValue: '')
+          required this.code,
+      @JsonKey(name: 'Name', defaultValue: '')
+      @HiveField(25, defaultValue: '')
+      @HiveField(26, defaultValue: '')
+          required this.name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @HiveField(27, defaultValue: '')
+          required this.principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @HiveField(28, defaultValue: '')
+          required this.materialNumber,
+      @HiveField(29, defaultValue: '')
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+      @HiveField(30, defaultValue: '')
+          required this.materialDescription,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(31, defaultValue: '')
+          required this.manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+      @HiveField(32, defaultValue: false)
+          required this.isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+      @HiveField(33, defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+      @HiveField(34, defaultValue: false)
+          required this.hidePrice,
+      @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          required this.dataTotalCount,
+      @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+      @HiveField(36, defaultValue: 0)
+          required this.dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+      @HiveField(37, defaultValue: false)
+          required this.isGimmick,
+      @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+      @HiveField(38, defaultValue: [])
+          required final List<MaterialDataDto> data,
+      @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+      @HiveField(39, defaultValue: _emptyConstBundleDto)
+          required this.bundle})
       : _taxes = taxes,
         _bundles = bundles,
+        _data = data,
         super._();
 
   factory _$_MaterialDto.fromJson(Map<String, dynamic> json) =>
       _$$_MaterialDtoFromJson(json);
 
-  @override
-  @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(0, defaultValue: '')
-  final String materialNumber;
-  @override
-  @JsonKey(name: 'materialDescription', defaultValue: '')
-  @HiveField(1, defaultValue: '')
-  final String materialDescription;
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   @HiveField(2, defaultValue: '')
@@ -650,10 +885,6 @@ class _$_MaterialDto extends _MaterialDto {
   @JsonKey(name: 'principalName', defaultValue: '')
   @HiveField(5, defaultValue: '')
   final String principalName;
-  @override
-  @JsonKey(name: 'principalCode', defaultValue: '')
-  @HiveField(6, defaultValue: '')
-  final String principalCode;
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
   @HiveField(7, defaultValue: '')
@@ -679,10 +910,6 @@ class _$_MaterialDto extends _MaterialDto {
   @HiveField(12, defaultValue: false)
   final bool isSampleMaterial;
   @override
-  @JsonKey(name: 'hidePrice', defaultValue: false)
-  @HiveField(13, defaultValue: false)
-  final bool hidePrice;
-  @override
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
   @HiveField(14, defaultValue: false)
   final bool hasValidTenderContract;
@@ -698,16 +925,6 @@ class _$_MaterialDto extends _MaterialDto {
     if (_taxes is EqualUnmodifiableListView) return _taxes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_taxes);
-  }
-
-  final List<BundleDto> _bundles;
-  @override
-  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-  @HiveField(17, defaultValue: <BundleDto>[])
-  List<BundleDto> get bundles {
-    if (_bundles is EqualUnmodifiableListView) return _bundles;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bundles);
   }
 
   @override
@@ -734,10 +951,85 @@ class _$_MaterialDto extends _MaterialDto {
   @JsonKey(name: 'ean', defaultValue: '')
   @HiveField(23, defaultValue: '')
   final String ean;
+  final List<BundleDto> _bundles;
+  @override
+  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+  @HiveField(17, defaultValue: <BundleDto>[])
+  List<BundleDto> get bundles {
+    if (_bundles is EqualUnmodifiableListView) return _bundles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundles);
+  }
+
+// new field from v3
+  @override
+  @JsonKey(name: 'Code', defaultValue: '')
+  @HiveField(24, defaultValue: '')
+  final String code;
+  @override
+  @JsonKey(name: 'Name', defaultValue: '')
+  @HiveField(25, defaultValue: '')
+  @HiveField(26, defaultValue: '')
+  final String name;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @HiveField(27, defaultValue: '')
+  final String principalCode;
+  @override
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @HiveField(28, defaultValue: '')
+  final String materialNumber;
+  @override
+  @HiveField(29, defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
+  @HiveField(30, defaultValue: '')
+  final String materialDescription;
+  @override
+  @JsonKey(name: 'Manufactured', defaultValue: '')
+  @HiveField(31, defaultValue: '')
+  final String manufactured;
+  @override
+  @JsonKey(name: 'IsFavourite', defaultValue: false)
+  @HiveField(32, defaultValue: false)
+  final bool isFavourite;
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  @HiveField(33, defaultValue: '')
+  final String type;
+  @override
+  @JsonKey(name: 'HidePrice', defaultValue: false)
+  @HiveField(34, defaultValue: false)
+  final bool hidePrice;
+  @override
+  @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+  @HiveField(35, defaultValue: 0)
+  final int dataTotalCount;
+  @override
+  @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+  @HiveField(36, defaultValue: 0)
+  final int dataTotalHidden;
+  @override
+  @JsonKey(name: 'IsGimmick', defaultValue: false)
+  @HiveField(37, defaultValue: false)
+  final bool isGimmick;
+  final List<MaterialDataDto> _data;
+  @override
+  @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+  @HiveField(38, defaultValue: [])
+  List<MaterialDataDto> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+  @HiveField(39, defaultValue: _emptyConstBundleDto)
+  final BundleDto bundle;
 
   @override
   String toString() {
-    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
+    return 'MaterialDto(governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean, bundles: $bundles, code: $code, name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, data: $data, bundle: $bundle)';
   }
 
   @override
@@ -745,10 +1037,6 @@ class _$_MaterialDto extends _MaterialDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialDto &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.therapeuticClass, therapeuticClass) ||
@@ -757,8 +1045,6 @@ class _$_MaterialDto extends _MaterialDto {
                 other.itemBrand == itemBrand) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
-            (identical(other.principalCode, principalCode) ||
-                other.principalCode == principalCode) &&
             (identical(other.taxClassification, taxClassification) ||
                 other.taxClassification == taxClassification) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
@@ -771,8 +1057,6 @@ class _$_MaterialDto extends _MaterialDto {
                 other.materialGroup4 == materialGroup4) &&
             (identical(other.isSampleMaterial, isSampleMaterial) ||
                 other.isSampleMaterial == isSampleMaterial) &&
-            (identical(other.hidePrice, hidePrice) ||
-                other.hidePrice == hidePrice) &&
             (identical(other.hasValidTenderContract, hasValidTenderContract) ||
                 other.hasValidTenderContract == hasValidTenderContract) &&
             (identical(other.hasMandatoryTenderContract,
@@ -780,7 +1064,6 @@ class _$_MaterialDto extends _MaterialDto {
                 other.hasMandatoryTenderContract ==
                     hasMandatoryTenderContract) &&
             const DeepCollectionEquality().equals(other._taxes, _taxes) &&
-            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.defaultMaterialDescription,
                     defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
@@ -792,37 +1075,71 @@ class _$_MaterialDto extends _MaterialDto {
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
-            (identical(other.ean, ean) || other.ean == ean));
+            (identical(other.ean, ean) || other.ean == ean) &&
+            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.manufactured, manufactured) ||
+                other.manufactured == manufactured) &&
+            (identical(other.isFavourite, isFavourite) ||
+                other.isFavourite == isFavourite) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice) &&
+            (identical(other.dataTotalCount, dataTotalCount) ||
+                other.dataTotalCount == dataTotalCount) &&
+            (identical(other.dataTotalHidden, dataTotalHidden) ||
+                other.dataTotalHidden == dataTotalHidden) &&
+            (identical(other.isGimmick, isGimmick) ||
+                other.isGimmick == isGimmick) &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.bundle, bundle) || other.bundle == bundle));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        materialNumber,
-        materialDescription,
         governmentMaterialCode,
         therapeuticClass,
         itemBrand,
         principalName,
-        principalCode,
         taxClassification,
         itemRegistrationNumber,
         unitOfMeasurement,
         materialGroup2,
         materialGroup4,
         isSampleMaterial,
-        hidePrice,
         hasValidTenderContract,
         hasMandatoryTenderContract,
         const DeepCollectionEquality().hash(_taxes),
-        const DeepCollectionEquality().hash(_bundles),
         defaultMaterialDescription,
         isFOCMaterial,
         quantity,
         remarks,
         genericMaterialName,
-        ean
+        ean,
+        const DeepCollectionEquality().hash(_bundles),
+        code,
+        name,
+        principalCode,
+        materialNumber,
+        materialDescription,
+        manufactured,
+        isFavourite,
+        type,
+        hidePrice,
+        dataTotalCount,
+        dataTotalHidden,
+        isGimmick,
+        const DeepCollectionEquality().hash(_data),
+        bundle
       ]);
 
   @JsonKey(ignore: true)
@@ -841,13 +1158,7 @@ class _$_MaterialDto extends _MaterialDto {
 
 abstract class _MaterialDto extends MaterialDto {
   const factory _MaterialDto(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          required final String materialNumber,
-      @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required final String materialDescription,
-      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+      {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       @HiveField(2, defaultValue: '')
           required final String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
@@ -859,9 +1170,6 @@ abstract class _MaterialDto extends MaterialDto {
       @JsonKey(name: 'principalName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           required final String principalName,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required final String principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
       @HiveField(7, defaultValue: '')
           required final String taxClassification,
@@ -880,9 +1188,6 @@ abstract class _MaterialDto extends MaterialDto {
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
       @HiveField(12, defaultValue: false)
           required final bool isSampleMaterial,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13, defaultValue: false)
-          required final bool hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       @HiveField(14, defaultValue: false)
           required final bool hasValidTenderContract,
@@ -893,9 +1198,6 @@ abstract class _MaterialDto extends MaterialDto {
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
       @HiveField(16, defaultValue: ['0'])
           required final List<String> taxes,
-      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17, defaultValue: <BundleDto>[])
-          required final List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       @HiveField(18, defaultValue: '')
           required final String defaultMaterialDescription,
@@ -913,20 +1215,59 @@ abstract class _MaterialDto extends MaterialDto {
           required final String genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '')
       @HiveField(23, defaultValue: '')
-          required final String ean}) = _$_MaterialDto;
+          required final String ean,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+      @HiveField(17, defaultValue: <BundleDto>[])
+          required final List<BundleDto> bundles,
+      @JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(24, defaultValue: '')
+          required final String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+      @HiveField(25, defaultValue: '')
+      @HiveField(26, defaultValue: '')
+          required final String name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @HiveField(27, defaultValue: '')
+          required final String principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @HiveField(28, defaultValue: '')
+          required final String materialNumber,
+      @HiveField(29, defaultValue: '')
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+      @HiveField(30, defaultValue: '')
+          required final String materialDescription,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(31, defaultValue: '')
+          required final String manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+      @HiveField(32, defaultValue: false)
+          required final bool isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+      @HiveField(33, defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+      @HiveField(34, defaultValue: false)
+          required final bool hidePrice,
+      @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          required final int dataTotalCount,
+      @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+      @HiveField(36, defaultValue: 0)
+          required final int dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+      @HiveField(37, defaultValue: false)
+          required final bool isGimmick,
+      @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+      @HiveField(38, defaultValue: [])
+          required final List<MaterialDataDto> data,
+      @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+      @HiveField(39, defaultValue: _emptyConstBundleDto)
+          required final BundleDto bundle}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
       _$_MaterialDto.fromJson;
 
-  @override
-  @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(0, defaultValue: '')
-  String get materialNumber;
-  @override
-  @JsonKey(name: 'materialDescription', defaultValue: '')
-  @HiveField(1, defaultValue: '')
-  String get materialDescription;
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   @HiveField(2, defaultValue: '')
@@ -943,10 +1284,6 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'principalName', defaultValue: '')
   @HiveField(5, defaultValue: '')
   String get principalName;
-  @override
-  @JsonKey(name: 'principalCode', defaultValue: '')
-  @HiveField(6, defaultValue: '')
-  String get principalCode;
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
   @HiveField(7, defaultValue: '')
@@ -972,10 +1309,6 @@ abstract class _MaterialDto extends MaterialDto {
   @HiveField(12, defaultValue: false)
   bool get isSampleMaterial;
   @override
-  @JsonKey(name: 'hidePrice', defaultValue: false)
-  @HiveField(13, defaultValue: false)
-  bool get hidePrice;
-  @override
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
   @HiveField(14, defaultValue: false)
   bool get hasValidTenderContract;
@@ -987,10 +1320,6 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
   @HiveField(16, defaultValue: ['0'])
   List<String> get taxes;
-  @override
-  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-  @HiveField(17, defaultValue: <BundleDto>[])
-  List<BundleDto> get bundles;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   @HiveField(18, defaultValue: '')
@@ -1016,7 +1345,630 @@ abstract class _MaterialDto extends MaterialDto {
   @HiveField(23, defaultValue: '')
   String get ean;
   @override
+  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+  @HiveField(17, defaultValue: <BundleDto>[])
+  List<BundleDto> get bundles;
+  @override // new field from v3
+  @JsonKey(name: 'Code', defaultValue: '')
+  @HiveField(24, defaultValue: '')
+  String get code;
+  @override
+  @JsonKey(name: 'Name', defaultValue: '')
+  @HiveField(25, defaultValue: '')
+  @HiveField(26, defaultValue: '')
+  String get name;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @HiveField(27, defaultValue: '')
+  String get principalCode;
+  @override
+  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @HiveField(28, defaultValue: '')
+  String get materialNumber;
+  @override
+  @HiveField(29, defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
+  @HiveField(30, defaultValue: '')
+  String get materialDescription;
+  @override
+  @JsonKey(name: 'Manufactured', defaultValue: '')
+  @HiveField(31, defaultValue: '')
+  String get manufactured;
+  @override
+  @JsonKey(name: 'IsFavourite', defaultValue: false)
+  @HiveField(32, defaultValue: false)
+  bool get isFavourite;
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  @HiveField(33, defaultValue: '')
+  String get type;
+  @override
+  @JsonKey(name: 'HidePrice', defaultValue: false)
+  @HiveField(34, defaultValue: false)
+  bool get hidePrice;
+  @override
+  @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+  @HiveField(35, defaultValue: 0)
+  int get dataTotalCount;
+  @override
+  @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+  @HiveField(36, defaultValue: 0)
+  int get dataTotalHidden;
+  @override
+  @JsonKey(name: 'IsGimmick', defaultValue: false)
+  @HiveField(37, defaultValue: false)
+  bool get isGimmick;
+  @override
+  @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+  @HiveField(38, defaultValue: [])
+  List<MaterialDataDto> get data;
+  @override
+  @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+  @HiveField(39, defaultValue: _emptyConstBundleDto)
+  BundleDto get bundle;
+  @override
   @JsonKey(ignore: true)
   _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MaterialDataDto _$MaterialDataDtoFromJson(Map<String, dynamic> json) {
+  return _MaterialDataDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MaterialDataDto {
+  @JsonKey(name: 'Code', defaultValue: '')
+  @HiveField(1, defaultValue: '')
+  String get code => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Manufactured', defaultValue: '')
+  @HiveField(2, defaultValue: '')
+  String get manufactured => throw _privateConstructorUsedError;
+  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @HiveField(3, defaultValue: '')
+  String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  @HiveField(4, defaultValue: '')
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+  @HiveField(5, defaultValue: '')
+  String get genericMaterialName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+  @HiveField(6, defaultValue: '')
+  String get materialImageURL => throw _privateConstructorUsedError;
+  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  @HiveField(7, defaultValue: '')
+  String get governmentMaterialCode => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MaterialDataDtoCopyWith<MaterialDataDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MaterialDataDtoCopyWith<$Res> {
+  factory $MaterialDataDtoCopyWith(
+          MaterialDataDto value, $Res Function(MaterialDataDto) then) =
+      _$MaterialDataDtoCopyWithImpl<$Res, MaterialDataDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(1, defaultValue: '')
+          String code,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(2, defaultValue: '')
+          String manufactured,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      @HiveField(3, defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          String defaultMaterialDescription,
+      @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+      @HiveField(5, defaultValue: '')
+          String genericMaterialName,
+      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          String materialImageURL,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @HiveField(7, defaultValue: '')
+          String governmentMaterialCode});
+}
+
+/// @nodoc
+class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
+    implements $MaterialDataDtoCopyWith<$Res> {
+  _$MaterialDataDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+    Object? manufactured = null,
+    Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
+    Object? genericMaterialName = null,
+    Object? materialImageURL = null,
+    Object? governmentMaterialCode = null,
+  }) {
+    return _then(_value.copyWith(
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactured: null == manufactured
+          ? _value.manufactured
+          : manufactured // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      genericMaterialName: null == genericMaterialName
+          ? _value.genericMaterialName
+          : genericMaterialName // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialImageURL: null == materialImageURL
+          ? _value.materialImageURL
+          : materialImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MaterialDataDtoCopyWith<$Res>
+    implements $MaterialDataDtoCopyWith<$Res> {
+  factory _$$_MaterialDataDtoCopyWith(
+          _$_MaterialDataDto value, $Res Function(_$_MaterialDataDto) then) =
+      __$$_MaterialDataDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(1, defaultValue: '')
+          String code,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(2, defaultValue: '')
+          String manufactured,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      @HiveField(3, defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          String defaultMaterialDescription,
+      @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+      @HiveField(5, defaultValue: '')
+          String genericMaterialName,
+      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          String materialImageURL,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @HiveField(7, defaultValue: '')
+          String governmentMaterialCode});
+}
+
+/// @nodoc
+class __$$_MaterialDataDtoCopyWithImpl<$Res>
+    extends _$MaterialDataDtoCopyWithImpl<$Res, _$_MaterialDataDto>
+    implements _$$_MaterialDataDtoCopyWith<$Res> {
+  __$$_MaterialDataDtoCopyWithImpl(
+      _$_MaterialDataDto _value, $Res Function(_$_MaterialDataDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+    Object? manufactured = null,
+    Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
+    Object? genericMaterialName = null,
+    Object? materialImageURL = null,
+    Object? governmentMaterialCode = null,
+  }) {
+    return _then(_$_MaterialDataDto(
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactured: null == manufactured
+          ? _value.manufactured
+          : manufactured // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      genericMaterialName: null == genericMaterialName
+          ? _value.genericMaterialName
+          : genericMaterialName // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialImageURL: null == materialImageURL
+          ? _value.materialImageURL
+          : materialImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+@HiveType(typeId: 3, adapterName: 'MaterialDataDtoAdapter')
+class _$_MaterialDataDto extends _MaterialDataDto {
+  _$_MaterialDataDto(
+      {@JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(1, defaultValue: '')
+          required this.code,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(2, defaultValue: '')
+          required this.manufactured,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      @HiveField(3, defaultValue: '')
+          required this.materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          required this.defaultMaterialDescription,
+      @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+      @HiveField(5, defaultValue: '')
+          required this.genericMaterialName,
+      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          required this.materialImageURL,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @HiveField(7, defaultValue: '')
+          required this.governmentMaterialCode})
+      : super._();
+
+  factory _$_MaterialDataDto.fromJson(Map<String, dynamic> json) =>
+      _$$_MaterialDataDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'Code', defaultValue: '')
+  @HiveField(1, defaultValue: '')
+  final String code;
+  @override
+  @JsonKey(name: 'Manufactured', defaultValue: '')
+  @HiveField(2, defaultValue: '')
+  final String manufactured;
+  @override
+  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @HiveField(3, defaultValue: '')
+  final String materialDescription;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  @HiveField(4, defaultValue: '')
+  final String defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+  @HiveField(5, defaultValue: '')
+  final String genericMaterialName;
+  @override
+  @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+  @HiveField(6, defaultValue: '')
+  final String materialImageURL;
+  @override
+  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  @HiveField(7, defaultValue: '')
+  final String governmentMaterialCode;
+
+  @override
+  String toString() {
+    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, materialImageURL: $materialImageURL, governmentMaterialCode: $governmentMaterialCode)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MaterialDataDto &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.manufactured, manufactured) ||
+                other.manufactured == manufactured) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
+            (identical(other.genericMaterialName, genericMaterialName) ||
+                other.genericMaterialName == genericMaterialName) &&
+            (identical(other.materialImageURL, materialImageURL) ||
+                other.materialImageURL == materialImageURL) &&
+            (identical(other.governmentMaterialCode, governmentMaterialCode) ||
+                other.governmentMaterialCode == governmentMaterialCode));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      code,
+      manufactured,
+      materialDescription,
+      defaultMaterialDescription,
+      genericMaterialName,
+      materialImageURL,
+      governmentMaterialCode);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MaterialDataDtoCopyWith<_$_MaterialDataDto> get copyWith =>
+      __$$_MaterialDataDtoCopyWithImpl<_$_MaterialDataDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MaterialDataDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MaterialDataDto extends MaterialDataDto {
+  factory _MaterialDataDto(
+      {@JsonKey(name: 'Code', defaultValue: '')
+      @HiveField(1, defaultValue: '')
+          required final String code,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+      @HiveField(2, defaultValue: '')
+          required final String manufactured,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      @HiveField(3, defaultValue: '')
+          required final String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          required final String defaultMaterialDescription,
+      @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+      @HiveField(5, defaultValue: '')
+          required final String genericMaterialName,
+      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          required final String materialImageURL,
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @HiveField(7, defaultValue: '')
+          required final String governmentMaterialCode}) = _$_MaterialDataDto;
+  _MaterialDataDto._() : super._();
+
+  factory _MaterialDataDto.fromJson(Map<String, dynamic> json) =
+      _$_MaterialDataDto.fromJson;
+
+  @override
+  @JsonKey(name: 'Code', defaultValue: '')
+  @HiveField(1, defaultValue: '')
+  String get code;
+  @override
+  @JsonKey(name: 'Manufactured', defaultValue: '')
+  @HiveField(2, defaultValue: '')
+  String get manufactured;
+  @override
+  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @HiveField(3, defaultValue: '')
+  String get materialDescription;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  @HiveField(4, defaultValue: '')
+  String get defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+  @HiveField(5, defaultValue: '')
+  String get genericMaterialName;
+  @override
+  @JsonKey(name: 'MaterialImageURL', defaultValue: '')
+  @HiveField(6, defaultValue: '')
+  String get materialImageURL;
+  @override
+  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  @HiveField(7, defaultValue: '')
+  String get governmentMaterialCode;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MaterialDataDtoCopyWith<_$_MaterialDataDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MaterialResponseDto _$MaterialResponseDtoFromJson(Map<String, dynamic> json) {
+  return _MaterialResponseDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MaterialResponseDto {
+  @JsonKey(name: 'Count', defaultValue: 0)
+  int get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get products => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MaterialResponseDtoCopyWith<MaterialResponseDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MaterialResponseDtoCopyWith<$Res> {
+  factory $MaterialResponseDtoCopyWith(
+          MaterialResponseDto value, $Res Function(MaterialResponseDto) then) =
+      _$MaterialResponseDtoCopyWithImpl<$Res, MaterialResponseDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          int count,
+      @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+          List<MaterialDto> products});
+}
+
+/// @nodoc
+class _$MaterialResponseDtoCopyWithImpl<$Res, $Val extends MaterialResponseDto>
+    implements $MaterialResponseDtoCopyWith<$Res> {
+  _$MaterialResponseDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? products = null,
+  }) {
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDto>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MaterialResponseDtoCopyWith<$Res>
+    implements $MaterialResponseDtoCopyWith<$Res> {
+  factory _$$_MaterialResponseDtoCopyWith(_$_MaterialResponseDto value,
+          $Res Function(_$_MaterialResponseDto) then) =
+      __$$_MaterialResponseDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          int count,
+      @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+          List<MaterialDto> products});
+}
+
+/// @nodoc
+class __$$_MaterialResponseDtoCopyWithImpl<$Res>
+    extends _$MaterialResponseDtoCopyWithImpl<$Res, _$_MaterialResponseDto>
+    implements _$$_MaterialResponseDtoCopyWith<$Res> {
+  __$$_MaterialResponseDtoCopyWithImpl(_$_MaterialResponseDto _value,
+      $Res Function(_$_MaterialResponseDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? products = null,
+  }) {
+    return _then(_$_MaterialResponseDto(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDto>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MaterialResponseDto extends _MaterialResponseDto {
+  _$_MaterialResponseDto(
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          required this.count,
+      @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+          required final List<MaterialDto> products})
+      : _products = products,
+        super._();
+
+  factory _$_MaterialResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$$_MaterialResponseDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'Count', defaultValue: 0)
+  final int count;
+  final List<MaterialDto> _products;
+  @override
+  @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
+  @override
+  String toString() {
+    return 'MaterialResponseDto(count: $count, products: $products)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MaterialResponseDto &&
+            (identical(other.count, count) || other.count == count) &&
+            const DeepCollectionEquality().equals(other._products, _products));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, count, const DeepCollectionEquality().hash(_products));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MaterialResponseDtoCopyWith<_$_MaterialResponseDto> get copyWith =>
+      __$$_MaterialResponseDtoCopyWithImpl<_$_MaterialResponseDto>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MaterialResponseDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MaterialResponseDto extends MaterialResponseDto {
+  factory _MaterialResponseDto(
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          required final int count,
+      @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+          required final List<MaterialDto> products}) = _$_MaterialResponseDto;
+  _MaterialResponseDto._() : super._();
+
+  factory _MaterialResponseDto.fromJson(Map<String, dynamic> json) =
+      _$_MaterialResponseDto.fromJson;
+
+  @override
+  @JsonKey(name: 'Count', defaultValue: 0)
+  int get count;
+  @override
+  @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get products;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MaterialResponseDtoCopyWith<_$_MaterialResponseDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

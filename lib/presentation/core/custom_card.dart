@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   final Widget child;
-  const CustomCard({Key? key, required this.child}) : super(key: key);
+  final EdgeInsets margin;
+  final EdgeInsets padding;
+  const CustomCard({
+    Key? key,
+    required this.child,
+    this.margin = const EdgeInsets.only(bottom: 20.0),
+    this.padding = const EdgeInsets.symmetric(vertical: 10.0),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 20.0),
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      margin: margin,
+      padding: padding,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         boxShadow: [

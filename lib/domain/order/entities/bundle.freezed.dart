@@ -20,6 +20,8 @@ mixin _$Bundle {
   List<MaterialInfo> get materials => throw _privateConstructorUsedError;
   String get bundleCode => throw _privateConstructorUsedError;
   List<BundleInfo> get bundleInformation => throw _privateConstructorUsedError;
+  String get conditions => throw _privateConstructorUsedError;
+  bool get bonusEligible => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BundleCopyWith<Bundle> get copyWith => throw _privateConstructorUsedError;
@@ -34,7 +36,9 @@ abstract class $BundleCopyWith<$Res> {
       {BundleName bundleName,
       List<MaterialInfo> materials,
       String bundleCode,
-      List<BundleInfo> bundleInformation});
+      List<BundleInfo> bundleInformation,
+      String conditions,
+      bool bonusEligible});
 }
 
 /// @nodoc
@@ -54,6 +58,8 @@ class _$BundleCopyWithImpl<$Res, $Val extends Bundle>
     Object? materials = null,
     Object? bundleCode = null,
     Object? bundleInformation = null,
+    Object? conditions = null,
+    Object? bonusEligible = null,
   }) {
     return _then(_value.copyWith(
       bundleName: null == bundleName
@@ -72,6 +78,14 @@ class _$BundleCopyWithImpl<$Res, $Val extends Bundle>
           ? _value.bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfo>,
+      conditions: null == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: null == bonusEligible
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -86,7 +100,9 @@ abstract class _$$_BundleCopyWith<$Res> implements $BundleCopyWith<$Res> {
       {BundleName bundleName,
       List<MaterialInfo> materials,
       String bundleCode,
-      List<BundleInfo> bundleInformation});
+      List<BundleInfo> bundleInformation,
+      String conditions,
+      bool bonusEligible});
 }
 
 /// @nodoc
@@ -103,6 +119,8 @@ class __$$_BundleCopyWithImpl<$Res>
     Object? materials = null,
     Object? bundleCode = null,
     Object? bundleInformation = null,
+    Object? conditions = null,
+    Object? bonusEligible = null,
   }) {
     return _then(_$_Bundle(
       bundleName: null == bundleName
@@ -121,6 +139,14 @@ class __$$_BundleCopyWithImpl<$Res>
           ? _value._bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfo>,
+      conditions: null == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: null == bonusEligible
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -132,7 +158,9 @@ class _$_Bundle extends _Bundle {
       {required this.bundleName,
       required final List<MaterialInfo> materials,
       required this.bundleCode,
-      required final List<BundleInfo> bundleInformation})
+      required final List<BundleInfo> bundleInformation,
+      required this.conditions,
+      required this.bonusEligible})
       : _materials = materials,
         _bundleInformation = bundleInformation,
         super._();
@@ -159,8 +187,13 @@ class _$_Bundle extends _Bundle {
   }
 
   @override
+  final String conditions;
+  @override
+  final bool bonusEligible;
+
+  @override
   String toString() {
-    return 'Bundle(bundleName: $bundleName, materials: $materials, bundleCode: $bundleCode, bundleInformation: $bundleInformation)';
+    return 'Bundle(bundleName: $bundleName, materials: $materials, bundleCode: $bundleCode, bundleInformation: $bundleInformation, conditions: $conditions, bonusEligible: $bonusEligible)';
   }
 
   @override
@@ -175,7 +208,11 @@ class _$_Bundle extends _Bundle {
             (identical(other.bundleCode, bundleCode) ||
                 other.bundleCode == bundleCode) &&
             const DeepCollectionEquality()
-                .equals(other._bundleInformation, _bundleInformation));
+                .equals(other._bundleInformation, _bundleInformation) &&
+            (identical(other.conditions, conditions) ||
+                other.conditions == conditions) &&
+            (identical(other.bonusEligible, bonusEligible) ||
+                other.bonusEligible == bonusEligible));
   }
 
   @override
@@ -184,7 +221,9 @@ class _$_Bundle extends _Bundle {
       bundleName,
       const DeepCollectionEquality().hash(_materials),
       bundleCode,
-      const DeepCollectionEquality().hash(_bundleInformation));
+      const DeepCollectionEquality().hash(_bundleInformation),
+      conditions,
+      bonusEligible);
 
   @JsonKey(ignore: true)
   @override
@@ -198,7 +237,9 @@ abstract class _Bundle extends Bundle {
       {required final BundleName bundleName,
       required final List<MaterialInfo> materials,
       required final String bundleCode,
-      required final List<BundleInfo> bundleInformation}) = _$_Bundle;
+      required final List<BundleInfo> bundleInformation,
+      required final String conditions,
+      required final bool bonusEligible}) = _$_Bundle;
   const _Bundle._() : super._();
 
   @override
@@ -209,6 +250,10 @@ abstract class _Bundle extends Bundle {
   String get bundleCode;
   @override
   List<BundleInfo> get bundleInformation;
+  @override
+  String get conditions;
+  @override
+  bool get bonusEligible;
   @override
   @JsonKey(ignore: true)
   _$$_BundleCopyWith<_$_Bundle> get copyWith =>

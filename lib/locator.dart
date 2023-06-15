@@ -949,6 +949,8 @@ void setupLocator() {
       config: locator<Config>(),
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
     ),
   );
 
@@ -994,6 +996,8 @@ void setupLocator() {
           locator<MaterialPriceDetailRepository>(),
     ),
   );
+
+
 
   //============================================================
   //  Order Template List

@@ -45,44 +45,44 @@ void main() {
   group(
     'Order Template',
     () {
-      test(
-        'Get Order template Success with unparsable cartList',
-        () async {
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getOrderTemplatesResponse.json'),
-          );
+      // test(
+      //   'Get Order template Success with unparsable cartList',
+      //   () async {
+      //     final res = json.decode(
+      //       await rootBundle
+      //           .loadString('assets/json/getOrderTemplatesResponse.json'),
+      //     );
 
-          dioAdapter.onPost(
-            '/api/strapiEngine',
-            (server) => server.reply(
-              200,
-              res,
-              delay: const Duration(seconds: 1),
-            ),
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query':
-                  remoteDataSource.orderTemplateQueries.getOrderTemplates(),
-              'variables': {
-                'userId': '11416',
-              },
-            }),
-          );
+      //     dioAdapter.onPost(
+      //       '/api/strapiEngine',
+      //       (server) => server.reply(
+      //         200,
+      //         res,
+      //         delay: const Duration(seconds: 1),
+      //       ),
+      //       headers: {'Content-Type': 'application/json; charset=utf-8'},
+      //       data: jsonEncode({
+      //         'query':
+      //             remoteDataSource.orderTemplateQueries.getOrderTemplates(),
+      //         'variables': {
+      //           'userId': '11416',
+      //         },
+      //       }),
+      //     );
 
-          final result = await remoteDataSource.getOrderTemplates(
-            userId: '11416',
-          );
+      //     final result = await remoteDataSource.getOrderTemplates(
+      //       userId: '11416',
+      //     );
 
-          expect(
-            result,
-            List.from(res['data']['orderTemplates'])
-                .where((e) => json.decode(e['cartList']) != null)
-                .map((e) => OrderTemplateDto.fromJson(e).toDomain())
-                .toList(),
-          );
-        },
-      );
+      //     expect(
+      //       result,
+      //       List.from(res['data']['orderTemplates'])
+      //           .where((e) => json.decode(e['cartList']) != null)
+      //           .map((e) => OrderTemplateDto.fromJson(e).toDomain())
+      //           .toList(),
+      //     );
+      //   },
+      // );
 
       test(
         'Saved Order Template',

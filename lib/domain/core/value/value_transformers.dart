@@ -243,3 +243,9 @@ Color getValueColor(String input) =>
 
 int getIntegerReturnQuantity(String quantity) =>
     quantity.isEmpty ? 0 : int.parse(quantity);
+
+bool isBundle(String type) => type == 'bundle';
+
+bool isMaterial(String type) => type == 'material';
+
+bool notZero(int number) => number != 0;

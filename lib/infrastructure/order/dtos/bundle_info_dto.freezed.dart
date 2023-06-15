@@ -20,16 +20,16 @@ BundleInfoDto _$BundleInfoDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BundleInfoDto {
-  @JsonKey(name: 'sequence')
+  @JsonKey(name: 'Sequence')
   @HiveField(21, defaultValue: 1)
   int get sequence => throw _privateConstructorUsedError;
-  @JsonKey(name: 'quantity')
+  @JsonKey(name: 'Quantity')
   @HiveField(22, defaultValue: 1)
   int get quantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'Type')
   @HiveField(23, defaultValue: '%')
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'rate')
+  @JsonKey(name: 'Rate')
   @HiveField(24, defaultValue: -10)
   double get rate => throw _privateConstructorUsedError;
 
@@ -46,10 +46,10 @@ abstract class $BundleInfoDtoCopyWith<$Res> {
       _$BundleInfoDtoCopyWithImpl<$Res, BundleInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'sequence') @HiveField(21, defaultValue: 1) int sequence,
-      @JsonKey(name: 'quantity') @HiveField(22, defaultValue: 1) int quantity,
-      @JsonKey(name: 'type') @HiveField(23, defaultValue: '%') String type,
-      @JsonKey(name: 'rate') @HiveField(24, defaultValue: -10) double rate});
+      {@JsonKey(name: 'Sequence') @HiveField(21, defaultValue: 1) int sequence,
+      @JsonKey(name: 'Quantity') @HiveField(22, defaultValue: 1) int quantity,
+      @JsonKey(name: 'Type') @HiveField(23, defaultValue: '%') String type,
+      @JsonKey(name: 'Rate') @HiveField(24, defaultValue: -10) double rate});
 }
 
 /// @nodoc
@@ -100,10 +100,10 @@ abstract class _$$_BundleInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'sequence') @HiveField(21, defaultValue: 1) int sequence,
-      @JsonKey(name: 'quantity') @HiveField(22, defaultValue: 1) int quantity,
-      @JsonKey(name: 'type') @HiveField(23, defaultValue: '%') String type,
-      @JsonKey(name: 'rate') @HiveField(24, defaultValue: -10) double rate});
+      {@JsonKey(name: 'Sequence') @HiveField(21, defaultValue: 1) int sequence,
+      @JsonKey(name: 'Quantity') @HiveField(22, defaultValue: 1) int quantity,
+      @JsonKey(name: 'Type') @HiveField(23, defaultValue: '%') String type,
+      @JsonKey(name: 'Rate') @HiveField(24, defaultValue: -10) double rate});
 }
 
 /// @nodoc
@@ -148,16 +148,16 @@ class __$$_BundleInfoDtoCopyWithImpl<$Res>
 @HiveType(typeId: 16, adapterName: 'BundleInfoDtoAdapter')
 class _$_BundleInfoDto extends _BundleInfoDto {
   const _$_BundleInfoDto(
-      {@JsonKey(name: 'sequence')
+      {@JsonKey(name: 'Sequence')
       @HiveField(21, defaultValue: 1)
           required this.sequence,
-      @JsonKey(name: 'quantity')
+      @JsonKey(name: 'Quantity')
       @HiveField(22, defaultValue: 1)
           required this.quantity,
-      @JsonKey(name: 'type')
+      @JsonKey(name: 'Type')
       @HiveField(23, defaultValue: '%')
           required this.type,
-      @JsonKey(name: 'rate')
+      @JsonKey(name: 'Rate')
       @HiveField(24, defaultValue: -10)
           required this.rate})
       : super._();
@@ -166,19 +166,19 @@ class _$_BundleInfoDto extends _BundleInfoDto {
       _$$_BundleInfoDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'sequence')
+  @JsonKey(name: 'Sequence')
   @HiveField(21, defaultValue: 1)
   final int sequence;
   @override
-  @JsonKey(name: 'quantity')
+  @JsonKey(name: 'Quantity')
   @HiveField(22, defaultValue: 1)
   final int quantity;
   @override
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'Type')
   @HiveField(23, defaultValue: '%')
   final String type;
   @override
-  @JsonKey(name: 'rate')
+  @JsonKey(name: 'Rate')
   @HiveField(24, defaultValue: -10)
   final double rate;
 
@@ -220,16 +220,16 @@ class _$_BundleInfoDto extends _BundleInfoDto {
 
 abstract class _BundleInfoDto extends BundleInfoDto {
   const factory _BundleInfoDto(
-      {@JsonKey(name: 'sequence')
+      {@JsonKey(name: 'Sequence')
       @HiveField(21, defaultValue: 1)
           required final int sequence,
-      @JsonKey(name: 'quantity')
+      @JsonKey(name: 'Quantity')
       @HiveField(22, defaultValue: 1)
           required final int quantity,
-      @JsonKey(name: 'type')
+      @JsonKey(name: 'Type')
       @HiveField(23, defaultValue: '%')
           required final String type,
-      @JsonKey(name: 'rate')
+      @JsonKey(name: 'Rate')
       @HiveField(24, defaultValue: -10)
           required final double rate}) = _$_BundleInfoDto;
   const _BundleInfoDto._() : super._();
@@ -238,19 +238,19 @@ abstract class _BundleInfoDto extends BundleInfoDto {
       _$_BundleInfoDto.fromJson;
 
   @override
-  @JsonKey(name: 'sequence')
+  @JsonKey(name: 'Sequence')
   @HiveField(21, defaultValue: 1)
   int get sequence;
   @override
-  @JsonKey(name: 'quantity')
+  @JsonKey(name: 'Quantity')
   @HiveField(22, defaultValue: 1)
   int get quantity;
   @override
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'Type')
   @HiveField(23, defaultValue: '%')
   String get type;
   @override
-  @JsonKey(name: 'rate')
+  @JsonKey(name: 'Rate')
   @HiveField(24, defaultValue: -10)
   double get rate;
   @override

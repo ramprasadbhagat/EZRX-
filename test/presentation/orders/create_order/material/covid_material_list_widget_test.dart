@@ -147,7 +147,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late MaterialListRepository materialListRepositoryMock;
 
-  final fakeMaterialInfo = MaterialInfo(
+  final fakeMaterialInfo = MaterialInfo.empty().copyWith(
     materialNumber: fakeMaterialNumber,
     ean: '2234567890',
     materialDescription: "Reag Cup 15ml 1'S",
@@ -487,7 +487,7 @@ void main() {
         isFetching: false,
         nextPageIndex: 2,
         materialList: <MaterialInfo>[
-          MaterialInfo(
+          MaterialInfo.empty().copyWith(
             materialNumber: fakeMaterialNumber,
             ean: '2234567890',
             materialDescription: "Reag Cup 15ml 1'S",

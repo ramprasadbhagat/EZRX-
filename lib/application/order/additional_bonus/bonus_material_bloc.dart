@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_additional_bonus_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/transformers.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'bonus_material_bloc.freezed.dart';
 part 'bonus_material_event.dart';

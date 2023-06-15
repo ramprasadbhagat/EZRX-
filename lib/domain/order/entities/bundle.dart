@@ -15,6 +15,8 @@ class Bundle with _$Bundle {
     required List<MaterialInfo> materials,
     required String bundleCode,
     required List<BundleInfo> bundleInformation,
+    required String conditions,
+    required bool bonusEligible,
   }) = _Bundle;
 
   factory Bundle.empty() => Bundle(
@@ -22,6 +24,8 @@ class Bundle with _$Bundle {
         bundleName: BundleName(''),
         bundleCode: '',
         bundleInformation: <BundleInfo>[],
+        conditions: '',
+        bonusEligible: false,
       );
 
   List<BundleInfo> get sortedBundleInformation =>

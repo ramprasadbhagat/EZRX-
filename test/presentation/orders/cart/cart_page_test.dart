@@ -220,7 +220,7 @@ void main() {
             enableTaxAtTotalLevelOnly: true,
           ),
           quantity: 5,
-          bundle: Bundle(
+          bundle: Bundle.empty().copyWith(
             materials: <MaterialInfo>[
               MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('000000000023168451'),
@@ -254,6 +254,7 @@ void main() {
             ],
             bundleCode: '',
             bundleName: BundleName('test'),
+            bonusEligible: false,
           ),
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('000000000023168451'),
@@ -282,7 +283,7 @@ void main() {
             )),
           ],
           quantity: 10,
-          bundle: Bundle(
+          bundle: Bundle.empty().copyWith(
             materials: <MaterialInfo>[],
             bundleInformation: [],
             bundleCode: '',
@@ -347,7 +348,7 @@ void main() {
               100.0,
             ),
           ),
-          bundle: Bundle(
+          bundle: Bundle.empty().copyWith(
             materials: <MaterialInfo>[],
             bundleInformation: [],
             bundleCode: '123',

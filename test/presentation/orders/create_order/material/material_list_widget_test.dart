@@ -186,7 +186,7 @@ void main() {
         .copyWith(documentType: DocumentType('ZPFC (ZPFC)')),
   ];
 
-  final fakematerialInfo = MaterialInfo(
+  final fakematerialInfo = MaterialInfo.empty().copyWith(
     quantity: 0,
     ean: '2234567890',
     materialNumber: fakeMaterialNumber,
@@ -454,7 +454,7 @@ void main() {
           isFetching: false,
           nextPageIndex: 2,
           materialList: <MaterialInfo>[
-            MaterialInfo(
+            MaterialInfo.empty().copyWith(
               quantity: 0,
               ean: '2234567890',
               materialNumber: fakeMaterialNumber,

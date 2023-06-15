@@ -136,6 +136,8 @@ void main() {
           bundleName: BundleName(''),
           bundleCode: '0010276811',
           bundleInformation: mockBundleInfoList,
+          bonusEligible: false,
+          conditions: '',
         ),
         materialInfos: <MaterialInfo>[
           MaterialInfo.empty().copyWith(bundles: [
@@ -149,6 +151,8 @@ void main() {
             bundleName: BundleName(''),
             bundleCode: '0010276812',
             bundleInformation: mockBundleInfoList,
+            bonusEligible: false,
+            conditions: '',
           ),
           materialInfos: <MaterialInfo>[]),
       BundleAggregate(
@@ -157,6 +161,8 @@ void main() {
           bundleName: BundleName(''),
           bundleCode: '0010276813',
           bundleInformation: mockBundleInfoList,
+          bonusEligible: false,
+          conditions: '',
         ),
         materialInfos: <MaterialInfo>[],
       ),
@@ -166,6 +172,8 @@ void main() {
             bundleName: BundleName(''),
             bundleCode: '0010276814',
             bundleInformation: mockBundleInfoList,
+            bonusEligible: false,
+            conditions: '',
           ),
           materialInfos: <MaterialInfo>[]),
       BundleAggregate(
@@ -174,6 +182,8 @@ void main() {
             bundleName: BundleName(''),
             bundleCode: '0010276815',
             bundleInformation: mockBundleInfoList,
+            bonusEligible: false,
+            conditions: '',
           ),
           materialInfos: <MaterialInfo>[]),
     ];
@@ -548,6 +558,8 @@ void main() {
                 bundleName: BundleName(''),
                 bundleCode: '0010276811',
                 bundleInformation: mockBundleInfoList,
+                bonusEligible: false,
+                conditions: '',
               ),
               materialInfos: <MaterialInfo>[
                 MaterialInfo.empty().copyWith(bundles: [
