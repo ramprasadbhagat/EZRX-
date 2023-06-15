@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_checkout.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_header_message.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_item.dart';
@@ -99,7 +100,7 @@ class _ComboDealMaterialDetailPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('ComboDealDetailPage'),
+      key: WidgetKeys.comboDealDetailPage,
       appBar: AppBar(
         title: const Text('Combo Bundle Details').tr(),
       ),
@@ -146,7 +147,7 @@ class _ComboDealMaterialDetailPageState
                 builder: (context, state) {
                   if (state.isFetchingComboInfo || state.isFetchingPrice) {
                     return LoadingShimmer.logo(
-                      key: const Key('loaderImage'),
+                      key: WidgetKeys.loaderImage,
                     );
                   }
                   final comboDeal = state.currentDeal;
@@ -160,7 +161,9 @@ class _ComboDealMaterialDetailPageState
                       : Column(
                           children: [
                             ComboDealHeaderMessage(comboDeal: comboDeal),
-                            _ComboDealScrollList(state: state,),
+                            _ComboDealScrollList(
+                              state: state,
+                            ),
                           ],
                         );
                 },
@@ -265,8 +268,8 @@ class _K21ComboDealList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (state.items.isEmpty) {
-      return NoRecordFound.showMessage(
-        message: 'Combo bundle is empty'.tr(),
+      return const NoRecordFound(
+        title: 'Combo bundle is empty',
       );
     }
 

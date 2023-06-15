@@ -306,7 +306,11 @@ class _DeliveryAddressSearchSectionState
   @override
   void initState() {
     _searchController.value = TextEditingValue(
-      text: context.read<CustomerCodeBloc>().state.searchKey.getOrDefaultValue(''),
+      text: context
+          .read<CustomerCodeBloc>()
+          .state
+          .searchKey
+          .getOrDefaultValue(''),
       selection: TextSelection.collapsed(
         offset: _searchController.selection.base.offset,
       ),
@@ -358,23 +362,27 @@ class _DeliveryAddressSearchSectionState
             enabled: !state.isFetching,
             onSearchChanged: (value) {
               context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.autoSearch(
-                  userInfo: context.read<UserBloc>().state.user,
-                  selectedSalesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-                  hidecustomer: context.read<SalesOrgBloc>().state.hideCustomer,
-                  searchValue: value,
-                ),
-              );
+                    CustomerCodeEvent.autoSearch(
+                      userInfo: context.read<UserBloc>().state.user,
+                      selectedSalesOrg:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      hidecustomer:
+                          context.read<SalesOrgBloc>().state.hideCustomer,
+                      searchValue: value,
+                    ),
+                  );
             },
             onSearchSubmitted: (value) {
               context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.autoSearch(
-                  userInfo: context.read<UserBloc>().state.user,
-                  selectedSalesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-                  hidecustomer: context.read<SalesOrgBloc>().state.hideCustomer,
-                  searchValue: value,
-                ),
-              );
+                    CustomerCodeEvent.autoSearch(
+                      userInfo: context.read<UserBloc>().state.user,
+                      selectedSalesOrg:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      hidecustomer:
+                          context.read<SalesOrgBloc>().state.hideCustomer,
+                      searchValue: value,
+                    ),
+                  );
             },
             clearIconKey: WidgetKeys.clearIconKey,
             customValidator: () =>
@@ -383,12 +391,14 @@ class _DeliveryAddressSearchSectionState
               if (_searchController.text.isEmpty) return;
               _searchController.clear();
               context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.deletedSearch(
-                  userInfo: context.read<UserBloc>().state.user,
-                  selectedSalesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-                  hidecustomer: context.read<SalesOrgBloc>().state.hideCustomer,
-                ),
-              );
+                    CustomerCodeEvent.deletedSearch(
+                      userInfo: context.read<UserBloc>().state.user,
+                      selectedSalesOrg:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      hidecustomer:
+                          context.read<SalesOrgBloc>().state.hideCustomer,
+                    ),
+                  );
             },
             border: InputBorder.none,
           );

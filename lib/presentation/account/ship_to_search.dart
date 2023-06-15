@@ -136,11 +136,11 @@ class _AppBarState extends State<_AppBar> {
                 .read<ShipToCodeBloc>()
                 .add(ShipToCodeEvent.updateSearchKey(value));
             context.read<ShipToCodeBloc>().add(
-              ShipToCodeEvent.search(
-                shipToInfos:
-                context.read<CustomerCodeBloc>().state.shipToInfos,
-              ),
-            );
+                  ShipToCodeEvent.search(
+                    shipToInfos:
+                        context.read<CustomerCodeBloc>().state.shipToInfos,
+                  ),
+                );
           },
           border: InputBorder.none,
         ),

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -57,14 +57,14 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
       color: ZPColors.primary,
       onRefresh: () async => widget.onRefresh?.call(),
       child: CustomScrollView(
-        key: const Key('scrollList'),
+        key: WidgetKeys.scrollList,
         controller: _controller,
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
-                  child: NoRecordFound.showMessage(
-                    message: widget.emptyMessage.tr(),
+                  child: NoRecordFound(
+                    title: widget.emptyMessage,
                   ),
                 )
               : SliverList(
@@ -79,7 +79,7 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
                 ),
           if (widget.isLoading)
             SliverToBoxAdapter(
-              key: const Key('loadIndicator'),
+              key: WidgetKeys.loadMoreLoader,
               child: _LoadingMoreIndicator(
                 controller: _controller,
               ),

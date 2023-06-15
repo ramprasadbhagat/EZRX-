@@ -78,10 +78,10 @@ class _SelectedRequestReturnList extends StatelessWidget {
                   ],
                 ),
               )
-            : Align(
+            : const Align(
                 alignment: Alignment.center,
-                child: NoRecordFound.showMessage(
-                  message: 'No Return Items Added'.tr(),
+                child: NoRecordFound(
+                  title: 'No Return Items Added',
                 ),
               );
       },
@@ -365,8 +365,9 @@ class _ReturnQuantityInputFieldState extends State<_ReturnQuantityInputField> {
             ],
             onChanged: (value) {
               final offsetValue = ReturnQuantity.validatedValue(
-                      widget.returnItem.balanceQuantity, value,)
-                  .getValue();
+                widget.returnItem.balanceQuantity,
+                value,
+              ).getValue();
               _controller.value = TextEditingValue(
                 text: offsetValue,
                 selection: TextSelection.fromPosition(

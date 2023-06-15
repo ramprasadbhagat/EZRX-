@@ -87,6 +87,11 @@ class WidgetKeys {
   static const Key bonusItemList = Key('bonusItemList');
 
   //============================================================
+  //  Combo Deal Page Keys
+  //============================================================
+  static const Key comboDealDetailPage = Key('comboDealDetailPage');
+
+  //============================================================
   //  PolicyConfiguration page Keys
   //============================================================
   static const Key policyConfigurationLoader = Key('LoaderImage');
@@ -146,6 +151,8 @@ class WidgetKeys {
   static const Key staticHtmlViewer = Key('staticHtmlViewer');
   static const Key scrollList = Key('scrollList');
   static const Key loadMoreLoader = Key('loadIndicator');
+  static const Key noRecordsFoundSearchIcon = Key('noRecordsFoundSearchIcon');
+  static const Key loaderImage = Key('loaderImage');
 
   //============================================================
   //  Material List
@@ -159,7 +166,5 @@ class WidgetKeys {
   static const Key materialListBundleCard = Key('bundleCard');
   static const Key materialListMaterialCard = Key('MaterialCard');
   static Key materialListBundleMaterial(String materialNumber) =>
-      Key('bundleMaterialCard$materialNumber');  
-
-
+      Key('bundleMaterialCard$materialNumber');
 }
