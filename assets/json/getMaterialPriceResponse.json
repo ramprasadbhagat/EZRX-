@@ -2,1141 +2,376 @@
   "data": {
     "price": [
       {
-        "MaterialNumber": "000000000021026761",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 220,
-        "FinalIndividualPrice": 220,
+        "MaterialNumber": "000000000021038305",
+        "OldMaterialCode": "034F8B1307B",
+        "ListPrice": 273.6,
+        "FinalIndividualPrice": 273.6,
         "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 220,
-            "Conditions": "ZLP0 - A901 - 0070471303",
-            "BonusEligible": true,
-            "ConditionNumber": "0070471303"
-          }
-        ],
-        "ComboDeals": {
-          "Eligible": true,
-          "FlexibleGroup": "5000000018",
-          "SalesDeal": "0040000020",
-          "Category": {
-            "Type": "MATNR",
-            "Value": [
-              "000000000021130726",
-              "000000000021130718",
-              "000000000021222875"
-            ]
-          }
-        },
-        "Bonuses": [
-        ],
-        "TieredPricing": [
-          {
-            "Tier": "C", 
-            "PriceTier": [
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0, 
-                "Quantity": 1, 
-                "Type": "", 
-                "Rate": 5300
-              }, 
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0,
-                "Quantity": 3, 
-                "Type": "", 
-                "Rate": 4800
-              }, 
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0, 
-                "Quantity": 5, 
-                "Type": "", 
-                "Rate": 4650
-              }
-            ]
-          }
-        ],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000026176030",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 588.6,
-        "FinalIndividualPrice": 588.6,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 588.6,
-            "Conditions": "ZLP0 - A901 - 0065263458",
-            "BonusEligible": true,
-            "ConditionNumber": "0065263458"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [],
-        "Bundles": [],
-        "ComboDeals": {
-          "Eligible": true,
-          "FlexibleGroup": "5000000049",
-          "SalesDeal": "0040000050",
-          "Category": {
-            "Type": "ZPRINC",
-            "Value": [
-              "140132"
-            ]
-          }
-        },
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000023168451",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": true,
-        "ListPrice": 7,
-        "FinalIndividualPrice": 7,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 7,
-            "Conditions": "ZLP0 - A901 - 0065263502",
-            "BonusEligible": true,
-            "ConditionNumber": "0065263502"
-          }
-        ],
-        "Bonuses": [
-          {
-            "BonusTiers": [
-              {
-                "BonusMaterial": [
-                  {
-                    "MaterialNumber": "000000000023006010",
-                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 2,
-                    "ConditionId": "0000609500"
-                  }
-                ],
-                "Calculation": "915",
-                "QualifyingQuantity": 12
-              },
-              {
-                "BonusMaterial": [
-                  {
-                    "MaterialNumber": "000000000023006010",
-                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "QualifyingQuantity": 24,
-                    "BonusQuantity": 5,
-                    "ConditionId": "0000609500"
-                  }
-                ],
-                "Calculation": "915",
-                "QualifyingQuantity": 24
-              },
-              {
-                "BonusMaterial": [
-                  {
-                    "MaterialNumber": "000000000023006010",
-                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "QualifyingQuantity": 50,
-                    "BonusQuantity": 12,
-                    "ConditionId": "0000609500"
-                  }
-                ],
-                "Calculation": "915",
-                "QualifyingQuantity": 50
-              },
-              {
-                "BonusMaterial": [
-                  {
-                    "MaterialNumber": "000000000023006010",
-                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "QualifyingQuantity": 100,
-                    "BonusQuantity": 30,
-                    "ConditionId": "0000609500"
-                  }
-                ],
-                "Calculation": "915",
-                "QualifyingQuantity": 100
-              }
-            ]
-          }
-        ],
-        "TieredPricing": [
-          {
-            "Tier": "C", 
-            "PriceTier": [
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0, 
-                "Quantity": 5, 
-                "Type": "", 
-                "Rate": 4650
-              },
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0, 
-                "Quantity": 1, 
-                "Type": "", 
-                "Rate": 5300
-              }, 
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0,
-                "Quantity": 3, 
-                "Type": "", 
-                "Rate": 4800
-              }
-            ]
-          }
-        ],
-        "Bundles": [
-          {
-            "BundleName": "Low Strength",
-            "BundleCode": "0047093349",
-            "BundleInformation": [
-              {
-                "Sequence": 1,
-                "Quantity": 1,
-                "Type": "SGD",
-                "Rate": 46.35
-              },
-              {
-                "Sequence": 4,
-                "Quantity": 15,
-                "Type": "SGD",
-                "Rate": 31
-              },
-              {
-                "Sequence": 7,
-                "Quantity": 30,
-                "Type": "SGD",
-                "Rate": 23.2
-              },
-              {
-                "Sequence": 10,
-                "Quantity": 70,
-                "Type": "SGD",
-                "Rate": 19.3
-              }
-            ]
-          }
-        ],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000023167583",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": true,
-        "ListPrice": 225,
-        "FinalIndividualPrice": 225,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 225,
-            "Conditions": "ZLP0 - A901 - 0041867608",
-            "BonusEligible": true,
-            "ConditionNumber": "0041867608"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [
-          {
-            "Tier": "C", 
-            "PriceTier": [
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0, 
-                "Quantity": 1, 
-                "Type": "", 
-                "Rate": 4700
-              }, 
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0, 
-                "Quantity": 5, 
-                "Type": "", 
-                "Rate": 4150
-              },
-              {
-                "ApplyBonus": true, 
-                "Sequence": 0,
-                "Quantity": 3, 
-                "Type": "", 
-                "Rate": 4500
-              }
-            ]
-          }
-        ],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000023167634",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 480,
-        "FinalIndividualPrice": 480,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 480,
-            "Conditions": "ZLP0 - A901 - 0070471340",
-            "BonusEligible": true,
-            "ConditionNumber": "0070471340"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000021091528",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 400,
-        "FinalIndividualPrice": 400,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 400,
-            "Conditions": "ZLP0 - A901 - 0040379505",
-            "BonusEligible": true,
-            "ConditionNumber": "0040379505"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000023270009",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 7,
-        "FinalIndividualPrice": 7,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 7,
-            "Conditions": "ZLP0 - A901 - 0068029229",
-            "BonusEligible": true,
-            "ConditionNumber": "0068029229"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000023340340",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 220,
-        "FinalIndividualPrice": 220,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 220,
-            "Conditions": "ZLP0 - A901 - 0044334258",
-            "BonusEligible": true,
-            "ConditionNumber": "0044334258"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [
-          {
-            "Tier": "C",
-            "PriceTier": [
-              {
-                "ApplyBonus": false,
-                "Sequence": 0,
-                "Quantity": 1,
-                "Type": "",
-                "Rate": 800
-              },
-              {
-                "ApplyBonus": false,
-                "Sequence": 0,
-                "Quantity": 3,
-                "Type": "",
-                "Rate": 850
-              },
-              {
-                "ApplyBonus": false,
-                "Sequence": 0,
-                "Quantity": 5,
-                "Type": "",
-                "Rate": 900
-              }
-            ]
-          }
-        ],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000023270018",
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
-        "ListPrice": 901,
-        "FinalIndividualPrice": 901,
-        "FinalTotalPrice": 0,
-        "AdditionalBonusEligible": false,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 901,
-            "Conditions": "ZLP0 - A901 - 0068068150",
-            "BonusEligible": false,
-            "ConditionNumber": "0068068150"
-          }
-        ],
-        "Bonuses": [],
-        "TieredPricing": [
-          {
-            "Tier": "C",
-            "PriceTier": [
-              {
-                "ApplyBonus": false,
-                "Sequence": 0,
-                "Quantity": 1,
-                "Type": "",
-                "Rate": 900
-              },
-              {
-                "ApplyBonus": false,
-                "Sequence": 0,
-                "Quantity": 3,
-                "Type": "",
-                "Rate": 950
-              },
-              {
-                "ApplyBonus": false,
-                "Sequence": 0,
-                "Quantity": 5,
-                "Type": "",
-                "Rate": 1000
-              }
-            ]
-          }
-        ],
-        "Bundles": [],
-        "Valid": true
-      },
-      {
-        "MaterialNumber": "000000000021209747",
-        "ListPrice": 540,
-        "AdditionalBonusEligible": true,
         "PriceRules": [
           {
             "Type": "MYR",
-            "Rate": 540,
-            "Conditions": "ZLP0 - A901 - 0002069567",
+            "Rate": 273.6,
+            "Conditions": "ZLP0 - A901 - 0002049233",
+            "TieredRules": null,
             "BonusEligible": true,
-            "__typename": "PriceRule"
+            "ConditionNumber": "0002049233",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
           }
         ],
-        "Bundles": [],
         "Bonuses": [],
         "TieredPricing": [],
+        "Bundles": [],
         "Valid": true,
-        "FinalIndividualPrice": 540,
+        "AdditionalBonusEligible": true,
         "ZMGDiscount": false,
-        "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "__typename": "Price"
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
       },
       {
-        "MaterialNumber": "000000000023245612",
-        "ListPrice": 540,
-        "AdditionalBonusEligible": true,
+        "MaterialNumber": "000000000021038302",
+        "OldMaterialCode": "034F8B1306B",
+        "ListPrice": 364.8,
+        "FinalIndividualPrice": 364.8,
+        "FinalTotalPrice": 0,
         "PriceRules": [
           {
             "Type": "MYR",
-            "Rate": 540,
-            "Conditions": "ZLP0 - A901 - 0002069567",
+            "Rate": 364.8,
+            "Conditions": "ZLP0 - A901 - 0002049227",
+            "TieredRules": null,
             "BonusEligible": true,
-            "__typename": "PriceRule"
+            "ConditionNumber": "0002049227",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
           }
         ],
-        "Bundles": [],
         "Bonuses": [],
         "TieredPricing": [],
+        "Bundles": [],
         "Valid": true,
-        "FinalIndividualPrice": 540,
+        "AdditionalBonusEligible": true,
         "ZMGDiscount": false,
-        "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "__typename": "Price"
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
       },
       {
-        "MaterialNumber": "000000000023175833",
-        "ListPrice": 550,
-        "AdditionalBonusEligible": true,
+        "MaterialNumber": "000000000021041773",
+        "OldMaterialCode": "190235496",
+        "ListPrice": 20.4,
+        "FinalIndividualPrice": 20.4,
+        "FinalTotalPrice": 0,
         "PriceRules": [
           {
-            "Type": "TWD",
-            "Rate": 550,
-            "Conditions": "ZLP0 - A750 - 0046815199",
+            "Type": "MYR",
+            "Rate": 20.4,
+            "Conditions": "ZLP0 - A901 - 0002062642",
+            "TieredRules": null,
             "BonusEligible": true,
-            "__typename": "PriceRule"
-          },
-          {
-            "Type": "TWD",
-            "Rate": 0,
-            "Conditions": "ZDP7 - A750 - 0046815195",
-            "BonusEligible": true,
-            "__typename": "PriceRule"
+            "ConditionNumber": "0002062642",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
           }
         ],
-        "Bundles": [],
         "Bonuses": [
           {
             "BonusTiers": [
               {
-                "QualifyingQuantity": 1,
-                "Calculation": "915",
                 "BonusMaterial": [
                   {
                     "Id": 1,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 1,
-                    "BonusQuantity": 1,
-                    "Calculation": "915",
+                    "MaterialNumber": "000000000021041773",
+                    "MaterialDescription": "190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ",
+                    "Calculation": "913",
                     "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 12,
-                "Calculation": "915",
-                "BonusMaterial": [
-                  {
-                    "Id": 2,
-                    "MaterialNumber": "000000000023175833",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 2,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 3,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 14,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 24,
-                "Calculation": "915",
-                "BonusMaterial": [
-                  {
-                    "Id": 4,
-                    "MaterialNumber": "000000000023175833",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 24,
-                    "BonusQuantity": 5,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 5,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 24,
-                    "BonusQuantity": 29,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 53,
-                "Calculation": "915",
-                "BonusMaterial": [
-                  {
-                    "Id": 6,
-                    "MaterialNumber": "000000000023175833",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 53,
-                    "BonusQuantity": 15,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 7,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 53,
-                    "BonusQuantity": 68,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 74,
-                "Calculation": "915",
-                "BonusMaterial": [
-                  {
-                    "Id": 8,
-                    "MaterialNumber": "000000000023175833",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 74,
-                    "BonusQuantity": 28,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 9,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 74,
-                    "BonusQuantity": 102,
-                    "Calculation": "915",
-                    "BonusRatio": 1,
-                    "ConditionId": "0002899045",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              }
-            ],
-            "__typename": "Bonus"
-          }
-        ],
-        "TieredPricing": [
-          {
-            "Tier": "C",
-            "PriceTier": [
-              {
-                "Sequence": 0,
-                "Quantity": 1,
-                "Type": "",
-                "Rate": 550,
-                "ApplyBonus": true,
-                "__typename": "PriceTier"
-              }
-            ],
-            "__typename": "TieredPricing"
-          }
-        ],
-        "Valid": true,
-        "FinalIndividualPrice": 550,
-        "ZMGDiscount": false,
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "__typename": "Price"
-      },
-      {
-        "MaterialNumber": "000000000023007483",
-        "ListPrice": 126,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "SGD",
-            "Rate": 126,
-            "Conditions": "ZLP0 - A901 - 0000885455",
-            "BonusEligible": true,
-            "__typename": "PriceRule"
-          }
-        ],
-        "Bundles": [],
-        "Bonuses": [
-          {
-            "BonusTiers": [
-              {
-                "QualifyingQuantity": 6,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 1,
-                    "MaterialNumber": "000000000023007483",
-                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
-                    "LimitPerTransaction": 0,
                     "QualifyingQuantity": 6,
                     "BonusQuantity": 1,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0000754042",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 12,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 2,
-                    "MaterialNumber": "000000000023007483",
-                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
                     "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 2,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0000754042",
-                    "__typename": "BonusMaterial"
+                    "ConditionId": "0000205499",
+                    "OldMaterialCode": "190235496"
                   }
                 ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 24,
                 "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 3,
-                    "MaterialNumber": "000000000023007483",
-                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 24,
-                    "BonusQuantity": 5,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0000754042",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 36,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 4,
-                    "MaterialNumber": "000000000023007483",
-                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 36,
-                    "BonusQuantity": 8,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0000754042",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
+                "QualifyingQuantity": 6
               }
-            ],
-            "__typename": "Bonus"
+            ]
           }
         ],
         "TieredPricing": [],
+        "Bundles": [],
         "Valid": true,
-        "FinalIndividualPrice": 126,
+        "AdditionalBonusEligible": true,
         "ZMGDiscount": false,
-        "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "__typename": "Price"
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
       },
       {
-        "MaterialNumber": "000000000023064890",
-        "ListPrice": 23.93,
-        "AdditionalBonusEligible": true,
+        "MaterialNumber": "000000000021041769",
+        "OldMaterialCode": "190235168",
+        "ListPrice": 19.8,
+        "FinalIndividualPrice": 19.8,
+        "FinalTotalPrice": 0,
         "PriceRules": [
           {
             "Type": "MYR",
-            "Rate": 23.93,
-            "Conditions": "ZLP0 - A901 - 0002070558",
+            "Rate": 19.8,
+            "Conditions": "ZLP0 - A901 - 0002062638",
+            "TieredRules": null,
             "BonusEligible": true,
-            "__typename": "PriceRule"
+            "ConditionNumber": "0002062638",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
           }
         ],
-        "Bundles": [],
         "Bonuses": [
           {
             "BonusTiers": [
               {
-                "QualifyingQuantity": 12,
-                "Calculation": "913",
                 "BonusMaterial": [
                   {
                     "Id": 1,
-                    "MaterialNumber": "000000000023064890",
-                    "MaterialDescription": "BEROCCA EFFTAB15'S",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 1,
+                    "MaterialNumber": "000000000021041769",
+                    "MaterialDescription": "190 FIRST TEETH T/PASTE (190) 40G",
                     "Calculation": "913",
                     "BonusRatio": 1,
-                    "ConditionId": "0000216292",
-                    "__typename": "BonusMaterial"
+                    "QualifyingQuantity": 6,
+                    "BonusQuantity": 1,
+                    "LimitPerTransaction": 0,
+                    "ConditionId": "0000205492",
+                    "OldMaterialCode": "190235168"
                   }
                 ],
-                "__typename": "BonusTier"
+                "Calculation": "913",
+                "QualifyingQuantity": 6
               }
-            ],
-            "__typename": "Bonus"
+            ]
           }
         ],
         "TieredPricing": [],
-        "ComboDeals": null,
+        "Bundles": [],
         "Valid": true,
-        "FinalIndividualPrice": 23.93,
+        "AdditionalBonusEligible": true,
         "ZMGDiscount": false,
-        "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "__typename": "Price"
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
       },
       {
-        "MaterialNumber": "000000000023063774",
-        "ListPrice": 540,
-        "AdditionalBonusEligible": true,
+        "MaterialNumber": "000000000021041768",
+        "OldMaterialCode": "190235120",
+        "ListPrice": 36.5,
+        "FinalIndividualPrice": 36.5,
+        "FinalTotalPrice": 0,
         "PriceRules": [
           {
             "Type": "MYR",
-            "Rate": 540,
-            "Conditions": "ZLP0 - A901 - 0002069567",
+            "Rate": 36.5,
+            "Conditions": "ZLP0 - A901 - 0002062637",
+            "TieredRules": null,
             "BonusEligible": true,
-            "__typename": "PriceRule"
+            "ConditionNumber": "0002062637",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
           }
         ],
-        "Bundles": [],
         "Bonuses": [
           {
             "BonusTiers": [
               {
-                "QualifyingQuantity": 4,
-                "Calculation": "913",
                 "BonusMaterial": [
                   {
                     "Id": 1,
-                    "MaterialNumber": "000000000023063774",
-                    "MaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 4,
-                    "BonusQuantity": 1,
+                    "MaterialNumber": "000000000021041768",
+                    "MaterialDescription": "190 ORAL BALANCE 1.5OZ/42G(190)",
                     "Calculation": "913",
                     "BonusRatio": 1,
-                    "ConditionId": "0000224002",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 10,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 2,
-                    "MaterialNumber": "000000000023063774",
-                    "MaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+                    "QualifyingQuantity": 6,
+                    "BonusQuantity": 1,
                     "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 10,
-                    "BonusQuantity": 3,
-                    "Calculation": "913",
-                    "BonusRatio": 3,
-                    "ConditionId": "0000224002",
-                    "__typename": "BonusMaterial"
+                    "ConditionId": "0000205493",
+                    "OldMaterialCode": "190235120"
                   }
                 ],
-                "__typename": "BonusTier"
+                "Calculation": "913",
+                "QualifyingQuantity": 6
               }
-            ],
-            "__typename": "Bonus"
+            ]
           }
         ],
         "TieredPricing": [],
-        "ComboDeals": null,
+        "Bundles": [],
         "Valid": true,
-        "FinalIndividualPrice": 540,
+        "AdditionalBonusEligible": true,
         "ZMGDiscount": false,
-        "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "__typename": "Price"
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
       },
       {
-        "MaterialNumber": "000000000023175832",
-        "ListPrice": 550,
-        "AdditionalBonusEligible": true,
+        "MaterialNumber": "000000000021041805",
+        "OldMaterialCode": "190237629",
+        "ListPrice": 40,
+        "FinalIndividualPrice": 40,
+        "FinalTotalPrice": 0,
         "PriceRules": [
           {
-            "Type": "TWD",
-            "Rate": 550,
-            "Conditions": "ZLP0 - A750 - 0079729832",
+            "Type": "MYR",
+            "Rate": 40,
+            "Conditions": "ZLP0 - A901 - 0002062670",
+            "TieredRules": null,
             "BonusEligible": true,
-            "__typename": "PriceRule"
-          },
-          {
-            "Type": "TWD",
-            "Rate": 0,
-            "Conditions": "ZDP7 - A750 - 0079729769",
-            "BonusEligible": true,
-            "__typename": "PriceRule"
+            "ConditionNumber": "0002062670",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
           }
         ],
-        "Bundles": [],
         "Bonuses": [
           {
             "BonusTiers": [
               {
-                "QualifyingQuantity": 1,
-                "Calculation": "913",
                 "BonusMaterial": [
                   {
                     "Id": 1,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 1,
+                    "MaterialNumber": "000000000021041805",
+                    "MaterialDescription": "190 PANADOL ACTIFAST(NP)CAP 500MG80'S/BX",
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "QualifyingQuantity": 8,
                     "BonusQuantity": 1,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
+                    "LimitPerTransaction": 0,
+                    "ConditionId": "0000223046",
+                    "OldMaterialCode": "190237629"
                   }
                 ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 12,
                 "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 2,
-                    "MaterialNumber": "000000000023175832",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 2,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 3,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 12,
-                    "BonusQuantity": 14,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 24,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 4,
-                    "MaterialNumber": "000000000023175832",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 24,
-                    "BonusQuantity": 5,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 5,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 24,
-                    "BonusQuantity": 29,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 53,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 6,
-                    "MaterialNumber": "000000000023175832",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 53,
-                    "BonusQuantity": 15,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 7,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 53,
-                    "BonusQuantity": 68,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 74,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 8,
-                    "MaterialNumber": "000000000023175832",
-                    "MaterialDescription": "悅己膜衣錠 1x21",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 74,
-                    "BonusQuantity": 28,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  },
-                  {
-                    "Id": 9,
-                    "MaterialNumber": "000000000026063717",
-                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 74,
-                    "BonusQuantity": 102,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0004634285",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
+                "QualifyingQuantity": 8
               }
-            ],
-            "__typename": "Bonus"
+            ]
           }
         ],
-        "TieredPricing": [
-          {
-            "Tier": "C",
-            "PriceTier": [
-              {
-                "Sequence": 0,
-                "Quantity": 1,
-                "Type": "",
-                "Rate": 550,
-                "ApplyBonus": true,
-                "__typename": "PriceTier"
-              }
-            ],
-            "__typename": "TieredPricing"
-          }
-        ],
-        "ComboDeals": null,
+        "TieredPricing": [],
+        "Bundles": [],
         "Valid": true,
-        "FinalIndividualPrice": 550,
+        "AdditionalBonusEligible": true,
         "ZMGDiscount": false,
-        "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "__typename": "Price"
-    }
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
+      },
+      {
+        "MaterialNumber": "000000000021041779",
+        "OldMaterialCode": "190235816",
+        "ListPrice": 36.8,
+        "FinalIndividualPrice": 36.8,
+        "FinalTotalPrice": 0,
+        "PriceRules": [
+          {
+            "Type": "MYR",
+            "Rate": 36.8,
+            "Conditions": "ZLP0 - A901 - 0002062647",
+            "TieredRules": null,
+            "BonusEligible": true,
+            "ConditionNumber": "0002062647",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
+          }
+        ],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "BonusMaterial": [
+                  {
+                    "Id": 1,
+                    "MaterialNumber": "000000000021041779",
+                    "MaterialDescription": "190 PANADOL REG (NP)TAB150'S",
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "QualifyingQuantity": 6,
+                    "BonusQuantity": 1,
+                    "LimitPerTransaction": 0,
+                    "ConditionId": "0000225620",
+                    "OldMaterialCode": "190235816"
+                  }
+                ],
+                "Calculation": "913",
+                "QualifyingQuantity": 6
+              }
+            ]
+          }
+        ],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true,
+        "AdditionalBonusEligible": true,
+        "ZMGDiscount": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
+      },
+      {
+        "MaterialNumber": "000000000021041772",
+        "OldMaterialCode": "190235441",
+        "ListPrice": 2.04,
+        "FinalIndividualPrice": 2.04,
+        "FinalTotalPrice": 0,
+        "PriceRules": [
+          {
+            "Type": "MYR",
+            "Rate": 2.04,
+            "Conditions": "ZLP0 - A901 - 0002062641",
+            "TieredRules": null,
+            "BonusEligible": true,
+            "ConditionNumber": "0002062641",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true,
+        "AdditionalBonusEligible": true,
+        "ZMGDiscount": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ExceedQty": false,
+        "OverridenRulePresent": false,
+        "OverridenRules": [],
+        "OverridenRuleTier": []
+      }
     ]
   }
 }

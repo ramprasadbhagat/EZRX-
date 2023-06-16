@@ -15,7 +15,7 @@ class MaterialBundleListRemoteDataSource {
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
 
-  static const _url = '/api/pricing';
+  static const _url = '/api/price';
   static const _method = 'POST';
 
   MaterialBundleListRemoteDataSource({
@@ -38,7 +38,6 @@ class MaterialBundleListRemoteDataSource {
           'query': materialBundleQuery.getCustomerMaterialBundleList(),
           'variables': {
             'customer': customerCode,
-            'shipToCode': shipToCode,
             'salesOrganisation': salesOrganisation,
           },
         }),

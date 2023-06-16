@@ -47,21 +47,29 @@ class PriceBonusItem with _$PriceBonusItem {
 class BonusMaterial with _$BonusMaterial {
   const BonusMaterial._();
   const factory BonusMaterial({
+    required int id,
     required MaterialNumber materialNumber,
     required String materialDescription,
     required BonusMaterialCalculation calculation,
     required int bonusRatio,
     required int qualifyingQuantity,
     required int bonusQuantity,
+    required int limitPerTransaction,
+    required String conditionId,
+    required MaterialCode oldMaterialCode,
   }) = _BonusMaterial;
 
   factory BonusMaterial.empty() => BonusMaterial(
+        id: 0,
         materialNumber: MaterialNumber(''),
         materialDescription: '',
         calculation: BonusMaterialCalculation(''),
         bonusRatio: 0,
         qualifyingQuantity: 0,
         bonusQuantity: 0,
+        limitPerTransaction: 0,
+        conditionId: '',
+        oldMaterialCode: MaterialCode(''),
       );
 }
 

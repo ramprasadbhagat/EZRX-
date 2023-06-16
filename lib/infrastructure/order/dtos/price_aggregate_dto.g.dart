@@ -80,7 +80,11 @@ class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
               isPriceOverride: false,
               zdp8Override: 0.0,
               priceOverride: 0.0,
-              comboDeal: PriceComboDealDto.empty)
+              comboDeal: PriceComboDealDto.empty,
+              oldMaterialCode: '',
+              exceedQty: false,
+              overridenRules: [],
+              overridenRuleTier: [])
           : fields[2] as PriceDto,
       salesOrganisationConfigsDto: fields[3] == null
           ? const SalesOrganisationConfigsDto(

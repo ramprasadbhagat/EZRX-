@@ -24,7 +24,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat-my.ezrx.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio);
@@ -48,7 +48,6 @@ void main() {
       test('Get Material Bundle List', () async {
         final variables = {
           'customer': '',
-          'shipToCode': '',
           'salesOrganisation': '',
         };
         final res = json.decode(
@@ -57,7 +56,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             res,
@@ -109,7 +108,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             res,
@@ -158,7 +157,7 @@ void main() {
         };
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             204,
             {'data': []},
@@ -194,7 +193,7 @@ void main() {
         };
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             {

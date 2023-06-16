@@ -147,6 +147,10 @@ const PriceDto _emptyPriceDto = PriceDto(
   zdp8Override: 0,
   priceOverride: 0,
   comboDeal: PriceComboDealDto.empty,
+  oldMaterialCode: '',
+  exceedQty: false,
+  overridenRules: [],
+  overridenRuleTier: [],
 );
 
 const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =

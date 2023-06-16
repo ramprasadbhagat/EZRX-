@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ezrxmobile/domain/order/entities/overriden_rule_tier.dart';
 
 part 'price.freezed.dart';
 
@@ -13,19 +14,23 @@ class Price with _$Price {
   const Price._();
   const factory Price({
     required MaterialNumber materialNumber,
+    required MaterialCode materialCode,
+    required MaterialPrice lastPrice,
+    required MaterialPrice finalPrice,
+    required MaterialPrice finalTotalPrice,
     required List<PriceRule> rules,
     required List<PriceTier> tiers,
     required List<PriceBonus> bonuses,
     required List<PriceBundle> bundles,
-    required bool overrideRulePresent,
+    required bool isValid,
+    required bool additionalBonusEligible,
+    required bool zmgDiscount,
     required ZDP5Info zdp5MaxQuota,
     required ZDP5Info zdp5RemainingQuota,
-    required bool zmgDiscount,
-    required MaterialPrice lastPrice,
-    required MaterialPrice finalPrice,
-    required MaterialPrice finalTotalPrice,
-    required bool additionalBonusEligible,
-    required bool isValid,
+    required bool exceedQty,
+    required bool overrideRulePresent,
+    required List<PriceRule> overridenRules,
+    required List<OverridenRuleTier> overridenRuleTier,
     @Default(true) bool isValidMaterial,
     @Default(false) bool isFOC,
     @Default(false) bool isPriceOverride,
@@ -36,19 +41,23 @@ class Price with _$Price {
 
   factory Price.empty() => Price(
         materialNumber: MaterialNumber(''),
+        materialCode: MaterialCode(''),
+        lastPrice: MaterialPrice(0),
+        finalPrice: MaterialPrice(0),
+        finalTotalPrice: MaterialPrice(0),
         bundles: [],
         rules: [],
         tiers: [],
         bonuses: [],
-        overrideRulePresent: false,
+        isValid: true,
+        additionalBonusEligible: false,
+        zmgDiscount: false,
         zdp5MaxQuota: ZDP5Info(''),
         zdp5RemainingQuota: ZDP5Info(''),
-        zmgDiscount: false,
-        lastPrice: MaterialPrice(0),
-        finalPrice: MaterialPrice(0),
-        finalTotalPrice: MaterialPrice(0),
-        additionalBonusEligible: false,
-        isValid: true,
+        exceedQty: false,
+        overrideRulePresent: false,
+        overridenRules: [],
+        overridenRuleTier: [],
         zdp8Override: Zdp8OverrideValue(0),
         priceOverride: PriceOverrideValue(0),
         comboDeal: PriceComboDeal.empty(),
@@ -62,7 +71,6 @@ class Price with _$Price {
   bool get isDiscountEligible => isTireDiscountEligible || zmgDiscount;
 
   bool get isBonusDealEligible => _availableBonus.isNotEmpty;
-
 
   List<PriceBonusItem> get priceBonusItem => bonuses.isNotEmpty
       ? bonuses.first.sortedPriceBonusItem
@@ -78,7 +86,7 @@ class Price with _$Price {
   Iterable<BonusMaterial> get otherMaterialBonus => _availableBonus.where(
         (BonusMaterial element) => element.materialNumber != materialNumber,
       );
-      
+
   bool get isFailurePrice =>
       isValidMaterial && !isFOC && finalPrice == MaterialPrice.unavailable();
 }

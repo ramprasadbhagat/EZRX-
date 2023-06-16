@@ -63,7 +63,7 @@ void main() {
   const countryCode = 'KH';
   const customerDetailsPhoneNumber = '011 222 211';
   const shippingPhoneNumber = '012 773 990';
-  const na = 'NA';
+  const na = 'Price Not Available';
   const emptyString = '';
   const contactPerson = '1234';
   const poReferenceText = 'PO Reference';

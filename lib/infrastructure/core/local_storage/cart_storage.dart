@@ -24,6 +24,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/overriden_rule_tier_dto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CartStorage {
@@ -69,7 +70,10 @@ class CartStorage {
         ..registerAdapter(CartItemDtoAdapter())
         ..registerAdapter(SalesOrganisationConfigsPrincipalDtoAdapter())
         ..registerAdapter(CartItemTypeAdapter())
-        ..registerAdapter(BannerDtoAdapter());
+        ..registerAdapter(BannerDtoAdapter())
+        ..registerAdapter(OverridenRuleTierDtoAdapter())
+        ..registerAdapter(TieredRulesDtoAdapter())
+        ..registerAdapter(RuleTierDtoAdapter());
       _cartBox = await Hive.openBox(
         _boxName,
       );

@@ -27,7 +27,6 @@ class MaterialPriceRemoteDataSource {
   Future<List<Price>> getMaterialPriceList({
     required String salesOrgCode,
     required String customerCode,
-    required String shipToCode,
     required List<String> materialNumbers,
     required List<String> salesDeal,
   }) async {
@@ -37,19 +36,17 @@ class MaterialPriceRemoteDataSource {
       final variables = {
         'salesOrganisation': salesOrgCode,
         'customer': customerCode,
-        'shipToCode': shipToCode,
         'request': materialNumbers
             .map(
               (e) => {
                 'MaterialNumber': e,
-                'salesDeal': salesDeal,
               },
             )
             .toList(),
       };
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,
@@ -68,7 +65,6 @@ class MaterialPriceRemoteDataSource {
   Future<Price> getMaterialPrice({
     required String salesOrgCode,
     required String customerCode,
-    required String shipToCode,
     required String materialNumber,
     required List<String> salesDeal,
   }) async {
@@ -78,15 +74,13 @@ class MaterialPriceRemoteDataSource {
       final variables = {
         'salesOrganisation': salesOrgCode,
         'customer': customerCode,
-        'shipToCode': shipToCode,
         'request': {
           'MaterialNumber': materialNumber,
-          'salesDeal': salesDeal,
         },
       };
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,

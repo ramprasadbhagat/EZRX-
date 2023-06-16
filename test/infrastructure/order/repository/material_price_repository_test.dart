@@ -96,7 +96,7 @@ void main() {
       when(() => materialPriceRemoteDataSource.getMaterialPriceList(
             salesOrgCode: 'fake-name',
             customerCode: 'fake-customer-code',
-            shipToCode: 'fake-ship-code',
+            // shipToCode: 'fake-ship-code',
             materialNumbers: [],
             salesDeal: [],
           )).thenAnswer((invocation) async => <Price>[]);
@@ -120,7 +120,7 @@ void main() {
             salesOrgCode: '23456700',
             customerCode: '',
             materialNumbers: [],
-            shipToCode: 'fake-ship-code',
+            // shipToCode: 'fake-ship-code',
             salesDeal: [],
           )).thenThrow((invocation) async => MockException());
       final result = await materialPriceRepository.getMaterialPrice(
@@ -145,7 +145,7 @@ void main() {
       when(() => materialPriceRemoteDataSource.getMaterialPrice(
             salesOrgCode: 'fake-name',
             customerCode: 'fake-customer-code',
-            shipToCode: 'fake-ship-code',
+            // shipToCode: 'fake-ship-code',
             materialNumber: 'fake-number',
             salesDeal: [],
           )).thenAnswer((invocation) async => Price.empty().copyWith(

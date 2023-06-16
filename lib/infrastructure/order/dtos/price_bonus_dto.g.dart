@@ -95,19 +95,25 @@ class BonusMaterialDtoAdapter extends TypeAdapter<_$_BonusMaterialDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_BonusMaterialDto(
+      id: fields[28] == null ? 0 : fields[28] as int,
       materialNumber: fields[29] == null ? '' : fields[29] as String,
       materialDescription: fields[30] == null ? '' : fields[30] as String,
       calculation: fields[31] == null ? '' : fields[31] as String,
       bonusRatio: fields[32] == null ? 0 : fields[32] as int,
       qualifyingQuantity: fields[33] == null ? 0 : fields[33] as int,
       bonusQuantity: fields[34] == null ? 0 : fields[34] as int,
+      limitPerTransaction: fields[35] == null ? 0 : fields[35] as int,
+      conditionId: fields[36] == null ? '' : fields[36] as String,
+      oldMaterialCode: fields[37] == null ? '' : fields[37] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_BonusMaterialDto obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(10)
+      ..writeByte(28)
+      ..write(obj.id)
       ..writeByte(29)
       ..write(obj.materialNumber)
       ..writeByte(30)
@@ -119,7 +125,13 @@ class BonusMaterialDtoAdapter extends TypeAdapter<_$_BonusMaterialDto> {
       ..writeByte(33)
       ..write(obj.qualifyingQuantity)
       ..writeByte(34)
-      ..write(obj.bonusQuantity);
+      ..write(obj.bonusQuantity)
+      ..writeByte(35)
+      ..write(obj.limitPerTransaction)
+      ..writeByte(36)
+      ..write(obj.conditionId)
+      ..writeByte(37)
+      ..write(obj.oldMaterialCode);
   }
 
   @override
@@ -171,20 +183,28 @@ Map<String, dynamic> _$$_PriceBonusItemDtoToJson(
 
 _$_BonusMaterialDto _$$_BonusMaterialDtoFromJson(Map<String, dynamic> json) =>
     _$_BonusMaterialDto(
+      id: json['Id'] as int? ?? 0,
       materialNumber: json['MaterialNumber'] as String? ?? '',
       materialDescription: json['MaterialDescription'] as String? ?? '',
       calculation: json['Calculation'] as String? ?? '',
       bonusRatio: json['BonusRatio'] as int? ?? 0,
       qualifyingQuantity: json['QualifyingQuantity'] as int? ?? 0,
       bonusQuantity: json['BonusQuantity'] as int? ?? 0,
+      limitPerTransaction: json['LimitPerTransaction'] as int? ?? 0,
+      conditionId: json['ConditionId'] as String? ?? '',
+      oldMaterialCode: json['OldMaterialCode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_BonusMaterialDtoToJson(_$_BonusMaterialDto instance) =>
     <String, dynamic>{
+      'Id': instance.id,
       'MaterialNumber': instance.materialNumber,
       'MaterialDescription': instance.materialDescription,
       'Calculation': instance.calculation,
       'BonusRatio': instance.bonusRatio,
       'QualifyingQuantity': instance.qualifyingQuantity,
       'BonusQuantity': instance.bonusQuantity,
+      'LimitPerTransaction': instance.limitPerTransaction,
+      'ConditionId': instance.conditionId,
+      'OldMaterialCode': instance.oldMaterialCode,
     };

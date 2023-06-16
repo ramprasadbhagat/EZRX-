@@ -102,6 +102,10 @@ void main() {
           zdp8Override: 0,
           zmgDiscount: false,
           comboDeal: PriceComboDealDto.empty,
+          oldMaterialCode: '',
+          exceedQty: false,
+          overridenRules: [],
+          overridenRuleTier: [],
         ),
         quantity: 10,
         salesOrganisationConfigsDto: SalesOrganisationConfigsDto.fromDomain(

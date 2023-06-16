@@ -72,6 +72,9 @@ class BonusMaterialDto with _$BonusMaterialDto {
   const BonusMaterialDto._();
   @HiveType(typeId: 12, adapterName: 'BonusMaterialDtoAdapter')
   const factory BonusMaterialDto({
+    @JsonKey(name: 'Id', defaultValue: 0)
+    @HiveField(28, defaultValue: 0)
+        required int id,
     @JsonKey(name: 'MaterialNumber', defaultValue: '')
     @HiveField(29, defaultValue: '')
         required String materialNumber,
@@ -90,26 +93,43 @@ class BonusMaterialDto with _$BonusMaterialDto {
     @JsonKey(name: 'BonusQuantity', defaultValue: 0)
     @HiveField(34, defaultValue: 0)
         required int bonusQuantity,
+    @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+    @HiveField(35, defaultValue: 0)
+        required int limitPerTransaction,
+    @JsonKey(name: 'ConditionId', defaultValue: '')
+    @HiveField(36, defaultValue: '')
+        required String conditionId,
+    @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+    @HiveField(37, defaultValue: '')
+        required String oldMaterialCode,
   }) = _BonusMaterialDto;
 
   factory BonusMaterialDto.fromDomain(BonusMaterial bonusMaterial) {
     return BonusMaterialDto(
+      id: bonusMaterial.id,
       materialNumber: bonusMaterial.materialNumber.getOrDefaultValue(''),
       materialDescription: bonusMaterial.materialDescription,
       calculation: bonusMaterial.calculation.getOrDefaultValue(''),
       bonusRatio: bonusMaterial.bonusRatio,
       qualifyingQuantity: bonusMaterial.qualifyingQuantity,
       bonusQuantity: bonusMaterial.bonusQuantity,
+      limitPerTransaction: bonusMaterial.limitPerTransaction,
+      conditionId: bonusMaterial.conditionId,
+      oldMaterialCode: bonusMaterial.oldMaterialCode.getOrDefaultValue(''),
     );
   }
 
   BonusMaterial toDomain() => BonusMaterial(
+        id: id,
         materialNumber: MaterialNumber(materialNumber),
         materialDescription: materialDescription,
         calculation: BonusMaterialCalculation(calculation),
         bonusRatio: bonusRatio,
         qualifyingQuantity: qualifyingQuantity,
         bonusQuantity: bonusQuantity,
+        limitPerTransaction: limitPerTransaction,
+        conditionId: conditionId,
+        oldMaterialCode: MaterialCode(oldMaterialCode),
       );
 
   factory BonusMaterialDto.fromJson(Map<String, dynamic> json) =>

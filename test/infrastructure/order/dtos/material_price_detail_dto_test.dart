@@ -21,7 +21,7 @@ void main() {
       final configs = MaterialDetailDto.fromJson(
         data['data']['customerMaterialPriceDetails'][0]
       ).toDomain();
-      expect(configs.price.materialNumber.getOrCrash(), '000000000023210571');
+      expect(configs.price.materialNumber.getOrCrash(), '000000000021038305');
     });
   });
 }

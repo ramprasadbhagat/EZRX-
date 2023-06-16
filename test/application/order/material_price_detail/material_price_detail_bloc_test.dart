@@ -50,31 +50,31 @@ void main() {
 
   final fakeQuery = [
     MaterialQueryInfo.empty().copyWith(
-      value: MaterialNumber('000000000023210571'),
+      value: MaterialNumber('000000000021038305'),
       qty: MaterialQty(1),
     ),
     MaterialQueryInfo.empty().copyWith(
-      value: MaterialNumber('000000000023245612'),
+      value: MaterialNumber('000000000021038302'),
       qty: MaterialQty(1),
     ),
   ];
 
   final fakeQueryFOC = [
     MaterialQueryInfo.empty().copyWith(
-      value: MaterialNumber('000000000023210571'),
+      value: MaterialNumber('000000000021038305'),
       qty: MaterialQty(1),
       materialGroup4: MaterialGroup.four('6A1'),
     ),
     MaterialQueryInfo.empty().copyWith(
-      value: MaterialNumber('000000000023245612'),
+      value: MaterialNumber('000000000021038302'),
       qty: MaterialQty(1),
       materialGroup4: MaterialGroup.four('6A1'),
     ),
   ];
 
   final fakeQueryMaterialNumbers = [
-    MaterialNumber('000000000023210571'),
-    MaterialNumber('000000000023245612'),
+    MaterialNumber('000000000021038305'),
+    MaterialNumber('000000000021038302'),
   ];
 
   setUpAll(() async {

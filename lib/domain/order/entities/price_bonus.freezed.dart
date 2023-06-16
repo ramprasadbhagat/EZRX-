@@ -317,6 +317,7 @@ abstract class _PriceBonusItem extends PriceBonusItem {
 
 /// @nodoc
 mixin _$BonusMaterial {
+  int get id => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   BonusMaterialCalculation get calculation =>
@@ -324,6 +325,9 @@ mixin _$BonusMaterial {
   int get bonusRatio => throw _privateConstructorUsedError;
   int get qualifyingQuantity => throw _privateConstructorUsedError;
   int get bonusQuantity => throw _privateConstructorUsedError;
+  int get limitPerTransaction => throw _privateConstructorUsedError;
+  String get conditionId => throw _privateConstructorUsedError;
+  MaterialCode get oldMaterialCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BonusMaterialCopyWith<BonusMaterial> get copyWith =>
@@ -337,12 +341,16 @@ abstract class $BonusMaterialCopyWith<$Res> {
       _$BonusMaterialCopyWithImpl<$Res, BonusMaterial>;
   @useResult
   $Res call(
-      {MaterialNumber materialNumber,
+      {int id,
+      MaterialNumber materialNumber,
       String materialDescription,
       BonusMaterialCalculation calculation,
       int bonusRatio,
       int qualifyingQuantity,
-      int bonusQuantity});
+      int bonusQuantity,
+      int limitPerTransaction,
+      String conditionId,
+      MaterialCode oldMaterialCode});
 }
 
 /// @nodoc
@@ -358,14 +366,22 @@ class _$BonusMaterialCopyWithImpl<$Res, $Val extends BonusMaterial>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
     Object? calculation = null,
     Object? bonusRatio = null,
     Object? qualifyingQuantity = null,
     Object? bonusQuantity = null,
+    Object? limitPerTransaction = null,
+    Object? conditionId = null,
+    Object? oldMaterialCode = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -390,6 +406,18 @@ class _$BonusMaterialCopyWithImpl<$Res, $Val extends BonusMaterial>
           ? _value.bonusQuantity
           : bonusQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      limitPerTransaction: null == limitPerTransaction
+          ? _value.limitPerTransaction
+          : limitPerTransaction // ignore: cast_nullable_to_non_nullable
+              as int,
+      conditionId: null == conditionId
+          ? _value.conditionId
+          : conditionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      oldMaterialCode: null == oldMaterialCode
+          ? _value.oldMaterialCode
+          : oldMaterialCode // ignore: cast_nullable_to_non_nullable
+              as MaterialCode,
     ) as $Val);
   }
 }
@@ -403,12 +431,16 @@ abstract class _$$_BonusMaterialCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MaterialNumber materialNumber,
+      {int id,
+      MaterialNumber materialNumber,
       String materialDescription,
       BonusMaterialCalculation calculation,
       int bonusRatio,
       int qualifyingQuantity,
-      int bonusQuantity});
+      int bonusQuantity,
+      int limitPerTransaction,
+      String conditionId,
+      MaterialCode oldMaterialCode});
 }
 
 /// @nodoc
@@ -422,14 +454,22 @@ class __$$_BonusMaterialCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
     Object? calculation = null,
     Object? bonusRatio = null,
     Object? qualifyingQuantity = null,
     Object? bonusQuantity = null,
+    Object? limitPerTransaction = null,
+    Object? conditionId = null,
+    Object? oldMaterialCode = null,
   }) {
     return _then(_$_BonusMaterial(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -454,6 +494,18 @@ class __$$_BonusMaterialCopyWithImpl<$Res>
           ? _value.bonusQuantity
           : bonusQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      limitPerTransaction: null == limitPerTransaction
+          ? _value.limitPerTransaction
+          : limitPerTransaction // ignore: cast_nullable_to_non_nullable
+              as int,
+      conditionId: null == conditionId
+          ? _value.conditionId
+          : conditionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      oldMaterialCode: null == oldMaterialCode
+          ? _value.oldMaterialCode
+          : oldMaterialCode // ignore: cast_nullable_to_non_nullable
+              as MaterialCode,
     ));
   }
 }
@@ -462,14 +514,20 @@ class __$$_BonusMaterialCopyWithImpl<$Res>
 
 class _$_BonusMaterial extends _BonusMaterial {
   const _$_BonusMaterial(
-      {required this.materialNumber,
+      {required this.id,
+      required this.materialNumber,
       required this.materialDescription,
       required this.calculation,
       required this.bonusRatio,
       required this.qualifyingQuantity,
-      required this.bonusQuantity})
+      required this.bonusQuantity,
+      required this.limitPerTransaction,
+      required this.conditionId,
+      required this.oldMaterialCode})
       : super._();
 
+  @override
+  final int id;
   @override
   final MaterialNumber materialNumber;
   @override
@@ -482,10 +540,16 @@ class _$_BonusMaterial extends _BonusMaterial {
   final int qualifyingQuantity;
   @override
   final int bonusQuantity;
+  @override
+  final int limitPerTransaction;
+  @override
+  final String conditionId;
+  @override
+  final MaterialCode oldMaterialCode;
 
   @override
   String toString() {
-    return 'BonusMaterial(materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity)';
+    return 'BonusMaterial(id: $id, materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity, limitPerTransaction: $limitPerTransaction, conditionId: $conditionId, oldMaterialCode: $oldMaterialCode)';
   }
 
   @override
@@ -493,6 +557,7 @@ class _$_BonusMaterial extends _BonusMaterial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BonusMaterial &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -504,18 +569,28 @@ class _$_BonusMaterial extends _BonusMaterial {
             (identical(other.qualifyingQuantity, qualifyingQuantity) ||
                 other.qualifyingQuantity == qualifyingQuantity) &&
             (identical(other.bonusQuantity, bonusQuantity) ||
-                other.bonusQuantity == bonusQuantity));
+                other.bonusQuantity == bonusQuantity) &&
+            (identical(other.limitPerTransaction, limitPerTransaction) ||
+                other.limitPerTransaction == limitPerTransaction) &&
+            (identical(other.conditionId, conditionId) ||
+                other.conditionId == conditionId) &&
+            (identical(other.oldMaterialCode, oldMaterialCode) ||
+                other.oldMaterialCode == oldMaterialCode));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       materialNumber,
       materialDescription,
       calculation,
       bonusRatio,
       qualifyingQuantity,
-      bonusQuantity);
+      bonusQuantity,
+      limitPerTransaction,
+      conditionId,
+      oldMaterialCode);
 
   @JsonKey(ignore: true)
   @override
@@ -526,14 +601,20 @@ class _$_BonusMaterial extends _BonusMaterial {
 
 abstract class _BonusMaterial extends BonusMaterial {
   const factory _BonusMaterial(
-      {required final MaterialNumber materialNumber,
+      {required final int id,
+      required final MaterialNumber materialNumber,
       required final String materialDescription,
       required final BonusMaterialCalculation calculation,
       required final int bonusRatio,
       required final int qualifyingQuantity,
-      required final int bonusQuantity}) = _$_BonusMaterial;
+      required final int bonusQuantity,
+      required final int limitPerTransaction,
+      required final String conditionId,
+      required final MaterialCode oldMaterialCode}) = _$_BonusMaterial;
   const _BonusMaterial._() : super._();
 
+  @override
+  int get id;
   @override
   MaterialNumber get materialNumber;
   @override
@@ -546,6 +627,12 @@ abstract class _BonusMaterial extends BonusMaterial {
   int get qualifyingQuantity;
   @override
   int get bonusQuantity;
+  @override
+  int get limitPerTransaction;
+  @override
+  String get conditionId;
+  @override
+  MaterialCode get oldMaterialCode;
   @override
   @JsonKey(ignore: true)
   _$$_BonusMaterialCopyWith<_$_BonusMaterial> get copyWith =>

@@ -17,19 +17,24 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Price {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  MaterialCode get materialCode => throw _privateConstructorUsedError;
+  MaterialPrice get lastPrice => throw _privateConstructorUsedError;
+  MaterialPrice get finalPrice => throw _privateConstructorUsedError;
+  MaterialPrice get finalTotalPrice => throw _privateConstructorUsedError;
   List<PriceRule> get rules => throw _privateConstructorUsedError;
   List<PriceTier> get tiers => throw _privateConstructorUsedError;
   List<PriceBonus> get bonuses => throw _privateConstructorUsedError;
   List<PriceBundle> get bundles => throw _privateConstructorUsedError;
-  bool get overrideRulePresent => throw _privateConstructorUsedError;
+  bool get isValid => throw _privateConstructorUsedError;
+  bool get additionalBonusEligible => throw _privateConstructorUsedError;
+  bool get zmgDiscount => throw _privateConstructorUsedError;
   ZDP5Info get zdp5MaxQuota => throw _privateConstructorUsedError;
   ZDP5Info get zdp5RemainingQuota => throw _privateConstructorUsedError;
-  bool get zmgDiscount => throw _privateConstructorUsedError;
-  MaterialPrice get lastPrice => throw _privateConstructorUsedError;
-  MaterialPrice get finalPrice => throw _privateConstructorUsedError;
-  MaterialPrice get finalTotalPrice => throw _privateConstructorUsedError;
-  bool get additionalBonusEligible => throw _privateConstructorUsedError;
-  bool get isValid => throw _privateConstructorUsedError;
+  bool get exceedQty => throw _privateConstructorUsedError;
+  bool get overrideRulePresent => throw _privateConstructorUsedError;
+  List<PriceRule> get overridenRules => throw _privateConstructorUsedError;
+  List<OverridenRuleTier> get overridenRuleTier =>
+      throw _privateConstructorUsedError;
   bool get isValidMaterial => throw _privateConstructorUsedError;
   bool get isFOC => throw _privateConstructorUsedError;
   bool get isPriceOverride => throw _privateConstructorUsedError;
@@ -48,19 +53,23 @@ abstract class $PriceCopyWith<$Res> {
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
+      MaterialCode materialCode,
+      MaterialPrice lastPrice,
+      MaterialPrice finalPrice,
+      MaterialPrice finalTotalPrice,
       List<PriceRule> rules,
       List<PriceTier> tiers,
       List<PriceBonus> bonuses,
       List<PriceBundle> bundles,
-      bool overrideRulePresent,
+      bool isValid,
+      bool additionalBonusEligible,
+      bool zmgDiscount,
       ZDP5Info zdp5MaxQuota,
       ZDP5Info zdp5RemainingQuota,
-      bool zmgDiscount,
-      MaterialPrice lastPrice,
-      MaterialPrice finalPrice,
-      MaterialPrice finalTotalPrice,
-      bool additionalBonusEligible,
-      bool isValid,
+      bool exceedQty,
+      bool overrideRulePresent,
+      List<PriceRule> overridenRules,
+      List<OverridenRuleTier> overridenRuleTier,
       bool isValidMaterial,
       bool isFOC,
       bool isPriceOverride,
@@ -85,19 +94,23 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
   @override
   $Res call({
     Object? materialNumber = null,
+    Object? materialCode = null,
+    Object? lastPrice = null,
+    Object? finalPrice = null,
+    Object? finalTotalPrice = null,
     Object? rules = null,
     Object? tiers = null,
     Object? bonuses = null,
     Object? bundles = null,
-    Object? overrideRulePresent = null,
+    Object? isValid = null,
+    Object? additionalBonusEligible = null,
+    Object? zmgDiscount = null,
     Object? zdp5MaxQuota = null,
     Object? zdp5RemainingQuota = null,
-    Object? zmgDiscount = null,
-    Object? lastPrice = null,
-    Object? finalPrice = null,
-    Object? finalTotalPrice = null,
-    Object? additionalBonusEligible = null,
-    Object? isValid = null,
+    Object? exceedQty = null,
+    Object? overrideRulePresent = null,
+    Object? overridenRules = null,
+    Object? overridenRuleTier = null,
     Object? isValidMaterial = null,
     Object? isFOC = null,
     Object? isPriceOverride = null,
@@ -110,6 +123,22 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      materialCode: null == materialCode
+          ? _value.materialCode
+          : materialCode // ignore: cast_nullable_to_non_nullable
+              as MaterialCode,
+      lastPrice: null == lastPrice
+          ? _value.lastPrice
+          : lastPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
+      finalPrice: null == finalPrice
+          ? _value.finalPrice
+          : finalPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
+      finalTotalPrice: null == finalTotalPrice
+          ? _value.finalTotalPrice
+          : finalTotalPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
       rules: null == rules
           ? _value.rules
           : rules // ignore: cast_nullable_to_non_nullable
@@ -126,9 +155,17 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<PriceBundle>,
-      overrideRulePresent: null == overrideRulePresent
-          ? _value.overrideRulePresent
-          : overrideRulePresent // ignore: cast_nullable_to_non_nullable
+      isValid: null == isValid
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      additionalBonusEligible: null == additionalBonusEligible
+          ? _value.additionalBonusEligible
+          : additionalBonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+      zmgDiscount: null == zmgDiscount
+          ? _value.zmgDiscount
+          : zmgDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
       zdp5MaxQuota: null == zdp5MaxQuota
           ? _value.zdp5MaxQuota
@@ -138,30 +175,22 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.zdp5RemainingQuota
           : zdp5RemainingQuota // ignore: cast_nullable_to_non_nullable
               as ZDP5Info,
-      zmgDiscount: null == zmgDiscount
-          ? _value.zmgDiscount
-          : zmgDiscount // ignore: cast_nullable_to_non_nullable
+      exceedQty: null == exceedQty
+          ? _value.exceedQty
+          : exceedQty // ignore: cast_nullable_to_non_nullable
               as bool,
-      lastPrice: null == lastPrice
-          ? _value.lastPrice
-          : lastPrice // ignore: cast_nullable_to_non_nullable
-              as MaterialPrice,
-      finalPrice: null == finalPrice
-          ? _value.finalPrice
-          : finalPrice // ignore: cast_nullable_to_non_nullable
-              as MaterialPrice,
-      finalTotalPrice: null == finalTotalPrice
-          ? _value.finalTotalPrice
-          : finalTotalPrice // ignore: cast_nullable_to_non_nullable
-              as MaterialPrice,
-      additionalBonusEligible: null == additionalBonusEligible
-          ? _value.additionalBonusEligible
-          : additionalBonusEligible // ignore: cast_nullable_to_non_nullable
+      overrideRulePresent: null == overrideRulePresent
+          ? _value.overrideRulePresent
+          : overrideRulePresent // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValid: null == isValid
-          ? _value.isValid
-          : isValid // ignore: cast_nullable_to_non_nullable
-              as bool,
+      overridenRules: null == overridenRules
+          ? _value.overridenRules
+          : overridenRules // ignore: cast_nullable_to_non_nullable
+              as List<PriceRule>,
+      overridenRuleTier: null == overridenRuleTier
+          ? _value.overridenRuleTier
+          : overridenRuleTier // ignore: cast_nullable_to_non_nullable
+              as List<OverridenRuleTier>,
       isValidMaterial: null == isValidMaterial
           ? _value.isValidMaterial
           : isValidMaterial // ignore: cast_nullable_to_non_nullable
@@ -206,19 +235,23 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
+      MaterialCode materialCode,
+      MaterialPrice lastPrice,
+      MaterialPrice finalPrice,
+      MaterialPrice finalTotalPrice,
       List<PriceRule> rules,
       List<PriceTier> tiers,
       List<PriceBonus> bonuses,
       List<PriceBundle> bundles,
-      bool overrideRulePresent,
+      bool isValid,
+      bool additionalBonusEligible,
+      bool zmgDiscount,
       ZDP5Info zdp5MaxQuota,
       ZDP5Info zdp5RemainingQuota,
-      bool zmgDiscount,
-      MaterialPrice lastPrice,
-      MaterialPrice finalPrice,
-      MaterialPrice finalTotalPrice,
-      bool additionalBonusEligible,
-      bool isValid,
+      bool exceedQty,
+      bool overrideRulePresent,
+      List<PriceRule> overridenRules,
+      List<OverridenRuleTier> overridenRuleTier,
       bool isValidMaterial,
       bool isFOC,
       bool isPriceOverride,
@@ -240,19 +273,23 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
   @override
   $Res call({
     Object? materialNumber = null,
+    Object? materialCode = null,
+    Object? lastPrice = null,
+    Object? finalPrice = null,
+    Object? finalTotalPrice = null,
     Object? rules = null,
     Object? tiers = null,
     Object? bonuses = null,
     Object? bundles = null,
-    Object? overrideRulePresent = null,
+    Object? isValid = null,
+    Object? additionalBonusEligible = null,
+    Object? zmgDiscount = null,
     Object? zdp5MaxQuota = null,
     Object? zdp5RemainingQuota = null,
-    Object? zmgDiscount = null,
-    Object? lastPrice = null,
-    Object? finalPrice = null,
-    Object? finalTotalPrice = null,
-    Object? additionalBonusEligible = null,
-    Object? isValid = null,
+    Object? exceedQty = null,
+    Object? overrideRulePresent = null,
+    Object? overridenRules = null,
+    Object? overridenRuleTier = null,
     Object? isValidMaterial = null,
     Object? isFOC = null,
     Object? isPriceOverride = null,
@@ -265,6 +302,22 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      materialCode: null == materialCode
+          ? _value.materialCode
+          : materialCode // ignore: cast_nullable_to_non_nullable
+              as MaterialCode,
+      lastPrice: null == lastPrice
+          ? _value.lastPrice
+          : lastPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
+      finalPrice: null == finalPrice
+          ? _value.finalPrice
+          : finalPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
+      finalTotalPrice: null == finalTotalPrice
+          ? _value.finalTotalPrice
+          : finalTotalPrice // ignore: cast_nullable_to_non_nullable
+              as MaterialPrice,
       rules: null == rules
           ? _value._rules
           : rules // ignore: cast_nullable_to_non_nullable
@@ -281,9 +334,17 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value._bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<PriceBundle>,
-      overrideRulePresent: null == overrideRulePresent
-          ? _value.overrideRulePresent
-          : overrideRulePresent // ignore: cast_nullable_to_non_nullable
+      isValid: null == isValid
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      additionalBonusEligible: null == additionalBonusEligible
+          ? _value.additionalBonusEligible
+          : additionalBonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+      zmgDiscount: null == zmgDiscount
+          ? _value.zmgDiscount
+          : zmgDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
       zdp5MaxQuota: null == zdp5MaxQuota
           ? _value.zdp5MaxQuota
@@ -293,30 +354,22 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.zdp5RemainingQuota
           : zdp5RemainingQuota // ignore: cast_nullable_to_non_nullable
               as ZDP5Info,
-      zmgDiscount: null == zmgDiscount
-          ? _value.zmgDiscount
-          : zmgDiscount // ignore: cast_nullable_to_non_nullable
+      exceedQty: null == exceedQty
+          ? _value.exceedQty
+          : exceedQty // ignore: cast_nullable_to_non_nullable
               as bool,
-      lastPrice: null == lastPrice
-          ? _value.lastPrice
-          : lastPrice // ignore: cast_nullable_to_non_nullable
-              as MaterialPrice,
-      finalPrice: null == finalPrice
-          ? _value.finalPrice
-          : finalPrice // ignore: cast_nullable_to_non_nullable
-              as MaterialPrice,
-      finalTotalPrice: null == finalTotalPrice
-          ? _value.finalTotalPrice
-          : finalTotalPrice // ignore: cast_nullable_to_non_nullable
-              as MaterialPrice,
-      additionalBonusEligible: null == additionalBonusEligible
-          ? _value.additionalBonusEligible
-          : additionalBonusEligible // ignore: cast_nullable_to_non_nullable
+      overrideRulePresent: null == overrideRulePresent
+          ? _value.overrideRulePresent
+          : overrideRulePresent // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValid: null == isValid
-          ? _value.isValid
-          : isValid // ignore: cast_nullable_to_non_nullable
-              as bool,
+      overridenRules: null == overridenRules
+          ? _value._overridenRules
+          : overridenRules // ignore: cast_nullable_to_non_nullable
+              as List<PriceRule>,
+      overridenRuleTier: null == overridenRuleTier
+          ? _value._overridenRuleTier
+          : overridenRuleTier // ignore: cast_nullable_to_non_nullable
+              as List<OverridenRuleTier>,
       isValidMaterial: null == isValidMaterial
           ? _value.isValidMaterial
           : isValidMaterial // ignore: cast_nullable_to_non_nullable
@@ -350,19 +403,23 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
 class _$_Price extends _Price {
   const _$_Price(
       {required this.materialNumber,
+      required this.materialCode,
+      required this.lastPrice,
+      required this.finalPrice,
+      required this.finalTotalPrice,
       required final List<PriceRule> rules,
       required final List<PriceTier> tiers,
       required final List<PriceBonus> bonuses,
       required final List<PriceBundle> bundles,
-      required this.overrideRulePresent,
+      required this.isValid,
+      required this.additionalBonusEligible,
+      required this.zmgDiscount,
       required this.zdp5MaxQuota,
       required this.zdp5RemainingQuota,
-      required this.zmgDiscount,
-      required this.lastPrice,
-      required this.finalPrice,
-      required this.finalTotalPrice,
-      required this.additionalBonusEligible,
-      required this.isValid,
+      required this.exceedQty,
+      required this.overrideRulePresent,
+      required final List<PriceRule> overridenRules,
+      required final List<OverridenRuleTier> overridenRuleTier,
       this.isValidMaterial = true,
       this.isFOC = false,
       this.isPriceOverride = false,
@@ -373,10 +430,20 @@ class _$_Price extends _Price {
         _tiers = tiers,
         _bonuses = bonuses,
         _bundles = bundles,
+        _overridenRules = overridenRules,
+        _overridenRuleTier = overridenRuleTier,
         super._();
 
   @override
   final MaterialNumber materialNumber;
+  @override
+  final MaterialCode materialCode;
+  @override
+  final MaterialPrice lastPrice;
+  @override
+  final MaterialPrice finalPrice;
+  @override
+  final MaterialPrice finalTotalPrice;
   final List<PriceRule> _rules;
   @override
   List<PriceRule> get rules {
@@ -410,23 +477,36 @@ class _$_Price extends _Price {
   }
 
   @override
-  final bool overrideRulePresent;
+  final bool isValid;
+  @override
+  final bool additionalBonusEligible;
+  @override
+  final bool zmgDiscount;
   @override
   final ZDP5Info zdp5MaxQuota;
   @override
   final ZDP5Info zdp5RemainingQuota;
   @override
-  final bool zmgDiscount;
+  final bool exceedQty;
   @override
-  final MaterialPrice lastPrice;
+  final bool overrideRulePresent;
+  final List<PriceRule> _overridenRules;
   @override
-  final MaterialPrice finalPrice;
+  List<PriceRule> get overridenRules {
+    if (_overridenRules is EqualUnmodifiableListView) return _overridenRules;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_overridenRules);
+  }
+
+  final List<OverridenRuleTier> _overridenRuleTier;
   @override
-  final MaterialPrice finalTotalPrice;
-  @override
-  final bool additionalBonusEligible;
-  @override
-  final bool isValid;
+  List<OverridenRuleTier> get overridenRuleTier {
+    if (_overridenRuleTier is EqualUnmodifiableListView)
+      return _overridenRuleTier;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_overridenRuleTier);
+  }
+
   @override
   @JsonKey()
   final bool isValidMaterial;
@@ -445,7 +525,7 @@ class _$_Price extends _Price {
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
+    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
   }
 
   @override
@@ -455,28 +535,36 @@ class _$_Price extends _Price {
             other is _$_Price &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
-            const DeepCollectionEquality().equals(other._rules, _rules) &&
-            const DeepCollectionEquality().equals(other._tiers, _tiers) &&
-            const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
-            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
-            (identical(other.overrideRulePresent, overrideRulePresent) ||
-                other.overrideRulePresent == overrideRulePresent) &&
-            (identical(other.zdp5MaxQuota, zdp5MaxQuota) ||
-                other.zdp5MaxQuota == zdp5MaxQuota) &&
-            (identical(other.zdp5RemainingQuota, zdp5RemainingQuota) ||
-                other.zdp5RemainingQuota == zdp5RemainingQuota) &&
-            (identical(other.zmgDiscount, zmgDiscount) ||
-                other.zmgDiscount == zmgDiscount) &&
+            (identical(other.materialCode, materialCode) ||
+                other.materialCode == materialCode) &&
             (identical(other.lastPrice, lastPrice) ||
                 other.lastPrice == lastPrice) &&
             (identical(other.finalPrice, finalPrice) ||
                 other.finalPrice == finalPrice) &&
             (identical(other.finalTotalPrice, finalTotalPrice) ||
                 other.finalTotalPrice == finalTotalPrice) &&
+            const DeepCollectionEquality().equals(other._rules, _rules) &&
+            const DeepCollectionEquality().equals(other._tiers, _tiers) &&
+            const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
+            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
+            (identical(other.isValid, isValid) || other.isValid == isValid) &&
             (identical(
                     other.additionalBonusEligible, additionalBonusEligible) ||
                 other.additionalBonusEligible == additionalBonusEligible) &&
-            (identical(other.isValid, isValid) || other.isValid == isValid) &&
+            (identical(other.zmgDiscount, zmgDiscount) ||
+                other.zmgDiscount == zmgDiscount) &&
+            (identical(other.zdp5MaxQuota, zdp5MaxQuota) ||
+                other.zdp5MaxQuota == zdp5MaxQuota) &&
+            (identical(other.zdp5RemainingQuota, zdp5RemainingQuota) ||
+                other.zdp5RemainingQuota == zdp5RemainingQuota) &&
+            (identical(other.exceedQty, exceedQty) ||
+                other.exceedQty == exceedQty) &&
+            (identical(other.overrideRulePresent, overrideRulePresent) ||
+                other.overrideRulePresent == overrideRulePresent) &&
+            const DeepCollectionEquality()
+                .equals(other._overridenRules, _overridenRules) &&
+            const DeepCollectionEquality()
+                .equals(other._overridenRuleTier, _overridenRuleTier) &&
             (identical(other.isValidMaterial, isValidMaterial) ||
                 other.isValidMaterial == isValidMaterial) &&
             (identical(other.isFOC, isFOC) || other.isFOC == isFOC) &&
@@ -494,19 +582,23 @@ class _$_Price extends _Price {
   int get hashCode => Object.hashAll([
         runtimeType,
         materialNumber,
+        materialCode,
+        lastPrice,
+        finalPrice,
+        finalTotalPrice,
         const DeepCollectionEquality().hash(_rules),
         const DeepCollectionEquality().hash(_tiers),
         const DeepCollectionEquality().hash(_bonuses),
         const DeepCollectionEquality().hash(_bundles),
-        overrideRulePresent,
+        isValid,
+        additionalBonusEligible,
+        zmgDiscount,
         zdp5MaxQuota,
         zdp5RemainingQuota,
-        zmgDiscount,
-        lastPrice,
-        finalPrice,
-        finalTotalPrice,
-        additionalBonusEligible,
-        isValid,
+        exceedQty,
+        overrideRulePresent,
+        const DeepCollectionEquality().hash(_overridenRules),
+        const DeepCollectionEquality().hash(_overridenRuleTier),
         isValidMaterial,
         isFOC,
         isPriceOverride,
@@ -525,19 +617,23 @@ class _$_Price extends _Price {
 abstract class _Price extends Price {
   const factory _Price(
       {required final MaterialNumber materialNumber,
+      required final MaterialCode materialCode,
+      required final MaterialPrice lastPrice,
+      required final MaterialPrice finalPrice,
+      required final MaterialPrice finalTotalPrice,
       required final List<PriceRule> rules,
       required final List<PriceTier> tiers,
       required final List<PriceBonus> bonuses,
       required final List<PriceBundle> bundles,
-      required final bool overrideRulePresent,
+      required final bool isValid,
+      required final bool additionalBonusEligible,
+      required final bool zmgDiscount,
       required final ZDP5Info zdp5MaxQuota,
       required final ZDP5Info zdp5RemainingQuota,
-      required final bool zmgDiscount,
-      required final MaterialPrice lastPrice,
-      required final MaterialPrice finalPrice,
-      required final MaterialPrice finalTotalPrice,
-      required final bool additionalBonusEligible,
-      required final bool isValid,
+      required final bool exceedQty,
+      required final bool overrideRulePresent,
+      required final List<PriceRule> overridenRules,
+      required final List<OverridenRuleTier> overridenRuleTier,
       final bool isValidMaterial,
       final bool isFOC,
       final bool isPriceOverride,
@@ -549,6 +645,14 @@ abstract class _Price extends Price {
   @override
   MaterialNumber get materialNumber;
   @override
+  MaterialCode get materialCode;
+  @override
+  MaterialPrice get lastPrice;
+  @override
+  MaterialPrice get finalPrice;
+  @override
+  MaterialPrice get finalTotalPrice;
+  @override
   List<PriceRule> get rules;
   @override
   List<PriceTier> get tiers;
@@ -557,23 +661,23 @@ abstract class _Price extends Price {
   @override
   List<PriceBundle> get bundles;
   @override
-  bool get overrideRulePresent;
+  bool get isValid;
+  @override
+  bool get additionalBonusEligible;
+  @override
+  bool get zmgDiscount;
   @override
   ZDP5Info get zdp5MaxQuota;
   @override
   ZDP5Info get zdp5RemainingQuota;
   @override
-  bool get zmgDiscount;
+  bool get exceedQty;
   @override
-  MaterialPrice get lastPrice;
+  bool get overrideRulePresent;
   @override
-  MaterialPrice get finalPrice;
+  List<PriceRule> get overridenRules;
   @override
-  MaterialPrice get finalTotalPrice;
-  @override
-  bool get additionalBonusEligible;
-  @override
-  bool get isValid;
+  List<OverridenRuleTier> get overridenRuleTier;
   @override
   bool get isValidMaterial;
   @override

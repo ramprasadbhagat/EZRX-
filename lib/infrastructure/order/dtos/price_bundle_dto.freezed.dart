@@ -26,8 +26,14 @@ mixin _$PriceBundleDto {
   @JsonKey(name: 'BundleCode', defaultValue: '')
   @HiveField(36, defaultValue: '')
   String get code => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Conditions', defaultValue: '')
+  @HiveField(37, defaultValue: '')
+  String get conditions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  @HiveField(38, defaultValue: false)
+  bool get bonusEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-  @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+  @HiveField(39, defaultValue: <PriceBundleItemDto>[])
   List<PriceBundleItemDto> get information =>
       throw _privateConstructorUsedError;
 
@@ -50,8 +56,14 @@ abstract class $PriceBundleDtoCopyWith<$Res> {
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(36, defaultValue: '')
           String code,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          String conditions,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+      @HiveField(38, defaultValue: false)
+          bool bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
           List<PriceBundleItemDto> information});
 }
 
@@ -70,6 +82,8 @@ class _$PriceBundleDtoCopyWithImpl<$Res, $Val extends PriceBundleDto>
   $Res call({
     Object? name = null,
     Object? code = null,
+    Object? conditions = null,
+    Object? bonusEligible = null,
     Object? information = null,
   }) {
     return _then(_value.copyWith(
@@ -81,6 +95,14 @@ class _$PriceBundleDtoCopyWithImpl<$Res, $Val extends PriceBundleDto>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      conditions: null == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: null == bonusEligible
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
       information: null == information
           ? _value.information
           : information // ignore: cast_nullable_to_non_nullable
@@ -104,8 +126,14 @@ abstract class _$$_PriceBundleDtoCopyWith<$Res>
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(36, defaultValue: '')
           String code,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          String conditions,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+      @HiveField(38, defaultValue: false)
+          bool bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
           List<PriceBundleItemDto> information});
 }
 
@@ -122,6 +150,8 @@ class __$$_PriceBundleDtoCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? code = null,
+    Object? conditions = null,
+    Object? bonusEligible = null,
     Object? information = null,
   }) {
     return _then(_$_PriceBundleDto(
@@ -133,6 +163,14 @@ class __$$_PriceBundleDtoCopyWithImpl<$Res>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      conditions: null == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: null == bonusEligible
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
       information: null == information
           ? _value._information
           : information // ignore: cast_nullable_to_non_nullable
@@ -152,8 +190,14 @@ class _$_PriceBundleDto extends _PriceBundleDto {
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(36, defaultValue: '')
           required this.code,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          required this.conditions,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+      @HiveField(38, defaultValue: false)
+          required this.bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
           required final List<PriceBundleItemDto> information})
       : _information = information,
         super._();
@@ -169,10 +213,18 @@ class _$_PriceBundleDto extends _PriceBundleDto {
   @JsonKey(name: 'BundleCode', defaultValue: '')
   @HiveField(36, defaultValue: '')
   final String code;
+  @override
+  @JsonKey(name: 'Conditions', defaultValue: '')
+  @HiveField(37, defaultValue: '')
+  final String conditions;
+  @override
+  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  @HiveField(38, defaultValue: false)
+  final bool bonusEligible;
   final List<PriceBundleItemDto> _information;
   @override
   @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-  @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+  @HiveField(39, defaultValue: <PriceBundleItemDto>[])
   List<PriceBundleItemDto> get information {
     if (_information is EqualUnmodifiableListView) return _information;
     // ignore: implicit_dynamic_type
@@ -181,7 +233,7 @@ class _$_PriceBundleDto extends _PriceBundleDto {
 
   @override
   String toString() {
-    return 'PriceBundleDto(name: $name, code: $code, information: $information)';
+    return 'PriceBundleDto(name: $name, code: $code, conditions: $conditions, bonusEligible: $bonusEligible, information: $information)';
   }
 
   @override
@@ -191,14 +243,18 @@ class _$_PriceBundleDto extends _PriceBundleDto {
             other is _$_PriceBundleDto &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code) &&
+            (identical(other.conditions, conditions) ||
+                other.conditions == conditions) &&
+            (identical(other.bonusEligible, bonusEligible) ||
+                other.bonusEligible == bonusEligible) &&
             const DeepCollectionEquality()
                 .equals(other._information, _information));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, code,
-      const DeepCollectionEquality().hash(_information));
+  int get hashCode => Object.hash(runtimeType, name, code, conditions,
+      bonusEligible, const DeepCollectionEquality().hash(_information));
 
   @JsonKey(ignore: true)
   @override
@@ -222,8 +278,14 @@ abstract class _PriceBundleDto extends PriceBundleDto {
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(36, defaultValue: '')
           required final String code,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          required final String conditions,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+      @HiveField(38, defaultValue: false)
+          required final bool bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
           required final List<PriceBundleItemDto>
               information}) = _$_PriceBundleDto;
   const _PriceBundleDto._() : super._();
@@ -240,8 +302,16 @@ abstract class _PriceBundleDto extends PriceBundleDto {
   @HiveField(36, defaultValue: '')
   String get code;
   @override
+  @JsonKey(name: 'Conditions', defaultValue: '')
+  @HiveField(37, defaultValue: '')
+  String get conditions;
+  @override
+  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  @HiveField(38, defaultValue: false)
+  bool get bonusEligible;
+  @override
   @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-  @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+  @HiveField(39, defaultValue: <PriceBundleItemDto>[])
   List<PriceBundleItemDto> get information;
   @override
   @JsonKey(ignore: true)

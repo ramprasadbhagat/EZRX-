@@ -3,55 +3,36 @@
     "customerMaterialPriceDetails": [
       {
         "Price": {
-          "MaterialNumber": "000000000023210571",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 60.4,
-          "FinalIndividualPrice": 60.4,
+          "MaterialNumber": "000000000021038305",
+          "OldMaterialCode": "034F8B1307B",
+          "ListPrice": 273.6,
+          "FinalIndividualPrice": 273.6,
           "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": false,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 60.4,
-              "Conditions": "ZLP0 - A901 - 0041764727",
+              "Type": "MYR",
+              "Rate": 273.6,
+              "Conditions": "ZLP0 - A901 - 0002049233",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0041764727"
-            },
-            {
-              "Type": "SGD",
-              "Rate": 0,
-              "Conditions": "ZDP2 - A917 - 0055725431",
-              "BonusEligible": false,
-              "ConditionNumber": "0055725431"
+              "ConditionNumber": "0002049233",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
           "Bonuses": [],
-          "TieredPricing": [
-            {
-              "Tier": "C",
-              "PriceTier": [
-                {
-                  "ApplyBonus": false,
-                  "Sequence": 0,
-                  "Quantity": 1,
-                  "Type": "",
-                  "Rate": 60.4
-                },
-                {
-                  "ApplyBonus": false,
-                  "Sequence": 0,
-                  "Quantity": 16,
-                  "Type": "",
-                  "Rate": 59
-                }
-              ]
-            }
-          ]
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",
@@ -80,28 +61,36 @@
       },
       {
         "Price": {
-          "MaterialNumber": "000000000023245612",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 46.6,
-          "FinalIndividualPrice": 46.6,
+          "MaterialNumber": "000000000021038302",
+          "OldMaterialCode": "034F8B1306B",
+          "ListPrice": 364.8,
+          "FinalIndividualPrice": 364.8,
           "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": true,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 46.6,
-              "Conditions": "ZLP0 - A901 - 0071479176",
+              "Type": "MYR",
+              "Rate": 364.8,
+              "Conditions": "ZLP0 - A901 - 0002049227",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0071479176"
+              "ConditionNumber": "0002049227",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
           "Bonuses": [],
-          "TieredPricing": []
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",
@@ -130,28 +119,59 @@
       },
       {
         "Price": {
-          "MaterialNumber": "000000000023268597",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 9.5,
-          "FinalIndividualPrice": 9.5,
+          "MaterialNumber": "000000000021041773",
+          "OldMaterialCode": "190235496",
+          "ListPrice": 20.4,
+          "FinalIndividualPrice": 20.4,
           "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": true,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 9.5,
-              "Conditions": "ZLP0 - A901 - 0072102522",
+              "Type": "MYR",
+              "Rate": 20.4,
+              "Conditions": "ZLP0 - A901 - 0002062642",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0072102522"
+              "ConditionNumber": "0002062642",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
-          "Bonuses": [],
-          "TieredPricing": []
+          "Bonuses": [
+            {
+              "BonusTiers": [
+                {
+                  "BonusMaterial": [
+                    {
+                      "Id": 1,
+                      "MaterialNumber": "000000000021041773",
+                      "MaterialDescription": "190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ",
+                      "Calculation": "913",
+                      "BonusRatio": 1,
+                      "QualifyingQuantity": 6,
+                      "BonusQuantity": 1,
+                      "LimitPerTransaction": 0,
+                      "ConditionId": "0000205499",
+                      "OldMaterialCode": "190235496"
+                    }
+                  ],
+                  "Calculation": "913",
+                  "QualifyingQuantity": 6
+                }
+              ]
+            }
+          ],
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",
@@ -180,28 +200,59 @@
       },
       {
         "Price": {
-          "MaterialNumber": "000000000023245611",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 31.55,
-          "FinalIndividualPrice": 31.55,
+          "MaterialNumber": "000000000021041769",
+          "OldMaterialCode": "190235168",
+          "ListPrice": 19.8,
+          "FinalIndividualPrice": 19.8,
           "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": true,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 31.55,
-              "Conditions": "ZLP0 - A901 - 0071479175",
+              "Type": "MYR",
+              "Rate": 19.8,
+              "Conditions": "ZLP0 - A901 - 0002062638",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0071479175"
+              "ConditionNumber": "0002062638",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
-          "Bonuses": [],
-          "TieredPricing": []
+          "Bonuses": [
+            {
+              "BonusTiers": [
+                {
+                  "BonusMaterial": [
+                    {
+                      "Id": 1,
+                      "MaterialNumber": "000000000021041769",
+                      "MaterialDescription": "190 FIRST TEETH T/PASTE (190) 40G",
+                      "Calculation": "913",
+                      "BonusRatio": 1,
+                      "QualifyingQuantity": 6,
+                      "BonusQuantity": 1,
+                      "LimitPerTransaction": 0,
+                      "ConditionId": "0000205492",
+                      "OldMaterialCode": "190235168"
+                    }
+                  ],
+                  "Calculation": "913",
+                  "QualifyingQuantity": 6
+                }
+              ]
+            }
+          ],
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",
@@ -230,55 +281,59 @@
       },
       {
         "Price": {
-          "MaterialNumber": "000000000023244223",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 7.92,
-          "FinalIndividualPrice": 4.85,
+          "MaterialNumber": "000000000021041768",
+          "OldMaterialCode": "190235120",
+          "ListPrice": 36.5,
+          "FinalIndividualPrice": 36.5,
           "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": false,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 7.92,
-              "Conditions": "ZLP0 - A901 - 0054643168",
+              "Type": "MYR",
+              "Rate": 36.5,
+              "Conditions": "ZLP0 - A901 - 0002062637",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0054643168"
-            },
-            {
-              "Type": "SGD",
-              "Rate": 0,
-              "Conditions": "ZDP2 - A917 - 0060799940",
-              "BonusEligible": false,
-              "ConditionNumber": "0060799940"
+              "ConditionNumber": "0002062637",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
-          "Bonuses": [],
-          "TieredPricing": [
+          "Bonuses": [
             {
-              "Tier": "C",
-              "PriceTier": [
+              "BonusTiers": [
                 {
-                  "ApplyBonus": false,
-                  "Sequence": 0,
-                  "Quantity": 1,
-                  "Type": "",
-                  "Rate": 4.85
-                },
-                {
-                  "ApplyBonus": false,
-                  "Sequence": 0,
-                  "Quantity": 30,
-                  "Type": "",
-                  "Rate": 4.75
+                  "BonusMaterial": [
+                    {
+                      "Id": 1,
+                      "MaterialNumber": "000000000021041768",
+                      "MaterialDescription": "190 ORAL BALANCE 1.5OZ/42G(190)",
+                      "Calculation": "913",
+                      "BonusRatio": 1,
+                      "QualifyingQuantity": 6,
+                      "BonusQuantity": 1,
+                      "LimitPerTransaction": 0,
+                      "ConditionId": "0000205493",
+                      "OldMaterialCode": "190235120"
+                    }
+                  ],
+                  "Calculation": "913",
+                  "QualifyingQuantity": 6
                 }
               ]
             }
-          ]
+          ],
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",
@@ -307,20 +362,59 @@
       },
       {
         "Price": {
-          "MaterialNumber": "000000000023245611",
-          "OverridenRulePresent": false,
+          "MaterialNumber": "000000000021041805",
+          "OldMaterialCode": "190237629",
+          "ListPrice": 40,
+          "FinalIndividualPrice": 40,
+          "FinalTotalPrice": 0,
+          "PriceRules": [
+            {
+              "Type": "MYR",
+              "Rate": 40,
+              "Conditions": "ZLP0 - A901 - 0002062670",
+              "TieredRules": null,
+              "BonusEligible": true,
+              "ConditionNumber": "0002062670",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
+            }
+          ],
+          "Bonuses": [
+            {
+              "BonusTiers": [
+                {
+                  "BonusMaterial": [
+                    {
+                      "Id": 1,
+                      "MaterialNumber": "000000000021041805",
+                      "MaterialDescription": "190 PANADOL ACTIFAST(NP)CAP 500MG80'S/BX",
+                      "Calculation": "913",
+                      "BonusRatio": 1,
+                      "QualifyingQuantity": 8,
+                      "BonusQuantity": 1,
+                      "LimitPerTransaction": 0,
+                      "ConditionId": "0000223046",
+                      "OldMaterialCode": "190237629"
+                    }
+                  ],
+                  "Calculation": "913",
+                  "QualifyingQuantity": 8
+                }
+              ]
+            }
+          ],
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
           "ZDP5MaxQuota": "",
           "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 7.92,
-          "FinalIndividualPrice": 4.85,
-          "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": false,
-          "PriceRules": [],
-          "Bonuses": [],
-          "TieredPricing": []
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",
@@ -349,77 +443,117 @@
       },
       {
         "Price": {
-          "MaterialNumber": "000000000021209747",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 7.92,
-          "FinalIndividualPrice": 4.85,
+          "MaterialNumber": "000000000021041779",
+          "OldMaterialCode": "190235816",
+          "ListPrice": 36.8,
+          "FinalIndividualPrice": 36.8,
           "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": false,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 7.92,
-              "Conditions": "ZLP0 - A901 - 0054643168",
+              "Type": "MYR",
+              "Rate": 36.8,
+              "Conditions": "ZLP0 - A901 - 0002062647",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0054643168"
-            },
+              "ConditionNumber": "0002062647",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
+            }
+          ],
+          "Bonuses": [
             {
-              "Type": "SGD",
-              "Rate": 0,
-              "Conditions": "ZDP2 - A917 - 0060799940",
-              "BonusEligible": false,
-              "ConditionNumber": "0060799940"
+              "BonusTiers": [
+                {
+                  "BonusMaterial": [
+                    {
+                      "Id": 1,
+                      "MaterialNumber": "000000000021041779",
+                      "MaterialDescription": "190 PANADOL REG (NP)TAB150'S",
+                      "Calculation": "913",
+                      "BonusRatio": 1,
+                      "QualifyingQuantity": 6,
+                      "BonusQuantity": 1,
+                      "LimitPerTransaction": 0,
+                      "ConditionId": "0000225620",
+                      "OldMaterialCode": "190235816"
+                    }
+                  ],
+                  "Calculation": "913",
+                  "QualifyingQuantity": 6
+                }
+              ]
+            }
+          ],
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000021209747",
+          "MaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "TherapeuticClass": "Expectorants",
+          "ItemBrand": "BREACOL",
+          "defaultMaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "SIN08411P",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000021041772",
+          "OldMaterialCode": "190235441",
+          "ListPrice": 2.04,
+          "FinalIndividualPrice": 2.04,
+          "FinalTotalPrice": 0,
+          "PriceRules": [
+            {
+              "Type": "MYR",
+              "Rate": 2.04,
+              "Conditions": "ZLP0 - A901 - 0002062641",
+              "TieredRules": null,
+              "BonusEligible": true,
+              "ConditionNumber": "0002062641",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
           "Bonuses": [],
-          "TieredPricing": []
-        },
-        "MaterialInformation": {
-          "TaxClassification": "Product : Full Tax",
-          "Taxm1": "1",
-          "Taxes": [
-            "7"
-          ],
-          "PrincipalCode": "0000100813",
-          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
-          "MaterialNumber": "000000000021209747",
-          "MaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
-          "TherapeuticClass": "Expectorants",
-          "ItemBrand": "BREACOL",
-          "defaultMaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
-          "hasMandatoryTenderContract": null,
-          "hasValidTenderContract": null,
-          "hidePrice": false,
-          "GovernmentMaterialCode": "",
-          "IsSampleMaterial": false,
-          "ItemRegistrationNumber": "SIN08411P",
-          "UnitOfMeasurement": "EA",
-          "MaterialGroup2": "",
-          "MaterialGroup4": "6GS"
-        },
-        "ValidMaterial": true
-      },
-      {
-        "Price": {
-          "MaterialNumber": "000000000023245612",
-          "OverridenRulePresent": false,
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
           "ZDP5MaxQuota": "",
           "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 7.92,
-          "FinalIndividualPrice": 4.85,
-          "FinalTotalPrice": 0,
-          "Valid": true,
-          "Bundles": [],
-          "AdditionalBonusEligible": false,
-          "PriceRules": [],
-          "Bonuses": [],
-          "TieredPricing": []
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         },
         "MaterialInformation": {
           "TaxClassification": "Product : Full Tax",

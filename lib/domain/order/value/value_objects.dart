@@ -182,6 +182,21 @@ class MaterialInfoType extends ValueObject<String> {
   const MaterialInfoType._(this.value);
 }
 
+class MaterialCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialCode(String input) {
+    return MaterialCode._(validateStringNotEmpty(input));
+  }
+
+  String get displayMatNo {
+    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
+  }
+
+  const MaterialCode._(this.value);
+}
+
 class MaterialInStock extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

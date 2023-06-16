@@ -49,7 +49,7 @@ class MaterialPriceDetailRemoteDataSource {
 
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,
@@ -94,7 +94,7 @@ class MaterialPriceDetailRemoteDataSource {
 
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,
@@ -128,7 +128,7 @@ class MaterialPriceDetailRemoteDataSource {
 
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,

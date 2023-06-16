@@ -39,7 +39,7 @@ class PriceOverrideRemoteDataSource {
 
       final priceList = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryMaterialFilters,
           'variables': inputVariables,

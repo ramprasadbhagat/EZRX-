@@ -422,6 +422,9 @@ BonusMaterialDto _$BonusMaterialDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BonusMaterialDto {
+  @JsonKey(name: 'Id', defaultValue: 0)
+  @HiveField(28, defaultValue: 0)
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
   @HiveField(29, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
@@ -440,6 +443,15 @@ mixin _$BonusMaterialDto {
   @JsonKey(name: 'BonusQuantity', defaultValue: 0)
   @HiveField(34, defaultValue: 0)
   int get bonusQuantity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+  @HiveField(35, defaultValue: 0)
+  int get limitPerTransaction => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ConditionId', defaultValue: '')
+  @HiveField(36, defaultValue: '')
+  String get conditionId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+  @HiveField(37, defaultValue: '')
+  String get oldMaterialCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -454,7 +466,10 @@ abstract class $BonusMaterialDtoCopyWith<$Res> {
       _$BonusMaterialDtoCopyWithImpl<$Res, BonusMaterialDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+      {@JsonKey(name: 'Id', defaultValue: 0)
+      @HiveField(28, defaultValue: 0)
+          int id,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(29, defaultValue: '')
           String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -471,7 +486,16 @@ abstract class $BonusMaterialDtoCopyWith<$Res> {
           int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
       @HiveField(34, defaultValue: 0)
-          int bonusQuantity});
+          int bonusQuantity,
+      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          int limitPerTransaction,
+      @JsonKey(name: 'ConditionId', defaultValue: '')
+      @HiveField(36, defaultValue: '')
+          String conditionId,
+      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          String oldMaterialCode});
 }
 
 /// @nodoc
@@ -487,14 +511,22 @@ class _$BonusMaterialDtoCopyWithImpl<$Res, $Val extends BonusMaterialDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
     Object? calculation = null,
     Object? bonusRatio = null,
     Object? qualifyingQuantity = null,
     Object? bonusQuantity = null,
+    Object? limitPerTransaction = null,
+    Object? conditionId = null,
+    Object? oldMaterialCode = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -519,6 +551,18 @@ class _$BonusMaterialDtoCopyWithImpl<$Res, $Val extends BonusMaterialDto>
           ? _value.bonusQuantity
           : bonusQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      limitPerTransaction: null == limitPerTransaction
+          ? _value.limitPerTransaction
+          : limitPerTransaction // ignore: cast_nullable_to_non_nullable
+              as int,
+      conditionId: null == conditionId
+          ? _value.conditionId
+          : conditionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      oldMaterialCode: null == oldMaterialCode
+          ? _value.oldMaterialCode
+          : oldMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -532,7 +576,10 @@ abstract class _$$_BonusMaterialDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+      {@JsonKey(name: 'Id', defaultValue: 0)
+      @HiveField(28, defaultValue: 0)
+          int id,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(29, defaultValue: '')
           String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -549,7 +596,16 @@ abstract class _$$_BonusMaterialDtoCopyWith<$Res>
           int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
       @HiveField(34, defaultValue: 0)
-          int bonusQuantity});
+          int bonusQuantity,
+      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          int limitPerTransaction,
+      @JsonKey(name: 'ConditionId', defaultValue: '')
+      @HiveField(36, defaultValue: '')
+          String conditionId,
+      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          String oldMaterialCode});
 }
 
 /// @nodoc
@@ -563,14 +619,22 @@ class __$$_BonusMaterialDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
     Object? calculation = null,
     Object? bonusRatio = null,
     Object? qualifyingQuantity = null,
     Object? bonusQuantity = null,
+    Object? limitPerTransaction = null,
+    Object? conditionId = null,
+    Object? oldMaterialCode = null,
   }) {
     return _then(_$_BonusMaterialDto(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -595,6 +659,18 @@ class __$$_BonusMaterialDtoCopyWithImpl<$Res>
           ? _value.bonusQuantity
           : bonusQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      limitPerTransaction: null == limitPerTransaction
+          ? _value.limitPerTransaction
+          : limitPerTransaction // ignore: cast_nullable_to_non_nullable
+              as int,
+      conditionId: null == conditionId
+          ? _value.conditionId
+          : conditionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      oldMaterialCode: null == oldMaterialCode
+          ? _value.oldMaterialCode
+          : oldMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -604,7 +680,10 @@ class __$$_BonusMaterialDtoCopyWithImpl<$Res>
 @HiveType(typeId: 12, adapterName: 'BonusMaterialDtoAdapter')
 class _$_BonusMaterialDto extends _BonusMaterialDto {
   const _$_BonusMaterialDto(
-      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+      {@JsonKey(name: 'Id', defaultValue: 0)
+      @HiveField(28, defaultValue: 0)
+          required this.id,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(29, defaultValue: '')
           required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -621,12 +700,25 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
           required this.qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
       @HiveField(34, defaultValue: 0)
-          required this.bonusQuantity})
+          required this.bonusQuantity,
+      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          required this.limitPerTransaction,
+      @JsonKey(name: 'ConditionId', defaultValue: '')
+      @HiveField(36, defaultValue: '')
+          required this.conditionId,
+      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          required this.oldMaterialCode})
       : super._();
 
   factory _$_BonusMaterialDto.fromJson(Map<String, dynamic> json) =>
       _$$_BonusMaterialDtoFromJson(json);
 
+  @override
+  @JsonKey(name: 'Id', defaultValue: 0)
+  @HiveField(28, defaultValue: 0)
+  final int id;
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
   @HiveField(29, defaultValue: '')
@@ -651,10 +743,22 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
   @JsonKey(name: 'BonusQuantity', defaultValue: 0)
   @HiveField(34, defaultValue: 0)
   final int bonusQuantity;
+  @override
+  @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+  @HiveField(35, defaultValue: 0)
+  final int limitPerTransaction;
+  @override
+  @JsonKey(name: 'ConditionId', defaultValue: '')
+  @HiveField(36, defaultValue: '')
+  final String conditionId;
+  @override
+  @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+  @HiveField(37, defaultValue: '')
+  final String oldMaterialCode;
 
   @override
   String toString() {
-    return 'BonusMaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity)';
+    return 'BonusMaterialDto(id: $id, materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity, limitPerTransaction: $limitPerTransaction, conditionId: $conditionId, oldMaterialCode: $oldMaterialCode)';
   }
 
   @override
@@ -662,6 +766,7 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BonusMaterialDto &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -673,19 +778,29 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
             (identical(other.qualifyingQuantity, qualifyingQuantity) ||
                 other.qualifyingQuantity == qualifyingQuantity) &&
             (identical(other.bonusQuantity, bonusQuantity) ||
-                other.bonusQuantity == bonusQuantity));
+                other.bonusQuantity == bonusQuantity) &&
+            (identical(other.limitPerTransaction, limitPerTransaction) ||
+                other.limitPerTransaction == limitPerTransaction) &&
+            (identical(other.conditionId, conditionId) ||
+                other.conditionId == conditionId) &&
+            (identical(other.oldMaterialCode, oldMaterialCode) ||
+                other.oldMaterialCode == oldMaterialCode));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       materialNumber,
       materialDescription,
       calculation,
       bonusRatio,
       qualifyingQuantity,
-      bonusQuantity);
+      bonusQuantity,
+      limitPerTransaction,
+      conditionId,
+      oldMaterialCode);
 
   @JsonKey(ignore: true)
   @override
@@ -703,7 +818,10 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
 
 abstract class _BonusMaterialDto extends BonusMaterialDto {
   const factory _BonusMaterialDto(
-      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+      {@JsonKey(name: 'Id', defaultValue: 0)
+      @HiveField(28, defaultValue: 0)
+          required final int id,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(29, defaultValue: '')
           required final String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -720,12 +838,25 @@ abstract class _BonusMaterialDto extends BonusMaterialDto {
           required final int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
       @HiveField(34, defaultValue: 0)
-          required final int bonusQuantity}) = _$_BonusMaterialDto;
+          required final int bonusQuantity,
+      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+      @HiveField(35, defaultValue: 0)
+          required final int limitPerTransaction,
+      @JsonKey(name: 'ConditionId', defaultValue: '')
+      @HiveField(36, defaultValue: '')
+          required final String conditionId,
+      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+      @HiveField(37, defaultValue: '')
+          required final String oldMaterialCode}) = _$_BonusMaterialDto;
   const _BonusMaterialDto._() : super._();
 
   factory _BonusMaterialDto.fromJson(Map<String, dynamic> json) =
       _$_BonusMaterialDto.fromJson;
 
+  @override
+  @JsonKey(name: 'Id', defaultValue: 0)
+  @HiveField(28, defaultValue: 0)
+  int get id;
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
   @HiveField(29, defaultValue: '')
@@ -750,6 +881,18 @@ abstract class _BonusMaterialDto extends BonusMaterialDto {
   @JsonKey(name: 'BonusQuantity', defaultValue: 0)
   @HiveField(34, defaultValue: 0)
   int get bonusQuantity;
+  @override
+  @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+  @HiveField(35, defaultValue: 0)
+  int get limitPerTransaction;
+  @override
+  @JsonKey(name: 'ConditionId', defaultValue: '')
+  @HiveField(36, defaultValue: '')
+  String get conditionId;
+  @override
+  @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+  @HiveField(37, defaultValue: '')
+  String get oldMaterialCode;
   @override
   @JsonKey(ignore: true)
   _$$_BonusMaterialDtoCopyWith<_$_BonusMaterialDto> get copyWith =>

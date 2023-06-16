@@ -38,7 +38,7 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
         _filterFOCMaterial(e.materials, emit);
 
         final materialNumbers =
-            e.materials.map((e) => e.materialNumber).toList();
+            e.materials.map((e) => e.code).toList();
         final queryMaterialNumber =
             List<MaterialNumber>.from(materialNumbers)
               ..removeWhere(
@@ -96,7 +96,7 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
     final focMaterialDetails = <MaterialNumber, Price>{};
     for (final material in materials) {
       if (material.materialGroup4.isFOC) {
-        final materialNumber = material.materialNumber;
+        final materialNumber = material.code;
         focMaterialDetails.addEntries(
           {
             materialNumber: Price.empty().copyWith(

@@ -16,8 +16,14 @@ class PriceBundleDto with _$PriceBundleDto {
     @JsonKey(name: 'BundleCode', defaultValue: '')
     @HiveField(36, defaultValue: '')
         required String code,
+    @JsonKey(name: 'Conditions', defaultValue: '')
+    @HiveField(37, defaultValue: '')
+        required String conditions,
+    @JsonKey(name: 'BonusEligible', defaultValue: false)
+    @HiveField(38, defaultValue: false)
+        required bool bonusEligible,
     @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-    @HiveField(37, defaultValue: <PriceBundleItemDto>[])
+    @HiveField(39, defaultValue: <PriceBundleItemDto>[])
         required List<PriceBundleItemDto> information,
   }) = _PriceBundleDto;
 
@@ -25,6 +31,8 @@ class PriceBundleDto with _$PriceBundleDto {
     return PriceBundleDto(
       name: priceBundle.name,
       code: priceBundle.code,
+      conditions: priceBundle.conditions,
+      bonusEligible: priceBundle.bonusEligible,
       information: priceBundle.information
           .map((e) => PriceBundleItemDto.fromDomain(e))
           .toList(),
@@ -34,6 +42,8 @@ class PriceBundleDto with _$PriceBundleDto {
   PriceBundle toDomain() => PriceBundle(
         name: name,
         code: code,
+        conditions: conditions,
+        bonusEligible: bonusEligible,
         information: information.map((e) => e.toDomain()).toList(),
       );
 

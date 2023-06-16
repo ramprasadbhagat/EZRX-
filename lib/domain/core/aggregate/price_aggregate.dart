@@ -256,7 +256,8 @@ class PriceAggregate with _$PriceAggregate {
     if (price.finalPrice.isUnavailable ||
         materialInfo.hidePrice ||
         !price.isValid ||
-        !price.isValidMaterial) return 'NA(Price)';
+        !price.isValidMaterial) return 'Price Not Available';
+
 
     double result;
     switch (priceType) {

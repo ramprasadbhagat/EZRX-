@@ -2,35 +2,36 @@
     "data": {
       "price": [
         {
-          "MaterialNumber": "000000000023168451",
-          "OverridenRulePresent": false,
-          "ZDP5MaxQuota": "",
-          "ZDP5RemainingQuota": "",
-          "ZMGDiscount": false,
-          "ListPrice": 90,
-          "FinalIndividualPrice": 90,
+          "MaterialNumber": "000000000021038305",
+          "OldMaterialCode": "034F8B1307B",
+          "ListPrice": 273.6,
+          "FinalIndividualPrice": 273.6,
           "FinalTotalPrice": 0,
-          "AdditionalBonusEligible": true,
           "PriceRules": [
             {
-              "Type": "SGD",
-              "Rate": 10,
-              "Conditions": "ZLP0 - A936 - 0009924089",
+              "Type": "MYR",
+              "Rate": 273.6,
+              "Conditions": "ZLP0 - A901 - 0002049233",
+              "TieredRules": null,
               "BonusEligible": true,
-              "ConditionNumber": "0009924089"
-            },
-            {
-              "Type": "SGD",
-              "Rate": 90,
-              "Conditions": "ZPO1",
-              "BonusEligible": true,
-              "ConditionNumber": ""
+              "ConditionNumber": "0002049233",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
             }
           ],
           "Bonuses": [],
           "TieredPricing": [],
           "Bundles": [],
-          "Valid": true
+          "Valid": true,
+          "AdditionalBonusEligible": true,
+          "ZMGDiscount": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ExceedQty": false,
+          "OverridenRulePresent": false,
+          "OverridenRules": [],
+          "OverridenRuleTier": []
         }
       ]
     }

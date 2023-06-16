@@ -24,7 +24,7 @@ class StockLabel extends StatelessWidget {
               ),
             ),
             child: Text(
-              materialInfo.stockInfos.first.inStock.displayMaterialInStock,
+              materialInfo.stockInfos.isEmpty ? 'Preorder' : 'Out of Stock',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: ZPColors.darkerGrey,

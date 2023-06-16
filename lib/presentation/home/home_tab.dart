@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
@@ -12,9 +14,15 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:ezrxmobile/locator.dart';
+
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -45,25 +53,57 @@ class HomeTab extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          AnnouncementWidget(
-            currentPath: const HomeTabRoute().path,
-            key: const Key('homeTabAnnouncementWidget'),
-          ),
-          const EdiUserBanner(),
-          const AccountSuspendedBanner(),
-          const HomeBanner(
-            key: ValueKey('HomeBanner'),
-          ),
-          const OrdersExpansionTile(),
-          configService.getReturnsConfig()
-              ? const ReturnsExpansionTile()
-              : const SizedBox.shrink(),
-          configService.getPaymentsConfig()
-              ? const PaymentsExpansionTile()
-              : const SizedBox.shrink(),
-        ],
+      body: BlocListener<MaterialListBloc, MaterialListState>(
+        listenWhen: (previous, current) => previous.nextPageIndex != current.nextPageIndex,
+        listener: (context, state) {
+          if (state.materialList.isNotEmpty) {
+            context.read<MaterialPriceBloc>().add(
+              MaterialPriceEvent.fetch(
+                salesOrganisation: context
+                    .read<SalesOrgBloc>()
+                    .state
+                    .salesOrganisation,
+                salesConfigs: context
+                    .read<SalesOrgBloc>()
+                    .state
+                    .configs,
+                customerCodeInfo: context
+                    .read<CustomerCodeBloc>()
+                    .state
+                    .customerCodeInfo,
+                shipToInfo: context
+                    .read<ShipToCodeBloc>()
+                    .state
+                    .shipToInfo,
+                comboDealEligible: context
+                    .read<EligibilityBloc>()
+                    .state
+                    .comboDealEligible,
+                materials: state.materialList,
+              ),
+            );
+          }
+        },
+        child: ListView(
+          children: [
+            AnnouncementWidget(
+              currentPath: const HomeTabRoute().path,
+              key: const Key('homeTabAnnouncementWidget'),
+            ),
+            const EdiUserBanner(),
+            const AccountSuspendedBanner(),
+            const HomeBanner(
+              key: ValueKey('HomeBanner'),
+            ),
+            const OrdersExpansionTile(),
+            configService.getReturnsConfig()
+                ? const ReturnsExpansionTile()
+                : const SizedBox.shrink(),
+            configService.getPaymentsConfig()
+                ? const PaymentsExpansionTile()
+                : const SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }

@@ -24,7 +24,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat-my.ezrx.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio);
@@ -49,7 +49,6 @@ void main() {
         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
-          'shipToCode': 'fake-ship-code',
           'request': [],
         };
         final res = json.decode(
@@ -58,7 +57,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             res,
@@ -76,7 +75,6 @@ void main() {
           salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
-          shipToCode: 'fake-ship-code',
         );
         final priceData = res['data']['price'];
 
@@ -91,10 +89,8 @@ void main() {
         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
-          'shipToCode': 'fake-ship-code',
           'request': {
             'MaterialNumber': 'fake-number',
-            'salesDeal': [],
           },
         };
         final res = json.decode(
@@ -103,7 +99,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             res,
@@ -121,7 +117,6 @@ void main() {
           salesDeal: [],
           materialNumber: 'fake-number',
           salesOrgCode: 'fake-sales-org',
-          shipToCode: 'fake-ship-code',
         );
         final priceData = res['data']['price'][0];
 
@@ -135,12 +130,11 @@ void main() {
         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
-          'shipToCode': 'fake-ship-code',
           'request': [],
         };
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             204,
             {'data': []},
@@ -159,7 +153,6 @@ void main() {
           salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
-          shipToCode: 'fake-ship-code',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -179,7 +172,7 @@ void main() {
         };
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             {
@@ -203,7 +196,6 @@ void main() {
           salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
-          shipToCode: 'fake-ship-code',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

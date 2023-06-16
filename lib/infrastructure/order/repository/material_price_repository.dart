@@ -53,7 +53,6 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
       final shipToCode = shipToInfo.shipToCustomerCode;
       final queryMaterialNumbers =
           materialNumberList.map((e) => e.getOrCrash()).toList();
-
       final queryComboDeals = comboDealEligible
           ? customerCodeInfo.salesDeals.map((e) => e.getOrCrash()).toList()
           : <String>[];
@@ -94,7 +93,6 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
         salesOrgCode: salesOrgCode,
         customerCode: customerCode,
         materialNumber: materialNumber,
-        shipToCode: shipToCode,
         salesDeal: salesDeal,
       );
 

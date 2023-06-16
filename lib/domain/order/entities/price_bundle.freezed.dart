@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PriceBundle {
   String get name => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
+  String get conditions => throw _privateConstructorUsedError;
+  bool get bonusEligible => throw _privateConstructorUsedError;
   List<PriceBundleItem> get information => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +33,12 @@ abstract class $PriceBundleCopyWith<$Res> {
           PriceBundle value, $Res Function(PriceBundle) then) =
       _$PriceBundleCopyWithImpl<$Res, PriceBundle>;
   @useResult
-  $Res call({String name, String code, List<PriceBundleItem> information});
+  $Res call(
+      {String name,
+      String code,
+      String conditions,
+      bool bonusEligible,
+      List<PriceBundleItem> information});
 }
 
 /// @nodoc
@@ -49,6 +56,8 @@ class _$PriceBundleCopyWithImpl<$Res, $Val extends PriceBundle>
   $Res call({
     Object? name = null,
     Object? code = null,
+    Object? conditions = null,
+    Object? bonusEligible = null,
     Object? information = null,
   }) {
     return _then(_value.copyWith(
@@ -60,6 +69,14 @@ class _$PriceBundleCopyWithImpl<$Res, $Val extends PriceBundle>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      conditions: null == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: null == bonusEligible
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
       information: null == information
           ? _value.information
           : information // ignore: cast_nullable_to_non_nullable
@@ -76,7 +93,12 @@ abstract class _$$_PriceBundleCopyWith<$Res>
       __$$_PriceBundleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String code, List<PriceBundleItem> information});
+  $Res call(
+      {String name,
+      String code,
+      String conditions,
+      bool bonusEligible,
+      List<PriceBundleItem> information});
 }
 
 /// @nodoc
@@ -92,6 +114,8 @@ class __$$_PriceBundleCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? code = null,
+    Object? conditions = null,
+    Object? bonusEligible = null,
     Object? information = null,
   }) {
     return _then(_$_PriceBundle(
@@ -103,6 +127,14 @@ class __$$_PriceBundleCopyWithImpl<$Res>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      conditions: null == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: null == bonusEligible
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
       information: null == information
           ? _value._information
           : information // ignore: cast_nullable_to_non_nullable
@@ -117,6 +149,8 @@ class _$_PriceBundle extends _PriceBundle {
   const _$_PriceBundle(
       {required this.name,
       required this.code,
+      required this.conditions,
+      required this.bonusEligible,
       required final List<PriceBundleItem> information})
       : _information = information,
         super._();
@@ -125,6 +159,10 @@ class _$_PriceBundle extends _PriceBundle {
   final String name;
   @override
   final String code;
+  @override
+  final String conditions;
+  @override
+  final bool bonusEligible;
   final List<PriceBundleItem> _information;
   @override
   List<PriceBundleItem> get information {
@@ -135,7 +173,7 @@ class _$_PriceBundle extends _PriceBundle {
 
   @override
   String toString() {
-    return 'PriceBundle(name: $name, code: $code, information: $information)';
+    return 'PriceBundle(name: $name, code: $code, conditions: $conditions, bonusEligible: $bonusEligible, information: $information)';
   }
 
   @override
@@ -145,13 +183,17 @@ class _$_PriceBundle extends _PriceBundle {
             other is _$_PriceBundle &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code) &&
+            (identical(other.conditions, conditions) ||
+                other.conditions == conditions) &&
+            (identical(other.bonusEligible, bonusEligible) ||
+                other.bonusEligible == bonusEligible) &&
             const DeepCollectionEquality()
                 .equals(other._information, _information));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, code,
-      const DeepCollectionEquality().hash(_information));
+  int get hashCode => Object.hash(runtimeType, name, code, conditions,
+      bonusEligible, const DeepCollectionEquality().hash(_information));
 
   @JsonKey(ignore: true)
   @override
@@ -164,6 +206,8 @@ abstract class _PriceBundle extends PriceBundle {
   const factory _PriceBundle(
       {required final String name,
       required final String code,
+      required final String conditions,
+      required final bool bonusEligible,
       required final List<PriceBundleItem> information}) = _$_PriceBundle;
   const _PriceBundle._() : super._();
 
@@ -171,6 +215,10 @@ abstract class _PriceBundle extends PriceBundle {
   String get name;
   @override
   String get code;
+  @override
+  String get conditions;
+  @override
+  bool get bonusEligible;
   @override
   List<PriceBundleItem> get information;
   @override

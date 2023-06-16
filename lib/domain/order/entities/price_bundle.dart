@@ -8,6 +8,8 @@ class PriceBundle with _$PriceBundle {
   const factory PriceBundle({
     required String name,
     required String code,
+    required String conditions,
+    required bool bonusEligible,
     required List<PriceBundleItem> information,
   }) = _PriceBundle;
 }

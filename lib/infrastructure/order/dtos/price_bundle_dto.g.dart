@@ -19,21 +19,27 @@ class PriceBundleDtoAdapter extends TypeAdapter<_$_PriceBundleDto> {
     return _$_PriceBundleDto(
       name: fields[35] == null ? '' : fields[35] as String,
       code: fields[36] == null ? '' : fields[36] as String,
-      information: fields[37] == null
+      conditions: fields[37] == null ? '' : fields[37] as String,
+      bonusEligible: fields[38] == null ? false : fields[38] as bool,
+      information: fields[39] == null
           ? []
-          : (fields[37] as List).cast<PriceBundleItemDto>(),
+          : (fields[39] as List).cast<PriceBundleItemDto>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceBundleDto obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(35)
       ..write(obj.name)
       ..writeByte(36)
       ..write(obj.code)
       ..writeByte(37)
+      ..write(obj.conditions)
+      ..writeByte(38)
+      ..write(obj.bonusEligible)
+      ..writeByte(39)
       ..write(obj.information);
   }
 
@@ -99,6 +105,8 @@ _$_PriceBundleDto _$$_PriceBundleDtoFromJson(Map<String, dynamic> json) =>
     _$_PriceBundleDto(
       name: json['BundleName'] as String? ?? '',
       code: json['BundleCode'] as String? ?? '',
+      conditions: json['Conditions'] as String? ?? '',
+      bonusEligible: json['BonusEligible'] as bool? ?? false,
       information: (json['BundleInformation'] as List<dynamic>?)
               ?.map(
                   (e) => PriceBundleItemDto.fromJson(e as Map<String, dynamic>))
@@ -110,6 +118,8 @@ Map<String, dynamic> _$$_PriceBundleDtoToJson(_$_PriceBundleDto instance) =>
     <String, dynamic>{
       'BundleName': instance.name,
       'BundleCode': instance.code,
+      'Conditions': instance.conditions,
+      'BonusEligible': instance.bonusEligible,
       'BundleInformation': instance.information.map((e) => e.toJson()).toList(),
     };
 

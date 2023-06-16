@@ -634,7 +634,7 @@ void main() {
               shipToInfo: ShipToInfo.empty(),
               salesOrganisation: fakeSalesOrganisation,
               comboDealEligible: false,
-            ))).called(2);
+            ))).called(3);
       });
 
       testWidgets('Home Tab _TileCard onTap test', (WidgetTester tester) async {

@@ -28,6 +28,10 @@ void main() {
         zdp8Override: 12,
         priceOverride: 12,
         comboDeal: PriceComboDealDto.empty,
+        oldMaterialCode: '',
+        exceedQty: false,
+        overridenRules: [],
+        overridenRuleTier: [],
       );
     });
     test('Test get overridequery', () {

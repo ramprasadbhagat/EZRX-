@@ -18,70 +18,85 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
     };
     return _$_PriceDto(
       materialNumber: fields[0] == null ? '' : fields[0] as String,
-      rules: fields[1] == null ? [] : (fields[1] as List).cast<PriceRuleDto>(),
-      tiers: fields[2] == null ? [] : (fields[2] as List).cast<PriceTierDto>(),
+      oldMaterialCode: fields[1] == null ? '' : fields[1] as String,
+      listPrice: fields[2] == null ? 0 : fields[2] as double,
+      finalIndividualPrice: fields[3] == null ? 0 : fields[3] as double,
+      finalTotalPrice: fields[4] == null ? 0 : fields[4] as double,
+      rules: fields[5] == null ? [] : (fields[5] as List).cast<PriceRuleDto>(),
       bonuses:
-          fields[3] == null ? [] : (fields[3] as List).cast<PriceBonusDto>(),
+          fields[6] == null ? [] : (fields[6] as List).cast<PriceBonusDto>(),
+      tiers: fields[7] == null ? [] : (fields[7] as List).cast<PriceTierDto>(),
       bundles:
-          fields[4] == null ? [] : (fields[4] as List).cast<PriceBundleDto>(),
-      overrideRulePresent: fields[5] == null ? false : fields[5] as bool,
-      zdp5MaxQuota: fields[6] == null ? '' : fields[6] as String,
-      zdp5RemainingQuota: fields[7] == null ? '' : fields[7] as String,
-      zmgDiscount: fields[8] == null ? false : fields[8] as bool,
-      listPrice: fields[9] == null ? 0 : fields[9] as double,
-      finalIndividualPrice: fields[10] == null ? 0 : fields[10] as double,
-      finalTotalPrice: fields[11] == null ? 0 : fields[11] as double,
-      additionalBonusEligible: fields[12] == null ? false : fields[12] as bool,
-      isValid: fields[13] == null ? false : fields[13] as bool,
-      isPriceOverride: fields[14] == null ? false : fields[14] as bool,
-      zdp8Override: fields[15] == null ? 0 : fields[15] as double,
-      priceOverride: fields[16] == null ? 0 : fields[16] as double,
-      comboDeal: fields[17] == null
+          fields[8] == null ? [] : (fields[8] as List).cast<PriceBundleDto>(),
+      isValid: fields[9] == null ? false : fields[9] as bool,
+      additionalBonusEligible: fields[10] == null ? false : fields[10] as bool,
+      zmgDiscount: fields[11] == null ? false : fields[11] as bool,
+      zdp5MaxQuota: fields[12] == null ? '' : fields[12] as String,
+      zdp5RemainingQuota: fields[13] == null ? '' : fields[13] as String,
+      exceedQty: fields[14] == null ? false : fields[14] as bool,
+      overrideRulePresent: fields[15] == null ? false : fields[15] as bool,
+      overridenRules:
+          fields[16] == null ? [] : (fields[16] as List).cast<PriceRuleDto>(),
+      overridenRuleTier: fields[17] == null
+          ? []
+          : (fields[17] as List).cast<OverridenRuleTierDto>(),
+      isPriceOverride: fields[18] == null ? false : fields[18] as bool,
+      zdp8Override: fields[19] == null ? 0 : fields[19] as double,
+      priceOverride: fields[20] == null ? 0 : fields[20] as double,
+      comboDeal: fields[21] == null
           ? PriceComboDealDto.empty
-          : fields[17] as PriceComboDealDto,
+          : fields[21] as PriceComboDealDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDto obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(22)
       ..writeByte(0)
       ..write(obj.materialNumber)
-      ..writeByte(5)
-      ..write(obj.overrideRulePresent)
-      ..writeByte(6)
-      ..write(obj.zdp5MaxQuota)
-      ..writeByte(7)
-      ..write(obj.zdp5RemainingQuota)
-      ..writeByte(8)
-      ..write(obj.zmgDiscount)
-      ..writeByte(9)
-      ..write(obj.listPrice)
-      ..writeByte(10)
-      ..write(obj.finalIndividualPrice)
-      ..writeByte(11)
-      ..write(obj.finalTotalPrice)
-      ..writeByte(12)
-      ..write(obj.additionalBonusEligible)
-      ..writeByte(13)
-      ..write(obj.isValid)
-      ..writeByte(14)
-      ..write(obj.isPriceOverride)
-      ..writeByte(15)
-      ..write(obj.zdp8Override)
-      ..writeByte(16)
-      ..write(obj.priceOverride)
-      ..writeByte(17)
-      ..write(obj.comboDeal)
       ..writeByte(1)
-      ..write(obj.rules)
+      ..write(obj.oldMaterialCode)
       ..writeByte(2)
-      ..write(obj.tiers)
+      ..write(obj.listPrice)
       ..writeByte(3)
-      ..write(obj.bonuses)
+      ..write(obj.finalIndividualPrice)
       ..writeByte(4)
-      ..write(obj.bundles);
+      ..write(obj.finalTotalPrice)
+      ..writeByte(9)
+      ..write(obj.isValid)
+      ..writeByte(10)
+      ..write(obj.additionalBonusEligible)
+      ..writeByte(11)
+      ..write(obj.zmgDiscount)
+      ..writeByte(12)
+      ..write(obj.zdp5MaxQuota)
+      ..writeByte(13)
+      ..write(obj.zdp5RemainingQuota)
+      ..writeByte(14)
+      ..write(obj.exceedQty)
+      ..writeByte(15)
+      ..write(obj.overrideRulePresent)
+      ..writeByte(18)
+      ..write(obj.isPriceOverride)
+      ..writeByte(19)
+      ..write(obj.zdp8Override)
+      ..writeByte(20)
+      ..write(obj.priceOverride)
+      ..writeByte(21)
+      ..write(obj.comboDeal)
+      ..writeByte(5)
+      ..write(obj.rules)
+      ..writeByte(6)
+      ..write(obj.bonuses)
+      ..writeByte(7)
+      ..write(obj.tiers)
+      ..writeByte(8)
+      ..write(obj.bundles)
+      ..writeByte(16)
+      ..write(obj.overridenRules)
+      ..writeByte(17)
+      ..write(obj.overridenRuleTier);
   }
 
   @override
@@ -100,34 +115,45 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
 // **************************************************************************
 
 _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
-      materialNumber: json['MaterialNumber'] as String,
+      materialNumber: json['MaterialNumber'] as String? ?? '',
+      oldMaterialCode: json['OldMaterialCode'] as String? ?? '',
+      listPrice: (json['ListPrice'] as num?)?.toDouble() ?? 0,
+      finalIndividualPrice:
+          (json['FinalIndividualPrice'] as num?)?.toDouble() ?? 0,
+      finalTotalPrice: (json['FinalTotalPrice'] as num?)?.toDouble() ?? 0,
       rules: (json['PriceRules'] as List<dynamic>?)
               ?.map((e) => PriceRuleDto.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      tiers: (json['TieredPricing'] as List<dynamic>?)
-              ?.map((e) => PriceTierDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       bonuses: (json['Bonuses'] as List<dynamic>?)
               ?.map((e) => PriceBonusDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      tiers: (json['TieredPricing'] as List<dynamic>?)
+              ?.map((e) => PriceTierDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       bundles: (json['Bundles'] as List<dynamic>?)
               ?.map((e) => PriceBundleDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      overrideRulePresent: json['OverridenRulePresent'] as bool? ?? false,
-      zdp5MaxQuota: json['ZDP5MaxQuota'] as String? ?? '',
-      zdp5RemainingQuota: json['ZDP5RemainingQuota'] as String? ?? '',
-      zmgDiscount: json['ZMGDiscount'] as bool? ?? false,
-      listPrice: (json['ListPrice'] as num?)?.toDouble() ?? 0,
-      finalIndividualPrice:
-          (json['FinalIndividualPrice'] as num?)?.toDouble() ?? 0,
-      finalTotalPrice: (json['FinalTotalPrice'] as num?)?.toDouble() ?? 0,
+      isValid: json['Valid'] as bool? ?? false,
       additionalBonusEligible:
           json['AdditionalBonusEligible'] as bool? ?? false,
-      isValid: json['Valid'] as bool? ?? false,
+      zmgDiscount: json['ZMGDiscount'] as bool? ?? false,
+      zdp5MaxQuota: json['ZDP5MaxQuota'] as String? ?? '',
+      zdp5RemainingQuota: json['ZDP5RemainingQuota'] as String? ?? '',
+      exceedQty: json['ExceedQty'] as bool? ?? false,
+      overrideRulePresent: json['OverridenRulePresent'] as bool? ?? false,
+      overridenRules: (json['OverridenRules'] as List<dynamic>?)
+              ?.map((e) => PriceRuleDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      overridenRuleTier: (json['OverridenRuleTier'] as List<dynamic>?)
+              ?.map((e) =>
+                  OverridenRuleTierDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       isPriceOverride: json['isPriceOverride'] as bool? ?? false,
       zdp8Override: (json['zdp8Override'] as num?)?.toDouble() ?? 0,
       priceOverride: (json['priceOverride'] as num?)?.toDouble() ?? 0,
@@ -140,19 +166,24 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
 Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
     <String, dynamic>{
       'MaterialNumber': instance.materialNumber,
-      'PriceRules': instance.rules.map((e) => e.toJson()).toList(),
-      'TieredPricing': instance.tiers.map((e) => e.toJson()).toList(),
-      'Bonuses': instance.bonuses.map((e) => e.toJson()).toList(),
-      'Bundles': instance.bundles.map((e) => e.toJson()).toList(),
-      'OverridenRulePresent': instance.overrideRulePresent,
-      'ZDP5MaxQuota': instance.zdp5MaxQuota,
-      'ZDP5RemainingQuota': instance.zdp5RemainingQuota,
-      'ZMGDiscount': instance.zmgDiscount,
+      'OldMaterialCode': instance.oldMaterialCode,
       'ListPrice': instance.listPrice,
       'FinalIndividualPrice': instance.finalIndividualPrice,
       'FinalTotalPrice': instance.finalTotalPrice,
-      'AdditionalBonusEligible': instance.additionalBonusEligible,
+      'PriceRules': instance.rules.map((e) => e.toJson()).toList(),
+      'Bonuses': instance.bonuses.map((e) => e.toJson()).toList(),
+      'TieredPricing': instance.tiers.map((e) => e.toJson()).toList(),
+      'Bundles': instance.bundles.map((e) => e.toJson()).toList(),
       'Valid': instance.isValid,
+      'AdditionalBonusEligible': instance.additionalBonusEligible,
+      'ZMGDiscount': instance.zmgDiscount,
+      'ZDP5MaxQuota': instance.zdp5MaxQuota,
+      'ZDP5RemainingQuota': instance.zdp5RemainingQuota,
+      'ExceedQty': instance.exceedQty,
+      'OverridenRulePresent': instance.overrideRulePresent,
+      'OverridenRules': instance.overridenRules.map((e) => e.toJson()).toList(),
+      'OverridenRuleTier':
+          instance.overridenRuleTier.map((e) => e.toJson()).toList(),
       'isPriceOverride': instance.isPriceOverride,
       'zdp8Override': instance.zdp8Override,
       'priceOverride': instance.priceOverride,
