@@ -52,15 +52,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
         );
       },
-      refreshOktaToken: (e) async {
-        final oktaResult = await authRepository.getOktaAccessToken();
-        await oktaResult.fold(
-          (failure) async => emit(const AuthState.unauthenticated()),
-          (oktaAccessToken) async => add(
-            const AuthEvent.refreshEZRXToken(),
-          ),
-        );
-      },
       refreshEZRXToken: (e) async {
         final refreshResult = await authRepository.getRefreshToken();
         await refreshResult.fold(

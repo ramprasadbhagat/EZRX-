@@ -25,6 +25,8 @@ mixin _$LoginFormEvent {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,8 @@ mixin _$LoginFormEvent {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +51,8 @@ mixin _$LoginFormEvent {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +68,8 @@ mixin _$LoginFormEvent {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +83,8 @@ mixin _$LoginFormEvent {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +98,8 @@ mixin _$LoginFormEvent {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +168,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return loadLastSavedCred();
   }
@@ -170,6 +184,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return loadLastSavedCred?.call();
   }
@@ -184,6 +200,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (loadLastSavedCred != null) {
@@ -205,6 +223,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return loadLastSavedCred(this);
   }
@@ -221,6 +241,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return loadLastSavedCred?.call(this);
   }
@@ -237,6 +259,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (loadLastSavedCred != null) {
@@ -322,6 +346,8 @@ class _$_UsernameChanged implements _UsernameChanged {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return usernameChanged(usernameStr);
   }
@@ -336,6 +362,8 @@ class _$_UsernameChanged implements _UsernameChanged {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -350,6 +378,8 @@ class _$_UsernameChanged implements _UsernameChanged {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -371,6 +401,8 @@ class _$_UsernameChanged implements _UsernameChanged {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return usernameChanged(this);
   }
@@ -387,6 +419,8 @@ class _$_UsernameChanged implements _UsernameChanged {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return usernameChanged?.call(this);
   }
@@ -403,6 +437,8 @@ class _$_UsernameChanged implements _UsernameChanged {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -493,6 +529,8 @@ class _$_PasswordChanged implements _PasswordChanged {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return passwordChanged(passwordStr);
   }
@@ -507,6 +545,8 @@ class _$_PasswordChanged implements _PasswordChanged {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return passwordChanged?.call(passwordStr);
   }
@@ -521,6 +561,8 @@ class _$_PasswordChanged implements _PasswordChanged {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (passwordChanged != null) {
@@ -542,6 +584,8 @@ class _$_PasswordChanged implements _PasswordChanged {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return passwordChanged(this);
   }
@@ -558,6 +602,8 @@ class _$_PasswordChanged implements _PasswordChanged {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return passwordChanged?.call(this);
   }
@@ -574,6 +620,8 @@ class _$_PasswordChanged implements _PasswordChanged {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (passwordChanged != null) {
@@ -638,6 +686,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return passwordVisibilityChanged();
   }
@@ -652,6 +702,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return passwordVisibilityChanged?.call();
   }
@@ -666,6 +718,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (passwordVisibilityChanged != null) {
@@ -687,6 +741,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return passwordVisibilityChanged(this);
   }
@@ -703,6 +759,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return passwordVisibilityChanged?.call(this);
   }
@@ -719,6 +777,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (passwordVisibilityChanged != null) {
@@ -777,6 +837,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return rememberCheckChanged();
   }
@@ -791,6 +853,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return rememberCheckChanged?.call();
   }
@@ -805,6 +869,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (rememberCheckChanged != null) {
@@ -826,6 +892,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return rememberCheckChanged(this);
   }
@@ -842,6 +910,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return rememberCheckChanged?.call(this);
   }
@@ -858,6 +928,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (rememberCheckChanged != null) {
@@ -921,6 +993,8 @@ class _$_LoginWithEmailAndPasswordPressed
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return loginWithEmailAndPasswordPressed();
   }
@@ -935,6 +1009,8 @@ class _$_LoginWithEmailAndPasswordPressed
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return loginWithEmailAndPasswordPressed?.call();
   }
@@ -949,6 +1025,8 @@ class _$_LoginWithEmailAndPasswordPressed
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (loginWithEmailAndPasswordPressed != null) {
@@ -970,6 +1048,8 @@ class _$_LoginWithEmailAndPasswordPressed
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return loginWithEmailAndPasswordPressed(this);
   }
@@ -986,6 +1066,8 @@ class _$_LoginWithEmailAndPasswordPressed
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return loginWithEmailAndPasswordPressed?.call(this);
   }
@@ -1002,6 +1084,8 @@ class _$_LoginWithEmailAndPasswordPressed
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (loginWithEmailAndPasswordPressed != null) {
@@ -1064,6 +1148,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
     required TResult Function() rememberCheckChanged,
     required TResult Function() loginWithEmailAndPasswordPressed,
     required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
   }) {
     return loginWithOktaButtonPressed();
   }
@@ -1078,6 +1164,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
     TResult? Function()? rememberCheckChanged,
     TResult? Function()? loginWithEmailAndPasswordPressed,
     TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
   }) {
     return loginWithOktaButtonPressed?.call();
   }
@@ -1092,6 +1180,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
     TResult Function()? rememberCheckChanged,
     TResult Function()? loginWithEmailAndPasswordPressed,
     TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (loginWithOktaButtonPressed != null) {
@@ -1113,6 +1203,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
         loginWithEmailAndPasswordPressed,
     required TResult Function(_LoginWithOktaButtonPressed value)
         loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
   }) {
     return loginWithOktaButtonPressed(this);
   }
@@ -1129,6 +1221,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
         loginWithEmailAndPasswordPressed,
     TResult? Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
   }) {
     return loginWithOktaButtonPressed?.call(this);
   }
@@ -1145,6 +1239,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
         loginWithEmailAndPasswordPressed,
     TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
     required TResult orElse(),
   }) {
     if (loginWithOktaButtonPressed != null) {
@@ -1156,6 +1252,342 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
 
 abstract class _LoginWithOktaButtonPressed implements LoginFormEvent {
   const factory _LoginWithOktaButtonPressed() = _$_LoginWithOktaButtonPressed;
+}
+
+/// @nodoc
+abstract class _$$_RefreshOktaTokenCopyWith<$Res> {
+  factory _$$_RefreshOktaTokenCopyWith(
+          _$_RefreshOktaToken value, $Res Function(_$_RefreshOktaToken) then) =
+      __$$_RefreshOktaTokenCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RefreshOktaTokenCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$_RefreshOktaToken>
+    implements _$$_RefreshOktaTokenCopyWith<$Res> {
+  __$$_RefreshOktaTokenCopyWithImpl(
+      _$_RefreshOktaToken _value, $Res Function(_$_RefreshOktaToken) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RefreshOktaToken implements _RefreshOktaToken {
+  const _$_RefreshOktaToken();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.refreshOktaToken()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RefreshOktaToken);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() passwordVisibilityChanged,
+    required TResult Function() rememberCheckChanged,
+    required TResult Function() loginWithEmailAndPasswordPressed,
+    required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+  }) {
+    return refreshOktaToken();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadLastSavedCred,
+    TResult? Function(String usernameStr)? usernameChanged,
+    TResult? Function(String passwordStr)? passwordChanged,
+    TResult? Function()? passwordVisibilityChanged,
+    TResult? Function()? rememberCheckChanged,
+    TResult? Function()? loginWithEmailAndPasswordPressed,
+    TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+  }) {
+    return refreshOktaToken?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    required TResult orElse(),
+  }) {
+    if (refreshOktaToken != null) {
+      return refreshOktaToken();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
+    required TResult Function(_UsernameChanged value) usernameChanged,
+    required TResult Function(_PasswordChanged value) passwordChanged,
+    required TResult Function(_PasswordVisibleChanged value)
+        passwordVisibilityChanged,
+    required TResult Function(_RememberCheckChanged value) rememberCheckChanged,
+    required TResult Function(_LoginWithEmailAndPasswordPressed value)
+        loginWithEmailAndPasswordPressed,
+    required TResult Function(_LoginWithOktaButtonPressed value)
+        loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+  }) {
+    return refreshOktaToken(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult? Function(_UsernameChanged value)? usernameChanged,
+    TResult? Function(_PasswordChanged value)? passwordChanged,
+    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult? Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+  }) {
+    return refreshOktaToken?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    required TResult orElse(),
+  }) {
+    if (refreshOktaToken != null) {
+      return refreshOktaToken(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshOktaToken implements LoginFormEvent {
+  const factory _RefreshOktaToken() = _$_RefreshOktaToken;
+}
+
+/// @nodoc
+abstract class _$$_ExchanhgeEZRXTokenCopyWith<$Res> {
+  factory _$$_ExchanhgeEZRXTokenCopyWith(_$_ExchanhgeEZRXToken value,
+          $Res Function(_$_ExchanhgeEZRXToken) then) =
+      __$$_ExchanhgeEZRXTokenCopyWithImpl<$Res>;
+  @useResult
+  $Res call({JWT oktaAccessToken});
+}
+
+/// @nodoc
+class __$$_ExchanhgeEZRXTokenCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$_ExchanhgeEZRXToken>
+    implements _$$_ExchanhgeEZRXTokenCopyWith<$Res> {
+  __$$_ExchanhgeEZRXTokenCopyWithImpl(
+      _$_ExchanhgeEZRXToken _value, $Res Function(_$_ExchanhgeEZRXToken) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? oktaAccessToken = null,
+  }) {
+    return _then(_$_ExchanhgeEZRXToken(
+      null == oktaAccessToken
+          ? _value.oktaAccessToken
+          : oktaAccessToken // ignore: cast_nullable_to_non_nullable
+              as JWT,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
+  const _$_ExchanhgeEZRXToken(this.oktaAccessToken);
+
+  @override
+  final JWT oktaAccessToken;
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.exchanhgeEZRXToken(oktaAccessToken: $oktaAccessToken)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ExchanhgeEZRXToken &&
+            (identical(other.oktaAccessToken, oktaAccessToken) ||
+                other.oktaAccessToken == oktaAccessToken));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, oktaAccessToken);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ExchanhgeEZRXTokenCopyWith<_$_ExchanhgeEZRXToken> get copyWith =>
+      __$$_ExchanhgeEZRXTokenCopyWithImpl<_$_ExchanhgeEZRXToken>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() passwordVisibilityChanged,
+    required TResult Function() rememberCheckChanged,
+    required TResult Function() loginWithEmailAndPasswordPressed,
+    required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+  }) {
+    return exchanhgeEZRXToken(oktaAccessToken);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadLastSavedCred,
+    TResult? Function(String usernameStr)? usernameChanged,
+    TResult? Function(String passwordStr)? passwordChanged,
+    TResult? Function()? passwordVisibilityChanged,
+    TResult? Function()? rememberCheckChanged,
+    TResult? Function()? loginWithEmailAndPasswordPressed,
+    TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+  }) {
+    return exchanhgeEZRXToken?.call(oktaAccessToken);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    required TResult orElse(),
+  }) {
+    if (exchanhgeEZRXToken != null) {
+      return exchanhgeEZRXToken(oktaAccessToken);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
+    required TResult Function(_UsernameChanged value) usernameChanged,
+    required TResult Function(_PasswordChanged value) passwordChanged,
+    required TResult Function(_PasswordVisibleChanged value)
+        passwordVisibilityChanged,
+    required TResult Function(_RememberCheckChanged value) rememberCheckChanged,
+    required TResult Function(_LoginWithEmailAndPasswordPressed value)
+        loginWithEmailAndPasswordPressed,
+    required TResult Function(_LoginWithOktaButtonPressed value)
+        loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+  }) {
+    return exchanhgeEZRXToken(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult? Function(_UsernameChanged value)? usernameChanged,
+    TResult? Function(_PasswordChanged value)? passwordChanged,
+    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult? Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+  }) {
+    return exchanhgeEZRXToken?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    required TResult orElse(),
+  }) {
+    if (exchanhgeEZRXToken != null) {
+      return exchanhgeEZRXToken(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ExchanhgeEZRXToken implements LoginFormEvent {
+  const factory _ExchanhgeEZRXToken(final JWT oktaAccessToken) =
+      _$_ExchanhgeEZRXToken;
+
+  JWT get oktaAccessToken;
+  @JsonKey(ignore: true)
+  _$$_ExchanhgeEZRXTokenCopyWith<_$_ExchanhgeEZRXToken> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

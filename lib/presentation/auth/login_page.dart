@@ -145,9 +145,9 @@ class _SSOLoginButton extends StatelessWidget {
               ? null
               : () {
                   FocusScope.of(context).unfocus();
-                  // context
-                  //     .read<LoginFormBloc>()
-                  //     .add(const LoginFormEvent.loginWithOktaButtonPressed());
+                  context
+                      .read<LoginFormBloc>()
+                      .add(const LoginFormEvent.loginWithOktaButtonPressed());
                 },
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 backgroundColor: const MaterialStatePropertyAll(

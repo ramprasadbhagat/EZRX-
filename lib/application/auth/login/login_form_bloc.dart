@@ -111,12 +111,55 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           isSubmitting: true,
           authFailureOrSuccessOption: none(),
         ));
-        final failureOrSuccess = await authRepository.loginWithOkta();
-        emit(state.copyWith(
-          isSubmitting: false,
-          showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess),
-        ));
+        final oktaLoginResult = await authRepository.loginWithOkta();
+        await oktaLoginResult.fold(
+          (failure) async {
+            emit(state.copyWith(
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: optionOf(oktaLoginResult),
+            ));
+          },
+          (success) async => add(const LoginFormEvent.refreshOktaToken()),
+        );
+      },
+      refreshOktaToken: (e) async {
+        final oktaAccessResult = await authRepository.getOktaAccessToken();
+        await oktaAccessResult.fold(
+          (failure) async {
+            emit(state.copyWith(
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: optionOf(oktaAccessResult),
+            ));
+          },
+          (oktaAccessToken) async => add(
+            LoginFormEvent.exchanhgeEZRXToken(oktaAccessToken),
+          ),
+        );
+      },
+      exchanhgeEZRXToken: (e) async {
+        final ezrxResult = await authRepository.getEZRXJWT(e.oktaAccessToken);
+        await ezrxResult.fold(
+          (failure) async => emit(
+            state.copyWith(
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: optionOf(ezrxResult),
+            ),
+          ),
+          (login) async {
+            await authRepository.storeJWT(
+              access: login.access,
+              refresh: login.refresh,
+            );
+            emit(state.copyWith(
+              isSubmitting: false,
+              showErrorMessages: false,
+              authFailureOrSuccessOption: optionOf(ezrxResult),
+            ));
+          },
+        );
       },
     );
   }

@@ -21,7 +21,6 @@ mixin _$AuthEvent {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -33,7 +32,6 @@ mixin _$AuthEvent {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -45,7 +43,6 @@ mixin _$AuthEvent {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -58,7 +55,6 @@ mixin _$AuthEvent {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -71,7 +67,6 @@ mixin _$AuthEvent {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -83,7 +78,6 @@ mixin _$AuthEvent {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -151,7 +145,6 @@ class _$_AuthInit implements _AuthInit {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -166,7 +159,6 @@ class _$_AuthInit implements _AuthInit {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -181,7 +173,6 @@ class _$_AuthInit implements _AuthInit {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -200,7 +191,6 @@ class _$_AuthInit implements _AuthInit {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -216,7 +206,6 @@ class _$_AuthInit implements _AuthInit {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -231,7 +220,6 @@ class _$_AuthInit implements _AuthInit {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -290,7 +278,6 @@ class _$_BioCheck implements _BioCheck {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -305,7 +292,6 @@ class _$_BioCheck implements _BioCheck {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -320,7 +306,6 @@ class _$_BioCheck implements _BioCheck {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -339,7 +324,6 @@ class _$_BioCheck implements _BioCheck {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -355,7 +339,6 @@ class _$_BioCheck implements _BioCheck {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -370,7 +353,6 @@ class _$_BioCheck implements _BioCheck {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -429,7 +411,6 @@ class _$_AuthCheck implements _AuthCheck {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -444,7 +425,6 @@ class _$_AuthCheck implements _AuthCheck {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -459,7 +439,6 @@ class _$_AuthCheck implements _AuthCheck {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -478,7 +457,6 @@ class _$_AuthCheck implements _AuthCheck {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -494,7 +472,6 @@ class _$_AuthCheck implements _AuthCheck {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -509,7 +486,6 @@ class _$_AuthCheck implements _AuthCheck {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -525,145 +501,6 @@ class _$_AuthCheck implements _AuthCheck {
 
 abstract class _AuthCheck implements AuthEvent {
   const factory _AuthCheck() = _$_AuthCheck;
-}
-
-/// @nodoc
-abstract class _$$_RefreshOktaTokenCopyWith<$Res> {
-  factory _$$_RefreshOktaTokenCopyWith(
-          _$_RefreshOktaToken value, $Res Function(_$_RefreshOktaToken) then) =
-      __$$_RefreshOktaTokenCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_RefreshOktaTokenCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_RefreshOktaToken>
-    implements _$$_RefreshOktaTokenCopyWith<$Res> {
-  __$$_RefreshOktaTokenCopyWithImpl(
-      _$_RefreshOktaToken _value, $Res Function(_$_RefreshOktaToken) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_RefreshOktaToken implements _RefreshOktaToken {
-  const _$_RefreshOktaToken();
-
-  @override
-  String toString() {
-    return 'AuthEvent.refreshOktaToken()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RefreshOktaToken);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() bioCheck,
-    required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
-    required TResult Function() refreshEZRXToken,
-    required TResult Function() logout,
-    required TResult Function() checkIfBiometricDenied,
-    required TResult Function() visitedAppSettings,
-  }) {
-    return refreshOktaToken();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function()? refreshEZRXToken,
-    TResult? Function()? logout,
-    TResult? Function()? checkIfBiometricDenied,
-    TResult? Function()? visitedAppSettings,
-  }) {
-    return refreshOktaToken?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? bioCheck,
-    TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
-    TResult Function()? refreshEZRXToken,
-    TResult Function()? logout,
-    TResult Function()? checkIfBiometricDenied,
-    TResult Function()? visitedAppSettings,
-    required TResult orElse(),
-  }) {
-    if (refreshOktaToken != null) {
-      return refreshOktaToken();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_AuthInit value) init,
-    required TResult Function(_BioCheck value) bioCheck,
-    required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
-    required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
-    required TResult Function(_Logout value) logout,
-    required TResult Function(_CheckIfBiometricDenied value)
-        checkIfBiometricDenied,
-    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
-  }) {
-    return refreshOktaToken(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
-    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
-    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
-  }) {
-    return refreshOktaToken?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthInit value)? init,
-    TResult Function(_BioCheck value)? bioCheck,
-    TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult Function(_Logout value)? logout,
-    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
-    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
-    required TResult orElse(),
-  }) {
-    if (refreshOktaToken != null) {
-      return refreshOktaToken(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _RefreshOktaToken implements AuthEvent {
-  const factory _RefreshOktaToken() = _$_RefreshOktaToken;
 }
 
 /// @nodoc
@@ -707,7 +544,6 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -722,7 +558,6 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -737,7 +572,6 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -756,7 +590,6 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -772,7 +605,6 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -787,7 +619,6 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -844,7 +675,6 @@ class _$_Logout implements _Logout {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -859,7 +689,6 @@ class _$_Logout implements _Logout {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -874,7 +703,6 @@ class _$_Logout implements _Logout {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -893,7 +721,6 @@ class _$_Logout implements _Logout {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -909,7 +736,6 @@ class _$_Logout implements _Logout {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -924,7 +750,6 @@ class _$_Logout implements _Logout {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -984,7 +809,6 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -999,7 +823,6 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -1014,7 +837,6 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -1033,7 +855,6 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -1049,7 +870,6 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -1064,7 +884,6 @@ class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -1123,7 +942,6 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     required TResult Function() init,
     required TResult Function() bioCheck,
     required TResult Function() authCheck,
-    required TResult Function() refreshOktaToken,
     required TResult Function() refreshEZRXToken,
     required TResult Function() logout,
     required TResult Function() checkIfBiometricDenied,
@@ -1138,7 +956,6 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     TResult? Function()? init,
     TResult? Function()? bioCheck,
     TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
     TResult? Function()? refreshEZRXToken,
     TResult? Function()? logout,
     TResult? Function()? checkIfBiometricDenied,
@@ -1153,7 +970,6 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     TResult Function()? init,
     TResult Function()? bioCheck,
     TResult Function()? authCheck,
-    TResult Function()? refreshOktaToken,
     TResult Function()? refreshEZRXToken,
     TResult Function()? logout,
     TResult Function()? checkIfBiometricDenied,
@@ -1172,7 +988,6 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     required TResult Function(_AuthInit value) init,
     required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
-    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
     required TResult Function(_CheckIfBiometricDenied value)
@@ -1188,7 +1003,6 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     TResult? Function(_AuthInit value)? init,
     TResult? Function(_BioCheck value)? bioCheck,
     TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
     TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
@@ -1203,7 +1017,6 @@ class _$_ToggleAppSettings implements _ToggleAppSettings {
     TResult Function(_AuthInit value)? init,
     TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
-    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
     TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,

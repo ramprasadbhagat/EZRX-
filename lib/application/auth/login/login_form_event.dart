@@ -14,4 +14,7 @@ class LoginFormEvent with _$LoginFormEvent {
       _LoginWithEmailAndPasswordPressed;
   const factory LoginFormEvent.loginWithOktaButtonPressed() =
       _LoginWithOktaButtonPressed;
+  const factory LoginFormEvent.refreshOktaToken() = _RefreshOktaToken;
+  const factory LoginFormEvent.exchanhgeEZRXToken(JWT oktaAccessToken) =
+      _ExchanhgeEZRXToken;
 }
