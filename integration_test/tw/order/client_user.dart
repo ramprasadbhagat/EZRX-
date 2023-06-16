@@ -363,7 +363,7 @@ void main() {
     orderHistoryRobot.findOrderedItem();
     orderHistoryRobot.verifyOrderType(orderType);
     //Disable Processing Status Display
-    orderHistoryRobot.verifyOrderProcessingStatus(false);
+    orderHistoryRobot.verifyOrderProcessingStatus(true);
     orderHistoryRobot.verifyMaterialID(materialAbsolute);
     orderHistoryRobot.verifyQuantity(materialQuantity.toString());
     await orderHistoryRobot.tapOrderedItem();

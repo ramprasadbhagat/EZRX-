@@ -46,7 +46,7 @@ void main() {
       enableIRN: false,
       enableTaxClassification: false,
       disableBundles: true,
-      disableProcessingStatus: true,
+      disableProcessingStatus: false,
       disableOrderType: true,
       enableCollectiveNumber: false,
       enableGimmickMaterial: true,
