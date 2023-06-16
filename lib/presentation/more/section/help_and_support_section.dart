@@ -20,7 +20,8 @@ class HelpAndSupportTile extends StatelessWidget {
     ),
     const MoreDetailsTile(
       icon: Icon(
-        Icons.menu_book_outlined, //TODO : will update it after Design Them update the Figma
+        Icons
+            .menu_book_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'User guide',
@@ -42,9 +43,10 @@ class HelpAndSupportTile extends StatelessWidget {
       label: 'Chart support',
       route: null,
     ),
-     MoreDetailsTile(
+    MoreDetailsTile(
       icon: const Icon(
-        Icons.feed_outlined, //TODO : will update it after Design Them update the Figma
+        Icons
+            .feed_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'Terms of use',
@@ -55,7 +57,8 @@ class HelpAndSupportTile extends StatelessWidget {
     ),
     MoreDetailsTile(
       icon: const Icon(
-        Icons.policy_outlined, //TODO : will update it after Design Them update the Figma
+        Icons
+            .policy_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'Privacy policy',

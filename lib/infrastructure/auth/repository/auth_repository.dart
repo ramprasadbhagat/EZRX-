@@ -237,8 +237,11 @@ class AuthRepository implements IAuthRepository {
   Future<Either<ApiFailure, JWT>> getRefreshToken() async {
     try {
       final token = await tokenStorage.get();
+      final refreshToken = JWT(token.refresh);
 
-      return Right(JWT(token.refresh));
+      return refreshToken.isValid()
+          ? Right(refreshToken)
+          : const Left(ApiFailure.other('Invalid Refresh Token'));
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

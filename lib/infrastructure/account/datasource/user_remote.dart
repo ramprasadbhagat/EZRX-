@@ -57,7 +57,6 @@ class UserRemoteDataSource {
 
   Future<SettingTc> updateUserTC() async {
     return await dataSourceExceptionHandler.handle(() async {
-      
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}license',
@@ -71,8 +70,7 @@ class UserRemoteDataSource {
       );
       _userExceptionChecker(res: res);
 
-      return SettingTcDto.fromJson(res.data['data'])
-          .toDomain();
+      return SettingTcDto.fromJson(res.data['data']).toDomain();
     });
   }
 

@@ -1,95 +1,94 @@
-
 {
-   "data":{
-      "user":{
-         "id":"3860",
-         "username":"rootadmin",
-         "email":"mdas@zuelligpharma.com",
-         "provider":"local",
-         "confirmed":false,
-         "blocked":false,
-         "role":{
-            "id":"7",
-            "name":"ROOT Admin",
+   "data": {
+      "user": {
+         "id": "3860",
+         "username": "rootadmin",
+         "email": "mdas@zuelligpharma.com",
+         "provider": "local",
+         "confirmed": false,
+         "blocked": false,
+         "role": {
+            "id": "7",
+            "name": "ROOT Admin",
             "type": "root_admin",
-            "description":"ROOT Admin"
+            "description": "ROOT Admin"
          },
-         "initialLogin":true,
-         "accessRight":{
-            "Users":false,
-            "Orders":false,
-            "Promos":false,
-            "LoyaltyScheme":false,
-            "HCPHUB":false,
-            "Products":false,
-            "Services":false,
-            "Analytics":false,
-            "AdminPOAttachment":false
+         "initialLogin": true,
+         "accessRight": {
+            "Users": false,
+            "Orders": false,
+            "Promos": false,
+            "LoyaltyScheme": false,
+            "HCPHUB": false,
+            "Products": false,
+            "Services": false,
+            "Analytics": false,
+            "AdminPOAttachment": false
          },
-         "firstName":"rootadmin",
-         "lastName":"rootadmin",
-         "adName":"rootadmin",
-         "isFromAD":true,
-         "shipToAddr":"",
-         "shipToAddrTwo":"",
-         "disable2fa":false,
-         "lastLogin":"",
-         "acceptMobileTC":false,
-         "acceptTCTimestamp":"2023-05-12T05:45:47.37832Z",
-         "mobileNumber":"-",
-         "countryCode":"-",
-         "acceptTC":true,
-         "acceptAUP":false,
-         "acceptAUPTC":"",
-         "acceptLocalTC":false,
-         "optIn":false,
-         "optInTimestamp":"",
-         "hasPriceOverride":false,
-         "hasBonusOverride":false,
-         "disableReturns":false,
-         "disablePaymentAccess":true,
-         "disableCreateOrder":false,
-         "principalOverrideList":"",
-         "mobileAccess":false,
-         "totp2fa":false,
-         "emailNotifications":false,
-         "mobileNotifications":false,
-         "passwordLastUpdate":"",
-         "passwordActionName":"",
-         "passwordActionTime":"",
-         "holiday":{
-            "monday":false,
-            "tuesday":false,
-            "wednesday":false,
-            "thursday":false,
-            "friday":false,
-            "saturday":false,
-            "sunday":false
+         "firstName": "rootadmin",
+         "lastName": "rootadmin",
+         "adName": "rootadmin",
+         "isFromAD": true,
+         "shipToAddr": "",
+         "shipToAddrTwo": "",
+         "disable2fa": false,
+         "lastLogin": "",
+         "acceptMobileTC": false,
+         "acceptTCTimestamp": "2023-05-12T05:45:47.37832Z",
+         "mobileNumber": "-",
+         "countryCode": "-",
+         "acceptTC": true,
+         "acceptAUP": false,
+         "acceptAUPTC": "",
+         "acceptLocalTC": false,
+         "optIn": false,
+         "optInTimestamp": "",
+         "hasPriceOverride": false,
+         "hasBonusOverride": false,
+         "disableReturns": false,
+         "disablePaymentAccess": true,
+         "disableCreateOrder": false,
+         "principalOverrideList": "",
+         "mobileAccess": false,
+         "totp2fa": false,
+         "emailNotifications": false,
+         "mobileNotifications": false,
+         "passwordLastUpdate": "",
+         "passwordActionName": "",
+         "passwordActionTime": "",
+         "holiday": {
+            "monday": false,
+            "tuesday": false,
+            "wednesday": false,
+            "thursday": false,
+            "friday": false,
+            "saturday": false,
+            "sunday": false
          },
-         "conditionGroup":"",
-         "salesOrganisations":[
+         "conditionGroup": "",
+         "salesOrganisations": [
             "2001"
          ],
-         "salesOrganization":"",
-         "salesOrganizationTwo":"",
-         "languagePreference":"E",
-         "preferredLanguage":"EN",
-         "userSalesOrganisationList":[
+         "salesOrganization": "",
+         "salesOrganizationTwo": "",
+         "languagePreference": "E",
+         "preferredLanguage": "EN",
+         "userSalesOrganisationList": [
             {
-               "SalesOrg":"2001",
-               "CustomerCode":"all",
-               "ShipToCode":[
+               "SalesOrg": "2001",
+               "CustomerCode": "all",
+               "ShipToCode": [
                   "all"
                ]
             }
          ],
-         "enableOrderType":false,
-         "disablePaymentNotification":null,
-         "paymentNotification":null,
-         "privacyControls":{
-            "enableBrowserCookies":true,
-            "automatedPersonalisation":true,
-            "directMarketing":true
+         "enableOrderType": false,
+         "disablePaymentNotification": null,
+         "paymentNotification": null,
+         "privacyControls": {
+            "enableBrowserCookies": true,
+            "automatedPersonalisation": true,
+            "directMarketing": true
          }
       }
    }

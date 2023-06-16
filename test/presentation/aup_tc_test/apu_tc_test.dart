@@ -163,17 +163,16 @@ void main() {
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
-          showTermsAndCondition: true,
-          privacyConsent: true,
-          tncConsent: true
-        ),
+            showTermsAndCondition: true,
+            privacyConsent: true,
+            tncConsent: true),
       );
       await tester.pumpWidget(
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           child: MultiBlocProvider(
             providers: [
-              BlocProvider<UserBloc>(create: (context)=> userBlocMock),
+              BlocProvider<UserBloc>(create: (context) => userBlocMock),
               BlocProvider<AupTcBloc>(
                 create: (context) => mockAupTcBloc,
               ),
@@ -268,10 +267,9 @@ void main() {
   testWidgets('Test - AupTc Widget localization test', (tester) async {
     when(() => mockAupTcBloc.state).thenReturn(
       AupTcState.initial().copyWith(
-        showTermsAndCondition: true,
-        privacyConsent: false,
-        tncConsent: false
-      ),
+          showTermsAndCondition: true,
+          privacyConsent: false,
+          tncConsent: false),
     );
     await tester.pumpWidget(
       WidgetUtils.getScopedWidget(
@@ -296,8 +294,9 @@ void main() {
     final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
     await tester.tap(auptcAcceptButton);
     await tester.pumpAndSettle();
-    final snackBarMsgFinder = find
-        .text('You need to read and accept full Terms of use and Privacy Policy before continue.'.tr());
+    final snackBarMsgFinder = find.text(
+        'You need to read and accept full Terms of use and Privacy Policy before continue.'
+            .tr());
     expect(snackBarMsgFinder, findsOneWidget);
   });
 

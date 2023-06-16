@@ -71,19 +71,16 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: false
-              ),
+          bloc.add(AupTcEvent.show(user.copyWith(acceptPrivacyPolicy: false),
               salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
-              showTermsAndCondition: true,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
           )
         ],
       );
@@ -95,19 +92,16 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: true
-              ),
+          bloc.add(AupTcEvent.show(user.copyWith(acceptPrivacyPolicy: true),
               salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
-              showTermsAndCondition: false,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,
+            showTermsAndCondition: false,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
           )
         ],
       );
@@ -121,18 +115,15 @@ void main() {
         ),
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: false
-              ),
-              SalesOrg('3070')));
+              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('3070')));
         },
         expect: () => [
           AupTcState(
-             showTermsAndCondition: true,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
           )
         ],
       );
@@ -146,18 +137,15 @@ void main() {
         ),
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: false
-              ),
-              SalesOrg('2800')));
+              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('2800')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndCondition: true,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
           )
         ],
       );
@@ -171,18 +159,16 @@ void main() {
         ),
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: false
-              ),
-              SalesOrg('2902')));
+              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('2902')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndCondition: true,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,)
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
+          )
         ],
       );
 
@@ -195,18 +181,15 @@ void main() {
         ),
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: false
-              ),
-              SalesOrg('2201')));
+              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('2201')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndCondition: true,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
           )
         ],
       );
@@ -220,18 +203,15 @@ void main() {
         ),
         act: (AupTcBloc bloc) {
           bloc.add(AupTcEvent.show(
-              user.copyWith(
-                acceptPrivacyPolicy: false
-              ),
-              SalesOrg('1500')));
+              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('1500')));
         },
         expect: () => [
           AupTcState(
-              showTermsAndCondition: true,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncFile: config.getTnCFile,
-              tncConsent: false,
-              privacyConsent: false,
+            showTermsAndCondition: true,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncFile: config.getTnCFile,
+            tncConsent: false,
+            privacyConsent: false,
           )
         ],
       );

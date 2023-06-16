@@ -19,9 +19,9 @@ class AupTCDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return BlocBuilder<AupTcBloc, AupTcState>(
-      buildWhen: (previous, current) => 
-        previous.showTermsAndCondition != current.showTermsAndCondition,
+    return BlocBuilder<AupTcBloc, AupTcState>(
+      buildWhen: (previous, current) =>
+          previous.showTermsAndCondition != current.showTermsAndCondition,
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -36,15 +36,17 @@ class AupTCDialog extends StatelessWidget {
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Welcome to eZRx+',
+                  Text(
+                    'Welcome to eZRx+',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: 20, fontWeight: FontWeight.w600,
-                    ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                   const SizedBox(
                     height: 8,
@@ -52,8 +54,9 @@ class AupTCDialog extends StatelessWidget {
                   Text(
                     'As a new user of eZRx+, we will require you to acknowledge the Terms of Use and Regional Privacy Policy before proceeding.',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: 15, fontWeight: FontWeight.w400,
-                    ),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
                   ),
                   const SizedBox(
                     height: 16,
@@ -102,18 +105,18 @@ class _TermsOfUseConsentCheckBox extends StatelessWidget {
         return CheckboxListTile(
           contentPadding: const EdgeInsets.all(0),
           value: state.tncConsent,
-          title:  Text(
+          title: Text(
             'I have read and hereby agree to the Terms of Use.',
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ZPColors.darkerGrey,
-            ),
+                  color: ZPColors.darkerGrey,
+                ),
           ),
           onChanged: (value) {
             context.read<AupTcBloc>().add(
-              AupTcEvent.termsOfUseConsent(
-                newValue: value!,
-              ),
-            );
+                  AupTcEvent.termsOfUseConsent(
+                    newValue: value!,
+                  ),
+                );
           },
           visualDensity: VisualDensity.compact,
           controlAffinity: ListTileControlAffinity.leading,
@@ -134,22 +137,22 @@ class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
       builder: (context, state) {
         return CheckboxListTile(
           contentPadding: const EdgeInsets.all(0),
-            value: state.privacyConsent,
-            title: Text(
-              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: ZPColors.darkerGrey,
-              ),
-            ),
-            onChanged: (value) {
-              context.read<AupTcBloc>().add(
-                AupTcEvent.privacyPolicyConsent(
-                  newValue: value!,
+          value: state.privacyConsent,
+          title: Text(
+            'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.',
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: ZPColors.darkerGrey,
                 ),
-              );
-            },
-            visualDensity: VisualDensity.compact,
-            controlAffinity: ListTileControlAffinity.leading,
+          ),
+          onChanged: (value) {
+            context.read<AupTcBloc>().add(
+                  AupTcEvent.privacyPolicyConsent(
+                    newValue: value!,
+                  ),
+                );
+          },
+          visualDensity: VisualDensity.compact,
+          controlAffinity: ListTileControlAffinity.leading,
         );
       },
     );
@@ -167,11 +170,12 @@ class _ConsentBox extends StatelessWidget {
       padding: const EdgeInsets.all(3),
       height: MediaQuery.of(context).size.height * .20,
       decoration: BoxDecoration(
-          color: ZPColors.white,
-          border: Border.all(
-            color: ZPColors.lightGray,
-          ),
-        borderRadius: const BorderRadius.all(Radius.circular(10),
+        color: ZPColors.white,
+        border: Border.all(
+          color: ZPColors.lightGray,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(10),
         ),
       ),
       child: InAppWebView(
@@ -221,9 +225,10 @@ class AcceptButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AupTcBloc, AupTcState>(
-      buildWhen: (previous, current) => 
-      current.privacyConsent && current.tncConsent ||
-      !current.privacyConsent || !current.tncConsent,
+      buildWhen: (previous, current) =>
+          current.privacyConsent && current.tncConsent ||
+          !current.privacyConsent ||
+          !current.tncConsent,
       builder: (context, state) {
         return SafeArea(
           child: Padding(
@@ -239,12 +244,13 @@ class AcceptButton extends StatelessWidget {
                       showSnackBar(
                         context: context,
                         message:
-                        'You need to read and accept full Terms of use and Privacy Policy before continue.'.tr(),
+                            'You need to read and accept full Terms of use and Privacy Policy before continue.'
+                                .tr(),
                       );
                     } else {
-                        context.read<UserBloc>().add(
-                              const UserEvent.acceptTnc(),
-                        );
+                      context.read<UserBloc>().add(
+                            const UserEvent.acceptTnc(),
+                          );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -258,17 +264,17 @@ class AcceptButton extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                        const AuthEvent.logout(),
-                      );
-                    },
-                    child: Text(
-                      'Cancel',
-                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                        color: ZPColors.orange,
-                      ),
-                    ),
+                  onPressed: () {
+                    context.read<AuthBloc>().add(
+                          const AuthEvent.logout(),
+                        );
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                          color: ZPColors.orange,
+                        ),
+                  ),
                 ),
               ],
             ),

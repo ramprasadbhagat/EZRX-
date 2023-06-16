@@ -179,8 +179,7 @@ void main() {
           }),
         );
         final result = await remoteDataSource.updateUserTC();
-        final resTest =
-            SettingTcDto.fromJson(res['data']).toDomain();
+        final resTest = SettingTcDto.fromJson(res['data']).toDomain();
         expect(result.acceptTC, resTest.acceptTC);
       },
     );

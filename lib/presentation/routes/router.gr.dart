@@ -74,7 +74,7 @@ import '../account/ship_to_search.dart' as _i28;
 import '../aup_tc/aup_tc.dart' as _i31;
 import '../auth/forgot_password/forgot_passoword_confirmation_page.dart' as _i4;
 import '../auth/forgot_password/forgot_password_page.dart' as _i3;
-import '../auth/login_page.dart' as _i2;
+import '../auth/login/login_page.dart' as _i2;
 import '../core/static_html_viewer.dart' as _i23;
 import '../core/webview_page.dart' as _i22;
 import '../favourites/favourite_tab.dart' as _i39;
