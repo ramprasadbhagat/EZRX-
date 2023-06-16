@@ -32,6 +32,7 @@ mixin _$User {
   bool get disableCreateOrder => throw _privateConstructorUsedError;
   bool get disableReturns => throw _privateConstructorUsedError;
   bool get hasPriceOverride => throw _privateConstructorUsedError;
+  String get preferredLanguage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -57,7 +58,8 @@ abstract class $UserCopyWith<$Res> {
       bool hasBonusOverride,
       bool disableCreateOrder,
       bool disableReturns,
-      bool hasPriceOverride});
+      bool hasPriceOverride,
+      String preferredLanguage});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
@@ -93,6 +95,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
     Object? hasPriceOverride = null,
+    Object? preferredLanguage = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -155,6 +158,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      preferredLanguage: null == preferredLanguage
+          ? _value.preferredLanguage
+          : preferredLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -212,7 +219,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool hasBonusOverride,
       bool disableCreateOrder,
       bool disableReturns,
-      bool hasPriceOverride});
+      bool hasPriceOverride,
+      String preferredLanguage});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -248,6 +256,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
     Object? hasPriceOverride = null,
+    Object? preferredLanguage = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -310,6 +319,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      preferredLanguage: null == preferredLanguage
+          ? _value.preferredLanguage
+          : preferredLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -332,7 +345,8 @@ class _$_User extends _User {
       required this.hasBonusOverride,
       required this.disableCreateOrder,
       required this.disableReturns,
-      required this.hasPriceOverride})
+      required this.hasPriceOverride,
+      required this.preferredLanguage})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -373,10 +387,12 @@ class _$_User extends _User {
   final bool disableReturns;
   @override
   final bool hasPriceOverride;
+  @override
+  final String preferredLanguage;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage)';
   }
 
   @override
@@ -410,7 +426,9 @@ class _$_User extends _User {
             (identical(other.disableReturns, disableReturns) ||
                 other.disableReturns == disableReturns) &&
             (identical(other.hasPriceOverride, hasPriceOverride) ||
-                other.hasPriceOverride == hasPriceOverride));
+                other.hasPriceOverride == hasPriceOverride) &&
+            (identical(other.preferredLanguage, preferredLanguage) ||
+                other.preferredLanguage == preferredLanguage));
   }
 
   @override
@@ -430,7 +448,8 @@ class _$_User extends _User {
       hasBonusOverride,
       disableCreateOrder,
       disableReturns,
-      hasPriceOverride);
+      hasPriceOverride,
+      preferredLanguage);
 
   @JsonKey(ignore: true)
   @override
@@ -455,7 +474,8 @@ abstract class _User extends User {
       required final bool hasBonusOverride,
       required final bool disableCreateOrder,
       required final bool disableReturns,
-      required final bool hasPriceOverride}) = _$_User;
+      required final bool hasPriceOverride,
+      required final String preferredLanguage}) = _$_User;
   const _User._() : super._();
 
   @override
@@ -488,6 +508,8 @@ abstract class _User extends User {
   bool get disableReturns;
   @override
   bool get hasPriceOverride;
+  @override
+  String get preferredLanguage;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

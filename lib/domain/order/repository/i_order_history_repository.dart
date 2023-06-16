@@ -12,8 +12,6 @@ abstract class IOrderHistoryRepository {
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,
-    required String orderBy,
-    required String sort,
     required User user,
     required int pageSize,
     required int offset,

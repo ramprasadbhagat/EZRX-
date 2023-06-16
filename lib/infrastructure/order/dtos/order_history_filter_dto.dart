@@ -7,50 +7,54 @@ part 'order_history_filter_dto.g.dart';
 class OrderHistoryFilterDto with _$OrderHistoryFilterDto {
   const OrderHistoryFilterDto._();
   const factory OrderHistoryFilterDto({
+    //TODO: will remove if it's not required in filter purpose
+    
+    // @JsonKey(
+    //   name: 'orderNumber',
+    //   defaultValue: '',
+    //   toJson: valueTojson,
+    // )
+    // required String orderNumber,
+    // @JsonKey(
+    //   name: 'poReference',
+    //   defaultValue: '',
+    //   toJson: valueTojson,
+    // )
+    // required String poReference,
+    // @JsonKey(
+    //   name: 'materialSearch',
+    //   defaultValue: '',
+    //   toJson: valueTojson,
+    // )
+    // required String materialSearch,
     @JsonKey(
-      name: 'orderNumber',
-      defaultValue: '',
-      toJson: valueTojson,
+      name: 'orderStatus',
+      defaultValue: [],
     )
-    required String orderNumber,
-    @JsonKey(
-      name: 'poReference',
-      defaultValue: '',
-      toJson: valueTojson,
-    )
-    required String poReference,
-    @JsonKey(
-      name: 'materialSearch',
-      defaultValue: '',
-      toJson: valueTojson,
-    )
-    required String materialSearch,
-    @JsonKey(
-      name: 'principalSearch',
-      defaultValue: '',
-      toJson: valueTojson,
-    )
-    required String principalSearch,
+        required List<String> orderStatus,
     @JsonKey(
       name: 'toDate',
       defaultValue: '',
     )
-    required String dateTo,
+        required String dateTo,
     @JsonKey(
       name: 'fromDate',
       defaultValue: '',
     )
-    required String dateFrom,
+        required String dateFrom,
   }) = _ReturnSummaryFilterDto;
 
   factory OrderHistoryFilterDto.fromDomain(
     OrderHistoryFilter orderHistoryFilter,
   ) {
     return OrderHistoryFilterDto(
-      orderNumber: orderHistoryFilter.orderId.searchValueOrEmpty,
-      poReference: orderHistoryFilter.poNumber.searchValueOrEmpty,
-      materialSearch: orderHistoryFilter.materialSearch.searchValueOrEmpty,
-      principalSearch: orderHistoryFilter.principalSearch.searchValueOrEmpty,
+      //TODO: will remove if it's not required in filter purpose
+      
+      // orderNumber: orderHistoryFilter.orderId.searchValueOrEmpty,
+      // poReference: orderHistoryFilter.poNumber.searchValueOrEmpty,
+      // materialSearch: orderHistoryFilter.materialSearch.searchValueOrEmpty,
+      // principalSearch: orderHistoryFilter.principalSearch.searchValueOrEmpty,
+      orderStatus: [],
       dateTo: orderHistoryFilter.toDate.apiDateTimeFormat,
       dateFrom: orderHistoryFilter.fromDate.apiDateTimeFormat,
     );
@@ -60,4 +64,4 @@ class OrderHistoryFilterDto with _$OrderHistoryFilterDto {
       _$OrderHistoryFilterDtoFromJson(json);
 }
 
-dynamic valueTojson(String value) => value.isNotEmpty ? value : null;
+// dynamic valueTojson(String value) => value.isNotEmpty ? value : null;

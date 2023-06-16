@@ -54,6 +54,32 @@ mixin _$OrderHistoryItemDto {
   String get orderBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'PurchaseOrderType')
   String get purchaseOrderType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DefaultMaterialDescription')
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'WarehouseStorageCondition')
+  String get warehouseStorageCondition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Batch')
+  String get batch => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Available')
+  bool get available => throw _privateConstructorUsedError;
+  @JsonKey(name: 'IsMarketplace')
+  bool get isMarketplace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'IsBonusMaterial')
+  bool get isBonusMaterial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'GovernmentMaterialCode')
+  String get governmentMaterialCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TelephoneNumber')
+  String get telephoneNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Seller')
+  String get seller => throw _privateConstructorUsedError;
+  @JsonKey(name: 'InvoiceNumber')
+  String get invoiceNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'POReference')
+  String get pOReference => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ManufactureName')
+  String get manufactureName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ExpiryDate')
+  String get expiryDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,23 +94,66 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       _$OrderHistoryItemDtoCopyWithImpl<$Res, OrderHistoryItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode') String materialNumber,
-      @JsonKey(name: 'MaterialDescription') String materialDescription,
-      @JsonKey(name: 'Qty') int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') String status,
-      @JsonKey(name: 'DeliveryDate') String deliveryDate,
-      @JsonKey(name: 'DeliveryTime') String deliveryTime,
-      @JsonKey(name: 'LineNumber') String lineNumber,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
-      @JsonKey(name: 'OrderType') String orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
-      @JsonKey(name: 'EZRXNumber') String ezrxNumber,
-      @JsonKey(name: 'CreatedDate') String createdDate,
-      @JsonKey(name: 'CreatedTime') String createdTime,
-      @JsonKey(name: 'OrderBy') String orderBy,
-      @JsonKey(name: 'PurchaseOrderType') String purchaseOrderType});
+      {@JsonKey(name: 'MaterialCode')
+          String materialNumber,
+      @JsonKey(name: 'MaterialDescription')
+          String materialDescription,
+      @JsonKey(name: 'Qty')
+          int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'DeliveryDate')
+          String deliveryDate,
+      @JsonKey(name: 'DeliveryTime')
+          String deliveryTime,
+      @JsonKey(name: 'LineNumber')
+          String lineNumber,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          double tax,
+      @JsonKey(name: 'OrderType')
+          String orderType,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+          String orderNumber,
+      @JsonKey(name: 'EZRXNumber')
+          String ezrxNumber,
+      @JsonKey(name: 'CreatedDate')
+          String createdDate,
+      @JsonKey(name: 'CreatedTime')
+          String createdTime,
+      @JsonKey(name: 'OrderBy')
+          String orderBy,
+      @JsonKey(name: 'PurchaseOrderType')
+          String purchaseOrderType,
+      @JsonKey(name: 'DefaultMaterialDescription')
+          String defaultMaterialDescription,
+      @JsonKey(name: 'WarehouseStorageCondition')
+          String warehouseStorageCondition,
+      @JsonKey(name: 'Batch')
+          String batch,
+      @JsonKey(name: 'Available')
+          bool available,
+      @JsonKey(name: 'IsMarketplace')
+          bool isMarketplace,
+      @JsonKey(name: 'IsBonusMaterial')
+          bool isBonusMaterial,
+      @JsonKey(name: 'GovernmentMaterialCode')
+          String governmentMaterialCode,
+      @JsonKey(name: 'TelephoneNumber')
+          String telephoneNumber,
+      @JsonKey(name: 'Seller')
+          String seller,
+      @JsonKey(name: 'InvoiceNumber')
+          String invoiceNumber,
+      @JsonKey(name: 'POReference')
+          String pOReference,
+      @JsonKey(name: 'ManufactureName')
+          String manufactureName,
+      @JsonKey(name: 'ExpiryDate')
+          String expiryDate});
 }
 
 /// @nodoc
@@ -117,6 +186,19 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? createdTime = null,
     Object? orderBy = null,
     Object? purchaseOrderType = null,
+    Object? defaultMaterialDescription = null,
+    Object? warehouseStorageCondition = null,
+    Object? batch = null,
+    Object? available = null,
+    Object? isMarketplace = null,
+    Object? isBonusMaterial = null,
+    Object? governmentMaterialCode = null,
+    Object? telephoneNumber = null,
+    Object? seller = null,
+    Object? invoiceNumber = null,
+    Object? pOReference = null,
+    Object? manufactureName = null,
+    Object? expiryDate = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -187,6 +269,58 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      warehouseStorageCondition: null == warehouseStorageCondition
+          ? _value.warehouseStorageCondition
+          : warehouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as String,
+      batch: null == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
+              as String,
+      available: null == available
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMarketplace: null == isMarketplace
+          ? _value.isMarketplace
+          : isMarketplace // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBonusMaterial: null == isBonusMaterial
+          ? _value.isBonusMaterial
+          : isBonusMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      seller: null == seller
+          ? _value.seller
+          : seller // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactureName: null == manufactureName
+          ? _value.manufactureName
+          : manufactureName // ignore: cast_nullable_to_non_nullable
+              as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -200,23 +334,66 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode') String materialNumber,
-      @JsonKey(name: 'MaterialDescription') String materialDescription,
-      @JsonKey(name: 'Qty') int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') String status,
-      @JsonKey(name: 'DeliveryDate') String deliveryDate,
-      @JsonKey(name: 'DeliveryTime') String deliveryTime,
-      @JsonKey(name: 'LineNumber') String lineNumber,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
-      @JsonKey(name: 'OrderType') String orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
-      @JsonKey(name: 'EZRXNumber') String ezrxNumber,
-      @JsonKey(name: 'CreatedDate') String createdDate,
-      @JsonKey(name: 'CreatedTime') String createdTime,
-      @JsonKey(name: 'OrderBy') String orderBy,
-      @JsonKey(name: 'PurchaseOrderType') String purchaseOrderType});
+      {@JsonKey(name: 'MaterialCode')
+          String materialNumber,
+      @JsonKey(name: 'MaterialDescription')
+          String materialDescription,
+      @JsonKey(name: 'Qty')
+          int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'DeliveryDate')
+          String deliveryDate,
+      @JsonKey(name: 'DeliveryTime')
+          String deliveryTime,
+      @JsonKey(name: 'LineNumber')
+          String lineNumber,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          double tax,
+      @JsonKey(name: 'OrderType')
+          String orderType,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+          String orderNumber,
+      @JsonKey(name: 'EZRXNumber')
+          String ezrxNumber,
+      @JsonKey(name: 'CreatedDate')
+          String createdDate,
+      @JsonKey(name: 'CreatedTime')
+          String createdTime,
+      @JsonKey(name: 'OrderBy')
+          String orderBy,
+      @JsonKey(name: 'PurchaseOrderType')
+          String purchaseOrderType,
+      @JsonKey(name: 'DefaultMaterialDescription')
+          String defaultMaterialDescription,
+      @JsonKey(name: 'WarehouseStorageCondition')
+          String warehouseStorageCondition,
+      @JsonKey(name: 'Batch')
+          String batch,
+      @JsonKey(name: 'Available')
+          bool available,
+      @JsonKey(name: 'IsMarketplace')
+          bool isMarketplace,
+      @JsonKey(name: 'IsBonusMaterial')
+          bool isBonusMaterial,
+      @JsonKey(name: 'GovernmentMaterialCode')
+          String governmentMaterialCode,
+      @JsonKey(name: 'TelephoneNumber')
+          String telephoneNumber,
+      @JsonKey(name: 'Seller')
+          String seller,
+      @JsonKey(name: 'InvoiceNumber')
+          String invoiceNumber,
+      @JsonKey(name: 'POReference')
+          String pOReference,
+      @JsonKey(name: 'ManufactureName')
+          String manufactureName,
+      @JsonKey(name: 'ExpiryDate')
+          String expiryDate});
 }
 
 /// @nodoc
@@ -247,6 +424,19 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? createdTime = null,
     Object? orderBy = null,
     Object? purchaseOrderType = null,
+    Object? defaultMaterialDescription = null,
+    Object? warehouseStorageCondition = null,
+    Object? batch = null,
+    Object? available = null,
+    Object? isMarketplace = null,
+    Object? isBonusMaterial = null,
+    Object? governmentMaterialCode = null,
+    Object? telephoneNumber = null,
+    Object? seller = null,
+    Object? invoiceNumber = null,
+    Object? pOReference = null,
+    Object? manufactureName = null,
+    Object? expiryDate = null,
   }) {
     return _then(_$_OrderHistoryItemDto(
       materialNumber: null == materialNumber
@@ -317,6 +507,58 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      warehouseStorageCondition: null == warehouseStorageCondition
+          ? _value.warehouseStorageCondition
+          : warehouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as String,
+      batch: null == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
+              as String,
+      available: null == available
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMarketplace: null == isMarketplace
+          ? _value.isMarketplace
+          : isMarketplace // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBonusMaterial: null == isBonusMaterial
+          ? _value.isBonusMaterial
+          : isBonusMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      governmentMaterialCode: null == governmentMaterialCode
+          ? _value.governmentMaterialCode
+          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      seller: null == seller
+          ? _value.seller
+          : seller // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactureName: null == manufactureName
+          ? _value.manufactureName
+          : manufactureName // ignore: cast_nullable_to_non_nullable
+              as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -325,23 +567,66 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   const _$_OrderHistoryItemDto(
-      {@JsonKey(name: 'MaterialCode') required this.materialNumber,
-      @JsonKey(name: 'MaterialDescription') required this.materialDescription,
-      @JsonKey(name: 'Qty') required this.qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') required this.status,
-      @JsonKey(name: 'DeliveryDate') required this.deliveryDate,
-      @JsonKey(name: 'DeliveryTime') required this.deliveryTime,
-      @JsonKey(name: 'LineNumber') required this.lineNumber,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
-      @JsonKey(name: 'OrderType') required this.orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
-      @JsonKey(name: 'EZRXNumber') required this.ezrxNumber,
-      @JsonKey(name: 'CreatedDate') required this.createdDate,
-      @JsonKey(name: 'CreatedTime') required this.createdTime,
-      @JsonKey(name: 'OrderBy') required this.orderBy,
-      @JsonKey(name: 'PurchaseOrderType') required this.purchaseOrderType})
+      {@JsonKey(name: 'MaterialCode')
+          required this.materialNumber,
+      @JsonKey(name: 'MaterialDescription')
+          required this.materialDescription,
+      @JsonKey(name: 'Qty')
+          required this.qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          required this.unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          required this.totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '')
+          required this.status,
+      @JsonKey(name: 'DeliveryDate')
+          required this.deliveryDate,
+      @JsonKey(name: 'DeliveryTime')
+          required this.deliveryTime,
+      @JsonKey(name: 'LineNumber')
+          required this.lineNumber,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          required this.tax,
+      @JsonKey(name: 'OrderType')
+          required this.orderType,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+          required this.orderNumber,
+      @JsonKey(name: 'EZRXNumber')
+          required this.ezrxNumber,
+      @JsonKey(name: 'CreatedDate')
+          required this.createdDate,
+      @JsonKey(name: 'CreatedTime')
+          required this.createdTime,
+      @JsonKey(name: 'OrderBy')
+          required this.orderBy,
+      @JsonKey(name: 'PurchaseOrderType')
+          required this.purchaseOrderType,
+      @JsonKey(name: 'DefaultMaterialDescription')
+          required this.defaultMaterialDescription,
+      @JsonKey(name: 'WarehouseStorageCondition')
+          required this.warehouseStorageCondition,
+      @JsonKey(name: 'Batch')
+          required this.batch,
+      @JsonKey(name: 'Available')
+          required this.available,
+      @JsonKey(name: 'IsMarketplace')
+          required this.isMarketplace,
+      @JsonKey(name: 'IsBonusMaterial')
+          required this.isBonusMaterial,
+      @JsonKey(name: 'GovernmentMaterialCode')
+          required this.governmentMaterialCode,
+      @JsonKey(name: 'TelephoneNumber')
+          required this.telephoneNumber,
+      @JsonKey(name: 'Seller')
+          required this.seller,
+      @JsonKey(name: 'InvoiceNumber')
+          required this.invoiceNumber,
+      @JsonKey(name: 'POReference')
+          required this.pOReference,
+      @JsonKey(name: 'ManufactureName')
+          required this.manufactureName,
+      @JsonKey(name: 'ExpiryDate')
+          required this.expiryDate})
       : super._();
 
   factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
@@ -398,10 +683,49 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'PurchaseOrderType')
   final String purchaseOrderType;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription')
+  final String defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'WarehouseStorageCondition')
+  final String warehouseStorageCondition;
+  @override
+  @JsonKey(name: 'Batch')
+  final String batch;
+  @override
+  @JsonKey(name: 'Available')
+  final bool available;
+  @override
+  @JsonKey(name: 'IsMarketplace')
+  final bool isMarketplace;
+  @override
+  @JsonKey(name: 'IsBonusMaterial')
+  final bool isBonusMaterial;
+  @override
+  @JsonKey(name: 'GovernmentMaterialCode')
+  final String governmentMaterialCode;
+  @override
+  @JsonKey(name: 'TelephoneNumber')
+  final String telephoneNumber;
+  @override
+  @JsonKey(name: 'Seller')
+  final String seller;
+  @override
+  @JsonKey(name: 'InvoiceNumber')
+  final String invoiceNumber;
+  @override
+  @JsonKey(name: 'POReference')
+  final String pOReference;
+  @override
+  @JsonKey(name: 'ManufactureName')
+  final String manufactureName;
+  @override
+  @JsonKey(name: 'ExpiryDate')
+  final String expiryDate;
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, lineNumber: $lineNumber, tax: $tax, orderType: $orderType, orderNumber: $orderNumber, ezrxNumber: $ezrxNumber, createdDate: $createdDate, createdTime: $createdTime, orderBy: $orderBy, purchaseOrderType: $purchaseOrderType)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, lineNumber: $lineNumber, tax: $tax, orderType: $orderType, orderNumber: $orderNumber, ezrxNumber: $ezrxNumber, createdDate: $createdDate, createdTime: $createdTime, orderBy: $orderBy, purchaseOrderType: $purchaseOrderType, defaultMaterialDescription: $defaultMaterialDescription, warehouseStorageCondition: $warehouseStorageCondition, batch: $batch, available: $available, isMarketplace: $isMarketplace, isBonusMaterial: $isBonusMaterial, governmentMaterialCode: $governmentMaterialCode, telephoneNumber: $telephoneNumber, seller: $seller, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate)';
   }
 
   @override
@@ -438,30 +762,71 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
                 other.createdTime == createdTime) &&
             (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
             (identical(other.purchaseOrderType, purchaseOrderType) ||
-                other.purchaseOrderType == purchaseOrderType));
+                other.purchaseOrderType == purchaseOrderType) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
+            (identical(other.warehouseStorageCondition,
+                    warehouseStorageCondition) ||
+                other.warehouseStorageCondition == warehouseStorageCondition) &&
+            (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.available, available) ||
+                other.available == available) &&
+            (identical(other.isMarketplace, isMarketplace) ||
+                other.isMarketplace == isMarketplace) &&
+            (identical(other.isBonusMaterial, isBonusMaterial) ||
+                other.isBonusMaterial == isBonusMaterial) &&
+            (identical(other.governmentMaterialCode, governmentMaterialCode) ||
+                other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
+            (identical(other.seller, seller) || other.seller == seller) &&
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber) &&
+            (identical(other.pOReference, pOReference) ||
+                other.pOReference == pOReference) &&
+            (identical(other.manufactureName, manufactureName) ||
+                other.manufactureName == manufactureName) &&
+            (identical(other.expiryDate, expiryDate) ||
+                other.expiryDate == expiryDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      materialNumber,
-      materialDescription,
-      qty,
-      unitPrice,
-      totalPrice,
-      status,
-      deliveryDate,
-      deliveryTime,
-      lineNumber,
-      tax,
-      orderType,
-      orderNumber,
-      ezrxNumber,
-      createdDate,
-      createdTime,
-      orderBy,
-      purchaseOrderType);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        materialNumber,
+        materialDescription,
+        qty,
+        unitPrice,
+        totalPrice,
+        status,
+        deliveryDate,
+        deliveryTime,
+        lineNumber,
+        tax,
+        orderType,
+        orderNumber,
+        ezrxNumber,
+        createdDate,
+        createdTime,
+        orderBy,
+        purchaseOrderType,
+        defaultMaterialDescription,
+        warehouseStorageCondition,
+        batch,
+        available,
+        isMarketplace,
+        isBonusMaterial,
+        governmentMaterialCode,
+        telephoneNumber,
+        seller,
+        invoiceNumber,
+        pOReference,
+        manufactureName,
+        expiryDate
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -513,7 +878,33 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'OrderBy')
           required final String orderBy,
       @JsonKey(name: 'PurchaseOrderType')
-          required final String purchaseOrderType}) = _$_OrderHistoryItemDto;
+          required final String purchaseOrderType,
+      @JsonKey(name: 'DefaultMaterialDescription')
+          required final String defaultMaterialDescription,
+      @JsonKey(name: 'WarehouseStorageCondition')
+          required final String warehouseStorageCondition,
+      @JsonKey(name: 'Batch')
+          required final String batch,
+      @JsonKey(name: 'Available')
+          required final bool available,
+      @JsonKey(name: 'IsMarketplace')
+          required final bool isMarketplace,
+      @JsonKey(name: 'IsBonusMaterial')
+          required final bool isBonusMaterial,
+      @JsonKey(name: 'GovernmentMaterialCode')
+          required final String governmentMaterialCode,
+      @JsonKey(name: 'TelephoneNumber')
+          required final String telephoneNumber,
+      @JsonKey(name: 'Seller')
+          required final String seller,
+      @JsonKey(name: 'InvoiceNumber')
+          required final String invoiceNumber,
+      @JsonKey(name: 'POReference')
+          required final String pOReference,
+      @JsonKey(name: 'ManufactureName')
+          required final String manufactureName,
+      @JsonKey(name: 'ExpiryDate')
+          required final String expiryDate}) = _$_OrderHistoryItemDto;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
@@ -570,6 +961,45 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'PurchaseOrderType')
   String get purchaseOrderType;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription')
+  String get defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'WarehouseStorageCondition')
+  String get warehouseStorageCondition;
+  @override
+  @JsonKey(name: 'Batch')
+  String get batch;
+  @override
+  @JsonKey(name: 'Available')
+  bool get available;
+  @override
+  @JsonKey(name: 'IsMarketplace')
+  bool get isMarketplace;
+  @override
+  @JsonKey(name: 'IsBonusMaterial')
+  bool get isBonusMaterial;
+  @override
+  @JsonKey(name: 'GovernmentMaterialCode')
+  String get governmentMaterialCode;
+  @override
+  @JsonKey(name: 'TelephoneNumber')
+  String get telephoneNumber;
+  @override
+  @JsonKey(name: 'Seller')
+  String get seller;
+  @override
+  @JsonKey(name: 'InvoiceNumber')
+  String get invoiceNumber;
+  @override
+  @JsonKey(name: 'POReference')
+  String get pOReference;
+  @override
+  @JsonKey(name: 'ManufactureName')
+  String get manufactureName;
+  @override
+  @JsonKey(name: 'ExpiryDate')
+  String get expiryDate;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>

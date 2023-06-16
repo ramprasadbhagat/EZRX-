@@ -69,6 +69,8 @@ class UserDto with _$UserDto {
       defaultValue: <PaymentAdviceExpiryNotificationDto>[],
     )
         required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+    @JsonKey(name: 'preferredLanguage', defaultValue: '')
+        required String preferredLanguage,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -98,6 +100,7 @@ class UserDto with _$UserDto {
           .settings.paymentNotification.paymentAdviceExpiryNotificationList
           .map((e) => PaymentAdviceExpiryNotificationDto.fromDomain(e))
           .toList(),
+      preferredLanguage: user.preferredLanguage,
     );
   }
   static const emptyUserDto = UserDto(
@@ -119,6 +122,7 @@ class UserDto with _$UserDto {
     hasPriceOverride: false,
     disablePaymentNotification: false,
     paymentNotification: <PaymentAdviceExpiryNotificationDto>[],
+    preferredLanguage: '',
   );
   User toDomain() {
     return User(
@@ -151,6 +155,7 @@ class UserDto with _$UserDto {
       disableCreateOrder: disableCreateOrder,
       disableReturns: disableReturns,
       hasPriceOverride: hasPriceOverride,
+      preferredLanguage: preferredLanguage,
     );
   }
 

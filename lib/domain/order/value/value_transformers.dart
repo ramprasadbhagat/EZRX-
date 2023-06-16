@@ -94,17 +94,37 @@ Color getStatusLabelColor(String statusType) {
       return ZPColors.lightSecondary;
     case 'Cancelled':
     case 'Failed':
+    case 'Cancelled - credit issue':
+    case 'Cancelled - duplicate order':
+    case 'Cancelled - license invalid / expired':
+    case 'Cancelled - stock unavailable':
+    case 'Cancelled by buyer':
+    case 'Cancelled by Seller':
+      return ZPColors.lightRedStatusColor;
     case 'Pending':
     case 'Picking in-progress':
     case 'Order Created':
     case 'Out for delivery':
     case 'Pending Approval':
-      return ZPColors.lightRed;
-
+    case 'Out for re-delivery':
+    case 'Not Available':
+    case 'In Process':
+    case 'Order Creating':
+    case 'On the way to you':
+    case 'Order being prepared':
+    case 'Pending release':
+    case 'Pending release - credit check':
+    case 'Pending release - license issue':
+    case 'Pending release - month end closing':
+    case 'Pending release - on backorder':
+    case 'Pending release - seller approval required':
+    case 'order pending':
+    case 'Order packed and ready for delivery':
+      return ZPColors.lightYellow;
     case 'Cleared':
       return ZPColors.invoiceStatusGreen;
     case 'Overdue':
-      return ZPColors.invoiceStatusRed;
+      return ZPColors.lightRedStatusColor;
     case 'Open':
       return ZPColors.invoiceStatusBlue;
     case 'In progress':
@@ -113,7 +133,10 @@ Color getStatusLabelColor(String statusType) {
     case 'In Progress':
       return ZPColors.lightGray;
     case 'Completed':
-      return ZPColors.darkGray;
+    case 'Delivered':
+    case 'Delivered - partial rejection':
+    case 'Delivered - rejected upon delivery':
+      return ZPColors.secondary;
     default:
       return ZPColors.lightYellow;
   }

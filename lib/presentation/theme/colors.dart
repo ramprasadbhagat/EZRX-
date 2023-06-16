@@ -48,7 +48,6 @@ abstract class ZPColors {
   static const Color invoiceStatusBlue = Color.fromRGBO(221, 232, 255, 1);
   static const Color invoiceStatusGreen = Color.fromRGBO(229, 235, 177, 1);
   static const Color invoiceStatusOrange = Color.fromRGBO(250, 234, 176, 1);
-  static const Color invoiceStatusRed = Color.fromRGBO(255, 211, 211, 1);
 
   static const Color error = Color.fromRGBO(227, 23, 16, 1);
   static const Color tender = Color.fromRGBO(246, 138, 37, 1);
@@ -65,9 +64,7 @@ abstract class ZPColors {
   static const Color transparent = Color.fromRGBO(255, 255, 255, 0);
   static const Color warning = Color.fromRGBO(254, 198, 0, 1);
   static const Color aliceBlue = Color.fromRGBO(246, 249, 253, 1);
-
-
-
+  static const Color lightRedStatusColor = Color.fromRGBO(255, 211, 211, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

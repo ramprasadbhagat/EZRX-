@@ -64,6 +64,8 @@ mixin _$UserDto {
       defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'preferredLanguage', defaultValue: '')
+  String get preferredLanguage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -115,7 +117,9 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           bool disablePaymentNotification,
       @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-          List<PaymentAdviceExpiryNotificationDto> paymentNotification});
+          List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+      @JsonKey(name: 'preferredLanguage', defaultValue: '')
+          String preferredLanguage});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
@@ -154,6 +158,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? hasPriceOverride = null,
     Object? disablePaymentNotification = null,
     Object? paymentNotification = null,
+    Object? preferredLanguage = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -236,6 +241,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.paymentNotification
           : paymentNotification // ignore: cast_nullable_to_non_nullable
               as List<PaymentAdviceExpiryNotificationDto>,
+      preferredLanguage: null == preferredLanguage
+          ? _value.preferredLanguage
+          : preferredLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -303,7 +312,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           bool disablePaymentNotification,
       @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-          List<PaymentAdviceExpiryNotificationDto> paymentNotification});
+          List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+      @JsonKey(name: 'preferredLanguage', defaultValue: '')
+          String preferredLanguage});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -341,6 +352,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? hasPriceOverride = null,
     Object? disablePaymentNotification = null,
     Object? paymentNotification = null,
+    Object? preferredLanguage = null,
   }) {
     return _then(_$_UserDto(
       id: null == id
@@ -423,6 +435,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value._paymentNotification
           : paymentNotification // ignore: cast_nullable_to_non_nullable
               as List<PaymentAdviceExpiryNotificationDto>,
+      preferredLanguage: null == preferredLanguage
+          ? _value.preferredLanguage
+          : preferredLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -470,7 +486,9 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           required this.disablePaymentNotification,
       @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification})
+          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+      @JsonKey(name: 'preferredLanguage', defaultValue: '')
+          required this.preferredLanguage})
       : _userSalesOrganisations = userSalesOrganisations,
         _paymentNotification = paymentNotification,
         super._();
@@ -555,8 +573,12 @@ class _$_UserDto extends _UserDto {
   }
 
   @override
+  @JsonKey(name: 'preferredLanguage', defaultValue: '')
+  final String preferredLanguage;
+
+  @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage)';
   }
 
   @override
@@ -602,7 +624,9 @@ class _$_UserDto extends _UserDto {
                 other.disablePaymentNotification ==
                     disablePaymentNotification) &&
             const DeepCollectionEquality()
-                .equals(other._paymentNotification, _paymentNotification));
+                .equals(other._paymentNotification, _paymentNotification) &&
+            (identical(other.preferredLanguage, preferredLanguage) ||
+                other.preferredLanguage == preferredLanguage));
   }
 
   @JsonKey(ignore: true)
@@ -628,7 +652,8 @@ class _$_UserDto extends _UserDto {
         disableReturns,
         hasPriceOverride,
         disablePaymentNotification,
-        const DeepCollectionEquality().hash(_paymentNotification)
+        const DeepCollectionEquality().hash(_paymentNotification),
+        preferredLanguage
       ]);
 
   @JsonKey(ignore: true)
@@ -686,7 +711,9 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           required final bool disablePaymentNotification,
       @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification}) = _$_UserDto;
+          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+      @JsonKey(name: 'preferredLanguage', defaultValue: '')
+          required final String preferredLanguage}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -753,6 +780,9 @@ abstract class _UserDto extends UserDto {
       name: 'paymentNotification',
       defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification;
+  @override
+  @JsonKey(name: 'preferredLanguage', defaultValue: '')
+  String get preferredLanguage;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

@@ -28,9 +28,8 @@ class OrderHistoryRemoteDataSource {
     required String shipTo,
     required int pageSize,
     required int offset,
-    required String orderBy, // = 'orderDate',
-    required String sort, // = 'desc',
-    required String companyName,
+    required String language,
+    required String query,
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -41,9 +40,8 @@ class OrderHistoryRemoteDataSource {
         'shipTo': [shipTo],
         'first': pageSize,
         'after': offset,
-        'orderBy': orderBy,
-        'sort': sort,
-        'companyName': companyName,
+        'language': language,
+        'query': query,
         ...filterQuery,
       };
 
@@ -74,8 +72,6 @@ class OrderHistoryRemoteDataSource {
     required String shipTo,
     required int pageSize,
     required int offset,
-    required String orderBy, // = 'orderDate',
-    required String sort, // = 'desc',
     required String userName, // = '',
     required String language, // = 'E',
     required Map<String, dynamic> filterQuery,
@@ -87,8 +83,6 @@ class OrderHistoryRemoteDataSource {
         'shipTo': [shipTo],
         'first': pageSize,
         'after': offset,
-        'orderBy': orderBy,
-        'sort': sort,
         'userName': userName,
         'language': language,
         ...filterQuery,

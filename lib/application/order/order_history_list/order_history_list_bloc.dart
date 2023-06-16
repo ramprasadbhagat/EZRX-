@@ -17,7 +17,7 @@ part 'order_history_list_bloc.freezed.dart';
 part 'order_history_list_event.dart';
 part 'order_history_list_state.dart';
 
-const int _pageSize = 20;
+const int _pageSize = 24;
 
 class OrderHistoryListBloc
     extends Bloc<OrderHistoryListEvent, OrderHistoryListState> {
@@ -44,8 +44,6 @@ class OrderHistoryListBloc
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
-          orderBy: 'orderDate',
-          sort: e.sortDirection,
           pageSize: _pageSize,
           offset: 0,
           orderHistoryFilter: e.orderHistoryFilter,
@@ -86,8 +84,6 @@ class OrderHistoryListBloc
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
         user: e.user,
-        orderBy: 'orderDate',
-        sort: e.sortDirection,
         pageSize: _pageSize,
         offset: state.orderHistoryList.orderHistoryItems.length,
         orderHistoryFilter: e.orderHistoryFilter,

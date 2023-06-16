@@ -9,10 +9,10 @@ part of 'order_history_filter_dto.dart';
 _$_ReturnSummaryFilterDto _$$_ReturnSummaryFilterDtoFromJson(
         Map<String, dynamic> json) =>
     _$_ReturnSummaryFilterDto(
-      orderNumber: json['orderNumber'] as String? ?? '',
-      poReference: json['poReference'] as String? ?? '',
-      materialSearch: json['materialSearch'] as String? ?? '',
-      principalSearch: json['principalSearch'] as String? ?? '',
+      orderStatus: (json['orderStatus'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       dateTo: json['toDate'] as String? ?? '',
       dateFrom: json['fromDate'] as String? ?? '',
     );
@@ -20,10 +20,7 @@ _$_ReturnSummaryFilterDto _$$_ReturnSummaryFilterDtoFromJson(
 Map<String, dynamic> _$$_ReturnSummaryFilterDtoToJson(
         _$_ReturnSummaryFilterDto instance) =>
     <String, dynamic>{
-      'orderNumber': valueTojson(instance.orderNumber),
-      'poReference': valueTojson(instance.poReference),
-      'materialSearch': valueTojson(instance.materialSearch),
-      'principalSearch': valueTojson(instance.principalSearch),
+      'orderStatus': instance.orderStatus,
       'toDate': instance.dateTo,
       'fromDate': instance.dateFrom,
     };

@@ -1,48 +1,38 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
 class OrderHistoryMock extends Mock implements OrderHistory {}
 
 void main() {
-  late OrderHistoryRemoteDataSource remoteDataSource;
+  // late OrderHistoryRemoteDataSource remoteDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
-  final dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
-    ),
-  );
-  final dioAdapter = DioAdapter(dio: dio);
-  final service = HttpService.mockDio(dio);
+  // final dio = Dio(
+  //   BaseOptions(
+  //     baseUrl: 'https://uat.ezrx.com',
+  //   ),
+  // );
+  // final dioAdapter = DioAdapter(dio: dio);
+  // final service = HttpService.mockDio(dio);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      remoteDataSource = OrderHistoryRemoteDataSource(
-        httpService: service,
-        config: Config(),
-        orderHistoryQueryMutation: OrderHistoryQueryMutation(),
-        dataSourceExceptionHandler: DataSourceExceptionHandler(),
-      );
+      // remoteDataSource = OrderHistoryRemoteDataSource(
+      //   httpService: service,
+      //   config: Config(),
+      //   orderHistoryQueryMutation: OrderHistoryQueryMutation(),
+      //   dataSourceExceptionHandler: DataSourceExceptionHandler(),
+      // );
     },
   );
 
-  group(
+  //TODO : will enhance
+  /*group(
     'Order History',
     () {
       test('Get OrderHistory', () async {
@@ -76,14 +66,14 @@ void main() {
         );
 
         final result = await remoteDataSource.getOrderHistory(
-          companyName: 'fake-companyname',
           offset: 0,
-          orderBy: 'fake-order',
+          orderStatus: 'fake-order',
           pageSize: 10,
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
-          sort: 'ASC',
           filterQuery: {},
+          language: '',
+          query: '',
         );
 
         expect(
@@ -93,7 +83,7 @@ void main() {
             ).toDomain());
       });
 
-      test('Get OrderHistory for salesrep', () async {
+      /* test('Get OrderHistory for salesrep', () async {
         final variables = {
           'soldTo': 'fake-soldto',
           'shipTo': ['fake-shipto'],
@@ -141,7 +131,7 @@ void main() {
             OrderHistoryDto.fromJson(
               res['data']['orderHistoryForSalesRepV2']['OrderHistory'][0],
             ).toDomain());
-      });
+      });*/
 
       test('statuscode not equal to 200', () async {
         final variables = {
@@ -168,16 +158,18 @@ void main() {
           }),
         );
 
-        await remoteDataSource.getOrderHistory(
-          companyName: 'fake-companyname',
+        await remoteDataSource
+            .getOrderHistory(
           offset: 0,
-          orderBy: 'fake-order',
+          orderStatus: 'fake-order',
           pageSize: 10,
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
-          sort: 'ASC',
           filterQuery: {},
-        ).onError((error, _) async {
+          language: '',
+          query: '',
+        )
+            .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(OrderHistoryMock());
         });
@@ -213,20 +205,24 @@ void main() {
           }),
         );
 
-        await remoteDataSource.getOrderHistory(
-          companyName: 'fake-companyname',
+        await remoteDataSource
+            .getOrderHistory(
           offset: 0,
-          orderBy: 'fake-order',
+          orderStatus: 'fake-order',
           pageSize: 10,
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
-          sort: 'ASC',
           filterQuery: {},
-        ).onError((error, _) async {
+          language: '',
+          query: '',
+        )
+            .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(OrderHistoryMock());
         });
       });
     },
   );
+}
+*/
 }

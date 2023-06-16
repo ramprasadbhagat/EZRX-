@@ -1,5 +1,5 @@
-query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $userName: String!, $orderStatus: [String!]) {
-  orderHistoryForSalesRepV2(
+query orderHistoryV2($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $query: String) {
+  orderHistoryV2(
     soldTo: $soldTo
     fromDate: $fromDate
     toDate: $toDate
@@ -7,8 +7,8 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
     first: $first
     after: $after
     language: $language
-    userName: $userName
     orderStatus: $orderStatus
+    query: $query
   ) {
     OrderCount
     OrderHistory {
@@ -19,13 +19,14 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
         PaymentTerm {
           PaymentTermCode
           PaymentTermDescription
-         
+          
         }
-       
+        
       }
       OrderItems {
         MaterialCode
         MaterialDescription
+        DefaultMaterialDescription
         CreatedTime
         CreatedDate
         Qty
@@ -51,28 +52,26 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
         POReference
         ManufactureName
         InvoiceNumber
+        IsBonusMaterial
+        GovernmentMaterialCode
         TelephoneNumber
-        
+       
       }
      
     }
    
   }
 }
-
- variable:
-{
-  "soldTo": "0030068160",
-  "fromDate": "20230607",
-  "toDate": "20230613",
+variables:{
+  "soldTo": "0030032223",
+  "fromDate": "20230606",
+  "toDate": "20230612",
   "shipTo": [
-    "0070132214"
+    "0070042688"
   ],
-  "first": 10,
+  "first": 5,
   "after": 0,
   "language": "EN",
-  "userName": "testintsalesrep",
+  "query": "",
   "orderStatus": []
 }
-                
-              

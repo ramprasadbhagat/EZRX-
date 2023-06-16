@@ -43,6 +43,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
                   e as Map<String, dynamic>))
               .toList() ??
           [],
+      preferredLanguage: json['preferredLanguage'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -69,4 +70,5 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'disablePaymentNotification': instance.disablePaymentNotification,
       'paymentNotification':
           instance.paymentNotification.map((e) => e.toJson()).toList(),
+      'preferredLanguage': instance.preferredLanguage,
     };

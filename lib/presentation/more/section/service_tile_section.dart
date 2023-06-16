@@ -9,8 +9,8 @@ class ServiceTile extends StatelessWidget {
   ServiceTile({Key? key}) : super(key: key);
 
   final List<MoreDetailsTile> moreServiceTiles = [
-    const MoreDetailsTile(
-      icon: Icon(
+    MoreDetailsTile(
+      icon: const Icon(
         Icons.receipt_long_outlined,
         color: ZPColors.greenIconColor,
       ),
@@ -19,7 +19,8 @@ class ServiceTile extends StatelessWidget {
     ),
     const MoreDetailsTile(
       icon: Icon(
-        Icons.assignment_return_outlined, //TODO : will update it after Design Them update the Figma
+        Icons
+            .assignment_return_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'Returns',
@@ -35,7 +36,8 @@ class ServiceTile extends StatelessWidget {
     ),
     const MoreDetailsTile(
       icon: Icon(
-        Icons.discount_outlined, //TODO : will update it after Design Them update the Figma
+        Icons
+            .discount_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'Loyalty',
@@ -43,7 +45,8 @@ class ServiceTile extends StatelessWidget {
     ),
     const MoreDetailsTile(
       icon: Icon(
-        Icons .center_focus_weak_outlined, //TODO : will update it after Design Them update the Figma
+        Icons
+            .center_focus_weak_outlined, //TODO : will update it after Design Them update the Figma
         color: ZPColors.greenIconColor,
       ),
       label: 'Web Login',

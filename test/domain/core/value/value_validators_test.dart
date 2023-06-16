@@ -378,6 +378,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
+          preferredLanguage: 'EN',
         );
         final result = validateContainUserNameOrName(input, user);
         expect(result, const Right(input));
@@ -408,6 +409,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
+          preferredLanguage: 'EN',
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -441,6 +443,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
+          preferredLanguage: 'EN',
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -474,6 +477,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
+          preferredLanguage: 'EN',
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -483,8 +487,6 @@ void main() {
       },
     );
   });
-
-  
 
   group('validateIntegerValue', () {
     test(

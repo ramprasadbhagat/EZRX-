@@ -11,6 +11,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
   factory OrderHistoryItem({
     required MaterialNumber materialNumber,
     required String materialDescription,
+    required String defaultMaterialDescription,
     required int qty,
     required ZpPrice unitPrice,
     required TotalPrice totalPrice,
@@ -26,9 +27,23 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required String createdTime,
     required String orderBy,
     required String purchaseOrderType,
+    required String warehouseStorageCondition,
+    required bool available,
+    required String batch,
+    required DateTimeStringValue expiryDate,
+    required bool isMarketplace,
+    required String seller,
+    required String pOReference,
+    required String manufactureName,
+    required String invoiceNumber,
+    required bool isBonusMaterial,
+    required String governmentMaterialCode,
+    required String telephoneNumber,
   }) = _OrderHistoryItem;
 
-  DateTimeStringValue get deliveryDateTime => DateTimeStringValue('${deliveryDate.getOrDefaultValue('00000000')}$deliveryTime');
+  DateTimeStringValue get deliveryDateTime => DateTimeStringValue(
+        '${deliveryDate.getOrDefaultValue('00000000')}$deliveryTime',
+      );
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
         materialNumber: MaterialNumber(''),
@@ -48,6 +63,19 @@ class OrderHistoryItem with _$OrderHistoryItem {
         createdTime: '',
         orderBy: '',
         purchaseOrderType: '',
+        available: false,
+        batch: '',
+        defaultMaterialDescription: '',
+        expiryDate: DateTimeStringValue(''),
+        governmentMaterialCode: '',
+        invoiceNumber: '',
+        isBonusMaterial: false,
+        warehouseStorageCondition: '',
+        isMarketplace: false,
+        manufactureName: '',
+        pOReference: '',
+        seller: '',
+        telephoneNumber: '',
       );
 
   OrderHistoryItem copyWithTaxCal({

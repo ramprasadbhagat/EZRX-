@@ -44,6 +44,9 @@ import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_p
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_page.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
@@ -75,7 +78,6 @@ import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
-import 'package:ezrxmobile/presentation/orders/orders_tab.dart';
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
 
@@ -203,12 +205,18 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
         ),
         AutoRoute(
           page: OrdersTab,
-          path: 'orders/tab',
+          path: 'orders_tab',
+          children: [
+            AutoRoute(
+              page: ViewByItemsPage,
+              path: 'orders/view_by_items',
+            ),
+            AutoRoute(
+              page: ViewByOrdersPage,
+              path: 'orders/view_by_orders',
+            ),
+          ],
         ),
-        // AutoRoute(
-        //   page: AccountTab,
-        //   path: 'core/account',
-        // ),
         AutoRoute(
           page: PaymentsTab,
           path: 'payments/tab',
@@ -234,6 +242,14 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
         ),
       ],
     ),
+    // AutoRoute(
+    //   page: ViewByItemsPage,
+    //   path: 'orders/view_by_items',
+    // ),
+    // AutoRoute(
+    //   page: ViewByOrdersPage,
+    //   path: 'orders/view_by_orders',
+    // ),
     // =========
     // TODO:  will remove in future
     AutoRoute(
@@ -351,6 +367,15 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
       page: EditPaymentAdviceFooterPage,
     ),
     AutoRoute(path: 'intro_page', page: IntroPage),
+      AutoRoute(
+      page: ViewByItemsPage,
+      path: 'orders/view_by_items',
+    ),
+    AutoRoute(
+      page: ViewByOrdersPage,
+      path: 'orders/view_by_orders',
+    ),
+
   ],
 )
 class $AppRouter {}

@@ -1,94 +1,54 @@
-
 {
   "data": {
     "orderHistoryForSalesRepV2": {
+      "OrderCount": 1,
       "OrderHistory": [
         {
           "OrderBasicInformation": {
-            "SoldTo": "0030026133",
-            "ShipTo": "0030026133",
-            "CompanyName": "Changi General Hospital Pte Ltd   "
+            "SoldTo": "0030068160",
+            "CompanyName": "DR SHAMIR CHANDRAN",
+            "ShipTo": "0070132214",
+            "PaymentTerm": {
+              "PaymentTermCode": "",
+              "PaymentTermDescription": ""
+            }
           },
           "OrderItems": [
             {
-              "MaterialCode": "000000000026175702",
-              "MaterialDescription": "BASELATE EXTRACTION BAR",
-              "Qty": 1,
-              "UnitPrice": 0,
-              "TotalPrice": 0,
-              "Status": "Failed",
-              "DeliveryDate": "",
-              "DeliveryTime": "",
+              "MaterialCode": "000000000023063780",
+              "MaterialDescription": "(M) TEOSYAL PS ULTIM 3ML PRFS 1'S",
+              "CreatedTime": "141839",
+              "CreatedDate": "20230613",
+              "Qty": 2,
+              "UnitPrice": 1320,
+              "TotalPrice": 2640,
+              "Status": "Pending release - credit check",
               "LineNumber": "000010",
               "Tax": 0,
-              "OrderType": "ZPFB",
-              "OrderNumber": "a7f19a0a-afe0-4e6d-a674-ad5a36105489",
-              "EZRXNumber": "EZRX-7f0cf12",
-              "CreatedDate": "20220910",
-              "CreatedTime": "130454",
-              "OrderBy": "Hsiao Jiun Ho",
-              "PurchaseOrderType": "MRXR"
-            },
-            {
-              "MaterialCode": "000000000026175700",
-              "MaterialDescription": "COMPREHENSIVEMOD    CALCARPLANER 54MM",
-              "Qty": 1,
-              "UnitPrice": 0,
-              "TotalPrice": 0,
-              "Status": "Failed",
-              "DeliveryDate": "",
+              "DeliveryDate": "20230613",
               "DeliveryTime": "",
-              "LineNumber": "000020",
-              "Tax": 0,
               "OrderType": "ZPOR",
-              "OrderNumber": "852a23d6-c51d-485b-bda8-0f3b2f7594e5",
-              "EZRXNumber": "EZRX-0ee4214",
-              "CreatedDate": "20220910",
-              "CreatedTime": "130420",
-              "OrderBy": "Hsiao Jiun Ho",
-              "PurchaseOrderType": "MRXR"
-            },
-            {
-              "MaterialCode": "000000000026175701",
-              "MaterialDescription": "COMPREHENSIVEMOD    CALCARPLANER 58MM",
-              "Qty": 1,
-              "UnitPrice": 0,
-              "TotalPrice": 0,
-              "Status": "Failed",
-              "DeliveryDate": "",
-              "DeliveryTime": "",
-              "LineNumber": "000030",
-              "Tax": 0,
-              "OrderType": "ZPOR",
-              "OrderNumber": "852a23d6-c51d-485b-bda8-0f3b2f7594e5",
-              "EZRXNumber": "EZRX-0ee4214",
-              "CreatedDate": "20220910",
-              "CreatedTime": "130420",
-              "OrderBy": "Hsiao Jiun Ho",
-              "PurchaseOrderType": "MRXR"
-            },
-            {
-              "MaterialCode": "000000000026175702",
-              "MaterialDescription": "BASELATE EXTRACTION BAR",
-              "Qty": 1,
-              "UnitPrice": 0,
-              "TotalPrice": 0,
-              "Status": "Failed",
-              "DeliveryDate": "",
-              "DeliveryTime": "",
-              "LineNumber": "000010",
-              "Tax": 0,
-              "OrderType": "ZPOR",
-              "OrderNumber": "852a23d6-c51d-485b-bda8-0f3b2f7594e5",
-              "EZRXNumber": "EZRX-0ee4214",
-              "CreatedDate": "20220910",
-              "CreatedTime": "130420",
-              "OrderBy": "Hsiao Jiun Ho",
-              "PurchaseOrderType": "MRXR"
+              "EZRXNumber": "EZRX-9e028e9",
+              "OrderNumber": "0200220305",
+              "OrderBy": "testintsalesrep",
+              "PurchaseOrderType": "EZC",
+              "WarehouseStorageCondition": "",
+              "Available": true,
+              "Batch": "+L-134005C",
+              "ExpiryDate": "20251031",
+              "IsMarketplace": false,
+              "Seller": "",
+              "POReference": "",
+              "ManufactureName": "",
+              "InvoiceNumber": "0100000",
+              "TelephoneNumber": "014-6894547"
             }
           ]
         }
       ]
     }
+  },
+  "extensions": {
+    "trace-id": "f1ae101a72aac3daf390c9b0a94011e7"
   }
 }

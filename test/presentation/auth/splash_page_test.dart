@@ -18,6 +18,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -161,6 +162,10 @@ class ScanMaterialInfoBlocMock
 class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
     implements SettingBloc {}
 
+class OrderHistoryFilterMockBloc
+    extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
+    implements OrderHistoryFilterBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -197,6 +202,7 @@ void main() {
   late DeepLinkingBloc deepLinkingBlocMock;
   late OrderHistoryListBloc mockOrderHistoryListBloc;
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
+  final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -314,6 +320,8 @@ void main() {
           .thenReturn(OrderHistoryListState.initial());
       when(() => mockOrderHistoryDetailsBloc.state)
           .thenReturn(OrderHistoryDetailsState.initial());
+      when(() => mockOrderHistoryFilterBloc.state)
+          .thenReturn(OrderHistoryFilterState.initial());
     });
 
     Future getWidget(tester) async {
@@ -375,6 +383,9 @@ void main() {
             ),
             BlocProvider<AccountSummaryBloc>(
               create: (context) => accountSummaryMock,
+            ),
+            BlocProvider<OrderHistoryFilterBloc>(
+              create: (context) => mockOrderHistoryFilterBloc,
             ),
           ],
           child: const SplashPage(),

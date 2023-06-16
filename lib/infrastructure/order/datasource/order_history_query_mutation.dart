@@ -6,15 +6,12 @@ class OrderHistoryQueryMutation {
       \$shipTo: [String],
       \$fromDate: String!,
       \$toDate: String!,
-      \$orderBy: String!, 
-      \$companyName: String,
+      \$orderStatus: [String!], 
+      \$language: String,
+      \$query: String,
       \$first: Int!,
       \$after: Int!,
-      \$sort:String!
-      \$orderNumber:String
-     \$poReference:String
-     \$materialSearch:String
-     \$principalSearch:String
+    
       )
       {
       orderHistoryV2(
@@ -22,37 +19,61 @@ class OrderHistoryQueryMutation {
         shipTo:\$shipTo, 
         fromDate:\$fromDate, 
         toDate:\$toDate,
-        orderBy:\$orderBy,
-       companyName: \$companyName,
+        orderStatus:\$orderStatus,
         after:\$after,
         first:\$first,
-        sort:\$sort,
-        orderNumber:\$orderNumber,
-        poReference:\$poReference,
-        materialSearch:\$materialSearch,
-        principalSearch:\$principalSearch,){
-          OrderHistory{
-            OrderBasicInformation{ SoldTo ShipTo CompanyName }
-            OrderItems {
-              MaterialCode
-              MaterialDescription
-              Qty
-              UnitPrice
-              TotalPrice
-              Status
-              DeliveryDate
-              DeliveryTime
-              LineNumber
-              Tax
-              OrderType
-              OrderNumber
-              EZRXNumber
-              CreatedDate
-              CreatedTime
-              OrderBy
-              PurchaseOrderType  
-            }
-          }
+        language:\$language,
+        query:\$query,
+        ){
+          OrderCount
+         OrderHistory {
+      OrderBasicInformation {
+        SoldTo
+        CompanyName
+        ShipTo
+        PaymentTerm {
+          PaymentTermCode
+          PaymentTermDescription
+         
+        }
+       
+      }
+      OrderItems {
+        MaterialCode
+        MaterialDescription
+        DefaultMaterialDescription
+        CreatedTime
+        CreatedDate
+        Qty
+        UnitPrice
+        TotalPrice
+        Status
+        LineNumber
+        Tax
+        DeliveryDate
+        DeliveryTime
+        OrderType
+        EZRXNumber
+        OrderNumber
+        OrderBy
+        PurchaseOrderType
+        WarehouseStorageCondition
+        OrderNumber
+        Available
+        Batch
+        ExpiryDate
+        IsMarketplace
+        Seller
+        POReference
+        ManufactureName
+        InvoiceNumber
+        IsBonusMaterial
+        GovernmentMaterialCode
+        TelephoneNumber
+       
+      }
+      
+    }
         }
       }
       ''';
@@ -61,59 +82,76 @@ class OrderHistoryQueryMutation {
   String getOrderHistoryForSalesRep() {
     return '''
       query orderHistoryForSalesRepV2(
-      \$orderBy: String!,  
+      \$orderStatus: [String!],  
       \$language: String!,
       \$first: Int!,
       \$after: Int!,
       \$shipTo: [String],
       \$soldTo: String!,
       \$userName: String!,
-      \$sort:String!
-      \$orderNumber:String
-     \$poReference:String
-     \$materialSearch:String
-     \$principalSearch:String
      \$fromDate: String!,
       \$toDate: String!,
       ){
        orderHistoryForSalesRepV2(
-        orderBy:\$orderBy,
+        orderStatus:\$orderStatus,
         language:\$language,
         shipTo:\$shipTo,
         soldTo:\$soldTo,
         after:\$after,
         first:\$first, 
         userName:\$userName,
-        sort:\$sort,
-        orderNumber:\$orderNumber,
-        poReference:\$poReference,
-        materialSearch:\$materialSearch,
-        principalSearch:\$principalSearch,
         fromDate:\$fromDate, 
         toDate:\$toDate,
       ) {
+        OrderCount
             OrderHistory {
-              OrderBasicInformation { SoldTo ShipTo CompanyName }
-              OrderItems {
-                MaterialCode
-                MaterialDescription
-                Qty
-                UnitPrice
-                TotalPrice
-                Status
-                DeliveryDate
-                DeliveryTime
-                LineNumber
-                Tax
-                OrderType
-                OrderNumber
-                EZRXNumber
-                CreatedDate
-                CreatedTime
-                OrderBy
-                PurchaseOrderType
-              }
-            }
+      OrderBasicInformation {
+        SoldTo
+        CompanyName
+        ShipTo
+        PaymentTerm {
+          PaymentTermCode
+          PaymentTermDescription
+         
+        }
+       
+      }
+      OrderItems {
+        MaterialCode
+        MaterialDescription
+        DefaultMaterialDescription
+        CreatedTime
+        CreatedDate
+        Qty
+        UnitPrice
+        TotalPrice
+        Status
+        LineNumber
+        Tax
+        DeliveryDate
+        DeliveryTime
+        OrderType
+        EZRXNumber
+        OrderNumber
+        OrderBy
+        PurchaseOrderType
+        WarehouseStorageCondition
+        OrderNumber
+        Available
+        Batch
+        ExpiryDate
+        IsMarketplace
+        Seller
+        POReference
+        ManufactureName
+        InvoiceNumber
+        IsBonusMaterial
+        GovernmentMaterialCode
+        TelephoneNumber
+       
+      }
+      
+    }
           }
         }''';
   }

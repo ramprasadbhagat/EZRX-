@@ -14,6 +14,7 @@ class UserQueryMutation {
             provider
             confirmed
             blocked
+            preferredLanguage
             role {
               id
               name
@@ -84,6 +85,7 @@ class UserQueryMutation {
               ShipToCode
             }
             enableOrderType
+           
             disablePaymentNotification
             paymentNotification {
               day

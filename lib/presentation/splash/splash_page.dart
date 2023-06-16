@@ -4,11 +4,13 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_adv
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -17,6 +19,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -150,16 +153,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             );
           },
         ),
-         BlocListener<UserBloc, UserState>(
+        BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) =>
               previous.user.id != current.user.id,
           listener: (context, state) {
-             _welcomeUserMessage(state);
+            _welcomeUserMessage(state);
           },
         ),
         BlocListener<UserBloc, UserState>(
-          listenWhen: (previous, current) =>
-              previous.user != current.user,
+          listenWhen: (previous, current) => previous.user != current.user,
           listener: (context, state) {
             _initializeSalesOrg(state);
             if (state.isSalesRep) {
@@ -239,6 +241,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             _initializeProduct();
+            context.read<OrderHistoryListBloc>().add(
+                  OrderHistoryListEvent.fetch(
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    user: context.read<UserBloc>().state.user,
+                    sortDirection: context
+                        .read<OrderHistoryFilterBloc>()
+                        .state
+                        .sortDirection,
+                    orderHistoryFilter: OrderHistoryFilter.empty(),
+                  ),
+                );
             if (state.isCovidMaterialEnable) {
               context.read<CovidMaterialListBloc>().add(
                     CovidMaterialListEvent.fetch(

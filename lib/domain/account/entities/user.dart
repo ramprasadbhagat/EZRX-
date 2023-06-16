@@ -31,6 +31,7 @@ class User with _$User {
     required bool disableCreateOrder,
     required bool disableReturns,
     required bool hasPriceOverride,
+    required String preferredLanguage,
   }) = _User;
 
   factory User.empty() => User(
@@ -54,5 +55,6 @@ class User with _$User {
         disableCreateOrder: false,
         disableReturns: false,
         hasPriceOverride: false,
+        preferredLanguage: '',
       );
 }

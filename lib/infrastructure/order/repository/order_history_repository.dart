@@ -18,13 +18,11 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
   final Config config;
   final OrderHistoryLocalDataSource localDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
-  
 
   OrderHistoryRepository({
     required this.config,
     required this.localDataSource,
     required this.orderHistoryRemoteDataSource,
-    
   });
 
   @override
@@ -32,8 +30,6 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,
-    required String orderBy,
-    required String sort,
     required User user,
     required int pageSize,
     required int offset,
@@ -58,10 +54,8 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
               offset: offset,
-              language: salesOrgConfig.getConfigLanguage,
+              language: user.preferredLanguage,
               userName: user.username.getOrCrash(),
-              orderBy: orderBy,
-              sort: sort,
               filterQuery:
                   OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
             )
@@ -70,11 +64,10 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
               offset: offset,
-              companyName: '',
-              orderBy: orderBy,
-              sort: sort,
+              language: user.preferredLanguage,
               filterQuery:
                   OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
+              query: '',
             );
 
       return Right(orderHistoryItemList);

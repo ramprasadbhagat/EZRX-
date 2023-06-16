@@ -20,7 +20,7 @@ void main() {
       final configsDto = OrderHistoryDto.fromDomain(OrderHistoryDto.fromJson(
               data['data']['orderHistoryV2']['OrderHistory'][0])
           .toDomain());
-      expect(configsDto.orderBasicInformation.shipTo, '0000002610');
+      expect(configsDto.orderBasicInformation.shipTo, '0070042688');
     });
 
     test('Test toJson', () {
@@ -29,7 +29,7 @@ void main() {
               .toDomain())
           .toJson();
 
-      expect(configsDto['OrderBasicInformation']['ShipTo'], '0000002610');
+      expect(configsDto['OrderBasicInformation']['ShipTo'], '0070042688');
     });
   });
 }

@@ -21,14 +21,26 @@ OrderHistoryFilterDto _$OrderHistoryFilterDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryFilterDto {
-  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-  String get orderNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-  String get poReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-  String get materialSearch => throw _privateConstructorUsedError;
-  @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-  String get principalSearch => throw _privateConstructorUsedError;
+// @JsonKey(
+//   name: 'orderNumber',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String orderNumber,
+// @JsonKey(
+//   name: 'poReference',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String poReference,
+// @JsonKey(
+//   name: 'materialSearch',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String materialSearch,
+  @JsonKey(name: 'orderStatus', defaultValue: [])
+  List<String> get orderStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'toDate', defaultValue: '')
   String get dateTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'fromDate', defaultValue: '')
@@ -47,18 +59,9 @@ abstract class $OrderHistoryFilterDtoCopyWith<$Res> {
       _$OrderHistoryFilterDtoCopyWithImpl<$Res, OrderHistoryFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-          String orderNumber,
-      @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-          String poReference,
-      @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-          String materialSearch,
-      @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-          String principalSearch,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          String dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          String dateFrom});
+      {@JsonKey(name: 'orderStatus', defaultValue: []) List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom});
 }
 
 /// @nodoc
@@ -75,30 +78,15 @@ class _$OrderHistoryFilterDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderNumber = null,
-    Object? poReference = null,
-    Object? materialSearch = null,
-    Object? principalSearch = null,
+    Object? orderStatus = null,
     Object? dateTo = null,
     Object? dateFrom = null,
   }) {
     return _then(_value.copyWith(
-      orderNumber: null == orderNumber
-          ? _value.orderNumber
-          : orderNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      poReference: null == poReference
-          ? _value.poReference
-          : poReference // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialSearch: null == materialSearch
-          ? _value.materialSearch
-          : materialSearch // ignore: cast_nullable_to_non_nullable
-              as String,
-      principalSearch: null == principalSearch
-          ? _value.principalSearch
-          : principalSearch // ignore: cast_nullable_to_non_nullable
-              as String,
+      orderStatus: null == orderStatus
+          ? _value.orderStatus
+          : orderStatus // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       dateTo: null == dateTo
           ? _value.dateTo
           : dateTo // ignore: cast_nullable_to_non_nullable
@@ -120,18 +108,9 @@ abstract class _$$_ReturnSummaryFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-          String orderNumber,
-      @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-          String poReference,
-      @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-          String materialSearch,
-      @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-          String principalSearch,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          String dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          String dateFrom});
+      {@JsonKey(name: 'orderStatus', defaultValue: []) List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom});
 }
 
 /// @nodoc
@@ -145,30 +124,15 @@ class __$$_ReturnSummaryFilterDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderNumber = null,
-    Object? poReference = null,
-    Object? materialSearch = null,
-    Object? principalSearch = null,
+    Object? orderStatus = null,
     Object? dateTo = null,
     Object? dateFrom = null,
   }) {
     return _then(_$_ReturnSummaryFilterDto(
-      orderNumber: null == orderNumber
-          ? _value.orderNumber
-          : orderNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      poReference: null == poReference
-          ? _value.poReference
-          : poReference // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialSearch: null == materialSearch
-          ? _value.materialSearch
-          : materialSearch // ignore: cast_nullable_to_non_nullable
-              as String,
-      principalSearch: null == principalSearch
-          ? _value.principalSearch
-          : principalSearch // ignore: cast_nullable_to_non_nullable
-              as String,
+      orderStatus: null == orderStatus
+          ? _value._orderStatus
+          : orderStatus // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       dateTo: null == dateTo
           ? _value.dateTo
           : dateTo // ignore: cast_nullable_to_non_nullable
@@ -185,35 +149,63 @@ class __$$_ReturnSummaryFilterDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
   const _$_ReturnSummaryFilterDto(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-          required this.orderNumber,
-      @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-          required this.poReference,
-      @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-          required this.materialSearch,
-      @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-          required this.principalSearch,
+      {@JsonKey(name: 'orderStatus', defaultValue: [])
+          required final List<String> orderStatus,
       @JsonKey(name: 'toDate', defaultValue: '')
           required this.dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '')
           required this.dateFrom})
-      : super._();
+      : _orderStatus = orderStatus,
+        super._();
 
   factory _$_ReturnSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
       _$$_ReturnSummaryFilterDtoFromJson(json);
 
+// @JsonKey(
+//   name: 'orderNumber',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String orderNumber,
+// @JsonKey(
+//   name: 'poReference',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String poReference,
+// @JsonKey(
+//   name: 'materialSearch',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String materialSearch,
+  final List<String> _orderStatus;
+// @JsonKey(
+//   name: 'orderNumber',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String orderNumber,
+// @JsonKey(
+//   name: 'poReference',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String poReference,
+// @JsonKey(
+//   name: 'materialSearch',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String materialSearch,
   @override
-  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-  final String orderNumber;
-  @override
-  @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-  final String poReference;
-  @override
-  @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-  final String materialSearch;
-  @override
-  @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-  final String principalSearch;
+  @JsonKey(name: 'orderStatus', defaultValue: [])
+  List<String> get orderStatus {
+    if (_orderStatus is EqualUnmodifiableListView) return _orderStatus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderStatus);
+  }
+
   @override
   @JsonKey(name: 'toDate', defaultValue: '')
   final String dateTo;
@@ -223,7 +215,7 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
 
   @override
   String toString() {
-    return 'OrderHistoryFilterDto(orderNumber: $orderNumber, poReference: $poReference, materialSearch: $materialSearch, principalSearch: $principalSearch, dateTo: $dateTo, dateFrom: $dateFrom)';
+    return 'OrderHistoryFilterDto(orderStatus: $orderStatus, dateTo: $dateTo, dateFrom: $dateFrom)';
   }
 
   @override
@@ -231,14 +223,8 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReturnSummaryFilterDto &&
-            (identical(other.orderNumber, orderNumber) ||
-                other.orderNumber == orderNumber) &&
-            (identical(other.poReference, poReference) ||
-                other.poReference == poReference) &&
-            (identical(other.materialSearch, materialSearch) ||
-                other.materialSearch == materialSearch) &&
-            (identical(other.principalSearch, principalSearch) ||
-                other.principalSearch == principalSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._orderStatus, _orderStatus) &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom));
@@ -246,8 +232,8 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, orderNumber, poReference,
-      materialSearch, principalSearch, dateTo, dateFrom);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_orderStatus), dateTo, dateFrom);
 
   @JsonKey(ignore: true)
   @override
@@ -266,14 +252,8 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
 
 abstract class _ReturnSummaryFilterDto extends OrderHistoryFilterDto {
   const factory _ReturnSummaryFilterDto(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-          required final String orderNumber,
-      @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-          required final String poReference,
-      @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-          required final String materialSearch,
-      @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-          required final String principalSearch,
+      {@JsonKey(name: 'orderStatus', defaultValue: [])
+          required final List<String> orderStatus,
       @JsonKey(name: 'toDate', defaultValue: '')
           required final String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '')
@@ -283,18 +263,26 @@ abstract class _ReturnSummaryFilterDto extends OrderHistoryFilterDto {
   factory _ReturnSummaryFilterDto.fromJson(Map<String, dynamic> json) =
       _$_ReturnSummaryFilterDto.fromJson;
 
-  @override
-  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueTojson)
-  String get orderNumber;
-  @override
-  @JsonKey(name: 'poReference', defaultValue: '', toJson: valueTojson)
-  String get poReference;
-  @override
-  @JsonKey(name: 'materialSearch', defaultValue: '', toJson: valueTojson)
-  String get materialSearch;
-  @override
-  @JsonKey(name: 'principalSearch', defaultValue: '', toJson: valueTojson)
-  String get principalSearch;
+  @override // @JsonKey(
+//   name: 'orderNumber',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String orderNumber,
+// @JsonKey(
+//   name: 'poReference',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String poReference,
+// @JsonKey(
+//   name: 'materialSearch',
+//   defaultValue: '',
+//   toJson: valueTojson,
+// )
+// required String materialSearch,
+  @JsonKey(name: 'orderStatus', defaultValue: [])
+  List<String> get orderStatus;
   @override
   @JsonKey(name: 'toDate', defaultValue: '')
   String get dateTo;

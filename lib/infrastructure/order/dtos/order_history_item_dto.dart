@@ -27,6 +27,22 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'CreatedTime') required String createdTime,
     @JsonKey(name: 'OrderBy') required String orderBy,
     @JsonKey(name: 'PurchaseOrderType') required String purchaseOrderType,
+    @JsonKey(name: 'DefaultMaterialDescription')
+        required String defaultMaterialDescription,
+    @JsonKey(name: 'WarehouseStorageCondition')
+        required String warehouseStorageCondition,
+    @JsonKey(name: 'Batch') required String batch,
+    @JsonKey(name: 'Available') required bool available,
+    @JsonKey(name: 'IsMarketplace') required bool isMarketplace,
+    @JsonKey(name: 'IsBonusMaterial') required bool isBonusMaterial,
+    @JsonKey(name: 'GovernmentMaterialCode')
+        required String governmentMaterialCode,
+    @JsonKey(name: 'TelephoneNumber') required String telephoneNumber,
+    @JsonKey(name: 'Seller') required String seller,
+    @JsonKey(name: 'InvoiceNumber') required String invoiceNumber,
+    @JsonKey(name: 'POReference') required String pOReference,
+    @JsonKey(name: 'ManufactureName') required String manufactureName,
+    @JsonKey(name: 'ExpiryDate') required String expiryDate,
   }) = _OrderHistoryItemDto;
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
     return OrderHistoryItemDto(
@@ -47,6 +63,19 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       createdTime: orderHistoryItem.createdTime,
       orderBy: orderHistoryItem.orderBy,
       purchaseOrderType: orderHistoryItem.purchaseOrderType,
+      defaultMaterialDescription: orderHistoryItem.defaultMaterialDescription,
+      warehouseStorageCondition: orderHistoryItem.warehouseStorageCondition,
+      batch: orderHistoryItem.batch,
+      available: orderHistoryItem.available,
+      isMarketplace: orderHistoryItem.isMarketplace,
+      isBonusMaterial: orderHistoryItem.isBonusMaterial,
+      governmentMaterialCode: orderHistoryItem.governmentMaterialCode,
+      telephoneNumber: orderHistoryItem.telephoneNumber,
+      seller: orderHistoryItem.seller,
+      invoiceNumber: orderHistoryItem.invoiceNumber,
+      pOReference: orderHistoryItem.pOReference,
+      manufactureName: orderHistoryItem.manufactureName,
+      expiryDate: orderHistoryItem.expiryDate.toValidDateString,
     );
   }
   OrderHistoryItem toDomain() {
@@ -68,9 +97,23 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       createdTime: createdTime,
       orderBy: orderBy,
       purchaseOrderType: purchaseOrderType,
+      available: available,
+      batch: batch,
+      expiryDate: DateTimeStringValue(expiryDate),
+      defaultMaterialDescription: defaultMaterialDescription,
+      governmentMaterialCode: governmentMaterialCode,
+      invoiceNumber: invoiceNumber,
+      warehouseStorageCondition: warehouseStorageCondition,
+      isBonusMaterial: isBonusMaterial,
+      isMarketplace: isMarketplace,
+      manufactureName: manufactureName,
+      pOReference: pOReference,
+      seller: seller,
+      telephoneNumber: telephoneNumber,
     );
   }
 
   factory OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryItemDtoFromJson(json);
 }
+
