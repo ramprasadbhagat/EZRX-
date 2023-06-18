@@ -34,8 +34,45 @@
 		<true/>
 		<key>NSAppTransportSecurity</key>
 		<dict>
-			<key>NSAllowsArbitraryLoads</key>
-			<true/>
+			<key>NSExceptionDomains</key>
+			<dict>
+				<key>zpregistration.zuelligpharma.com</key>
+				<dict>
+					<key>NSIncludesSubdomains</key>
+					<true/>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+				</dict>
+				<key>ezrx.com</key>
+				<dict>
+					<key>NSIncludesSubdomains</key>
+					<true/>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+				</dict>
+				<key>oktapreview.com</key>
+				<dict>
+					<key>NSIncludesSubdomains</key>
+					<true/>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+				</dict>
+				<key>zuelligpharma.com</key>
+				<dict>
+					<key>NSIncludesSubdomains</key>
+					<true/>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+				</dict>
+				<key>ezreach.io</key>
+				<dict>
+					<key>NSIncludesSubdomains</key>
+					<true/>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+				</dict>
+				<!-- Add more domains here if needed -->
+			</dict>
 		</dict>
 		<key>UIBackgroundModes</key>
 		<array>

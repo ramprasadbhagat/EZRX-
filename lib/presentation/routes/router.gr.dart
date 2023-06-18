@@ -280,6 +280,7 @@ class AppRouter extends _i81.RootStackRouter {
           key: args.key,
           url: args.url,
           initialFile: args.initialFile,
+          titleText: args.titleText,
         ),
       );
     },
@@ -1415,6 +1416,7 @@ class WebViewPageRoute extends _i81.PageRouteInfo<WebViewPageRouteArgs> {
     _i82.Key? key,
     String url = '',
     String? initialFile,
+    String titleText = '',
   }) : super(
           WebViewPageRoute.name,
           path: 'web_view',
@@ -1422,6 +1424,7 @@ class WebViewPageRoute extends _i81.PageRouteInfo<WebViewPageRouteArgs> {
             key: key,
             url: url,
             initialFile: initialFile,
+            titleText: titleText,
           ),
         );
 
@@ -1433,6 +1436,7 @@ class WebViewPageRouteArgs {
     this.key,
     this.url = '',
     this.initialFile,
+    this.titleText = '',
   });
 
   final _i82.Key? key;
@@ -1441,9 +1445,11 @@ class WebViewPageRouteArgs {
 
   final String? initialFile;
 
+  final String titleText;
+
   @override
   String toString() {
-    return 'WebViewPageRouteArgs{key: $key, url: $url, initialFile: $initialFile}';
+    return 'WebViewPageRouteArgs{key: $key, url: $url, initialFile: $initialFile, titleText: $titleText}';
   }
 }
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">zpregistration.zuelligpharma.com</domain>
+        <domain includeSubdomains="true">ezrx.com</domain>
+        <domain includeSubdomains="true">oktapreview.com</domain>
+        <domain includeSubdomains="true">zuelligpharma.com</domain>
+        <domain includeSubdomains="true">ezreach.io</domain>
+        <!-- Add more domains if needed -->
+    </domain-config>
+</network-security-config>

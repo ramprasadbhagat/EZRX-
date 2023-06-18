@@ -92,6 +92,12 @@ class Config {
         };
     }
   }
+  //============================================================
+  //  Create Account Url
+  //============================================================
+
+  String get createAccountUrl =>
+      'http://zpregistration.zuelligpharma.com/Registration/Index';
 
   //============================================================
   //  Privacy Policy
