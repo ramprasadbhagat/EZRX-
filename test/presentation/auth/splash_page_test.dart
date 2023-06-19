@@ -444,10 +444,13 @@ void main() {
         )
       ];
 
-      whenListen(paymentCustomerInformationBlocMock,
-          Stream.fromIterable(expectedPaymentStates));
       await getWidget(tester);
       await tester.pump();
+
+      whenListen(
+        paymentCustomerInformationBlocMock,
+        Stream.fromIterable(expectedPaymentStates),
+      );
 
       verify(() => paymentTermBlocMock.add(PaymentTermEvent.fetch(
             customeCodeInfo: customerCodeBlocMock.state.customerCodeInfo,

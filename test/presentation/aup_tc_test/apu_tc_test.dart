@@ -98,6 +98,7 @@ void main() {
   late ResetPasswordBloc resetPasswordBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late DeepLinkingBloc deepLinkingBlocMock;
+  late CustomerCodeBloc customerCodeBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -134,6 +135,8 @@ void main() {
     orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
     announcementBlocMock = AnnouncementBlocMock();
     deepLinkingBlocMock = DeepLinkingMockBloc();
+    customerCodeBloc = CustomerCodeBlocMock();
+    when(() => customerCodeBloc.state).thenReturn(CustomerCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
 
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -218,6 +221,9 @@ void main() {
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBloc,
+            ),
             BlocProvider<SalesOrgBloc>(
               create: (context) => mockSalesOrgBloc,
             ),

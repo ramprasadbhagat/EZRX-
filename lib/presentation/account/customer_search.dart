@@ -246,11 +246,6 @@ class _ShipToAddressSection extends StatelessWidget {
       trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
         MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
       });
-      context.read<ShipToCodeBloc>().add(
-            ShipToCodeEvent.selected(
-              shipToInfo: shipToInfo,
-            ),
-          );
     }
   }
 

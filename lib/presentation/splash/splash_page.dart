@@ -453,10 +453,40 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.salesOrganisation != current.salesOrganisation,
           listener: (context, state) {
             context.read<CustomerCodeBloc>().add(
-                  CustomerCodeEvent.fetch(
+                  CustomerCodeEvent.loadStoredCustomerCode(
                     hidecustomer: state.hideCustomer,
                     selectedSalesOrg: state.salesOrganisation,
                     userInfo: context.read<UserBloc>().state.user,
+                  ),
+                );
+          },
+        ),
+        BlocListener<CustomerCodeBloc, CustomerCodeState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+                  current.apiFailureOrSuccessOption ||
+              previous.customerCodeInfo != current.customerCodeInfo,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
+
+            final defaultShipToInfo = state.defaultShipToInfo;
+            context.read<ShipToCodeBloc>().add(
+                  ShipToCodeEvent.load(
+                    shipToInfos: state.shipToInfos,
+                  ),
+                );
+            context.read<ShipToCodeBloc>().add(
+                  ShipToCodeEvent.loadSavedShipToCode(
+                    shipToInfos: state.shipToInfos,
+                    defaultShipToInfo: defaultShipToInfo,
                   ),
                 );
           },
