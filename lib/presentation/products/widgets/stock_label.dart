@@ -16,6 +16,7 @@ class StockLabel extends StatelessWidget {
         : Container(
             key: WidgetKeys.materialListStockLabel,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            margin: const EdgeInsets.only(top: 10),
             decoration: const BoxDecoration(
               color: ZPColors.warning,
               borderRadius: BorderRadius.only(

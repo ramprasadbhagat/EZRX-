@@ -13,7 +13,6 @@ class MaterialInfo with _$MaterialInfo {
   const MaterialInfo._();
 
   const factory MaterialInfo({
-
     required MaterialNumber code,
     required String name,
     required String principalCode,
@@ -29,7 +28,6 @@ class MaterialInfo with _$MaterialInfo {
     required bool isGimmick,
     required List<StockInfo> stockInfos,
     required Bundle bundle,
-
 
     //TODO: remove field from v2
     required String defaultMaterialDescription,
@@ -151,6 +149,8 @@ class MaterialInfo with _$MaterialInfo {
 
   List<MaterialData> get listingVisibleMaterial =>
       data.sublist(0, data.length > 5 ? 5 : data.length);
+
+  String get productImage => data.isNotEmpty ? data.first.materialImageURL : '';
 }
 
 @freezed
@@ -178,5 +178,4 @@ class MaterialResponse with _$MaterialResponse {
     required int count,
     required List<MaterialInfo> products,
   }) = _MaterialResponse;
-
 }

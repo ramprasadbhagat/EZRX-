@@ -2,9 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
@@ -18,7 +20,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
@@ -31,34 +32,52 @@ class MaterialGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       key: WidgetKeys.materialListMaterialCard,
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       child: Column(
         children: [
           Expanded(
             flex: 3,
-            child: Stack(
-              children: [
-                Center(
-                  child: SvgPicture.asset(
-                    'assets/svg/product_default.svg',
-                    fit: BoxFit.fill,
+            child: ColoredBox(
+              color: ZPColors.extraLightGrey3,
+              child: Stack(
+                children: [
+                  Center(
+                    child: CachedNetworkImage(
+                      imageUrl: materialInfo.productImage,
+                      fit: BoxFit.fitHeight,
+                      placeholder: (context, url) {
+                        return LoadingShimmer.withChild(
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(8.0),
+                                topLeft: Radius.circular(8.0),
+                              ),
+                              color: ZPColors.white,
+                            ),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.20,
+                          ),
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return SvgPicture.asset(
+                          'assets/svg/product_default.svg',
+                          fit: BoxFit.fill,
+                        );
+                      },
+                    ),
                   ),
-                ),
-                StockLabel(
-                  materialInfo: materialInfo,
-                ),
-                const Align(
-                  alignment: Alignment.bottomRight,
-                  child: FavouriteIcon(),
-                ),
-              ],
+                  StockLabel(
+                    materialInfo: materialInfo,
+                  ),
+                  const Align(
+                    alignment: Alignment.bottomRight,
+                    child: FavouriteIcon(),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Divider(
-            indent: 0,
-            endIndent: 0,
-            height: 15,
-            color: ZPColors.accentColor,
           ),
           Expanded(
             flex: 2,
@@ -94,7 +113,7 @@ class MaterialGridItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 5),
-                  _PriceLabel(materialInfo: materialInfo,),
+                  _PriceLabel(materialInfo: materialInfo),
                 ],
               ),
             ),
@@ -114,7 +133,7 @@ class _PriceLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
       buildWhen: (previous, current) =>
-      previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.code];
         if (itemPrice != null) {
@@ -127,11 +146,11 @@ class _PriceLabel extends StatelessWidget {
             // TODO: will revisit and enhance this
             discountedMaterialCount: itemPrice.zmgDiscount
                 ? context.watch<CartBloc>().state.zmgMaterialCount(
-              itemMaterialGroup: materialInfo.materialGroup2,
-            )
+                      itemMaterialGroup: materialInfo.materialGroup2,
+                    )
                 : context.read<CartBloc>().state.zmgMaterialCount(
-              itemMaterialGroup: materialInfo.materialGroup2,
-            ),
+                      itemMaterialGroup: materialInfo.materialGroup2,
+                    ),
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty().copyWith(
