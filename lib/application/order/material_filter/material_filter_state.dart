@@ -10,7 +10,9 @@ class MaterialFilterState with _$MaterialFilterState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
     required List<String> selectedItem,
+    required bool isFavourite,
     required bool isFilterApplied,
+    required bool isUpdated,
   }) = _MaterialFilterState;
 
   factory MaterialFilterState.initial() => MaterialFilterState(
@@ -28,7 +30,9 @@ class MaterialFilterState with _$MaterialFilterState {
         searchKey: '',
         apiFailureOrSuccessOption: none(),
         selectedItem: [],
+        isFavourite: false,
         isFilterApplied: false,
+        isUpdated: true,
       );
 
   List<String> getFilterList(MaterialFilterType filterType) {

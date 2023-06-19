@@ -169,4 +169,5 @@ class WidgetKeys {
   static const Key priceLoading = Key('price-loading');
   static Key materialListBundleMaterial(String materialNumber) =>
       Key('bundleMaterialCard$materialNumber');
+  static const Key materialFavouriteButton = Key('materialFavouriteButton');
 }

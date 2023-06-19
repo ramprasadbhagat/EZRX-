@@ -23,7 +23,8 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -52,7 +53,8 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -75,7 +77,8 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -104,7 +107,8 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -127,7 +131,8 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -156,7 +161,8 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -274,7 +280,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -303,7 +310,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -329,7 +337,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -358,7 +367,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -384,7 +394,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -413,7 +424,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -499,12 +511,14 @@ abstract class _$$_FetchCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      MaterialFilter selectedMaterialFilter});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
 }
 
 /// @nodoc
@@ -521,6 +535,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? selectedMaterialFilter = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -539,6 +554,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      selectedMaterialFilter: null == selectedMaterialFilter
+          ? _value.selectedMaterialFilter
+          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
     ));
   }
 
@@ -573,6 +592,15 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
+        (value) {
+      return _then(_value.copyWith(selectedMaterialFilter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -582,7 +610,8 @@ class _$_Fetch implements _Fetch {
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.selectedMaterialFilter});
 
 // required User user,
   @override
@@ -593,10 +622,12 @@ class _$_Fetch implements _Fetch {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final MaterialFilter selectedMaterialFilter;
 
   @override
   String toString() {
-    return 'MaterialListEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'MaterialListEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter)';
   }
 
   @override
@@ -610,12 +641,14 @@ class _$_Fetch implements _Fetch {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
+                other.selectedMaterialFilter == selectedMaterialFilter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, configs, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
+      customerCodeInfo, shipToInfo, selectedMaterialFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -631,7 +664,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -660,7 +694,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -675,7 +710,8 @@ class _$_Fetch implements _Fetch {
             bool isScanSearch)
         deletedSearchMaterialList,
   }) {
-    return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo);
+    return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+        selectedMaterialFilter);
   }
 
   @override
@@ -686,7 +722,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -715,7 +752,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -730,8 +768,8 @@ class _$_Fetch implements _Fetch {
             bool isScanSearch)?
         deletedSearchMaterialList,
   }) {
-    return fetch?.call(
-        salesOrganisation, configs, customerCodeInfo, shipToInfo);
+    return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+        selectedMaterialFilter);
   }
 
   @override
@@ -742,7 +780,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -771,7 +810,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -788,7 +828,8 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo);
+      return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+          selectedMaterialFilter);
     }
     return orElse();
   }
@@ -849,13 +890,15 @@ abstract class _Fetch implements MaterialListEvent {
       {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_Fetch;
+      required final ShipToInfo shipToInfo,
+      required final MaterialFilter selectedMaterialFilter}) = _$_Fetch;
 
 // required User user,
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1087,7 +1130,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -1116,7 +1160,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -1151,7 +1196,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -1180,7 +1226,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -1215,7 +1262,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -1244,7 +1292,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -1578,7 +1627,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -1607,7 +1657,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -1642,7 +1693,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -1671,7 +1723,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -1706,7 +1759,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -1735,7 +1789,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -1913,7 +1968,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -1942,7 +1998,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -1968,7 +2025,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -1997,7 +2055,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -2023,7 +2082,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -2052,7 +2112,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -2145,12 +2206,14 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      MaterialFilter selectedMaterialFilter});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
 }
 
 /// @nodoc
@@ -2168,6 +2231,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? selectedMaterialFilter = null,
   }) {
     return _then(_$_LoadMore(
       salesOrganisation: null == salesOrganisation
@@ -2186,6 +2250,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      selectedMaterialFilter: null == selectedMaterialFilter
+          ? _value.selectedMaterialFilter
+          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
     ));
   }
 
@@ -2220,6 +2288,15 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
+        (value) {
+      return _then(_value.copyWith(selectedMaterialFilter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -2229,7 +2306,8 @@ class _$_LoadMore implements _LoadMore {
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.selectedMaterialFilter});
 
 // required User user,
   @override
@@ -2240,10 +2318,12 @@ class _$_LoadMore implements _LoadMore {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final MaterialFilter selectedMaterialFilter;
 
   @override
   String toString() {
-    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter)';
   }
 
   @override
@@ -2257,12 +2337,14 @@ class _$_LoadMore implements _LoadMore {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
+                other.selectedMaterialFilter == selectedMaterialFilter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, configs, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
+      customerCodeInfo, shipToInfo, selectedMaterialFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -2278,7 +2360,8 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -2307,7 +2390,8 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -2322,7 +2406,8 @@ class _$_LoadMore implements _LoadMore {
             bool isScanSearch)
         deletedSearchMaterialList,
   }) {
-    return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo);
+    return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+        selectedMaterialFilter);
   }
 
   @override
@@ -2333,7 +2418,8 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -2362,7 +2448,8 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -2377,8 +2464,8 @@ class _$_LoadMore implements _LoadMore {
             bool isScanSearch)?
         deletedSearchMaterialList,
   }) {
-    return loadMore?.call(
-        salesOrganisation, configs, customerCodeInfo, shipToInfo);
+    return loadMore?.call(salesOrganisation, configs, customerCodeInfo,
+        shipToInfo, selectedMaterialFilter);
   }
 
   @override
@@ -2389,7 +2476,8 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -2418,7 +2506,8 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,
@@ -2435,7 +2524,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo);
+      return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+          selectedMaterialFilter);
     }
     return orElse();
   }
@@ -2496,13 +2586,15 @@ abstract class _LoadMore implements MaterialListEvent {
       {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_LoadMore;
+      required final ShipToInfo shipToInfo,
+      required final MaterialFilter selectedMaterialFilter}) = _$_LoadMore;
 
 // required User user,
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2757,7 +2849,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         fetch,
     required TResult Function(
             User user,
@@ -2786,7 +2879,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
         loadMore,
     required TResult Function(
             User user,
@@ -2822,7 +2916,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult? Function(
             User user,
@@ -2851,7 +2946,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult? Function(
             User user,
@@ -2887,7 +2983,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         fetch,
     TResult Function(
             User user,
@@ -2916,7 +3013,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
         loadMore,
     TResult Function(
             User user,

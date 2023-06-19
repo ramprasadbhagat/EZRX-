@@ -54,6 +54,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           shipToInfo: e.shipToInfo,
           pageSize: _pageSize,
           offset: 0,
+          selectedMaterialFilter: e.selectedMaterialFilter,
           orderByName: 'asc',
         );
         failureOrSuccess.fold(
@@ -94,6 +95,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         shipToInfo: e.shipToInfo,
         pageSize: _pageSize,
         offset: state.materialList.length,
+        selectedMaterialFilter: e.selectedMaterialFilter,
         orderByName: 'asc',
       );
       failureOrSuccess.fold(
@@ -195,6 +197,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           configs: e.configs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
+          selectedMaterialFilter: e.selectedMaterialFilter,
         ));
       }
     });

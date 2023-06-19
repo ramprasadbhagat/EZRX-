@@ -9,7 +9,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    // required MaterialFilter selectedMaterialFilter,
+    required MaterialFilter selectedMaterialFilter,
     // required OrderDocumentType orderDocumentType,
     // required String pickAndPack,
   }) = _Fetch;
@@ -44,7 +44,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    // required MaterialFilter selectedMaterialFilter,
+    required MaterialFilter selectedMaterialFilter,
     // required OrderDocumentType orderDocumentType,
     // required String pickAndPack,
   }) = _LoadMore;

@@ -640,6 +640,8 @@ void main() {
             configs: salesOrgBlocMock.state.configs,
             customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             shipToInfo: eligibilityBlocMock.state.shipToInfo,
+            selectedMaterialFilter:
+                materialFilterBlocMock.state.selectedMaterialFilter,
           ),
         ),
       ).called(2);

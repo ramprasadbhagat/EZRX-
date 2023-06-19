@@ -41,6 +41,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required ShipToInfo shipToInfo,
     required int pageSize,
     required int offset,
+    required MaterialFilter selectedMaterialFilter,
     required String orderByName,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -63,6 +64,7 @@ class MaterialListRepository implements IMaterialListRepository {
         pageSize: pageSize,
         language: salesOrgConfig.getConfigLanguage,
         gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
+        isFavourite: selectedMaterialFilter.isFavourite,
         offset: offset,
         orderByName: orderByName,
       );

@@ -58,6 +58,7 @@ class MaterialFilterBloc
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 materialFilter: materialFilter,
+                isFavourite: false,
                 isFetching: false,
               ),
             );
@@ -84,6 +85,15 @@ class MaterialFilterBloc
               apiFailureOrSuccessOption: none(),
             ));
             break;
+          case MaterialFilterType.isFavourite:
+            emit(state.copyWith(
+              selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
+                isFavourite: state.isFavourite,
+              ),
+              isFilterApplied: true,
+              isUpdated: true,
+            ));
+            break;
           case MaterialFilterType.brand:
           default:
             emit(state.copyWith(
@@ -97,16 +107,25 @@ class MaterialFilterBloc
         }
       },
       updateTappedMaterialSelected: (e) async {
-        final tempList = List<String>.from(state.selectedItem);
-        tempList.contains(e.selectedFilter)
-            ? tempList.remove(e.selectedFilter)
-            : tempList.add(e.selectedFilter);
-        emit(
-          state.copyWith(
-            selectedItem: tempList,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
+        if (e.filterType == MaterialFilterType.isFavourite) {
+          emit(
+            state.copyWith(
+              isFavourite: !state.isFavourite,
+              isUpdated: false,
+            ),
+          );
+        } else {
+          final tempList = List<String>.from(state.selectedItem);
+          tempList.contains(e.selectedFilter)
+              ? tempList.remove(e.selectedFilter)
+              : tempList.add(e.selectedFilter);
+          emit(
+            state.copyWith(
+              selectedItem: tempList,
+              apiFailureOrSuccessOption: none(),
+            ),
+          );
+        }
       },
       updateSearchKey: (e) async =>
           emit(state.copyWith(searchKey: e.searchkey)),
@@ -122,6 +141,7 @@ class MaterialFilterBloc
             selectedMaterialFilter: state.getEmptyMaterialFilter(),
             materialFilter: state.getEmptyMaterialFilter(),
             isFilterApplied: false,
+            isFavourite: false,
             selectedItem: [],
           ),
         );
@@ -164,11 +184,23 @@ class MaterialFilterBloc
               ),
             );
             break;
+          case MaterialFilterType.isFavourite:
+            emit(
+              state.copyWith(
+                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
+                  isFavourite: false,
+                ),
+                selectedItem: [],
+                isFilterApplied: false,
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
         }
       },
       setTappedMaterialToEmpty: (e) async => emit(
         state.copyWith(
           selectedItem: [],
+          isFavourite: false,
           apiFailureOrSuccessOption: none(),
         ),
       ),
@@ -189,6 +221,7 @@ class MaterialFilterBloc
         emit(
           state.copyWith(
             selectedItem: tempMap,
+            isFavourite: false,
             isFilterApplied: false,
             apiFailureOrSuccessOption: none(),
           ),

@@ -538,6 +538,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<EligibilityBloc>().state.shipToInfo,
+                    selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
                   ),
                 );
           },
@@ -683,6 +684,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
   void _initializeProduct() {
     final eligibilityBloc = context.read<EligibilityBloc>();
+    context.read<MaterialFilterBloc>().add(
+      MaterialFilterEvent.fetch(
+        user: context.read<UserBloc>().state.user,
+        salesOrganisation:
+        context.read<SalesOrgBloc>().state.salesOrganisation,
+        salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+        customerCodeInfo:
+        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+        shipToInfo:
+        context.read<EligibilityBloc>().state.shipToInfo,
+        pickAndPack: context
+            .read<EligibilityBloc>()
+            .state
+            .getPNPValueMaterial,
+      ),
+    );
+    context.read<MaterialFilterBloc>().add(
+      const MaterialFilterEvent.resetFilter(),
+    );
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
             salesOrganisation:
@@ -690,6 +710,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
+            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }

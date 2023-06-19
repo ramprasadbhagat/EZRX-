@@ -21,6 +21,7 @@ OrderHistoryFilterDto _$OrderHistoryFilterDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryFilterDto {
+//TODO: will remove if it's not required in filter purpose
 // @JsonKey(
 //   name: 'orderNumber',
 //   defaultValue: '',
@@ -161,6 +162,7 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
   factory _$_ReturnSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
       _$$_ReturnSummaryFilterDtoFromJson(json);
 
+//TODO: will remove if it's not required in filter purpose
 // @JsonKey(
 //   name: 'orderNumber',
 //   defaultValue: '',
@@ -180,6 +182,7 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
 // )
 // required String materialSearch,
   final List<String> _orderStatus;
+//TODO: will remove if it's not required in filter purpose
 // @JsonKey(
 //   name: 'orderNumber',
 //   defaultValue: '',
@@ -263,7 +266,8 @@ abstract class _ReturnSummaryFilterDto extends OrderHistoryFilterDto {
   factory _ReturnSummaryFilterDto.fromJson(Map<String, dynamic> json) =
       _$_ReturnSummaryFilterDto.fromJson;
 
-  @override // @JsonKey(
+  @override //TODO: will remove if it's not required in filter purpose
+// @JsonKey(
 //   name: 'orderNumber',
 //   defaultValue: '',
 //   toJson: valueTojson,

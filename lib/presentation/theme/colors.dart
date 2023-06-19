@@ -23,6 +23,7 @@ abstract class ZPColors {
       Color.fromRGBO(233, 237, 238, 0.18);
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
   static const Color translucentWhite = Color.fromRGBO(250, 250, 250, 0.3);
+  static const Color secondaryEmerald10 = Color.fromRGBO(234, 239, 240, 1);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color neutralsBlack = Color.fromRGBO(19, 19, 19, 1);
   static const Color darkYellow = Color.fromRGBO(231, 165, 70, 1);

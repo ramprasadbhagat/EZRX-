@@ -20,6 +20,7 @@ abstract class IMaterialListRepository {
     required int pageSize,
     required int offset,
     required String orderByName,
+    required MaterialFilter selectedMaterialFilter,
   });
 
   Future<Either<ApiFailure, List<MaterialInfo>>> searchMaterialList({

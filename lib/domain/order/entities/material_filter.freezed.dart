@@ -19,6 +19,7 @@ mixin _$MaterialFilter {
   List<String> get uniquePrincipalName => throw _privateConstructorUsedError;
   List<String> get uniqueTherapeuticClass => throw _privateConstructorUsedError;
   List<String> get uniqueItemBrand => throw _privateConstructorUsedError;
+  bool get isFavourite => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialFilterCopyWith<MaterialFilter> get copyWith =>
@@ -34,7 +35,8 @@ abstract class $MaterialFilterCopyWith<$Res> {
   $Res call(
       {List<String> uniquePrincipalName,
       List<String> uniqueTherapeuticClass,
-      List<String> uniqueItemBrand});
+      List<String> uniqueItemBrand,
+      bool isFavourite});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
     Object? uniquePrincipalName = null,
     Object? uniqueTherapeuticClass = null,
     Object? uniqueItemBrand = null,
+    Object? isFavourite = null,
   }) {
     return _then(_value.copyWith(
       uniquePrincipalName: null == uniquePrincipalName
@@ -67,6 +70,10 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
           ? _value.uniqueItemBrand
           : uniqueItemBrand // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isFavourite: null == isFavourite
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
   $Res call(
       {List<String> uniquePrincipalName,
       List<String> uniqueTherapeuticClass,
-      List<String> uniqueItemBrand});
+      List<String> uniqueItemBrand,
+      bool isFavourite});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
     Object? uniquePrincipalName = null,
     Object? uniqueTherapeuticClass = null,
     Object? uniqueItemBrand = null,
+    Object? isFavourite = null,
   }) {
     return _then(_$_MaterialFilter(
       uniquePrincipalName: null == uniquePrincipalName
@@ -113,6 +122,10 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
           ? _value._uniqueItemBrand
           : uniqueItemBrand // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isFavourite: null == isFavourite
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -123,7 +136,8 @@ class _$_MaterialFilter extends _MaterialFilter {
   const _$_MaterialFilter(
       {required final List<String> uniquePrincipalName,
       required final List<String> uniqueTherapeuticClass,
-      required final List<String> uniqueItemBrand})
+      required final List<String> uniqueItemBrand,
+      this.isFavourite = false})
       : _uniquePrincipalName = uniquePrincipalName,
         _uniqueTherapeuticClass = uniqueTherapeuticClass,
         _uniqueItemBrand = uniqueItemBrand,
@@ -156,8 +170,12 @@ class _$_MaterialFilter extends _MaterialFilter {
   }
 
   @override
+  @JsonKey()
+  final bool isFavourite;
+
+  @override
   String toString() {
-    return 'MaterialFilter(uniquePrincipalName: $uniquePrincipalName, uniqueTherapeuticClass: $uniqueTherapeuticClass, uniqueItemBrand: $uniqueItemBrand)';
+    return 'MaterialFilter(uniquePrincipalName: $uniquePrincipalName, uniqueTherapeuticClass: $uniqueTherapeuticClass, uniqueItemBrand: $uniqueItemBrand, isFavourite: $isFavourite)';
   }
 
   @override
@@ -170,7 +188,9 @@ class _$_MaterialFilter extends _MaterialFilter {
             const DeepCollectionEquality().equals(
                 other._uniqueTherapeuticClass, _uniqueTherapeuticClass) &&
             const DeepCollectionEquality()
-                .equals(other._uniqueItemBrand, _uniqueItemBrand));
+                .equals(other._uniqueItemBrand, _uniqueItemBrand) &&
+            (identical(other.isFavourite, isFavourite) ||
+                other.isFavourite == isFavourite));
   }
 
   @override
@@ -178,7 +198,8 @@ class _$_MaterialFilter extends _MaterialFilter {
       runtimeType,
       const DeepCollectionEquality().hash(_uniquePrincipalName),
       const DeepCollectionEquality().hash(_uniqueTherapeuticClass),
-      const DeepCollectionEquality().hash(_uniqueItemBrand));
+      const DeepCollectionEquality().hash(_uniqueItemBrand),
+      isFavourite);
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +212,8 @@ abstract class _MaterialFilter extends MaterialFilter {
   const factory _MaterialFilter(
       {required final List<String> uniquePrincipalName,
       required final List<String> uniqueTherapeuticClass,
-      required final List<String> uniqueItemBrand}) = _$_MaterialFilter;
+      required final List<String> uniqueItemBrand,
+      final bool isFavourite}) = _$_MaterialFilter;
   const _MaterialFilter._() : super._();
 
   @override
@@ -200,6 +222,8 @@ abstract class _MaterialFilter extends MaterialFilter {
   List<String> get uniqueTherapeuticClass;
   @override
   List<String> get uniqueItemBrand;
+  @override
+  bool get isFavourite;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialFilterCopyWith<_$_MaterialFilter> get copyWith =>

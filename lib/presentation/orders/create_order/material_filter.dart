@@ -98,6 +98,10 @@ class MaterialFilterPage extends StatelessWidget {
                                 .customerCodeInfo,
                             shipToInfo:
                                 context.read<ShipToCodeBloc>().state.shipToInfo,
+                            selectedMaterialFilter: context
+                                .read<MaterialFilterBloc>()
+                                .state
+                                .selectedMaterialFilter,
                           ),
                         )
                     : true;

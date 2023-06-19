@@ -2338,7 +2338,9 @@ mixin _$MaterialFilterState {
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   List<String> get selectedItem => throw _privateConstructorUsedError;
+  bool get isFavourite => throw _privateConstructorUsedError;
   bool get isFilterApplied => throw _privateConstructorUsedError;
+  bool get isUpdated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialFilterStateCopyWith<MaterialFilterState> get copyWith =>
@@ -2358,7 +2360,9 @@ abstract class $MaterialFilterStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
       List<String> selectedItem,
-      bool isFilterApplied});
+      bool isFavourite,
+      bool isFilterApplied,
+      bool isUpdated});
 
   $MaterialFilterCopyWith<$Res> get materialFilter;
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
@@ -2383,7 +2387,9 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? selectedItem = null,
+    Object? isFavourite = null,
     Object? isFilterApplied = null,
+    Object? isUpdated = null,
   }) {
     return _then(_value.copyWith(
       materialFilter: null == materialFilter
@@ -2410,9 +2416,17 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isFavourite: null == isFavourite
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFilterApplied: null == isFilterApplied
           ? _value.isFilterApplied
           : isFilterApplied // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdated: null == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -2450,7 +2464,9 @@ abstract class _$$_MaterialFilterStateCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
       List<String> selectedItem,
-      bool isFilterApplied});
+      bool isFavourite,
+      bool isFilterApplied,
+      bool isUpdated});
 
   @override
   $MaterialFilterCopyWith<$Res> get materialFilter;
@@ -2475,7 +2491,9 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? selectedItem = null,
+    Object? isFavourite = null,
     Object? isFilterApplied = null,
+    Object? isUpdated = null,
   }) {
     return _then(_$_MaterialFilterState(
       materialFilter: null == materialFilter
@@ -2502,9 +2520,17 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
           ? _value._selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isFavourite: null == isFavourite
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFilterApplied: null == isFilterApplied
           ? _value.isFilterApplied
           : isFilterApplied // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdated: null == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -2520,7 +2546,9 @@ class _$_MaterialFilterState extends _MaterialFilterState {
       required this.apiFailureOrSuccessOption,
       required this.isFetching,
       required final List<String> selectedItem,
-      required this.isFilterApplied})
+      required this.isFavourite,
+      required this.isFilterApplied,
+      required this.isUpdated})
       : _selectedItem = selectedItem,
         super._();
 
@@ -2543,11 +2571,15 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   }
 
   @override
+  final bool isFavourite;
+  @override
   final bool isFilterApplied;
+  @override
+  final bool isUpdated;
 
   @override
   String toString() {
-    return 'MaterialFilterState(materialFilter: $materialFilter, selectedMaterialFilter: $selectedMaterialFilter, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, selectedItem: $selectedItem, isFilterApplied: $isFilterApplied)';
+    return 'MaterialFilterState(materialFilter: $materialFilter, selectedMaterialFilter: $selectedMaterialFilter, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, selectedItem: $selectedItem, isFavourite: $isFavourite, isFilterApplied: $isFilterApplied, isUpdated: $isUpdated)';
   }
 
   @override
@@ -2568,8 +2600,12 @@ class _$_MaterialFilterState extends _MaterialFilterState {
                 other.isFetching == isFetching) &&
             const DeepCollectionEquality()
                 .equals(other._selectedItem, _selectedItem) &&
+            (identical(other.isFavourite, isFavourite) ||
+                other.isFavourite == isFavourite) &&
             (identical(other.isFilterApplied, isFilterApplied) ||
-                other.isFilterApplied == isFilterApplied));
+                other.isFilterApplied == isFilterApplied) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated));
   }
 
   @override
@@ -2581,7 +2617,9 @@ class _$_MaterialFilterState extends _MaterialFilterState {
       apiFailureOrSuccessOption,
       isFetching,
       const DeepCollectionEquality().hash(_selectedItem),
-      isFilterApplied);
+      isFavourite,
+      isFilterApplied,
+      isUpdated);
 
   @JsonKey(ignore: true)
   @override
@@ -2600,7 +2638,9 @@ abstract class _MaterialFilterState extends MaterialFilterState {
           apiFailureOrSuccessOption,
       required final bool isFetching,
       required final List<String> selectedItem,
-      required final bool isFilterApplied}) = _$_MaterialFilterState;
+      required final bool isFavourite,
+      required final bool isFilterApplied,
+      required final bool isUpdated}) = _$_MaterialFilterState;
   const _MaterialFilterState._() : super._();
 
   @override
@@ -2616,7 +2656,11 @@ abstract class _MaterialFilterState extends MaterialFilterState {
   @override
   List<String> get selectedItem;
   @override
+  bool get isFavourite;
+  @override
   bool get isFilterApplied;
+  @override
+  bool get isUpdated;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialFilterStateCopyWith<_$_MaterialFilterState> get copyWith =>

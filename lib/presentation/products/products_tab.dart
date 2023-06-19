@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
+import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/shimmer_grid_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -43,30 +45,38 @@ class ProductsTab extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching,
         builder: (context, state) {
-          return state.isFetching && state.materialList.isEmpty
-              ? const LoadingShimmerGridItem()
-              : Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ScrollableGridView<MaterialInfo>(
-                    emptyMessage: 'No material found'.tr(),
-                    header: const _TotalMaterialCount(),
-                    isLoading: state.isFetching,
-                    items: state.materialList,
-                    onRefresh: () => _onRefresh(context),
-                    onLoadingMore: () => _onLoadingMore(context),
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 0,
-                    itemBuilder:
-                        (BuildContext context, int index, MaterialInfo item) =>
-                            item.type.typeMaterial
-                                ? MaterialGridItem(
-                                    materialInfo: item,
-                                  )
-                                : BundleGridItem(
-                                    materialInfo: item,
-                                  ),
-                  ),
-                );
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FilterValueList(isFetching: state.isFetching,),
+              Expanded(
+                child: state.isFetching && state.materialList.isEmpty
+                    ? const LoadingShimmerGridItem()
+                    : Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: ScrollableGridView<MaterialInfo>(
+                          emptyMessage: 'No material found'.tr(),
+                          header: const _TotalMaterialCount(),
+                          isLoading: state.isFetching,
+                          items: state.materialList,
+                          onRefresh: () => _onRefresh(context),
+                          onLoadingMore: () => _onLoadingMore(context),
+                          mainAxisSpacing: 0,
+                          crossAxisSpacing: 0,
+                          itemBuilder:
+                              (BuildContext context, int index, MaterialInfo item) =>
+                                  item.type.typeMaterial
+                                      ? MaterialGridItem(
+                                          materialInfo: item,
+                                        )
+                                      : BundleGridItem(
+                                          materialInfo: item,
+                                        ),
+                        ),
+                      ),
+              ),
+            ],
+          );
         },
       ),
     );
@@ -81,6 +91,7 @@ class ProductsTab extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
+            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }
@@ -94,6 +105,7 @@ class ProductsTab extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
+            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }

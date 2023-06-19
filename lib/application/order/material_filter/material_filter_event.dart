@@ -36,4 +36,5 @@ enum MaterialFilterType {
   principal,
   therapeutic,
   brand,
+  isFavourite,
 }

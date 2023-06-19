@@ -210,6 +210,7 @@ class MaterialListRemoteDataSource {
     required int offset,
     required bool gimmickMaterial,
     required String language,
+    required bool isFavourite,
     required String orderByName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -228,6 +229,9 @@ class MaterialListRemoteDataSource {
           // 'Type': 'bundle'
         },
       };
+
+      if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
+
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}price',

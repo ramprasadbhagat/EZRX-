@@ -10,11 +10,13 @@ class MaterialFilter with _$MaterialFilter {
     required List<String> uniquePrincipalName,
     required List<String> uniqueTherapeuticClass,
     required List<String> uniqueItemBrand,
+    @Default(false) bool isFavourite,
   }) = _MaterialFilter;
 
   factory MaterialFilter.empty() => const MaterialFilter(
         uniqueItemBrand: <String>[],
         uniquePrincipalName: <String>[],
         uniqueTherapeuticClass: <String>[],
+        isFavourite: false,
       );
 }

@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sizer/sizer.dart';
 
 enum AppTheme {
   light,
@@ -424,12 +423,12 @@ DividerThemeData _dividerTheme() {
 }
 
 ChipThemeData _chipTheme() {
-  return ChipThemeData(
-    backgroundColor: ZPColors.secondary,
-    labelStyle: TextStyle(color: ZPColors.primary, fontSize: 8.sp),
-    labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+  return const ChipThemeData(
+    backgroundColor: ZPColors.secondaryEmerald10,
+    labelPadding: EdgeInsets.symmetric(horizontal: 10),
+    labelStyle: TextStyle(fontSize: 14, letterSpacing: 0.25, height: 1.1),
+    selectedColor: ZPColors.primary,
     padding: EdgeInsets.zero,
-    shape: const StadiumBorder(),
   );
 }
 
