@@ -15,7 +15,7 @@ class  OrderHistoryDto with _$OrderHistoryDto {
     @JsonKey(name: 'OrderBasicInformation')
         required OrderHistoryBasicInfoDto orderBasicInformation,
     @JsonKey(name: 'OrderItems') required List<OrderHistoryItemDto> orderItems,
-  }) = _OrderHistoryItemDto;
+  }) = _OrderHistoryDto;
   factory OrderHistoryDto.fromDomain(
     OrderHistory orderHistory,
   ) {

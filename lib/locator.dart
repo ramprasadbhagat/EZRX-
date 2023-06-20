@@ -32,6 +32,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
@@ -86,6 +87,9 @@ import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_r
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -242,6 +246,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/payment_term_reposito
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
@@ -2528,6 +2533,35 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AccountSummaryBloc(
       accountSummaryRepository: locator<AccountSummaryRepository>(),
+    ),
+  );
+
+  //============================================================
+  // View By Order History
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ViewByOrderHistoryLocalDataSource());
+  locator.registerLazySingleton(() => ViewByOrderQuery());
+  locator.registerLazySingleton(
+    () => ViewByOrderHistoryRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      viewByOrderQuery: locator<ViewByOrderQuery>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ViewByOrderHistoryRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ViewByOrderHistoryLocalDataSource>(),
+      remoteDataSource: locator<ViewByOrderHistoryRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ViewByOrderHistoryBloc(
+      viewByOrderHistoryRepository: locator<ViewByOrderHistoryRepository>(),
     ),
   );
 }

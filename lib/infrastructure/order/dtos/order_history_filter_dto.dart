@@ -42,7 +42,7 @@ class OrderHistoryFilterDto with _$OrderHistoryFilterDto {
       defaultValue: '',
     )
         required String dateFrom,
-  }) = _ReturnSummaryFilterDto;
+  }) = _OrderHistoryFilterDto;
 
   factory OrderHistoryFilterDto.fromDomain(
     OrderHistoryFilter orderHistoryFilter,

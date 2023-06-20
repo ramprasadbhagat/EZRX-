@@ -41,6 +41,24 @@ mixin _$OrderHistoryDetailsOrderHeadersDto {
   String get referenceNotes => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderReason', defaultValue: '')
   String get orderReason => throw _privateConstructorUsedError;
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  String get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+  bool get hasPOAttachment => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ItmDescription', defaultValue: '')
+  String get itmDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'MaterialCount', defaultValue: 0)
+  int get materialCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'CreatedTime', defaultValue: '')
+  String get createdTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  String get orderNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'POReference', defaultValue: '')
+  String get pOReference => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ShipTo', defaultValue: '')
+  String get shipTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'SoldTo', defaultValue: '')
+  String get soldTo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +95,25 @@ abstract class $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res> {
       @JsonKey(name: 'ReferenceNotes', defaultValue: '')
           String referenceNotes,
       @JsonKey(name: 'OrderReason', defaultValue: '')
-          String orderReason});
+          String orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+          bool hasPOAttachment,
+      @JsonKey(name: 'ItmDescription', defaultValue: '')
+          String itmDescription,
+      @JsonKey(name: 'MaterialCount', defaultValue: 0)
+          int materialCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '')
+          String createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+          String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '')
+          String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '')
+          String soldTo});
 }
 
 /// @nodoc
@@ -104,6 +140,15 @@ class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
     Object? orderBy = null,
     Object? referenceNotes = null,
     Object? orderReason = null,
+    Object? companyName = null,
+    Object? hasPOAttachment = null,
+    Object? itmDescription = null,
+    Object? materialCount = null,
+    Object? createdTime = null,
+    Object? orderNumber = null,
+    Object? pOReference = null,
+    Object? shipTo = null,
+    Object? soldTo = null,
   }) {
     return _then(_value.copyWith(
       totalTax: null == totalTax
@@ -146,6 +191,42 @@ class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasPOAttachment: null == hasPOAttachment
+          ? _value.hasPOAttachment
+          : hasPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
+      itmDescription: null == itmDescription
+          ? _value.itmDescription
+          : itmDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialCount: null == materialCount
+          ? _value.materialCount
+          : materialCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -179,7 +260,25 @@ abstract class _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
       @JsonKey(name: 'ReferenceNotes', defaultValue: '')
           String referenceNotes,
       @JsonKey(name: 'OrderReason', defaultValue: '')
-          String orderReason});
+          String orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+          bool hasPOAttachment,
+      @JsonKey(name: 'ItmDescription', defaultValue: '')
+          String itmDescription,
+      @JsonKey(name: 'MaterialCount', defaultValue: 0)
+          int materialCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '')
+          String createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+          String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '')
+          String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '')
+          String soldTo});
 }
 
 /// @nodoc
@@ -205,6 +304,15 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
     Object? orderBy = null,
     Object? referenceNotes = null,
     Object? orderReason = null,
+    Object? companyName = null,
+    Object? hasPOAttachment = null,
+    Object? itmDescription = null,
+    Object? materialCount = null,
+    Object? createdTime = null,
+    Object? orderNumber = null,
+    Object? pOReference = null,
+    Object? shipTo = null,
+    Object? soldTo = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderHeadersDto(
       totalTax: null == totalTax
@@ -247,6 +355,42 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasPOAttachment: null == hasPOAttachment
+          ? _value.hasPOAttachment
+          : hasPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
+      itmDescription: null == itmDescription
+          ? _value.itmDescription
+          : itmDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialCount: null == materialCount
+          ? _value.materialCount
+          : materialCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -275,7 +419,25 @@ class _$_OrderHistoryDetailsOrderHeadersDto
       @JsonKey(name: 'ReferenceNotes', defaultValue: '')
           required this.referenceNotes,
       @JsonKey(name: 'OrderReason', defaultValue: '')
-          required this.orderReason})
+          required this.orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          required this.companyName,
+      @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+          required this.hasPOAttachment,
+      @JsonKey(name: 'ItmDescription', defaultValue: '')
+          required this.itmDescription,
+      @JsonKey(name: 'MaterialCount', defaultValue: 0)
+          required this.materialCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '')
+          required this.createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+          required this.orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          required this.pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '')
+          required this.shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '')
+          required this.soldTo})
       : super._();
 
   factory _$_OrderHistoryDetailsOrderHeadersDto.fromJson(
@@ -312,10 +474,37 @@ class _$_OrderHistoryDetailsOrderHeadersDto
   @override
   @JsonKey(name: 'OrderReason', defaultValue: '')
   final String orderReason;
+  @override
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  final String companyName;
+  @override
+  @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+  final bool hasPOAttachment;
+  @override
+  @JsonKey(name: 'ItmDescription', defaultValue: '')
+  final String itmDescription;
+  @override
+  @JsonKey(name: 'MaterialCount', defaultValue: 0)
+  final int materialCount;
+  @override
+  @JsonKey(name: 'CreatedTime', defaultValue: '')
+  final String createdTime;
+  @override
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  final String orderNumber;
+  @override
+  @JsonKey(name: 'POReference', defaultValue: '')
+  final String pOReference;
+  @override
+  @JsonKey(name: 'ShipTo', defaultValue: '')
+  final String shipTo;
+  @override
+  @JsonKey(name: 'SoldTo', defaultValue: '')
+  final String soldTo;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeadersDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason)';
+    return 'OrderHistoryDetailsOrderHeadersDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, companyName: $companyName, hasPOAttachment: $hasPOAttachment, itmDescription: $itmDescription, materialCount: $materialCount, createdTime: $createdTime, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo)';
   }
 
   @override
@@ -340,23 +529,49 @@ class _$_OrderHistoryDetailsOrderHeadersDto
             (identical(other.referenceNotes, referenceNotes) ||
                 other.referenceNotes == referenceNotes) &&
             (identical(other.orderReason, orderReason) ||
-                other.orderReason == orderReason));
+                other.orderReason == orderReason) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.hasPOAttachment, hasPOAttachment) ||
+                other.hasPOAttachment == hasPOAttachment) &&
+            (identical(other.itmDescription, itmDescription) ||
+                other.itmDescription == itmDescription) &&
+            (identical(other.materialCount, materialCount) ||
+                other.materialCount == materialCount) &&
+            (identical(other.createdTime, createdTime) ||
+                other.createdTime == createdTime) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
+            (identical(other.pOReference, pOReference) ||
+                other.pOReference == pOReference) &&
+            (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
+            (identical(other.soldTo, soldTo) || other.soldTo == soldTo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      totalTax,
-      requestedDeliveryDate,
-      type,
-      telephoneNumber,
-      orderValue,
-      createdDate,
-      eZRXNumber,
-      orderBy,
-      referenceNotes,
-      orderReason);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        totalTax,
+        requestedDeliveryDate,
+        type,
+        telephoneNumber,
+        orderValue,
+        createdDate,
+        eZRXNumber,
+        orderBy,
+        referenceNotes,
+        orderReason,
+        companyName,
+        hasPOAttachment,
+        itmDescription,
+        materialCount,
+        createdTime,
+        orderNumber,
+        pOReference,
+        shipTo,
+        soldTo
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -396,7 +611,25 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
           @JsonKey(name: 'ReferenceNotes', defaultValue: '')
               required final String referenceNotes,
           @JsonKey(name: 'OrderReason', defaultValue: '')
-              required final String orderReason}) =
+              required final String orderReason,
+          @JsonKey(name: 'CompanyName', defaultValue: '')
+              required final String companyName,
+          @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+              required final bool hasPOAttachment,
+          @JsonKey(name: 'ItmDescription', defaultValue: '')
+              required final String itmDescription,
+          @JsonKey(name: 'MaterialCount', defaultValue: 0)
+              required final int materialCount,
+          @JsonKey(name: 'CreatedTime', defaultValue: '')
+              required final String createdTime,
+          @JsonKey(name: 'OrderNumber', defaultValue: '')
+              required final String orderNumber,
+          @JsonKey(name: 'POReference', defaultValue: '')
+              required final String pOReference,
+          @JsonKey(name: 'ShipTo', defaultValue: '')
+              required final String shipTo,
+          @JsonKey(name: 'SoldTo', defaultValue: '')
+              required final String soldTo}) =
       _$_OrderHistoryDetailsOrderHeadersDto;
   const _OrderHistoryDetailsOrderHeadersDto._() : super._();
 
@@ -434,6 +667,33 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
   @override
   @JsonKey(name: 'OrderReason', defaultValue: '')
   String get orderReason;
+  @override
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  String get companyName;
+  @override
+  @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+  bool get hasPOAttachment;
+  @override
+  @JsonKey(name: 'ItmDescription', defaultValue: '')
+  String get itmDescription;
+  @override
+  @JsonKey(name: 'MaterialCount', defaultValue: 0)
+  int get materialCount;
+  @override
+  @JsonKey(name: 'CreatedTime', defaultValue: '')
+  String get createdTime;
+  @override
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  String get orderNumber;
+  @override
+  @JsonKey(name: 'POReference', defaultValue: '')
+  String get pOReference;
+  @override
+  @JsonKey(name: 'ShipTo', defaultValue: '')
+  String get shipTo;
+  @override
+  @JsonKey(name: 'SoldTo', defaultValue: '')
+  String get soldTo;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<

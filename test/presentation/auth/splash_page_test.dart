@@ -23,6 +23,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -166,6 +167,10 @@ class OrderHistoryFilterMockBloc
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
 
+class ViewByOrderHistoryMockBloc
+    extends MockBloc<ViewByOrderHistoryEvent, ViewByOrderHistoryState>
+    implements ViewByOrderHistoryBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -203,6 +208,7 @@ void main() {
   late OrderHistoryListBloc mockOrderHistoryListBloc;
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
+  final mockViewByOrderHistoryBloc = ViewByOrderHistoryMockBloc();
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -322,6 +328,8 @@ void main() {
           .thenReturn(OrderHistoryDetailsState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
+      when(() => mockViewByOrderHistoryBloc.state)
+          .thenReturn(ViewByOrderHistoryState.initial());
     });
 
     Future getWidget(tester) async {
@@ -386,6 +394,9 @@ void main() {
             ),
             BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc,
+            ),
+            BlocProvider<ViewByOrderHistoryBloc>(
+              create: (context) => mockViewByOrderHistoryBloc,
             ),
           ],
           child: const SplashPage(),

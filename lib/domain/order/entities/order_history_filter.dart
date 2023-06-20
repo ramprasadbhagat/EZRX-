@@ -34,8 +34,8 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
 
   int get appliedFilterCount =>
       orderId.countWhenValid +
-        poNumber.countWhenValid +
-        materialSearch.countWhenValid +
+      poNumber.countWhenValid +
+      materialSearch.countWhenValid +
       principalSearch.countWhenValid +
       1;
 

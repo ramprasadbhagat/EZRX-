@@ -27,6 +27,16 @@ mixin _$OrderHistoryDetailsOrderHeader {
   String get orderBy => throw _privateConstructorUsedError;
   String get referenceNotes => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
+  OrderNumber get orderNumber =>
+      throw _privateConstructorUsedError; //used for orderHistory api in view vy order section
+  String get soldTo => throw _privateConstructorUsedError;
+  String get shipTo => throw _privateConstructorUsedError;
+  CompanyName get companyName => throw _privateConstructorUsedError;
+  String get createdTime => throw _privateConstructorUsedError;
+  String get pOReference => throw _privateConstructorUsedError;
+  int get materialCount => throw _privateConstructorUsedError;
+  String get itmDescription => throw _privateConstructorUsedError;
+  bool get hasPOAttachment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderHeaderCopyWith<OrderHistoryDetailsOrderHeader>
@@ -51,7 +61,16 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
       String eZRXNumber,
       String orderBy,
       String referenceNotes,
-      String orderReason});
+      String orderReason,
+      OrderNumber orderNumber,
+      String soldTo,
+      String shipTo,
+      CompanyName companyName,
+      String createdTime,
+      String pOReference,
+      int materialCount,
+      String itmDescription,
+      bool hasPOAttachment});
 }
 
 /// @nodoc
@@ -78,6 +97,15 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
     Object? orderBy = null,
     Object? referenceNotes = null,
     Object? orderReason = null,
+    Object? orderNumber = null,
+    Object? soldTo = null,
+    Object? shipTo = null,
+    Object? companyName = null,
+    Object? createdTime = null,
+    Object? pOReference = null,
+    Object? materialCount = null,
+    Object? itmDescription = null,
+    Object? hasPOAttachment = null,
   }) {
     return _then(_value.copyWith(
       totalTax: null == totalTax
@@ -120,6 +148,42 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as CompanyName,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialCount: null == materialCount
+          ? _value.materialCount
+          : materialCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      itmDescription: null == itmDescription
+          ? _value.itmDescription
+          : itmDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasPOAttachment: null == hasPOAttachment
+          ? _value.hasPOAttachment
+          : hasPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -143,7 +207,16 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
       String eZRXNumber,
       String orderBy,
       String referenceNotes,
-      String orderReason});
+      String orderReason,
+      OrderNumber orderNumber,
+      String soldTo,
+      String shipTo,
+      CompanyName companyName,
+      String createdTime,
+      String pOReference,
+      int materialCount,
+      String itmDescription,
+      bool hasPOAttachment});
 }
 
 /// @nodoc
@@ -169,6 +242,15 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
     Object? orderBy = null,
     Object? referenceNotes = null,
     Object? orderReason = null,
+    Object? orderNumber = null,
+    Object? soldTo = null,
+    Object? shipTo = null,
+    Object? companyName = null,
+    Object? createdTime = null,
+    Object? pOReference = null,
+    Object? materialCount = null,
+    Object? itmDescription = null,
+    Object? hasPOAttachment = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderHeader(
       totalTax: null == totalTax
@@ -211,6 +293,42 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as CompanyName,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialCount: null == materialCount
+          ? _value.materialCount
+          : materialCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      itmDescription: null == itmDescription
+          ? _value.itmDescription
+          : itmDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasPOAttachment: null == hasPOAttachment
+          ? _value.hasPOAttachment
+          : hasPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -229,7 +347,16 @@ class _$_OrderHistoryDetailsOrderHeader
       required this.eZRXNumber,
       required this.orderBy,
       required this.referenceNotes,
-      required this.orderReason})
+      required this.orderReason,
+      required this.orderNumber,
+      required this.soldTo,
+      required this.shipTo,
+      required this.companyName,
+      required this.createdTime,
+      required this.pOReference,
+      required this.materialCount,
+      required this.itmDescription,
+      required this.hasPOAttachment})
       : super._();
 
   @override
@@ -252,10 +379,29 @@ class _$_OrderHistoryDetailsOrderHeader
   final String referenceNotes;
   @override
   final String orderReason;
+  @override
+  final OrderNumber orderNumber;
+//used for orderHistory api in view vy order section
+  @override
+  final String soldTo;
+  @override
+  final String shipTo;
+  @override
+  final CompanyName companyName;
+  @override
+  final String createdTime;
+  @override
+  final String pOReference;
+  @override
+  final int materialCount;
+  @override
+  final String itmDescription;
+  @override
+  final bool hasPOAttachment;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason)';
+    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, createdTime: $createdTime, pOReference: $pOReference, materialCount: $materialCount, itmDescription: $itmDescription, hasPOAttachment: $hasPOAttachment)';
   }
 
   @override
@@ -280,22 +426,48 @@ class _$_OrderHistoryDetailsOrderHeader
             (identical(other.referenceNotes, referenceNotes) ||
                 other.referenceNotes == referenceNotes) &&
             (identical(other.orderReason, orderReason) ||
-                other.orderReason == orderReason));
+                other.orderReason == orderReason) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
+            (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
+            (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.createdTime, createdTime) ||
+                other.createdTime == createdTime) &&
+            (identical(other.pOReference, pOReference) ||
+                other.pOReference == pOReference) &&
+            (identical(other.materialCount, materialCount) ||
+                other.materialCount == materialCount) &&
+            (identical(other.itmDescription, itmDescription) ||
+                other.itmDescription == itmDescription) &&
+            (identical(other.hasPOAttachment, hasPOAttachment) ||
+                other.hasPOAttachment == hasPOAttachment));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      totalTax,
-      requestedDeliveryDate,
-      type,
-      telephoneNumber,
-      orderValue,
-      createdDate,
-      eZRXNumber,
-      orderBy,
-      referenceNotes,
-      orderReason);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        totalTax,
+        requestedDeliveryDate,
+        type,
+        telephoneNumber,
+        orderValue,
+        createdDate,
+        eZRXNumber,
+        orderBy,
+        referenceNotes,
+        orderReason,
+        orderNumber,
+        soldTo,
+        shipTo,
+        companyName,
+        createdTime,
+        pOReference,
+        materialCount,
+        itmDescription,
+        hasPOAttachment
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -317,7 +489,16 @@ abstract class _OrderHistoryDetailsOrderHeader
       required final String eZRXNumber,
       required final String orderBy,
       required final String referenceNotes,
-      required final String orderReason}) = _$_OrderHistoryDetailsOrderHeader;
+      required final String orderReason,
+      required final OrderNumber orderNumber,
+      required final String soldTo,
+      required final String shipTo,
+      required final CompanyName companyName,
+      required final String createdTime,
+      required final String pOReference,
+      required final int materialCount,
+      required final String itmDescription,
+      required final bool hasPOAttachment}) = _$_OrderHistoryDetailsOrderHeader;
   _OrderHistoryDetailsOrderHeader._() : super._();
 
   @override
@@ -340,6 +521,24 @@ abstract class _OrderHistoryDetailsOrderHeader
   String get referenceNotes;
   @override
   String get orderReason;
+  @override
+  OrderNumber get orderNumber;
+  @override //used for orderHistory api in view vy order section
+  String get soldTo;
+  @override
+  String get shipTo;
+  @override
+  CompanyName get companyName;
+  @override
+  String get createdTime;
+  @override
+  String get pOReference;
+  @override
+  int get materialCount;
+  @override
+  String get itmDescription;
+  @override
+  bool get hasPOAttachment;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderHeaderCopyWith<_$_OrderHistoryDetailsOrderHeader>

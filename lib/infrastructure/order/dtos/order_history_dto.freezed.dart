@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 OrderHistoryDto _$OrderHistoryDtoFromJson(Map<String, dynamic> json) {
-  return _OrderHistoryItemDto.fromJson(json);
+  return _OrderHistoryDto.fromJson(json);
 }
 
 /// @nodoc
@@ -87,11 +87,11 @@ class _$OrderHistoryDtoCopyWithImpl<$Res, $Val extends OrderHistoryDto>
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
+abstract class _$$_OrderHistoryDtoCopyWith<$Res>
     implements $OrderHistoryDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryItemDtoCopyWith(_$_OrderHistoryItemDto value,
-          $Res Function(_$_OrderHistoryItemDto) then) =
-      __$$_OrderHistoryItemDtoCopyWithImpl<$Res>;
+  factory _$$_OrderHistoryDtoCopyWith(
+          _$_OrderHistoryDto value, $Res Function(_$_OrderHistoryDto) then) =
+      __$$_OrderHistoryDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +105,11 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDtoCopyWithImpl<$Res, _$_OrderHistoryItemDto>
-    implements _$$_OrderHistoryItemDtoCopyWith<$Res> {
-  __$$_OrderHistoryItemDtoCopyWithImpl(_$_OrderHistoryItemDto _value,
-      $Res Function(_$_OrderHistoryItemDto) _then)
+class __$$_OrderHistoryDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryDtoCopyWithImpl<$Res, _$_OrderHistoryDto>
+    implements _$$_OrderHistoryDtoCopyWith<$Res> {
+  __$$_OrderHistoryDtoCopyWithImpl(
+      _$_OrderHistoryDto _value, $Res Function(_$_OrderHistoryDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? orderBasicInformation = null,
     Object? orderItems = null,
   }) {
-    return _then(_$_OrderHistoryItemDto(
+    return _then(_$_OrderHistoryDto(
       orderBasicInformation: null == orderBasicInformation
           ? _value.orderBasicInformation
           : orderBasicInformation // ignore: cast_nullable_to_non_nullable
@@ -133,8 +133,8 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
-  const _$_OrderHistoryItemDto(
+class _$_OrderHistoryDto extends _OrderHistoryDto {
+  const _$_OrderHistoryDto(
       {@JsonKey(name: 'OrderBasicInformation')
           required this.orderBasicInformation,
       @JsonKey(name: 'OrderItems')
@@ -142,8 +142,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       : _orderItems = orderItems,
         super._();
 
-  factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderHistoryItemDtoFromJson(json);
+  factory _$_OrderHistoryDto.fromJson(Map<String, dynamic> json) =>
+      _$$_OrderHistoryDtoFromJson(json);
 
   @override
   @JsonKey(name: 'OrderBasicInformation')
@@ -166,7 +166,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryItemDto &&
+            other is _$_OrderHistoryDto &&
             (identical(other.orderBasicInformation, orderBasicInformation) ||
                 other.orderBasicInformation == orderBasicInformation) &&
             const DeepCollectionEquality()
@@ -181,29 +181,28 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
-      __$$_OrderHistoryItemDtoCopyWithImpl<_$_OrderHistoryItemDto>(
-          this, _$identity);
+  _$$_OrderHistoryDtoCopyWith<_$_OrderHistoryDto> get copyWith =>
+      __$$_OrderHistoryDtoCopyWithImpl<_$_OrderHistoryDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryItemDtoToJson(
+    return _$$_OrderHistoryDtoToJson(
       this,
     );
   }
 }
 
-abstract class _OrderHistoryItemDto extends OrderHistoryDto {
-  const factory _OrderHistoryItemDto(
+abstract class _OrderHistoryDto extends OrderHistoryDto {
+  const factory _OrderHistoryDto(
           {@JsonKey(name: 'OrderBasicInformation')
               required final OrderHistoryBasicInfoDto orderBasicInformation,
           @JsonKey(name: 'OrderItems')
               required final List<OrderHistoryItemDto> orderItems}) =
-      _$_OrderHistoryItemDto;
-  const _OrderHistoryItemDto._() : super._();
+      _$_OrderHistoryDto;
+  const _OrderHistoryDto._() : super._();
 
-  factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderHistoryItemDto.fromJson;
+  factory _OrderHistoryDto.fromJson(Map<String, dynamic> json) =
+      _$_OrderHistoryDto.fromJson;
 
   @override
   @JsonKey(name: 'OrderBasicInformation')
@@ -213,6 +212,6 @@ abstract class _OrderHistoryItemDto extends OrderHistoryDto {
   List<OrderHistoryItemDto> get orderItems;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
+  _$$_OrderHistoryDtoCopyWith<_$_OrderHistoryDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

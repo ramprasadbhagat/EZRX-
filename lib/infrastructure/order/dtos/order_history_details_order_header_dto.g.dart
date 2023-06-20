@@ -19,6 +19,15 @@ _$_OrderHistoryDetailsOrderHeadersDto
           orderBy: json['OrderBy'] as String? ?? '',
           referenceNotes: json['ReferenceNotes'] as String? ?? '',
           orderReason: json['OrderReason'] as String? ?? '',
+          companyName: json['CompanyName'] as String? ?? '',
+          hasPOAttachment: json['HasPOAttachment'] as bool? ?? false,
+          itmDescription: json['ItmDescription'] as String? ?? '',
+          materialCount: json['MaterialCount'] as int? ?? 0,
+          createdTime: json['CreatedTime'] as String? ?? '',
+          orderNumber: json['OrderNumber'] as String? ?? '',
+          pOReference: json['POReference'] as String? ?? '',
+          shipTo: json['ShipTo'] as String? ?? '',
+          soldTo: json['SoldTo'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
@@ -34,4 +43,13 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
       'OrderBy': instance.orderBy,
       'ReferenceNotes': instance.referenceNotes,
       'OrderReason': instance.orderReason,
+      'CompanyName': instance.companyName,
+      'HasPOAttachment': instance.hasPOAttachment,
+      'ItmDescription': instance.itmDescription,
+      'MaterialCount': instance.materialCount,
+      'CreatedTime': instance.createdTime,
+      'OrderNumber': instance.orderNumber,
+      'POReference': instance.pOReference,
+      'ShipTo': instance.shipTo,
+      'SoldTo': instance.soldTo,
     };

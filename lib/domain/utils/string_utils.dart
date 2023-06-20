@@ -30,4 +30,10 @@ class StringUtils {
             price,
           );
   }
+
+  static String displayNumber(
+    double price,
+  ) {
+    return formatter.format(price);
+  }
 }

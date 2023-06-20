@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 OrderHistoryFilterDto _$OrderHistoryFilterDtoFromJson(
     Map<String, dynamic> json) {
-  return _ReturnSummaryFilterDto.fromJson(json);
+  return _OrderHistoryFilterDto.fromJson(json);
 }
 
 /// @nodoc
@@ -101,11 +101,11 @@ class _$OrderHistoryFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnSummaryFilterDtoCopyWith<$Res>
+abstract class _$$_OrderHistoryFilterDtoCopyWith<$Res>
     implements $OrderHistoryFilterDtoCopyWith<$Res> {
-  factory _$$_ReturnSummaryFilterDtoCopyWith(_$_ReturnSummaryFilterDto value,
-          $Res Function(_$_ReturnSummaryFilterDto) then) =
-      __$$_ReturnSummaryFilterDtoCopyWithImpl<$Res>;
+  factory _$$_OrderHistoryFilterDtoCopyWith(_$_OrderHistoryFilterDto value,
+          $Res Function(_$_OrderHistoryFilterDto) then) =
+      __$$_OrderHistoryFilterDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_ReturnSummaryFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnSummaryFilterDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterDtoCopyWithImpl<$Res, _$_ReturnSummaryFilterDto>
-    implements _$$_ReturnSummaryFilterDtoCopyWith<$Res> {
-  __$$_ReturnSummaryFilterDtoCopyWithImpl(_$_ReturnSummaryFilterDto _value,
-      $Res Function(_$_ReturnSummaryFilterDto) _then)
+class __$$_OrderHistoryFilterDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterDtoCopyWithImpl<$Res, _$_OrderHistoryFilterDto>
+    implements _$$_OrderHistoryFilterDtoCopyWith<$Res> {
+  __$$_OrderHistoryFilterDtoCopyWithImpl(_$_OrderHistoryFilterDto _value,
+      $Res Function(_$_OrderHistoryFilterDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,7 +129,7 @@ class __$$_ReturnSummaryFilterDtoCopyWithImpl<$Res>
     Object? dateTo = null,
     Object? dateFrom = null,
   }) {
-    return _then(_$_ReturnSummaryFilterDto(
+    return _then(_$_OrderHistoryFilterDto(
       orderStatus: null == orderStatus
           ? _value._orderStatus
           : orderStatus // ignore: cast_nullable_to_non_nullable
@@ -148,8 +148,8 @@ class __$$_ReturnSummaryFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
-  const _$_ReturnSummaryFilterDto(
+class _$_OrderHistoryFilterDto extends _OrderHistoryFilterDto {
+  const _$_OrderHistoryFilterDto(
       {@JsonKey(name: 'orderStatus', defaultValue: [])
           required final List<String> orderStatus,
       @JsonKey(name: 'toDate', defaultValue: '')
@@ -159,8 +159,8 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
       : _orderStatus = orderStatus,
         super._();
 
-  factory _$_ReturnSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnSummaryFilterDtoFromJson(json);
+  factory _$_OrderHistoryFilterDto.fromJson(Map<String, dynamic> json) =>
+      _$$_OrderHistoryFilterDtoFromJson(json);
 
 //TODO: will remove if it's not required in filter purpose
 // @JsonKey(
@@ -225,7 +225,7 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnSummaryFilterDto &&
+            other is _$_OrderHistoryFilterDto &&
             const DeepCollectionEquality()
                 .equals(other._orderStatus, _orderStatus) &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
@@ -241,30 +241,30 @@ class _$_ReturnSummaryFilterDto extends _ReturnSummaryFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnSummaryFilterDtoCopyWith<_$_ReturnSummaryFilterDto> get copyWith =>
-      __$$_ReturnSummaryFilterDtoCopyWithImpl<_$_ReturnSummaryFilterDto>(
+  _$$_OrderHistoryFilterDtoCopyWith<_$_OrderHistoryFilterDto> get copyWith =>
+      __$$_OrderHistoryFilterDtoCopyWithImpl<_$_OrderHistoryFilterDto>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnSummaryFilterDtoToJson(
+    return _$$_OrderHistoryFilterDtoToJson(
       this,
     );
   }
 }
 
-abstract class _ReturnSummaryFilterDto extends OrderHistoryFilterDto {
-  const factory _ReturnSummaryFilterDto(
+abstract class _OrderHistoryFilterDto extends OrderHistoryFilterDto {
+  const factory _OrderHistoryFilterDto(
       {@JsonKey(name: 'orderStatus', defaultValue: [])
           required final List<String> orderStatus,
       @JsonKey(name: 'toDate', defaultValue: '')
           required final String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '')
-          required final String dateFrom}) = _$_ReturnSummaryFilterDto;
-  const _ReturnSummaryFilterDto._() : super._();
+          required final String dateFrom}) = _$_OrderHistoryFilterDto;
+  const _OrderHistoryFilterDto._() : super._();
 
-  factory _ReturnSummaryFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnSummaryFilterDto.fromJson;
+  factory _OrderHistoryFilterDto.fromJson(Map<String, dynamic> json) =
+      _$_OrderHistoryFilterDto.fromJson;
 
   @override //TODO: will remove if it's not required in filter purpose
 // @JsonKey(
@@ -295,6 +295,6 @@ abstract class _ReturnSummaryFilterDto extends OrderHistoryFilterDto {
   String get dateFrom;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnSummaryFilterDtoCopyWith<_$_ReturnSummaryFilterDto> get copyWith =>
+  _$$_OrderHistoryFilterDtoCopyWith<_$_OrderHistoryFilterDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

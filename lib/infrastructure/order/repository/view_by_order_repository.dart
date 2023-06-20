@@ -1,0 +1,72 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/repository/i_view_by_order_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_history_filter_dto.dart';
+
+class ViewByOrderHistoryRepository implements IViewByOrderHistoryRepository {
+  final Config config;
+  final ViewByOrderHistoryLocalDataSource localDataSource;
+  final ViewByOrderHistoryRemoteDataSource remoteDataSource;
+
+  ViewByOrderHistoryRepository({
+    required this.config,
+    required this.localDataSource,
+    required this.remoteDataSource,
+  });
+
+  @override
+  Future<Either<ApiFailure, ViewByOrderHistory>> getViewByOrderHistory({
+    required SalesOrganisationConfigs salesOrgConfig,
+    required CustomerCodeInfo soldTo,
+    required ShipToInfo shipTo,
+    required User user,
+    required int pageSize,
+    required int offset,
+    required String orderBy,
+    required String sort,
+    required String searchKey,
+    required List<String> creatingOrderIds,
+    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final result = await localDataSource.getViewByOrderHistory();
+
+        return Right(result);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final orderHistoryItemList = await remoteDataSource.getViewByOrderHistory(
+        shipTo: shipTo.shipToCustomerCode,
+        soldTo: soldTo.customerCodeSoldTo,
+        pageSize: pageSize,
+        offset: offset,
+        language: user.preferredLanguage,
+        searchKey: searchKey,
+        orderBy: orderBy,
+        creatingOrderIds: creatingOrderIds,
+        filterQuery:
+            ViewByOrderHistoryFilterDto.fromDomain(viewByOrderHistoryFilter)
+                .toJson(),
+        sort: sort,
+      );
+
+      return Right(orderHistoryItemList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+}

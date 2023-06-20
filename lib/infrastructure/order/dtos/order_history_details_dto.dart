@@ -89,6 +89,15 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         orderBy: orderHistoryDetailsOrderHeader.orderBy,
         referenceNotes: orderHistoryDetailsOrderHeader.referenceNotes,
         orderReason: orderHistoryDetailsOrderHeader.orderReason,
+        companyName: CompanyName(orderHistoryDetailsOrderHeader.companyName),
+        createdTime: orderHistoryDetailsOrderHeader.createdTime,
+        hasPOAttachment: orderHistoryDetailsOrderHeader.hasPOAttachment,
+        itmDescription: orderHistoryDetailsOrderHeader.itmDescription,
+        materialCount: orderHistoryDetailsOrderHeader.materialCount,
+        orderNumber: OrderNumber(orderHistoryDetailsOrderHeader.orderNumber),
+        pOReference: orderHistoryDetailsOrderHeader.pOReference,
+        shipTo: orderHistoryDetailsOrderHeader.shipTo,
+        soldTo: orderHistoryDetailsOrderHeader.soldTo,
       ),
       orderHistoryDetailsShippingInformation:
           OrderHistoryDetailsShippingInformation(
@@ -100,7 +109,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         invoices: orderHistoryDetailsShippingInformation.invoices
             .map((e) => e.toDomain())
             .toList(),
-        pOReference: POReference(orderHistoryDetailsShippingInformation.pOReference),
+        pOReference:
+            POReference(orderHistoryDetailsShippingInformation.pOReference),
         phone: orderHistoryDetailsShippingInformation.phone,
         postalCode: orderHistoryDetailsShippingInformation.postalCode,
       ),
@@ -116,7 +126,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       ),
       orderHistoryDetailsPoDocuments:
           orderHistoryDetailsPoDocuments.map((e) => e.toDomain()).toList(),
-      orderHistoryDetailsSpecialInstructions:  SpecialInstructions(orderHistoryDetailsSpecialInstructions),
+      orderHistoryDetailsSpecialInstructions:
+          SpecialInstructions(orderHistoryDetailsSpecialInstructions),
       orderHistoryDetailsMessages:
           orderHistoryDetailsMessages.map((e) => e.toDomain()).toList(),
     );

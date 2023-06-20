@@ -1,0 +1,47 @@
+query orderHistoryQuery($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $orderBy: String, $sort: String, $language: String, $poReference: String, $searchKey: String, $companyName: String, $creatingOrderIds: [String!]) {
+  orderHistory(
+    request: {soldTo: $soldTo, shipTo: $shipTo, fromDate: $fromDate, toDate: $toDate, first: $first, after: $after, orderBy: $orderBy, sort: $sort, language: $language, poReference: $poReference, searchKey: $searchKey, companyName: $companyName, creatingOrderIds: $creatingOrderIds}
+  ) {
+    orderCount
+    creatingOrderIds
+    orderHeaders {
+      Type
+      OrderNumber
+      EZRXNumber
+      SoldTo
+      ShipTo
+      CompanyName
+      OrderValue
+      ProcessingStatus
+      CreatedDate
+      CreatedTime
+      RequestedDeliveryDate
+      TotalTax
+      POReference
+      MaterialCount
+      ItmDescription
+      HasPOAttachment
+      ItmCount
+      TelephoneNumber
+      OrderBy
+     
+    }
+   
+  }
+}
+
+variable:{
+  "soldTo": "0000100208",
+  "fromDate": "20230613",
+  "toDate": "20230619",
+  "shipTo": [
+    "0000100208"
+  ],
+  "first": 11,
+  "after": 0,
+  "orderBy": "datetime",
+  "sort": "desc",
+  "searchKey": "",
+  "language": "EN",
+  "creatingOrderIds": []
+}

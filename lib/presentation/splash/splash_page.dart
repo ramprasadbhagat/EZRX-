@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -20,6 +21,7 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -253,6 +255,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         .state
                         .sortDirection,
                     orderHistoryFilter: OrderHistoryFilter.empty(),
+                  ),
+                );
+            context.read<ViewByOrderHistoryBloc>().add(
+                  ViewByOrderHistoryEvent.fetch(
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    user: context.read<UserBloc>().state.user,
+                    sortDirection: context
+                        .read<OrderHistoryFilterBloc>()
+                        .state
+                        .sortDirection,
+                    viewByOrderHistoryFilter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
             if (state.isCovidMaterialEnable) {

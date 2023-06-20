@@ -24,7 +24,17 @@ class OrderHistoryDetailsOrderHeadersDto
     @JsonKey(name: 'ReferenceNotes', defaultValue: '')
         required String referenceNotes,
     @JsonKey(name: 'OrderReason', defaultValue: '') required String orderReason,
-
+    @JsonKey(name: 'CompanyName', defaultValue: '') required String companyName,
+    @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+        required bool hasPOAttachment,
+    @JsonKey(name: 'ItmDescription', defaultValue: '')
+        required String itmDescription,
+    @JsonKey(name: 'MaterialCount', defaultValue: 0) required int materialCount,
+    @JsonKey(name: 'CreatedTime', defaultValue: '') required String createdTime,
+    @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
+    @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
+    @JsonKey(name: 'ShipTo', defaultValue: '') required String shipTo,
+    @JsonKey(name: 'SoldTo', defaultValue: '') required String soldTo,
   }) = _OrderHistoryDetailsOrderHeadersDto;
   factory OrderHistoryDetailsOrderHeadersDto.fromDomain(
     OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader,
@@ -41,7 +51,18 @@ class OrderHistoryDetailsOrderHeadersDto
       eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
       orderBy: orderHistoryDetailsOrderHeader.orderBy,
       referenceNotes: orderHistoryDetailsOrderHeader.referenceNotes,
-      orderReason:orderHistoryDetailsOrderHeader.orderReason,
+      orderReason: orderHistoryDetailsOrderHeader.orderReason,
+      companyName:
+          orderHistoryDetailsOrderHeader.companyName.getOrDefaultValue(''),
+      createdTime: orderHistoryDetailsOrderHeader.createdTime,
+      hasPOAttachment: orderHistoryDetailsOrderHeader.hasPOAttachment,
+      itmDescription: orderHistoryDetailsOrderHeader.itmDescription,
+      materialCount: orderHistoryDetailsOrderHeader.materialCount,
+      orderNumber:
+          orderHistoryDetailsOrderHeader.orderNumber.getOrDefaultValue(''),
+      pOReference: orderHistoryDetailsOrderHeader.pOReference,
+      shipTo: orderHistoryDetailsOrderHeader.shipTo,
+      soldTo: orderHistoryDetailsOrderHeader.soldTo,
     );
   }
 
@@ -57,6 +78,15 @@ class OrderHistoryDetailsOrderHeadersDto
       orderBy: orderBy,
       referenceNotes: referenceNotes,
       orderReason: orderReason,
+      companyName: CompanyName(''),
+      createdTime: createdTime,
+      hasPOAttachment: hasPOAttachment,
+      itmDescription: itmDescription,
+      materialCount: materialCount,
+      orderNumber: OrderNumber(orderNumber),
+      pOReference: pOReference,
+      shipTo: shipTo,
+      soldTo: soldTo,
     );
   }
 
