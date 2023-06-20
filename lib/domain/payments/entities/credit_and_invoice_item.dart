@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_and_invoice_item.freezed.dart';
@@ -125,4 +127,19 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
 //to convert if amountInTransactionCurrency value is negative
   double get convertIfAmountInTransactionCurrencyIsNegative =>
       amountInTransactionCurrency * -1;
+}
+
+extension CreditAndInvoiceGroupExtension on List<CreditAndInvoiceItem> {
+  List<CreditAndInvoiceGroup> get creditListGroup {
+    return List<CreditAndInvoiceItem>.from(this)
+        .groupListsBy((item) => item.netDueDate)
+        .entries
+        .map(
+          (entry) => CreditAndInvoiceGroup(
+            dueDate: entry.key,
+            invoiceItems: entry.value,
+          ),
+        )
+        .toList();
+  }
 }

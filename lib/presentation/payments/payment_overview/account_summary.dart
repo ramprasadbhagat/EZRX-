@@ -264,15 +264,15 @@ List<KeyValuePair> getCredits({
     [
       KeyValuePair(
         key: 'Current remaining'.tr(),
-        value: creditLimit.creditBalance,
+        value: creditLimit.creditBalance.getOrDefaultValue('0'),
       ),
       KeyValuePair(
         key: 'Total used'.tr(),
-        value: creditLimit.creditExposure,
+        value: creditLimit.creditExposure.getOrDefaultValue('0'),
       ),
       KeyValuePair(
         key: 'Total credit limit'.tr(),
-        value: creditLimit.creditLimit,
+        value: creditLimit.creditLimit.getOrDefaultValue('0'),
       ),
     ];
 

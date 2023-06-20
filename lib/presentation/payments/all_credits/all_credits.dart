@@ -5,30 +5,24 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/attention_row.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/payments/all_credits/all_credits_filter.dart';
-import 'package:ezrxmobile/presentation/payments/all_credits/all_credits_filter_by_status.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/history/status_label.dart';
 
 class AllCredits extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -40,128 +34,9 @@ class AllCredits extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('All Credits').tr(),
-        actions: [
-          BlocConsumer<DownloadPaymentAttachmentsBloc,
-              DownloadPaymentAttachmentsState>(
-            listenWhen: (previous, current) =>
-                previous.failureOrSuccessOption !=
-                current.failureOrSuccessOption,
-            buildWhen: (previous, current) =>
-                previous.isDownloadInProgress != current.isDownloadInProgress,
-            listener: (context, state) {
-              state.failureOrSuccessOption.fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
-                    ErrorUtils.handleApiFailure(context, failure);
-                  },
-                  (_) {
-                    showSnackBar(
-                      context: context,
-                      message: 'File downloaded successfully'.tr(),
-                    );
-                  },
-                ),
-              );
-            },
-            builder: (context, state) {
-              return TextButton(
-                onPressed: state.isDownloadInProgress
-                    ? null
-                    : () {
-                        final eligibilityState =
-                            context.read<EligibilityBloc>().state;
-                        final allCreditsFilterState =
-                            context.read<AllCreditsFilterBloc>().state;
-                        context.read<DownloadPaymentAttachmentsBloc>().add(
-                              DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-                                salesOrganization:
-                                    eligibilityState.salesOrganisation,
-                                customerCodeInfo:
-                                    eligibilityState.customerCodeInfo,
-                                queryObject:
-                                    allCreditsFilterState.allCreditsFilter,
-                              ),
-                            );
-                      },
-                child: state.isDownloadInProgress
-                    ? const SizedBox(
-                        height: 15,
-                        width: 15,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Text('Download').tr(),
-              );
-            },
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(30.0),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: BlocBuilder<AllCreditsFilterBloc, AllCreditsFilterState>(
-              buildWhen: (previous, current) =>
-                  previous.allCreditsFilter != current.allCreditsFilter ||
-                  previous.allCreditsFilter.sortBy !=
-                      current.allCreditsFilter.sortBy ||
-                  previous.isSubmitting != current.isSubmitting,
-              builder: (context, state) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      key: const Key('statusFilterButton'),
-                      onTap: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (_) {
-                            return const AllCreditsFilterByStatus();
-                          },
-                        );
-                      },
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            'Status'.tr(),
-                            key: const ValueKey('status'),
-                            style:
-                                Theme.of(context).textTheme.titleSmall?.apply(
-                                      color: ZPColors.kPrimaryColor,
-                                    ),
-                          ),
-                          Text(
-                            ' : ${state.allCreditsFilter.sortBy}',
-                          ),
-                          const Icon(
-                            Icons.arrow_drop_down_outlined,
-                          ),
-                        ],
-                      ),
-                    ),
-                    BlocBuilder<AllCreditsFilterBloc, AllCreditsFilterState>(
-                      buildWhen: (previous, current) =>
-                          previous.allCreditsFilter.appliedFilterCount !=
-                          current.allCreditsFilter.appliedFilterCount,
-                      builder: (context, state) {
-                        return FilterCountButton(
-                          filterCount:
-                              state.allCreditsFilter.appliedFilterCount,
-                          onTap: () {
-                            scaffoldKey.currentState!.openEndDrawer();
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ),
+        centerTitle: false,
+        title: const Text('Credits').tr(),
       ),
-      endDrawer: const AllCreditsFilterDrawer(),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: BlocListener<AllCreditsFilterBloc, AllCreditsFilterState>(
@@ -228,11 +103,10 @@ class AllCredits extends StatelessWidget {
 
               return Column(
                 children: [
-                  const AttentionRow(
-                    valueText:
-                        'All Credits document dates pre-set for past 28 days. Change the date range from “Filter” for more data',
+                  // Place left for search and filter 
+                  _CreditsScrollList(
+                    allCreditsState: allCreditsState,
                   ),
-                  _CreditsScrollList(allCreditsState: allCreditsState,),
                 ],
               );
             },
@@ -253,10 +127,8 @@ class _CreditsScrollList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final configs = context.read<SalesOrgBloc>().state.configs;
-
     return Expanded(
-      child: ScrollList<CreditAndInvoiceItem>(
+      child: ScrollList<CreditAndInvoiceGroup>(
         emptyMessage: 'No files found'.tr(),
         controller: ScrollController(),
         onRefresh: () {
@@ -294,12 +166,61 @@ class _CreditsScrollList extends StatelessWidget {
               );
         },
         isLoading: allCreditsState.isLoading,
-        itemBuilder: (context, index, item) => _CreditsItem(
-          creditItem: item,
-          configs: configs,
+        itemBuilder: (context, index, item) => _CreditGroup(
+          data: item,
+          showDivider: index != 0,
         ),
-        items: allCreditsState.credits,
+        items: allCreditsState.credits.creditListGroup,
       ),
+    );
+  }
+}
+
+class _CreditGroup extends StatelessWidget {
+  final CreditAndInvoiceGroup data;
+  final bool showDivider;
+  const _CreditGroup({
+    Key? key,
+    required this.data,
+    required this.showDivider,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if (showDivider)
+          const Divider(
+            indent: 0,
+            height: 20,
+            endIndent: 0,
+            color: ZPColors.lightGray2,
+          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Text(
+                  'Documents created on ${data.dueDate.toValidDateString}',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: ZPColors.darkerGrey,
+                      ),
+                ),
+              ),
+              Column(
+                children: data.invoiceItems
+                    .map(
+                      (e) => _CreditsItem(creditItem: e),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -308,66 +229,52 @@ class _CreditsItem extends StatelessWidget {
   const _CreditsItem({
     Key? key,
     required this.creditItem,
-    required this.configs,
   }) : super(key: key);
 
   final CreditAndInvoiceItem creditItem;
-  final SalesOrganisationConfigs configs;
+  
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
       child: ListTile(
-        key: const ValueKey('creditItemTile'),
-        onTap: () {
-          context.read<CreditAndInvoiceDetailsBloc>().add(
-                CreditAndInvoiceDetailsEvent.fetch(
-                  creditAndInvoiceItem: creditItem,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+        title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${creditItem.accountingDocumentType} #${creditItem.accountingDocument}',
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
-              );
-          context.router.push(CreditDetailsPageRoute(
-            creditItem: creditItem,
-          ));
-        },
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BalanceTextRow(
-              keyText: 'Document Date'.tr(),
-              valueText: creditItem.documentDate.toValidDateString,
-              keyFlex: 1,
-              valueFlex: 1,
+                StatusLabel(
+                  status: StatusType(
+                    creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
+                  ),
+                ),
+              ],
             ),
-            BalanceTextRow(
-              keyText: 'Document Number'.tr(),
-              valueText: creditItem.accountingDocument,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Credit Amount'.tr(),
-              valueText: StringUtils.displayPrice(
-                configs,
-                creditItem.convertIfAmountInTransactionCurrencyIsNegative,
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top:8,bottom: 10),
+          child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                      creditItem.postingKeyName,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    Text(
+                      StringUtils.displayPrice(
+                        context.read<SalesOrgBloc>().state.configs,
+                        creditItem.convertIfAmountInTransactionCurrencyIsNegative,  
+                      ),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.primary,
+                          ),
+                    ),
+                ],
               ),
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Status'.tr(),
-              valueText:
-                  creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
-              keyFlex: 1,
-              valueFlex: 1,
-              valueColor: ZPColors.kPrimaryColor,
-            ),
-          ],
         ),
       ),
     );
+    
   }
 }

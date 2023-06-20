@@ -127,6 +127,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required int offset,
     required int pageSize,
     required List<Map<String, dynamic>> filterQuery,
+    String sortDirection = 'desc',
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -142,8 +143,13 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'first': pageSize,
               'after': offset,
               'excelFor': 'Credit',
-              'orderBy': [],
-              'filterBy': filterQuery,
+              'orderBy': [
+                {
+                  'order': sortDirection,
+                  'field': 'documentDate',
+                },
+              ],
+              'filterBy': [],
             },
           },
         },

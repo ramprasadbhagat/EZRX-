@@ -20,7 +20,7 @@ import 'package:mocktail/mocktail.dart';
 class MockAllCreditsRepository extends Mock
     implements AllCreditsAndInvoicesRepository {}
 
-const _pageSize = 20;
+const _pageSize = 24;
 
 void main() {
   late MockAllCreditsRepository mockAllCreditsRepository;

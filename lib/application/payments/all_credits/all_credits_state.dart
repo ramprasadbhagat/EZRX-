@@ -2,6 +2,8 @@ part of 'all_credits_bloc.dart';
 
 @freezed
 class AllCreditsState with _$AllCreditsState {
+  //Constructor created for Getter 
+  const AllCreditsState._();
   const factory AllCreditsState({
     required List<CreditAndInvoiceItem> credits,
     required int totalCount,
@@ -19,4 +21,5 @@ class AllCreditsState with _$AllCreditsState {
         sortDirection: 'desc',
         totalCount: 0,
       );
+
 }

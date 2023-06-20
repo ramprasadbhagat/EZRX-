@@ -27,7 +27,7 @@ void main() {
       baseUrl: 'https://uat.ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(dio: dio,matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 
   setUpAll(
@@ -46,6 +46,7 @@ void main() {
   group(
     'All Credits Remote Data Test',
     () {
+
       test('=> getAllCredits with status code 200', () async {
         final res = json.decode(
           await rootBundle
@@ -57,13 +58,13 @@ void main() {
               .getCustomerDocumentHeaderQuery(),
           'variables': {
             'input': {
-              'customerCode': 'mock_soldTo',
-              'salesOrg': 'mock_salesOrg',
+              'customerCode': '0000100120',
+              'salesOrg': '2001',
               'first': 1,
               'after': 0,
               'excelFor': 'Credit',
-              'orderBy': [],
-              'filterBy': [],
+              // 'orderBy': [],
+              // 'filterBy': [],
             },
           },
         });
@@ -80,8 +81,8 @@ void main() {
         );
 
         final result = await remoteDataSource.getAllCredits(
-            customerCode: 'mock_soldTo',
-            salesOrg: 'mock_salesOrg',
+            customerCode: '0000100120',
+            salesOrg: '2001',
             pageSize: 1,
             offset: 0,
             filterQuery: []);
@@ -176,6 +177,8 @@ void main() {
           return Future.value(CustomerDocumentHeader.empty());
         });
       });
+    
     },
   );
+
 }

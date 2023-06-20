@@ -839,7 +839,7 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AllCreditsState implements _AllCreditsState {
+class _$_AllCreditsState extends _AllCreditsState {
   const _$_AllCreditsState(
       {required final List<CreditAndInvoiceItem> credits,
       required this.totalCount,
@@ -847,7 +847,8 @@ class _$_AllCreditsState implements _AllCreditsState {
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore})
-      : _credits = credits;
+      : _credits = credits,
+        super._();
 
   final List<CreditAndInvoiceItem> _credits;
   @override
@@ -908,7 +909,7 @@ class _$_AllCreditsState implements _AllCreditsState {
       __$$_AllCreditsStateCopyWithImpl<_$_AllCreditsState>(this, _$identity);
 }
 
-abstract class _AllCreditsState implements AllCreditsState {
+abstract class _AllCreditsState extends AllCreditsState {
   const factory _AllCreditsState(
       {required final List<CreditAndInvoiceItem> credits,
       required final int totalCount,
@@ -916,6 +917,7 @@ abstract class _AllCreditsState implements AllCreditsState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore}) = _$_AllCreditsState;
+  const _AllCreditsState._() : super._();
 
   @override
   List<CreditAndInvoiceItem> get credits;

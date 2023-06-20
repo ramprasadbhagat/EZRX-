@@ -18,9 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreditLimit {
   CustomerCode get customerCode => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
-  String get creditLimit => throw _privateConstructorUsedError;
-  String get creditExposure => throw _privateConstructorUsedError;
-  String get creditBalance => throw _privateConstructorUsedError;
+  StringValue get creditLimit => throw _privateConstructorUsedError;
+  StringValue get creditExposure => throw _privateConstructorUsedError;
+  StringValue get creditBalance => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreditLimitCopyWith<CreditLimit> get copyWith =>
@@ -36,9 +36,9 @@ abstract class $CreditLimitCopyWith<$Res> {
   $Res call(
       {CustomerCode customerCode,
       Currency currency,
-      String creditLimit,
-      String creditExposure,
-      String creditBalance});
+      StringValue creditLimit,
+      StringValue creditExposure,
+      StringValue creditBalance});
 }
 
 /// @nodoc
@@ -72,15 +72,15 @@ class _$CreditLimitCopyWithImpl<$Res, $Val extends CreditLimit>
       creditLimit: null == creditLimit
           ? _value.creditLimit
           : creditLimit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       creditExposure: null == creditExposure
           ? _value.creditExposure
           : creditExposure // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       creditBalance: null == creditBalance
           ? _value.creditBalance
           : creditBalance // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ) as $Val);
   }
 }
@@ -96,9 +96,9 @@ abstract class _$$_CreditLimitCopyWith<$Res>
   $Res call(
       {CustomerCode customerCode,
       Currency currency,
-      String creditLimit,
-      String creditExposure,
-      String creditBalance});
+      StringValue creditLimit,
+      StringValue creditExposure,
+      StringValue creditBalance});
 }
 
 /// @nodoc
@@ -130,15 +130,15 @@ class __$$_CreditLimitCopyWithImpl<$Res>
       creditLimit: null == creditLimit
           ? _value.creditLimit
           : creditLimit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       creditExposure: null == creditExposure
           ? _value.creditExposure
           : creditExposure // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       creditBalance: null == creditBalance
           ? _value.creditBalance
           : creditBalance // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ));
   }
 }
@@ -159,11 +159,11 @@ class _$_CreditLimit extends _CreditLimit {
   @override
   final Currency currency;
   @override
-  final String creditLimit;
+  final StringValue creditLimit;
   @override
-  final String creditExposure;
+  final StringValue creditExposure;
   @override
-  final String creditBalance;
+  final StringValue creditBalance;
 
   @override
   String toString() {
@@ -202,9 +202,9 @@ abstract class _CreditLimit extends CreditLimit {
   const factory _CreditLimit(
       {required final CustomerCode customerCode,
       required final Currency currency,
-      required final String creditLimit,
-      required final String creditExposure,
-      required final String creditBalance}) = _$_CreditLimit;
+      required final StringValue creditLimit,
+      required final StringValue creditExposure,
+      required final StringValue creditBalance}) = _$_CreditLimit;
   const _CreditLimit._() : super._();
 
   @override
@@ -212,11 +212,11 @@ abstract class _CreditLimit extends CreditLimit {
   @override
   Currency get currency;
   @override
-  String get creditLimit;
+  StringValue get creditLimit;
   @override
-  String get creditExposure;
+  StringValue get creditExposure;
   @override
-  String get creditBalance;
+  StringValue get creditBalance;
   @override
   @JsonKey(ignore: true)
   _$$_CreditLimitCopyWith<_$_CreditLimit> get copyWith =>

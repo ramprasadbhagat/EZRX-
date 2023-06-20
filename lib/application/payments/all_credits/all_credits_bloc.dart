@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -12,7 +13,7 @@ part 'all_credits_event.dart';
 part 'all_credits_state.dart';
 part 'all_credits_bloc.freezed.dart';
 
-const int _pageSize = 20;
+const int _pageSize = 24;
 
 class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;

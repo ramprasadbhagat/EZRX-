@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -30,9 +31,9 @@ class CreditLimitDto with _$CreditLimitDto {
     return CreditLimitDto(
       customerCode: creditLimit.customerCode.getOrCrash(),
       currency: creditLimit.currency.getOrCrash(),
-      creditLimit: creditLimit.creditLimit,
-      creditExposure: creditLimit.creditExposure,
-      creditBalance: creditLimit.creditBalance,
+      creditLimit: creditLimit.creditLimit.getOrDefaultValue(''),
+      creditExposure: creditLimit.creditExposure.getOrDefaultValue(''),
+      creditBalance: creditLimit.creditBalance.getOrDefaultValue(''),
     );
   }
 
@@ -40,9 +41,9 @@ class CreditLimitDto with _$CreditLimitDto {
     return CreditLimit(
       customerCode: CustomerCode(customerCode),
       currency: Currency(currency),
-      creditLimit: creditLimit,
-      creditExposure: creditExposure,
-      creditBalance: creditBalance,
+      creditLimit: StringValue(creditLimit),
+      creditExposure: StringValue(creditExposure),
+      creditBalance: StringValue(creditBalance),
     );
   }
 
