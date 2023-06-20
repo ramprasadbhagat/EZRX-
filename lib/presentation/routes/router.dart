@@ -81,6 +81,8 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
 
+import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
+
 //ignore: unused-code
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
@@ -190,6 +192,12 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
     AutoRoute(
       path: 'orders/order_template_detail',
       page: OrderTemplateDetailPage,
+    ),
+    CustomRoute(
+      path: 'product_suggestion_page',
+      page: ProductSuggestionPage,
+      durationInMilliseconds: 0,
+      reverseDurationInMilliseconds: 0,
     ),
     AutoRoute(
       path: 'main',

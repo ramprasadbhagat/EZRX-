@@ -114,6 +114,8 @@ import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_
 
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -458,6 +460,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AccountSummaryBloc>(
           create: (context) => locator<AccountSummaryBloc>(),
+        ),
+        BlocProvider<ProductSearchBloc>(
+          create: (context) => locator<ProductSearchBloc>(),
         ),
       ],
       child: MaterialApp.router(

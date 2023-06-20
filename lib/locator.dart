@@ -345,6 +345,14 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_a
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_query.dart';
 
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
+
+import 'package:ezrxmobile/infrastructure/order/repository/product_search_repository.dart';
+
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -2408,6 +2416,34 @@ void setupLocator() {
       config: locator<Config>(),
       remoteDataSource: locator<UpdateSalesOrgRemoteDataSource>(),
       localDataSource: locator<UpdateSalesOrgLocalDataSource>(),
+    ),
+  );
+
+  //============================================================
+  //  Product Search
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ProductSearchLocalDataSource());
+  locator.registerLazySingleton(
+    () => ProductSearchRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      materialListQuery: locator<MaterialsWithMetaQuery>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ProductSearchRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ProductSearchLocalDataSource>(),
+      remoteDataSource: locator<ProductSearchRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ProductSearchBloc(
+      productSearchRepository: locator<ProductSearchRepository>(),
     ),
   );
 

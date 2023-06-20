@@ -169,5 +169,11 @@ class WidgetKeys {
   static const Key priceLoading = Key('price-loading');
   static Key materialListBundleMaterial(String materialNumber) =>
       Key('bundleMaterialCard$materialNumber');
+  //============================================================
+  //  ProductSearch Keys
+  //============================================================
+  static const Key productSearchClearKey = Key('productClearIcon');
+  static const Key productScanCameraKey =  Key('productScanCameraKey');
+  static const Key productSearchPage =  Key('productSearchPage');
   static const Key materialFavouriteButton = Key('materialFavouriteButton');
 }

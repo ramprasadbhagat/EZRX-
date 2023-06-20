@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -48,12 +49,15 @@ class ProductsTab extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FilterValueList(isFetching: state.isFetching,),
+              const _ProductSearch(),
+              FilterValueList(
+                isFetching: state.isFetching,
+              ),
               Expanded(
                 child: state.isFetching && state.materialList.isEmpty
                     ? const LoadingShimmerGridItem()
                     : Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: ScrollableGridView<MaterialInfo>(
                           emptyMessage: 'No material found'.tr(),
                           header: const _TotalMaterialCount(),
@@ -63,15 +67,18 @@ class ProductsTab extends StatelessWidget {
                           onLoadingMore: () => _onLoadingMore(context),
                           mainAxisSpacing: 0,
                           crossAxisSpacing: 0,
-                          itemBuilder:
-                              (BuildContext context, int index, MaterialInfo item) =>
-                                  item.type.typeMaterial
-                                      ? MaterialGridItem(
-                                          materialInfo: item,
-                                        )
-                                      : BundleGridItem(
-                                          materialInfo: item,
-                                        ),
+                          itemBuilder: (
+                            BuildContext context,
+                            int index,
+                            MaterialInfo item,
+                          ) =>
+                              item.type.typeMaterial
+                                  ? MaterialGridItem(
+                                      materialInfo: item,
+                                    )
+                                  : BundleGridItem(
+                                      materialInfo: item,
+                                    ),
                         ),
                       ),
               ),
@@ -91,7 +98,8 @@ class ProductsTab extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+            selectedMaterialFilter:
+                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }
@@ -105,7 +113,8 @@ class ProductsTab extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+            selectedMaterialFilter:
+                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }
@@ -152,6 +161,33 @@ class _TotalMaterialCount extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ProductSearch extends StatelessWidget {
+  const _ProductSearch({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      child: TextFormField(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+          context.router.pushNamed('product_suggestion_page');
+        },
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            key: WidgetKeys.productScanCameraKey,
+            icon: const Icon(
+              Icons.camera_alt_outlined,
+            ),
+            onPressed: () => {},
+          ),
+          hintText: 'Search'.tr(),
+        ),
       ),
     );
   }
