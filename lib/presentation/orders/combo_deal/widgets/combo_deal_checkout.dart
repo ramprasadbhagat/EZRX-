@@ -73,7 +73,7 @@ class ComboDealCheckout extends StatelessWidget {
                 if (rateEnabled &&
                     currentDeal.scheme != ComboDealScheme.k5 &&
                     currentDeal.scheme != ComboDealScheme.k1 &&
-                    currentDeal.scheme != ComboDealScheme.k4_2)
+                    currentDeal.scheme != ComboDealScheme.kWithSuffix)
                   DiscountLabel(
                     label: cartItem
                             .comboDealRate(material: PriceAggregate.empty())

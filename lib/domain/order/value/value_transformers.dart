@@ -101,7 +101,7 @@ Color getStatusLabelColor(String statusType) {
     case 'Open':
       return ZPColors.primary;
     case 'In Progress':
-     return ZPColors.lightGray;
+      return ZPColors.lightGray;
     case 'Completed':
       return ZPColors.darkGray;
     default:
@@ -120,3 +120,4 @@ int getParsedValue(String zDP5Value) =>
 
 bool isValueNotEmpty(String zDP5Value) => zDP5Value.isNotEmpty;
 
+String intToString(int value) => value == 0 ? '' : '$value';

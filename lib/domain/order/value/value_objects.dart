@@ -257,6 +257,19 @@ class DiscountType extends ValueObject<String> {
   }
 }
 
+class ComboSuffix extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory ComboSuffix(String input) {
+    return ComboSuffix._(validateIntegerValue(input));
+  }
+
+  String get stringValue => intToString(value.getOrElse(() => 0));
+
+  const ComboSuffix._(this.value);
+}
+
 class MaterialTaxClassification extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

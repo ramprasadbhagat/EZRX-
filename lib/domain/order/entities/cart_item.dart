@@ -309,14 +309,14 @@ class CartItem with _$CartItem {
         return eligibleComboDealSKUTier.discountInfo;
       case ComboDealScheme.k4:
         return eligibleComboDealQtyTier.discountInfo;
-      case ComboDealScheme.k4_2:
-        final selectedSuffix = comboDeal.selectedSuffixForK4_2(
+      case ComboDealScheme.k5:
+        return eligibleComboDealTierRule.discountInfo;
+      case ComboDealScheme.kWithSuffix:
+        final selectedSuffix = comboDeal.selectedSuffix(
           material: material,
           eligibleComboDealQtyTier: eligibleComboDealQtyTier,
         );
         return selectedSuffix.discountInfo;
-      case ComboDealScheme.k5:
-        return eligibleComboDealTierRule.discountInfo;
     }
   }
 
@@ -364,7 +364,7 @@ class CartItem with _$CartItem {
       case ComboDealScheme.k3:
         return eligibleComboDealSKUTier != ComboDealSKUTier.empty();
       case ComboDealScheme.k4:
-      case ComboDealScheme.k4_2:
+      case ComboDealScheme.kWithSuffix:
         return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
       case ComboDealScheme.k5:
         return eligibleComboDealTierRule != ComboDealTierRule.empty();

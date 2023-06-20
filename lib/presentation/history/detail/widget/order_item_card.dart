@@ -164,7 +164,9 @@ class OrderItemCard extends StatelessWidget {
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
                             orderHistoryDetailsBonusAggregate
-                                .orderItem.totalPrice.totalPrice,
+                                .orderItem
+                                .totalPrice
+                                .totalPrice,
                           ),
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,

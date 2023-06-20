@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -47,5 +48,17 @@ class OrderHistoryItem with _$OrderHistoryItem {
         createdTime: '',
         orderBy: '',
         purchaseOrderType: '',
+      );
+
+  OrderHistoryItem copyWithTaxCal({
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+  }) =>
+      copyWith(
+        totalPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
+            ? TotalPrice('${totalPrice.totalPrice + tax}')
+            : totalPrice,
+        unitPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
+            ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
+            : unitPrice,
       );
 }

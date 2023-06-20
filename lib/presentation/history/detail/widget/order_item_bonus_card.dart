@@ -35,8 +35,8 @@ class OrderItemBonusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibiltiyBlocState = context.read<EligibilityBloc>().state;
-    final salesOrgConfigs = eligibiltiyBlocState.salesOrgConfigs;
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+    final salesOrgConfigs = eligibilityBlocState.salesOrgConfigs;
     final enableTaxDisplay = salesOrgConfigs.enableTaxDisplay;
 
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
@@ -111,7 +111,7 @@ class OrderItemBonusCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
+                      eligibilityBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
                               key: const Key('batchNumberExpiryDate'),
                               keyText: 'Batch Number & Expiry Date'.tr(),
@@ -131,7 +131,7 @@ class OrderItemBonusCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      !eligibiltiyBlocState.salesOrgConfigs.disableDeliveryDate
+                      !eligibilityBlocState.salesOrgConfigs.disableDeliveryDate
                           ? BalanceTextRow(
                               key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
@@ -175,7 +175,9 @@ class OrderItemBonusCard extends StatelessWidget {
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
                             orderHistoryDetailsBonusAggregate
-                                .orderItem.totalPrice.totalPrice,
+                                .orderItem
+                                .totalPrice
+                                .totalPrice,
                           ),
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
@@ -252,7 +254,7 @@ class OrderItemBonusCard extends StatelessWidget {
                                       keyFlex: 1,
                                       valueFlex: 1,
                                     ),
-                                    eligibiltiyBlocState
+                                    eligibilityBlocState
                                             .salesOrgConfigs.batchNumDisplay
                                         ? BalanceTextRow(
                                             keyText:
@@ -274,7 +276,7 @@ class OrderItemBonusCard extends StatelessWidget {
                                       keyFlex: 1,
                                       valueFlex: 1,
                                     ),
-                                    !eligibiltiyBlocState
+                                    !eligibilityBlocState
                                             .salesOrgConfigs.disableDeliveryDate
                                         ? BalanceTextRow(
                                             keyText: 'Delivery Date/Time'.tr(),

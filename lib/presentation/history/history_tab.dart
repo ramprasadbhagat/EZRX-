@@ -330,7 +330,10 @@ class _OrderHistoryScrollList extends StatelessWidget {
             ),
         itemBuilder: (context, index, item) => OrderHistoryListTile(
           key: ValueKey('historyTitle$index'),
-          orderHistoryItem: item,
+          orderHistoryItem: item.copyWithTaxCal(
+            salesOrganisationConfigs:
+                context.read<SalesOrgBloc>().state.configs,
+          ),
           customerCodeInfo:
               context.read<CustomerCodeBloc>().state.customerCodeInfo,
           shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,

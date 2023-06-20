@@ -79,7 +79,7 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
         type: DiscountType(type),
         conditionNumber: conditionNumber,
         mandatory: mandatory,
-        suffix: suffix,
+        suffix: ComboSuffix(suffix),
       );
 
   factory ComboDealMaterialDto.fromDomain(ComboDealMaterial domain) =>
@@ -90,6 +90,6 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
         type: domain.type.getOrDefaultValue(''),
         conditionNumber: domain.conditionNumber,
         mandatory: domain.mandatory,
-        suffix: domain.suffix,
+        suffix: domain.suffix.stringValue,
       );
 }

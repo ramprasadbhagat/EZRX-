@@ -39,7 +39,7 @@ class ComboDealQtyTierDto with _$ComboDealQtyTierDto {
         conditionNumber: conditionNumber,
         minQty: minQty,
         type: DiscountType(type),
-        suffix: suffix,
+        suffix: ComboSuffix(suffix),
       );
 
   factory ComboDealQtyTierDto.fromDomain(ComboDealQtyTier domain) =>
@@ -48,6 +48,6 @@ class ComboDealQtyTierDto with _$ComboDealQtyTierDto {
         conditionNumber: domain.conditionNumber,
         minQty: domain.minQty,
         type: domain.type.getOrDefaultValue(''),
-        suffix: domain.suffix,
+        suffix: domain.suffix.stringValue,
       );
 }

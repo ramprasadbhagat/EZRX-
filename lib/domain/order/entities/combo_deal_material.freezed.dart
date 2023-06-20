@@ -171,7 +171,7 @@ mixin _$ComboDealMaterial {
   DiscountType get type => throw _privateConstructorUsedError;
   String get conditionNumber => throw _privateConstructorUsedError;
   bool get mandatory => throw _privateConstructorUsedError;
-  String get suffix => throw _privateConstructorUsedError;
+  ComboSuffix get suffix => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ComboDealMaterialCopyWith<ComboDealMaterial> get copyWith =>
@@ -191,7 +191,7 @@ abstract class $ComboDealMaterialCopyWith<$Res> {
       DiscountType type,
       String conditionNumber,
       bool mandatory,
-      String suffix});
+      ComboSuffix suffix});
 }
 
 /// @nodoc
@@ -243,7 +243,7 @@ class _$ComboDealMaterialCopyWithImpl<$Res, $Val extends ComboDealMaterial>
       suffix: null == suffix
           ? _value.suffix
           : suffix // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ComboSuffix,
     ) as $Val);
   }
 }
@@ -263,7 +263,7 @@ abstract class _$$_ComboDealMaterialCopyWith<$Res>
       DiscountType type,
       String conditionNumber,
       bool mandatory,
-      String suffix});
+      ComboSuffix suffix});
 }
 
 /// @nodoc
@@ -313,7 +313,7 @@ class __$$_ComboDealMaterialCopyWithImpl<$Res>
       suffix: null == suffix
           ? _value.suffix
           : suffix // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ComboSuffix,
     ));
   }
 }
@@ -344,7 +344,7 @@ class _$_ComboDealMaterial extends _ComboDealMaterial {
   @override
   final bool mandatory;
   @override
-  final String suffix;
+  final ComboSuffix suffix;
 
   @override
   String toString() {
@@ -388,7 +388,7 @@ abstract class _ComboDealMaterial extends ComboDealMaterial {
       required final DiscountType type,
       required final String conditionNumber,
       required final bool mandatory,
-      required final String suffix}) = _$_ComboDealMaterial;
+      required final ComboSuffix suffix}) = _$_ComboDealMaterial;
   const _ComboDealMaterial._() : super._();
 
   @override
@@ -404,7 +404,7 @@ abstract class _ComboDealMaterial extends ComboDealMaterial {
   @override
   bool get mandatory;
   @override
-  String get suffix;
+  ComboSuffix get suffix;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealMaterialCopyWith<_$_ComboDealMaterial> get copyWith =>

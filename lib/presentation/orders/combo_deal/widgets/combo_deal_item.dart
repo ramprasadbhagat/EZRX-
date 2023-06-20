@@ -157,14 +157,16 @@ class _DiscountLabel extends StatelessWidget {
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
         return const SizedBox();
-      case ComboDealScheme.k4_2:
+      case ComboDealScheme.k5:
+        return const SizedBox();
+      case ComboDealScheme.kWithSuffix:
         final totalSelectedQuantity = context
             .read<ComboDealMaterialDetailBloc>()
             .state
             .totalSelectedQuantity;
 
         final discountInfo = comboDeal
-            .selectedSuffixForK4_2(
+            .selectedSuffix(
               material: material,
               eligibleComboDealQtyTier:
                   comboDeal.descendingSortedQtyTiers.firstWhere(
@@ -179,8 +181,6 @@ class _DiscountLabel extends StatelessWidget {
         return DiscountLabel(
           label: discountInfo.text,
         );
-      case ComboDealScheme.k5:
-        return const SizedBox();
     }
   }
 }
@@ -236,7 +236,7 @@ class _PriceLabel extends StatelessWidget {
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
         return false;
-      case ComboDealScheme.k4_2:
+      case ComboDealScheme.kWithSuffix:
         return true;
       case ComboDealScheme.k5:
         return false;
@@ -255,12 +255,12 @@ class _PriceLabel extends StatelessWidget {
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
         return null;
-      case ComboDealScheme.k4_2:
+      case ComboDealScheme.kWithSuffix:
         final totalSelectedQuantity = context
             .read<ComboDealMaterialDetailBloc>()
             .state
             .totalSelectedQuantity;
-        final selectedSuffix = comboDeal.selectedSuffixForK4_2(
+        final selectedSuffix = comboDeal.selectedSuffix(
           material: material,
           eligibleComboDealQtyTier:
               comboDeal.descendingSortedQtyTiers.firstWhere(

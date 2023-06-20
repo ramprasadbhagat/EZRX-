@@ -71,7 +71,7 @@ void main() async {
             type: DiscountType('%'),
             conditionNumber: '0015958842',
             minQty: 3,
-            suffix: '2',
+            suffix: ComboSuffix('2'),
           ),
         );
         expect(cartItem.eligibleComboDealSKUTier, ComboDealSKUTier.empty());
@@ -120,7 +120,7 @@ void main() async {
             type: DiscountType('USD'),
             conditionNumber: '0015958842',
             minQty: 4,
-            suffix: '3',
+            suffix: ComboSuffix('3'),
           ),
         );
         expect(cartItem.eligibleComboDealSKUTier, ComboDealSKUTier.empty());
@@ -171,7 +171,7 @@ void main() async {
             type: DiscountType(''),
             conditionNumber: '0015958842',
             minQty: 2,
-            suffix: '1',
+            suffix: ComboSuffix('1'),
           ),
         );
         expect(cartItem.eligibleComboDealSKUTier, ComboDealSKUTier.empty());

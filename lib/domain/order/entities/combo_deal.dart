@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_amount_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
@@ -7,7 +8,6 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:collection/collection.dart';
 
 part 'combo_deal.freezed.dart';
 
@@ -79,7 +79,20 @@ class ComboDeal with _$ComboDeal {
         orElse: () => ComboDealMaterial.empty(),
       );
 
+  bool get _allMaterialWithSuffix =>
+      materialComboDeals.isNotEmpty &&
+      allMaterials.every((item) => item.suffix.isValid());
+
+  bool get _allFlexiQtyTierWithSuffix =>
+      flexiQtyTier.isNotEmpty &&
+      flexiQtyTier.every((tier) => tier.suffix.isValid());
+
+
   ComboDealScheme get scheme {
+
+    if (_allMaterialWithSuffix && _allFlexiQtyTierWithSuffix) {
+      return ComboDealScheme.kWithSuffix;
+    }
     if (materialComboDeals.isNotEmpty &&
         allMaterials.every((item) => item.mandatory)) {
       return ComboDealScheme.k1;
@@ -95,12 +108,6 @@ class ComboDeal with _$ComboDeal {
       return ComboDealScheme.k3;
     }
     if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
-      if (materialComboDeals.isNotEmpty &&
-          allMaterials.every((item) => item.suffix.isNotEmpty) &&
-          flexiQtyTier.every((tier) => tier.suffix.isNotEmpty)) {
-        return ComboDealScheme.k4_2;
-      }
-
       return ComboDealScheme.k4;
     }
 
@@ -118,7 +125,7 @@ class ComboDeal with _$ComboDeal {
       flexiSKUTier.isNotEmpty ||
       materialComboDeals.isNotEmpty;
 
-  ComboDealMaterial selectedSuffixForK4_2({
+  ComboDealMaterial selectedSuffix({
     required PriceAggregate material,
     required ComboDealQtyTier eligibleComboDealQtyTier,
   }) =>
@@ -130,4 +137,4 @@ class ComboDeal with _$ComboDeal {
       );
 }
 
-enum ComboDealScheme { k1, k2, k3, k4, k4_2, k5 }
+enum ComboDealScheme { k1, k2, k3, k4, k5, kWithSuffix }

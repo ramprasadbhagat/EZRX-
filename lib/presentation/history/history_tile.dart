@@ -149,10 +149,15 @@ class OrderHistoryListTile extends StatelessWidget {
                 ),
               if (enableOHPrice)
                 BalanceTextRow(
+                  key: Key(
+                    'totalPrice${orderHistoryItem.materialNumber.getOrDefaultValue('')}',
+                  ),
                   keyText: 'Total Price'.tr(),
                   valueText: StringUtils.displayPrice(
                     salesOrgConfigs,
-                    orderHistoryItem.totalPrice.totalPrice,
+                    orderHistoryItem
+                        .totalPrice
+                        .totalPrice,
                   ),
                 ),
               if (enableTaxDisplay)

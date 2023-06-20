@@ -59,7 +59,10 @@ class HistoryOrderSummarySection extends StatelessWidget {
                           key: Key(
                             'orderItemBonusCard-${orderItem.orderItem.materialNumber.displayMatNo.tr()}-$index',
                           ),
-                          orderHistoryDetailsBonusAggregate: orderItem,
+                          orderHistoryDetailsBonusAggregate:
+                              orderItem.copyWithTaxCal(
+                            salesOrganisationConfigs: salesOrgConfigs,
+                          ),
                         )
                       : orderItem.orderItem.isTenderContractMaterial
                           ? BlocProvider(
@@ -81,7 +84,10 @@ class HistoryOrderSummarySection extends StatelessWidget {
                                 key: Key(
                                   'orderTenderContractCard-${orderItem.orderItem.materialNumber.displayMatNo}-$index',
                                 ),
-                                orderHistoryDetailsBonusAggregate: orderItem,
+                                orderHistoryDetailsBonusAggregate:
+                                    orderItem.copyWithTaxCal(
+                                  salesOrganisationConfigs: salesOrgConfigs,
+                                ),
                                 isLoading: state.isLoading,
                               ),
                             )
@@ -89,7 +95,10 @@ class HistoryOrderSummarySection extends StatelessWidget {
                               key: Key(
                                 'orderItemCard-${orderItem.orderItem.materialNumber.displayMatNo}-$index',
                               ),
-                              orderHistoryDetailsBonusAggregate: orderItem,
+                              orderHistoryDetailsBonusAggregate:
+                                  orderItem.copyWithTaxCal(
+                                salesOrganisationConfigs: salesOrgConfigs,
+                              ),
                             );
                 },
               ),

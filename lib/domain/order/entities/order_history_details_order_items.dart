@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
@@ -58,4 +59,15 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   String get deliveryDate => plannedDeliveryDate.isNotEmpty
       ? plannedDeliveryDate.toValidDateString
       : '-';
+  OrderHistoryDetailsOrderItem copyWithTaxCal({
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+  }) =>
+      copyWith(
+        totalPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
+            ? TotalPrice('${totalPrice.totalPrice + tax}')
+            : totalPrice,
+        unitPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
+            ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
+            : unitPrice,
+      );
 }

@@ -760,6 +760,108 @@ void main() {
               ),
             )).called(1);
       });
+
+      testWidgets('zp price and total price check without tax', (tester) async {
+        final zpPrice = ZpPrice('50');
+        final totalPrice = TotalPrice('100');
+        const tax = 25.00;
+        const qty = 2;
+
+        when(() => mockOrderHistoryListBloc.state).thenReturn(
+          OrderHistoryListState.initial().copyWith(
+            canLoadMore: true,
+            orderHistoryList: OrderHistory.empty().copyWith(
+              orderHistoryItems: [
+                OrderHistoryItem.empty().copyWith(
+                  orderNumber: OrderNumber('fake-number'),
+                  tax: tax,
+                  totalPrice: totalPrice,
+                  qty: qty,
+                  unitPrice: zpPrice,
+                ),
+              ],
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(
+          find.textContaining(
+            totalPrice.getOrDefaultValue(''),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.textContaining(
+            zpPrice.getOrDefaultValue(''),
+          ),
+          findsOneWidget,
+        );
+        final orderHistoryList = find.byType(OrderHistoryListTile);
+        expect(orderHistoryList, findsWidgets);
+        await tester.tap(orderHistoryList.first);
+        await tester.pump();
+        expect(
+          find.textContaining(
+            totalPrice.getOrDefaultValue(''),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.textContaining(
+            zpPrice.getOrDefaultValue(''),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('zp price and total price check with tax', (tester) async {
+        final zpPrice = ZpPrice('50');
+        final totalPrice = TotalPrice('100');
+        const tax = 25.00;
+        const qty = 2;
+        when(() => mockSalesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableTaxAtTotalLevelOnly: false,
+              enableTaxDisplay: true,
+            ),
+          ),
+        );
+        when(() => mockOrderHistoryListBloc.state).thenReturn(
+          OrderHistoryListState.initial().copyWith(
+            canLoadMore: true,
+            orderHistoryList: OrderHistory.empty().copyWith(
+              orderHistoryItems: [
+                OrderHistoryItem.empty().copyWith(
+                  orderNumber: OrderNumber('fake-number'),
+                  tax: tax,
+                  totalPrice: totalPrice,
+                  qty: qty,
+                  unitPrice: zpPrice,
+                ),
+              ],
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(
+          find.textContaining(
+            '${(totalPrice.totalPrice + tax).truncate()}',
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.textContaining(
+            '${(zpPrice.zpPrice + tax / qty).truncate()}',
+          ),
+          findsOneWidget,
+        );
+      });
     },
   );
 }

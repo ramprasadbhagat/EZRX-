@@ -56,7 +56,7 @@ void main() async {
     invalidDealMaterial,
   ]);
 
-  group('Cart Item K4.2 -', () {
+  group('Cart Item KWithSuffix -', () {
     test('Combo not eligible when total qty is not suffice', () {
       expect(
           CartItem.comboDeal([amountDealMaterial]).isComboDealEligible, false);
@@ -78,7 +78,7 @@ void main() async {
           type: DiscountType('%'),
           conditionNumber: '0015958909',
           minQty: 6,
-          suffix: '1',
+          suffix: ComboSuffix('1'),
         ),
       );
       expect(cartItem.eligibleComboDealSKUTier, ComboDealSKUTier.empty());

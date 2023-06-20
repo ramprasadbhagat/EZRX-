@@ -54,7 +54,7 @@ class ComboDealHeaderMessage extends StatelessWidget {
       case ComboDealScheme.k3:
         return 'You must purchase ${comboDeal.sortedSKUTier.map((e) => '${e.minQty} unique products ').toList().join(' OR ')} WITH a min QTY of [${comboDeal.materialComboDeals.first.materials.first.minQty}] for each single product (Discounts will increase as the number of unique products increases)';
       case ComboDealScheme.k4:
-      case ComboDealScheme.k4_2:
+      case ComboDealScheme.kWithSuffix:
         final flexiQtyTierCopyList =
             List<ComboDealQtyTier>.from(comboDeal.flexiQtyTier);
         flexiQtyTierCopyList.sort(((a, b) => a.minQty.compareTo(b.minQty)));

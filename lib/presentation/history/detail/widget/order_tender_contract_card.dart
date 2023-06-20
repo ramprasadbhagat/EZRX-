@@ -120,7 +120,9 @@ class OrderTenderContractCard extends StatelessWidget {
                       valueText: StringUtils.displayPrice(
                         salesOrgConfigs,
                         orderHistoryDetailsBonusAggregate
-                            .orderItem.totalPrice.totalPrice,
+                            .orderItem
+                            .totalPrice
+                            .totalPrice,
                       ),
                       valueTextLoading: isLoading,
                       keyFlex: 1,
