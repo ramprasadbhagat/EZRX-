@@ -167,7 +167,7 @@ class _ItemCard extends StatelessWidget {
                       size: 16,
                     ),
                     label: Text(
-                      'Download csv'.tr(),
+                      'Download xlsx'.tr(),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.skyBlueColor,
                           ),
