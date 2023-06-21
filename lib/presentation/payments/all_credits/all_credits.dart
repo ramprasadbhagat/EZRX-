@@ -16,9 +16,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
-
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -103,7 +100,7 @@ class AllCredits extends StatelessWidget {
 
               return Column(
                 children: [
-                  // Place left for search and filter 
+                  // Place left for search and filter
                   _CreditsScrollList(
                     allCreditsState: allCreditsState,
                   ),
@@ -232,49 +229,47 @@ class _CreditsItem extends StatelessWidget {
   }) : super(key: key);
 
   final CreditAndInvoiceItem creditItem;
-  
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       child: ListTile(
         title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${creditItem.accountingDocumentType} #${creditItem.accountingDocument}',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-                StatusLabel(
-                  status: StatusType(
-                    creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
-                  ),
-                ),
-              ],
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${creditItem.accountingDocumentType} #${creditItem.accountingDocument}',
+              style: Theme.of(context).textTheme.labelSmall,
             ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top:8,bottom: 10),
-          child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                      creditItem.postingKeyName,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    Text(
-                      StringUtils.displayPrice(
-                        context.read<SalesOrgBloc>().state.configs,
-                        creditItem.convertIfAmountInTransactionCurrencyIsNegative,  
-                      ),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
-                    ),
-                ],
+            StatusLabel(
+              status: StatusType(
+                creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
               ),
+            ),
+          ],
+        ),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                creditItem.postingKeyName,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              Text(
+                StringUtils.displayPrice(
+                  context.read<SalesOrgBloc>().state.configs,
+                  creditItem.convertIfAmountInTransactionCurrencyIsNegative,
+                ),
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.primary,
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );
-    
   }
 }

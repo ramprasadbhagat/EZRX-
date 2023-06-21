@@ -23,34 +23,34 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
   }
   Future<void> _onEvent(AupTcEvent event, Emitter<AupTcState> emit) async {
     event.map(
-        show: (e) async {
-          emit(
-            state.copyWith(
-              showTermsAndCondition: await _showTermsAndConditon(e.user),
-              tncFile: config.getTnCFile,
-              privacyFile: config.getPrivacyPolicyFile,
-              tncConsent: false,
-              privacyConsent: false,
-            ),
-          );
-        },
-        termsOfUseConsent: (e) => emit(
+      show: (e) async {
+        emit(
           state.copyWith(
-            tncConsent: e.newValue,
+            showTermsAndCondition: await _showTermsAndConditon(e.user),
+            tncFile: config.getTnCFile,
+            privacyFile: config.getPrivacyPolicyFile,
+            tncConsent: false,
+            privacyConsent: false,
           ),
+        );
+      },
+      termsOfUseConsent: (e) => emit(
+        state.copyWith(
+          tncConsent: e.newValue,
         ),
-        privacyPolicyConsent: (e) => emit(
-          state.copyWith(
-            privacyConsent: e.newValue,
-          ),
+      ),
+      privacyPolicyConsent: (e) => emit(
+        state.copyWith(
+          privacyConsent: e.newValue,
         ),
+      ),
     );
   }
 
   Future<bool> _showTermsAndConditon(User user) async {
     final isTncEnabled = aupTcRepository.getTncConfig();
     if (!isTncEnabled) return false;
-    
+
     return !user.acceptPrivacyPolicy;
   }
 }

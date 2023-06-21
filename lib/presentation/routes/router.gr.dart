@@ -293,6 +293,7 @@ class AppRouter extends _i82.RootStackRouter {
           key: args.key,
           title: args.title,
           htmlPath: args.htmlPath,
+          styleCss: args.styleCss,
         ),
       );
     },
@@ -1474,8 +1475,9 @@ class StaticHtmlViewerRoute
     extends _i82.PageRouteInfo<StaticHtmlViewerRouteArgs> {
   StaticHtmlViewerRoute({
     _i83.Key? key,
-    required String title,
+    String title = '',
     required String htmlPath,
+    String styleCss = '',
   }) : super(
           StaticHtmlViewerRoute.name,
           path: 'static_html_viewer',
@@ -1483,6 +1485,7 @@ class StaticHtmlViewerRoute
             key: key,
             title: title,
             htmlPath: htmlPath,
+            styleCss: styleCss,
           ),
         );
 
@@ -1492,8 +1495,9 @@ class StaticHtmlViewerRoute
 class StaticHtmlViewerRouteArgs {
   const StaticHtmlViewerRouteArgs({
     this.key,
-    required this.title,
+    this.title = '',
     required this.htmlPath,
+    this.styleCss = '',
   });
 
   final _i83.Key? key;
@@ -1502,9 +1506,11 @@ class StaticHtmlViewerRouteArgs {
 
   final String htmlPath;
 
+  final String styleCss;
+
   @override
   String toString() {
-    return 'StaticHtmlViewerRouteArgs{key: $key, title: $title, htmlPath: $htmlPath}';
+    return 'StaticHtmlViewerRouteArgs{key: $key, title: $title, htmlPath: $htmlPath, styleCss: $styleCss}';
   }
 }
 

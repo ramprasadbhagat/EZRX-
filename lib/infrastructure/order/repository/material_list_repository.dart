@@ -274,7 +274,7 @@ class MaterialListRepository implements IMaterialListRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
-
+  
 
   @override
   Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({

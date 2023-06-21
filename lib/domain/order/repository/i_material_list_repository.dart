@@ -11,7 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class IMaterialListRepository {
-
+  
   Future<Either<ApiFailure, MaterialResponse>> getMaterialList({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfig,

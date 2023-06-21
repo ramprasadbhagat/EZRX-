@@ -353,7 +353,7 @@ void main() {
     //     ),
     //   ).called(1);
     // });
-    
+
     // testWidgets('=> All Credits AttentionRow visible', (tester) async {
     //   when(() => allCreditsBlocMock.state)
     //       .thenReturn(AllCreditsState.initial());
@@ -365,7 +365,7 @@ void main() {
     //   final attentionRow = find.byType(AttentionRow);
     //   expect(attentionRow, findsOneWidget);
     // });
-    
+
     // testWidgets('=> All Credits Filter By Status Test', (tester) async {
     //   when(() => allCreditsBlocMock.state)
     //       .thenReturn(AllCreditsState.initial().copyWith(isLoading: true));
@@ -426,6 +426,6 @@ void main() {
     //   await tester.tap(statusFilterButton);
     //   await tester.pump();
     // });
-  
+    
   });
 }

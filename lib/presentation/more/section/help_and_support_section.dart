@@ -53,6 +53,7 @@ class HelpAndSupportTile extends StatelessWidget {
       route: StaticHtmlViewerRoute(
         title: 'Terms of Use',
         htmlPath: locator<Config>().staticTermsOfUseFile,
+        styleCss: locator<Config>().staticStyleCss,
       ),
     ),
     MoreDetailsTile(
@@ -65,6 +66,7 @@ class HelpAndSupportTile extends StatelessWidget {
       route: StaticHtmlViewerRoute(
         title: 'Privacy policy',
         htmlPath: locator<Config>().staticPrivacyPolicyFile,
+        styleCss: locator<Config>().staticStyleCss,
       ),
     ),
   ];

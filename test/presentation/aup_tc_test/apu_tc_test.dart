@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -102,7 +103,7 @@ void main() {
 
   setUpAll(() async {
     setupLocator();
-
+    WidgetsFlutterBinding.ensureInitialized();
     TestWidgetsFlutterBinding.ensureInitialized();
     mockSalesOrgBloc = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
@@ -187,19 +188,33 @@ void main() {
           ),
         ),
       );
+      final aupTcWebView = find.byKey(WidgetKeys.aupTcWebView);
+      expect(aupTcWebView, findsNWidgets(2));
+      final staticHtmlViewerElement1 =
+          tester.state(aupTcWebView.first) as StaticHtmlViewerState;
+      staticHtmlViewerElement1.isLoading = false;
+      // ignore: invalid_use_of_protected_member
+      staticHtmlViewerElement1.setState(() {});
+
+      final staticHtmlViewerElement2 =
+          tester.state(aupTcWebView.last) as StaticHtmlViewerState;
+      staticHtmlViewerElement2.isLoading = false;
+      // ignore: invalid_use_of_protected_member
+      staticHtmlViewerElement2.setState(() {});
+
       await tester.pump();
-      final auptcscreen = find.byKey(const Key('aupTcScreen'));
-      final homeTabbar = find.byKey(const Key('homeTabBar'));
-      final auptcappBar = find.byKey(const Key('auptcappBar'));
-      final auptcwebview = find.byKey(const Key('auptcwebview'));
-      final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-      expect(auptcscreen, findsOneWidget);
-      expect(auptcappBar, findsOneWidget);
-      expect(homeTabbar, findsNothing);
-      expect(auptcwebview, findsNWidgets(2));
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-      expect(auptcAcceptButton, findsOneWidget);
-      await tester.tap(auptcAcceptButton);
+      final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
+      final homeTabBar = find.byKey(const Key('homeTabBar'));
+      final aupTcaAppBar = find.byKey(const Key('auptcappBar'));
+      final aupTcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+
+      expect(aupTcScreen, findsOneWidget);
+      expect(aupTcaAppBar, findsOneWidget);
+      expect(homeTabBar, findsNothing);
+      expect(aupTcAcceptButton, findsOneWidget);
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.tap(aupTcAcceptButton);
       await tester.pump();
       var willPopCalled = false;
       final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
@@ -293,12 +308,27 @@ void main() {
         ),
       ),
     );
+    //This is for setting the isLoading false
+    final aupTcWebView = find.byKey(WidgetKeys.aupTcWebView);
+    expect(aupTcWebView, findsNWidgets(2));
+    final staticHtmlViewerElement1 =
+        tester.state(aupTcWebView.first) as StaticHtmlViewerState;
+    staticHtmlViewerElement1.isLoading = false;
+    // ignore: invalid_use_of_protected_member
+    staticHtmlViewerElement1.setState(() {});
+
+    final staticHtmlViewerElement2 =
+        tester.state(aupTcWebView.last) as StaticHtmlViewerState;
+    staticHtmlViewerElement2.isLoading = false;
+    // ignore: invalid_use_of_protected_member
+    staticHtmlViewerElement2.setState(() {});
+
     await tester.pump();
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 5));
     final acceptButtonTextFinder = find.text('Accept and continue');
     expect(acceptButtonTextFinder, findsOneWidget);
-    final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    await tester.tap(auptcAcceptButton);
+    final aupTcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+    await tester.tap(aupTcAcceptButton);
     await tester.pumpAndSettle();
     final snackBarMsgFinder = find.text(
         'You need to read and accept full Terms of use and Privacy Policy before continue.'

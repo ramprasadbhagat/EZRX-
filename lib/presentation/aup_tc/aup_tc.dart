@@ -4,10 +4,11 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,7 +37,10 @@ class AupTCDialog extends StatelessWidget {
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,11 +163,13 @@ class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class _ConsentBox extends StatelessWidget {
-  _ConsentBox({Key? key, required this.url}) : super(key: key);
+  const _ConsentBox({
+    Key? key,
+    required this.url,
+  }) : super(key: key);
   final String url;
-  late InAppWebViewController controller;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -178,42 +184,20 @@ class _ConsentBox extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      child: InAppWebView(
-        key: const ValueKey('auptcwebview'),
-        initialFile: url,
-        onWebViewCreated: (InAppWebViewController webViewController) async {
-          controller = webViewController;
-        },
-        initialOptions: InAppWebViewGroupOptions(
-          android: AndroidInAppWebViewOptions(
-            useHybridComposition: true,
-            useWideViewPort: false,
-          ),
-          ios: IOSInAppWebViewOptions(
-            enableViewportScale: true,
-          ),
-          crossPlatform: InAppWebViewOptions(
-            preferredContentMode: UserPreferredContentMode.MOBILE,
-            minimumFontSize: 30,
-            allowUniversalAccessFromFileURLs: true,
-          ),
-        ),
-        onLoadStart: (controller, url) {},
-        onLoadStop: (controller, url) async {
-          await _injectCss();
-        },
-        onScrollChanged: (controller, x, y) {},
+      child: StaticHtmlViewer(
+        key: WidgetKeys.aupTcWebView,
+        htmlPath: url,
+        styleCss: styleCss,
       ),
     );
   }
 
-  Future<void> _injectCss() async {
-    const cssCode = '''
+  String get styleCss {
+    return '''
       var style = document.createElement('style');
       style.innerHTML = 'body { padding: 3.5rem !important; padding-top: 0rem !important; align-items: center; justify-content: center;}';
       document.head.appendChild(style);
     ''';
-    await controller.evaluateJavascript(source: cssCode);
   }
 }
 

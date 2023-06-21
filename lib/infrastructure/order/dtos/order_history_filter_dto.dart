@@ -8,7 +8,7 @@ class OrderHistoryFilterDto with _$OrderHistoryFilterDto {
   const OrderHistoryFilterDto._();
   const factory OrderHistoryFilterDto({
     //TODO: will remove if it's not required in filter purpose
-    
+
     // @JsonKey(
     //   name: 'orderNumber',
     //   defaultValue: '',
@@ -49,7 +49,7 @@ class OrderHistoryFilterDto with _$OrderHistoryFilterDto {
   ) {
     return OrderHistoryFilterDto(
       //TODO: will remove if it's not required in filter purpose
-      
+
       // orderNumber: orderHistoryFilter.orderId.searchValueOrEmpty,
       // poReference: orderHistoryFilter.poNumber.searchValueOrEmpty,
       // materialSearch: orderHistoryFilter.materialSearch.searchValueOrEmpty,

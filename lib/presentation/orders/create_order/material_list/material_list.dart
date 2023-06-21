@@ -135,7 +135,9 @@ class MaterialListPage extends StatelessWidget {
                       ? LoadingShimmer.logo(
                           key: const Key('loaderImage'),
                         )
-                      : _MaterialListScrollList(state: state,),
+                      : _MaterialListScrollList(
+                          state: state,
+                        ),
                 ),
               ],
             );
@@ -199,7 +201,10 @@ class _MaterialListScrollList extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.getEmptyMaterialFilter(),
+            selectedMaterialFilter: context
+                .read<MaterialFilterBloc>()
+                .state
+                .getEmptyMaterialFilter(),
           ),
         );
   }
@@ -214,7 +219,7 @@ class _MaterialListScrollList extends StatelessWidget {
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
-            context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }

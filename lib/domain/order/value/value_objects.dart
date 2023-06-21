@@ -209,7 +209,8 @@ class MaterialInStock extends ValueObject<String> {
     return getInStock(value.getOrElse(() => ''));
   }
 
-  String get displayMaterialInStock => getMaterialInStockText(isMaterialInStock);
+  String get displayMaterialInStock =>
+      getMaterialInStockText(isMaterialInStock);
 
   const MaterialInStock._(this.value);
 }

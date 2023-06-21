@@ -29,7 +29,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
@@ -63,6 +62,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
+
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -554,7 +555,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<EligibilityBloc>().state.shipToInfo,
-                    selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+                    selectedMaterialFilter: context
+                        .read<MaterialFilterBloc>()
+                        .state
+                        .selectedMaterialFilter,
                   ),
                 );
           },
@@ -701,24 +705,21 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _initializeProduct() {
     final eligibilityBloc = context.read<EligibilityBloc>();
     context.read<MaterialFilterBloc>().add(
-      MaterialFilterEvent.fetch(
-        user: context.read<UserBloc>().state.user,
-        salesOrganisation:
-        context.read<SalesOrgBloc>().state.salesOrganisation,
-        salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-        customerCodeInfo:
-        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-        shipToInfo:
-        context.read<EligibilityBloc>().state.shipToInfo,
-        pickAndPack: context
-            .read<EligibilityBloc>()
-            .state
-            .getPNPValueMaterial,
-      ),
-    );
+          MaterialFilterEvent.fetch(
+            user: context.read<UserBloc>().state.user,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+            pickAndPack:
+                context.read<EligibilityBloc>().state.getPNPValueMaterial,
+          ),
+        );
     context.read<MaterialFilterBloc>().add(
-      const MaterialFilterEvent.resetFilter(),
-    );
+          const MaterialFilterEvent.resetFilter(),
+        );
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
             salesOrganisation:
@@ -726,7 +727,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+            selectedMaterialFilter:
+                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
           ),
         );
   }

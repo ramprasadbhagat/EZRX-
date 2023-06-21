@@ -15,7 +15,10 @@ class WidgetKeys {
       Key('loginRememberPasswordCheckbox');
   static const Key loginSubmitButton = Key('loginSubmitButton');
   static const Key ssoLoginButton = Key('ssoLoginButton');
-
+  //============================================================
+  //  AupTCDialog
+  //============================================================
+  static const Key aupTcWebView = Key('aupTcWebView');
   //============================================================
   //  HOME TAB BAR
   //============================================================
@@ -173,7 +176,7 @@ class WidgetKeys {
   //  ProductSearch Keys
   //============================================================
   static const Key productSearchClearKey = Key('productClearIcon');
-  static const Key productScanCameraKey =  Key('productScanCameraKey');
-  static const Key productSearchPage =  Key('productSearchPage');
+  static const Key productScanCameraKey = Key('productScanCameraKey');
+  static const Key productSearchPage = Key('productSearchPage');
   static const Key materialFavouriteButton = Key('materialFavouriteButton');
 }
