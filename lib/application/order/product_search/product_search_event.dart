@@ -27,4 +27,8 @@ class ProductSearchEvent with _$ProductSearchEvent {
   }) = _LoadMoreProductList;
 
   const factory ProductSearchEvent.clearSearch() = _ClearSearch;
+
+  const factory ProductSearchEvent.fetchProductSearchSuggestionHistory() = _FetchProductSearchSuggestionHistory;
+
+  const factory ProductSearchEvent.clearProductSearchSuggestionHistory() = _ClearProductSearchSuggestionHistory;
 }

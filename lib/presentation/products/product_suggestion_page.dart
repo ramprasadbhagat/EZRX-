@@ -23,6 +23,8 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 
+import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
+
 class ProductSuggestionPage extends StatelessWidget {
   const ProductSuggestionPage({
     Key? key,
@@ -37,7 +39,23 @@ class ProductSuggestionPage extends StatelessWidget {
         elevation: 0,
         titleSpacing: 0,
       ),
-      body: const _ProductSuggestionSection(),
+      body: const _BodyContent(),
+    );
+  }
+}
+
+class _BodyContent extends StatelessWidget {
+  const _BodyContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductSearchBloc, ProductSearchState>(
+      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      builder: (context, state) {
+        return state.searchKey.isValid()
+            ? const _ProductSuggestionSection()
+            : const _ProductSearchHistorySuggestionSection();
+      },
     );
   }
 }
@@ -65,6 +83,12 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
       ),
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -109,9 +133,12 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                       salesOrganization:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                       configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo:
-                          context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
                       searchKey: value,
                     ),
                   );
@@ -122,9 +149,12 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                       salesOrganization:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                       configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo:
-                          context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
                       searchKey: value,
                     ),
                   );
@@ -143,8 +173,6 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
     );
   }
 }
-
-//TODO: Empty suggestion UI to be implemented in next ticket
 
 class _ProductSuggestionSection extends StatelessWidget {
   const _ProductSuggestionSection({Key? key}) : super(key: key);
@@ -169,12 +197,9 @@ class _ProductSuggestionSection extends StatelessWidget {
                     salesOrganization:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo: context
-                        .read<CustomerCodeBloc>()
-                        .state
-                        .customerCodeInfo,
-                    shipToInfo:
-                        context.read<ShipToCodeBloc>().state.shipToInfo,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                   ),
                 );
           },
@@ -205,6 +230,117 @@ class _SuggestedProductTile extends StatelessWidget {
           ),
           title: Text(
             product.name,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+        ),
+        const Divider(
+          indent: 15,
+          endIndent: 15,
+          color: ZPColors.accentColor,
+        ),
+      ],
+    );
+  }
+}
+
+class _ProductSearchHistorySuggestionSection extends StatelessWidget {
+  const _ProductSearchHistorySuggestionSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductSearchBloc, ProductSearchState>(
+      buildWhen: (previous, current) =>
+          previous.productSuggestionHistory != current.productSuggestionHistory,
+      builder: (context, state) {
+        return state.productSuggestionHistory.searchKeyList.isNotEmpty
+            ? Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Search History',
+                          style:
+                              Theme.of(context).textTheme.labelSmall?.copyWith(
+                                    color: ZPColors.extraLightGrey4,
+                                  ),
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.delete_outlined,
+                            color: ZPColors.extraLightGrey4,
+                          ),
+                          onPressed: () => {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  topRight: Radius.circular(16),
+                                ),
+                              ),
+                              builder: (_) {
+                                return const ClearProductSearchSuggestionHistory();
+                              },
+                            ),
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: context
+                        .read<ProductSearchBloc>()
+                        .state
+                        .productSuggestionHistory
+                        .searchKeyList
+                        .reversed
+                        .map((e) => _HistoryTile(
+                              productSearchObject: e,
+                            ))
+                        .toList(),
+                  ),
+                ],
+              )
+            : const SizedBox.shrink();
+      },
+    );
+  }
+}
+
+class _HistoryTile extends StatelessWidget {
+  final SearchKey productSearchObject;
+  const _HistoryTile({Key? key, required this.productSearchObject})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          horizontalTitleGap: 0,
+          onTap: () {
+            context.read<ProductSearchBloc>().add(
+                  ProductSearchEvent.searchProduct(
+                    salesOrganization:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    searchKey: productSearchObject.getOrDefaultValue(''),
+                  ),
+                );
+          },
+          leading: const Icon(
+            Icons.history,
+            color: ZPColors.unselectedLabelColor,
+          ),
+          title: Text(
+            productSearchObject.getOrDefaultValue(''),
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),

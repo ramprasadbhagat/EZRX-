@@ -11,6 +11,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 
+import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
+
 abstract class IProductSearchRepository {
   Future<Either<ApiFailure, MaterialResponse>> searchProductList({
     required SalesOrganisation salesOrganization,
@@ -21,4 +23,7 @@ abstract class IProductSearchRepository {
     required int pageSize,
     required int offset,
   });
+
+  Future<Either<ApiFailure, ProductSuggestionHistory>> getSearchKeys();
+  Future<Either<ApiFailure, void>> clearSearchHistory();
 }

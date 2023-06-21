@@ -117,6 +117,8 @@ import 'package:ezrxmobile/application/account/payment_notification/payment_noti
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
+import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -159,6 +161,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<CartStorage>().init();
   await locator<SettingStorage>().init();
   await locator<OrderStorage>().init();
+  await locator<ProductSuggestionHistoryStorage>().init();
   locator<MixpanelService>().init(
     mixpanel: await Mixpanel.init(
       config.mixpanelKey,

@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.d
 
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
-
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -21,15 +20,23 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote
 
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 
+import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
+
+import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
+
+import 'package:ezrxmobile/infrastructure/order/dtos/product_suggestion_history_dto.dart';
+
 class ProductSearchRepository implements IProductSearchRepository {
   final Config config;
   final ProductSearchLocalDataSource localDataSource;
   final ProductSearchRemoteDataSource remoteDataSource;
+  final ProductSuggestionHistoryStorage productSuggestionHistoryStorage;
 
   ProductSearchRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
+    required this.productSuggestionHistoryStorage,
   });
 
   @override
@@ -55,6 +62,16 @@ class ProductSearchRepository implements IProductSearchRepository {
       }
     }
     try {
+      final getSearchKeyResponse = await getSearchKeys();
+      final storedKeys = getSearchKeyResponse.fold(
+        (failure) => ProductSuggestionHistory.empty(),
+        (success) => success,
+      );
+      final searchKeyList = ProductSuggestionHistoryDto.fromDomain(storedKeys)
+          .getModifiedList(searchKey);
+
+      await _putSearchKeys(searchKeyList);
+
       final materialList = await remoteDataSource.getSearchedMaterialList(
         customerCode: customerCode,
         salesOrgCode: salesOrg,
@@ -67,6 +84,44 @@ class ProductSearchRepository implements IProductSearchRepository {
       );
 
       return Right(materialList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Future<Either<ApiFailure, Unit>> _putSearchKeys(List<String> searchKeyList) async {
+    try {
+      final updatedObject = ProductSuggestionHistory(
+        searchKeyList: searchKeyList.map((e) => SearchKey(e)).toList(),
+
+      );
+      await productSuggestionHistoryStorage.putSearchKey(
+        searchKeyList: ProductSuggestionHistoryDto.fromDomain(updatedObject),
+      );
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, ProductSuggestionHistory>> getSearchKeys() async {
+    try {
+      final response = productSuggestionHistoryStorage.getAllSearchKey();
+
+      return Right(response.toDomain());
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> clearSearchHistory() async {
+    try {
+      await productSuggestionHistoryStorage.clear();
+
+      return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

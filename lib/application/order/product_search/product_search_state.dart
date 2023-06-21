@@ -6,6 +6,7 @@ class ProductSearchState with _$ProductSearchState {
     required bool isSearching,
     required List<MaterialInfo> suggestedProductList,
     required bool canLoadMore,
+    required ProductSuggestionHistory productSuggestionHistory,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required SearchKey searchKey,
   }) = _ProductSearchState;
@@ -14,6 +15,7 @@ class ProductSearchState with _$ProductSearchState {
         apiFailureOrSuccessOption: none(),
         isSearching: false,
         canLoadMore: false,
+        productSuggestionHistory: ProductSuggestionHistory.empty(),
         suggestedProductList: <MaterialInfo>[],
         searchKey: SearchKey(''),
       );

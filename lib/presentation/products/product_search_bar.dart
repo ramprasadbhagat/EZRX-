@@ -33,19 +33,11 @@ class ProductSearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<ProductSearchBar> {
-  late final TextEditingController _controller;
   Timer? _debounce;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller;
-  }
 
   @override
   void dispose() {
     _debounce?.cancel();
-    _controller.dispose();
     super.dispose();
   }
 
@@ -53,12 +45,12 @@ class _SearchBarState extends State<ProductSearchBar> {
   Widget build(BuildContext context) {
     return TextFormField(
       autofocus: true,
-      controller: _controller,
+      controller: widget.controller,
       enabled: widget.enabled,
       onChanged: (value) => _onSearchChanged(context, value),
       onFieldSubmitted: (value) => _onSearch(context, value),
       decoration: InputDecoration(
-        suffixIcon: _controller.text.isEmpty
+        suffixIcon: widget.controller.text.isEmpty
             ? IconButton(
                 key: WidgetKeys.productScanCameraKey,
                 icon: const Icon(

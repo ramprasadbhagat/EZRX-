@@ -65,6 +65,8 @@ import 'package:upgrader/upgrader.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -475,6 +477,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     selectedSalesOrg: state.salesOrganisation,
                     userInfo: context.read<UserBloc>().state.user,
                   ),
+                );
+            context.read<ProductSearchBloc>().add(
+                  const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
                 );
           },
         ),

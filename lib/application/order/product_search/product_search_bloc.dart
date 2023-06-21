@@ -18,6 +18,8 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
+import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
+
 part 'product_search_event.dart';
 part 'product_search_state.dart';
 part 'product_search_bloc.freezed.dart';
@@ -140,6 +142,49 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],
+          ),
+        );
+
+      add(
+          const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
+        );
+      },
+    );
+
+    on<_FetchProductSearchSuggestionHistory>(
+      (e, emit) async {
+        final failureOrSuccess = await productSearchRepository.getSearchKeys();
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (searchKeyList) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: none(),
+              productSuggestionHistory: searchKeyList,
+            ),
+          ),
+        );
+      },
+    );
+
+    on<_ClearProductSearchSuggestionHistory>(
+      (e, emit) async {
+        final failureOrSuccess =
+            await productSearchRepository.clearSearchHistory();
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (clearedHistory) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: none(),
+              productSuggestionHistory: ProductSuggestionHistory.empty(),
+            ),
           ),
         );
       },

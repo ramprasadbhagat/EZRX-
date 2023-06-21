@@ -39,6 +39,8 @@ mixin _$ProductSearchEvent {
             ShipToInfo shipToInfo)
         loadMoreProductList,
     required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +66,8 @@ mixin _$ProductSearchEvent {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +93,8 @@ mixin _$ProductSearchEvent {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,6 +104,10 @@ mixin _$ProductSearchEvent {
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,6 +116,10 @@ mixin _$ProductSearchEvent {
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,6 +128,10 @@ mixin _$ProductSearchEvent {
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -307,6 +325,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo)
         loadMoreProductList,
     required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
   }) {
     return autoSearchProduct(
         salesOrganization, configs, customerCodeInfo, shipToInfo, searchKey);
@@ -336,6 +356,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
   }) {
     return autoSearchProduct?.call(
         salesOrganization, configs, customerCodeInfo, shipToInfo, searchKey);
@@ -365,6 +387,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (autoSearchProduct != null) {
@@ -381,6 +405,10 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
   }) {
     return autoSearchProduct(this);
   }
@@ -392,6 +420,10 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
   }) {
     return autoSearchProduct?.call(this);
   }
@@ -403,6 +435,10 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (autoSearchProduct != null) {
@@ -599,6 +635,8 @@ class _$_SearchProduct implements _SearchProduct {
             ShipToInfo shipToInfo)
         loadMoreProductList,
     required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
   }) {
     return searchProduct(
         salesOrganization, configs, customerCodeInfo, shipToInfo, searchKey);
@@ -628,6 +666,8 @@ class _$_SearchProduct implements _SearchProduct {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
   }) {
     return searchProduct?.call(
         salesOrganization, configs, customerCodeInfo, shipToInfo, searchKey);
@@ -657,6 +697,8 @@ class _$_SearchProduct implements _SearchProduct {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (searchProduct != null) {
@@ -673,6 +715,10 @@ class _$_SearchProduct implements _SearchProduct {
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
   }) {
     return searchProduct(this);
   }
@@ -684,6 +730,10 @@ class _$_SearchProduct implements _SearchProduct {
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
   }) {
     return searchProduct?.call(this);
   }
@@ -695,6 +745,10 @@ class _$_SearchProduct implements _SearchProduct {
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (searchProduct != null) {
@@ -881,6 +935,8 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             ShipToInfo shipToInfo)
         loadMoreProductList,
     required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
   }) {
     return loadMoreProductList(
         salesOrganization, configs, customerCodeInfo, shipToInfo);
@@ -910,6 +966,8 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
   }) {
     return loadMoreProductList?.call(
         salesOrganization, configs, customerCodeInfo, shipToInfo);
@@ -939,6 +997,8 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (loadMoreProductList != null) {
@@ -955,6 +1015,10 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
   }) {
     return loadMoreProductList(this);
   }
@@ -966,6 +1030,10 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
   }) {
     return loadMoreProductList?.call(this);
   }
@@ -977,6 +1045,10 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (loadMoreProductList != null) {
@@ -1061,6 +1133,8 @@ class _$_ClearSearch implements _ClearSearch {
             ShipToInfo shipToInfo)
         loadMoreProductList,
     required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
   }) {
     return clearSearch();
   }
@@ -1089,6 +1163,8 @@ class _$_ClearSearch implements _ClearSearch {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
   }) {
     return clearSearch?.call();
   }
@@ -1117,6 +1193,8 @@ class _$_ClearSearch implements _ClearSearch {
             ShipToInfo shipToInfo)?
         loadMoreProductList,
     TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -1132,6 +1210,10 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
   }) {
     return clearSearch(this);
   }
@@ -1143,6 +1225,10 @@ class _$_ClearSearch implements _ClearSearch {
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
   }) {
     return clearSearch?.call(this);
   }
@@ -1154,6 +1240,10 @@ class _$_ClearSearch implements _ClearSearch {
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -1168,11 +1258,393 @@ abstract class _ClearSearch implements ProductSearchEvent {
 }
 
 /// @nodoc
+abstract class _$$_FetchProductSearchSuggestionHistoryCopyWith<$Res> {
+  factory _$$_FetchProductSearchSuggestionHistoryCopyWith(
+          _$_FetchProductSearchSuggestionHistory value,
+          $Res Function(_$_FetchProductSearchSuggestionHistory) then) =
+      __$$_FetchProductSearchSuggestionHistoryCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchProductSearchSuggestionHistoryCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res,
+        _$_FetchProductSearchSuggestionHistory>
+    implements _$$_FetchProductSearchSuggestionHistoryCopyWith<$Res> {
+  __$$_FetchProductSearchSuggestionHistoryCopyWithImpl(
+      _$_FetchProductSearchSuggestionHistory _value,
+      $Res Function(_$_FetchProductSearchSuggestionHistory) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchProductSearchSuggestionHistory
+    implements _FetchProductSearchSuggestionHistory {
+  const _$_FetchProductSearchSuggestionHistory();
+
+  @override
+  String toString() {
+    return 'ProductSearchEvent.fetchProductSearchSuggestionHistory()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchProductSearchSuggestionHistory);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)
+        autoSearchProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)
+        searchProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        loadMoreProductList,
+    required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
+  }) {
+    return fetchProductSearchSuggestionHistory();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        autoSearchProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        searchProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMoreProductList,
+    TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
+  }) {
+    return fetchProductSearchSuggestionHistory?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        searchProduct,
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMoreProductList,
+    TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
+    required TResult orElse(),
+  }) {
+    if (fetchProductSearchSuggestionHistory != null) {
+      return fetchProductSearchSuggestionHistory();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_LoadMoreProductList value) loadMoreProductList,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
+  }) {
+    return fetchProductSearchSuggestionHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
+  }) {
+    return fetchProductSearchSuggestionHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_LoadMoreProductList value)? loadMoreProductList,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
+    required TResult orElse(),
+  }) {
+    if (fetchProductSearchSuggestionHistory != null) {
+      return fetchProductSearchSuggestionHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchProductSearchSuggestionHistory
+    implements ProductSearchEvent {
+  const factory _FetchProductSearchSuggestionHistory() =
+      _$_FetchProductSearchSuggestionHistory;
+}
+
+/// @nodoc
+abstract class _$$_ClearProductSearchSuggestionHistoryCopyWith<$Res> {
+  factory _$$_ClearProductSearchSuggestionHistoryCopyWith(
+          _$_ClearProductSearchSuggestionHistory value,
+          $Res Function(_$_ClearProductSearchSuggestionHistory) then) =
+      __$$_ClearProductSearchSuggestionHistoryCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ClearProductSearchSuggestionHistoryCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res,
+        _$_ClearProductSearchSuggestionHistory>
+    implements _$$_ClearProductSearchSuggestionHistoryCopyWith<$Res> {
+  __$$_ClearProductSearchSuggestionHistoryCopyWithImpl(
+      _$_ClearProductSearchSuggestionHistory _value,
+      $Res Function(_$_ClearProductSearchSuggestionHistory) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ClearProductSearchSuggestionHistory
+    implements _ClearProductSearchSuggestionHistory {
+  const _$_ClearProductSearchSuggestionHistory();
+
+  @override
+  String toString() {
+    return 'ProductSearchEvent.clearProductSearchSuggestionHistory()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClearProductSearchSuggestionHistory);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)
+        autoSearchProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)
+        searchProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        loadMoreProductList,
+    required TResult Function() clearSearch,
+    required TResult Function() fetchProductSearchSuggestionHistory,
+    required TResult Function() clearProductSearchSuggestionHistory,
+  }) {
+    return clearProductSearchSuggestionHistory();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        autoSearchProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        searchProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMoreProductList,
+    TResult? Function()? clearSearch,
+    TResult? Function()? fetchProductSearchSuggestionHistory,
+    TResult? Function()? clearProductSearchSuggestionHistory,
+  }) {
+    return clearProductSearchSuggestionHistory?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            String searchKey)?
+        searchProduct,
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        loadMoreProductList,
+    TResult Function()? clearSearch,
+    TResult Function()? fetchProductSearchSuggestionHistory,
+    TResult Function()? clearProductSearchSuggestionHistory,
+    required TResult orElse(),
+  }) {
+    if (clearProductSearchSuggestionHistory != null) {
+      return clearProductSearchSuggestionHistory();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_LoadMoreProductList value) loadMoreProductList,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchProductSearchSuggestionHistory value)
+        fetchProductSearchSuggestionHistory,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
+  }) {
+    return clearProductSearchSuggestionHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
+  }) {
+    return clearProductSearchSuggestionHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_LoadMoreProductList value)? loadMoreProductList,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchProductSearchSuggestionHistory value)?
+        fetchProductSearchSuggestionHistory,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
+    required TResult orElse(),
+  }) {
+    if (clearProductSearchSuggestionHistory != null) {
+      return clearProductSearchSuggestionHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearProductSearchSuggestionHistory
+    implements ProductSearchEvent {
+  const factory _ClearProductSearchSuggestionHistory() =
+      _$_ClearProductSearchSuggestionHistory;
+}
+
+/// @nodoc
 mixin _$ProductSearchState {
   bool get isSearching => throw _privateConstructorUsedError;
   List<MaterialInfo> get suggestedProductList =>
       throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
+  ProductSuggestionHistory get productSuggestionHistory =>
+      throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
@@ -1192,8 +1664,11 @@ abstract class $ProductSearchStateCopyWith<$Res> {
       {bool isSearching,
       List<MaterialInfo> suggestedProductList,
       bool canLoadMore,
+      ProductSuggestionHistory productSuggestionHistory,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       SearchKey searchKey});
+
+  $ProductSuggestionHistoryCopyWith<$Res> get productSuggestionHistory;
 }
 
 /// @nodoc
@@ -1212,6 +1687,7 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
     Object? isSearching = null,
     Object? suggestedProductList = null,
     Object? canLoadMore = null,
+    Object? productSuggestionHistory = null,
     Object? apiFailureOrSuccessOption = null,
     Object? searchKey = null,
   }) {
@@ -1228,6 +1704,10 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      productSuggestionHistory: null == productSuggestionHistory
+          ? _value.productSuggestionHistory
+          : productSuggestionHistory // ignore: cast_nullable_to_non_nullable
+              as ProductSuggestionHistory,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1237,6 +1717,15 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductSuggestionHistoryCopyWith<$Res> get productSuggestionHistory {
+    return $ProductSuggestionHistoryCopyWith<$Res>(
+        _value.productSuggestionHistory, (value) {
+      return _then(_value.copyWith(productSuggestionHistory: value) as $Val);
+    });
   }
 }
 
@@ -1252,8 +1741,12 @@ abstract class _$$_ProductSearchStateCopyWith<$Res>
       {bool isSearching,
       List<MaterialInfo> suggestedProductList,
       bool canLoadMore,
+      ProductSuggestionHistory productSuggestionHistory,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       SearchKey searchKey});
+
+  @override
+  $ProductSuggestionHistoryCopyWith<$Res> get productSuggestionHistory;
 }
 
 /// @nodoc
@@ -1270,6 +1763,7 @@ class __$$_ProductSearchStateCopyWithImpl<$Res>
     Object? isSearching = null,
     Object? suggestedProductList = null,
     Object? canLoadMore = null,
+    Object? productSuggestionHistory = null,
     Object? apiFailureOrSuccessOption = null,
     Object? searchKey = null,
   }) {
@@ -1286,6 +1780,10 @@ class __$$_ProductSearchStateCopyWithImpl<$Res>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      productSuggestionHistory: null == productSuggestionHistory
+          ? _value.productSuggestionHistory
+          : productSuggestionHistory // ignore: cast_nullable_to_non_nullable
+              as ProductSuggestionHistory,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1305,6 +1803,7 @@ class _$_ProductSearchState implements _ProductSearchState {
       {required this.isSearching,
       required final List<MaterialInfo> suggestedProductList,
       required this.canLoadMore,
+      required this.productSuggestionHistory,
       required this.apiFailureOrSuccessOption,
       required this.searchKey})
       : _suggestedProductList = suggestedProductList;
@@ -1323,13 +1822,15 @@ class _$_ProductSearchState implements _ProductSearchState {
   @override
   final bool canLoadMore;
   @override
+  final ProductSuggestionHistory productSuggestionHistory;
+  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'ProductSearchState(isSearching: $isSearching, suggestedProductList: $suggestedProductList, canLoadMore: $canLoadMore, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, searchKey: $searchKey)';
+    return 'ProductSearchState(isSearching: $isSearching, suggestedProductList: $suggestedProductList, canLoadMore: $canLoadMore, productSuggestionHistory: $productSuggestionHistory, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, searchKey: $searchKey)';
   }
 
   @override
@@ -1343,6 +1844,9 @@ class _$_ProductSearchState implements _ProductSearchState {
                 .equals(other._suggestedProductList, _suggestedProductList) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
+            (identical(
+                    other.productSuggestionHistory, productSuggestionHistory) ||
+                other.productSuggestionHistory == productSuggestionHistory) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
@@ -1356,6 +1860,7 @@ class _$_ProductSearchState implements _ProductSearchState {
       isSearching,
       const DeepCollectionEquality().hash(_suggestedProductList),
       canLoadMore,
+      productSuggestionHistory,
       apiFailureOrSuccessOption,
       searchKey);
 
@@ -1372,6 +1877,7 @@ abstract class _ProductSearchState implements ProductSearchState {
       {required final bool isSearching,
       required final List<MaterialInfo> suggestedProductList,
       required final bool canLoadMore,
+      required final ProductSuggestionHistory productSuggestionHistory,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final SearchKey searchKey}) = _$_ProductSearchState;
@@ -1382,6 +1888,8 @@ abstract class _ProductSearchState implements ProductSearchState {
   List<MaterialInfo> get suggestedProductList;
   @override
   bool get canLoadMore;
+  @override
+  ProductSuggestionHistory get productSuggestionHistory;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

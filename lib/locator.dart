@@ -358,6 +358,8 @@ import 'package:ezrxmobile/infrastructure/order/repository/product_search_reposi
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
+import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -379,6 +381,7 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(() => PerformanceMonitorService());
+  locator.registerLazySingleton(() => ProductSuggestionHistoryStorage());
   locator.registerLazySingleton(() => FirebaseAnalyticsService(
         analytics: FirebaseAnalytics.instance,
         observer:
@@ -2446,6 +2449,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<ProductSearchLocalDataSource>(),
       remoteDataSource: locator<ProductSearchRemoteDataSource>(),
+      productSuggestionHistoryStorage: locator<ProductSuggestionHistoryStorage>(),
     ),
   );
   locator.registerLazySingleton(
