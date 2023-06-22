@@ -4,8 +4,7 @@ part of 'return_summary_filter_bloc.dart';
 class ReturnSummaryFilterEvent with _$ReturnSummaryFilterEvent {
   const factory ReturnSummaryFilterEvent.initialized() = _Initialized;
 
-  const factory ReturnSummaryFilterEvent.applyFilters() =
-      _ApplyFilters;
+  const factory ReturnSummaryFilterEvent.applyFilters() = _ApplyFilters;
 
   const factory ReturnSummaryFilterEvent.returnIdChanged(
     String returnId,
@@ -17,9 +16,9 @@ class ReturnSummaryFilterEvent with _$ReturnSummaryFilterEvent {
     String refundTotalFrom,
   ) = _RefundTotalFromChanged;
   const factory ReturnSummaryFilterEvent.sortByChanged({
-    required ReturnSummaryStatus sortBy,
+    required StatusType sortBy,
   }) = _CheckedStatusFilter;
   const factory ReturnSummaryFilterEvent.setSubmittedDate({
-    required  DateTimeRange submittedDateRange,
+    required DateTimeRange submittedDateRange,
   }) = _SetSubmittedDate;
 }

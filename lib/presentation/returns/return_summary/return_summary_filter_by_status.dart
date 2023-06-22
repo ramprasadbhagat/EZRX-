@@ -1,19 +1,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnSummaryFilterByStatus extends StatelessWidget {
-  const ReturnSummaryFilterByStatus({Key? key,}) : super(key: key);
+  const ReturnSummaryFilterByStatus({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
-      buildWhen: (previous, current) => previous.returnSummaryFilter.activeStatus != current.returnSummaryFilter.activeStatus,
-      listenWhen: (previous, current) => previous.returnSummaryFilter.activeStatus != current.returnSummaryFilter.activeStatus,
+      buildWhen: (previous, current) =>
+          previous.returnSummaryFilter.activeStatus !=
+          current.returnSummaryFilter.activeStatus,
+      listenWhen: (previous, current) =>
+          previous.returnSummaryFilter.activeStatus !=
+          current.returnSummaryFilter.activeStatus,
       listener: (context, state) {
         context.router.popForced();
       },
@@ -40,12 +46,12 @@ class ReturnSummaryFilterByStatus extends StatelessWidget {
             SafeArea(
               child: Column(
                 children: state.returnSummaryFilter.returnSummaryFilteredStatus
-                    .map((ReturnSummaryStatus status) {
-                  return RadioListTile<ReturnSummaryStatus>(
+                    .map((StatusType status) {
+                  return RadioListTile<StatusType>(
                     title: Text(status.displayStatusInList),
                     groupValue: state.returnSummaryFilter.sortBy,
                     controlAffinity: ListTileControlAffinity.trailing,
-                    onChanged: (ReturnSummaryStatus? value) {
+                    onChanged: (StatusType? value) {
                       BlocProvider.of<ReturnSummaryFilterBloc>(
                         context,
                       ).add(

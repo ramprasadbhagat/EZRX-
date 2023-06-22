@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_summary_filter.freezed.dart';
@@ -14,7 +13,7 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
     required DateTimeStringValue dateTo,
     required RangeValue refundTotalTo,
     required RangeValue refundTotalFrom,
-    required ReturnSummaryStatus sortBy,
+    required StatusType sortBy,
   }) = _ReturnSummaryFilter;
 
   factory ReturnSummaryFilter.empty() => ReturnSummaryFilter(
@@ -33,7 +32,7 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
             DateTime.now(),
           ),
         ),
-        sortBy: ReturnSummaryStatus('All'),
+        sortBy: StatusType('All'),
       );
 
   String get getSubmittedDateFiltered =>
@@ -43,10 +42,10 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
         start: dateFrom.dateTimeByDateString,
         end: dateTo.dateTimeByDateString,
       );
-  List<ReturnSummaryStatus> get returnSummaryFilteredStatus =>
-      returnSummaryStatus.map((e) => ReturnSummaryStatus(e)).toList();
+  List<StatusType> get returnSummaryFilteredStatus =>
+      returnSummaryStatus.map((e) => StatusType(e)).toList();
 
-  ReturnSummaryStatus get activeStatus => sortBy;
+  StatusType get activeStatus => sortBy;
 // to check total value validation
   bool get checkIfTotalRangeIsValid =>
       RangeValue.checkIfRangeIsValid(refundTotalFrom, refundTotalTo);

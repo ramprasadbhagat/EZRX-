@@ -203,3 +203,33 @@ class IntegerValue extends ValueObject<int> {
 
   const IntegerValue._(this.value);
 }
+
+class StatusType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory StatusType(String input) =>
+      StatusType._(validateStringNotEmpty(input));
+
+  bool statusContains(StatusType statusType) => value
+      .getOrElse(() => '')
+      .toLowerCase()
+      .contains(statusType.getOrDefaultValue('').toLowerCase());
+
+  String get displayStatusInList =>
+      getReturnSummaryStatusInList(value.getOrElse(() => ''));
+
+  Color get displayStatusLabelColor =>
+      getStatusLabelColor(value.getOrElse(() => ''));
+
+  Color get displayDueDateColor => getDueDateColor(value.getOrElse(() => ''));
+
+  String get label => getReturnSummaryFilterByStatus(value.getOrElse(() => ''));
+
+  String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
+
+  Color get displayStatusTextColor =>
+      getStatusTextColor(value.getOrElse(() => ''));
+
+  const StatusType._(this.value);
+}

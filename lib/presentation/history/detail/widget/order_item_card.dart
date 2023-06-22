@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -15,11 +16,10 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/history/status_label.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +115,8 @@ class OrderItemCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Material ID'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.displayMatNo.tr(),
+                            .orderItem.materialNumber.displayMatNo
+                            .tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,
@@ -164,9 +165,7 @@ class OrderItemCard extends StatelessWidget {
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
                             orderHistoryDetailsBonusAggregate
-                                .orderItem
-                                .totalPrice
-                                .totalPrice,
+                                .orderItem.totalPrice.totalPrice,
                           ),
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
@@ -176,7 +175,9 @@ class OrderItemCard extends StatelessWidget {
                         BalanceTextRow(
                           key: const Key('enableTaxDisplay'),
                           keyText: 'Included Tax '.tr(),
-                          valueText: StringUtils.formatter.format(orderHistoryDetailsBonusAggregate.orderItem.tax),
+                          valueText: StringUtils.formatter.format(
+                            orderHistoryDetailsBonusAggregate.orderItem.tax,
+                          ),
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
                           valueFlex: 1,
@@ -184,7 +185,8 @@ class OrderItemCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Remarks'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.lineReferenceNotes.displayRemarks.tr(),
+                            .orderItem.lineReferenceNotes.displayRemarks
+                            .tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,

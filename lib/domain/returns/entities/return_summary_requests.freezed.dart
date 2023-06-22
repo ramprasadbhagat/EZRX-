@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReturnSummaryRequest {
-  ReturnSummaryStatus get requestStatus => throw _privateConstructorUsedError;
+  StatusType get requestStatus => throw _privateConstructorUsedError;
   DateTimeStringValue get submitDate => throw _privateConstructorUsedError;
   String get returnId => throw _privateConstructorUsedError;
   double get refundTotal => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $ReturnSummaryRequestCopyWith<$Res> {
       _$ReturnSummaryRequestCopyWithImpl<$Res, ReturnSummaryRequest>;
   @useResult
   $Res call(
-      {ReturnSummaryStatus requestStatus,
+      {StatusType requestStatus,
       DateTimeStringValue submitDate,
       String returnId,
       double refundTotal,
@@ -66,7 +66,7 @@ class _$ReturnSummaryRequestCopyWithImpl<$Res,
       requestStatus: null == requestStatus
           ? _value.requestStatus
           : requestStatus // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       submitDate: null == submitDate
           ? _value.submitDate
           : submitDate // ignore: cast_nullable_to_non_nullable
@@ -96,7 +96,7 @@ abstract class _$$_ReturnSummaryRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ReturnSummaryStatus requestStatus,
+      {StatusType requestStatus,
       DateTimeStringValue submitDate,
       String returnId,
       double refundTotal,
@@ -124,7 +124,7 @@ class __$$_ReturnSummaryRequestCopyWithImpl<$Res>
       requestStatus: null == requestStatus
           ? _value.requestStatus
           : requestStatus // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       submitDate: null == submitDate
           ? _value.submitDate
           : submitDate // ignore: cast_nullable_to_non_nullable
@@ -158,7 +158,7 @@ class _$_ReturnSummaryRequest extends _ReturnSummaryRequest {
         super._();
 
   @override
-  final ReturnSummaryStatus requestStatus;
+  final StatusType requestStatus;
   @override
   final DateTimeStringValue submitDate;
   @override
@@ -208,7 +208,7 @@ class _$_ReturnSummaryRequest extends _ReturnSummaryRequest {
 
 abstract class _ReturnSummaryRequest extends ReturnSummaryRequest {
   const factory _ReturnSummaryRequest(
-          {required final ReturnSummaryStatus requestStatus,
+          {required final StatusType requestStatus,
           required final DateTimeStringValue submitDate,
           required final String returnId,
           required final double refundTotal,
@@ -217,7 +217,7 @@ abstract class _ReturnSummaryRequest extends ReturnSummaryRequest {
   const _ReturnSummaryRequest._() : super._();
 
   @override
-  ReturnSummaryStatus get requestStatus;
+  StatusType get requestStatus;
   @override
   DateTimeStringValue get submitDate;
   @override

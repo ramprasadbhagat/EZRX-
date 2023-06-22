@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 double totalPriceStringAsFixed(String value) {
   return double.parse(value);
@@ -79,67 +76,6 @@ bool isPrincipalCodeForAll(String principalCode) {
 
 bool havingSubmitPrincipalForSalesRep(String principalCode) {
   return principalCode == '100225';
-}
-
-Color getDueDateColor(String statusType) {
-  return statusType == 'Overdue' ? ZPColors.red : ZPColors.black;
-}
-
-Color getStatusLabelColor(String statusType) {
-  switch (statusType) {
-    case 'Processed':
-    case 'Successful':
-    case 'Approved for Return':
-    case 'FAILED':
-      return ZPColors.lightSecondary;
-    case 'Cancelled':
-    case 'Failed':
-    case 'Cancelled - credit issue':
-    case 'Cancelled - duplicate order':
-    case 'Cancelled - license invalid / expired':
-    case 'Cancelled - stock unavailable':
-    case 'Cancelled by buyer':
-    case 'Cancelled by Seller':
-      return ZPColors.lightRedStatusColor;
-    case 'Pending':
-    case 'Picking in-progress':
-    case 'Order Created':
-    case 'Out for delivery':
-    case 'Pending Approval':
-    case 'Out for re-delivery':
-    case 'Not Available':
-    case 'In Process':
-    case 'Order Creating':
-    case 'On the way to you':
-    case 'Order being prepared':
-    case 'Pending release':
-    case 'Pending release - credit check':
-    case 'Pending release - license issue':
-    case 'Pending release - month end closing':
-    case 'Pending release - on backorder':
-    case 'Pending release - seller approval required':
-    case 'order pending':
-    case 'Order packed and ready for delivery':
-      return ZPColors.lightYellow;
-    case 'Cleared':
-      return ZPColors.invoiceStatusGreen;
-    case 'Overdue':
-      return ZPColors.lightRedStatusColor;
-    case 'Open':
-      return ZPColors.invoiceStatusBlue;
-    case 'In progress':
-      return ZPColors.invoiceStatusOrange;
-
-    case 'In Progress':
-      return ZPColors.lightGray;
-    case 'Completed':
-    case 'Delivered':
-    case 'Delivered - partial rejection':
-    case 'Delivered - rejected upon delivery':
-      return ZPColors.secondary;
-    default:
-      return ZPColors.lightYellow;
-  }
 }
 
 bool validateZDP5Quantity(int quantity, String zDP5Value) =>

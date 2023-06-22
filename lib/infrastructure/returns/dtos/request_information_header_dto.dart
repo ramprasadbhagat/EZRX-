@@ -57,7 +57,7 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
       salesOrg: SalesOrg(salesOrg),
       shipTo: shipTo,
       soldTo: soldTo,
-      status: ReturnSummaryStatus(status),
+      status: StatusType(status),
       street1: street1,
       street2: street2,
       street3: street3,

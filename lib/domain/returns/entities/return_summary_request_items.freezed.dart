@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReturnSummaryRequestItems {
-  ReturnSummaryStatus get status => throw _privateConstructorUsedError;
+  StatusType get status => throw _privateConstructorUsedError;
   String get materialNumber => throw _privateConstructorUsedError;
   String get materialName => throw _privateConstructorUsedError;
   String get returnQty => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $ReturnSummaryRequestItemsCopyWith<$Res> {
       _$ReturnSummaryRequestItemsCopyWithImpl<$Res, ReturnSummaryRequestItems>;
   @useResult
   $Res call(
-      {ReturnSummaryStatus status,
+      {StatusType status,
       String materialNumber,
       String materialName,
       String returnQty,
@@ -68,7 +68,7 @@ class _$ReturnSummaryRequestItemsCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ abstract class _$$_ReturnSummaryRequestItemsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ReturnSummaryStatus status,
+      {StatusType status,
       String materialNumber,
       String materialName,
       String returnQty,
@@ -135,7 +135,7 @@ class __$$_ReturnSummaryRequestItemsCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -173,7 +173,7 @@ class _$_ReturnSummaryRequestItems extends _ReturnSummaryRequestItems {
       : super._();
 
   @override
-  final ReturnSummaryStatus status;
+  final StatusType status;
   @override
   final String materialNumber;
   @override
@@ -221,7 +221,7 @@ class _$_ReturnSummaryRequestItems extends _ReturnSummaryRequestItems {
 
 abstract class _ReturnSummaryRequestItems extends ReturnSummaryRequestItems {
   factory _ReturnSummaryRequestItems(
-      {required final ReturnSummaryStatus status,
+      {required final StatusType status,
       required final String materialNumber,
       required final String materialName,
       required final String returnQty,
@@ -230,7 +230,7 @@ abstract class _ReturnSummaryRequestItems extends ReturnSummaryRequestItems {
   _ReturnSummaryRequestItems._() : super._();
 
   @override
-  ReturnSummaryStatus get status;
+  StatusType get status;
   @override
   String get materialNumber;
   @override

@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_request_information.freezed.dart';
@@ -55,7 +54,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required String eZRxNumber,
     required String bapiStatus,
     required String cnNumber,
-    required ReturnSummaryStatus status,
+    required StatusType status,
     required String statusReason,
     required String priceOverride,
     required String remarks,
@@ -117,7 +116,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         eZRxNumber: '',
         bapiStatus: '',
         cnNumber: '',
-        status: ReturnSummaryStatus(''),
+        status: StatusType(''),
         statusReason: '',
         priceOverride: '',
         remarks: '',

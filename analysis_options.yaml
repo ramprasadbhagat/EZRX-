@@ -87,6 +87,7 @@ dart_code_metrics:
         exclude:
           - "**/*_bloc.dart"
           - "**/value_transformers.dart"
+          - "**/splash_page.dart"
     - long-parameter-list
   metrics:
     cyclomatic-complexity: 30
@@ -95,6 +96,7 @@ dart_code_metrics:
     source-lines-of-code: 62
   metrics-exclude:
     - lib/locator.dart
+    - lib/presentation/splash/splash_page.dart
   rules:
     - avoid-dynamic:
         exclude:

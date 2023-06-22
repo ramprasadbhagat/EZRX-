@@ -61,7 +61,7 @@ mixin _$ReturnRequestInformation {
   String get eZRxNumber => throw _privateConstructorUsedError;
   String get bapiStatus => throw _privateConstructorUsedError;
   String get cnNumber => throw _privateConstructorUsedError;
-  ReturnSummaryStatus get status => throw _privateConstructorUsedError;
+  StatusType get status => throw _privateConstructorUsedError;
   String get statusReason => throw _privateConstructorUsedError;
   String get priceOverride => throw _privateConstructorUsedError;
   String get remarks => throw _privateConstructorUsedError;
@@ -134,7 +134,7 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       String eZRxNumber,
       String bapiStatus,
       String cnNumber,
-      ReturnSummaryStatus status,
+      StatusType status,
       String statusReason,
       String priceOverride,
       String remarks,
@@ -410,7 +410,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       statusReason: null == statusReason
           ? _value.statusReason
           : statusReason // ignore: cast_nullable_to_non_nullable
@@ -526,7 +526,7 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       String eZRxNumber,
       String bapiStatus,
       String cnNumber,
-      ReturnSummaryStatus status,
+      StatusType status,
       String statusReason,
       String priceOverride,
       String remarks,
@@ -800,7 +800,7 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       statusReason: null == statusReason
           ? _value.statusReason
           : statusReason // ignore: cast_nullable_to_non_nullable
@@ -1040,7 +1040,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   @override
   final String cnNumber;
   @override
-  final ReturnSummaryStatus status;
+  final StatusType status;
   @override
   final String statusReason;
   @override
@@ -1305,7 +1305,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
       required final String eZRxNumber,
       required final String bapiStatus,
       required final String cnNumber,
-      required final ReturnSummaryStatus status,
+      required final StatusType status,
       required final String statusReason,
       required final String priceOverride,
       required final String remarks,
@@ -1413,7 +1413,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   @override
   String get cnNumber;
   @override
-  ReturnSummaryStatus get status;
+  StatusType get status;
   @override
   String get statusReason;
   @override

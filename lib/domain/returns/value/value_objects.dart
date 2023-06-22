@@ -85,27 +85,6 @@ class RefundTotal extends ValueObject<String> {
   const RefundTotal._(this.value);
 }
 
-class ReturnSummaryStatus extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory ReturnSummaryStatus(String input) {
-    return ReturnSummaryStatus._(validateStringNotEmpty(input));
-  }
-  String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
-
-  String get displayStatusInList =>
-      getReturnSummaryStatusInList(value.getOrElse(() => ''));
-  Color get displayStatusLabelColor =>
-      getStatusLabelColor(value.getOrElse(() => ''));
-
-  Color get displayStatusTextColor =>
-      getStatusTextColor(value.getOrElse(() => ''));
-
-  String get label => getReturnSummaryFilterByStatus(value.getOrElse(() => ''));
-  const ReturnSummaryStatus._(this.value);
-}
-
 class FilterStatus extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -130,12 +109,17 @@ class ReturnQuantity extends ValueObject<String> {
     return ReturnQuantity._(Right(input));
   }
 
-
-  factory ReturnQuantity.validatedValue(int balanceQuantity, String inputValue) {
-    return ReturnQuantity._(validateStringNotEmpty(inputValue)
-        .flatMap((input) => validateInputIsBiggerThanMaxValue(inputValue, balanceQuantity)));
+  factory ReturnQuantity.validatedValue(
+    int balanceQuantity,
+    String inputValue,
+  ) {
+    return ReturnQuantity._(validateStringNotEmpty(inputValue).flatMap(
+      (input) => validateInputIsBiggerThanMaxValue(
+        inputValue,
+        balanceQuantity,
+      ),
+    ));
   }
-
 
   int get getIntValue => getIntegerReturnQuantity(value.getOrElse(() => ''));
 

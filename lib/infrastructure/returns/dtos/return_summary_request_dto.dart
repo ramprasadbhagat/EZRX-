@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_summary_request_items_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_summary_request_dto.freezed.dart';
@@ -19,7 +18,9 @@ class ReturnSummaryRequestDto with _$ReturnSummaryRequestDto {
     @JsonKey(name: 'items', defaultValue: [])
         required List<ReturnSummaryRequestItemsDto> items,
   }) = _ReturnSummaryRequestDto;
-  factory ReturnSummaryRequestDto.fromDomain(ReturnSummaryRequest returnSummaryRequest) {
+  factory ReturnSummaryRequestDto.fromDomain(
+    ReturnSummaryRequest returnSummaryRequest,
+  ) {
     return ReturnSummaryRequestDto(
       requestStatus: returnSummaryRequest.requestStatus.getOrCrash(),
       submitDate: returnSummaryRequest.submitDate.getOrCrash(),
@@ -32,7 +33,7 @@ class ReturnSummaryRequestDto with _$ReturnSummaryRequestDto {
   }
   ReturnSummaryRequest toDomain() {
     return ReturnSummaryRequest(
-      requestStatus: ReturnSummaryStatus(requestStatus),
+      requestStatus: StatusType(requestStatus),
       submitDate: DateTimeStringValue(submitDate),
       returnId: returnId,
       refundTotal: double.parse(refundTotal),

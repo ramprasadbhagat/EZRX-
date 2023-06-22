@@ -1,5 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_request_items.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_summary_request_items_dto.freezed.dart';
 part 'return_summary_request_items_dto.g.dart';
@@ -19,7 +19,9 @@ class ReturnSummaryRequestItemsDto with _$ReturnSummaryRequestItemsDto {
     @JsonKey(name: 'total', defaultValue: '') required String total,
   }) = _ReturnSummaryRequestItemsDto;
 
-  factory ReturnSummaryRequestItemsDto.fromDomain(ReturnSummaryRequestItems returnSummaryRequestItems) {
+  factory ReturnSummaryRequestItemsDto.fromDomain(
+    ReturnSummaryRequestItems returnSummaryRequestItems,
+  ) {
     return ReturnSummaryRequestItemsDto(
       status: returnSummaryRequestItems.status.getOrCrash(),
       materialNumber: returnSummaryRequestItems.materialNumber,
@@ -31,7 +33,7 @@ class ReturnSummaryRequestItemsDto with _$ReturnSummaryRequestItemsDto {
   }
   ReturnSummaryRequestItems toDomain() {
     return ReturnSummaryRequestItems(
-      status: ReturnSummaryStatus(status),
+      status: StatusType(status),
       materialNumber: materialNumber,
       materialName: materialName,
       returnQty: returnQty,

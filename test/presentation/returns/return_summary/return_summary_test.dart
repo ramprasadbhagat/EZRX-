@@ -21,7 +21,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_request_items.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
@@ -163,7 +162,7 @@ void main() {
         ),
         ReturnSummaryFilterState.initial().copyWith(
           returnSummaryFilter: ReturnSummaryFilter.empty()
-              .copyWith(sortBy: ReturnSummaryStatus('Active')),
+              .copyWith(sortBy: StatusType('Active')),
         ),
       ];
       whenListen(
@@ -208,7 +207,7 @@ void main() {
         ReturnSummaryFilterState.initial().copyWith(
           isSubmitting: true,
           returnSummaryFilter: ReturnSummaryFilter.empty()
-              .copyWith(sortBy: ReturnSummaryStatus('Active')),
+              .copyWith(sortBy: StatusType('Active')),
         ),
       ];
       whenListen(
@@ -267,7 +266,7 @@ void main() {
             returnSummaryList: [
               ReturnSummaryRequest.empty().copyWith(
                 returnId: '123456',
-                requestStatus: ReturnSummaryStatus('PENDING'),
+                requestStatus: StatusType('PENDING'),
                 submitDate: DateTimeStringValue('2023-02-21'),
                 items: [
                   ReturnSummaryRequestItems.empty().copyWith(
@@ -309,8 +308,8 @@ void main() {
     testWidgets('=> Body Test onLoadMore', (tester) async {
       when(() => returnSummaryFilterBlocMock.state)
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
-        returnSummaryFilter: ReturnSummaryFilter.empty()
-            .copyWith(sortBy: ReturnSummaryStatus('Active')),
+        returnSummaryFilter:
+            ReturnSummaryFilter.empty().copyWith(sortBy: StatusType('Active')),
       ));
       when(() => returnSummaryBlocMock.state).thenReturn(
         ReturnSummaryState.initial().copyWith(
@@ -319,7 +318,7 @@ void main() {
           returnSummaryList: [
             ReturnSummaryRequest.empty().copyWith(
               returnId: '123456',
-              requestStatus: ReturnSummaryStatus('PENDING'),
+              requestStatus: StatusType('PENDING'),
               submitDate: DateTimeStringValue('2023-02-21'),
               items: [
                 ReturnSummaryRequestItems.empty().copyWith(
@@ -329,7 +328,7 @@ void main() {
             ),
             ReturnSummaryRequest.empty().copyWith(
               returnId: '123456',
-              requestStatus: ReturnSummaryStatus('PENDING'),
+              requestStatus: StatusType('PENDING'),
               submitDate: DateTimeStringValue('2023-02-21'),
               items: [
                 ReturnSummaryRequestItems.empty().copyWith(
@@ -339,7 +338,7 @@ void main() {
             ),
             ReturnSummaryRequest.empty().copyWith(
               returnId: '123456',
-              requestStatus: ReturnSummaryStatus('PENDING'),
+              requestStatus: StatusType('PENDING'),
               submitDate: DateTimeStringValue('2023-02-21'),
               items: [
                 ReturnSummaryRequestItems.empty().copyWith(
@@ -349,7 +348,7 @@ void main() {
             ),
             ReturnSummaryRequest.empty().copyWith(
               returnId: '123456',
-              requestStatus: ReturnSummaryStatus('PENDING'),
+              requestStatus: StatusType('PENDING'),
               submitDate: DateTimeStringValue('2023-02-21'),
               items: [
                 ReturnSummaryRequestItems.empty().copyWith(
@@ -384,12 +383,12 @@ void main() {
       final expectedState = [
         ReturnSummaryFilterState.initial().copyWith(
           returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-            sortBy: ReturnSummaryStatus('All'),
+            sortBy: StatusType('All'),
           ),
         ),
         ReturnSummaryFilterState.initial().copyWith(
           returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-            sortBy: ReturnSummaryStatus('Active'),
+            sortBy: StatusType('Active'),
           ),
         ),
       ];

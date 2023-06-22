@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_request_information_dto.freezed.dart';
@@ -218,7 +217,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       unitPrice: double.parse(unitPrice),
       storageLocation: storageLocation,
       statusReason: statusReason,
-      status: ReturnSummaryStatus(status),
+      status: StatusType(status),
       returnType: returnType,
       returnValue: returnValue,
       createdTimeStamp: createdTimeStamp,

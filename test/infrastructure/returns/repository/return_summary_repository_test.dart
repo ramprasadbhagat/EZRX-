@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/requests_by_user_return_summary.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_summary_filter_dto.dart';
@@ -111,7 +110,7 @@ void main() {
               dateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
-              sortBy: ReturnSummaryStatus('Active'),
+              sortBy: StatusType('Active'),
               requestId: SearchKey.searchFilter('mock_id'),
               refundTotalTo: RangeValue('100'),
               refundTotalFrom: RangeValue('1000'),
@@ -128,7 +127,7 @@ void main() {
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
           dateFrom: DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
           dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
-          sortBy: ReturnSummaryStatus('Active'),
+          sortBy: StatusType('Active'),
           requestId: SearchKey.searchFilter('mock_id'),
           refundTotalTo: RangeValue('100'),
           refundTotalFrom: RangeValue('1000'),
@@ -151,7 +150,7 @@ void main() {
               dateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
-              sortBy: ReturnSummaryStatus('Active'),
+              sortBy: StatusType('Active'),
               requestId: SearchKey.searchFilter('mock_id'),
               refundTotalTo: RangeValue('100'),
               refundTotalFrom: RangeValue('1000'),
@@ -168,7 +167,7 @@ void main() {
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
           dateFrom: DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
           dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
-          sortBy: ReturnSummaryStatus('Active'),
+          sortBy: StatusType('Active'),
           requestId: SearchKey.searchFilter('mock_id'),
           refundTotalTo: RangeValue('100'),
           refundTotalFrom: RangeValue('1000'),

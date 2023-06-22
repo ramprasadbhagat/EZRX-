@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
-import 'package:flutter/material.dart';
 
 class CompanyName extends ValueObject<String> {
   @override
@@ -739,26 +738,6 @@ class MaterialItemType extends ValueObject<String> {
   bool get isBundle => value.getOrElse(() => '') == 'Bundle';
 
   const MaterialItemType._(this.value);
-}
-
-class StatusType extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory StatusType(String input) =>
-      StatusType._(validateStringNotEmpty(input));
-
-  bool statusContains(StatusType statusType) => value
-      .getOrElse(() => '')
-      .toLowerCase()
-      .contains(statusType.getOrDefaultValue('').toLowerCase());
-
-  Color get displayStatusLabelColor =>
-      getStatusLabelColor(value.getOrElse(() => ''));
-
-  Color get displayDueDateColor => getDueDateColor(value.getOrElse(() => ''));
-
-  const StatusType._(this.value);
 }
 
 class DocumentType extends ValueObject<String> {

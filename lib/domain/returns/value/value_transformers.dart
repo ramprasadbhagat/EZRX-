@@ -17,64 +17,6 @@ double refundTotalStringAsFixed(String value) {
   return double.tryParse(value) ?? 0;
 }
 
-String getReturnSummaryStatus(String status) {
-  switch (status) {
-    case 'PENDING':
-      return 'Pending Approval';
-    case 'APPROVED':
-    case 'FAILED':
-      return 'Approved for Return';
-    case 'REJECTED':
-      return 'Rejected';
-    default:
-      return 'Return Completed';
-  }
-}
-
-String getReturnSummaryStatusInList(String statusType) {
-  switch (statusType) {
-    case 'PENDING':
-      return 'Active';
-    case 'APPROVED':
-    case 'FAILED':
-    case 'REJECTED':
-      return 'Completed';
-
-    default:
-      return statusType;
-  }
-}
-
-Color getStatusLabelColor(String statusType) {
-  switch (statusType) {
-    case 'PENDING':
-      return ZPColors.lightRed;
-    case 'APPROVED':
-    case 'FAILED':
-      return ZPColors.lightSecondary;
-    case 'REJECTED':
-      return ZPColors.darkGray;
-
-    default:
-      return ZPColors.defaultReturnSummaryStatusColor;
-  }
-}
-
-Color getStatusTextColor(String statusType) {
-  switch (statusType) {
-    case 'PENDING':
-    case 'APPROVED':
-    case 'FAILED':
-      return ZPColors.returnSummaryStatusTextColor;
-    case 'REJECTED':
-      return ZPColors.darkGray;
-
-    default:
-      return ZPColors.white;
-  }
-}
-
-
 String filterLabel(String sort) {
   switch (sort) {
     case 'COMPLETED':
@@ -89,9 +31,3 @@ String filterLabel(String sort) {
 
 String covertSortToApiDateString(String value) =>
     value.isNotEmpty && value != 'ALL' ? value : '';
-
-String getReturnSummaryFilterByStatus(String filter) => filter == 'Active'
-    ? 'PENDING'
-    : filter != 'All'
-        ? 'COMPLETED'
-        : '';

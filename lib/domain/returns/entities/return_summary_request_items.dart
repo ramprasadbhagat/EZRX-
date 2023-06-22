@@ -1,5 +1,4 @@
-
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_summary_request_items.freezed.dart';
 
@@ -8,16 +7,16 @@ class ReturnSummaryRequestItems with _$ReturnSummaryRequestItems {
   const ReturnSummaryRequestItems._();
 
   factory ReturnSummaryRequestItems({
-    required ReturnSummaryStatus status,
+    required StatusType status,
     required String materialNumber,
     required String materialName,
     required String returnQty,
-     required double unitPrice,
+    required double unitPrice,
     required double total,
   }) = _ReturnSummaryRequestItems;
 
   factory ReturnSummaryRequestItems.empty() => ReturnSummaryRequestItems(
-        status: ReturnSummaryStatus(''),
+        status: StatusType(''),
         materialNumber: '',
         materialName: '',
         returnQty: '',

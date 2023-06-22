@@ -20,7 +20,7 @@ mixin _$ReturnRequestInformationHeader {
   String get shipTo => throw _privateConstructorUsedError;
   String get createdBy => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
-  ReturnSummaryStatus get status => throw _privateConstructorUsedError;
+  StatusType get status => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get requestID => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $ReturnRequestInformationHeaderCopyWith<$Res> {
       String shipTo,
       String createdBy,
       String returnType,
-      ReturnSummaryStatus status,
+      StatusType status,
       DateTimeStringValue createdDate,
       String createdTime,
       String requestID,
@@ -137,7 +137,7 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -228,7 +228,7 @@ abstract class _$$_ReturnRequestInformationHeaderCopyWith<$Res>
       String shipTo,
       String createdBy,
       String returnType,
-      ReturnSummaryStatus status,
+      StatusType status,
       DateTimeStringValue createdDate,
       String createdTime,
       String requestID,
@@ -306,7 +306,7 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -423,7 +423,7 @@ class _$_ReturnRequestInformationHeader
   @override
   final String returnType;
   @override
-  final ReturnSummaryStatus status;
+  final StatusType status;
   @override
   final DateTimeStringValue createdDate;
   @override
@@ -560,7 +560,7 @@ abstract class _ReturnRequestInformationHeader
           required final String shipTo,
           required final String createdBy,
           required final String returnType,
-          required final ReturnSummaryStatus status,
+          required final StatusType status,
           required final DateTimeStringValue createdDate,
           required final String createdTime,
           required final String requestID,
@@ -590,7 +590,7 @@ abstract class _ReturnRequestInformationHeader
   @override
   String get returnType;
   @override
-  ReturnSummaryStatus get status;
+  StatusType get status;
   @override
   DateTimeStringValue get createdDate;
   @override

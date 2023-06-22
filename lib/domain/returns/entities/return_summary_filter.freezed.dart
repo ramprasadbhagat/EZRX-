@@ -21,7 +21,7 @@ mixin _$ReturnSummaryFilter {
   DateTimeStringValue get dateTo => throw _privateConstructorUsedError;
   RangeValue get refundTotalTo => throw _privateConstructorUsedError;
   RangeValue get refundTotalFrom => throw _privateConstructorUsedError;
-  ReturnSummaryStatus get sortBy => throw _privateConstructorUsedError;
+  StatusType get sortBy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnSummaryFilterCopyWith<ReturnSummaryFilter> get copyWith =>
@@ -40,7 +40,7 @@ abstract class $ReturnSummaryFilterCopyWith<$Res> {
       DateTimeStringValue dateTo,
       RangeValue refundTotalTo,
       RangeValue refundTotalFrom,
-      ReturnSummaryStatus sortBy});
+      StatusType sortBy});
 }
 
 /// @nodoc
@@ -87,7 +87,7 @@ class _$ReturnSummaryFilterCopyWithImpl<$Res, $Val extends ReturnSummaryFilter>
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
     ) as $Val);
   }
 }
@@ -106,7 +106,7 @@ abstract class _$$_ReturnSummaryFilterCopyWith<$Res>
       DateTimeStringValue dateTo,
       RangeValue refundTotalTo,
       RangeValue refundTotalFrom,
-      ReturnSummaryStatus sortBy});
+      StatusType sortBy});
 }
 
 /// @nodoc
@@ -151,7 +151,7 @@ class __$$_ReturnSummaryFilterCopyWithImpl<$Res>
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
     ));
   }
 }
@@ -179,7 +179,7 @@ class _$_ReturnSummaryFilter extends _ReturnSummaryFilter {
   @override
   final RangeValue refundTotalFrom;
   @override
-  final ReturnSummaryStatus sortBy;
+  final StatusType sortBy;
 
   @override
   String toString() {
@@ -222,7 +222,7 @@ abstract class _ReturnSummaryFilter extends ReturnSummaryFilter {
       required final DateTimeStringValue dateTo,
       required final RangeValue refundTotalTo,
       required final RangeValue refundTotalFrom,
-      required final ReturnSummaryStatus sortBy}) = _$_ReturnSummaryFilter;
+      required final StatusType sortBy}) = _$_ReturnSummaryFilter;
   _ReturnSummaryFilter._() : super._();
 
   @override
@@ -236,7 +236,7 @@ abstract class _ReturnSummaryFilter extends ReturnSummaryFilter {
   @override
   RangeValue get refundTotalFrom;
   @override
-  ReturnSummaryStatus get sortBy;
+  StatusType get sortBy;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnSummaryFilterCopyWith<_$_ReturnSummaryFilter> get copyWith =>

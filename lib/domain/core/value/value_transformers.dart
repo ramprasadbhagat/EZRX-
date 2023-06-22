@@ -253,3 +253,121 @@ bool isBundle(String type) => type == 'bundle';
 bool isMaterial(String type) => type == 'material';
 
 bool notZero(int number) => number != 0;
+
+Color getStatusLabelColor(String statusType) {
+  final lightSecondary = {
+    'Processed': ZPColors.lightSecondary,
+    'Successful': ZPColors.lightSecondary,
+    'Approved for Return': ZPColors.lightSecondary,
+    'FAILED': ZPColors.lightSecondary,
+    'APPROVED': ZPColors.lightSecondary,
+  };
+
+  final lightRedStatusColor = {
+    'Cancelled': ZPColors.lightRedStatusColor,
+    'Failed': ZPColors.lightRedStatusColor,
+    'Cancelled - credit issue': ZPColors.lightRedStatusColor,
+    'Cancelled - duplicate order': ZPColors.lightRedStatusColor,
+    'Cancelled - license invalid / expired': ZPColors.lightRedStatusColor,
+    'Cancelled - stock unavailable': ZPColors.lightRedStatusColor,
+    'Cancelled by buyer': ZPColors.lightRedStatusColor,
+    'Cancelled by Seller': ZPColors.lightRedStatusColor,
+    'Overdue': ZPColors.lightRedStatusColor,
+  };
+
+  final lightYellow = {
+    'Pending': ZPColors.lightYellow,
+    'Picking in-progress': ZPColors.lightYellow,
+    'Order Created': ZPColors.lightYellow,
+    'Out for delivery': ZPColors.lightYellow,
+    'Pending Approval': ZPColors.lightYellow,
+    'Out for re-delivery': ZPColors.lightYellow,
+    'Not Available': ZPColors.lightYellow,
+    'In Process': ZPColors.lightYellow,
+    'Order Creating': ZPColors.lightYellow,
+    'On the way to you': ZPColors.lightYellow,
+    'Order being prepared': ZPColors.lightYellow,
+    'Pending release': ZPColors.lightYellow,
+    'Pending release - credit check': ZPColors.lightYellow,
+    'Pending release - license issue': ZPColors.lightYellow,
+    'Pending release - month end closing': ZPColors.lightYellow,
+    'Pending release - on backorder': ZPColors.lightYellow,
+    'Pending release - seller approval required': ZPColors.lightYellow,
+    'order pending': ZPColors.lightYellow,
+    'Order packed and ready for delivery': ZPColors.lightYellow,
+  };
+
+  final secondary = {
+    'Completed': ZPColors.secondary,
+    'Delivered': ZPColors.secondary,
+    'Delivered - partial rejection': ZPColors.secondary,
+    'Delivered - rejected upon delivery': ZPColors.secondary,
+  };
+
+  final statusTypeMap = {
+    ...lightSecondary,
+    ...lightRedStatusColor,
+    ...lightYellow,
+    ...secondary,
+    'Cleared': ZPColors.invoiceStatusGreen,
+    'Open': ZPColors.invoiceStatusBlue,
+    'In progress': ZPColors.invoiceStatusOrange,
+    'In Progress': ZPColors.lightGray,
+    'PENDING': ZPColors.lightRed,
+    'REJECTED': ZPColors.darkGray,
+  };
+
+  return statusTypeMap[statusType] ?? ZPColors.lightYellow;
+}
+
+Color getDueDateColor(String statusType) {
+  return statusType == 'Overdue' ? ZPColors.red : ZPColors.black;
+}
+
+Color getStatusTextColor(String statusType) {
+  switch (statusType) {
+    case 'PENDING':
+    case 'APPROVED':
+    case 'FAILED':
+      return ZPColors.returnSummaryStatusTextColor;
+    case 'REJECTED':
+      return ZPColors.darkGray;
+
+    default:
+      return ZPColors.white;
+  }
+}
+
+String getReturnSummaryStatus(String status) {
+  switch (status) {
+    case 'PENDING':
+      return 'Pending Approval';
+    case 'APPROVED':
+    case 'FAILED':
+      return 'Approved for Return';
+    case 'REJECTED':
+      return 'Rejected';
+    default:
+      return 'Return Completed';
+  }
+}
+
+String getReturnSummaryFilterByStatus(String filter) => filter == 'Active'
+    ? 'PENDING'
+    : filter != 'All'
+        ? 'COMPLETED'
+        : '';
+
+String getReturnSummaryStatusInList(String statusType) {
+  switch (statusType) {
+    case 'PENDING':
+      return 'Active';
+    case 'APPROVED':
+    case 'FAILED':
+    case 'REJECTED':
+      return 'Completed';
+
+    default:
+      return statusType;
+  }
+}

@@ -3,7 +3,6 @@ import 'package:ezrxmobile/application/returns/return_summary_filter/return_summ
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
@@ -36,7 +35,7 @@ void main() {
       dateTo: DateTimeStringValue(
         getDateStringByDateTime(fakeToDate),
       ),
-      sortBy: ReturnSummaryStatus('Active'),
+      sortBy: StatusType('Active'),
       requestId: SearchKey.searchFilter('mock_id'),
       refundTotalTo: RangeValue('100'),
       refundTotalFrom: RangeValue('1000'),
@@ -67,7 +66,7 @@ void main() {
             dateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
-            sortBy: ReturnSummaryStatus('Active'),
+            sortBy: StatusType('Active'),
             requestId: SearchKey.searchFilter('mock_id'),
           ),
         ),
@@ -82,7 +81,7 @@ void main() {
               dateTo: DateTimeStringValue(
                 getDateStringByDateTime(fakeToDate),
               ),
-              sortBy: ReturnSummaryStatus('Active'),
+              sortBy: StatusType('Active'),
               requestId: SearchKey.searchFilter('mock_id'),
             ),
             isSubmitting: true,
@@ -168,12 +167,11 @@ void main() {
           returnSummaryFilter: returnSummaryFilter,
         ),
         act: (ReturnSummaryFilterBloc bloc) => bloc.add(
-            ReturnSummaryFilterEvent.sortByChanged(
-                sortBy: ReturnSummaryStatus('All'))),
+            ReturnSummaryFilterEvent.sortByChanged(sortBy: StatusType('All'))),
         expect: () => [
           ReturnSummaryFilterState.initial().copyWith(
             returnSummaryFilter: returnSummaryFilter.copyWith(
-              sortBy: ReturnSummaryStatus('All'),
+              sortBy: StatusType('All'),
             ),
           ),
         ],

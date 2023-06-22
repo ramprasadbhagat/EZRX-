@@ -23,7 +23,7 @@ mixin _$ReturnSummaryFilterEvent {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) =>
@@ -35,7 +35,7 @@ mixin _$ReturnSummaryFilterEvent {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ mixin _$ReturnSummaryFilterEvent {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) =>
@@ -150,7 +150,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -165,7 +165,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return initialized?.call();
@@ -179,7 +179,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {
@@ -284,7 +284,7 @@ class _$_ApplyFilters implements _ApplyFilters {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -299,7 +299,7 @@ class _$_ApplyFilters implements _ApplyFilters {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return applyFilters?.call();
@@ -313,7 +313,7 @@ class _$_ApplyFilters implements _ApplyFilters {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {
@@ -445,7 +445,7 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -460,7 +460,7 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return returnIdChanged?.call(returnId);
@@ -474,7 +474,7 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {
@@ -613,7 +613,7 @@ class _$_RefundTotalToChanged implements _RefundTotalToChanged {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -628,7 +628,7 @@ class _$_RefundTotalToChanged implements _RefundTotalToChanged {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return refundTotalToChanged?.call(refundTotalTo);
@@ -642,7 +642,7 @@ class _$_RefundTotalToChanged implements _RefundTotalToChanged {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {
@@ -782,7 +782,7 @@ class _$_RefundTotalFromChanged implements _RefundTotalFromChanged {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -797,7 +797,7 @@ class _$_RefundTotalFromChanged implements _RefundTotalFromChanged {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return refundTotalFromChanged?.call(refundTotalFrom);
@@ -811,7 +811,7 @@ class _$_RefundTotalFromChanged implements _RefundTotalFromChanged {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {
@@ -885,7 +885,7 @@ abstract class _$$_CheckedStatusFilterCopyWith<$Res> {
           $Res Function(_$_CheckedStatusFilter) then) =
       __$$_CheckedStatusFilterCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnSummaryStatus sortBy});
+  $Res call({StatusType sortBy});
 }
 
 /// @nodoc
@@ -905,7 +905,7 @@ class __$$_CheckedStatusFilterCopyWithImpl<$Res>
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryStatus,
+              as StatusType,
     ));
   }
 }
@@ -916,7 +916,7 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
   const _$_CheckedStatusFilter({required this.sortBy});
 
   @override
-  final ReturnSummaryStatus sortBy;
+  final StatusType sortBy;
 
   @override
   String toString() {
@@ -949,7 +949,7 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -964,7 +964,7 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return sortByChanged?.call(sortBy);
@@ -978,7 +978,7 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {
@@ -1037,10 +1037,10 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
 }
 
 abstract class _CheckedStatusFilter implements ReturnSummaryFilterEvent {
-  const factory _CheckedStatusFilter(
-      {required final ReturnSummaryStatus sortBy}) = _$_CheckedStatusFilter;
+  const factory _CheckedStatusFilter({required final StatusType sortBy}) =
+      _$_CheckedStatusFilter;
 
-  ReturnSummaryStatus get sortBy;
+  StatusType get sortBy;
   @JsonKey(ignore: true)
   _$$_CheckedStatusFilterCopyWith<_$_CheckedStatusFilter> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1116,7 +1116,7 @@ class _$_SetSubmittedDate implements _SetSubmittedDate {
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String refundTotalTo) refundTotalToChanged,
     required TResult Function(String refundTotalFrom) refundTotalFromChanged,
-    required TResult Function(ReturnSummaryStatus sortBy) sortByChanged,
+    required TResult Function(StatusType sortBy) sortByChanged,
     required TResult Function(DateTimeRange submittedDateRange)
         setSubmittedDate,
   }) {
@@ -1131,7 +1131,7 @@ class _$_SetSubmittedDate implements _SetSubmittedDate {
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String refundTotalTo)? refundTotalToChanged,
     TResult? Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult? Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult? Function(StatusType sortBy)? sortByChanged,
     TResult? Function(DateTimeRange submittedDateRange)? setSubmittedDate,
   }) {
     return setSubmittedDate?.call(submittedDateRange);
@@ -1145,7 +1145,7 @@ class _$_SetSubmittedDate implements _SetSubmittedDate {
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String refundTotalTo)? refundTotalToChanged,
     TResult Function(String refundTotalFrom)? refundTotalFromChanged,
-    TResult Function(ReturnSummaryStatus sortBy)? sortByChanged,
+    TResult Function(StatusType sortBy)? sortByChanged,
     TResult Function(DateTimeRange submittedDateRange)? setSubmittedDate,
     required TResult orElse(),
   }) {

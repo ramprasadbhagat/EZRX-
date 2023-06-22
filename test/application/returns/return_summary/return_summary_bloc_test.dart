@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/requests_by_user_return_summary.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -39,7 +38,7 @@ void main() {
           returnId: 'fakeApproverReturnRequestId',
           items: [],
           refundTotal: 12.0,
-          requestStatus: ReturnSummaryStatus('PENDING'),
+          requestStatus: StatusType('PENDING'),
           submitDate: DateTimeStringValue('20230327')),
     ];
     mockReturnSummaryRepository = MockReturnSummaryRepository();
@@ -50,7 +49,7 @@ void main() {
       dateFrom: DateTimeStringValue(
         getDateStringByDateTime(fakeFromDate),
       ),
-      sortBy: ReturnSummaryStatus('Active'),
+      sortBy: StatusType('Active'),
       requestId: SearchKey.searchFilter('mock_id'),
       refundTotalTo: RangeValue('100'),
       refundTotalFrom: RangeValue('1000'),
