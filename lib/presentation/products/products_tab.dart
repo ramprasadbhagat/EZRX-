@@ -44,7 +44,7 @@ class ProductsTab extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
+            previous.materialList != current.materialList,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

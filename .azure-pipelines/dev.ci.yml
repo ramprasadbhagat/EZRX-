@@ -56,11 +56,6 @@ jobs:
   - bash: flutter375 test test/infrastructure/banner
 - job:
   pool: devops-flutter
-  displayName: Test infrastructure -> favourites
-  steps: 
-  - bash: flutter375 test test/infrastructure/favourites
-- job:
-  pool: devops-flutter
   displayName: Test infrastructure -> order
   steps: 
   - bash: flutter375 test test/infrastructure/order
@@ -89,11 +84,6 @@ jobs:
   displayName: Test presentation -> auth
   steps: 
   - bash: flutter375 test test/presentation/auth
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> favorites
-  steps: 
-  - bash: flutter375 test test/presentation/favorites
 - job:
   pool: devops-flutter
   displayName: Test presentation -> home

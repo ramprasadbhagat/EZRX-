@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -40,7 +39,6 @@ import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_item_detail_widget.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
@@ -70,9 +68,6 @@ class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
 
-class FavoriteMockBloc extends MockBloc<FavouriteEvent, FavouriteState>
-    implements FavouriteBloc {}
-
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class OrderDocumentTypeBlocMock
@@ -85,9 +80,6 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
-class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
-    implements FavouriteBloc {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
@@ -97,12 +89,10 @@ void main() {
   late EligibilityBloc eligibilityMockBloc;
   late AddToCartBloc addToCartBlocMock;
   late TenderContractBloc tenderContractBlocMock;
-  late FavouriteBloc favouriteMockBloc;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
   late OrderDocumentTypeBlocMock orderDocumentTypeBlocMock;
-  late MockFavouriteBloc mockFavouriteBloc;
 
   final materialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
@@ -134,7 +124,6 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
-    locator.registerLazySingleton(() => mockFavouriteBloc);
   });
 
   setUp(() {
@@ -143,12 +132,10 @@ void main() {
     cartBlocMock = CartBlocMock();
     eligibilityMockBloc = EligibilityMockBloc();
     tenderContractBlocMock = TenderContractBlocMock();
-    favouriteMockBloc = FavoriteMockBloc();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     userBlocMock = UserBlocMock();
     orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
-    mockFavouriteBloc = MockFavouriteBloc();
     addToCartBlocMock = AddToCartBlocMock();
     autoRouterMock = locator<AppRouter>();
 
@@ -160,14 +147,12 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => tenderContractBlocMock.state)
         .thenReturn(TenderContractState.initial());
-    when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => orderDocumentTypeBlocMock.state)
         .thenReturn(OrderDocumentTypeState.initial());
-    when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
     when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
   });
 
@@ -183,14 +168,12 @@ void main() {
         BlocProvider<EligibilityBloc>(create: (context) => eligibilityMockBloc),
         BlocProvider<TenderContractBloc>(
             create: (context) => tenderContractBlocMock),
-        BlocProvider<FavouriteBloc>(create: (context) => favouriteMockBloc),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock),
         BlocProvider<UserBloc>(create: (context) => userBlocMock),
         BlocProvider<OrderDocumentTypeBloc>(
             create: (context) => orderDocumentTypeBlocMock),
-        BlocProvider<FavouriteBloc>(create: ((context) => mockFavouriteBloc)),
       ],
       child: child,
     );
@@ -334,7 +317,6 @@ void main() {
 
       expect(find.byType(CartBottomSheetShimmer), findsOneWidget);
       expect(find.text('Material Detail'), findsOneWidget);
-      expect(find.byType(FavoriteButton), findsOneWidget);
       expect(find.byType(CartItemDetailWidget), findsNothing);
       expect(find.byType(AddToCartButton), findsNothing);
     });
@@ -352,7 +334,6 @@ void main() {
 
       expect(find.byType(CartBottomSheetShimmer), findsNothing);
       expect(find.text('Material Detail'), findsOneWidget);
-      expect(find.byType(FavoriteButton), findsOneWidget);
       expect(find.byType(CartItemDetailWidget), findsOneWidget);
       expect(find.byType(AddToCartButton), findsOneWidget);
       expect(find.byType(SelectContract), findsNothing);

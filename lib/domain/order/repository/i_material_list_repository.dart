@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
@@ -76,4 +77,16 @@ abstract class IMaterialListRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   });
+
+  Future<Either<ApiFailure, List<MaterialInfo>>> addFavourateData({
+    required MaterialNumber materialNumber,
+    required List<MaterialInfo> materialList,
+  });
+
+  Future<Either<ApiFailure, List<MaterialInfo>>> removeFavourateData({
+    required MaterialNumber materialNumber,
+    required List<MaterialInfo> materialList,
+    required bool filter,
+  });
+
 }

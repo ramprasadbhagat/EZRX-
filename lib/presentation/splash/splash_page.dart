@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -735,13 +734,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               user,
             ),
           );
-
-      context.read<FavouriteBloc>().add(
-            FavouriteEvent.fetch(
-              user: user,
-            ),
-          );
-
       context
           .read<PaymentCustomerInformationBloc>()
           .add(PaymentCustomerInformationEvent.fetch(
@@ -834,8 +826,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context
           .read<OrderTemplateListBloc>()
           .add(const OrderTemplateListEvent.initialized());
-
-      context.read<FavouriteBloc>().add(const FavouriteEvent.initialized());
       context
           .read<OrderHistoryFilterBloc>()
           .add(const OrderHistoryFilterEvent.initialized());

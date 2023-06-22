@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -130,9 +129,6 @@ class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
 
-class FavouriteBlocMock extends MockBloc<FavouriteEvent, FavouriteState>
-    implements FavouriteBloc {}
-
 class PermissionServiceMock extends Mock implements PermissionService {}
 
 class TenderContractRepositoryMock extends Mock
@@ -173,7 +169,6 @@ void main() {
   late MaterialPriceBlocMock materialPriceBlocMock;
   late AddToCartBlocMock addToCartBlocMock;
   late TenderContractBlocMock tenderContractBlocMock;
-  late FavouriteBlocMock favouriteBlocMock;
   late AdditionalDetailsBlocMock additionalDetailsBlocMock;
   late PermissionService permissionService;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
@@ -224,7 +219,6 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       addToCartBlocMock = AddToCartBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
-      favouriteBlocMock = FavouriteBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       authBlocMock = AuthBlocMock();
@@ -273,7 +267,6 @@ void main() {
           .thenReturn(MaterialPriceState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
-      when(() => favouriteBlocMock.state).thenReturn(FavouriteState.initial());
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
       );
@@ -313,9 +306,6 @@ void main() {
           ),
           BlocProvider<TenderContractBloc>(
             create: (context) => tenderContractBlocMock,
-          ),
-          BlocProvider<FavouriteBloc>(
-            create: (context) => favouriteBlocMock,
           ),
           BlocProvider<AdditionalDetailsBloc>(
             create: (context) => additionalDetailsBlocMock,

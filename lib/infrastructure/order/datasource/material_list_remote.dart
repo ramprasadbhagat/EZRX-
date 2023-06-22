@@ -4,11 +4,15 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/material_add_favourite.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_remove_favourite.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_add_favourite_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_remove_favourite_dto.dart';
 
 class MaterialListRemoteDataSource {
   HttpService httpService;
@@ -491,6 +495,54 @@ class MaterialListRemoteDataSource {
       final finalData = res.data['data']['GetProductDetails'];
 
       return MaterialDto.fromJson(finalData).toDomain();
+    });
+  }
+
+  Future<MaterialAddFavourite> addFavourateMaterial({
+    required String materialNumber,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.addFavouriteMutation();
+
+      final variables = {'materialNumber': materialNumber};
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'addFavouriteMaterial',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData = res.data['data'];
+
+      return MaterialAddFavouriteDto.fromJson(finalData).toDomain();
+    });
+  }
+
+  Future<MaterialRemoveFavourite> removeFavourateMaterial({
+    required String materialNumber,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.removeFavouriteMutation();
+
+      final variables = {'materialNumber': materialNumber};
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'removeFavouriteMaterial',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData = res.data['data'];
+
+      return MaterialRemoveFavouriteDto.fromJson(finalData).toDomain();
     });
   }
 

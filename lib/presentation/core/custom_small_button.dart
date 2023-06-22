@@ -1,10 +1,13 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 
 class CustomSmallButton extends StatelessWidget {
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
   final String text;
 
-  const CustomSmallButton({
+   const CustomSmallButton({
     Key? key,
     required this.onPressed,
     required this.text,

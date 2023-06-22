@@ -73,6 +73,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 isFetching: false,
                 canLoadMore: productResponse.products.length >= _pageSize,
                 nextPageIndex: 1,
+                selectedFilters: e.selectedMaterialFilter,
               ),
             );
           },
@@ -116,6 +117,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               isFetching: false,
               canLoadMore: productList.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
+              selectedFilters: e.selectedMaterialFilter,
             ),
           );
         },
@@ -182,6 +184,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 isFetching: false,
                 canLoadMore: materialList.length >= _pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
+                selectedFilters: e.selectedMaterialFilter,
               ),
             );
           },
@@ -201,6 +204,54 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         ));
       }
     });
+    on<_AddFavourite>(
+      (e, emit) async {
+        final failureOrSuccess = await materialListRepository.addFavourateData(
+            materialNumber: e.item.code, materialList: state.materialList,);
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          ),
+          (favouriteResponse) {
+            emit(
+              state.copyWith(
+                materialList: favouriteResponse,
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+    );
+    on<_DeleteFavourite>(
+      ((e, emit) async {
+        final failureOrSuccess =
+            await materialListRepository.removeFavourateData(
+          materialNumber: e.item.code,
+          materialList: state.materialList,
+          filter: state.selectedFilters.isFavourite,
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          ),
+          (favouriteResponse) {
+            emit(
+              state.copyWith(
+                materialList: favouriteResponse,
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      }),
+    );
   }
 
   @override

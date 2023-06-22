@@ -16,7 +16,6 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_item_detail_widget.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_svg/svg.dart';
@@ -137,18 +136,6 @@ class AddToCart extends StatelessWidget implements AutoRouteWrapper {
         backgroundColor: ZPColors.white,
         appBar: AppBar(
           title: const Text('Material Detail').tr(),
-          actions: [
-            BlocBuilder<AddToCartBloc, AddToCartState>(
-              buildWhen: (previous, current) =>
-                  previous.cartItem.materialInfo !=
-                  current.cartItem.materialInfo,
-              builder: (context, state) {
-                return FavoriteButton(
-                  materialInfo: state.cartItem.materialInfo,
-                );
-              },
-            ),
-          ],
         ),
         body: AnnouncementBanner(
           currentPath: context.router.currentPath,

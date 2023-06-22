@@ -22,7 +22,6 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -169,10 +168,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
-import 'package:ezrxmobile/infrastructure/favourites/datasource/favourites_local.dart';
-import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
@@ -705,38 +700,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PriceOverrideBloc(
       priceOverrideRepository: locator<PriceOverrideRepository>(),
-    ),
-  );
-  //============================================================
-  //  Favourite
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => FavouriteLocalDataSource(),
-  );
-
-  locator.registerLazySingleton(
-    () => FavouriteQueryMutation(),
-  );
-  locator.registerLazySingleton(
-    () => FavouriteRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      favouriteQueryMutation: locator<FavouriteQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => FavouriteRepository(
-      config: locator<Config>(),
-      localDataSource: locator<FavouriteLocalDataSource>(),
-      remoteDataSource: locator<FavouriteRemoteDataSource>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => FavouriteBloc(
-      favouriteRepository: locator<FavouriteRepository>(),
     ),
   );
   //============================================================

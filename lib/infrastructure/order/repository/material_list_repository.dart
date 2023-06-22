@@ -274,7 +274,6 @@ class MaterialListRepository implements IMaterialListRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
-  
 
   @override
   Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({
@@ -367,6 +366,83 @@ class MaterialListRepository implements IMaterialListRepository {
         );
 
         return Right(materialData);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<MaterialInfo>>> addFavourateData({
+    required MaterialNumber materialNumber,
+    required List<MaterialInfo> materialList,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        await materialListLocalDataSource.addFavouriteMaterial();
+        final favouriteList = List<MaterialInfo>.from(materialList)
+            .map((element) => element.code == materialNumber
+                ? element.copyWith(isFavourite: true)
+                : element)
+            .toList();
+
+        return Right(favouriteList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    } else {
+      try {
+        await materialListRemoteDataSource.addFavourateMaterial(
+          materialNumber: materialNumber.getOrCrash(),
+        );
+        final newMaterialList = List<MaterialInfo>.from(materialList)
+            .map((element) => element.code == materialNumber
+                ? element.copyWith(isFavourite: true)
+                : element)
+            .toList();
+
+        return Right(newMaterialList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<MaterialInfo>>> removeFavourateData({
+    required MaterialNumber materialNumber,
+    required List<MaterialInfo> materialList,
+    required bool filter,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        await materialListLocalDataSource.removeFavouriteMaterial();
+        final newMaterialList = List<MaterialInfo>.from(materialList)
+            .map((element) => element.code == materialNumber
+                ? element.copyWith(isFavourite: false)
+                : element)
+            .toList();
+        newMaterialList
+            .removeWhere((element) => element.code == materialNumber && filter);
+
+        return Right(newMaterialList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    } else {
+      try {
+        await materialListRemoteDataSource.removeFavourateMaterial(
+          materialNumber: materialNumber.getOrCrash(),
+        );
+        final favouriteList = List<MaterialInfo>.from(materialList)
+            .map((element) => element.code == materialNumber
+                ? element.copyWith(isFavourite: false)
+                : element)
+            .toList();
+        favouriteList
+            .removeWhere((element) => element.code == materialNumber && filter);
+
+        return Right(favouriteList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }

@@ -20,7 +20,6 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list_search_bar.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -245,7 +244,6 @@ class _ListContent extends StatelessWidget {
                 _PriceLabel(materialInfo: materialInfo),
                 Row(
                   children: [
-                    FavoriteButton(materialInfo: materialInfo),
                     CustomSmallButton(
                       onPressed: () => _showMaterialDetail(context),
                       text: 'Add'.tr(),

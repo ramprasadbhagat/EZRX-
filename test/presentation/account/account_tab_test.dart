@@ -11,7 +11,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
-import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,9 +35,6 @@ class AnnouncementBlocMock
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
-
-class FavoriteRemoteDataSourceMock extends Mock
-    implements FavouriteRemoteDataSource {}
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}

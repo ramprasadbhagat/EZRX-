@@ -55,7 +55,6 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -265,9 +264,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CovidMaterialListBloc>(
           create: (context) => locator<CovidMaterialListBloc>(),
-        ),
-        BlocProvider<FavouriteBloc>(
-          create: (context) => locator<FavouriteBloc>(),
         ),
         BlocProvider<OrderHistoryListBloc>(
           create: (context) => locator<OrderHistoryListBloc>(),

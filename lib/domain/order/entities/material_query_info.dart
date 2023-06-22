@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
+
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -54,19 +54,19 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         tenderContract: TenderContract.empty(),
       );
 
-  factory MaterialQueryInfo.fromFavorite({
-    required Favourite material,
-  }) =>
-      MaterialQueryInfo(
-        qty: MaterialQty(1),
-        value: material.materialNumber,
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4:
-            material.isFOC ? MaterialGroup.four('6A1') : MaterialGroup.four(''),
-        description: material.materialDescription,
-        principalName: 'NA',
-        tenderContract: TenderContract.empty(),
-      );
+  // factory MaterialQueryInfo.fromFavorite({
+  //   required Favourite material,
+  // }) =>
+  //     MaterialQueryInfo(
+  //       qty: MaterialQty(1),
+  //       value: material.materialNumber,
+  //       materialGroup2: MaterialGroup.two(''),
+  //       materialGroup4:
+  //           material.isFOC ? MaterialGroup.four('6A1') : MaterialGroup.four(''),
+  //       description: material.materialDescription,
+  //       principalName: 'NA',
+  //       tenderContract: TenderContract.empty(),
+  //     );
 
   factory MaterialQueryInfo.fromBundles({
     required MaterialInfo materialInfo,

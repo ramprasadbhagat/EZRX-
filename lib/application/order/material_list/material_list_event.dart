@@ -25,6 +25,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required SearchKey searchKey,
     @Default(false) bool isScanSearch,
   }) = _SearchMaterialList;
+ 
   const factory MaterialListEvent.autoSearchMaterialList({
     required User user,
     required SalesOrganisation salesOrganisation,
@@ -36,8 +37,10 @@ class MaterialListEvent with _$MaterialListEvent {
     required SearchKey searchKey,
     @Default(false) bool isScanSearch,
   }) = _AutoSearchMaterialList;
+ 
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;
+ 
   const factory MaterialListEvent.loadMore({
     // required User user,
     required SalesOrganisation salesOrganisation,
@@ -48,6 +51,7 @@ class MaterialListEvent with _$MaterialListEvent {
     // required OrderDocumentType orderDocumentType,
     // required String pickAndPack,
   }) = _LoadMore;
+ 
   factory MaterialListEvent.deletedSearchMaterialList({
     required User user,
     required SalesOrganisation salesOrganisation,
@@ -60,4 +64,12 @@ class MaterialListEvent with _$MaterialListEvent {
     required SearchKey searchKey,
     @Default(false) bool isScanSearch,
   }) = _DeletedSearchMaterialList;
+
+  factory MaterialListEvent.addFavourite({
+    required MaterialInfo item,
+  }) = _AddFavourite;
+
+  factory MaterialListEvent.deleteFavourite({
+    required MaterialInfo item,
+  }) = _DeleteFavourite;
 }

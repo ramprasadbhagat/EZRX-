@@ -68,6 +68,8 @@ mixin _$MaterialListEvent {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -122,6 +124,8 @@ mixin _$MaterialListEvent {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -176,6 +180,8 @@ mixin _$MaterialListEvent {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -190,6 +196,8 @@ mixin _$MaterialListEvent {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -202,6 +210,8 @@ mixin _$MaterialListEvent {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -214,6 +224,8 @@ mixin _$MaterialListEvent {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -325,6 +337,8 @@ class _$_Initialized implements _Initialized {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return initialized();
   }
@@ -382,6 +396,8 @@ class _$_Initialized implements _Initialized {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return initialized?.call();
   }
@@ -439,6 +455,8 @@ class _$_Initialized implements _Initialized {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -459,6 +477,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return initialized(this);
   }
@@ -474,6 +494,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return initialized?.call(this);
   }
@@ -489,6 +511,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -709,6 +733,8 @@ class _$_Fetch implements _Fetch {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
         selectedMaterialFilter);
@@ -767,6 +793,8 @@ class _$_Fetch implements _Fetch {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
         selectedMaterialFilter);
@@ -825,6 +853,8 @@ class _$_Fetch implements _Fetch {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -846,6 +876,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return fetch(this);
   }
@@ -861,6 +893,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return fetch?.call(this);
   }
@@ -876,6 +910,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -1175,6 +1211,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return searchMaterialList(
         user,
@@ -1241,6 +1279,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return searchMaterialList?.call(
         user,
@@ -1307,6 +1347,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (searchMaterialList != null) {
@@ -1336,6 +1378,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return searchMaterialList(this);
   }
@@ -1351,6 +1395,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return searchMaterialList?.call(this);
   }
@@ -1366,6 +1412,8 @@ class _$_SearchMaterialList implements _SearchMaterialList {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (searchMaterialList != null) {
@@ -1672,6 +1720,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return autoSearchMaterialList(
         user,
@@ -1738,6 +1788,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return autoSearchMaterialList?.call(
         user,
@@ -1804,6 +1856,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (autoSearchMaterialList != null) {
@@ -1833,6 +1887,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return autoSearchMaterialList(this);
   }
@@ -1848,6 +1904,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return autoSearchMaterialList?.call(this);
   }
@@ -1863,6 +1921,8 @@ class _$_AutoSearchMaterialList implements _AutoSearchMaterialList {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (autoSearchMaterialList != null) {
@@ -2013,6 +2073,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return updateSearchKey(searchKey);
   }
@@ -2070,6 +2132,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return updateSearchKey?.call(searchKey);
   }
@@ -2127,6 +2191,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -2147,6 +2213,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return updateSearchKey(this);
   }
@@ -2162,6 +2230,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -2177,6 +2247,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -2405,6 +2477,8 @@ class _$_LoadMore implements _LoadMore {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo,
         selectedMaterialFilter);
@@ -2463,6 +2537,8 @@ class _$_LoadMore implements _LoadMore {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return loadMore?.call(salesOrganisation, configs, customerCodeInfo,
         shipToInfo, selectedMaterialFilter);
@@ -2521,6 +2597,8 @@ class _$_LoadMore implements _LoadMore {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -2542,6 +2620,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return loadMore(this);
   }
@@ -2557,6 +2637,8 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return loadMore?.call(this);
   }
@@ -2572,6 +2654,8 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -2894,6 +2978,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)
         deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
     return deletedSearchMaterialList(
         user,
@@ -2961,6 +3047,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
     return deletedSearchMaterialList?.call(
         user,
@@ -3028,6 +3116,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
             SearchKey searchKey,
             bool isScanSearch)?
         deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (deletedSearchMaterialList != null) {
@@ -3058,6 +3148,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearchMaterialList value)
         deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return deletedSearchMaterialList(this);
   }
@@ -3073,6 +3165,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return deletedSearchMaterialList?.call(this);
   }
@@ -3088,6 +3182,8 @@ class _$_DeletedSearchMaterialList implements _DeletedSearchMaterialList {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearchMaterialList value)?
         deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (deletedSearchMaterialList != null) {
@@ -3123,6 +3219,643 @@ abstract class _DeletedSearchMaterialList implements MaterialListEvent {
   @JsonKey(ignore: true)
   _$$_DeletedSearchMaterialListCopyWith<_$_DeletedSearchMaterialList>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddFavouriteCopyWith<$Res> {
+  factory _$$_AddFavouriteCopyWith(
+          _$_AddFavourite value, $Res Function(_$_AddFavourite) then) =
+      __$$_AddFavouriteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialInfo item});
+
+  $MaterialInfoCopyWith<$Res> get item;
+}
+
+/// @nodoc
+class __$$_AddFavouriteCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$_AddFavourite>
+    implements _$$_AddFavouriteCopyWith<$Res> {
+  __$$_AddFavouriteCopyWithImpl(
+      _$_AddFavourite _value, $Res Function(_$_AddFavourite) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+  }) {
+    return _then(_$_AddFavourite(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get item {
+    return $MaterialInfoCopyWith<$Res>(_value.item, (value) {
+      return _then(_value.copyWith(item: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AddFavourite implements _AddFavourite {
+  _$_AddFavourite({required this.item});
+
+  @override
+  final MaterialInfo item;
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.addFavourite(item: $item)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AddFavourite &&
+            (identical(other.item, item) || other.item == item));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, item);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+      __$$_AddFavouriteCopyWithImpl<_$_AddFavourite>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        searchMaterialList,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        autoSearchMaterialList,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
+  }) {
+    return addFavourite(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        searchMaterialList,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        autoSearchMaterialList,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
+  }) {
+    return addFavourite?.call(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        searchMaterialList,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        autoSearchMaterialList,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (addFavourite != null) {
+      return addFavourite(item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMaterialList value) searchMaterialList,
+    required TResult Function(_AutoSearchMaterialList value)
+        autoSearchMaterialList,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return addFavourite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SearchMaterialList value)? searchMaterialList,
+    TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return addFavourite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMaterialList value)? searchMaterialList,
+    TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (addFavourite != null) {
+      return addFavourite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddFavourite implements MaterialListEvent {
+  factory _AddFavourite({required final MaterialInfo item}) = _$_AddFavourite;
+
+  MaterialInfo get item;
+  @JsonKey(ignore: true)
+  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteFavouriteCopyWith<$Res> {
+  factory _$$_DeleteFavouriteCopyWith(
+          _$_DeleteFavourite value, $Res Function(_$_DeleteFavourite) then) =
+      __$$_DeleteFavouriteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialInfo item});
+
+  $MaterialInfoCopyWith<$Res> get item;
+}
+
+/// @nodoc
+class __$$_DeleteFavouriteCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$_DeleteFavourite>
+    implements _$$_DeleteFavouriteCopyWith<$Res> {
+  __$$_DeleteFavouriteCopyWithImpl(
+      _$_DeleteFavourite _value, $Res Function(_$_DeleteFavourite) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+  }) {
+    return _then(_$_DeleteFavourite(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get item {
+    return $MaterialInfoCopyWith<$Res>(_value.item, (value) {
+      return _then(_value.copyWith(item: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteFavourite implements _DeleteFavourite {
+  _$_DeleteFavourite({required this.item});
+
+  @override
+  final MaterialInfo item;
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.deleteFavourite(item: $item)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteFavourite &&
+            (identical(other.item, item) || other.item == item));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, item);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
+      __$$_DeleteFavouriteCopyWithImpl<_$_DeleteFavourite>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        searchMaterialList,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        autoSearchMaterialList,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        loadMore,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)
+        deletedSearchMaterialList,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
+  }) {
+    return deleteFavourite(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        searchMaterialList,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        autoSearchMaterialList,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        loadMore,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
+  }) {
+    return deleteFavourite?.call(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        searchMaterialList,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        autoSearchMaterialList,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        loadMore,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter,
+            OrderDocumentType orderDocumentType,
+            String pickAndPack,
+            SearchKey searchKey,
+            bool isScanSearch)?
+        deletedSearchMaterialList,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (deleteFavourite != null) {
+      return deleteFavourite(item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMaterialList value) searchMaterialList,
+    required TResult Function(_AutoSearchMaterialList value)
+        autoSearchMaterialList,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearchMaterialList value)
+        deletedSearchMaterialList,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return deleteFavourite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SearchMaterialList value)? searchMaterialList,
+    TResult? Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return deleteFavourite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMaterialList value)? searchMaterialList,
+    TResult Function(_AutoSearchMaterialList value)? autoSearchMaterialList,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearchMaterialList value)?
+        deletedSearchMaterialList,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (deleteFavourite != null) {
+      return deleteFavourite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteFavourite implements MaterialListEvent {
+  factory _DeleteFavourite({required final MaterialInfo item}) =
+      _$_DeleteFavourite;
+
+  MaterialInfo get item;
+  @JsonKey(ignore: true)
+  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

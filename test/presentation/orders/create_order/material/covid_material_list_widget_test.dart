@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -62,9 +61,6 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MaterialMockBloc extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
-
-class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
-    implements FavouriteBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -125,7 +121,6 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
-  late MockFavouriteBloc mockFavouriteBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
@@ -175,7 +170,6 @@ void main() {
     locator.registerLazySingleton(() => userBlocMock);
     locator.registerLazySingleton(() => salesOrgBlocMock);
     locator.registerLazySingleton(() => customerCodeBlocMock);
-    locator.registerLazySingleton(() => mockFavouriteBloc);
     locator.registerLazySingleton(() => materialPriceBlocMock);
     locator.registerLazySingleton(() => cartBlocMock);
     locator.registerLazySingleton(() => mockMaterialFilterBloc);
@@ -196,7 +190,6 @@ void main() {
       salesOrgBlocMock = SalesOrgMockBloc();
       customerCodeBlocMock = CustomerCodeMockBloc();
       userBlocMock = UserMockBloc();
-      mockFavouriteBloc = MockFavouriteBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
       mockMaterialFilterBloc = MockMaterialFilterBloc();
@@ -229,7 +222,6 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('SG'))));
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -289,8 +281,6 @@ void main() {
                 create: ((context) => customerCodeBlocMock)),
             BlocProvider<MaterialListBloc>(
                 create: ((context) => materialListBlocMock)),
-            BlocProvider<FavouriteBloc>(
-                create: ((context) => mockFavouriteBloc)),
             BlocProvider<MaterialPriceBloc>(
                 create: ((context) => materialPriceBlocMock)),
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),

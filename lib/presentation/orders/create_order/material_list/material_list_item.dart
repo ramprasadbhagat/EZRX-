@@ -21,7 +21,6 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -145,12 +144,6 @@ class MaterialListItem extends StatelessWidget {
                       Flexible(child: _PriceLabel(materialInfo: materialInfo)),
                       Row(
                         children: [
-                          FavoriteButton(
-                            key: Key(
-                              'favoriteButtonKey${materialInfo.materialNumber.displayMatNo}',
-                            ),
-                            materialInfo: materialInfo,
-                          ),
                           CustomSmallButton(
                             onPressed: () => _showMaterialDetail(context),
                             text: 'Add'.tr(),

@@ -71,9 +71,9 @@ class MaterialGridItem extends StatelessWidget {
                   StockLabel(
                     materialInfo: materialInfo,
                   ),
-                  const Align(
+                   Align(
                     alignment: Alignment.bottomRight,
-                    child: FavouriteIcon(),
+                    child: FavouriteIcon(materialInfo: materialInfo),
                   ),
                 ],
               ),

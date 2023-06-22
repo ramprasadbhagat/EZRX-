@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -32,7 +31,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -50,7 +48,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_list_reposit
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_item.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
@@ -77,9 +74,6 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MaterialMockBloc extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
-
-class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
-    implements FavouriteBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -151,7 +145,6 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
-  late MockFavouriteBloc mockFavouriteBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
   late MaterialListRepository materialListRepositoryMock;
@@ -215,7 +208,6 @@ void main() {
     locator.registerLazySingleton(() => userBlocMock);
     locator.registerLazySingleton(() => salesOrgBlocMock);
     locator.registerLazySingleton(() => customerCodeBlocMock);
-    locator.registerLazySingleton(() => mockFavouriteBloc);
     locator.registerLazySingleton(() => materialPriceBlocMock);
     locator.registerLazySingleton(() => cartBlocMock);
     locator.registerLazySingleton(() => mockMaterialFilterBloc);
@@ -247,7 +239,6 @@ void main() {
             create: ((context) => customerCodeBlocMock)),
         BlocProvider<MaterialListBloc>(
             create: ((context) => materialListBlocMock)),
-        BlocProvider<FavouriteBloc>(create: ((context) => mockFavouriteBloc)),
         BlocProvider<MaterialPriceBloc>(
             create: ((context) => materialPriceBlocMock)),
         BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
@@ -287,7 +278,6 @@ void main() {
     salesOrgBlocMock = SalesOrgMockBloc();
     customerCodeBlocMock = CustomerCodeMockBloc();
     userBlocMock = UserMockBloc();
-    mockFavouriteBloc = MockFavouriteBloc();
     materialPriceBlocMock = MaterialPriceBlocMock();
     cartBlocMock = CartBlocMock();
     mockMaterialFilterBloc = MockMaterialFilterBloc();
@@ -312,7 +302,6 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
     when(() => materialPriceBlocMock.state)
         .thenReturn(MaterialPriceState.initial());
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -1625,10 +1614,6 @@ void main() {
           const MaterialListPage(),
         ),
       );
-
-      final favoriteButton = find.byType(FavoriteButton).first;
-
-      await tester.tap(favoriteButton);
       await tester.pump(const Duration(seconds: 1));
     });
 
@@ -1644,28 +1629,13 @@ void main() {
         ),
       );
 
-      whenListen(
-          mockFavouriteBloc,
-          Stream.fromIterable([
-            FavouriteState.initial().copyWith(
-              favouriteItems: [
-                Favourite.empty().copyWith(materialNumber: fakeMaterialNumber),
-              ],
-            ),
-          ]));
-
       await tester.pumpWidget(
         getScopedWidget(
           const MaterialListPage(),
         ),
       );
 
-      final favoriteButton = find.byType(FavoriteButton).first;
-
-      await tester.tap(favoriteButton);
-      await tester.pump(const Duration(seconds: 1));
-
-      await tester.tap(find.byIcon(Icons.favorite));
+      
       await tester.pump();
     });
 
