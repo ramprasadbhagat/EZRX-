@@ -18,4 +18,3 @@ class DocumentNumber extends ValueObject<String> {
 
   const DocumentNumber._(this.value);
 }
-

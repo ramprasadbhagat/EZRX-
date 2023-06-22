@@ -112,7 +112,7 @@ import '../payments/invoice_details/invoice_details.dart' as _i48;
 import '../payments/payment_overview/account_summary.dart' as _i77;
 import '../payments/payment_overview/payments_summary.dart' as _i78;
 import '../payments/payment_overview/statement_summary.dart' as _i79;
-import '../payments/payment_summary.dart' as _i44;
+import '../payments/payment_summary/payment_summary.dart' as _i44;
 import '../payments/payments_tab.dart' as _i75;
 import '../products/product_suggestion_page.dart' as _i36;
 import '../products/products_tab.dart' as _i73;

@@ -72,7 +72,7 @@ import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart'
 import 'package:ezrxmobile/presentation/returns/request_return/request_return_details.dart';
 import 'package:ezrxmobile/presentation/returns/request_return/return_details_summary_page.dart';
 import 'package:ezrxmobile/presentation/returns/request_return/return_request_success.dart';
-import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
+import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';

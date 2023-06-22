@@ -117,6 +117,7 @@ import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 
@@ -424,6 +425,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ManagePaymentMethodsBloc>(
           create: (context) => locator<ManagePaymentMethodsBloc>(),
+        ),
+        BlocProvider<DownloadPaymentAttachmentsBloc>(
+          create: (context) => locator<DownloadPaymentAttachmentsBloc>(),
         ),
         BlocProvider<AddPaymentMethodBloc>(
           create: (context) => locator<AddPaymentMethodBloc>(),

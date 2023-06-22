@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -14,7 +16,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required double paymentAmount,
     required String transactionCurrency,
     required String paymentDocument,
-    required String status,
+    required StatusType status,
     required String paymentMethod,
     required String iban,
     required String bankIdentification,
@@ -40,7 +42,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         bankName: '',
         customId: '',
         iban: '',
-        status: '',
+        status: StatusType(''),
         paymentAmount: 0.0,
         paymentCardHolderName: '',
         paymentCardID: '',
@@ -56,4 +58,19 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         adviceExpiry: StringValue(''),
         zzAdvice: StringValue(''),
       );
+}
+
+extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {
+  List<PaymentSummaryGroup> get getPaymentSummaryGroupList {
+    return List<PaymentSummaryDetails>.from(this)
+        .groupListsBy((item) => item.createdDate)
+        .entries
+        .map(
+          (entry) => PaymentSummaryGroup(
+            createdDate: entry.key,
+            paymentSummaryDetails: entry.value,
+          ),
+        )
+        .toList();
+  }
 }

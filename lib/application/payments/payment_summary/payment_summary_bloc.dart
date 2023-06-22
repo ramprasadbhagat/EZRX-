@@ -14,7 +14,7 @@ part 'payment_summary_event.dart';
 part 'payment_summary_state.dart';
 part 'payment_summary_bloc.freezed.dart';
 
-int _pageSize = 20;
+int _pageSize = 24;
 
 class PaymentSummaryBloc
     extends Bloc<PaymentSummaryEvent, PaymentSummaryState> {

@@ -2,7 +2,7 @@ part of 'payment_summary_bloc.dart';
 
 @freezed
 class PaymentSummaryState with _$PaymentSummaryState {
-
+  const PaymentSummaryState._();
   const factory PaymentSummaryState({
     required List<PaymentSummaryDetails> paymentSummaryList,
     required bool isFetching,

@@ -9,6 +9,8 @@ import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+
 @immutable
 abstract class ValueObject<T> {
   const ValueObject();
@@ -226,10 +228,22 @@ class StatusType extends ValueObject<String> {
 
   String get label => getReturnSummaryFilterByStatus(value.getOrElse(() => ''));
 
+  String get displayStringValue {
+    return dashIfEmpty((value.getOrElse(() => '')));
+  }
+
   String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
 
   Color get displayStatusTextColor =>
       getStatusTextColor(value.getOrElse(() => ''));
+
+  Color get getPaymentDisplayStatusTextColor =>
+      getDisplayStatusTextColor(value.getOrElse(() => ''));
+
+  String message(
+    PaymentSummaryDetails paymentSummaryDetails,
+  ) =>
+      getStatusMessage(value.getOrElse(() => ''), paymentSummaryDetails);
 
   const StatusType._(this.value);
 }

@@ -31,10 +31,14 @@ class PaymentSummaryRemoteDataSource {
   }) async {
     final queryData = paymentSummaryQuery.getPaymentSummaryQuery();
     final request = {
-      'salesOrg': salesOrg,
       'customerCode': customerCode,
+      'salesOrg': salesOrg,
       'first': pageSize,
       'after': offset,
+      'orderBy': [
+        {'order': 'desc', 'field': 'createdDate'},
+      ],
+      'filterBy': [],
     };
     final res = await httpService.request(
       method: 'POST',
@@ -49,7 +53,7 @@ class PaymentSummaryRemoteDataSource {
       ),
     );
     _approverReturnRequestInformationExceptionChecker(res: res);
-    final data = res.data['data']['customerPayment'];
+    final data = res.data['data']['customerPayment']['customerPaymentResponse'];
 
     return List.from(data)
         .map((e) => PaymentSummaryDetailsDto.fromJson(e).toDomain())

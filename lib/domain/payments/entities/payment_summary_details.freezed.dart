@@ -21,7 +21,7 @@ mixin _$PaymentSummaryDetails {
   double get paymentAmount => throw _privateConstructorUsedError;
   String get transactionCurrency => throw _privateConstructorUsedError;
   String get paymentDocument => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  StatusType get status => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
   String get iban => throw _privateConstructorUsedError;
   String get bankIdentification => throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       double paymentAmount,
       String transactionCurrency,
       String paymentDocument,
-      String status,
+      StatusType status,
       String paymentMethod,
       String iban,
       String bankIdentification,
@@ -136,7 +136,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -219,7 +219,7 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       double paymentAmount,
       String transactionCurrency,
       String paymentDocument,
-      String status,
+      StatusType status,
       String paymentMethod,
       String iban,
       String bankIdentification,
@@ -296,7 +296,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -404,7 +404,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final String paymentDocument;
   @override
-  final String status;
+  final StatusType status;
   @override
   final String paymentMethod;
   @override
@@ -534,7 +534,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
       required final double paymentAmount,
       required final String transactionCurrency,
       required final String paymentDocument,
-      required final String status,
+      required final StatusType status,
       required final String paymentMethod,
       required final String iban,
       required final String bankIdentification,
@@ -564,7 +564,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   String get paymentDocument;
   @override
-  String get status;
+  StatusType get status;
   @override
   String get paymentMethod;
   @override

@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
-
 part 'payment_summary_dto.freezed.dart';
 part 'payment_summary_dto.g.dart';
 
@@ -22,8 +21,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
         required String transactionCurrency,
     @JsonKey(name: 'paymentDocument', defaultValue: '')
         required String paymentDocument,
-    @JsonKey(name: 'status', defaultValue: '')
-        required String status,
+    @JsonKey(name: 'status', defaultValue: '') required String status,
     @JsonKey(name: 'paymentMethod', defaultValue: '')
         required String paymentMethod,
     @JsonKey(name: 'iban', defaultValue: '') required String iban,
@@ -62,7 +60,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       bankName: bankName,
       customId: customId,
       iban: iban,
-      status: status,
+      status: StatusType(status),
       paymentAmount: paymentAmount,
       paymentCardHolderName: paymentCardHolderName,
       paymentCardID: paymentCardID,
@@ -84,8 +82,8 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       _$PaymentSummaryDetailsDtoFromJson(json);
 }
 
-String createdAtDate(Map json, String key) => json[key]?.replaceAll('-', '') ?? '';
+String createdAtDate(Map json, String key) =>
+    json[key]?.replaceAll('-', '') ?? '';
 
-
-String paymentDate(Map json, String key) => json[key]?.replaceAll('-', '') ?? '';
-
+String paymentDate(Map json, String key) =>
+    json[key]?.replaceAll('-', '') ?? '';

@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
@@ -312,7 +314,7 @@ Color getStatusLabelColor(String statusType) {
     'Cleared': ZPColors.invoiceStatusGreen,
     'Open': ZPColors.invoiceStatusBlue,
     'In progress': ZPColors.invoiceStatusOrange,
-    'In Progress': ZPColors.lightGray,
+    // 'In Progress': ZPColors.lightGray,
     'PENDING': ZPColors.lightRed,
     'REJECTED': ZPColors.darkGray,
   };
@@ -370,4 +372,17 @@ String getReturnSummaryStatusInList(String statusType) {
     default:
       return statusType;
   }
+}
+
+String getStatusMessage(
+  String status,
+  PaymentSummaryDetails paymentSummaryDetails,
+) {
+  return status != 'Successful'
+      ? 'Expires in ${paymentSummaryDetails.adviceExpiry.displayStringValue}'
+      : 'Payment date: ${paymentSummaryDetails.createdDate.toValidDateString}';
+}
+
+Color getDisplayStatusTextColor(String status) {
+  return status != 'Successful' ? ZPColors.red : ZPColors.black;
 }

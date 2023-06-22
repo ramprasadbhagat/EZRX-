@@ -9,8 +9,8 @@ variables
 
 {
   "request": {
-    "customerCode": "0030032223",
-    "salesOrg": "2601",
+    "customerCode": "0000100208",
+    "salesOrg": "2001",
     "orderBy": [
       {
         "order": "desc",

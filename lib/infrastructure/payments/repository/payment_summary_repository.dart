@@ -46,13 +46,13 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
       }
     }
     try {
-     final paymentSummaryList = await remoteDataSource.getPaymentSummary(
+      final paymentSummaryList = await remoteDataSource.getPaymentSummary(
         customerCode: customerCode,
         salesOrg: salesOrgCode,
         offset: offset,
         pageSize: pageSize,
       );
-    
+
       return Right(paymentSummaryList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

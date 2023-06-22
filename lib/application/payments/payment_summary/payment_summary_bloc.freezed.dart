@@ -605,13 +605,14 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentSummaryState implements _PaymentSummaryState {
+class _$_PaymentSummaryState extends _PaymentSummaryState {
   const _$_PaymentSummaryState(
       {required final List<PaymentSummaryDetails> paymentSummaryList,
       required this.isFetching,
       required this.canLoadMorePaymentSummary,
       required this.failureOrSuccessOption})
-      : _paymentSummaryList = paymentSummaryList;
+      : _paymentSummaryList = paymentSummaryList,
+        super._();
 
   final List<PaymentSummaryDetails> _paymentSummaryList;
   @override
@@ -666,13 +667,14 @@ class _$_PaymentSummaryState implements _PaymentSummaryState {
           this, _$identity);
 }
 
-abstract class _PaymentSummaryState implements PaymentSummaryState {
+abstract class _PaymentSummaryState extends PaymentSummaryState {
   const factory _PaymentSummaryState(
       {required final List<PaymentSummaryDetails> paymentSummaryList,
       required final bool isFetching,
       required final bool canLoadMorePaymentSummary,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_PaymentSummaryState;
+  const _PaymentSummaryState._() : super._();
 
   @override
   List<PaymentSummaryDetails> get paymentSummaryList;
