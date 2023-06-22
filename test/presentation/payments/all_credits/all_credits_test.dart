@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -42,9 +41,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class DownloadPaymentAttachmentsBlocMock extends MockBloc<
         DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
     implements DownloadPaymentAttachmentsBloc {}
@@ -65,7 +61,7 @@ void main() {
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBlocMock;
+
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
@@ -101,7 +97,7 @@ void main() {
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
-    shipToCodeBlocMock = ShipToCodeBlocMock();
+
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
@@ -114,7 +110,7 @@ void main() {
         .thenReturn(DownloadPaymentAttachmentsState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
+
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -138,9 +134,6 @@ void main() {
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<ShipToCodeBloc>(
-            create: (context) => shipToCodeBlocMock,
           ),
           BlocProvider<UserBloc>(
             create: (context) => userBlocMock,
@@ -196,8 +189,8 @@ void main() {
           customerCodeSoldTo: 'mock-customerCodeSoldTo',
         ),
       ));
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial().copyWith(
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial().copyWith(
         shipToInfo: ShipToInfo.empty().copyWith(
           shipToCustomerCode: 'mock-shipToCustomerCode',
         ),
@@ -228,8 +221,8 @@ void main() {
     testWidgets('=> Body Test onRefresh', (tester) async {
       when(() => allCreditsBlocMock.state)
           .thenReturn(AllCreditsState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial().copyWith(
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial().copyWith(
         shipToInfo: ShipToInfo(
             defaultShipToAddress: true,
             shipToCustomerCode: '',

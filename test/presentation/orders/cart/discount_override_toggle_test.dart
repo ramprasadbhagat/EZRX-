@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
@@ -44,11 +43,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
-
-
 class DiscountOverrideBlocMock
     extends MockBloc<DiscountOverrideEvent, DiscountOverrideState>
     implements DiscountOverrideBloc {}
@@ -58,8 +52,7 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
-  late ShipToCodeBloc shipToCodeBloc;
-  
+
   late CartBloc cartBloc;
   late AppRouter autoRouter;
   late DiscountOverrideBloc discountOverrideBlocMock;
@@ -75,7 +68,6 @@ void main() {
       salesOrgBloc = SalesOrgBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
       cartBloc = CartBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
       price = Price.empty().copyWith(
@@ -96,7 +88,7 @@ void main() {
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
       );
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
+
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(isFetching: false),
       );
@@ -110,7 +102,6 @@ void main() {
         autoRouterMock: autoRouter,
         providers: [
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBloc,
@@ -133,7 +124,6 @@ void main() {
         autoRouterMock: autoRouter,
         providers: [
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBloc,
@@ -296,7 +286,7 @@ void main() {
       },
     );
 
-     testWidgets(
+    testWidgets(
       'DiscountOverride submit failure snackbar visible',
       (tester) async {
         final expectedStates = [
@@ -344,7 +334,7 @@ void main() {
       },
     );
 
-     testWidgets(
+    testWidgets(
       'DiscountOverride submit success snackbar not visible',
       (tester) async {
         final expectedStates = [

@@ -3,7 +3,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -27,9 +26,6 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
-
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -112,7 +108,7 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBlocMock;
+  // late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   // late AppRouter autoRouterMock;
@@ -134,7 +130,7 @@ void main() {
       userBlocMock = UserBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
+      // shipToCodeBlocMock = ShipToCodeBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       // autoRouterMock = locator<AppRouter>();
@@ -147,8 +143,6 @@ void main() {
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());

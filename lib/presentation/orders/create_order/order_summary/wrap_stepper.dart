@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -51,7 +50,6 @@ class WrapStepper extends StatelessWidget {
   }
 }
 
-
 class _Stepper extends StatelessWidget {
   final SavedOrderListState savedOrderState;
 
@@ -62,17 +60,17 @@ class _Stepper extends StatelessWidget {
 
   void _moveToOrderHistory(BuildContext context) {
     context.read<OrderHistoryListBloc>().add(
-      OrderHistoryListEvent.fetch(
-        salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-        customerCodeInfo:
-        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-        user: context.read<UserBloc>().state.user,
-        orderHistoryFilter:
-        context.read<OrderHistoryFilterBloc>().state.orderHistoryFilter,
-        sortDirection: 'desc',
-      ),
-    );
+          OrderHistoryListEvent.fetch(
+            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            orderHistoryFilter:
+                context.read<OrderHistoryFilterBloc>().state.orderHistoryFilter,
+            sortDirection: 'desc',
+          ),
+        );
     final selectedItemIds = context
         .read<CartBloc>()
         .state
@@ -81,10 +79,10 @@ class _Stepper extends StatelessWidget {
         .map((e) => e.id)
         .toList();
     context.read<CartBloc>().add(
-      CartEvent.clearSelectedItemsFromCart(
-        selectedItemIds: selectedItemIds,
-      ),
-    );
+          CartEvent.clearSelectedItemsFromCart(
+            selectedItemIds: selectedItemIds,
+          ),
+        );
     context.router.pushAndPopUntil(
       const OrderSuccessPageRoute(),
       predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
@@ -93,20 +91,20 @@ class _Stepper extends StatelessWidget {
 
   void _stepTapped(BuildContext context, int step) {
     context.read<OrderSummaryBloc>().add(
-      OrderSummaryEvent.stepTapped(
-        step: step,
-      ),
-    );
+          OrderSummaryEvent.stepTapped(
+            step: step,
+          ),
+        );
   }
 
   void _handleError(BuildContext context, OrderSummaryState state) {
     state.apiFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
+      () {},
+      (either) => either.fold(
+        (failure) {
+          ErrorUtils.handleApiFailure(context, failure);
         },
-            (_) {},
+        (_) {},
       ),
     );
   }
@@ -114,12 +112,12 @@ class _Stepper extends StatelessWidget {
   void _handleListener(BuildContext context, OrderSummaryState state) {
     if (state.isSubmitSuccess) {
       context.read<AdditionalDetailsBloc>().add(
-        AdditionalDetailsEvent.initialized(
-          config: context.read<SalesOrgBloc>().state.configs,
-          customerCodeInfo:
-          context.read<CustomerCodeBloc>().state.customerCodeInfo,
-        ),
-      );
+            AdditionalDetailsEvent.initialized(
+              config: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            ),
+          );
       _moveToOrderHistory(context);
     }
     _handleError(context, state);
@@ -144,7 +142,8 @@ class _Stepper extends StatelessWidget {
         final config = context.read<SalesOrgBloc>().state.configs;
         final isAccountSuspended =
             context.read<EligibilityBloc>().state.isAccountSuspended;
-        final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
+        final orderEligibilityState =
+            context.read<OrderEligibilityBloc>().state;
 
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
@@ -155,7 +154,8 @@ class _Stepper extends StatelessWidget {
                   maxStepsReached: details.currentStep == state.maxSteps,
                 ),
                 ContainsSpecialOrderMaterialWarning(
-                  containsSpecialOrderMaterial: !orderEligibilityState.validateRegularOrderType,
+                  containsSpecialOrderMaterial:
+                      !orderEligibilityState.validateRegularOrderType,
                   maxStepsReached: details.currentStep == state.maxSteps,
                 ),
                 MovCheckMessage(
@@ -170,7 +170,8 @@ class _Stepper extends StatelessWidget {
                     children: [
                       SubmitContinueButton(
                         details: details,
-                        eligibleForOrderSubmit: orderEligibilityState.eligibleForOrderSubmit &&
+                        eligibleForOrderSubmit: orderEligibilityState
+                                .eligibleForOrderSubmit &&
                             !context.read<PoAttachmentBloc>().state.isFetching,
                         isAccountSuspended: isAccountSuspended,
                         orderSummaryState: state,
@@ -204,7 +205,6 @@ class _Stepper extends StatelessWidget {
     );
   }
 }
-
 
 List<Step> _getSteps({
   required BuildContext context,

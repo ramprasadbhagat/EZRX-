@@ -47,7 +47,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -245,9 +244,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<UserRestrictionListBloc>(
           create: (context) => locator<UserRestrictionListBloc>(),
-        ),
-        BlocProvider<ShipToCodeBloc>(
-          create: (context) => locator<ShipToCodeBloc>(),
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => locator<EligibilityBloc>(),

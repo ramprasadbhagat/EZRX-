@@ -1,14 +1,12 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/payments_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
-import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
-import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
@@ -32,69 +30,53 @@ class HomeTab extends StatelessWidget {
     final configService = locator<RemoteConfigService>();
 
     return Scaffold(
-      key: const Key('homeScreen'),
+      key: WidgetKeys.homeScreen,
       appBar: AppBar(
         centerTitle: true,
         title: SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
         toolbarHeight: kToolbarHeight + 8.0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(40.0),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(40.0),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: Row(
-              children: const [
-                SalesOrgSelector(key: ValueKey('homeSalesOrgSelector')),
-                CustomerCodeSelector(key: ValueKey('homeCustomerCodeSelector')),
-                ShipCodeSelector(key: ValueKey('homeShipCodeSelector')),
-              ],
+            padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: CustomerCodeSelector(
+              key: WidgetKeys.homeCustomerCodeSelector,
             ),
           ),
         ),
       ),
       body: BlocListener<MaterialListBloc, MaterialListState>(
-        listenWhen: (previous, current) => previous.nextPageIndex != current.nextPageIndex,
+        listenWhen: (previous, current) =>
+            previous.nextPageIndex != current.nextPageIndex,
         listener: (context, state) {
           if (state.materialList.isNotEmpty) {
             context.read<MaterialPriceBloc>().add(
-              MaterialPriceEvent.fetch(
-                salesOrganisation: context
-                    .read<SalesOrgBloc>()
-                    .state
-                    .salesOrganisation,
-                salesConfigs: context
-                    .read<SalesOrgBloc>()
-                    .state
-                    .configs,
-                customerCodeInfo: context
-                    .read<CustomerCodeBloc>()
-                    .state
-                    .customerCodeInfo,
-                shipToInfo: context
-                    .read<ShipToCodeBloc>()
-                    .state
-                    .shipToInfo,
-                comboDealEligible: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .comboDealEligible,
-                materials: state.materialList,
-              ),
-            );
+                  MaterialPriceEvent.fetch(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesConfigs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    comboDealEligible:
+                        context.read<EligibilityBloc>().state.comboDealEligible,
+                    materials: state.materialList,
+                  ),
+                );
           }
         },
         child: ListView(
           children: [
             AnnouncementWidget(
               currentPath: const HomeTabRoute().path,
-              key: const Key('homeTabAnnouncementWidget'),
+              key: WidgetKeys.homeTabAnnouncementWidget,
             ),
             const EdiUserBanner(),
             const AccountSuspendedBanner(),
-            const HomeBanner(
-              key: ValueKey('HomeBanner'),
-            ),
+            const HomeBanner(),
             const OrdersExpansionTile(),
             configService.getReturnsConfig()
                 ? const ReturnsExpansionTile()

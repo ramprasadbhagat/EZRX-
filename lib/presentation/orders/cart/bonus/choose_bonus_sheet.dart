@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -137,7 +136,7 @@ class _UpdateBonusState extends State<UpdateBonus> {
                         salesOrganisationConfigs:
                             context.read<SalesOrgBloc>().state.configs,
                         shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
                       ),
                     );
 

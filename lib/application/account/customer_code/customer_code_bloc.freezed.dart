@@ -19,7 +19,9 @@ mixin _$CustomerCodeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -43,7 +45,8 @@ mixin _$CustomerCodeEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -67,7 +70,8 @@ mixin _$CustomerCodeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -186,7 +190,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -213,7 +219,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -240,7 +247,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -328,9 +336,10 @@ abstract class _$$_SelectedCopyWith<$Res> {
           _$_Selected value, $Res Function(_$_Selected) then) =
       __$$_SelectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({CustomerCodeInfo customerCodeInfo});
+  $Res call({CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -345,12 +354,17 @@ class __$$_SelectedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_Selected(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 
@@ -361,19 +375,29 @@ class __$$_SelectedCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Selected implements _Selected {
-  const _$_Selected({required this.customerCodeInfo});
+  const _$_Selected({required this.customerCodeInfo, required this.shipToInfo});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.selected(customerCodeInfo: $customerCodeInfo)';
+    return 'CustomerCodeEvent.selected(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -382,11 +406,13 @@ class _$_Selected implements _Selected {
         (other.runtimeType == runtimeType &&
             other is _$_Selected &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCodeInfo);
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo, shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -398,7 +424,9 @@ class _$_Selected implements _Selected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -418,14 +446,15 @@ class _$_Selected implements _Selected {
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return selected(customerCodeInfo);
+    return selected(customerCodeInfo, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -445,14 +474,15 @@ class _$_Selected implements _Selected {
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
-    return selected?.call(customerCodeInfo);
+    return selected?.call(customerCodeInfo, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -474,7 +504,7 @@ class _$_Selected implements _Selected {
     required TResult orElse(),
   }) {
     if (selected != null) {
-      return selected(customerCodeInfo);
+      return selected(customerCodeInfo, shipToInfo);
     }
     return orElse();
   }
@@ -531,10 +561,12 @@ class _$_Selected implements _Selected {
 }
 
 abstract class _Selected implements CustomerCodeEvent {
-  const factory _Selected({required final CustomerCodeInfo customerCodeInfo}) =
-      _$_Selected;
+  const factory _Selected(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo}) = _$_Selected;
 
   CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
   _$$_SelectedCopyWith<_$_Selected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -660,7 +692,9 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -687,7 +721,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -714,7 +749,8 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -927,7 +963,9 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -954,7 +992,8 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -981,7 +1020,8 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1183,7 +1223,9 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -1210,7 +1252,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1237,7 +1280,8 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1438,7 +1482,9 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -1465,7 +1511,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1493,7 +1540,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1707,7 +1755,9 @@ class _$_AutoSearch implements _AutoSearch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -1734,7 +1784,8 @@ class _$_AutoSearch implements _AutoSearch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1762,7 +1813,8 @@ class _$_AutoSearch implements _AutoSearch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -1978,7 +2030,9 @@ class _$_DeletedSearch implements _DeletedSearch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selected,
     required TResult Function(String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
@@ -2005,7 +2059,8 @@ class _$_DeletedSearch implements _DeletedSearch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult? Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -2033,7 +2088,8 @@ class _$_DeletedSearch implements _DeletedSearch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selected,
     TResult Function(String searchText, bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
@@ -2139,6 +2195,7 @@ mixin _$CustomerCodeState {
   bool get isFetching => throw _privateConstructorUsedError;
   bool get isSearchActive => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeStateCopyWith<CustomerCodeState> get copyWith =>
@@ -2158,9 +2215,11 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
       bool canLoadMore,
       bool isFetching,
       bool isSearchActive,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      ShipToInfo shipToInfo});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -2183,6 +2242,7 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
     Object? isFetching = null,
     Object? isSearchActive = null,
     Object? searchKey = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_value.copyWith(
       customerCodeInfo: null == customerCodeInfo
@@ -2213,6 +2273,10 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ) as $Val);
   }
 
@@ -2221,6 +2285,14 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
       return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
     });
   }
 }
@@ -2240,10 +2312,13 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
       bool canLoadMore,
       bool isFetching,
       bool isSearchActive,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      ShipToInfo shipToInfo});
 
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -2264,6 +2339,7 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? isSearchActive = null,
     Object? searchKey = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_CustomerCodeState(
       customerCodeInfo: null == customerCodeInfo
@@ -2294,6 +2370,10 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 }
@@ -2308,7 +2388,8 @@ class _$_CustomerCodeState extends _CustomerCodeState {
       required this.canLoadMore,
       required this.isFetching,
       required this.isSearchActive,
-      required this.searchKey})
+      required this.searchKey,
+      required this.shipToInfo})
       : _customerCodeList = customerCodeList,
         super._();
 
@@ -2333,10 +2414,12 @@ class _$_CustomerCodeState extends _CustomerCodeState {
   final bool isSearchActive;
   @override
   final SearchKey searchKey;
+  @override
+  final ShipToInfo shipToInfo;
 
   @override
   String toString() {
-    return 'CustomerCodeState(customerCodeInfo: $customerCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey)';
+    return 'CustomerCodeState(customerCodeInfo: $customerCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -2358,7 +2441,9 @@ class _$_CustomerCodeState extends _CustomerCodeState {
             (identical(other.isSearchActive, isSearchActive) ||
                 other.isSearchActive == isSearchActive) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
@@ -2370,7 +2455,8 @@ class _$_CustomerCodeState extends _CustomerCodeState {
       canLoadMore,
       isFetching,
       isSearchActive,
-      searchKey);
+      searchKey,
+      shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -2389,7 +2475,8 @@ abstract class _CustomerCodeState extends CustomerCodeState {
       required final bool canLoadMore,
       required final bool isFetching,
       required final bool isSearchActive,
-      required final SearchKey searchKey}) = _$_CustomerCodeState;
+      required final SearchKey searchKey,
+      required final ShipToInfo shipToInfo}) = _$_CustomerCodeState;
   const _CustomerCodeState._() : super._();
 
   @override
@@ -2406,6 +2493,8 @@ abstract class _CustomerCodeState extends CustomerCodeState {
   bool get isSearchActive;
   @override
   SearchKey get searchKey;
+  @override
+  ShipToInfo get shipToInfo;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeStateCopyWith<_$_CustomerCodeState> get copyWith =>

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
@@ -49,7 +48,7 @@ class HistoryTab extends StatelessWidget {
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+            child: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
               buildWhen: (previous, current) =>
                   previous.haveShipTo != current.haveShipTo,
               builder: (context, state) {
@@ -184,7 +183,7 @@ class HistoryTab extends StatelessWidget {
               .customerCodeSoldTo
               .isNotEmpty;
           final hasShipToInfo = context
-              .read<ShipToCodeBloc>()
+              .read<CustomerCodeBloc>()
               .state
               .shipToInfo
               .shipToCustomerCode
@@ -195,7 +194,8 @@ class HistoryTab extends StatelessWidget {
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     orderHistoryFilter: state.orderHistoryFilter,
                     sortDirection: state.sortDirection,
@@ -299,8 +299,11 @@ class HistoryTab extends StatelessWidget {
 }
 
 class _OrderHistoryScrollList extends StatelessWidget {
-  const _OrderHistoryScrollList({Key? key, required this.orderHistoryListState , required this.orderHistoryFilterByStatusState})
-      : super(key: key);
+  const _OrderHistoryScrollList({
+    Key? key,
+    required this.orderHistoryListState,
+    required this.orderHistoryFilterByStatusState,
+  }) : super(key: key);
   final OrderHistoryListState orderHistoryListState;
   final OrderHistoryFilterByStatusState orderHistoryFilterByStatusState;
 
@@ -318,7 +321,7 @@ class _OrderHistoryScrollList extends StatelessWidget {
                 customerCodeInfo:
                     context.read<CustomerCodeBloc>().state.customerCodeInfo,
                 salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                 user: context.read<UserBloc>().state.user,
                 sortDirection:
                     context.read<OrderHistoryFilterBloc>().state.sortDirection,
@@ -336,8 +339,9 @@ class _OrderHistoryScrollList extends StatelessWidget {
           ),
           customerCodeInfo:
               context.read<CustomerCodeBloc>().state.customerCodeInfo,
-          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-          orderHistoryBasicInfo: orderHistoryListState.orderHistoryList.orderBasicInformation,
+          shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+          orderHistoryBasicInfo:
+              orderHistoryListState.orderHistoryList.orderBasicInformation,
           currency: context.read<SalesOrgBloc>().state.configs.currency,
           salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
           billToInfo: context
@@ -354,7 +358,7 @@ class _OrderHistoryScrollList extends StatelessWidget {
   }
 
   void _onRefresh(BuildContext context) {
-    if (context.read<ShipToCodeBloc>().state.haveShipTo) {
+    if (context.read<CustomerCodeBloc>().state.haveShipTo) {
       context.read<OrderHistoryFilterBloc>().add(
             const OrderHistoryFilterEvent.initialized(),
           );
@@ -369,7 +373,7 @@ class _OrderHistoryScrollList extends StatelessWidget {
               customerCodeInfo:
                   context.read<CustomerCodeBloc>().state.customerCodeInfo,
               salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: context.read<UserBloc>().state.user,
               orderHistoryFilter: OrderHistoryFilter.empty(),
               sortDirection:

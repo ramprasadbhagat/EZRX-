@@ -17,7 +17,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
@@ -220,7 +219,7 @@ class _AppBarState extends State<_AppBar> {
                       context.read<EligibilityBloc>().state.getPNPValueMaterial,
                   customerInfo:
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   searchKey: value,
                 ),
               );
@@ -236,7 +235,7 @@ class _AppBarState extends State<_AppBar> {
                       context.read<EligibilityBloc>().state.getPNPValueMaterial,
                   customerInfo:
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   searchKey: value,
                 ),
               );

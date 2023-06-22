@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -85,7 +84,7 @@ class _BodyContent extends StatelessWidget {
                             .state
                             .salesOrganisation,
                         shipToCode:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
                       ),
                     );
               },
@@ -119,7 +118,7 @@ class _ListContent extends StatelessWidget {
                 context.read<SalesOrgBloc>().state.salesOrganisation,
             salesOrganisationConfigs:
                 context.read<SalesOrgBloc>().state.configs,
-            shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+            shipToCode: context.read<CustomerCodeBloc>().state.shipToInfo,
             materialInfoList: materialQueryInfo,
             pickAndPack:
                 context.read<EligibilityBloc>().state.getPNPValueMaterial,

@@ -14,20 +14,17 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 
-
 class CustomerCodeRepository implements ICustomerCodeRepository {
   final Config config;
   final CustomerCodeRemoteDataSource remoteDataSource;
   final CustomerCodeLocalDataSource localCustomerCodeDataSource;
   final AccountSelectorStorage accountSelectorStorage;
-  
 
   CustomerCodeRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localCustomerCodeDataSource,
     required this.accountSelectorStorage,
-    
   });
 
   @override
@@ -76,18 +73,22 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Unit>> storeCustomerCode({
+  Future<Either<ApiFailure, Unit>> storeCustomerInfo({
     required String customerCode,
+    required String shippingAddress,
   }) async {
     try {
       final accountSelectorStorageDto = await accountSelectorStorage.get();
       final accountSelector = accountSelectorStorageDto.toDomain();
       await accountSelectorStorage.set(
         accountSelectorStorageDto: AccountSelectorStorageDto.fromDomain(
-          accountSelector: accountSelector.copyWith(customerCode: customerCode),
+          accountSelector: accountSelector.copyWith(
+            customerCode: customerCode,
+            shippingAddress: shippingAddress,
+          ),
         ),
       );
-      
+
       return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

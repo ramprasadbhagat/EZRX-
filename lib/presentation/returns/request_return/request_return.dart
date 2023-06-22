@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -124,7 +123,7 @@ class _WrapRequestReturnBody extends StatelessWidget {
             .customerCodeSoldTo
             .isNotEmpty;
         final hasShipToInfo = context
-            .read<ShipToCodeBloc>()
+            .read<CustomerCodeBloc>()
             .state
             .shipToInfo
             .shipToCustomerCode
@@ -136,7 +135,7 @@ class _WrapRequestReturnBody extends StatelessWidget {
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   salesOrg:
                       context.read<SalesOrgBloc>().state.salesOrganisation,
-                  shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   requestReturnFilter: state.requestReturnFilter,
                 ),
               );
@@ -170,21 +169,22 @@ class _RequestReturnList extends StatelessWidget {
           previous.isLoading != current.isLoading ||
           previous.sortDirection != current.sortDirection,
       builder: (context, state) {
-
         return state.isLoading && state.returnItemList.isEmpty
             ? LoadingShimmer.logo(
                 key: const Key('LoaderImage'),
               )
             : Column(
                 children: [
-                  _RequestReturnScrollList(state: state,),
+                  _RequestReturnScrollList(
+                    state: state,
+                  ),
                   BlocBuilder<RequestReturnBloc, RequestReturnState>(
                     buildWhen: (previous, current) =>
                         previous.returnItemList != current.returnItemList,
                     builder: (context, state) {
                       return state.selectedReturnItems.isNotEmpty
                           ? Container(
-                            alignment: Alignment.center,
+                              alignment: Alignment.center,
                               width: double.infinity,
                               padding: const EdgeInsets.only(top: 10),
                               decoration: const BoxDecoration(
@@ -200,7 +200,8 @@ class _RequestReturnList extends StatelessWidget {
                               child: SafeArea(
                                 child: ElevatedButton(
                                   key: const ValueKey(
-                                      'goToReturnsDetailsPage',),
+                                    'goToReturnsDetailsPage',
+                                  ),
                                   onPressed: () {
                                     context.router.pushNamed(
                                       'request_return_details',
@@ -239,18 +240,11 @@ class _RequestReturnScrollList extends StatelessWidget {
         onRefresh: () {
           context.read<RequestReturnBloc>().add(
                 RequestReturnEvent.fetch(
-                  salesOrg: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .salesOrganisation,
-                  shipInfo: context
-                      .read<ShipToCodeBloc>()
-                      .state
-                      .shipToInfo,
-                  customerCodeInfo: context
-                      .read<CustomerCodeBloc>()
-                      .state
-                      .customerCodeInfo,
+                  salesOrg:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   requestReturnFilter: context
                       .read<RequestReturnFilterBloc>()
                       .state
@@ -261,18 +255,11 @@ class _RequestReturnScrollList extends StatelessWidget {
         onLoadingMore: () {
           context.read<RequestReturnBloc>().add(
                 RequestReturnEvent.loadMore(
-                  salesOrg: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .salesOrganisation,
-                  shipInfo: context
-                      .read<ShipToCodeBloc>()
-                      .state
-                      .shipToInfo,
-                  customerCodeInfo: context
-                      .read<CustomerCodeBloc>()
-                      .state
-                      .customerCodeInfo,
+                  salesOrg:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   requestReturnFilter: context
                       .read<RequestReturnFilterBloc>()
                       .state
@@ -281,8 +268,7 @@ class _RequestReturnScrollList extends StatelessWidget {
               );
         },
         isLoading: state.isLoading,
-        itemBuilder: (context, index, item) =>
-            _RequestReturnListItem(
+        itemBuilder: (context, index, item) => _RequestReturnListItem(
           returnItem: item,
           configs: configs,
           index: index,

@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -20,8 +20,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 class ChangeDeliveryAddress extends StatelessWidget {
   final ShipToInfo shipToInfo;
@@ -100,23 +98,18 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
             child: ElevatedButton(
               key: WidgetKeys.confirmButton,
               onPressed: () {
-                final shipToBloc = context.read<ShipToCodeBloc>();
                 context.router
                     .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
-                shipToBloc.add(
-                  ShipToCodeEvent.selected(
-                    shipToInfo: shipToInfo,
-                  ),
-                );
+
                 trackMixpanelEvent(
                   MixpanelEvents.shipToAddressSave,
                   props: {
-                    MixpanelProps.shipToAddress:
-                        shipToInfo.shipToCustomerCode,
+                    MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
                   },
                 );
                 context.read<CustomerCodeBloc>().add(
                       CustomerCodeEvent.selected(
+                        shipToInfo: shipToInfo,
                         customerCodeInfo: customerCodeInfo,
                       ),
                     );

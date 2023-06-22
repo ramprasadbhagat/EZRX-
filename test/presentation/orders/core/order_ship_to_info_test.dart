@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 
@@ -14,10 +14,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../home/home_tab_test.dart';
 import '../../order_history/order_history_details_widget_test.dart';
-
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
 
 class MockPaymentCustomerInformationBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
@@ -26,8 +24,8 @@ class MockPaymentCustomerInformationBloc extends MockBloc<
 void main() {
   late AppRouter autoRouterMock;
 
-  late ShipToCodeBloc shipToCodeBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBloc;
+  late CustomerCodeBloc customerCodeBlocMock;
 
   setUpAll(
     () async {
@@ -41,14 +39,14 @@ void main() {
     () {
       WidgetsFlutterBinding.ensureInitialized();
       paymentCustomerInformationBloc = MockPaymentCustomerInformationBloc();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
+      customerCodeBlocMock = CustomerCodeBlocMock();
 
       autoRouterMock = locator<AppRouter>();
 
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => paymentCustomerInformationBloc.state)
           .thenReturn(PaymentCustomerInformationState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
     },
   );
   group(
@@ -58,10 +56,10 @@ void main() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
-            BlocProvider<ShipToCodeBloc>(
-                create: (context) => shipToCodeBlocMock),
             BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => paymentCustomerInformationBloc),
+            BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeBlocMock),
           ],
           child: const ShipToAddressInfo(),
         );

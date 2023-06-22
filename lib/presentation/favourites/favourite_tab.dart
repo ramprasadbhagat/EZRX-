@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -80,7 +79,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
                           salesOrganisationConfigs:
                               context.read<SalesOrgBloc>().state.configs,
                           shipToCode:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                              context.read<CustomerCodeBloc>().state.shipToInfo,
                           materialInfoList: state.favouriteItems
                               .map(
                                 (item) => MaterialQueryInfo.fromFavorite(
@@ -104,7 +103,9 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
                   return LoadingShimmer.logo(key: const Key('LoaderImage'));
                 }
 
-                return _FavoriteScrollList(favoriteState: favoriteState,);
+                return _FavoriteScrollList(
+                  favoriteState: favoriteState,
+                );
               },
             ),
           ),

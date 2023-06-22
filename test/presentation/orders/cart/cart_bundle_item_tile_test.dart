@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -53,9 +52,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class MaterialPriceBlocMock
@@ -67,7 +63,6 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late TenderContractBloc tenderContractBloc;
-  late ShipToCodeBloc shipToCodeBloc;
 
   late CartBloc cartBloc;
   late CartItem bundleItem;
@@ -79,7 +74,6 @@ void main() {
       salesOrgBloc = SalesOrgBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
       cartBloc = CartBlocMock();
       tenderContractBloc = TenderContractBlocMock();
 
@@ -117,7 +111,6 @@ void main() {
       when(() => tenderContractBloc.state).thenReturn(
         TenderContractState.initial(),
       );
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => cartBloc.state).thenReturn(CartState.initial().copyWith());
     },
   );
@@ -127,7 +120,6 @@ void main() {
         autoRouterMock: AutoRouterMock(),
         providers: [
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
           BlocProvider<CartBloc>(create: (context) => cartBloc),
           BlocProvider<CustomerCodeBloc>(

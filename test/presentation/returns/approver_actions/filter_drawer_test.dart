@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -28,9 +27,6 @@ class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -39,7 +35,6 @@ void main() {
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
 
-  late ShipToCodeBloc shipToCodeBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   final mockReturnApproverFilter = ReturnApproverFilter.empty();
 
@@ -73,9 +68,6 @@ void main() {
         BlocProvider<ReturnApproverFilterBloc>(
           create: (context) => returnApproverFilterBlocMock,
         ),
-        BlocProvider<ShipToCodeBloc>(
-          create: (context) => shipToCodeBlocMock,
-        ),
         BlocProvider<SalesOrgBloc>(
           create: (context) => salesOrgBlocMock,
         ),
@@ -89,15 +81,13 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
+
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     },
   );
@@ -193,8 +183,7 @@ void main() {
         await tester.enterText(filterReturnIdField, '2');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -217,8 +206,7 @@ void main() {
         await tester.enterText(filterReturnIdField, '1');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );
@@ -254,8 +242,7 @@ void main() {
         await tester.enterText(filterCreatedBy, '2');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -277,8 +264,7 @@ void main() {
         await tester.enterText(filterCreatedBy, '1');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );
@@ -313,8 +299,7 @@ void main() {
         await tester.enterText(shipToSearchField, '2');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -336,8 +321,7 @@ void main() {
         await tester.enterText(shipToSearchField, '1');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );
@@ -372,8 +356,7 @@ void main() {
         await tester.enterText(soldToSearchField, '2');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -395,8 +378,7 @@ void main() {
         await tester.enterText(soldToSearchField, '1');
         await tester.pump();
 
-        expect(
-            find.text('Please enter at least 2 characters.'.tr()),
+        expect(find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );

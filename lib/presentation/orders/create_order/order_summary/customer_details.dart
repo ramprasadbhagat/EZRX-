@@ -1,7 +1,5 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -16,13 +14,13 @@ class CustomerDetailsStep extends StatelessWidget {
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
       key: const Key('_CustomerDetailsStepperKey'),
       buildWhen: (previous, current) =>
-      previous.customerCodeInfo != current.customerCodeInfo,
+          previous.customerCodeInfo != current.customerCodeInfo,
       builder: (context, state) {
         return Column(
           children: [
             ..._getTextRowLevelsForCustomerInfo(
               state.customerCodeInfo,
-              context.read<ShipToCodeBloc>().state.shipToInfo,
+              context.read<CustomerCodeBloc>().state.shipToInfo,
             ).map((e) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -40,16 +38,15 @@ class CustomerDetailsStep extends StatelessWidget {
     );
   }
 
-
   List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
-      CustomerCodeInfo customer,
-      ShipToInfo shipToInfo,
-      ) {
+    CustomerCodeInfo customer,
+    ShipToInfo shipToInfo,
+  ) {
     return [
       _OrderSummaryDetails(
         key: 'Customer Name.'.tr(),
         value:
-        '${customer.customerName.name1} ${customer.customerName.name2} ${customer.customerName.name3} ${customer.customerName.name4}',
+            '${customer.customerName.name1} ${customer.customerName.name2} ${customer.customerName.name3} ${customer.customerName.name4}',
       ),
       _OrderSummaryDetails(
         key: 'Customer Email'.tr(),
@@ -65,7 +62,8 @@ class CustomerDetailsStep extends StatelessWidget {
       ),
       _OrderSummaryDetails(
         key: 'Customer Classification'.tr(),
-        value: customer.customerClassification.displayCustomerClassification.tr(),
+        value:
+            customer.customerClassification.displayCustomerClassification.tr(),
       ),
       _OrderSummaryDetails(
         key: 'Customer Local Group'.tr(),
@@ -77,9 +75,7 @@ class CustomerDetailsStep extends StatelessWidget {
       ),
     ];
   }
-
 }
-
 
 class _OrderSummaryDetails {
   const _OrderSummaryDetails({

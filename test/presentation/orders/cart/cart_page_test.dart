@@ -8,7 +8,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -76,9 +75,6 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
-class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class CustomerCodeBlocMock
@@ -133,7 +129,6 @@ void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late EligibilityBloc eligibilityBloc;
-  late ShipToCodeBloc shipToCodeBloc;
   late UserBloc userBloc;
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
@@ -184,7 +179,6 @@ void main() {
       customerCodeBloc = CustomerCodeBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       userBloc = UserBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
@@ -501,7 +495,6 @@ void main() {
         materialPrice: mockPriceList,
       ));
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => discountOverrideBlocMock.state)
           .thenReturn(DiscountOverrideState.initial());
@@ -574,7 +567,6 @@ void main() {
             BlocProvider<MaterialListBloc>(
                 create: ((context) => materialListBlocMock)),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-            BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
             BlocProvider<TenderContractBloc>(
                 create: (context) => tenderContractBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(

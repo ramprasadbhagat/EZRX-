@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -35,9 +34,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
@@ -58,7 +54,6 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late AuthBloc authBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBlocMock;
   late MaterialListBloc materialListBloc;
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialFilterBloc materialfilterBlocMock;
@@ -83,7 +78,6 @@ void main() {
       salesOrgBlocMock = SalesOrgBlocMock();
       authBlocMock = AuthBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
       materialListBloc = MaterialListBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       materialfilterBlocMock = MockMaterialFilterBloc();
@@ -93,8 +87,6 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => materialListBloc.state)
           .thenReturn(MaterialListState.initial());
       when(() => eligibilityBlocMock.state)

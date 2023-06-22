@@ -80,17 +80,24 @@ void main() {
             CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
         setUp: () {
           when(
-            () => customerCodeMockRepo.storeCustomerCode(
-                customerCode: fakeCustomerInfo.customerCodeSoldTo),
+            () => customerCodeMockRepo.storeCustomerInfo(
+              customerCode: fakeCustomerInfo.customerCodeSoldTo,
+              shippingAddress:
+                  fakeCustomerInfo.shipToInfos.first.shipToCustomerCode,
+            ),
           ).thenAnswer((invocation) async => const Right(unit));
         },
         act: (CustomerCodeBloc bloc) {
-          bloc.add(
-              CustomerCodeEvent.selected(customerCodeInfo: fakeCustomerInfo));
+          bloc.add(CustomerCodeEvent.selected(
+            customerCodeInfo: fakeCustomerInfo,
+            shipToInfo: fakeCustomerInfo.shipToInfos.first,
+          ));
         },
         expect: () => [
-              CustomerCodeState.initial()
-                  .copyWith(customerCodeInfo: fakeCustomerInfo)
+              CustomerCodeState.initial().copyWith(
+                customerCodeInfo: fakeCustomerInfo,
+                shipToInfo: fakeCustomerInfo.shipToInfos.first,
+              )
             ]);
 
     blocTest(
@@ -99,8 +106,11 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(
-          () => customerCodeMockRepo.storeCustomerCode(
-              customerCode: fakeCustomerInfo.customerCodeSoldTo),
+          () => customerCodeMockRepo.storeCustomerInfo(
+            customerCode: fakeCustomerInfo.customerCodeSoldTo,
+            shippingAddress:
+                fakeCustomerInfo.shipToInfos.first.shipToCustomerCode,
+          ),
         ).thenAnswer((invocation) async => const Right(unit));
 
         when(
@@ -717,8 +727,10 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(
-          () => customerCodeMockRepo.storeCustomerCode(
+          () => customerCodeMockRepo.storeCustomerInfo(
             customerCode: customerMockData.first.customerCodeSoldTo,
+            shippingAddress:
+                customerMockData.first.shipToInfos.first.shipToCustomerCode,
           ),
         ).thenAnswer((invocation) async => const Right(unit));
 
@@ -762,13 +774,15 @@ void main() {
       expect: () => [
         CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
-            isSearchActive: true,
-            customerCodeInfo: customerMockData.first,
-            isFetching: false,
-            customerCodeList: [customerMockData.first],
-            searchKey: SearchKey(
-              customerMockData.first.customerCodeSoldTo,
-            )),
+          isSearchActive: true,
+          customerCodeInfo: customerMockData.first,
+          isFetching: false,
+          customerCodeList: [customerMockData.first],
+          searchKey: SearchKey(
+            customerMockData.first.customerCodeSoldTo,
+          ),
+          shipToInfo: customerMockData.first.shipToInfos.first,
+        ),
       ],
     );
 
@@ -834,6 +848,7 @@ void main() {
           ],
           apiFailureOrSuccessOption: none(),
           canLoadMore: false,
+          shipToInfo: customerMockData.first.shipToInfos.first,
         ),
       ],
       verify: (CustomerCodeBloc bloc) => expect(

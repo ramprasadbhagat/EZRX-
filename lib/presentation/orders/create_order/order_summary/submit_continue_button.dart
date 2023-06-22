@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -34,10 +33,10 @@ class SubmitContinueButton extends StatelessWidget {
     required BuildContext context,
   }) {
     context.read<AdditionalDetailsBloc>().add(
-      AdditionalDetailsEvent.validateForm(
-        config: context.read<SalesOrgBloc>().state.configs,
-      ),
-    );
+          AdditionalDetailsEvent.validateForm(
+            config: context.read<SalesOrgBloc>().state.configs,
+          ),
+        );
   }
 
   void _stepContinue(BuildContext context) {
@@ -52,7 +51,7 @@ class SubmitContinueButton extends StatelessWidget {
 
     return eligibilityState.customerCodeInfo.status.isEDI
         ? eligibilityState.user.role.type.isSalesRepRole &&
-        orderType.isSpecialOrderType
+            orderType.isSpecialOrderType
         : true;
   }
 
@@ -73,29 +72,29 @@ class SubmitContinueButton extends StatelessWidget {
         context.read<EligibilityBloc>().state.isMYMarketSalesRep;
 
     context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
-      config: context.read<SalesOrgBloc>().state.configs,
-      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-      customerCodeInfo:
-      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-      salesOrganisation:
-      context.read<SalesOrgBloc>().state.salesOrganisation,
-      user: context.read<UserBloc>().state.user,
-      cartItems: cartBloc.state.selectedCartItems.validMaterials,
-      grandTotal: cartBloc.state.grandTotal(
-        isMYMarketSalesRep: isMYMarketSalesRep,
-      ),
-      orderDocumentType:
-      context.read<OrderDocumentTypeBloc>().state.selectedOrderType,
-      data:
-      context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
-    ));
+          config: context.read<SalesOrgBloc>().state.configs,
+          shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+          customerCodeInfo:
+              context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          salesOrganisation:
+              context.read<SalesOrgBloc>().state.salesOrganisation,
+          user: context.read<UserBloc>().state.user,
+          cartItems: cartBloc.state.selectedCartItems.validMaterials,
+          grandTotal: cartBloc.state.grandTotal(
+            isMYMarketSalesRep: isMYMarketSalesRep,
+          ),
+          orderDocumentType:
+              context.read<OrderDocumentTypeBloc>().state.selectedOrderType,
+          data:
+              context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AdditionalDetailsBloc, AdditionalDetailsState>(
       listenWhen: (previous, current) =>
-      previous.isValidated != current.isValidated ||
+          previous.isValidated != current.isValidated ||
           previous.showErrorMessages != current.showErrorMessages,
       listener: (context, state) {
         final orderSummaryBloc = context.read<OrderSummaryBloc>();
@@ -121,32 +120,32 @@ class SubmitContinueButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: details.currentStep == orderSummaryState.maxSteps
                 ? eligibleForOrderSubmit &&
-                !isAccountSuspended &&
-                _isCustomerEDI(context)
-                ? ZPColors.primary
-                : ZPColors.lightGray
+                        !isAccountSuspended &&
+                        _isCustomerEDI(context)
+                    ? ZPColors.primary
+                    : ZPColors.lightGray
                 : ZPColors.primary,
           ),
           onPressed: () {
             details.currentStep == orderSummaryState.maxSteps
                 ? eligibleForOrderSubmit &&
-                !isAccountSuspended &&
-                _isCustomerEDI(context)
-                ? _validateForm(
-              context: context,
-            )
-                : null
+                        !isAccountSuspended &&
+                        _isCustomerEDI(context)
+                    ? _validateForm(
+                        context: context,
+                      )
+                    : null
                 : details.currentStep == orderSummaryState.additionalDetailsStep
-                ? _validateForm(
-              context: context,
-            )
-                : _stepContinue(context);
+                    ? _validateForm(
+                        context: context,
+                      )
+                    : _stepContinue(context);
           },
           child: details.currentStep == orderSummaryState.maxSteps
               ? LoadingShimmer.withChild(
-            enabled: orderSummaryState.isSubmitting,
-            child: const Text('Submit').tr(),
-          )
+                  enabled: orderSummaryState.isSubmitting,
+                  child: const Text('Submit').tr(),
+                )
               : const Text('Continue').tr(),
         );
       },

@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -47,9 +46,6 @@ class MockCustomerCodeBloc
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
-class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -66,7 +62,7 @@ void main() {
   late MaterialPriceDetailBloc priceBloc;
   late MockCustomerCodeBloc mockCustomerBloc;
   late MockSalesOrgBloc mockSalesOrgBloc;
-  late MockShipToCodeBloc mockShipToCodeBloc;
+
   late EligibilityBlocMock mockEligiblityBloc;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -94,7 +90,7 @@ void main() {
     userBloc = UserBlocMock();
     mockCustomerBloc = MockCustomerCodeBloc();
     mockSalesOrgBloc = MockSalesOrgBloc();
-    mockShipToCodeBloc = MockShipToCodeBloc();
+
     mockEligiblityBloc = EligibilityBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
@@ -106,7 +102,7 @@ void main() {
     when(() => priceBloc.state).thenReturn(MaterialPriceDetailState.initial());
     when(() => mockCustomerBloc.state).thenReturn(CustomerCodeState.initial());
     when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-    when(() => mockShipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
+
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
@@ -129,7 +125,6 @@ void main() {
         BlocProvider<CartBloc>(create: (context) => cartBloc),
         BlocProvider<CustomerCodeBloc>(create: (context) => mockCustomerBloc),
         BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-        BlocProvider<ShipToCodeBloc>(create: (context) => mockShipToCodeBloc),
         BlocProvider<EligibilityBloc>(create: (context) => mockEligiblityBloc),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
@@ -122,7 +121,7 @@ class ReturnSummary extends StatelessWidget {
                 .customerCodeSoldTo
                 .isNotEmpty;
             final hasShipToInfo = context
-                .read<ShipToCodeBloc>()
+                .read<CustomerCodeBloc>()
                 .state
                 .shipToInfo
                 .shipToCustomerCode
@@ -135,7 +134,8 @@ class ReturnSummary extends StatelessWidget {
                     user: context.read<UserBloc>().state.user,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     returnSummaryFilter: context
                         .read<ReturnSummaryFilterBloc>()
                         .state
@@ -209,7 +209,8 @@ class ReturnSummary extends StatelessWidget {
                           ),
                         ),
                   _ReturnSummaryScrollList(
-                      returnSummaryState: returnSummaryState,),
+                    returnSummaryState: returnSummaryState,
+                  ),
                 ],
               );
             },
@@ -233,7 +234,7 @@ class _ReturnSummaryScrollList extends StatelessWidget {
     final configs = context.read<SalesOrgBloc>().state.configs;
     final customerCodeInfo =
         context.read<CustomerCodeBloc>().state.customerCodeInfo;
-    final shipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo;
+    final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
 
     return Expanded(
       child: ScrollList<ReturnSummaryRequest>(

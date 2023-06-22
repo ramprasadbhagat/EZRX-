@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -66,9 +65,6 @@ import '../../order_history/order_history_details_widget_test.dart';
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
-
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -167,7 +163,7 @@ final variants = ValueVariant({...StepVariant.values});
 
 void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
-  late ShipToCodeBloc shipToCodeBlocMock;
+
   late UserBloc userBlocMock;
   late CartBloc cartBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -201,7 +197,7 @@ void main() {
     () {
       WidgetsFlutterBinding.ensureInitialized();
       orderSummaryBlocMock = OrderSummaryBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
+
       userBlocMock = UserBlocMock();
       cartBlocMock = CartBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
@@ -269,8 +265,7 @@ void main() {
         ),
       ));
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
+
       when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
               customerCodeInfo:
@@ -299,7 +294,6 @@ void main() {
               create: (context) => orderSummaryBlocMock),
           BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
@@ -606,7 +600,7 @@ void main() {
           showPOAttachment: true,
         )));
         final expectedStates = [
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               city1: 'city1',
               shipToAddress: ShipToAddress.empty().copyWith(
@@ -616,7 +610,7 @@ void main() {
               ),
             ),
           ),
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               city1: 'city1',
               city2: 'city2',
@@ -638,7 +632,7 @@ void main() {
             ),
           ),
         );
-        whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
+        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
         when(() => salesOrgBlocMock.state)
             .thenReturn(SalesOrgState.initial().copyWith(
                 configs: SalesOrganisationConfigs.empty().copyWith(
@@ -2353,9 +2347,9 @@ void main() {
         );
 
         when(
-          () => shipToCodeBlocMock.state,
+          () => customerCodeBlocMock.state,
         ).thenReturn(
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               shipToCustomerCode: '0070100095',
               defaultShipToAddress: false,
@@ -2417,34 +2411,33 @@ void main() {
 
         when(
           () => orderEligibilityBlocMock.state,
-        ).thenReturn(OrderEligibilityState.initial()
-            .copyWith(orderType: '', cartItems: [
-          PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
-                finalPrice: MaterialPrice(45.68)
-              ),
-              materialInfo: MaterialInfo.empty().copyWith(
-            isSampleMaterial: false,
-            isFOCMaterial:false,
-          ))
-        ],
-        configs:SalesOrganisationConfigs.empty().copyWith(
-            enableReferenceNote: true,
-            enableVat: true,
-            enableFutureDeliveryDay: true,
-            enableMobileNumber: true,
-            enableSpecialInstructions: true,
-            disableOrderType: false,
-            enableCollectiveNumber: true,
-            enablePaymentTerms: true,
-            poNumberRequired: true,
-            minOrderAmount: '100',
-          ),
-          salesOrg: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-          ),
-          grandTotal: 45.68
-        ));
+        ).thenReturn(OrderEligibilityState.initial().copyWith(
+            orderType: '',
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                  price:
+                      Price.empty().copyWith(finalPrice: MaterialPrice(45.68)),
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    isSampleMaterial: false,
+                    isFOCMaterial: false,
+                  ))
+            ],
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              poNumberRequired: true,
+              minOrderAmount: '100',
+            ),
+            salesOrg: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+            grandTotal: 45.68));
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -2495,42 +2488,42 @@ void main() {
 
         when(
           () => orderEligibilityBlocMock.state,
-        ).thenReturn(OrderEligibilityState.initial()
-            .copyWith(orderType: '', cartItems: [
-          PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
-                finalPrice: MaterialPrice(45.68)
-              ),
-              materialInfo: MaterialInfo.empty().copyWith(
-            isSampleMaterial: false,
-            isFOCMaterial:false,
-          ))
-        ],
-        configs:SalesOrganisationConfigs.empty().copyWith(
-            enableReferenceNote: true,
-            enableVat: true,
-            enableFutureDeliveryDay: true,
-            enableMobileNumber: true,
-            enableSpecialInstructions: true,
-            disableOrderType: false,
-            enableCollectiveNumber: true,
-            enablePaymentTerms: true,
-            poNumberRequired: true,
-            minOrderAmount: '0',
-          ),
-          salesOrg: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-          ),
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            status: Status('Z1 - Suspended Customer'),
-          ),
-          grandTotal: 500
-        ));
+        ).thenReturn(OrderEligibilityState.initial().copyWith(
+            orderType: '',
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                  price:
+                      Price.empty().copyWith(finalPrice: MaterialPrice(45.68)),
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    isSampleMaterial: false,
+                    isFOCMaterial: false,
+                  ))
+            ],
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              poNumberRequired: true,
+              minOrderAmount: '0',
+            ),
+            salesOrg: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('Z1 - Suspended Customer'),
+            ),
+            grandTotal: 500));
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
         if (orderSummaryBlocMock.state.step == 4) {
-          if (!orderEligibilityBlocMock.state.isMinOrderValuePassed && orderEligibilityBlocMock.state.isAccountSuspended) {
+          if (!orderEligibilityBlocMock.state.isMinOrderValuePassed &&
+              orderEligibilityBlocMock.state.isAccountSuspended) {
             final warningText = find.textContaining(
                 'Note : Minimum order value criteria does not match! Please update your cart to proceed.'
                     .tr());
@@ -2547,6 +2540,5 @@ void main() {
       },
       variant: variants,
     );
-
   });
 }

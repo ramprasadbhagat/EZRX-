@@ -38,6 +38,10 @@ class WidgetKeys {
   static const Key paymentsTab = Key('paymentsTab');
   static const Key moreTab = Key('moreTab');
   static const Key aupTcScreen = Key('aupTcScreen');
+  static const Key homeCustomerCodeSelector = Key('homeCustomerCodeSelector');
+  static const Key homeTabAnnouncementWidget = Key('homeTabAnnouncementWidget');
+  static const Key homeScreen = Key('homeScreen');
+
   //============================================================
   //  MORE TAB BAR
   //============================================================

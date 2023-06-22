@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -23,9 +22,6 @@ class AutoRouterMock extends Mock implements AppRouter {}
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -40,7 +36,6 @@ void main() {
   late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   setUpAll(
@@ -57,15 +52,12 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       mockSalesOrgBloc = MockSalesOrgBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
 
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -82,8 +74,6 @@ void main() {
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<CustomerCodeBloc>(
                 create: (context) => customerCodeBlocMock),
-            BlocProvider<ShipToCodeBloc>(
-                create: (context) => shipToCodeBlocMock),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock),

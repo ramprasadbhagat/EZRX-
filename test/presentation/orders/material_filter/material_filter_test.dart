@@ -5,7 +5,6 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -46,9 +45,6 @@ class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -70,7 +66,6 @@ void main() {
   late MockCustomerCodeBloc customerCodeBloc;
   late MockEligibilityBloc eligibilityBloc;
   late MockSalesOrgBloc salesOrgBloc;
-  late MockShipToCodeBloc shipToCodeBloc;
   late MockUserBloc userBloc;
   late MockOrderDocumentTypeBloc orderDocumentTypeBloc;
   late AuthBloc authBlocMock;
@@ -87,7 +82,6 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       materialListBloc = MockMaterialListBloc();
       salesOrgBloc = MockSalesOrgBloc();
-      shipToCodeBloc = MockShipToCodeBloc();
       userBloc = MockUserBloc();
       eligibilityBloc = MockEligibilityBloc();
       customerCodeBloc = MockCustomerCodeBloc();
@@ -100,7 +94,6 @@ void main() {
       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => materialListBloc.state)
           .thenReturn(MaterialListState.initial());
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => customerCodeBloc.state)
@@ -134,7 +127,6 @@ void main() {
                 create: ((context) => customerCodeBloc)),
             BlocProvider<UserBloc>(create: ((context) => userBloc)),
             BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBloc)),
-            BlocProvider<ShipToCodeBloc>(create: ((context) => shipToCodeBloc)),
             BlocProvider<EligibilityBloc>(
                 create: ((context) => eligibilityBloc)),
             BlocProvider<OrderDocumentTypeBloc>(

@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -49,9 +48,6 @@ class CustomerCodeMockBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
@@ -63,7 +59,7 @@ void main() {
   late RequestReturnFilterBloc requestReturnFilterBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBLocMock;
+
   late AppRouter autoRouterMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -86,7 +82,7 @@ void main() {
     requestReturnBlocMock = RequestReturnMockBloc();
     salesOrgBlocMock = SalesOrgMockBloc();
     customerCodeBlocMock = CustomerCodeMockBloc();
-    shipToCodeBLocMock = ShipToCodeMockBloc();
+
     requestReturnFilterBlocMock = RequestReturnFilterMockBloc();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
@@ -98,7 +94,7 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
@@ -120,9 +116,6 @@ void main() {
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<ShipToCodeBloc>(
-            create: (context) => shipToCodeBLocMock,
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
@@ -311,13 +304,22 @@ void main() {
         );
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-              customerCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-sold-to-code')),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'fake-sold-to-code',
+            ),
+            shipToInfo: ShipToInfo.empty()
+                .copyWith(shipToCustomerCode: 'fake-ship-to-code'),
+          ),
         );
-        when(() => shipToCodeBLocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
-              shipToInfo: ShipToInfo.empty()
-                  .copyWith(shipToCustomerCode: 'fake-ship-to-code')),
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'fake-sold-to-code',
+            ),
+            shipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: 'fake-ship-to-code',
+            ),
+          ),
         );
         await tester.runAsync(() async {
           await getWidget(tester);
@@ -359,8 +361,8 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty()
                   .copyWith(customerCodeSoldTo: 'fake-sold-to-code')),
         );
-        when(() => shipToCodeBLocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
               shipToInfo: ShipToInfo.empty()
                   .copyWith(shipToCustomerCode: 'fake-ship-to-code')),
         );
@@ -417,7 +419,6 @@ void main() {
         ).called(1);
       });
 
-
       testWidgets('Test when at least one item is selected', (tester) async {
         whenListen(
           requestReturnBlocMock,
@@ -456,11 +457,11 @@ void main() {
 
         final checkBox = find.byType(Checkbox);
         await tester.tap(checkBox.last);
-        final goToReturnsDetailsPage = find.byKey(const Key('goToReturnsDetailsPage'));
+        final goToReturnsDetailsPage =
+            find.byKey(const Key('goToReturnsDetailsPage'));
         await tester.tap(goToReturnsDetailsPage);
         await tester.pump();
       });
-
 
       testWidgets('Test when no items selected is empty', (tester) async {
         whenListen(
@@ -498,9 +499,9 @@ void main() {
         await getWidget(tester);
         await tester.pumpAndSettle(const Duration(seconds: 4));
 
-        final goToReturnsDetailsPage = find.byKey(const Key('goToReturnsDetailsPage'));
+        final goToReturnsDetailsPage =
+            find.byKey(const Key('goToReturnsDetailsPage'));
         expect(goToReturnsDetailsPage, findsNothing);
-        
       });
     },
   );

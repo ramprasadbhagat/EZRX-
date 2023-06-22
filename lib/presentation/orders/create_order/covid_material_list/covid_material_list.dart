@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
@@ -104,7 +103,7 @@ class _BodyContent extends StatelessWidget {
                             .state
                             .customerCodeInfo,
                         shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
                         pickAndPack: context
                             .read<EligibilityBloc>()
                             .state
@@ -124,7 +123,7 @@ class _BodyContent extends StatelessWidget {
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       pickAndPack: context
                           .read<EligibilityBloc>()
                           .state

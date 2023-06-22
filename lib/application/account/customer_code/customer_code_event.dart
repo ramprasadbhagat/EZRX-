@@ -5,6 +5,7 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
   const factory CustomerCodeEvent.initialized() = _Initialized;
   const factory CustomerCodeEvent.selected({
     required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
   }) = _Selected;
 
   const factory CustomerCodeEvent.fetch({

@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -52,11 +51,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
-
-
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
   late List<MaterialInfo> mockbonusItemWithDataList;
@@ -67,8 +61,7 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
-  late ShipToCodeBloc shipToCodeBloc;
-  
+
   late CartBloc cartBloc;
   late AppRouter autoRouter;
 
@@ -86,7 +79,6 @@ void main() {
       salesOrgBloc = SalesOrgBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       cartBloc = CartBlocMock();
 
@@ -122,7 +114,6 @@ void main() {
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
       );
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => cartBloc.state).thenReturn(
@@ -141,7 +132,6 @@ void main() {
           BlocProvider<TenderContractBloc>(
               create: (context) => tenderContractBlocMock),
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           BlocProvider<UserBloc>(create: (context) => userBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
           BlocProvider<CustomerCodeBloc>(

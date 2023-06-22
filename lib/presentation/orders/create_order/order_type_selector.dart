@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -248,8 +248,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
           key: const ValueKey('orderDocumentTypeSectorDialog'),
           title: Text(dropDownTitle),
           actions: itemList.map<CupertinoActionSheetAction>((i) {
-            final displayText =
-                isReason
+            final displayText = isReason
                 ? i.displayReasonText
                 : i.documentType.getOrDefaultValue('');
 
@@ -301,7 +300,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
         customerCodeInfo: eligibilityState.customerCodeInfo,
         salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
         salesOrganisation: eligibilityState.salesOrganisation,
-        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+        shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
         doNotallowOutOfStockMaterial:
             eligibilityState.doNotAllowOutOfStockMaterials,
       ),

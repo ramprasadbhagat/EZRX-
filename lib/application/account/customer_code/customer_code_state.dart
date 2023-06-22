@@ -12,6 +12,7 @@ class CustomerCodeState with _$CustomerCodeState {
     required bool isFetching,
     required bool isSearchActive,
     required SearchKey searchKey,
+    required ShipToInfo shipToInfo,
   }) = _CustomerCodeState;
 
   factory CustomerCodeState.initial() => CustomerCodeState(
@@ -20,6 +21,7 @@ class CustomerCodeState with _$CustomerCodeState {
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
         isFetching: false,
+        shipToInfo: ShipToInfo.empty(),
         isSearchActive: false,
         searchKey: SearchKey(''),
       );
@@ -37,6 +39,12 @@ class CustomerCodeState with _$CustomerCodeState {
     }
   }
 
+  String get displayShipTo => customerCodeInfo == CustomerCodeInfo.empty()
+      ? 'NA'
+      : defaultShipToInfo.deliveryAddress;
+
+  bool get haveShipTo => shipToInfo != ShipToInfo.empty();
+
   bool get haveShipToInfo =>
       customerCodeInfo != CustomerCodeInfo.empty() &&
       customerCodeInfo.shipToInfos.isNotEmpty;
@@ -44,5 +52,4 @@ class CustomerCodeState with _$CustomerCodeState {
   List<ShipToInfo> get shipToInfos => customerCodeInfo.shipToInfos;
 
   bool get apiSuccess => apiFailureOrSuccessOption.isNone();
-
 }

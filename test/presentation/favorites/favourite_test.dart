@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -41,9 +40,6 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
-class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class EligibilityMockBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -76,7 +72,6 @@ class OrderDocumentTypeBlocMock
 void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
   var userBlocMock = UserMockBloc();
-  var shipToCodeMockBloc = ShipToCodeMockBloc();
   var eligibilityMockBloc = EligibilityMockBloc();
   var customerCodeMockBloc = CustomerCodeMockBloc();
   var salesOrgMockBloc = SalesOrgMockBloc();
@@ -120,7 +115,6 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     mockFavouriteBloc = MockFavouriteBloc();
     userBlocMock = UserMockBloc();
-    shipToCodeMockBloc = ShipToCodeMockBloc();
     eligibilityMockBloc = EligibilityMockBloc();
     customerCodeMockBloc = CustomerCodeMockBloc();
     salesOrgMockBloc = SalesOrgMockBloc();
@@ -136,7 +130,6 @@ void main() {
     when(() => eligibilityMockBloc.state)
         .thenReturn(EligibilityState.initial());
     when(() => salesOrgMockBloc.state).thenReturn(SalesOrgState.initial());
-    when(() => shipToCodeMockBloc.state).thenReturn(ShipToCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => cartMockBloc.state).thenReturn(CartState.initial());
     when(() => mockMaterialPriceDetailBloc.state)
@@ -163,8 +156,6 @@ void main() {
             BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgMockBloc)),
             BlocProvider<CustomerCodeBloc>(
                 create: ((context) => customerCodeMockBloc)),
-            BlocProvider<ShipToCodeBloc>(
-                create: ((context) => shipToCodeMockBloc)),
             BlocProvider<EligibilityBloc>(
                 create: ((context) => eligibilityMockBloc)),
             BlocProvider<FavouriteBloc>(create: (context) => mockFavouriteBloc),

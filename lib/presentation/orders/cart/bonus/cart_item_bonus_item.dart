@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -118,11 +117,15 @@ class _BonusItemTileState extends State<BonusItemTile> {
                           .enableRemarks)
                         widget.bonusItem.materialInfo.remarks.isNotEmpty
                             ? RemarksMessage(
-                                key: Key('remarks${widget.bonusItem.materialInfo.remarks}'),
+                                key: Key(
+                                  'remarks${widget.bonusItem.materialInfo.remarks}',
+                                ),
                                 message:
                                     '${'Remarks: '.tr()}${widget.bonusItem.materialInfo.remarks}',
                                 showEditDeleteDialog: EditDeleteDialog(
-                                  key: Key('editDeleteDialog${widget.bonusItem.materialInfo.materialNumber.getOrDefaultValue('')}'),
+                                  key: Key(
+                                    'editDeleteDialog${widget.bonusItem.materialInfo.materialNumber.getOrDefaultValue('')}',
+                                  ),
                                   onDelete: () {
                                     context.read<CartBloc>().add(
                                           CartEvent.addRemarkToBonusItem(
@@ -193,7 +196,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                                 salesOrganisationConfigs:
                                     context.read<SalesOrgBloc>().state.configs,
                                 shipToInfo: context
-                                    .read<ShipToCodeBloc>()
+                                    .read<CustomerCodeBloc>()
                                     .state
                                     .shipToInfo,
                               ),
@@ -219,7 +222,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                                 salesOrganisationConfigs:
                                     context.read<SalesOrgBloc>().state.configs,
                                 shipToInfo: context
-                                    .read<ShipToCodeBloc>()
+                                    .read<CustomerCodeBloc>()
                                     .state
                                     .shipToInfo,
                               ),
@@ -245,7 +248,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                                 salesOrganisationConfigs:
                                     context.read<SalesOrgBloc>().state.configs,
                                 shipToInfo: context
-                                    .read<ShipToCodeBloc>()
+                                    .read<CustomerCodeBloc>()
                                     .state
                                     .shipToInfo,
                               ),

@@ -5,7 +5,6 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
@@ -54,9 +53,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class MaterialPriceDetailMockBloc
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
@@ -73,7 +69,6 @@ void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
   late SalesOrgBloc salesOrgBlocMock;
-  late ShipToCodeBloc shipToCodeBLocMock;
   late List<BundleInfo> mockBundleInfoList;
   late EligibilityBloc eligibilityMockBloc;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -89,7 +84,6 @@ void main() {
     userBlocMock = UserBlocMock();
     authBlocMock = AuthBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
-    shipToCodeBLocMock = ShipToCodeBlocMock();
     eligibilityMockBloc = EligibilityMockBloc();
     customerCodeBlocMock = CustomerCodeBlocMock();
     materialBundleListBloc = MaterialBundleListBlocMock();
@@ -205,7 +199,6 @@ void main() {
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
     when(() => materialPriceDetailMockBloc.state)
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => orderDocumentTypeBlocMock.state)
@@ -245,9 +238,6 @@ void main() {
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<ShipToCodeBloc>(
-            create: (context) => shipToCodeBLocMock,
           ),
           BlocProvider<MaterialBundleListBloc>(
             create: (context) => materialBundleListBloc,

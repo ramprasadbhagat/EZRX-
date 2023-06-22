@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -51,9 +50,6 @@ class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class MockMaterialPriceDetailBloc
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
@@ -85,7 +81,7 @@ void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBLocMock;
+
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late CartBloc cartBlocMock;
   // late SavedOrder orderMock;
@@ -122,7 +118,7 @@ void main() {
     userBlocMock = MockUserBloc();
     salesOrgBlocMock = MockSalesOrgBloc();
     customerCodeBlocMock = MockCustomerCodeBloc();
-    shipToCodeBLocMock = MockShipToCodeBloc();
+
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
     eligibilityBlocMock = MockEligibilityBloc();
@@ -144,7 +140,7 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+
     when(() => materialPriceDetailBlocMock.state.copyWith(
         isFetching: true,
         isValidating: true)).thenReturn(MaterialPriceDetailState.initial());

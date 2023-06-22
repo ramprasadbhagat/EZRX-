@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
@@ -57,7 +56,7 @@ class ViewByOrdersPage extends StatelessWidget {
                           salesOrgConfigs:
                               context.read<SalesOrgBloc>().state.configs,
                           shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                              context.read<CustomerCodeBloc>().state.shipToInfo,
                           user: context.read<UserBloc>().state.user,
                           sortDirection: context
                               .read<OrderHistoryFilterBloc>()
@@ -78,7 +77,7 @@ class ViewByOrdersPage extends StatelessWidget {
                         salesOrgConfigs:
                             context.read<SalesOrgBloc>().state.configs,
                         shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
                         user: context.read<UserBloc>().state.user,
                         sortDirection: context
                             .read<OrderHistoryFilterBloc>()

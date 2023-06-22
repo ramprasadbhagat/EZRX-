@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -54,9 +53,6 @@ class CustomerCodeBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class AnnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
@@ -90,7 +86,6 @@ void main() {
   final UserBloc userBlocMock = UserBlocMock();
   final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
-  final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
   final CartBloc cartBlocMock = CartBlocMock();
   final eligibilityBlocMock = EligibilityBlocMock();
   late AutoRouterMock autoRouterMock;
@@ -125,8 +120,6 @@ void main() {
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBLocMock.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => paymentCustomerInformationBlocMock.state)
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -251,9 +244,6 @@ void main() {
             ),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBLocMock,
             ),
             BlocProvider<PaymentCustomerInformationBloc>(
               create: (context) => paymentCustomerInformationBlocMock,

@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -73,7 +72,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       selectedMaterialFilter: context
                           .read<MaterialFilterBloc>()
                           .state
@@ -107,7 +106,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       selectedMaterialFilter: context
                           .read<MaterialFilterBloc>()
                           .state
@@ -149,7 +148,8 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                     configs: context.read<SalesOrgBloc>().state.configs,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     selectedMaterialFilter: context
                         .read<MaterialFilterBloc>()
                         .state

@@ -26,8 +26,6 @@ class AccountSelectorStorageMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
-
-
 void main() {
   late int offset;
   late int pageSize;
@@ -299,8 +297,9 @@ void main() {
         return;
       });
 
-      final result = await customerCodeRepository.storeCustomerCode(
+      final result = await customerCodeRepository.storeCustomerInfo(
         customerCode: mockCustomerCode,
+        shippingAddress: 'mockShippingAddress',
       );
 
       expect(result.isRight(), true);
@@ -317,8 +316,9 @@ void main() {
         ),
       ).thenThrow((invocation) => MockException());
 
-      final result = await customerCodeRepository.storeCustomerCode(
+      final result = await customerCodeRepository.storeCustomerInfo(
         customerCode: mockCustomerCode,
+        shippingAddress: 'mockShippingAddress',
       );
 
       expect(result.isLeft(), true);

@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -35,9 +34,6 @@ class ReturnSummaryDetailsBlocMock
     extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
     implements ReturnSummaryDetailsBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -57,7 +53,7 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 void main() {
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
-  late ShipToCodeBloc shipToCodeBlocMock;
+
   late CustomerCodeBloc customerCodeBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
@@ -77,7 +73,7 @@ void main() {
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
     returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
-    shipToCodeBlocMock = ShipToCodeBlocMock();
+
     customerCodeBlocMock = CustomerCodeBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     poAttachmentBlocMock = PoAttachmentBlocMock();
@@ -85,7 +81,7 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     when(() => returnSummaryDetailsBlocMock.state)
         .thenReturn(ReturnSummaryDetailsState.initial());
-    when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
+
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -103,9 +99,6 @@ void main() {
         providers: [
           BlocProvider<ReturnSummaryDetailsBloc>(
             create: (context) => returnSummaryDetailsBlocMock,
-          ),
-          BlocProvider<ShipToCodeBloc>(
-            create: (context) => shipToCodeBlocMock,
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,

@@ -5,7 +5,6 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -53,9 +52,6 @@ class MockOrderHistoryRepository extends Mock
 
 class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
 
-class ShipToCodeMocBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class CartMocBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -96,7 +92,6 @@ void main() {
   late OrderHistoryListBloc mockOrderHistoryListBloc;
   late OrderHistoryFilterBloc mockOrderHistoryFilterBloc;
   late OrderHistoryFilterByStatusBloc mockOrderHistoryFilterByStatusBloc;
-  late ShipToCodeBloc mockShipToCodeBloc;
   late CartBloc mockCartBloc;
   late SalesOrgBloc mockSalesOrgBloc;
   late UserBloc userBlocMock;
@@ -122,7 +117,6 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
-    locator.registerLazySingleton(() => mockShipToCodeBloc);
     locator.registerLazySingleton(() => mockCartBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => MixpanelService());
@@ -140,7 +134,6 @@ void main() {
         mockOrderHistoryListBloc = OrderHistoryListBlocMock();
         mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
         mockOrderHistoryFilterByStatusBloc = OrderHistoryStatusByFilterBloc();
-        mockShipToCodeBloc = ShipToCodeMocBloc();
         mockCartBloc = CartMocBloc();
         mockSalesOrgBloc = SalesOrgMockBloc();
         userBlocMock = UserBlocMock();
@@ -151,8 +144,6 @@ void main() {
             .thenReturn(OrderHistoryListState.initial());
         when(() => mockOrderHistoryFilterBloc.state)
             .thenReturn(OrderHistoryFilterState.initial());
-        when(() => mockShipToCodeBloc.state)
-            .thenReturn(ShipToCodeState.initial());
         when(() => mockCartBloc.state).thenReturn(CartState.initial());
         when(() => customerCodeBlocMock.state)
             .thenReturn(CustomerCodeState.initial());
@@ -188,8 +179,6 @@ void main() {
                   create: (context) => mockOrderHistoryListBloc),
               BlocProvider<OrderHistoryFilterBloc>(
                   create: (context) => mockOrderHistoryFilterBloc),
-              BlocProvider<ShipToCodeBloc>(
-                  create: (context) => mockShipToCodeBloc),
               BlocProvider<CartBloc>(create: (context) => mockCartBloc),
               BlocProvider<CustomerCodeBloc>(
                   create: (context) => customerCodeBlocMock),
@@ -213,13 +202,13 @@ void main() {
 
       testWidgets('Order History test', (tester) async {
         final expectedStates = [
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         ];
-        whenListen(mockShipToCodeBloc, Stream.fromIterable(expectedStates));
+        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
 
         // final mockCartBloc = locator<CartMocBloc>();
         // when(() => mockCartBloc.stream).thenAnswer((invocation) {
@@ -405,8 +394,8 @@ void main() {
         expect(find.byKey(const Key('Filter_list_not_empty')), findsNothing);
       });
       testWidgets('Filter list not empty test', (tester) async {
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
 
@@ -424,8 +413,8 @@ void main() {
         ];
         whenListen(
             mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         await tester.pumpWidget(getWUT());
@@ -447,8 +436,8 @@ void main() {
         ];
         whenListen(
             mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         await tester.pumpWidget(getWUT());
@@ -467,8 +456,8 @@ void main() {
         when(() => mockOrderHistoryFilterBloc.state).thenReturn(
           OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
         );
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         await tester.pumpWidget(getWUT());
@@ -481,8 +470,8 @@ void main() {
       testWidgets('Filter status  test ', (tester) async {
         when(() => mockOrderHistoryListBloc.state)
             .thenReturn(OrderHistoryListState.initial());
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
 
@@ -500,8 +489,8 @@ void main() {
         await tester.pump();
       });
       testWidgets('Filter status list not empty test', (tester) async {
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
@@ -528,8 +517,8 @@ void main() {
             orderHistoryList: orderHistoryItem,
           ),
         );
-        when(() => mockShipToCodeBloc.state).thenReturn(
-            ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
@@ -647,8 +636,8 @@ void main() {
             salesOrganisation: fakeSalesOrg,
           ),
         );
-        when(() => mockShipToCodeBloc.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
               shipToCustomerCode: '00001234',

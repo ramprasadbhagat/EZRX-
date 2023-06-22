@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -40,7 +39,7 @@ class _FilterValueListState extends State<FilterValueList> {
                             .state
                             .customerCodeInfo,
                         shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
                         selectedMaterialFilter: context
                             .read<MaterialFilterBloc>()
                             .state
@@ -62,7 +61,7 @@ class _FilterValueListState extends State<FilterValueList> {
                       color: state.selectedMaterialFilter.isFavourite
                           ? ZPColors.white
                           : ZPColors.shadesBlack,
-                     ),
+                    ),
                 onSelected: widget.isFetching
                     ? null
                     : (value) {

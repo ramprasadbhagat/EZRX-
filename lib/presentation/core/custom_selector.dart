@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomSelector extends StatelessWidget {
   final String title;
   final Widget child;
-  final Function()? onTap;
+  final Function() onTap;
   final Locale? locale;
 
   const CustomSelector({

@@ -4,7 +4,6 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -26,6 +25,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -34,6 +34,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -45,7 +46,6 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../utils/widget_utils.dart';
 import '../order_history/order_history_details_widget_test.dart';
-import 'selectors/shipping_address_selector_test.dart';
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -82,9 +82,6 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -118,7 +115,6 @@ void main() {
   late CovidMaterialListBlocMock covidMaterialListBlocMock;
   late CartBlocMock cartBlocMock;
   late BannerBlocMock mockBannerBloc;
-  late ShipToCodeBlocMock shipToCodeBlocMock;
   late AuthBloc authBlocMock;
   late MockAupTcBloc mockAupTcBloc;
   late AnnouncementBloc announcementBlocMock;
@@ -127,6 +123,13 @@ void main() {
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
   late RemoteConfigService remoteConfigServiceMock;
+  final fakeUser = User.empty().copyWith(
+    username: Username('fake-user'),
+    role: Role.empty().copyWith(
+      type: RoleType('client'),
+    ),
+    enableOrderType: true,
+  );
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakematerialInfo1 = MaterialInfo.empty().copyWith(
     quantity: 0,
@@ -187,7 +190,6 @@ void main() {
         covidMaterialListBlocMock = CovidMaterialListBlocMock();
         mockBannerBloc = BannerBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
-        shipToCodeBlocMock = ShipToCodeBlocMock();
         returnsOverviewBlocMock = ReturnsOverviewBlocMock();
         authBlocMock = AuthBlocMock();
         announcementBlocMock = AnnouncementBlocMock();
@@ -220,8 +222,6 @@ void main() {
             .thenReturn(CovidMaterialListState.initial());
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
         when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
-        when(() => shipToCodeBlocMock.state)
-            .thenReturn(ShipToCodeState.initial());
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
         when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
@@ -268,8 +268,6 @@ void main() {
                 BlocProvider<EligibilityBloc>(
                     create: (context) => eligibilityBlocMock),
                 BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
-                BlocProvider<ShipToCodeBloc>(
-                    create: (context) => shipToCodeBlocMock),
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<UserBloc>(create: (context) => userBlocMock),
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
@@ -609,8 +607,7 @@ void main() {
         await getWidget(tester);
         await tester.pump(const Duration(seconds: 3));
         expect(find.byType(HomeTab), findsOneWidget);
-        expect(
-            find.byKey(const ValueKey('homeSalesOrgSelector')), findsOneWidget);
+
         final ediUserBanner = find.byKey(const ValueKey('ediUserBanner'));
         final returnsExpansionTile = find.byType(ReturnsExpansionTile);
         if (remoteConfigServiceMock.getReturnsConfig()) {
@@ -619,9 +616,8 @@ void main() {
         expect(ediUserBanner, findsOneWidget);
         expect(find.byKey(const ValueKey('homeCustomerCodeSelector')),
             findsOneWidget);
-        expect(
-            find.byKey(const ValueKey('homeShipCodeSelector')), findsOneWidget);
-        expect(find.byKey(const ValueKey('HomeBanner')), findsOneWidget);
+
+        expect(find.byKey(WidgetKeys.homeBanner), findsOneWidget);
 
         expect(find.text('Orders'), findsOneWidget);
         expect(find.text('Create Order'), findsOneWidget);

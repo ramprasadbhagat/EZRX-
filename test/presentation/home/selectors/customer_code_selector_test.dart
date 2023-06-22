@@ -1,82 +1,60 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late CustomerCodeBlocMock mockCustomerCodeBloc;
-  late AuthBlocMock authBlocMock;
-  late SalesOrgBlocMock salesOrgBlocMock;
-  late EligibilityBlocMock eligibilityBlocMock;
-  late ShipToCodeBlocMock shipToCodeBlocMock;
-  late UserBlocMock userBlocMock;
 
   setUpAll(() async {
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
   });
 
-  final fakeCustomerInfo =
-      CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '00001234');
+  final fakeCustomerInfo = CustomerCodeInfo.empty()
+      .copyWith(customerCodeSoldTo: '00001234', shipToInfos: [
+    ShipToInfo.empty().copyWith(
+      shipToCustomerCode: '00001234',
+    )
+  ]);
 
-  final fakeCustomerInfo2 =
-      CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '00001235');
+  final fakeCustomerInfo2 = CustomerCodeInfo.empty()
+      .copyWith(customerCodeSoldTo: '00001235', shipToInfos: [
+    ShipToInfo.empty().copyWith(
+      shipToCustomerCode: '00001235',
+    )
+  ]);
 
   group('Customer Code Selector Test ', () {
     setUp(() {
-      locator = GetIt.instance;
       mockCustomerCodeBloc = CustomerCodeBlocMock();
-      authBlocMock = AuthBlocMock();
-      salesOrgBlocMock = SalesOrgBlocMock();
-      eligibilityBlocMock = EligibilityBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
-      userBlocMock = UserBlocMock();
+
       when(() => mockCustomerCodeBloc.state).thenReturn(
           CustomerCodeState.initial()
               .copyWith(customerCodeList: [fakeCustomerInfo]));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
     });
 
     Future getWidget(tester) async {
@@ -87,21 +65,10 @@ void main() {
             providers: [
               BlocProvider<CustomerCodeBloc>(
                   create: (context) => mockCustomerCodeBloc),
-              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-              BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-              BlocProvider<EligibilityBloc>(
-                  create: (context) => eligibilityBlocMock),
-              BlocProvider<ShipToCodeBloc>(
-                  create: (context) => shipToCodeBlocMock),
-              BlocProvider<UserBloc>(create: (context) => userBlocMock),
             ],
-            child: Material(
+            child: const Material(
               child: Scaffold(
-                body: Row(
-                  children: const [
-                    CustomerCodeSelector(),
-                  ],
-                ),
+                body: CustomerCodeSelector(),
               ),
             ),
           ),
@@ -114,21 +81,20 @@ void main() {
           CustomerCodeState.initial()
               .copyWith(customerCodeList: [CustomerCodeInfo.empty()]));
       await getWidget(tester);
-      final customerCodeText = find.text('Customer Code');
       final selectedCustomerCodeText = find.text('NA');
-      expect(customerCodeText, findsOneWidget);
-      expect(selectedCustomerCodeText, findsOneWidget);
+      expect(selectedCustomerCodeText, findsNWidgets(2));
     });
 
     testWidgets('When customerCodeInfo is not empty', (tester) async {
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial()
-              .copyWith(customerCodeInfo: fakeCustomerInfo));
+      when(() => mockCustomerCodeBloc.state)
+          .thenReturn(CustomerCodeState.initial().copyWith(
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeCustomerInfo.shipToInfos.first,
+      ));
 
       await getWidget(tester);
-      final customerCodeText = find.text('Customer Code');
-      final selectedCustomerCodeText = find.text('00001234');
-      expect(customerCodeText, findsOneWidget);
+      final selectedCustomerCodeText =
+          find.text(fakeCustomerInfo.shipToInfos.first.shipToCustomerCode);
       expect(selectedCustomerCodeText, findsOneWidget);
     });
 
@@ -136,10 +102,8 @@ void main() {
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial().copyWith(isFetching: true));
       await getWidget(tester);
-      final customerCodeText = find.text('Customer Code');
       final shimmer = find.byType(Shimmer);
-      expect(customerCodeText, findsOneWidget);
-      expect(shimmer, findsOneWidget);
+      expect(shimmer, findsNWidgets(2));
     });
 
     testWidgets('When there is an error', (tester) async {
@@ -148,6 +112,7 @@ void main() {
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeCustomerInfo.shipToInfos.first,
           customerCodeList: [
             CustomerCodeInfo.empty(),
           ],
@@ -175,8 +140,9 @@ void main() {
             isFetching: false,
             customerCodeInfo: fakeCustomerInfo2,
             customerCodeList: [
-              CustomerCodeInfo.empty(),
+              fakeCustomerInfo2,
             ],
+            shipToInfo: fakeCustomerInfo2.shipToInfos.first,
             apiFailureOrSuccessOption: optionOf(const Right(null))),
       ];
       whenListen(mockCustomerCodeBloc,
@@ -207,6 +173,7 @@ void main() {
             customerCodeList: [
               CustomerCodeInfo.empty(),
             ],
+            shipToInfo: fakeCustomerInfo2.shipToInfos.first,
             apiFailureOrSuccessOption: none()),
       ];
       whenListen(mockCustomerCodeBloc,

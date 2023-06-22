@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
@@ -38,7 +37,7 @@ class ApproverActions extends StatelessWidget {
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+            child: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
               buildWhen: (previous, current) =>
                   previous.haveShipTo != current.haveShipTo,
               builder: (context, state) {
@@ -129,7 +128,7 @@ class ApproverActions extends StatelessWidget {
               .customerCodeSoldTo
               .isNotEmpty;
           final hasShipToInfo = context
-              .read<ShipToCodeBloc>()
+              .read<CustomerCodeBloc>()
               .state
               .shipToInfo
               .shipToCustomerCode
@@ -165,7 +164,9 @@ class ApproverActions extends StatelessWidget {
           builder: (context, state) {
             return AnnouncementBanner(
               currentPath: context.router.currentPath,
-              child: _ApproverReturnRequestScrollList(state: state,),
+              child: _ApproverReturnRequestScrollList(
+                state: state,
+              ),
             );
           },
         ),
@@ -188,7 +189,7 @@ class _ApproverReturnRequestScrollList extends StatelessWidget {
       emptyMessage: 'No Return found'.tr(),
       controller: ScrollController(),
       onRefresh: () {
-        if (!context.read<ShipToCodeBloc>().state.haveShipTo) {
+        if (!context.read<CustomerCodeBloc>().state.haveShipTo) {
           return;
         }
         final returnApproverFilterBloc =

@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -567,7 +566,8 @@ class _CartItemQuantityInput extends StatelessWidget {
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     isSpecialOrderType: isSpecialOrderType,
                   ),
                 );
@@ -604,7 +604,7 @@ class _CartItemQuantityInput extends StatelessWidget {
                       salesOrganisationConfigs:
                           context.read<SalesOrgBloc>().state.configs,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       isSpecialOrderType: isSpecialOrderType,
                     ),
                   );
@@ -627,11 +627,11 @@ class _CartItemQuantityInput extends StatelessWidget {
                       salesOrganisationConfigs:
                           context.read<SalesOrgBloc>().state.configs,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       isSpecialOrderType: isSpecialOrderType,
                     ),
                   );
-               _displayZdp5ExceedWarning(context, int.parse(controller.text));
+              _displayZdp5ExceedWarning(context, int.parse(controller.text));
             },
             isLoading: state.isFetching,
           ),

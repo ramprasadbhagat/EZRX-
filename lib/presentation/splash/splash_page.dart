@@ -4,24 +4,41 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_adv
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -64,6 +81,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
 
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
@@ -255,7 +274,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     sortDirection: context
                         .read<OrderHistoryFilterBloc>()
@@ -269,7 +289,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     sortDirection: context
                         .read<OrderHistoryFilterBloc>()
@@ -473,25 +494,53 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<SalesOrgBloc, SalesOrgState>(
           listenWhen: (previous, current) =>
-              previous.salesOrganisation != current.salesOrganisation,
+              previous.salesOrganisation != current.salesOrganisation ||
+              previous.configs != current.configs ||
+              previous.salesOrgFailureOrSuccessOption !=
+                  current.salesOrgFailureOrSuccessOption,
           listener: (context, state) {
-            context.read<CustomerCodeBloc>().add(
-                  CustomerCodeEvent.loadStoredCustomerCode(
-                    hidecustomer: state.hideCustomer,
-                    selectedSalesOrg: state.salesOrganisation,
-                    userInfo: context.read<UserBloc>().state.user,
-                  ),
-                );
-            context.read<ProductSearchBloc>().add(
-                  const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
-                );
+            state.salesOrgFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+
+                  if (state.haveSelectedSalesOrganisation) {
+                    _callBannerAndDocType(context, state, false);
+                  } else {
+                    _initBlocs(context);
+                  }
+                },
+                (_) {},
+              ),
+            );
+            if (!state.haveSelectedSalesOrganisation) {
+              _initBlocs(context);
+            }
+            if (state.haveSelectedSalesOrganisation &&
+                state.configs != SalesOrganisationConfigs.empty()) {
+              _callBannerAndDocType(context, state, true);
+
+              context.read<CustomerCodeBloc>().add(
+                    CustomerCodeEvent.loadStoredCustomerCode(
+                      hidecustomer: state.hideCustomer,
+                      selectedSalesOrg: state.salesOrganisation,
+                      userInfo: context.read<UserBloc>().state.user,
+                    ),
+                  );
+              context.read<ProductSearchBloc>().add(
+                    const ProductSearchEvent
+                        .fetchProductSearchSuggestionHistory(),
+                  );
+            }
           },
         ),
         BlocListener<CustomerCodeBloc, CustomerCodeState>(
           listenWhen: (previous, current) =>
               previous.apiFailureOrSuccessOption !=
                   current.apiFailureOrSuccessOption ||
-              previous.customerCodeInfo != current.customerCodeInfo,
+              previous.customerCodeInfo != current.customerCodeInfo ||
+              previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
               () {},
@@ -502,19 +551,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 (_) {},
               ),
             );
-
-            final defaultShipToInfo = state.defaultShipToInfo;
-            context.read<ShipToCodeBloc>().add(
-                  ShipToCodeEvent.load(
-                    shipToInfos: state.shipToInfos,
-                  ),
-                );
-            context.read<ShipToCodeBloc>().add(
-                  ShipToCodeEvent.loadSavedShipToCode(
-                    shipToInfos: state.shipToInfos,
-                    defaultShipToInfo: defaultShipToInfo,
-                  ),
-                );
+            _addDependentEvents(context, state);
           },
         ),
         BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
@@ -603,6 +640,212 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               child: const _Splash(),
             ),
     );
+  }
+
+  //ignore:long-method
+  void _addDependentEvents(BuildContext context, CustomerCodeState state) {
+    final salesOrgState = context.read<SalesOrgBloc>().state;
+    final orderDocumentTypeState = context.read<OrderDocumentTypeBloc>().state;
+
+    context.read<MaterialFilterBloc>().add(
+          const MaterialFilterEvent.resetFilter(),
+        );
+
+    context.read<MaterialListBloc>().add(
+          const MaterialListEvent.updateSearchKey(
+            searchKey: '',
+          ),
+        );
+
+    context.read<MaterialPriceBloc>().add(
+          const MaterialPriceEvent.initialized(),
+        );
+
+    context.read<MaterialPriceDetailBloc>().add(
+          const MaterialPriceDetailEvent.initialized(),
+        );
+
+    if (state.haveShipTo) {
+      final user = context.read<UserBloc>().state.user;
+      final customerCodeInfo =
+          context.read<CustomerCodeBloc>().state.customerCodeInfo;
+
+      locator<MixpanelService>().registerSuperProps(
+        username: user.username.getOrDefaultValue(''),
+        salesOrg: salesOrgState.salesOrg.getOrDefaultValue(''),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToAddress: state.shipToInfo.shipToCustomerCode,
+        userRole: user.role.type.getOrDefaultValue(''),
+      );
+
+      context.read<EligibilityBloc>().add(
+            EligibilityEvent.update(
+              user: user,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              salesOrgConfigs: salesOrgState.configs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: state.shipToInfo,
+              selectedOrderType: orderDocumentTypeState.selectedOrderType,
+            ),
+          );
+      context.read<ReturnSummaryBloc>().add(
+            ReturnSummaryEvent.fetch(
+              user: context.read<UserBloc>().state.user,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              returnSummaryFilter: ReturnSummaryFilter.empty(),
+            ),
+          );
+      if (context.read<UserBloc>().state.userCanCreateOrder) {
+        context.read<MaterialBundleListBloc>().add(
+              MaterialBundleListEvent.fetch(
+                user: user,
+                customerCode: customerCodeInfo,
+                salesOrganisation: salesOrgState.salesOrganisation,
+                shipToCode: context.read<CustomerCodeBloc>().state.shipToInfo,
+              ),
+            );
+      }
+
+      context.read<SavedOrderListBloc>().add(
+            SavedOrderListEvent.fetch(
+              userInfo: user,
+              selectedSalesOrganisation: salesOrgState.salesOrganisation,
+              selectedCustomerCode: customerCodeInfo,
+              selectedShipTo: state.shipToInfo,
+            ),
+          );
+
+      if (context.read<UserBloc>().state.userCanCreateOrder) {
+        context.read<OrderHistoryListBloc>().add(
+              OrderHistoryListEvent.fetch(
+                salesOrgConfigs: salesOrgState.configs,
+                shipToInfo: state.shipToInfo,
+                user: user,
+                customerCodeInfo: customerCodeInfo,
+                orderHistoryFilter: OrderHistoryFilter.empty(),
+                sortDirection: 'desc',
+              ),
+            );
+      }
+
+      context.read<OrderTemplateListBloc>().add(
+            OrderTemplateListEvent.fetch(
+              user,
+            ),
+          );
+
+      context.read<FavouriteBloc>().add(
+            FavouriteEvent.fetch(
+              user: user,
+            ),
+          );
+
+      context
+          .read<PaymentCustomerInformationBloc>()
+          .add(PaymentCustomerInformationEvent.fetch(
+            customeCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrgState.salesOrganisation,
+            selectedShipToCode: context
+                .read<CustomerCodeBloc>()
+                .state
+                .shipToInfo
+                .shipToCustomerCode,
+          ));
+
+      if (user.role.type.hasReturnsAdminAccess) {
+        context.read<RequestReturnBloc>().add(
+              RequestReturnEvent.fetch(
+                salesOrg: salesOrgState.salesOrganisation,
+                customerCodeInfo: customerCodeInfo,
+                shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                requestReturnFilter: RequestReturnFilter.empty(),
+              ),
+            );
+      }
+      context.read<PaymentSummaryBloc>().add(
+            PaymentSummaryEvent.fetchPaymentSummaryList(
+              salesOrganization:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              customerCodeInfo: customerCodeInfo,
+            ),
+          );
+
+      context.read<AdditionalDetailsBloc>().add(
+            AdditionalDetailsEvent.initialized(
+              config: salesOrgState.configs,
+              customerCodeInfo: customerCodeInfo,
+            ),
+          );
+
+      context.read<AllInvoicesFilterBloc>().add(
+            AllInvoicesFilterEvent.fetch(
+              salesOrganisation: salesOrgState.salesOrganisation,
+            ),
+          );
+      context.read<AllInvoicesBloc>().add(
+            AllInvoicesEvent.fetch(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              filter: AllInvoicesFilter.empty(),
+            ),
+          );
+      context.read<AllCreditsBloc>().add(
+            AllCreditsEvent.fetchAllCreditsList(
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              allCreditsFilter: AllCreditsFilter.empty(),
+            ),
+          );
+      context.read<AllCreditsFilterBloc>().add(
+            AllCreditsFilterEvent.fetch(
+              salesOrganisation: salesOrgState.salesOrganisation,
+            ),
+          );
+
+      context.read<AccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchInvoiceSummary(
+              custCode: customerCodeInfo.customerCodeSoldTo,
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<AccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchCreditSummary(
+              custCode: customerCodeInfo.customerCodeSoldTo,
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+            ),
+          );
+    } else {
+      context
+          .read<SavedOrderListBloc>()
+          .add(const SavedOrderListEvent.initialized());
+
+      context
+          .read<OrderHistoryListBloc>()
+          .add(const OrderHistoryListEvent.initialized());
+
+      context
+          .read<OrderTemplateListBloc>()
+          .add(const OrderTemplateListEvent.initialized());
+
+      context.read<FavouriteBloc>().add(const FavouriteEvent.initialized());
+      context
+          .read<OrderHistoryFilterBloc>()
+          .add(const OrderHistoryFilterEvent.initialized());
+      context
+          .read<OrderHistoryFilterByStatusBloc>()
+          .add(const OrderHistoryFilterByStatusEvent.initialized());
+      context.read<AccountSummaryBloc>().add(
+            const AccountSummaryEvent.initialize(),
+          );
+    }
   }
 
   void _showLoadingDialog(BuildContext context) {
@@ -738,6 +981,35 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
                 context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+          ),
+        );
+  }
+
+  void _initBlocs(BuildContext context) {
+    context.read<BannerBloc>().add(const BannerEvent.initialized());
+    context
+        .read<OrderDocumentTypeBloc>()
+        .add(const OrderDocumentTypeEvent.initialized());
+    context.read<CustomerCodeBloc>().add(const CustomerCodeEvent.initialized());
+  }
+
+  void _callBannerAndDocType(
+    BuildContext context,
+    SalesOrgState state,
+    bool fetchCustomer,
+  ) {
+    context.read<BannerBloc>().add(
+          BannerEvent.fetch(
+            isPreSalesOrg: false,
+            salesOrganisation: state.salesOrganisation,
+            country: state.salesOrg.country,
+            role: context
+                .read<UserBloc>()
+                .state
+                .user
+                .role
+                .type
+                .getEZReachRoleType,
           ),
         );
   }

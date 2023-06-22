@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
@@ -9,11 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnSummaryCustomerDetailsSection extends StatelessWidget {
   const ReturnSummaryCustomerDetailsSection({
-    Key? key,}) : super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final shipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo;
+    final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
 
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
       builder: (context, state) {

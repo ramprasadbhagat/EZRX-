@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -69,7 +68,7 @@ class CovidMaterialListSearchBarState
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       selectedMaterialFilter: context
                           .read<MaterialFilterBloc>()
                           .state
@@ -100,7 +99,7 @@ class CovidMaterialListSearchBarState
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       selectedMaterialFilter: context
                           .read<MaterialFilterBloc>()
                           .state
@@ -142,7 +141,7 @@ class CovidMaterialListSearchBarState
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       pickAndPack: context
                           .read<EligibilityBloc>()
                           .state

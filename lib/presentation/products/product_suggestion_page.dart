@@ -19,8 +19,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
@@ -138,7 +136,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       searchKey: value,
                     ),
                   );
@@ -154,7 +152,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                           .state
                           .customerCodeInfo,
                       shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       searchKey: value,
                     ),
                   );
@@ -199,7 +197,8 @@ class _ProductSuggestionSection extends StatelessWidget {
                     configs: context.read<SalesOrgBloc>().state.configs,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                   ),
                 );
           },
@@ -330,7 +329,8 @@ class _HistoryTile extends StatelessWidget {
                     configs: context.read<SalesOrgBloc>().state.configs,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     searchKey: productSearchObject.getOrDefaultValue(''),
                   ),
                 );

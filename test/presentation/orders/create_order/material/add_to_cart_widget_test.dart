@@ -7,7 +7,6 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -67,9 +66,6 @@ class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
 class EligibilityMockBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
-class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
@@ -98,7 +94,6 @@ void main() {
   late AppRouter autoRouterMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
-  late ShipToCodeBloc shipToCodeMockBloc;
   late EligibilityBloc eligibilityMockBloc;
   late AddToCartBloc addToCartBlocMock;
   late TenderContractBloc tenderContractBlocMock;
@@ -147,7 +142,6 @@ void main() {
     materialPriceBlocMock = MaterialPriceBlocMock();
     cartBlocMock = CartBlocMock();
     eligibilityMockBloc = EligibilityMockBloc();
-    shipToCodeMockBloc = ShipToCodeMockBloc();
     tenderContractBlocMock = TenderContractBlocMock();
     favouriteMockBloc = FavoriteMockBloc();
     authBlocMock = AuthBlocMock();
@@ -164,7 +158,6 @@ void main() {
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
     when(() => eligibilityMockBloc.state)
         .thenReturn(EligibilityState.initial());
-    when(() => shipToCodeMockBloc.state).thenReturn(ShipToCodeState.initial());
     when(() => tenderContractBlocMock.state)
         .thenReturn(TenderContractState.initial());
     when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
@@ -187,7 +180,6 @@ void main() {
             create: ((context) => materialPriceBlocMock)),
         BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
         BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
-        BlocProvider<ShipToCodeBloc>(create: ((context) => shipToCodeMockBloc)),
         BlocProvider<EligibilityBloc>(create: (context) => eligibilityMockBloc),
         BlocProvider<TenderContractBloc>(
             create: (context) => tenderContractBlocMock),
@@ -254,13 +246,12 @@ void main() {
 
       verify(
         () => addToCartBloc.add(
-           AddToCartEvent.updateQuantity(
-            quantity: 1,
-          cartZmgQtyExcludeCurrent: 0,
-          customerCode: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToCode: ShipToInfo.empty()
-          ),
+          AddToCartEvent.updateQuantity(
+              quantity: 1,
+              cartZmgQtyExcludeCurrent: 0,
+              customerCode: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToCode: ShipToInfo.empty()),
         ),
       ).called(1);
     });
@@ -407,12 +398,11 @@ void main() {
       verify(
         () => addToCartBlocMock.add(
           AddToCartEvent.updateQuantity(
-            quantity: 2,
-          cartZmgQtyExcludeCurrent: 0,
-          customerCode: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToCode: ShipToInfo.empty()
-          ),
+              quantity: 2,
+              cartZmgQtyExcludeCurrent: 0,
+              customerCode: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToCode: ShipToInfo.empty()),
         ),
       );
     });

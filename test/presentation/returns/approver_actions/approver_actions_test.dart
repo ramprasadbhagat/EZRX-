@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -42,9 +41,6 @@ class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -66,8 +62,6 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
-
-  late ShipToCodeBloc shipToCodeBlocMock;
   late List<RequestInformation> approverReturnRequestList;
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -105,7 +99,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
+
       salesOrgBlocMock = SalesOrgBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       authBlocMock = AuthBlocMock();
@@ -126,8 +120,7 @@ void main() {
           .thenReturn(ReturnApproverState.initial());
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
+
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
@@ -147,9 +140,6 @@ void main() {
               create: (context) => returnApproverBlocMock),
           BlocProvider<ReturnApproverFilterBloc>(
             create: (context) => returnApproverFilterBlocMock,
-          ),
-          BlocProvider<ShipToCodeBloc>(
-            create: (context) => shipToCodeBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
@@ -172,18 +162,18 @@ void main() {
       'Action Approver Empty Page',
       (tester) async {
         final expectedStates = [
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: false,
             ),
           ),
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         ];
-        whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
+        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
         await tester.pump();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
@@ -204,8 +194,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page first fetch',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -238,8 +228,11 @@ void main() {
         whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-              customerCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-sold-to-code')),
+            customerCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(customerCodeSoldTo: 'fake-sold-to-code'),
+            shipToInfo: ShipToInfo.empty()
+                .copyWith(shipToCustomerCode: 'fake-sold-to-code'),
+          ),
         );
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -282,27 +275,27 @@ void main() {
     testWidgets(
       'Test Action Approver Filter Drawer',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         );
         final expectedShipToCodeState = [
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: false,
             ),
           ),
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         ];
         whenListen(
-          shipToCodeBlocMock,
+          customerCodeBlocMock,
           Stream.fromIterable(expectedShipToCodeState),
         );
         final expectedStates = [
@@ -333,20 +326,20 @@ void main() {
     testWidgets(
       'Test Action Approver apply filter',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         );
         final expectedShipToCodeState = [
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: false,
             ),
           ),
-          ShipToCodeState.initial().copyWith(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -354,7 +347,7 @@ void main() {
         ];
 
         whenListen(
-          shipToCodeBlocMock,
+          customerCodeBlocMock,
           Stream.fromIterable(expectedShipToCodeState),
         );
         await tester.pumpWidget(getWidget());
@@ -380,8 +373,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page refresh on filter change',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               shipToCustomerCode: 'Fake-shipTo-customer-code',
             ),
@@ -404,8 +397,12 @@ void main() {
         );
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-              customerCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-sold-to-code')),
+            customerCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(customerCodeSoldTo: 'fake-sold-to-code'),
+            shipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: 'fake-sold-to-code',
+            ),
+          ),
         );
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -429,8 +426,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page sort by bottom sheet close',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -504,8 +501,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page refresh',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -543,8 +540,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page loadMore',
       (tester) async {
-        when(() => shipToCodeBlocMock.state).thenReturn(
-          ShipToCodeState.initial().copyWith(
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),

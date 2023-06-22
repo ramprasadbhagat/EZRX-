@@ -16,8 +16,6 @@ import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
 
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-
 import 'package:ezrxmobile/presentation/account/change_delivery_address.dart';
 
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -211,8 +209,7 @@ class _ShipToAddressSection extends StatelessWidget {
   void _onShipToCodeChange(BuildContext context) {
     final cartBloc = context.read<CartBloc>();
     final customerBloc = context.read<CustomerCodeBloc>();
-    final shipToBloc = context.read<ShipToCodeBloc>();
-    if (shipToInfo != shipToBloc.state.shipToInfo &&
+    if (shipToInfo != customerBloc.state.shipToInfo &&
         cartBloc.state.cartItems.isNotEmpty) {
       showModalBottomSheet(
         isScrollControlled: true,
@@ -235,6 +232,7 @@ class _ShipToAddressSection extends StatelessWidget {
       customerBloc.add(
         CustomerCodeEvent.selected(
           customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
         ),
       );
       trackMixpanelEvent(

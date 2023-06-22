@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,7 +87,8 @@ class DiscountOverrideToggle extends StatelessWidget {
                               0,
                             ),
                           ),
-                          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                          shipToInfo:
+                              context.read<CustomerCodeBloc>().state.shipToInfo,
                         ),
                       );
                 }
@@ -106,7 +106,9 @@ class DiscountOverrideToggle extends StatelessWidget {
                 ),
                 child: Text(
                   '${'Discount : '.tr()}${cartItem.price.zdp8Override.getOrDefaultValue(0)}',
-                  key: Key('discountOverridePercentage${cartItem.price.zdp8Override.getOrDefaultValue(0)}'),
+                  key: Key(
+                    'discountOverridePercentage${cartItem.price.zdp8Override.getOrDefaultValue(0)}',
+                  ),
                   style: Theme.of(context).textTheme.labelSmall?.apply(
                         color: state.isDiscountOverride
                             ? ZPColors.red
@@ -198,7 +200,8 @@ class DiscountOverrideDialog {
                         double.parse(controller.text),
                       ),
                     ),
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
                   ),
                 );
             context.router.pop();

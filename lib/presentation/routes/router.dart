@@ -33,7 +33,6 @@ import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart'
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
 import 'package:ezrxmobile/presentation/account/settings_page.dart';
-import 'package:ezrxmobile/presentation/account/ship_to_search.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
@@ -146,10 +145,6 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'customer_search',
       page: CustomerSearchPage,
-    ),
-    AutoRoute(
-      path: 'ship_to_search',
-      page: ShiptToSearchPage,
     ),
     AutoRoute(path: 'material_root', page: MaterialRoot, children: [
       AutoRoute(
@@ -375,7 +370,7 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: EditPaymentAdviceFooterPage,
     ),
     AutoRoute(path: 'intro_page', page: IntroPage),
-      AutoRoute(
+    AutoRoute(
       page: ViewByItemsPage,
       path: 'orders/view_by_items',
     ),
@@ -383,7 +378,6 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: ViewByOrdersPage,
       path: 'orders/view_by_orders',
     ),
-
   ],
 )
 class $AppRouter {}

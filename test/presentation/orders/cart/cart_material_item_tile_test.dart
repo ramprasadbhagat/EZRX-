@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -57,9 +56,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class MaterialPriceBlocMock
@@ -86,7 +82,6 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
-  late ShipToCodeBloc shipToCodeBloc;
 
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -114,7 +109,6 @@ void main() {
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
       cartBloc = CartBlocMock();
       materialPriceBloc = MaterialPriceBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
@@ -133,7 +127,6 @@ void main() {
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
       );
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
@@ -175,7 +168,6 @@ void main() {
             create: (context) => orderDocumentTypeBlocMock),
         BlocProvider<UserBloc>(create: (context) => userBlockMock),
         BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-        BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
         BlocProvider<CartBloc>(create: (context) => cartBloc),
         BlocProvider<CustomerCodeBloc>(

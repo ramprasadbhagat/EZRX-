@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -70,7 +69,7 @@ class CartPage extends StatelessWidget {
                   currentPath: context.router.currentPath,
                 ),
                 const AccountSuspendedBanner(),
-                _CartScrollList(state: state,taxCode: taxCode),
+                _CartScrollList(state: state, taxCode: taxCode),
                 state.cartItems.isEmpty
                     ? const SizedBox.shrink()
                     : Container(
@@ -163,7 +162,7 @@ class CartPage extends StatelessWidget {
                 .documentType
                 .getOrDefaultValue(''),
             salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-            shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
             subTotal: context.read<CartBloc>().state.subTotal(
                   isMYMarketSalesRep: isMYMarketSalesRep,
@@ -197,7 +196,7 @@ class _CartScrollList extends StatelessWidget {
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   salesOrganisationConfigs:
                       context.read<SalesOrgBloc>().state.configs,
-                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   doNotAllowOutOfStockMaterials: context
                       .read<EligibilityBloc>()
                       .state

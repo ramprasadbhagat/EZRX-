@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -53,7 +52,9 @@ class SavedOrderListPage extends StatelessWidget {
                 currentPath: context.router.currentPath,
               ),
               const AccountSuspendedBanner(),
-              _SavedOrderScrollList(state: state,),
+              _SavedOrderScrollList(
+                state: state,
+              ),
             ],
           );
         },
@@ -88,7 +89,7 @@ class _SavedOrderScrollList extends StatelessWidget {
                   selectedCustomerCode:
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   selectedShipTo:
-                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                      context.read<CustomerCodeBloc>().state.shipToInfo,
                 ),
               );
         },
@@ -99,7 +100,8 @@ class _SavedOrderScrollList extends StatelessWidget {
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                 selectedCustomerCode:
                     context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                selectedShipTo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                selectedShipTo:
+                    context.read<CustomerCodeBloc>().state.shipToInfo,
               ),
             ),
         isLoading: state.isFetching,

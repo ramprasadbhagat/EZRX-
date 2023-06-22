@@ -1,5 +1,6 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -26,10 +27,16 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       emit(CustomerCodeState.initial());
     });
     on<_Selected>((e, emit) async {
-      await customerCodeRepository.storeCustomerCode(
+      await customerCodeRepository.storeCustomerInfo(
         customerCode: e.customerCodeInfo.customerCodeSoldTo,
+        shippingAddress: e.shipToInfo.shipToCustomerCode,
       );
-      emit(state.copyWith(customerCodeInfo: e.customerCodeInfo));
+      emit(
+        state.copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+        ),
+      );
     });
     on<_AutoSearch>(
       (event, emit) {
@@ -82,7 +89,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: customerCodeList.length >= _pageSize,
-                  searchKey: SearchKey(e.searchValue),
+                searchKey: SearchKey(e.searchValue),
               ),
             );
           },
@@ -98,12 +105,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       final customerStorageSuccessOrFailure =
           await customerCodeRepository.getCustomerCodeStorage();
 
-      final lastSavedCustomerCode = customerStorageSuccessOrFailure.fold(
-        (_) => '',
-        (accountSelector) => accountSelector.customerCode,
+      final lastSavedCustomerInfo = customerStorageSuccessOrFailure.fold(
+        (_) => AccountSelector.empty(),
+        (accountSelector) => accountSelector,
       );
 
-      if (lastSavedCustomerCode.isEmpty) {
+      if (lastSavedCustomerInfo.customerCode.isEmpty) {
         add(
           CustomerCodeEvent.fetch(
             hidecustomer: e.hidecustomer,
@@ -117,7 +124,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
         salesOrganisation: e.selectedSalesOrg,
-        customerCode: lastSavedCustomerCode,
+        customerCode: lastSavedCustomerInfo.customerCode,
         hideCustomer: e.hidecustomer,
         user: e.userInfo,
         pageSize: _pageSize,
@@ -142,6 +149,16 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         return;
       }
 
+      var shipToInfo = ShipToInfo.empty();
+      if (lastSavedCustomerInfo.shippingAddress.isNotEmpty) {
+        shipToInfo = customerCodeInfoList.first.shipToInfos.firstWhere(
+          (shipToInfo) =>
+              shipToInfo.shipToCustomerCode ==
+              lastSavedCustomerInfo.shippingAddress,
+          orElse: () => ShipToInfo.empty(),
+        );
+      }
+
       emit(state.copyWith(
         customerCodeList: customerCodeInfoList,
         isFetching: false,
@@ -149,6 +166,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         searchKey:
             SearchKey.search(customerCodeInfoList.first.customerCodeSoldTo),
         customerCodeInfo: customerCodeInfoList.first,
+        shipToInfo: shipToInfo == ShipToInfo.empty()
+            ? customerCodeInfoList.first.shipToInfos.first
+            : shipToInfo,
       ));
     });
     on<_Fetch>(
@@ -163,7 +183,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         var apiFailure = false;
         final finalCustomerCodeinfo = e.selectedSalesOrg.customerInfos;
         emit(CustomerCodeState.initial());
-        emit(state.copyWith(isFetching: true, searchKey: SearchKey(e.searchText)));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            searchKey: SearchKey(e.searchText),
+          ),
+        );
 
         for (final customerItem in finalCustomerCodeinfo) {
           final failureOrSuccess = await customerCodeRepository.getCustomerCode(
@@ -212,6 +237,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                 customerCodeInfo: finalCustomerCodeInfoList.isNotEmpty
                     ? finalCustomerCodeInfoList.first
                     : CustomerCodeInfo.empty(),
+                shipToInfo: finalCustomerCodeInfoList.isNotEmpty
+                    ? finalCustomerCodeInfoList.first.shipToInfos.first
+                    : ShipToInfo.empty(),
               ),
             );
           }
@@ -261,7 +289,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       );
     });
     on<_DeletedSearch>(
-          (event, emit) {
+      (event, emit) {
         if (event.searchText != state.searchKey.getValue()) {
           add(_Fetch(
             hidecustomer: event.hidecustomer,

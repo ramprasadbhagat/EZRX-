@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -49,7 +48,7 @@ class AllCredits extends StatelessWidget {
                 .customerCodeSoldTo
                 .isNotEmpty;
             final hasShipToInfo = context
-                .read<ShipToCodeBloc>()
+                .read<CustomerCodeBloc>()
                 .state
                 .shipToInfo
                 .shipToCustomerCode

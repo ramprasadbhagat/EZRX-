@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -24,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
 
 import '../../../utils/widget_utils.dart';
 import '../order_success/order_success_page_test.dart';
@@ -51,11 +49,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
-
-
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 void main() {
@@ -67,9 +60,8 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
-  late ShipToCodeBloc shipToCodeBloc;
   late MaterialItemBonus materialItemBonus;
-  
+
   late CartBloc cartBloc;
 
   setUp(
@@ -81,7 +73,6 @@ void main() {
       salesOrgBloc = SalesOrgBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
       materialItemBonus = MaterialItemBonus.empty();
       cartBloc = CartBlocMock();
       cartItem = PriceAggregate.empty().copyWith(
@@ -116,7 +107,6 @@ void main() {
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
       );
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => cartBloc.state).thenReturn(CartState.initial().copyWith());
@@ -133,7 +123,6 @@ void main() {
           BlocProvider<TenderContractBloc>(
               create: (context) => tenderContractBlocMock),
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           BlocProvider<UserBloc>(create: (context) => userBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
           BlocProvider<CartBloc>(create: (context) => cartBloc),

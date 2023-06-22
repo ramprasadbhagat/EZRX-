@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -11,6 +10,10 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -18,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../home/selectors/shipping_address_selector_test.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
 // List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
@@ -47,9 +49,6 @@ class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class MockMaterialPriceDetailBloc
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
@@ -77,7 +76,7 @@ void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBLocMock;
+
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late CartBloc cartBlocMock;
   // late OrderTemplate orderMock;
@@ -88,6 +87,14 @@ void main() {
   late TenderContractListBloc tenderContractListBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+
+  final fakeUser = User.empty().copyWith(
+    username: Username('fake-user'),
+    role: Role.empty().copyWith(
+      type: RoleType('client'),
+    ),
+    enableOrderType: true,
+  );
 
   setUpAll(() async {
     setupLocator();
@@ -107,7 +114,7 @@ void main() {
     userBlocMock = MockUserBloc();
     salesOrgBlocMock = MockSalesOrgBloc();
     customerCodeBlocMock = MockCustomerCodeBloc();
-    shipToCodeBLocMock = MockShipToCodeBloc();
+
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
     orderTemplateListBlocMock = OrderTemplateListBlocMock();
@@ -125,7 +132,7 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+
     when(() => materialPriceDetailBlocMock.state)
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -206,58 +213,58 @@ void main() {
     //   await tester.pumpAndSettle(const Duration(
     //     seconds: 3,
     //   ));
-      // verify(
-      //   () => materialPriceDetailBlocMock.add(MaterialPriceDetailEvent.refresh(
-      //     user: User.empty(),
-      //     customerCode: CustomerCodeInfo.empty(),
-      //     salesOrganisation: SalesOrganisation.empty(),
-      //     salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      //     shipToCode: ShipToInfo.empty(),
-      //     materialInfoList: <MaterialQueryInfo>[
-      //       MaterialQueryInfo.empty().copyWith(
-      //         value: MaterialNumber('000000000011007178'),
-      //         materialGroup4: MaterialGroup.four('6PA'),
-      //         description: '(TG)Amoxil Cap 500mg 1x100\'s',
-      //         principalName: 'NA',
-      //         qty: MaterialQty(5),
-      //       ),
-      //       MaterialQueryInfo.empty().copyWith(
-      //         value: MaterialNumber('000000000023007401'),
-      //         materialGroup2: MaterialGroup.two('50'),
-      //         materialGroup4: MaterialGroup.four('6GS'),
-      //         description: 'Veg Glucosamine Sulphate 1500mg  2x60s',
-      //         principalName: 'Ocean Health Pte Ltd',
-      //         qty: MaterialQty(1),
-      //       ),
-      //       MaterialQueryInfo.empty().copyWith(
-      //         value: MaterialNumber('000000000023007377'),
-      //         materialGroup2: MaterialGroup.two('50'),
-      //         materialGroup4: MaterialGroup.four('6GS'),
-      //         description: 'Skin Nutrition Capsule 2x60s',
-      //         principalName: 'Ocean Health Pte Ltd',
-      //         qty: MaterialQty(1),
-      //       ),
-      //       MaterialQueryInfo.empty().copyWith(
-      //         value: MaterialNumber('000000000023007310'),
-      //         materialGroup2: MaterialGroup.two('50'),
-      //         materialGroup4: MaterialGroup.four('6GS'),
-      //         description: 'Joint RX Cap w       300s + 50g',
-      //         principalName: 'Ocean Health Pte Ltd',
-      //         qty: MaterialQty(1),
-      //       ),
-      //       MaterialQueryInfo.empty().copyWith(
-      //         value: MaterialNumber('000000000023007396'),
-      //         materialGroup2: MaterialGroup.two('50'),
-      //         materialGroup4: MaterialGroup.four('6GS'),
-      //         description: 'Joint GS-500        Cap          270\'s',
-      //         principalName: 'Ocean Health Pte Ltd',
-      //         qty: MaterialQty(1),
-      //       ),
-      //     ],
-      //     pickAndPack: '',
-      //   )),
-      // ).called(1);
-    });
+    // verify(
+    //   () => materialPriceDetailBlocMock.add(MaterialPriceDetailEvent.refresh(
+    //     user: User.empty(),
+    //     customerCode: CustomerCodeInfo.empty(),
+    //     salesOrganisation: SalesOrganisation.empty(),
+    //     salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+    //     shipToCode: ShipToInfo.empty(),
+    //     materialInfoList: <MaterialQueryInfo>[
+    //       MaterialQueryInfo.empty().copyWith(
+    //         value: MaterialNumber('000000000011007178'),
+    //         materialGroup4: MaterialGroup.four('6PA'),
+    //         description: '(TG)Amoxil Cap 500mg 1x100\'s',
+    //         principalName: 'NA',
+    //         qty: MaterialQty(5),
+    //       ),
+    //       MaterialQueryInfo.empty().copyWith(
+    //         value: MaterialNumber('000000000023007401'),
+    //         materialGroup2: MaterialGroup.two('50'),
+    //         materialGroup4: MaterialGroup.four('6GS'),
+    //         description: 'Veg Glucosamine Sulphate 1500mg  2x60s',
+    //         principalName: 'Ocean Health Pte Ltd',
+    //         qty: MaterialQty(1),
+    //       ),
+    //       MaterialQueryInfo.empty().copyWith(
+    //         value: MaterialNumber('000000000023007377'),
+    //         materialGroup2: MaterialGroup.two('50'),
+    //         materialGroup4: MaterialGroup.four('6GS'),
+    //         description: 'Skin Nutrition Capsule 2x60s',
+    //         principalName: 'Ocean Health Pte Ltd',
+    //         qty: MaterialQty(1),
+    //       ),
+    //       MaterialQueryInfo.empty().copyWith(
+    //         value: MaterialNumber('000000000023007310'),
+    //         materialGroup2: MaterialGroup.two('50'),
+    //         materialGroup4: MaterialGroup.four('6GS'),
+    //         description: 'Joint RX Cap w       300s + 50g',
+    //         principalName: 'Ocean Health Pte Ltd',
+    //         qty: MaterialQty(1),
+    //       ),
+    //       MaterialQueryInfo.empty().copyWith(
+    //         value: MaterialNumber('000000000023007396'),
+    //         materialGroup2: MaterialGroup.two('50'),
+    //         materialGroup4: MaterialGroup.four('6GS'),
+    //         description: 'Joint GS-500        Cap          270\'s',
+    //         principalName: 'Ocean Health Pte Ltd',
+    //         qty: MaterialQty(1),
+    //       ),
+    //     ],
+    //     pickAndPack: '',
+    //   )),
+    // ).called(1);
+  });
 
   // testWidgets(
   //   'Order Template Detail with material items',

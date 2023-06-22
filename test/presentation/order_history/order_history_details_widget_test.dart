@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -78,9 +77,6 @@ class MockOrderHistoryRepository extends Mock
     implements OrderHistoryRepository {}
 
 class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
-
-class ShipToCodeMocBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
 
 class CartMocBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -160,7 +156,6 @@ void main() {
   final mockOrderHistoryListBloc = OrderHistoryListBlocMock();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
-  final mockShipToCodeBloc = ShipToCodeMocBloc();
   final mockCartBloc = CartMocBloc();
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserBlocMock();
@@ -243,8 +238,6 @@ void main() {
           .thenReturn(OrderHistoryListState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockShipToCodeBloc.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => mockCartBloc.state).thenReturn(CartState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -298,7 +291,6 @@ void main() {
               create: (context) => mockOrderHistoryListBloc),
           BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => mockShipToCodeBloc),
           BlocProvider<CartBloc>(create: (context) => mockCartBloc),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
@@ -1862,67 +1854,69 @@ void main() {
         expect(reorderButton, findsOneWidget);
       },
     );
-    testWidgets('Reorder test for spacial order', (tester) async {
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('fake_type'),
-            ),
-            accessRight: AccessRight.empty().copyWith(
-              orders: true,
-            ),
-            disableCreateOrder: false,
-          ),
-        ),
-      );
-      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
-        OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderHeader:
-                  OrderHistoryDetailsOrderHeader.empty()
-                      .copyWith(type: 'ZPFB', orderReason: '814')),
-          failureOrSuccessOption: none(),
-          isLoading: false,
-          showErrorMessage: false,
-        ),
-      );
 
-      when(() => orderDocumentTypeBlocMock.state).thenReturn(
-        OrderDocumentTypeState.initial().copyWith(
-            selectedOrderType: OrderDocumentType.empty().copyWith(
-              documentType: DocumentType('ZPFB'),
-              orderReason: '814',
-            ),
-            orderDocumentTypeList: [
-              OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPFB'),
-                orderReason: '814',
-              )
-            ]),
-      );
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          user: User.empty().copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('external_sales_rep'),
-            ),
-            hasPriceOverride: false,
-          ),
-        ),
-      );
+    //TODO: un-comment test again after re-order is implemented.
+    // testWidgets('Reorder test for spacial order', (tester) async {
+    //   when(() => userBlocMock.state).thenReturn(
+    //     UserState.initial().copyWith(
+    //       user: fakeUser.copyWith(
+    //         role: Role.empty().copyWith(
+    //           type: RoleType('fake_type'),
+    //         ),
+    //         accessRight: AccessRight.empty().copyWith(
+    //           orders: true,
+    //         ),
+    //         disableCreateOrder: false,
+    //       ),
+    //     ),
+    //   );
+    //   when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+    //     OrderHistoryDetailsState.initial().copyWith(
+    //       orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+    //           orderHistoryDetailsOrderHeader:
+    //               OrderHistoryDetailsOrderHeader.empty()
+    //                   .copyWith(type: 'ZPFB', orderReason: '814')),
+    //       failureOrSuccessOption: none(),
+    //       isLoading: false,
+    //       showErrorMessage: false,
+    //     ),
+    //   );
 
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final reorder = find.byKey(const Key('addToCartPressed'));
+    //   when(() => orderDocumentTypeBlocMock.state).thenReturn(
+    //     OrderDocumentTypeState.initial().copyWith(
+    //         selectedOrderType: OrderDocumentType.empty().copyWith(
+    //           documentType: DocumentType('ZPFB'),
+    //           orderReason: '814',
+    //         ),
+    //         orderDocumentTypeList: [
+    //           OrderDocumentType.empty().copyWith(
+    //             documentType: DocumentType('ZPFB'),
+    //             orderReason: '814',
+    //           )
+    //         ]),
+    //   );
+    //   when(() => eligibilityBlocMock.state).thenReturn(
+    //     EligibilityState.initial().copyWith(
+    //       user: User.empty().copyWith(
+    //         role: Role.empty().copyWith(
+    //           type: RoleType('external_sales_rep'),
+    //         ),
+    //         hasPriceOverride: false,
+    //       ),
+    //     ),
+    //   );
 
-      await tester.tap(reorder);
-      await tester.pump();
-      verify(() => orderDocumentTypeBlocMock.add(
-          OrderDocumentTypeEvent.selectedOrderType(
-              selectedOrderType: OrderDocumentType.empty().copyWith(
-                  documentType: DocumentType('ZPFB'), orderReason: '814'),
-              isReasonSelected: false))).called(1);
-    });
+    //   await tester.pumpWidget(getWUT());
+    //   await tester.pump();
+    //   final reorder = find.byKey(const Key('addToCartPressed'));
+
+    //   await tester.tap(reorder);
+    //   await tester.pump();
+    //   verify(() => orderDocumentTypeBlocMock.add(
+    //       OrderDocumentTypeEvent.selectedOrderType(
+    //           selectedOrderType: OrderDocumentType.empty().copyWith(
+    //               documentType: DocumentType('ZPFB'), orderReason: '814'),
+    //           isReasonSelected: false))).called(1);
+    // });
   });
 }

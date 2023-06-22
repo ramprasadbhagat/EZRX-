@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
@@ -45,9 +44,6 @@ class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
-
 class MockBannerRepository extends Mock implements BannerRepository {}
 
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -69,7 +65,6 @@ void main() {
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
-  late ShipToCodeBloc mockShipToCodeBloc;
   late EligibilityBloc eligibilityBlocMock;
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -93,7 +88,6 @@ void main() {
     mockHTTPService = MockHTTPService();
     mockUserBloc = MockUserBloc();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
-    mockShipToCodeBloc = MockShipToCodeBloc();
     eligibilityBlocMock = EligibilityBlocMock();
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
@@ -115,8 +109,6 @@ void main() {
       ));
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => mockShipToCodeBloc.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial().copyWith(
         user: fakeUser,
@@ -133,7 +125,6 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => mockShipToCodeBloc),
           BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock),
         ],

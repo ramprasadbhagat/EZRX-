@@ -15,8 +15,9 @@ abstract class ICustomerCodeRepository {
     required int pageSize,
   });
 
-  Future<Either<ApiFailure, Unit>> storeCustomerCode({
+  Future<Either<ApiFailure, Unit>> storeCustomerInfo({
     required String customerCode,
+    required String shippingAddress,
   });
 
   Future<Either<ApiFailure, AccountSelector>> getCustomerCodeStorage();

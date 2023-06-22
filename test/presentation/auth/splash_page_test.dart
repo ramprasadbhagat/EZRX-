@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -81,9 +80,6 @@ class CustomerCodeBlocMock
 class AccountSummaryBlocMock
     extends MockBloc<AccountSummaryEvent, AccountSummaryState>
     implements AccountSummaryBloc {}
-
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}
 
 class SalesRepBlocMock extends MockBloc<SalesRepEvent, SalesRepState>
     implements SalesRepBloc {}
@@ -186,7 +182,6 @@ void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late ShipToCodeBloc shipToCodeBLocMock;
   late SalesRepBloc salesRepBlocMock;
   late AupTcBloc aupTcBlocMock;
   late AccountSummaryBloc accountSummaryMock;
@@ -265,7 +260,6 @@ void main() {
       userBlocMock = UserBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      shipToCodeBLocMock = ShipToCodeBlocMock();
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
       orderDocumentTypeMock = OrderDocumentTypeBlocMock();
       salesRepBlocMock = SalesRepBlocMock();
@@ -304,8 +298,6 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBLocMock.state)
-          .thenReturn(ShipToCodeState.initial());
       when(() => salesRepBlocMock.state).thenReturn(SalesRepState.initial());
       when(() => aupTcBlocMock.state).thenReturn(AupTcState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -360,8 +352,6 @@ void main() {
             BlocProvider<UserRestrictionListBloc>(
               create: (context) => userRestrictionListBlocMock,
             ),
-            BlocProvider<ShipToCodeBloc>(
-                create: (context) => shipToCodeBLocMock),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
             BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),

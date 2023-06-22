@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -336,7 +335,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                         salesOrganisationConfigs:
                             context.read<SalesOrgBloc>().state.configs,
                         shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
                       ),
                     );
               },
@@ -369,7 +368,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                           salesOrganisationConfigs:
                               context.read<SalesOrgBloc>().state.configs,
                           shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                              context.read<CustomerCodeBloc>().state.shipToInfo,
                         ),
                       );
                 },
@@ -393,7 +392,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                           salesOrganisationConfigs:
                               context.read<SalesOrgBloc>().state.configs,
                           shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                              context.read<CustomerCodeBloc>().state.shipToInfo,
                         ),
                       );
                 },

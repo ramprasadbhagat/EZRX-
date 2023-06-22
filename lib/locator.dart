@@ -9,7 +9,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_met
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
@@ -136,7 +135,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/ship_to_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
@@ -804,23 +802,6 @@ void setupLocator() {
   locator.registerFactory(
     () => CustomerCodeBloc(
       customerCodeRepository: locator<CustomerCodeRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Ship To Code
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => ShipToCodeRepository(
-      accountSelectorStorage: locator<AccountSelectorStorage>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ShipToCodeBloc(
-      shipToCodeRepository: locator<ShipToCodeRepository>(),
     ),
   );
 
