@@ -32,35 +32,35 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
     )
         required String documentDateTo,
     @JsonKey(
-      name: 'debitValueFrom',
+      name: 'amountValueFrom',
       defaultValue: '',
     )
-        required String debitValueFrom,
+        required String amountValueFrom,
     @JsonKey(
-      name: 'debitValueTo',
+      name: 'amountValueTo',
       defaultValue: '',
     )
-        required String debitValueTo,
+        required String amountValueTo,
     @JsonKey(
-      name: 'filterStatus',
+      name: 'filterStatuses',
       defaultValue: '',
     )
-        required String filterStatus,
+        required String filterStatuses,
   }) = _AllInvoicesFilterDto;
 
   factory AllInvoicesFilterDto.fromDomain(
-    AllInvoicesFilter allInvoicesFilter,
+    AllInvoicesFilter tempFilter,
   ) {
     return AllInvoicesFilterDto(
-      dueDateFrom: allInvoicesFilter.dueDateFrom.apiDateWithDashFormat,
-      dueDateTo: allInvoicesFilter.dueDateTo.apiDateWithDashFormat,
-      documentNumber: allInvoicesFilter.documentNumber.getOrDefaultValue(''),
-      documentDateTo: allInvoicesFilter.documentDateTo.apiDateWithDashFormat,
+      dueDateFrom: tempFilter.dueDateFrom.apiDateWithDashFormat,
+      dueDateTo: tempFilter.dueDateTo.apiDateWithDashFormat,
+      documentNumber: tempFilter.documentNumber.getOrDefaultValue(''),
+      documentDateTo: tempFilter.documentDateTo.apiDateWithDashFormat,
       documentDateFrom:
-          allInvoicesFilter.documentDateFrom.apiDateWithDashFormat,
-      debitValueFrom: allInvoicesFilter.debitValueFrom.apiParameterValue,
-      debitValueTo: allInvoicesFilter.debitValueTo.apiParameterValue,
-      filterStatus: allInvoicesFilter.filterStatus,
+          tempFilter.documentDateFrom.apiDateWithDashFormat,
+      amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
+      amountValueTo: tempFilter.amountValueTo.apiParameterValue,
+      filterStatuses: tempFilter.filterStatuses.join(','),
     );
   }
 
@@ -92,32 +92,32 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
         },
       if (documentDateFrom.isNotEmpty)
         {
-          'field': 'postingDate',
+          'field': 'documentDate',
           'value': documentDateFrom,
           'type': 'ge',
         },
       if (documentDateTo.isNotEmpty)
         {
-          'field': 'postingDate',
+          'field': 'documentDate',
           'value': documentDateTo,
           'type': 'le',
         },
-      if (debitValueFrom.isNotEmpty)
+      if (amountValueFrom.isNotEmpty)
         {
           'field': 'amountInTransactionCurrency',
-          'value': debitValueFrom,
+          'value': amountValueFrom,
           'type': 'ge',
         },
-      if (debitValueTo.isNotEmpty)
+      if (amountValueTo.isNotEmpty)
         {
           'field': 'amountInTransactionCurrency',
-          'value': debitValueTo,
+          'value': amountValueTo,
           'type': 'le',
         },
-      if (filterStatus.isNotEmpty && filterStatus != 'All')
+      if (filterStatuses.isNotEmpty)
         {
           'field': 'invoiceProcessingStatus',
-          'value': filterStatus,
+          'value': filterStatuses,
         },
     ];
 

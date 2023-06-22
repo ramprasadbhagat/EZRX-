@@ -112,7 +112,8 @@ class _LoadingMoreIndicator extends StatelessWidget {
           },
         );
 
-        return Padding(
+        return Container(
+          alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(
             vertical: 10,
           ),

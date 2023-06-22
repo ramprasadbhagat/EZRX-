@@ -8,12 +8,12 @@ part 'credit_and_invoice_group.freezed.dart';
 class CreditAndInvoiceGroup with _$CreditAndInvoiceGroup {
   factory CreditAndInvoiceGroup({
   required DateTimeStringValue dueDate,
-  required List<CreditAndInvoiceItem> invoiceItems,
+  required List<CreditAndInvoiceItem> items,
   }) = _CreditAndInvoiceGroup;
 
   factory CreditAndInvoiceGroup.empty() => CreditAndInvoiceGroup(
         dueDate: DateTimeStringValue('') ,
-        invoiceItems: <CreditAndInvoiceItem>[],
+        items: <CreditAndInvoiceItem>[],
       );
 
 }

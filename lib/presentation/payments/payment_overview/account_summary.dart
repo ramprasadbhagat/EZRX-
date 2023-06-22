@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -67,12 +69,30 @@ class AccountSummaryPage extends StatelessWidget {
                 return BlocProvider(
                   create: (context) =>
                       locator<DownloadPaymentAttachmentsBloc>(),
-                  child: _ItemCard(
-                    label: 'Invoices',
-                    keyVal: getInvoices(
-                      outstandingBalance: state.outstandingBalance,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<AllInvoicesBloc>().add(
+                            AllInvoicesEvent.fetch(
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              customerCodeInfo: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                              filter: AllInvoicesFilter.empty(),
+                            ),
+                          );
+                      context.router.pushNamed('payments/all_invoices');
+                    },
+                    child: _ItemCard(
+                      label: 'Invoices',
+                      keyVal: getInvoices(
+                        outstandingBalance: state.outstandingBalance,
+                      ),
+                      isFetching: state.isFetchingOutstandingBalance,
                     ),
-                    isFetching: state.isFetchingOutstandingBalance,
                   ),
                 );
               },

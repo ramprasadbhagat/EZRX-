@@ -1,3 +1,4 @@
+
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 
 double totalPriceStringAsFixed(String value) {

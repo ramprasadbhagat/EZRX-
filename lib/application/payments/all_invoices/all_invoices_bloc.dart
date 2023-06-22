@@ -1,10 +1,8 @@
-import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

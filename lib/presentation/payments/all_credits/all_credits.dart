@@ -167,7 +167,7 @@ class _CreditsScrollList extends StatelessWidget {
           data: item,
           showDivider: index != 0,
         ),
-        items: allCreditsState.credits.creditListGroup,
+        items: allCreditsState.credits.groupList,
       ),
     );
   }
@@ -208,7 +208,7 @@ class _CreditGroup extends StatelessWidget {
                 ),
               ),
               Column(
-                children: data.invoiceItems
+                children: data.items
                     .map(
                       (e) => _CreditsItem(creditItem: e),
                     )

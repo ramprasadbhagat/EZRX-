@@ -356,9 +356,12 @@ CheckboxThemeData _checkboxTheme() {
     checkColor: MaterialStateProperty.all(
       ZPColors.white,
     ),
-    fillColor: MaterialStateProperty.all(
-      ZPColors.primary,
+    fillColor: MaterialStateColor.resolveWith(
+      (states) => states.contains(MaterialState.selected)
+          ? ZPColors.primary
+          : ZPColors.darkGray,
     ),
+    visualDensity: VisualDensity.compact,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(
         3.0,

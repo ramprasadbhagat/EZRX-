@@ -20,15 +20,4 @@ class AllInvoicesState with _$AllInvoicesState {
         sortDirection: 'desc',
         totalCount: 0,
       );
-
-  List<CreditAndInvoiceGroup> get groups => items
-      .groupListsBy((item) => item.netDueDate)
-      .entries
-      .map(
-        (entry) => CreditAndInvoiceGroup(
-          dueDate: entry.key,
-          invoiceItems: entry.value,
-        ),
-      )
-      .toList();
 }

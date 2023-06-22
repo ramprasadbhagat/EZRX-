@@ -6,7 +6,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/filter_drawer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,16 +61,20 @@ void main() {
             create: (context) => allInvoicesFilterBlocMock,
           ),
         ],
-        child: const AllInvoicesFilterDrawer(),
+        child: const Scaffold(
+          body: SingleChildScrollView(
+            child: AllInvoicesFilterBottomSheet(),
+          ),
+        ),
       ),
     );
   }
 
-  group('All Invoices Filter Drawer Test', () {
+  group('All Invoices Filter Bottom Sheet Test', () {
     testWidgets('=> Listen When condition', (tester) async {
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          changed: true,
+          applied: true,
         ),
       ];
       whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
@@ -81,10 +86,10 @@ void main() {
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findFilterAllInvoicesText = find.text('Apply Filters'.tr());
+      final findFilterAllInvoicesText = find.text('Filter'.tr());
       expect(findFilterAllInvoicesText, findsOneWidget);
 
-      final findIconKey = find.byKey(const Key('filterCrossButton'));
+      final findIconKey = find.byKey(WidgetKeys.closeButton);
       expect(findIconKey, findsOneWidget);
       await tester.tap(findIconKey);
       await tester.pump();
@@ -93,7 +98,7 @@ void main() {
     testWidgets('=> _DueDateFilterState Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
+        tempFilter: AllInvoicesFilter.empty().copyWith(
           dueDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
@@ -105,7 +110,7 @@ void main() {
 
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
+          tempFilter: AllInvoicesFilter.empty().copyWith(
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -120,11 +125,24 @@ void main() {
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Due Date'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.tap(findTextField);
+      final toDueDateField = find.byKey(WidgetKeys.toDueDateField);
+      expect(toDueDateField, findsOneWidget);
+      await tester.tap(toDueDateField);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('SAVE'));
+      await tester.pumpAndSettle();
+
+      verify(
+        () => allInvoicesFilterBlocMock.add(
+          AllInvoicesFilterEvent.setDueDate(
+              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+        ),
+      ).called(1);
+
+      final fromDueDateField = find.byKey(WidgetKeys.fromDueDateField);
+      expect(fromDueDateField, findsOneWidget);
+      await tester.tap(fromDueDateField);
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('SAVE'));
@@ -138,28 +156,10 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('_DocumentNumberByFilter test', (tester) async {
-      when(() => allInvoicesFilterBlocMock.state)
-          .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: AllInvoicesFilter.empty(),
-      ));
-
-      await getWidget(tester);
-      await tester.pumpAndSettle();
-
-      final findText = find.text('Document Number'.tr());
-      expect(findText, findsOneWidget);
-      await tester.enterText(
-          find.byKey(const Key('filterDocumentNumberField')), '1234567890');
-      await tester.pump();
-      expect(find.text('1234567899'), findsNothing);
-      expect(find.text('1234567890'), findsOneWidget);
-    });
-
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
+        tempFilter: AllInvoicesFilter.empty().copyWith(
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
@@ -171,7 +171,7 @@ void main() {
 
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
+          tempFilter: AllInvoicesFilter.empty().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -186,11 +186,25 @@ void main() {
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Document Date'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.tap(findTextField);
+      final toDocumentDateField = find.byKey(WidgetKeys.toDocumentDateField);
+      expect(toDocumentDateField, findsOneWidget);
+      await tester.tap(toDocumentDateField);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('SAVE'));
+      await tester.pumpAndSettle();
+
+      verify(
+        () => allInvoicesFilterBlocMock.add(
+          AllInvoicesFilterEvent.setDocumentDate(
+              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+        ),
+      ).called(1);
+
+      final fromDocumentDateField =
+          find.byKey(WidgetKeys.fromDocumentDateField);
+      expect(fromDocumentDateField, findsOneWidget);
+      await tester.tap(fromDocumentDateField);
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('SAVE'));
@@ -203,54 +217,53 @@ void main() {
         ),
       ).called(1);
     });
-
-    testWidgets('=> _DebitValueToFilter Test', (tester) async {
+    testWidgets('=> _AmountValueToFilter Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
-        allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueTo: RangeValue('12'),
+        tempFilter: AllInvoicesFilter.empty().copyWith(
+          amountValueTo: RangeValue('12'),
         ),
       ));
 
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Debit Value To'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.enterText(findTextField, '123456');
+      final amountValueTo = find.byKey(WidgetKeys.amountValueTo);
+      expect(amountValueTo, findsOneWidget);
+      await tester.tap(amountValueTo);
+      await tester.pumpAndSettle();
+      await tester.enterText(amountValueTo, '123456');
       await tester.pump();
       verify(
         () => allInvoicesFilterBlocMock.add(
-          AllInvoicesFilterEvent.debitValueToChanged(
+          AllInvoicesFilterEvent.amountValueToChanged(
               StringUtils.formatter.format(double.parse('123456'))),
         ),
       ).called(1);
     });
 
-    testWidgets('=> _DebitValueFromFilter Test', (tester) async {
+    testWidgets('=> _AmountValueFromFilter Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
-        allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueFrom: RangeValue('12'),
+        tempFilter: AllInvoicesFilter.empty().copyWith(
+          amountValueFrom: RangeValue('12'),
         ),
       ));
 
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Debit Value From'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.enterText(findTextField, '12');
+      final amountValueFrom = find.byKey(WidgetKeys.amountValueFrom);
+      expect(amountValueFrom, findsOneWidget);
+      await tester.tap(amountValueFrom);
+      await tester.pumpAndSettle();
+      await tester.enterText(amountValueFrom, '12');
       await tester.pump();
       verify(
         () => allInvoicesFilterBlocMock.add(
-          AllInvoicesFilterEvent.debitValueFromChanged(
+          AllInvoicesFilterEvent.amountValueFromChanged(
               StringUtils.formatter.format(double.parse('12'))),
         ),
       ).called(1);
@@ -273,38 +286,39 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('=> _ClearButton Test', (tester) async {
+    testWidgets('=> _ResetButton Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: false,
-        allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueFrom: RangeValue('12'),
+        appliedFilter: AllInvoicesFilter.empty().copyWith(
+          amountValueFrom: RangeValue('12'),
+          amountValueTo: RangeValue('22'),
         ),
       ));
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Clear'.tr());
+      final findText = find.text('Reset'.tr());
       expect(findText, findsOneWidget);
-      final findOutlineButton = find.byKey(const Key('filterClearButton'));
-      await tester.tap(findOutlineButton);
+      final filterResetButton = find.byKey(WidgetKeys.filterResetButton);
+      await tester.tap(filterResetButton);
       await tester.pump();
       verify(
         () => allInvoicesFilterBlocMock.add(
-          const AllInvoicesFilterEvent.clearFilters(),
+          const AllInvoicesFilterEvent.resetFilters(),
         ),
       ).called(1);
     });
 
     testWidgets(
-        '=> DebitValueError Test when debitValueTo greater than debitValueFrom',
+        '=> AmountValueError Test when amountValueTo greater than amountValueFrom',
         (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
-        allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueFrom: RangeValue('15'),
-          debitValueTo: RangeValue('12'),
+        tempFilter: AllInvoicesFilter.empty().copyWith(
+          amountValueFrom: RangeValue('15'),
+          amountValueTo: RangeValue('12'),
         ),
       ));
       await getWidget(tester);
@@ -317,7 +331,7 @@ void main() {
       await tester.tap(findElevatedButton);
       await tester.pumpAndSettle();
 
-      final findInvalidText = find.text('Invalid Debit Value Range!'.tr());
+      final findInvalidText = find.text('Invalid Amount range!'.tr());
       expect(findInvalidText, findsOneWidget);
       await tester.pump();
     });

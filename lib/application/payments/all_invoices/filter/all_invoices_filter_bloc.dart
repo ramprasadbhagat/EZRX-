@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
-import 'package:ezrxmobile/domain/payments/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -38,7 +37,6 @@ class AllInvoicesFilterBloc
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
-            statuses: <String>['All'],
             isFetching: true,
           ),
         );
@@ -70,66 +68,86 @@ class AllInvoicesFilterBloc
           },
         );
       },
-      openFilterDrawer: (_OpenFilterDrawer value) async {
-        if (state.changed || state.edited || state.showErrorMessages) {
+      openFilterBottomSheet: (_OpenFilterBottomSheet value) async {
+        if (state.applied || state.showErrorMessages) {
           emit(
             state.copyWith(
-              changed: false,
-              edited: false,
+              applied: false,
               showErrorMessages: false,
             ),
           );
         }
       },
-      applyFilters: (_ApplyFilters value) async {
-        if (state.allInvoicesFilter.isValid) {
-          emit(
-            state.copyWith(
-              changed: true,
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(
-              changed: false,
-              showErrorMessages: true,
-            ),
-          );
-        }
-      },
-      clearFilters: (_ClearFilters value) async {
+      closeFilterBottomSheet: (_CloseFilterBottomSheet value) async {
         emit(
           state.copyWith(
-            changed: true,
-            allInvoicesFilter: AllInvoicesFilter.empty(),
+            applied: false,
+            tempFilter: state.appliedFilter,
             showErrorMessages: false,
           ),
         );
       },
-      documentNumberChanged: (_DocumentNumberChanged e) async => emit(
-        state.copyWith(
-          allInvoicesFilter: state.allInvoicesFilter.copyWith(
-            documentNumber: e.documentNumber,
+      applyFilters: (_ApplyFilters value) async {
+        if (state.tempFilter != state.appliedFilter) {
+          if (state.tempFilter.isValid) {
+            emit(
+              state.copyWith(
+                appliedFilter: state.tempFilter,
+                applied: true,
+              ),
+            );
+          } else {
+            emit(
+              state.copyWith(
+                applied: false,
+                showErrorMessages: true,
+              ),
+            );
+          }
+        }
+      },
+      resetFilters: (_ResetFilters value) async {
+        final emptyValue = AllInvoicesFilter.empty();
+        if (!state.appliedFilter.isEmpty) {
+          emit(
+            state.copyWith(
+              applied: true,
+              tempFilter: emptyValue,
+              appliedFilter: emptyValue,
+              showErrorMessages: false,
+            ),
+          );
+        } else if (!state.tempFilter.isEmpty) {
+          emit(
+            state.copyWith(
+              applied: false,
+              tempFilter: emptyValue,
+              showErrorMessages: false,
+            ),
+          );
+        }
+      },
+      statusChanged: (_StatusChanged e) async {
+        final statuses = List<String>.from(state.tempFilter.filterStatuses);
+        e.selected
+            ? statuses.add(e.filterStatus)
+            : statuses.remove(e.filterStatus);
+        emit(
+          state.copyWith(
+            tempFilter: state.tempFilter.copyWith(
+              filterStatuses: statuses,
+            ),
           ),
-          edited: true,
-          showErrorMessages: false,
-        ),
-      ),
-      statusChanged: (_StatusChanged e) async => emit(
-        state.copyWith(
-          allInvoicesFilter: state.allInvoicesFilter.copyWith(
-            filterStatus: e.filterStatus,
-          ),
-        ),
-      ),
+        );
+      },
       setDueDate: (_SetDueDate e) async => emit(
         state.copyWith(
-          allInvoicesFilter: state.allInvoicesFilter.copyWith(
+          tempFilter: state.tempFilter.copyWith(
             dueDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(e.dueDateRange.start),
+              getDateStringByDateTime(e.dateRange.start),
             ),
             dueDateTo: DateTimeStringValue(
-              getDateStringByDateTime(e.dueDateRange.end),
+              getDateStringByDateTime(e.dateRange.end),
             ),
           ),
           showErrorMessages: false,
@@ -137,32 +155,30 @@ class AllInvoicesFilterBloc
       ),
       setDocumentDate: (_SetDocumentDate e) async => emit(
         state.copyWith(
-          allInvoicesFilter: state.allInvoicesFilter.copyWith(
+          tempFilter: state.tempFilter.copyWith(
             documentDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(e.documentDateRange.start),
+              getDateStringByDateTime(e.dateRange.start),
             ),
             documentDateTo: DateTimeStringValue(
-              getDateStringByDateTime(e.documentDateRange.end),
+              getDateStringByDateTime(e.dateRange.end),
             ),
           ),
           showErrorMessages: false,
         ),
       ),
-      debitValueFromChanged: (_DebitValueFromChanged e) async => emit(
+      amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
         state.copyWith(
-          allInvoicesFilter: state.allInvoicesFilter.copyWith(
-            debitValueFrom: RangeValue(e.debitValueFrom),
+          tempFilter: state.tempFilter.copyWith(
+            amountValueFrom: RangeValue(e.amountValueFrom),
           ),
-          edited: true,
           showErrorMessages: false,
         ),
       ),
-      debitValueToChanged: (_DebitValueToChanged e) async => emit(
+      amountValueToChanged: (_AmountValueToChanged e) async => emit(
         state.copyWith(
-          allInvoicesFilter: state.allInvoicesFilter.copyWith(
-            debitValueTo: RangeValue(e.debitValueTo),
+          tempFilter: state.tempFilter.copyWith(
+            amountValueTo: RangeValue(e.amountValueTo),
           ),
-          edited: true,
           showErrorMessages: false,
         ),
       ),

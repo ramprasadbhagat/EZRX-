@@ -15,9 +15,9 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required DateTimeStringValue dueDateTo,
     required DateTimeStringValue documentDateFrom,
     required DateTimeStringValue documentDateTo,
-    required RangeValue debitValueFrom,
-    required RangeValue debitValueTo,
-    required String filterStatus,
+    required RangeValue amountValueFrom,
+    required RangeValue amountValueTo,
+    required List<String> filterStatuses,
   }) = _AllInvoicesFilter;
 
   factory AllInvoicesFilter.fullyEmpty() => AllInvoicesFilter(
@@ -26,9 +26,9 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         dueDateTo: DateTimeStringValue(''),
         documentDateFrom: DateTimeStringValue(''),
         documentDateTo: DateTimeStringValue(''),
-        debitValueFrom: RangeValue(''),
-        debitValueTo: RangeValue(''),
-        filterStatus: '',
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        filterStatuses: [],
       );
 
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
@@ -57,26 +57,18 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
             DateTime.now(),
           ),
         ),
-        debitValueFrom: RangeValue(''),
-        debitValueTo: RangeValue(''),
-        filterStatus: 'All',
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        filterStatuses: <String>[],
       );
 
   AllInvoicesFilter get _defaultValue => AllInvoicesFilter.empty();
 
-  String get getFilteredDueDate => dueDateFrom.isValid() && dueDateTo.isValid()
-      ? '${dueDateFrom.toValidDateString} to ${dueDateTo.toValidDateString}'
-      : '';
 
   DateTimeRange get getDueDateFilterDateRange => DateTimeRange(
         start: dueDateFrom.dateTimeByDateString,
         end: dueDateTo.dateTimeByDateString,
       );
-
-  String get getFilteredDocumentDate => documentDateFrom.isValid() &&
-          documentDateTo.isValid()
-      ? '${documentDateFrom.toValidDateString} to ${documentDateTo.toValidDateString}'
-      : '';
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
         start: documentDateFrom.dateTimeByDateString,
@@ -85,7 +77,7 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
 
   int get appliedFilterCount {
     var count = 0;
-    if (documentNumber.isValid()) {
+    if (filterStatuses.isNotEmpty) {
       count += 1;
     }
     if (dueDateFrom.isValid() || dueDateTo.isValid()) {
@@ -94,23 +86,18 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     if (documentDateFrom.isValid() || documentDateTo.isValid()) {
       count += 1;
     }
-    if (debitValueFrom.isValid() || debitValueTo.isValid()) {
+    if (amountValueFrom.isValid() || amountValueTo.isValid()) {
       count += 1;
     }
 
     return count;
   }
 
-  bool get checkIfDebitValueRangeIsValid =>
-      RangeValue.checkIfRangeIsValid(debitValueFrom, debitValueTo);
+  bool get isValid => anyFilterApplied && isAmountValueRangeValid;
 
-  bool get checkIfAnyDebitValueIsEmpty =>
-      RangeValue.checkIfAnyIsEmpty(debitValueFrom, debitValueTo);
-
-  bool get isValid => anyFilterApplied && isDebitValueRangeValid;
-
-  bool get isDebitValueRangeValid =>
-      !checkIfAnyDebitValueIsEmpty && checkIfDebitValueRangeIsValid;
+  bool get isAmountValueRangeValid =>
+      !RangeValue.checkIfAnyIsEmpty(amountValueFrom, amountValueTo) &&
+      RangeValue.checkIfRangeIsValid(amountValueFrom, amountValueTo);
 
   bool get anyFilterApplied => appliedFilterCount > 0;
 

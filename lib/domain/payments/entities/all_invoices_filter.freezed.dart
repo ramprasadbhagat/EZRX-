@@ -22,9 +22,9 @@ mixin _$AllInvoicesFilter {
   DateTimeStringValue get documentDateFrom =>
       throw _privateConstructorUsedError;
   DateTimeStringValue get documentDateTo => throw _privateConstructorUsedError;
-  RangeValue get debitValueFrom => throw _privateConstructorUsedError;
-  RangeValue get debitValueTo => throw _privateConstructorUsedError;
-  String get filterStatus => throw _privateConstructorUsedError;
+  RangeValue get amountValueFrom => throw _privateConstructorUsedError;
+  RangeValue get amountValueTo => throw _privateConstructorUsedError;
+  List<String> get filterStatuses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllInvoicesFilterCopyWith<AllInvoicesFilter> get copyWith =>
@@ -43,9 +43,9 @@ abstract class $AllInvoicesFilterCopyWith<$Res> {
       DateTimeStringValue dueDateTo,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      RangeValue debitValueFrom,
-      RangeValue debitValueTo,
-      String filterStatus});
+      RangeValue amountValueFrom,
+      RangeValue amountValueTo,
+      List<String> filterStatuses});
 }
 
 /// @nodoc
@@ -66,9 +66,9 @@ class _$AllInvoicesFilterCopyWithImpl<$Res, $Val extends AllInvoicesFilter>
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? debitValueFrom = null,
-    Object? debitValueTo = null,
-    Object? filterStatus = null,
+    Object? amountValueFrom = null,
+    Object? amountValueTo = null,
+    Object? filterStatuses = null,
   }) {
     return _then(_value.copyWith(
       documentNumber: null == documentNumber
@@ -91,18 +91,18 @@ class _$AllInvoicesFilterCopyWithImpl<$Res, $Val extends AllInvoicesFilter>
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      debitValueFrom: null == debitValueFrom
-          ? _value.debitValueFrom
-          : debitValueFrom // ignore: cast_nullable_to_non_nullable
+      amountValueFrom: null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      debitValueTo: null == debitValueTo
-          ? _value.debitValueTo
-          : debitValueTo // ignore: cast_nullable_to_non_nullable
+      amountValueTo: null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      filterStatus: null == filterStatus
-          ? _value.filterStatus
-          : filterStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+      filterStatuses: null == filterStatuses
+          ? _value.filterStatuses
+          : filterStatuses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -121,9 +121,9 @@ abstract class _$$_AllInvoicesFilterCopyWith<$Res>
       DateTimeStringValue dueDateTo,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      RangeValue debitValueFrom,
-      RangeValue debitValueTo,
-      String filterStatus});
+      RangeValue amountValueFrom,
+      RangeValue amountValueTo,
+      List<String> filterStatuses});
 }
 
 /// @nodoc
@@ -142,9 +142,9 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? debitValueFrom = null,
-    Object? debitValueTo = null,
-    Object? filterStatus = null,
+    Object? amountValueFrom = null,
+    Object? amountValueTo = null,
+    Object? filterStatuses = null,
   }) {
     return _then(_$_AllInvoicesFilter(
       documentNumber: null == documentNumber
@@ -167,18 +167,18 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      debitValueFrom: null == debitValueFrom
-          ? _value.debitValueFrom
-          : debitValueFrom // ignore: cast_nullable_to_non_nullable
+      amountValueFrom: null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      debitValueTo: null == debitValueTo
-          ? _value.debitValueTo
-          : debitValueTo // ignore: cast_nullable_to_non_nullable
+      amountValueTo: null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      filterStatus: null == filterStatus
-          ? _value.filterStatus
-          : filterStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+      filterStatuses: null == filterStatuses
+          ? _value._filterStatuses
+          : filterStatuses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -192,10 +192,11 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
       required this.dueDateTo,
       required this.documentDateFrom,
       required this.documentDateTo,
-      required this.debitValueFrom,
-      required this.debitValueTo,
-      required this.filterStatus})
-      : super._();
+      required this.amountValueFrom,
+      required this.amountValueTo,
+      required final List<String> filterStatuses})
+      : _filterStatuses = filterStatuses,
+        super._();
 
   @override
   final DocumentNumber documentNumber;
@@ -208,15 +209,20 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
   @override
   final DateTimeStringValue documentDateTo;
   @override
-  final RangeValue debitValueFrom;
+  final RangeValue amountValueFrom;
   @override
-  final RangeValue debitValueTo;
+  final RangeValue amountValueTo;
+  final List<String> _filterStatuses;
   @override
-  final String filterStatus;
+  List<String> get filterStatuses {
+    if (_filterStatuses is EqualUnmodifiableListView) return _filterStatuses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterStatuses);
+  }
 
   @override
   String toString() {
-    return 'AllInvoicesFilter(documentNumber: $documentNumber, dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, debitValueFrom: $debitValueFrom, debitValueTo: $debitValueTo, filterStatus: $filterStatus)';
+    return 'AllInvoicesFilter(documentNumber: $documentNumber, dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
   }
 
   @override
@@ -234,12 +240,12 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
                 other.documentDateTo == documentDateTo) &&
-            (identical(other.debitValueFrom, debitValueFrom) ||
-                other.debitValueFrom == debitValueFrom) &&
-            (identical(other.debitValueTo, debitValueTo) ||
-                other.debitValueTo == debitValueTo) &&
-            (identical(other.filterStatus, filterStatus) ||
-                other.filterStatus == filterStatus));
+            (identical(other.amountValueFrom, amountValueFrom) ||
+                other.amountValueFrom == amountValueFrom) &&
+            (identical(other.amountValueTo, amountValueTo) ||
+                other.amountValueTo == amountValueTo) &&
+            const DeepCollectionEquality()
+                .equals(other._filterStatuses, _filterStatuses));
   }
 
   @override
@@ -250,9 +256,9 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
       dueDateTo,
       documentDateFrom,
       documentDateTo,
-      debitValueFrom,
-      debitValueTo,
-      filterStatus);
+      amountValueFrom,
+      amountValueTo,
+      const DeepCollectionEquality().hash(_filterStatuses));
 
   @JsonKey(ignore: true)
   @override
@@ -269,9 +275,9 @@ abstract class _AllInvoicesFilter extends AllInvoicesFilter {
       required final DateTimeStringValue dueDateTo,
       required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
-      required final RangeValue debitValueFrom,
-      required final RangeValue debitValueTo,
-      required final String filterStatus}) = _$_AllInvoicesFilter;
+      required final RangeValue amountValueFrom,
+      required final RangeValue amountValueTo,
+      required final List<String> filterStatuses}) = _$_AllInvoicesFilter;
   _AllInvoicesFilter._() : super._();
 
   @override
@@ -285,11 +291,11 @@ abstract class _AllInvoicesFilter extends AllInvoicesFilter {
   @override
   DateTimeStringValue get documentDateTo;
   @override
-  RangeValue get debitValueFrom;
+  RangeValue get amountValueFrom;
   @override
-  RangeValue get debitValueTo;
+  RangeValue get amountValueTo;
   @override
-  String get filterStatus;
+  List<String> get filterStatuses;
   @override
   @JsonKey(ignore: true)
   _$$_AllInvoicesFilterCopyWith<_$_AllInvoicesFilter> get copyWith =>

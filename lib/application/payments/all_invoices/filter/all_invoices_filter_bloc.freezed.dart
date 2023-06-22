@@ -20,46 +20,45 @@ mixin _$AllInvoicesFilterEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,14 +66,15 @@ mixin _$AllInvoicesFilterEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -84,12 +84,12 @@ mixin _$AllInvoicesFilterEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -99,12 +99,12 @@ mixin _$AllInvoicesFilterEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -207,16 +207,15 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
     return fetch(salesOrganisation);
   }
@@ -226,15 +225,15 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
     return fetch?.call(salesOrganisation);
   }
@@ -244,15 +243,15 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -266,14 +265,15 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -286,12 +286,12 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -304,12 +304,12 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -372,16 +372,15 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
     return initialized();
   }
@@ -391,15 +390,15 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
     return initialized?.call();
   }
@@ -409,15 +408,15 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -431,14 +430,15 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -451,12 +451,12 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -469,12 +469,12 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -492,35 +492,35 @@ abstract class _Initialized implements AllInvoicesFilterEvent {
 }
 
 /// @nodoc
-abstract class _$$_OpenFilterDrawerCopyWith<$Res> {
-  factory _$$_OpenFilterDrawerCopyWith(
-          _$_OpenFilterDrawer value, $Res Function(_$_OpenFilterDrawer) then) =
-      __$$_OpenFilterDrawerCopyWithImpl<$Res>;
+abstract class _$$_OpenFilterBottomSheetCopyWith<$Res> {
+  factory _$$_OpenFilterBottomSheetCopyWith(_$_OpenFilterBottomSheet value,
+          $Res Function(_$_OpenFilterBottomSheet) then) =
+      __$$_OpenFilterBottomSheetCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_OpenFilterDrawerCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_OpenFilterDrawer>
-    implements _$$_OpenFilterDrawerCopyWith<$Res> {
-  __$$_OpenFilterDrawerCopyWithImpl(
-      _$_OpenFilterDrawer _value, $Res Function(_$_OpenFilterDrawer) _then)
+class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
+    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_OpenFilterBottomSheet>
+    implements _$$_OpenFilterBottomSheetCopyWith<$Res> {
+  __$$_OpenFilterBottomSheetCopyWithImpl(_$_OpenFilterBottomSheet _value,
+      $Res Function(_$_OpenFilterBottomSheet) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_OpenFilterDrawer implements _OpenFilterDrawer {
-  const _$_OpenFilterDrawer();
+class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
+  const _$_OpenFilterBottomSheet();
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.openFilterDrawer()';
+    return 'AllInvoicesFilterEvent.openFilterBottomSheet()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_OpenFilterDrawer);
+        (other.runtimeType == runtimeType && other is _$_OpenFilterBottomSheet);
   }
 
   @override
@@ -531,18 +531,17 @@ class _$_OpenFilterDrawer implements _OpenFilterDrawer {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return openFilterDrawer();
+    return openFilterBottomSheet();
   }
 
   @override
@@ -550,17 +549,17 @@ class _$_OpenFilterDrawer implements _OpenFilterDrawer {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return openFilterDrawer?.call();
+    return openFilterBottomSheet?.call();
   }
 
   @override
@@ -568,19 +567,19 @@ class _$_OpenFilterDrawer implements _OpenFilterDrawer {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (openFilterDrawer != null) {
-      return openFilterDrawer();
+    if (openFilterBottomSheet != null) {
+      return openFilterBottomSheet();
     }
     return orElse();
   }
@@ -590,19 +589,20 @@ class _$_OpenFilterDrawer implements _OpenFilterDrawer {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
   }) {
-    return openFilterDrawer(this);
+    return openFilterBottomSheet(this);
   }
 
   @override
@@ -610,17 +610,17 @@ class _$_OpenFilterDrawer implements _OpenFilterDrawer {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
   }) {
-    return openFilterDrawer?.call(this);
+    return openFilterBottomSheet?.call(this);
   }
 
   @override
@@ -628,26 +628,187 @@ class _$_OpenFilterDrawer implements _OpenFilterDrawer {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (openFilterDrawer != null) {
-      return openFilterDrawer(this);
+    if (openFilterBottomSheet != null) {
+      return openFilterBottomSheet(this);
     }
     return orElse();
   }
 }
 
-abstract class _OpenFilterDrawer implements AllInvoicesFilterEvent {
-  const factory _OpenFilterDrawer() = _$_OpenFilterDrawer;
+abstract class _OpenFilterBottomSheet implements AllInvoicesFilterEvent {
+  const factory _OpenFilterBottomSheet() = _$_OpenFilterBottomSheet;
+}
+
+/// @nodoc
+abstract class _$$_CloseFilterBottomSheetCopyWith<$Res> {
+  factory _$$_CloseFilterBottomSheetCopyWith(_$_CloseFilterBottomSheet value,
+          $Res Function(_$_CloseFilterBottomSheet) then) =
+      __$$_CloseFilterBottomSheetCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CloseFilterBottomSheetCopyWithImpl<$Res>
+    extends _$AllInvoicesFilterEventCopyWithImpl<$Res,
+        _$_CloseFilterBottomSheet>
+    implements _$$_CloseFilterBottomSheetCopyWith<$Res> {
+  __$$_CloseFilterBottomSheetCopyWithImpl(_$_CloseFilterBottomSheet _value,
+      $Res Function(_$_CloseFilterBottomSheet) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
+  const _$_CloseFilterBottomSheet();
+
+  @override
+  String toString() {
+    return 'AllInvoicesFilterEvent.closeFilterBottomSheet()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CloseFilterBottomSheet);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function() initialized,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
+    required TResult Function() applyFilters,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
+  }) {
+    return closeFilterBottomSheet();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function()? initialized,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
+    TResult? Function()? applyFilters,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
+  }) {
+    return closeFilterBottomSheet?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function()? initialized,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
+    TResult Function()? applyFilters,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
+    required TResult orElse(),
+  }) {
+    if (closeFilterBottomSheet != null) {
+      return closeFilterBottomSheet();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
+    required TResult Function(_ApplyFilters value) applyFilters,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
+    required TResult Function(_StatusChanged value) statusChanged,
+    required TResult Function(_SetDueDate value) setDueDate,
+    required TResult Function(_SetDocumentDate value) setDocumentDate,
+  }) {
+    return closeFilterBottomSheet(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
+    TResult? Function(_ApplyFilters value)? applyFilters,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
+    TResult? Function(_StatusChanged value)? statusChanged,
+    TResult? Function(_SetDueDate value)? setDueDate,
+    TResult? Function(_SetDocumentDate value)? setDocumentDate,
+  }) {
+    return closeFilterBottomSheet?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
+    TResult Function(_ApplyFilters value)? applyFilters,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
+    TResult Function(_StatusChanged value)? statusChanged,
+    TResult Function(_SetDueDate value)? setDueDate,
+    TResult Function(_SetDocumentDate value)? setDocumentDate,
+    required TResult orElse(),
+  }) {
+    if (closeFilterBottomSheet != null) {
+      return closeFilterBottomSheet(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CloseFilterBottomSheet implements AllInvoicesFilterEvent {
+  const factory _CloseFilterBottomSheet() = _$_CloseFilterBottomSheet;
 }
 
 /// @nodoc
@@ -690,16 +851,15 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
     return applyFilters();
   }
@@ -709,15 +869,15 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
     return applyFilters?.call();
   }
@@ -727,15 +887,15 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
     if (applyFilters != null) {
@@ -749,14 +909,15 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -769,12 +930,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -787,12 +948,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -810,35 +971,35 @@ abstract class _ApplyFilters implements AllInvoicesFilterEvent {
 }
 
 /// @nodoc
-abstract class _$$_ClearFiltersCopyWith<$Res> {
-  factory _$$_ClearFiltersCopyWith(
-          _$_ClearFilters value, $Res Function(_$_ClearFilters) then) =
-      __$$_ClearFiltersCopyWithImpl<$Res>;
+abstract class _$$_ResetFiltersCopyWith<$Res> {
+  factory _$$_ResetFiltersCopyWith(
+          _$_ResetFilters value, $Res Function(_$_ResetFilters) then) =
+      __$$_ResetFiltersCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearFiltersCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_ClearFilters>
-    implements _$$_ClearFiltersCopyWith<$Res> {
-  __$$_ClearFiltersCopyWithImpl(
-      _$_ClearFilters _value, $Res Function(_$_ClearFilters) _then)
+class __$$_ResetFiltersCopyWithImpl<$Res>
+    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_ResetFilters>
+    implements _$$_ResetFiltersCopyWith<$Res> {
+  __$$_ResetFiltersCopyWithImpl(
+      _$_ResetFilters _value, $Res Function(_$_ResetFilters) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearFilters implements _ClearFilters {
-  const _$_ClearFilters();
+class _$_ResetFilters implements _ResetFilters {
+  const _$_ResetFilters();
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.clearFilters()';
+    return 'AllInvoicesFilterEvent.resetFilters()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearFilters);
+        (other.runtimeType == runtimeType && other is _$_ResetFilters);
   }
 
   @override
@@ -849,18 +1010,17 @@ class _$_ClearFilters implements _ClearFilters {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return clearFilters();
+    return resetFilters();
   }
 
   @override
@@ -868,17 +1028,17 @@ class _$_ClearFilters implements _ClearFilters {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return clearFilters?.call();
+    return resetFilters?.call();
   }
 
   @override
@@ -886,19 +1046,19 @@ class _$_ClearFilters implements _ClearFilters {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (clearFilters != null) {
-      return clearFilters();
+    if (resetFilters != null) {
+      return resetFilters();
     }
     return orElse();
   }
@@ -908,19 +1068,20 @@ class _$_ClearFilters implements _ClearFilters {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
   }) {
-    return clearFilters(this);
+    return resetFilters(this);
   }
 
   @override
@@ -928,17 +1089,17 @@ class _$_ClearFilters implements _ClearFilters {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
   }) {
-    return clearFilters?.call(this);
+    return resetFilters?.call(this);
   }
 
   @override
@@ -946,247 +1107,55 @@ class _$_ClearFilters implements _ClearFilters {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (clearFilters != null) {
-      return clearFilters(this);
+    if (resetFilters != null) {
+      return resetFilters(this);
     }
     return orElse();
   }
 }
 
-abstract class _ClearFilters implements AllInvoicesFilterEvent {
-  const factory _ClearFilters() = _$_ClearFilters;
+abstract class _ResetFilters implements AllInvoicesFilterEvent {
+  const factory _ResetFilters() = _$_ResetFilters;
 }
 
 /// @nodoc
-abstract class _$$_DocumentNumberChangedCopyWith<$Res> {
-  factory _$$_DocumentNumberChangedCopyWith(_$_DocumentNumberChanged value,
-          $Res Function(_$_DocumentNumberChanged) then) =
-      __$$_DocumentNumberChangedCopyWithImpl<$Res>;
+abstract class _$$_AmountValueFromChangedCopyWith<$Res> {
+  factory _$$_AmountValueFromChangedCopyWith(_$_AmountValueFromChanged value,
+          $Res Function(_$_AmountValueFromChanged) then) =
+      __$$_AmountValueFromChangedCopyWithImpl<$Res>;
   @useResult
-  $Res call({DocumentNumber documentNumber});
+  $Res call({String amountValueFrom});
 }
 
 /// @nodoc
-class __$$_DocumentNumberChangedCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_DocumentNumberChanged>
-    implements _$$_DocumentNumberChangedCopyWith<$Res> {
-  __$$_DocumentNumberChangedCopyWithImpl(_$_DocumentNumberChanged _value,
-      $Res Function(_$_DocumentNumberChanged) _then)
+class __$$_AmountValueFromChangedCopyWithImpl<$Res>
+    extends _$AllInvoicesFilterEventCopyWithImpl<$Res,
+        _$_AmountValueFromChanged>
+    implements _$$_AmountValueFromChangedCopyWith<$Res> {
+  __$$_AmountValueFromChangedCopyWithImpl(_$_AmountValueFromChanged _value,
+      $Res Function(_$_AmountValueFromChanged) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
+    Object? amountValueFrom = null,
   }) {
-    return _then(_$_DocumentNumberChanged(
-      null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as DocumentNumber,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_DocumentNumberChanged implements _DocumentNumberChanged {
-  const _$_DocumentNumberChanged(this.documentNumber);
-
-  @override
-  final DocumentNumber documentNumber;
-
-  @override
-  String toString() {
-    return 'AllInvoicesFilterEvent.documentNumberChanged(documentNumber: $documentNumber)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_DocumentNumberChanged &&
-            (identical(other.documentNumber, documentNumber) ||
-                other.documentNumber == documentNumber));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, documentNumber);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_DocumentNumberChangedCopyWith<_$_DocumentNumberChanged> get copyWith =>
-      __$$_DocumentNumberChangedCopyWithImpl<_$_DocumentNumberChanged>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation) fetch,
-    required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
-    required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
-  }) {
-    return documentNumberChanged(documentNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
-    TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
-    TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
-  }) {
-    return documentNumberChanged?.call(documentNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
-    TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
-    TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (documentNumberChanged != null) {
-      return documentNumberChanged(documentNumber);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
-    required TResult Function(_StatusChanged value) statusChanged,
-    required TResult Function(_SetDueDate value) setDueDate,
-    required TResult Function(_SetDocumentDate value) setDocumentDate,
-  }) {
-    return documentNumberChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
-    TResult? Function(_StatusChanged value)? statusChanged,
-    TResult? Function(_SetDueDate value)? setDueDate,
-    TResult? Function(_SetDocumentDate value)? setDocumentDate,
-  }) {
-    return documentNumberChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
-    TResult Function(_StatusChanged value)? statusChanged,
-    TResult Function(_SetDueDate value)? setDueDate,
-    TResult Function(_SetDocumentDate value)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (documentNumberChanged != null) {
-      return documentNumberChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DocumentNumberChanged implements AllInvoicesFilterEvent {
-  const factory _DocumentNumberChanged(final DocumentNumber documentNumber) =
-      _$_DocumentNumberChanged;
-
-  DocumentNumber get documentNumber;
-  @JsonKey(ignore: true)
-  _$$_DocumentNumberChangedCopyWith<_$_DocumentNumberChanged> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_DebitValueFromChangedCopyWith<$Res> {
-  factory _$$_DebitValueFromChangedCopyWith(_$_DebitValueFromChanged value,
-          $Res Function(_$_DebitValueFromChanged) then) =
-      __$$_DebitValueFromChangedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String debitValueFrom});
-}
-
-/// @nodoc
-class __$$_DebitValueFromChangedCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_DebitValueFromChanged>
-    implements _$$_DebitValueFromChangedCopyWith<$Res> {
-  __$$_DebitValueFromChangedCopyWithImpl(_$_DebitValueFromChanged _value,
-      $Res Function(_$_DebitValueFromChanged) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? debitValueFrom = null,
-  }) {
-    return _then(_$_DebitValueFromChanged(
-      null == debitValueFrom
-          ? _value.debitValueFrom
-          : debitValueFrom // ignore: cast_nullable_to_non_nullable
+    return _then(_$_AmountValueFromChanged(
+      null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1194,34 +1163,34 @@ class __$$_DebitValueFromChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DebitValueFromChanged implements _DebitValueFromChanged {
-  const _$_DebitValueFromChanged(this.debitValueFrom);
+class _$_AmountValueFromChanged implements _AmountValueFromChanged {
+  const _$_AmountValueFromChanged(this.amountValueFrom);
 
   @override
-  final String debitValueFrom;
+  final String amountValueFrom;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.debitValueFromChanged(debitValueFrom: $debitValueFrom)';
+    return 'AllInvoicesFilterEvent.amountValueFromChanged(amountValueFrom: $amountValueFrom)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DebitValueFromChanged &&
-            (identical(other.debitValueFrom, debitValueFrom) ||
-                other.debitValueFrom == debitValueFrom));
+            other is _$_AmountValueFromChanged &&
+            (identical(other.amountValueFrom, amountValueFrom) ||
+                other.amountValueFrom == amountValueFrom));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, debitValueFrom);
+  int get hashCode => Object.hash(runtimeType, amountValueFrom);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DebitValueFromChangedCopyWith<_$_DebitValueFromChanged> get copyWith =>
-      __$$_DebitValueFromChangedCopyWithImpl<_$_DebitValueFromChanged>(
+  _$$_AmountValueFromChangedCopyWith<_$_AmountValueFromChanged> get copyWith =>
+      __$$_AmountValueFromChangedCopyWithImpl<_$_AmountValueFromChanged>(
           this, _$identity);
 
   @override
@@ -1229,18 +1198,17 @@ class _$_DebitValueFromChanged implements _DebitValueFromChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return debitValueFromChanged(debitValueFrom);
+    return amountValueFromChanged(amountValueFrom);
   }
 
   @override
@@ -1248,17 +1216,17 @@ class _$_DebitValueFromChanged implements _DebitValueFromChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return debitValueFromChanged?.call(debitValueFrom);
+    return amountValueFromChanged?.call(amountValueFrom);
   }
 
   @override
@@ -1266,19 +1234,19 @@ class _$_DebitValueFromChanged implements _DebitValueFromChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (debitValueFromChanged != null) {
-      return debitValueFromChanged(debitValueFrom);
+    if (amountValueFromChanged != null) {
+      return amountValueFromChanged(amountValueFrom);
     }
     return orElse();
   }
@@ -1288,19 +1256,20 @@ class _$_DebitValueFromChanged implements _DebitValueFromChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
   }) {
-    return debitValueFromChanged(this);
+    return amountValueFromChanged(this);
   }
 
   @override
@@ -1308,17 +1277,17 @@ class _$_DebitValueFromChanged implements _DebitValueFromChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
   }) {
-    return debitValueFromChanged?.call(this);
+    return amountValueFromChanged?.call(this);
   }
 
   @override
@@ -1326,60 +1295,60 @@ class _$_DebitValueFromChanged implements _DebitValueFromChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (debitValueFromChanged != null) {
-      return debitValueFromChanged(this);
+    if (amountValueFromChanged != null) {
+      return amountValueFromChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class _DebitValueFromChanged implements AllInvoicesFilterEvent {
-  const factory _DebitValueFromChanged(final String debitValueFrom) =
-      _$_DebitValueFromChanged;
+abstract class _AmountValueFromChanged implements AllInvoicesFilterEvent {
+  const factory _AmountValueFromChanged(final String amountValueFrom) =
+      _$_AmountValueFromChanged;
 
-  String get debitValueFrom;
+  String get amountValueFrom;
   @JsonKey(ignore: true)
-  _$$_DebitValueFromChangedCopyWith<_$_DebitValueFromChanged> get copyWith =>
+  _$$_AmountValueFromChangedCopyWith<_$_AmountValueFromChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DebitValueToChangedCopyWith<$Res> {
-  factory _$$_DebitValueToChangedCopyWith(_$_DebitValueToChanged value,
-          $Res Function(_$_DebitValueToChanged) then) =
-      __$$_DebitValueToChangedCopyWithImpl<$Res>;
+abstract class _$$_AmountValueToChangedCopyWith<$Res> {
+  factory _$$_AmountValueToChangedCopyWith(_$_AmountValueToChanged value,
+          $Res Function(_$_AmountValueToChanged) then) =
+      __$$_AmountValueToChangedCopyWithImpl<$Res>;
   @useResult
-  $Res call({String debitValueTo});
+  $Res call({String amountValueTo});
 }
 
 /// @nodoc
-class __$$_DebitValueToChangedCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_DebitValueToChanged>
-    implements _$$_DebitValueToChangedCopyWith<$Res> {
-  __$$_DebitValueToChangedCopyWithImpl(_$_DebitValueToChanged _value,
-      $Res Function(_$_DebitValueToChanged) _then)
+class __$$_AmountValueToChangedCopyWithImpl<$Res>
+    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_AmountValueToChanged>
+    implements _$$_AmountValueToChangedCopyWith<$Res> {
+  __$$_AmountValueToChangedCopyWithImpl(_$_AmountValueToChanged _value,
+      $Res Function(_$_AmountValueToChanged) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? debitValueTo = null,
+    Object? amountValueTo = null,
   }) {
-    return _then(_$_DebitValueToChanged(
-      null == debitValueTo
-          ? _value.debitValueTo
-          : debitValueTo // ignore: cast_nullable_to_non_nullable
+    return _then(_$_AmountValueToChanged(
+      null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1387,34 +1356,34 @@ class __$$_DebitValueToChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DebitValueToChanged implements _DebitValueToChanged {
-  const _$_DebitValueToChanged(this.debitValueTo);
+class _$_AmountValueToChanged implements _AmountValueToChanged {
+  const _$_AmountValueToChanged(this.amountValueTo);
 
   @override
-  final String debitValueTo;
+  final String amountValueTo;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.debitValueToChanged(debitValueTo: $debitValueTo)';
+    return 'AllInvoicesFilterEvent.amountValueToChanged(amountValueTo: $amountValueTo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DebitValueToChanged &&
-            (identical(other.debitValueTo, debitValueTo) ||
-                other.debitValueTo == debitValueTo));
+            other is _$_AmountValueToChanged &&
+            (identical(other.amountValueTo, amountValueTo) ||
+                other.amountValueTo == amountValueTo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, debitValueTo);
+  int get hashCode => Object.hash(runtimeType, amountValueTo);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DebitValueToChangedCopyWith<_$_DebitValueToChanged> get copyWith =>
-      __$$_DebitValueToChangedCopyWithImpl<_$_DebitValueToChanged>(
+  _$$_AmountValueToChangedCopyWith<_$_AmountValueToChanged> get copyWith =>
+      __$$_AmountValueToChangedCopyWithImpl<_$_AmountValueToChanged>(
           this, _$identity);
 
   @override
@@ -1422,18 +1391,17 @@ class _$_DebitValueToChanged implements _DebitValueToChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return debitValueToChanged(debitValueTo);
+    return amountValueToChanged(amountValueTo);
   }
 
   @override
@@ -1441,17 +1409,17 @@ class _$_DebitValueToChanged implements _DebitValueToChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return debitValueToChanged?.call(debitValueTo);
+    return amountValueToChanged?.call(amountValueTo);
   }
 
   @override
@@ -1459,19 +1427,19 @@ class _$_DebitValueToChanged implements _DebitValueToChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (debitValueToChanged != null) {
-      return debitValueToChanged(debitValueTo);
+    if (amountValueToChanged != null) {
+      return amountValueToChanged(amountValueTo);
     }
     return orElse();
   }
@@ -1481,19 +1449,20 @@ class _$_DebitValueToChanged implements _DebitValueToChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
   }) {
-    return debitValueToChanged(this);
+    return amountValueToChanged(this);
   }
 
   @override
@@ -1501,17 +1470,17 @@ class _$_DebitValueToChanged implements _DebitValueToChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
   }) {
-    return debitValueToChanged?.call(this);
+    return amountValueToChanged?.call(this);
   }
 
   @override
@@ -1519,31 +1488,31 @@ class _$_DebitValueToChanged implements _DebitValueToChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (debitValueToChanged != null) {
-      return debitValueToChanged(this);
+    if (amountValueToChanged != null) {
+      return amountValueToChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class _DebitValueToChanged implements AllInvoicesFilterEvent {
-  const factory _DebitValueToChanged(final String debitValueTo) =
-      _$_DebitValueToChanged;
+abstract class _AmountValueToChanged implements AllInvoicesFilterEvent {
+  const factory _AmountValueToChanged(final String amountValueTo) =
+      _$_AmountValueToChanged;
 
-  String get debitValueTo;
+  String get amountValueTo;
   @JsonKey(ignore: true)
-  _$$_DebitValueToChangedCopyWith<_$_DebitValueToChanged> get copyWith =>
+  _$$_AmountValueToChangedCopyWith<_$_AmountValueToChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1553,7 +1522,7 @@ abstract class _$$_StatusChangedCopyWith<$Res> {
           _$_StatusChanged value, $Res Function(_$_StatusChanged) then) =
       __$$_StatusChangedCopyWithImpl<$Res>;
   @useResult
-  $Res call({String filterStatus});
+  $Res call({String filterStatus, bool selected});
 }
 
 /// @nodoc
@@ -1568,12 +1537,17 @@ class __$$_StatusChangedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? filterStatus = null,
+    Object? selected = null,
   }) {
     return _then(_$_StatusChanged(
       null == filterStatus
           ? _value.filterStatus
           : filterStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      null == selected
+          ? _value.selected
+          : selected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1581,14 +1555,16 @@ class __$$_StatusChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_StatusChanged implements _StatusChanged {
-  const _$_StatusChanged(this.filterStatus);
+  const _$_StatusChanged(this.filterStatus, this.selected);
 
   @override
   final String filterStatus;
+  @override
+  final bool selected;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.statusChanged(filterStatus: $filterStatus)';
+    return 'AllInvoicesFilterEvent.statusChanged(filterStatus: $filterStatus, selected: $selected)';
   }
 
   @override
@@ -1597,11 +1573,13 @@ class _$_StatusChanged implements _StatusChanged {
         (other.runtimeType == runtimeType &&
             other is _$_StatusChanged &&
             (identical(other.filterStatus, filterStatus) ||
-                other.filterStatus == filterStatus));
+                other.filterStatus == filterStatus) &&
+            (identical(other.selected, selected) ||
+                other.selected == selected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filterStatus);
+  int get hashCode => Object.hash(runtimeType, filterStatus, selected);
 
   @JsonKey(ignore: true)
   @override
@@ -1614,18 +1592,17 @@ class _$_StatusChanged implements _StatusChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return statusChanged(filterStatus);
+    return statusChanged(filterStatus, selected);
   }
 
   @override
@@ -1633,17 +1610,17 @@ class _$_StatusChanged implements _StatusChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return statusChanged?.call(filterStatus);
+    return statusChanged?.call(filterStatus, selected);
   }
 
   @override
@@ -1651,19 +1628,19 @@ class _$_StatusChanged implements _StatusChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
     if (statusChanged != null) {
-      return statusChanged(filterStatus);
+      return statusChanged(filterStatus, selected);
     }
     return orElse();
   }
@@ -1673,14 +1650,15 @@ class _$_StatusChanged implements _StatusChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -1693,12 +1671,12 @@ class _$_StatusChanged implements _StatusChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -1711,12 +1689,12 @@ class _$_StatusChanged implements _StatusChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -1730,9 +1708,11 @@ class _$_StatusChanged implements _StatusChanged {
 }
 
 abstract class _StatusChanged implements AllInvoicesFilterEvent {
-  const factory _StatusChanged(final String filterStatus) = _$_StatusChanged;
+  const factory _StatusChanged(final String filterStatus, final bool selected) =
+      _$_StatusChanged;
 
   String get filterStatus;
+  bool get selected;
   @JsonKey(ignore: true)
   _$$_StatusChangedCopyWith<_$_StatusChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1744,7 +1724,7 @@ abstract class _$$_SetDueDateCopyWith<$Res> {
           _$_SetDueDate value, $Res Function(_$_SetDueDate) then) =
       __$$_SetDueDateCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTimeRange dueDateRange});
+  $Res call({DateTimeRange dateRange});
 }
 
 /// @nodoc
@@ -1758,12 +1738,12 @@ class __$$_SetDueDateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dueDateRange = null,
+    Object? dateRange = null,
   }) {
     return _then(_$_SetDueDate(
-      null == dueDateRange
-          ? _value.dueDateRange
-          : dueDateRange // ignore: cast_nullable_to_non_nullable
+      null == dateRange
+          ? _value.dateRange
+          : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange,
     ));
   }
@@ -1772,14 +1752,14 @@ class __$$_SetDueDateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SetDueDate implements _SetDueDate {
-  const _$_SetDueDate(this.dueDateRange);
+  const _$_SetDueDate(this.dateRange);
 
   @override
-  final DateTimeRange dueDateRange;
+  final DateTimeRange dateRange;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.setDueDate(dueDateRange: $dueDateRange)';
+    return 'AllInvoicesFilterEvent.setDueDate(dateRange: $dateRange)';
   }
 
   @override
@@ -1787,12 +1767,12 @@ class _$_SetDueDate implements _SetDueDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetDueDate &&
-            (identical(other.dueDateRange, dueDateRange) ||
-                other.dueDateRange == dueDateRange));
+            (identical(other.dateRange, dateRange) ||
+                other.dateRange == dateRange));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dueDateRange);
+  int get hashCode => Object.hash(runtimeType, dateRange);
 
   @JsonKey(ignore: true)
   @override
@@ -1805,18 +1785,17 @@ class _$_SetDueDate implements _SetDueDate {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return setDueDate(dueDateRange);
+    return setDueDate(dateRange);
   }
 
   @override
@@ -1824,17 +1803,17 @@ class _$_SetDueDate implements _SetDueDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return setDueDate?.call(dueDateRange);
+    return setDueDate?.call(dateRange);
   }
 
   @override
@@ -1842,19 +1821,19 @@ class _$_SetDueDate implements _SetDueDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
     if (setDueDate != null) {
-      return setDueDate(dueDateRange);
+      return setDueDate(dateRange);
     }
     return orElse();
   }
@@ -1864,14 +1843,15 @@ class _$_SetDueDate implements _SetDueDate {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -1884,12 +1864,12 @@ class _$_SetDueDate implements _SetDueDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -1902,12 +1882,12 @@ class _$_SetDueDate implements _SetDueDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -1921,9 +1901,9 @@ class _$_SetDueDate implements _SetDueDate {
 }
 
 abstract class _SetDueDate implements AllInvoicesFilterEvent {
-  const factory _SetDueDate(final DateTimeRange dueDateRange) = _$_SetDueDate;
+  const factory _SetDueDate(final DateTimeRange dateRange) = _$_SetDueDate;
 
-  DateTimeRange get dueDateRange;
+  DateTimeRange get dateRange;
   @JsonKey(ignore: true)
   _$$_SetDueDateCopyWith<_$_SetDueDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1935,7 +1915,7 @@ abstract class _$$_SetDocumentDateCopyWith<$Res> {
           _$_SetDocumentDate value, $Res Function(_$_SetDocumentDate) then) =
       __$$_SetDocumentDateCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTimeRange documentDateRange});
+  $Res call({DateTimeRange dateRange});
 }
 
 /// @nodoc
@@ -1949,12 +1929,12 @@ class __$$_SetDocumentDateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentDateRange = null,
+    Object? dateRange = null,
   }) {
     return _then(_$_SetDocumentDate(
-      null == documentDateRange
-          ? _value.documentDateRange
-          : documentDateRange // ignore: cast_nullable_to_non_nullable
+      null == dateRange
+          ? _value.dateRange
+          : dateRange // ignore: cast_nullable_to_non_nullable
               as DateTimeRange,
     ));
   }
@@ -1963,14 +1943,14 @@ class __$$_SetDocumentDateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SetDocumentDate implements _SetDocumentDate {
-  const _$_SetDocumentDate(this.documentDateRange);
+  const _$_SetDocumentDate(this.dateRange);
 
   @override
-  final DateTimeRange documentDateRange;
+  final DateTimeRange dateRange;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.setDocumentDate(documentDateRange: $documentDateRange)';
+    return 'AllInvoicesFilterEvent.setDocumentDate(dateRange: $dateRange)';
   }
 
   @override
@@ -1978,12 +1958,12 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetDocumentDate &&
-            (identical(other.documentDateRange, documentDateRange) ||
-                other.documentDateRange == documentDateRange));
+            (identical(other.dateRange, dateRange) ||
+                other.dateRange == dateRange));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, documentDateRange);
+  int get hashCode => Object.hash(runtimeType, dateRange);
 
   @JsonKey(ignore: true)
   @override
@@ -1996,18 +1976,17 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function() initialized,
-    required TResult Function() openFilterDrawer,
+    required TResult Function() openFilterBottomSheet,
+    required TResult Function() closeFilterBottomSheet,
     required TResult Function() applyFilters,
-    required TResult Function() clearFilters,
-    required TResult Function(DocumentNumber documentNumber)
-        documentNumberChanged,
-    required TResult Function(String debitValueFrom) debitValueFromChanged,
-    required TResult Function(String debitValueTo) debitValueToChanged,
-    required TResult Function(String filterStatus) statusChanged,
-    required TResult Function(DateTimeRange dueDateRange) setDueDate,
-    required TResult Function(DateTimeRange documentDateRange) setDocumentDate,
+    required TResult Function() resetFilters,
+    required TResult Function(String amountValueFrom) amountValueFromChanged,
+    required TResult Function(String amountValueTo) amountValueToChanged,
+    required TResult Function(String filterStatus, bool selected) statusChanged,
+    required TResult Function(DateTimeRange dateRange) setDueDate,
+    required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return setDocumentDate(documentDateRange);
+    return setDocumentDate(dateRange);
   }
 
   @override
@@ -2015,17 +1994,17 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function()? initialized,
-    TResult? Function()? openFilterDrawer,
+    TResult? Function()? openFilterBottomSheet,
+    TResult? Function()? closeFilterBottomSheet,
     TResult? Function()? applyFilters,
-    TResult? Function()? clearFilters,
-    TResult? Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult? Function(String debitValueFrom)? debitValueFromChanged,
-    TResult? Function(String debitValueTo)? debitValueToChanged,
-    TResult? Function(String filterStatus)? statusChanged,
-    TResult? Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult? Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult? Function()? resetFilters,
+    TResult? Function(String amountValueFrom)? amountValueFromChanged,
+    TResult? Function(String amountValueTo)? amountValueToChanged,
+    TResult? Function(String filterStatus, bool selected)? statusChanged,
+    TResult? Function(DateTimeRange dateRange)? setDueDate,
+    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return setDocumentDate?.call(documentDateRange);
+    return setDocumentDate?.call(dateRange);
   }
 
   @override
@@ -2033,19 +2012,19 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function()? initialized,
-    TResult Function()? openFilterDrawer,
+    TResult Function()? openFilterBottomSheet,
+    TResult Function()? closeFilterBottomSheet,
     TResult Function()? applyFilters,
-    TResult Function()? clearFilters,
-    TResult Function(DocumentNumber documentNumber)? documentNumberChanged,
-    TResult Function(String debitValueFrom)? debitValueFromChanged,
-    TResult Function(String debitValueTo)? debitValueToChanged,
-    TResult Function(String filterStatus)? statusChanged,
-    TResult Function(DateTimeRange dueDateRange)? setDueDate,
-    TResult Function(DateTimeRange documentDateRange)? setDocumentDate,
+    TResult Function()? resetFilters,
+    TResult Function(String amountValueFrom)? amountValueFromChanged,
+    TResult Function(String amountValueTo)? amountValueToChanged,
+    TResult Function(String filterStatus, bool selected)? statusChanged,
+    TResult Function(DateTimeRange dateRange)? setDueDate,
+    TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
     if (setDocumentDate != null) {
-      return setDocumentDate(documentDateRange);
+      return setDocumentDate(dateRange);
     }
     return orElse();
   }
@@ -2055,14 +2034,15 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterDrawer value) openFilterDrawer,
+    required TResult Function(_OpenFilterBottomSheet value)
+        openFilterBottomSheet,
+    required TResult Function(_CloseFilterBottomSheet value)
+        closeFilterBottomSheet,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ClearFilters value) clearFilters,
-    required TResult Function(_DocumentNumberChanged value)
-        documentNumberChanged,
-    required TResult Function(_DebitValueFromChanged value)
-        debitValueFromChanged,
-    required TResult Function(_DebitValueToChanged value) debitValueToChanged,
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_AmountValueFromChanged value)
+        amountValueFromChanged,
+    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
     required TResult Function(_StatusChanged value) statusChanged,
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
@@ -2075,12 +2055,12 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ClearFilters value)? clearFilters,
-    TResult? Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult? Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult? Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
@@ -2093,12 +2073,12 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterDrawer value)? openFilterDrawer,
+    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
+    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ClearFilters value)? clearFilters,
-    TResult Function(_DocumentNumberChanged value)? documentNumberChanged,
-    TResult Function(_DebitValueFromChanged value)? debitValueFromChanged,
-    TResult Function(_DebitValueToChanged value)? debitValueToChanged,
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
+    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
     TResult Function(_SetDueDate value)? setDueDate,
     TResult Function(_SetDocumentDate value)? setDocumentDate,
@@ -2112,10 +2092,10 @@ class _$_SetDocumentDate implements _SetDocumentDate {
 }
 
 abstract class _SetDocumentDate implements AllInvoicesFilterEvent {
-  const factory _SetDocumentDate(final DateTimeRange documentDateRange) =
+  const factory _SetDocumentDate(final DateTimeRange dateRange) =
       _$_SetDocumentDate;
 
-  DateTimeRange get documentDateRange;
+  DateTimeRange get dateRange;
   @JsonKey(ignore: true)
   _$$_SetDocumentDateCopyWith<_$_SetDocumentDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2123,10 +2103,10 @@ abstract class _SetDocumentDate implements AllInvoicesFilterEvent {
 
 /// @nodoc
 mixin _$AllInvoicesFilterState {
-  AllInvoicesFilter get allInvoicesFilter => throw _privateConstructorUsedError;
+  AllInvoicesFilter get tempFilter => throw _privateConstructorUsedError;
+  AllInvoicesFilter get appliedFilter => throw _privateConstructorUsedError;
   List<String> get statuses => throw _privateConstructorUsedError;
-  bool get changed => throw _privateConstructorUsedError;
-  bool get edited => throw _privateConstructorUsedError;
+  bool get applied => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
@@ -2144,15 +2124,16 @@ abstract class $AllInvoicesFilterStateCopyWith<$Res> {
       _$AllInvoicesFilterStateCopyWithImpl<$Res, AllInvoicesFilterState>;
   @useResult
   $Res call(
-      {AllInvoicesFilter allInvoicesFilter,
+      {AllInvoicesFilter tempFilter,
+      AllInvoicesFilter appliedFilter,
       List<String> statuses,
-      bool changed,
-      bool edited,
+      bool applied,
       bool isFetching,
       bool showErrorMessages,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
-  $AllInvoicesFilterCopyWith<$Res> get allInvoicesFilter;
+  $AllInvoicesFilterCopyWith<$Res> get tempFilter;
+  $AllInvoicesFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -2169,30 +2150,30 @@ class _$AllInvoicesFilterStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? allInvoicesFilter = null,
+    Object? tempFilter = null,
+    Object? appliedFilter = null,
     Object? statuses = null,
-    Object? changed = null,
-    Object? edited = null,
+    Object? applied = null,
     Object? isFetching = null,
     Object? showErrorMessages = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      allInvoicesFilter: null == allInvoicesFilter
-          ? _value.allInvoicesFilter
-          : allInvoicesFilter // ignore: cast_nullable_to_non_nullable
+      tempFilter: null == tempFilter
+          ? _value.tempFilter
+          : tempFilter // ignore: cast_nullable_to_non_nullable
+              as AllInvoicesFilter,
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
               as AllInvoicesFilter,
       statuses: null == statuses
           ? _value.statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      changed: null == changed
-          ? _value.changed
-          : changed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      edited: null == edited
-          ? _value.edited
-          : edited // ignore: cast_nullable_to_non_nullable
+      applied: null == applied
+          ? _value.applied
+          : applied // ignore: cast_nullable_to_non_nullable
               as bool,
       isFetching: null == isFetching
           ? _value.isFetching
@@ -2211,9 +2192,17 @@ class _$AllInvoicesFilterStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $AllInvoicesFilterCopyWith<$Res> get allInvoicesFilter {
-    return $AllInvoicesFilterCopyWith<$Res>(_value.allInvoicesFilter, (value) {
-      return _then(_value.copyWith(allInvoicesFilter: value) as $Val);
+  $AllInvoicesFilterCopyWith<$Res> get tempFilter {
+    return $AllInvoicesFilterCopyWith<$Res>(_value.tempFilter, (value) {
+      return _then(_value.copyWith(tempFilter: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AllInvoicesFilterCopyWith<$Res> get appliedFilter {
+    return $AllInvoicesFilterCopyWith<$Res>(_value.appliedFilter, (value) {
+      return _then(_value.copyWith(appliedFilter: value) as $Val);
     });
   }
 }
@@ -2227,16 +2216,18 @@ abstract class _$$_AllInvoicesFilterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AllInvoicesFilter allInvoicesFilter,
+      {AllInvoicesFilter tempFilter,
+      AllInvoicesFilter appliedFilter,
       List<String> statuses,
-      bool changed,
-      bool edited,
+      bool applied,
       bool isFetching,
       bool showErrorMessages,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
-  $AllInvoicesFilterCopyWith<$Res> get allInvoicesFilter;
+  $AllInvoicesFilterCopyWith<$Res> get tempFilter;
+  @override
+  $AllInvoicesFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -2251,30 +2242,30 @@ class __$$_AllInvoicesFilterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? allInvoicesFilter = null,
+    Object? tempFilter = null,
+    Object? appliedFilter = null,
     Object? statuses = null,
-    Object? changed = null,
-    Object? edited = null,
+    Object? applied = null,
     Object? isFetching = null,
     Object? showErrorMessages = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_AllInvoicesFilterState(
-      allInvoicesFilter: null == allInvoicesFilter
-          ? _value.allInvoicesFilter
-          : allInvoicesFilter // ignore: cast_nullable_to_non_nullable
+      tempFilter: null == tempFilter
+          ? _value.tempFilter
+          : tempFilter // ignore: cast_nullable_to_non_nullable
+              as AllInvoicesFilter,
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
               as AllInvoicesFilter,
       statuses: null == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      changed: null == changed
-          ? _value.changed
-          : changed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      edited: null == edited
-          ? _value.edited
-          : edited // ignore: cast_nullable_to_non_nullable
+      applied: null == applied
+          ? _value.applied
+          : applied // ignore: cast_nullable_to_non_nullable
               as bool,
       isFetching: null == isFetching
           ? _value.isFetching
@@ -2296,10 +2287,10 @@ class __$$_AllInvoicesFilterStateCopyWithImpl<$Res>
 
 class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
   const _$_AllInvoicesFilterState(
-      {required this.allInvoicesFilter,
+      {required this.tempFilter,
+      required this.appliedFilter,
       required final List<String> statuses,
-      required this.changed,
-      required this.edited,
+      required this.applied,
       required this.isFetching,
       required this.showErrorMessages,
       required this.failureOrSuccessOption})
@@ -2307,7 +2298,9 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
         super._();
 
   @override
-  final AllInvoicesFilter allInvoicesFilter;
+  final AllInvoicesFilter tempFilter;
+  @override
+  final AllInvoicesFilter appliedFilter;
   final List<String> _statuses;
   @override
   List<String> get statuses {
@@ -2317,9 +2310,7 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
   }
 
   @override
-  final bool changed;
-  @override
-  final bool edited;
+  final bool applied;
   @override
   final bool isFetching;
   @override
@@ -2329,7 +2320,7 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
 
   @override
   String toString() {
-    return 'AllInvoicesFilterState(allInvoicesFilter: $allInvoicesFilter, statuses: $statuses, changed: $changed, edited: $edited, isFetching: $isFetching, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'AllInvoicesFilterState(tempFilter: $tempFilter, appliedFilter: $appliedFilter, statuses: $statuses, applied: $applied, isFetching: $isFetching, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -2337,11 +2328,12 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllInvoicesFilterState &&
-            (identical(other.allInvoicesFilter, allInvoicesFilter) ||
-                other.allInvoicesFilter == allInvoicesFilter) &&
+            (identical(other.tempFilter, tempFilter) ||
+                other.tempFilter == tempFilter) &&
+            (identical(other.appliedFilter, appliedFilter) ||
+                other.appliedFilter == appliedFilter) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
-            (identical(other.changed, changed) || other.changed == changed) &&
-            (identical(other.edited, edited) || other.edited == edited) &&
+            (identical(other.applied, applied) || other.applied == applied) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
@@ -2353,10 +2345,10 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      allInvoicesFilter,
+      tempFilter,
+      appliedFilter,
       const DeepCollectionEquality().hash(_statuses),
-      changed,
-      edited,
+      applied,
       isFetching,
       showErrorMessages,
       failureOrSuccessOption);
@@ -2371,10 +2363,10 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
 
 abstract class _AllInvoicesFilterState extends AllInvoicesFilterState {
   const factory _AllInvoicesFilterState(
-      {required final AllInvoicesFilter allInvoicesFilter,
+      {required final AllInvoicesFilter tempFilter,
+      required final AllInvoicesFilter appliedFilter,
       required final List<String> statuses,
-      required final bool changed,
-      required final bool edited,
+      required final bool applied,
       required final bool isFetching,
       required final bool showErrorMessages,
       required final Option<Either<ApiFailure, dynamic>>
@@ -2382,13 +2374,13 @@ abstract class _AllInvoicesFilterState extends AllInvoicesFilterState {
   const _AllInvoicesFilterState._() : super._();
 
   @override
-  AllInvoicesFilter get allInvoicesFilter;
+  AllInvoicesFilter get tempFilter;
+  @override
+  AllInvoicesFilter get appliedFilter;
   @override
   List<String> get statuses;
   @override
-  bool get changed;
-  @override
-  bool get edited;
+  bool get applied;
   @override
   bool get isFetching;
   @override

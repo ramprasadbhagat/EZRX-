@@ -12,13 +12,11 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/filter_drawer.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/filter_status.dart';
+import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,13 +37,12 @@ class AllInvoicesPage extends StatelessWidget {
           SizedBox.shrink(),
         ],
       ),
-      endDrawer: const AllInvoicesFilterDrawer(),
       body: BlocListener<AllInvoicesFilterBloc, AllInvoicesFilterState>(
         listenWhen: (previous, current) =>
-            ((previous.changed != current.changed && current.changed) &&
-                current.allInvoicesFilter.anyFilterApplied) ||
-            previous.allInvoicesFilter.filterStatus !=
-                current.allInvoicesFilter.filterStatus,
+            ((previous.applied != current.applied && current.applied) &&
+                current.tempFilter.anyFilterApplied) ||
+            previous.tempFilter.documentNumber !=
+                current.tempFilter.documentNumber,
         listener: (context, state) {
           context.read<AllInvoicesBloc>().add(
                 AllInvoicesEvent.fetch(
@@ -53,7 +50,7 @@ class AllInvoicesPage extends StatelessWidget {
                       context.read<SalesOrgBloc>().state.salesOrganisation,
                   customerCodeInfo:
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  filter: state.allInvoicesFilter,
+                  filter: state.tempFilter,
                 ),
               );
         },
@@ -73,32 +70,83 @@ class AllInvoicesPage extends StatelessWidget {
                         onClear: () {},
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        if (context.read<AllInvoicesBloc>().state.isLoading) {
-                          return;
-                        }
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (_) {
-                            return const AllInvoicesStatusFilterBottomSheet();
-                          },
+                    BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.applied != current.applied,
+                      builder: (context, state) {
+                        return Stack(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                if (context
+                                    .read<AllInvoicesBloc>()
+                                    .state
+                                    .isLoading) {
+                                  return;
+                                }
+                                context.read<AllInvoicesFilterBloc>().add(
+                                      const AllInvoicesFilterEvent
+                                          .openFilterBottomSheet(),
+                                    );
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  isDismissible: false,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16),
+                                    ),
+                                  ),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  context: context,
+                                  builder: (_) {
+                                    return const AllInvoicesFilterBottomSheet();
+                                  },
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.tune,
+                              ),
+                            ),
+                            Positioned(
+                              right: 4,
+                              top: 4,
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: ZPColors.orange,
+                                ),
+                                padding: const EdgeInsets.all(3),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  context
+                                      .read<AllInvoicesFilterBloc>()
+                                      .state
+                                      .tempFilter
+                                      .appliedFilterCount
+                                      .toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(
+                                        fontSize: 10,
+                                        color: ZPColors.white,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       },
-                      icon: const Icon(
-                        Icons.tune,
-                      ),
                     ),
                   ],
                 ),
               ),
               BlocListener<AllInvoicesFilterBloc, AllInvoicesFilterState>(
                 listenWhen: (previous, current) =>
-                    ((previous.changed != current.changed && current.changed) &&
-                        current.allInvoicesFilter.anyFilterApplied) ||
-                    previous.allInvoicesFilter.filterStatus !=
-                        current.allInvoicesFilter.filterStatus,
+                    ((previous.applied != current.applied && current.applied) &&
+                        current.tempFilter.anyFilterApplied) ||
+                    previous.tempFilter.documentNumber !=
+                        current.tempFilter.documentNumber,
                 listener: (context, state) {
                   context.read<AllInvoicesBloc>().add(
                         AllInvoicesEvent.fetch(
@@ -110,7 +158,7 @@ class AllInvoicesPage extends StatelessWidget {
                               .read<CustomerCodeBloc>()
                               .state
                               .customerCodeInfo,
-                          filter: state.allInvoicesFilter,
+                          filter: state.tempFilter,
                         ),
                       );
                 },
@@ -132,19 +180,13 @@ class AllInvoicesPage extends StatelessWidget {
                   buildWhen: (previous, current) =>
                       previous.isLoading != current.isLoading,
                   builder: (context, state) {
-                    if (state.isLoading) {
-                      return LoadingShimmer.logo(
-                        key: const Key('LoaderImage'),
-                      );
-                    }
-
                     return Expanded(
                       child: ScrollList<CreditAndInvoiceGroup>(
                         emptyMessage: 'No invoice found'.tr(),
                         controller: ScrollController(),
                         onRefresh: () {
                           context.read<AllInvoicesFilterBloc>().add(
-                                const AllInvoicesFilterEvent.clearFilters(),
+                                const AllInvoicesFilterEvent.resetFilters(),
                               );
                           context.read<AllInvoicesBloc>().add(
                                 AllInvoicesEvent.fetch(
@@ -180,7 +222,7 @@ class AllInvoicesPage extends StatelessWidget {
                           data: item,
                           showDivider: index != 0,
                         ),
-                        items: state.groups,
+                        items: state.items.groupList,
                       ),
                     );
                   },
@@ -229,7 +271,7 @@ class _InvoiceGroup extends StatelessWidget {
                 ),
               ),
               Column(
-                children: data.invoiceItems
+                children: data.items
                     .map(
                       (e) => _InvoiceItem(invoiceItem: e),
                     )

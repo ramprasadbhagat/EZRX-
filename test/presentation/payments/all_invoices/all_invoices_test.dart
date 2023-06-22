@@ -21,6 +21,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -154,10 +155,10 @@ void main() {
       final expectedState = [
         AllInvoicesFilterState.initial(),
         AllInvoicesFilterState.initial().copyWith(
-          changed: true,
+          applied: true,
         ),
         AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: AllInvoicesFilter.empty(),
+          tempFilter: AllInvoicesFilter.empty(),
         ),
       ];
       whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
@@ -189,11 +190,11 @@ void main() {
 
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          changed: true,
+          applied: true,
         ),
         AllInvoicesFilterState.initial().copyWith(
-          changed: true,
-          allInvoicesFilter: AllInvoicesFilter.empty(),
+          applied: true,
+          tempFilter: AllInvoicesFilter.empty(),
         ),
       ];
       whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
@@ -201,7 +202,7 @@ void main() {
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
 
-      final loaderImage = find.byKey(const Key('LoaderImage'));
+      final loaderImage = find.byKey(WidgetKeys.loadMoreLoader);
       expect(loaderImage, findsOneWidget);
       await tester.pump();
     });

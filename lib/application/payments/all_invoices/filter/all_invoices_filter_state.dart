@@ -4,10 +4,10 @@ part of 'all_invoices_filter_bloc.dart';
 class AllInvoicesFilterState with _$AllInvoicesFilterState {
   const AllInvoicesFilterState._();
   const factory AllInvoicesFilterState({
-    required AllInvoicesFilter allInvoicesFilter,
+    required AllInvoicesFilter tempFilter,
+    required AllInvoicesFilter appliedFilter,
     required List<String> statuses,
-    required bool changed,
-    required bool edited,
+    required bool applied,
     required bool isFetching,
     required bool showErrorMessages,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -15,13 +15,16 @@ class AllInvoicesFilterState with _$AllInvoicesFilterState {
 
   factory AllInvoicesFilterState.initial() => AllInvoicesFilterState(
         failureOrSuccessOption: none(),
-        changed: false,
-        edited: false,
+        applied: false,
         isFetching: false,
-        allInvoicesFilter: AllInvoicesFilter.empty(),
+        tempFilter: AllInvoicesFilter.empty(),
+        appliedFilter: AllInvoicesFilter.empty(),
         showErrorMessages: false,
-        statuses: <String>[],
+        statuses: <String>[
+          'Open',
+          'In progress',
+          'Overdue',
+          'Cleared',
+        ],
       );
-
-  bool get clearNeeded => !allInvoicesFilter.isEmpty || edited;
 }

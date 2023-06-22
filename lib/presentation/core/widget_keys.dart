@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 
 class WidgetKeys {
   //============================================================
+  //  COMMON
+  //============================================================
+
+  static const Key closeButton = Key('closeButton');
+  static const Key filterResetButton = Key('filterResetButton');
+  static const Key filterApplyButton = Key('filterApplyButton');
+
+  //============================================================
   //  LOGIN
   //============================================================
 
@@ -179,4 +187,16 @@ class WidgetKeys {
   static const Key productScanCameraKey = Key('productScanCameraKey');
   static const Key productSearchPage = Key('productSearchPage');
   static const Key materialFavouriteButton = Key('materialFavouriteButton');
+
+  //============================================================
+  //  ALL INVOICES
+  //============================================================
+
+  static const Key tempFilter = Key('tempFilter');
+  static const Key fromDocumentDateField = Key('fromDocumentDateField');
+  static const Key toDocumentDateField = Key('toDocumentDateField');
+  static const Key fromDueDateField = Key('fromDueDateField');
+  static const Key toDueDateField = Key('toDueDateField');
+  static const Key amountValueFrom = Key('amountValueFrom');
+  static const Key amountValueTo = Key('amountValueTo');
 }

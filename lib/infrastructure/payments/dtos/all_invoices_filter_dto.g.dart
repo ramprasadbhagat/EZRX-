@@ -14,9 +14,9 @@ _$_AllInvoicesFilterDto _$$_AllInvoicesFilterDtoFromJson(
       documentNumber: json['documentNumber'] as String,
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
       documentDateTo: json['documentDateTo'] as String? ?? '',
-      debitValueFrom: json['debitValueFrom'] as String? ?? '',
-      debitValueTo: json['debitValueTo'] as String? ?? '',
-      filterStatus: json['filterStatus'] as String? ?? '',
+      amountValueFrom: json['amountValueFrom'] as String? ?? '',
+      amountValueTo: json['amountValueTo'] as String? ?? '',
+      filterStatuses: json['filterStatuses'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_AllInvoicesFilterDtoToJson(
@@ -27,7 +27,7 @@ Map<String, dynamic> _$$_AllInvoicesFilterDtoToJson(
       'documentNumber': instance.documentNumber,
       'documentDateFrom': instance.documentDateFrom,
       'documentDateTo': instance.documentDateTo,
-      'debitValueFrom': instance.debitValueFrom,
-      'debitValueTo': instance.debitValueTo,
-      'filterStatus': instance.filterStatus,
+      'amountValueFrom': instance.amountValueFrom,
+      'amountValueTo': instance.amountValueTo,
+      'filterStatuses': instance.filterStatuses,
     };

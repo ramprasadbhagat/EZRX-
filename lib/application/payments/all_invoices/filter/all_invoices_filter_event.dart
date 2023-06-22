@@ -8,33 +8,35 @@ class AllInvoicesFilterEvent with _$AllInvoicesFilterEvent {
 
   const factory AllInvoicesFilterEvent.initialized() = _Initialized;
 
-  const factory AllInvoicesFilterEvent.openFilterDrawer() = _OpenFilterDrawer;
+  const factory AllInvoicesFilterEvent.openFilterBottomSheet() =
+      _OpenFilterBottomSheet;
+
+  const factory AllInvoicesFilterEvent.closeFilterBottomSheet() =
+      _CloseFilterBottomSheet;
 
   const factory AllInvoicesFilterEvent.applyFilters() = _ApplyFilters;
-  
-  const factory AllInvoicesFilterEvent.clearFilters() = _ClearFilters;
 
-  const factory AllInvoicesFilterEvent.documentNumberChanged(
-    DocumentNumber documentNumber,
-  ) = _DocumentNumberChanged;
+  const factory AllInvoicesFilterEvent.resetFilters() = _ResetFilters;
 
-  const factory AllInvoicesFilterEvent.debitValueFromChanged(
-    String debitValueFrom,
-  ) = _DebitValueFromChanged;
+  const factory AllInvoicesFilterEvent.amountValueFromChanged(
+    String amountValueFrom,
+  ) = _AmountValueFromChanged;
 
-  const factory AllInvoicesFilterEvent.debitValueToChanged(
-    String debitValueTo,
-  ) = _DebitValueToChanged;
+  const factory AllInvoicesFilterEvent.amountValueToChanged(
+    String amountValueTo,
+  ) = _AmountValueToChanged;
 
   const factory AllInvoicesFilterEvent.statusChanged(
     String filterStatus,
+    bool selected,
   ) = _StatusChanged;
 
   const factory AllInvoicesFilterEvent.setDueDate(
-    DateTimeRange dueDateRange,
+    DateTimeRange dateRange,
   ) = _SetDueDate;
 
   const factory AllInvoicesFilterEvent.setDocumentDate(
-    DateTimeRange documentDateRange,
+    DateTimeRange dateRange,
   ) = _SetDocumentDate;
+  
 }

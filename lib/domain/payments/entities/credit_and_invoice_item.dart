@@ -128,15 +128,15 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
       amountInTransactionCurrency * -1;
 }
 
-extension CreditAndInvoiceGroupExtension on List<CreditAndInvoiceItem> {
-  List<CreditAndInvoiceGroup> get creditListGroup {
+extension CreditAndInvoiceListExtension on List<CreditAndInvoiceItem> {
+  List<CreditAndInvoiceGroup> get groupList {
     return List<CreditAndInvoiceItem>.from(this)
         .groupListsBy((item) => item.netDueDate)
         .entries
         .map(
           (entry) => CreditAndInvoiceGroup(
             dueDate: entry.key,
-            invoiceItems: entry.value,
+            items: entry.value,
           ),
         )
         .toList();

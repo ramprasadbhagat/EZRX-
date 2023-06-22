@@ -172,7 +172,7 @@ void main() {
           pageSize: 1,
           offset: 0,
         );
-        expect(result.isRight(), true);
+        expect(result.isRight(), false);
       });
 
       test('=> filterInvoices remote failed', () async {

@@ -16,7 +16,6 @@ void main() {
   late DocumentNumber fakeDocumentNumber;
   late AllInvoicesFilter allInvoicesFilter;
   late DateTime fakeToDate;
-
   late DateTime fakeFromDate;
   late DateTimeRange dateTimeRange;
   setUpAll(() async {
@@ -61,28 +60,6 @@ void main() {
     );
 
     blocTest(
-      'Document Number Change',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
-      seed: () => AllInvoicesFilterState.initial(),
-      act: (AllInvoicesFilterBloc bloc) {
-        bloc.add(
-          AllInvoicesFilterEvent.documentNumberChanged(
-            fakeDocumentNumber,
-          ),
-        );
-      },
-      expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: allInvoicesFilter.copyWith(
-            documentNumber: fakeDocumentNumber,
-          ),
-          edited: true,
-        ),
-      ],
-    );
-
-    blocTest(
       'Due Date Range Changed',
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
@@ -95,7 +72,7 @@ void main() {
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: allInvoicesFilter.copyWith(
+          tempFilter: allInvoicesFilter.copyWith(
             dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
@@ -120,7 +97,7 @@ void main() {
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: allInvoicesFilter.copyWith(
+          tempFilter: allInvoicesFilter.copyWith(
             documentDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
@@ -131,21 +108,19 @@ void main() {
         ),
       ],
     );
-
     blocTest(
-      'DebitValueToChanged',
+      'AmountValueToChanged',
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: allInvoicesFilter,
+        tempFilter: allInvoicesFilter,
       ),
       act: (AllInvoicesFilterBloc bloc) =>
-          bloc.add(const AllInvoicesFilterEvent.debitValueToChanged('1000')),
+          bloc.add(const AllInvoicesFilterEvent.amountValueToChanged('1000')),
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          edited: true,
-          allInvoicesFilter: allInvoicesFilter.copyWith(
-            debitValueTo: RangeValue('1000'),
+          tempFilter: allInvoicesFilter.copyWith(
+            amountValueTo: RangeValue('1000'),
           ),
           showErrorMessages: false,
         ),
@@ -153,19 +128,18 @@ void main() {
     );
 
     blocTest(
-      'DebitValueFromChanged',
+      'AmountValueFromChanged',
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: allInvoicesFilter,
+        tempFilter: allInvoicesFilter,
       ),
       act: (AllInvoicesFilterBloc bloc) =>
-          bloc.add(const AllInvoicesFilterEvent.debitValueFromChanged('100')),
+          bloc.add(const AllInvoicesFilterEvent.amountValueFromChanged('100')),
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          edited: true,
-          allInvoicesFilter: allInvoicesFilter.copyWith(
-            debitValueFrom: RangeValue('100'),
+          tempFilter: allInvoicesFilter.copyWith(
+            amountValueFrom: RangeValue('100'),
           ),
           showErrorMessages: false,
         ),
@@ -177,7 +151,7 @@ void main() {
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: allInvoicesFilter.copyWith(
+        tempFilter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
           ),
@@ -190,19 +164,20 @@ void main() {
         bloc.add(
           const AllInvoicesFilterEvent.statusChanged(
             'Cleared',
+            true,
           ),
         );
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          allInvoicesFilter: allInvoicesFilter.copyWith(
+          tempFilter: allInvoicesFilter.copyWith(
             dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            filterStatus: 'Cleared',
+            filterStatuses: ['Cleared'],
           ),
         ),
       ],
@@ -213,7 +188,7 @@ void main() {
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: allInvoicesFilter.copyWith(
+        tempFilter: allInvoicesFilter.copyWith(
           documentNumber: fakeDocumentNumber,
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -227,9 +202,9 @@ void main() {
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
-          debitValueFrom: RangeValue('1'),
-          debitValueTo: RangeValue('10'),
-          filterStatus: 'Cleared',
+          amountValueFrom: RangeValue('1'),
+          amountValueTo: RangeValue('10'),
+          filterStatuses: ['Cleared'],
         ),
       ),
       act: (AllInvoicesFilterBloc bloc) {
@@ -239,8 +214,8 @@ void main() {
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          changed: true,
-          allInvoicesFilter: allInvoicesFilter.copyWith(
+          applied: true,
+          tempFilter: allInvoicesFilter.copyWith(
             documentNumber: fakeDocumentNumber,
             dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
@@ -254,9 +229,27 @@ void main() {
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            debitValueFrom: RangeValue('1'),
-            debitValueTo: RangeValue('10'),
-            filterStatus: 'Cleared',
+            amountValueFrom: RangeValue('1'),
+            amountValueTo: RangeValue('10'),
+            filterStatuses: ['Cleared'],
+          ),
+          appliedFilter: allInvoicesFilter.copyWith(
+            documentNumber: fakeDocumentNumber,
+            dueDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+            dueDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            documentDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+            documentDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            amountValueFrom: RangeValue('1'),
+            amountValueTo: RangeValue('10'),
+            filterStatuses: ['Cleared'],
           ),
         ),
       ],
@@ -267,7 +260,7 @@ void main() {
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: allInvoicesFilter.copyWith(
+        tempFilter: allInvoicesFilter.copyWith(
           documentNumber: fakeDocumentNumber,
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -281,9 +274,9 @@ void main() {
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
-          debitValueFrom: RangeValue('100'),
-          debitValueTo: RangeValue('10'),
-          filterStatus: 'Cleared',
+          amountValueFrom: RangeValue('100'),
+          amountValueTo: RangeValue('10'),
+          filterStatuses: ['Cleared'],
         ),
       ),
       act: (AllInvoicesFilterBloc bloc) {
@@ -294,7 +287,7 @@ void main() {
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
           showErrorMessages: true,
-          allInvoicesFilter: allInvoicesFilter.copyWith(
+          tempFilter: allInvoicesFilter.copyWith(
             documentNumber: fakeDocumentNumber,
             dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
@@ -308,9 +301,9 @@ void main() {
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            debitValueFrom: RangeValue('100'),
-            debitValueTo: RangeValue('10'),
-            filterStatus: 'Cleared',
+            amountValueFrom: RangeValue('100'),
+            amountValueTo: RangeValue('10'),
+            filterStatuses: ['Cleared'],
           ),
         ),
       ],
@@ -321,7 +314,7 @@ void main() {
       build: () =>
           AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllInvoicesFilterState.initial().copyWith(
-        allInvoicesFilter: allInvoicesFilter.copyWith(
+        tempFilter: allInvoicesFilter.copyWith(
           documentNumber: fakeDocumentNumber,
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -335,20 +328,18 @@ void main() {
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
-          debitValueFrom: RangeValue('1'),
-          debitValueTo: RangeValue('10'),
-          filterStatus: 'Cleared',
+          amountValueFrom: RangeValue('1'),
+          amountValueTo: RangeValue('10'),
+          filterStatuses: ['Cleared'],
         ),
       ),
       act: (AllInvoicesFilterBloc bloc) {
         bloc.add(
-          const AllInvoicesFilterEvent.clearFilters(),
+          const AllInvoicesFilterEvent.resetFilters(),
         );
       },
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
-          changed: true,
-        ),
+        AllInvoicesFilterState.initial(),
       ],
     );
   });
