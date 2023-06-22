@@ -82,12 +82,7 @@ You need to run the below commands from a shell.
 - ```fvm flutter build apk --flavor uat -t lib/main_browserstack.dart --debug```
 
 ### Error when run IOS ?
-1. go to /ios
-2. remove `Pods` folder
-3. remove `Podfile.lock` file
-4. `fvm flutter clean`
-5. `fvm flutter pub get`
-6. run you app
+- Run command ```make clean_ios```
 
 ## Before submit PR, please run 
 ### Analyze
