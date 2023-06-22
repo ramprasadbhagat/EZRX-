@@ -852,7 +852,7 @@ void main() {
           settingStorage: settingStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+          pushNotificationService: pushNotificationServiceMock,       
         );
 
         final result = await repository.isEligibleProxyLogin(

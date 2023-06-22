@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
@@ -45,6 +46,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -170,6 +173,11 @@ class OrderHistoryFilterMockBloc
 class ViewByOrderHistoryMockBloc
     extends MockBloc<ViewByOrderHistoryEvent, ViewByOrderHistoryState>
     implements ViewByOrderHistoryBloc {}
+class PushNotificationServiceMock extends Mock implements PushNotificationService {}
+
+class ChatBotMockBloc
+    extends MockBloc<ChatBotEvent, ChatBotState>
+    implements ChatBotBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -209,6 +217,8 @@ void main() {
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockViewByOrderHistoryBloc = ViewByOrderHistoryMockBloc();
+  late PushNotificationService pushNotificationServiceMock;
+  final chatBotBloc = ChatBotMockBloc();
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -230,11 +240,16 @@ void main() {
   // late AppRouter router;
   setUpAll(() async {
     remoteConfigServiceMock = RemoteConfigServiceMock();
+    pushNotificationServiceMock = PushNotificationServiceMock();
     when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
     when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(() => ChatBotService(
+          config: locator<Config>(),
+          pushNotificationService: pushNotificationServiceMock,
+        ));
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton<RemoteConfigService>(
         () => remoteConfigServiceMock);
@@ -397,6 +412,9 @@ void main() {
             ),
             BlocProvider<ViewByOrderHistoryBloc>(
               create: (context) => mockViewByOrderHistoryBloc,
+            ),
+            BlocProvider<ChatBotBloc>(
+              create: (context) => chatBotBloc,
             ),
           ],
           child: const SplashPage(),

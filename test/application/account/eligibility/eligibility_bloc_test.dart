@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -13,7 +14,11 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class ChatBotRepositoryMock extends Mock implements ChatBotRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +28,7 @@ void main() {
         customerCodeSoldTo: CustomerCode('fake-customer-code'), shipToInfos: [])
   ];
 
-  final fakeShipToInfo = ShipToInfo.empty().copyWith(building: 'fakeBuilding');
+  final fakeShipToInfo = ShipToInfo.empty().copyWith(building: 'fakeBuilding',shipToCustomerCode: '123');
   final fakeBillToInfo =
       BillToInfo.empty().copyWith(billToCustomerCode: 'customer1234');
   final fakeCustomerInfo = CustomerCodeInfo.empty().copyWith(
@@ -42,7 +47,7 @@ void main() {
     customerInfos: fakeSalesOrgCustomerInfos,
   );
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
-    salesOrg: SalesOrg(''),
+    salesOrg: SalesOrg('2601'),
     enableIRN: false,
     enableDefaultMD: false,
     disableProcessingStatus: false,
@@ -98,10 +103,11 @@ void main() {
     comboDealsUserRole: ComboDealUserRole(0),
     enableGMN:false,
   );
+  final chatBotRepositoryMock = ChatBotRepositoryMock();
 
   group('Eligibility Bloc', () {
     blocTest('Eligibility Bloc Initial',
-        build: () => EligibilityBloc(),
+        build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
         act: (EligibilityBloc bloc) {
           bloc.add(const EligibilityEvent.initialized());
         },
@@ -109,7 +115,19 @@ void main() {
 
     blocTest(
       'Eligibility Update',
-      build: () => EligibilityBloc(),
+      build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
+      setUp: () {
+        when(() => chatBotRepositoryMock
+            .passPayloadToChatbot(
+              customerCodeInfo: fakeCustomerInfo,
+              salesOrganisation: fakeSaleOrg,
+              salesOrganisationConfigs: fakeSaleOrgConfig,
+              shipToInfo: fakeShipToInfo,
+              user: fakeUser,
+            )).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+      },
       act: (EligibilityBloc bloc) {
         bloc.add(
           EligibilityEvent.update(
@@ -129,6 +147,7 @@ void main() {
           salesOrgConfigs: fakeSaleOrgConfig,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
+          failureOrSuccessOption: const None()
         ),
       ],
     );

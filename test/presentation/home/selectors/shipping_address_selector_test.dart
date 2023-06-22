@@ -35,6 +35,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
@@ -136,6 +138,8 @@ class MaterialPriceDetailBlocMock
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
 
+class PushNotificationServiceMock extends Mock implements PushNotificationService {}
+
 class ReturnSummaryBlocMock
     extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
     implements ReturnSummaryBloc {}
@@ -204,6 +208,8 @@ void main() {
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    locator.registerLazySingleton(() => ChatBotService(
+        config: locator<Config>(), pushNotificationService: PushNotificationServiceMock()));
     locator.registerLazySingleton(() => AppRouter());
     mockCustomerCodeBloc = CustomerCodeBlocMock();
     mockSalesOrgBloc = SalesOrgBlocMock();

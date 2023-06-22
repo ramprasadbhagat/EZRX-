@@ -507,6 +507,8 @@ mixin _$EligibilityState {
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   OrderDocumentType get selectedOrderType => throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EligibilityStateCopyWith<EligibilityState> get copyWith =>
@@ -525,7 +527,8 @@ abstract class $EligibilityStateCopyWith<$Res> {
       SalesOrganisationConfigs salesOrgConfigs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      OrderDocumentType selectedOrderType});
+      OrderDocumentType selectedOrderType,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -554,6 +557,7 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? selectedOrderType = null,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -580,6 +584,10 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
+      failureOrSuccessOption: null == failureOrSuccessOption
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
 
@@ -647,7 +655,8 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
       SalesOrganisationConfigs salesOrgConfigs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      OrderDocumentType selectedOrderType});
+      OrderDocumentType selectedOrderType,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -680,6 +689,7 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? selectedOrderType = null,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_EligibilityState(
       user: null == user
@@ -706,6 +716,10 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
+      failureOrSuccessOption: null == failureOrSuccessOption
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -719,7 +733,8 @@ class _$_EligibilityState extends _EligibilityState {
       required this.salesOrgConfigs,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.selectedOrderType})
+      required this.selectedOrderType,
+      required this.failureOrSuccessOption})
       : super._();
 
   @override
@@ -734,10 +749,12 @@ class _$_EligibilityState extends _EligibilityState {
   final ShipToInfo shipToInfo;
   @override
   final OrderDocumentType selectedOrderType;
+  @override
+  final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType)';
+    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -755,12 +772,21 @@ class _$_EligibilityState extends _EligibilityState {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.selectedOrderType, selectedOrderType) ||
-                other.selectedOrderType == selectedOrderType));
+                other.selectedOrderType == selectedOrderType) &&
+            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
+                other.failureOrSuccessOption == failureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, salesOrganisation,
-      salesOrgConfigs, customerCodeInfo, shipToInfo, selectedOrderType);
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      salesOrganisation,
+      salesOrgConfigs,
+      customerCodeInfo,
+      shipToInfo,
+      selectedOrderType,
+      failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -771,13 +797,14 @@ class _$_EligibilityState extends _EligibilityState {
 
 abstract class _EligibilityState extends EligibilityState {
   const factory _EligibilityState(
-          {required final User user,
-          required final SalesOrganisation salesOrganisation,
-          required final SalesOrganisationConfigs salesOrgConfigs,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final OrderDocumentType selectedOrderType}) =
-      _$_EligibilityState;
+      {required final User user,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesOrgConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final OrderDocumentType selectedOrderType,
+      required final Option<Either<ApiFailure, dynamic>>
+          failureOrSuccessOption}) = _$_EligibilityState;
   const _EligibilityState._() : super._();
 
   @override
@@ -792,6 +819,8 @@ abstract class _EligibilityState extends EligibilityState {
   ShipToInfo get shipToInfo;
   @override
   OrderDocumentType get selectedOrderType;
+  @override
+  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_EligibilityStateCopyWith<_$_EligibilityState> get copyWith =>

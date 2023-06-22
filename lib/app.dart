@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_met
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
@@ -29,9 +30,11 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/chatbot/chatbot_widget.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
@@ -172,6 +175,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   if (!kIsWeb) {
     await Wakelock.enable();
     await locator<ClevertapService>().init();
+    await locator<ChatBotService>().init();
     if (locator<RemoteConfigService>().getScanToOrderConfig()) {
       await ScanditFlutterDataCaptureBarcode.initialize();
       await locator<MaterialInfoScanner>().init();
@@ -468,8 +472,11 @@ class App extends StatelessWidget {
         BlocProvider<ProductSearchBloc>(
           create: (context) => locator<ProductSearchBloc>(),
         ),
-          BlocProvider<ViewByOrderHistoryBloc>(
+        BlocProvider<ViewByOrderHistoryBloc>(
           create: (context) => locator<ViewByOrderHistoryBloc>(),
+        ),
+        BlocProvider<ChatBotBloc>(
+          create: (context) => locator<ChatBotBloc>(),
         ),
       ],
       child: MaterialApp.router(
@@ -488,8 +495,28 @@ class App extends StatelessWidget {
             locator<RouterObserver>(),
           ],
         ),
+        builder: (context, child) => _EntryPage(child: child,),
         routeInformationParser: router.defaultRouteParser(),
       ),
+    );
+  }
+}
+
+class _EntryPage extends StatelessWidget {
+  final Widget? child;
+  const _EntryPage({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Overlay(
+      initialEntries: [
+        OverlayEntry(
+          builder: (context) => ChatBotWidget(child: child!,),
+        ),
+      ],
     );
   }
 }

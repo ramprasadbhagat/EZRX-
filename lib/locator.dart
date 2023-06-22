@@ -21,6 +21,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -73,6 +74,8 @@ import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_rep
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/forget_password_repository.dart';
+import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
@@ -827,7 +830,9 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => EligibilityBloc(),
+    () => EligibilityBloc(
+      chatBotRepository: locator<ChatBotRepository>(),
+    ),
   );
 
   //============================================================
@@ -2568,6 +2573,26 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByOrderHistoryBloc(
       viewByOrderHistoryRepository: locator<ViewByOrderHistoryRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ChatBotService(
+      config: locator<Config>(),
+      pushNotificationService: locator<PushNotificationService>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ChatBotRepository(
+      chatBotService: locator<ChatBotService>(),
+      tokenStorage: locator<TokenStorage>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ChatBotBloc(
+      repository: locator<ChatBotRepository>(),
     ),
   );
 }

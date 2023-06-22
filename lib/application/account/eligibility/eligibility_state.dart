@@ -11,6 +11,7 @@ class EligibilityState with _$EligibilityState {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required OrderDocumentType selectedOrderType,
+    required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -20,6 +21,7 @@ class EligibilityState with _$EligibilityState {
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
         selectedOrderType: OrderDocumentType.empty(),
+        failureOrSuccessOption: none(),
       );
 
   bool get isReturnsEnable {
