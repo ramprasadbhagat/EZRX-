@@ -102,7 +102,8 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  dart_code_metrics: ^5.7.2
+  dart_code_metrics: ^5.7.5
+  # dart_code_metrics_presets: ^1.0.1
   flutter_lints: ^2.0.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.2.19

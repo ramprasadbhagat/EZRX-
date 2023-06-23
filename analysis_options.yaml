@@ -80,6 +80,8 @@ linter:
     - prefer_final_locals
 
 dart_code_metrics:
+  # extends:
+  #   - package:dart_code_metrics_presets/all.yaml
   anti-patterns:
     - long-method:
         exclude:
@@ -92,10 +94,21 @@ dart_code_metrics:
     number-of-parameters: 20
     source-lines-of-code: 62
   metrics-exclude:
-    # - test/**
-    # - integration_test/**
     - lib/locator.dart
   rules:
+    - avoid-dynamic:
+        exclude:
+          - "**/*_state.dart"
+          - "**/*_remote.dart"
+          - "**/*_remote_datasource.dart"
+          - "**/*_local.dart"
+          - "**/*_local_datasource.dart"
+          - "**/*_dto.dart"
+          - "lib/domain/core/error/exception_handler.dart"
+          - "lib/domain/core/value/value_objects.dart"
+          - "lib/infrastructure/core/**"
+          - "lib/presentation/home_tab.dart"
+          - "lib/presentation/more/more_tile_details.dart"
     - newline-before-return
     - no-boolean-literal-compare
     # - no-empty-block
@@ -108,4 +121,3 @@ dart_code_metrics:
     - avoid-expanded-as-spacer
     # - prefer-correct-edge-insets-constructor
     - avoid-returning-widgets
-    
