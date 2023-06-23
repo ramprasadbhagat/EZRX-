@@ -3,7 +3,7 @@ VERSION := $$( echo $(STR) | cut -d '+' -f 1 )
 BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'order/client_user.dart'
 EXTERNALSALESREP := 'order/external_sales_rep.dart'
-SALESORGCONFIG := 'sales_org_config.dart'
+SALESORGCONFIG := 'reset_sales_org_config.sh'
 
 clean_ios:
 	@cd ios && rm -rf Pods && rm Podfile.lock && fvm flutter pub get && pod install && cd ..
@@ -45,21 +45,21 @@ build_xctest:
 	@xcodebuild -workspace ios/Runner.xcworkspace -scheme uat -derivedDataPath build/xctest -sdk iphoneos build-for-testing
 	@zip -r ezrx_xctest.zip Debug-iphoneos build/xctest/Build/Products/uat_iphoneos16.4.xctestrun
 reset_sg_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/sg/${SALESORGCONFIG}
+	./integration_test/sg/${SALESORGCONFIG}
 reset_my_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/my/${SALESORGCONFIG}
+	./integration_test/my/${SALESORGCONFIG}
 reset_vn_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/vn/${SALESORGCONFIG}
+	./integration_test/vn/${SALESORGCONFIG}
 reset_th_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/th/${SALESORGCONFIG}
+	./integration_test/th/${SALESORGCONFIG}
 reset_tw_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/tw/${SALESORGCONFIG}
+	./integration_test/tw/${SALESORGCONFIG}
 reset_ph_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/ph/${SALESORGCONFIG}
+	./integration_test/ph/${SALESORGCONFIG}
 reset_mm_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/mm/${SALESORGCONFIG}
+	./integration_test/mm/${SALESORGCONFIG}
 reset_kh_salesorg_config:
-	@fvm flutter test --flavor uat integration_test/kh/${SALESORGCONFIG}
+	./integration_test/kh/${SALESORGCONFIG}
 run_sg_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENTUSER}
 run_sg_external_test:

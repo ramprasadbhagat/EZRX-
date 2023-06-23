@@ -29,22 +29,22 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          chmod 777 ./integration_test/kh/preset_sales_org_config.sh
-          ./integration_test/kh/preset_sales_org_config.sh
-          chmod 777 ./integration_test/mm/preset_sales_org_config.sh
-          ./integration_test/mm/preset_sales_org_config.sh
-          chmod 777 ./integration_test/my/preset_sales_org_config.sh
-          ./integration_test/my/preset_sales_org_config.sh
-          chmod 777 ./integration_test/ph/preset_sales_org_config.sh
-          ./integration_test/ph/preset_sales_org_config.sh
-          chmod 777 ./integration_test/sg/preset_sales_org_config.sh
-          ./integration_test/sg/preset_sales_org_config.sh
-          chmod 777 ./integration_test/th/preset_sales_org_config.sh
-          ./integration_test/th/preset_sales_org_config.sh
-          chmod 777 ./integration_test/tw/preset_sales_org_config.sh
-          ./integration_test/tw/preset_sales_org_config.sh
-          chmod 777 ./integration_test/vn/preset_sales_org_config.sh
-          ./integration_test/vn/preset_sales_org_config.sh
+          chmod 777 ./integration_test/kh/reset_sales_org_config.sh
+          ./integration_test/kh/reset_sales_org_config.sh
+          chmod 777 ./integration_test/mm/reset_sales_org_config.sh
+          ./integration_test/mm/reset_sales_org_config.sh
+          chmod 777 ./integration_test/my/reset_sales_org_config.sh
+          ./integration_test/my/reset_sales_org_config.sh
+          chmod 777 ./integration_test/ph/reset_sales_org_config.sh
+          ./integration_test/ph/reset_sales_org_config.sh
+          chmod 777 ./integration_test/sg/reset_sales_org_config.sh
+          ./integration_test/sg/reset_sales_org_config.sh
+          chmod 777 ./integration_test/th/reset_sales_org_config.sh
+          ./integration_test/th/reset_sales_org_config.sh
+          chmod 777 ./integration_test/tw/reset_sales_org_config.sh
+          ./integration_test/tw/reset_sales_org_config.sh
+          chmod 777 ./integration_test/vn/reset_sales_org_config.sh
+          ./integration_test/vn/reset_sales_org_config.sh
 
     - task: Bash@3
       displayName: Run Integration tests
