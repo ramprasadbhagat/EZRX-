@@ -28,7 +28,7 @@ class BundleGridItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  materialInfo.code.displayMatNo,
+                  materialInfo.materialNumber.displayMatNo,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.darkGray,
                       ),

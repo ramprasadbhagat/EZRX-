@@ -90,7 +90,7 @@ class MaterialListRepository implements IMaterialListRepository {
                   );
           final upDatedMaterialInfo =
               bundleData.getOrElse(() => {}).putIfAbsent(
-                    materialInfo.code,
+                    materialInfo.materialNumber,
                     () => materialInfo,
                   );
 
@@ -294,7 +294,7 @@ class MaterialListRepository implements IMaterialListRepository {
       try {
         final stockInfoList =
             await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: materials.map((e) => e.code.getOrCrash()).toList(),
+          materialNumbers: materials.map((e) => e.materialNumber.getOrCrash()).toList(),
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
         );
@@ -327,7 +327,7 @@ class MaterialListRepository implements IMaterialListRepository {
           type: 'bundle',
         );
         materialInfoMap.addAll(
-          {bundle.code: materialInfo.getOrElse(() => bundle)},
+          {bundle.materialNumber: materialInfo.getOrElse(() => bundle)},
         );
       }
 
@@ -358,7 +358,7 @@ class MaterialListRepository implements IMaterialListRepository {
       try {
         final materialData =
             await materialListRemoteDataSource.getProductDetails(
-          code: material.code.getOrCrash(),
+          code: material.materialNumber.getOrCrash(),
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           customerCode: customerCodeInfo.customerCodeSoldTo,
           shipToCode: shipToInfo.shipToCustomerCode,
@@ -381,7 +381,7 @@ class MaterialListRepository implements IMaterialListRepository {
       try {
         await materialListLocalDataSource.addFavouriteMaterial();
         final favouriteList = List<MaterialInfo>.from(materialList)
-            .map((element) => element.code == materialNumber
+            .map((element) => element.materialNumber == materialNumber
                 ? element.copyWith(isFavourite: true)
                 : element)
             .toList();
@@ -396,7 +396,7 @@ class MaterialListRepository implements IMaterialListRepository {
           materialNumber: materialNumber.getOrCrash(),
         );
         final newMaterialList = List<MaterialInfo>.from(materialList)
-            .map((element) => element.code == materialNumber
+            .map((element) => element.materialNumber == materialNumber
                 ? element.copyWith(isFavourite: true)
                 : element)
             .toList();
@@ -418,12 +418,12 @@ class MaterialListRepository implements IMaterialListRepository {
       try {
         await materialListLocalDataSource.removeFavouriteMaterial();
         final newMaterialList = List<MaterialInfo>.from(materialList)
-            .map((element) => element.code == materialNumber
+            .map((element) => element.materialNumber == materialNumber
                 ? element.copyWith(isFavourite: false)
                 : element)
             .toList();
         newMaterialList
-            .removeWhere((element) => element.code == materialNumber && filter);
+            .removeWhere((element) => element.materialNumber == materialNumber && filter);
 
         return Right(newMaterialList);
       } catch (e) {
@@ -435,12 +435,12 @@ class MaterialListRepository implements IMaterialListRepository {
           materialNumber: materialNumber.getOrCrash(),
         );
         final favouriteList = List<MaterialInfo>.from(materialList)
-            .map((element) => element.code == materialNumber
+            .map((element) => element.materialNumber == materialNumber
                 ? element.copyWith(isFavourite: false)
                 : element)
             .toList();
         favouriteList
-            .removeWhere((element) => element.code == materialNumber && filter);
+            .removeWhere((element) => element.materialNumber == materialNumber && filter);
 
         return Right(favouriteList);
       } catch (e) {

@@ -93,7 +93,6 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         name: '',
         principalCode: '',
         type: MaterialInfoType(''),
-        code: MaterialNumber(''),
         stockInfos: <StockInfo>[],
         bundle: Bundle.empty(),
       );

@@ -13,7 +13,6 @@ class MaterialInfo with _$MaterialInfo {
   const MaterialInfo._();
 
   const factory MaterialInfo({
-    required MaterialNumber code,
     required String name,
     required String principalCode,
     required MaterialNumber materialNumber,
@@ -79,7 +78,6 @@ class MaterialInfo with _$MaterialInfo {
         remarks: '',
         genericMaterialName: '',
         ean: '',
-        code: MaterialNumber(''),
         data: <MaterialData>[],
         dataTotalCount: 0,
         dataTotalHidden: DataTotalHidden(0),
@@ -132,7 +130,7 @@ class MaterialInfo with _$MaterialInfo {
 
   MaterialInfo fromMaterialData(MaterialData materialData) =>
       MaterialInfo.empty().copyWith(
-        code: materialData.code,
+        materialNumber: materialData.code,
         manufactured: materialData.manufactured,
         data: [materialData],
         materialDescription: materialData.materialDescription,

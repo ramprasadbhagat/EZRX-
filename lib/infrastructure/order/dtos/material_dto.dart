@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
 part 'material_dto.freezed.dart';
+
 part 'material_dto.g.dart';
 
 @freezed
@@ -160,14 +161,14 @@ class MaterialDto with _$MaterialDto {
       isGimmick: false,
       manufactured: '',
       name: '',
-      type: '', 
+      type: '',
       bundle: BundleDto.fromDomain(materialInfo.bundle),
     );
   }
 
   MaterialInfo toDomain() {
     return MaterialInfo(
-      materialNumber: MaterialNumber(materialNumber),
+      materialNumber: _getMaterialNumber,
       materialDescription: materialDescription,
       governmentMaterialCode: governmentMaterialCode,
       therapeuticClass: therapeuticClass,
@@ -193,7 +194,6 @@ class MaterialDto with _$MaterialDto {
       remarks: remarks,
       genericMaterialName: genericMaterialName,
       ean: ean,
-      code: MaterialNumber(code),
       data: data.map((e) => e.toDomain()).toList(),
       dataTotalCount: dataTotalCount,
       dataTotalHidden: DataTotalHidden(dataTotalHidden),
@@ -207,6 +207,10 @@ class MaterialDto with _$MaterialDto {
       bundle: bundle.toDomain(),
     );
   }
+
+  MaterialNumber get _getMaterialNumber => materialNumber.isEmpty
+      ? MaterialNumber(code)
+      : MaterialNumber(materialNumber);
 
   factory MaterialDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialDtoFromJson(json);
@@ -227,12 +231,13 @@ int _validateQantity(Map json, String key) {
           ? json['qty']
           : 0;
 }
-Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
 
+Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
 
 @freezed
 class MaterialDataDto with _$MaterialDataDto {
   const MaterialDataDto._();
+
   @HiveType(typeId: 3, adapterName: 'MaterialDataDtoAdapter')
   factory MaterialDataDto({
     @JsonKey(name: 'Code', defaultValue: '')
@@ -286,6 +291,7 @@ class MaterialDataDto with _$MaterialDataDto {
 @freezed
 class MaterialResponseDto with _$MaterialResponseDto {
   const MaterialResponseDto._();
+
   factory MaterialResponseDto({
     @JsonKey(name: 'Count', defaultValue: 0) required int count,
     @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])

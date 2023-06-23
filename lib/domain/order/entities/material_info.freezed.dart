@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MaterialInfo {
-  MaterialNumber get code => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get principalCode => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
@@ -66,8 +65,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       _$MaterialInfoCopyWithImpl<$Res, MaterialInfo>;
   @useResult
   $Res call(
-      {MaterialNumber code,
-      String name,
+      {String name,
       String principalCode,
       MaterialNumber materialNumber,
       String materialDescription,
@@ -119,7 +117,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
     Object? name = null,
     Object? principalCode = null,
     Object? materialNumber = null,
@@ -156,10 +153,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? ean = null,
   }) {
     return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -325,8 +318,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MaterialNumber code,
-      String name,
+      {String name,
       String principalCode,
       MaterialNumber materialNumber,
       String materialDescription,
@@ -378,7 +370,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
     Object? name = null,
     Object? principalCode = null,
     Object? materialNumber = null,
@@ -415,10 +406,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? ean = null,
   }) {
     return _then(_$_MaterialInfo(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -563,8 +550,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
 
 class _$_MaterialInfo extends _MaterialInfo {
   const _$_MaterialInfo(
-      {required this.code,
-      required this.name,
+      {required this.name,
       required this.principalCode,
       required this.materialNumber,
       required this.materialDescription,
@@ -604,8 +590,6 @@ class _$_MaterialInfo extends _MaterialInfo {
         _bundles = bundles,
         super._();
 
-  @override
-  final MaterialNumber code;
   @override
   final String name;
   @override
@@ -702,7 +686,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(code: $code, name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
   }
 
   @override
@@ -710,7 +694,6 @@ class _$_MaterialInfo extends _MaterialInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialInfo &&
-            (identical(other.code, code) || other.code == code) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.principalCode, principalCode) ||
                 other.principalCode == principalCode) &&
@@ -780,7 +763,6 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        code,
         name,
         principalCode,
         materialNumber,
@@ -826,8 +808,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
 abstract class _MaterialInfo extends MaterialInfo {
   const factory _MaterialInfo(
-      {required final MaterialNumber code,
-      required final String name,
+      {required final String name,
       required final String principalCode,
       required final MaterialNumber materialNumber,
       required final String materialDescription,
@@ -863,8 +844,6 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final String ean}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
 
-  @override
-  MaterialNumber get code;
   @override
   String get name;
   @override

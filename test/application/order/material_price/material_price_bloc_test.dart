@@ -41,16 +41,16 @@ void main() {
 
   final fakeFOCMaterialQuery = [
     MaterialInfo.empty().copyWith(
-        code: MaterialNumber('1'),
+        materialNumber: MaterialNumber('1'),
         materialGroup4: MaterialGroup.four('6A1')),
     MaterialInfo.empty().copyWith(
-        code: MaterialNumber('2'),
+        materialNumber: MaterialNumber('2'),
         materialGroup4: MaterialGroup.four('6A1')),
   ];
 
   final fakeMaterialQuery = [
-    MaterialInfo.empty().copyWith(code: MaterialNumber('1')),
-    MaterialInfo.empty().copyWith(code: MaterialNumber('2')),
+    MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('1')),
+    MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('2')),
   ];
 
   final fakeMaterialNumberQuery = [
@@ -83,7 +83,7 @@ void main() {
       seed: () => MaterialPriceState.initial().copyWith(
         materialPrice: {
           for (var number in fakeMaterialQuery)
-            number.code: Price.empty().copyWith(
+            number.materialNumber: Price.empty().copyWith(
               rules: [PriceRule.empty()],
               tiers: [PriceTier.empty()],
               bonuses: [PriceBonus.empty()],
@@ -106,7 +106,7 @@ void main() {
           isFetching: true,
           materialPrice: {
             for (var number in fakeMaterialQuery)
-              number.code: Price.empty().copyWith(
+              number.materialNumber: Price.empty().copyWith(
                 rules: [PriceRule.empty()],
                 tiers: [PriceTier.empty()],
                 bonuses: [PriceBonus.empty()],
@@ -117,7 +117,7 @@ void main() {
           isFetching: false,
           materialPrice: {
             for (var number in fakeMaterialQuery)
-              number.code: Price.empty().copyWith(
+              number.materialNumber: Price.empty().copyWith(
                 rules: [PriceRule.empty()],
                 tiers: [PriceTier.empty()],
                 bonuses: [PriceBonus.empty()],
@@ -146,16 +146,16 @@ void main() {
           isFetching: true,
           materialPrice: {
             for (final material in fakeFOCMaterialQuery)
-              material.code: Price.empty()
-                  .copyWith(materialNumber: material.code)
+              material.materialNumber: Price.empty()
+                  .copyWith(materialNumber: material.materialNumber)
           },
         ),
         MaterialPriceState.initial().copyWith(
           isFetching: false,
           materialPrice: {
             for (final material in fakeFOCMaterialQuery)
-              material.code: Price.empty()
-                  .copyWith(materialNumber: material.code)
+              material.materialNumber: Price.empty()
+                  .copyWith(materialNumber: material.materialNumber)
           },
         ),
       ],

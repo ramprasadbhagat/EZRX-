@@ -87,7 +87,7 @@ class MaterialGridItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    materialInfo.code.displayMatNo,
+                    materialInfo.materialNumber.displayMatNo,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.darkGray,
                         ),
@@ -135,7 +135,7 @@ class _PriceLabel extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
-        final itemPrice = state.materialPrice[materialInfo.code];
+        final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
           final priceAggregate = PriceAggregate(
             banner: BannerItem.empty(),
@@ -154,7 +154,7 @@ class _PriceLabel extends StatelessWidget {
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty().copyWith(
-              materialNumber: materialInfo.code,
+              materialNumber: materialInfo.materialNumber,
             ),
             tenderContract: TenderContract.empty(),
             comboDeal: ComboDeal.empty(),
