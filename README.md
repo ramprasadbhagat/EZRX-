@@ -48,6 +48,16 @@ type command `make run_sg_client_test` to run integration test
 type command `make run_sg_external_test` to run integration test
 #### Browserstack test
 ```fvm flutter test --flavor uat --machine integration_test/<filePath> > report.json```
+#### Integration tests on Browserstack cloud platform on Android Devices
+You need to run the below commands from a shell.
+1. Set the Browserstack username. ``` export BROWSERSTACK_USERNAME='Username' ```
+2. Set the Browserstack accesskey. ``` export BROWSERSTACK_ACCESSKEY='Accesskey' ```
+3. Set whether to run on specific geo location. This should be either 'Yes' or 'No' ``` export ENABLE_GEOLOCATION='Yes' ```
+4. Set all the tests that you want to run, Specify in same format with test name and geo location. Multiple Tests can be specified. 
+   Please note for MM market , Browserstack still does not support this Geo Location. You can set any other market geo location like "SG".     
+	``` testIT=("./integration_test/sg/order/client_user.dart":"SG" "./integration_test/my/order/client_user.dart":"MY") ```
+5. Run the tests by calling the script and passing the tests defined in above step as parameter to script.``` ./run_intg_android_browserstack.sh ${testIT[@]} ```
+	Summary of the test run will conatin the following at the end of the script execution - "Test case" , "Build Status", "Build Details Link", "Video Link"
 
 ### Flavor
 | Flavor| Package name | App Name | Endpoint |

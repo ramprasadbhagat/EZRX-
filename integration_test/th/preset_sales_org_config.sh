@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo -e "\n"
+echo "Presetting sales org config for TH."
+
+updateSalesorgconfigMutationReq=$(curl --location 'https://uat.ezrx.com/api/strapiEngineMutation' \
+--header 'Content-Type: application/json' \
+--data '{"query":"  mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {        updateSalesOrgConfig(input: $input) {       salesOrgConfig {         salesOrgCode         ponRequired         priceOverride         expiryDateDisplay         enableBatchNumber         currency         netPriceOverride         languageFilter         enableVat         enableZDP5         languageValue         materialWithoutPrice         enableZDP8Override         displayOrderDiscount         enableIRN         enableTaxClassification         disableBundles         disableProcessingStatus         enableCollectiveNumber         enableGimmickMaterial         hideStockDisplay         showPOAttachment         disableDeliveryDate         enableTaxAtTotalLevelOnly         enableGreenDelivery         greenDeliveryDelayInDays         greenDeliveryUserRole         minOrderAmount         hideCustomer         disableOrderType         vatValue         enableSpecialInstructions         enableReferenceNote         enableMobileNumber         enablePaymentTerms         enableGMC         enableListPrice         enableDefaultMD         disablePaymentTermsDisplay         enableBillTo         enableOHPrice         addOosMaterials         oosValue         enableRemarks         enableTaxDisplay         enableGMN          }        }      }   ","variables":{"input":{"where":{"id":22},"data":{"salesOrgCode":"2902","ponRequired":false,"priceOverride":false,"expiryDateDisplay":false,"batchNumDisplay":false,"enableBatchNumber":false,"currency":"thb","netPriceOverride":true,"languageFilter":true,"enableVat":true,"enableZDP5":false,"languageValue":"E","materialWithoutPrice":false,"enableZDP8Override":true,"displayOrderDiscount":false,"enableIRN":true,"enableTaxClassification":true,"disableBundles":true,"disableProcessingStatus":false,"enableCollectiveNumber":false,"enableGimmickMaterial":false,"hideStockDisplay":false,"showPOAttachment":true,"disableDeliveryDate":false,"enableTaxAtTotalLevelOnly":false,"enableGreenDelivery":false,"greenDeliveryDelayInDays":0,"greenDeliveryUserRole":0,"minOrderAmount":"1500","hideCustomer":false,"disableOrderType":false,"vatValue":7,"enableSpecialInstructions":true,"enableReferenceNote":true,"enableMobileNumber":false,"enablePaymentTerms":false,"enableGMC":false,"enableListPrice":true,"enableDefaultMD":true,"disablePaymentTermsDisplay":true,"enableBillTo":false,"enableOHPrice":true,"addOosMaterials":true,"oosValue":0,"enableRemarks":true,"enableTaxDisplay":true,"enableGMN":false}}}}' )
+
+response=$(echo $updateSalesorgconfigMutationReq)
+echo "Response is : "  $response
+
+echo "Your TH sales org config has been successfully reset."
+echo -e "\n"

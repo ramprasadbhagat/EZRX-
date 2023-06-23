@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo -e "\n"
+echo "Presetting sales org config for MM."
+
+updateSalesorgconfigMutationReq=$(curl --location 'https://uat.ezrx.com/api/strapiEngineMutation' \
+--header 'Content-Type: application/json' \
+--data '{"query":"  mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {       updateSalesOrgConfig(input: $input) {       salesOrgConfig {         salesOrgCode         ponRequired         priceOverride         expiryDateDisplay         enableBatchNumber         currency         netPriceOverride         languageFilter         enableVat         enableZDP5         languageValue         materialWithoutPrice         enableZDP8Override         displayOrderDiscount         enableIRN         enableTaxClassification         disableBundles         disableProcessingStatus         enableCollectiveNumber         enableGimmickMaterial         hideStockDisplay         showPOAttachment         disableDeliveryDate         enableTaxAtTotalLevelOnly         enableGreenDelivery         greenDeliveryDelayInDays         greenDeliveryUserRole         minOrderAmount         hideCustomer         disableOrderType         vatValue         enableSpecialInstructions         enableReferenceNote         enableMobileNumber         enablePaymentTerms         enableGMC         enableListPrice         enableDefaultMD         disablePaymentTermsDisplay         enableBillTo         enableOHPrice         addOosMaterials         oosValue         enableRemarks         enableTaxDisplay         enableGMN        }       }     }     ","variables":{"input":{"where":{"id":209},"data":{"salesOrgCode":"2201","ponRequired":false,"priceOverride":false,"expiryDateDisplay":true,"batchNumDisplay":true,"enableBatchNumber":false,"currency":"mmk","netPriceOverride":false,"languageFilter":false,"enableVat":false,"enableZDP5":false,"languageValue":"","materialWithoutPrice":false,"enableZDP8Override":false,"displayOrderDiscount":false,"enableIRN":false,"enableTaxClassification":false,"disableBundles":false,"disableProcessingStatus":false,"enableCollectiveNumber":true,"enableGimmickMaterial":false,"hideStockDisplay":false,"showPOAttachment":false,"disableDeliveryDate":true,"enableTaxAtTotalLevelOnly":false,"enableGreenDelivery":false,"greenDeliveryDelayInDays":0,"greenDeliveryUserRole":0,"minOrderAmount":"0","hideCustomer":false,"disableOrderType":true,"vatValue":0,"enableSpecialInstructions":true,"enableReferenceNote":false,"enableMobileNumber":false,"enablePaymentTerms":false,"enableGMC":false,"enableListPrice":true,"enableDefaultMD":false,"disablePaymentTermsDisplay":false,"enableBillTo":false,"enableOHPrice":true,"addOosMaterials":true,"oosValue":1,"enableRemarks":false,"enableTaxDisplay":true,"enableGMN":false}}}}')
+
+response=$(echo $updateSalesorgconfigMutationReq)
+echo "Response is : "  $response
+
+echo "Your MM sales org config has been successfully reset."
+echo -e "\n"
