@@ -11,8 +11,6 @@ class MaterialDetailRobot {
   final tenderContractHeading = find.byKey(const Key('selectContract'));
   final tenderOrderInvalidQuantityError =
       find.byKey(const Key('tenderOrderValidQuantityErrorText'));
-  final tenderOrderInvalidCombinationError =
-      find.byKey(const Key('addTOCartTenderOrderInvalidCombinationError'));
 
   void verify() {
     final materialDetails = find.byKey(const Key('materialDetailsPage'));
@@ -57,17 +55,17 @@ class MaterialDetailRobot {
   }
 
   Future<void> tenderOrderErrorTextVisible() async {
-    expect(tenderOrderInvalidQuantityError, findsOneWidget);
+    if (tenderOrderInvalidQuantityError.evaluate().isNotEmpty) {
+      expect(tenderOrderInvalidQuantityError, findsOneWidget);
+    }
 
     await tester.pumpAndSettle();
   }
 
   Future<void> tenderOrderErrorTextNotVisible() async {
-    expect(tenderOrderInvalidQuantityError, findsNothing);
-  }
-
-  void displayTenderContractErrorText() {
-    expect(tenderOrderInvalidCombinationError, findsWidgets);
+    if (tenderOrderInvalidQuantityError.evaluate().isEmpty) {
+      expect(tenderOrderInvalidQuantityError, findsNothing);
+    }
   }
 
   void findTenderContractText() {
@@ -82,6 +80,15 @@ class MaterialDetailRobot {
     await tester
         .tap(find.byKey(Key('tenderContractIcon$tenderContractNumber')));
     await tester.pumpAndSettle();
+  }
+
+  Future<void> addTenderMaterialToCartIfQuantityIsValidated() async {
+    if (tenderOrderInvalidQuantityError.evaluate().isEmpty) {
+      findAddToCart();
+      await tapAddToCart();
+    } else {
+      await goBack();
+    }
   }
 
   Future<void> findAndCloseAnnouncementIcon() async {

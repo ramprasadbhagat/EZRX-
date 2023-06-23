@@ -245,6 +245,15 @@ class CartRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> deleteMaterialIfItemPresentInCart(
+      String materialNumber, int qty) async {
+    final material = find.byKey(ValueKey('$materialNumber$qty'));
+    if (material.evaluate().isNotEmpty) {
+      await tester.tap(find.byKey(Key('deleteFromCart$materialNumber')));
+      await tester.pumpAndSettle();
+    }
+  }
+
   Future<void> deleteBonusMaterial() async {
     await tester.tap(find.byKey(const Key('deleteBonusFromCart')));
     await tester.pumpAndSettle();

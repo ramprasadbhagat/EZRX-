@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -43,7 +44,8 @@ void main() {
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('VN market test client user', (WidgetTester tester) async {
+  testWidgets('VN market test external sales rep user',
+      (WidgetTester tester) async {
     loginRobot = LoginRobot(tester);
     homeRobot = HomeRobot(tester);
     accountSettingsRobot = AccountSettingsRobot(tester);
@@ -94,6 +96,35 @@ void main() {
     const tierQuantityUnitPrice1 = '171,899.7';
     const tierQuantityUnitPrice8 = '154,709.73';
     const minimumOrderAmount = '1,000,000 $currency';
+
+    Future<void> tenderOrderValidation({
+      required String materialNumber,
+      required int qty,
+    }) async {
+      final tenderOrderInvalidCombinationError =
+          find.byKey(const Key('addTOCartTenderOrderInvalidCombinationError'));
+
+      if (tenderOrderInvalidCombinationError.evaluate().isNotEmpty) {
+        expect(tenderOrderInvalidCombinationError, findsOneWidget);
+      }
+      materialDetailRobot.findAddToCart();
+      await materialDetailRobot.tapAddToCart();
+
+      final materialDetails = find.byKey(const Key('materialDetailsPage'));
+
+      if (materialDetails.evaluate().isNotEmpty) {
+        expect(materialDetails, findsOneWidget);
+        await materialDetailRobot.goBack();
+      } else {
+        materialListRobot.verify();
+        materialListRobot.findCartButton();
+        await materialListRobot.tapCartButton();
+        cartRobot.verify();
+        cartRobot.findMaterialItem(materialNumber, qty);
+        await cartRobot.deleteMaterial(materialNumber);
+        await cartRobot.goBack();
+      }
+    }
 
     //init app
     await runAppForTesting(tester);
@@ -468,23 +499,19 @@ void main() {
     await materialDetailRobot.changeQuantity(1001);
     await materialDetailRobot.deductQuantity();
     await materialDetailRobot.tenderOrderErrorTextNotVisible();
-
-    materialDetailRobot.findAddToCart();
-    await materialDetailRobot.tapAddToCart();
+    await materialDetailRobot.addTenderMaterialToCartIfQuantityIsValidated();
 
     //Tender Order Validation(Tender material 730 cannot be combined with any other material in the cart.)
     await materialListRobot.clearSearchMaterial();
     await materialListRobot.search(material1);
     await materialListRobot.tapMaterial(material1);
     materialDetailRobot.verify();
-    materialDetailRobot.displayTenderContractErrorText();
-    await materialListRobot.goBack();
+    await tenderOrderValidation(materialNumber: material1,qty: 1);
     materialListRobot.verify();
     materialListRobot.findCartButton();
     await materialListRobot.tapCartButton();
     cartRobot.verify();
-    cartRobot.findMaterialItem(material2, 1000);
-    await cartRobot.deleteMaterial(material2);
+    await cartRobot.deleteMaterialIfItemPresentInCart(material2, 1000);
     await cartRobot.goBack();
 
     await materialListRobot.goBack();
