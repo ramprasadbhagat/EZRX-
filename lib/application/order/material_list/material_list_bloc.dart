@@ -207,7 +207,9 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     on<_AddFavourite>(
       (e, emit) async {
         final failureOrSuccess = await materialListRepository.addFavourateData(
-            materialNumber: e.item.materialNumber, materialList: state.materialList,);
+          materialNumber: e.item.materialNumber,
+          materialList: state.materialList,
+        );
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(

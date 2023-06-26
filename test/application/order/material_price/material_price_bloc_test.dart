@@ -78,54 +78,54 @@ void main() {
     );
 
     blocTest<MaterialPriceBloc, MaterialPriceState>(
-      'Fetch when all materials query already have their price',
-      build: () => MaterialPriceBloc(repository: repository),
-      seed: () => MaterialPriceState.initial().copyWith(
-        materialPrice: {
-          for (var number in fakeMaterialQuery)
-            number.materialNumber: Price.empty().copyWith(
-              rules: [PriceRule.empty()],
-              tiers: [PriceTier.empty()],
-              bonuses: [PriceBonus.empty()],
+        'Fetch when all materials query already have their price',
+        build: () => MaterialPriceBloc(repository: repository),
+        seed: () => MaterialPriceState.initial().copyWith(
+              materialPrice: {
+                for (var number in fakeMaterialQuery)
+                  number.materialNumber: Price.empty().copyWith(
+                    rules: [PriceRule.empty()],
+                    tiers: [PriceTier.empty()],
+                    bonuses: [PriceBonus.empty()],
+                  ),
+              },
             ),
-        },
-      ),
-      act: (MaterialPriceBloc bloc) => bloc.add(
-        MaterialPriceEvent.fetch(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrg,
-          salesConfigs: fakeSalesConfigs,
-          materials: fakeMaterialQuery,
-          comboDealEligible: false,
-        ),
-      ),
-      expect: () {
-        return [
-        MaterialPriceState.initial().copyWith(
-          isFetching: true,
-          materialPrice: {
-            for (var number in fakeMaterialQuery)
-              number.materialNumber: Price.empty().copyWith(
-                rules: [PriceRule.empty()],
-                tiers: [PriceTier.empty()],
-                bonuses: [PriceBonus.empty()],
+        act: (MaterialPriceBloc bloc) => bloc.add(
+              MaterialPriceEvent.fetch(
+                customerCodeInfo: fakeCustomerCodeInfo,
+                shipToInfo: fakeShipToInfo,
+                salesOrganisation: fakeSalesOrg,
+                salesConfigs: fakeSalesConfigs,
+                materials: fakeMaterialQuery,
+                comboDealEligible: false,
               ),
-          },
-        ),
-        MaterialPriceState.initial().copyWith(
-          isFetching: false,
-          materialPrice: {
-            for (var number in fakeMaterialQuery)
-              number.materialNumber: Price.empty().copyWith(
-                rules: [PriceRule.empty()],
-                tiers: [PriceTier.empty()],
-                bonuses: [PriceBonus.empty()],
-              ),
-          },
-        )
-      ];}
-    );
+            ),
+        expect: () {
+          return [
+            MaterialPriceState.initial().copyWith(
+              isFetching: true,
+              materialPrice: {
+                for (var number in fakeMaterialQuery)
+                  number.materialNumber: Price.empty().copyWith(
+                    rules: [PriceRule.empty()],
+                    tiers: [PriceTier.empty()],
+                    bonuses: [PriceBonus.empty()],
+                  ),
+              },
+            ),
+            MaterialPriceState.initial().copyWith(
+              isFetching: false,
+              materialPrice: {
+                for (var number in fakeMaterialQuery)
+                  number.materialNumber: Price.empty().copyWith(
+                    rules: [PriceRule.empty()],
+                    tiers: [PriceTier.empty()],
+                    bonuses: [PriceBonus.empty()],
+                  ),
+              },
+            )
+          ];
+        });
 
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch when all materials is FOC',

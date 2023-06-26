@@ -67,15 +67,14 @@ class UserRepository implements IUserRepository {
         role: user.role.name,
       );
 
-      await clevertapService.setUser(
-        name: user.fullName.displayFullName,
-        username: user.username.getOrDefaultValue(''),
-        email: user.email.getOrDefaultValue(''),
-        role: user.role.name,
-      );
-
       if (!kIsWeb) {
         await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
+        await clevertapService.setUser(
+          name: user.fullName.displayFullName,
+          username: user.username.getOrDefaultValue(''),
+          email: user.email.getOrDefaultValue(''),
+          role: user.role.name,
+        );
       }
 
       return Right(user);

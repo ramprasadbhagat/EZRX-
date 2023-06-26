@@ -39,13 +39,12 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
 
         final materialNumbers =
             e.materials.map((e) => e.materialNumber).toList();
-        final queryMaterialNumber =
-            List<MaterialNumber>.from(materialNumbers)
-              ..removeWhere(
-                (element) => state.materialPrice.containsKey(
-                  element,
-                ),
-              );
+        final queryMaterialNumber = List<MaterialNumber>.from(materialNumbers)
+          ..removeWhere(
+            (element) => state.materialPrice.containsKey(
+              element,
+            ),
+          );
         if (queryMaterialNumber.isEmpty) {
           emit(
             state.copyWith(

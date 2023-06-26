@@ -237,7 +237,6 @@ Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
 @freezed
 class MaterialDataDto with _$MaterialDataDto {
   const MaterialDataDto._();
-
   @HiveType(typeId: 3, adapterName: 'MaterialDataDtoAdapter')
   factory MaterialDataDto({
     @JsonKey(name: 'Code', defaultValue: '')
@@ -291,7 +290,6 @@ class MaterialDataDto with _$MaterialDataDto {
 @freezed
 class MaterialResponseDto with _$MaterialResponseDto {
   const MaterialResponseDto._();
-
   factory MaterialResponseDto({
     @JsonKey(name: 'Count', defaultValue: 0) required int count,
     @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])

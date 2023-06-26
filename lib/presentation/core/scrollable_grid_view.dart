@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -59,9 +60,6 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final cardWidth = MediaQuery.of(context).size.width / 3.1;
-    final cardHeight = MediaQuery.of(context).size.height / 4;
-
     return RefreshIndicator(
       color: ZPColors.primary,
       onRefresh: () async => widget.onRefresh?.call(),
@@ -90,10 +88,13 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
                     childCount: widget.items.length,
                   ),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount:
+                        Responsive.isLargerThan(context, Breakpoint.desktop)
+                            ? 4
+                            : 2,
                     crossAxisSpacing: widget.crossAxisSpacing,
                     mainAxisSpacing: widget.mainAxisSpacing,
-                    childAspectRatio: cardWidth / cardHeight,
+                    childAspectRatio: _getResponsiveAspectRatio(context),
                   ),
                 ),
           if (widget.isLoading)
@@ -106,6 +107,18 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
         ],
       ),
     );
+  }
+
+  double _getResponsiveAspectRatio(BuildContext context) {
+    final cardWidth = MediaQuery.of(context).size.width / 3.1;
+    final cardHeight = MediaQuery.of(context).size.height / 4;
+    if (Responsive.isLargerThan(context, Breakpoint.xl)) {
+      return 1 / 0.9;
+    } else if (Responsive.isLargerThan(context, Breakpoint.desktop)) {
+      return 1 / 1.3;
+    }
+
+    return cardWidth / cardHeight;
   }
 }
 

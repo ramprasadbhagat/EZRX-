@@ -964,8 +964,6 @@ void setupLocator() {
     ),
   );
 
-
-
   //============================================================
   //  Order Template List
   //
@@ -2402,7 +2400,8 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<ProductSearchLocalDataSource>(),
       remoteDataSource: locator<ProductSearchRemoteDataSource>(),
-      productSuggestionHistoryStorage: locator<ProductSuggestionHistoryStorage>(),
+      productSuggestionHistoryStorage:
+          locator<ProductSuggestionHistoryStorage>(),
     ),
   );
   locator.registerLazySingleton(

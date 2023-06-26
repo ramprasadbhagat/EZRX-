@@ -8,7 +8,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 
 class HomeNavigationTabbar extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -20,99 +19,51 @@ class HomeNavigationTabbar extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.showTermsAndCondition != current.showTermsAndCondition,
       builder: (context, state) {
-        final orientation = MediaQuery.of(context).orientation;
-
         return state.showTermsAndCondition
             ? const AupTCDialog(
                 key: WidgetKeys.aupTcScreen,
               )
             : WillPopScope(
                 onWillPop: () async => false,
-                child: SizerUtil.deviceType != DeviceType.mobile &&
-                        orientation == Orientation.landscape
-                    ? BlocBuilder<UserBloc, UserState>(
-                        buildWhen: (previous, current) => previous != current,
-                        builder: (context, state) {
-                          return AutoTabsRouter(
-                            lazyLoad: false,
-                            routes: _getTabs(context)
-                                .map((item) => item.route)
-                                .toList(),
-                            builder: (context, child, animation) {
-                              var activeIndex = _getTabs(context).indexWhere(
-                                (d) => context.tabsRouter
-                                    .isRouteActive(d.route.routeName),
-                              );
-                              if (activeIndex == -1) {
-                                activeIndex = 0;
-                              }
-
-                              return Row(
-                                children: [
-                                  NavigationRail(
-                                    key: WidgetKeys.homeTabBar,
-                                    destinations: _getTabs(context)
-                                        .map(
-                                          (item) => NavigationRailDestination(
-                                            icon: item.icon,
-                                            label: Text(item.label).tr(),
-                                          ),
-                                        )
-                                        .toList(),
-                                    selectedIndex: activeIndex,
-                                    onDestinationSelected: (index) {
-                                      context.navigateTo(
-                                        _getTabs(context)[index].route,
-                                      );
-                                    },
-                                  ),
-                                  Expanded(child: child),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      )
-                    : BlocBuilder<UserBloc, UserState>(
-                        buildWhen: (previous, current) => previous != current,
-                        builder: (context, state) {
-                          return Material(
-                            color: Colors.white,
-                            child: AutoTabsRouter.tabBar(
-                              routes: _getTabs(context)
-                                  .map((item) => item.route)
-                                  .toList(),
-                              builder: (context, child, tabController) =>
-                                  Column(
-                                children: [
-                                  Expanded(child: child),
-                                  SafeArea(
-                                    bottom: true,
-                                    top: false,
-                                    child: TabBar(
-                                      key: WidgetKeys.homeTabBar,
-                                      indicator: TopIndicator(),
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0,
+                child: BlocBuilder<UserBloc, UserState>(
+                  buildWhen: (previous, current) => previous != current,
+                  builder: (context, state) {
+                    return Material(
+                      color: Colors.white,
+                      child: AutoTabsRouter.tabBar(
+                        routes: _getTabs(context)
+                            .map((item) => item.route)
+                            .toList(),
+                        builder: (context, child, tabController) => Column(
+                          children: [
+                            Expanded(child: child),
+                            SafeArea(
+                              bottom: true,
+                              top: false,
+                              child: TabBar(
+                                key: WidgetKeys.homeTabBar,
+                                indicator: TopIndicator(),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                ),
+                                controller: tabController,
+                                labelPadding: EdgeInsets.zero,
+                                tabs: _getTabs(context)
+                                    .map(
+                                      (item) => Tab(
+                                        icon: item.icon,
+                                        text: item.label.tr(),
                                       ),
-                                      controller: tabController,
-                                      labelPadding: EdgeInsets.zero,
-                                      tabs: _getTabs(context)
-                                          .map(
-                                            (item) => Tab(
-                                              icon: item.icon,
-                                              text: item.label.tr(),
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-                                  ),
-                                ],
+                                    )
+                                    .toList(),
                               ),
                             ),
-                          );
-                        },
+                          ],
+                        ),
                       ),
+                    );
+                  },
+                ),
               );
       },
     );

@@ -294,7 +294,8 @@ class MaterialListRepository implements IMaterialListRepository {
       try {
         final stockInfoList =
             await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: materials.map((e) => e.materialNumber.getOrCrash()).toList(),
+          materialNumbers:
+              materials.map((e) => e.materialNumber.getOrCrash()).toList(),
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
         );
@@ -422,8 +423,9 @@ class MaterialListRepository implements IMaterialListRepository {
                 ? element.copyWith(isFavourite: false)
                 : element)
             .toList();
-        newMaterialList
-            .removeWhere((element) => element.materialNumber == materialNumber && filter);
+        newMaterialList.removeWhere(
+          (element) => element.materialNumber == materialNumber && filter,
+        );
 
         return Right(newMaterialList);
       } catch (e) {
@@ -439,8 +441,9 @@ class MaterialListRepository implements IMaterialListRepository {
                 ? element.copyWith(isFavourite: false)
                 : element)
             .toList();
-        favouriteList
-            .removeWhere((element) => element.materialNumber == materialNumber && filter);
+        favouriteList.removeWhere(
+          (element) => element.materialNumber == materialNumber && filter,
+        );
 
         return Right(favouriteList);
       } catch (e) {
