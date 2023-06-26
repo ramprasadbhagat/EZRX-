@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
@@ -108,10 +109,28 @@ class AccountSummaryPage extends StatelessWidget {
                 return BlocProvider(
                   create: (context) =>
                       locator<DownloadPaymentAttachmentsBloc>(),
-                  child: _ItemCard(
-                    label: 'Credits',
-                    keyVal: getCredits(creditLimit: state.creditLimit),
-                    isFetching: state.isFetchingCreditLimit,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<AllCreditsBloc>().add(
+                            AllCreditsEvent.fetchAllCreditsList(
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              customerCodeInfo: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                              allCreditsFilter: AllCreditsFilter.empty(),
+                            ),
+                          );
+                      context.router.pushNamed('payments/all_credits');
+                    },
+                    child: _ItemCard(
+                      label: 'Credits',
+                      keyVal: getCredits(creditLimit: state.creditLimit),
+                      isFetching: state.isFetchingCreditLimit,
+                    ),
                   ),
                 );
               },
