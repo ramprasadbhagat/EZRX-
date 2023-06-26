@@ -57,7 +57,11 @@ class ProductsTab extends StatelessWidget {
                 child: state.isFetching && state.materialList.isEmpty
                     ? const LoadingShimmerGridItem()
                     : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        padding: const EdgeInsets.only(
+                          left: 5.0,
+                          right: 5.0,
+                          bottom: 10.0,
+                        ),
                         child: ScrollableGridView<MaterialInfo>(
                           emptyMessage: 'No material found'.tr(),
                           header: const _TotalMaterialCount(),
@@ -149,10 +153,14 @@ class _TotalMaterialCount extends StatelessWidget {
             ),
             child: BlocBuilder<MaterialListBloc, MaterialListState>(
               buildWhen: (previous, current) =>
-                  previous.materialCount != current.materialCount,
+                  previous.materialList != current.materialList,
               builder: (context, state) {
                 return Text(
-                  '${state.materialCount}',
+                  state.selectedFilters.isFavourite
+                      //if favourite filter is true show the material list length
+                      ? '${state.materialList.length}'
+                      //if favourite filter is false show the material count
+                      : '${state.materialCount}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkGray,
                       ),

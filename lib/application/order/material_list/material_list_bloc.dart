@@ -206,7 +206,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     });
     on<_AddFavourite>(
       (e, emit) async {
-        final failureOrSuccess = await materialListRepository.addFavourateData(
+        final failureOrSuccess =
+            await materialListRepository.addFavouriteMaterial(
           materialNumber: e.item.materialNumber,
           materialList: state.materialList,
         );
@@ -231,7 +232,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     on<_DeleteFavourite>(
       ((e, emit) async {
         final failureOrSuccess =
-            await materialListRepository.removeFavourateData(
+            await materialListRepository.removeFavouriteMaterial(
           materialNumber: e.item.materialNumber,
           materialList: state.materialList,
           filter: state.selectedFilters.isFavourite,

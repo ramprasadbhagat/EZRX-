@@ -32,7 +32,7 @@ class MaterialGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       key: WidgetKeys.materialListMaterialCard,
-      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+      margin: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 3),
       child: Column(
         children: [
           Expanded(

@@ -374,32 +374,36 @@ class MaterialListRepository implements IMaterialListRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<MaterialInfo>>> addFavourateData({
+  Future<Either<ApiFailure, List<MaterialInfo>>> addFavouriteMaterial({
     required MaterialNumber materialNumber,
     required List<MaterialInfo> materialList,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         await materialListLocalDataSource.addFavouriteMaterial();
-        final favouriteList = List<MaterialInfo>.from(materialList)
-            .map((element) => element.materialNumber == materialNumber
-                ? element.copyWith(isFavourite: true)
-                : element)
+        final newMaterialList = List<MaterialInfo>.from(materialList)
+            .map(
+              (element) => element.materialNumber == materialNumber
+                  ? element.copyWith(isFavourite: true)
+                  : element,
+            )
             .toList();
 
-        return Right(favouriteList);
+        return Right(newMaterialList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     } else {
       try {
-        await materialListRemoteDataSource.addFavourateMaterial(
+        await materialListRemoteDataSource.addFavouriteMaterial(
           materialNumber: materialNumber.getOrCrash(),
         );
         final newMaterialList = List<MaterialInfo>.from(materialList)
-            .map((element) => element.materialNumber == materialNumber
-                ? element.copyWith(isFavourite: true)
-                : element)
+            .map(
+              (element) => element.materialNumber == materialNumber
+                  ? element.copyWith(isFavourite: true)
+                  : element,
+            )
             .toList();
 
         return Right(newMaterialList);
@@ -410,7 +414,7 @@ class MaterialListRepository implements IMaterialListRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<MaterialInfo>>> removeFavourateData({
+  Future<Either<ApiFailure, List<MaterialInfo>>> removeFavouriteMaterial({
     required MaterialNumber materialNumber,
     required List<MaterialInfo> materialList,
     required bool filter,
@@ -433,19 +437,19 @@ class MaterialListRepository implements IMaterialListRepository {
       }
     } else {
       try {
-        await materialListRemoteDataSource.removeFavourateMaterial(
+        await materialListRemoteDataSource.removeFavouriteMaterial(
           materialNumber: materialNumber.getOrCrash(),
         );
-        final favouriteList = List<MaterialInfo>.from(materialList)
+        final newMaterialList = List<MaterialInfo>.from(materialList)
             .map((element) => element.materialNumber == materialNumber
                 ? element.copyWith(isFavourite: false)
                 : element)
             .toList();
-        favouriteList.removeWhere(
+        newMaterialList.removeWhere(
           (element) => element.materialNumber == materialNumber && filter,
         );
 
-        return Right(favouriteList);
+        return Right(newMaterialList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }

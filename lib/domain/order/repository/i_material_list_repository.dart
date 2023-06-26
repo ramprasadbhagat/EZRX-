@@ -77,12 +77,12 @@ abstract class IMaterialListRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, List<MaterialInfo>>> addFavourateData({
+  Future<Either<ApiFailure, List<MaterialInfo>>> addFavouriteMaterial({
     required MaterialNumber materialNumber,
     required List<MaterialInfo> materialList,
   });
 
-  Future<Either<ApiFailure, List<MaterialInfo>>> removeFavourateData({
+  Future<Either<ApiFailure, List<MaterialInfo>>> removeFavouriteMaterial({
     required MaterialNumber materialNumber,
     required List<MaterialInfo> materialList,
     required bool filter,

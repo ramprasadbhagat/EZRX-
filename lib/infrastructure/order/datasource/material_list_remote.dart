@@ -498,7 +498,7 @@ class MaterialListRemoteDataSource {
     });
   }
 
-  Future<MaterialAddFavourite> addFavourateMaterial({
+  Future<MaterialAddFavourite> addFavouriteMaterial({
     required String materialNumber,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -522,7 +522,7 @@ class MaterialListRemoteDataSource {
     });
   }
 
-  Future<MaterialRemoveFavourite> removeFavourateMaterial({
+  Future<MaterialRemoveFavourite> removeFavouriteMaterial({
     required String materialNumber,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
