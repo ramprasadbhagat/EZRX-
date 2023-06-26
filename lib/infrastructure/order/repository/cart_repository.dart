@@ -29,9 +29,15 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 
+import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
+
+import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
+
+
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
   final Config config;
+  final CartLocalDataSource cartLocalDataSource;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
@@ -45,6 +51,7 @@ class CartRepository implements ICartRepository {
     required this.stockInfoRemoteDataSource,
     required this.discountOverrideRemoteDataSource,
     required this.mixpanelService,
+    required this.cartLocalDataSource,
   });
 
   @override
@@ -121,7 +128,7 @@ class CartRepository implements ICartRepository {
                   return material.copyWithIncreasedQty(qty: qty);
                 },
               ).toList(),
-            ) : cartItemWithStock;  
+            ) : cartItemWithStock;
 
       final updatedCartItem = await _verifyZdp5Discount(cartItem: savedCartItem,
         customerCodeInfo: customerCodeInfo,
@@ -139,7 +146,7 @@ class CartRepository implements ICartRepository {
     } catch (e) {
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.addToCartFailed,
-        properties: {MixpanelProps.errorMessage:
+       properties: {MixpanelProps.errorMessage:
               FailureHandler.handleFailure(e).failureMessage,
         },
       );
@@ -155,7 +162,7 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
   }) async {
     var updatedCartItem = cartItem;
-    
+
     if (cartItem.materials.first.isPriceUpdateAvailable) {
       final newPrice = await getMaterialPriceWithZdp5Discount(
         customerCodeInfo: customerCodeInfo,
@@ -946,5 +953,17 @@ class CartRepository implements ICartRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  Future<Either<ApiFailure, List<CartProduct>>>
+      getAddedToCartProductList() async {
+      try {
+        final savedCartList =
+            await cartLocalDataSource.getAddedToCartProductList();
+
+        return Right(savedCartList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
   }
 }

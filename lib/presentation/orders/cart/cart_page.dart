@@ -1,3 +1,8 @@
+// ignore_for_file: unused_element
+
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -9,23 +14,27 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_combo_deal_item_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
+
+import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -57,11 +66,31 @@ class CartPage extends StatelessWidget {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Scaffold(
-            key: const Key('cartpage'),
+            key: WidgetKeys.cartPage,
             appBar: AppBar(
               title: Text(
-                '${'My Cart'.tr()} (${state.cartItems.length})',
+                'Cart'.tr(),
+                style: Theme.of(context).textTheme.labelLarge,
               ),
+              centerTitle: false,
+              titleSpacing: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.close,
+                ),
+                onPressed: () {
+                  context.router.pop();
+                },
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.delete_outlined,
+                    color: ZPColors.red,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
             ),
             body: Column(
               children: [
@@ -70,50 +99,7 @@ class CartPage extends StatelessWidget {
                 ),
                 const AccountSuspendedBanner(),
                 _CartScrollList(state: state, taxCode: taxCode),
-                state.cartItems.isEmpty
-                    ? const SizedBox.shrink()
-                    : Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.only(top: 10),
-                        decoration: const BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Colors.black54,
-                              blurRadius: 2.0,
-                              offset: Offset(0.0, 0.75),
-                            ),
-                          ],
-                          color: ZPColors.white,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                _SelectAllButton(),
-                                _TotalSection(),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            SafeArea(
-                              child: ElevatedButton(
-                                key: const ValueKey('orderSummaryButton'),
-                                onPressed: state.selectedCartItems.isEmpty
-                                    ? null
-                                    : () {
-                                        FocusScope.of(context)
-                                            .requestFocus(FocusNode());
-                                        trackMixpanelEvent(
-                                          MixpanelEvents.goToOrderSummary,
-                                        );
-                                        _goToOrderSummary(context);
-                                      },
-                                child: const Text('Order Summary').tr(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                const _CheckoutSection(),
               ],
             ),
           ),
@@ -186,63 +172,26 @@ class _CartScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ScrollList<CartItem>(
-        emptyMessage: 'Cart is Empty'.tr(),
-        controller: ScrollController(),
-        onRefresh: () {
-          context.read<CartBloc>().add(
-                CartEvent.fetch(
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  salesOrganisationConfigs:
-                      context.read<SalesOrgBloc>().state.configs,
-                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                  doNotAllowOutOfStockMaterials: context
-                      .read<EligibilityBloc>()
-                      .state
-                      .doNotAllowOutOfStockMaterials,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  comboDealEligible:
-                      context.read<EligibilityBloc>().state.comboDealEligible,
-                  isSpecialOrderType: context
-                      .read<OrderDocumentTypeBloc>()
-                      .state
-                      .isSpecialOrderType,
-                ),
-              );
-        },
-        isLoading: state.isFetching && state.cartItems.isEmpty,
-        itemBuilder: (context, index, item) {
-          switch (item.itemType) {
-            case CartItemType.material:
-              return CartMaterialItemTile(
-                cartItem: item,
-                key: ValueKey(
-                  '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
-                ),
-                taxCode: taxCode,
-                showCheckBox: true,
-              );
-            case CartItemType.bundle:
-              return CartBundleItemTile(
-                cartItem: item,
-                taxCode: taxCode,
-                showCheckBox: true,
-              );
-            case CartItemType.comboDeal:
-              return CartComboDealItem(
-                cartItem: item,
-                showCheckBox: true,
-              );
-          }
-        },
-        items: state.cartItems,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: ScrollList<CartProduct>(
+          emptyMessage: 'Cart is Empty'.tr(),
+          controller: ScrollController(),
+          onRefresh: () {},
+          isLoading: state.isFetching && state.cartItems.isEmpty,
+          itemBuilder: (context, index, item) {
+            return CartProductTile(
+              cartItem: item,
+            );
+          },
+          items: state.cartProducts,
+        ),
       ),
     );
   }
 }
 
+//TODO: To be removed when add to cart flow is implemented
 class _SelectAllButton extends StatelessWidget {
   const _SelectAllButton({Key? key}) : super(key: key);
 
@@ -252,12 +201,12 @@ class _SelectAllButton extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Expanded(
-          key: const Key('selectAllButton'),
+          key: WidgetKeys.selectAllButton,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Radio(
-                key: const Key('selectAllRadioButton'),
+                key: WidgetKeys.selectAllRadioButton,
                 value: state.selectedCartItems.length,
                 groupValue: state.cartItems.length,
                 toggleable: true,
@@ -287,6 +236,7 @@ class _SelectAllButton extends StatelessWidget {
   }
 }
 
+//TODO: To be removed when add to cart flow is implemented
 class _TotalSection extends StatelessWidget {
   const _TotalSection({Key? key}) : super(key: key);
 
@@ -311,6 +261,7 @@ class _TotalSection extends StatelessWidget {
   }
 }
 
+//TODO: To be removed when add to cart flow is implemented
 class _TotalPriceSection extends StatelessWidget {
   final SalesOrganisationConfigs salesOrgConfig;
   final CartState cartState;
@@ -334,7 +285,7 @@ class _TotalPriceSection extends StatelessWidget {
 
         return Expanded(
           flex: 2,
-          key: const Key('totalSection'),
+          key: WidgetKeys.totalSection,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -350,14 +301,14 @@ class _TotalPriceSection extends StatelessWidget {
               ),
               if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
                 BalanceTextRow(
-                  key: const Key('taxCodeInPercentageKey'),
+                  key: WidgetKeys.taxCodeInPercentageKey,
                   keyText: '$taxCode in %'.tr(),
                   valueText: '${salesOrgConfig.vatValue}%',
                   valueFlex: 1,
                 ),
               if (salesOrgConfig.shouldShowTax)
                 BalanceTextRow(
-                  key: const Key('totalTaxKey'),
+                  key: WidgetKeys.totalTaxKey,
                   keyText: taxCode.tr(),
                   valueText: StringUtils.displayPrice(
                     salesOrgConfig,
@@ -368,7 +319,7 @@ class _TotalPriceSection extends StatelessWidget {
                   valueFlex: 1,
                 ),
               BalanceTextRow(
-                key: const Key('grandTotalKey'),
+                key: WidgetKeys.grandTotalKey,
                 keyText: 'Grand Total'.tr(),
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
@@ -380,6 +331,88 @@ class _TotalPriceSection extends StatelessWidget {
               ),
             ],
           ),
+        );
+      },
+    );
+  }
+}
+
+//TODO: Static data to be removed once add to cart flow is implemented
+class _CheckoutSection extends StatelessWidget {
+  const _CheckoutSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) => previous.cartItems != current.cartItems,
+      builder: (context, state) {
+        return Column(
+          children: [
+            const Divider(
+              color: ZPColors.lightGray2,
+              indent: 0,
+              endIndent: 0,
+              height: 15,
+            ),
+            ListTile(
+              dense: true,
+              visualDensity: VisualDensity.compact,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+              title: Text(
+                'Order for RSD Hospitals SDN BHD',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 20,
+              ),
+            ),
+            ListTile(
+              dense: true,
+              visualDensity: VisualDensity.compact,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+              title: Text(
+                '6 items',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              trailing: RichText(
+                text: TextSpan(
+                  text: 'Grand total: ',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: ZPColors.extraLightGrey4,
+                      ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'MYR ',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: ZPColors.primary,
+                          ),
+                    ),
+                    TextSpan(
+                      text: '11,000.00',
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.primary,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SafeArea(
+              child: Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: ElevatedButton(
+                  key: WidgetKeys.checkoutButton,
+                  onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: const Text('Check out').tr(),
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

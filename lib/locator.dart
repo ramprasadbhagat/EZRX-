@@ -356,6 +356,8 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 
+import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1623,6 +1625,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => StockInfoLocalDataSource());
   locator.registerLazySingleton(() => StockInfoQueryMutation());
+  locator.registerLazySingleton(() => CartLocalDataSource());
 
   locator.registerLazySingleton(
     () => StockInfoRemoteDataSource(
@@ -1642,6 +1645,7 @@ void setupLocator() {
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
       discountOverrideRemoteDataSource:
           locator<DiscountOverrideRemoteDataSource>(),
+      cartLocalDataSource: locator<CartLocalDataSource>(),
     ),
   );
 

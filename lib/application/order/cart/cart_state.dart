@@ -6,6 +6,7 @@ class CartState with _$CartState {
 
   const factory CartState({
     required List<CartItem> cartItems,
+    required List<CartProduct> cartProducts,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
     required bool isClearing,
@@ -14,6 +15,7 @@ class CartState with _$CartState {
 
   factory CartState.initial() => CartState(
         cartItems: <CartItem>[],
+        cartProducts: <CartProduct>[],
         apiFailureOrSuccessOption: none(),
         isFetching: false,
         isClearing: false,

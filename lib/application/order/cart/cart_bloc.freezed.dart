@@ -85,6 +85,7 @@ mixin _$CartEvent {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -156,6 +157,7 @@ mixin _$CartEvent {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -227,6 +229,7 @@ mixin _$CartEvent {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -260,6 +263,8 @@ mixin _$CartEvent {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -286,6 +291,8 @@ mixin _$CartEvent {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -312,6 +319,7 @@ mixin _$CartEvent {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -439,6 +447,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return initialized();
   }
@@ -513,6 +522,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return initialized?.call();
   }
@@ -587,6 +597,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -626,6 +637,8 @@ class _$_Initialized implements _Initialized {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return initialized(this);
   }
@@ -655,6 +668,8 @@ class _$_Initialized implements _Initialized {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return initialized?.call(this);
   }
@@ -684,6 +699,7 @@ class _$_Initialized implements _Initialized {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -945,6 +961,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return fetch(
         salesOrganisationConfigs,
@@ -1026,6 +1043,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return fetch?.call(
         salesOrganisationConfigs,
@@ -1107,6 +1125,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -1153,6 +1172,8 @@ class _$_Fetch implements _Fetch {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return fetch(this);
   }
@@ -1182,6 +1203,8 @@ class _$_Fetch implements _Fetch {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return fetch?.call(this);
   }
@@ -1211,6 +1234,7 @@ class _$_Fetch implements _Fetch {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -1514,6 +1538,7 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return addMaterialToCart(
         item,
@@ -1596,6 +1621,7 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return addMaterialToCart?.call(
         item,
@@ -1678,6 +1704,7 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addMaterialToCart != null) {
@@ -1725,6 +1752,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return addMaterialToCart(this);
   }
@@ -1754,6 +1783,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return addMaterialToCart?.call(this);
   }
@@ -1783,6 +1814,7 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addMaterialToCart != null) {
@@ -1957,6 +1989,7 @@ class _$_DiscountOverride implements _DiscountOverride {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return discountOverride(item);
   }
@@ -2031,6 +2064,7 @@ class _$_DiscountOverride implements _DiscountOverride {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return discountOverride?.call(item);
   }
@@ -2105,6 +2139,7 @@ class _$_DiscountOverride implements _DiscountOverride {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (discountOverride != null) {
@@ -2144,6 +2179,8 @@ class _$_DiscountOverride implements _DiscountOverride {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return discountOverride(this);
   }
@@ -2173,6 +2210,8 @@ class _$_DiscountOverride implements _DiscountOverride {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return discountOverride?.call(this);
   }
@@ -2202,6 +2241,7 @@ class _$_DiscountOverride implements _DiscountOverride {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (discountOverride != null) {
@@ -2465,6 +2505,7 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return addBundleToCart(
         bundleItems,
@@ -2545,6 +2586,7 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return addBundleToCart?.call(
         bundleItems,
@@ -2625,6 +2667,7 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addBundleToCart != null) {
@@ -2670,6 +2713,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return addBundleToCart(this);
   }
@@ -2699,6 +2744,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return addBundleToCart?.call(this);
   }
@@ -2728,6 +2775,7 @@ class _$_AddBundleToCart implements _AddBundleToCart {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addBundleToCart != null) {
@@ -3015,6 +3063,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return addComboDealToCart(
         comboDealItems,
@@ -3096,6 +3145,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return addComboDealToCart?.call(
         comboDealItems,
@@ -3177,6 +3227,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addComboDealToCart != null) {
@@ -3223,6 +3274,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return addComboDealToCart(this);
   }
@@ -3252,6 +3305,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return addComboDealToCart?.call(this);
   }
@@ -3281,6 +3336,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addComboDealToCart != null) {
@@ -3595,6 +3651,7 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return updateMaterialQtyInCartItem(
         currentItem,
@@ -3677,6 +3734,7 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return updateMaterialQtyInCartItem?.call(
         currentItem,
@@ -3759,6 +3817,7 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (updateMaterialQtyInCartItem != null) {
@@ -3806,6 +3865,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return updateMaterialQtyInCartItem(this);
   }
@@ -3835,6 +3896,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return updateMaterialQtyInCartItem?.call(this);
   }
@@ -3864,6 +3927,7 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (updateMaterialQtyInCartItem != null) {
@@ -4126,6 +4190,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return verifyMaterialDealBonus(item, salesOrganisationConfigs,
         salesOrganisation, customerCodeInfo, shipToInfo);
@@ -4201,6 +4266,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return verifyMaterialDealBonus?.call(item, salesOrganisationConfigs,
         salesOrganisation, customerCodeInfo, shipToInfo);
@@ -4276,6 +4342,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -4316,6 +4383,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return verifyMaterialDealBonus(this);
   }
@@ -4345,6 +4414,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return verifyMaterialDealBonus?.call(this);
   }
@@ -4374,6 +4445,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -4542,6 +4614,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return removeFromCart(item);
   }
@@ -4616,6 +4689,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return removeFromCart?.call(item);
   }
@@ -4690,6 +4764,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -4729,6 +4804,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return removeFromCart(this);
   }
@@ -4758,6 +4835,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return removeFromCart?.call(this);
   }
@@ -4787,6 +4866,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -4956,6 +5036,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return addRemarkToCartItem(item, message);
   }
@@ -5030,6 +5111,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return addRemarkToCartItem?.call(item, message);
   }
@@ -5104,6 +5186,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addRemarkToCartItem != null) {
@@ -5143,6 +5226,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return addRemarkToCartItem(this);
   }
@@ -5172,6 +5257,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return addRemarkToCartItem?.call(this);
   }
@@ -5201,6 +5288,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addRemarkToCartItem != null) {
@@ -5502,6 +5590,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return addBonusToCartItem(
         item,
@@ -5584,6 +5673,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return addBonusToCartItem?.call(
         item,
@@ -5666,6 +5756,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -5713,6 +5804,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return addBonusToCartItem(this);
   }
@@ -5742,6 +5835,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return addBonusToCartItem?.call(this);
   }
@@ -5771,6 +5866,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -5967,6 +6063,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return removeBonusFromCartItem(item, bonusItem);
   }
@@ -6041,6 +6138,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return removeBonusFromCartItem?.call(item, bonusItem);
   }
@@ -6115,6 +6213,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (removeBonusFromCartItem != null) {
@@ -6154,6 +6253,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return removeBonusFromCartItem(this);
   }
@@ -6183,6 +6284,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return removeBonusFromCartItem?.call(this);
   }
@@ -6212,6 +6315,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (removeBonusFromCartItem != null) {
@@ -6402,6 +6506,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return addRemarkToBonusItem(item, bonusItem, message);
   }
@@ -6476,6 +6581,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return addRemarkToBonusItem?.call(item, bonusItem, message);
   }
@@ -6550,6 +6656,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addRemarkToBonusItem != null) {
@@ -6589,6 +6696,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return addRemarkToBonusItem(this);
   }
@@ -6618,6 +6727,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return addRemarkToBonusItem?.call(this);
   }
@@ -6647,6 +6758,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (addRemarkToBonusItem != null) {
@@ -6831,6 +6943,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return overrideCartItemPrice(overridenPrice, cartItem);
   }
@@ -6905,6 +7018,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return overrideCartItemPrice?.call(overridenPrice, cartItem);
   }
@@ -6979,6 +7093,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (overrideCartItemPrice != null) {
@@ -7018,6 +7133,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return overrideCartItemPrice(this);
   }
@@ -7047,6 +7164,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return overrideCartItemPrice?.call(this);
   }
@@ -7076,6 +7195,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (overrideCartItemPrice != null) {
@@ -7240,6 +7360,7 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return selectButtonTapped(cartItem);
   }
@@ -7314,6 +7435,7 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return selectButtonTapped?.call(cartItem);
   }
@@ -7388,6 +7510,7 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (selectButtonTapped != null) {
@@ -7427,6 +7550,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return selectButtonTapped(this);
   }
@@ -7456,6 +7581,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return selectButtonTapped?.call(this);
   }
@@ -7485,6 +7612,7 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (selectButtonTapped != null) {
@@ -7609,6 +7737,7 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return selectAllButtonTapped();
   }
@@ -7683,6 +7812,7 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return selectAllButtonTapped?.call();
   }
@@ -7757,6 +7887,7 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (selectAllButtonTapped != null) {
@@ -7796,6 +7927,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return selectAllButtonTapped(this);
   }
@@ -7825,6 +7958,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return selectAllButtonTapped?.call(this);
   }
@@ -7854,6 +7989,7 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (selectAllButtonTapped != null) {
@@ -7972,6 +8108,7 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return clearCart();
   }
@@ -8046,6 +8183,7 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return clearCart?.call();
   }
@@ -8120,6 +8258,7 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -8159,6 +8298,8 @@ class _$_ClearCart implements _ClearCart {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return clearCart(this);
   }
@@ -8188,6 +8329,8 @@ class _$_ClearCart implements _ClearCart {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return clearCart?.call(this);
   }
@@ -8217,6 +8360,7 @@ class _$_ClearCart implements _ClearCart {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -8373,6 +8517,7 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return clearSelectedItemsFromCart(selectedItemIds);
   }
@@ -8447,6 +8592,7 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return clearSelectedItemsFromCart?.call(selectedItemIds);
   }
@@ -8521,6 +8667,7 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (clearSelectedItemsFromCart != null) {
@@ -8560,6 +8707,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return clearSelectedItemsFromCart(this);
   }
@@ -8589,6 +8738,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return clearSelectedItemsFromCart?.call(this);
   }
@@ -8618,6 +8769,7 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (clearSelectedItemsFromCart != null) {
@@ -8882,6 +9034,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return replaceWithOrderItems(
         items,
@@ -8962,6 +9115,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return replaceWithOrderItems?.call(
         items,
@@ -9042,6 +9196,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (replaceWithOrderItems != null) {
@@ -9087,6 +9242,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return replaceWithOrderItems(this);
   }
@@ -9116,6 +9273,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return replaceWithOrderItems?.call(this);
   }
@@ -9145,6 +9304,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (replaceWithOrderItems != null) {
@@ -9335,6 +9495,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
     required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
   }) {
     return updateBatchInCartItem(item, stockInfo);
   }
@@ -9409,6 +9570,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
   }) {
     return updateBatchInCartItem?.call(item, stockInfo);
   }
@@ -9483,6 +9645,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (updateBatchInCartItem != null) {
@@ -9522,6 +9685,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
         updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
   }) {
     return updateBatchInCartItem(this);
   }
@@ -9551,6 +9716,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
   }) {
     return updateBatchInCartItem?.call(this);
   }
@@ -9580,6 +9747,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     required TResult orElse(),
   }) {
     if (updateBatchInCartItem != null) {
@@ -9602,8 +9770,382 @@ abstract class _UpdateBatchInCartItem implements CartEvent {
 }
 
 /// @nodoc
+abstract class _$$_FetchProductsAddedToCartCopyWith<$Res> {
+  factory _$$_FetchProductsAddedToCartCopyWith(
+          _$_FetchProductsAddedToCart value,
+          $Res Function(_$_FetchProductsAddedToCart) then) =
+      __$$_FetchProductsAddedToCartCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchProductsAddedToCartCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_FetchProductsAddedToCart>
+    implements _$$_FetchProductsAddedToCartCopyWith<$Res> {
+  __$$_FetchProductsAddedToCartCopyWithImpl(_$_FetchProductsAddedToCart _value,
+      $Res Function(_$_FetchProductsAddedToCart) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
+  const _$_FetchProductsAddedToCart();
+
+  @override
+  String toString() {
+    return 'CartEvent.fetchProductsAddedToCart()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchProductsAddedToCart);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials,
+            bool comboDealEligible,
+            bool isSpecialOrderType)
+        fetch,
+    required TResult Function(
+            PriceAggregate item,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
+        addMaterialToCart,
+    required TResult Function(PriceAggregate item) discountOverride,
+    required TResult Function(
+            List<PriceAggregate> bundleItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        addBundleToCart,
+    required TResult Function(
+            List<PriceAggregate> comboDealItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool overrideQty)
+        addComboDealToCart,
+    required TResult Function(
+            CartItem currentItem,
+            PriceAggregate updatedQtyItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        updateMaterialQtyInCartItem,
+    required TResult Function(
+            PriceAggregate item,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        verifyMaterialDealBonus,
+    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(CartItem item, String message) addRemarkToCartItem,
+    required TResult Function(CartItem item, MaterialItemBonus bonusItem, bool overrideQty, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) addBonusToCartItem,
+    required TResult Function(CartItem item, MaterialItemBonus bonusItem) removeBonusFromCartItem,
+    required TResult Function(CartItem item, MaterialItemBonus bonusItem, String message) addRemarkToBonusItem,
+    required TResult Function(List<Price> overridenPrice, CartItem cartItem) overrideCartItemPrice,
+    required TResult Function(CartItem cartItem) selectButtonTapped,
+    required TResult Function() selectAllButtonTapped,
+    required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds) clearSelectedItemsFromCart,
+    required TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial) replaceWithOrderItems,
+    required TResult Function(CartItem item, StockInfo stockInfo) updateBatchInCartItem,
+    required TResult Function() fetchProductsAddedToCart,
+  }) {
+    return fetchProductsAddedToCart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials,
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
+        fetch,
+    TResult? Function(
+            PriceAggregate item,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
+        addMaterialToCart,
+    TResult? Function(PriceAggregate item)? discountOverride,
+    TResult? Function(
+            List<PriceAggregate> bundleItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addBundleToCart,
+    TResult? Function(
+            List<PriceAggregate> comboDealItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool overrideQty)?
+        addComboDealToCart,
+    TResult? Function(
+            CartItem currentItem,
+            PriceAggregate updatedQtyItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        updateMaterialQtyInCartItem,
+    TResult? Function(
+            PriceAggregate item,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        verifyMaterialDealBonus,
+    TResult? Function(CartItem item)? removeFromCart,
+    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
+    TResult? Function(CartItem item, MaterialItemBonus bonusItem, bool overrideQty, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? addBonusToCartItem,
+    TResult? Function(CartItem item, MaterialItemBonus bonusItem)? removeBonusFromCartItem,
+    TResult? Function(CartItem item, MaterialItemBonus bonusItem, String message)? addRemarkToBonusItem,
+    TResult? Function(List<Price> overridenPrice, CartItem cartItem)? overrideCartItemPrice,
+    TResult? Function(CartItem cartItem)? selectButtonTapped,
+    TResult? Function()? selectAllButtonTapped,
+    TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
+    TResult? Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
+    TResult? Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult? Function()? fetchProductsAddedToCart,
+  }) {
+    return fetchProductsAddedToCart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials,
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
+        fetch,
+    TResult Function(
+            PriceAggregate item,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
+        addMaterialToCart,
+    TResult Function(PriceAggregate item)? discountOverride,
+    TResult Function(
+            List<PriceAggregate> bundleItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addBundleToCart,
+    TResult Function(
+            List<PriceAggregate> comboDealItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool overrideQty)?
+        addComboDealToCart,
+    TResult Function(
+            CartItem currentItem,
+            PriceAggregate updatedQtyItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        updateMaterialQtyInCartItem,
+    TResult Function(
+            PriceAggregate item,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        verifyMaterialDealBonus,
+    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(CartItem item, String message)? addRemarkToCartItem,
+    TResult Function(CartItem item, MaterialItemBonus bonusItem, bool overrideQty, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? addBonusToCartItem,
+    TResult Function(CartItem item, MaterialItemBonus bonusItem)? removeBonusFromCartItem,
+    TResult Function(CartItem item, MaterialItemBonus bonusItem, String message)? addRemarkToBonusItem,
+    TResult Function(List<Price> overridenPrice, CartItem cartItem)? overrideCartItemPrice,
+    TResult Function(CartItem cartItem)? selectButtonTapped,
+    TResult Function()? selectAllButtonTapped,
+    TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
+    TResult Function(List<CartItem> items, SalesOrganisationConfigs salesOrganisationConfigs, SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, bool doNotallowOutOfStockMaterial)? replaceWithOrderItems,
+    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function()? fetchProductsAddedToCart,
+    required TResult orElse(),
+  }) {
+    if (fetchProductsAddedToCart != null) {
+      return fetchProductsAddedToCart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AddMaterialToCart value) addMaterialToCart,
+    required TResult Function(_DiscountOverride value) discountOverride,
+    required TResult Function(_AddBundleToCart value) addBundleToCart,
+    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
+    required TResult Function(_UpdateMaterialQtyInCartItem value)
+        updateMaterialQtyInCartItem,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveBonusFromCartItem value)
+        removeBonusFromCartItem,
+    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
+    required TResult Function(_OverrideCartItemPrice value)
+        overrideCartItemPrice,
+    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
+    required TResult Function(_SelectAllButtonTapped value)
+        selectAllButtonTapped,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
+    required TResult Function(_ReplaceWithOrderItems value)
+        replaceWithOrderItems,
+    required TResult Function(_UpdateBatchInCartItem value)
+        updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
+  }) {
+    return fetchProductsAddedToCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddMaterialToCart value)? addMaterialToCart,
+    TResult? Function(_DiscountOverride value)? discountOverride,
+    TResult? Function(_AddBundleToCart value)? addBundleToCart,
+    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
+    TResult? Function(_UpdateMaterialQtyInCartItem value)?
+        updateMaterialQtyInCartItem,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
+    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
+    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
+    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
+    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
+    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
+  }) {
+    return fetchProductsAddedToCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AddMaterialToCart value)? addMaterialToCart,
+    TResult Function(_DiscountOverride value)? discountOverride,
+    TResult Function(_AddBundleToCart value)? addBundleToCart,
+    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
+    TResult Function(_UpdateMaterialQtyInCartItem value)?
+        updateMaterialQtyInCartItem,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
+    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
+    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
+    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
+    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
+    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
+    required TResult orElse(),
+  }) {
+    if (fetchProductsAddedToCart != null) {
+      return fetchProductsAddedToCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchProductsAddedToCart implements CartEvent {
+  const factory _FetchProductsAddedToCart() = _$_FetchProductsAddedToCart;
+}
+
+/// @nodoc
 mixin _$CartState {
   List<CartItem> get cartItems => throw _privateConstructorUsedError;
+  List<CartProduct> get cartProducts => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
@@ -9622,6 +10164,7 @@ abstract class $CartStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<CartItem> cartItems,
+      List<CartProduct> cartProducts,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
       bool isClearing,
@@ -9642,6 +10185,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
   @override
   $Res call({
     Object? cartItems = null,
+    Object? cartProducts = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? isClearing = null,
@@ -9652,6 +10196,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
               as List<CartItem>,
+      cartProducts: null == cartProducts
+          ? _value.cartProducts
+          : cartProducts // ignore: cast_nullable_to_non_nullable
+              as List<CartProduct>,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -9681,6 +10229,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<CartItem> cartItems,
+      List<CartProduct> cartProducts,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
       bool isClearing,
@@ -9699,6 +10248,7 @@ class __$$_CartStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cartItems = null,
+    Object? cartProducts = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? isClearing = null,
@@ -9709,6 +10259,10 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
               as List<CartItem>,
+      cartProducts: null == cartProducts
+          ? _value._cartProducts
+          : cartProducts // ignore: cast_nullable_to_non_nullable
+              as List<CartProduct>,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -9734,11 +10288,13 @@ class __$$_CartStateCopyWithImpl<$Res>
 class _$_CartState extends _CartState {
   const _$_CartState(
       {required final List<CartItem> cartItems,
+      required final List<CartProduct> cartProducts,
       required this.apiFailureOrSuccessOption,
       required this.isFetching,
       required this.isClearing,
       required this.isFetchingBonus})
       : _cartItems = cartItems,
+        _cartProducts = cartProducts,
         super._();
 
   final List<CartItem> _cartItems;
@@ -9747,6 +10303,14 @@ class _$_CartState extends _CartState {
     if (_cartItems is EqualUnmodifiableListView) return _cartItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cartItems);
+  }
+
+  final List<CartProduct> _cartProducts;
+  @override
+  List<CartProduct> get cartProducts {
+    if (_cartProducts is EqualUnmodifiableListView) return _cartProducts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cartProducts);
   }
 
   @override
@@ -9760,7 +10324,7 @@ class _$_CartState extends _CartState {
 
   @override
   String toString() {
-    return 'CartState(cartItems: $cartItems, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus)';
+    return 'CartState(cartItems: $cartItems, cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus)';
   }
 
   @override
@@ -9770,6 +10334,8 @@ class _$_CartState extends _CartState {
             other is _$_CartState &&
             const DeepCollectionEquality()
                 .equals(other._cartItems, _cartItems) &&
+            const DeepCollectionEquality()
+                .equals(other._cartProducts, _cartProducts) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
@@ -9785,6 +10351,7 @@ class _$_CartState extends _CartState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_cartItems),
+      const DeepCollectionEquality().hash(_cartProducts),
       apiFailureOrSuccessOption,
       isFetching,
       isClearing,
@@ -9800,6 +10367,7 @@ class _$_CartState extends _CartState {
 abstract class _CartState extends CartState {
   const factory _CartState(
       {required final List<CartItem> cartItems,
+      required final List<CartProduct> cartProducts,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool isFetching,
@@ -9809,6 +10377,8 @@ abstract class _CartState extends CartState {
 
   @override
   List<CartItem> get cartItems;
+  @override
+  List<CartProduct> get cartProducts;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

@@ -111,4 +111,6 @@ class CartEvent with _$CartEvent {
     required CartItem item,
     required StockInfo stockInfo,
   }) = _UpdateBatchInCartItem;
+
+  const factory CartEvent.fetchProductsAddedToCart() = _FetchProductsAddedToCart;
 }

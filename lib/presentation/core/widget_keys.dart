@@ -171,6 +171,28 @@ class WidgetKeys {
   static const Key loaderImage = Key('loaderImage');
 
   //============================================================
+  //  Quantity Input Widget Keys
+  //============================================================
+  static const Key cartItemAddKey = Key('cartItemAddKey');
+  static const Key cartItemDeleteKey =  Key('cartItemDeleteKey');
+  static const Key quantityInputTextKey =  Key('quantityInputTextKey');
+  static const Key cartProductImage =  Key('cartProductImage');
+
+  //============================================================
+  //  Cart Page Keys
+  //============================================================
+  static const Key cartPage = Key('cartpage');
+  static const Key totalSection = Key('totalSection');
+  static const Key totalTaxKey = Key('totalTaxKey');
+  static const Key grandTotalKey = Key('grandTotalKey');
+  static const Key selectAllRadioButton = Key('selectAllRadioButton');
+  static const Key taxCodeInPercentageKey = Key('taxCodeInPercentageKey');
+  static const Key orderSummaryButton = Key('orderSummaryButton');
+  static const Key checkoutButton = Key('checkoutButton');
+  static const Key selectAllButton = Key('selectAllButton');
+  static Key cartMaterialItemTile(String cartMaterialItemTileKey) => Key(cartMaterialItemTileKey);
+
+  //============================================================
   //  Material List
   //============================================================
 

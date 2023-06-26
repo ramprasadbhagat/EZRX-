@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
@@ -39,6 +40,8 @@ class MockCartStorage extends Mock implements CartStorage {}
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
 
+class CartLocalDataSourceMock extends Mock implements CartLocalDataSource {}
+
 class DiscountOverrideRemoteDataSourceMock extends Mock
     implements DiscountOverrideRemoteDataSource {}
 
@@ -50,6 +53,7 @@ void main() {
   late CartStorage cartStorageMock;
   late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
   late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
+  late CartLocalDataSourceMock cartLocalDataSourceMock;
   late DiscountOverrideRemoteDataSource discountOverrideRemoteDataSourceMock;
   late CartRepository cartRepository;
   late CartItem fakeCartItem;
@@ -74,12 +78,14 @@ void main() {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
+    cartLocalDataSourceMock = CartLocalDataSourceMock();
     discountOverrideRemoteDataSourceMock =
         DiscountOverrideRemoteDataSourceMock();
     cartStorageMock = MockCartStorage();
     mixpanelService = MixpanelServiceMock();
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
+      cartLocalDataSource: cartLocalDataSourceMock,
       discountOverrideRemoteDataSource: discountOverrideRemoteDataSourceMock,
       config: mockConfig,
       cartStorage: cartStorageMock,

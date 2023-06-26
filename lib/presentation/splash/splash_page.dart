@@ -403,22 +403,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
             _getAdminPoAttachment(state);
-            context.read<CartBloc>().add(
-                  CartEvent.fetch(
-                    doNotAllowOutOfStockMaterials:
-                        state.doNotAllowOutOfStockMaterials,
-                    customerCodeInfo: state.customerCodeInfo,
-                    salesOrganisationConfigs: state.salesOrgConfigs,
-                    salesOrganisation: state.salesOrganisation,
-                    shipToInfo: state.shipToInfo,
-                    comboDealEligible: state.comboDealEligible,
-                    isSpecialOrderType: context
-                        .read<OrderDocumentTypeBloc>()
-                        .state
-                        .isSpecialOrderType,
-                  ),
+             context.read<CartBloc>().add(
+                  const CartEvent.fetchProductsAddedToCart(),
                 );
-
             final enableReturn =
                 locator<RemoteConfigService>().getReturnsConfig() &&
                     state.isReturnsEnable;

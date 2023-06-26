@@ -16,6 +16,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
+import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
+
 part 'cart_bloc.freezed.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -788,6 +790,35 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+
+      fetchProductsAddedToCart: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.getAddedToCartProductList();
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (productAddedToCartList) {
+            emit(
+              state.copyWith(
+                cartProducts: productAddedToCartList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),
