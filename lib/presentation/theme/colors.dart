@@ -68,6 +68,8 @@ abstract class ZPColors {
   static const Color warning = Color.fromRGBO(254, 198, 0, 1);
   static const Color aliceBlue = Color.fromRGBO(246, 249, 253, 1);
   static const Color lightRedStatusColor = Color.fromRGBO(255, 211, 211, 1);
+  static const Color lightBgYellow = Color.fromRGBO(253, 246, 237, 1);
+  static const Color lightBorderYellow = Color.fromRGBO(245, 219, 181, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

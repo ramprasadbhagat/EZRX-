@@ -70,20 +70,20 @@ class Price with _$Price {
 
   bool get isDiscountEligible => isTireDiscountEligible || zmgDiscount;
 
-  bool get isBonusDealEligible => _availableBonus.isNotEmpty;
+  bool get isBonusDealEligible => availableBonus.isNotEmpty;
 
   List<PriceBonusItem> get priceBonusItem => bonuses.isNotEmpty
       ? bonuses.first.sortedPriceBonusItem
       : <PriceBonusItem>[];
 
-  Iterable<BonusMaterial> get _availableBonus =>
+  Iterable<BonusMaterial> get availableBonus =>
       priceBonusItem.expand((element) => element.bonusMaterials);
 
-  Iterable<BonusMaterial> get sameMaterialBonus => _availableBonus.where(
+  Iterable<BonusMaterial> get sameMaterialBonus => availableBonus.where(
         (BonusMaterial element) => element.materialNumber == materialNumber,
       );
 
-  Iterable<BonusMaterial> get otherMaterialBonus => _availableBonus.where(
+  Iterable<BonusMaterial> get otherMaterialBonus => availableBonus.where(
         (BonusMaterial element) => element.materialNumber != materialNumber,
       );
 
