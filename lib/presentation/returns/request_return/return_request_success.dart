@@ -6,17 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 final scaffoldKey = GlobalKey<ScaffoldState>();
+
 class ReturnRequestSuccessPage extends StatelessWidget {
   const ReturnRequestSuccessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key :scaffoldKey,
+      key: scaffoldKey,
       appBar: AppBar(
         title: const Text('Returns Confirmation').tr(),
       ),
-      body:const _BodyContent(),
+      body: const _BodyContent(),
     );
   }
 }
@@ -53,19 +54,6 @@ class _BodyContent extends StatelessWidget {
           ),
           const SizedBox(
             height: 15,
-          ),
-          ElevatedButton(
-            key: const Key('createNewReturnRequest'),
-            onPressed: () {
-              context.router.pushAndPopUntil(
-                const RequestReturnRoute(),
-                predicate: (route) =>
-                    route.settings.name == 'HomeNavigationTabbarRoute',
-              );
-            },
-            child: const Text(
-              'Create New Return Request',
-            ),
           ),
           ElevatedButton(
             key: const Key('gotToReturnsSummary'),

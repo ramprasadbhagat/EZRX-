@@ -27,6 +27,7 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/return_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
@@ -474,6 +475,9 @@ class App extends StatelessWidget {
         BlocProvider<ChatBotBloc>(
           create: (context) => locator<ChatBotBloc>(),
         ),
+        BlocProvider<ReturnListBloc>(
+          create: (context) => locator<ReturnListBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         localizationsDelegates: context.localizationDelegates,
@@ -491,7 +495,9 @@ class App extends StatelessWidget {
             locator<RouterObserver>(),
           ],
         ),
-        builder: (context, child) => _EntryPage(child: child,),
+        builder: (context, child) => _EntryPage(
+          child: child,
+        ),
         routeInformationParser: router.defaultRouteParser(),
       ),
     );
@@ -510,7 +516,9 @@ class _EntryPage extends StatelessWidget {
     return Overlay(
       initialEntries: [
         OverlayEntry(
-          builder: (context) => ChatBotWidget(child: child!,),
+          builder: (context) => ChatBotWidget(
+            child: child!,
+          ),
         ),
       ],
     );

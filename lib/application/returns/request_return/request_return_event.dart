@@ -44,15 +44,6 @@ class RequestReturnEvent with _$RequestReturnEvent {
     required String specialInstructions,
   }) = _UpdateSpecialInstructions;
 
-  const factory RequestReturnEvent.initializeSelectedReturnItems() = _InitializeSelectedReturnItems;
-}
-
-
-enum RequestReturnLabel {
-  balanceQuantity,
-  returnQuantity,
-  returnValue,
-  principal,
-  referenceNumber,
-  specialInstructions,
+  const factory RequestReturnEvent.initializeSelectedReturnItems() =
+      _InitializeSelectedReturnItems;
 }

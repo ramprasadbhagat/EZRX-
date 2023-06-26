@@ -23,7 +23,7 @@ class ChatBotWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     final dx = MediaQuery.of(context).size.width * (isMobile ? 0.85 : 0.93);
-    final dy = MediaQuery.of(context).size.height * (isMobile ? 0.8 : 0.9);
+    final dy = MediaQuery.of(context).size.height * (isMobile ? 0.75 : 0.85);
 
     return Stack(
       key: _parentKey,
@@ -31,9 +31,8 @@ class ChatBotWidget extends StatelessWidget {
         child,
         BlocBuilder<LoginFormBloc, LoginFormState>(
           buildWhen: (previous, current) =>
-            previous.isSubmitting != current.isSubmitting,
+              previous.isSubmitting != current.isSubmitting,
           builder: (context, state) {
-            
             return BlocListener<ChatBotBloc, ChatBotState>(
               listener: (context, state) {
                 state.whenOrNull(error: (e) {

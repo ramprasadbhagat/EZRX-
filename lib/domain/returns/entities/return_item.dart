@@ -1,12 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_schedule.dart';
-import 'package:ezrxmobile/domain/returns/entities/usage.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 
 part 'return_item.freezed.dart';
 
@@ -15,82 +9,34 @@ class ReturnItem with _$ReturnItem {
   const ReturnItem._();
 
   const factory ReturnItem({
-    required String assignmentNumber,
-    required String referenceDocument,
-    required String purchaseNumberC,
-    required String poMethod,
-    required DateTimeStringValue createdDate,
-    required String currency,
-    required String plant,
-    required MaterialNumber materialNumber,
-    required String materialDescription,
-    required String itemNumber,
-    required int targetQuantity,
-    required String storeLocation,
-    required String batch,
-    required String highLevelItemCode,
-    required String orderReason,
-    required DateTimeStringValue priceDate,
-    required double unitPrice,
+    required String requestId,
+    required DateTimeStringValue requestDate,
+    required int itemQty,
     required double totalPrice,
-    required PrincipalData principalData,
-    required DateTimeStringValue expiryDate,
-    required bool eligibleForReturn,
-    required List<ReturnSchedule> schedules,
-    required String suggestedPriceOverride,
-    required int balanceQuantity,
-    required double balanceValue,
-    required bool outsidePolicy,
-    @Default(false) bool isSelected,
-    required ReturnQuantity returnQuantity,
-    required Usage usage,
-    required List<PoDocuments> poDocuments,
+    required StatusType status,
+    required MaterialNumber materialNumber,
+    required String materialName,
+    required String defaultMaterialDescription,
+    required String orderNumber,
+    required String invoiceID,
+    required String customerName,
+    required String batch,
+    required DateTimeStringValue expiry,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
-        assignmentNumber: '',
-        referenceDocument: '',
-        purchaseNumberC: '',
-        poMethod: '',
-        createdDate: DateTimeStringValue(''),
-        currency: '',
-        plant: '',
-        materialNumber: MaterialNumber(''),
-        materialDescription: '',
-        itemNumber: '',
-        targetQuantity: 0,
-        storeLocation: '',
-        batch: '',
-        highLevelItemCode: '',
-        orderReason: '',
-        priceDate: DateTimeStringValue(''),
-        unitPrice: 0.0,
+        requestId: '',
+        requestDate: DateTimeStringValue(''),
+        itemQty: 0,
         totalPrice: 0.0,
-        principalData: PrincipalData(
-          principalName: PrincipalName(''),
-          principalCode: PrincipalCode(''),
-        ),
-        expiryDate: DateTimeStringValue(''),
-        eligibleForReturn: false,
-        schedules: <ReturnSchedule>[],
-        suggestedPriceOverride: '',
-        balanceQuantity: 0,
-        balanceValue: 0.0,
-        outsidePolicy: false,
-        isSelected: false,
-        poDocuments: [],
-        returnQuantity: ReturnQuantity(''),
-        usage: Usage.empty(),
+        status: StatusType(''),
+        materialNumber: MaterialNumber(''),
+        materialName: '',
+        defaultMaterialDescription: '',
+        orderNumber: '',
+        invoiceID: '',
+        customerName: '',
+        batch: '',
+        expiry: DateTimeStringValue(''),
       );
-
-  bool get isReturnQuantityValid => returnQuantity.getIntValue != 0
-      ? returnQuantity.getIntValue > balanceQuantity
-      : true;
-
-  List<PoDocuments> updatedDocumentList(String attachmentName) => attachmentName.isNotEmpty ? 
-      poDocuments.where((element) => element.name != attachmentName).toList() : [];
-
-  List<String> get poDocumentUrl => poDocuments.map((e) => e.url).toList();
-
-  String get uniqueId => '$materialNumber$assignmentNumber';
 }

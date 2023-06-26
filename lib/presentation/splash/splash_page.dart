@@ -27,6 +27,7 @@ import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/return_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
@@ -801,6 +802,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),
           );
+
+      context.read<ReturnListBloc>().add(
+            ReturnListEvent.fetchByItems(
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              customerCodeInfo: customerCodeInfo,
+              user: user,
+            ),
+          );
     } else {
       context
           .read<SavedOrderListBloc>()
@@ -821,6 +832,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           .add(const OrderHistoryFilterByStatusEvent.initialized());
       context.read<AccountSummaryBloc>().add(
             const AccountSummaryEvent.initialize(),
+          );
+      context.read<ReturnListBloc>().add(
+            const ReturnListEvent.initialized(),
           );
     }
   }

@@ -235,7 +235,6 @@ class MaterialListRemoteDataSource {
       };
 
       if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
-
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}price',

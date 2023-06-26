@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 abstract class ZPColors {
-  static const Color darkBlue = Color.fromRGBO(0, 57, 72, 1.0);
   static const Color darkGray = Color.fromRGBO(128, 128, 128, 1.0);
   static const Color lightGreen = Color.fromRGBO(192, 212, 47, 0.5);
   static const Color green = Color.fromRGBO(76, 175, 80, 1.0);
@@ -12,6 +11,7 @@ abstract class ZPColors {
   static const Color lightGray = Color.fromRGBO(170, 170, 170, 1.0);
   static const Color extraLightGray = Color.fromRGBO(238, 238, 238, 1.0);
   static const Color shadowColor = Color.fromRGBO(245, 245, 245, 1.0);
+  static const Color mustardColor = Color.fromRGBO(245, 219, 181, 1.0);
   static const Color skyBlueColor = Color.fromRGBO(68, 131, 219, 1.0);
   static const Color unselectedLabelColor = Color.fromRGBO(167, 180, 187, 1.0);
   static const Color inputBorderColor = Color.fromRGBO(207, 210, 210, 1.0);
@@ -41,7 +41,6 @@ abstract class ZPColors {
   static const Color unselectedTabColor = Color.fromRGBO(208, 208, 208, 1);
   static const Color lightYellow = Color.fromRGBO(250, 234, 176, 1);
   static const Color systemMessageColor = Color.fromRGBO(240, 248, 230, 1.0);
-
   static const Color defaultReturnSummaryStatusColor =
       Color.fromRGBO(23, 49, 62, 0.5);
   static const Color returnSummaryStatusTextColor =

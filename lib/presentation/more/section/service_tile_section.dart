@@ -24,7 +24,7 @@ class ServiceTile extends StatelessWidget {
         color: ZPColors.greenIconColor,
       ),
       label: 'Returns',
-      route: null,
+      route: ReturnRootRoute(),
     ),
     const MoreDetailsTile(
       icon: Icon(

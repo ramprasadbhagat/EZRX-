@@ -33,8 +33,10 @@ class _ScaleButtonState extends State<ScaleButton> {
 
   @override
   void dispose() {
-    widget.scrollController.removeListener(_scrollListener);
-    widget.scrollController.dispose();
+    if (widget.scrollController.hasClients) {
+      widget.scrollController.removeListener(_scrollListener);
+      widget.scrollController.dispose();
+    }
     super.dispose();
   }
 

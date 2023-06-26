@@ -7,11 +7,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_request_return_repository.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 
@@ -141,10 +138,8 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
         );
       },
       uploadAttachments: (e) {
-        final item = state.getReturnItem(e.uniqueId);
-        final updatedItem = item.copyWith(
-          poDocuments: List.from(item.poDocuments)..addAll(e.poDocuments),
-        );
+        final item = ReturnItem.empty();
+        final updatedItem = item;
         emit(
           state.copyWith(
             returnItemList: _updatedReturnItemList(updatedItem),
@@ -152,13 +147,10 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
         );
       },
       deleteAttachment: (e) {
-        final item = state.getReturnItem(e.uniqueId);
-        final updatedAttachments = item.updatedDocumentList(e.poDocuments.name);
+        final item = ReturnItem.empty();
         emit(
           state.copyWith(
-            returnItemList: _updatedReturnItemList(item.copyWith(
-              poDocuments: updatedAttachments,
-            )),
+            returnItemList: _updatedReturnItemList(item.copyWith()),
           ),
         );
       },
@@ -189,27 +181,18 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
   }
 
   List<ReturnItem> _updatedReturnItemList(ReturnItem updatedItem) {
-    final returnItemToUpdateIndex = state.returnItemList.indexWhere(
-      (element) => element.uniqueId == updatedItem.uniqueId,
-    );
+    const returnItemToUpdateIndex = 0;
 
     return List.from(state.returnItemList)
       ..removeAt(returnItemToUpdateIndex)
       ..insert(returnItemToUpdateIndex, updatedItem);
   }
 
-  List<ReturnItem> get _getInitializedReturnItemList => state.returnItemList
-      .map((e) => e.copyWith(
-            isSelected: false,
-            poDocuments: [],
-            returnQuantity: ReturnQuantity(''),
-            usage: Usage.empty(),
-          ))
-      .toList();
+  List<ReturnItem> get _getInitializedReturnItemList => <ReturnItem>[];
 
   List<ReturnItem> _getSortedList(List<ReturnItem> oldList, String direction) {
     final newList = oldList
-      ..sort((a, b) => _compareTo(a.expiryDate, b.expiryDate, direction));
+      ..sort((a, b) => _compareTo(a.expiry, b.expiry, direction));
 
     return newList;
   }

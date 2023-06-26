@@ -22,13 +22,4 @@ class RequestReturnState with _$RequestReturnState {
         returnReferenceNumber: '',
         specialInstructions: '',
       );
-
-  List<ReturnItem> get selectedReturnItems =>
-      returnItemList.where((element) => element.isSelected).toList();
-
-  bool get isNotValidated => selectedReturnItems.any((element) =>
-      element.isReturnQuantityValid || element.usage == Usage.empty());
-
-  ReturnItem getReturnItem(String uniqueId) => returnItemList
-      .firstWhere((element) => element.uniqueId == uniqueId);
 }

@@ -4,17 +4,18 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 
 import 'package:ezrxmobile/domain/returns/repository/i_return_price_repository.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_price.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_local.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_remote.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-
 
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_item_details_dto.dart';
@@ -31,8 +32,7 @@ class ReturnPriceRepository extends IReturnPriceRepository {
   });
 
   @override
-  Future<Either<ApiFailure, Map<String, ReturnPrice>>>
-      fetchReturnPrice({
+  Future<Either<ApiFailure, Map<String, ReturnPrice>>> fetchReturnPrice({
     required SalesOrganisation salesOrg,
     required List<ReturnItem> returnItemsList,
   }) async {
@@ -40,9 +40,6 @@ class ReturnPriceRepository extends IReturnPriceRepository {
     final returnPriceObject = <String, ReturnPrice>{};
     if (config.appFlavor == Flavor.mock) {
       try {
-        final returnPrice = await localDataSource.fetchReturnPrice();
-        returnPriceObject.addAll({ReturnItem.empty().uniqueId: returnPrice});
-
         return Right(returnPriceObject);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
@@ -55,12 +52,8 @@ class ReturnPriceRepository extends IReturnPriceRepository {
           salesOrgCode: salesOrganisation,
         );
         returnPrice.fold(
-          (failure) {
-            returnPriceObject.addAll({
-              e.uniqueId: ReturnPrice.empty(),
-            });
-          },
-          (price) => returnPriceObject.addAll({e.uniqueId: price}),
+          (failure) {},
+          (price) => null,
         );
       }));
 
@@ -79,7 +72,7 @@ class ReturnPriceRepository extends IReturnPriceRepository {
     try {
       final price = await remoteDataSource.getReturnPrice(
         salesOrg: salesOrgCode,
-        invoiceNumber: returnItem.assignmentNumber,
+        invoiceNumber: returnItem.orderNumber,
         materials:
             ReturnItemDetailsDto.fromDomain(_getMaterial(returnItem)).toJson(),
       );
@@ -93,9 +86,9 @@ class ReturnPriceRepository extends IReturnPriceRepository {
   ReturnItemDetails _getMaterial(ReturnItem returnItem) =>
       ReturnItemDetails.empty().copyWith(
         batch: returnItem.batch,
-        itemNumber: returnItem.itemNumber,
+        itemNumber: returnItem.orderNumber,
         materialNumber: returnItem.materialNumber,
-        returnQuantity: returnItem.returnQuantity,
-        usage: returnItem.usage,
+        returnQuantity: ReturnQuantity(returnItem.itemQty.toString()),
+        usage: Usage.empty(),
       );
 }

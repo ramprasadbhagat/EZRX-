@@ -148,6 +148,13 @@ class WidgetKeys {
   static const Key addBonusTextFieldClear = Key('addBonusTextFieldClear');
   static const Key clearShipToSearch = Key('clearShipToSearch');
   //============================================================
+  //  Returns
+  //============================================================
+
+  static const Key returnRootPage = Key('returnRootPage');
+  static const Key returnByItemPage = Key('returnByItemPage');
+  static const Key returnByRequestRootPage = Key('returnByRequestRootPage');
+  //============================================================
   //  Reset Password
   //============================================================
 

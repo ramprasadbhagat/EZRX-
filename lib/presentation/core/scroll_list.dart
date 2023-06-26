@@ -48,7 +48,9 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_controller.hasClients) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 

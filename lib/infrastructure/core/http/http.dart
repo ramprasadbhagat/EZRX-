@@ -36,8 +36,8 @@ class HttpService {
     bool overrideBaseUrl = false,
   }) async {
     try {
-      if(overrideBaseUrl) _dio.options.baseUrl = url;
-      
+      if (overrideBaseUrl) _dio.options.baseUrl = url;
+
       _dio.options.method = method;
       _dio.options.responseType = responseType;
       _dio.options.headers['apiEndpoint'] = apiEndpoint;

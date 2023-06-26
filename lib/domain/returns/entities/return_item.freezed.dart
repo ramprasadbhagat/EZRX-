@@ -16,36 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReturnItem {
-  String get assignmentNumber => throw _privateConstructorUsedError;
-  String get referenceDocument => throw _privateConstructorUsedError;
-  String get purchaseNumberC => throw _privateConstructorUsedError;
-  String get poMethod => throw _privateConstructorUsedError;
-  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
-  String get currency => throw _privateConstructorUsedError;
-  String get plant => throw _privateConstructorUsedError;
-  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
-  String get materialDescription => throw _privateConstructorUsedError;
-  String get itemNumber => throw _privateConstructorUsedError;
-  int get targetQuantity => throw _privateConstructorUsedError;
-  String get storeLocation => throw _privateConstructorUsedError;
-  String get batch => throw _privateConstructorUsedError;
-  String get highLevelItemCode => throw _privateConstructorUsedError;
-  String get orderReason => throw _privateConstructorUsedError;
-  DateTimeStringValue get priceDate => throw _privateConstructorUsedError;
-  double get unitPrice => throw _privateConstructorUsedError;
+  String get requestId => throw _privateConstructorUsedError;
+  DateTimeStringValue get requestDate => throw _privateConstructorUsedError;
+  int get itemQty => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
-  PrincipalData get principalData => throw _privateConstructorUsedError;
-  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
-  bool get eligibleForReturn => throw _privateConstructorUsedError;
-  List<ReturnSchedule> get schedules => throw _privateConstructorUsedError;
-  String get suggestedPriceOverride => throw _privateConstructorUsedError;
-  int get balanceQuantity => throw _privateConstructorUsedError;
-  double get balanceValue => throw _privateConstructorUsedError;
-  bool get outsidePolicy => throw _privateConstructorUsedError;
-  bool get isSelected => throw _privateConstructorUsedError;
-  ReturnQuantity get returnQuantity => throw _privateConstructorUsedError;
-  Usage get usage => throw _privateConstructorUsedError;
-  List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
+  StatusType get status => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  String get materialName => throw _privateConstructorUsedError;
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
+  String get orderNumber => throw _privateConstructorUsedError;
+  String get invoiceID => throw _privateConstructorUsedError;
+  String get customerName => throw _privateConstructorUsedError;
+  String get batch => throw _privateConstructorUsedError;
+  DateTimeStringValue get expiry => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -59,39 +42,19 @@ abstract class $ReturnItemCopyWith<$Res> {
       _$ReturnItemCopyWithImpl<$Res, ReturnItem>;
   @useResult
   $Res call(
-      {String assignmentNumber,
-      String referenceDocument,
-      String purchaseNumberC,
-      String poMethod,
-      DateTimeStringValue createdDate,
-      String currency,
-      String plant,
-      MaterialNumber materialNumber,
-      String materialDescription,
-      String itemNumber,
-      int targetQuantity,
-      String storeLocation,
-      String batch,
-      String highLevelItemCode,
-      String orderReason,
-      DateTimeStringValue priceDate,
-      double unitPrice,
+      {String requestId,
+      DateTimeStringValue requestDate,
+      int itemQty,
       double totalPrice,
-      PrincipalData principalData,
-      DateTimeStringValue expiryDate,
-      bool eligibleForReturn,
-      List<ReturnSchedule> schedules,
-      String suggestedPriceOverride,
-      int balanceQuantity,
-      double balanceValue,
-      bool outsidePolicy,
-      bool isSelected,
-      ReturnQuantity returnQuantity,
-      Usage usage,
-      List<PoDocuments> poDocuments});
-
-  $PrincipalDataCopyWith<$Res> get principalData;
-  $UsageCopyWith<$Res> get usage;
+      StatusType status,
+      MaterialNumber materialNumber,
+      String materialName,
+      String defaultMaterialDescription,
+      String orderNumber,
+      String invoiceID,
+      String customerName,
+      String batch,
+      DateTimeStringValue expiry});
 }
 
 /// @nodoc
@@ -107,175 +70,74 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assignmentNumber = null,
-    Object? referenceDocument = null,
-    Object? purchaseNumberC = null,
-    Object? poMethod = null,
-    Object? createdDate = null,
-    Object? currency = null,
-    Object? plant = null,
-    Object? materialNumber = null,
-    Object? materialDescription = null,
-    Object? itemNumber = null,
-    Object? targetQuantity = null,
-    Object? storeLocation = null,
-    Object? batch = null,
-    Object? highLevelItemCode = null,
-    Object? orderReason = null,
-    Object? priceDate = null,
-    Object? unitPrice = null,
+    Object? requestId = null,
+    Object? requestDate = null,
+    Object? itemQty = null,
     Object? totalPrice = null,
-    Object? principalData = null,
-    Object? expiryDate = null,
-    Object? eligibleForReturn = null,
-    Object? schedules = null,
-    Object? suggestedPriceOverride = null,
-    Object? balanceQuantity = null,
-    Object? balanceValue = null,
-    Object? outsidePolicy = null,
-    Object? isSelected = null,
-    Object? returnQuantity = null,
-    Object? usage = null,
-    Object? poDocuments = null,
+    Object? status = null,
+    Object? materialNumber = null,
+    Object? materialName = null,
+    Object? defaultMaterialDescription = null,
+    Object? orderNumber = null,
+    Object? invoiceID = null,
+    Object? customerName = null,
+    Object? batch = null,
+    Object? expiry = null,
   }) {
     return _then(_value.copyWith(
-      assignmentNumber: null == assignmentNumber
-          ? _value.assignmentNumber
-          : assignmentNumber // ignore: cast_nullable_to_non_nullable
+      requestId: null == requestId
+          ? _value.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
               as String,
-      referenceDocument: null == referenceDocument
-          ? _value.referenceDocument
-          : referenceDocument // ignore: cast_nullable_to_non_nullable
-              as String,
-      purchaseNumberC: null == purchaseNumberC
-          ? _value.purchaseNumberC
-          : purchaseNumberC // ignore: cast_nullable_to_non_nullable
-              as String,
-      poMethod: null == poMethod
-          ? _value.poMethod
-          : poMethod // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdDate: null == createdDate
-          ? _value.createdDate
-          : createdDate // ignore: cast_nullable_to_non_nullable
+      requestDate: null == requestDate
+          ? _value.requestDate
+          : requestDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      plant: null == plant
-          ? _value.plant
-          : plant // ignore: cast_nullable_to_non_nullable
-              as String,
+      itemQty: null == itemQty
+          ? _value.itemQty
+          : itemQty // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StatusType,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      materialDescription: null == materialDescription
-          ? _value.materialDescription
-          : materialDescription // ignore: cast_nullable_to_non_nullable
+      materialName: null == materialName
+          ? _value.materialName
+          : materialName // ignore: cast_nullable_to_non_nullable
               as String,
-      itemNumber: null == itemNumber
-          ? _value.itemNumber
-          : itemNumber // ignore: cast_nullable_to_non_nullable
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      targetQuantity: null == targetQuantity
-          ? _value.targetQuantity
-          : targetQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
-      storeLocation: null == storeLocation
-          ? _value.storeLocation
-          : storeLocation // ignore: cast_nullable_to_non_nullable
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceID: null == invoiceID
+          ? _value.invoiceID
+          : invoiceID // ignore: cast_nullable_to_non_nullable
+              as String,
+      customerName: null == customerName
+          ? _value.customerName
+          : customerName // ignore: cast_nullable_to_non_nullable
               as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      highLevelItemCode: null == highLevelItemCode
-          ? _value.highLevelItemCode
-          : highLevelItemCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderReason: null == orderReason
-          ? _value.orderReason
-          : orderReason // ignore: cast_nullable_to_non_nullable
-              as String,
-      priceDate: null == priceDate
-          ? _value.priceDate
-          : priceDate // ignore: cast_nullable_to_non_nullable
+      expiry: null == expiry
+          ? _value.expiry
+          : expiry // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      unitPrice: null == unitPrice
-          ? _value.unitPrice
-          : unitPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      totalPrice: null == totalPrice
-          ? _value.totalPrice
-          : totalPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      principalData: null == principalData
-          ? _value.principalData
-          : principalData // ignore: cast_nullable_to_non_nullable
-              as PrincipalData,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
-      eligibleForReturn: null == eligibleForReturn
-          ? _value.eligibleForReturn
-          : eligibleForReturn // ignore: cast_nullable_to_non_nullable
-              as bool,
-      schedules: null == schedules
-          ? _value.schedules
-          : schedules // ignore: cast_nullable_to_non_nullable
-              as List<ReturnSchedule>,
-      suggestedPriceOverride: null == suggestedPriceOverride
-          ? _value.suggestedPriceOverride
-          : suggestedPriceOverride // ignore: cast_nullable_to_non_nullable
-              as String,
-      balanceQuantity: null == balanceQuantity
-          ? _value.balanceQuantity
-          : balanceQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
-      balanceValue: null == balanceValue
-          ? _value.balanceValue
-          : balanceValue // ignore: cast_nullable_to_non_nullable
-              as double,
-      outsidePolicy: null == outsidePolicy
-          ? _value.outsidePolicy
-          : outsidePolicy // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
-      returnQuantity: null == returnQuantity
-          ? _value.returnQuantity
-          : returnQuantity // ignore: cast_nullable_to_non_nullable
-              as ReturnQuantity,
-      usage: null == usage
-          ? _value.usage
-          : usage // ignore: cast_nullable_to_non_nullable
-              as Usage,
-      poDocuments: null == poDocuments
-          ? _value.poDocuments
-          : poDocuments // ignore: cast_nullable_to_non_nullable
-              as List<PoDocuments>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PrincipalDataCopyWith<$Res> get principalData {
-    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
-      return _then(_value.copyWith(principalData: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UsageCopyWith<$Res> get usage {
-    return $UsageCopyWith<$Res>(_value.usage, (value) {
-      return _then(_value.copyWith(usage: value) as $Val);
-    });
   }
 }
 
@@ -288,41 +150,19 @@ abstract class _$$_ReturnItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String assignmentNumber,
-      String referenceDocument,
-      String purchaseNumberC,
-      String poMethod,
-      DateTimeStringValue createdDate,
-      String currency,
-      String plant,
-      MaterialNumber materialNumber,
-      String materialDescription,
-      String itemNumber,
-      int targetQuantity,
-      String storeLocation,
-      String batch,
-      String highLevelItemCode,
-      String orderReason,
-      DateTimeStringValue priceDate,
-      double unitPrice,
+      {String requestId,
+      DateTimeStringValue requestDate,
+      int itemQty,
       double totalPrice,
-      PrincipalData principalData,
-      DateTimeStringValue expiryDate,
-      bool eligibleForReturn,
-      List<ReturnSchedule> schedules,
-      String suggestedPriceOverride,
-      int balanceQuantity,
-      double balanceValue,
-      bool outsidePolicy,
-      bool isSelected,
-      ReturnQuantity returnQuantity,
-      Usage usage,
-      List<PoDocuments> poDocuments});
-
-  @override
-  $PrincipalDataCopyWith<$Res> get principalData;
-  @override
-  $UsageCopyWith<$Res> get usage;
+      StatusType status,
+      MaterialNumber materialNumber,
+      String materialName,
+      String defaultMaterialDescription,
+      String orderNumber,
+      String invoiceID,
+      String customerName,
+      String batch,
+      DateTimeStringValue expiry});
 }
 
 /// @nodoc
@@ -336,158 +176,73 @@ class __$$_ReturnItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assignmentNumber = null,
-    Object? referenceDocument = null,
-    Object? purchaseNumberC = null,
-    Object? poMethod = null,
-    Object? createdDate = null,
-    Object? currency = null,
-    Object? plant = null,
-    Object? materialNumber = null,
-    Object? materialDescription = null,
-    Object? itemNumber = null,
-    Object? targetQuantity = null,
-    Object? storeLocation = null,
-    Object? batch = null,
-    Object? highLevelItemCode = null,
-    Object? orderReason = null,
-    Object? priceDate = null,
-    Object? unitPrice = null,
+    Object? requestId = null,
+    Object? requestDate = null,
+    Object? itemQty = null,
     Object? totalPrice = null,
-    Object? principalData = null,
-    Object? expiryDate = null,
-    Object? eligibleForReturn = null,
-    Object? schedules = null,
-    Object? suggestedPriceOverride = null,
-    Object? balanceQuantity = null,
-    Object? balanceValue = null,
-    Object? outsidePolicy = null,
-    Object? isSelected = null,
-    Object? returnQuantity = null,
-    Object? usage = null,
-    Object? poDocuments = null,
+    Object? status = null,
+    Object? materialNumber = null,
+    Object? materialName = null,
+    Object? defaultMaterialDescription = null,
+    Object? orderNumber = null,
+    Object? invoiceID = null,
+    Object? customerName = null,
+    Object? batch = null,
+    Object? expiry = null,
   }) {
     return _then(_$_ReturnItem(
-      assignmentNumber: null == assignmentNumber
-          ? _value.assignmentNumber
-          : assignmentNumber // ignore: cast_nullable_to_non_nullable
+      requestId: null == requestId
+          ? _value.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
               as String,
-      referenceDocument: null == referenceDocument
-          ? _value.referenceDocument
-          : referenceDocument // ignore: cast_nullable_to_non_nullable
-              as String,
-      purchaseNumberC: null == purchaseNumberC
-          ? _value.purchaseNumberC
-          : purchaseNumberC // ignore: cast_nullable_to_non_nullable
-              as String,
-      poMethod: null == poMethod
-          ? _value.poMethod
-          : poMethod // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdDate: null == createdDate
-          ? _value.createdDate
-          : createdDate // ignore: cast_nullable_to_non_nullable
+      requestDate: null == requestDate
+          ? _value.requestDate
+          : requestDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      plant: null == plant
-          ? _value.plant
-          : plant // ignore: cast_nullable_to_non_nullable
-              as String,
+      itemQty: null == itemQty
+          ? _value.itemQty
+          : itemQty // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StatusType,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      materialDescription: null == materialDescription
-          ? _value.materialDescription
-          : materialDescription // ignore: cast_nullable_to_non_nullable
+      materialName: null == materialName
+          ? _value.materialName
+          : materialName // ignore: cast_nullable_to_non_nullable
               as String,
-      itemNumber: null == itemNumber
-          ? _value.itemNumber
-          : itemNumber // ignore: cast_nullable_to_non_nullable
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      targetQuantity: null == targetQuantity
-          ? _value.targetQuantity
-          : targetQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
-      storeLocation: null == storeLocation
-          ? _value.storeLocation
-          : storeLocation // ignore: cast_nullable_to_non_nullable
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceID: null == invoiceID
+          ? _value.invoiceID
+          : invoiceID // ignore: cast_nullable_to_non_nullable
+              as String,
+      customerName: null == customerName
+          ? _value.customerName
+          : customerName // ignore: cast_nullable_to_non_nullable
               as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      highLevelItemCode: null == highLevelItemCode
-          ? _value.highLevelItemCode
-          : highLevelItemCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderReason: null == orderReason
-          ? _value.orderReason
-          : orderReason // ignore: cast_nullable_to_non_nullable
-              as String,
-      priceDate: null == priceDate
-          ? _value.priceDate
-          : priceDate // ignore: cast_nullable_to_non_nullable
+      expiry: null == expiry
+          ? _value.expiry
+          : expiry // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      unitPrice: null == unitPrice
-          ? _value.unitPrice
-          : unitPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      totalPrice: null == totalPrice
-          ? _value.totalPrice
-          : totalPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      principalData: null == principalData
-          ? _value.principalData
-          : principalData // ignore: cast_nullable_to_non_nullable
-              as PrincipalData,
-      expiryDate: null == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as DateTimeStringValue,
-      eligibleForReturn: null == eligibleForReturn
-          ? _value.eligibleForReturn
-          : eligibleForReturn // ignore: cast_nullable_to_non_nullable
-              as bool,
-      schedules: null == schedules
-          ? _value._schedules
-          : schedules // ignore: cast_nullable_to_non_nullable
-              as List<ReturnSchedule>,
-      suggestedPriceOverride: null == suggestedPriceOverride
-          ? _value.suggestedPriceOverride
-          : suggestedPriceOverride // ignore: cast_nullable_to_non_nullable
-              as String,
-      balanceQuantity: null == balanceQuantity
-          ? _value.balanceQuantity
-          : balanceQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
-      balanceValue: null == balanceValue
-          ? _value.balanceValue
-          : balanceValue // ignore: cast_nullable_to_non_nullable
-              as double,
-      outsidePolicy: null == outsidePolicy
-          ? _value.outsidePolicy
-          : outsidePolicy // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
-      returnQuantity: null == returnQuantity
-          ? _value.returnQuantity
-          : returnQuantity // ignore: cast_nullable_to_non_nullable
-              as ReturnQuantity,
-      usage: null == usage
-          ? _value.usage
-          : usage // ignore: cast_nullable_to_non_nullable
-              as Usage,
-      poDocuments: null == poDocuments
-          ? _value._poDocuments
-          : poDocuments // ignore: cast_nullable_to_non_nullable
-              as List<PoDocuments>,
     ));
   }
 }
@@ -496,116 +251,51 @@ class __$$_ReturnItemCopyWithImpl<$Res>
 
 class _$_ReturnItem extends _ReturnItem {
   const _$_ReturnItem(
-      {required this.assignmentNumber,
-      required this.referenceDocument,
-      required this.purchaseNumberC,
-      required this.poMethod,
-      required this.createdDate,
-      required this.currency,
-      required this.plant,
-      required this.materialNumber,
-      required this.materialDescription,
-      required this.itemNumber,
-      required this.targetQuantity,
-      required this.storeLocation,
-      required this.batch,
-      required this.highLevelItemCode,
-      required this.orderReason,
-      required this.priceDate,
-      required this.unitPrice,
+      {required this.requestId,
+      required this.requestDate,
+      required this.itemQty,
       required this.totalPrice,
-      required this.principalData,
-      required this.expiryDate,
-      required this.eligibleForReturn,
-      required final List<ReturnSchedule> schedules,
-      required this.suggestedPriceOverride,
-      required this.balanceQuantity,
-      required this.balanceValue,
-      required this.outsidePolicy,
-      this.isSelected = false,
-      required this.returnQuantity,
-      required this.usage,
-      required final List<PoDocuments> poDocuments})
-      : _schedules = schedules,
-        _poDocuments = poDocuments,
-        super._();
+      required this.status,
+      required this.materialNumber,
+      required this.materialName,
+      required this.defaultMaterialDescription,
+      required this.orderNumber,
+      required this.invoiceID,
+      required this.customerName,
+      required this.batch,
+      required this.expiry})
+      : super._();
 
   @override
-  final String assignmentNumber;
+  final String requestId;
   @override
-  final String referenceDocument;
+  final DateTimeStringValue requestDate;
   @override
-  final String purchaseNumberC;
-  @override
-  final String poMethod;
-  @override
-  final DateTimeStringValue createdDate;
-  @override
-  final String currency;
-  @override
-  final String plant;
-  @override
-  final MaterialNumber materialNumber;
-  @override
-  final String materialDescription;
-  @override
-  final String itemNumber;
-  @override
-  final int targetQuantity;
-  @override
-  final String storeLocation;
-  @override
-  final String batch;
-  @override
-  final String highLevelItemCode;
-  @override
-  final String orderReason;
-  @override
-  final DateTimeStringValue priceDate;
-  @override
-  final double unitPrice;
+  final int itemQty;
   @override
   final double totalPrice;
   @override
-  final PrincipalData principalData;
+  final StatusType status;
   @override
-  final DateTimeStringValue expiryDate;
+  final MaterialNumber materialNumber;
   @override
-  final bool eligibleForReturn;
-  final List<ReturnSchedule> _schedules;
+  final String materialName;
   @override
-  List<ReturnSchedule> get schedules {
-    if (_schedules is EqualUnmodifiableListView) return _schedules;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_schedules);
-  }
-
+  final String defaultMaterialDescription;
   @override
-  final String suggestedPriceOverride;
+  final String orderNumber;
   @override
-  final int balanceQuantity;
+  final String invoiceID;
   @override
-  final double balanceValue;
+  final String customerName;
   @override
-  final bool outsidePolicy;
+  final String batch;
   @override
-  @JsonKey()
-  final bool isSelected;
-  @override
-  final ReturnQuantity returnQuantity;
-  @override
-  final Usage usage;
-  final List<PoDocuments> _poDocuments;
-  @override
-  List<PoDocuments> get poDocuments {
-    if (_poDocuments is EqualUnmodifiableListView) return _poDocuments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_poDocuments);
-  }
+  final DateTimeStringValue expiry;
 
   @override
   String toString() {
-    return 'ReturnItem(assignmentNumber: $assignmentNumber, referenceDocument: $referenceDocument, purchaseNumberC: $purchaseNumberC, poMethod: $poMethod, createdDate: $createdDate, currency: $currency, plant: $plant, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, targetQuantity: $targetQuantity, storeLocation: $storeLocation, batch: $batch, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, unitPrice: $unitPrice, totalPrice: $totalPrice, principalData: $principalData, expiryDate: $expiryDate, eligibleForReturn: $eligibleForReturn, schedules: $schedules, suggestedPriceOverride: $suggestedPriceOverride, balanceQuantity: $balanceQuantity, balanceValue: $balanceValue, outsidePolicy: $outsidePolicy, isSelected: $isSelected, returnQuantity: $returnQuantity, usage: $usage, poDocuments: $poDocuments)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, expiry: $expiry)';
   }
 
   @override
@@ -613,99 +303,48 @@ class _$_ReturnItem extends _ReturnItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReturnItem &&
-            (identical(other.assignmentNumber, assignmentNumber) ||
-                other.assignmentNumber == assignmentNumber) &&
-            (identical(other.referenceDocument, referenceDocument) ||
-                other.referenceDocument == referenceDocument) &&
-            (identical(other.purchaseNumberC, purchaseNumberC) ||
-                other.purchaseNumberC == purchaseNumberC) &&
-            (identical(other.poMethod, poMethod) ||
-                other.poMethod == poMethod) &&
-            (identical(other.createdDate, createdDate) ||
-                other.createdDate == createdDate) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.plant, plant) || other.plant == plant) &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription) &&
-            (identical(other.itemNumber, itemNumber) ||
-                other.itemNumber == itemNumber) &&
-            (identical(other.targetQuantity, targetQuantity) ||
-                other.targetQuantity == targetQuantity) &&
-            (identical(other.storeLocation, storeLocation) ||
-                other.storeLocation == storeLocation) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.highLevelItemCode, highLevelItemCode) ||
-                other.highLevelItemCode == highLevelItemCode) &&
-            (identical(other.orderReason, orderReason) ||
-                other.orderReason == orderReason) &&
-            (identical(other.priceDate, priceDate) ||
-                other.priceDate == priceDate) &&
-            (identical(other.unitPrice, unitPrice) ||
-                other.unitPrice == unitPrice) &&
+            (identical(other.requestId, requestId) ||
+                other.requestId == requestId) &&
+            (identical(other.requestDate, requestDate) ||
+                other.requestDate == requestDate) &&
+            (identical(other.itemQty, itemQty) || other.itemQty == itemQty) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
-            (identical(other.principalData, principalData) ||
-                other.principalData == principalData) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
-            (identical(other.eligibleForReturn, eligibleForReturn) ||
-                other.eligibleForReturn == eligibleForReturn) &&
-            const DeepCollectionEquality()
-                .equals(other._schedules, _schedules) &&
-            (identical(other.suggestedPriceOverride, suggestedPriceOverride) ||
-                other.suggestedPriceOverride == suggestedPriceOverride) &&
-            (identical(other.balanceQuantity, balanceQuantity) ||
-                other.balanceQuantity == balanceQuantity) &&
-            (identical(other.balanceValue, balanceValue) ||
-                other.balanceValue == balanceValue) &&
-            (identical(other.outsidePolicy, outsidePolicy) ||
-                other.outsidePolicy == outsidePolicy) &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected) &&
-            (identical(other.returnQuantity, returnQuantity) ||
-                other.returnQuantity == returnQuantity) &&
-            (identical(other.usage, usage) || other.usage == usage) &&
-            const DeepCollectionEquality()
-                .equals(other._poDocuments, _poDocuments));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.materialName, materialName) ||
+                other.materialName == materialName) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
+            (identical(other.invoiceID, invoiceID) ||
+                other.invoiceID == invoiceID) &&
+            (identical(other.customerName, customerName) ||
+                other.customerName == customerName) &&
+            (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.expiry, expiry) || other.expiry == expiry));
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        assignmentNumber,
-        referenceDocument,
-        purchaseNumberC,
-        poMethod,
-        createdDate,
-        currency,
-        plant,
-        materialNumber,
-        materialDescription,
-        itemNumber,
-        targetQuantity,
-        storeLocation,
-        batch,
-        highLevelItemCode,
-        orderReason,
-        priceDate,
-        unitPrice,
-        totalPrice,
-        principalData,
-        expiryDate,
-        eligibleForReturn,
-        const DeepCollectionEquality().hash(_schedules),
-        suggestedPriceOverride,
-        balanceQuantity,
-        balanceValue,
-        outsidePolicy,
-        isSelected,
-        returnQuantity,
-        usage,
-        const DeepCollectionEquality().hash(_poDocuments)
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      requestId,
+      requestDate,
+      itemQty,
+      totalPrice,
+      status,
+      materialNumber,
+      materialName,
+      defaultMaterialDescription,
+      orderNumber,
+      invoiceID,
+      customerName,
+      batch,
+      expiry);
 
   @JsonKey(ignore: true)
   @override
@@ -716,98 +355,47 @@ class _$_ReturnItem extends _ReturnItem {
 
 abstract class _ReturnItem extends ReturnItem {
   const factory _ReturnItem(
-      {required final String assignmentNumber,
-      required final String referenceDocument,
-      required final String purchaseNumberC,
-      required final String poMethod,
-      required final DateTimeStringValue createdDate,
-      required final String currency,
-      required final String plant,
-      required final MaterialNumber materialNumber,
-      required final String materialDescription,
-      required final String itemNumber,
-      required final int targetQuantity,
-      required final String storeLocation,
-      required final String batch,
-      required final String highLevelItemCode,
-      required final String orderReason,
-      required final DateTimeStringValue priceDate,
-      required final double unitPrice,
+      {required final String requestId,
+      required final DateTimeStringValue requestDate,
+      required final int itemQty,
       required final double totalPrice,
-      required final PrincipalData principalData,
-      required final DateTimeStringValue expiryDate,
-      required final bool eligibleForReturn,
-      required final List<ReturnSchedule> schedules,
-      required final String suggestedPriceOverride,
-      required final int balanceQuantity,
-      required final double balanceValue,
-      required final bool outsidePolicy,
-      final bool isSelected,
-      required final ReturnQuantity returnQuantity,
-      required final Usage usage,
-      required final List<PoDocuments> poDocuments}) = _$_ReturnItem;
+      required final StatusType status,
+      required final MaterialNumber materialNumber,
+      required final String materialName,
+      required final String defaultMaterialDescription,
+      required final String orderNumber,
+      required final String invoiceID,
+      required final String customerName,
+      required final String batch,
+      required final DateTimeStringValue expiry}) = _$_ReturnItem;
   const _ReturnItem._() : super._();
 
   @override
-  String get assignmentNumber;
+  String get requestId;
   @override
-  String get referenceDocument;
+  DateTimeStringValue get requestDate;
   @override
-  String get purchaseNumberC;
-  @override
-  String get poMethod;
-  @override
-  DateTimeStringValue get createdDate;
-  @override
-  String get currency;
-  @override
-  String get plant;
-  @override
-  MaterialNumber get materialNumber;
-  @override
-  String get materialDescription;
-  @override
-  String get itemNumber;
-  @override
-  int get targetQuantity;
-  @override
-  String get storeLocation;
-  @override
-  String get batch;
-  @override
-  String get highLevelItemCode;
-  @override
-  String get orderReason;
-  @override
-  DateTimeStringValue get priceDate;
-  @override
-  double get unitPrice;
+  int get itemQty;
   @override
   double get totalPrice;
   @override
-  PrincipalData get principalData;
+  StatusType get status;
   @override
-  DateTimeStringValue get expiryDate;
+  MaterialNumber get materialNumber;
   @override
-  bool get eligibleForReturn;
+  String get materialName;
   @override
-  List<ReturnSchedule> get schedules;
+  String get defaultMaterialDescription;
   @override
-  String get suggestedPriceOverride;
+  String get orderNumber;
   @override
-  int get balanceQuantity;
+  String get invoiceID;
   @override
-  double get balanceValue;
+  String get customerName;
   @override
-  bool get outsidePolicy;
+  String get batch;
   @override
-  bool get isSelected;
-  @override
-  ReturnQuantity get returnQuantity;
-  @override
-  Usage get usage;
-  @override
-  List<PoDocuments> get poDocuments;
+  DateTimeStringValue get expiry;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemCopyWith<_$_ReturnItem> get copyWith =>

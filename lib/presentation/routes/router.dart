@@ -61,7 +61,9 @@ import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart'
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
-import 'package:ezrxmobile/presentation/returns/request_return/request_return.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary/return_by_item_page.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary/return_by_request_page.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary/return_root.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/return_summary_details.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
@@ -106,7 +108,7 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       path: 'payments/edit_deduction_code',
       page: EditDeductionCodePage,
     ),
-    AutoRoute(path: 'returns/request_return', page: RequestReturn),
+    //AutoRoute(path: 'returns/request_return', page: RequestReturn),
     AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
     AutoRoute(path: 'returns/return_summary', page: ReturnSummary),
     AutoRoute(
@@ -278,6 +280,21 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'returns/add_edit_user_restriction',
       page: AddEditUserRestrictionPage,
+    ),
+    AutoRoute(
+      path: 'return_root',
+      page: ReturnRoot,
+      children: [
+        AutoRoute(
+          page: ReturnByItemPage,
+          path: 'return_by_item',
+          initial: true,
+        ),
+        AutoRoute(
+          page: ReturnByRequestPage,
+          path: 'return_by_request',
+        ),
+      ],
     ),
     AutoRoute(
       path: 'payments/payment_summary',

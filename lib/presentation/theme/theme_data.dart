@@ -157,7 +157,6 @@ NavigationRailThemeData _navigationRailTheme() {
         const IconThemeData(color: ZPColors.unselectedLabelColor),
   );
 }
-
 //============================================================
 //  TEXT
 //============================================================

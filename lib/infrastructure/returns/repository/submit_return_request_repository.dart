@@ -8,13 +8,14 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 
 import 'package:ezrxmobile/domain/returns/repository/i_submit_request_return_repository.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_remote_datasource.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/submit_return_request.dart';
-
 
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 
@@ -59,15 +60,16 @@ class SubmitRequestReturnRepository extends ISubmitRequestReturnRepository {
     }
     try {
       final returnRequest = _getSubmitRequest(
-          customerCodeInfo: customerCodeInfo,
-          returnItemsList: returnItemsList,
-          returnReferenceNumber: returnReferenceNumber,
-          salesOrg: salesOrg,
-          specialInstructions: specialInstructions,
-          user: user,);
+        customerCodeInfo: customerCodeInfo,
+        returnItemsList: returnItemsList,
+        returnReferenceNumber: returnReferenceNumber,
+        salesOrg: salesOrg,
+        specialInstructions: specialInstructions,
+        user: user,
+      );
       final submitReturnResponse = await remoteDataSource.submitReturnRequest(
-          returnInput:
-              SubmitReturnRequestDto.fromDomain(returnRequest).toJson(),);
+        returnInput: SubmitReturnRequestDto.fromDomain(returnRequest).toJson(),
+      );
 
       return Right(submitReturnResponse);
     } catch (e) {
@@ -99,10 +101,11 @@ class SubmitRequestReturnRepository extends ISubmitRequestReturnRepository {
   List<InvoiceDetails> _getInvoiceDetails({
     required List<ReturnItem> returnItemsList,
     required SalesOrganisation salesOrg,
-  }) => returnItemsList
+  }) =>
+      returnItemsList
           .map(
             (e) => InvoiceDetails.empty().copyWith(
-              invoiceNumber: e.assignmentNumber,
+              invoiceNumber: e.orderNumber,
               salesOrg: salesOrg.salesOrg,
               returnItemDetailsList: [_getReturnItemDetails(e)],
             ),
@@ -112,10 +115,10 @@ class SubmitRequestReturnRepository extends ISubmitRequestReturnRepository {
   ReturnItemDetails _getReturnItemDetails(ReturnItem returnItem) =>
       ReturnItemDetails.empty().copyWith(
         batch: returnItem.batch,
-        itemNumber: returnItem.itemNumber,
+        itemNumber: returnItem.orderNumber,
         materialNumber: returnItem.materialNumber,
-        returnQuantity: returnItem.returnQuantity,
-        usage: returnItem.usage,
-        poDocuments: returnItem.poDocumentUrl,
+        returnQuantity: ReturnQuantity(returnItem.itemQty.toString()),
+        usage: Usage.empty(),
+        poDocuments: [],
       );
 }

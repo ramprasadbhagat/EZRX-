@@ -8,14 +8,13 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewByItemsPage extends StatelessWidget {
   const ViewByItemsPage({
@@ -154,131 +153,26 @@ class _ViewByOrderItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomCard(
-          child: ListTile(
-            onTap: () {},
-            title: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                    StatusLabel(
-                      status: StatusType(
-                        orderHistoryItem.status.getOrDefaultValue(''),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    CustomCard(
-                      showBorder: true,
-                      showShadow: false,
-                      margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/svg/default_product_image.svg', //TODO: will implement the getProduct api to display the iamge
-                        height: MediaQuery.of(context).size.height * 0.06,
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  orderHistoryItem.materialNumber.displayMatNo,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: ZPColors.darkGray,
-                                      ),
-                                ),
-                                if (orderHistoryItem.isBonusMaterial)
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 4,
-                                    ),
-                                    decoration: const BoxDecoration(
-                                      color: ZPColors.darkerGreen,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Bonus',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelSmall!
-                                          .copyWith(
-                                            color: ZPColors.white,
-                                          ),
-                                    ).tr(),
-                                  ),
-                              ],
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              orderHistoryItem.materialDescription,
-                              style: Theme.of(context).textTheme.labelSmall,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    orderHistoryItem.manufactureName,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          color: ZPColors.darkGray,
-                                          fontSize: 10,
-                                        ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                Text(
-                                  'Qty: ${orderHistoryItem.qty}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: ZPColors.black,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                if (orderHistoryItem.invoiceNumber.isNotEmpty)
-                  _InvoiceNumber(
-                    orderHistoryItem: orderHistoryItem,
-                  ),
-              ],
+        CommonTileItem(
+          label: orderHistoryItem.materialNumber.displayMatNo,
+          title: orderHistoryItem.materialDescription,
+          subtitle: orderHistoryItem.manufactureName,
+          headerText:
+              'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+          statusWidget: StatusLabel(
+            status: StatusType(
+              orderHistoryItem.status.getOrDefaultValue(''),
             ),
           ),
+          quantity: orderHistoryItem.qty.toString(),
+          footerWidget: orderHistoryItem.invoiceNumber.isNotEmpty
+              ? _InvoiceNumber(
+                  orderHistoryItem: orderHistoryItem,
+                )
+              : null,
+          image: 'assets/svg/default_product_image.svg',
+          isQuantityBelowImage: false,
+          tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
         ),
       ],
     );

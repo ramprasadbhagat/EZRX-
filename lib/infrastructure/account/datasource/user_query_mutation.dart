@@ -85,7 +85,6 @@ class UserQueryMutation {
               ShipToCode
             }
             enableOrderType
-           
             disablePaymentNotification
             paymentNotification {
               day

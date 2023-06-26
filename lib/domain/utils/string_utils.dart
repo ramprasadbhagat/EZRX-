@@ -36,4 +36,15 @@ class StringUtils {
   ) {
     return formatter.format(price);
   }
+
+  static String changeToCamelCase({required String sentence}) {
+    final semiCamel = sentence
+        .split(' ')
+        .map((e) =>
+            '${e.substring(0, 1).toUpperCase()}${e.substring(1).toLowerCase()}')
+        .toList()
+        .join();
+
+    return '${semiCamel.substring(0, 1).toLowerCase()}${semiCamel.substring(1)}';
+  }
 }

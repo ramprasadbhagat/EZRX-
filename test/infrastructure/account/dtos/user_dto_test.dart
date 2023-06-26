@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'dart:convert';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
