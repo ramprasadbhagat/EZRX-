@@ -246,4 +246,11 @@ class WidgetKeys {
   static const Key bundleQuantityTextKey = Key('bundleInputAddKey');
   static const Key bundleAddToCartSheet = Key('bundleAddToCartSheet');
   static const Key bundleMaterialListItem = Key('bundleMaterialListItem');
+
+  //============================================================
+  //  Orders
+  //============================================================
+
+  static const Key materialDescription = Key('materialDescription');
+  static const Key orderPriceLoading = Key('priceLoading');
 }

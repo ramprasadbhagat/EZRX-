@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
@@ -83,7 +84,7 @@ class MaterialListItem extends StatelessWidget {
                         builder: (context, state) {
                           final price = state
                               .getPriceForMaterial(materialInfo.materialNumber);
-            
+
                           return BonusDiscountLabel(
                             materialInfo: materialInfo,
                             price: price,
@@ -162,7 +163,7 @@ class MaterialListItem extends StatelessWidget {
                         builder: (context, state) {
                           final price = state
                               .getPriceForMaterial(materialInfo.materialNumber);
-            
+
                           return price.comboDeal.isAvailable &&
                                   eligibilityState.comboDealEligible
                               ? GestureDetector(
@@ -386,30 +387,35 @@ class _PriceLabel extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableVat
-                  ? Text(
-                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice).tr()}',
-                      key: Key(
-                        'priceBefore${materialInfo.materialNumber.getOrDefaultValue('')}',
-                      ),
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
+                  ? PriceComponent(
+                      price: priceAggregate.display(PriceType.finalPrice),
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      title:
+                          'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: ',
+                      priceTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.apply(
+                                color: ZPColors.lightGray,
+                              ),
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableListPrice
-                  ? Text(
-                      '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice).tr()}',
-                      key: Key(
-                        'listPrice${materialInfo.materialNumber.getOrDefaultValue('')}',
-                      ),
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
+                  ? PriceComponent(
+                      price: priceAggregate.display(PriceType.listPrice),
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      title: 'List Price: ',
+                      priceTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.apply(
+                                color: ZPColors.lightGray,
+                              ),
                     )
                   : const SizedBox.shrink(),
-              Text(
-                '${'Unit Price:'.tr()} ${priceAggregate.display(PriceType.unitPrice).tr()}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
+              PriceComponent(
+                price: priceAggregate.display(PriceType.unitPrice),
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                title: 'Unit Price: ',
+                priceTextStyle: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.black,
                     ),
               ),

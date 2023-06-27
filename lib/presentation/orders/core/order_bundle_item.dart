@@ -12,6 +12,8 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +70,7 @@ class OrderBundleItem extends StatelessWidget {
                           ),
                           state.isFetching || state.isValidating
                               ? SizedBox(
-                                  key: const Key('material-description-key'),
+                                  key: WidgetKeys.materialDescription,
                                   width: 100,
                                   child: LoadingShimmer.tile(),
                                 )
@@ -97,7 +99,7 @@ class OrderBundleItem extends StatelessWidget {
                           ),
                           state.isFetching || state.isValidating
                               ? SizedBox(
-                                  key: const Key('material-description-key'),
+                                  key: WidgetKeys.materialDescription,
                                   width: 100,
                                   child: LoadingShimmer.tile(),
                                 )
@@ -149,9 +151,7 @@ class OrderBundleItem extends StatelessWidget {
                         builder: (context, state) {
                           return state.isFetching || state.isValidating
                               ? SizedBox(
-                                  key: const Key(
-                                    'material-description-key',
-                                  ),
+                                  key: WidgetKeys.materialDescription,
                                   width: 100,
                                   child: LoadingShimmer.tile(),
                                 )
@@ -322,7 +322,7 @@ class _MaterialPriceInfo extends StatelessWidget {
         final itemInfo = state.materialDetails[materialQueryInfo];
         if (state.isFetching || state.isValidating) {
           return SizedBox(
-            key: const Key('price-loading'),
+            key: WidgetKeys.orderPriceLoading,
             width: 40,
             child: LoadingShimmer.tile(),
           );
@@ -345,13 +345,13 @@ class _MaterialPriceInfo extends StatelessWidget {
             comboDeal: ComboDeal.empty(),
           );
 
-          return Text(
-            priceAggregate.display(priceType).tr(),
-            style: const TextStyle(
-              color: ZPColors.darkerGreen,
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400,
-            ),
+          return PriceComponent(
+            price: priceAggregate.display(priceType),
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            priceTextStyle: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.copyWith(color: ZPColors.darkGray),
           );
         }
 

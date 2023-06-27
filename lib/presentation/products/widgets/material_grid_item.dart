@@ -21,6 +21,8 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
   const MaterialGridItem({
@@ -196,11 +198,9 @@ class _PriceLabel extends StatelessWidget {
               //   ),
               // )
               //     : const SizedBox.shrink(),
-              Text(
-                priceAggregate.display(PriceType.unitPrice).tr(),
-                style: Theme.of(context).textTheme.labelMedium,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              PriceComponent(
+                price: priceAggregate.display(PriceType.unitPrice),
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               ),
             ],
           );

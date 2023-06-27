@@ -91,6 +91,7 @@ dependencies:
   clevertap_plugin: ^1.6.1
   flutter_html: ^2.2.1
   loading_animation_widget: ^1.2.0+4
+  easy_rich_text: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

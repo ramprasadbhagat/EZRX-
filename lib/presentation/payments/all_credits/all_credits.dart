@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -19,6 +18,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 
 class AllCredits extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -256,14 +257,14 @@ class _CreditsItem extends StatelessWidget {
                 creditItem.postingKeyName,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              Text(
-                StringUtils.displayPrice(
-                  context.read<SalesOrgBloc>().state.configs,
-                  creditItem.convertIfAmountInTransactionCurrencyIsNegative,
-                ),
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.primary,
-                    ),
+              PriceComponent(
+                price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
+                    .toString(),
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                currencyCodeTextStyle:
+                    Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: ZPColors.darkGray,
+                        ),
               ),
             ],
           ),

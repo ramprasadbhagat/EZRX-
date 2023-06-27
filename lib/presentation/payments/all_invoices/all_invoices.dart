@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -20,6 +19,8 @@ import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_shee
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 
 class AllInvoicesPage extends StatelessWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
@@ -333,20 +334,13 @@ class _InvoiceItem extends StatelessWidget {
                 ],
               ),
             ),
-            RichText(
-              text: TextSpan(
-                text: '${invoiceItem.transactionCurrency} ',
-                style: Theme.of(context).textTheme.titleSmall,
-                children: [
-                  TextSpan(
-                    text: StringUtils.displayPrice(
-                      context.read<SalesOrgBloc>().state.configs,
-                      invoiceItem.amountInTransactionCurrency,
-                    ),
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ],
-              ),
+            PriceComponent(
+              price: invoiceItem.amountInTransactionCurrency.toString(),
+              currencyCodeTextStyle:
+                  Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: ZPColors.darkGray,
+                      ),
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             ),
           ],
         ),

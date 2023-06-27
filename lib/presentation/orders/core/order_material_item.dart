@@ -16,6 +16,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+
 class OrderMaterialItem extends StatelessWidget {
   final MaterialQueryInfo materialQueryInfo;
   final String materialNumber;
@@ -74,8 +76,8 @@ class OrderMaterialItem extends StatelessWidget {
                                   ),
                             )
                           : Row(
-                            children: [
-                              Flexible(
+                              children: [
+                                Flexible(
                                   child: Text(
                                     materialDescription,
                                     style: Theme.of(context)
@@ -86,8 +88,8 @@ class OrderMaterialItem extends StatelessWidget {
                                         ),
                                   ),
                                 ),
-                            ],
-                          );
+                              ],
+                            );
                 },
               ),
             ),
@@ -275,9 +277,11 @@ class _MaterialPriceInfo extends StatelessWidget {
             comboDeal: ComboDeal.empty(),
           );
 
-          return Text(
-            ': ${priceAggregate.display(priceType).tr()}',
-            style: Theme.of(context).textTheme.titleSmall?.apply(
+          return PriceComponent(
+            price: priceAggregate.display(priceType),
+            title: ': ',
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            priceTextStyle: Theme.of(context).textTheme.titleSmall?.apply(
                   color: ZPColors.darkerGreen,
                 ),
           );

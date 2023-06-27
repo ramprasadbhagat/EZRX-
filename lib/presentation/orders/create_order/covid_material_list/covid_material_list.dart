@@ -24,6 +24,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+
 class CovidMaterialListPage extends StatelessWidget {
   final Function addToCart;
 
@@ -319,25 +321,37 @@ class _PriceLabel extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               context.read<SalesOrgBloc>().state.configs.enableVat
-                  ? Text(
-                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
+                  ? PriceComponent(
+                      price: priceAggregate.display(PriceType.finalPrice),
+                      title:
+                          'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '
+                              .tr(),
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      priceTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.apply(
+                                color: ZPColors.lightGray,
+                              ),
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableListPrice
-                  ? Text(
-                      '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
+                  ? PriceComponent(
+                      price: priceAggregate.display(PriceType.listPrice),
+                      title: 'List Price: '.tr(),
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      priceTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.apply(
+                                color: ZPColors.lightGray,
+                              ),
                     )
                   : const SizedBox.shrink(),
-              Text(
-                '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.black,
+              PriceComponent(
+                price: priceAggregate.display(PriceType.unitPrice),
+                title: 'Unit Price: '.tr(),
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                priceTextStyle: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.lightGray,
                     ),
               ),
             ],

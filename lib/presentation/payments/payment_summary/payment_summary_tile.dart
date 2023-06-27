@@ -3,6 +3,7 @@
 //ignore_for_file: unused-class
 
 //ignore_for_file: unused-files
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -13,7 +14,6 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -107,12 +107,13 @@ class _PaymentSummaryTiles extends StatelessWidget {
                           .status.getPaymentDisplayStatusTextColor,
                     ),
               ),
-              Text(
-                StringUtils.displayPrice(
-                  context.read<SalesOrgBloc>().state.configs,
-                  paymentSummaryDetails.paymentAmount,
-                ),
-                style: Theme.of(context).textTheme.bodyLarge,
+              PriceComponent(
+                price: paymentSummaryDetails.paymentAmount.toString(),
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                currencyCodeTextStyle:
+                    Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: ZPColors.darkGray,
+                        ),
               ),
             ],
           ),

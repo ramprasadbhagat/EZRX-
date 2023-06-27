@@ -9,9 +9,9 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_hea
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -179,25 +179,12 @@ class _ViewByOrder extends StatelessWidget {
                         '${viewByOrderHistoryItem.materialCount} materials',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      RichText(
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Order total : ',
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            TextSpan(
-                              text: '${salesOrgConfigs.currency.code} ',
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            TextSpan(
-                              text: StringUtils.displayNumber(
-                                viewByOrderHistoryItem.orderValue,
-                              ),
-                              style: Theme.of(context).textTheme.labelSmall,
-                            ),
-                          ],
-                        ),
+                      PriceComponent(
+                        salesOrgConfig: salesOrgConfigs,
+                        price: viewByOrderHistoryItem.orderValue.toString(),
+                        currencyCodeTextStyle:
+                            Theme.of(context).textTheme.titleSmall,
+                        title: 'Order total : ',
                       ),
                     ],
                   ),

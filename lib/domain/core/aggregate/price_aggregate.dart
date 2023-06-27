@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -258,7 +257,6 @@ class PriceAggregate with _$PriceAggregate {
         !price.isValid ||
         !price.isValidMaterial) return 'Price Not Available';
 
-
     double result;
     switch (priceType) {
       case PriceType.finalPrice:
@@ -283,7 +281,7 @@ class PriceAggregate with _$PriceAggregate {
         break;
     }
 
-    return StringUtils.displayPrice(salesOrgConfig, result);
+    return result.toString();
   }
 
   bool get isDefaultMDEnabled {
@@ -423,7 +421,6 @@ class PriceAggregate with _$PriceAggregate {
         exceedQuantity: exceedQty,
       );
 
-
   bool get isEligibleAddAdditionBonus =>
       !materialInfo.materialGroup4.isFOC &&
       !materialInfo.hidePrice &&
@@ -499,7 +496,8 @@ class PriceAggregate with _$PriceAggregate {
   bool get hasRemainingQuotaReached =>
       isRemainingQuantityNotExceeded || isRemainingQuantityExceeded;
 
-  bool get isPriceUpdateAvailable =>isZdp5DiscountEligible && hasRemainingQuotaReached ;
+  bool get isPriceUpdateAvailable =>
+      isZdp5DiscountEligible && hasRemainingQuotaReached;
 }
 
 enum PriceType {

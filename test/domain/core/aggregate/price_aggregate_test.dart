@@ -24,7 +24,6 @@ import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
@@ -662,13 +661,7 @@ void main() {
     test(
       'display from PriceAggregate for PriceType.finalPrice',
       () {
-        expect(
-          emptyPriceAggregate.display(PriceType.finalPrice),
-          StringUtils.displayPrice(
-            emptyPriceAggregate.salesOrgConfig,
-            emptyPriceAggregate.finalPrice,
-          ),
-        );
+        expect(emptyPriceAggregate.display(PriceType.finalPrice), '0.0');
       },
     );
 
@@ -680,41 +673,21 @@ void main() {
             enableTaxAtTotalLevelOnly: true,
           ),
         );
-        expect(
-          customPriceAggregate.display(PriceType.unitPrice),
-          StringUtils.displayPrice(
-            emptySalesOrganisationConfigs.copyWith(
-              enableTaxAtTotalLevelOnly: true,
-            ),
-            emptyPriceAggregate.finalPrice,
-          ),
-        );
+        expect(customPriceAggregate.display(PriceType.unitPrice), '0.0');
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.unitPrice',
       () async {
-        expect(
-          emptyPriceAggregate.display(PriceType.unitPrice),
-          StringUtils.displayPrice(
-            emptySalesOrganisationConfigs,
-            emptyPriceAggregate.unitPrice,
-          ),
-        );
+        expect(emptyPriceAggregate.display(PriceType.unitPrice), '0.0');
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.finalPriceTotal',
       () {
-        expect(
-          emptyPriceAggregate.display(PriceType.finalPriceTotal),
-          StringUtils.displayPrice(
-            emptyPriceAggregate.salesOrgConfig,
-            emptyPriceAggregate.finalPriceTotal,
-          ),
-        );
+        expect(emptyPriceAggregate.display(PriceType.finalPriceTotal), '0.0');
       },
     );
 
@@ -726,41 +699,21 @@ void main() {
             enableTaxAtTotalLevelOnly: true,
           ),
         );
-        expect(
-          customPriceAggregate.display(PriceType.unitPriceTotal),
-          StringUtils.displayPrice(
-            emptySalesOrganisationConfigs.copyWith(
-              enableTaxAtTotalLevelOnly: true,
-            ),
-            emptyPriceAggregate.finalPriceTotal,
-          ),
-        );
+        expect(customPriceAggregate.display(PriceType.unitPriceTotal), '0.0');
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.unitPriceTotal',
       () {
-        expect(
-          emptyPriceAggregate.display(PriceType.unitPriceTotal),
-          StringUtils.displayPrice(
-            emptySalesOrganisationConfigs,
-            emptyPriceAggregate.unitPriceTotal,
-          ),
-        );
+        expect(emptyPriceAggregate.display(PriceType.unitPriceTotal), '0.0');
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.listPrice',
       () {
-        expect(
-          emptyPriceAggregate.display(PriceType.listPrice),
-          StringUtils.displayPrice(
-            emptySalesOrganisationConfigs,
-            emptyPriceAggregate.listPrice,
-          ),
-        );
+        expect(emptyPriceAggregate.display(PriceType.listPrice), '0.0');
       },
     );
 
