@@ -13,19 +13,19 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.d
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_history_filter_dto.dart';
 
-class ViewByOrderHistoryRepository implements IViewByOrderHistoryRepository {
+class ViewByOrderRepository implements IViewByOrderRepository {
   final Config config;
-  final ViewByOrderHistoryLocalDataSource localDataSource;
-  final ViewByOrderHistoryRemoteDataSource remoteDataSource;
+  final ViewByOrderLocalDataSource localDataSource;
+  final ViewByOrderRemoteDataSource remoteDataSource;
 
-  ViewByOrderHistoryRepository({
+  ViewByOrderRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
   });
 
   @override
-  Future<Either<ApiFailure, ViewByOrderHistory>> getViewByOrderHistory({
+  Future<Either<ApiFailure, ViewByOrder>> getViewByOrderHistory({
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,

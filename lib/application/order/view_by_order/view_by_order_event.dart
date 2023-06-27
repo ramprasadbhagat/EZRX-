@@ -1,22 +1,22 @@
-part of 'order_history_list_bloc.dart';
+part of 'view_by_order_bloc.dart';
 
 @freezed
-class OrderHistoryListEvent with _$OrderHistoryListEvent {
-  const factory OrderHistoryListEvent.initialized() = _Initialized;
-  const factory OrderHistoryListEvent.fetch({
+class ViewByOrderEvent with _$ViewByOrderEvent {
+  const factory ViewByOrderEvent.initialized() = _Initialized;
+  const factory ViewByOrderEvent.fetch({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
-    required OrderHistoryFilter orderHistoryFilter,
+    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
   }) = _Fetch;
-  const factory OrderHistoryListEvent.loadMore({
+  const factory ViewByOrderEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
-    required OrderHistoryFilter orderHistoryFilter,
+    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
   }) = _LoadMore;
 }

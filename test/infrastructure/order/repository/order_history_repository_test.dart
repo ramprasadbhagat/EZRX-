@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

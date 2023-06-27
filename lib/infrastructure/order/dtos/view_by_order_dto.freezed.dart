@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ViewByOrderHistoryDto _$ViewByOrderHistoryDtoFromJson(
-    Map<String, dynamic> json) {
-  return _ViewByOrderHistoryDto.fromJson(json);
+ViewByOrderDto _$ViewByOrderDtoFromJson(Map<String, dynamic> json) {
+  return _ViewByOrderDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ViewByOrderHistoryDto {
+mixin _$ViewByOrderDto {
   @JsonKey(name: 'orderCount', defaultValue: 0)
   int get orderCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
@@ -33,15 +32,15 @@ mixin _$ViewByOrderHistoryDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ViewByOrderHistoryDtoCopyWith<ViewByOrderHistoryDto> get copyWith =>
+  $ViewByOrderDtoCopyWith<ViewByOrderDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByOrderHistoryDtoCopyWith<$Res> {
-  factory $ViewByOrderHistoryDtoCopyWith(ViewByOrderHistoryDto value,
-          $Res Function(ViewByOrderHistoryDto) then) =
-      _$ViewByOrderHistoryDtoCopyWithImpl<$Res, ViewByOrderHistoryDto>;
+abstract class $ViewByOrderDtoCopyWith<$Res> {
+  factory $ViewByOrderDtoCopyWith(
+          ViewByOrderDto value, $Res Function(ViewByOrderDto) then) =
+      _$ViewByOrderDtoCopyWithImpl<$Res, ViewByOrderDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'orderCount', defaultValue: 0)
@@ -53,10 +52,9 @@ abstract class $ViewByOrderHistoryDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ViewByOrderHistoryDtoCopyWithImpl<$Res,
-        $Val extends ViewByOrderHistoryDto>
-    implements $ViewByOrderHistoryDtoCopyWith<$Res> {
-  _$ViewByOrderHistoryDtoCopyWithImpl(this._value, this._then);
+class _$ViewByOrderDtoCopyWithImpl<$Res, $Val extends ViewByOrderDto>
+    implements $ViewByOrderDtoCopyWith<$Res> {
+  _$ViewByOrderDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -88,11 +86,11 @@ class _$ViewByOrderHistoryDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrderHistoryDtoCopyWith<$Res>
-    implements $ViewByOrderHistoryDtoCopyWith<$Res> {
-  factory _$$_ViewByOrderHistoryDtoCopyWith(_$_ViewByOrderHistoryDto value,
-          $Res Function(_$_ViewByOrderHistoryDto) then) =
-      __$$_ViewByOrderHistoryDtoCopyWithImpl<$Res>;
+abstract class _$$_ViewByOrderDtoCopyWith<$Res>
+    implements $ViewByOrderDtoCopyWith<$Res> {
+  factory _$$_ViewByOrderDtoCopyWith(
+          _$_ViewByOrderDto value, $Res Function(_$_ViewByOrderDto) then) =
+      __$$_ViewByOrderDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +103,11 @@ abstract class _$$_ViewByOrderHistoryDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByOrderHistoryDtoCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryDtoCopyWithImpl<$Res, _$_ViewByOrderHistoryDto>
-    implements _$$_ViewByOrderHistoryDtoCopyWith<$Res> {
-  __$$_ViewByOrderHistoryDtoCopyWithImpl(_$_ViewByOrderHistoryDto _value,
-      $Res Function(_$_ViewByOrderHistoryDto) _then)
+class __$$_ViewByOrderDtoCopyWithImpl<$Res>
+    extends _$ViewByOrderDtoCopyWithImpl<$Res, _$_ViewByOrderDto>
+    implements _$$_ViewByOrderDtoCopyWith<$Res> {
+  __$$_ViewByOrderDtoCopyWithImpl(
+      _$_ViewByOrderDto _value, $Res Function(_$_ViewByOrderDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +117,7 @@ class __$$_ViewByOrderHistoryDtoCopyWithImpl<$Res>
     Object? creatingOrderIds = null,
     Object? orderHeaders = null,
   }) {
-    return _then(_$_ViewByOrderHistoryDto(
+    return _then(_$_ViewByOrderDto(
       orderCount: null == orderCount
           ? _value.orderCount
           : orderCount // ignore: cast_nullable_to_non_nullable
@@ -138,8 +136,8 @@ class __$$_ViewByOrderHistoryDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ViewByOrderHistoryDto extends _ViewByOrderHistoryDto {
-  const _$_ViewByOrderHistoryDto(
+class _$_ViewByOrderDto extends _ViewByOrderDto {
+  const _$_ViewByOrderDto(
       {@JsonKey(name: 'orderCount', defaultValue: 0)
           required this.orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
@@ -150,8 +148,8 @@ class _$_ViewByOrderHistoryDto extends _ViewByOrderHistoryDto {
         _orderHeaders = orderHeaders,
         super._();
 
-  factory _$_ViewByOrderHistoryDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ViewByOrderHistoryDtoFromJson(json);
+  factory _$_ViewByOrderDto.fromJson(Map<String, dynamic> json) =>
+      _$$_ViewByOrderDtoFromJson(json);
 
   @override
   @JsonKey(name: 'orderCount', defaultValue: 0)
@@ -179,14 +177,14 @@ class _$_ViewByOrderHistoryDto extends _ViewByOrderHistoryDto {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryDto(orderCount: $orderCount, creatingOrderIds: $creatingOrderIds, orderHeaders: $orderHeaders)';
+    return 'ViewByOrderDto(orderCount: $orderCount, creatingOrderIds: $creatingOrderIds, orderHeaders: $orderHeaders)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrderHistoryDto &&
+            other is _$_ViewByOrderDto &&
             (identical(other.orderCount, orderCount) ||
                 other.orderCount == orderCount) &&
             const DeepCollectionEquality()
@@ -206,30 +204,29 @@ class _$_ViewByOrderHistoryDto extends _ViewByOrderHistoryDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrderHistoryDtoCopyWith<_$_ViewByOrderHistoryDto> get copyWith =>
-      __$$_ViewByOrderHistoryDtoCopyWithImpl<_$_ViewByOrderHistoryDto>(
-          this, _$identity);
+  _$$_ViewByOrderDtoCopyWith<_$_ViewByOrderDto> get copyWith =>
+      __$$_ViewByOrderDtoCopyWithImpl<_$_ViewByOrderDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ViewByOrderHistoryDtoToJson(
+    return _$$_ViewByOrderDtoToJson(
       this,
     );
   }
 }
 
-abstract class _ViewByOrderHistoryDto extends ViewByOrderHistoryDto {
-  const factory _ViewByOrderHistoryDto(
+abstract class _ViewByOrderDto extends ViewByOrderDto {
+  const factory _ViewByOrderDto(
       {@JsonKey(name: 'orderCount', defaultValue: 0)
           required final int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
           required final List<String> creatingOrderIds,
       @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-          required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders}) = _$_ViewByOrderHistoryDto;
-  const _ViewByOrderHistoryDto._() : super._();
+          required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders}) = _$_ViewByOrderDto;
+  const _ViewByOrderDto._() : super._();
 
-  factory _ViewByOrderHistoryDto.fromJson(Map<String, dynamic> json) =
-      _$_ViewByOrderHistoryDto.fromJson;
+  factory _ViewByOrderDto.fromJson(Map<String, dynamic> json) =
+      _$_ViewByOrderDto.fromJson;
 
   @override
   @JsonKey(name: 'orderCount', defaultValue: 0)
@@ -244,6 +241,6 @@ abstract class _ViewByOrderHistoryDto extends ViewByOrderHistoryDto {
   List<OrderHistoryDetailsOrderHeadersDto> get orderHeaders;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrderHistoryDtoCopyWith<_$_ViewByOrderHistoryDto> get copyWith =>
+  _$$_ViewByOrderDtoCopyWith<_$_ViewByOrderDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

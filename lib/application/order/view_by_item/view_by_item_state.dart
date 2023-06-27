@@ -1,21 +1,23 @@
-part of 'order_history_list_bloc.dart';
+part of 'view_by_item_bloc.dart';
 
 @freezed
-class OrderHistoryListState with _$OrderHistoryListState {
-  const OrderHistoryListState._();
-  const factory OrderHistoryListState({
+class ViewByItemsState with _$ViewByItemsState {
+  const ViewByItemsState._();
+  const factory ViewByItemsState({
     required OrderHistory orderHistoryList,
     required bool canLoadMore,
     required bool isFetching,
+    required bool isImageLoading,
     required int nextPageIndex,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-  }) = _OrderHistoryListState;
-  factory OrderHistoryListState.initial() => OrderHistoryListState(
+  }) = _ViewByItemsState;
+  factory ViewByItemsState.initial() => ViewByItemsState(
         orderHistoryList: OrderHistory.empty(),
         canLoadMore: true,
         isFetching: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
+        isImageLoading: false,
       );
 
   List<OrderHistoryItem> getFilterItem(List<StatusType> filter) {

@@ -6,8 +6,9 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 
-abstract class IOrderHistoryRepository {
+abstract class IViewByItemRepository {
   Future<Either<ApiFailure, OrderHistory>> getOrderHistory({
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
@@ -16,5 +17,8 @@ abstract class IOrderHistoryRepository {
     required int pageSize,
     required int offset,
     required OrderHistoryFilter orderHistoryFilter,
+  });
+  Future<Either<ApiFailure, List<OrderHistoryItem>>> getItemProductDetails({
+    required List<OrderHistoryItem> orderHistoryItem,
   });
 }

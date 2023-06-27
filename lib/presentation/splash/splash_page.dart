@@ -14,16 +14,16 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -269,23 +269,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             _initializeProduct();
-            context.read<OrderHistoryListBloc>().add(
-                  OrderHistoryListEvent.fetch(
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    user: context.read<UserBloc>().state.user,
-                    sortDirection: context
-                        .read<OrderHistoryFilterBloc>()
-                        .state
-                        .sortDirection,
-                    orderHistoryFilter: OrderHistoryFilter.empty(),
-                  ),
-                );
-            context.read<ViewByOrderHistoryBloc>().add(
-                  ViewByOrderHistoryEvent.fetch(
+            context.read<ViewByOrderBloc>().add(
+                  ViewByOrderEvent.fetch(
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
@@ -466,7 +451,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                           : BillToInfo.empty(),
                   customerCodeInfo: eligibilityState.customerCodeInfo,
                   orderHistoryBasicInfo: context
-                      .read<OrderHistoryListBloc>()
+                      .read<ViewByItemsBloc>()
                       .state
                       .orderHistoryList
                       .orderBasicInformation,
@@ -705,8 +690,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
 
       if (context.read<UserBloc>().state.userCanCreateOrder) {
-        context.read<OrderHistoryListBloc>().add(
-              OrderHistoryListEvent.fetch(
+        context.read<ViewByItemsBloc>().add(
+              ViewByItemsEvent.fetch(
                 salesOrgConfigs: salesOrgState.configs,
                 shipToInfo: state.shipToInfo,
                 user: user,
@@ -817,9 +802,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           .read<SavedOrderListBloc>()
           .add(const SavedOrderListEvent.initialized());
 
-      context
-          .read<OrderHistoryListBloc>()
-          .add(const OrderHistoryListEvent.initialized());
+      context.read<ViewByItemsBloc>().add(const ViewByItemsEvent.initialized());
 
       context
           .read<OrderTemplateListBloc>()

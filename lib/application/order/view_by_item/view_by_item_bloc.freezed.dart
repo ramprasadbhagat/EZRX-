@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'order_history_list_bloc.dart';
+part of 'view_by_item_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$OrderHistoryListEvent {
+mixin _$ViewByItemsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
@@ -35,6 +35,7 @@ mixin _$OrderHistoryListEvent {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
+    required TResult Function() fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +57,7 @@ mixin _$OrderHistoryListEvent {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult? Function()? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +79,7 @@ mixin _$OrderHistoryListEvent {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -85,6 +88,7 @@ mixin _$OrderHistoryListEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -92,6 +96,7 @@ mixin _$OrderHistoryListEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,23 +104,23 @@ mixin _$OrderHistoryListEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderHistoryListEventCopyWith<$Res> {
-  factory $OrderHistoryListEventCopyWith(OrderHistoryListEvent value,
-          $Res Function(OrderHistoryListEvent) then) =
-      _$OrderHistoryListEventCopyWithImpl<$Res, OrderHistoryListEvent>;
+abstract class $ViewByItemsEventCopyWith<$Res> {
+  factory $ViewByItemsEventCopyWith(
+          ViewByItemsEvent value, $Res Function(ViewByItemsEvent) then) =
+      _$ViewByItemsEventCopyWithImpl<$Res, ViewByItemsEvent>;
 }
 
 /// @nodoc
-class _$OrderHistoryListEventCopyWithImpl<$Res,
-        $Val extends OrderHistoryListEvent>
-    implements $OrderHistoryListEventCopyWith<$Res> {
-  _$OrderHistoryListEventCopyWithImpl(this._value, this._then);
+class _$ViewByItemsEventCopyWithImpl<$Res, $Val extends ViewByItemsEvent>
+    implements $ViewByItemsEventCopyWith<$Res> {
+  _$ViewByItemsEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -132,7 +137,7 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderHistoryListEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
@@ -146,7 +151,7 @@ class _$_Initialized implements _Initialized {
 
   @override
   String toString() {
-    return 'OrderHistoryListEvent.initialized()';
+    return 'ViewByItemsEvent.initialized()';
   }
 
   @override
@@ -178,6 +183,7 @@ class _$_Initialized implements _Initialized {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
+    required TResult Function() fetchProductImage,
   }) {
     return initialized();
   }
@@ -202,6 +208,7 @@ class _$_Initialized implements _Initialized {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult? Function()? fetchProductImage,
   }) {
     return initialized?.call();
   }
@@ -226,6 +233,7 @@ class _$_Initialized implements _Initialized {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -240,6 +248,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return initialized(this);
   }
@@ -250,6 +259,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return initialized?.call(this);
   }
@@ -260,6 +270,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -269,7 +280,7 @@ class _$_Initialized implements _Initialized {
   }
 }
 
-abstract class _Initialized implements OrderHistoryListEvent {
+abstract class _Initialized implements ViewByItemsEvent {
   const factory _Initialized() = _$_Initialized;
 }
 
@@ -295,7 +306,7 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$OrderHistoryListEventCopyWithImpl<$Res, _$_Fetch>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
@@ -407,7 +418,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'OrderHistoryListEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, orderHistoryFilter: $orderHistoryFilter)';
+    return 'ViewByItemsEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, orderHistoryFilter: $orderHistoryFilter)';
   }
 
   @override
@@ -458,6 +469,7 @@ class _$_Fetch implements _Fetch {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
+    required TResult Function() fetchProductImage,
   }) {
     return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
         sortDirection, orderHistoryFilter);
@@ -483,6 +495,7 @@ class _$_Fetch implements _Fetch {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult? Function()? fetchProductImage,
   }) {
     return fetch?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
         sortDirection, orderHistoryFilter);
@@ -508,6 +521,7 @@ class _$_Fetch implements _Fetch {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -523,6 +537,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return fetch(this);
   }
@@ -533,6 +548,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return fetch?.call(this);
   }
@@ -543,6 +559,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -552,7 +569,7 @@ class _$_Fetch implements _Fetch {
   }
 }
 
-abstract class _Fetch implements OrderHistoryListEvent {
+abstract class _Fetch implements ViewByItemsEvent {
   const factory _Fetch(
       {required final SalesOrganisationConfigs salesOrgConfigs,
       required final CustomerCodeInfo customerCodeInfo,
@@ -595,7 +612,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$OrderHistoryListEventCopyWithImpl<$Res, _$_LoadMore>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_LoadMore>
     implements _$$_LoadMoreCopyWith<$Res> {
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
@@ -708,7 +725,7 @@ class _$_LoadMore implements _LoadMore {
 
   @override
   String toString() {
-    return 'OrderHistoryListEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, orderHistoryFilter: $orderHistoryFilter)';
+    return 'ViewByItemsEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, orderHistoryFilter: $orderHistoryFilter)';
   }
 
   @override
@@ -759,6 +776,7 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
+    required TResult Function() fetchProductImage,
   }) {
     return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
         sortDirection, orderHistoryFilter);
@@ -784,6 +802,7 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult? Function()? fetchProductImage,
   }) {
     return loadMore?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
         sortDirection, orderHistoryFilter);
@@ -809,6 +828,7 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -824,6 +844,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return loadMore(this);
   }
@@ -834,6 +855,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return loadMore?.call(this);
   }
@@ -844,6 +866,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -853,7 +876,7 @@ class _$_LoadMore implements _LoadMore {
   }
 }
 
-abstract class _LoadMore implements OrderHistoryListEvent {
+abstract class _LoadMore implements ViewByItemsEvent {
   const factory _LoadMore(
       {required final SalesOrganisationConfigs salesOrgConfigs,
       required final CustomerCodeInfo customerCodeInfo,
@@ -874,29 +897,187 @@ abstract class _LoadMore implements OrderHistoryListEvent {
 }
 
 /// @nodoc
-mixin _$OrderHistoryListState {
+abstract class _$$_FetchProductImageCopyWith<$Res> {
+  factory _$$_FetchProductImageCopyWith(_$_FetchProductImage value,
+          $Res Function(_$_FetchProductImage) then) =
+      __$$_FetchProductImageCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchProductImageCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_FetchProductImage>
+    implements _$$_FetchProductImageCopyWith<$Res> {
+  __$$_FetchProductImageCopyWithImpl(
+      _$_FetchProductImage _value, $Res Function(_$_FetchProductImage) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchProductImage implements _FetchProductImage {
+  const _$_FetchProductImage();
+
+  @override
+  String toString() {
+    return 'ViewByItemsEvent.fetchProductImage()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FetchProductImage);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            String sortDirection,
+            OrderHistoryFilter orderHistoryFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            String sortDirection,
+            OrderHistoryFilter orderHistoryFilter)
+        loadMore,
+    required TResult Function() fetchProductImage,
+  }) {
+    return fetchProductImage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            String sortDirection,
+            OrderHistoryFilter orderHistoryFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            String sortDirection,
+            OrderHistoryFilter orderHistoryFilter)?
+        loadMore,
+    TResult? Function()? fetchProductImage,
+  }) {
+    return fetchProductImage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            String sortDirection,
+            OrderHistoryFilter orderHistoryFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            String sortDirection,
+            OrderHistoryFilter orderHistoryFilter)?
+        loadMore,
+    TResult Function()? fetchProductImage,
+    required TResult orElse(),
+  }) {
+    if (fetchProductImage != null) {
+      return fetchProductImage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
+  }) {
+    return fetchProductImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
+  }) {
+    return fetchProductImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
+    required TResult orElse(),
+  }) {
+    if (fetchProductImage != null) {
+      return fetchProductImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchProductImage implements ViewByItemsEvent {
+  const factory _FetchProductImage() = _$_FetchProductImage;
+}
+
+/// @nodoc
+mixin _$ViewByItemsState {
   OrderHistory get orderHistoryList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isImageLoading => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OrderHistoryListStateCopyWith<OrderHistoryListState> get copyWith =>
+  $ViewByItemsStateCopyWith<ViewByItemsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderHistoryListStateCopyWith<$Res> {
-  factory $OrderHistoryListStateCopyWith(OrderHistoryListState value,
-          $Res Function(OrderHistoryListState) then) =
-      _$OrderHistoryListStateCopyWithImpl<$Res, OrderHistoryListState>;
+abstract class $ViewByItemsStateCopyWith<$Res> {
+  factory $ViewByItemsStateCopyWith(
+          ViewByItemsState value, $Res Function(ViewByItemsState) then) =
+      _$ViewByItemsStateCopyWithImpl<$Res, ViewByItemsState>;
   @useResult
   $Res call(
       {OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
+      bool isImageLoading,
       int nextPageIndex,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
@@ -904,10 +1085,9 @@ abstract class $OrderHistoryListStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryListStateCopyWithImpl<$Res,
-        $Val extends OrderHistoryListState>
-    implements $OrderHistoryListStateCopyWith<$Res> {
-  _$OrderHistoryListStateCopyWithImpl(this._value, this._then);
+class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
+    implements $ViewByItemsStateCopyWith<$Res> {
+  _$ViewByItemsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -920,6 +1100,7 @@ class _$OrderHistoryListStateCopyWithImpl<$Res,
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isImageLoading = null,
     Object? nextPageIndex = null,
     Object? failureOrSuccessOption = null,
   }) {
@@ -935,6 +1116,10 @@ class _$OrderHistoryListStateCopyWithImpl<$Res,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isImageLoading: null == isImageLoading
+          ? _value.isImageLoading
+          : isImageLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -957,17 +1142,18 @@ class _$OrderHistoryListStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryListStateCopyWith<$Res>
-    implements $OrderHistoryListStateCopyWith<$Res> {
-  factory _$$_OrderHistoryListStateCopyWith(_$_OrderHistoryListState value,
-          $Res Function(_$_OrderHistoryListState) then) =
-      __$$_OrderHistoryListStateCopyWithImpl<$Res>;
+abstract class _$$_ViewByItemsStateCopyWith<$Res>
+    implements $ViewByItemsStateCopyWith<$Res> {
+  factory _$$_ViewByItemsStateCopyWith(
+          _$_ViewByItemsState value, $Res Function(_$_ViewByItemsState) then) =
+      __$$_ViewByItemsStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
+      bool isImageLoading,
       int nextPageIndex,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
@@ -976,11 +1162,11 @@ abstract class _$$_OrderHistoryListStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryListStateCopyWithImpl<$Res>
-    extends _$OrderHistoryListStateCopyWithImpl<$Res, _$_OrderHistoryListState>
-    implements _$$_OrderHistoryListStateCopyWith<$Res> {
-  __$$_OrderHistoryListStateCopyWithImpl(_$_OrderHistoryListState _value,
-      $Res Function(_$_OrderHistoryListState) _then)
+class __$$_ViewByItemsStateCopyWithImpl<$Res>
+    extends _$ViewByItemsStateCopyWithImpl<$Res, _$_ViewByItemsState>
+    implements _$$_ViewByItemsStateCopyWith<$Res> {
+  __$$_ViewByItemsStateCopyWithImpl(
+      _$_ViewByItemsState _value, $Res Function(_$_ViewByItemsState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -989,10 +1175,11 @@ class __$$_OrderHistoryListStateCopyWithImpl<$Res>
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isImageLoading = null,
     Object? nextPageIndex = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_OrderHistoryListState(
+    return _then(_$_ViewByItemsState(
       orderHistoryList: null == orderHistoryList
           ? _value.orderHistoryList
           : orderHistoryList // ignore: cast_nullable_to_non_nullable
@@ -1004,6 +1191,10 @@ class __$$_OrderHistoryListStateCopyWithImpl<$Res>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isImageLoading: null == isImageLoading
+          ? _value.isImageLoading
+          : isImageLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1019,11 +1210,12 @@ class __$$_OrderHistoryListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryListState extends _OrderHistoryListState {
-  const _$_OrderHistoryListState(
+class _$_ViewByItemsState extends _ViewByItemsState {
+  const _$_ViewByItemsState(
       {required this.orderHistoryList,
       required this.canLoadMore,
       required this.isFetching,
+      required this.isImageLoading,
       required this.nextPageIndex,
       required this.failureOrSuccessOption})
       : super._();
@@ -1035,26 +1227,30 @@ class _$_OrderHistoryListState extends _OrderHistoryListState {
   @override
   final bool isFetching;
   @override
+  final bool isImageLoading;
+  @override
   final int nextPageIndex;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'OrderHistoryListState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemsState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, isImageLoading: $isImageLoading, nextPageIndex: $nextPageIndex, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryListState &&
+            other is _$_ViewByItemsState &&
             (identical(other.orderHistoryList, orderHistoryList) ||
                 other.orderHistoryList == orderHistoryList) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.isImageLoading, isImageLoading) ||
+                other.isImageLoading == isImageLoading) &&
             (identical(other.nextPageIndex, nextPageIndex) ||
                 other.nextPageIndex == nextPageIndex) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -1063,25 +1259,25 @@ class _$_OrderHistoryListState extends _OrderHistoryListState {
 
   @override
   int get hashCode => Object.hash(runtimeType, orderHistoryList, canLoadMore,
-      isFetching, nextPageIndex, failureOrSuccessOption);
+      isFetching, isImageLoading, nextPageIndex, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryListStateCopyWith<_$_OrderHistoryListState> get copyWith =>
-      __$$_OrderHistoryListStateCopyWithImpl<_$_OrderHistoryListState>(
-          this, _$identity);
+  _$$_ViewByItemsStateCopyWith<_$_ViewByItemsState> get copyWith =>
+      __$$_ViewByItemsStateCopyWithImpl<_$_ViewByItemsState>(this, _$identity);
 }
 
-abstract class _OrderHistoryListState extends OrderHistoryListState {
-  const factory _OrderHistoryListState(
+abstract class _ViewByItemsState extends ViewByItemsState {
+  const factory _ViewByItemsState(
       {required final OrderHistory orderHistoryList,
       required final bool canLoadMore,
       required final bool isFetching,
+      required final bool isImageLoading,
       required final int nextPageIndex,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_OrderHistoryListState;
-  const _OrderHistoryListState._() : super._();
+          failureOrSuccessOption}) = _$_ViewByItemsState;
+  const _ViewByItemsState._() : super._();
 
   @override
   OrderHistory get orderHistoryList;
@@ -1090,11 +1286,13 @@ abstract class _OrderHistoryListState extends OrderHistoryListState {
   @override
   bool get isFetching;
   @override
+  bool get isImageLoading;
+  @override
   int get nextPageIndex;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryListStateCopyWith<_$_OrderHistoryListState> get copyWith =>
+  _$$_ViewByItemsStateCopyWith<_$_ViewByItemsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

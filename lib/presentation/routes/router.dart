@@ -246,14 +246,7 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
         ),
       ],
     ),
-    // AutoRoute(
-    //   page: ViewByItemsPage,
-    //   path: 'orders/view_by_items',
-    // ),
-    // AutoRoute(
-    //   page: ViewByOrdersPage,
-    //   path: 'orders/view_by_orders',
-    // ),
+
     // =========
     // TODO:  will remove in future
     AutoRoute(

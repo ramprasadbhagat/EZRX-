@@ -1,4 +1,3 @@
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -9,24 +8,23 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/repository/i_order_history_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'order_history_list_bloc.freezed.dart';
-part 'order_history_list_event.dart';
-part 'order_history_list_state.dart';
+part 'view_by_item_bloc.freezed.dart';
+part 'view_by_item_event.dart';
+part 'view_by_item_state.dart';
 
 const int _pageSize = 24;
 
-class OrderHistoryListBloc
-    extends Bloc<OrderHistoryListEvent, OrderHistoryListState> {
-  final IOrderHistoryRepository orderHistoryRepository;
-  OrderHistoryListBloc({
-    required this.orderHistoryRepository,
-  }) : super(OrderHistoryListState.initial()) {
+class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
+  final IViewByItemRepository viewByItemRepository;
+  ViewByItemsBloc({
+    required this.viewByItemRepository,
+  }) : super(ViewByItemsState.initial()) {
     on<_Initialized>((event, emit) async {
-      emit(OrderHistoryListState.initial());
+      emit(ViewByItemsState.initial());
     });
     on<_Fetch>(
       (e, emit) async {
@@ -39,7 +37,7 @@ class OrderHistoryListBloc
           ),
         );
 
-        final failureOrSuccess = await orderHistoryRepository.getOrderHistory(
+        final failureOrSuccess = await viewByItemRepository.getOrderHistory(
           salesOrgConfig: e.salesOrgConfigs,
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
@@ -48,7 +46,6 @@ class OrderHistoryListBloc
           offset: 0,
           orderHistoryFilter: e.orderHistoryFilter,
         );
-        if (emit.isDone) return;
 
         failureOrSuccess.fold(
           (failure) {
@@ -70,16 +67,16 @@ class OrderHistoryListBloc
                 nextPageIndex: 1,
               ),
             );
+            add(const _FetchProductImage());
           },
         );
       },
-      transformer: restartable(),
     );
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
-      final failureOrSuccess = await orderHistoryRepository.getOrderHistory(
+      final failureOrSuccess = await viewByItemRepository.getOrderHistory(
         salesOrgConfig: e.salesOrgConfigs,
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
@@ -113,6 +110,36 @@ class OrderHistoryListBloc
               canLoadMore:
                   orderHistoryList.orderHistoryItems.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
+            ),
+          );
+          add(const _FetchProductImage());
+        },
+      );
+    });
+
+    on<_FetchProductImage>((event, emit) async {
+      emit(state.copyWith(
+        isImageLoading: true,
+      ));
+      final orderProductFailureOrSuccess =
+          await viewByItemRepository.getItemProductDetails(
+        orderHistoryItem: state.orderHistoryList.orderHistoryItems,
+      );
+      await orderProductFailureOrSuccess.fold(
+        (failure) async => emit(
+          state.copyWith(
+            failureOrSuccessOption: optionOf(orderProductFailureOrSuccess),
+            isImageLoading: false,
+          ),
+        ),
+        (productDetails) async {
+          emit(
+            state.copyWith(
+              orderHistoryList: state.orderHistoryList.copyWith(
+                orderHistoryItems: productDetails,
+              ),
+              failureOrSuccessOption: none(),
+              isImageLoading: false,
             ),
           );
         },

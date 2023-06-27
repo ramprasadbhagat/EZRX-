@@ -15,9 +15,9 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
@@ -48,9 +48,9 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
@@ -68,12 +68,11 @@ import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
 
-class OrderHistoryListBlocMock
-    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
-    implements OrderHistoryListBloc {}
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class MockOrderHistoryRepository extends Mock
-    implements OrderHistoryRepository {}
+    implements ViewByItemRepository {}
 
 class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
 
@@ -149,7 +148,7 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  final mockOrderHistoryListBloc = OrderHistoryListBlocMock();
+  final mockViewByItemsBloc = ViewByItemsBlocMock();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockCartBloc = CartMocBloc();
@@ -228,8 +227,8 @@ void main() {
           user: fakeUser,
         ),
       );
-      when(() => mockOrderHistoryListBloc.state)
-          .thenReturn(OrderHistoryListState.initial());
+      when(() => mockViewByItemsBloc.state)
+          .thenReturn(ViewByItemsState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
       when(() => mockCartBloc.state).thenReturn(CartState.initial());
@@ -280,8 +279,8 @@ void main() {
         autoRouterMock: autoRouterMock,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
-          BlocProvider<OrderHistoryListBloc>(
-              create: (context) => mockOrderHistoryListBloc),
+          BlocProvider<ViewByItemsBloc>(
+              create: (context) => mockViewByItemsBloc),
           BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc),
           BlocProvider<CartBloc>(create: (context) => mockCartBloc),
@@ -473,9 +472,8 @@ void main() {
       final isBillToEnable = eligibilityBlocMock.state.isOrderTypeEnable;
 
       expect(isBillToEnable, false);
-      when(() => mockOrderHistoryListBloc.state).thenReturn(
-        OrderHistoryListState.initial()
-            .copyWith(orderHistoryList: orderHistory),
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistoryList: orderHistory),
       );
 
       await tester.pumpWidget(getWUT());

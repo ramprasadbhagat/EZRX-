@@ -1,22 +1,23 @@
-part of 'view_by_order_bloc.dart';
+part of 'view_by_item_bloc.dart';
 
 @freezed
-class ViewByOrderHistoryEvent with _$ViewByOrderHistoryEvent {
-  const factory ViewByOrderHistoryEvent.initialized() = _Initialized;
-  const factory ViewByOrderHistoryEvent.fetch({
+class ViewByItemsEvent with _$ViewByItemsEvent {
+  const factory ViewByItemsEvent.initialized() = _Initialized;
+  const factory ViewByItemsEvent.fetch({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
-    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+    required OrderHistoryFilter orderHistoryFilter,
   }) = _Fetch;
-  const factory ViewByOrderHistoryEvent.loadMore({
+  const factory ViewByItemsEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
-    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+    required OrderHistoryFilter orderHistoryFilter,
   }) = _LoadMore;
+  const factory ViewByItemsEvent.fetchProductImage() = _FetchProductImage;
 }

@@ -6,9 +6,9 @@ part 'view_by_order_dto.freezed.dart';
 part 'view_by_order_dto.g.dart';
 
 @freezed
-class ViewByOrderHistoryDto with _$ViewByOrderHistoryDto {
-  const ViewByOrderHistoryDto._();
-  const factory ViewByOrderHistoryDto({
+class ViewByOrderDto with _$ViewByOrderDto {
+  const ViewByOrderDto._();
+  const factory ViewByOrderDto({
     @JsonKey(name: 'orderCount', defaultValue: 0)
         required int orderCount,
     @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
@@ -18,26 +18,26 @@ class ViewByOrderHistoryDto with _$ViewByOrderHistoryDto {
       defaultValue: <OrderHistoryDetailsOrderHeadersDto>[],
     )
         required List<OrderHistoryDetailsOrderHeadersDto> orderHeaders,
-  }) = _ViewByOrderHistoryDto;
-  factory ViewByOrderHistoryDto.fromDomain(
-    ViewByOrderHistory viewByOrderHistory,
+  }) = _ViewByOrderDto;
+  factory ViewByOrderDto.fromDomain(
+    ViewByOrder viewByOrder,
   ) {
-    return ViewByOrderHistoryDto(
-      creatingOrderIds: viewByOrderHistory.creatingOrderIds,
-      orderHeaders: List.from(viewByOrderHistory.orderHeaders)
+    return ViewByOrderDto(
+      creatingOrderIds: viewByOrder.creatingOrderIds,
+      orderHeaders: List.from(viewByOrder.orderHeaders)
           .map((e) => OrderHistoryDetailsOrderHeadersDto.fromDomain(e))
           .toList(),
-      orderCount: viewByOrderHistory.orderCount,
+      orderCount: viewByOrder.orderCount,
     );
   }
-  ViewByOrderHistory toDomain() {
-    return ViewByOrderHistory(
+  ViewByOrder toDomain() {
+    return ViewByOrder(
       orderCount: orderCount,
       creatingOrderIds: creatingOrderIds,
       orderHeaders: orderHeaders.map((e) => e.toDomain()).toList(),
     );
   }
 
-  factory ViewByOrderHistoryDto.fromJson(Map<String, dynamic> json) =>
-      _$ViewByOrderHistoryDtoFromJson(json);
+  factory ViewByOrderDto.fromJson(Map<String, dynamic> json) =>
+      _$ViewByOrderDtoFromJson(json);
 }

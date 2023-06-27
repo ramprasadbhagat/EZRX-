@@ -8,10 +8,10 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -59,8 +59,8 @@ class _Stepper extends StatelessWidget {
   }) : super(key: key);
 
   void _moveToOrderHistory(BuildContext context) {
-    context.read<OrderHistoryListBloc>().add(
-          OrderHistoryListEvent.fetch(
+    context.read<ViewByItemsBloc>().add(
+          ViewByItemsEvent.fetch(
             salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
             customerCodeInfo:
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,

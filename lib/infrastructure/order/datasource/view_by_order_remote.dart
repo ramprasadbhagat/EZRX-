@@ -10,20 +10,20 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_dto.dart';
 
-class ViewByOrderHistoryRemoteDataSource {
+class ViewByOrderRemoteDataSource {
   HttpService httpService;
   ViewByOrderQuery viewByOrderQuery;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
 
-  ViewByOrderHistoryRemoteDataSource({
+  ViewByOrderRemoteDataSource({
     required this.httpService,
     required this.viewByOrderQuery,
     required this.config,
     required this.dataSourceExceptionHandler,
   });
 
-  Future<ViewByOrderHistory> getViewByOrderHistory({
+  Future<ViewByOrder> getViewByOrderHistory({
     required String soldTo,
     required String shipTo,
     required int pageSize,
@@ -63,10 +63,10 @@ class ViewByOrderHistoryRemoteDataSource {
 
       _orderHistoryExceptionChecker(res: res);
       if (res.data['data']['orderHistory'].isEmpty) {
-        return ViewByOrderHistory.empty();
+        return ViewByOrder.empty();
       }
 
-      return ViewByOrderHistoryDto.fromJson(
+      return ViewByOrderDto.fromJson(
         res.data['data']['orderHistory'],
       ).toDomain();
     });

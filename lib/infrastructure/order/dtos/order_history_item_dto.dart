@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -110,10 +111,10 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       pOReference: pOReference,
       seller: seller,
       telephoneNumber: telephoneNumber,
+      productImages: ProductImages.empty(),
     );
   }
 
   factory OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryItemDtoFromJson(json);
 }
-

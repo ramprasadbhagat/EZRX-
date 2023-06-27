@@ -1,4 +1,3 @@
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -18,28 +17,28 @@ part 'view_by_order_bloc.freezed.dart';
 
 const int _pageSize = 24;
 
-class ViewByOrderHistoryBloc
-    extends Bloc<ViewByOrderHistoryEvent, ViewByOrderHistoryState> {
-  final IViewByOrderHistoryRepository viewByOrderHistoryRepository;
-  ViewByOrderHistoryBloc({
-    required this.viewByOrderHistoryRepository,
-  }) : super(ViewByOrderHistoryState.initial()) {
+class ViewByOrderBloc
+    extends Bloc<ViewByOrderEvent, ViewByOrderState> {
+  final IViewByOrderRepository viewByOrderRepository;
+  ViewByOrderBloc({
+    required this.viewByOrderRepository,
+  }) : super(ViewByOrderState.initial()) {
     on<_Initialized>((event, emit) async {
-      emit(ViewByOrderHistoryState.initial());
+      emit(ViewByOrderState.initial());
     });
     on<_Fetch>(
       (e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
-            viewByOrderHistoryList: ViewByOrderHistory.empty(),
+            viewByOrderList: ViewByOrder.empty(),
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
           ),
         );
 
         final failureOrSuccess =
-            await viewByOrderHistoryRepository.getViewByOrderHistory(
+            await viewByOrderRepository.getViewByOrderHistory(
           salesOrgConfig: e.salesOrgConfigs,
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
@@ -52,7 +51,6 @@ class ViewByOrderHistoryBloc
           searchKey: '',
           creatingOrderIds: <String>[],
         );
-        if (emit.isDone) return;
 
         failureOrSuccess.fold(
           (failure) {
@@ -63,28 +61,24 @@ class ViewByOrderHistoryBloc
               ),
             );
           },
-          (viewByOrderHistoryList) {
+          (viewByOrderList) {
             emit(
               state.copyWith(
-                viewByOrderHistoryList: viewByOrderHistoryList,
+                viewByOrderList: viewByOrderList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore:
-                    viewByOrderHistoryList.orderHeaders.length >= _pageSize,
-                nextPageIndex: 1,
               ),
             );
           },
         );
       },
-      transformer: restartable(),
     );
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
       final failureOrSuccess =
-          await viewByOrderHistoryRepository.getViewByOrderHistory(
+          await viewByOrderRepository.getViewByOrderHistory(
         salesOrgConfig: e.salesOrgConfigs,
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
@@ -107,21 +101,21 @@ class ViewByOrderHistoryBloc
             ),
           );
         },
-        (viewByOrderHistoryList) async {
-          final newViewByOrderHistoryList =
+        (viewByOrderList) async {
+          final newViewByOrderList =
               List<OrderHistoryDetailsOrderHeader>.from(
-            state.viewByOrderHistoryList.orderHeaders,
-          )..addAll(viewByOrderHistoryList.orderHeaders);
+            state.viewByOrderList.orderHeaders,
+          )..addAll(viewByOrderList.orderHeaders);
 
           emit(
             state.copyWith(
-              viewByOrderHistoryList: state.viewByOrderHistoryList.copyWith(
-                orderHeaders: newViewByOrderHistoryList,
+              viewByOrderList: state.viewByOrderList.copyWith(
+                orderHeaders: newViewByOrderList,
               ),
               failureOrSuccessOption: none(),
               isFetching: false,
               canLoadMore:
-                  viewByOrderHistoryList.orderHeaders.length >= _pageSize,
+                  viewByOrderList.orderHeaders.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );

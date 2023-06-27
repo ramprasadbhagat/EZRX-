@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 
-abstract class IViewByOrderHistoryRepository {
-  Future<Either<ApiFailure, ViewByOrderHistory>> getViewByOrderHistory({
+abstract class IViewByOrderRepository {
+  Future<Either<ApiFailure, ViewByOrder>> getViewByOrderHistory({
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,

@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ViewByOrderHistoryEvent {
+mixin _$ViewByOrderEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
@@ -105,17 +105,16 @@ mixin _$ViewByOrderHistoryEvent {
 }
 
 /// @nodoc
-abstract class $ViewByOrderHistoryEventCopyWith<$Res> {
-  factory $ViewByOrderHistoryEventCopyWith(ViewByOrderHistoryEvent value,
-          $Res Function(ViewByOrderHistoryEvent) then) =
-      _$ViewByOrderHistoryEventCopyWithImpl<$Res, ViewByOrderHistoryEvent>;
+abstract class $ViewByOrderEventCopyWith<$Res> {
+  factory $ViewByOrderEventCopyWith(
+          ViewByOrderEvent value, $Res Function(ViewByOrderEvent) then) =
+      _$ViewByOrderEventCopyWithImpl<$Res, ViewByOrderEvent>;
 }
 
 /// @nodoc
-class _$ViewByOrderHistoryEventCopyWithImpl<$Res,
-        $Val extends ViewByOrderHistoryEvent>
-    implements $ViewByOrderHistoryEventCopyWith<$Res> {
-  _$ViewByOrderHistoryEventCopyWithImpl(this._value, this._then);
+class _$ViewByOrderEventCopyWithImpl<$Res, $Val extends ViewByOrderEvent>
+    implements $ViewByOrderEventCopyWith<$Res> {
+  _$ViewByOrderEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -132,7 +131,7 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$ViewByOrderEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
@@ -146,7 +145,7 @@ class _$_Initialized implements _Initialized {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryEvent.initialized()';
+    return 'ViewByOrderEvent.initialized()';
   }
 
   @override
@@ -269,7 +268,7 @@ class _$_Initialized implements _Initialized {
   }
 }
 
-abstract class _Initialized implements ViewByOrderHistoryEvent {
+abstract class _Initialized implements ViewByOrderEvent {
   const factory _Initialized() = _$_Initialized;
 }
 
@@ -295,7 +294,7 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryEventCopyWithImpl<$Res, _$_Fetch>
+    extends _$ViewByOrderEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
@@ -407,7 +406,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, viewByOrderHistoryFilter: $viewByOrderHistoryFilter)';
+    return 'ViewByOrderEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, viewByOrderHistoryFilter: $viewByOrderHistoryFilter)';
   }
 
   @override
@@ -559,7 +558,7 @@ class _$_Fetch implements _Fetch {
   }
 }
 
-abstract class _Fetch implements ViewByOrderHistoryEvent {
+abstract class _Fetch implements ViewByOrderEvent {
   const factory _Fetch(
           {required final SalesOrganisationConfigs salesOrgConfigs,
           required final CustomerCodeInfo customerCodeInfo,
@@ -603,7 +602,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryEventCopyWithImpl<$Res, _$_LoadMore>
+    extends _$ViewByOrderEventCopyWithImpl<$Res, _$_LoadMore>
     implements _$$_LoadMoreCopyWith<$Res> {
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
@@ -716,7 +715,7 @@ class _$_LoadMore implements _LoadMore {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, viewByOrderHistoryFilter: $viewByOrderHistoryFilter)';
+    return 'ViewByOrderEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, viewByOrderHistoryFilter: $viewByOrderHistoryFilter)';
   }
 
   @override
@@ -868,7 +867,7 @@ class _$_LoadMore implements _LoadMore {
   }
 }
 
-abstract class _LoadMore implements ViewByOrderHistoryEvent {
+abstract class _LoadMore implements ViewByOrderEvent {
   const factory _LoadMore(
           {required final SalesOrganisationConfigs salesOrgConfigs,
           required final CustomerCodeInfo customerCodeInfo,
@@ -890,9 +889,8 @@ abstract class _LoadMore implements ViewByOrderHistoryEvent {
 }
 
 /// @nodoc
-mixin _$ViewByOrderHistoryState {
-  ViewByOrderHistory get viewByOrderHistoryList =>
-      throw _privateConstructorUsedError;
+mixin _$ViewByOrderState {
+  ViewByOrder get viewByOrderList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
@@ -900,31 +898,30 @@ mixin _$ViewByOrderHistoryState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ViewByOrderHistoryStateCopyWith<ViewByOrderHistoryState> get copyWith =>
+  $ViewByOrderStateCopyWith<ViewByOrderState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByOrderHistoryStateCopyWith<$Res> {
-  factory $ViewByOrderHistoryStateCopyWith(ViewByOrderHistoryState value,
-          $Res Function(ViewByOrderHistoryState) then) =
-      _$ViewByOrderHistoryStateCopyWithImpl<$Res, ViewByOrderHistoryState>;
+abstract class $ViewByOrderStateCopyWith<$Res> {
+  factory $ViewByOrderStateCopyWith(
+          ViewByOrderState value, $Res Function(ViewByOrderState) then) =
+      _$ViewByOrderStateCopyWithImpl<$Res, ViewByOrderState>;
   @useResult
   $Res call(
-      {ViewByOrderHistory viewByOrderHistoryList,
+      {ViewByOrder viewByOrderList,
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
-  $ViewByOrderHistoryCopyWith<$Res> get viewByOrderHistoryList;
+  $ViewByOrderCopyWith<$Res> get viewByOrderList;
 }
 
 /// @nodoc
-class _$ViewByOrderHistoryStateCopyWithImpl<$Res,
-        $Val extends ViewByOrderHistoryState>
-    implements $ViewByOrderHistoryStateCopyWith<$Res> {
-  _$ViewByOrderHistoryStateCopyWithImpl(this._value, this._then);
+class _$ViewByOrderStateCopyWithImpl<$Res, $Val extends ViewByOrderState>
+    implements $ViewByOrderStateCopyWith<$Res> {
+  _$ViewByOrderStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -934,17 +931,17 @@ class _$ViewByOrderHistoryStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByOrderHistoryList = null,
+    Object? viewByOrderList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? nextPageIndex = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      viewByOrderHistoryList: null == viewByOrderHistoryList
-          ? _value.viewByOrderHistoryList
-          : viewByOrderHistoryList // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistory,
+      viewByOrderList: null == viewByOrderList
+          ? _value.viewByOrderList
+          : viewByOrderList // ignore: cast_nullable_to_non_nullable
+              as ViewByOrder,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -966,56 +963,54 @@ class _$ViewByOrderHistoryStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByOrderHistoryCopyWith<$Res> get viewByOrderHistoryList {
-    return $ViewByOrderHistoryCopyWith<$Res>(_value.viewByOrderHistoryList,
-        (value) {
-      return _then(_value.copyWith(viewByOrderHistoryList: value) as $Val);
+  $ViewByOrderCopyWith<$Res> get viewByOrderList {
+    return $ViewByOrderCopyWith<$Res>(_value.viewByOrderList, (value) {
+      return _then(_value.copyWith(viewByOrderList: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrderHistoryStateCopyWith<$Res>
-    implements $ViewByOrderHistoryStateCopyWith<$Res> {
-  factory _$$_ViewByOrderHistoryStateCopyWith(_$_ViewByOrderHistoryState value,
-          $Res Function(_$_ViewByOrderHistoryState) then) =
-      __$$_ViewByOrderHistoryStateCopyWithImpl<$Res>;
+abstract class _$$_ViewByOrderStateCopyWith<$Res>
+    implements $ViewByOrderStateCopyWith<$Res> {
+  factory _$$_ViewByOrderStateCopyWith(
+          _$_ViewByOrderState value, $Res Function(_$_ViewByOrderState) then) =
+      __$$_ViewByOrderStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {ViewByOrderHistory viewByOrderHistoryList,
+      {ViewByOrder viewByOrderList,
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
-  $ViewByOrderHistoryCopyWith<$Res> get viewByOrderHistoryList;
+  $ViewByOrderCopyWith<$Res> get viewByOrderList;
 }
 
 /// @nodoc
-class __$$_ViewByOrderHistoryStateCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryStateCopyWithImpl<$Res,
-        _$_ViewByOrderHistoryState>
-    implements _$$_ViewByOrderHistoryStateCopyWith<$Res> {
-  __$$_ViewByOrderHistoryStateCopyWithImpl(_$_ViewByOrderHistoryState _value,
-      $Res Function(_$_ViewByOrderHistoryState) _then)
+class __$$_ViewByOrderStateCopyWithImpl<$Res>
+    extends _$ViewByOrderStateCopyWithImpl<$Res, _$_ViewByOrderState>
+    implements _$$_ViewByOrderStateCopyWith<$Res> {
+  __$$_ViewByOrderStateCopyWithImpl(
+      _$_ViewByOrderState _value, $Res Function(_$_ViewByOrderState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByOrderHistoryList = null,
+    Object? viewByOrderList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? nextPageIndex = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_ViewByOrderHistoryState(
-      viewByOrderHistoryList: null == viewByOrderHistoryList
-          ? _value.viewByOrderHistoryList
-          : viewByOrderHistoryList // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistory,
+    return _then(_$_ViewByOrderState(
+      viewByOrderList: null == viewByOrderList
+          ? _value.viewByOrderList
+          : viewByOrderList // ignore: cast_nullable_to_non_nullable
+              as ViewByOrder,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -1038,9 +1033,9 @@ class __$$_ViewByOrderHistoryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByOrderHistoryState extends _ViewByOrderHistoryState {
-  const _$_ViewByOrderHistoryState(
-      {required this.viewByOrderHistoryList,
+class _$_ViewByOrderState extends _ViewByOrderState {
+  const _$_ViewByOrderState(
+      {required this.viewByOrderList,
       required this.canLoadMore,
       required this.isFetching,
       required this.nextPageIndex,
@@ -1048,7 +1043,7 @@ class _$_ViewByOrderHistoryState extends _ViewByOrderHistoryState {
       : super._();
 
   @override
-  final ViewByOrderHistory viewByOrderHistoryList;
+  final ViewByOrder viewByOrderList;
   @override
   final bool canLoadMore;
   @override
@@ -1060,16 +1055,16 @@ class _$_ViewByOrderHistoryState extends _ViewByOrderHistoryState {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryState(viewByOrderHistoryList: $viewByOrderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByOrderState(viewByOrderList: $viewByOrderList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrderHistoryState &&
-            (identical(other.viewByOrderHistoryList, viewByOrderHistoryList) ||
-                other.viewByOrderHistoryList == viewByOrderHistoryList) &&
+            other is _$_ViewByOrderState &&
+            (identical(other.viewByOrderList, viewByOrderList) ||
+                other.viewByOrderList == viewByOrderList) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
@@ -1081,30 +1076,28 @@ class _$_ViewByOrderHistoryState extends _ViewByOrderHistoryState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, viewByOrderHistoryList,
-      canLoadMore, isFetching, nextPageIndex, failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, viewByOrderList, canLoadMore,
+      isFetching, nextPageIndex, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrderHistoryStateCopyWith<_$_ViewByOrderHistoryState>
-      get copyWith =>
-          __$$_ViewByOrderHistoryStateCopyWithImpl<_$_ViewByOrderHistoryState>(
-              this, _$identity);
+  _$$_ViewByOrderStateCopyWith<_$_ViewByOrderState> get copyWith =>
+      __$$_ViewByOrderStateCopyWithImpl<_$_ViewByOrderState>(this, _$identity);
 }
 
-abstract class _ViewByOrderHistoryState extends ViewByOrderHistoryState {
-  const factory _ViewByOrderHistoryState(
-      {required final ViewByOrderHistory viewByOrderHistoryList,
+abstract class _ViewByOrderState extends ViewByOrderState {
+  const factory _ViewByOrderState(
+      {required final ViewByOrder viewByOrderList,
       required final bool canLoadMore,
       required final bool isFetching,
       required final int nextPageIndex,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_ViewByOrderHistoryState;
-  const _ViewByOrderHistoryState._() : super._();
+          failureOrSuccessOption}) = _$_ViewByOrderState;
+  const _ViewByOrderState._() : super._();
 
   @override
-  ViewByOrderHistory get viewByOrderHistoryList;
+  ViewByOrder get viewByOrderList;
   @override
   bool get canLoadMore;
   @override
@@ -1115,6 +1108,6 @@ abstract class _ViewByOrderHistoryState extends ViewByOrderHistoryState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrderHistoryStateCopyWith<_$_ViewByOrderHistoryState>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_ViewByOrderStateCopyWith<_$_ViewByOrderState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

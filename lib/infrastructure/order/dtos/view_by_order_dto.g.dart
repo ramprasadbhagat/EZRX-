@@ -6,9 +6,8 @@ part of 'view_by_order_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ViewByOrderHistoryDto _$$_ViewByOrderHistoryDtoFromJson(
-        Map<String, dynamic> json) =>
-    _$_ViewByOrderHistoryDto(
+_$_ViewByOrderDto _$$_ViewByOrderDtoFromJson(Map<String, dynamic> json) =>
+    _$_ViewByOrderDto(
       orderCount: json['orderCount'] as int? ?? 0,
       creatingOrderIds: (json['creatingOrderIds'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -21,8 +20,7 @@ _$_ViewByOrderHistoryDto _$$_ViewByOrderHistoryDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_ViewByOrderHistoryDtoToJson(
-        _$_ViewByOrderHistoryDto instance) =>
+Map<String, dynamic> _$$_ViewByOrderDtoToJson(_$_ViewByOrderDto instance) =>
     <String, dynamic>{
       'orderCount': instance.orderCount,
       'creatingOrderIds': instance.creatingOrderIds,

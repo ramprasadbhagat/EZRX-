@@ -31,7 +31,8 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
@@ -106,7 +107,6 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -196,9 +196,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_r
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
@@ -235,7 +235,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
@@ -1072,15 +1072,15 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => OrderHistoryRepository(
+    () => ViewByItemRepository(
       config: locator<Config>(),
       localDataSource: locator<OrderHistoryLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
     ),
   );
   locator.registerLazySingleton(
-    () => OrderHistoryListBloc(
-      orderHistoryRepository: locator<OrderHistoryRepository>(),
+    () => ViewByItemsBloc(
+      viewByItemRepository: locator<ViewByItemRepository>(),
     ),
   );
   //============================================================
@@ -2536,10 +2536,10 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(() => ViewByOrderHistoryLocalDataSource());
+  locator.registerLazySingleton(() => ViewByOrderLocalDataSource());
   locator.registerLazySingleton(() => ViewByOrderQuery());
   locator.registerLazySingleton(
-    () => ViewByOrderHistoryRemoteDataSource(
+    () => ViewByOrderRemoteDataSource(
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
@@ -2548,15 +2548,15 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => ViewByOrderHistoryRepository(
+    () => ViewByOrderRepository(
       config: locator<Config>(),
-      localDataSource: locator<ViewByOrderHistoryLocalDataSource>(),
-      remoteDataSource: locator<ViewByOrderHistoryRemoteDataSource>(),
+      localDataSource: locator<ViewByOrderLocalDataSource>(),
+      remoteDataSource: locator<ViewByOrderRemoteDataSource>(),
     ),
   );
   locator.registerLazySingleton(
-    () => ViewByOrderHistoryBloc(
-      viewByOrderHistoryRepository: locator<ViewByOrderHistoryRepository>(),
+    () => ViewByOrderBloc(
+      viewByOrderRepository: locator<ViewByOrderRepository>(),
     ),
   );
 

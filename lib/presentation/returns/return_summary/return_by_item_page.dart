@@ -152,7 +152,7 @@ class _ReturnItemGroup extends StatelessWidget {
                         subtitle:
                             'Batch ${e.batch} (Expires ${e.expiry.toValidDateString})',
                         headerText: 'Return #${e.requestId}',
-                        image: 'assets/svg/default_product_image.svg',
+                        image: '', //TODO: will pass the image url when API is implemented,for now, it's showing default image
                         quantity: e.itemQty.toString(),
                         isQuantityBelowImage: true,
                         statusWidget: StatusLabel(

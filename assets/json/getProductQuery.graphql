@@ -1,0 +1,24 @@
+query getProduct($materialID: [String!]) {
+  getProduct(request: {materialID: $materialID}) {
+    orderCloudProduct {
+      materialID
+      name
+      description
+      image
+      thumbNail
+      
+    }
+    Items {
+      HidePrice
+      ID
+      
+    }
+    
+  }
+}
+variable: {
+  "materialID": [
+    "000000000023272832",
+    "000000000023272832"
+  ]
+}

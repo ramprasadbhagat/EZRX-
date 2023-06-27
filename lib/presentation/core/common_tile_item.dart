@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -63,25 +64,29 @@ class CommonTileItem extends StatelessWidget {
                             ),
                             tag.isNotEmpty
                                 ? Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Chip(
-                                label: Text(
-                                  tag,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelSmall!
-                                      .copyWith(
-                                    color: ZPColors.white,
-                                  ),
-                                ).tr(),
-                                visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-                                backgroundColor: ZPColors.darkerGreen,
-                                materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                                labelPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0,),
-                              ),
-                            )
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Chip(
+                                      label: Text(
+                                        tag,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall!
+                                            .copyWith(
+                                              color: ZPColors.white,
+                                            ),
+                                      ).tr(),
+                                      visualDensity: const VisualDensity(
+                                        horizontal: -4,
+                                        vertical: -4,
+                                      ),
+                                      backgroundColor: ZPColors.darkerGreen,
+                                      materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                      labelPadding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0,
+                                      ),
+                                    ),
+                                  )
                                 : const SizedBox.shrink(),
                           ],
                         ),
@@ -130,33 +135,33 @@ class _Subtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return isQuantityBelowImage
         ? Text(
-      tileBody3,
-      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-        fontWeight: FontWeight.w400,
-        color: ZPColors.darkerGrey,
-      ),
-    )
-        : Row(
-      children: [
-        Expanded(
-          child: Text(
             tileBody3,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: ZPColors.darkGray,
-              fontSize: 10,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Text(
-          'Qty: $quantity',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: ZPColors.black,
-          ),
-        ),
-      ],
-    );
+                  fontWeight: FontWeight.w400,
+                  color: ZPColors.darkerGrey,
+                ),
+          )
+        : Row(
+            children: [
+              Expanded(
+                child: Text(
+                  tileBody3,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.darkGray,
+                        fontSize: 10,
+                      ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Text(
+                'Qty: $quantity',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.black,
+                    ),
+              ),
+            ],
+          );
   }
 }
 
@@ -179,8 +184,8 @@ class _HeaderItem extends StatelessWidget {
           child: Text(
             header,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: ZPColors.darkerGrey,
-            ),
+                  color: ZPColors.darkerGrey,
+                ),
           ),
         ),
         statusWidget,
@@ -204,42 +209,65 @@ class _ImageBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return isQuantityBelowImage
         ? Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomCard(
-          showBorder: true,
-          showShadow: false,
-          margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
-          padding: const EdgeInsets.all(
-            10,
-          ),
-          child: SvgPicture.asset(
-            image,
-            height: MediaQuery.of(context).size.height * 0.06,
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          'Qty: $quantity',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
-    )
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomCard(
+                showBorder: true,
+                showShadow: false,
+                margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
+                padding: const EdgeInsets.all(
+                  10,
+                ),
+                child: CachedNetworkImage(
+                  width: MediaQuery.of(context).size.height * 0.06,
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  imageUrl: image,
+                  placeholder: (context, url) => const _DefaultProductImage(),
+                  errorWidget: (context, url, error) =>
+                      const _DefaultProductImage(),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Qty: $quantity',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+            ],
+          )
         : CustomCard(
-      showBorder: true,
-      showShadow: false,
-      margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
-      padding: const EdgeInsets.all(
-        10,
-      ),
-      child: SvgPicture.asset(
-        image,
-        height: MediaQuery.of(context).size.height * 0.06,
-      ),
+            showBorder: true,
+            showShadow: false,
+            margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
+            padding: const EdgeInsets.all(
+              10,
+            ),
+            child: CachedNetworkImage(
+              width: MediaQuery.of(context).size.height * 0.06,
+              height: MediaQuery.of(context).size.height * 0.06,
+              imageUrl: image,
+              placeholder: (context, url) => const _DefaultProductImage(),
+              errorWidget: (context, url, error) =>
+                  const _DefaultProductImage(),
+              fit: BoxFit.fitHeight,
+            ),
+          );
+  }
+}
+
+class _DefaultProductImage extends StatelessWidget {
+  const _DefaultProductImage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'assets/svg/product_default.svg',
+      height: MediaQuery.of(context).size.height * 0.05,
+      width: MediaQuery.of(context).size.height * 0.05,
     );
   }
 }

@@ -1,5 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -39,6 +42,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required bool isBonusMaterial,
     required String governmentMaterialCode,
     required String telephoneNumber,
+    required ProductImages productImages,
   }) = _OrderHistoryItem;
 
   DateTimeStringValue get deliveryDateTime => DateTimeStringValue(
@@ -76,6 +80,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         pOReference: '',
         seller: '',
         telephoneNumber: '',
+        productImages: ProductImages.empty(),
       );
 
   OrderHistoryItem copyWithTaxCal({
@@ -89,4 +94,19 @@ class OrderHistoryItem with _$OrderHistoryItem {
             ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
             : unitPrice,
       );
+}
+
+extension ViewByItemListExtension on List<OrderHistoryItem> {
+  List<ViewByItemGroup> get getViewByOrderItemList {
+    return List<OrderHistoryItem>.from(this)
+        .groupListsBy((item) => item.createdDate)
+        .entries
+        .map(
+          (entry) => ViewByItemGroup(
+            createdDate: entry.key,
+            orderHistoryItem: entry.value,
+          ),
+        )
+        .toList();
+  }
 }

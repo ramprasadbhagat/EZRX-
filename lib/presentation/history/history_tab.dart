@@ -5,7 +5,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -189,8 +189,8 @@ class HistoryTab extends StatelessWidget {
               .shipToCustomerCode
               .isNotEmpty;
           if (hasCustomerCodeInfo && hasShipToInfo) {
-            context.read<OrderHistoryListBloc>().add(
-                  OrderHistoryListEvent.fetch(
+            context.read<ViewByItemsBloc>().add(
+                  ViewByItemsEvent.fetch(
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
@@ -208,7 +208,7 @@ class HistoryTab extends StatelessWidget {
           buildWhen: ((previous, current) =>
               previous.filterByStatusName != current.filterByStatusName),
           builder: (context, orderHistoryFilterByStatusState) {
-            return BlocConsumer<OrderHistoryListBloc, OrderHistoryListState>(
+            return BlocConsumer<ViewByItemsBloc, ViewByItemsState>(
               listenWhen: (previous, current) =>
                   previous.failureOrSuccessOption !=
                   current.failureOrSuccessOption,
@@ -304,7 +304,7 @@ class _OrderHistoryScrollList extends StatelessWidget {
     required this.orderHistoryListState,
     required this.orderHistoryFilterByStatusState,
   }) : super(key: key);
-  final OrderHistoryListState orderHistoryListState;
+  final ViewByItemsState orderHistoryListState;
   final OrderHistoryFilterByStatusState orderHistoryFilterByStatusState;
 
   @override
@@ -316,8 +316,8 @@ class _OrderHistoryScrollList extends StatelessWidget {
         controller: ScrollController(),
         onRefresh: () => _onRefresh(context),
         isLoading: orderHistoryListState.isFetching,
-        onLoadingMore: () => context.read<OrderHistoryListBloc>().add(
-              OrderHistoryListEvent.loadMore(
+        onLoadingMore: () => context.read<ViewByItemsBloc>().add(
+              ViewByItemsEvent.loadMore(
                 customerCodeInfo:
                     context.read<CustomerCodeBloc>().state.customerCodeInfo,
                 salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
@@ -368,8 +368,8 @@ class _OrderHistoryScrollList extends StatelessWidget {
       context.read<MaterialPriceDetailBloc>().add(
             const MaterialPriceDetailEvent.initialized(),
           );
-      context.read<OrderHistoryListBloc>().add(
-            OrderHistoryListEvent.fetch(
+      context.read<ViewByItemsBloc>().add(
+            ViewByItemsEvent.fetch(
               customerCodeInfo:
                   context.read<CustomerCodeBloc>().state.customerCodeInfo,
               salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,

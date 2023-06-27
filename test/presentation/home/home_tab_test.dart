@@ -13,8 +13,8 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
@@ -62,9 +62,8 @@ class SavedOrderBlocMock
     extends MockBloc<SavedOrderListEvent, SavedOrderListState>
     implements SavedOrderListBloc {}
 
-class OrderHistoryListBlocMock
-    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
-    implements OrderHistoryListBloc {}
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}

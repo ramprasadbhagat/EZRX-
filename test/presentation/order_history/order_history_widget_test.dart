@@ -13,7 +13,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
@@ -27,8 +27,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
@@ -43,12 +43,11 @@ import '../../utils/widget_utils.dart';
 import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 import 'order_history_details_widget_test.dart';
 
-class OrderHistoryListBlocMock
-    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
-    implements OrderHistoryListBloc {}
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class MockOrderHistoryRepository extends Mock
-    implements OrderHistoryRepository {}
+    implements ViewByItemRepository {}
 
 class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
 
@@ -89,7 +88,7 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
-  late OrderHistoryListBloc mockOrderHistoryListBloc;
+  late ViewByItemsBloc mockViewByItemsBloc;
   late OrderHistoryFilterBloc mockOrderHistoryFilterBloc;
   late OrderHistoryFilterByStatusBloc mockOrderHistoryFilterByStatusBloc;
   late CartBloc mockCartBloc;
@@ -116,7 +115,7 @@ void main() {
     orderHistoryItem = await OrderHistoryLocalDataSource().getOrderHistory();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => mockOrderHistoryListBloc);
+    locator.registerLazySingleton(() => mockViewByItemsBloc);
     locator.registerLazySingleton(() => mockCartBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => MixpanelService());
@@ -131,7 +130,7 @@ void main() {
         eligibilityBlocMock = EligibilityBlocMock();
         mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
         mockOrderHistoryDetailsBloc = OrderHistoryDetailsBlocMock();
-        mockOrderHistoryListBloc = OrderHistoryListBlocMock();
+        mockViewByItemsBloc = ViewByItemsBlocMock();
         mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
         mockOrderHistoryFilterByStatusBloc = OrderHistoryStatusByFilterBloc();
         mockCartBloc = CartMocBloc();
@@ -140,8 +139,8 @@ void main() {
         authBlocMock = AuthBlocMock();
         announcementBlocMock = AnnouncementBlocMock();
         when(() => userBlocMock.state).thenReturn(UserState.initial());
-        when(() => mockOrderHistoryListBloc.state)
-            .thenReturn(OrderHistoryListState.initial());
+        when(() => mockViewByItemsBloc.state)
+            .thenReturn(ViewByItemsState.initial());
         when(() => mockOrderHistoryFilterBloc.state)
             .thenReturn(OrderHistoryFilterState.initial());
         when(() => mockCartBloc.state).thenReturn(CartState.initial());
@@ -175,8 +174,8 @@ void main() {
             autoRouterMock: autoRouterMock,
             providers: [
               BlocProvider<UserBloc>(create: (context) => userBlocMock),
-              BlocProvider<OrderHistoryListBloc>(
-                  create: (context) => mockOrderHistoryListBloc),
+              BlocProvider<ViewByItemsBloc>(
+                  create: (context) => mockViewByItemsBloc),
               BlocProvider<OrderHistoryFilterBloc>(
                   create: (context) => mockOrderHistoryFilterBloc),
               BlocProvider<CartBloc>(create: (context) => mockCartBloc),
@@ -329,17 +328,17 @@ void main() {
 
       testWidgets('order Type error test 1', (tester) async {
         final expectedStates = [
-          OrderHistoryListState.initial().copyWith(
+          ViewByItemsState.initial().copyWith(
             failureOrSuccessOption: optionOf(
               const Left(ApiFailure.other('fake-message')),
             ),
           ),
         ];
         whenListen(
-            mockOrderHistoryListBloc, Stream.fromIterable(expectedStates));
+            mockViewByItemsBloc, Stream.fromIterable(expectedStates));
 
-        when(() => mockOrderHistoryListBloc.state).thenReturn(
-          OrderHistoryListState.initial().copyWith(
+        when(() => mockViewByItemsBloc.state).thenReturn(
+          ViewByItemsState.initial().copyWith(
             isFetching: false,
             failureOrSuccessOption: none(),
           ),
@@ -353,8 +352,8 @@ void main() {
       });
 
       testWidgets('order Type error test 2', (tester) async {
-        when(() => mockOrderHistoryListBloc.state).thenReturn(
-          OrderHistoryListState.initial().copyWith(
+        when(() => mockViewByItemsBloc.state).thenReturn(
+          ViewByItemsState.initial().copyWith(
               isFetching: false,
               failureOrSuccessOption: optionOf(
                 const Left(
@@ -363,12 +362,12 @@ void main() {
               )),
         );
         whenListen(
-            mockOrderHistoryListBloc,
+            mockViewByItemsBloc,
             Stream.fromIterable([
-              OrderHistoryListState.initial().copyWith(
+              ViewByItemsState.initial().copyWith(
                 failureOrSuccessOption: none(),
               ),
-              mockOrderHistoryListBloc.state,
+              mockViewByItemsBloc.state,
             ]));
         await tester.pumpWidget(getWUT());
         await tester.pump();
@@ -376,14 +375,14 @@ void main() {
 
       testWidgets('order Type success test', (tester) async {
         final expectedStates = [
-          OrderHistoryListState.initial().copyWith(
+          ViewByItemsState.initial().copyWith(
             failureOrSuccessOption: optionOf(
               const Right('fake-message'),
             ),
           ),
         ];
         whenListen(
-            mockOrderHistoryListBloc, Stream.fromIterable(expectedStates));
+            mockViewByItemsBloc, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWUT());
         await tester.pump();
       });
@@ -406,8 +405,8 @@ void main() {
       });
 
       testWidgets('Filter button test 1', (tester) async {
-        when(() => mockOrderHistoryListBloc.state)
-            .thenReturn(OrderHistoryListState.initial());
+        when(() => mockViewByItemsBloc.state)
+            .thenReturn(ViewByItemsState.initial());
         final expectedStates = [
           OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
         ];
@@ -428,8 +427,8 @@ void main() {
       });
 
       testWidgets('Filter button test 2', (tester) async {
-        when(() => mockOrderHistoryListBloc.state)
-            .thenReturn(OrderHistoryListState.initial());
+        when(() => mockViewByItemsBloc.state)
+            .thenReturn(ViewByItemsState.initial());
         final expectedStates = [
           OrderHistoryFilterState.initial()
               .copyWith(isSubmitting: false, sortDirection: 'desc'),
@@ -451,8 +450,8 @@ void main() {
       });
 
       testWidgets('Filter status button test ', (tester) async {
-        when(() => mockOrderHistoryListBloc.state)
-            .thenReturn(OrderHistoryListState.initial());
+        when(() => mockViewByItemsBloc.state)
+            .thenReturn(ViewByItemsState.initial());
         when(() => mockOrderHistoryFilterBloc.state).thenReturn(
           OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
         );
@@ -468,8 +467,8 @@ void main() {
         await tester.pump();
       });
       testWidgets('Filter status  test ', (tester) async {
-        when(() => mockOrderHistoryListBloc.state)
-            .thenReturn(OrderHistoryListState.initial());
+        when(() => mockViewByItemsBloc.state)
+            .thenReturn(ViewByItemsState.initial());
         when(() => customerCodeBlocMock.state).thenReturn(
             CustomerCodeState.initial().copyWith(
                 shipToInfo:
@@ -511,8 +510,8 @@ void main() {
       testWidgets(
           'When selected filter status order history list should be filtered',
           (tester) async {
-        when(() => mockOrderHistoryListBloc.state).thenReturn(
-          OrderHistoryListState.initial().copyWith(
+        when(() => mockViewByItemsBloc.state).thenReturn(
+          ViewByItemsState.initial().copyWith(
             isFetching: false,
             orderHistoryList: orderHistoryItem,
           ),
@@ -547,10 +546,10 @@ void main() {
           orderHistoryItems: [fakeOrderHistoryItem],
         );
 
-        when(() => mockOrderHistoryListBloc.stream).thenAnswer((invocation) {
+        when(() => mockViewByItemsBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
-            OrderHistoryListState.initial().copyWith(isFetching: true),
-            OrderHistoryListState.initial().copyWith(
+            ViewByItemsState.initial().copyWith(isFetching: true),
+            ViewByItemsState.initial().copyWith(
               failureOrSuccessOption: none(),
               orderHistoryList: orderHistoryItem,
               isFetching: false,
@@ -616,10 +615,10 @@ void main() {
 
       testWidgets('OrderHistoryList refresh & loading more test',
           (tester) async {
-        when(() => mockOrderHistoryListBloc.stream).thenAnswer((invocation) {
+        when(() => mockViewByItemsBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
-            OrderHistoryListState.initial().copyWith(isFetching: true),
-            OrderHistoryListState.initial().copyWith(
+            ViewByItemsState.initial().copyWith(isFetching: true),
+            ViewByItemsState.initial().copyWith(
               failureOrSuccessOption: none(),
               orderHistoryList: orderHistoryItem,
               isFetching: false,
@@ -670,17 +669,17 @@ void main() {
 
       testWidgets('rebuild when new list is different from old list',
           (tester) async {
-        final initialState = OrderHistoryListState.initial().copyWith(
+        final initialState = ViewByItemsState.initial().copyWith(
             orderHistoryList: orderHistoryItem.copyWith(orderHistoryItems: [
           OrderHistoryItem.empty(),
         ]));
-        when(() => mockOrderHistoryListBloc.state).thenReturn(initialState);
+        when(() => mockViewByItemsBloc.state).thenReturn(initialState);
         whenListen(
-          mockOrderHistoryListBloc,
+          mockViewByItemsBloc,
           Stream.fromIterable(
             [
               initialState,
-              OrderHistoryListState.initial().copyWith(
+              ViewByItemsState.initial().copyWith(
                 orderHistoryList: orderHistoryItem.copyWith(
                   orderHistoryItems: [],
                 ),
@@ -698,7 +697,7 @@ void main() {
       // testWidgets('onLoadMore should use currently set historyFilter',
       //     (tester) async {
       //   when(() => mockOrderHistoryListBloc.state).thenReturn(
-      //     OrderHistoryListState.initial().copyWith(
+      //     ViewByItemsState.initial().copyWith(
       //       canLoadMore: true,
       //       orderHistoryList: OrderHistory.empty().copyWith(orderHistoryItems: [
       //         for (var i = 0; i < 10; i++)

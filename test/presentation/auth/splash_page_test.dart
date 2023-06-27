@@ -19,11 +19,11 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -147,9 +147,9 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
-class OrderHistoryListBlocMock
-    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
-    implements OrderHistoryListBloc {}
+class ViewByItemsBlocMock
+    extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class OrderHistoryDetailsMockBloc
     extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
@@ -166,9 +166,9 @@ class OrderHistoryFilterMockBloc
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
 
-class ViewByOrderHistoryMockBloc
-    extends MockBloc<ViewByOrderHistoryEvent, ViewByOrderHistoryState>
-    implements ViewByOrderHistoryBloc {}
+class ViewByOrderMockBloc
+    extends MockBloc<ViewByOrderEvent, ViewByOrderState>
+    implements ViewByOrderBloc {}
 class PushNotificationServiceMock extends Mock implements PushNotificationService {}
 
 class ChatBotMockBloc
@@ -208,10 +208,10 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
   late DeepLinkingBloc deepLinkingBlocMock;
-  late OrderHistoryListBloc mockOrderHistoryListBloc;
+  late ViewByItemsBloc mockViewByItemsBloc;
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
-  final mockViewByOrderHistoryBloc = ViewByOrderHistoryMockBloc();
+  final mockViewByOrderBloc = ViewByOrderMockBloc();
   late PushNotificationService pushNotificationServiceMock;
   final chatBotBloc = ChatBotMockBloc();
 
@@ -249,7 +249,7 @@ void main() {
     locator.registerLazySingleton<RemoteConfigService>(
         () => remoteConfigServiceMock);
 
-    locator.registerLazySingleton(() => mockOrderHistoryListBloc);
+    locator.registerLazySingleton(() => mockViewByItemsBloc);
   });
 
   group('Splash Screen', () {
@@ -280,7 +280,7 @@ void main() {
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       deepLinkingBlocMock = DeepLinkingMockBloc();
-      mockOrderHistoryListBloc = OrderHistoryListBlocMock();
+      mockViewByItemsBloc = ViewByItemsBlocMock();
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
       settingBlocMock = SettingMockBloc();
 
@@ -329,14 +329,14 @@ void main() {
           .thenReturn(AnnouncementState.initial());
       when(() => deepLinkingBlocMock.state)
           .thenReturn(const DeepLinkingState.initial());
-      when(() => mockOrderHistoryListBloc.state)
-          .thenReturn(OrderHistoryListState.initial());
+      when(() => mockViewByItemsBloc.state)
+          .thenReturn(ViewByItemsState.initial());
       when(() => mockOrderHistoryDetailsBloc.state)
           .thenReturn(OrderHistoryDetailsState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockViewByOrderHistoryBloc.state)
-          .thenReturn(ViewByOrderHistoryState.initial());
+      when(() => mockViewByOrderBloc.state)
+          .thenReturn(ViewByOrderState.initial());
     });
 
     Future getWidget(tester) async {
@@ -385,8 +385,8 @@ void main() {
             BlocProvider<DeepLinkingBloc>(
               create: (context) => deepLinkingBlocMock,
             ),
-            BlocProvider<OrderHistoryListBloc>(
-                create: (context) => mockOrderHistoryListBloc),
+            BlocProvider<ViewByItemsBloc>(
+                create: (context) => mockViewByItemsBloc),
             BlocProvider<OrderHistoryDetailsBloc>(
                 create: (context) => mockOrderHistoryDetailsBloc),
             BlocProvider<ScanMaterialInfoBloc>(
@@ -400,8 +400,8 @@ void main() {
             BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc,
             ),
-            BlocProvider<ViewByOrderHistoryBloc>(
-              create: (context) => mockViewByOrderHistoryBloc,
+            BlocProvider<ViewByOrderBloc>(
+              create: (context) => mockViewByOrderBloc,
             ),
             BlocProvider<ChatBotBloc>(
               create: (context) => chatBotBloc,

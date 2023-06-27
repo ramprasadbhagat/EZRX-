@@ -16,7 +16,8 @@ import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_history/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
@@ -71,7 +72,6 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -267,8 +267,8 @@ class App extends StatelessWidget {
         BlocProvider<CovidMaterialListBloc>(
           create: (context) => locator<CovidMaterialListBloc>(),
         ),
-        BlocProvider<OrderHistoryListBloc>(
-          create: (context) => locator<OrderHistoryListBloc>(),
+        BlocProvider<ViewByItemsBloc>(
+          create: (context) => locator<ViewByItemsBloc>(),
         ),
         BlocProvider<OrderHistoryFilterBloc>(
           create: (context) => locator<OrderHistoryFilterBloc>(),
@@ -469,8 +469,8 @@ class App extends StatelessWidget {
         BlocProvider<ProductSearchBloc>(
           create: (context) => locator<ProductSearchBloc>(),
         ),
-        BlocProvider<ViewByOrderHistoryBloc>(
-          create: (context) => locator<ViewByOrderHistoryBloc>(),
+        BlocProvider<ViewByOrderBloc>(
+          create: (context) => locator<ViewByOrderBloc>(),
         ),
         BlocProvider<ChatBotBloc>(
           create: (context) => locator<ChatBotBloc>(),

@@ -6,20 +6,22 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
-import 'package:ezrxmobile/domain/order/repository/i_order_history_repository.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_filter_dto.dart';
 
-class OrderHistoryRepository implements IOrderHistoryRepository {
+class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
   final OrderHistoryLocalDataSource localDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
 
-  OrderHistoryRepository({
+  ViewByItemRepository({
     required this.config,
     required this.localDataSource,
     required this.orderHistoryRemoteDataSource,
@@ -73,6 +75,53 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
       return Right(orderHistoryItemList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<OrderHistoryItem>>> getItemProductDetails({
+    required List<OrderHistoryItem> orderHistoryItem,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getItemProductDetails();
+        final updatedOrderHistoryItemList =
+            List<OrderHistoryItem>.from(orderHistoryItem).map((e) {
+          final productImageDetails = response.firstWhere(
+            (element) => element.materialID == e.materialNumber,
+            orElse: () => ProductImages.empty(),
+          );
+
+          return e.copyWith(productImages: productImageDetails);
+        }).toList();
+        
+        return Right(updatedOrderHistoryItemList);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final response = await orderHistoryRemoteDataSource.getItemProductDetails(
+        materialIDs:
+            orderHistoryItem.map((e) => e.materialNumber.getOrCrash()).toList(),
+      );
+      final updatedOrderHistoryItemList =
+          List<OrderHistoryItem>.from(orderHistoryItem).map((e) {
+        final productImageDetails = response.firstWhere(
+          (element) => element.materialID == e.materialNumber,
+          orElse: () => ProductImages.empty(),
+        );
+
+        return e.copyWith(productImages: productImageDetails);
+      }).toList();
+
+      return Right(updatedOrderHistoryItemList);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
   }
 }

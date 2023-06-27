@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
@@ -22,9 +22,8 @@ class OrderHistoryFilterMockBloc
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
 
-class OrderHistoryListBlocMock
-    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
-    implements OrderHistoryListBloc {}
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class MockAppRouter extends Mock implements AppRouter {}
 

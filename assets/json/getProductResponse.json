@@ -1,0 +1,24 @@
+{
+  "data": {
+    "getProduct": {
+      "orderCloudProduct": [
+        {
+          "materialID": "000000000023272832",
+          "name": "TRI TS PLUS INSERT X3 POLY#1  11MM",
+          "description": null,
+          "image": null,
+          "thumbNail": null
+        }
+      ],
+      "Items": [
+        {
+          "HidePrice": false,
+          "ID": "000000000023272832"
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "trace-id": "932e9c8a776377fb477b7176d8a25a1e"
+  }
+}

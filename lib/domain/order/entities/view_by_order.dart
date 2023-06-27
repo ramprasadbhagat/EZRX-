@@ -4,15 +4,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'view_by_order.freezed.dart';
 
 @freezed
-class ViewByOrderHistory with _$ViewByOrderHistory {
-  const ViewByOrderHistory._();
-  factory ViewByOrderHistory({
+class ViewByOrder with _$ViewByOrder {
+  const ViewByOrder._();
+  factory ViewByOrder({
     required int orderCount,
     required List<String> creatingOrderIds,
     required List<OrderHistoryDetailsOrderHeader> orderHeaders,
-  }) = _ViewByOrderHistory;
+  }) = _ViewByOrder;
 
-  factory ViewByOrderHistory.empty() => ViewByOrderHistory(
+  factory ViewByOrder.empty() => ViewByOrder(
         creatingOrderIds: [],
         orderCount: 0,
         orderHeaders: <OrderHistoryDetailsOrderHeader>[],

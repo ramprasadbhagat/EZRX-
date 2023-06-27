@@ -58,7 +58,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetailsOrderHeader> {
-  List<ViewByOrderHistoryGroup> get getPaymentSummeryGroupList {
+  List<ViewByOrderHistoryGroup> get getViewByOrderGroupList {
     return List<OrderHistoryDetailsOrderHeader>.from(this)
         .groupListsBy((item) => item.createdDate)
         .entries

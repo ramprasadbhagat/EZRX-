@@ -14,13 +14,13 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_alt_name.dart';
@@ -103,9 +103,8 @@ class OrderEligibilityBlocMock
     extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
     implements OrderEligibilityBloc {}
 
-class OrderHistoryListBlocMock
-    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
-    implements OrderHistoryListBloc {}
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
 
 class OrderHistoryFilterBlocMock
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
@@ -176,7 +175,7 @@ void main() {
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late AppRouter autoRouterMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
-  late OrderHistoryListBloc orderHistoryListBlocMock;
+  late ViewByItemsBloc viewByItemsBlocMock;
   late OrderHistoryFilterBloc orderHistoryFilterBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late TenderContractBloc tenderContractBlocMock;
@@ -209,7 +208,7 @@ void main() {
       paymentTermBlocMock = PaymentTermBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
-      orderHistoryListBlocMock = OrderHistoryListBlocMock();
+      viewByItemsBlocMock = ViewByItemsBlocMock();
       orderHistoryFilterBlocMock = OrderHistoryFilterBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
@@ -311,8 +310,8 @@ void main() {
               create: (context) => orderDocumentTypeBlocMock),
           BlocProvider<OrderEligibilityBloc>(
               create: (context) => orderEligibilityBlocMock),
-          BlocProvider<OrderHistoryListBloc>(
-              create: (context) => orderHistoryListBlocMock),
+          BlocProvider<ViewByItemsBloc>(
+              create: (context) => viewByItemsBlocMock),
           BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => orderHistoryFilterBlocMock),
           BlocProvider<AdditionalDetailsBloc>(

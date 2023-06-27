@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class OrderHistoryRepoMock extends Mock implements OrderHistoryRepository {}
+class OrderHistoryRepoMock extends Mock implements ViewByItemRepository {}
 
 // const _defaultPageSize = 20;
 
@@ -29,11 +29,11 @@ void main() {
   });
   group(' Order History Bloc', () {
     blocTest('Initialize',
-        build: () => OrderHistoryListBloc(
-            orderHistoryRepository: orderHistoryRepository),
-        act: (OrderHistoryListBloc bloc) =>
-            bloc.add(const OrderHistoryListEvent.initialized()),
-        expect: () => [OrderHistoryListState.initial()]);
+        build: () =>
+            ViewByItemsBloc(viewByItemRepository: orderHistoryRepository),
+        act: (ViewByItemsBloc bloc) =>
+            bloc.add(const ViewByItemsEvent.initialized()),
+        expect: () => [ViewByItemsState.initial()]);
   });
   //TODO : will enhance
   /*
