@@ -12,8 +12,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -103,14 +101,6 @@ class UserRestrictionListBlocMock
     extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
     implements UserRestrictionListBloc {}
 
-class MaterialBundleListBlocMock
-    extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
-    implements MaterialBundleListBloc {}
-
-class CovidMaterialListBlocMock
-    extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
-    implements CovidMaterialListBloc {}
-
 class MaterialFilterBlocMock
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
@@ -147,8 +137,7 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
-class ViewByItemsBlocMock
-    extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
 class OrderHistoryDetailsMockBloc
@@ -166,13 +155,13 @@ class OrderHistoryFilterMockBloc
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
 
-class ViewByOrderMockBloc
-    extends MockBloc<ViewByOrderEvent, ViewByOrderState>
+class ViewByOrderMockBloc extends MockBloc<ViewByOrderEvent, ViewByOrderState>
     implements ViewByOrderBloc {}
-class PushNotificationServiceMock extends Mock implements PushNotificationService {}
 
-class ChatBotMockBloc
-    extends MockBloc<ChatBotEvent, ChatBotState>
+class PushNotificationServiceMock extends Mock
+    implements PushNotificationService {}
+
+class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
     implements ChatBotBloc {}
 
 void main() {
@@ -200,8 +189,6 @@ void main() {
 
   late MaterialFilterBloc materialFilterBlocMock;
 
-  late MaterialBundleListBloc materialBundleListBlocMock;
-  late CovidMaterialListBloc covidMaterialListBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
@@ -260,7 +247,6 @@ void main() {
       userBlocMock = UserBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      covidMaterialListBlocMock = CovidMaterialListBlocMock();
       orderDocumentTypeMock = OrderDocumentTypeBlocMock();
       salesRepBlocMock = SalesRepBlocMock();
       aupTcBlocMock = AupTcBlocMock();
@@ -270,7 +256,6 @@ void main() {
       userRestrictionListBlocMock = UserRestrictionListBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
-      materialBundleListBlocMock = MaterialBundleListBlocMock();
       usageCodeBlocMock = UsageCodeBlocMock();
       returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
@@ -359,12 +344,8 @@ void main() {
                 create: (context) => paymentCustomerInformationBlocMock),
             BlocProvider<PaymentTermBloc>(
                 create: (context) => paymentTermBlocMock),
-            BlocProvider<MaterialBundleListBloc>(
-                create: (context) => materialBundleListBlocMock),
             BlocProvider<EligibilityBloc>(
                 create: (context) => eligibilityBlocMock),
-            BlocProvider<CovidMaterialListBloc>(
-                create: (context) => covidMaterialListBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeMock),
             BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),

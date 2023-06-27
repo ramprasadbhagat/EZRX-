@@ -38,16 +38,16 @@ bool hasLengthEqualOrGreaterThanN(String text, int n) =>
     hasLengthN(text, n) || hasLengthGreaterThanN(text, n);
 
 // a simple string => A Simple String
-String stringTitleCase(String text) {
-  if (text.isEmpty) return '';
-  if (hasLengthN(text, 1)) return text;
+// String stringTitleCase(String text) {
+//   if (text.isEmpty) return '';
+//   if (hasLengthN(text, 1)) return text;
 
-  return text
-      .trim()
-      .split(' ')
-      .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
-      .join(' ');
-}
+//   return text
+//       .trim()
+//       .split(' ')
+//       .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
+//       .join(' ');
+// }
 
 String removeLeadingZero(String text) {
   return text.isEmpty ? '' : text.replaceAll(RegExp(r'^0+(?=.)'), '');

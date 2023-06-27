@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +10,7 @@ class QuantityInput extends StatelessWidget {
   final TextEditingController controller;
   final Key quantityTextKey;
   final Function(int) onFieldChange;
-  final Function(int)? minusPressed;
+  final Function(int) minusPressed;
   final Function(int) addPressed;
   final Key quantityAddKey;
   final Key quantityDeleteKey;
@@ -22,7 +25,7 @@ class QuantityInput extends StatelessWidget {
     required this.controller,
     required this.quantityTextKey,
     required this.onFieldChange,
-    this.minusPressed,
+    required this.minusPressed,
     required this.addPressed,
     required this.quantityAddKey,
     required this.quantityDeleteKey,
@@ -92,11 +95,11 @@ class QuantityInput extends StatelessWidget {
                                 offset: controller.selection.base.offset,
                               ),
                             );
-                            minusPressed?.call(value);
+                            minusPressed.call(value);
                           }
                         },
                         icon: Icons.remove,
-                        isEnabled: isEnabled && minusPressed != null,
+                        isEnabled: isEnabled,
                       ),
                       QuantityIcon(
                         key: quantityAddKey,

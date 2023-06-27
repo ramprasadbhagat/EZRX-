@@ -16,7 +16,6 @@ import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:flutter/material.dart';
@@ -171,8 +170,6 @@ void main() {
         final expiryDate = find.textContaining('07 Apr 2023');
         expect(expiryDate, findsOneWidget);
 
-        final remarksMessage = find.byType(RemarksMessage);
-        expect(remarksMessage, findsOneWidget);
         final quantityInput = find.byType(QuantityInput);
         expect(quantityInput, findsOneWidget);
         await tester.ensureVisible(quantityInput);
@@ -232,41 +229,39 @@ void main() {
       },
     );
 
-    testWidgets(
-      'On cart bonus item Edit Dailog',
-      (tester) async {
-        materialItemBonus = materialItemBonus.copyWith(
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('1234567'),
-            remarks: 'test',
-          ),
-        );
-        when(() => salesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs:
-                SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
-          ),
-        );
+    // testWidgets(
+    //   'On cart bonus item Edit Dailog',
+    //   (tester) async {
+    //     materialItemBonus = materialItemBonus.copyWith(
+    //       materialInfo: MaterialInfo.empty().copyWith(
+    //         materialNumber: MaterialNumber('1234567'),
+    //         remarks: 'test',
+    //       ),
+    //     );
+    //     when(() => salesOrgBloc.state).thenReturn(
+    //       SalesOrgState.initial().copyWith(
+    //         configs:
+    //             SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
+    //       ),
+    //     );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final remarksMessage = find.byType(RemarksMessage);
-        expect(remarksMessage, findsOneWidget);
-        final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
-        expect(editDeleteDialog, findsOneWidget);
-        await tester.tap(editDeleteDialog.first);
-        await tester.pumpAndSettle();
-        final childDeleteButton = find.text('Delete');
-        expect(childDeleteButton, findsOneWidget); //
-        await tester.ensureVisible(childDeleteButton);
-        await tester.pumpAndSettle();
-        await tester.tap(childDeleteButton);
-        // verify(
-        //   () => cartBloc.add(
-        //     const CartEvent.remarksChanged(''),
-        //   ),
-        // ).called(1);
-      },
-    );
+    //     await tester.pumpWidget(getWidget());
+    //     await tester.pump();
+    //     final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
+    //     expect(editDeleteDialog, findsOneWidget);
+    //     await tester.tap(editDeleteDialog.first);
+    //     await tester.pumpAndSettle();
+    //     final childDeleteButton = find.text('Delete');
+    //     expect(childDeleteButton, findsOneWidget); //
+    //     await tester.ensureVisible(childDeleteButton);
+    //     await tester.pumpAndSettle();
+    //     await tester.tap(childDeleteButton);
+    //     // verify(
+    //     //   () => cartBloc.add(
+    //     //     const CartEvent.remarksChanged(''),
+    //     //   ),
+    //     // ).called(1);
+    //   },
+    // );
   });
 }

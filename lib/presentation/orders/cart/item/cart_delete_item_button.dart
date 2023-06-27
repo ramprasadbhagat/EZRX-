@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
@@ -7,7 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartDeleteItemButton extends StatelessWidget {
   final CartItem item;
-  const CartDeleteItemButton({Key? key, required this.item,}) : super(key: key);
+  const CartDeleteItemButton({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

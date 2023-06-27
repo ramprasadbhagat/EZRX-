@@ -10,34 +10,34 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('stringTitleCase', () {
-    test(
-      'should return an String with title case',
-      () async {
-        const input = 'APPLE CARE';
-        final result = stringTitleCase(input);
-        expect(result, 'Apple Care');
-      },
-    );
+  // group('stringTitleCase', () {
+  //   test(
+  //     'should return an String with title case',
+  //     () async {
+  //       const input = 'APPLE CARE';
+  //       final result = stringTitleCase(input);
+  //       expect(result, 'Apple Care');
+  //     },
+  //   );
 
-    test(
-      'should return an String with title case',
-      () async {
-        const input = 'orange juice';
-        final result = stringTitleCase(input);
-        expect(result, 'Orange Juice');
-      },
-    );
+  //   test(
+  //     'should return an String with title case',
+  //     () async {
+  //       const input = 'orange juice';
+  //       final result = stringTitleCase(input);
+  //       expect(result, 'Orange Juice');
+  //     },
+  //   );
 
-    test(
-      'should return an String with title case',
-      () async {
-        const input = 'Zuellig Pharma';
-        final result = stringTitleCase(input);
-        expect(result, 'Zuellig Pharma');
-      },
-    );
-  });
+  //   test(
+  //     'should return an String with title case',
+  //     () async {
+  //       const input = 'Zuellig Pharma';
+  //       final result = stringTitleCase(input);
+  //       expect(result, 'Zuellig Pharma');
+  //     },
+  //   );
+  // });
 
   group('removeLeadingZero', () {
     test(

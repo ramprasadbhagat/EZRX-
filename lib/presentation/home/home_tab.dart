@@ -1,11 +1,7 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
-import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_tile.dart';
-import 'package:ezrxmobile/presentation/home/expansion_tiles/payments_expansion_tile.dart';
-import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -15,8 +11,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/locator.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -28,8 +22,6 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final configService = locator<RemoteConfigService>();
-
     return Scaffold(
       key: WidgetKeys.homeScreen,
       appBar: AppBar(
@@ -82,13 +74,6 @@ class HomeTab extends StatelessWidget {
             const EdiUserBanner(),
             const AccountSuspendedBanner(),
             const HomeBanner(),
-            const OrdersExpansionTile(),
-            configService.getReturnsConfig()
-                ? const ReturnsExpansionTile()
-                : const SizedBox.shrink(),
-            configService.getPaymentsConfig()
-                ? const PaymentsExpansionTile()
-                : const SizedBox.shrink(),
           ],
         ),
       ),
@@ -96,19 +81,6 @@ class HomeTab extends StatelessWidget {
   }
 }
 
-class HomePageTile {
-  const HomePageTile({
-    this.key,
-    required this.title,
-    required this.icon,
-    required this.routeName,
-  });
-
-  final Key? key;
-  final String title;
-  final IconData icon;
-  final String routeName;
-}
 
 // class _WelcomeUser extends StatelessWidget {
 //   const _WelcomeUser({Key? key}) : super(key: key);

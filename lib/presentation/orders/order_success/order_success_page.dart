@@ -68,11 +68,6 @@ class _BodyContent extends StatelessWidget {
             key: const Key('createNewOrder'),
             onPressed: () {
               trackMixpanelEvent(MixpanelEvents.thankYouToCreate);
-              context.router.pushAndPopUntil(
-                const MaterialRootRoute(),
-                predicate: (route) =>
-                    route.settings.name == 'HomeNavigationTabbarRoute',
-              );
             },
             child: Text(
               'Create New Order'.tr(),

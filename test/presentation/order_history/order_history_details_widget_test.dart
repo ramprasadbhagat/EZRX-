@@ -64,15 +64,13 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
-import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
 
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
-class MockOrderHistoryRepository extends Mock
-    implements ViewByItemRepository {}
+class MockOrderHistoryRepository extends Mock implements ViewByItemRepository {}
 
 class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
 
@@ -144,6 +142,10 @@ class AnnouncementBlocMock
     implements AnnouncementBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

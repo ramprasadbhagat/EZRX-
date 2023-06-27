@@ -40,14 +40,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../utils/widget_utils.dart';
-import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 import 'order_history_details_widget_test.dart';
 
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
-class MockOrderHistoryRepository extends Mock
-    implements ViewByItemRepository {}
+class MockOrderHistoryRepository extends Mock implements ViewByItemRepository {}
 
 class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
 
@@ -84,6 +82,10 @@ class AnnouncementBlocMock
     implements AnnouncementBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -334,8 +336,7 @@ void main() {
             ),
           ),
         ];
-        whenListen(
-            mockViewByItemsBloc, Stream.fromIterable(expectedStates));
+        whenListen(mockViewByItemsBloc, Stream.fromIterable(expectedStates));
 
         when(() => mockViewByItemsBloc.state).thenReturn(
           ViewByItemsState.initial().copyWith(
@@ -381,8 +382,7 @@ void main() {
             ),
           ),
         ];
-        whenListen(
-            mockViewByItemsBloc, Stream.fromIterable(expectedStates));
+        whenListen(mockViewByItemsBloc, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWUT());
         await tester.pump();
       });

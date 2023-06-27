@@ -14,8 +14,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
@@ -59,8 +57,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -284,29 +280,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     viewByOrderHistoryFilter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
-            if (state.isCovidMaterialEnable) {
-              context.read<CovidMaterialListBloc>().add(
-                    CovidMaterialListEvent.fetch(
-                      user: state.user,
-                      salesOrganisation: state.salesOrganisation,
-                      configs: state.salesOrgConfigs,
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                      pickAndPack: state.getPNPValueCovidMaterial,
-                      searchKey: '',
-                    ),
-                  );
-            }
-            if (!state.salesOrgConfigs.disableBundles) {
-              context.read<MaterialBundleListBloc>().add(
-                    MaterialBundleListEvent.fetch(
-                      user: state.user,
-                      customerCode: state.customerCodeInfo,
-                      shipToCode: state.shipToInfo,
-                      salesOrganisation: state.salesOrganisation,
-                    ),
-                  );
-            }
             if (state.isOrderTypeEnable) {
               context.read<OrderDocumentTypeBloc>().add(
                     OrderDocumentTypeEvent.fetch(
@@ -389,7 +362,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
             _getAdminPoAttachment(state);
-             context.read<CartBloc>().add(
+            context.read<CartBloc>().add(
                   const CartEvent.fetchProductsAddedToCart(),
                 );
             final enableReturn =
@@ -669,25 +642,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               returnSummaryFilter: ReturnSummaryFilter.empty(),
             ),
           );
-      if (context.read<UserBloc>().state.userCanCreateOrder) {
-        context.read<MaterialBundleListBloc>().add(
-              MaterialBundleListEvent.fetch(
-                user: user,
-                customerCode: customerCodeInfo,
-                salesOrganisation: salesOrgState.salesOrganisation,
-                shipToCode: context.read<CustomerCodeBloc>().state.shipToInfo,
-              ),
-            );
-      }
-
-      context.read<SavedOrderListBloc>().add(
-            SavedOrderListEvent.fetch(
-              userInfo: user,
-              selectedSalesOrganisation: salesOrgState.salesOrganisation,
-              selectedCustomerCode: customerCodeInfo,
-              selectedShipTo: state.shipToInfo,
-            ),
-          );
 
       if (context.read<UserBloc>().state.userCanCreateOrder) {
         context.read<ViewByItemsBloc>().add(
@@ -702,11 +656,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             );
       }
 
-      context.read<OrderTemplateListBloc>().add(
-            OrderTemplateListEvent.fetch(
-              user,
-            ),
-          );
       context
           .read<PaymentCustomerInformationBloc>()
           .add(PaymentCustomerInformationEvent.fetch(
@@ -798,15 +747,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
     } else {
-      context
-          .read<SavedOrderListBloc>()
-          .add(const SavedOrderListEvent.initialized());
-
       context.read<ViewByItemsBloc>().add(const ViewByItemsEvent.initialized());
 
-      context
-          .read<OrderTemplateListBloc>()
-          .add(const OrderTemplateListEvent.initialized());
       context
           .read<OrderHistoryFilterBloc>()
           .add(const OrderHistoryFilterEvent.initialized());

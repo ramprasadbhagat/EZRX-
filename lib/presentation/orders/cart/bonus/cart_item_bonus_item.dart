@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -7,10 +10,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 
-import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
-import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
-import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
-import 'package:ezrxmobile/presentation/orders/cart/remark/update_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -110,51 +109,6 @@ class _BonusItemTileState extends State<BonusItemTile> {
                                 color: ZPColors.lightGray,
                               ),
                         ),
-                      if (context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .configs
-                          .enableRemarks)
-                        widget.bonusItem.materialInfo.remarks.isNotEmpty
-                            ? RemarksMessage(
-                                key: Key(
-                                  'remarks${widget.bonusItem.materialInfo.remarks}',
-                                ),
-                                message:
-                                    '${'Remarks: '.tr()}${widget.bonusItem.materialInfo.remarks}',
-                                showEditDeleteDialog: EditDeleteDialog(
-                                  key: Key(
-                                    'editDeleteDialog${widget.bonusItem.materialInfo.materialNumber.getOrDefaultValue('')}',
-                                  ),
-                                  onDelete: () {
-                                    context.read<CartBloc>().add(
-                                          CartEvent.addRemarkToBonusItem(
-                                            bonusItem: widget.bonusItem,
-                                            item: widget.cartItem,
-                                            message: '',
-                                          ),
-                                        );
-                                  },
-                                  onEdit: () {
-                                    AddRemarkDialog.bonusItem(
-                                      context: context,
-                                      cartItem: widget.cartItem,
-                                      bonusItem: widget.bonusItem,
-                                      isEdit: true,
-                                    );
-                                  },
-                                ),
-                              )
-                            : AddRemarksButton(
-                                key: const Key('addRemarksBonus'),
-                                onPressed: () {
-                                  AddRemarkDialog.bonusItem(
-                                    context: context,
-                                    cartItem: widget.cartItem,
-                                    bonusItem: widget.bonusItem,
-                                  );
-                                },
-                              ),
                     ],
                   ),
                 ),

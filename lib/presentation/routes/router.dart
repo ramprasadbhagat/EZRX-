@@ -21,11 +21,6 @@ import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/payment_methods_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
-import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_material_detail_page.dart';
-import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_principle_detail_page.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
@@ -40,15 +35,9 @@ import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_template/order_template_detail_page.dart';
-import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_page.dart';
-import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
-import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
@@ -148,20 +137,6 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       path: 'customer_search',
       page: CustomerSearchPage,
     ),
-    AutoRoute(path: 'material_root', page: MaterialRoot, children: [
-      AutoRoute(
-        page: MaterialListPage,
-        path: 'orders/material_list',
-      ),
-      AutoRoute(
-        page: MaterialBundleListPage,
-        path: 'orders/material_bundle_list',
-      ),
-      AutoRoute(
-        page: CovidMaterialListPage,
-        path: 'orders/covid_material_list',
-      ),
-    ]),
     AutoRoute(
       path: 'orders/material_filter',
       page: MaterialFilterPage,
@@ -171,24 +146,12 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: AupTCDialog,
     ),
     AutoRoute(
-      path: 'orders/order_template_list',
-      page: OrderTemplateListPage,
-    ),
-    AutoRoute(
       path: 'orders/cart',
       page: CartPage,
     ),
     AutoRoute(
-      path: 'orders/order_summary',
-      page: OrderSummaryPage,
-    ),
-    AutoRoute(
       path: 'orders/order_confirmation',
       page: OrderSuccessPage,
-    ),
-    AutoRoute(
-      path: 'orders/order_template_detail',
-      page: OrderTemplateDetailPage,
     ),
     CustomRoute(
       path: 'product_suggestion_page',
@@ -254,15 +217,7 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: HistoryTab,
       path: 'orders/history',
     ),
-    // =========
-    AutoRoute(
-      path: 'orders/saved_order_list',
-      page: SavedOrderListPage,
-    ),
-    AutoRoute(
-      path: 'orders/saved_order_detail',
-      page: SavedOrderDetailPage,
-    ),
+    // ========
     AutoRoute(
       path: 'orders/history_details',
       page: HistoryDetails,
@@ -323,14 +278,6 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: BundleItemDetailPage,
       transitionsBuilder: TransitionsBuilders.slideBottom,
       fullscreenDialog: true,
-    ),
-    AutoRoute(
-      path: 'orders/combo_deal_material_detail',
-      page: ComboDealMaterialDetailPage,
-    ),
-    AutoRoute(
-      path: 'orders/combo_deal_principle_detail',
-      page: ComboDealPrincipleDetailPage,
     ),
     AutoRoute(path: 'request_return_details', page: RequestReturnDetails),
     AutoRoute(

@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -87,29 +90,29 @@ class _BatchActionSheet extends StatelessWidget {
         SafeArea(
           child: item.materials.first.batchNumbers.isNotEmpty
               ? Column(
-            children: item.materials.first.stockInfoList.map(
-              (StockInfo stockInfo) {
-                return RadioListTile<StockInfo>(
-                    key: ValueKey(
-                      stockInfo.batch.getOrDefaultValue(''),
-                    ),
-                  title: Text(
-                    stockInfo.batch.getOrDefaultValue(''),
-                    key: const Key('selectBatchNumberRadioListTile'),
-                  ),
-                  groupValue: item.materials.first.stockInfo,
-                  controlAffinity: ListTileControlAffinity.trailing,
-                  onChanged: (StockInfo? value) {
-                    context.read<CartBloc>().add(
-                          CartEvent.updateBatchInCartItem(
-                            item: item,
-                            stockInfo: stockInfo,
-                          ),
-                        );
-                    context.router.pop();
-                  },
-                  value: stockInfo,
-                );
+                  children: item.materials.first.stockInfoList.map(
+                    (StockInfo stockInfo) {
+                      return RadioListTile<StockInfo>(
+                        key: ValueKey(
+                          stockInfo.batch.getOrDefaultValue(''),
+                        ),
+                        title: Text(
+                          stockInfo.batch.getOrDefaultValue(''),
+                          key: const Key('selectBatchNumberRadioListTile'),
+                        ),
+                        groupValue: item.materials.first.stockInfo,
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        onChanged: (StockInfo? value) {
+                          context.read<CartBloc>().add(
+                                CartEvent.updateBatchInCartItem(
+                                  item: item,
+                                  stockInfo: stockInfo,
+                                ),
+                              );
+                          context.router.pop();
+                        },
+                        value: stockInfo,
+                      );
                     },
                   ).toList(),
                 )

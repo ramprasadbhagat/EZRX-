@@ -96,8 +96,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -108,11 +106,9 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
@@ -858,16 +854,6 @@ void setupLocator() {
   );
 
   //============================================================
-  // Saved Orders
-  //
-  //============================================================
-  locator.registerLazySingleton(
-    () => SavedOrderListBloc(
-      repository: locator<OrderRepository>(),
-    ),
-  );
-
-  //============================================================
   //  Sales Rep
   //
   //============================================================
@@ -932,12 +918,6 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
-    () => CovidMaterialListBloc(
-      materialListRepository: locator<MaterialListRepository>(),
-    ),
-  );
-
   locator.registerLazySingleton(() => MaterialBundleQuery());
 
   locator.registerLazySingleton(() => MaterialBundleListLocalDatasource());
@@ -958,14 +938,6 @@ void setupLocator() {
           locator<MaterialBundleListLocalDatasource>(),
       materialBundleListRemoteDatasource:
           locator<MaterialBundleListRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => MaterialBundleListBloc(
-      materialBundleListRepository: locator<MaterialBundleListRepository>(),
-      customerMaterialPriceDetailsRepository:
-          locator<MaterialPriceDetailRepository>(),
     ),
   );
 
@@ -990,12 +962,6 @@ void setupLocator() {
       config: locator<Config>(),
       orderTemplateLocalDataSource: locator<OrderTemplateLocalDataSource>(),
       orderTemplateRemoteDataSource: locator<OrderTemplateRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => OrderTemplateListBloc(
-      orderTemplateRepository: locator<OrderTemplateRepository>(),
     ),
   );
 

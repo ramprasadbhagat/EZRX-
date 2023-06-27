@@ -14,12 +14,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../home/home_tab_test.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
 class MockPaymentCustomerInformationBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
 
 void main() {
   late AppRouter autoRouterMock;

@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
@@ -12,7 +15,6 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -313,10 +315,6 @@ void _onConfirm({
   required bool isReason,
   required OrderDocumentType i,
 }) {
-  context.router.pushAndPopUntil(
-    const MaterialRootRoute(),
-    predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
-  );
   context.read<OrderDocumentTypeBloc>().add(
         OrderDocumentTypeEvent.selectedOrderType(
           selectedOrderType: i,

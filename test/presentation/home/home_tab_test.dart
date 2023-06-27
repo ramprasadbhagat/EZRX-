@@ -10,11 +10,9 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -22,8 +20,6 @@ import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -35,8 +31,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -59,10 +53,6 @@ class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
-class SavedOrderBlocMock
-    extends MockBloc<SavedOrderListEvent, SavedOrderListState>
-    implements SavedOrderListBloc {}
-
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
@@ -72,10 +62,6 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
-
-class CovidMaterialListBlocMock
-    extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
-    implements CovidMaterialListBloc {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -116,7 +102,6 @@ void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
-  late CovidMaterialListBlocMock covidMaterialListBlocMock;
   late CartBlocMock cartBlocMock;
   late BannerBlocMock mockBannerBloc;
   late AuthBloc authBlocMock;
@@ -192,7 +177,6 @@ void main() {
         salesOrgBlocMock = SalesOrgBlocMock();
         materialListBlocMock = MaterialListBlocMock();
         materialPriceBlocMock = MaterialPriceBlocMock();
-        covidMaterialListBlocMock = CovidMaterialListBlocMock();
         mockBannerBloc = BannerBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
         returnsOverviewBlocMock = ReturnsOverviewBlocMock();
@@ -224,8 +208,6 @@ void main() {
             EligibilityState.initial().copyWith(
                 customerCodeInfo:
                     CustomerCodeInfo.empty().copyWith(status: Status('EDI'))));
-        when(() => covidMaterialListBlocMock.state)
-            .thenReturn(CovidMaterialListState.initial());
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
         when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -271,8 +253,6 @@ void main() {
                     create: (context) => materialListBlocMock),
                 BlocProvider<MaterialPriceBloc>(
                     create: (context) => materialPriceBlocMock),
-                BlocProvider<CovidMaterialListBloc>(
-                    create: (context) => covidMaterialListBlocMock),
                 BlocProvider<CartBloc>(create: (context) => cartBlocMock),
                 BlocProvider<EligibilityBloc>(
                     create: (context) => eligibilityBlocMock),
@@ -393,31 +373,31 @@ void main() {
         },
       );
 
-      testWidgets(
-        'Home Screen orders is enable, when user is client admin/user, accessRight->orders is true and disableCreateOrder is false',
-        (WidgetTester tester) async {
-          VisibilityDetectorController.instance.updateInterval = Duration.zero;
-          when(() => userBlocMock.state).thenReturn(
-            UserState.initial().copyWith(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(
-                  type: RoleType('client_admin'),
-                ),
-                accessRight: AccessRight.empty().copyWith(
-                  orders: true,
-                ),
-                disableCreateOrder: false,
-              ),
-            ),
-          );
+      // testWidgets(
+      //   'Home Screen orders is enable, when user is client admin/user, accessRight->orders is true and disableCreateOrder is false',
+      //   (WidgetTester tester) async {
+      //     VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      //     when(() => userBlocMock.state).thenReturn(
+      //       UserState.initial().copyWith(
+      //         user: fakeUser.copyWith(
+      //           role: Role.empty().copyWith(
+      //             type: RoleType('client_admin'),
+      //           ),
+      //           accessRight: AccessRight.empty().copyWith(
+      //             orders: true,
+      //           ),
+      //           disableCreateOrder: false,
+      //         ),
+      //       ),
+      //     );
 
-          await getWidget(tester);
-          await tester.pump();
-          final orderExpansionTile =
-              find.byKey(const Key('orderExpansionTile'));
-          expect(orderExpansionTile, findsOneWidget);
-        },
-      );
+      //     await getWidget(tester);
+      //     await tester.pump();
+      //     final orderExpansionTile =
+      //         find.byKey(const Key('orderExpansionTile'));
+      //     expect(orderExpansionTile, findsOneWidget);
+      //   },
+      // );
 
       testWidgets(
         'Home Screen orders is disable, when user is client admin/user, accessRight->orders is false and disableCreateOrder is false',
@@ -445,57 +425,57 @@ void main() {
         },
       );
 
-      testWidgets(
-        'Home Screen orders is enable, when user is not client admin/user, accessRight->orders is true and disableCreateOrder is false',
-        (WidgetTester tester) async {
-          VisibilityDetectorController.instance.updateInterval = Duration.zero;
-          when(() => userBlocMock.state).thenReturn(
-            UserState.initial().copyWith(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(
-                  type: RoleType('fake_type'),
-                ),
-                accessRight: AccessRight.empty().copyWith(
-                  orders: true,
-                ),
-                disableCreateOrder: false,
-              ),
-            ),
-          );
+      // testWidgets(
+      //   'Home Screen orders is enable, when user is not client admin/user, accessRight->orders is true and disableCreateOrder is false',
+      //   (WidgetTester tester) async {
+      //     VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      //     when(() => userBlocMock.state).thenReturn(
+      //       UserState.initial().copyWith(
+      //         user: fakeUser.copyWith(
+      //           role: Role.empty().copyWith(
+      //             type: RoleType('fake_type'),
+      //           ),
+      //           accessRight: AccessRight.empty().copyWith(
+      //             orders: true,
+      //           ),
+      //           disableCreateOrder: false,
+      //         ),
+      //       ),
+      //     );
 
-          await getWidget(tester);
-          await tester.pump();
-          final orderExpansionTile =
-              find.byKey(const Key('orderExpansionTile'));
-          expect(orderExpansionTile, findsOneWidget);
-        },
-      );
+      //     await getWidget(tester);
+      //     await tester.pump();
+      //     final orderExpansionTile =
+      //         find.byKey(const Key('orderExpansionTile'));
+      //     expect(orderExpansionTile, findsOneWidget);
+      //   },
+      // );
 
-      testWidgets(
-        'Home Screen orders is enable, when user is not client admin/user, accessRight->orders is true and disableCreateOrder is false',
-        (WidgetTester tester) async {
-          VisibilityDetectorController.instance.updateInterval = Duration.zero;
-          when(() => userBlocMock.state).thenReturn(
-            UserState.initial().copyWith(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(
-                  type: RoleType('fake_type'),
-                ),
-                accessRight: AccessRight.empty().copyWith(
-                  orders: true,
-                ),
-                disableCreateOrder: true,
-              ),
-            ),
-          );
+      // testWidgets(
+      //   'Home Screen orders is enable, when user is not client admin/user, accessRight->orders is true and disableCreateOrder is false',
+      //   (WidgetTester tester) async {
+      //     VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      //     when(() => userBlocMock.state).thenReturn(
+      //       UserState.initial().copyWith(
+      //         user: fakeUser.copyWith(
+      //           role: Role.empty().copyWith(
+      //             type: RoleType('fake_type'),
+      //           ),
+      //           accessRight: AccessRight.empty().copyWith(
+      //             orders: true,
+      //           ),
+      //           disableCreateOrder: true,
+      //         ),
+      //       ),
+      //     );
 
-          await getWidget(tester);
-          await tester.pump();
-          final orderExpansionTile =
-              find.byKey(const Key('orderExpansionTile'));
-          expect(orderExpansionTile, findsOneWidget);
-        },
-      );
+      //     await getWidget(tester);
+      //     await tester.pump();
+      //     final orderExpansionTile =
+      //         find.byKey(const Key('orderExpansionTile'));
+      //     expect(orderExpansionTile, findsOneWidget);
+      //   },
+      // );
 
       testWidgets(
         'Home Screen orders is disable, when user is not client admin/user, accessRight->orders is false and disableCreateOrder is true',
@@ -548,158 +528,6 @@ void main() {
           expect(orderExpansionTile, findsNothing);
         },
       );
-
-      testWidgets('Home Tab  test', (WidgetTester tester) async {
-        VisibilityDetectorController.instance.updateInterval = Duration.zero;
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('fake_type'),
-              ),
-              accessRight: AccessRight.empty().copyWith(
-                orders: true,
-              ),
-              disableCreateOrder: false,
-            ),
-          ),
-        );
-        final expectedEligibilityState = [
-          EligibilityState.initial().copyWith(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(
-                  type: RoleType('fake_type'),
-                ),
-                accessRight: AccessRight.empty().copyWith(
-                  orders: true,
-                ),
-                disableCreateOrder: false,
-              ),
-              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-                status: Status(''),
-              )),
-          EligibilityState.initial().copyWith(
-              user: User.empty().copyWith(disableCreateOrder: true),
-              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-                status: Status('EDI'),
-              )),
-        ];
-        final expectedMaterialState = [
-          MaterialListState.initial().copyWith(
-              isFetching: true,
-              nextPageIndex: 1,
-              materialList: [fakematerialInfo1]),
-          MaterialListState.initial().copyWith(
-              isFetching: false,
-              nextPageIndex: 1,
-              materialList: [
-                fakematerialInfo1.copyWith(materialNumber: fakeMaterialNumber)
-              ]),
-        ];
-        final expectedCovidMaterialState = [
-          CovidMaterialListState.initial().copyWith(
-              isFetching: true,
-              nextPageIndex: 1,
-              materialList: [fakematerialInfo1]),
-          CovidMaterialListState.initial().copyWith(
-              isFetching: false,
-              nextPageIndex: 1,
-              materialList: [
-                fakematerialInfo1.copyWith(materialNumber: fakeMaterialNumber)
-              ]),
-        ];
-
-        whenListen(
-            materialListBlocMock, Stream.fromIterable(expectedMaterialState));
-        whenListen(covidMaterialListBlocMock,
-            Stream.fromIterable(expectedCovidMaterialState));
-        whenListen(
-            eligibilityBlocMock, Stream.fromIterable(expectedEligibilityState));
-        await getWidget(tester);
-        await tester.pump(const Duration(seconds: 3));
-        expect(find.byType(HomeTab), findsOneWidget);
-
-        final ediUserBanner = find.byKey(const ValueKey('ediUserBanner'));
-        final returnsExpansionTile =
-            find.byType(ReturnsExpansionTile, skipOffstage: false);
-        if (remoteConfigServiceMock.getReturnsConfig()) {
-          expect(returnsExpansionTile, findsOneWidget);
-        }
-        expect(ediUserBanner, findsOneWidget);
-        expect(find.byKey(const ValueKey('homeCustomerCodeSelector')),
-            findsOneWidget);
-
-        expect(find.byKey(WidgetKeys.homeBanner), findsOneWidget);
-
-        expect(find.text('Orders'), findsOneWidget);
-        expect(find.text('Create Order'), findsOneWidget);
-        expect(find.text('Saved Orders'), findsOneWidget);
-        expect(find.text('Order Template'), findsOneWidget);
-        verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              materials: [fakematerialInfo1],
-              salesConfigs: SalesOrganisationConfigs.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              salesOrganisation: fakeSalesOrganisation,
-              comboDealEligible: false,
-            ))).called(3);
-      });
-
-      testWidgets('Home Tab _TileCard onTap test', (WidgetTester tester) async {
-        VisibilityDetectorController.instance.updateInterval = Duration.zero;
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('fake_type'),
-              ),
-              accessRight: AccessRight.empty().copyWith(
-                orders: true,
-              ),
-              disableCreateOrder: false,
-            ),
-          ),
-        );
-        final expectedEligibilityState = [
-          EligibilityState.initial().copyWith(
-              user: User.empty().copyWith(
-                role: Role.empty().copyWith(type: RoleType('fake')),
-                disableCreateOrder: false,
-                accessRight: AccessRight.empty().copyWith(
-                  orders: true,
-                ),
-              ),
-              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-                status: Status('EDI'),
-              )),
-        ];
-        whenListen(
-            eligibilityBlocMock, Stream.fromIterable(expectedEligibilityState));
-        await getWidget(tester);
-        await tester.pump();
-
-        final onTapTest = find.byKey(const Key('material_root'));
-        expect(onTapTest, findsOneWidget);
-        await tester.tap(onTapTest);
-
-        expect(onTapTest, findsAtLeastNWidgets(1));
-
-        expect(autoRouterMock.current.name, MaterialRootRoute.name);
-        final onTapTest1 = find.byKey(const Key('orders/saved_order_list'));
-        expect(onTapTest1, findsOneWidget);
-        await tester.tap(onTapTest1);
-
-        expect(onTapTest1, findsAtLeastNWidgets(1));
-
-        expect(autoRouterMock.current.name, SavedOrderListPageRoute.name);
-        final onTapTest2 = find.byKey(const Key('orders/order_template_list'));
-        expect(onTapTest2, findsOneWidget);
-        await tester.tap(onTapTest2);
-
-        expect(onTapTest2, findsAtLeastNWidgets(1));
-
-        expect(autoRouterMock.current.name, OrderTemplateListPageRoute.name);
-      });
 
       testWidgets('Home Tab disableCreateOrder test',
           (WidgetTester tester) async {

@@ -62,8 +62,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -73,10 +71,8 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
@@ -252,20 +248,11 @@ class App extends StatelessWidget {
         BlocProvider<AnnouncementBloc>(
           create: (context) => locator<AnnouncementBloc>(),
         ),
-        BlocProvider<SavedOrderListBloc>(
-          create: (context) => locator<SavedOrderListBloc>(),
-        ),
         BlocProvider<MaterialFilterBloc>(
           create: (context) => locator<MaterialFilterBloc>(),
         ),
         BlocProvider<MaterialListBloc>(
           create: (context) => locator<MaterialListBloc>(),
-        ),
-        BlocProvider<MaterialBundleListBloc>(
-          create: (context) => locator<MaterialBundleListBloc>(),
-        ),
-        BlocProvider<CovidMaterialListBloc>(
-          create: (context) => locator<CovidMaterialListBloc>(),
         ),
         BlocProvider<ViewByItemsBloc>(
           create: (context) => locator<ViewByItemsBloc>(),
@@ -287,9 +274,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<BonusMaterialBloc>(
           create: (context) => locator<BonusMaterialBloc>(),
-        ),
-        BlocProvider<OrderTemplateListBloc>(
-          create: (context) => locator<OrderTemplateListBloc>(),
         ),
         BlocProvider<MaterialPriceDetailBloc>(
           create: (context) => locator<MaterialPriceDetailBloc>(),
