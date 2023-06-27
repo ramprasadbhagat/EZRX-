@@ -1,6 +1,3 @@
-//ignore_for_file: unused-code
-//ignore_for_file: unused-class
-//ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
