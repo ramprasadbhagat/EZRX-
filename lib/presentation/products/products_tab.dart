@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
@@ -49,7 +50,10 @@ class ProductsTab extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _ProductSearch(),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: ProductSearchEntry(),
+              ),
               FilterValueList(
                 isFetching: state.isFetching,
               ),
@@ -177,33 +181,6 @@ class _TotalMaterialCount extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ProductSearch extends StatelessWidget {
-  const _ProductSearch({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-      child: TextFormField(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-          context.router.pushNamed('product_suggestion_page');
-        },
-        decoration: InputDecoration(
-          suffixIcon: IconButton(
-            key: WidgetKeys.productScanCameraKey,
-            icon: const Icon(
-              Icons.camera_alt_outlined,
-            ),
-            onPressed: () => {},
-          ),
-          hintText: 'Search'.tr(),
-        ),
       ),
     );
   }
