@@ -8,7 +8,7 @@ class _Logo extends StatelessWidget {
     return _WithChild(
       enabled: true,
       child: SvgPicture.asset(
-        'assets/svg/ezrxlogo.svg',
+        'assets/svg/ezrx+logo.svg',
         height: 30,
         fit: BoxFit.scaleDown,
       ),

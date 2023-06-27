@@ -77,8 +77,16 @@ class ProductsTab extends StatelessWidget {
                             MaterialInfo item,
                           ) =>
                               item.type.typeMaterial
-                                  ? MaterialGridItem(
-                                      materialInfo: item,
+                                  // Need to remove this GestureDetector after PR is reviewed
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        context.router.pushNamed(
+                                          'orders/bundle_detail_page',
+                                        );
+                                      },
+                                      child: MaterialGridItem(
+                                        materialInfo: item,
+                                      ),
                                     )
                                   : BundleGridItem(
                                       materialInfo: item,

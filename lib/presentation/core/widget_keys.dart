@@ -176,6 +176,8 @@ class WidgetKeys {
   static const Key loadMoreLoader = Key('loadIndicator');
   static const Key noRecordsFoundSearchIcon = Key('noRecordsFoundSearchIcon');
   static const Key loaderImage = Key('loaderImage');
+  static const Key loader = Key('loader');
+  static const Key webview = Key('webview');
 
   //============================================================
   //  Quantity Input Widget Keys
@@ -233,4 +235,13 @@ class WidgetKeys {
   static const Key toDueDateField = Key('toDueDateField');
   static const Key amountValueFrom = Key('amountValueFrom');
   static const Key amountValueTo = Key('amountValueTo');
+  //============================================================
+  //  BundleDetails Keys
+  //============================================================
+  static const Key bundleDetailPage = Key('bundleDetailPage');
+  static const Key bundleInputAddKey = Key('bundleInputAddKey');
+  static const Key bundleInputDeleteKey = Key('bundleInputAddKey');
+  static const Key bundleQuantityTextKey = Key('bundleInputAddKey');
+  static const Key bundleAddToCartSheet = Key('bundleAddToCartSheet');
+  static const Key bundleMaterialListItem = Key('bundleMaterialListItem');
 }
