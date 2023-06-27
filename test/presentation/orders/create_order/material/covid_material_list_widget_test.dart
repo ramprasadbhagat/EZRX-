@@ -37,6 +37,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -323,7 +324,7 @@ void main() {
       final covidMaterialsListPage =
           find.byKey(const Key('covidMaterialListPage'));
       final searchField = find.byKey(const Key('covidMaterialSearchField'));
-      final cartButton = find.byKey(const Key('cartButton'));
+      final cartButton = find.byKey(WidgetKeys.cartButton);
       expect(laoder, findsOneWidget);
       expect(covidMaterialsListPage, findsOneWidget);
       expect(cartButton, findsOneWidget);

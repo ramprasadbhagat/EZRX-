@@ -7,13 +7,14 @@ import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_ti
 import 'package:ezrxmobile/presentation/home/expansion_tiles/payments_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
+import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:ezrxmobile/locator.dart';
 
@@ -32,19 +33,23 @@ class HomeTab extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.homeScreen,
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
-        title: SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),
+        title: const CustomerCodeSelector(
+          key: WidgetKeys.homeCustomerCodeSelector,
+        ),
+        backgroundColor: ZPColors.primary,
         automaticallyImplyLeading: false,
-        actions: const [CartButton()],
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: CartButton(),
+          ),
+        ],
         toolbarHeight: kToolbarHeight + 8.0,
         bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(40.0),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: CustomerCodeSelector(
-              key: WidgetKeys.homeCustomerCodeSelector,
-            ),
-          ),
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: HomeProductSearchBar(),
         ),
       ),
       body: BlocListener<MaterialListBloc, MaterialListState>(
@@ -142,3 +147,4 @@ class HomePageTile {
 //     );
 //   }
 // }
+

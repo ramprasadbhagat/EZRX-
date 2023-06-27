@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
@@ -92,6 +93,10 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class ProductSearchBlocMock
+    extends MockBloc<ProductSearchEvent, ProductSearchState>
+    implements ProductSearchBloc {}
+
 class ReturnsOverviewBlocMock
     extends MockBloc<ReturnsOverviewEvent, ReturnsOverviewState>
     implements ReturnsOverviewBloc {}
@@ -122,6 +127,7 @@ void main() {
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
   late RemoteConfigService remoteConfigServiceMock;
+  late ProductSearchBloc productSearchBlocMock;
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
     role: Role.empty().copyWith(
@@ -197,6 +203,7 @@ void main() {
         mockAupTcBloc = MockAupTcBloc();
         mockHTTPService = MockHTTPService();
         remoteConfigServiceMock = RemoteConfigServiceMock();
+        productSearchBlocMock = ProductSearchBlocMock();
 
         when(() => mockCustomerCodeBloc.state).thenReturn(
             CustomerCodeState.initial()
@@ -236,6 +243,9 @@ void main() {
         when(() => returnsOverviewBlocMock.state).thenReturn(
           ReturnsOverviewState.initial(),
         );
+        when(() => productSearchBlocMock.state).thenReturn(
+          ProductSearchState.initial(),
+        );
       });
 
       Future getWidget(tester) async {
@@ -274,6 +284,8 @@ void main() {
                     create: (context) => announcementBlocMock),
                 BlocProvider<ReturnsOverviewBloc>(
                     create: (context) => returnsOverviewBlocMock),
+                BlocProvider<ProductSearchBloc>(
+                    create: (context) => productSearchBlocMock),
               ],
               child: const HomeTab(),
             ),
@@ -608,7 +620,8 @@ void main() {
         expect(find.byType(HomeTab), findsOneWidget);
 
         final ediUserBanner = find.byKey(const ValueKey('ediUserBanner'));
-        final returnsExpansionTile = find.byType(ReturnsExpansionTile);
+        final returnsExpansionTile =
+            find.byType(ReturnsExpansionTile, skipOffstage: false);
         if (remoteConfigServiceMock.getReturnsConfig()) {
           expect(returnsExpansionTile, findsOneWidget);
         }

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -162,7 +163,7 @@ void main() {
 
       final materialsListPage = find.byKey(const Key('OrderTemplateListPage'));
       expect(materialsListPage, findsOneWidget);
-      final cartButton = find.byKey(const Key('cartButton'));
+      final cartButton = find.byKey(WidgetKeys.cartButton);
       expect(cartButton, findsOneWidget);
     });
 

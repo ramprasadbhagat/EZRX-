@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,7 +8,7 @@ class MaterialListRobot {
 
   MaterialListRobot(this.tester);
 
-  final cartButton = find.byKey(const Key('cartButton'));
+  final cartButton = find.byKey(WidgetKeys.cartButton);
   final tenderContractHeading = find.byKey(const Key('selectContract'));
   final orderTypeSelector = find.byKey(const ValueKey('orderTypeSelector'));
   final change = find.byKey(const ValueKey('Change'));
@@ -98,6 +99,7 @@ class MaterialListRobot {
     navigator.pop();
     await tester.pumpAndSettle();
   }
+
   void displayTotalTax(String materialNumber) {
     final totalTax = find.byKey(Key('taxClassification$materialNumber'));
     expect(totalTax, findsOneWidget);

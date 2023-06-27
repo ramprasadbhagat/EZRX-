@@ -281,6 +281,8 @@ InputDecorationTheme _inputDecorationTheme() {
     hoverColor: ZPColors.primary,
     prefixIconColor: ZPColors.primary,
     suffixIconColor: ZPColors.primary,
+    filled: true,
+    fillColor: ZPColors.white,
   );
 }
 

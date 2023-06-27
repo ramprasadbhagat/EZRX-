@@ -28,7 +28,10 @@ class CustomerCodeSelector extends StatelessWidget {
           leading: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.location_on_outlined),
+              Icon(
+                Icons.location_on_outlined,
+                color: ZPColors.orange,
+              ),
             ],
           ),
           title: state.isFetching
@@ -37,7 +40,9 @@ class CustomerCodeSelector extends StatelessWidget {
                   state.shipToInfo == ShipToInfo.empty()
                       ? 'NA'.tr()
                       : state.shipToInfo.shipToCustomerCode,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: ZPColors.white,
+                      ),
                 ),
           subtitle: state.isFetching
               ? LoadingShimmer.tile()
@@ -46,13 +51,15 @@ class CustomerCodeSelector extends StatelessWidget {
                     Expanded(
                       child: Text(
                         state.displayShipTo.tr(),
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: ZPColors.white,
+                            ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const Icon(
                       Icons.keyboard_arrow_down,
-                      color: ZPColors.primary,
+                      color: ZPColors.white,
                     ),
                   ],
                 ),

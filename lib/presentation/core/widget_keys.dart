@@ -41,6 +41,7 @@ class WidgetKeys {
   static const Key homeCustomerCodeSelector = Key('homeCustomerCodeSelector');
   static const Key homeTabAnnouncementWidget = Key('homeTabAnnouncementWidget');
   static const Key homeScreen = Key('homeScreen');
+  static const Key homeProductSearchBar = Key('homeProductSearchBar');
 
   //============================================================
   //  MORE TAB BAR
@@ -201,6 +202,7 @@ class WidgetKeys {
   static const Key selectAllButton = Key('selectAllButton');
   static Key cartMaterialItemTile(String cartMaterialItemTileKey) =>
       Key(cartMaterialItemTileKey);
+  static const Key cartButton = Key('cartButton');
 
   //============================================================
   //  Material List

@@ -123,6 +123,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
         return Padding(
           padding: const EdgeInsets.only(right: 20),
           child: ProductSearchBar(
+            autofocus: true,
             controller: _searchController,
             enabled: !state.isSearching,
             onSearchChanged: (value) {

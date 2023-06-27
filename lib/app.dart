@@ -495,8 +495,11 @@ class App extends StatelessWidget {
             locator<RouterObserver>(),
           ],
         ),
-        builder: (context, child) => _EntryPage(
-          child: child,
+        builder: (context, child) => GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: _EntryPage(
+            child: child,
+          ),
         ),
         routeInformationParser: router.defaultRouteParser(),
       ),
