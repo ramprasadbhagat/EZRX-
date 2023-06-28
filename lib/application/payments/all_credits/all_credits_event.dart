@@ -4,14 +4,16 @@ part of 'all_credits_bloc.dart';
 class AllCreditsEvent with _$AllCreditsEvent {
   const factory AllCreditsEvent.initialized() = _initialized;
 
-  const factory AllCreditsEvent.fetchAllCreditsList({
+  const factory AllCreditsEvent.fetch({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required AllCreditsFilter allCreditsFilter,
-  }) = _FetchAllCreditsList;
-  const factory AllCreditsEvent.loadMoreAllCreditsList({
+  }) = _Fetch;
+  const factory AllCreditsEvent.loadMore({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required AllCreditsFilter allCreditsFilter,
-  }) = _LoadMoreAllCreditsList;
+  }) = _LoadMore;
+
+  const factory AllCreditsEvent.applyFilters({
+    required AllCreditsFilter tempFilter,
+  }) = _ApplyFilters;
 }

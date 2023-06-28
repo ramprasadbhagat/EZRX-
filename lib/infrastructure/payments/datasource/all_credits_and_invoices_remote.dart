@@ -4,11 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_statuses.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/available_statuses_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
 
 class AllCreditsAndInvoicesRemoteDataSource {
@@ -22,57 +20,6 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required this.dataSourceExceptionHandler,
     required this.config,
   });
-
-  Future<AvailableStatuses> getAvailableStatuses({
-    required String salesOrg,
-    String statusFor = 'DebitItems',
-  }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}ezpay',
-      data: jsonEncode(
-        {
-          'query':
-              allCreditsAndInvoicesQueryMutation.getAvailableStatusesQuery(),
-          'variables': {
-            'request': {
-              'statusFor': 'DebitItems',
-              'salesOrg': salesOrg,
-            },
-          },
-        },
-      ),
-    );
-    _exceptionChecker(property: 'availableStatuses', res: res);
-    final data = res.data['data']['availableStatuses'];
-
-    return AvailableStatusesDto.fromJson(data).toDomain();
-  }
-
-  Future<AvailableStatuses> getAvailableStatusesForAllCredits({
-    required String salesOrg,
-  }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}ezpay',
-      data: jsonEncode(
-        {
-          'query':
-              allCreditsAndInvoicesQueryMutation.getAvailableStatusesQuery(),
-          'variables': {
-            'request': {
-              'statusFor': 'CreditItems',
-              'salesOrg': salesOrg,
-            },
-          },
-        },
-      ),
-    );
-    _exceptionChecker(property: 'availableStatuses', res: res);
-    final data = res.data['data']['availableStatuses'];
-
-    return AvailableStatusesDto.fromJson(data).toDomain();
-  }
 
   Future<CustomerDocumentHeader> filterInvoices({
     required String customerCode,
@@ -114,12 +61,12 @@ class AllCreditsAndInvoicesRemoteDataSource {
     return CustomerDocumentHeaderDto.fromJson(data).toDomain();
   }
 
-  Future<CustomerDocumentHeader> getAllCredits({
+  Future<CustomerDocumentHeader> filterCredits({
     required String customerCode,
     required String salesOrg,
     required int offset,
     required int pageSize,
-    required List<Map<String, dynamic>> filterQuery,
+    required List<Map<String, dynamic>> filterMap,
     String sortDirection = 'desc',
   }) async {
     final res = await httpService.request(
@@ -142,7 +89,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
                   'field': 'documentDate',
                 },
               ],
-              'filterBy': [],
+              'filterBy': filterMap,
             },
           },
         },

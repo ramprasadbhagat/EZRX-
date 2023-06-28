@@ -16,7 +16,7 @@ void main() {
     'All Credits Local Datasource Test',
     () {
       test(
-        '=> getAllCredits',
+        '=> filterCredits',
         () async {
           final result = await localDataSource.getCustomerDocumentHeader();
           expect(

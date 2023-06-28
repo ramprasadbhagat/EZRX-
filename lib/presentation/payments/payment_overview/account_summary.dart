@@ -112,7 +112,7 @@ class AccountSummaryPage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       context.read<AllCreditsBloc>().add(
-                            AllCreditsEvent.fetchAllCreditsList(
+                            AllCreditsEvent.fetch(
                               salesOrganisation: context
                                   .read<SalesOrgBloc>()
                                   .state
@@ -121,7 +121,6 @@ class AccountSummaryPage extends StatelessWidget {
                                   .read<CustomerCodeBloc>()
                                   .state
                                   .customerCodeInfo,
-                              allCreditsFilter: AllCreditsFilter.empty(),
                             ),
                           );
                       context.router.pushNamed('payments/all_credits');

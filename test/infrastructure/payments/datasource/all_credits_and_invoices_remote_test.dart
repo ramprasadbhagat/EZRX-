@@ -4,12 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_statuses.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/available_statuses_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -52,9 +50,6 @@ void main() {
       }
     },
   };
-  final statusVariables = {
-    'request': {'statusFor': 'DebitItems', 'salesOrg': '2601'}
-  };
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 
@@ -74,105 +69,6 @@ void main() {
   group(
     'All Credits And Invoices Remote Datasource',
     () {
-      group('All available statuses', () {
-        test(
-          'get All available statuses Success',
-          () async {
-            final res = json.decode(
-              await rootBundle
-                  .loadString('assets/json/availableStatusesResponse.json'),
-            );
-
-            dioAdapter.onPost(
-              '/api/ezpay',
-              (server) => server.reply(
-                200,
-                res,
-                delay: const Duration(seconds: 1),
-              ),
-              headers: {'Content-Type': 'application/json; charset=utf-8'},
-              data: jsonEncode({
-                'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
-                    .getAvailableStatusesQuery(),
-                'variables': statusVariables,
-              }),
-            );
-
-            final result = await remoteDataSource.getAvailableStatuses(
-              salesOrg: 'fake-sale-org',
-            );
-
-            expect(
-              result,
-              AvailableStatusesDto.fromJson(res['data']['availableStatuses'])
-                  .toDomain(),
-            );
-          },
-        );
-
-        test(
-          'get All available statuses status is not 200',
-          () async {
-            dioAdapter.onPost(
-              '/api/ezpay',
-              (server) => server.reply(
-                204,
-                {'data': []},
-                delay: const Duration(seconds: 1),
-              ),
-              headers: {'Content-Type': 'application/json; charset=utf-8'},
-              data: jsonEncode({
-                'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
-                    .getAvailableStatusesQuery(),
-                'variables': statusVariables,
-              }),
-            );
-
-            await remoteDataSource
-                .getAvailableStatuses(
-              salesOrg: 'fake-sale-org',
-            )
-                .onError((error, _) {
-              expect(error, isA<ServerException>());
-              return AvailableStatuses.empty();
-            });
-          },
-        );
-
-        test(
-          'get All available statuses throws an error',
-          () async {
-            dioAdapter.onPost(
-              '/api/ezpay',
-              (server) => server.reply(
-                200,
-                {
-                  'data': null,
-                  'errors': [
-                    {'message': 'fake-error'}
-                  ],
-                },
-                delay: const Duration(seconds: 1),
-              ),
-              headers: {'Content-Type': 'application/json; charset=utf-8'},
-              data: jsonEncode({
-                'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
-                    .getAvailableStatusesQuery(),
-                'variables': statusVariables,
-              }),
-            );
-
-            await remoteDataSource
-                .getAvailableStatuses(
-              salesOrg: 'fake-sale-org',
-            )
-                .onError((error, _) {
-              expect(error, isA<ServerException>());
-              return AvailableStatuses.empty();
-            });
-          },
-        );
-      });
 
       group('All Credits And Invoices', () {
         test(

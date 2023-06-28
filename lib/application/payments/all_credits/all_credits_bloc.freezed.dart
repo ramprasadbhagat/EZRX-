@@ -19,69 +19,62 @@ mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        fetchAllCreditsList,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        loadMoreAllCreditsList,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        loadMore,
+    required TResult Function(AllCreditsFilter tempFilter) applyFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult? Function(AllCreditsFilter tempFilter)? applyFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult Function(AllCreditsFilter tempFilter)? applyFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
-    required TResult Function(_LoadMoreAllCreditsList value)
-        loadMoreAllCreditsList,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_ApplyFilters value) applyFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_ApplyFilters value)? applyFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_ApplyFilters value)? applyFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,16 +137,13 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        fetchAllCreditsList,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        loadMoreAllCreditsList,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        loadMore,
+    required TResult Function(AllCreditsFilter tempFilter) applyFilters,
   }) {
     return initialized();
   }
@@ -162,16 +152,13 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult? Function(AllCreditsFilter tempFilter)? applyFilters,
   }) {
     return initialized?.call();
   }
@@ -180,16 +167,13 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult Function(AllCreditsFilter tempFilter)? applyFilters,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -202,9 +186,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
-    required TResult Function(_LoadMoreAllCreditsList value)
-        loadMoreAllCreditsList,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_ApplyFilters value) applyFilters,
   }) {
     return initialized(this);
   }
@@ -213,8 +197,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_ApplyFilters value)? applyFilters,
   }) {
     return initialized?.call(this);
   }
@@ -223,8 +208,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_ApplyFilters value)? applyFilters,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -239,27 +225,22 @@ abstract class _initialized implements AllCreditsEvent {
 }
 
 /// @nodoc
-abstract class _$$_FetchAllCreditsListCopyWith<$Res> {
-  factory _$$_FetchAllCreditsListCopyWith(_$_FetchAllCreditsList value,
-          $Res Function(_$_FetchAllCreditsList) then) =
-      __$$_FetchAllCreditsListCopyWithImpl<$Res>;
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      AllCreditsFilter allCreditsFilter});
+      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $AllCreditsFilterCopyWith<$Res> get allCreditsFilter;
 }
 
 /// @nodoc
-class __$$_FetchAllCreditsListCopyWithImpl<$Res>
-    extends _$AllCreditsEventCopyWithImpl<$Res, _$_FetchAllCreditsList>
-    implements _$$_FetchAllCreditsListCopyWith<$Res> {
-  __$$_FetchAllCreditsListCopyWithImpl(_$_FetchAllCreditsList _value,
-      $Res Function(_$_FetchAllCreditsList) _then)
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -267,9 +248,8 @@ class __$$_FetchAllCreditsListCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
-    Object? allCreditsFilter = null,
   }) {
-    return _then(_$_FetchAllCreditsList(
+    return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -278,10 +258,6 @@ class __$$_FetchAllCreditsListCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      allCreditsFilter: null == allCreditsFilter
-          ? _value.allCreditsFilter
-          : allCreditsFilter // ignore: cast_nullable_to_non_nullable
-              as AllCreditsFilter,
     ));
   }
 
@@ -300,117 +276,90 @@ class __$$_FetchAllCreditsListCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AllCreditsFilterCopyWith<$Res> get allCreditsFilter {
-    return $AllCreditsFilterCopyWith<$Res>(_value.allCreditsFilter, (value) {
-      return _then(_value.copyWith(allCreditsFilter: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$_FetchAllCreditsList implements _FetchAllCreditsList {
-  const _$_FetchAllCreditsList(
-      {required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.allCreditsFilter});
+class _$_Fetch implements _Fetch {
+  const _$_Fetch(
+      {required this.salesOrganisation, required this.customerCodeInfo});
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
-  @override
-  final AllCreditsFilter allCreditsFilter;
 
   @override
   String toString() {
-    return 'AllCreditsEvent.fetchAllCreditsList(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, allCreditsFilter: $allCreditsFilter)';
+    return 'AllCreditsEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchAllCreditsList &&
+            other is _$_Fetch &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.allCreditsFilter, allCreditsFilter) ||
-                other.allCreditsFilter == allCreditsFilter));
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, allCreditsFilter);
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchAllCreditsListCopyWith<_$_FetchAllCreditsList> get copyWith =>
-      __$$_FetchAllCreditsListCopyWithImpl<_$_FetchAllCreditsList>(
-          this, _$identity);
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        fetchAllCreditsList,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        loadMoreAllCreditsList,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        loadMore,
+    required TResult Function(AllCreditsFilter tempFilter) applyFilters,
   }) {
-    return fetchAllCreditsList(
-        salesOrganisation, customerCodeInfo, allCreditsFilter);
+    return fetch(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult? Function(AllCreditsFilter tempFilter)? applyFilters,
   }) {
-    return fetchAllCreditsList?.call(
-        salesOrganisation, customerCodeInfo, allCreditsFilter);
+    return fetch?.call(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult Function(AllCreditsFilter tempFilter)? applyFilters,
     required TResult orElse(),
   }) {
-    if (fetchAllCreditsList != null) {
-      return fetchAllCreditsList(
-          salesOrganisation, customerCodeInfo, allCreditsFilter);
+    if (fetch != null) {
+      return fetch(salesOrganisation, customerCodeInfo);
     }
     return orElse();
   }
@@ -419,75 +368,71 @@ class _$_FetchAllCreditsList implements _FetchAllCreditsList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
-    required TResult Function(_LoadMoreAllCreditsList value)
-        loadMoreAllCreditsList,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_ApplyFilters value) applyFilters,
   }) {
-    return fetchAllCreditsList(this);
+    return fetch(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_ApplyFilters value)? applyFilters,
   }) {
-    return fetchAllCreditsList?.call(this);
+    return fetch?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_ApplyFilters value)? applyFilters,
     required TResult orElse(),
   }) {
-    if (fetchAllCreditsList != null) {
-      return fetchAllCreditsList(this);
+    if (fetch != null) {
+      return fetch(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchAllCreditsList implements AllCreditsEvent {
-  const factory _FetchAllCreditsList(
-          {required final SalesOrganisation salesOrganisation,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final AllCreditsFilter allCreditsFilter}) =
-      _$_FetchAllCreditsList;
+abstract class _Fetch implements AllCreditsEvent {
+  const factory _Fetch(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
-  AllCreditsFilter get allCreditsFilter;
   @JsonKey(ignore: true)
-  _$$_FetchAllCreditsListCopyWith<_$_FetchAllCreditsList> get copyWith =>
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreAllCreditsListCopyWith<$Res> {
-  factory _$$_LoadMoreAllCreditsListCopyWith(_$_LoadMoreAllCreditsList value,
-          $Res Function(_$_LoadMoreAllCreditsList) then) =
-      __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>;
+abstract class _$$_LoadMoreCopyWith<$Res> {
+  factory _$$_LoadMoreCopyWith(
+          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
+      __$$_LoadMoreCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      AllCreditsFilter allCreditsFilter});
+      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $AllCreditsFilterCopyWith<$Res> get allCreditsFilter;
 }
 
 /// @nodoc
-class __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>
-    extends _$AllCreditsEventCopyWithImpl<$Res, _$_LoadMoreAllCreditsList>
-    implements _$$_LoadMoreAllCreditsListCopyWith<$Res> {
-  __$$_LoadMoreAllCreditsListCopyWithImpl(_$_LoadMoreAllCreditsList _value,
-      $Res Function(_$_LoadMoreAllCreditsList) _then)
+class __$$_LoadMoreCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_LoadMore>
+    implements _$$_LoadMoreCopyWith<$Res> {
+  __$$_LoadMoreCopyWithImpl(
+      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -495,9 +440,8 @@ class __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
-    Object? allCreditsFilter = null,
   }) {
-    return _then(_$_LoadMoreAllCreditsList(
+    return _then(_$_LoadMore(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -506,10 +450,6 @@ class __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      allCreditsFilter: null == allCreditsFilter
-          ? _value.allCreditsFilter
-          : allCreditsFilter // ignore: cast_nullable_to_non_nullable
-              as AllCreditsFilter,
     ));
   }
 
@@ -528,117 +468,90 @@ class __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AllCreditsFilterCopyWith<$Res> get allCreditsFilter {
-    return $AllCreditsFilterCopyWith<$Res>(_value.allCreditsFilter, (value) {
-      return _then(_value.copyWith(allCreditsFilter: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$_LoadMoreAllCreditsList implements _LoadMoreAllCreditsList {
-  const _$_LoadMoreAllCreditsList(
-      {required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.allCreditsFilter});
+class _$_LoadMore implements _LoadMore {
+  const _$_LoadMore(
+      {required this.salesOrganisation, required this.customerCodeInfo});
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
-  @override
-  final AllCreditsFilter allCreditsFilter;
 
   @override
   String toString() {
-    return 'AllCreditsEvent.loadMoreAllCreditsList(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, allCreditsFilter: $allCreditsFilter)';
+    return 'AllCreditsEvent.loadMore(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMoreAllCreditsList &&
+            other is _$_LoadMore &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.allCreditsFilter, allCreditsFilter) ||
-                other.allCreditsFilter == allCreditsFilter));
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, allCreditsFilter);
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreAllCreditsListCopyWith<_$_LoadMoreAllCreditsList> get copyWith =>
-      __$$_LoadMoreAllCreditsListCopyWithImpl<_$_LoadMoreAllCreditsList>(
-          this, _$identity);
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        fetchAllCreditsList,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)
-        loadMoreAllCreditsList,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        loadMore,
+    required TResult Function(AllCreditsFilter tempFilter) applyFilters,
   }) {
-    return loadMoreAllCreditsList(
-        salesOrganisation, customerCodeInfo, allCreditsFilter);
+    return loadMore(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult? Function(AllCreditsFilter tempFilter)? applyFilters,
   }) {
-    return loadMoreAllCreditsList?.call(
-        salesOrganisation, customerCodeInfo, allCreditsFilter);
+    return loadMore?.call(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        fetchAllCreditsList,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            AllCreditsFilter allCreditsFilter)?
-        loadMoreAllCreditsList,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult Function(AllCreditsFilter tempFilter)? applyFilters,
     required TResult orElse(),
   }) {
-    if (loadMoreAllCreditsList != null) {
-      return loadMoreAllCreditsList(
-          salesOrganisation, customerCodeInfo, allCreditsFilter);
+    if (loadMore != null) {
+      return loadMore(salesOrganisation, customerCodeInfo);
     }
     return orElse();
   }
@@ -647,56 +560,225 @@ class _$_LoadMoreAllCreditsList implements _LoadMoreAllCreditsList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
-    required TResult Function(_LoadMoreAllCreditsList value)
-        loadMoreAllCreditsList,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_ApplyFilters value) applyFilters,
   }) {
-    return loadMoreAllCreditsList(this);
+    return loadMore(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_ApplyFilters value)? applyFilters,
   }) {
-    return loadMoreAllCreditsList?.call(this);
+    return loadMore?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
-    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_ApplyFilters value)? applyFilters,
     required TResult orElse(),
   }) {
-    if (loadMoreAllCreditsList != null) {
-      return loadMoreAllCreditsList(this);
+    if (loadMore != null) {
+      return loadMore(this);
     }
     return orElse();
   }
 }
 
-abstract class _LoadMoreAllCreditsList implements AllCreditsEvent {
-  const factory _LoadMoreAllCreditsList(
-          {required final SalesOrganisation salesOrganisation,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final AllCreditsFilter allCreditsFilter}) =
-      _$_LoadMoreAllCreditsList;
+abstract class _LoadMore implements AllCreditsEvent {
+  const factory _LoadMore(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_LoadMore;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
-  AllCreditsFilter get allCreditsFilter;
   @JsonKey(ignore: true)
-  _$$_LoadMoreAllCreditsListCopyWith<_$_LoadMoreAllCreditsList> get copyWith =>
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ApplyFiltersCopyWith<$Res> {
+  factory _$$_ApplyFiltersCopyWith(
+          _$_ApplyFilters value, $Res Function(_$_ApplyFilters) then) =
+      __$$_ApplyFiltersCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AllCreditsFilter tempFilter});
+
+  $AllCreditsFilterCopyWith<$Res> get tempFilter;
+}
+
+/// @nodoc
+class __$$_ApplyFiltersCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_ApplyFilters>
+    implements _$$_ApplyFiltersCopyWith<$Res> {
+  __$$_ApplyFiltersCopyWithImpl(
+      _$_ApplyFilters _value, $Res Function(_$_ApplyFilters) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tempFilter = null,
+  }) {
+    return _then(_$_ApplyFilters(
+      tempFilter: null == tempFilter
+          ? _value.tempFilter
+          : tempFilter // ignore: cast_nullable_to_non_nullable
+              as AllCreditsFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AllCreditsFilterCopyWith<$Res> get tempFilter {
+    return $AllCreditsFilterCopyWith<$Res>(_value.tempFilter, (value) {
+      return _then(_value.copyWith(tempFilter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_ApplyFilters implements _ApplyFilters {
+  const _$_ApplyFilters({required this.tempFilter});
+
+  @override
+  final AllCreditsFilter tempFilter;
+
+  @override
+  String toString() {
+    return 'AllCreditsEvent.applyFilters(tempFilter: $tempFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ApplyFilters &&
+            (identical(other.tempFilter, tempFilter) ||
+                other.tempFilter == tempFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, tempFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ApplyFiltersCopyWith<_$_ApplyFilters> get copyWith =>
+      __$$_ApplyFiltersCopyWithImpl<_$_ApplyFilters>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        loadMore,
+    required TResult Function(AllCreditsFilter tempFilter) applyFilters,
+  }) {
+    return applyFilters(tempFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult? Function(AllCreditsFilter tempFilter)? applyFilters,
+  }) {
+    return applyFilters?.call(tempFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    TResult Function(AllCreditsFilter tempFilter)? applyFilters,
+    required TResult orElse(),
+  }) {
+    if (applyFilters != null) {
+      return applyFilters(tempFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_ApplyFilters value) applyFilters,
+  }) {
+    return applyFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_ApplyFilters value)? applyFilters,
+  }) {
+    return applyFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_ApplyFilters value)? applyFilters,
+    required TResult orElse(),
+  }) {
+    if (applyFilters != null) {
+      return applyFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ApplyFilters implements AllCreditsEvent {
+  const factory _ApplyFilters({required final AllCreditsFilter tempFilter}) =
+      _$_ApplyFilters;
+
+  AllCreditsFilter get tempFilter;
+  @JsonKey(ignore: true)
+  _$$_ApplyFiltersCopyWith<_$_ApplyFilters> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$AllCreditsState {
-  List<CreditAndInvoiceItem> get credits => throw _privateConstructorUsedError;
+  AllCreditsFilter get appliedFilter => throw _privateConstructorUsedError;
+  List<CreditAndInvoiceItem> get items => throw _privateConstructorUsedError;
   int get totalCount => throw _privateConstructorUsedError;
   String get sortDirection => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
@@ -716,12 +798,15 @@ abstract class $AllCreditsStateCopyWith<$Res> {
       _$AllCreditsStateCopyWithImpl<$Res, AllCreditsState>;
   @useResult
   $Res call(
-      {List<CreditAndInvoiceItem> credits,
+      {AllCreditsFilter appliedFilter,
+      List<CreditAndInvoiceItem> items,
       int totalCount,
       String sortDirection,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore});
+
+  $AllCreditsFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -737,7 +822,8 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? credits = null,
+    Object? appliedFilter = null,
+    Object? items = null,
     Object? totalCount = null,
     Object? sortDirection = null,
     Object? failureOrSuccessOption = null,
@@ -745,9 +831,13 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
     Object? canLoadMore = null,
   }) {
     return _then(_value.copyWith(
-      credits: null == credits
-          ? _value.credits
-          : credits // ignore: cast_nullable_to_non_nullable
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
+              as AllCreditsFilter,
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
@@ -771,6 +861,14 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AllCreditsFilterCopyWith<$Res> get appliedFilter {
+    return $AllCreditsFilterCopyWith<$Res>(_value.appliedFilter, (value) {
+      return _then(_value.copyWith(appliedFilter: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -782,12 +880,16 @@ abstract class _$$_AllCreditsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CreditAndInvoiceItem> credits,
+      {AllCreditsFilter appliedFilter,
+      List<CreditAndInvoiceItem> items,
       int totalCount,
       String sortDirection,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore});
+
+  @override
+  $AllCreditsFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -801,7 +903,8 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? credits = null,
+    Object? appliedFilter = null,
+    Object? items = null,
     Object? totalCount = null,
     Object? sortDirection = null,
     Object? failureOrSuccessOption = null,
@@ -809,9 +912,13 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
     Object? canLoadMore = null,
   }) {
     return _then(_$_AllCreditsState(
-      credits: null == credits
-          ? _value._credits
-          : credits // ignore: cast_nullable_to_non_nullable
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
+              as AllCreditsFilter,
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
@@ -841,21 +948,24 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
 
 class _$_AllCreditsState extends _AllCreditsState {
   const _$_AllCreditsState(
-      {required final List<CreditAndInvoiceItem> credits,
+      {required this.appliedFilter,
+      required final List<CreditAndInvoiceItem> items,
       required this.totalCount,
       required this.sortDirection,
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore})
-      : _credits = credits,
+      : _items = items,
         super._();
 
-  final List<CreditAndInvoiceItem> _credits;
   @override
-  List<CreditAndInvoiceItem> get credits {
-    if (_credits is EqualUnmodifiableListView) return _credits;
+  final AllCreditsFilter appliedFilter;
+  final List<CreditAndInvoiceItem> _items;
+  @override
+  List<CreditAndInvoiceItem> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_credits);
+    return EqualUnmodifiableListView(_items);
   }
 
   @override
@@ -871,7 +981,7 @@ class _$_AllCreditsState extends _AllCreditsState {
 
   @override
   String toString() {
-    return 'AllCreditsState(credits: $credits, totalCount: $totalCount, sortDirection: $sortDirection, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
+    return 'AllCreditsState(appliedFilter: $appliedFilter, items: $items, totalCount: $totalCount, sortDirection: $sortDirection, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
   }
 
   @override
@@ -879,7 +989,9 @@ class _$_AllCreditsState extends _AllCreditsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllCreditsState &&
-            const DeepCollectionEquality().equals(other._credits, _credits) &&
+            (identical(other.appliedFilter, appliedFilter) ||
+                other.appliedFilter == appliedFilter) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.totalCount, totalCount) ||
                 other.totalCount == totalCount) &&
             (identical(other.sortDirection, sortDirection) ||
@@ -895,7 +1007,8 @@ class _$_AllCreditsState extends _AllCreditsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_credits),
+      appliedFilter,
+      const DeepCollectionEquality().hash(_items),
       totalCount,
       sortDirection,
       failureOrSuccessOption,
@@ -911,7 +1024,8 @@ class _$_AllCreditsState extends _AllCreditsState {
 
 abstract class _AllCreditsState extends AllCreditsState {
   const factory _AllCreditsState(
-      {required final List<CreditAndInvoiceItem> credits,
+      {required final AllCreditsFilter appliedFilter,
+      required final List<CreditAndInvoiceItem> items,
       required final int totalCount,
       required final String sortDirection,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -920,7 +1034,9 @@ abstract class _AllCreditsState extends AllCreditsState {
   const _AllCreditsState._() : super._();
 
   @override
-  List<CreditAndInvoiceItem> get credits;
+  AllCreditsFilter get appliedFilter;
+  @override
+  List<CreditAndInvoiceItem> get items;
   @override
   int get totalCount;
   @override

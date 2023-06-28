@@ -267,7 +267,7 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     ),
     AutoRoute(
       path: 'payments/all_credits',
-      page: AllCredits,
+      page: AllCreditsPage,
     ),
     AutoRoute(
       path: 'payments/credit_details',

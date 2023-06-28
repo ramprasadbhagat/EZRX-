@@ -27,7 +27,7 @@ void main() {
       baseUrl: 'https://uat.ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio,matcher: const UrlRequestMatcher());
+  final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 
   setUpAll(
@@ -46,8 +46,7 @@ void main() {
   group(
     'All Credits Remote Data Test',
     () {
-
-      test('=> getAllCredits with status code 200', () async {
+      test('=> filterCredits with status code 200', () async {
         final res = json.decode(
           await rootBundle
               .loadString('assets/json/customerDocumentHeaderResponse.json'),
@@ -80,12 +79,13 @@ void main() {
           data: data,
         );
 
-        final result = await remoteDataSource.getAllCredits(
-            customerCode: '0000100120',
-            salesOrg: '2001',
-            pageSize: 1,
-            offset: 0,
-            filterQuery: []);
+        final result = await remoteDataSource.filterCredits(
+          customerCode: '0000100120',
+          salesOrg: '2001',
+          pageSize: 1,
+          offset: 0,
+          filterMap: [],
+        );
 
         expect(
           result,
@@ -95,7 +95,7 @@ void main() {
         );
       });
 
-      test('=> getAllCredits status code not 200', () async {
+      test('=> filterCredits status code not 200', () async {
         final data = jsonEncode({
           'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
               .getCustomerDocumentHeaderQuery(),
@@ -123,18 +123,18 @@ void main() {
           data: data,
         );
 
-        await remoteDataSource.getAllCredits(
+        await remoteDataSource.filterCredits(
             customerCode: 'mock_soldTo',
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
             offset: 0,
-            filterQuery: []).onError((error, stackTrace) async {
+            filterMap: []).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(CustomerDocumentHeader.empty());
         });
       });
 
-      test('=> getAllCredits with error', () async {
+      test('=> filterCredits with error', () async {
         final data = jsonEncode({
           'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
               .getCustomerDocumentHeaderQuery(),
@@ -167,18 +167,17 @@ void main() {
           data: data,
         );
 
-        await remoteDataSource.getAllCredits(
-            customerCode: 'mock_soldTo',
-            salesOrg: 'mock_salesOrg',
-            pageSize: 1,
-            offset: 0,
-            filterQuery: []).onError((error, stackTrace) async {
+        await remoteDataSource.filterCredits(
+          customerCode: 'mock_soldTo',
+          salesOrg: 'mock_salesOrg',
+          pageSize: 1,
+          offset: 0,
+          filterMap: [],
+        ).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(CustomerDocumentHeader.empty());
         });
       });
-    
     },
   );
-
 }

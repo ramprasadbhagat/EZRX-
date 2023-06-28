@@ -16,13 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AllCreditsFilter {
-  DocumentNumber get documentNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get documentDateFrom =>
       throw _privateConstructorUsedError;
   DateTimeStringValue get documentDateTo => throw _privateConstructorUsedError;
-  RangeValue get creditAmountFrom => throw _privateConstructorUsedError;
-  RangeValue get creditAmountTo => throw _privateConstructorUsedError;
-  String get sortBy => throw _privateConstructorUsedError;
+  RangeValue get amountValueFrom => throw _privateConstructorUsedError;
+  RangeValue get amountValueTo => throw _privateConstructorUsedError;
+  List<String> get filterStatuses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllCreditsFilterCopyWith<AllCreditsFilter> get copyWith =>
@@ -36,12 +35,11 @@ abstract class $AllCreditsFilterCopyWith<$Res> {
       _$AllCreditsFilterCopyWithImpl<$Res, AllCreditsFilter>;
   @useResult
   $Res call(
-      {DocumentNumber documentNumber,
-      DateTimeStringValue documentDateFrom,
+      {DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      RangeValue creditAmountFrom,
-      RangeValue creditAmountTo,
-      String sortBy});
+      RangeValue amountValueFrom,
+      RangeValue amountValueTo,
+      List<String> filterStatuses});
 }
 
 /// @nodoc
@@ -57,18 +55,13 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? creditAmountFrom = null,
-    Object? creditAmountTo = null,
-    Object? sortBy = null,
+    Object? amountValueFrom = null,
+    Object? amountValueTo = null,
+    Object? filterStatuses = null,
   }) {
     return _then(_value.copyWith(
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as DocumentNumber,
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -77,18 +70,18 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      creditAmountFrom: null == creditAmountFrom
-          ? _value.creditAmountFrom
-          : creditAmountFrom // ignore: cast_nullable_to_non_nullable
+      amountValueFrom: null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      creditAmountTo: null == creditAmountTo
-          ? _value.creditAmountTo
-          : creditAmountTo // ignore: cast_nullable_to_non_nullable
+      amountValueTo: null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      sortBy: null == sortBy
-          ? _value.sortBy
-          : sortBy // ignore: cast_nullable_to_non_nullable
-              as String,
+      filterStatuses: null == filterStatuses
+          ? _value.filterStatuses
+          : filterStatuses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -102,12 +95,11 @@ abstract class _$$_AllCreditsFilterCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DocumentNumber documentNumber,
-      DateTimeStringValue documentDateFrom,
+      {DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      RangeValue creditAmountFrom,
-      RangeValue creditAmountTo,
-      String sortBy});
+      RangeValue amountValueFrom,
+      RangeValue amountValueTo,
+      List<String> filterStatuses});
 }
 
 /// @nodoc
@@ -121,18 +113,13 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
-    Object? creditAmountFrom = null,
-    Object? creditAmountTo = null,
-    Object? sortBy = null,
+    Object? amountValueFrom = null,
+    Object? amountValueTo = null,
+    Object? filterStatuses = null,
   }) {
     return _then(_$_AllCreditsFilter(
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as DocumentNumber,
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -141,18 +128,18 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      creditAmountFrom: null == creditAmountFrom
-          ? _value.creditAmountFrom
-          : creditAmountFrom // ignore: cast_nullable_to_non_nullable
+      amountValueFrom: null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      creditAmountTo: null == creditAmountTo
-          ? _value.creditAmountTo
-          : creditAmountTo // ignore: cast_nullable_to_non_nullable
+      amountValueTo: null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
               as RangeValue,
-      sortBy: null == sortBy
-          ? _value.sortBy
-          : sortBy // ignore: cast_nullable_to_non_nullable
-              as String,
+      filterStatuses: null == filterStatuses
+          ? _value._filterStatuses
+          : filterStatuses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -161,30 +148,33 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
 
 class _$_AllCreditsFilter extends _AllCreditsFilter {
   _$_AllCreditsFilter(
-      {required this.documentNumber,
-      required this.documentDateFrom,
+      {required this.documentDateFrom,
       required this.documentDateTo,
-      required this.creditAmountFrom,
-      required this.creditAmountTo,
-      required this.sortBy})
-      : super._();
+      required this.amountValueFrom,
+      required this.amountValueTo,
+      required final List<String> filterStatuses})
+      : _filterStatuses = filterStatuses,
+        super._();
 
-  @override
-  final DocumentNumber documentNumber;
   @override
   final DateTimeStringValue documentDateFrom;
   @override
   final DateTimeStringValue documentDateTo;
   @override
-  final RangeValue creditAmountFrom;
+  final RangeValue amountValueFrom;
   @override
-  final RangeValue creditAmountTo;
+  final RangeValue amountValueTo;
+  final List<String> _filterStatuses;
   @override
-  final String sortBy;
+  List<String> get filterStatuses {
+    if (_filterStatuses is EqualUnmodifiableListView) return _filterStatuses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterStatuses);
+  }
 
   @override
   String toString() {
-    return 'AllCreditsFilter(documentNumber: $documentNumber, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, creditAmountFrom: $creditAmountFrom, creditAmountTo: $creditAmountTo, sortBy: $sortBy)';
+    return 'AllCreditsFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
   }
 
   @override
@@ -192,22 +182,26 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllCreditsFilter &&
-            (identical(other.documentNumber, documentNumber) ||
-                other.documentNumber == documentNumber) &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
                 other.documentDateTo == documentDateTo) &&
-            (identical(other.creditAmountFrom, creditAmountFrom) ||
-                other.creditAmountFrom == creditAmountFrom) &&
-            (identical(other.creditAmountTo, creditAmountTo) ||
-                other.creditAmountTo == creditAmountTo) &&
-            (identical(other.sortBy, sortBy) || other.sortBy == sortBy));
+            (identical(other.amountValueFrom, amountValueFrom) ||
+                other.amountValueFrom == amountValueFrom) &&
+            (identical(other.amountValueTo, amountValueTo) ||
+                other.amountValueTo == amountValueTo) &&
+            const DeepCollectionEquality()
+                .equals(other._filterStatuses, _filterStatuses));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, documentNumber, documentDateFrom,
-      documentDateTo, creditAmountFrom, creditAmountTo, sortBy);
+  int get hashCode => Object.hash(
+      runtimeType,
+      documentDateFrom,
+      documentDateTo,
+      amountValueFrom,
+      amountValueTo,
+      const DeepCollectionEquality().hash(_filterStatuses));
 
   @JsonKey(ignore: true)
   @override
@@ -218,26 +212,23 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
 
 abstract class _AllCreditsFilter extends AllCreditsFilter {
   factory _AllCreditsFilter(
-      {required final DocumentNumber documentNumber,
-      required final DateTimeStringValue documentDateFrom,
+      {required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
-      required final RangeValue creditAmountFrom,
-      required final RangeValue creditAmountTo,
-      required final String sortBy}) = _$_AllCreditsFilter;
+      required final RangeValue amountValueFrom,
+      required final RangeValue amountValueTo,
+      required final List<String> filterStatuses}) = _$_AllCreditsFilter;
   _AllCreditsFilter._() : super._();
 
-  @override
-  DocumentNumber get documentNumber;
   @override
   DateTimeStringValue get documentDateFrom;
   @override
   DateTimeStringValue get documentDateTo;
   @override
-  RangeValue get creditAmountFrom;
+  RangeValue get amountValueFrom;
   @override
-  RangeValue get creditAmountTo;
+  RangeValue get amountValueTo;
   @override
-  String get sortBy;
+  List<String> get filterStatuses;
   @override
   @JsonKey(ignore: true)
   _$$_AllCreditsFilterCopyWith<_$_AllCreditsFilter> get copyWith =>

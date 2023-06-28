@@ -106,7 +106,7 @@ class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepo
         customerCode: customerCode,
         excelFor: 'Credit',
         queryObject:
-            AllCreditsFilterDto.fromDomain(queryObject).toFilterByMapList,
+            AllCreditsFilterDto.fromDomain(queryObject).toMapList,
       );
 
       return Right(paymentSummaryStatus);

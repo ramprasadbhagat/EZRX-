@@ -3,213 +3,245 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
-import 'package:ezrxmobile/domain/payments/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAllCreditsRepository extends Mock
+class AllCreditsAndInvoicesRepositoryMock extends Mock
     implements AllCreditsAndInvoicesRepository {}
 
 const _pageSize = 24;
-
 void main() {
-  late MockAllCreditsRepository mockAllCreditsRepository;
+  late AllCreditsAndInvoicesRepository repository;
+  late CustomerDocumentHeader fakeResult;
+  late List<CreditAndInvoiceItem> creditList;
   late AllCreditsFilter allCreditsFilter;
-  late CustomerDocumentHeader credits;
-  late List<CreditAndInvoiceItem> creditItems;
-  final fakeToDate = DateTime.now();
-  final fakeFromDate = DateTime.now().subtract(
-    const Duration(days: 28),
-  );
-
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    repository = AllCreditsAndInvoicesRepositoryMock();
+  });
 
-    mockAllCreditsRepository = MockAllCreditsRepository();
-    credits = await AllCreditsAndInvoicesLocalDataSource()
-        .getCustomerDocumentHeader();
-    creditItems = [credits.invoices.first];
-    allCreditsFilter = AllCreditsFilter.empty().copyWith(
-      documentDateTo: DateTimeStringValue(
-        getDateStringByDateTime(fakeToDate),
-      ),
-      documentDateFrom: DateTimeStringValue(
-        getDateStringByDateTime(fakeFromDate),
-      ),
-      sortBy: 'All',
-      documentNumber: DocumentNumber('mock_documentNumber'),
-      creditAmountTo: RangeValue('100'),
-      creditAmountFrom: RangeValue('1000'),
-    );
+  setUp(() {
+    creditList = [
+      CreditAndInvoiceItem.empty(),
+    ];
+    fakeResult = CustomerDocumentHeader.empty()
+        .copyWith(invoices: creditList, totalCount: 1);
+    allCreditsFilter = AllCreditsFilter.empty();
   });
 
   group(
-    'All Credits Bloc',
+    'All Credits Bloc Initialize',
+    () {
+      blocTest('Initialize',
+          build: () =>
+              AllCreditsBloc(allCreditsAndInvoicesRepository: repository),
+          act: (AllCreditsBloc bloc) =>
+              bloc.add(const AllCreditsEvent.initialized()),
+          expect: () => [AllCreditsState.initial()]);
+    },
+  );
+
+  group(
+    'All Credits Bloc Fetch',
     () {
       blocTest(
-        'Initialize',
+        'fetch -> credits fetch fail',
         build: () => AllCreditsBloc(
-            allCreditsAndInvoicesRepository: mockAllCreditsRepository),
-        act: (AllCreditsBloc bloc) =>
-            bloc.add(const AllCreditsEvent.initialized()),
-        expect: () => [AllCreditsState.initial()],
+          allCreditsAndInvoicesRepository: repository,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterCredits(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allCreditsFilter,
+              offset: 0,
+              pageSize: _pageSize,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.fetch(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+        expect: () => [
+          AllCreditsState.initial().copyWith(
+            isLoading: true,
+          ),
+          AllCreditsState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+          ),
+        ],
+      );
+      blocTest(
+        'fetch -> credits fetch success',
+        build: () => AllCreditsBloc(
+          allCreditsAndInvoicesRepository: repository,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterCredits(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allCreditsFilter,
+              offset: 0,
+              pageSize: _pageSize,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(fakeResult),
+          );
+        },
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.fetch(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+        expect: () => [
+          AllCreditsState.initial().copyWith(
+            isLoading: true,
+          ),
+          AllCreditsState.initial().copyWith(
+            items: creditList,
+            failureOrSuccessOption: none(),
+            canLoadMore: false,
+            totalCount: 1,
+          ),
+        ],
+      );
+    },
+  );
+
+  group(
+    'All Credits Bloc load more',
+    () {
+      blocTest(
+        'fetch -> credits load more fail',
+        build: () => AllCreditsBloc(
+          allCreditsAndInvoicesRepository: repository,
+        ),
+        seed: () => AllCreditsState.initial().copyWith(
+          isLoading: false,
+          items: List.filled(
+            _pageSize,
+            CreditAndInvoiceItem.empty(),
+          ),
+          totalCount: 1,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterCredits(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allCreditsFilter,
+              offset: _pageSize,
+              pageSize: _pageSize,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.loadMore(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+        expect: () => [
+          AllCreditsState.initial().copyWith(
+              items: List.filled(
+                _pageSize,
+                CreditAndInvoiceItem.empty(),
+              ),
+              isLoading: true,
+              totalCount: 1),
+          AllCreditsState.initial().copyWith(
+              items: List.filled(
+                _pageSize,
+                CreditAndInvoiceItem.empty(),
+              ),
+              failureOrSuccessOption: optionOf(
+                const Left(
+                  ApiFailure.other('fake-error'),
+                ),
+              ),
+              totalCount: 1),
+        ],
       );
 
       blocTest(
-        'Fetch success',
+        'fetch -> credits load more success',
         build: () => AllCreditsBloc(
-            allCreditsAndInvoicesRepository: mockAllCreditsRepository),
-        setUp: () {
-          when(() => mockAllCreditsRepository.getAllCredits(
-                pageSize: _pageSize,
-                offset: 0,
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: '0030032223'),
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2601')),
-                allCreditsFilter: allCreditsFilter,
-              )).thenAnswer(
-            (invocation) async => Right(
-                CustomerDocumentHeader(invoices: creditItems, totalCount: 0)),
-          );
-        },
-        act: (AllCreditsBloc bloc) =>
-            bloc.add(AllCreditsEvent.fetchAllCreditsList(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: '0030032223'),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          allCreditsFilter: allCreditsFilter,
-        )),
-        expect: () => [
-          AllCreditsState.initial().copyWith(
-            isLoading: true,
+          allCreditsAndInvoicesRepository: repository,
+        ),
+        seed: () => AllCreditsState.initial().copyWith(
+          isLoading: false,
+          items: List.filled(
+            _pageSize,
+            CreditAndInvoiceItem.empty(),
           ),
-          AllCreditsState.initial().copyWith(
-              isLoading: false, credits: creditItems, canLoadMore: false),
-        ],
-      );
-      blocTest(
-        'Fetch failure',
-        build: () => AllCreditsBloc(
-            allCreditsAndInvoicesRepository: mockAllCreditsRepository),
+          totalCount: _pageSize * 2,
+        ),
         setUp: () {
-          when(() => mockAllCreditsRepository.getAllCredits(
-                pageSize: _pageSize,
-                offset: 0,
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: '0030032223'),
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2601')),
-                allCreditsFilter: allCreditsFilter,
-              )).thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('mock-error'),
+          when(
+            () => repository.filterCredits(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allCreditsFilter,
+              offset: _pageSize,
+              pageSize: _pageSize,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              CustomerDocumentHeader.empty().copyWith(
+                invoices: List.filled(
+                  _pageSize,
+                  creditList.first,
+                ),
+                totalCount: _pageSize * 2,
+              ),
             ),
           );
         },
-        act: (AllCreditsBloc bloc) =>
-            bloc.add(AllCreditsEvent.fetchAllCreditsList(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: '0030032223'),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          allCreditsFilter: allCreditsFilter,
-        )),
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.loadMore(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
         expect: () => [
           AllCreditsState.initial().copyWith(
-            isLoading: true,
-          ),
-          AllCreditsState.initial().copyWith(
-            isLoading: false,
-            failureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('mock-error'))),
-          ),
-        ],
-      );
-      blocTest(
-        'Load More success',
-        build: () => AllCreditsBloc(
-            allCreditsAndInvoicesRepository: mockAllCreditsRepository),
-        setUp: () {
-          when(() => mockAllCreditsRepository.getAllCredits(
-                pageSize: _pageSize,
-                offset: 0,
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: '0030032223'),
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2601')),
-                allCreditsFilter: allCreditsFilter,
-              )).thenAnswer(
-            (invocation) async => Right(
-                CustomerDocumentHeader(invoices: creditItems, totalCount: 0)),
-          );
-        },
-        act: (AllCreditsBloc bloc) =>
-            bloc.add(AllCreditsEvent.loadMoreAllCreditsList(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: '0030032223'),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          allCreditsFilter: allCreditsFilter,
-        )),
-        expect: () => [
-          AllCreditsState.initial().copyWith(
-            isLoading: true,
-          ),
-          AllCreditsState.initial().copyWith(
-            isLoading: false,
-            canLoadMore: false,
-            credits: creditItems,
-          ),
-        ],
-      );
-      blocTest(
-        'Load More success',
-        build: () => AllCreditsBloc(
-            allCreditsAndInvoicesRepository: mockAllCreditsRepository),
-        setUp: () {
-          when(() => mockAllCreditsRepository.getAllCredits(
-                pageSize: _pageSize,
-                offset: 0,
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: '0030032223'),
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2601')),
-                allCreditsFilter: allCreditsFilter,
-              )).thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('mock-error'),
+            items: List.filled(
+              _pageSize,
+              CreditAndInvoiceItem.empty(),
             ),
-          );
-        },
-        act: (AllCreditsBloc bloc) =>
-            bloc.add(AllCreditsEvent.loadMoreAllCreditsList(
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: '0030032223'),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          allCreditsFilter: allCreditsFilter,
-        )),
-        expect: () => [
-          AllCreditsState.initial().copyWith(
             isLoading: true,
+            totalCount: _pageSize * 2,
           ),
           AllCreditsState.initial().copyWith(
-            isLoading: false,
-            canLoadMore: true,
-            failureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('mock-error'))),
+            items: List.filled(
+              _pageSize * 2,
+              CreditAndInvoiceItem.empty(),
+            ),
+            totalCount: _pageSize * 2,
           ),
         ],
       );

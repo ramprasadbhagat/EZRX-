@@ -1,11 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
-import 'package:ezrxmobile/presentation/payments/all_credits/all_credits_filter.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +18,15 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 
+class AllCreditsBlocMock
+    extends MockBloc<AllCreditsEvent, AllCreditsState>
+    implements AllCreditsBloc {}
 class AllCreditsFilterBlocMock
     extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
     implements AllCreditsFilterBloc {}
 
 void main() {
+  late AllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
@@ -45,6 +52,9 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    allCreditsBlocMock = AllCreditsBlocMock();
+    when(() => allCreditsBlocMock.state)
+        .thenReturn(AllCreditsState.initial());
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
@@ -55,20 +65,27 @@ void main() {
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
+          BlocProvider<AllCreditsBloc>(
+            create: (context) => allCreditsBlocMock,
+          ),
           BlocProvider<AllCreditsFilterBloc>(
             create: (context) => allCreditsFilterBlocMock,
           ),
         ],
-        child: const AllCreditsFilterDrawer(),
+        child: const Scaffold(
+          body: SingleChildScrollView(
+            child: AllCreditsFilterBottomSheet(),
+          ),
+        ),
       ),
     );
   }
 
-  group('All Credits Filter Drawer Test', () {
+  group('All Credits Filter Bottom Sheet Test', () {
     testWidgets('=> Listen When condition', (tester) async {
       final expectedState = [
         AllCreditsFilterState.initial().copyWith(
-          isSubmitting: true,
+          applied: true,
         ),
       ];
       whenListen(allCreditsFilterBlocMock, Stream.fromIterable(expectedState));
@@ -80,37 +97,19 @@ void main() {
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final allCreditsFilterBlocMock = find.text('Apply Filters'.tr());
-      expect(allCreditsFilterBlocMock, findsOneWidget);
+      final findFilterAllCreditsText = find.text('Filter'.tr());
+      expect(findFilterAllCreditsText, findsOneWidget);
 
-      final findIconKey = find.byKey(const Key('filterCrossButton'));
+      final findIconKey = find.byKey(WidgetKeys.closeButton);
       expect(findIconKey, findsOneWidget);
       await tester.tap(findIconKey);
       await tester.pump();
     });
 
-    testWidgets('_DocumentNumberByFilter test', (tester) async {
-      when(() => allCreditsFilterBlocMock.state)
-          .thenReturn(AllCreditsFilterState.initial().copyWith(
-        allCreditsFilter: AllCreditsFilter.empty(),
-      ));
-
-      await getWidget(tester);
-      await tester.pumpAndSettle();
-
-      final findText = find.text('Document Number'.tr());
-      expect(findText, findsOneWidget);
-      await tester.enterText(
-          find.byKey(const Key('filterDocumentNumberField')), '0180000153');
-      await tester.pump();
-      expect(find.text('0180000152'), findsNothing);
-      expect(find.text('0180000153'), findsOneWidget);
-    });
-
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
       when(() => allCreditsFilterBlocMock.state)
           .thenReturn(AllCreditsFilterState.initial().copyWith(
-        allCreditsFilter: AllCreditsFilter.empty().copyWith(
+        filter: AllCreditsFilter.empty().copyWith(
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
@@ -122,7 +121,7 @@ void main() {
 
       final expectedState = [
         AllCreditsFilterState.initial().copyWith(
-          allCreditsFilter: AllCreditsFilter.empty().copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -137,11 +136,25 @@ void main() {
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Document Date'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.tap(findTextField);
+      final toDocumentDateField = find.byKey(WidgetKeys.toDocumentDateField);
+      expect(toDocumentDateField, findsOneWidget);
+      await tester.tap(toDocumentDateField);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('SAVE'));
+      await tester.pumpAndSettle();
+
+      verify(
+        () => allCreditsFilterBlocMock.add(
+          AllCreditsFilterEvent.setDocumentDate(
+              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+        ),
+      ).called(1);
+
+      final fromDocumentDateField =
+          find.byKey(WidgetKeys.fromDocumentDateField);
+      expect(fromDocumentDateField, findsOneWidget);
+      await tester.tap(fromDocumentDateField);
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('SAVE'));
@@ -154,53 +167,54 @@ void main() {
         ),
       ).called(1);
     });
-
-    testWidgets('=> _CreditAmountToFilter Test', (tester) async {
+    testWidgets('=> _AmountValueToFilter Test', (tester) async {
       when(() => allCreditsFilterBlocMock.state)
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: true,
-        allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountTo: RangeValue('10'),
+        filter: AllCreditsFilter.empty().copyWith(
+          amountValueTo: RangeValue('12'),
         ),
       ));
 
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Credit Amount To'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.enterText(findTextField, '100');
+      final amountValueTo = find.byKey(WidgetKeys.amountValueTo);
+      expect(amountValueTo, findsOneWidget);
+      await tester.tap(amountValueTo);
+      await tester.pumpAndSettle();
+      await tester.enterText(amountValueTo, '123456');
       await tester.pump();
       verify(
         () => allCreditsFilterBlocMock.add(
-          const AllCreditsFilterEvent.creditAmountToChanged('100'),
+          AllCreditsFilterEvent.amountValueToChanged(
+              StringUtils.formatter.format(double.parse('123456'))),
         ),
       ).called(1);
     });
 
-    testWidgets('=> _CreditAmountFromFilter Test', (tester) async {
+    testWidgets('=> _AmountValueFromFilter Test', (tester) async {
       when(() => allCreditsFilterBlocMock.state)
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: true,
-        allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountFrom: RangeValue('1000'),
+        filter: AllCreditsFilter.empty().copyWith(
+          amountValueFrom: RangeValue('12'),
         ),
       ));
 
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Credit Amount From'.tr());
-      expect(findText, findsOneWidget);
-      final findTextField =
-          find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.enterText(findTextField, '1000');
+      final amountValueFrom = find.byKey(WidgetKeys.amountValueFrom);
+      expect(amountValueFrom, findsOneWidget);
+      await tester.tap(amountValueFrom);
+      await tester.pumpAndSettle();
+      await tester.enterText(amountValueFrom, '12');
       await tester.pump();
       verify(
         () => allCreditsFilterBlocMock.add(
-          const AllCreditsFilterEvent.creditAmountFromChanged('1000'),
+          AllCreditsFilterEvent.amountValueFromChanged(
+              StringUtils.formatter.format(double.parse('12'))),
         ),
       ).called(1);
     });
@@ -217,43 +231,40 @@ void main() {
       await tester.pump();
       verify(
         () => allCreditsFilterBlocMock.add(
-          const AllCreditsFilterEvent.applyFilters(),
+          const AllCreditsFilterEvent.validateFilters(),
         ),
       ).called(1);
     });
 
-    testWidgets('=> _ClearButton Test', (tester) async {
+    testWidgets('=> _ResetButton Test', (tester) async {
       when(() => allCreditsFilterBlocMock.state)
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: false,
-        allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountFrom: RangeValue('10'),
-        ),
       ));
       await getWidget(tester);
       await tester.pumpAndSettle();
 
-      final findText = find.text('Clear'.tr());
+      final findText = find.text('Reset'.tr());
       expect(findText, findsOneWidget);
-      final findOutlineButton = find.byKey(const Key('filterClearButton'));
-      await tester.tap(findOutlineButton);
+      final filterResetButton = find.byKey(WidgetKeys.filterResetButton);
+      await tester.tap(filterResetButton);
       await tester.pump();
       verify(
         () => allCreditsFilterBlocMock.add(
-          const AllCreditsFilterEvent.clearFilters(),
+          const AllCreditsFilterEvent.resetFilters(),
         ),
       ).called(1);
     });
 
     testWidgets(
-        '=> CreditAmountError Test when creditAmountTo greater than creditAmountFrom',
+        '=> AmountValueError Test when amountValueTo greater than amountValueFrom',
         (tester) async {
       when(() => allCreditsFilterBlocMock.state)
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: true,
-        allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountFrom: RangeValue('25'),
-          creditAmountTo: RangeValue('10'),
+        filter: AllCreditsFilter.empty().copyWith(
+          amountValueFrom: RangeValue('15'),
+          amountValueTo: RangeValue('12'),
         ),
       ));
       await getWidget(tester);
@@ -266,7 +277,7 @@ void main() {
       await tester.tap(findElevatedButton);
       await tester.pumpAndSettle();
 
-      final findInvalidText = find.text('Invalid Credit Amount Range!'.tr());
+      final findInvalidText = find.text('Invalid Amount range!'.tr());
       expect(findInvalidText, findsOneWidget);
       await tester.pump();
     });

@@ -9,21 +9,19 @@ part of 'all_credits_filter_dto.dart';
 _$_AllCreditsFilterDto _$$_AllCreditsFilterDtoFromJson(
         Map<String, dynamic> json) =>
     _$_AllCreditsFilterDto(
-      documentNumber: json['documentNumber'] as String? ?? '',
-      creditAmountTo: json['creditAmountTo'] as String? ?? '',
-      creditAmountFrom: json['creditAmountFrom'] as String? ?? '',
-      documentDateTo: json['documentDateTo'] as String? ?? '',
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
-      status: json['status'] as String? ?? '',
+      documentDateTo: json['documentDateTo'] as String? ?? '',
+      amountValueFrom: json['amountValueFrom'] as String? ?? '',
+      amountValueTo: json['amountValueTo'] as String? ?? '',
+      filterStatuses: json['filterStatuses'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_AllCreditsFilterDtoToJson(
         _$_AllCreditsFilterDto instance) =>
     <String, dynamic>{
-      'documentNumber': instance.documentNumber,
-      'creditAmountTo': instance.creditAmountTo,
-      'creditAmountFrom': instance.creditAmountFrom,
-      'documentDateTo': instance.documentDateTo,
       'documentDateFrom': instance.documentDateFrom,
-      'status': instance.status,
+      'documentDateTo': instance.documentDateTo,
+      'amountValueFrom': instance.amountValueFrom,
+      'amountValueTo': instance.amountValueTo,
+      'filterStatuses': instance.filterStatuses,
     };

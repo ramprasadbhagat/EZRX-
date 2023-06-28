@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_statuses.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -23,34 +22,6 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     required this.localDataSource,
     required this.remoteDataSource,
   });
-
-  @override
-  Future<Either<ApiFailure, AvailableStatuses>> getAvailableStatuses({
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final response = await localDataSource.getAvailableStatuses();
-
-        return Right(response);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final response = await remoteDataSource.getAvailableStatuses(
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-      );
-
-      return Right(response);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
 
   @override
   Future<Either<ApiFailure, CustomerDocumentHeader>> filterInvoices({
@@ -89,12 +60,12 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   }
 
   @override
-  Future<Either<ApiFailure, CustomerDocumentHeader>> getAllCredits({
+  Future<Either<ApiFailure, CustomerDocumentHeader>> filterCredits({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required int pageSize,
     required int offset,
-    required AllCreditsFilter allCreditsFilter,
+    required AllCreditsFilter filter,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -108,13 +79,13 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
       }
     }
     try {
-      final response = await remoteDataSource.getAllCredits(
+      final response = await remoteDataSource.filterCredits(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        filterQuery:
-            AllCreditsFilterDto.fromDomain(allCreditsFilter).toFilterByMapList,
+        filterMap:
+            AllCreditsFilterDto.fromDomain(filter).toMapList,
       );
 
       return Right(response);
@@ -125,32 +96,4 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     }
   }
 
-  @override
-  Future<Either<ApiFailure, AvailableStatuses>>
-      getAvailableStatusesForAllCredits({
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final response = await localDataSource.getAvailableStatuses();
-
-        return Right(response);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final response = await remoteDataSource.getAvailableStatusesForAllCredits(
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-      );
-
-      return Right(response);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
 }

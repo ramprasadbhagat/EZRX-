@@ -17,9 +17,7 @@ import 'package:ezrxmobile/application/order/order_history_filter/order_history_
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -33,7 +31,6 @@ import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.da
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
@@ -692,12 +689,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeInfo,
             ),
           );
-
-      context.read<AllInvoicesFilterBloc>().add(
-            AllInvoicesFilterEvent.fetch(
-              salesOrganisation: salesOrgState.salesOrganisation,
-            ),
-          );
+          
       context.read<AllInvoicesBloc>().add(
             AllInvoicesEvent.fetch(
               salesOrganisation: salesOrgState.salesOrganisation,
@@ -707,17 +699,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
       context.read<AllCreditsBloc>().add(
-            AllCreditsEvent.fetchAllCreditsList(
+            AllCreditsEvent.fetch(
               salesOrganisation:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
               customerCodeInfo:
                   context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              allCreditsFilter: AllCreditsFilter.empty(),
-            ),
-          );
-      context.read<AllCreditsFilterBloc>().add(
-            AllCreditsFilterEvent.fetch(
-              salesOrganisation: salesOrgState.salesOrganisation,
             ),
           );
 

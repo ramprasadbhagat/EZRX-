@@ -20,18 +20,16 @@ AllCreditsFilterDto _$AllCreditsFilterDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AllCreditsFilterDto {
-  @JsonKey(name: 'documentNumber', defaultValue: '')
-  String get documentNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'creditAmountTo', defaultValue: '')
-  String get creditAmountTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-  String get creditAmountFrom => throw _privateConstructorUsedError;
-  @JsonKey(name: 'documentDateTo', defaultValue: '')
-  String get documentDateTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
   String get documentDateFrom => throw _privateConstructorUsedError;
-  @JsonKey(name: 'status', defaultValue: '')
-  String get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'documentDateTo', defaultValue: '')
+  String get documentDateTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'amountValueFrom', defaultValue: '')
+  String get amountValueFrom => throw _privateConstructorUsedError;
+  @JsonKey(name: 'amountValueTo', defaultValue: '')
+  String get amountValueTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'filterStatuses', defaultValue: '')
+  String get filterStatuses => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,18 +44,16 @@ abstract class $AllCreditsFilterDtoCopyWith<$Res> {
       _$AllCreditsFilterDtoCopyWithImpl<$Res, AllCreditsFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'documentNumber', defaultValue: '')
-          String documentNumber,
-      @JsonKey(name: 'creditAmountTo', defaultValue: '')
-          String creditAmountTo,
-      @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-          String creditAmountFrom,
+      {@JsonKey(name: 'documentDateFrom', defaultValue: '')
+          String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           String documentDateTo,
-      @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status});
+      @JsonKey(name: 'amountValueFrom', defaultValue: '')
+          String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '')
+          String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '')
+          String filterStatuses});
 }
 
 /// @nodoc
@@ -73,37 +69,32 @@ class _$AllCreditsFilterDtoCopyWithImpl<$Res, $Val extends AllCreditsFilterDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
-    Object? creditAmountTo = null,
-    Object? creditAmountFrom = null,
-    Object? documentDateTo = null,
     Object? documentDateFrom = null,
-    Object? status = null,
+    Object? documentDateTo = null,
+    Object? amountValueFrom = null,
+    Object? amountValueTo = null,
+    Object? filterStatuses = null,
   }) {
     return _then(_value.copyWith(
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      creditAmountTo: null == creditAmountTo
-          ? _value.creditAmountTo
-          : creditAmountTo // ignore: cast_nullable_to_non_nullable
-              as String,
-      creditAmountFrom: null == creditAmountFrom
-          ? _value.creditAmountFrom
-          : creditAmountFrom // ignore: cast_nullable_to_non_nullable
+      documentDateFrom: null == documentDateFrom
+          ? _value.documentDateFrom
+          : documentDateFrom // ignore: cast_nullable_to_non_nullable
               as String,
       documentDateTo: null == documentDateTo
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as String,
-      documentDateFrom: null == documentDateFrom
-          ? _value.documentDateFrom
-          : documentDateFrom // ignore: cast_nullable_to_non_nullable
+      amountValueFrom: null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
+      amountValueTo: null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      filterStatuses: null == filterStatuses
+          ? _value.filterStatuses
+          : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -118,18 +109,16 @@ abstract class _$$_AllCreditsFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'documentNumber', defaultValue: '')
-          String documentNumber,
-      @JsonKey(name: 'creditAmountTo', defaultValue: '')
-          String creditAmountTo,
-      @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-          String creditAmountFrom,
+      {@JsonKey(name: 'documentDateFrom', defaultValue: '')
+          String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           String documentDateTo,
-      @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status});
+      @JsonKey(name: 'amountValueFrom', defaultValue: '')
+          String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '')
+          String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '')
+          String filterStatuses});
 }
 
 /// @nodoc
@@ -143,37 +132,32 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
-    Object? creditAmountTo = null,
-    Object? creditAmountFrom = null,
-    Object? documentDateTo = null,
     Object? documentDateFrom = null,
-    Object? status = null,
+    Object? documentDateTo = null,
+    Object? amountValueFrom = null,
+    Object? amountValueTo = null,
+    Object? filterStatuses = null,
   }) {
     return _then(_$_AllCreditsFilterDto(
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      creditAmountTo: null == creditAmountTo
-          ? _value.creditAmountTo
-          : creditAmountTo // ignore: cast_nullable_to_non_nullable
-              as String,
-      creditAmountFrom: null == creditAmountFrom
-          ? _value.creditAmountFrom
-          : creditAmountFrom // ignore: cast_nullable_to_non_nullable
+      documentDateFrom: null == documentDateFrom
+          ? _value.documentDateFrom
+          : documentDateFrom // ignore: cast_nullable_to_non_nullable
               as String,
       documentDateTo: null == documentDateTo
           ? _value.documentDateTo
           : documentDateTo // ignore: cast_nullable_to_non_nullable
               as String,
-      documentDateFrom: null == documentDateFrom
-          ? _value.documentDateFrom
-          : documentDateFrom // ignore: cast_nullable_to_non_nullable
+      amountValueFrom: null == amountValueFrom
+          ? _value.amountValueFrom
+          : amountValueFrom // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
+      amountValueTo: null == amountValueTo
+          ? _value.amountValueTo
+          : amountValueTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      filterStatuses: null == filterStatuses
+          ? _value.filterStatuses
+          : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -183,45 +167,40 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
   const _$_AllCreditsFilterDto(
-      {@JsonKey(name: 'documentNumber', defaultValue: '')
-          required this.documentNumber,
-      @JsonKey(name: 'creditAmountTo', defaultValue: '')
-          required this.creditAmountTo,
-      @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-          required this.creditAmountFrom,
+      {@JsonKey(name: 'documentDateFrom', defaultValue: '')
+          required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           required this.documentDateTo,
-      @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required this.documentDateFrom,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status})
+      @JsonKey(name: 'amountValueFrom', defaultValue: '')
+          required this.amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '')
+          required this.amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '')
+          required this.filterStatuses})
       : super._();
 
   factory _$_AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =>
       _$$_AllCreditsFilterDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'documentNumber', defaultValue: '')
-  final String documentNumber;
-  @override
-  @JsonKey(name: 'creditAmountTo', defaultValue: '')
-  final String creditAmountTo;
-  @override
-  @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-  final String creditAmountFrom;
+  @JsonKey(name: 'documentDateFrom', defaultValue: '')
+  final String documentDateFrom;
   @override
   @JsonKey(name: 'documentDateTo', defaultValue: '')
   final String documentDateTo;
   @override
-  @JsonKey(name: 'documentDateFrom', defaultValue: '')
-  final String documentDateFrom;
+  @JsonKey(name: 'amountValueFrom', defaultValue: '')
+  final String amountValueFrom;
   @override
-  @JsonKey(name: 'status', defaultValue: '')
-  final String status;
+  @JsonKey(name: 'amountValueTo', defaultValue: '')
+  final String amountValueTo;
+  @override
+  @JsonKey(name: 'filterStatuses', defaultValue: '')
+  final String filterStatuses;
 
   @override
   String toString() {
-    return 'AllCreditsFilterDto(documentNumber: $documentNumber, creditAmountTo: $creditAmountTo, creditAmountFrom: $creditAmountFrom, documentDateTo: $documentDateTo, documentDateFrom: $documentDateFrom, status: $status)';
+    return 'AllCreditsFilterDto(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
   }
 
   @override
@@ -229,23 +208,22 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllCreditsFilterDto &&
-            (identical(other.documentNumber, documentNumber) ||
-                other.documentNumber == documentNumber) &&
-            (identical(other.creditAmountTo, creditAmountTo) ||
-                other.creditAmountTo == creditAmountTo) &&
-            (identical(other.creditAmountFrom, creditAmountFrom) ||
-                other.creditAmountFrom == creditAmountFrom) &&
-            (identical(other.documentDateTo, documentDateTo) ||
-                other.documentDateTo == documentDateTo) &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.documentDateTo, documentDateTo) ||
+                other.documentDateTo == documentDateTo) &&
+            (identical(other.amountValueFrom, amountValueFrom) ||
+                other.amountValueFrom == amountValueFrom) &&
+            (identical(other.amountValueTo, amountValueTo) ||
+                other.amountValueTo == amountValueTo) &&
+            (identical(other.filterStatuses, filterStatuses) ||
+                other.filterStatuses == filterStatuses));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, documentNumber, creditAmountTo,
-      creditAmountFrom, documentDateTo, documentDateFrom, status);
+  int get hashCode => Object.hash(runtimeType, documentDateFrom, documentDateTo,
+      amountValueFrom, amountValueTo, filterStatuses);
 
   @JsonKey(ignore: true)
   @override
@@ -264,41 +242,36 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
 
 abstract class _AllCreditsFilterDto extends AllCreditsFilterDto {
   const factory _AllCreditsFilterDto(
-      {@JsonKey(name: 'documentNumber', defaultValue: '')
-          required final String documentNumber,
-      @JsonKey(name: 'creditAmountTo', defaultValue: '')
-          required final String creditAmountTo,
-      @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-          required final String creditAmountFrom,
+      {@JsonKey(name: 'documentDateFrom', defaultValue: '')
+          required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
           required final String documentDateTo,
-      @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required final String documentDateFrom,
-      @JsonKey(name: 'status', defaultValue: '')
-          required final String status}) = _$_AllCreditsFilterDto;
+      @JsonKey(name: 'amountValueFrom', defaultValue: '')
+          required final String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '')
+          required final String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '')
+          required final String filterStatuses}) = _$_AllCreditsFilterDto;
   const _AllCreditsFilterDto._() : super._();
 
   factory _AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =
       _$_AllCreditsFilterDto.fromJson;
 
   @override
-  @JsonKey(name: 'documentNumber', defaultValue: '')
-  String get documentNumber;
-  @override
-  @JsonKey(name: 'creditAmountTo', defaultValue: '')
-  String get creditAmountTo;
-  @override
-  @JsonKey(name: 'creditAmountFrom', defaultValue: '')
-  String get creditAmountFrom;
+  @JsonKey(name: 'documentDateFrom', defaultValue: '')
+  String get documentDateFrom;
   @override
   @JsonKey(name: 'documentDateTo', defaultValue: '')
   String get documentDateTo;
   @override
-  @JsonKey(name: 'documentDateFrom', defaultValue: '')
-  String get documentDateFrom;
+  @JsonKey(name: 'amountValueFrom', defaultValue: '')
+  String get amountValueFrom;
   @override
-  @JsonKey(name: 'status', defaultValue: '')
-  String get status;
+  @JsonKey(name: 'amountValueTo', defaultValue: '')
+  String get amountValueTo;
+  @override
+  @JsonKey(name: 'filterStatuses', defaultValue: '')
+  String get filterStatuses;
   @override
   @JsonKey(ignore: true)
   _$$_AllCreditsFilterDtoCopyWith<_$_AllCreditsFilterDto> get copyWith =>

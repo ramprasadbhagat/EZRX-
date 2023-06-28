@@ -5,7 +5,8 @@ class AllCreditsState with _$AllCreditsState {
   //Constructor created for Getter 
   const AllCreditsState._();
   const factory AllCreditsState({
-    required List<CreditAndInvoiceItem> credits,
+    required AllCreditsFilter appliedFilter,
+    required List<CreditAndInvoiceItem> items,
     required int totalCount,
     required String sortDirection,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -17,7 +18,8 @@ class AllCreditsState with _$AllCreditsState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        credits: <CreditAndInvoiceItem>[],
+        appliedFilter: AllCreditsFilter.empty(),
+        items: <CreditAndInvoiceItem>[],
         sortDirection: 'desc',
         totalCount: 0,
       );

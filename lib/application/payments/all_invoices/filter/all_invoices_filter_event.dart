@@ -2,9 +2,6 @@ part of 'all_invoices_filter_bloc.dart';
 
 @freezed
 class AllInvoicesFilterEvent with _$AllInvoicesFilterEvent {
-  const factory AllInvoicesFilterEvent.fetch({
-    required SalesOrganisation salesOrganisation,
-  }) = _Fetch;
 
   const factory AllInvoicesFilterEvent.initialized() = _Initialized;
 

@@ -437,12 +437,10 @@ class AppRouter extends _i72.RootStackRouter {
         ),
       );
     },
-    AllCreditsRoute.name: (routeData) {
-      final args = routeData.argsAs<AllCreditsRouteArgs>(
-          orElse: () => const AllCreditsRouteArgs());
+    AllCreditsPageRoute.name: (routeData) {
       return _i72.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i43.AllCredits(key: args.key),
+        child: const _i43.AllCreditsPage(),
       );
     },
     CreditDetailsPageRoute.name: (routeData) {
@@ -910,7 +908,7 @@ class AppRouter extends _i72.RootStackRouter {
           path: 'payments/invoice_details',
         ),
         _i72.RouteConfig(
-          AllCreditsRoute.name,
+          AllCreditsPageRoute.name,
           path: 'payments/all_credits',
         ),
         _i72.RouteConfig(
@@ -1819,27 +1817,15 @@ class InvoiceDetailsPageRouteArgs {
 }
 
 /// generated route for
-/// [_i43.AllCredits]
-class AllCreditsRoute extends _i72.PageRouteInfo<AllCreditsRouteArgs> {
-  AllCreditsRoute({_i73.Key? key})
+/// [_i43.AllCreditsPage]
+class AllCreditsPageRoute extends _i72.PageRouteInfo<void> {
+  const AllCreditsPageRoute()
       : super(
-          AllCreditsRoute.name,
+          AllCreditsPageRoute.name,
           path: 'payments/all_credits',
-          args: AllCreditsRouteArgs(key: key),
         );
 
-  static const String name = 'AllCreditsRoute';
-}
-
-class AllCreditsRouteArgs {
-  const AllCreditsRouteArgs({this.key});
-
-  final _i73.Key? key;
-
-  @override
-  String toString() {
-    return 'AllCreditsRouteArgs{key: $key}';
-  }
+  static const String name = 'AllCreditsPageRoute';
 }
 
 /// generated route for

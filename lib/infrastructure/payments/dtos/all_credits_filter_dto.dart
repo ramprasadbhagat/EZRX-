@@ -8,109 +8,85 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
   const AllCreditsFilterDto._();
   const factory AllCreditsFilterDto({
     @JsonKey(
-      name: 'documentNumber',
+      name: 'documentDateFrom',
       defaultValue: '',
     )
-        required String documentNumber,
-    @JsonKey(
-      name: 'creditAmountTo',
-      defaultValue: '',
-    )
-        required String creditAmountTo,
-    @JsonKey(
-      name: 'creditAmountFrom',
-      defaultValue: '',
-    )
-        required String creditAmountFrom,
+        required String documentDateFrom,
     @JsonKey(
       name: 'documentDateTo',
       defaultValue: '',
     )
         required String documentDateTo,
     @JsonKey(
-      name: 'documentDateFrom',
+      name: 'amountValueFrom',
       defaultValue: '',
     )
-        required String documentDateFrom,
+        required String amountValueFrom,
     @JsonKey(
-      name: 'status',
+      name: 'amountValueTo',
       defaultValue: '',
     )
-        required String status,
+        required String amountValueTo,
+    @JsonKey(
+      name: 'filterStatuses',
+      defaultValue: '',
+    )
+        required String filterStatuses,
   }) = _AllCreditsFilterDto;
 
   factory AllCreditsFilterDto.fromDomain(
-    AllCreditsFilter allCreditsFilter,
+    AllCreditsFilter tempFilter,
   ) {
     return AllCreditsFilterDto(
-      documentNumber: allCreditsFilter.documentNumber.getOrDefaultValue(''),
-      creditAmountFrom:
-          allCreditsFilter.creditAmountFrom.apiParameterValueIfNegative,
-      creditAmountTo:
-          allCreditsFilter.creditAmountTo.apiParameterValueIfNegative,
-      documentDateTo: allCreditsFilter.documentDateTo.apiDateWithDashFormat,
-      documentDateFrom: allCreditsFilter.documentDateFrom.apiDateWithDashFormat,
-      status: allCreditsFilter.sortBy,
+      documentDateTo: tempFilter.documentDateTo.apiDateWithDashFormat,
+      documentDateFrom:
+          tempFilter.documentDateFrom.apiDateWithDashFormat,
+      amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
+      amountValueTo: tempFilter.amountValueTo.apiParameterValue,
+      filterStatuses: tempFilter.filterStatuses.join(','),
     );
   }
 
   factory AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =>
       _$AllCreditsFilterDtoFromJson(json);
 
-  List<Map<String, String>> get toFilterByMapList {
-    final filterQuery = <Map<String, String>>[];
-    filterQuery.add(
+  List<Map<String, String>> get toMapList {
+    final filterMapList = <Map<String, String>>[
       {
         'field': 'debitCreditCode',
         'value': 'H',
       },
-    );
-    if (documentNumber.isNotEmpty) {
-      filterQuery.add({
-        'field': 'accountingDocument',
-        'value': documentNumber,
-      });
-    }
+      if (documentDateFrom.isNotEmpty)
+        {
+          'field': 'documentDate',
+          'value': documentDateFrom,
+          'type': 'ge',
+        },
+      if (documentDateTo.isNotEmpty)
+        {
+          'field': 'documentDate',
+          'value': documentDateTo,
+          'type': 'le',
+        },
+      if (amountValueFrom.isNotEmpty)
+        {
+          'field': 'amountInTransactionCurrency',
+          'value': amountValueFrom,
+          'type': 'ge',
+        },
+      if (amountValueTo.isNotEmpty)
+        {
+          'field': 'amountInTransactionCurrency',
+          'value': amountValueTo,
+          'type': 'le',
+        },
+      if (filterStatuses.isNotEmpty)
+        {
+          'field': 'invoiceProcessingStatus',
+          'value': filterStatuses,
+        },
+    ];
 
-    if (documentDateFrom.isNotEmpty) {
-      filterQuery.add({
-        'field': 'postingDate',
-        'value': documentDateFrom,
-        'type': 'ge',
-      });
-    }
-
-    if (documentDateTo.isNotEmpty) {
-      filterQuery.add({
-        'field': 'postingDate',
-        'value': documentDateTo,
-        'type': 'le',
-      });
-    }
-
-    if (creditAmountFrom.isNotEmpty) {
-      filterQuery.add({
-        'field': 'amountInTransactionCurrency',
-        'value': creditAmountFrom,
-        'type': 'le',
-      });
-    }
-
-    if (creditAmountTo.isNotEmpty) {
-      filterQuery.add({
-        'field': 'amountInTransactionCurrency',
-        'value': creditAmountTo,
-        'type': 'ge',
-      });
-    }
-
-    if (status != 'All') {
-      filterQuery.add({
-        'field': 'invoiceProcessingStatus',
-        'value': status,
-      });
-    }
-
-    return filterQuery;
+    return filterMapList;
   }
 }

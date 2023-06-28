@@ -1,9 +1,8 @@
-
-import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,23 +28,22 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
   ) async {
     await event.map(
       initialized: (_) async => emit(AllCreditsState.initial()),
-      fetchAllCreditsList: (value) async {
+      fetch: (value) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
-            credits: <CreditAndInvoiceItem>[],
+            items: <CreditAndInvoiceItem>[],
             totalCount: 0,
             isLoading: true,
           ),
         );
 
-        final failureOrSuccess =
-            await allCreditsAndInvoicesRepository.getAllCredits(
+        final failureOrSuccess = await allCreditsAndInvoicesRepository.filterCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
+          filter: state.appliedFilter,
           pageSize: _pageSize,
           offset: 0,
-          allCreditsFilter: value.allCreditsFilter,
         );
 
         failureOrSuccess.fold(
@@ -57,12 +55,12 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
               ),
             );
           },
-          (creditData) {
+          (paymentData) {
             emit(
               state.copyWith(
-                credits: creditData.invoices,
-                totalCount: creditData.totalCount,
-                canLoadMore: creditData.invoices.length >= _pageSize,
+                items: paymentData.invoices,
+                totalCount: paymentData.totalCount,
+                canLoadMore: paymentData.invoices.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -70,7 +68,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           },
         );
       },
-      loadMoreAllCreditsList: (value) async {
+      loadMore: (value) async {
         if (state.isLoading || !state.canLoadMore) return;
 
         emit(
@@ -80,13 +78,12 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           ),
         );
 
-        final failureOrSuccess =
-            await allCreditsAndInvoicesRepository.getAllCredits(
+        final failureOrSuccess = await allCreditsAndInvoicesRepository.filterCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
+          filter: state.appliedFilter,
           pageSize: _pageSize,
-          offset: state.credits.length,
-          allCreditsFilter: value.allCreditsFilter,
+          offset: state.items.length,
         );
 
         failureOrSuccess.fold(
@@ -98,21 +95,29 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
               ),
             );
           },
-          (creditData) {
-            final updateItemList =
-                List<CreditAndInvoiceItem>.from(state.credits)
-                  ..addAll(creditData.invoices);
+          (paymentData) {
+            final updateItemList = List<CreditAndInvoiceItem>.from(state.items)
+              ..addAll(paymentData.invoices);
             emit(
               state.copyWith(
-                credits: updateItemList,
-                totalCount: creditData.totalCount,
-                canLoadMore: creditData.invoices.length >= _pageSize,
+                items: updateItemList,
+                totalCount: paymentData.totalCount,
+                canLoadMore: paymentData.invoices.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
             );
           },
         );
+      },
+      applyFilters: (_ApplyFilters value) async {
+        if (state.appliedFilter != value.tempFilter) {
+            emit(
+              state.copyWith(
+                appliedFilter: value.tempFilter,
+              ),
+            );
+        }
       },
     );
   }
