@@ -26,4 +26,21 @@ class ReturnQuery {
       }
     ''';
   }
+
+  String getRequestsByRequest() {
+    return '''
+      query requestsByUserV3(\$requestsByUserRequest: requestsByUserRequestV3!) {
+        requestsByUserV3(request: \$requestsByUserRequest) {
+          returnRequests {
+            requestId
+            requestDate
+            itemQty
+            totalPrice
+            status
+          }
+          totalCount
+        }
+      }
+    ''';
+  }
 }

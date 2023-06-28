@@ -2,16 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item_group.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_query.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/return_item_group_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_item_dto.dart';
 
 class ReturnListRemoteDataSource {
   HttpService httpService;
@@ -26,21 +22,21 @@ class ReturnListRemoteDataSource {
     required this.config,
   });
 
-  Future<List<ReturnItemGroup>> fetchReturnByItems({
-    required CustomerCodeInfo custCode,
-    required SalesOrg salesOrg,
-    required ShipToInfo shipToInfo,
-    required Username userName,
+  Future<List<ReturnItem>> fetchReturnByItems({
+    required String custCode,
+    required String salesOrg,
+    required String shipToInfo,
+    required String userName,
     required int first,
     required int after,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getRequestsByItems();
       final variables = {
-        'salesOrg': salesOrg.getOrCrash(),
-        'soldTo': custCode.customerCodeSoldTo,
-        'shipTo': shipToInfo.shipToCustomerCode,
-        'username': userName.getOrCrash(),
+        'salesOrg': salesOrg,
+        'soldTo': custCode,
+        'shipTo': shipToInfo,
+        'username': userName,
         'first': first,
         'after': after,
       };
@@ -56,12 +52,62 @@ class ReturnListRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'requestsByItems',
       );
       _returnRequestTypeCodeExceptionChecker(res: res);
 
-      return List.from(
+      return List<Map<String, dynamic>>.from(
         res.data['data']['requestsByItems']['returnRequestsByItems'],
-      ).map((e) => ReturnItemGroupDto.fromJson(e).toDomain()).toList();
+      )
+          .map((returnRequestsByItem) => List<Map<String, dynamic>>.from(
+                returnRequestsByItem['requestByItems'],
+              )
+                  .map((requestByItem) =>
+                      ReturnItemDto.fromJson(requestByItem).toDomain())
+                  .toList())
+          .toList()
+          .expand((element) => element)
+          .toList();
+    });
+  }
+
+  Future<List<ReturnItem>> fetchReturnByRequest({
+    required String custCode,
+    required String salesOrg,
+    required String shipToInfo,
+    required String userName,
+    required int first,
+    required int after,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getRequestsByRequest();
+      final variables = {
+        'salesOrg': salesOrg,
+        'soldTo': custCode,
+        'shipTo': shipToInfo,
+        'username': userName,
+        'first': first,
+        'after': after,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode(
+          {
+            'query': queryData,
+            'variables': {
+              'requestsByUserRequest': variables,
+            },
+          },
+        ),
+        apiEndpoint: 'requestsByUserV3',
+      );
+      _returnRequestTypeCodeExceptionChecker(res: res);
+
+      return List<Map<String, dynamic>>.from(
+        res.data['data']['requestsByUserV3']['returnRequests'],
+      ).map((e) => ReturnItemDto.fromJson(e).toDomain()).toList();
     });
   }
 

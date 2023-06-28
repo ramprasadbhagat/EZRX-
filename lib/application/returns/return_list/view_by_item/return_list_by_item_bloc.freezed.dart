@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'return_list_bloc.dart';
+part of 'return_list_by_item_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,16 +15,16 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ReturnListEvent {
+mixin _$ReturnListByItemEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)
-        fetchByItems,
+        fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
-        loadMoreFetchByItems,
+        loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,10 +32,10 @@ mixin _$ReturnListEvent {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,48 +43,49 @@ mixin _$ReturnListEvent {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FetchByItems value) fetchByItems,
-    required TResult Function(_LoadMoreFetchByItems value) loadMoreFetchByItems,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FetchByItems value)? fetchByItems,
-    TResult? Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchByItems value)? fetchByItems,
-    TResult Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReturnListEventCopyWith<$Res> {
-  factory $ReturnListEventCopyWith(
-          ReturnListEvent value, $Res Function(ReturnListEvent) then) =
-      _$ReturnListEventCopyWithImpl<$Res, ReturnListEvent>;
+abstract class $ReturnListByItemEventCopyWith<$Res> {
+  factory $ReturnListByItemEventCopyWith(ReturnListByItemEvent value,
+          $Res Function(ReturnListByItemEvent) then) =
+      _$ReturnListByItemEventCopyWithImpl<$Res, ReturnListByItemEvent>;
 }
 
 /// @nodoc
-class _$ReturnListEventCopyWithImpl<$Res, $Val extends ReturnListEvent>
-    implements $ReturnListEventCopyWith<$Res> {
-  _$ReturnListEventCopyWithImpl(this._value, this._then);
+class _$ReturnListByItemEventCopyWithImpl<$Res,
+        $Val extends ReturnListByItemEvent>
+    implements $ReturnListByItemEventCopyWith<$Res> {
+  _$ReturnListByItemEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -101,7 +102,7 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnListEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
@@ -115,7 +116,7 @@ class _$_Initialized implements _Initialized {
 
   @override
   String toString() {
-    return 'ReturnListEvent.initialized()';
+    return 'ReturnListByItemEvent.initialized()';
   }
 
   @override
@@ -133,10 +134,10 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)
-        fetchByItems,
+        fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
-        loadMoreFetchByItems,
+        loadMore,
   }) {
     return initialized();
   }
@@ -147,10 +148,10 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
   }) {
     return initialized?.call();
   }
@@ -161,10 +162,10 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -177,8 +178,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FetchByItems value) fetchByItems,
-    required TResult Function(_LoadMoreFetchByItems value) loadMoreFetchByItems,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) {
     return initialized(this);
   }
@@ -187,8 +188,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FetchByItems value)? fetchByItems,
-    TResult? Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
     return initialized?.call(this);
   }
@@ -197,8 +198,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchByItems value)? fetchByItems,
-    TResult Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -208,15 +209,14 @@ class _$_Initialized implements _Initialized {
   }
 }
 
-abstract class _Initialized implements ReturnListEvent {
+abstract class _Initialized implements ReturnListByItemEvent {
   const factory _Initialized() = _$_Initialized;
 }
 
 /// @nodoc
-abstract class _$$_FetchByItemsCopyWith<$Res> {
-  factory _$$_FetchByItemsCopyWith(
-          _$_FetchByItems value, $Res Function(_$_FetchByItems) then) =
-      __$$_FetchByItemsCopyWithImpl<$Res>;
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrg salesOrg,
@@ -230,11 +230,10 @@ abstract class _$$_FetchByItemsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchByItemsCopyWithImpl<$Res>
-    extends _$ReturnListEventCopyWithImpl<$Res, _$_FetchByItems>
-    implements _$$_FetchByItemsCopyWith<$Res> {
-  __$$_FetchByItemsCopyWithImpl(
-      _$_FetchByItems _value, $Res Function(_$_FetchByItems) _then)
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -245,7 +244,7 @@ class __$$_FetchByItemsCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_FetchByItems(
+    return _then(_$_Fetch(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -292,8 +291,8 @@ class __$$_FetchByItemsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchByItems implements _FetchByItems {
-  const _$_FetchByItems(
+class _$_Fetch implements _Fetch {
+  const _$_Fetch(
       {required this.salesOrg,
       required this.shipInfo,
       required this.customerCodeInfo,
@@ -310,14 +309,14 @@ class _$_FetchByItems implements _FetchByItems {
 
   @override
   String toString() {
-    return 'ReturnListEvent.fetchByItems(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user)';
+    return 'ReturnListByItemEvent.fetch(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchByItems &&
+            other is _$_Fetch &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.shipInfo, shipInfo) ||
@@ -334,8 +333,8 @@ class _$_FetchByItems implements _FetchByItems {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchByItemsCopyWith<_$_FetchByItems> get copyWith =>
-      __$$_FetchByItemsCopyWithImpl<_$_FetchByItems>(this, _$identity);
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -343,12 +342,12 @@ class _$_FetchByItems implements _FetchByItems {
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)
-        fetchByItems,
+        fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
-        loadMoreFetchByItems,
+        loadMore,
   }) {
-    return fetchByItems(salesOrg, shipInfo, customerCodeInfo, user);
+    return fetch(salesOrg, shipInfo, customerCodeInfo, user);
   }
 
   @override
@@ -357,12 +356,12 @@ class _$_FetchByItems implements _FetchByItems {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
   }) {
-    return fetchByItems?.call(salesOrg, shipInfo, customerCodeInfo, user);
+    return fetch?.call(salesOrg, shipInfo, customerCodeInfo, user);
   }
 
   @override
@@ -371,14 +370,14 @@ class _$_FetchByItems implements _FetchByItems {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
     required TResult orElse(),
   }) {
-    if (fetchByItems != null) {
-      return fetchByItems(salesOrg, shipInfo, customerCodeInfo, user);
+    if (fetch != null) {
+      return fetch(salesOrg, shipInfo, customerCodeInfo, user);
     }
     return orElse();
   }
@@ -387,58 +386,58 @@ class _$_FetchByItems implements _FetchByItems {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FetchByItems value) fetchByItems,
-    required TResult Function(_LoadMoreFetchByItems value) loadMoreFetchByItems,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) {
-    return fetchByItems(this);
+    return fetch(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FetchByItems value)? fetchByItems,
-    TResult? Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
-    return fetchByItems?.call(this);
+    return fetch?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchByItems value)? fetchByItems,
-    TResult Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
-    if (fetchByItems != null) {
-      return fetchByItems(this);
+    if (fetch != null) {
+      return fetch(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchByItems implements ReturnListEvent {
-  const factory _FetchByItems(
+abstract class _Fetch implements ReturnListByItemEvent {
+  const factory _Fetch(
       {required final SalesOrg salesOrg,
       required final ShipToInfo shipInfo,
       required final CustomerCodeInfo customerCodeInfo,
-      required final User user}) = _$_FetchByItems;
+      required final User user}) = _$_Fetch;
 
   SalesOrg get salesOrg;
   ShipToInfo get shipInfo;
   CustomerCodeInfo get customerCodeInfo;
   User get user;
   @JsonKey(ignore: true)
-  _$$_FetchByItemsCopyWith<_$_FetchByItems> get copyWith =>
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreFetchByItemsCopyWith<$Res> {
-  factory _$$_LoadMoreFetchByItemsCopyWith(_$_LoadMoreFetchByItems value,
-          $Res Function(_$_LoadMoreFetchByItems) then) =
-      __$$_LoadMoreFetchByItemsCopyWithImpl<$Res>;
+abstract class _$$_LoadMoreCopyWith<$Res> {
+  factory _$$_LoadMoreCopyWith(
+          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
+      __$$_LoadMoreCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {User user,
@@ -452,11 +451,11 @@ abstract class _$$_LoadMoreFetchByItemsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMoreFetchByItemsCopyWithImpl<$Res>
-    extends _$ReturnListEventCopyWithImpl<$Res, _$_LoadMoreFetchByItems>
-    implements _$$_LoadMoreFetchByItemsCopyWith<$Res> {
-  __$$_LoadMoreFetchByItemsCopyWithImpl(_$_LoadMoreFetchByItems _value,
-      $Res Function(_$_LoadMoreFetchByItems) _then)
+class __$$_LoadMoreCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_LoadMore>
+    implements _$$_LoadMoreCopyWith<$Res> {
+  __$$_LoadMoreCopyWithImpl(
+      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -467,7 +466,7 @@ class __$$_LoadMoreFetchByItemsCopyWithImpl<$Res>
     Object? shipInfo = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_LoadMoreFetchByItems(
+    return _then(_$_LoadMore(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -514,8 +513,8 @@ class __$$_LoadMoreFetchByItemsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
-  const _$_LoadMoreFetchByItems(
+class _$_LoadMore implements _LoadMore {
+  const _$_LoadMore(
       {required this.user,
       required this.salesOrg,
       required this.shipInfo,
@@ -532,14 +531,14 @@ class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
 
   @override
   String toString() {
-    return 'ReturnListEvent.loadMoreFetchByItems(user: $user, salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo)';
+    return 'ReturnListByItemEvent.loadMore(user: $user, salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMoreFetchByItems &&
+            other is _$_LoadMore &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
@@ -556,9 +555,8 @@ class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreFetchByItemsCopyWith<_$_LoadMoreFetchByItems> get copyWith =>
-      __$$_LoadMoreFetchByItemsCopyWithImpl<_$_LoadMoreFetchByItems>(
-          this, _$identity);
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -566,12 +564,12 @@ class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)
-        fetchByItems,
+        fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
-        loadMoreFetchByItems,
+        loadMore,
   }) {
-    return loadMoreFetchByItems(user, salesOrg, shipInfo, customerCodeInfo);
+    return loadMore(user, salesOrg, shipInfo, customerCodeInfo);
   }
 
   @override
@@ -580,13 +578,12 @@ class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
   }) {
-    return loadMoreFetchByItems?.call(
-        user, salesOrg, shipInfo, customerCodeInfo);
+    return loadMore?.call(user, salesOrg, shipInfo, customerCodeInfo);
   }
 
   @override
@@ -595,14 +592,14 @@ class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo, User user)?
-        fetchByItems,
+        fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
-        loadMoreFetchByItems,
+        loadMore,
     required TResult orElse(),
   }) {
-    if (loadMoreFetchByItems != null) {
-      return loadMoreFetchByItems(user, salesOrg, shipInfo, customerCodeInfo);
+    if (loadMore != null) {
+      return loadMore(user, salesOrg, shipInfo, customerCodeInfo);
     }
     return orElse();
   }
@@ -611,87 +608,84 @@ class _$_LoadMoreFetchByItems implements _LoadMoreFetchByItems {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FetchByItems value) fetchByItems,
-    required TResult Function(_LoadMoreFetchByItems value) loadMoreFetchByItems,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) {
-    return loadMoreFetchByItems(this);
+    return loadMore(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FetchByItems value)? fetchByItems,
-    TResult? Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
-    return loadMoreFetchByItems?.call(this);
+    return loadMore?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchByItems value)? fetchByItems,
-    TResult Function(_LoadMoreFetchByItems value)? loadMoreFetchByItems,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
-    if (loadMoreFetchByItems != null) {
-      return loadMoreFetchByItems(this);
+    if (loadMore != null) {
+      return loadMore(this);
     }
     return orElse();
   }
 }
 
-abstract class _LoadMoreFetchByItems implements ReturnListEvent {
-  const factory _LoadMoreFetchByItems(
-          {required final User user,
-          required final SalesOrg salesOrg,
-          required final ShipToInfo shipInfo,
-          required final CustomerCodeInfo customerCodeInfo}) =
-      _$_LoadMoreFetchByItems;
+abstract class _LoadMore implements ReturnListByItemEvent {
+  const factory _LoadMore(
+      {required final User user,
+      required final SalesOrg salesOrg,
+      required final ShipToInfo shipInfo,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_LoadMore;
 
   User get user;
   SalesOrg get salesOrg;
   ShipToInfo get shipInfo;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_LoadMoreFetchByItemsCopyWith<_$_LoadMoreFetchByItems> get copyWith =>
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$ReturnListState {
-  List<ReturnItemGroup> get returnItemGroupList =>
-      throw _privateConstructorUsedError;
+mixin _$ReturnListByItemState {
+  List<ReturnItem> get returnItemList => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
-  bool get isSmallFab => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ReturnListStateCopyWith<ReturnListState> get copyWith =>
+  $ReturnListByItemStateCopyWith<ReturnListByItemState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReturnListStateCopyWith<$Res> {
-  factory $ReturnListStateCopyWith(
-          ReturnListState value, $Res Function(ReturnListState) then) =
-      _$ReturnListStateCopyWithImpl<$Res, ReturnListState>;
+abstract class $ReturnListByItemStateCopyWith<$Res> {
+  factory $ReturnListByItemStateCopyWith(ReturnListByItemState value,
+          $Res Function(ReturnListByItemState) then) =
+      _$ReturnListByItemStateCopyWithImpl<$Res, ReturnListByItemState>;
   @useResult
   $Res call(
-      {List<ReturnItemGroup> returnItemGroupList,
+      {List<ReturnItem> returnItemList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isFetching,
-      bool canLoadMore,
-      bool isSmallFab});
+      bool canLoadMore});
 }
 
 /// @nodoc
-class _$ReturnListStateCopyWithImpl<$Res, $Val extends ReturnListState>
-    implements $ReturnListStateCopyWith<$Res> {
-  _$ReturnListStateCopyWithImpl(this._value, this._then);
+class _$ReturnListByItemStateCopyWithImpl<$Res,
+        $Val extends ReturnListByItemState>
+    implements $ReturnListByItemStateCopyWith<$Res> {
+  _$ReturnListByItemStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -701,17 +695,16 @@ class _$ReturnListStateCopyWithImpl<$Res, $Val extends ReturnListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? returnItemGroupList = null,
+    Object? returnItemList = null,
     Object? failureOrSuccessOption = null,
     Object? isFetching = null,
     Object? canLoadMore = null,
-    Object? isSmallFab = null,
   }) {
     return _then(_value.copyWith(
-      returnItemGroupList: null == returnItemGroupList
-          ? _value.returnItemGroupList
-          : returnItemGroupList // ignore: cast_nullable_to_non_nullable
-              as List<ReturnItemGroup>,
+      returnItemList: null == returnItemList
+          ? _value.returnItemList
+          : returnItemList // ignore: cast_nullable_to_non_nullable
+              as List<ReturnItem>,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -723,53 +716,47 @@ class _$ReturnListStateCopyWithImpl<$Res, $Val extends ReturnListState>
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSmallFab: null == isSmallFab
-          ? _value.isSmallFab
-          : isSmallFab // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnListStateCopyWith<$Res>
-    implements $ReturnListStateCopyWith<$Res> {
-  factory _$$_ReturnListStateCopyWith(
-          _$_ReturnListState value, $Res Function(_$_ReturnListState) then) =
-      __$$_ReturnListStateCopyWithImpl<$Res>;
+abstract class _$$_ReturnListByItemStateCopyWith<$Res>
+    implements $ReturnListByItemStateCopyWith<$Res> {
+  factory _$$_ReturnListByItemStateCopyWith(_$_ReturnListByItemState value,
+          $Res Function(_$_ReturnListByItemState) then) =
+      __$$_ReturnListByItemStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {List<ReturnItemGroup> returnItemGroupList,
+      {List<ReturnItem> returnItemList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isFetching,
-      bool canLoadMore,
-      bool isSmallFab});
+      bool canLoadMore});
 }
 
 /// @nodoc
-class __$$_ReturnListStateCopyWithImpl<$Res>
-    extends _$ReturnListStateCopyWithImpl<$Res, _$_ReturnListState>
-    implements _$$_ReturnListStateCopyWith<$Res> {
-  __$$_ReturnListStateCopyWithImpl(
-      _$_ReturnListState _value, $Res Function(_$_ReturnListState) _then)
+class __$$_ReturnListByItemStateCopyWithImpl<$Res>
+    extends _$ReturnListByItemStateCopyWithImpl<$Res, _$_ReturnListByItemState>
+    implements _$$_ReturnListByItemStateCopyWith<$Res> {
+  __$$_ReturnListByItemStateCopyWithImpl(_$_ReturnListByItemState _value,
+      $Res Function(_$_ReturnListByItemState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? returnItemGroupList = null,
+    Object? returnItemList = null,
     Object? failureOrSuccessOption = null,
     Object? isFetching = null,
     Object? canLoadMore = null,
-    Object? isSmallFab = null,
   }) {
-    return _then(_$_ReturnListState(
-      returnItemGroupList: null == returnItemGroupList
-          ? _value._returnItemGroupList
-          : returnItemGroupList // ignore: cast_nullable_to_non_nullable
-              as List<ReturnItemGroup>,
+    return _then(_$_ReturnListByItemState(
+      returnItemList: null == returnItemList
+          ? _value._returnItemList
+          : returnItemList // ignore: cast_nullable_to_non_nullable
+              as List<ReturnItem>,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -781,10 +768,6 @@ class __$$_ReturnListStateCopyWithImpl<$Res>
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSmallFab: null == isSmallFab
-          ? _value.isSmallFab
-          : isSmallFab // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -792,23 +775,21 @@ class __$$_ReturnListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnListState extends _ReturnListState {
-  const _$_ReturnListState(
-      {required final List<ReturnItemGroup> returnItemGroupList,
+class _$_ReturnListByItemState extends _ReturnListByItemState {
+  const _$_ReturnListByItemState(
+      {required final List<ReturnItem> returnItemList,
       required this.failureOrSuccessOption,
       required this.isFetching,
-      required this.canLoadMore,
-      required this.isSmallFab})
-      : _returnItemGroupList = returnItemGroupList,
+      required this.canLoadMore})
+      : _returnItemList = returnItemList,
         super._();
 
-  final List<ReturnItemGroup> _returnItemGroupList;
+  final List<ReturnItem> _returnItemList;
   @override
-  List<ReturnItemGroup> get returnItemGroupList {
-    if (_returnItemGroupList is EqualUnmodifiableListView)
-      return _returnItemGroupList;
+  List<ReturnItem> get returnItemList {
+    if (_returnItemList is EqualUnmodifiableListView) return _returnItemList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_returnItemGroupList);
+    return EqualUnmodifiableListView(_returnItemList);
   }
 
   @override
@@ -817,58 +798,53 @@ class _$_ReturnListState extends _ReturnListState {
   final bool isFetching;
   @override
   final bool canLoadMore;
-  @override
-  final bool isSmallFab;
 
   @override
   String toString() {
-    return 'ReturnListState(returnItemGroupList: $returnItemGroupList, failureOrSuccessOption: $failureOrSuccessOption, isFetching: $isFetching, canLoadMore: $canLoadMore, isSmallFab: $isSmallFab)';
+    return 'ReturnListByItemState(returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isFetching: $isFetching, canLoadMore: $canLoadMore)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnListState &&
+            other is _$_ReturnListByItemState &&
             const DeepCollectionEquality()
-                .equals(other._returnItemGroupList, _returnItemGroupList) &&
+                .equals(other._returnItemList, _returnItemList) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.canLoadMore, canLoadMore) ||
-                other.canLoadMore == canLoadMore) &&
-            (identical(other.isSmallFab, isSmallFab) ||
-                other.isSmallFab == isSmallFab));
+                other.canLoadMore == canLoadMore));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_returnItemGroupList),
+      const DeepCollectionEquality().hash(_returnItemList),
       failureOrSuccessOption,
       isFetching,
-      canLoadMore,
-      isSmallFab);
+      canLoadMore);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnListStateCopyWith<_$_ReturnListState> get copyWith =>
-      __$$_ReturnListStateCopyWithImpl<_$_ReturnListState>(this, _$identity);
+  _$$_ReturnListByItemStateCopyWith<_$_ReturnListByItemState> get copyWith =>
+      __$$_ReturnListByItemStateCopyWithImpl<_$_ReturnListByItemState>(
+          this, _$identity);
 }
 
-abstract class _ReturnListState extends ReturnListState {
-  const factory _ReturnListState(
-      {required final List<ReturnItemGroup> returnItemGroupList,
+abstract class _ReturnListByItemState extends ReturnListByItemState {
+  const factory _ReturnListByItemState(
+      {required final List<ReturnItem> returnItemList,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isFetching,
-      required final bool canLoadMore,
-      required final bool isSmallFab}) = _$_ReturnListState;
-  const _ReturnListState._() : super._();
+      required final bool canLoadMore}) = _$_ReturnListByItemState;
+  const _ReturnListByItemState._() : super._();
 
   @override
-  List<ReturnItemGroup> get returnItemGroupList;
+  List<ReturnItem> get returnItemList;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
@@ -876,9 +852,7 @@ abstract class _ReturnListState extends ReturnListState {
   @override
   bool get canLoadMore;
   @override
-  bool get isSmallFab;
-  @override
   @JsonKey(ignore: true)
-  _$$_ReturnListStateCopyWith<_$_ReturnListState> get copyWith =>
+  _$$_ReturnListByItemStateCopyWith<_$_ReturnListByItemState> get copyWith =>
       throw _privateConstructorUsedError;
 }

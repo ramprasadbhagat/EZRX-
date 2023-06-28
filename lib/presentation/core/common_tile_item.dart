@@ -200,7 +200,6 @@ class _ImageBox extends StatelessWidget {
     required this.image,
     required this.quantity,
   });
-
   final bool isQuantityBelowImage;
   final String image;
   final String quantity;

@@ -12,6 +12,7 @@ class PriceComponent extends StatelessWidget {
     this.title = '',
     this.priceTextStyle,
     this.currencyCodeTextStyle,
+    this.priceLabelStyle,
   }) : super(key: key);
 
   final SalesOrganisationConfigs salesOrgConfig;
@@ -19,6 +20,7 @@ class PriceComponent extends StatelessWidget {
   final String title;
   final TextStyle? priceTextStyle;
   final TextStyle? currencyCodeTextStyle;
+  final TextStyle? priceLabelStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +42,12 @@ class PriceComponent extends StatelessWidget {
           style: currencyCodeTextStyle ?? defaultStyle,
         ),
         EasyRichTextPattern(
-          targetString: '',
+          targetString: priceValue,
           style: priceTextStyle ?? defaultStyle,
+        ),
+        EasyRichTextPattern(
+          targetString: title,
+          style: priceLabelStyle ?? priceTextStyle ?? defaultStyle,
         ),
       ],
     );

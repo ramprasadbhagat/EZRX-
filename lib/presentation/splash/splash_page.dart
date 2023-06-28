@@ -23,7 +23,8 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.da
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/return_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
@@ -723,8 +724,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
-      context.read<ReturnListBloc>().add(
-            ReturnListEvent.fetchByItems(
+      context.read<ReturnListByItemBloc>().add(
+            ReturnListByItemEvent.fetch(
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              customerCodeInfo: customerCodeInfo,
+              user: user,
+            ),
+          );
+      context.read<ReturnListByRequestBloc>().add(
+            ReturnListByRequestEvent.fetch(
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
@@ -744,8 +754,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<AccountSummaryBloc>().add(
             const AccountSummaryEvent.initialize(),
           );
-      context.read<ReturnListBloc>().add(
-            const ReturnListEvent.initialized(),
+      context.read<ReturnListByItemBloc>().add(
+            const ReturnListByItemEvent.initialized(),
+          );
+      context.read<ReturnListByRequestBloc>().add(
+            const ReturnListByRequestEvent.initialized(),
           );
     }
   }

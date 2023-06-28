@@ -28,7 +28,8 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/return_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
@@ -459,8 +460,11 @@ class App extends StatelessWidget {
         BlocProvider<ChatBotBloc>(
           create: (context) => locator<ChatBotBloc>(),
         ),
-        BlocProvider<ReturnListBloc>(
-          create: (context) => locator<ReturnListBloc>(),
+        BlocProvider<ReturnListByItemBloc>(
+          create: (context) => locator<ReturnListByItemBloc>(),
+        ),
+        BlocProvider<ReturnListByRequestBloc>(
+          create: (context) => locator<ReturnListByRequestBloc>(),
         ),
       ],
       child: MaterialApp.router(
