@@ -4,6 +4,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
+import 'package:ezrxmobile/presentation/home/widgets/kr_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
@@ -76,6 +77,7 @@ class HomeTab extends StatelessWidget {
             const AccountSuspendedBanner(),
             const QuickAccessMenuPanel(),
             const HomeBanner(),
+            const KRBanners(),
           ],
         ),
       ),
