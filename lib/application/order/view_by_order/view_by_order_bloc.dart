@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_order_repository.dart';
@@ -17,8 +16,7 @@ part 'view_by_order_bloc.freezed.dart';
 
 const int _pageSize = 24;
 
-class ViewByOrderBloc
-    extends Bloc<ViewByOrderEvent, ViewByOrderState> {
+class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
   final IViewByOrderRepository viewByOrderRepository;
   ViewByOrderBloc({
     required this.viewByOrderRepository,
@@ -45,31 +43,30 @@ class ViewByOrderBloc
           user: e.user,
           pageSize: _pageSize,
           offset: 0,
-          viewByOrderHistoryFilter: e.viewByOrderHistoryFilter,
+          viewByOrderHistoryFilter: e.filter,
           orderBy: 'datetime',
           sort: e.sortDirection,
           searchKey: '',
           creatingOrderIds: <String>[],
+          viewByOrder: state.viewByOrderList,
         );
 
         failureOrSuccess.fold(
-          (failure) {
-            emit(
+          (failure) => emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
+              appliedFilter: e.filter,
               ),
-            );
-          },
-          (viewByOrderList) {
-            emit(
+          ),
+          (viewByOrderList) => emit(
               state.copyWith(
                 viewByOrderList: viewByOrderList,
                 failureOrSuccessOption: none(),
+              appliedFilter: e.filter,
                 isFetching: false,
               ),
-            );
-          },
+          ),
         );
       },
     );
@@ -84,42 +81,32 @@ class ViewByOrderBloc
         shipTo: e.shipToInfo,
         user: e.user,
         pageSize: _pageSize,
-        offset: 0,
-        viewByOrderHistoryFilter: e.viewByOrderHistoryFilter,
+        offset: state.viewByOrderList.orderHeaders.length,
+        viewByOrderHistoryFilter: state.appliedFilter,
         orderBy: 'datetime',
         sort: e.sortDirection,
         searchKey: '',
         creatingOrderIds: <String>[],
+        viewByOrder: state.viewByOrderList,
       );
 
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
+      failureOrSuccess.fold(
+        (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
             ),
-          );
-        },
-        (viewByOrderList) async {
-          final newViewByOrderList =
-              List<OrderHistoryDetailsOrderHeader>.from(
-            state.viewByOrderList.orderHeaders,
-          )..addAll(viewByOrderList.orderHeaders);
-
+        ),
+        (viewByOrder) => 
           emit(
             state.copyWith(
-              viewByOrderList: state.viewByOrderList.copyWith(
-                orderHeaders: newViewByOrderList,
-              ),
+            viewByOrderList: viewByOrder,
               failureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore:
-                  viewByOrderList.orderHeaders.length >= _pageSize,
+            canLoadMore: viewByOrder.orderHeaders.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
-          );
-        },
+        ),
       );
     });
   }

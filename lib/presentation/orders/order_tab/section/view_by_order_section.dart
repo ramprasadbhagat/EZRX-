@@ -64,7 +64,7 @@ class ViewByOrdersPage extends StatelessWidget {
                         .read<OrderHistoryFilterBloc>()
                         .state
                         .sortDirection,
-                    viewByOrderHistoryFilter: ViewByOrderHistoryFilter.empty(),
+                    filter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
           },
@@ -80,7 +80,6 @@ class ViewByOrdersPage extends StatelessWidget {
                       .read<OrderHistoryFilterBloc>()
                       .state
                       .sortDirection,
-                  viewByOrderHistoryFilter: ViewByOrderHistoryFilter.empty(),
                 ),
               ),
           itemBuilder: (context, index, item) => _ViewByOrderGroup(

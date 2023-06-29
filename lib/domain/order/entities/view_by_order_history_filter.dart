@@ -1,25 +1,27 @@
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 part 'view_by_order_history_filter.freezed.dart';
 
 @freezed
 class ViewByOrderHistoryFilter with _$ViewByOrderHistoryFilter {
   const ViewByOrderHistoryFilter._();
   factory ViewByOrderHistoryFilter({
-    required DateTimeStringValue toDate,
-    required DateTimeStringValue fromDate,
+    required DateTimeRange dateRange,
   }) = _ViewByOrderHistoryFilter;
 
   factory ViewByOrderHistoryFilter.empty() => ViewByOrderHistoryFilter(
-        fromDate: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now().subtract(const Duration(days: 28)),
+        dateRange: DateTimeRange(
+          end: DateTime.now(),
+          start: DateTime.now().subtract(
+            const Duration(days: 7),
           ),
         ),
-        toDate: DateTimeStringValue(
-          getDateStringByDateTime(DateTime.now()),
-        ),
       );
+  DateTimeStringValue get toDate =>
+      DateTimeStringValue(dateRange.end.toIso8601String());
+
+  DateTimeStringValue get fromDate =>
+      DateTimeStringValue(dateRange.start.toIso8601String());
 }

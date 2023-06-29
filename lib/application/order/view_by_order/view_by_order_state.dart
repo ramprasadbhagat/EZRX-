@@ -9,6 +9,7 @@ class ViewByOrderState with _$ViewByOrderState {
     required bool isFetching,
     required int nextPageIndex,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+    required ViewByOrderHistoryFilter appliedFilter,
   }) = _ViewByOrderState;
   factory ViewByOrderState.initial() => ViewByOrderState(
         viewByOrderList: ViewByOrder.empty(),
@@ -16,5 +17,6 @@ class ViewByOrderState with _$ViewByOrderState {
         isFetching: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
+        appliedFilter: ViewByOrderHistoryFilter.empty(),
       );
 }

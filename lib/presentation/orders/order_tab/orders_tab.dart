@@ -1,10 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrdersTab extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -78,7 +85,16 @@ class OrdersTab extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (context.tabsRouter.current.name ==
+                                    ViewByOrdersPageRoute.name &&
+                                !context
+                                    .read<ViewByOrderBloc>()
+                                    .state
+                                    .isFetching) {
+                              _showFilter(context);
+                            }
+                          },
                           icon: const Icon(
                             Icons.tune,
                           ),
@@ -94,5 +110,33 @@ class OrdersTab extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showFilter(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
+      builder: (_) {
+        return const ViewByOrderFilterBottomSheet();
+      },
+    ).then((value) {
+      if (value != null &&
+          context.read<ViewByOrderBloc>().state.appliedFilter != value) {
+        context.read<ViewByOrderBloc>().add(
+              ViewByOrderEvent.fetch(
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                user: context.read<UserBloc>().state.user,
+                sortDirection:
+                    context.read<OrderHistoryFilterBloc>().state.sortDirection,
+                filter: value,
+              ),
+            );
+      }
+    });
   }
 }

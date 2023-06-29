@@ -9,7 +9,7 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
-    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+    required ViewByOrderHistoryFilter filter,
   }) = _Fetch;
   const factory ViewByOrderEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,
@@ -17,6 +17,5 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required ShipToInfo shipToInfo,
     required User user,
     required String sortDirection,
-    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
   }) = _LoadMore;
 }

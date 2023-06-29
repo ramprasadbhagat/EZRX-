@@ -20,5 +20,6 @@ abstract class IViewByOrderRepository {
     required String searchKey,
     required List<String> creatingOrderIds,
     required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+    required ViewByOrder viewByOrder,
   });
 }

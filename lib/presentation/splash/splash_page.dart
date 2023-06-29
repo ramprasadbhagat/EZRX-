@@ -275,7 +275,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         .read<OrderHistoryFilterBloc>()
                         .state
                         .sortDirection,
-                    viewByOrderHistoryFilter: ViewByOrderHistoryFilter.empty(),
+                    filter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
             if (state.isOrderTypeEnable) {
