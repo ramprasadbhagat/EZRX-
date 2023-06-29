@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_add_favourite.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_remove_favourite.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -27,185 +26,6 @@ class MaterialListRemoteDataSource {
     required this.config,
   });
 
-  Future<List<MaterialInfo>> searchMaterialList({
-    required String salesOrgCode,
-    required String customerCode,
-    required String shipToCode,
-    required List excludePrincipal,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required String language,
-    required List<String> principalNameList,
-    required List<String> therapeuticClassList,
-    required List<String> itemBrandList,
-    required bool isForFOC,
-    required MaterialFilter selectedMaterialFilter,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery.getCustomerMaterialList(
-          // custCode: customerCode,
-          // excludePrincipal: excludePrincipal,
-          // languageActive: language,
-          // orderBy: orderBy,
-          // paginate: pageSize,
-          // salesOrg: salesOrgCode,
-          // searchKeyActive: searchKey,
-          // searchKeyActiveFilter: selectedMaterialFilter,
-          // shipToCode: shipToCode,
-          // principalNameList: selectedMaterialFilter.uniquePrincipalName,
-          // itemBrandList: selectedMaterialFilter.uniqueItemBrand,
-          // therapeuticClassList: selectedMaterialFilter.uniqueTherapeuticClass,
-          // offset: offset,
-          );
-
-      final variables = {
-        'salesOrganisation': salesOrgCode,
-        'customerCode': customerCode,
-        'shipToCustomer': shipToCode,
-        'excludePrincipal': excludePrincipal,
-        'plants': [],
-        'first': pageSize,
-        'after': offset,
-        'cached': true,
-        'searchKey': searchKey,
-        'orderBy': orderBy,
-        'language': language,
-        'principalNameList': principalNameList,
-        'therapeuticClassList': therapeuticClassList,
-        'itemBrandList': itemBrandList,
-        'isForFOC': isForFOC,
-      };
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}license',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': variables,
-        }),
-        apiEndpoint: 'materialsWithMetaQuery',
-      );
-      _materialListExceptionChecker(res: res);
-      final finalData = res.data['data']['materialsWithMeta']['materials'];
-
-      return List.from(finalData)
-          .map((e) => MaterialDto.fromJson(e).toDomain())
-          .toList();
-    });
-  }
-
-  Future<List<MaterialInfo>> searchMaterialListSalesRep({
-    required String salesOrgCode,
-    required String customerCode,
-    required String shipToCode,
-    required List excludePrincipal,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required String language,
-    required bool isForFOC,
-    required MaterialFilter selectedMaterialFilter,
-    required bool gimmickMaterial,
-    required String pickAndPack,
-    required String userName,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery.getSalesRepMaterialList();
-
-      final variables = {
-        'username': userName,
-        'salesOrganisation': salesOrgCode,
-        'customerSoldToCode': customerCode,
-        'customerShipToCode': shipToCode,
-        'excludePrincipal': excludePrincipal,
-        'gimmickMaterial': gimmickMaterial,
-        'pickAndPack': pickAndPack,
-        'plants': [],
-        'searchKey': searchKey,
-        'first': pageSize,
-        'after': offset,
-        'cached': true,
-        'orderBy': orderBy,
-        'language': language,
-        'principalNameList': selectedMaterialFilter.uniquePrincipalName,
-        'therapeuticClassList': selectedMaterialFilter.uniqueTherapeuticClass,
-        'itemBrandList': selectedMaterialFilter.uniqueItemBrand,
-      };
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}license',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': variables,
-        }),
-        apiEndpoint: 'customerMaterialsForSalesRep',
-      );
-      _materialListExceptionChecker(res: res);
-      final finalData =
-          res.data['data']['customerMaterialsForSalesRep']['materials'];
-
-      return List.from(finalData)
-          .map((e) => MaterialDto.fromJson(e).toDomain())
-          .toList();
-    });
-  }
-
-  Future<List<MaterialInfo>> getMaterialList({
-    required String salesOrgCode,
-    required String customerCode,
-    required String shipToCode,
-    required List excludePrincipal,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required String language,
-    required List<String> principalNameList,
-    required List<String> therapeuticClassList,
-    required List<String> itemBrandList,
-    required bool isForFOC,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery.getCustomerMaterialList();
-
-      final variables = {
-        'salesOrganisation': salesOrgCode,
-        'customerCode': customerCode,
-        'shipToCustomer': shipToCode,
-        'searchKey': searchKey,
-        'excludePrincipal': excludePrincipal,
-        'plants': [],
-        'first': pageSize,
-        'after': offset,
-        'cached': true,
-        'orderBy': orderBy,
-        'language': language,
-        'principalNameList': principalNameList,
-        'therapeuticClassList': therapeuticClassList,
-        'itemBrandList': itemBrandList,
-        'isForFOC': isForFOC,
-      };
-
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}license',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': variables,
-        }),
-        apiEndpoint: 'materialsWithMetaQuery',
-      );
-      _materialListExceptionChecker(res: res);
-      final finalData = res.data['data']['materialsWithMeta']['materials'];
-
-      return List.from(finalData)
-          .map((e) => MaterialDto.fromJson(e).toDomain())
-          .toList();
-    });
-  }
-
   Future<MaterialResponse> getProductList({
     required String salesOrgCode,
     required String customerCode,
@@ -215,7 +35,10 @@ class MaterialListRemoteDataSource {
     required bool gimmickMaterial,
     required String language,
     required bool isFavourite,
+    required bool bundleOffers,
     required String orderByName,
+    required List<String> manufactureList,
+    required List<String> countryListCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -230,11 +53,14 @@ class MaterialListRemoteDataSource {
           'SalesOrg': salesOrgCode,
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
-          // 'Type': 'bundle'
         },
       };
 
       if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
+      if (bundleOffers) variables['request']!['Type'] = 'bundle';
+      if (manufactureList.isNotEmpty) variables['request']!['Manufactured'] = manufactureList;
+      if (countryListCode.isNotEmpty) variables['request']!['CountryCode'] = countryListCode;
+
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}price',
@@ -248,68 +74,6 @@ class MaterialListRemoteDataSource {
       final finalData = res.data['data']['GetAllProducts'];
 
       return MaterialResponseDto.fromJson(finalData).toDomain();
-    });
-  }
-
-  Future<List<MaterialInfo>> getMaterialListSalesRep({
-    required String userName,
-    required String salesOrgCode,
-    required String customerCode,
-    required String shipToCode,
-    required List excludePrincipal,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required String language,
-    required bool gimmickMaterial,
-    required String pickAndPack,
-    required List<String> principalNameList,
-    required List<String> therapeuticClassList,
-    required List<String> itemBrandList,
-    required bool isSample,
-    required bool isForFOC,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery.getSalesRepMaterialList();
-
-      final variables = {
-        'username': userName,
-        'salesOrganisation': salesOrgCode,
-        'customerSoldToCode': customerCode,
-        'customerShipToCode': shipToCode,
-        'excludePrincipal': excludePrincipal,
-        'gimmickMaterial': gimmickMaterial,
-        'searchKey': searchKey,
-        'pickAndPack': pickAndPack,
-        'plants': [],
-        'first': pageSize,
-        'after': offset,
-        'cached': true,
-        'orderBy': orderBy,
-        'language': language,
-        'principalNameList': principalNameList,
-        'therapeuticClassList': therapeuticClassList,
-        'itemBrandList': itemBrandList,
-        'isSample': isSample,
-        'isForFOC': isForFOC,
-      };
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}license',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': variables,
-        }),
-        apiEndpoint: 'customerMaterialsForSalesRep',
-      );
-      _materialListExceptionChecker(res: res);
-      final finalData =
-          res.data['data']['customerMaterialsForSalesRep']['materials'];
-
-      return List.from(finalData)
-          .map((e) => MaterialDto.fromJson(e).toDomain())
-          .toList();
     });
   }
 

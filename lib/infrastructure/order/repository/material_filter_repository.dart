@@ -31,6 +31,7 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
     required ShipToInfo shipToInfo,
     required User user,
     required String pickAndPack,
+    required String searchKey,
   }) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -65,6 +66,7 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
               shipToCustomerCode: shipToCode,
               soldToCustomerCode: customerCode,
               language: language,
+              searchKey: searchKey,
             );
 
       return Right(filterMaterialData);

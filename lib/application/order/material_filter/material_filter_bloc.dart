@@ -3,8 +3,10 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_filter_material_repository.dart';
+import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -43,6 +45,7 @@ class MaterialFilterBloc
           shipToInfo: e.shipToInfo,
           user: e.user,
           pickAndPack: e.pickAndPack,
+          searchKey: '',
         );
         failureOrSuccess.fold(
           (failure) {
@@ -58,172 +61,141 @@ class MaterialFilterBloc
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 materialFilter: materialFilter,
-                isFavourite: false,
                 isFetching: false,
               ),
             );
           },
         );
       },
-      updateMaterialSelected: (e) async {
+      search: (e) async {},
+      updateSelectedMaterialFilter: (e) async {
         switch (e.filterType) {
-          case MaterialFilterType.principal:
-            emit(state.copyWith(
-              selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                uniquePrincipalName: state.selectedItem,
+          case MaterialFilterType.countryList:
+            final materialFilterCountry = Map<MaterialFilterCountry, bool>.from(
+              state.materialFilter.countryMapOptions,
+            );
+            if (e.key is MaterialFilterCountry) {
+              materialFilterCountry[e.key as MaterialFilterCountry] =
+                  !(materialFilterCountry[e.key] ?? false);
+            }
+
+            emit(
+              state.copyWith(
+                materialFilter: state.materialFilter.copyWith(
+                  countryMapOptions: materialFilterCountry,
+                  countryListSelected: materialFilterCountry.entries
+                      .where((element) => element.value)
+                      .map((e) => e.key)
+                      .toList(),
+                ),
               ),
-              isFilterApplied: true,
-              apiFailureOrSuccessOption: none(),
-            ));
+            );
             break;
-          case MaterialFilterType.therapeutic:
-            emit(state.copyWith(
-              selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                uniqueTherapeuticClass: state.selectedItem,
+          case MaterialFilterType.manufactured:
+            final materialFilterManufacture = Map<String, bool>.from(
+              state.materialFilter.manufactureMapOptions,
+            );
+            if (e.key is String) {
+              materialFilterManufacture[e.key as String] =
+                  !(materialFilterManufacture[e.key] ?? false);
+            }
+
+            emit(
+              state.copyWith(
+                materialFilter: state.materialFilter.copyWith(
+                  manufactureMapOptions: materialFilterManufacture,
+                  manufactureListSelected: materialFilterManufacture.entries
+                      .where((element) => element.value)
+                      .map((e) => e.key)
+                      .toList(),
+                ),
               ),
-              isFilterApplied: true,
-              apiFailureOrSuccessOption: none(),
-            ));
+            );
             break;
           case MaterialFilterType.isFavourite:
-            emit(state.copyWith(
-              selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                isFavourite: state.isFavourite,
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(isFavourite: e.key as bool),
               ),
-              isFilterApplied: true,
-              isUpdated: true,
-            ));
+            );
             break;
-          case MaterialFilterType.brand:
+          case MaterialFilterType.bundleOffers:
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(bundleOffers: e.key as bool),
+              ),
+            );
+            break;
+          case MaterialFilterType.sortBy:
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(sortBy: e.key as Sort),
+              ),
+            );
+            break;
           default:
-            emit(state.copyWith(
-              selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                uniqueItemBrand: state.selectedItem,
-              ),
-              isFilterApplied: true,
-              apiFailureOrSuccessOption: none(),
-            ));
             break;
         }
       },
-      updateTappedMaterialSelected: (e) async {
-        if (e.filterType == MaterialFilterType.isFavourite) {
-          emit(
-            state.copyWith(
-              isFavourite: !state.isFavourite,
-              isUpdated: false,
-            ),
-          );
-        } else {
-          final tempList = List<String>.from(state.selectedItem);
-          tempList.contains(e.selectedFilter)
-              ? tempList.remove(e.selectedFilter)
-              : tempList.add(e.selectedFilter);
-          emit(
-            state.copyWith(
-              selectedItem: tempList,
-              apiFailureOrSuccessOption: none(),
-            ),
-          );
-        }
-      },
-      updateSearchKey: (e) async =>
-          emit(state.copyWith(searchKey: e.searchkey)),
-      clearSelected: (_) async => emit(
+      updateSearchKey: (e) async => emit(
         state.copyWith(
-          selectedMaterialFilter: state.getEmptyMaterialFilter(),
+          searchKey: SearchKey(e.searchkey),
         ),
       ),
-      resetFilter: (_) {
+      initSelectedMaterialFilter: (e) async {
+        final manufactureMap = Map<String, bool>.from(
+          state.materialFilter.manufactureMapOptions,
+        );
+        manufactureMap.updateAll((key, value) => value = false);
+
+        final countryMap = Map<MaterialFilterCountry, bool>.from(
+          state.materialFilter.countryMapOptions,
+        );
+        countryMap.updateAll((key, value) => value = false);
+
+        for (final element
+            in e.selectedMaterialFilter.manufactureListSelected) {
+          manufactureMap[element] = true;
+        }
+        for (final element in e.selectedMaterialFilter.countryListSelected) {
+          countryMap[element] = true;
+        }
         emit(
           state.copyWith(
-            searchKey: '',
-            selectedMaterialFilter: state.getEmptyMaterialFilter(),
-            materialFilter: state.getEmptyMaterialFilter(),
-            isFilterApplied: false,
-            isFavourite: false,
-            selectedItem: [],
+            materialFilter: state.materialFilter.copyWith(
+              isFavourite: e.selectedMaterialFilter.isFavourite,
+              sortBy: e.selectedMaterialFilter.sortBy,
+              bundleOffers: e.selectedMaterialFilter.bundleOffers,
+              manufactureMapOptions: manufactureMap,
+              countryMapOptions: countryMap,
+              manufactureListSelected:
+                  e.selectedMaterialFilter.manufactureListSelected,
+              countryListSelected: e.selectedMaterialFilter.countryListSelected,
+            ),
+            searchKey: SearchKey(''),
           ),
         );
       },
-      clearAllSelected: (e) {
-        switch (e.filterType) {
-          case MaterialFilterType.principal:
-            emit(
-              state.copyWith(
-                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                  uniquePrincipalName: <String>[],
-                ),
-                selectedItem: [],
-                isFilterApplied: false,
-                apiFailureOrSuccessOption: none(),
-              ),
-            );
-            break;
-          case MaterialFilterType.therapeutic:
-            emit(
-              state.copyWith(
-                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                  uniqueTherapeuticClass: <String>[],
-                ),
-                selectedItem: [],
-                isFilterApplied: false,
-                apiFailureOrSuccessOption: none(),
-              ),
-            );
-            break;
-          case MaterialFilterType.brand:
-            emit(
-              state.copyWith(
-                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                  uniqueItemBrand: <String>[],
-                ),
-                selectedItem: [],
-                isFilterApplied: false,
-                apiFailureOrSuccessOption: none(),
-              ),
-            );
-            break;
-          case MaterialFilterType.isFavourite:
-            emit(
-              state.copyWith(
-                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                  isFavourite: false,
-                ),
-                selectedItem: [],
-                isFilterApplied: false,
-                apiFailureOrSuccessOption: none(),
-              ),
-            );
-        }
-      },
-      setTappedMaterialToEmpty: (e) async => emit(
-        state.copyWith(
-          selectedItem: [],
-          isFavourite: false,
-          apiFailureOrSuccessOption: none(),
-        ),
-      ),
-      initiateTappedMaterial: (e) async {
-        final tempMap = <String>[];
-        switch (e.filterType) {
-          case MaterialFilterType.principal:
-            tempMap.addAll(state.selectedMaterialFilter.uniquePrincipalName);
-            break;
-          case MaterialFilterType.therapeutic:
-            tempMap.addAll(state.selectedMaterialFilter.uniqueTherapeuticClass);
-            break;
-          case MaterialFilterType.brand:
-          default:
-            tempMap.addAll(state.selectedMaterialFilter.uniqueItemBrand);
-            break;
-        }
+      resetFilter: (e) {
+        final manufactureMap = Map<String, bool>.from(
+          state.materialFilter.manufactureMapOptions,
+        );
+        manufactureMap.updateAll((key, value) => value = false);
+
+        final countryMap = Map<MaterialFilterCountry, bool>.from(
+          state.materialFilter.countryMapOptions,
+        );
+        countryMap.updateAll((key, value) => value = false);
+
         emit(
           state.copyWith(
-            selectedItem: tempMap,
-            isFavourite: false,
-            isFilterApplied: false,
-            apiFailureOrSuccessOption: none(),
+            materialFilter: MaterialFilter.empty().copyWith(
+              manufactureMapOptions: manufactureMap,
+              countryMapOptions: countryMap,
+            ),
           ),
         );
       },

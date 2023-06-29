@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -74,8 +75,9 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
           ),
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
-                  child: _NoRecordFound.showMessage(
-                    message: widget.emptyMessage.tr(),
+                  child: NoRecordFound(
+                    title: '',
+                    subTitle: widget.emptyMessage.tr(),
                   ),
                 )
               : SliverGrid(
@@ -156,21 +158,6 @@ class _LoadingMoreIndicator extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _NoRecordFound {
-  static Widget showMessage({
-    String message = 'Not found',
-    IconData iconData = Icons.search_off_outlined,
-  }) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(iconData, size: 80),
-        Text(message).tr(),
-      ],
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
-
 class SearchBar extends StatefulWidget {
   const SearchBar({
     required this.onSearchChanged,
@@ -53,6 +52,7 @@ class _SearchBarState extends State<SearchBar> {
       enabled: widget.enabled,
       onChanged: (value) => _onSearchChanged(context, value),
       onFieldSubmitted: (value) => _onSearch(context, value),
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 24 / 16),
       decoration: InputDecoration(
         isDense: widget.isDense,
         suffixIcon: widget.controller.text.isEmpty
@@ -60,7 +60,11 @@ class _SearchBarState extends State<SearchBar> {
                 key: widget.searchIconKey,
                 icon: const Icon(
                   Icons.search,
+                  size: 22,
                 ),
+                splashRadius: 22,
+                visualDensity:
+                    const VisualDensity(horizontal: -4, vertical: -4),
                 onPressed: () => _onSearch(context, widget.controller.text),
               )
             : IconButton(

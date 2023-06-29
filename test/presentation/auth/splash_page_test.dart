@@ -641,7 +641,7 @@ void main() {
             customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             shipToInfo: eligibilityBlocMock.state.shipToInfo,
             selectedMaterialFilter:
-                materialFilterBlocMock.state.selectedMaterialFilter,
+                materialFilterBlocMock.state.materialFilter,
           ),
         ),
       ).called(2);

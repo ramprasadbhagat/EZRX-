@@ -20,12 +20,13 @@ MaterialFilterDto _$MaterialFilterDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MaterialFilterDto {
-  @JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-  List<String> get uniquePrincipalName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-  List<String> get uniqueTherapeuticClass => throw _privateConstructorUsedError;
-  @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-  List<String> get uniqueItemBrand => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+  List<String> get manufactureList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+  List<MaterialFilterCountryDto> get countryList =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'BrandList', defaultValue: <String>[])
+  List<String> get brandList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,12 +41,12 @@ abstract class $MaterialFilterDtoCopyWith<$Res> {
       _$MaterialFilterDtoCopyWithImpl<$Res, MaterialFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-          List<String> uniquePrincipalName,
-      @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-          List<String> uniqueTherapeuticClass,
-      @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-          List<String> uniqueItemBrand});
+      {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+          List<String> manufactureList,
+      @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+          List<MaterialFilterCountryDto> countryList,
+      @JsonKey(name: 'BrandList', defaultValue: <String>[])
+          List<String> brandList});
 }
 
 /// @nodoc
@@ -61,22 +62,22 @@ class _$MaterialFilterDtoCopyWithImpl<$Res, $Val extends MaterialFilterDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uniquePrincipalName = null,
-    Object? uniqueTherapeuticClass = null,
-    Object? uniqueItemBrand = null,
+    Object? manufactureList = null,
+    Object? countryList = null,
+    Object? brandList = null,
   }) {
     return _then(_value.copyWith(
-      uniquePrincipalName: null == uniquePrincipalName
-          ? _value.uniquePrincipalName
-          : uniquePrincipalName // ignore: cast_nullable_to_non_nullable
+      manufactureList: null == manufactureList
+          ? _value.manufactureList
+          : manufactureList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueTherapeuticClass: null == uniqueTherapeuticClass
-          ? _value.uniqueTherapeuticClass
-          : uniqueTherapeuticClass // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      uniqueItemBrand: null == uniqueItemBrand
-          ? _value.uniqueItemBrand
-          : uniqueItemBrand // ignore: cast_nullable_to_non_nullable
+      countryList: null == countryList
+          ? _value.countryList
+          : countryList // ignore: cast_nullable_to_non_nullable
+              as List<MaterialFilterCountryDto>,
+      brandList: null == brandList
+          ? _value.brandList
+          : brandList // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ) as $Val);
   }
@@ -91,12 +92,12 @@ abstract class _$$_MaterialFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-          List<String> uniquePrincipalName,
-      @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-          List<String> uniqueTherapeuticClass,
-      @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-          List<String> uniqueItemBrand});
+      {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+          List<String> manufactureList,
+      @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+          List<MaterialFilterCountryDto> countryList,
+      @JsonKey(name: 'BrandList', defaultValue: <String>[])
+          List<String> brandList});
 }
 
 /// @nodoc
@@ -110,22 +111,22 @@ class __$$_MaterialFilterDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uniquePrincipalName = null,
-    Object? uniqueTherapeuticClass = null,
-    Object? uniqueItemBrand = null,
+    Object? manufactureList = null,
+    Object? countryList = null,
+    Object? brandList = null,
   }) {
     return _then(_$_MaterialFilterDto(
-      uniquePrincipalName: null == uniquePrincipalName
-          ? _value._uniquePrincipalName
-          : uniquePrincipalName // ignore: cast_nullable_to_non_nullable
+      manufactureList: null == manufactureList
+          ? _value._manufactureList
+          : manufactureList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueTherapeuticClass: null == uniqueTherapeuticClass
-          ? _value._uniqueTherapeuticClass
-          : uniqueTherapeuticClass // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      uniqueItemBrand: null == uniqueItemBrand
-          ? _value._uniqueItemBrand
-          : uniqueItemBrand // ignore: cast_nullable_to_non_nullable
+      countryList: null == countryList
+          ? _value._countryList
+          : countryList // ignore: cast_nullable_to_non_nullable
+              as List<MaterialFilterCountryDto>,
+      brandList: null == brandList
+          ? _value._brandList
+          : brandList // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -135,52 +136,50 @@ class __$$_MaterialFilterDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialFilterDto extends _MaterialFilterDto {
   const _$_MaterialFilterDto(
-      {@JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-          required final List<String> uniquePrincipalName,
-      @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-          required final List<String> uniqueTherapeuticClass,
-      @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-          required final List<String> uniqueItemBrand})
-      : _uniquePrincipalName = uniquePrincipalName,
-        _uniqueTherapeuticClass = uniqueTherapeuticClass,
-        _uniqueItemBrand = uniqueItemBrand,
+      {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+          required final List<String> manufactureList,
+      @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+          required final List<MaterialFilterCountryDto> countryList,
+      @JsonKey(name: 'BrandList', defaultValue: <String>[])
+          required final List<String> brandList})
+      : _manufactureList = manufactureList,
+        _countryList = countryList,
+        _brandList = brandList,
         super._();
 
   factory _$_MaterialFilterDto.fromJson(Map<String, dynamic> json) =>
       _$$_MaterialFilterDtoFromJson(json);
 
-  final List<String> _uniquePrincipalName;
+  final List<String> _manufactureList;
   @override
-  @JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-  List<String> get uniquePrincipalName {
-    if (_uniquePrincipalName is EqualUnmodifiableListView)
-      return _uniquePrincipalName;
+  @JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+  List<String> get manufactureList {
+    if (_manufactureList is EqualUnmodifiableListView) return _manufactureList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_uniquePrincipalName);
+    return EqualUnmodifiableListView(_manufactureList);
   }
 
-  final List<String> _uniqueTherapeuticClass;
+  final List<MaterialFilterCountryDto> _countryList;
   @override
-  @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-  List<String> get uniqueTherapeuticClass {
-    if (_uniqueTherapeuticClass is EqualUnmodifiableListView)
-      return _uniqueTherapeuticClass;
+  @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+  List<MaterialFilterCountryDto> get countryList {
+    if (_countryList is EqualUnmodifiableListView) return _countryList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_uniqueTherapeuticClass);
+    return EqualUnmodifiableListView(_countryList);
   }
 
-  final List<String> _uniqueItemBrand;
+  final List<String> _brandList;
   @override
-  @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-  List<String> get uniqueItemBrand {
-    if (_uniqueItemBrand is EqualUnmodifiableListView) return _uniqueItemBrand;
+  @JsonKey(name: 'BrandList', defaultValue: <String>[])
+  List<String> get brandList {
+    if (_brandList is EqualUnmodifiableListView) return _brandList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_uniqueItemBrand);
+    return EqualUnmodifiableListView(_brandList);
   }
 
   @override
   String toString() {
-    return 'MaterialFilterDto(uniquePrincipalName: $uniquePrincipalName, uniqueTherapeuticClass: $uniqueTherapeuticClass, uniqueItemBrand: $uniqueItemBrand)';
+    return 'MaterialFilterDto(manufactureList: $manufactureList, countryList: $countryList, brandList: $brandList)';
   }
 
   @override
@@ -189,20 +188,20 @@ class _$_MaterialFilterDto extends _MaterialFilterDto {
         (other.runtimeType == runtimeType &&
             other is _$_MaterialFilterDto &&
             const DeepCollectionEquality()
-                .equals(other._uniquePrincipalName, _uniquePrincipalName) &&
-            const DeepCollectionEquality().equals(
-                other._uniqueTherapeuticClass, _uniqueTherapeuticClass) &&
+                .equals(other._manufactureList, _manufactureList) &&
             const DeepCollectionEquality()
-                .equals(other._uniqueItemBrand, _uniqueItemBrand));
+                .equals(other._countryList, _countryList) &&
+            const DeepCollectionEquality()
+                .equals(other._brandList, _brandList));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_uniquePrincipalName),
-      const DeepCollectionEquality().hash(_uniqueTherapeuticClass),
-      const DeepCollectionEquality().hash(_uniqueItemBrand));
+      const DeepCollectionEquality().hash(_manufactureList),
+      const DeepCollectionEquality().hash(_countryList),
+      const DeepCollectionEquality().hash(_brandList));
 
   @JsonKey(ignore: true)
   @override
@@ -221,28 +220,203 @@ class _$_MaterialFilterDto extends _MaterialFilterDto {
 
 abstract class _MaterialFilterDto extends MaterialFilterDto {
   const factory _MaterialFilterDto(
-      {@JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-          required final List<String> uniquePrincipalName,
-      @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-          required final List<String> uniqueTherapeuticClass,
-      @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-          required final List<String> uniqueItemBrand}) = _$_MaterialFilterDto;
+      {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+          required final List<String> manufactureList,
+      @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+          required final List<MaterialFilterCountryDto> countryList,
+      @JsonKey(name: 'BrandList', defaultValue: <String>[])
+          required final List<String> brandList}) = _$_MaterialFilterDto;
   const _MaterialFilterDto._() : super._();
 
   factory _MaterialFilterDto.fromJson(Map<String, dynamic> json) =
       _$_MaterialFilterDto.fromJson;
 
   @override
-  @JsonKey(name: 'uniquePrincipalName', defaultValue: <String>[])
-  List<String> get uniquePrincipalName;
+  @JsonKey(name: 'ManufactureList', defaultValue: <String>[])
+  List<String> get manufactureList;
   @override
-  @JsonKey(name: 'uniqueTherapeuticClass', defaultValue: <String>[])
-  List<String> get uniqueTherapeuticClass;
+  @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
+  List<MaterialFilterCountryDto> get countryList;
   @override
-  @JsonKey(name: 'uniqueItemBrand', defaultValue: <String>[])
-  List<String> get uniqueItemBrand;
+  @JsonKey(name: 'BrandList', defaultValue: <String>[])
+  List<String> get brandList;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialFilterDtoCopyWith<_$_MaterialFilterDto> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+MaterialFilterCountryDto _$MaterialFilterCountryDtoFromJson(
+    Map<String, dynamic> json) {
+  return _MaterialFilterCountryDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MaterialFilterCountryDto {
+  @JsonKey(name: 'Code', defaultValue: '')
+  String get code => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Name', defaultValue: '')
+  String get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MaterialFilterCountryDtoCopyWith<MaterialFilterCountryDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MaterialFilterCountryDtoCopyWith<$Res> {
+  factory $MaterialFilterCountryDtoCopyWith(MaterialFilterCountryDto value,
+          $Res Function(MaterialFilterCountryDto) then) =
+      _$MaterialFilterCountryDtoCopyWithImpl<$Res, MaterialFilterCountryDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'Code', defaultValue: '') String code,
+      @JsonKey(name: 'Name', defaultValue: '') String name});
+}
+
+/// @nodoc
+class _$MaterialFilterCountryDtoCopyWithImpl<$Res,
+        $Val extends MaterialFilterCountryDto>
+    implements $MaterialFilterCountryDtoCopyWith<$Res> {
+  _$MaterialFilterCountryDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+    Object? name = null,
+  }) {
+    return _then(_value.copyWith(
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MaterialFilterCountryDtoCopyWith<$Res>
+    implements $MaterialFilterCountryDtoCopyWith<$Res> {
+  factory _$$_MaterialFilterCountryDtoCopyWith(
+          _$_MaterialFilterCountryDto value,
+          $Res Function(_$_MaterialFilterCountryDto) then) =
+      __$$_MaterialFilterCountryDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'Code', defaultValue: '') String code,
+      @JsonKey(name: 'Name', defaultValue: '') String name});
+}
+
+/// @nodoc
+class __$$_MaterialFilterCountryDtoCopyWithImpl<$Res>
+    extends _$MaterialFilterCountryDtoCopyWithImpl<$Res,
+        _$_MaterialFilterCountryDto>
+    implements _$$_MaterialFilterCountryDtoCopyWith<$Res> {
+  __$$_MaterialFilterCountryDtoCopyWithImpl(_$_MaterialFilterCountryDto _value,
+      $Res Function(_$_MaterialFilterCountryDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+    Object? name = null,
+  }) {
+    return _then(_$_MaterialFilterCountryDto(
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MaterialFilterCountryDto extends _MaterialFilterCountryDto {
+  const _$_MaterialFilterCountryDto(
+      {@JsonKey(name: 'Code', defaultValue: '') required this.code,
+      @JsonKey(name: 'Name', defaultValue: '') required this.name})
+      : super._();
+
+  factory _$_MaterialFilterCountryDto.fromJson(Map<String, dynamic> json) =>
+      _$$_MaterialFilterCountryDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'Code', defaultValue: '')
+  final String code;
+  @override
+  @JsonKey(name: 'Name', defaultValue: '')
+  final String name;
+
+  @override
+  String toString() {
+    return 'MaterialFilterCountryDto(code: $code, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MaterialFilterCountryDto &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, code, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MaterialFilterCountryDtoCopyWith<_$_MaterialFilterCountryDto>
+      get copyWith => __$$_MaterialFilterCountryDtoCopyWithImpl<
+          _$_MaterialFilterCountryDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MaterialFilterCountryDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MaterialFilterCountryDto extends MaterialFilterCountryDto {
+  const factory _MaterialFilterCountryDto(
+      {@JsonKey(name: 'Code', defaultValue: '')
+          required final String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+          required final String name}) = _$_MaterialFilterCountryDto;
+  const _MaterialFilterCountryDto._() : super._();
+
+  factory _MaterialFilterCountryDto.fromJson(Map<String, dynamic> json) =
+      _$_MaterialFilterCountryDto.fromJson;
+
+  @override
+  @JsonKey(name: 'Code', defaultValue: '')
+  String get code;
+  @override
+  @JsonKey(name: 'Name', defaultValue: '')
+  String get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MaterialFilterCountryDtoCopyWith<_$_MaterialFilterCountryDto>
+      get copyWith => throw _privateConstructorUsedError;
 }

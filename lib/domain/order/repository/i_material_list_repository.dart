@@ -19,23 +19,7 @@ abstract class IMaterialListRepository {
     required ShipToInfo shipToInfo,
     required int pageSize,
     required int offset,
-    required String orderByName,
     required MaterialFilter selectedMaterialFilter,
-  });
-
-  Future<Either<ApiFailure, List<MaterialInfo>>> searchMaterialList({
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs salesOrgConfig,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required MaterialFilter selectedMaterialFilter,
-    required String pickAndPack,
-    bool isForFoc = false,
   });
 
   Future<Either<ApiFailure, List<MaterialInfo>>> getComboDealMaterials({

@@ -12,7 +12,7 @@ class MaterialListState with _$MaterialListState {
     required bool isScanFromBarcode,
     required int nextPageIndex,
     required SearchKey searchKey,
-    required MaterialFilter selectedFilters,
+    required MaterialFilter selectedMaterialFilter,
   }) = _MaterialListState;
 
   factory MaterialListState.initial() => MaterialListState(
@@ -24,6 +24,6 @@ class MaterialListState with _$MaterialListState {
         isScanFromBarcode: false,
         nextPageIndex: 0,
         searchKey: SearchKey(''),
-        selectedFilters: MaterialFilter.empty(),
+        selectedMaterialFilter: MaterialFilter.empty(),
       );
 }

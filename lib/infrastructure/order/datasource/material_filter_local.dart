@@ -11,7 +11,7 @@ class MaterialFilterLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getMaterialFilterResponse.json'),
     );
-    final finalData = data['data']['materialsWithMeta']['rawMetaData'];
+    final finalData = data['data']['GetFilterList'];
 
     return MaterialFilterDto.fromJson(finalData).toDomain();
   }

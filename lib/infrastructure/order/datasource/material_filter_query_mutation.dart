@@ -2,15 +2,16 @@ class MaterialFilterQueryMutation{
   
 String getMaterialFilterCategoryList() {
     return '''
-      query materialsWithMeta(\$customer: String!,\$salesOrganisation: String!,\$shipToCustomer:String!,\$language: String!){
-      materialsWithMeta(customer: \$customer, salesOrganisation: \$salesOrganisation, shipToCustomer: \$shipToCustomer, language: \$language) {
-        rawMetaData{
-          uniqueItemBrand,
-          uniquePrincipalName,
-          uniqueTherapeuticClass,
+      query (\$request: GetFilterListRequest!) {
+        GetFilterList(request: \$request) {
+          ManufactureList
+          CountryList {
+            Code
+            Name
+          }
+          BrandList
         }
       }
-    }
     ''';
   }
 

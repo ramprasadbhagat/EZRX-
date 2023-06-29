@@ -26,31 +26,35 @@ class MaterialFilterRemoteDataSource {
     required String soldToCustomerCode,
     required String shipToCustomerCode,
     required String language,
+    required String searchKey,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryMaterialFilters =
           materialFilterQueryMutation.getMaterialFilterCategoryList();
 
       final materialFilterInputVariables = {
-        'customer': soldToCustomerCode,
-        'salesOrganisation': salesOrganisation,
-        'shipToCustomer': shipToCustomerCode,
-        'language': language,
+        'request': {
+          'Customer': soldToCustomerCode,
+          'SalesOrg': salesOrganisation,
+          'ShipTo': shipToCustomerCode,
+          'Language': language,
+          'SearchKey': searchKey,
+        },
       };
 
       final resMaterialFilters = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}license',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryMaterialFilters,
           'variables': materialFilterInputVariables,
         }),
-        apiEndpoint: 'materialsWithMeta',
+        apiEndpoint: 'GetFilterListRequest',
       );
 
       _materialFilterExceptionChecker(res: resMaterialFilters);
       final finalData =
-          resMaterialFilters.data['data']['materialsWithMeta']['rawMetaData'];
+          resMaterialFilters.data['data']['GetFilterList'];
 
       return MaterialFilterDto.fromJson(finalData).toDomain();
     });

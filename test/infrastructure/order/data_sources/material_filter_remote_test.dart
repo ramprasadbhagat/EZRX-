@@ -24,7 +24,7 @@ void main() {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat-my.ezrx.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio);
@@ -47,10 +47,13 @@ void main() {
     () {
       test('Get Material Filter List', () async {
         final variables = {
-          'customer': 'fake-customer-code',
-          'salesOrganisation': 'fake-sales-org',
-          'shipToCustomer': 'fake-shiptocode',
-          'language': 'fake-language',
+          'request': {
+            'Customer': 'fake-customer-code',
+            'SalesOrg': 'fake-sales-org',
+            'ShipTo': 'fake-shiptocode',
+            'Language': 'fake-language',
+            'SearchKey': ''
+          }
         };
         final res = json.decode(
           await rootBundle
@@ -58,7 +61,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/license',
+          '/api/price',
           (server) => server.reply(
             200,
             res,
@@ -77,8 +80,9 @@ void main() {
           salesOrganisation: 'fake-sales-org',
           shipToCustomerCode: 'fake-shiptocode',
           soldToCustomerCode: 'fake-customer-code',
+          searchKey: '',
         );
-        final finalData = res['data']['materialsWithMeta']['rawMetaData'];
+        final finalData = res['data']['GetFilterList'];
 
         expect(result, MaterialFilterDto.fromJson(finalData).toDomain());
       });

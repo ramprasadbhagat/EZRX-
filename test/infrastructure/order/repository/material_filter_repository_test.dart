@@ -68,7 +68,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: mockUser.copyWith(username: Username('fake_user')),
-          pickAndPack: '');
+          pickAndPack: '',
+          searchKey: '');
       expect(
         result.isRight(),
         true,
@@ -86,7 +87,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: mockUser.copyWith(username: Username('fake_user')),
-          pickAndPack: '');
+          pickAndPack: '',
+          searchKey: '');
       expect(
         result.isLeft(),
         true,
@@ -119,7 +121,8 @@ void main() {
               username: Username('user'),
               email: EmailAddress('user@gmail.com'),
               customerCode: CustomerCode('100007654')),
-          pickAndPack: '');
+          pickAndPack: '',
+          searchKey: '');
       expect(
         result.isRight(),
         true,
@@ -133,6 +136,7 @@ void main() {
             soldToCustomerCode: '100000345',
             shipToCustomerCode: '1234567',
             language: ApiLanguageCode.english,
+            searchKey: '',
           )).thenAnswer((invocation) async => MaterialFilter.empty());
 
       final result = await materialFilterRepository.getMaterialFilterList(
@@ -149,7 +153,8 @@ void main() {
               username: Username('user'),
               email: EmailAddress('user@gmail.com'),
               customerCode: CustomerCode('100007654')),
-          pickAndPack: '');
+          pickAndPack: '',
+          searchKey: '');
       expect(
         result.isRight(),
         true,
@@ -173,7 +178,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: mockUser.copyWith(username: Username('fake_user')),
-          pickAndPack: '');
+          pickAndPack: '',
+          searchKey: '');
       expect(
         result.isLeft(),
         true,
@@ -186,6 +192,7 @@ void main() {
             soldToCustomerCode: '100000345',
             shipToCustomerCode: '1234567',
             language: ApiLanguageCode.english,
+            searchKey: '',
           )).thenThrow((invocation) async => MockException());
 
       final result = await materialFilterRepository.getMaterialFilterList(
@@ -195,7 +202,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
           user: mockUser.copyWith(username: Username('fake_user')),
-          pickAndPack: '');
+          pickAndPack: '',
+          searchKey: '');
       expect(
         result.isLeft(),
         true,

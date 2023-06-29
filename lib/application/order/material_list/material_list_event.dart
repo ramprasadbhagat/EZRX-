@@ -13,30 +13,6 @@ class MaterialListEvent with _$MaterialListEvent {
     // required OrderDocumentType orderDocumentType,
     // required String pickAndPack,
   }) = _Fetch;
-
-  const factory MaterialListEvent.searchMaterialList({
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs configs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required MaterialFilter selectedMaterialFilter,
-    required String pickAndPack,
-    required SearchKey searchKey,
-    @Default(false) bool isScanSearch,
-  }) = _SearchMaterialList;
- 
-  const factory MaterialListEvent.autoSearchMaterialList({
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs configs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required MaterialFilter selectedMaterialFilter,
-    required String pickAndPack,
-    required SearchKey searchKey,
-    @Default(false) bool isScanSearch,
-  }) = _AutoSearchMaterialList;
  
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;
@@ -51,19 +27,6 @@ class MaterialListEvent with _$MaterialListEvent {
     // required OrderDocumentType orderDocumentType,
     // required String pickAndPack,
   }) = _LoadMore;
- 
-  factory MaterialListEvent.deletedSearchMaterialList({
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs configs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required MaterialFilter selectedMaterialFilter,
-    required OrderDocumentType orderDocumentType,
-    required String pickAndPack,
-    required SearchKey searchKey,
-    @Default(false) bool isScanSearch,
-  }) = _DeletedSearchMaterialList;
 
   factory MaterialListEvent.addFavourite({
     required MaterialInfo item,
@@ -72,4 +35,8 @@ class MaterialListEvent with _$MaterialListEvent {
   factory MaterialListEvent.deleteFavourite({
     required MaterialInfo item,
   }) = _DeleteFavourite;
+
+  factory MaterialListEvent.updateSelectedMaterialFilter({
+    required MaterialFilter selectedMaterialFilter,
+}) = _updateSelectedMaterialFilter;
 }

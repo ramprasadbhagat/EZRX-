@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 
 class MaterialListRepository implements IMaterialListRepository {
   final Config config;
@@ -42,7 +43,6 @@ class MaterialListRepository implements IMaterialListRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter selectedMaterialFilter,
-    required String orderByName,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -65,8 +65,11 @@ class MaterialListRepository implements IMaterialListRepository {
         language: salesOrgConfig.getConfigLanguage,
         gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
         isFavourite: selectedMaterialFilter.isFavourite,
+        bundleOffers: selectedMaterialFilter.bundleOffers,
         offset: offset,
-        orderByName: orderByName,
+        orderByName: selectedMaterialFilter.sortBy.valueRequest,
+        manufactureList: selectedMaterialFilter.manufactureListSelected,
+        countryListCode: selectedMaterialFilter.countryListSelected.map((e) => e.code).toList(),
       );
       final stockInfoList = await getStockInfoList(
         materials: materialListData.products,
@@ -103,75 +106,6 @@ class MaterialListRepository implements IMaterialListRepository {
       return Right(
         materialListData.copyWith(products: materialListDataWithStock),
       );
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<MaterialInfo>>> searchMaterialList({
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs salesOrgConfig,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required MaterialFilter selectedMaterialFilter,
-    required String pickAndPack,
-    bool isForFoc = false,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final materialListData = user.role.type.isSalesRepRole
-            ? await materialListLocalDataSource.searchMaterialListSalesRep()
-            : await materialListLocalDataSource.searchMaterialList();
-
-        return Right(materialListData);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-
-    try {
-      final materialListData = user.role.type.isSalesRepRole
-          ? await materialListRemoteDataSource.searchMaterialListSalesRep(
-              userName: user.username.getOrCrash(),
-              pickAndPack: pickAndPack,
-              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
-              excludePrincipal: salesOrgConfig.getExcludePrincipal,
-              customerCode: customerCodeInfo.customerCodeSoldTo,
-              shipToCode: shipToInfo.shipToCustomerCode,
-              pageSize: pageSize,
-              offset: offset,
-              orderBy: orderBy,
-              searchKey: searchKey,
-              language: salesOrgConfig.getConfigLanguage,
-              gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
-              isForFOC: isForFoc,
-              selectedMaterialFilter: selectedMaterialFilter,
-            )
-          : await materialListRemoteDataSource.searchMaterialList(
-              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
-              excludePrincipal: salesOrgConfig.getExcludePrincipal,
-              customerCode: customerCodeInfo.customerCodeSoldTo,
-              shipToCode: shipToInfo.shipToCustomerCode,
-              pageSize: pageSize,
-              offset: offset,
-              orderBy: orderBy,
-              searchKey: searchKey,
-              language: salesOrgConfig.getConfigLanguage,
-              principalNameList: selectedMaterialFilter.uniquePrincipalName,
-              itemBrandList: selectedMaterialFilter.uniqueItemBrand,
-              therapeuticClassList:
-                  selectedMaterialFilter.uniqueTherapeuticClass,
-              isForFOC: isForFoc,
-              selectedMaterialFilter: selectedMaterialFilter,
-            );
-
-      return Right(materialListData);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

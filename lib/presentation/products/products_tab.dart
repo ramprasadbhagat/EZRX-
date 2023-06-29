@@ -6,12 +6,12 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
+import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
 import 'package:ezrxmobile/presentation/products/widgets/shimmer_grid_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -45,15 +45,12 @@ class ProductsTab extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.materialList != current.materialList,
+            previous.isFetching != current.isFetching,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: ProductSearchEntry(),
-              ),
+              const SearchAndFilter(),
               FilterValueList(
                 isFetching: state.isFetching,
               ),
@@ -115,7 +112,7 @@ class ProductsTab extends StatelessWidget {
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
-                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+                context.read<MaterialFilterBloc>().state.materialFilter,
           ),
         );
   }
@@ -130,7 +127,7 @@ class ProductsTab extends StatelessWidget {
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
-                context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+                context.read<MaterialFilterBloc>().state.materialFilter,
           ),
         );
   }
@@ -168,7 +165,7 @@ class _TotalMaterialCount extends StatelessWidget {
                   previous.materialList != current.materialList,
               builder: (context, state) {
                 return Text(
-                  state.selectedFilters.isFavourite
+                  state.selectedMaterialFilter.isFavourite
                       //if favourite filter is true show the material list length
                       ? '${state.materialList.length}'
                       //if favourite filter is false show the material count

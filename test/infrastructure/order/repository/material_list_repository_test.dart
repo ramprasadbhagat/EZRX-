@@ -2,18 +2,11 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
@@ -55,31 +48,32 @@ void main() {
   final fakeShipToInfo = ShipToInfo.empty()
       .copyWith(shipToCustomerCode: '1234567', status: Status('fake_status'));
   final mockUser = User.empty();
-  final mockSalesOrganisationConfigs =
-      SalesOrganisationConfigs.empty().copyWith(
-          languageFilter: true,
-          languageValue: LanguageValue(ApiLanguageCode.english),
-          disablePrincipals: false,
-          enableGimmickMaterial: true,
-          principalList: [
-            SalesOrganisationConfigsPrincipal.empty()
-                .copyWith(principalCode: PrincipalCode('123')),
-            SalesOrganisationConfigsPrincipal.empty()
-                .copyWith(principalCode: PrincipalCode('234')),
-            SalesOrganisationConfigsPrincipal.empty()
-                .copyWith(principalCode: PrincipalCode('345')),
-          ],
-          currency: Currency('SG'),
-          salesOrg: SalesOrg('2601'));
+  // final mockSalesOrganisationConfigs =
+  //     SalesOrganisationConfigs.empty().copyWith(
+  //         languageFilter: true,
+  //         languageValue: LanguageValue(ApiLanguageCode.english),
+  //         disablePrincipals: false,
+  //         enableGimmickMaterial: true,
+  //         principalList: [
+  //           SalesOrganisationConfigsPrincipal.empty()
+  //               .copyWith(principalCode: PrincipalCode('123')),
+  //           SalesOrganisationConfigsPrincipal.empty()
+  //               .copyWith(principalCode: PrincipalCode('234')),
+  //           SalesOrganisationConfigsPrincipal.empty()
+  //               .copyWith(principalCode: PrincipalCode('345')),
+  //         ],
+  //         currency: Currency('SG'),
+  //         salesOrg: SalesOrg('2601'));
   // final mockOrderDocumentType = OrderDocumentType.empty().copyWith(
   //     documentType: DocumentType('Sample (ZPFB)'), salesOrg: SalesOrg('2601'));
-  final mockMaterialFilter = MaterialFilter.empty().copyWith(uniqueItemBrand: [
-    'Ribena RTD Blueberry',
-  ], uniqueTherapeuticClass: [
-    'Other multivitamins with minerals',
-  ], uniquePrincipalName: [
-    'GSK Consumer Healthcare',
-  ]);
+  // final mockMaterialFilter = MaterialFilter.empty().copyWith(
+  //   countryListSelected: [
+  //     MaterialFilterCountry.empty().copyWith(name: 'Hong Kong', code: 'HK'),
+  //   ],
+  //   manufactureListSelected: [
+  //     'STRYKER CORPORATION (M) SDN BHD',
+  //   ],
+  // );
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -419,247 +413,6 @@ void main() {
     //     true,
     //   );
     // });
-
-    test('get searchMaterialList successfully locally for salesrep', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => materialListLocalDataSource.searchMaterialListSalesRep())
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'OrderDate',
-        pageSize: 10,
-        pickAndPack: '',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '',
-        selectedMaterialFilter: MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-        ),
-        isForFoc: false,
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
-    test('get searchMaterialList successfully locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => materialListLocalDataSource.searchMaterialList())
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'OrderDate',
-        pageSize: 10,
-        pickAndPack: '',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '',
-        selectedMaterialFilter: MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser,
-        isForFoc: false,
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
-    test('get searchMaterialList successfully locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => materialListLocalDataSource.searchMaterialList())
-          .thenThrow((invocation) async => MockException());
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'OrderDate',
-        pageSize: 10,
-        pickAndPack: '',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '',
-        selectedMaterialFilter: MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser,
-        isForFoc: false,
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
-    });
-    test('get searchMaterialList successfully remote for salesrep', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialListRemoteDataSource.searchMaterialListSalesRep(
-          selectedMaterialFilter: mockMaterialFilter,
-          userName: 'user',
-          salesOrgCode: '2601',
-          customerCode: '100000345',
-          shipToCode: '1234567',
-          excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
-          pageSize: 10,
-          offset: 0,
-          orderBy: 'materialDescription_asc',
-          searchKey: '1763',
-          language: ApiLanguageCode.english,
-          gimmickMaterial: true,
-          pickAndPack: 'include',
-          isForFOC: false)).thenAnswer((invocation) async => <MaterialInfo>[]);
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'materialDescription_asc',
-        pageSize: 10,
-        pickAndPack: 'include',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '1763',
-        selectedMaterialFilter: mockMaterialFilter, //MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-            id: '1',
-            username: Username('user'),
-            email: EmailAddress('user@gmail.com'),
-            customerCode: CustomerCode('100000345')),
-        isForFoc: false,
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
-    test('get searchMaterialList successfully remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialListRemoteDataSource.searchMaterialList(
-              offset: 0,
-              orderBy: 'OrderDate',
-              pageSize: 10,
-              searchKey: '1763',
-              selectedMaterialFilter: MaterialFilter.empty(),
-              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-              excludePrincipal: [],
-              isForFOC: false,
-              itemBrandList: [],
-              language: ApiLanguageCode.english,
-              principalNameList: [],
-              salesOrgCode: '2601',
-              shipToCode: '1234567',
-              therapeuticClassList: []))
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'OrderDate',
-        pageSize: 10,
-        pickAndPack: '',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '1763',
-        selectedMaterialFilter: MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-            id: '1',
-            username: Username('user'),
-            email: EmailAddress('user@gmail.com'),
-            customerCode: CustomerCode('100007654')),
-        isForFoc: false,
-      );
-      expect(
-        result.isRight(),
-        false,
-      );
-    });
-    test('get searchMaterialList fail remote for salesrep', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialListRemoteDataSource.searchMaterialListSalesRep(
-          selectedMaterialFilter: MaterialFilter.empty(),
-          userName: 'user',
-          salesOrgCode: '2601',
-          customerCode: '100000345',
-          shipToCode: '1234567',
-          excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
-          pageSize: 10,
-          offset: 0,
-          orderBy: 'materialDescription_asc',
-          searchKey: '173',
-          language: ApiLanguageCode.english,
-          gimmickMaterial: true,
-          pickAndPack: 'include',
-          isForFOC: true)).thenThrow((invocation) async => MockException());
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'materialDescription_asc',
-        pageSize: 10,
-        pickAndPack: 'include',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '1763',
-        selectedMaterialFilter: MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-            id: '1',
-            username: Username('user'),
-            email: EmailAddress('user@gmail.com'),
-            customerCode: CustomerCode('100007654')),
-        isForFoc: false,
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
-    });
-    test('get searchMaterialList fail remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialListRemoteDataSource.searchMaterialList(
-              offset: 0,
-              orderBy: '',
-              pageSize: 10,
-              searchKey: '',
-              selectedMaterialFilter: MaterialFilter.empty(),
-              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-              excludePrincipal: [],
-              isForFOC: true,
-              itemBrandList: [],
-              language: '',
-              principalNameList: [],
-              salesOrgCode: '',
-              shipToCode: '',
-              therapeuticClassList: []))
-          .thenThrow((invocation) async => MockException());
-
-      final result = await materialListRepository.searchMaterialList(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        orderBy: 'OrderDate',
-        pageSize: 10,
-        pickAndPack: '',
-        salesOrgConfig: mockSalesOrganisationConfigs,
-        salesOrganisation: fakeSaleOrg,
-        searchKey: '',
-        selectedMaterialFilter: MaterialFilter.empty(),
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-            id: '1',
-            username: Username('user'),
-            email: EmailAddress('user@gmail.com'),
-            customerCode: CustomerCode('100007654')),
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
-    });
   });
 
   group('Materials for combo deal', () {

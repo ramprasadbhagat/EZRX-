@@ -96,12 +96,16 @@ class WidgetKeys {
 
   static Key materialSearchField(String searchKey) =>
       Key('materialSearchField$searchKey');
+  static const Key materialListPage = Key('materialListPage');
 
   //============================================================
   //  MaterialFilterSearch Page Keys
   //============================================================
 
   static const Key materialFilterSearchField = Key('materialFilterSearchField');
+  static const Key clearSearchFilter = Key('clearSearchFilter');
+  static const Key materialFilterPage = Key('materialFilterPage');
+  static const Key applyMaterialFilter = Key('applyMaterialFilter');
 
   //============================================================
   //  Search Bonus page Keys
@@ -211,7 +215,6 @@ class WidgetKeys {
   //  Material List
   //============================================================
 
-  static const Key materialListPage = Key('materialListPage');
   static const Key materialListPageAppBar = Key('materialListPageAppBar');
   static const Key materialListLoader = Key('LoaderImage');
   static const Key totalMaterialItemCount = Key('totalMaterialCount');

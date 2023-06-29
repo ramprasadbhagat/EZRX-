@@ -8,15 +8,16 @@ part of 'material_filter_dto.dart';
 
 _$_MaterialFilterDto _$$_MaterialFilterDtoFromJson(Map<String, dynamic> json) =>
     _$_MaterialFilterDto(
-      uniquePrincipalName: (json['uniquePrincipalName'] as List<dynamic>?)
+      manufactureList: (json['ManufactureList'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      uniqueTherapeuticClass: (json['uniqueTherapeuticClass'] as List<dynamic>?)
-              ?.map((e) => e as String)
+      countryList: (json['CountryList'] as List<dynamic>?)
+              ?.map((e) =>
+                  MaterialFilterCountryDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      uniqueItemBrand: (json['uniqueItemBrand'] as List<dynamic>?)
+      brandList: (json['BrandList'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
@@ -25,7 +26,21 @@ _$_MaterialFilterDto _$$_MaterialFilterDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MaterialFilterDtoToJson(
         _$_MaterialFilterDto instance) =>
     <String, dynamic>{
-      'uniquePrincipalName': instance.uniquePrincipalName,
-      'uniqueTherapeuticClass': instance.uniqueTherapeuticClass,
-      'uniqueItemBrand': instance.uniqueItemBrand,
+      'ManufactureList': instance.manufactureList,
+      'CountryList': instance.countryList.map((e) => e.toJson()).toList(),
+      'BrandList': instance.brandList,
+    };
+
+_$_MaterialFilterCountryDto _$$_MaterialFilterCountryDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_MaterialFilterCountryDto(
+      code: json['Code'] as String? ?? '',
+      name: json['Name'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_MaterialFilterCountryDtoToJson(
+        _$_MaterialFilterCountryDto instance) =>
+    <String, dynamic>{
+      'Code': instance.code,
+      'Name': instance.name,
     };

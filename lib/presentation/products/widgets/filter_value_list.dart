@@ -24,30 +24,7 @@ class _FilterValueListState extends State<FilterValueList> {
       child: Wrap(
         spacing: 8.0,
         children: [
-          BlocConsumer<MaterialFilterBloc, MaterialFilterState>(
-            listener: (context, state) {
-              if (state.isUpdated) {
-                context.read<MaterialListBloc>().add(
-                      MaterialListEvent.fetch(
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo:
-                            context.read<CustomerCodeBloc>().state.shipToInfo,
-                        selectedMaterialFilter: context
-                            .read<MaterialFilterBloc>()
-                            .state
-                            .selectedMaterialFilter,
-                      ),
-                    );
-              }
-            },
+          BlocBuilder<MaterialListBloc, MaterialListState>(
             buildWhen: (previous, current) =>
                 previous.selectedMaterialFilter.isFavourite !=
                 current.selectedMaterialFilter.isFavourite,
@@ -57,6 +34,8 @@ class _FilterValueListState extends State<FilterValueList> {
                   'Favourites'.tr(),
                 ),
                 selected: state.selectedMaterialFilter.isFavourite,
+                backgroundColor: ZPColors.secondaryEmerald10,
+                selectedColor: ZPColors.primary,
                 labelStyle: Theme.of(context).chipTheme.labelStyle?.copyWith(
                       color: state.selectedMaterialFilter.isFavourite
                           ? ZPColors.white
@@ -66,15 +45,42 @@ class _FilterValueListState extends State<FilterValueList> {
                     ? null
                     : (value) {
                         context.read<MaterialFilterBloc>().add(
-                              const MaterialFilterEvent
-                                  .updateTappedMaterialSelected(
+                              MaterialFilterEvent.updateSelectedMaterialFilter(
                                 MaterialFilterType.isFavourite,
-                                '',
+                                !context
+                                    .read<MaterialListBloc>()
+                                    .state
+                                    .selectedMaterialFilter
+                                    .isFavourite,
                               ),
                             );
-                        context.read<MaterialFilterBloc>().add(
-                              const MaterialFilterEvent.updateMaterialSelected(
-                                MaterialFilterType.isFavourite,
+                        context.read<MaterialListBloc>().add(
+                              MaterialListEvent.fetch(
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                configs:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                shipToInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                selectedMaterialFilter: context
+                                    .read<MaterialListBloc>()
+                                    .state
+                                    .selectedMaterialFilter
+                                    .copyWith(
+                                      isFavourite: !context
+                                          .read<MaterialListBloc>()
+                                          .state
+                                          .selectedMaterialFilter
+                                          .isFavourite,
+                                    ),
                               ),
                             );
                       },

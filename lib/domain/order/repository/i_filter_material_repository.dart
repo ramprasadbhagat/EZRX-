@@ -15,5 +15,6 @@ abstract class IMaterialFilterRepository {
     required ShipToInfo shipToInfo,
     required User user,
     required String pickAndPack,
+    required String searchKey,
   });
 }

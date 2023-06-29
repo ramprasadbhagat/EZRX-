@@ -11,30 +11,25 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
     required SalesOrganisationConfigs salesOrgConfig,
     required String pickAndPack,
   }) = _fetch;
-  const factory MaterialFilterEvent.updateMaterialSelected(
+  const factory MaterialFilterEvent.updateSelectedMaterialFilter(
     MaterialFilterType filterType,
-  ) = _updateMaterialSelected;
-  const factory MaterialFilterEvent.updateTappedMaterialSelected(
-    MaterialFilterType filterType,
-    String selectedFilter,
-  ) = _updateTappedMaterialSelected;
-  const factory MaterialFilterEvent.setTappedMaterialToEmpty() =
-      _SetTappedMaterialToEmpty;
-  const factory MaterialFilterEvent.initiateTappedMaterial({
-    required MaterialFilterType filterType,
-  }) = _InitiateTappedMaterial;
+    Object key,
+  ) = _updateSelectedMaterialFilter;
+  const factory MaterialFilterEvent.initSelectedMaterialFilter(
+      MaterialFilter selectedMaterialFilter,
+      ) = _initSelectedMaterialFilter;
   const factory MaterialFilterEvent.updateSearchKey(String searchkey) =
       _updateSearchKey;
-  const factory MaterialFilterEvent.clearSelected() = _clearSelected;
-  const factory MaterialFilterEvent.clearAllSelected(
-    MaterialFilterType filterType,
-  ) = _clearAllSelected;
+  const factory MaterialFilterEvent.search() =
+      _search;
   const factory MaterialFilterEvent.resetFilter() = _resetFilter;
 }
 
 enum MaterialFilterType {
-  principal,
-  therapeutic,
-  brand,
   isFavourite,
+  bundleOffers,
+  sortBy,
+  countryList,
+  manufactured,
+  brand,
 }

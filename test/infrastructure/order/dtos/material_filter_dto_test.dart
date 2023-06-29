@@ -17,10 +17,10 @@ void main() {
     });
     test('Test toDomain', () {
       final configs = MaterialFilterDto.fromJson(
-        data['data']['materialsWithMeta']['rawMetaData'],
+        data['data']['GetFilterList'],
       ).toDomain();
-      expect(configs.uniqueItemBrand,
-          data['data']['materialsWithMeta']['rawMetaData']['uniqueItemBrand']);
+      expect(configs.brandList,
+          data['data']['GetFilterList']['BrandList']);
     });
   });
 }

@@ -34,7 +34,6 @@ import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order_section.dart';
@@ -136,10 +135,6 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'customer_search',
       page: CustomerSearchPage,
-    ),
-    AutoRoute(
-      path: 'orders/material_filter',
-      page: MaterialFilterPage,
     ),
     AutoRoute(
       path: 'terms_of_service',
