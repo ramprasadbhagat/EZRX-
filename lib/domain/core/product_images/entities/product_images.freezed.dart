@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProductImages {
-  MaterialNumber get materialID => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get image => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $ProductImagesCopyWith<$Res> {
       _$ProductImagesCopyWithImpl<$Res, ProductImages>;
   @useResult
   $Res call(
-      {MaterialNumber materialID,
+      {MaterialNumber materialNumber,
       String name,
       String description,
       List<String> image,
@@ -54,16 +54,16 @@ class _$ProductImagesCopyWithImpl<$Res, $Val extends ProductImages>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialID = null,
+    Object? materialNumber = null,
     Object? name = null,
     Object? description = null,
     Object? image = null,
     Object? thumbNail = null,
   }) {
     return _then(_value.copyWith(
-      materialID: null == materialID
-          ? _value.materialID
-          : materialID // ignore: cast_nullable_to_non_nullable
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
       name: null == name
           ? _value.name
@@ -94,7 +94,7 @@ abstract class _$$_ProductImagesCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MaterialNumber materialID,
+      {MaterialNumber materialNumber,
       String name,
       String description,
       List<String> image,
@@ -112,16 +112,16 @@ class __$$_ProductImagesCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialID = null,
+    Object? materialNumber = null,
     Object? name = null,
     Object? description = null,
     Object? image = null,
     Object? thumbNail = null,
   }) {
     return _then(_$_ProductImages(
-      materialID: null == materialID
-          ? _value.materialID
-          : materialID // ignore: cast_nullable_to_non_nullable
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
       name: null == name
           ? _value.name
@@ -147,7 +147,7 @@ class __$$_ProductImagesCopyWithImpl<$Res>
 
 class _$_ProductImages extends _ProductImages {
   const _$_ProductImages(
-      {required this.materialID,
+      {required this.materialNumber,
       required this.name,
       required this.description,
       required final List<String> image,
@@ -156,7 +156,7 @@ class _$_ProductImages extends _ProductImages {
         super._();
 
   @override
-  final MaterialNumber materialID;
+  final MaterialNumber materialNumber;
   @override
   final String name;
   @override
@@ -174,7 +174,7 @@ class _$_ProductImages extends _ProductImages {
 
   @override
   String toString() {
-    return 'ProductImages(materialID: $materialID, name: $name, description: $description, image: $image, thumbNail: $thumbNail)';
+    return 'ProductImages(materialNumber: $materialNumber, name: $name, description: $description, image: $image, thumbNail: $thumbNail)';
   }
 
   @override
@@ -182,8 +182,8 @@ class _$_ProductImages extends _ProductImages {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductImages &&
-            (identical(other.materialID, materialID) ||
-                other.materialID == materialID) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -193,8 +193,8 @@ class _$_ProductImages extends _ProductImages {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialID, name, description,
-      const DeepCollectionEquality().hash(_image), thumbNail);
+  int get hashCode => Object.hash(runtimeType, materialNumber, name,
+      description, const DeepCollectionEquality().hash(_image), thumbNail);
 
   @JsonKey(ignore: true)
   @override
@@ -205,7 +205,7 @@ class _$_ProductImages extends _ProductImages {
 
 abstract class _ProductImages extends ProductImages {
   const factory _ProductImages(
-      {required final MaterialNumber materialID,
+      {required final MaterialNumber materialNumber,
       required final String name,
       required final String description,
       required final List<String> image,
@@ -213,7 +213,7 @@ abstract class _ProductImages extends ProductImages {
   const _ProductImages._() : super._();
 
   @override
-  MaterialNumber get materialID;
+  MaterialNumber get materialNumber;
   @override
   String get name;
   @override

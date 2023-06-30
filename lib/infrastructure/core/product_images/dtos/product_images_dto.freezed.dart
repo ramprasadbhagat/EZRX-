@@ -21,7 +21,7 @@ ProductImagesDto _$ProductImagesDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductImagesDto {
   @JsonKey(name: 'materialID', defaultValue: '')
-  String get materialID => throw _privateConstructorUsedError;
+  String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'name', defaultValue: '')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'description', defaultValue: '')
@@ -44,7 +44,7 @@ abstract class $ProductImagesDtoCopyWith<$Res> {
       _$ProductImagesDtoCopyWithImpl<$Res, ProductImagesDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialID', defaultValue: '') String materialID,
+      {@JsonKey(name: 'materialID', defaultValue: '') String materialNumber,
       @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'thumbNail', defaultValue: '') String thumbNail,
@@ -64,16 +64,16 @@ class _$ProductImagesDtoCopyWithImpl<$Res, $Val extends ProductImagesDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialID = null,
+    Object? materialNumber = null,
     Object? name = null,
     Object? description = null,
     Object? thumbNail = null,
     Object? image = null,
   }) {
     return _then(_value.copyWith(
-      materialID: null == materialID
-          ? _value.materialID
-          : materialID // ignore: cast_nullable_to_non_nullable
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -104,7 +104,7 @@ abstract class _$$_ProductImagesDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialID', defaultValue: '') String materialID,
+      {@JsonKey(name: 'materialID', defaultValue: '') String materialNumber,
       @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'thumbNail', defaultValue: '') String thumbNail,
@@ -122,16 +122,16 @@ class __$$_ProductImagesDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialID = null,
+    Object? materialNumber = null,
     Object? name = null,
     Object? description = null,
     Object? thumbNail = null,
     Object? image = null,
   }) {
     return _then(_$_ProductImagesDto(
-      materialID: null == materialID
-          ? _value.materialID
-          : materialID // ignore: cast_nullable_to_non_nullable
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -158,7 +158,7 @@ class __$$_ProductImagesDtoCopyWithImpl<$Res>
 class _$_ProductImagesDto extends _ProductImagesDto {
   const _$_ProductImagesDto(
       {@JsonKey(name: 'materialID', defaultValue: '')
-          required this.materialID,
+          required this.materialNumber,
       @JsonKey(name: 'name', defaultValue: '')
           required this.name,
       @JsonKey(name: 'description', defaultValue: '')
@@ -175,7 +175,7 @@ class _$_ProductImagesDto extends _ProductImagesDto {
 
   @override
   @JsonKey(name: 'materialID', defaultValue: '')
-  final String materialID;
+  final String materialNumber;
   @override
   @JsonKey(name: 'name', defaultValue: '')
   final String name;
@@ -196,7 +196,7 @@ class _$_ProductImagesDto extends _ProductImagesDto {
 
   @override
   String toString() {
-    return 'ProductImagesDto(materialID: $materialID, name: $name, description: $description, thumbNail: $thumbNail, image: $image)';
+    return 'ProductImagesDto(materialNumber: $materialNumber, name: $name, description: $description, thumbNail: $thumbNail, image: $image)';
   }
 
   @override
@@ -204,8 +204,8 @@ class _$_ProductImagesDto extends _ProductImagesDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductImagesDto &&
-            (identical(other.materialID, materialID) ||
-                other.materialID == materialID) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -216,8 +216,8 @@ class _$_ProductImagesDto extends _ProductImagesDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, materialID, name, description,
-      thumbNail, const DeepCollectionEquality().hash(_image));
+  int get hashCode => Object.hash(runtimeType, materialNumber, name,
+      description, thumbNail, const DeepCollectionEquality().hash(_image));
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +236,7 @@ class _$_ProductImagesDto extends _ProductImagesDto {
 abstract class _ProductImagesDto extends ProductImagesDto {
   const factory _ProductImagesDto(
       {@JsonKey(name: 'materialID', defaultValue: '')
-          required final String materialID,
+          required final String materialNumber,
       @JsonKey(name: 'name', defaultValue: '')
           required final String name,
       @JsonKey(name: 'description', defaultValue: '')
@@ -252,7 +252,7 @@ abstract class _ProductImagesDto extends ProductImagesDto {
 
   @override
   @JsonKey(name: 'materialID', defaultValue: '')
-  String get materialID;
+  String get materialNumber;
   @override
   @JsonKey(name: 'name', defaultValue: '')
   String get name;

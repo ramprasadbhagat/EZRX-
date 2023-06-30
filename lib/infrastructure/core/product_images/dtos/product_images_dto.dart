@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,7 +13,7 @@ class ProductImagesDto with _$ProductImagesDto {
       name: 'materialID',
       defaultValue: '',
     )
-        required String materialID,
+        required String materialNumber,
     @JsonKey(
       name: 'name',
       defaultValue: '',
@@ -39,7 +39,7 @@ class ProductImagesDto with _$ProductImagesDto {
     ProductImages productImages,
   ) {
     return ProductImagesDto(
-      materialID: productImages.materialID.displayMatNo,
+      materialNumber: productImages.materialNumber.displayMatNo,
       name: productImages.name,
       description: productImages.description,
       thumbNail: productImages.thumbNail,
@@ -48,7 +48,7 @@ class ProductImagesDto with _$ProductImagesDto {
   }
   ProductImages toDomain() {
     return ProductImages(
-      materialID: MaterialNumber(materialID),
+      materialNumber: MaterialNumber(materialNumber),
       name: name,
       description: description,
       thumbNail: thumbNail,

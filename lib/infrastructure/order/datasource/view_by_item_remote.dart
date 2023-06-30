@@ -5,11 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/product_images_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 
 class OrderHistoryRemoteDataSource {
@@ -111,31 +109,6 @@ class OrderHistoryRemoteDataSource {
         res.data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0],
       ).toDomain();
     });
-  }
-
-  Future<List<ProductImages>> getItemProductDetails({
-    required List<String> materialIDs,
-  }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}license',
-      data: jsonEncode(
-        {
-          'query': orderHistoryQueryMutation.getProduct(),
-          'variables': {
-            'request': {
-              'materialID': materialIDs,
-            },
-          },
-        },
-      ),
-    );
-    _orderHistoryExceptionChecker(res: res);
-    final data = res.data['data']['getProduct']['orderCloudProduct'];
-
-    return List.from(data)
-        .map((e) => ProductImagesDto.fromJson(e).toDomain())
-        .toList();
   }
 
   void _orderHistoryExceptionChecker({required Response<dynamic> res}) {

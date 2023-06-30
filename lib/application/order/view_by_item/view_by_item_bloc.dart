@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
@@ -13,15 +14,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'view_by_item_bloc.freezed.dart';
+
 part 'view_by_item_event.dart';
+
 part 'view_by_item_state.dart';
 
 const int _pageSize = 24;
 
 class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
   final IViewByItemRepository viewByItemRepository;
+  final IProductImagesRepository productImagesRepository;
+
   ViewByItemsBloc({
     required this.viewByItemRepository,
+    required this.productImagesRepository,
   }) : super(ViewByItemsState.initial()) {
     on<_Initialized>((event, emit) async {
       emit(ViewByItemsState.initial());
@@ -117,33 +123,40 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
       );
     });
 
-    on<_FetchProductImage>((event, emit) async {
-      emit(state.copyWith(
-        isImageLoading: true,
-      ));
-      final orderProductFailureOrSuccess =
-          await viewByItemRepository.getItemProductDetails(
-        orderHistoryItem: state.orderHistoryList.orderHistoryItems,
-      );
-      await orderProductFailureOrSuccess.fold(
-        (failure) async => emit(
+    on<_FetchProductImage>(
+      (event, emit) async {
+        emit(
           state.copyWith(
-            failureOrSuccessOption: optionOf(orderProductFailureOrSuccess),
-            isImageLoading: false,
+            isImageLoading: true,
           ),
-        ),
-        (productDetails) async {
-          emit(
+        );
+
+        final failureOrSuccess = await productImagesRepository.getProductImages(
+          list: state.orderHistoryList.orderHistoryItems,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) async => emit(
             state.copyWith(
-              orderHistoryList: state.orderHistoryList.copyWith(
-                orderHistoryItems: productDetails,
-              ),
-              failureOrSuccessOption: none(),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
               isImageLoading: false,
             ),
-          );
-        },
-      );
-    });
+          ),
+          (updatedListWithImages) async {
+            emit(
+              state.copyWith(
+                orderHistoryList: state.orderHistoryList.copyWith(
+                  orderHistoryItems: updatedListWithImages
+                      .map((e) => e as OrderHistoryItem)
+                      .toList(),
+                ),
+                failureOrSuccessOption: none(),
+                isImageLoading: false,
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

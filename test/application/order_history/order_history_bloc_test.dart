@@ -1,17 +1,20 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class OrderHistoryRepoMock extends Mock implements ViewByItemRepository {}
+class ProductImagesRepositoryMock extends Mock implements ProductImagesRepository {}
 
 // const _defaultPageSize = 20;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final orderHistoryRepository = OrderHistoryRepoMock();
+  final productImagesRepository = ProductImagesRepositoryMock();
   // final mockUser = User.empty();
   // final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
   // final mockCustomerCodeInfo = CustomerCodeInfo.empty()
@@ -30,7 +33,7 @@ void main() {
   group(' Order History Bloc', () {
     blocTest('Initialize',
         build: () =>
-            ViewByItemsBloc(viewByItemRepository: orderHistoryRepository),
+            ViewByItemsBloc(viewByItemRepository: orderHistoryRepository, productImagesRepository: productImagesRepository,),
         act: (ViewByItemsBloc bloc) =>
             bloc.add(const ViewByItemsEvent.initialized()),
         expect: () => [ViewByItemsState.initial()]);

@@ -8,7 +8,7 @@ part of 'product_images_dto.dart';
 
 _$_ProductImagesDto _$$_ProductImagesDtoFromJson(Map<String, dynamic> json) =>
     _$_ProductImagesDto(
-      materialID: json['materialID'] as String? ?? '',
+      materialNumber: json['materialID'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       thumbNail: json['thumbNail'] as String? ?? '',
@@ -19,7 +19,7 @@ _$_ProductImagesDto _$$_ProductImagesDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ProductImagesDtoToJson(_$_ProductImagesDto instance) =>
     <String, dynamic>{
-      'materialID': instance.materialID,
+      'materialID': instance.materialNumber,
       'name': instance.name,
       'description': instance.description,
       'thumbNail': instance.thumbNail,

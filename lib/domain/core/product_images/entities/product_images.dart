@@ -7,14 +7,14 @@ class ProductImages with _$ProductImages {
   const ProductImages._();
 
   const factory ProductImages({
-    required MaterialNumber materialID,
+    required MaterialNumber materialNumber,
     required String name,
     required String description,
     required List<String> image,
     required String thumbNail,
   }) = _ProductImages;
   factory ProductImages.empty() => ProductImages(
-        materialID: MaterialNumber(''),
+        materialNumber: MaterialNumber(''),
         name: '',
         description: '',
         image: <String>[],
