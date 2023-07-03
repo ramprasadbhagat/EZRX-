@@ -43,7 +43,7 @@ class AddToCartButton extends StatelessWidget {
                   color: ZPColors.red,
                 ),
               ),
-            if (context.read<UserBloc>().state.userCanCreateOrder)
+            if (context.read<UserBloc>().state.user.userCanCreateOrder)
               SafeArea(
                 child: ElevatedButton(
                   key: const Key('addMaterialToCart'),

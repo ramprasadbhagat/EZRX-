@@ -27,14 +27,4 @@ class UserState with _$UserState {
       user.userSalesOrganisations;
   List<String> get salesOrgValue =>
       userSalesOrganisations.map((e) => e.salesOrg.getValue()).toList();
-  bool get userCanCreateOrder =>
-      isNotEmpty && !(isCreateOrderDisabled || user.role.type.isReturnRole);
-  bool get showHistoryTab => user.role.type.isCustomer // TODO: maybe can remove
-      ? user.accessRight.orders && user.disableCreateOrder
-      : false;
-  bool get isCreateOrderDisabled => user.role.type.isCustomer
-      ? user.accessRight.orders
-          ? user.disableCreateOrder
-          : true
-      : !user.accessRight.orders;
 }

@@ -16,7 +16,7 @@ class ReOrderButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (!context.read<UserBloc>().state.userCanCreateOrder) {
+    if (!context.read<UserBloc>().state.user.userCanCreateOrder) {
       return const SizedBox.shrink();
     }
 

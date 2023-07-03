@@ -36,7 +36,7 @@ class BundleItemDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final quantityControllerList = <String, TextEditingController>{};
     final userCanCreateOrder =
-        context.read<UserBloc>().state.userCanCreateOrder;
+        context.read<UserBloc>().state.user.userCanCreateOrder;
 
     return Scaffold(
       key: const Key('bundleItemDetailPage'),

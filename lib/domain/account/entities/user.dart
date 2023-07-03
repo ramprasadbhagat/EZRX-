@@ -57,4 +57,38 @@ class User with _$User {
         hasPriceOverride: false,
         preferredLanguage: '',
       );
+
+  bool get userCanCreateOrder {
+    // For Root / ZP admin the it will always return true
+    if (role.type.adminOrderAccess) {
+      return true;
+    }
+    // For Return admin/ requestor/ approver the it will always return false
+    if (role.type.isReturnRole) {
+      return false;
+    }
+    // For Client admin/user we check the flags
+    // [accessRight.orders] should be true & disableCreateOrder should be false
+    if (role.type.isCustomer) {
+      return accessRight.orders && !disableCreateOrder;
+    }
+
+    // For Other user we check only [accessRight.orders]
+    return accessRight.orders;
+  }
+
+  bool get userCanAccessOrderHistory {
+    // For Root / ZP admin the it will always return true
+    if (role.type.adminOrderAccess) {
+      return true;
+    }
+    // For Return admin/ requestor/ approver it will always return false
+    if (role.type.isReturnRole) {
+      return false;
+    }
+
+    // For Client admin/user and Other user we only check the flag
+    // [accessRight.orders]  should be true
+    return accessRight.orders;
+  }
 }

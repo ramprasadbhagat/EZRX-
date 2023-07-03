@@ -42,7 +42,7 @@ class OrderItemBonusCard extends StatelessWidget {
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
     final enableRemark = salesOrgConfigs.enableRemarks;
     final disableCreateOrder =
-        !context.read<UserBloc>().state.userCanCreateOrder;
+        !context.read<UserBloc>().state.user.userCanCreateOrder;
     final enableOHPrice = salesOrgConfigs.enableOHPrice;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
@@ -175,9 +175,7 @@ class OrderItemBonusCard extends StatelessWidget {
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
                             orderHistoryDetailsBonusAggregate
-                                .orderItem
-                                .totalPrice
-                                .totalPrice,
+                                .orderItem.totalPrice.totalPrice,
                           ),
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,

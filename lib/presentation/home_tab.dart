@@ -109,15 +109,20 @@ class _TopIndicatorBox extends BoxPainter {
 }
 
 List<RouteItem> _getTabs(BuildContext context) {
-  // TODO : userCanCreateOrder is not ready yet
-  // if (!context.read<UserBloc>().state.userCanCreateOrder) {
-  //   return [
-  //     homeTabRouteItem,
-  //     productTabRouteItem,
-  //     paymentsTabRouteItem,
-  //     moreTabRouteItem,
-  //   ];
-  // }
+  if (!context.read<UserBloc>().state.user.userCanCreateOrder) {
+    return context.read<UserBloc>().state.user.userCanAccessOrderHistory
+        ? [
+            homeTabRouteItem,
+            ordersTabRouteItem,
+            paymentsTabRouteItem,
+            moreTabRouteItem,
+          ]
+        : [
+            homeTabRouteItem,
+            paymentsTabRouteItem,
+            moreTabRouteItem,
+          ];
+  }
 
   return [
     homeTabRouteItem,

@@ -40,7 +40,7 @@ class OrderItemCard extends StatelessWidget {
     final enableTaxDisplay = salesOrgConfigs.enableTaxDisplay;
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
     final disableCreateOrder =
-        !context.read<UserBloc>().state.userCanCreateOrder;
+        !context.read<UserBloc>().state.user.userCanCreateOrder;
     final enableOHPrice = salesOrgConfigs.enableOHPrice;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(

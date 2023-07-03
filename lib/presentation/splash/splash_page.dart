@@ -502,7 +502,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
           listenWhen: (previous, current) =>
               context.read<UserBloc>().state.isNotEmpty &&
-              context.read<UserBloc>().state.userCanCreateOrder &&
+              context.read<UserBloc>().state.user.userCanCreateOrder &&
               previous.selectedOrderType != current.selectedOrderType &&
               current.selectedOrderType != OrderDocumentType.empty() &&
               context.read<SalesOrgBloc>().state.salesOrganisation !=
@@ -643,7 +643,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
-      if (context.read<UserBloc>().state.userCanCreateOrder) {
+      if (user.userCanAccessOrderHistory) {
         context.read<ViewByItemsBloc>().add(
               ViewByItemsEvent.fetch(
                 salesOrgConfigs: salesOrgState.configs,

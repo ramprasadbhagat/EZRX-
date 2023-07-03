@@ -43,7 +43,7 @@ class HistoryDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final disableCreateOrder =
-        !context.read<UserBloc>().state.userCanCreateOrder;
+        !context.read<UserBloc>().state.user.userCanCreateOrder;
 
     return MultiBlocListener(
       listeners: [
