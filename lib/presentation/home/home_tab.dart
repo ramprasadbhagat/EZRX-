@@ -19,10 +19,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
-
-
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
-
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -35,7 +32,7 @@ class HomeTab extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: const CustomerCodeSelector(
-          key: WidgetKeys.homeCustomerCodeSelector,
+          key: WidgetKeys.customerCodeSelector,
         ),
         backgroundColor: ZPColors.primary,
         automaticallyImplyLeading: false,

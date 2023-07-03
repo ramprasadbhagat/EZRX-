@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
@@ -25,9 +27,17 @@ class ProductsTab extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.materialListPage,
       appBar: AppBar(
-        key: WidgetKeys.materialListPageAppBar,
-        title: const Text('Products').tr(),
+        title: const CustomerCodeSelector(
+          key: WidgetKeys.customerCodeSelector,
+        ),
+        backgroundColor: ZPColors.primary,
         automaticallyImplyLeading: false,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: CartButton(),
+          ),
+        ],
       ),
       body: BlocConsumer<MaterialListBloc, MaterialListState>(
         listenWhen: (previous, current) =>

@@ -38,13 +38,12 @@ class WidgetKeys {
   static const Key paymentsTab = Key('paymentsTab');
   static const Key moreTab = Key('moreTab');
   static const Key aupTcScreen = Key('aupTcScreen');
-  static const Key homeCustomerCodeSelector = Key('homeCustomerCodeSelector');
+  static const Key customerCodeSelector = Key('customerCodeSelector');
   static const Key homeTabAnnouncementWidget = Key('homeTabAnnouncementWidget');
   static const Key homeScreen = Key('homeScreen');
   static const Key homeProductSearchBar = Key('homeProductSearchBar');
   static const Key homeQuickAccessPanel = Key('homeQuickAccessPanel');
   static Key homeQuickAccessMenu(String menu) => Key('homeQuickAccess$menu');
-
 
   //============================================================
   //  MORE TAB BAR
