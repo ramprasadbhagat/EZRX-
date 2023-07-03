@@ -209,6 +209,7 @@ class _PriceOverrideField extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('priceOverrideTextFormField'),
+          autocorrect: false,
           decoration: InputDecoration(
             hintText: 'Enter price override',
             prefixText: isVN ? null : '  ${currencyCode.tr()}',

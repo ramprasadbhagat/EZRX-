@@ -20,6 +20,7 @@ class ConfirmPasswordTextField extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('confirmPasswordTextField'),
+          autocorrect: false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             context.read<ResetPasswordBloc>().add(

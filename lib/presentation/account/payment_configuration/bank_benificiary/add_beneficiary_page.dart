@@ -20,7 +20,8 @@ class AddBeneficiaryPage extends StatelessWidget {
       appBar: AppBar(title: Text('Add Beneficiary'.tr())),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocConsumer<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
+        child:
+            BlocConsumer<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
           listenWhen: (previous, current) =>
               previous.isSubmitting != current.isSubmitting,
           listener: (context, state) {
@@ -34,7 +35,7 @@ class AddBeneficiaryPage extends StatelessWidget {
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
-                (_) {},  
+                (_) {},
               ),
             );
           },
@@ -42,21 +43,21 @@ class AddBeneficiaryPage extends StatelessWidget {
               previous.showErrorMessages != current.showErrorMessages,
           builder: (context, state) {
             return Form(
-                    autovalidateMode: state.showErrorMessages
-                        ? AutovalidateMode.always
-                        : AutovalidateMode.disabled,
-                child: ListView(
-                  padding: const EdgeInsets.all(25.0),
-                      children: [
-                        _SalesOrgDropdown(state: state),
-                        const SizedBox(height: 20),
-                        const _SalesDistrictDropdown(),
-                        const SizedBox(height: 20),
-                        const _BeneficiaryDetailsTextFields(),
-                        const SizedBox(height: 20),
-                        const _AddBeneficiaryButton(),
-                      ],
-                ),
+              autovalidateMode: state.showErrorMessages
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
+              child: ListView(
+                padding: const EdgeInsets.all(25.0),
+                children: [
+                  _SalesOrgDropdown(state: state),
+                  const SizedBox(height: 20),
+                  const _SalesDistrictDropdown(),
+                  const SizedBox(height: 20),
+                  const _BeneficiaryDetailsTextFields(),
+                  const SizedBox(height: 20),
+                  const _AddBeneficiaryButton(),
+                ],
+              ),
             );
           },
         ),
@@ -104,13 +105,13 @@ class _SalesOrgDropdown extends StatelessWidget {
                       label: BeneficiaryLabel.selectSalesOrg,
                       newValue: value!,
                     ),
-              );
+                  );
               context.read<ManageBankBeneficiaryBloc>().add(
                     ManageBankBeneficiaryEvent.fetchSalesDistrict(
                       fromAdd: true,
                       salesOrg: SalesOrg(value),
                     ),
-              );
+                  );
             },
       validator: (_) {
         return context
@@ -151,8 +152,8 @@ class _SalesDistrictDropdown extends StatelessWidget {
           key: const Key('salesDistrictDropdownKey'),
           isExpanded: true,
           decoration: InputDecoration(
-              labelText: labelText, 
-              enabled: district.isNotEmpty,
+            labelText: labelText,
+            enabled: district.isNotEmpty,
           ),
           value: district.isEmpty ? null : district,
           items: !state.isFetching && state.salesDistrict.isNotEmpty
@@ -188,6 +189,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
       children: [
         TextFormField(
           key: const Key('beneficiaryNameField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Beneficiary Name'.tr()),
           onChanged: (value) {
             context
@@ -201,6 +203,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('bankNameField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Name'.tr()),
           onChanged: (value) {
             context
@@ -214,6 +217,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('branchField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Branch'.tr()),
           onChanged: (value) {
             context
@@ -227,6 +231,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('bankCodeField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Code'.tr()),
           onChanged: (value) {
             context
@@ -240,6 +245,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('bankAccountField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Account'.tr()),
           onChanged: (value) {
             context
@@ -253,6 +259,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('hdbcSwiftCodeField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'hdbc Swift Code'.tr()),
           onChanged: (value) {
             context
@@ -266,6 +273,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('bankAddressField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Address'.tr()),
           onChanged: (value) {
             context
@@ -279,6 +287,7 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('payNowUenField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Pay Now Uen'.tr()),
           onChanged: (value) {
             context
@@ -292,10 +301,11 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
         const SizedBox(height: 20),
         TextFormField(
           key: const Key('emailIdField'),
+          autocorrect: false,
           decoration: InputDecoration(labelText: 'Email Id'.tr()),
           onChanged: (value) {
-            context.read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
                     label: BeneficiaryLabel.emailId,
                     newValue: value,
                   ),
@@ -309,12 +319,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
                 .emailId
                 .value
                 .fold(
-                (f) => f.maybeMap(
-                  invalidEmail: (_) =>'Email is invalid'.tr(),
-                  orElse: () => null,
-                ), 
-                (_) => null,
-              );
+                  (f) => f.maybeMap(
+                    invalidEmail: (_) => 'Email is invalid'.tr(),
+                    orElse: () => null,
+                  ),
+                  (_) => null,
+                );
           },
         ),
       ],

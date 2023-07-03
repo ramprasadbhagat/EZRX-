@@ -138,6 +138,7 @@ class _OrderNoByFilter extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('filterOrderNoField'),
+          autocorrect: false,
           initialValue:
               state.adminPoAttachmentFilter.orderNumber.getOrDefaultValue(''),
           onChanged: (value) => context.read<AdminPoAttachmentFilterBloc>().add(
@@ -179,6 +180,7 @@ class _EzrxNumberFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterEzrxNumberField'),
+          autocorrect: false,
           initialValue:
               state.adminPoAttachmentFilter.exRxNo.getOrDefaultValue(''),
           onChanged: (value) => context.read<AdminPoAttachmentFilterBloc>().add(
@@ -236,6 +238,7 @@ class _SalesOrgByFilter extends StatelessWidget {
           key: Key(
             'filterSalesOrgSearchField${state.adminPoAttachmentFilter.salesOrg.getOrDefaultValue('')}',
           ),
+          autocorrect: false,
           readOnly: true,
           initialValue:
               state.adminPoAttachmentFilter.salesOrg.getOrDefaultValue(''),
@@ -273,6 +276,7 @@ class _CustomerCodeByFilter extends StatelessWidget {
           key: Key(
             'filterCustomerCodeSearchField ${state.adminPoAttachmentFilter.soldTo.customerCodeSoldTo}',
           ),
+          autocorrect: false,
           initialValue: state.adminPoAttachmentFilter.soldTo.customerCodeSoldTo,
           onTap: () {
             if (!state.adminPoAttachmentFilter.salesOrg.isValid()) return;
@@ -306,6 +310,7 @@ class _AdminAttachmentDateFilter extends StatelessWidget {
           key: Key(
             'filterAdminPoAttachmentDateField+${state.adminPoAttachmentFilter.dateFiltered}',
           ),
+          autocorrect: false,
           onTap: () async {
             final adminPoAttachmentFilterBloc =
                 context.read<AdminPoAttachmentFilterBloc>();

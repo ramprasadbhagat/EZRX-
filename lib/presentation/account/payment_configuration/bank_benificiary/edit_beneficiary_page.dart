@@ -18,7 +18,8 @@ class EditBeneficiaryPage extends StatelessWidget {
       appBar: AppBar(title: Text('Edit Bank Beneficiary'.tr())),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocConsumer<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
+        child:
+            BlocConsumer<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
           listenWhen: (previous, current) =>
               previous.isSubmitting != current.isSubmitting,
           listener: (context, state) {
@@ -39,8 +40,8 @@ class EditBeneficiaryPage extends StatelessWidget {
           builder: (context, state) {
             return Form(
               autovalidateMode: state.showErrorMessages
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
               child: ListView(
                 padding: const EdgeInsets.all(25.0),
                 children: [
@@ -107,7 +108,8 @@ class _SalesDistrictDropdown extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
-        final salesDistrictLabel = !state.isFetching ? state.salesDistrictLabel : '';
+        final salesDistrictLabel =
+            !state.isFetching ? state.salesDistrictLabel : '';
 
         return DropdownButtonFormField<String>(
           key: const Key('salesDistrictDropdownKey'),
@@ -346,6 +348,7 @@ class _TextFormFieldState extends State<_TextFormField> {
           builder: (context, state) {
             return TextFormField(
               key: Key(widget.keyText),
+              autocorrect: false,
               enabled: !state.isSubmitting,
               controller: _controller,
               onChanged: (value) {

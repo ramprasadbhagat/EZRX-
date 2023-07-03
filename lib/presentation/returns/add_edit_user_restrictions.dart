@@ -524,6 +524,7 @@ class _TextFormFieldState extends State<_TextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       key: Key(widget.keyText),
+      autocorrect: false,
       controller: _controller,
       onChanged: (value) {
         context.read<UserRestrictionDetailsBloc>().add(

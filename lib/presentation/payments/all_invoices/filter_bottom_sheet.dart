@@ -246,6 +246,7 @@ class _AmountValueToFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
+            autocorrect: false,
             key: WidgetKeys.amountValueTo,
             initialValue: state.tempFilter.amountValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
@@ -286,6 +287,7 @@ class _AmountValueFromFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
+            autocorrect: false,
             key: WidgetKeys.amountValueFrom,
             initialValue: state.tempFilter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
@@ -323,6 +325,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
           current.tempFilter.getDocumentDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           key: WidgetKeys.fromDocumentDateField,
           onTap: () async {
             final returnApproverFilterBloc =
@@ -373,6 +376,7 @@ class _ToDocumentDateFilter extends StatelessWidget {
           current.tempFilter.getDocumentDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           key: WidgetKeys.toDocumentDateField,
           onTap: () async {
             final returnApproverFilterBloc =
@@ -421,6 +425,7 @@ class _FromDueDateFilter extends StatelessWidget {
           current.tempFilter.getDueDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           key: WidgetKeys.fromDueDateField,
           onTap: () async {
             final returnApproverFilterBloc =
@@ -475,6 +480,7 @@ class _ToDueDateFilter extends StatelessWidget {
       ) =>
           Expanded(
         child: TextFormField(
+          autocorrect: false,
           key: WidgetKeys.toDueDateField,
           onTap: () async {
             final returnApproverFilterBloc =

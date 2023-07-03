@@ -9,6 +9,7 @@ class ProductSearchEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autocorrect: false,
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
         context.router.pushNamed('product_suggestion_page');

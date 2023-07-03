@@ -115,6 +115,7 @@ class _ReturnIdByFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterReturnIdField'),
+          autocorrect: false,
           initialValue:
               state.approverReturnFilter.returnId.getOrDefaultValue(''),
           onChanged: (value) => context.read<ReturnApproverFilterBloc>().add(
@@ -153,6 +154,7 @@ class _CreatedByFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterCreatedBy'),
+          autocorrect: false,
           initialValue:
               state.approverReturnFilter.createdBy.getOrDefaultValue(''),
           onChanged: (value) => context.read<ReturnApproverFilterBloc>().add(
@@ -191,6 +193,7 @@ class _ShipToFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('shipToSearchField'),
+          autocorrect: false,
           initialValue: state.approverReturnFilter.shipTo.getOrDefaultValue(''),
           onChanged: (value) => context.read<ReturnApproverFilterBloc>().add(
                 ReturnApproverFilterEvent.shipToChanged(
@@ -228,6 +231,7 @@ class _SoldToFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('soldToSearchField'),
+          autocorrect: false,
           initialValue: state.approverReturnFilter.soldTo.getOrDefaultValue(''),
           onChanged: (value) => context.read<ReturnApproverFilterBloc>().add(
                 ReturnApproverFilterEvent.soldToChanged(value),
@@ -303,6 +307,7 @@ class _InvoiceDateFilter extends StatelessWidget {
           key: Key(
             'filterInvoiceDateField+${state.approverReturnFilter.getFilteredInvoiceDate}',
           ),
+          autocorrect: false,
           onTap: () async {
             final returnApproverFilterBloc =
                 context.read<ReturnApproverFilterBloc>();

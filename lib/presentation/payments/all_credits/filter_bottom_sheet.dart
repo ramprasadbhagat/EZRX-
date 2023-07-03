@@ -213,6 +213,7 @@ class _AmountValueToFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
+            autocorrect: false,
             key: WidgetKeys.amountValueTo,
             initialValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllCreditsFilterBloc>().add(
@@ -252,6 +253,7 @@ class _AmountValueFromFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
+            autocorrect: false,
             key: WidgetKeys.amountValueFrom,
             initialValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllCreditsFilterBloc>().add(
@@ -289,6 +291,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
           current.filter.getDocumentDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           key: WidgetKeys.fromDocumentDateField,
           onTap: () async {
             final returnApproverFilterBloc =
@@ -339,6 +342,7 @@ class _ToDocumentDateFilter extends StatelessWidget {
           current.filter.getDocumentDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           key: WidgetKeys.toDocumentDateField,
           onTap: () async {
             final returnApproverFilterBloc =

@@ -112,6 +112,7 @@ class _OrderIdByFilter extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('filterOrderIdField'),
+          autocorrect: false,
           initialValue: state.orderHistoryFilter.orderId.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.orderIdChanged(
@@ -149,6 +150,7 @@ class _PoNumberFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterPoNumberField'),
+          autocorrect: false,
           initialValue: state.orderHistoryFilter.poNumber.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.poNumberChanged(
@@ -186,6 +188,7 @@ class _MaterialSearchByFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterMaterialSearchField'),
+          autocorrect: false,
           initialValue:
               state.orderHistoryFilter.materialSearch.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
@@ -224,6 +227,7 @@ class _PrincipalSearchByFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterPrincipalSearchField'),
+          autocorrect: false,
           initialValue:
               state.orderHistoryFilter.principalSearch.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
@@ -302,6 +306,7 @@ class _OrderDateFilter extends StatelessWidget {
           key: Key(
             'filterOrderDateField+${state.orderHistoryFilter.getOrderDateFiltered}',
           ),
+          autocorrect: false,
           onTap: () async {
             final orderHistoryFilterBloc =
                 context.read<OrderHistoryFilterBloc>();

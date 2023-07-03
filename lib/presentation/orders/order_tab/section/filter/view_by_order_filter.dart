@@ -26,6 +26,7 @@ class _ViewByOrderFilterBottomSheetState
         );
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -100,20 +101,18 @@ class _FromOrderDateFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByOrderFilterBloc, ViewByOrderFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter != current.filter,
+      buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           onTap: () async {
             final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();
             final documentDateRange = await showDateRangePicker(
-                          context: context,
-                          firstDate: DateTime.now()
-                              .subtract(const Duration(days: 365)),
-                          lastDate: DateTime.now(),
-                          initialDateRange:
-                              state.filter.dateRange,
-                        );
+              context: context,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              lastDate: DateTime.now(),
+              initialDateRange: state.filter.dateRange,
+            );
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
               ViewByOrderFilterEvent.setDateRange(
@@ -153,16 +152,15 @@ class _ToOrderDateFilter extends StatelessWidget {
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          autocorrect: false,
           onTap: () async {
             final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();
             final documentDateRange = await showDateRangePicker(
-                          context: context,
-                          firstDate: DateTime.now()
-                              .subtract(const Duration(days: 365)),
-                          lastDate: DateTime.now(),
-                          initialDateRange:
-                              state.filter.dateRange,
-                        );
+              context: context,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              lastDate: DateTime.now(),
+              initialDateRange: state.filter.dateRange,
+            );
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
               ViewByOrderFilterEvent.setDateRange(
@@ -220,10 +218,7 @@ class _ApplyButton extends StatelessWidget {
     return Expanded(
       child: ElevatedButton(
         onPressed: () => Navigator.of(context).pop(
-                  context
-                      .read<ViewByOrderFilterBloc>()
-                      .state
-                      .filter,
+          context.read<ViewByOrderFilterBloc>().state.filter,
         ),
         child: const Text(
           'Apply',

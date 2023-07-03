@@ -237,6 +237,7 @@ class DiscountOverrideForm extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               key: const Key('discountOvverrideField'),
+              autocorrect: false,
               keyboardType: const TextInputType.numberWithOptions(
                 signed: false,
                 decimal: true,

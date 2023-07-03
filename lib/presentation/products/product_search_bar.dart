@@ -50,6 +50,7 @@ class _SearchBarState extends State<ProductSearchBar> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autocorrect: false,
       autofocus: widget.autofocus,
       controller: widget.controller,
       enabled: widget.enabled,

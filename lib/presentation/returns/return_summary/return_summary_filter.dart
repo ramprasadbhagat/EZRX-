@@ -164,6 +164,7 @@ class _TotalPriceToFilter extends StatelessWidget {
           child: TextFormField(
             initialValue:
                 state.returnSummaryFilter.refundTotalTo.apiParameterValue,
+            autocorrect: false,
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalToChanged(
                     value.isNotEmpty
@@ -201,6 +202,7 @@ class _TotalPriceFromFilter extends StatelessWidget {
           child: TextFormField(
             initialValue:
                 state.returnSummaryFilter.refundTotalFrom.apiParameterValue,
+            autocorrect: false,
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalFromChanged(
                     value.isNotEmpty
@@ -278,6 +280,7 @@ class _SubmittedDateFilter extends StatelessWidget {
           key: Key(
             'filterSubmittedDateField+${state.returnSummaryFilter.getSubmittedDateFiltered}',
           ),
+          autocorrect: false,
           onTap: () async {
             final returnSummaryFilterBloc =
                 context.read<ReturnSummaryFilterBloc>();

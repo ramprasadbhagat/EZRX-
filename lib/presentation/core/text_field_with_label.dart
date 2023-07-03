@@ -10,7 +10,7 @@ class TextFieldWithLabel extends StatelessWidget {
     required this.onChanged,
     required this.decoration,
     this.isEnabled = true,
-    this.autoCorrect = true,
+    this.autoCorrect = false,
     this.keyboardType,
     this.initValue,
     this.obscureText = false,

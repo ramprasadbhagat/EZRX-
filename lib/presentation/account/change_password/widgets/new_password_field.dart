@@ -18,6 +18,7 @@ class NewPasswordTextField extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('newPasswordTextField'),
+          autocorrect: false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (text) {
             context.read<ResetPasswordBloc>().add(

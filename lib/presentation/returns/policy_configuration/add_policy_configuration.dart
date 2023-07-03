@@ -117,6 +117,7 @@ class _SalesOrganizationField extends StatelessWidget {
           .salesOrg
           .getOrCrash(),
       enabled: false,
+      autocorrect: false,
       keyboardType: TextInputType.none,
       decoration: InputDecoration(
         labelText: 'Sales Organization '.tr(),

@@ -48,6 +48,7 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autocorrect: false,
       controller: widget.controller,
       enabled: widget.enabled,
       onChanged: (value) => _onSearchChanged(context, value),
