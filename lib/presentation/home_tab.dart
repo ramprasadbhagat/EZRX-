@@ -101,8 +101,8 @@ class _TopIndicatorBox extends BoxPainter {
     );
 
     canvas.drawLine(
-      Offset(offset.dx, offset.dy),
-      Offset(cfg.size!.width + offset.dx, 0),
+      Offset(offset.dx + 3, offset.dy),
+      Offset(cfg.size!.width + offset.dx - 3, 0),
       paint,
     );
   }
