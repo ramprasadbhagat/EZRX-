@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 
 class DraggableFloatingActionButton extends StatefulWidget {
@@ -6,13 +9,13 @@ class DraggableFloatingActionButton extends StatefulWidget {
   final VoidCallback onPressed;
   final GlobalKey parentKey;
 
-  const DraggableFloatingActionButton(
-      {Key? key,
-      required this.child,
-      required this.initialOffset,
-      required this.onPressed,
-      required this.parentKey,})
-      : super(key: key);
+  const DraggableFloatingActionButton({
+    Key? key,
+    required this.child,
+    required this.initialOffset,
+    required this.onPressed,
+    required this.parentKey,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _DraggableFloatingActionButtonState();
@@ -37,7 +40,8 @@ class _DraggableFloatingActionButtonState
 
   void _setBoundary(_) {
     final parentKey = widget.parentKey;
-    final parentRenderBox = parentKey.currentContext?.findRenderObject() as RenderBox;
+    final parentRenderBox =
+        parentKey.currentContext?.findRenderObject() as RenderBox;
     final renderBox = _key.currentContext?.findRenderObject() as RenderBox;
 
     try {
@@ -47,7 +51,9 @@ class _DraggableFloatingActionButtonState
       setState(() {
         _minOffset = const Offset(0, 0);
         _maxOffset = Offset(
-            parentSize.width - size.width, parentSize.height - size.height,);
+          parentSize.width - size.width,
+          parentSize.height - size.height,
+        );
       });
     } catch (e) {
       return;

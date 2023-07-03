@@ -1,3 +1,6 @@
+//ignore_for_file: unused-code
+//ignore_for_file: unused-class
+//ignore_for_file: unused-files
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';

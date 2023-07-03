@@ -38,7 +38,6 @@ import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/presentation/core/chatbot/chatbot_widget.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
@@ -494,9 +493,7 @@ class App extends StatelessWidget {
         ),
         builder: (context, child) => GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: _EntryPage(
-            child: child,
-          ),
+          child: child,
         ),
         routeInformationParser: router.defaultRouteParser(),
       ),
@@ -504,23 +501,23 @@ class App extends StatelessWidget {
   }
 }
 
-class _EntryPage extends StatelessWidget {
-  final Widget? child;
-  const _EntryPage({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+// class _EntryPage extends StatelessWidget {
+//   final Widget? child;
+//   const _EntryPage({
+//     Key? key,
+//     required this.child,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Overlay(
-      initialEntries: [
-        OverlayEntry(
-          builder: (context) => ChatBotWidget(
-            child: child!,
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Overlay(
+//       initialEntries: [
+//         OverlayEntry(
+//           builder: (context) => ChatBotWidget(
+//             child: child!,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
