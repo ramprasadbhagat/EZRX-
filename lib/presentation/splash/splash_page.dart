@@ -81,6 +81,8 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
+import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -690,7 +692,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeInfo,
             ),
           );
-          
+
       context.read<AllInvoicesBloc>().add(
             AllInvoicesEvent.fetch(
               salesOrganisation: salesOrgState.salesOrganisation,
@@ -715,7 +717,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),
           );
-
+      context.read<RecentOrderBloc>().add(
+            RecentOrderEvent.fetchRecentlyOrderedProducts(
+              configs: salesOrgState.configs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            ),
+          );
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchCreditSummary(
               custCode: customerCodeInfo.customerCodeSoldTo,

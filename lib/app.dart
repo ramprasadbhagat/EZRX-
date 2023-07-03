@@ -120,6 +120,8 @@ import 'package:ezrxmobile/application/payments/download_payment_attachments/dow
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 
+import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -457,6 +459,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ViewByOrderBloc>(
           create: (context) => locator<ViewByOrderBloc>(),
+        ),
+        BlocProvider<RecentOrderBloc>(
+          create: (context) => locator<RecentOrderBloc>(),
         ),
         BlocProvider<ViewByOrderFilterBloc>(
           create: (context) => locator<ViewByOrderFilterBloc>(),

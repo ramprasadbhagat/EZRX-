@@ -365,6 +365,16 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_
 
 import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
 
+import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_query_mutation.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_local_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/order/repository/recent_order_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_remote_datasource.dart';
+
+import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -2070,6 +2080,44 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => SubmitReturnBloc(
       submitRequestRepository: locator<SubmitRequestReturnRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Fetch Recently Ordered Items
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => RecentOrdersQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => RecentOrdersLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => RecentOrderRepository(
+      config: locator<Config>(),
+      localDataSource: locator<RecentOrdersLocalDataSource>(),
+      remoteDataSource: locator<RecentOrdersRemoteDataSource>(),
+      materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => RecentOrdersRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      recentOrdersQueryMutation: locator<RecentOrdersQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => RecentOrderBloc(
+      recentOrderRepository: locator<RecentOrderRepository>(),
+      productImagesRepository: locator<ProductImagesRepository>(),
     ),
   );
 

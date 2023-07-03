@@ -15,6 +15,7 @@ abstract class ZPColors {
   static const Color skyBlueColor = Color.fromRGBO(68, 131, 219, 1.0);
   static const Color unselectedLabelColor = Color.fromRGBO(167, 180, 187, 1.0);
   static const Color inputBorderColor = Color.fromRGBO(207, 210, 210, 1.0);
+  static const Color arrowButtonBackgroundColor = Color.fromRGBO(138, 177, 180, 1);
   static const Color orange = Color.fromRGBO(231, 165, 70, 1);
   static const Color lightGray2 = Color.fromRGBO(217, 217, 217, 1.0);
   static const Color shadesGray = Color.fromRGBO(160, 160, 160, 1.0);

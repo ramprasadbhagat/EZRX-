@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -65,6 +66,9 @@ class CustomerCodeBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
+    implements RecentOrderBloc {}
+
 class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
 
@@ -99,6 +103,7 @@ void main() {
   EasyLocalization.logger.enableLevels = [];
   late CustomerCodeBlocMock mockCustomerCodeBloc;
   late SalesOrgBlocMock salesOrgBlocMock;
+  late RecentOrderMockBloc recentOrderMockBloc;
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
@@ -175,6 +180,7 @@ void main() {
       setUp(() {
         mockCustomerCodeBloc = CustomerCodeBlocMock();
         salesOrgBlocMock = SalesOrgBlocMock();
+        recentOrderMockBloc = RecentOrderMockBloc();
         materialListBlocMock = MaterialListBlocMock();
         materialPriceBlocMock = MaterialPriceBlocMock();
         mockBannerBloc = BannerBlocMock();
@@ -199,6 +205,7 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
             .copyWith(salesOrganisation: fakeSalesOrganisation));
+        when(() => recentOrderMockBloc.state).thenReturn(RecentOrderState.initial());
         when(() => materialListBlocMock.state).thenReturn(
             MaterialListState.initial()
                 .copyWith(materialList: [fakematerialInfo1]));
@@ -249,6 +256,8 @@ void main() {
                     create: (context) => mockCustomerCodeBloc),
                 BlocProvider<SalesOrgBloc>(
                     create: (context) => salesOrgBlocMock),
+                 BlocProvider<RecentOrderBloc>(
+                    create: (context) => recentOrderMockBloc),
                 BlocProvider<MaterialListBloc>(
                     create: (context) => materialListBlocMock),
                 BlocProvider<MaterialPriceBloc>(
