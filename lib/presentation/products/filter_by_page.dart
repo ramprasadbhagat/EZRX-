@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -51,7 +52,7 @@ class FilterByPage extends StatelessWidget {
                               .manufactureMapOptions.entries
                               .map((e) => e.key)
                               .toList(),
-                          emptyMessage: '',
+                          noRecordFoundWidget: const NoRecordFound(),
                           controller: ScrollController(),
                         ),
                       )
@@ -71,7 +72,7 @@ class FilterByPage extends StatelessWidget {
                                   .countryMapOptions.entries
                                   .map((e) => e.key)
                                   .toList(),
-                              emptyMessage: '',
+                              noRecordFoundWidget: const NoRecordFound(),
                               controller: ScrollController(),
                             ),
                           )

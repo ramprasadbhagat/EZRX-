@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,8 @@ class _SalesDistrictScrollList extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ScrollList<SalesDistrict>(
-          emptyMessage: 'No Sales District found'.tr(),
+          noRecordFoundWidget:
+              const NoRecordFound(title: 'No Sales District found'),
           controller: ScrollController(),
           onRefresh: () => context
               .read<SalesDistrictBloc>()

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -85,7 +86,8 @@ class _DeductionCodeScrollList extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ScrollList<DeductionCode>(
-          emptyMessage: 'No deduction code found'.tr(),
+          noRecordFoundWidget:
+              const NoRecordFound(title: 'No deduction code found'),
           controller: ScrollController(),
           onRefresh: () {
             context

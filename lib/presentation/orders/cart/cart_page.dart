@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -175,7 +176,7 @@ class _CartScrollList extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ScrollList<CartProduct>(
-          emptyMessage: 'Cart is Empty'.tr(),
+          noRecordFoundWidget: const NoRecordFound(title: 'Cart is Empty'),
           controller: ScrollController(),
           onRefresh: () {},
           isLoading: state.isFetching && state.cartItems.isEmpty,

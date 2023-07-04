@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.da
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -49,7 +50,7 @@ class ViewByOrdersPage extends StatelessWidget {
 
         return ScrollList<ViewByOrderHistoryGroup>(
           controller: ScrollController(),
-          emptyMessage: 'No orders found'.tr(),
+          noRecordFoundWidget: const NoRecordFound(title: 'No orders found'),
           onRefresh: () {
             context.read<ViewByOrderBloc>().add(
                   ViewByOrderEvent.fetch(

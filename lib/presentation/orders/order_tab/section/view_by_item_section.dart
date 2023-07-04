@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -11,9 +12,12 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +56,16 @@ class ViewByItemsPage extends StatelessWidget {
 
         return ScrollList<ViewByItemGroup>(
           controller: ScrollController(),
-          emptyMessage: 'No order items found'.tr(),
+          noRecordFoundWidget: NoRecordFound(
+            title: 'No past orders to show',
+            subTitle: 'Items ordered on eZRx+ will be shown here',
+            svgImage: SvgImage.emptyOrder,
+            actionButton: ElevatedButton(
+              key: WidgetKeys.startBrowsingViewByItem,
+              onPressed: () => context.navigateTo(const ProductsTabRoute()),
+              child: const Text('Start browsing').tr(),
+            ),
+          ),
           onRefresh: () {
             context
                 .read<ViewByItemFilterBloc>()

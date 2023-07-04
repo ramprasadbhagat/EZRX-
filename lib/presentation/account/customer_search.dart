@@ -6,7 +6,9 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +108,11 @@ class _BodyContent extends StatelessWidget {
         itemBuilder: (_, __, item) =>
             _DeliveryAddressItem(customerCodeInfo: item),
         items: state.customerCodeList,
-        emptyMessage: 'No delivery address found'.tr(),
+        noRecordFoundWidget: const NoRecordFound(
+            title: 'That didn’t match anything',
+            subTitle:
+                'Check the location name or code you have entered for any errors',
+            svgImage: SvgImage.deliveryAddress,),
       ),
     );
   }

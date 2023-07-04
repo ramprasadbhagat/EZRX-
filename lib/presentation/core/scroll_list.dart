@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ class ScrollList<T> extends StatefulWidget {
   final VoidCallback? onLoadingMore;
   final bool isLoading;
   final List<T> items;
-  final String emptyMessage;
+  final Widget noRecordFoundWidget;
   final ScrollController controller;
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   const ScrollList({
@@ -19,7 +18,7 @@ class ScrollList<T> extends StatefulWidget {
     required this.isLoading,
     required this.itemBuilder,
     required this.items,
-    required this.emptyMessage,
+    required this.noRecordFoundWidget,
     required this.controller,
     this.onRefresh,
     this.onLoadingMore,
@@ -66,9 +65,7 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
         slivers: [
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
-                  child: NoRecordFound(
-                    title: widget.emptyMessage,
-                  ),
+                  child: widget.noRecordFoundWidget,
                 )
               : SliverList(
                   delegate: SliverChildBuilderDelegate(

@@ -76,7 +76,6 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
                   child: NoRecordFound(
-                    title: '',
                     subTitle: widget.emptyMessage.tr(),
                   ),
                 )

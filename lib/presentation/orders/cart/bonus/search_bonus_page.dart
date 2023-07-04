@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
@@ -67,7 +68,7 @@ class _BonusScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollList<MaterialInfo>(
-      emptyMessage: 'No materials found'.tr(),
+      noRecordFoundWidget: const NoRecordFound(title: 'No materials found'),
       controller: ScrollController(),
       isLoading: state.isFetching,
       itemBuilder: (_, __, item) => _BonusItem(item: item, cartItem: cartItem),

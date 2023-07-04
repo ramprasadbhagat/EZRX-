@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,8 @@ class _UserRestrictionScrollList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ScrollList<String>(
-        emptyMessage: 'No user restrictions found'.tr(),
+        noRecordFoundWidget:
+            const NoRecordFound(title: 'No user restrictions found'),
         controller: ScrollController(),
         isLoading: state.isFetching,
         onRefresh: () {

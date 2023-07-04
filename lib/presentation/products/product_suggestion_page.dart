@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/products/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -206,7 +206,7 @@ class _ProductSuggestionSection extends StatelessWidget {
           isLoading: state.isSearching,
           itemBuilder: (_, __, item) => _SuggestedProductTile(product: item),
           items: state.suggestedProductList,
-          emptyMessage: 'That didn’t match anything'.tr(),
+          noRecordFoundWidget: const NoRecordFound(title: 'That didn’t match anything'),
         );
       },
     );

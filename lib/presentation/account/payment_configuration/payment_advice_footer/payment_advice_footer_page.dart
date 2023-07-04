@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -81,7 +82,8 @@ class _PaymentAdviceFooterScrollList extends StatelessWidget {
           previous.isFetching != current.isFetching,
         builder: (context, state) {
         return ScrollList<PaymentAdviceFooter>(
-          emptyMessage: 'No Payment Advice Footer Found'.tr(),
+          noRecordFoundWidget:
+              const NoRecordFound(title: 'No Payment Advice Footer Found'),
           controller: ScrollController(),
           onRefresh: () =>
               context.read<ManagePaymentAdviceFooterBloc>().add(

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -58,7 +59,8 @@ class _PaymentMethodScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollList<AvailablePaymentMethod>(
-      emptyMessage: 'No payment method found'.tr(),
+      noRecordFoundWidget:
+          const NoRecordFound(title: 'No payment method found'),
       controller: ScrollController(),
       onRefresh: () => _onRefresh(context: context),
       isLoading: state.isFetching,

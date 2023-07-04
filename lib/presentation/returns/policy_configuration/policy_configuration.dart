@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -82,7 +83,8 @@ class _PolicyConfigurationScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollList<PolicyConfiguration>(
-      emptyMessage: 'No Policy Configurations found'.tr(),
+      noRecordFoundWidget:
+          const NoRecordFound(title: 'No Policy Configurations found'),
       controller: ScrollController(),
       onRefresh: () {
         context.read<PolicyConfigurationBloc>().add(

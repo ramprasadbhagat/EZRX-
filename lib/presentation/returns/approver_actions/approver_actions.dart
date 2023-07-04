@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_drawer.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_status.dart';
@@ -186,7 +187,7 @@ class _ApproverReturnRequestScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollList<RequestInformation>(
-      emptyMessage: 'No Return found'.tr(),
+      noRecordFoundWidget: const NoRecordFound(title: 'No Return found'),
       controller: ScrollController(),
       onRefresh: () {
         if (!context.read<CustomerCodeBloc>().state.haveShipTo) {

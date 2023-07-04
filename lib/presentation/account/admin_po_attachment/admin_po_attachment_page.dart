@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/account/admin_po_attachment/filter/admin
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_tile.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -188,7 +189,7 @@ class _BodyContent extends StatelessWidget {
     return Expanded(
       child: ScrollList<AdminPoAttachment>(
         key: const Key('adminPoAttachment'),
-        emptyMessage: 'No Attachment found'.tr(),
+        noRecordFoundWidget: const NoRecordFound(title: 'No Attachment found'),
         controller: ScrollController(),
         onRefresh: () {
           context.read<AdminPoAttachmentBloc>().add(

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_tile.dart';
@@ -185,7 +186,8 @@ class _PaymentSummaryScrollList extends StatelessWidget {
       children: [
         Expanded(
           child: ScrollList<PaymentSummaryGroup>(
-            emptyMessage: 'No Payment Summary Found'.tr(),
+            noRecordFoundWidget:
+                const NoRecordFound(title: 'No Payment Summary Found'),
             controller: ScrollController(),
             onRefresh: () => context.read<PaymentSummaryBloc>().add(
                   PaymentSummaryEvent.fetchPaymentSummaryList(

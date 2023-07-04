@@ -268,6 +268,7 @@ class WidgetKeys {
 
   static const Key materialDescription = Key('materialDescription');
   static const Key orderPriceLoading = Key('priceLoading');
+  static const Key startBrowsingViewByItem = Key('startBrowsingViewByItem');
 
   //============================================================
   //  Order History

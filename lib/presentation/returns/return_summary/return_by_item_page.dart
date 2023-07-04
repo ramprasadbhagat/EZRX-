@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -51,7 +52,8 @@ class ReturnByItemPage extends StatelessWidget {
                     key: WidgetKeys.loaderImage,
                   )
                 : ScrollList<ReturnItem>(
-                    emptyMessage: 'No Return by Item found'.tr(),
+                    noRecordFoundWidget:
+                        const NoRecordFound(title: 'No Return by Item found'),
                     controller: _controller,
                     onRefresh: () => context.read<ReturnListByItemBloc>().add(
                           ReturnListByItemEvent.fetch(

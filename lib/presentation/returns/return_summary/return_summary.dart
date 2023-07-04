@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter_by_status.dart';
@@ -238,7 +239,8 @@ class _ReturnSummaryScrollList extends StatelessWidget {
 
     return Expanded(
       child: ScrollList<ReturnSummaryRequest>(
-        emptyMessage: 'You have not submitted any return request'.tr(),
+        noRecordFoundWidget: const NoRecordFound(
+            title: 'You have not submitted any return request',),
         controller: ScrollController(),
         onRefresh: () {
           context.read<ReturnSummaryFilterBloc>().add(

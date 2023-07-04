@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -183,7 +184,8 @@ class AllInvoicesPage extends StatelessWidget {
                   builder: (context, state) {
                     return Expanded(
                       child: ScrollList<CreditAndInvoiceGroup>(
-                        emptyMessage: 'No invoice found'.tr(),
+                        noRecordFoundWidget:
+                            const NoRecordFound(title: 'No invoice found'),
                         controller: ScrollController(),
                         onRefresh: () {
                           context.read<AllInvoicesFilterBloc>().add(
