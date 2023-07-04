@@ -43,7 +43,17 @@ class WidgetKeys {
   static const Key homeScreen = Key('homeScreen');
   static const Key homeProductSearchBar = Key('homeProductSearchBar');
   static const Key homeQuickAccessPanel = Key('homeQuickAccessPanel');
-  static Key homeQuickAccessMenu(String menu) => Key('homeQuickAccess$menu');
+  static const Key homeQuickAccessWebLoginMenu =
+      Key('homeQuickAccessWebLoginMenu');
+  static const Key homeQuickAccessOrdersMenu = Key('homeQuickAccessOrdersMenu');
+  static const Key homeQuickAccessReturnsMenu =
+      Key('homeQuickAccessReturnsMenu');
+  static const Key homeQuickAccessPaymentsMenu =
+      Key('homeQuickAccessPaymentsMenu');
+  static const Key homeQuickAccessLoyaltyMenu =
+      Key('homeQuickAccessLoyaltyMenu');
+  static const Key homeQuickAccessChatSupportMenu =
+      Key('homeQuickAccessChatSupportMenu');
 
   //============================================================
   //  MORE TAB BAR

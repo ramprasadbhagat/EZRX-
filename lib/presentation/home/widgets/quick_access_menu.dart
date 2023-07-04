@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -14,64 +15,23 @@ class QuickAccessMenuPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final quickAccessItems = [
-      _QuickAccessMenuData(
-        key: 'webLogin',
-        icon: 'web_login_menu.svg',
-        label: 'Web login',
-        onTap: () {},
-      ),
-      _QuickAccessMenuData(
-        key: 'orders',
-        icon: 'order_menu.svg',
-        label: 'Orders',
-        onTap: () => context.navigateTo(OrdersTabRoute()),
-      ),
-      _QuickAccessMenuData(
-        key: 'returns',
-        icon: 'return_menu.svg',
-        label: 'Returns',
-        onTap: () => context.navigateTo(const ReturnRootRoute()),
-      ),
-      _QuickAccessMenuData(
-        key: 'payments',
-        icon: 'payments_menu.svg',
-        label: 'Payments',
-        onTap: () => context.navigateTo(const PaymentsTabRoute()),
-      ),
-      _QuickAccessMenuData(
-        key: 'loyalty',
-        icon: 'loyalty_menu.svg',
-        label: 'Loyalty',
-        onTap: () => {},
-      ),
-      _QuickAccessMenuData(
-        key: 'chatSupport',
-        icon: 'chat_support_menu.svg',
-        label: 'Chat Support',
-        onTap: () =>
-            context.read<ChatBotBloc>().add(const ChatBotEvent.startChatbot()),
-      ),
-    ];
+    final quickAccessItems = _getQuickAccessItems(context);
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: kToolbarHeight * 1.4,
-      margin: const EdgeInsets.only(
-        left: 20.0,
-        bottom: 10.0,
-        top: 10.0,
-      ),
-      child: ListView.separated(
+      height: kToolbarHeight * 1.58,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 11,
+          vertical: 5,
+        ),
         scrollDirection: Axis.horizontal,
-        itemCount: quickAccessItems.length,
-        itemBuilder: (BuildContext context, int index) {
+        children: quickAccessItems.map((quickAccessItem) {
+          
           return _QuickAccessMenu(
-            quickAccessMenuData: quickAccessItems.elementAt(index),
+            quickAccessMenuData: quickAccessItem,
           );
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-        const SizedBox(width: 10),
+        }).toList(),
       ),
     );
   }
@@ -87,9 +47,7 @@ class _QuickAccessMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      key: WidgetKeys.homeQuickAccessMenu(
-        quickAccessMenuData.key,
-      ),
+      key: quickAccessMenuData.key,
       onTap: quickAccessMenuData.onTap,
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
@@ -114,8 +72,8 @@ class _QuickAccessMenu extends StatelessWidget {
                 child: Text(
                   quickAccessMenuData.label,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkTeal,
-                  ),
+                        color: ZPColors.darkTeal,
+                      ),
                 ).tr(),
               ),
             ),
@@ -131,7 +89,7 @@ class _QuickAccessMenu extends StatelessWidget {
 }
 
 class _QuickAccessMenuData {
-  final String key;
+  final Key key;
   final String icon;
   final String label;
   final VoidCallback onTap;
@@ -141,4 +99,65 @@ class _QuickAccessMenuData {
     required this.label,
     required this.onTap,
   });
+}
+
+List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
+  final homeQuickAccessWebLoginMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessWebLoginMenu,
+    icon: 'web_login_menu.svg',
+    label: 'Web login',
+    onTap: () {},
+  );
+  final homeQuickAccessOrdersMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessOrdersMenu,
+    icon: 'order_menu.svg',
+    label: 'Orders',
+    onTap: () => context.navigateTo(OrdersTabRoute()),
+  );
+
+  final homeQuickAccessReturnsMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessReturnsMenu,
+    icon: 'return_menu.svg',
+    label: 'Returns',
+    onTap: () => context.navigateTo(const ReturnRootRoute()),
+  );
+
+  final homeQuickAccessPaymentsMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessPaymentsMenu,
+    icon: 'payments_menu.svg',
+    label: 'Payments',
+    onTap: () => context.navigateTo(const PaymentsTabRoute()),
+  );
+
+  final homeQuickAccessLoyaltyMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessLoyaltyMenu,
+    icon: 'loyalty_menu.svg',
+    label: 'Loyalty',
+    onTap: () => {},
+  );
+
+  final homeQuickAccessChatSupportMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessChatSupportMenu,
+    icon: 'chat_support_menu.svg',
+    label: 'Chat Support',
+    onTap: () =>
+        context.read<ChatBotBloc>().add(const ChatBotEvent.startChatbot()),
+  );
+
+  return context.read<UserBloc>().state.user.userCanAccessOrderHistory
+      ? [
+          homeQuickAccessWebLoginMenu,
+          homeQuickAccessOrdersMenu,
+          homeQuickAccessReturnsMenu,
+          homeQuickAccessPaymentsMenu,
+          homeQuickAccessLoyaltyMenu,
+          homeQuickAccessChatSupportMenu,
+        ]
+      : [
+          homeQuickAccessWebLoginMenu,
+          homeQuickAccessReturnsMenu,
+          homeQuickAccessPaymentsMenu,
+          homeQuickAccessLoyaltyMenu,
+          homeQuickAccessChatSupportMenu,
+        ];
 }
