@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -75,6 +76,9 @@ class AutoRouterMock extends Mock implements AppRouter {
   @override
   String currentPath = '';
 }
+class MaterialListMockBloc
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
 
 void main() {
   late GetIt locator;
@@ -92,6 +96,7 @@ void main() {
   final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock =
       PaymentCustomerInformationBlocMock();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late MaterialListBloc materialListBloc;
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -110,7 +115,7 @@ void main() {
       announcementBlocMock = AnnnouncementBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
       deepLinkingBlocMock = DeepLinkingMockBloc();
-
+      materialListBloc = MaterialListMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -130,6 +135,9 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => deepLinkingBlocMock.state)
           .thenReturn(const DeepLinkingState.initial());
+      when(() => materialListBloc.state)
+          .thenReturn(MaterialListState.initial());
+
     });
 
     Widget loginTestPage() => WidgetUtils.getScopedWidget(
@@ -160,6 +168,8 @@ void main() {
               BlocProvider<AccountSummaryBloc>(
                 create: (context) => accountSummaryMock,
               ),
+              BlocProvider<MaterialListBloc>(
+                  create: (context) => materialListBloc),
             ],
             child: const LoginPage(),
           ),
@@ -263,6 +273,8 @@ void main() {
             BlocProvider<AccountSummaryBloc>(
               create: (context) => accountSummaryMock,
             ),
+            BlocProvider<MaterialListBloc>(
+                create: (context) => materialListBloc),
           ],
           child: const SplashPage(),
         ),

@@ -937,7 +937,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => MaterialListBloc(
       materialListRepository: locator<MaterialListRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),

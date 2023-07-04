@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -79,6 +80,10 @@ class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
+class MaterialListMockBloc
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -96,6 +101,7 @@ void main() {
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late DeepLinkingBloc deepLinkingBlocMock;
   late CustomerCodeBloc customerCodeBloc;
+  late MaterialListBloc materialListBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -108,6 +114,7 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();
+    materialListBloc = MaterialListMockBloc();
     locator = GetIt.instance;
     locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
@@ -154,6 +161,7 @@ void main() {
         .thenReturn(AnnouncementState.initial());
     when(() => deepLinkingBlocMock.state)
         .thenReturn(const DeepLinkingState.initial());
+    when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
@@ -179,6 +187,8 @@ void main() {
               BlocProvider<AuthBloc>(create: (context) => authBlocMock),
               BlocProvider<AnnouncementBloc>(
                   create: (context) => announcementBlocMock),
+              BlocProvider<MaterialListBloc>(
+                  create: (context) => materialListBloc),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -271,6 +281,8 @@ void main() {
             BlocProvider<AccountSummaryBloc>(
               create: (context) => accountSummaryMock,
             ),
+            BlocProvider<MaterialListBloc>(
+                create: (context) => materialListBloc),
           ],
           child: const SplashPage(),
         ),

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../presentation/home/home_tab_test.dart';
+import '../../../presentation/home/banners/banner_test.dart';
 
 void main() {
   group('AcceptanceDateRemoteDataSource should - ', () {
