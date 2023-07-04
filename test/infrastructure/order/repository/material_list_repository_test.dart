@@ -29,7 +29,6 @@ class StockInfoLocalDataSourceMock extends Mock
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
 
-
 void main() {
   late MaterialListRepository materialListRepository;
   late Config mockConfig;

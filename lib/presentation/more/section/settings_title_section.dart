@@ -1,47 +1,16 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/presentation/more/more_tile_details.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/more/more_details_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class SettingsTile extends StatelessWidget {
-  SettingsTile({Key? key}) : super(key: key);
+  const SettingsTile({Key? key}) : super(key: key);
 
-  final List<MoreDetailsTile> moreSettingTiles = [
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.perm_identity_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Account',
-      route: null,
-    ),
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.https_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Security',
-      route: null,
-    ),
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.notifications_none_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Notifications',
-      route: NotificationSettingsPageRoute(),
-    ),
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.security_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Privacy',
-      route: null,
-    ),
-  ];
+  List<MoreDetailsTile> moreSettingTiles(BuildContext context) => [
+        MoreDetailsTile.account(),
+        MoreDetailsTile.security(),
+        MoreDetailsTile.notifications(context),
+        MoreDetailsTile.privacy(),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +27,9 @@ class SettingsTile extends StatelessWidget {
           top: 18.0,
         ),
         shrinkWrap: true,
-        children: moreSettingTiles.map((item) {
+        children: moreSettingTiles(context).map((item) {
           return InkWell(
-            onTap: () {
-              //TODO : will remove this condition when all the routes are created
-              if (item.route != null) {
-                context.navigateTo(item.route!);
-              }
-            },
+            onTap: item.onTap,
             child: Column(
               children: [
                 item.icon,

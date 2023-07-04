@@ -10,7 +10,7 @@ class NoRecordFound extends StatelessWidget {
     Key? key,
     this.title = '',
     this.subTitle =
-    'Try adjusting your search or filter selection to find what you’re looking for.',
+        'Try adjusting your search or filter selection to find what you’re looking for.',
     this.svgImage = SvgImage.searchLogo,
     this.actionButton = const SizedBox.shrink(),
   }) : super(key: key);
@@ -33,13 +33,13 @@ class NoRecordFound extends StatelessWidget {
               key: WidgetKeys.noRecordsFoundSearchIcon,
             ),
           ),
-          if(title.isNotEmpty)
+          if (title.isNotEmpty)
             Text(
               title.tr(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: ZPColors.neutralsDarkBlack,
-              ),
+                    color: ZPColors.neutralsDarkBlack,
+                  ),
             ),
           Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 30),
@@ -47,8 +47,8 @@ class NoRecordFound extends StatelessWidget {
               subTitle.tr(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: ZPColors.neutralsDarkBlack,
-              ),
+                    color: ZPColors.neutralsDarkBlack,
+                  ),
             ),
           ),
           actionButton,
@@ -57,4 +57,3 @@ class NoRecordFound extends StatelessWidget {
     );
   }
 }
-

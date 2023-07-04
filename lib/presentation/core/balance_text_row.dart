@@ -17,7 +17,6 @@ class BalanceTextRow extends StatelessWidget {
   final TextStyle? keyTextStyle;
   final TextStyle? valueTextStyle;
 
-
   const BalanceTextRow({
     Key? key,
     required this.keyText,

@@ -39,14 +39,18 @@ class FilterByPage extends StatelessWidget {
                 return materialFilterType == MaterialFilterType.manufactured
                     ? Padding(
                         padding: const EdgeInsets.only(
-                            left: 20.0, right: 20.0, top: 10.0,),
+                          left: 20.0,
+                          right: 20.0,
+                          top: 10.0,
+                        ),
                         child: ScrollList<String>(
                           isLoading: state.isFetching,
                           itemBuilder: (_, index, item) {
                             return _ItemBuilder(
-                                item: state.displayMaterialFilter,
-                                index: index,
-                                materialFilterType: materialFilterType,);
+                              item: state.displayMaterialFilter,
+                              index: index,
+                              materialFilterType: materialFilterType,
+                            );
                           },
                           items: state.displayMaterialFilter
                               .manufactureMapOptions.entries
@@ -59,14 +63,18 @@ class FilterByPage extends StatelessWidget {
                     : materialFilterType == MaterialFilterType.countryList
                         ? Padding(
                             padding: const EdgeInsets.only(
-                                left: 20.0, right: 20.0, top: 10.0,),
+                              left: 20.0,
+                              right: 20.0,
+                              top: 10.0,
+                            ),
                             child: ScrollList<MaterialFilterCountry>(
                               isLoading: state.isFetching,
                               itemBuilder: (_, index, item) {
                                 return _ItemBuilder(
-                                    item: state.displayMaterialFilter,
-                                    index: index,
-                                    materialFilterType: materialFilterType,);
+                                  item: state.displayMaterialFilter,
+                                  index: index,
+                                  materialFilterType: materialFilterType,
+                                );
                               },
                               items: state.displayMaterialFilter
                                   .countryMapOptions.entries

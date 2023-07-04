@@ -84,7 +84,7 @@ class _BundleDetails extends StatelessWidget {
                 ),
               ),
               FavouriteIcon(
-                materialInfo: MaterialInfo.empty(), 
+                materialInfo: MaterialInfo.empty(),
               ),
             ],
           ),

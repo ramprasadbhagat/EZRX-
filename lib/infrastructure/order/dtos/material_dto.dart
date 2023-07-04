@@ -235,7 +235,6 @@ List handleEmptyTaxList(Map json, String key) {
   return json[key];
 }
 
-
 int _validateQantity(Map json, String key) {
   return (json[key] ?? 0) > 0
       ? json[key]

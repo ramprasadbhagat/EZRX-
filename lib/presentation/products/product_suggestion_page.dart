@@ -201,7 +201,8 @@ class _ProductSuggestionSection extends StatelessWidget {
           isLoading: state.isSearching,
           itemBuilder: (_, __, item) => _SuggestedProductTile(product: item),
           items: state.suggestedProductList,
-          noRecordFoundWidget: const NoRecordFound(title: 'That didn’t match anything'),
+          noRecordFoundWidget:
+              const NoRecordFound(title: 'That didn’t match anything'),
         );
       },
     );

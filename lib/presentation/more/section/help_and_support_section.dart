@@ -1,75 +1,18 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/more/more_tile_details.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/more/more_details_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HelpAndSupportTile extends StatelessWidget {
-  HelpAndSupportTile({Key? key}) : super(key: key);
-  final List<MoreDetailsTile> moreHelpAndSupportTiles = [
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.contact_support_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'FAQ',
-      route: null,
-    ),
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons
-            .menu_book_outlined, //TODO : will update it after Design Them update the Figma
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'User guide',
-      route: null,
-    ),
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.error_outline_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'About us',
-      route: null,
-    ),
-    const MoreDetailsTile(
-      icon: Icon(
-        Icons.support_agent_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Chart support',
-      route: null,
-    ),
-    MoreDetailsTile(
-      icon: const Icon(
-        Icons
-            .feed_outlined, //TODO : will update it after Design Them update the Figma
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Terms of use',
-      route: StaticHtmlViewerRoute(
-        title: 'Terms of Use',
-        htmlPath: locator<Config>().staticTermsOfUseFile,
-        styleCss: locator<Config>().staticStyleCss,
-      ),
-    ),
-    MoreDetailsTile(
-      icon: const Icon(
-        Icons
-            .policy_outlined, //TODO : will update it after Design Them update the Figma
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Privacy policy',
-      route: StaticHtmlViewerRoute(
-        title: 'Privacy policy',
-        htmlPath: locator<Config>().staticPrivacyPolicyFile,
-        styleCss: locator<Config>().staticStyleCss,
-      ),
-    ),
-  ];
+  const HelpAndSupportTile({Key? key}) : super(key: key);
+  List<MoreDetailsTile> moreHelpAndSupportTiles(BuildContext context) =>
+      <MoreDetailsTile>[
+        MoreDetailsTile.faq(),
+        MoreDetailsTile.userGuide(),
+        MoreDetailsTile.aboutUs(),
+        MoreDetailsTile.chatSupport(context),
+        MoreDetailsTile.termsOfUse(context),
+        MoreDetailsTile.privacyPolicy(context),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +29,9 @@ class HelpAndSupportTile extends StatelessWidget {
           top: 18.0,
         ),
         shrinkWrap: true,
-        children: moreHelpAndSupportTiles.map((item) {
+        children: moreHelpAndSupportTiles(context).map((item) {
           return InkWell(
-            onTap: () {
-              //TODO : will remove this condition when all the routes are created
-              if (item.route != null) {
-                context.navigateTo(item.route!);
-              }
-            },
+            onTap: item.onTap,
             child: Column(
               children: [
                 item.icon,

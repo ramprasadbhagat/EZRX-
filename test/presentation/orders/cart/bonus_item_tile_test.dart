@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 // class BonusMaterialBlocMock
 //     extends MockBloc<BonusMaterialEvent, BonusMaterialState>
 //     implements BonusMaterialBloc {}
@@ -205,39 +204,39 @@ void main() {
   //   },
   // );
 
-    // testWidgets(
-    //   'On cart bonus item Edit Dailog',
-    //   (tester) async {
-    //     materialItemBonus = materialItemBonus.copyWith(
-    //       materialInfo: MaterialInfo.empty().copyWith(
-    //         materialNumber: MaterialNumber('1234567'),
-    //         remarks: 'test',
-    //       ),
-    //     );
-    //     when(() => salesOrgBloc.state).thenReturn(
-    //       SalesOrgState.initial().copyWith(
-    //         configs:
-    //             SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
-    //       ),
-    //     );
+  // testWidgets(
+  //   'On cart bonus item Edit Dailog',
+  //   (tester) async {
+  //     materialItemBonus = materialItemBonus.copyWith(
+  //       materialInfo: MaterialInfo.empty().copyWith(
+  //         materialNumber: MaterialNumber('1234567'),
+  //         remarks: 'test',
+  //       ),
+  //     );
+  //     when(() => salesOrgBloc.state).thenReturn(
+  //       SalesOrgState.initial().copyWith(
+  //         configs:
+  //             SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
+  //       ),
+  //     );
 
-    //     await tester.pumpWidget(getWidget());
-    //     await tester.pump();
-    //     final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
-    //     expect(editDeleteDialog, findsOneWidget);
-    //     await tester.tap(editDeleteDialog.first);
-    //     await tester.pumpAndSettle();
-    //     final childDeleteButton = find.text('Delete');
-    //     expect(childDeleteButton, findsOneWidget); //
-    //     await tester.ensureVisible(childDeleteButton);
-    //     await tester.pumpAndSettle();
-    //     await tester.tap(childDeleteButton);
-    //     // verify(
-    //     //   () => cartBloc.add(
-    //     //     const CartEvent.remarksChanged(''),
-    //     //   ),
-    //     // ).called(1);
-    //   },
-    // );
+  //     await tester.pumpWidget(getWidget());
+  //     await tester.pump();
+  //     final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
+  //     expect(editDeleteDialog, findsOneWidget);
+  //     await tester.tap(editDeleteDialog.first);
+  //     await tester.pumpAndSettle();
+  //     final childDeleteButton = find.text('Delete');
+  //     expect(childDeleteButton, findsOneWidget); //
+  //     await tester.ensureVisible(childDeleteButton);
+  //     await tester.pumpAndSettle();
+  //     await tester.tap(childDeleteButton);
+  //     // verify(
+  //     //   () => cartBloc.add(
+  //     //     const CartEvent.remarksChanged(''),
+  //     //   ),
+  //     // ).called(1);
+  //   },
+  // );
   // });
 }

@@ -55,7 +55,8 @@ class ReturnByRequestPage extends StatelessWidget {
                   )
                 : ScrollList<ReturnItem>(
                     noRecordFoundWidget: const NoRecordFound(
-                        title: 'No Return by Request found',),
+                      title: 'No Return by Request found',
+                    ),
                     controller: _controller,
                     onRefresh: () =>
                         context.read<ReturnListByRequestBloc>().add(

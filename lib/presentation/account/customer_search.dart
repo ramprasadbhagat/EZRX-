@@ -109,10 +109,11 @@ class _BodyContent extends StatelessWidget {
             _DeliveryAddressItem(customerCodeInfo: item),
         items: state.customerCodeList,
         noRecordFoundWidget: const NoRecordFound(
-            title: 'That didn’t match anything',
-            subTitle:
-                'Check the location name or code you have entered for any errors',
-            svgImage: SvgImage.deliveryAddress,),
+          title: 'That didn’t match anything',
+          subTitle:
+              'Check the location name or code you have entered for any errors',
+          svgImage: SvgImage.deliveryAddress,
+        ),
       ),
     );
   }

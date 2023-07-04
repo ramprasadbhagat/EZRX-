@@ -32,7 +32,7 @@ class MoreTab extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            ServiceTile(), // Adds Service Tile
+            const ServiceTile(), // Adds Service Tile
             const Divider(
               color: ZPColors.accentColor,
               height: 15,
@@ -40,7 +40,7 @@ class MoreTab extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            SettingsTile(), // Adds Settings Tile
+            const SettingsTile(), // Adds Settings Tile
             const Divider(
               color: ZPColors.accentColor,
               height: 15,
@@ -48,7 +48,7 @@ class MoreTab extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            HelpAndSupportTile(), // Adds Help and Support Tile
+            const HelpAndSupportTile(), // Adds Help and Support Tile
             const Divider(
               color: ZPColors.accentColor,
               height: 15,

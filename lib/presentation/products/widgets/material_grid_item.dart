@@ -10,12 +10,10 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
   final VoidCallback onTap;
-  
+
   const MaterialGridItem({
     required this.materialInfo,
     required this.onTap,
@@ -39,8 +37,7 @@ class MaterialGridItem extends StatelessWidget {
                   children: [
                     Center(
                       child: CachedNetworkImage(
-                        imageUrl:
-                            materialInfo.productImages.thumbNail,
+                        imageUrl: materialInfo.productImages.thumbNail,
                         fit: BoxFit.fitHeight,
                         placeholder: (context, url) {
                           return LoadingShimmer.withChild(
@@ -123,4 +120,3 @@ class MaterialGridItem extends StatelessWidget {
     );
   }
 }
-

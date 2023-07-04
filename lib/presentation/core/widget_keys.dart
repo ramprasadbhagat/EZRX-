@@ -10,7 +10,6 @@ class WidgetKeys {
   static const Key filterApplyButton = Key('filterApplyButton');
   static const Key productImage = Key('productImage');
 
-
   //============================================================
   //  LOGIN
   //============================================================
@@ -280,7 +279,7 @@ class WidgetKeys {
 
   static const Key fromOrderDateField = Key('fromOrderDateField');
   static const Key toOrderDateField = Key('toOrderDateField');
-  
+
   //============================================================
   //  Material Details
   //============================================================
@@ -309,5 +308,4 @@ class WidgetKeys {
       Key('materialDetailsQuantityInput');
   static const Key materialDetailsAddToCartButton =
       Key('materialDetailsAddToCartButton');
-
 }

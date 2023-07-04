@@ -28,7 +28,6 @@ class StockInfoLocalDataSource {
         .toList();
   }
 
-
   Future<List<MaterialStockInfo>> getMaterialStockInfoList() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(
