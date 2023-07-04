@@ -63,7 +63,6 @@ void main() {
             'query': remoteDataSource.stockInfoQueryMutation.getStockInfo(),
             'variables': {
               'materialNumber': 'fake-material',
-              'plant': 'fake-plant',
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
             },
@@ -72,7 +71,6 @@ void main() {
 
         final result = await remoteDataSource.getStockInfo(
           materialNumber: 'fake-material',
-          plant: 'fake-plant',
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
         );
@@ -133,7 +131,6 @@ void main() {
             'query': remoteDataSource.stockInfoQueryMutation.getStockInfo(),
             'variables': {
               'materialNumber': 'fake-material',
-              'plant': 'fake-plant',
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
             },
@@ -143,7 +140,6 @@ void main() {
         await remoteDataSource
             .getStockInfo(
           materialNumber: 'fake-material',
-          plant: 'fake-plant',
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
         )
@@ -171,7 +167,6 @@ void main() {
             'query': remoteDataSource.stockInfoQueryMutation.getStockInfo(),
             'variables': {
               'materialNumber': 'fake-material',
-              'plant': 'fake-plant',
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
             },
@@ -181,7 +176,6 @@ void main() {
         await remoteDataSource
             .getStockInfo(
           materialNumber: 'fake-material',
-          plant: 'fake-plant',
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
         )

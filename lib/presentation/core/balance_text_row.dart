@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,10 @@ class BalanceTextRow extends StatelessWidget {
   final bool valueTextLoading;
   final bool isStatus;
   final Color valueColor;
+  final Color keyColor;
   final TextStyle? keyTextStyle;
   final TextStyle? valueTextStyle;
+
 
   const BalanceTextRow({
     Key? key,
@@ -24,6 +27,7 @@ class BalanceTextRow extends StatelessWidget {
     this.valueTextLoading = false,
     this.isStatus = false,
     this.valueColor = ZPColors.black,
+    this.keyColor = ZPColors.darkGray,
     this.keyTextStyle,
     this.valueTextStyle,
   }) : super(key: key);
@@ -31,7 +35,7 @@ class BalanceTextRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: Key('$keyText$valueText'),
+      key: WidgetKeys.balanceTextRow(keyText, valueText),
       padding: const EdgeInsets.symmetric(
         vertical: 2.0,
       ),
@@ -43,7 +47,7 @@ class BalanceTextRow extends StatelessWidget {
               keyText,
               style: keyTextStyle ??
                   Theme.of(context).textTheme.titleSmall?.apply(
-                        color: ZPColors.darkGray,
+                        color: keyColor,
                       ),
             ),
           ),

@@ -13,13 +13,17 @@ class FavouriteIcon extends StatelessWidget {
     return IconButton(
       onPressed: () {
         context.read<MaterialListBloc>().add(materialInfo.isFavourite
-            ? MaterialListEvent.deleteFavourite(item: materialInfo,)
-            : MaterialListEvent.addFavourite(item: materialInfo,));
+            ? MaterialListEvent.deleteFavourite(
+                item: materialInfo,
+              )
+            : MaterialListEvent.addFavourite(
+                item: materialInfo,
+              ));
       },
       icon: Icon(
         materialInfo.isFavourite
-        ?Icons.favorite
-        :Icons.favorite_border_outlined,
+            ? Icons.favorite
+            : Icons.favorite_border_outlined,
         color: ZPColors.darkYellow,
       ),
     );

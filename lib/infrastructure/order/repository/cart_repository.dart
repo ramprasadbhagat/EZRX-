@@ -829,7 +829,6 @@ class CartRepository implements ICartRepository {
             : [
                 await stockInfoRemoteDataSource.getStockInfo(
                   materialNumber: material.materialNumber.getOrCrash(),
-                  plant: shipToInfo.plant,
                   salesOrg: salesOrganisation.salesOrg.getOrCrash(),
                   selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
                 ),

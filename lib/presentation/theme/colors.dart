@@ -71,6 +71,8 @@ abstract class ZPColors {
   static const Color lightRedStatusColor = Color.fromRGBO(255, 211, 211, 1);
   static const Color lightBgYellow = Color.fromRGBO(253, 246, 237, 1);
   static const Color lightBorderYellow = Color.fromRGBO(245, 219, 181, 1);
+  static const Color secondaryMustard = Color.fromRGBO(245, 219, 181, 1);
+  static const Color grayishBlue = Color.fromRGBO(222, 227, 230, 1);
   static const Color lightBlueColor = Color.fromRGBO(218, 230, 248, 1);
   static const Color lightBlueBorderColor = Color.fromRGBO(143, 181, 233, 1);
   static const Color darkTeal = Color.fromRGBO(0, 85, 91, 1);

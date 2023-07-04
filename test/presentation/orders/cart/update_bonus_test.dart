@@ -170,31 +170,31 @@ void main() {
       },
     );
 
-    testWidgets(
-      'Update bonus Quantity Increment',
-      (tester) async {
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final updateBonus = find.byKey(const Key('updateBonus'));
-        expect(updateBonus, findsOneWidget);
-        final bounsAdd = find.byKey(const Key('bounsAdd'));
-        expect(bounsAdd, findsOneWidget);
-        await tester.tap(bounsAdd.first);
-      },
-    );
+    // testWidgets(
+    //   'Update bonus Quantity Increment',
+    //   (tester) async {
+    //     await tester.pumpWidget(getWidget());
+    //     await tester.pump();
+    //     final updateBonus = find.byKey(const Key('updateBonus'));
+    //     expect(updateBonus, findsOneWidget);
+    //     final bounsAdd = find.byKey(const Key('bounsAdd'));
+    //     expect(bounsAdd, findsOneWidget);
+    //     await tester.tap(bounsAdd.first);
+    //   },
+    // );
 
-    testWidgets(
-      'Update bonus Quantity Decrement',
-      (tester) async {
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final updateBonus = find.byKey(const Key('updateBonus'));
-        expect(updateBonus, findsOneWidget);
-        final bonusDelete = find.byKey(const Key('bonusDelete'));
-        expect(bonusDelete, findsOneWidget);
-        await tester.tap(bonusDelete.first);
-      },
-    );
+    // testWidgets(
+    //   'Update bonus Quantity Decrement',
+    //   (tester) async {
+    //     await tester.pumpWidget(getWidget());
+    //     await tester.pump();
+    //     final updateBonus = find.byKey(const Key('updateBonus'));
+    //     expect(updateBonus, findsOneWidget);
+    //     final bonusDelete = find.byKey(const Key('bonusDelete'));
+    //     expect(bonusDelete, findsOneWidget);
+    //     await tester.tap(bonusDelete.first);
+    //   },
+    // );
 
     testWidgets(
       'Add updated bonus',

@@ -35,7 +35,7 @@ class StockInfoLocalDataSource {
       await rootBundle.loadString('assets/json/getStockInformationList.json'),
     );
 
-    return List.from(data['data']['stockInformationList'])
+    return List.from(data['data']['getStockInformationLists'])
         .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
         .toList();
   }

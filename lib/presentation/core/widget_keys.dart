@@ -8,6 +8,8 @@ class WidgetKeys {
   static const Key closeButton = Key('closeButton');
   static const Key filterResetButton = Key('filterResetButton');
   static const Key filterApplyButton = Key('filterApplyButton');
+  static const Key productImage = Key('productImage');
+
 
   //============================================================
   //  LOGIN
@@ -195,6 +197,8 @@ class WidgetKeys {
   static const Key loaderImage = Key('loaderImage');
   static const Key loader = Key('loader');
   static const Key webview = Key('webview');
+  static Key balanceTextRow(String keyText, String valueText) =>
+      Key('$keyText$valueText');
 
   //============================================================
   //  Quantity Input Widget Keys
@@ -276,4 +280,34 @@ class WidgetKeys {
 
   static const Key fromOrderDateField = Key('fromOrderDateField');
   static const Key toOrderDateField = Key('toOrderDateField');
+  
+  //============================================================
+  //  Material Details
+  //============================================================
+
+  static const Key materialDetailsPageBack = Key('materialDetailsPageBack');
+  static const Key materialDetailsPageCartIcon =
+      Key('materialDetailsPageCartIcon');
+  static const Key materialDetailsFloatingButton =
+      Key('materialDetailsFloatingButton');
+  static const Key materialDetailsCarousel = Key('materialDetailsCarousel');
+  static const Key materialDetailsImageCounter =
+      Key('materialDetailsImageCounter');
+  static const Key materialDetailsMaterialNumber =
+      Key('materialDetailsMaterialNumber');
+  static const Key materialDetailsMaterialDescription =
+      Key('materialDetailsMaterialDescription');
+  static const Key materialDetailsFavouriteIcon =
+      Key('materialDetailsMaterialFavouriteIcon');
+  static const Key materialDetailsStock = Key('materialDetailsStock');
+  static const Key materialDetailsInfoTile = Key('materialDetailsInfoTile');
+  static const Key materialDetailsPromoShort = Key('materialDetailsPromoShort');
+  static const Key materialDetailsPromo = Key('materialDetailsPromo');
+  static const Key materialDetailsPromoSeeMore =
+      Key('materialDetailsPromoSeeMore');
+  static const Key materialDetailsQuantityInput =
+      Key('materialDetailsQuantityInput');
+  static const Key materialDetailsAddToCartButton =
+      Key('materialDetailsAddToCartButton');
+
 }

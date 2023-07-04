@@ -19,6 +19,7 @@ class QuantityInput extends StatelessWidget {
   final bool returnZeroOnFieldEmpty;
   final int minimumQty;
   final int maximumQty;
+  final double? width;
 
   const QuantityInput({
     Key? key,
@@ -34,6 +35,7 @@ class QuantityInput extends StatelessWidget {
     this.isLoading = false,
     this.minimumQty = 1,
     this.maximumQty = 100000,
+    this.width,
   }) : super(key: key);
 
   @override
@@ -41,7 +43,7 @@ class QuantityInput extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 70,
+          width: width ?? 150,
           child: TextField(
             enabled: isEnabled,
             key: quantityTextKey,
@@ -71,6 +73,55 @@ class QuantityInput extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               border:
                   isEnabled ? const UnderlineInputBorder() : InputBorder.none,
+                suffixIcon: isLoading
+                    ? const QuantityIconShimmer()
+                    : isEnabled
+                        ? QuantityIcon(
+                            key: quantityAddKey,
+                            pressed: () {
+                              FocusScope.of(context).unfocus();
+                              final value =
+                                  (int.tryParse(controller.text) ?? 0) + 1;
+
+                              if (value < maximumQty) {
+                                final text = value.toString();
+                                controller.value = TextEditingValue(
+                                  text: text,
+                                  selection: TextSelection.collapsed(
+                                    offset: controller.selection.base.offset,
+                                  ),
+                                );
+                                addPressed.call(value);
+                              }
+                            },
+                            icon: Icons.add,
+                            isEnabled: isEnabled,
+                          )
+                        : const SizedBox.shrink(),
+                prefixIcon: isLoading
+                    ? const QuantityIconShimmer()
+                    : isEnabled
+                        ? QuantityIcon(
+                            key: quantityDeleteKey,
+                            pressed: () {
+                              FocusScope.of(context).unfocus();
+                              final value =
+                                  (int.tryParse(controller.text) ?? 0) - 1;
+                              if (value >= minimumQty) {
+                                final text = value.toString();
+                                controller.value = TextEditingValue(
+                                  text: text,
+                                  selection: TextSelection.collapsed(
+                                    offset: controller.selection.base.offset,
+                                  ),
+                                );
+                                minusPressed.call(value);
+                              }
+                            },
+                            icon: Icons.remove,
+                            isEnabled: isEnabled,
+                          )
+                      : const SizedBox.shrink(),
             ),
             style: Theme.of(context).textTheme.titleLarge,
           ),

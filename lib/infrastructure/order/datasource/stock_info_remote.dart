@@ -26,7 +26,6 @@ class StockInfoRemoteDataSource {
     required String materialNumber,
     required String salesOrg,
     required String selectedCustomerCode,
-    required String plant,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
@@ -37,7 +36,6 @@ class StockInfoRemoteDataSource {
             'query': stockInfoQueryMutation.getStockInfo(),
             'variables': {
               'materialNumber': materialNumber,
-              'plant': plant,
               'customerCode': selectedCustomerCode,
               'salesOrganisation': salesOrg,
             },
@@ -109,7 +107,7 @@ class StockInfoRemoteDataSource {
 
       _exceptionChecker(res: res);
 
-      return List.from(res.data['data']['stockInformationList'])
+      return List.from(res.data['data']['getStockInformationLists'])
           .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
           .toList();
     });

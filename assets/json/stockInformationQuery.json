@@ -1,1 +1,0 @@
-{"query":"    {\n      stockInformation(materialNumber:\"000000000023245613\",customerCode:\"0000002610\", plant:\"2610\",salesOrganisation:\"2601\" , principalCode: \"0000100813\" ){\n        MaterialNumber\n        ExpiryDate\n        Batch\n        InStock\n        SalesDistrict\n      }\n    }\n    "}

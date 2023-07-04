@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -84,10 +86,18 @@ class MaterialDto with _$MaterialDto {
     @HiveField(25, defaultValue: '')
     @HiveField(26, defaultValue: '')
         required String name,
-    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+    @JsonKey(
+      name: 'PrincipalCode',
+      defaultValue: '',
+      readValue: _principalCodeReadValue,
+    )
     @HiveField(27, defaultValue: '')
         required String principalCode,
-    @JsonKey(name: 'MaterialNumber', defaultValue: '')
+    @JsonKey(
+      name: 'MaterialNumber',
+      defaultValue: '',
+      readValue: _materialNumberReadValue,
+    )
     @HiveField(28, defaultValue: '')
         required String materialNumber,
     @HiveField(29, defaultValue: '')
@@ -201,10 +211,11 @@ class MaterialDto with _$MaterialDto {
       isGimmick: isGimmick,
       manufactured: manufactured,
       name: name,
-      principalCode: principalCode,
       type: MaterialInfoType(type),
       stockInfos: [],
       bundle: bundle.toDomain(),
+      productImages:
+          data.isNotEmpty ? data.first.toProductImage() : ProductImages.empty(),
     );
   }
 
@@ -224,6 +235,7 @@ List handleEmptyTaxList(Map json, String key) {
   return json[key];
 }
 
+
 int _validateQantity(Map json, String key) {
   return (json[key] ?? 0) > 0
       ? json[key]
@@ -233,6 +245,11 @@ int _validateQantity(Map json, String key) {
 }
 
 Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
+String _materialNumberReadValue(Map json, String key) =>
+    json[key] ?? json['materialNumber'] ?? '';
+
+String _principalCodeReadValue(Map json, String key) =>
+    json[key] ?? json['principalCode'] ?? '';
 
 @freezed
 class MaterialDataDto with _$MaterialDataDto {
@@ -272,7 +289,7 @@ class MaterialDataDto with _$MaterialDataDto {
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: governmentMaterialCode,
-        materialImageURL: materialImageURL,
+        materialImageURL: StringValue(materialImageURL),
       );
 
   factory MaterialDataDto.fromDomain(MaterialData materialData) =>
@@ -283,8 +300,11 @@ class MaterialDataDto with _$MaterialDataDto {
         defaultMaterialDescription: materialData.defaultMaterialDescription,
         genericMaterialName: materialData.genericMaterialName,
         governmentMaterialCode: materialData.governmentMaterialCode,
-        materialImageURL: materialData.materialImageURL,
+        materialImageURL: materialData.materialImageURL.getOrDefaultValue(''),
       );
+
+  ProductImages toProductImage() =>
+      ProductImages.empty().copyWith(thumbNail: materialImageURL);
 }
 
 @freezed

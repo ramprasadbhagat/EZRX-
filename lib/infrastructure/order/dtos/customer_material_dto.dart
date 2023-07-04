@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -91,10 +92,10 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         isGimmick: false,
         manufactured: '',
         name: '',
-        principalCode: '',
         type: MaterialInfoType(''),
         stockInfos: <StockInfo>[],
         bundle: Bundle.empty(),
+        productImages: ProductImages.empty(),
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

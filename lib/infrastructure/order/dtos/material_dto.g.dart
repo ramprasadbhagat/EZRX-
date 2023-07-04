@@ -239,8 +239,10 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
           [],
       code: json['Code'] as String? ?? '',
       name: json['Name'] as String? ?? '',
-      principalCode: json['PrincipalCode'] as String? ?? '',
-      materialNumber: json['MaterialNumber'] as String? ?? '',
+      principalCode:
+          _principalCodeReadValue(json, 'PrincipalCode') as String? ?? '',
+      materialNumber:
+          _materialNumberReadValue(json, 'MaterialNumber') as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       manufactured: json['Manufactured'] as String? ?? '',
       isFavourite: json['IsFavourite'] as bool? ?? false,

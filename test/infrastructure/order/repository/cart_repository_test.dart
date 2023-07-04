@@ -148,7 +148,6 @@ void main() {
         materialNumber: fakeCartItem.materials.first.materialNumberString,
         salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        plant: fakeShipToInfo.plant,
       ),
     ).thenAnswer(
       (invocation) async => StockInfo.empty(),
@@ -1585,7 +1584,6 @@ void main() {
         materialNumber: fakeCartItem.materials.first.materialNumberString,
         salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        plant: fakeShipToInfo.plant,
       ),
     ).thenThrow(
       (invocation) async => MockException(),

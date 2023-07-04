@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -15,7 +17,7 @@ class MaterialInfo with _$MaterialInfo {
 
   const factory MaterialInfo({
     required String name,
-    required String principalCode,
+    required PrincipalData principalData,
     required MaterialNumber materialNumber,
     required String materialDescription,
     required String manufactured,
@@ -28,13 +30,13 @@ class MaterialInfo with _$MaterialInfo {
     required bool isGimmick,
     required List<StockInfo> stockInfos,
     required Bundle bundle,
+    required ProductImages productImages,
 
     //TODO: remove field from v2
     required String defaultMaterialDescription,
     required String governmentMaterialCode,
     required String therapeuticClass,
     required String itemBrand,
-    required PrincipalData principalData,
     required String itemRegistrationNumber,
     required String unitOfMeasurement,
     required MaterialGroup materialGroup2,
@@ -86,10 +88,10 @@ class MaterialInfo with _$MaterialInfo {
         isGimmick: false,
         manufactured: '',
         name: '',
-        principalCode: '',
         type: MaterialInfoType(''),
         stockInfos: <StockInfo>[],
         bundle: Bundle.empty(),
+        productImages: ProductImages.empty(),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(
@@ -134,16 +136,6 @@ class MaterialInfo with _$MaterialInfo {
   }) =>
       copyWith(stockInfos: stockInfos);
 
-  MaterialInfo fromMaterialData(MaterialData materialData) =>
-      MaterialInfo.empty().copyWith(
-        materialNumber: materialData.code,
-        manufactured: materialData.manufactured,
-        data: [materialData],
-        materialDescription: materialData.materialDescription,
-        governmentMaterialCode: materialData.genericMaterialName,
-        genericMaterialName: materialData.genericMaterialName,
-      );
-
   bool get listingDataNotAvailable =>
       type.typeBundle && dataTotalHidden.isDataHidden;
 
@@ -154,7 +146,9 @@ class MaterialInfo with _$MaterialInfo {
   List<MaterialData> get listingVisibleMaterial =>
       data.sublist(0, data.length > 5 ? 5 : data.length);
 
-  String get productImage => data.isNotEmpty ? data.first.materialImageURL : '';
+  String get getManufactured => manufactured.isNotEmpty
+      ? manufactured
+      : principalData.principalName.getOrDefaultValue('');
 }
 
 @freezed
@@ -166,7 +160,7 @@ class MaterialData with _$MaterialData {
     required String materialDescription,
     required String defaultMaterialDescription,
     required String genericMaterialName,
-    required String materialImageURL,
+    required StringValue materialImageURL,
     required String governmentMaterialCode,
   }) = _MaterialData;
 

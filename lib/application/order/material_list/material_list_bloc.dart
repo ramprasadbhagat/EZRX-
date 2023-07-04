@@ -204,6 +204,5 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   @override
   void onChange(Change<MaterialListState> change) {
     super.onChange(change);
-    // print(change);
   }
 }

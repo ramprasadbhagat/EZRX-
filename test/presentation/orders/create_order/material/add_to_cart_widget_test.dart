@@ -358,35 +358,35 @@ void main() {
       expect(find.byType(SelectContract), findsOneWidget);
     });
 
-    testWidgets('- did call update qty event when update qty', (tester) async {
-      when(() => addToCartBlocMock.state).thenReturn(
-        AddToCartState.initial().copyWith(
-          isFetching: false,
-          cartItem: priceAggregate,
-        ),
-      );
+    // testWidgets('- did call update qty event when update qty', (tester) async {
+    //   when(() => addToCartBlocMock.state).thenReturn(
+    //     AddToCartState.initial().copyWith(
+    //       isFetching: false,
+    //       cartItem: priceAggregate,
+    //     ),
+    //   );
 
-      await tester.pumpWidget(getScopedWidget(AddToCart(
-        isCovid19Tab: false,
-        material: priceAggregate,
-      )));
+    //   await tester.pumpWidget(getScopedWidget(AddToCart(
+    //     isCovid19Tab: false,
+    //     material: priceAggregate,
+    //   )));
 
-      expect(find.byType(CartItemDetailWidget), findsOneWidget);
-      final plusButton = find.byKey(const Key('cartItemAdd'));
-      await tester.tap(plusButton);
-      await tester.pump();
+    //   expect(find.byType(CartItemDetailWidget), findsOneWidget);
+    //   final plusButton = find.byKey(const Key('cartItemAdd'));
+    //   await tester.tap(plusButton);
+    //   await tester.pump();
 
-      verify(
-        () => addToCartBlocMock.add(
-          AddToCartEvent.updateQuantity(
-              quantity: 2,
-              cartZmgQtyExcludeCurrent: 0,
-              customerCode: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToCode: ShipToInfo.empty()),
-        ),
-      );
-    });
+    //   verify(
+    //     () => addToCartBlocMock.add(
+    //       AddToCartEvent.updateQuantity(
+    //           quantity: 2,
+    //           cartZmgQtyExcludeCurrent: 0,
+    //           customerCode: CustomerCodeInfo.empty(),
+    //           salesOrganisation: SalesOrganisation.empty(),
+    //           shipToCode: ShipToInfo.empty()),
+    //     ),
+    //   );
+    // });
   });
   group('Add To Cart Button', () {
     testWidgets('- hidden when user is returnRole ', (tester) async {

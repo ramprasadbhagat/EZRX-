@@ -20,6 +20,7 @@ class CartItemQuantityInput extends StatelessWidget {
   final bool returnZeroOnFieldEmpty;
   final int minimumQty;
   final int maximumQty;
+  final double height;
 
   const CartItemQuantityInput({
     Key? key,
@@ -35,6 +36,7 @@ class CartItemQuantityInput extends StatelessWidget {
     this.isLoading = false,
     this.minimumQty = 1,
     this.maximumQty = 100000,
+    this.height = 35,
   }) : super(key: key);
 
   @override
@@ -43,7 +45,7 @@ class CartItemQuantityInput extends StatelessWidget {
         ? CartItemQuantityInputShimmer(controller: controller)
         : SizedBox(
             width: double.infinity,
-            height: 35,
+            height: height,
             child: TextField(
               enabled: isEnabled,
               key: quantityTextKey,

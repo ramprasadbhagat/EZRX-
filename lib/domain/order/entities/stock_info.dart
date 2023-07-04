@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'stock_info.freezed.dart';
 
-
 @freezed
 class MaterialStockInfo with _$MaterialStockInfo {
   const MaterialStockInfo._();
@@ -39,5 +38,6 @@ class StockInfo with _$StockInfo {
         inStock: MaterialInStock(''),
         salesDistrict: '',
       );
-  
+
+  bool get batchExpiryDateAvailable => batch.isValid() || expiryDate.isValid();
 }

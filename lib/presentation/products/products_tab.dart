@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
@@ -88,16 +90,9 @@ class ProductsTab extends StatelessWidget {
                             MaterialInfo item,
                           ) =>
                               item.type.typeMaterial
-                                  // Need to remove this GestureDetector after PR is reviewed
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        context.router.pushNamed(
-                                          'orders/bundle_detail_page',
-                                        );
-                                      },
-                                      child: MaterialGridItem(
-                                        materialInfo: item,
-                                      ),
+                                  ? MaterialGridItem(
+                                      materialInfo: item,
+                                      onTap: () => _productOnTap(context, item),
                                     )
                                   : BundleGridItem(
                                       materialInfo: item,
@@ -138,6 +133,30 @@ class ProductsTab extends StatelessWidget {
             shipToInfo: eligibilityBloc.state.shipToInfo,
             selectedMaterialFilter:
                 context.read<MaterialFilterBloc>().state.materialFilter,
+          ),
+        );
+  }
+
+  void _productOnTap(BuildContext context, MaterialInfo materialInfo) {
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+    context.read<ProductDetailBloc>().add(
+          ProductDetailEvent.fetch(
+            materialNumber: materialInfo.materialNumber,
+            salesOrganisation: eligibilityBlocState.salesOrganisation,
+            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+            shipToInfo: eligibilityBlocState.shipToInfo,
+            locale: context.locale,
+          ),
+        );
+    context.router.pushNamed('orders/material_details');
+    context.read<MaterialPriceBloc>().add(
+          MaterialPriceEvent.fetch(
+            salesOrganisation: eligibilityBlocState.salesOrganisation,
+            salesConfigs: eligibilityBlocState.salesOrgConfigs,
+            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+            shipToInfo: eligibilityBlocState.shipToInfo,
+            comboDealEligible: eligibilityBlocState.comboDealEligible,
+            materials: [materialInfo],
           ),
         );
   }

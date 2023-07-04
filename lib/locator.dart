@@ -30,6 +30,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -100,6 +101,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
@@ -247,6 +251,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/order_template_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_repository.dart';
@@ -378,6 +383,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/recent_order_reposito
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_remote_datasource.dart';
 
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+
 
 GetIt locator = GetIt.instance;
 
@@ -928,7 +934,7 @@ void setupLocator() {
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
-      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(), 
     ),
   );
 
@@ -961,6 +967,42 @@ void setupLocator() {
           locator<MaterialBundleListRemoteDataSource>(),
     ),
   );
+
+  //============================================================
+  //   Material Details
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ProductDetailLocalDataSource());
+
+  locator.registerLazySingleton(() => ProductDetailQuery());
+
+  locator.registerLazySingleton(
+    () => ProductDetailRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      productDetailQuery: locator<ProductDetailQuery>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ProductDetailRepository(
+      config: locator<Config>(),
+      productDetailLocalDataSource: locator<ProductDetailLocalDataSource>(),
+      productDetailRemoteDataSource: locator<ProductDetailRemoteDataSource>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ProductDetailBloc(
+      productDetailRepository: locator<ProductDetailRepository>(), 
+      productImagesRepository: locator<ProductImagesRepository>(), 
+    ),
+  );
+
 
   //============================================================
   //  Order Template List

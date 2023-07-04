@@ -1,24 +1,31 @@
-query getProduct($materialID: [String!]) {
-  getProduct(request: {materialID: $materialID}) {
+query GetProductResponse($request: GetProductRequest!) {
+  getProduct(request: $request) {
     orderCloudProduct {
       materialID
       name
       description
       image
       thumbNail
-      
+      isFavourite
     }
     Items {
+      PromotionMaterial
       HidePrice
-      ID
-      
+      XP {
+        Dosage
+        HowToUse
+        Composition
+        DeliveryInstructions
+        Usability
+      }
     }
-    
   }
 }
-variable: {
-  "materialID": [
-    "000000000023272832",
-    "000000000023272832"
-  ]
+
+"variables": {
+  "request": {
+    "materialID": [
+      "000000000021041790"
+    ]
+  }
 }

@@ -24,13 +24,13 @@ class QuantityIcon extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero,
-          backgroundColor: isEnabled ? ZPColors.primary : ZPColors.lightGray,
+          backgroundColor: ZPColors.transparent,
         ),
         onPressed: isEnabled ? () => pressed() : () {},
         child: Icon(
           icon,
-          color: ZPColors.white,
-          size: 15,
+          color: ZPColors.black,
+          size: 20,
         ),
       ),
     );

@@ -1,26 +1,21 @@
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/presentation/products/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
-
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
 
 class ProductSuggestionPage extends StatelessWidget {
@@ -223,6 +218,7 @@ class _SuggestedProductTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          onTap: () => _onTap(context, product),
           horizontalTitleGap: 0,
           leading: const Icon(
             Icons.search,
@@ -240,6 +236,30 @@ class _SuggestedProductTile extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _onTap(BuildContext context, MaterialInfo product) {
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+    context.read<ProductDetailBloc>().add(
+          ProductDetailEvent.fetch(
+            materialNumber: product.materialNumber,
+            salesOrganisation: eligibilityBlocState.salesOrganisation,
+            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+            shipToInfo: eligibilityBlocState.shipToInfo,
+            locale: context.locale,
+          ),
+        );
+    context.router.pushNamed('orders/material_details');
+    context.read<MaterialPriceBloc>().add(
+          MaterialPriceEvent.fetch(
+            salesOrganisation: eligibilityBlocState.salesOrganisation,
+            salesConfigs: eligibilityBlocState.salesOrgConfigs,
+            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+            shipToInfo: eligibilityBlocState.shipToInfo,
+            comboDealEligible: eligibilityBlocState.comboDealEligible,
+            materials: [product],
+          ),
+        );
   }
 }
 

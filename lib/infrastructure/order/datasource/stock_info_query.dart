@@ -4,13 +4,11 @@ class StockInfoQueryMutation {
     return '''
       query stockInformation(
         \$materialNumber: String!, 
-        \$plant: String, 
         \$customerCode: String, 
         \$salesOrganisation: String, 
         \$principalCode: String){
           stockInformation(
             materialNumber:\$materialNumber, 
-            plant: \$plant,
             customerCode:\$customerCode, 
             salesOrganisation:\$salesOrganisation,
             principalCode:\$principalCode){

@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
+import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/bundle_material_descriptions_sheet.dart';
-import 'package:ezrxmobile/presentation/products/widgets/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +84,7 @@ class _BundleDetails extends StatelessWidget {
                 ),
               ),
               FavouriteIcon(
-                materialInfo: MaterialInfo.empty(),
+                materialInfo: MaterialInfo.empty(), 
               ),
             ],
           ),

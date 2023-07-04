@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MaterialInfo {
   String get name => throw _privateConstructorUsedError;
-  String get principalCode => throw _privateConstructorUsedError;
+  PrincipalData get principalData => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   String get manufactured => throw _privateConstructorUsedError;
@@ -29,13 +29,13 @@ mixin _$MaterialInfo {
   DataTotalHidden get dataTotalHidden => throw _privateConstructorUsedError;
   bool get isGimmick => throw _privateConstructorUsedError;
   List<StockInfo> get stockInfos => throw _privateConstructorUsedError;
-  Bundle get bundle =>
+  Bundle get bundle => throw _privateConstructorUsedError;
+  ProductImages get productImages =>
       throw _privateConstructorUsedError; //TODO: remove field from v2
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   String get therapeuticClass => throw _privateConstructorUsedError;
   String get itemBrand => throw _privateConstructorUsedError;
-  PrincipalData get principalData => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get unitOfMeasurement => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
@@ -66,7 +66,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      String principalCode,
+      PrincipalData principalData,
       MaterialNumber materialNumber,
       String materialDescription,
       String manufactured,
@@ -79,11 +79,11 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool isGimmick,
       List<StockInfo> stockInfos,
       Bundle bundle,
+      ProductImages productImages,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
       String itemBrand,
-      PrincipalData principalData,
       String itemRegistrationNumber,
       String unitOfMeasurement,
       MaterialGroup materialGroup2,
@@ -100,8 +100,9 @@ abstract class $MaterialInfoCopyWith<$Res> {
       String genericMaterialName,
       String ean});
 
-  $BundleCopyWith<$Res> get bundle;
   $PrincipalDataCopyWith<$Res> get principalData;
+  $BundleCopyWith<$Res> get bundle;
+  $ProductImagesCopyWith<$Res> get productImages;
 }
 
 /// @nodoc
@@ -118,7 +119,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
   @override
   $Res call({
     Object? name = null,
-    Object? principalCode = null,
+    Object? principalData = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
     Object? manufactured = null,
@@ -131,11 +132,11 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? isGimmick = null,
     Object? stockInfos = null,
     Object? bundle = null,
+    Object? productImages = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
     Object? itemBrand = null,
-    Object? principalData = null,
     Object? itemRegistrationNumber = null,
     Object? unitOfMeasurement = null,
     Object? materialGroup2 = null,
@@ -157,10 +158,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      principalCode: null == principalCode
-          ? _value.principalCode
-          : principalCode // ignore: cast_nullable_to_non_nullable
-              as String,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -209,6 +210,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.bundle
           : bundle // ignore: cast_nullable_to_non_nullable
               as Bundle,
+      productImages: null == productImages
+          ? _value.productImages
+          : productImages // ignore: cast_nullable_to_non_nullable
+              as ProductImages,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -225,10 +230,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
               as String,
-      principalData: null == principalData
-          ? _value.principalData
-          : principalData // ignore: cast_nullable_to_non_nullable
-              as PrincipalData,
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
@@ -294,6 +295,14 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
 
   @override
   @pragma('vm:prefer-inline')
+  $PrincipalDataCopyWith<$Res> get principalData {
+    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
+      return _then(_value.copyWith(principalData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $BundleCopyWith<$Res> get bundle {
     return $BundleCopyWith<$Res>(_value.bundle, (value) {
       return _then(_value.copyWith(bundle: value) as $Val);
@@ -302,9 +311,9 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
 
   @override
   @pragma('vm:prefer-inline')
-  $PrincipalDataCopyWith<$Res> get principalData {
-    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
-      return _then(_value.copyWith(principalData: value) as $Val);
+  $ProductImagesCopyWith<$Res> get productImages {
+    return $ProductImagesCopyWith<$Res>(_value.productImages, (value) {
+      return _then(_value.copyWith(productImages: value) as $Val);
     });
   }
 }
@@ -319,7 +328,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      String principalCode,
+      PrincipalData principalData,
       MaterialNumber materialNumber,
       String materialDescription,
       String manufactured,
@@ -332,11 +341,11 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool isGimmick,
       List<StockInfo> stockInfos,
       Bundle bundle,
+      ProductImages productImages,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
       String itemBrand,
-      PrincipalData principalData,
       String itemRegistrationNumber,
       String unitOfMeasurement,
       MaterialGroup materialGroup2,
@@ -354,9 +363,11 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       String ean});
 
   @override
+  $PrincipalDataCopyWith<$Res> get principalData;
+  @override
   $BundleCopyWith<$Res> get bundle;
   @override
-  $PrincipalDataCopyWith<$Res> get principalData;
+  $ProductImagesCopyWith<$Res> get productImages;
 }
 
 /// @nodoc
@@ -371,7 +382,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? principalCode = null,
+    Object? principalData = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
     Object? manufactured = null,
@@ -384,11 +395,11 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? isGimmick = null,
     Object? stockInfos = null,
     Object? bundle = null,
+    Object? productImages = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
     Object? itemBrand = null,
-    Object? principalData = null,
     Object? itemRegistrationNumber = null,
     Object? unitOfMeasurement = null,
     Object? materialGroup2 = null,
@@ -410,10 +421,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      principalCode: null == principalCode
-          ? _value.principalCode
-          : principalCode // ignore: cast_nullable_to_non_nullable
-              as String,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -462,6 +473,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.bundle
           : bundle // ignore: cast_nullable_to_non_nullable
               as Bundle,
+      productImages: null == productImages
+          ? _value.productImages
+          : productImages // ignore: cast_nullable_to_non_nullable
+              as ProductImages,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -478,10 +493,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
               as String,
-      principalData: null == principalData
-          ? _value.principalData
-          : principalData // ignore: cast_nullable_to_non_nullable
-              as PrincipalData,
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
@@ -551,7 +562,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
 class _$_MaterialInfo extends _MaterialInfo {
   const _$_MaterialInfo(
       {required this.name,
-      required this.principalCode,
+      required this.principalData,
       required this.materialNumber,
       required this.materialDescription,
       required this.manufactured,
@@ -564,11 +575,11 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.isGimmick,
       required final List<StockInfo> stockInfos,
       required this.bundle,
+      required this.productImages,
       required this.defaultMaterialDescription,
       required this.governmentMaterialCode,
       required this.therapeuticClass,
       required this.itemBrand,
-      required this.principalData,
       required this.itemRegistrationNumber,
       required this.unitOfMeasurement,
       required this.materialGroup2,
@@ -593,7 +604,7 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final String name;
   @override
-  final String principalCode;
+  final PrincipalData principalData;
   @override
   final MaterialNumber materialNumber;
   @override
@@ -630,6 +641,8 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   final Bundle bundle;
+  @override
+  final ProductImages productImages;
 //TODO: remove field from v2
   @override
   final String defaultMaterialDescription;
@@ -639,8 +652,6 @@ class _$_MaterialInfo extends _MaterialInfo {
   final String therapeuticClass;
   @override
   final String itemBrand;
-  @override
-  final PrincipalData principalData;
   @override
   final String itemRegistrationNumber;
   @override
@@ -686,7 +697,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
   }
 
   @override
@@ -695,8 +706,8 @@ class _$_MaterialInfo extends _MaterialInfo {
         (other.runtimeType == runtimeType &&
             other is _$_MaterialInfo &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.principalCode, principalCode) ||
-                other.principalCode == principalCode) &&
+            (identical(other.principalData, principalData) ||
+                other.principalData == principalData) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -718,6 +729,8 @@ class _$_MaterialInfo extends _MaterialInfo {
             const DeepCollectionEquality()
                 .equals(other._stockInfos, _stockInfos) &&
             (identical(other.bundle, bundle) || other.bundle == bundle) &&
+            (identical(other.productImages, productImages) ||
+                other.productImages == productImages) &&
             (identical(other.defaultMaterialDescription,
                     defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
@@ -728,8 +741,6 @@ class _$_MaterialInfo extends _MaterialInfo {
                 other.therapeuticClass == therapeuticClass) &&
             (identical(other.itemBrand, itemBrand) ||
                 other.itemBrand == itemBrand) &&
-            (identical(other.principalData, principalData) ||
-                other.principalData == principalData) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.unitOfMeasurement, unitOfMeasurement) ||
@@ -764,7 +775,7 @@ class _$_MaterialInfo extends _MaterialInfo {
   int get hashCode => Object.hashAll([
         runtimeType,
         name,
-        principalCode,
+        principalData,
         materialNumber,
         materialDescription,
         manufactured,
@@ -777,11 +788,11 @@ class _$_MaterialInfo extends _MaterialInfo {
         isGimmick,
         const DeepCollectionEquality().hash(_stockInfos),
         bundle,
+        productImages,
         defaultMaterialDescription,
         governmentMaterialCode,
         therapeuticClass,
         itemBrand,
-        principalData,
         itemRegistrationNumber,
         unitOfMeasurement,
         materialGroup2,
@@ -809,7 +820,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 abstract class _MaterialInfo extends MaterialInfo {
   const factory _MaterialInfo(
       {required final String name,
-      required final String principalCode,
+      required final PrincipalData principalData,
       required final MaterialNumber materialNumber,
       required final String materialDescription,
       required final String manufactured,
@@ -822,11 +833,11 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool isGimmick,
       required final List<StockInfo> stockInfos,
       required final Bundle bundle,
+      required final ProductImages productImages,
       required final String defaultMaterialDescription,
       required final String governmentMaterialCode,
       required final String therapeuticClass,
       required final String itemBrand,
-      required final PrincipalData principalData,
       required final String itemRegistrationNumber,
       required final String unitOfMeasurement,
       required final MaterialGroup materialGroup2,
@@ -847,7 +858,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   String get name;
   @override
-  String get principalCode;
+  PrincipalData get principalData;
   @override
   MaterialNumber get materialNumber;
   @override
@@ -872,6 +883,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   List<StockInfo> get stockInfos;
   @override
   Bundle get bundle;
+  @override
+  ProductImages get productImages;
   @override //TODO: remove field from v2
   String get defaultMaterialDescription;
   @override
@@ -880,8 +893,6 @@ abstract class _MaterialInfo extends MaterialInfo {
   String get therapeuticClass;
   @override
   String get itemBrand;
-  @override
-  PrincipalData get principalData;
   @override
   String get itemRegistrationNumber;
   @override
@@ -925,7 +936,7 @@ mixin _$MaterialData {
   String get materialDescription => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
-  String get materialImageURL => throw _privateConstructorUsedError;
+  StringValue get materialImageURL => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -945,7 +956,7 @@ abstract class $MaterialDataCopyWith<$Res> {
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      String materialImageURL,
+      StringValue materialImageURL,
       String governmentMaterialCode});
 }
 
@@ -994,7 +1005,7 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
       materialImageURL: null == materialImageURL
           ? _value.materialImageURL
           : materialImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -1017,7 +1028,7 @@ abstract class _$$_MaterialDataCopyWith<$Res>
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      String materialImageURL,
+      StringValue materialImageURL,
       String governmentMaterialCode});
 }
 
@@ -1064,7 +1075,7 @@ class __$$_MaterialDataCopyWithImpl<$Res>
       materialImageURL: null == materialImageURL
           ? _value.materialImageURL
           : materialImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -1097,7 +1108,7 @@ class _$_MaterialData extends _MaterialData {
   @override
   final String genericMaterialName;
   @override
-  final String materialImageURL;
+  final StringValue materialImageURL;
   @override
   final String governmentMaterialCode;
 
@@ -1153,7 +1164,7 @@ abstract class _MaterialData extends MaterialData {
       required final String materialDescription,
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
-      required final String materialImageURL,
+      required final StringValue materialImageURL,
       required final String governmentMaterialCode}) = _$_MaterialData;
   _MaterialData._() : super._();
 
@@ -1168,7 +1179,7 @@ abstract class _MaterialData extends MaterialData {
   @override
   String get genericMaterialName;
   @override
-  String get materialImageURL;
+  StringValue get materialImageURL;
   @override
   String get governmentMaterialCode;
   @override

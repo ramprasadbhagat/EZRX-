@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -29,6 +28,7 @@ class StockInfoLocalDataSourceMock extends Mock
 
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
+
 
 void main() {
   late MaterialListRepository materialListRepository;

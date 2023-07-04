@@ -88,10 +88,16 @@ mixin _$MaterialDto {
   @HiveField(25, defaultValue: '')
   @HiveField(26, defaultValue: '')
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @JsonKey(
+      name: 'PrincipalCode',
+      defaultValue: '',
+      readValue: _principalCodeReadValue)
   @HiveField(27, defaultValue: '')
   String get principalCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @JsonKey(
+      name: 'MaterialNumber',
+      defaultValue: '',
+      readValue: _materialNumberReadValue)
   @HiveField(28, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @HiveField(29, defaultValue: '')
@@ -207,10 +213,16 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @HiveField(25, defaultValue: '')
       @HiveField(26, defaultValue: '')
           String name,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(
+          name: 'PrincipalCode',
+          defaultValue: '',
+          readValue: _principalCodeReadValue)
       @HiveField(27, defaultValue: '')
           String principalCode,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @JsonKey(
+          name: 'MaterialNumber',
+          defaultValue: '',
+          readValue: _materialNumberReadValue)
       @HiveField(28, defaultValue: '')
           String materialNumber,
       @HiveField(29, defaultValue: '')
@@ -522,10 +534,16 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @HiveField(25, defaultValue: '')
       @HiveField(26, defaultValue: '')
           String name,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(
+          name: 'PrincipalCode',
+          defaultValue: '',
+          readValue: _principalCodeReadValue)
       @HiveField(27, defaultValue: '')
           String principalCode,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @JsonKey(
+          name: 'MaterialNumber',
+          defaultValue: '',
+          readValue: _materialNumberReadValue)
       @HiveField(28, defaultValue: '')
           String materialNumber,
       @HiveField(29, defaultValue: '')
@@ -824,10 +842,16 @@ class _$_MaterialDto extends _MaterialDto {
       @HiveField(25, defaultValue: '')
       @HiveField(26, defaultValue: '')
           required this.name,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(
+          name: 'PrincipalCode',
+          defaultValue: '',
+          readValue: _principalCodeReadValue)
       @HiveField(27, defaultValue: '')
           required this.principalCode,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @JsonKey(
+          name: 'MaterialNumber',
+          defaultValue: '',
+          readValue: _materialNumberReadValue)
       @HiveField(28, defaultValue: '')
           required this.materialNumber,
       @HiveField(29, defaultValue: '')
@@ -972,11 +996,17 @@ class _$_MaterialDto extends _MaterialDto {
   @HiveField(26, defaultValue: '')
   final String name;
   @override
-  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @JsonKey(
+      name: 'PrincipalCode',
+      defaultValue: '',
+      readValue: _principalCodeReadValue)
   @HiveField(27, defaultValue: '')
   final String principalCode;
   @override
-  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @JsonKey(
+      name: 'MaterialNumber',
+      defaultValue: '',
+      readValue: _materialNumberReadValue)
   @HiveField(28, defaultValue: '')
   final String materialNumber;
   @override
@@ -1226,10 +1256,16 @@ abstract class _MaterialDto extends MaterialDto {
       @HiveField(25, defaultValue: '')
       @HiveField(26, defaultValue: '')
           required final String name,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(
+          name: 'PrincipalCode',
+          defaultValue: '',
+          readValue: _principalCodeReadValue)
       @HiveField(27, defaultValue: '')
           required final String principalCode,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '')
+      @JsonKey(
+          name: 'MaterialNumber',
+          defaultValue: '',
+          readValue: _materialNumberReadValue)
       @HiveField(28, defaultValue: '')
           required final String materialNumber,
       @HiveField(29, defaultValue: '')
@@ -1358,11 +1394,17 @@ abstract class _MaterialDto extends MaterialDto {
   @HiveField(26, defaultValue: '')
   String get name;
   @override
-  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @JsonKey(
+      name: 'PrincipalCode',
+      defaultValue: '',
+      readValue: _principalCodeReadValue)
   @HiveField(27, defaultValue: '')
   String get principalCode;
   @override
-  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @JsonKey(
+      name: 'MaterialNumber',
+      defaultValue: '',
+      readValue: _materialNumberReadValue)
   @HiveField(28, defaultValue: '')
   String get materialNumber;
   @override

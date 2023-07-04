@@ -1,0 +1,38 @@
+query similarSearches($principalCode: String, $first: Int, $after: Int, $language: String, $resultCount: Int, $excludeMaterialNumber: String, $customerCode: String!, $shipToCode: String!) {
+  similarSearches(
+    principalCode: $principalCode
+    first: $first
+    after: $after
+    language: $language
+    resultCount: $resultCount
+    excludeMaterialNumber: $excludeMaterialNumber
+    customerCode: $customerCode
+    shipToCode: $shipToCode
+  ) {
+    materials {
+      principalName
+      principalCode
+      materialNumber
+      materialDescription
+      defaultMaterialDescription
+      itemBrand
+      isFavourite
+      warehouseStorageCondition
+      suspensionStatus
+      promoType
+      promoStatus
+      hidePrice
+    }
+  }
+}
+
+variables:{
+  "principalCode": "0000101334",
+  "first": 4,
+  "after": 0,
+  "language": "EN",
+  "resultCount": 1,
+  "excludeMaterialNumber": "000000000021041821",
+  "customerCode": "0070149863",
+  "shipToCode": "0070149863"
+}

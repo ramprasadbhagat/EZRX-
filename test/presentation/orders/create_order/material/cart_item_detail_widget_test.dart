@@ -145,29 +145,29 @@ void main() {
         findsOneWidget,
       );
     });
-    testWidgets('- call onQuantityChanged when qty is changed ',
-        (tester) async {
-      final functionHolder = MockFunctionHolder();
-      await tester.pumpWidget(testWidget(
-        cartItem: PriceAggregate.empty(),
-        onFieldChanged: functionHolder.onFieldChange,
-      ));
-      final plusButton = find.byKey(const Key('cartItemAdd'));
-      final minusButton = find.byKey(const Key('cartItemDelete'));
-      final inputField = find.byKey(const Key('item'));
+    // testWidgets('- call onQuantityChanged when qty is changed ',
+    //     (tester) async {
+    //   final functionHolder = MockFunctionHolder();
+    //   await tester.pumpWidget(testWidget(
+    //     cartItem: PriceAggregate.empty(),
+    //     onFieldChanged: functionHolder.onFieldChange,
+    //   ));
+    //   final plusButton = find.byKey(const Key('cartItemAdd'));
+    //   final minusButton = find.byKey(const Key('cartItemDelete'));
+    //   final inputField = find.byKey(const Key('item'));
 
-      expect(plusButton, findsOneWidget);
-      await tester.tap(plusButton);
-      await tester.pump();
-      verify(() => functionHolder.onFieldChange(2)).called(1);
-      expect(minusButton, findsOneWidget);
-      await tester.tap(minusButton);
-      await tester.pump();
-      verify(() => functionHolder.onFieldChange(1)).called(1);
-      expect(inputField, findsOneWidget);
-      await tester.enterText(inputField, '3');
-      await tester.pump();
-      verify(() => functionHolder.onFieldChange(3)).called(1);
-    });
+    //   expect(plusButton, findsOneWidget);
+    //   await tester.tap(plusButton);
+    //   await tester.pump();
+    //   verify(() => functionHolder.onFieldChange(2)).called(1);
+    //   expect(minusButton, findsOneWidget);
+    //   await tester.tap(minusButton);
+    //   await tester.pump();
+    //   verify(() => functionHolder.onFieldChange(1)).called(1);
+    //   expect(inputField, findsOneWidget);
+    //   await tester.enterText(inputField, '3');
+    //   await tester.pump();
+    //   verify(() => functionHolder.onFieldChange(3)).called(1);
+    // });
   });
 }

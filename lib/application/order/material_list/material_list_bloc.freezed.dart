@@ -431,7 +431,6 @@ class _$_Fetch implements _Fetch {
       required this.shipToInfo,
       required this.selectedMaterialFilter});
 
-// required User user,
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -620,7 +619,6 @@ abstract class _Fetch implements MaterialListEvent {
       required final ShipToInfo shipToInfo,
       required final MaterialFilter selectedMaterialFilter}) = _$_Fetch;
 
-// required User user,
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
@@ -951,7 +949,6 @@ class _$_LoadMore implements _LoadMore {
       required this.shipToInfo,
       required this.selectedMaterialFilter});
 
-// required User user,
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -1140,7 +1137,6 @@ abstract class _LoadMore implements MaterialListEvent {
       required final ShipToInfo shipToInfo,
       required final MaterialFilter selectedMaterialFilter}) = _$_LoadMore;
 
-// required User user,
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
