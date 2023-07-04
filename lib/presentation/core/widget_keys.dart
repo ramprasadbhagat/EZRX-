@@ -258,4 +258,11 @@ class WidgetKeys {
 
   static const Key materialDescription = Key('materialDescription');
   static const Key orderPriceLoading = Key('priceLoading');
+
+  //============================================================
+  //  Order History
+  //============================================================
+
+  static const Key fromOrderDateField = Key('fromOrderDateField');
+  static const Key toOrderDateField = Key('toOrderDateField');
 }

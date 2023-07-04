@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -75,17 +74,7 @@ class _BodyContent extends StatelessWidget {
           ),
           ElevatedButton(
             key: const Key('goToOrderHistory'),
-            onPressed: () {
-              trackMixpanelEvent(MixpanelEvents.thankYouToHistory);
-              context.router.pop();
-              context.router.navigate(
-                HomeNavigationTabbarRoute(
-                  children: [
-                    HistoryTabRoute(),
-                  ],
-                ),
-              );
-            },
+            onPressed: () {},
             child: Text(
               'Go To Order History'.tr(),
             ),

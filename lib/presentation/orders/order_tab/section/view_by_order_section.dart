@@ -3,7 +3,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
@@ -60,10 +59,7 @@ class ViewByOrdersPage extends StatelessWidget {
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
-                    sortDirection: context
-                        .read<OrderHistoryFilterBloc>()
-                        .state
-                        .sortDirection,
+                    sortDirection: 'desc',
                     filter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
@@ -76,10 +72,7 @@ class ViewByOrdersPage extends StatelessWidget {
                   salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
                   shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   user: context.read<UserBloc>().state.user,
-                  sortDirection: context
-                      .read<OrderHistoryFilterBloc>()
-                      .state
-                      .sortDirection,
+                  sortDirection: 'desc',
                 ),
               ),
           itemBuilder: (context, index, item) => _ViewByOrderGroup(

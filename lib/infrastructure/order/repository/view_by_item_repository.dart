@@ -7,11 +7,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_history_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_history_filter_dto.dart';
 
 class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
@@ -32,7 +32,7 @@ class ViewByItemRepository implements IViewByItemRepository {
     required User user,
     required int pageSize,
     required int offset,
-    required OrderHistoryFilter orderHistoryFilter,
+    required ViewByItemHistoryFilter viewByItemHistoryFilter,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -56,7 +56,8 @@ class ViewByItemRepository implements IViewByItemRepository {
               language: user.preferredLanguage,
               userName: user.username.getOrCrash(),
               filterQuery:
-                  OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
+                  ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
+                      .toJson(),
             )
           : await orderHistoryRemoteDataSource.getOrderHistory(
               shipTo: shipTo.shipToCustomerCode,
@@ -65,7 +66,8 @@ class ViewByItemRepository implements IViewByItemRepository {
               offset: offset,
               language: user.preferredLanguage,
               filterQuery:
-                  OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
+                  ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
+                      .toJson(),
               query: '',
             );
 

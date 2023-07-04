@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -54,6 +54,9 @@ class ViewByItemsPage extends StatelessWidget {
           controller: ScrollController(),
           emptyMessage: 'No order items found'.tr(),
           onRefresh: () {
+            context
+                .read<ViewByItemFilterBloc>()
+                .add(const ViewByItemFilterEvent.initializeOrReset());
             context.read<ViewByItemsBloc>().add(
                   ViewByItemsEvent.fetch(
                     customerCodeInfo:
@@ -62,11 +65,7 @@ class ViewByItemsPage extends StatelessWidget {
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
-                    sortDirection: context
-                        .read<OrderHistoryFilterBloc>()
-                        .state
-                        .sortDirection,
-                    orderHistoryFilter: OrderHistoryFilter.empty(),
+                    viewByItemHistoryFilter: ViewByItemHistoryFilter.empty(),
                   ),
                 );
           },
@@ -78,14 +77,6 @@ class ViewByItemsPage extends StatelessWidget {
                   salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
                   shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   user: context.read<UserBloc>().state.user,
-                  sortDirection: context
-                      .read<OrderHistoryFilterBloc>()
-                      .state
-                      .sortDirection,
-                  orderHistoryFilter: context
-                      .read<OrderHistoryFilterBloc>()
-                      .state
-                      .orderHistoryFilter,
                 ),
               ),
           itemBuilder: (context, index, item) => _ViewByOrderItemGroup(

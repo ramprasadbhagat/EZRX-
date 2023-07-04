@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -40,6 +40,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
             orderHistoryList: OrderHistory.empty(),
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
+            appliedFilter: e.viewByItemHistoryFilter,
           ),
         );
 
@@ -50,7 +51,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           user: e.user,
           pageSize: _pageSize,
           offset: 0,
-          orderHistoryFilter: e.orderHistoryFilter,
+          viewByItemHistoryFilter: e.viewByItemHistoryFilter,
         );
 
         failureOrSuccess.fold(
@@ -71,6 +72,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 canLoadMore:
                     orderHistoryList.orderHistoryItems.length >= _pageSize,
                 nextPageIndex: 1,
+                appliedFilter: e.viewByItemHistoryFilter,
               ),
             );
             add(const _FetchProductImage());
@@ -89,7 +91,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         user: e.user,
         pageSize: _pageSize,
         offset: state.orderHistoryList.orderHistoryItems.length,
-        orderHistoryFilter: e.orderHistoryFilter,
+        viewByItemHistoryFilter: state.appliedFilter,
       );
 
       await failureOrSuccess.fold(

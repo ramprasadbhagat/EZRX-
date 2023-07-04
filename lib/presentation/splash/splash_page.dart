@@ -13,8 +13,8 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
@@ -31,7 +31,6 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
@@ -273,10 +272,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
-                    sortDirection: context
-                        .read<OrderHistoryFilterBloc>()
-                        .state
-                        .sortDirection,
+                    sortDirection: 'desc',
                     filter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
@@ -546,10 +542,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<EligibilityBloc>().state.shipToInfo,
-                    selectedMaterialFilter: context
-                        .read<MaterialFilterBloc>()
-                        .state
-                        .materialFilter,
+                    selectedMaterialFilter:
+                        context.read<MaterialFilterBloc>().state.materialFilter,
                   ),
                 );
           },
@@ -650,8 +644,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 shipToInfo: state.shipToInfo,
                 user: user,
                 customerCodeInfo: customerCodeInfo,
-                orderHistoryFilter: OrderHistoryFilter.empty(),
-                sortDirection: 'desc',
+                viewByItemHistoryFilter:
+                    context.read<ViewByItemsBloc>().state.appliedFilter,
               ),
             );
       }
@@ -754,8 +748,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<ViewByItemsBloc>().add(const ViewByItemsEvent.initialized());
 
       context
-          .read<OrderHistoryFilterBloc>()
-          .add(const OrderHistoryFilterEvent.initialized());
+          .read<ViewByItemFilterBloc>()
+          .add(const ViewByItemFilterEvent.initializeOrReset());
       context
           .read<OrderHistoryFilterByStatusBloc>()
           .add(const OrderHistoryFilterByStatusEvent.initialized());
@@ -880,21 +874,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _initializeProduct() {
     final eligibilityBloc = context.read<EligibilityBloc>();
     context.read<MaterialFilterBloc>().add(
-      MaterialFilterEvent.fetch(
-        user: context.read<UserBloc>().state.user,
-        salesOrganisation:
-        context.read<SalesOrgBloc>().state.salesOrganisation,
-        salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-        customerCodeInfo:
-        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-        shipToInfo:
-        context.read<EligibilityBloc>().state.shipToInfo,
-        pickAndPack: context
-            .read<EligibilityBloc>()
-            .state
-            .getPNPValueMaterial,
-      ),
-    );
+          MaterialFilterEvent.fetch(
+            user: context.read<UserBloc>().state.user,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+            pickAndPack:
+                context.read<EligibilityBloc>().state.getPNPValueMaterial,
+          ),
+        );
     // context.read<MaterialFilterBloc>().add(
     //   const MaterialFilterEvent.resetFilter(),
     // );

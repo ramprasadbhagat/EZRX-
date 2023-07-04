@@ -8,16 +8,13 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-    required String sortDirection,
-    required OrderHistoryFilter orderHistoryFilter,
+    required ViewByItemHistoryFilter viewByItemHistoryFilter,
   }) = _Fetch;
   const factory ViewByItemsEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-    required String sortDirection,
-    required OrderHistoryFilter orderHistoryFilter,
   }) = _LoadMore;
   const factory ViewByItemsEvent.fetchProductImage() = _FetchProductImage;
 }

@@ -24,4 +24,11 @@ class ViewByOrderHistoryFilter with _$ViewByOrderHistoryFilter {
 
   DateTimeStringValue get fromDate =>
       DateTimeStringValue(dateRange.start.toIso8601String());
+
+  //TODO: this is the number which will be displayed on top of tune icon, for view_by_order,
+  //there will be only date range filter always applied.
+  //In future, if there is more filter we can modify here.
+  int get appliedFilterCount {
+    return 1;
+  }
 }

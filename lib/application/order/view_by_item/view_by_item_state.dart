@@ -10,6 +10,7 @@ class ViewByItemsState with _$ViewByItemsState {
     required bool isFetching,
     required bool isImageLoading,
     required int nextPageIndex,
+    required ViewByItemHistoryFilter appliedFilter,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _ViewByItemsState;
 
@@ -21,6 +22,7 @@ class ViewByItemsState with _$ViewByItemsState {
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
         isImageLoading: false,
+        appliedFilter: ViewByItemHistoryFilter.empty(),
       );
 
   List<OrderHistoryItem> getFilterItem(List<StatusType> filter) {

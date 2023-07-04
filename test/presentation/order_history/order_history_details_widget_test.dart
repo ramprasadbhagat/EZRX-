@@ -14,10 +14,10 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
@@ -88,8 +88,8 @@ class TenderContractMockBloc
 class MockAppRouter extends Mock implements AppRouter {}
 
 class OrderHistoryFilterMockBloc
-    extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
-    implements OrderHistoryFilterBloc {}
+    extends MockBloc<ViewByItemFilterEvent, ViewByItemFilterState>
+    implements ViewByItemFilterBloc {}
 
 class OrderHistoryDetailsMockBloc
     extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
@@ -232,7 +232,7 @@ void main() {
       when(() => mockViewByItemsBloc.state)
           .thenReturn(ViewByItemsState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
+          .thenReturn(ViewByItemFilterState.initial());
       when(() => mockCartBloc.state).thenReturn(CartState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -283,7 +283,7 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<ViewByItemsBloc>(
               create: (context) => mockViewByItemsBloc),
-          BlocProvider<OrderHistoryFilterBloc>(
+          BlocProvider<ViewByItemFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc),
           BlocProvider<CartBloc>(create: (context) => mockCartBloc),
           BlocProvider<CustomerCodeBloc>(

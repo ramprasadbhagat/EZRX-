@@ -16,11 +16,11 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -152,8 +152,8 @@ class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
     implements SettingBloc {}
 
 class OrderHistoryFilterMockBloc
-    extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
-    implements OrderHistoryFilterBloc {}
+    extends MockBloc<ViewByItemFilterEvent, ViewByItemFilterState>
+    implements ViewByItemFilterBloc {}
 
 class ViewByOrderMockBloc extends MockBloc<ViewByOrderEvent, ViewByOrderState>
     implements ViewByOrderBloc {}
@@ -319,7 +319,7 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state)
           .thenReturn(OrderHistoryDetailsState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
+          .thenReturn(ViewByItemFilterState.initial());
       when(() => mockViewByOrderBloc.state)
           .thenReturn(ViewByOrderState.initial());
     });
@@ -378,7 +378,7 @@ void main() {
             BlocProvider<AccountSummaryBloc>(
               create: (context) => accountSummaryMock,
             ),
-            BlocProvider<OrderHistoryFilterBloc>(
+            BlocProvider<ViewByItemFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc,
             ),
             BlocProvider<ViewByOrderBloc>(
@@ -640,8 +640,7 @@ void main() {
             configs: salesOrgBlocMock.state.configs,
             customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             shipToInfo: eligibilityBlocMock.state.shipToInfo,
-            selectedMaterialFilter:
-                materialFilterBlocMock.state.materialFilter,
+            selectedMaterialFilter: materialFilterBlocMock.state.materialFilter,
           ),
         ),
       ).called(2);

@@ -14,7 +14,6 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_co
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
-import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
@@ -208,10 +207,6 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
 
     // =========
     // TODO:  will remove in future
-    AutoRoute(
-      page: HistoryTab,
-      path: 'orders/history',
-    ),
     // ========
     AutoRoute(
       path: 'orders/history_details',
