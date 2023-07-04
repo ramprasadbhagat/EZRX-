@@ -12,13 +12,13 @@ import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 
 class OrderHistoryRemoteDataSource {
   HttpService httpService;
-  OrderHistoryQueryMutation orderHistoryQueryMutation;
+  ViewByItemQueryMutation viewByItemQueryMutation;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
 
   OrderHistoryRemoteDataSource({
     required this.httpService,
-    required this.orderHistoryQueryMutation,
+    required this.viewByItemQueryMutation,
     required this.config,
     required this.dataSourceExceptionHandler,
   });
@@ -33,7 +33,7 @@ class OrderHistoryRemoteDataSource {
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = orderHistoryQueryMutation.getOrderHistoryForCustomer();
+      final queryData = viewByItemQueryMutation.getViewByItemForCustomer();
 
       final variables = {
         'soldTo': soldTo,
@@ -77,7 +77,7 @@ class OrderHistoryRemoteDataSource {
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = orderHistoryQueryMutation.getOrderHistoryForSalesRep();
+      final queryData = viewByItemQueryMutation.getViewByItemForSalesRep();
       final variables = {
         'soldTo': soldTo,
         'shipTo': [shipTo],

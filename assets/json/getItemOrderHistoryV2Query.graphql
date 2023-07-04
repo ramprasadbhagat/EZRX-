@@ -1,16 +1,10 @@
-query orderHistoryV2($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $query: String) {
+query itemOrderHistoryV2($soldTo: String!, $language: String, $materialSearch: String, $orderNumber: String) {
   orderHistoryV2(
     soldTo: $soldTo
-    fromDate: $fromDate
-    toDate: $toDate
-    shipTo: $shipTo
-    first: $first
-    after: $after
     language: $language
-    orderStatus: $orderStatus
-    query: $query
+    materialSearch: $materialSearch
+    orderNumber: $orderNumber
   ) {
-    OrderCount
     OrderHistory {
       OrderBasicInformation {
         SoldTo
@@ -21,7 +15,7 @@ query orderHistoryV2($soldTo: String!, $fromDate: String, $toDate: String, $ship
           PaymentTermDescription
           
         }
-        
+       
       }
       OrderItems {
         MaterialCode
@@ -30,34 +24,30 @@ query orderHistoryV2($soldTo: String!, $fromDate: String, $toDate: String, $ship
         Qty
         UnitPrice
         TotalPrice
-        Status
         DeliveryDate
+        OrderType
         OrderNumber
         Batch
         ExpiryDate
         POReference
         ManufactureName
-        InvoiceNumber
+        SpecialInstructions
+        RequestedDeliveryDate
         IsBonusMaterial
         TelephoneNumber
         Tax
-       
+        OrderBy
+        
       }
-     
+      
     }
-   
+    
   }
 }
-variables:{
-  "soldTo": "0030032223",
-  "fromDate": "20230606",
-  "toDate": "20230612",
-  "shipTo": [
-    "0070042688"
-  ],
-  "first": 5,
-  "after": 0,
+
+variables :{
+  "soldTo": "0070149863",
   "language": "EN",
-  "query": "",
-  "orderStatus": []
+  "orderNumber": "42db99db-111f-48de-9109-20d39844bf98",
+  "materialSearch": ""
 }

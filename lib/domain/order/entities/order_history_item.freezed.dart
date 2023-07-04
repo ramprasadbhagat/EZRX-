@@ -18,35 +18,27 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryItem {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
-  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
-  String get deliveryTime => throw _privateConstructorUsedError;
-  String get lineNumber => throw _privateConstructorUsedError;
-  double get tax => throw _privateConstructorUsedError;
-  String get orderType => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
-  String get ezrxNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
-  String get createdTime => throw _privateConstructorUsedError;
-  String get orderBy => throw _privateConstructorUsedError;
-  String get purchaseOrderType => throw _privateConstructorUsedError;
-  String get warehouseStorageCondition => throw _privateConstructorUsedError;
-  bool get available => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
+  String get orderBy => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
-  bool get isMarketplace => throw _privateConstructorUsedError;
-  String get seller => throw _privateConstructorUsedError;
-  String get pOReference => throw _privateConstructorUsedError;
+  POReference get pOReference => throw _privateConstructorUsedError;
   String get manufactureName => throw _privateConstructorUsedError;
   String get invoiceNumber => throw _privateConstructorUsedError;
   bool get isBonusMaterial => throw _privateConstructorUsedError;
-  String get governmentMaterialCode => throw _privateConstructorUsedError;
-  String get telephoneNumber => throw _privateConstructorUsedError;
+  PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
+  DateTimeStringValue get requestedDeliveryDate =>
+      throw _privateConstructorUsedError;
+  SpecialInstructions get specialInstructions =>
+      throw _privateConstructorUsedError;
+  double get tax => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -62,35 +54,25 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       String materialDescription,
-      String defaultMaterialDescription,
       int qty,
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       StatusType status,
       DateTimeStringValue deliveryDate,
-      String deliveryTime,
-      String lineNumber,
-      double tax,
-      String orderType,
       OrderNumber orderNumber,
-      String ezrxNumber,
       DateTimeStringValue createdDate,
-      String createdTime,
-      String orderBy,
-      String purchaseOrderType,
-      String warehouseStorageCondition,
-      bool available,
       String batch,
+      String orderBy,
       DateTimeStringValue expiryDate,
-      bool isMarketplace,
-      String seller,
-      String pOReference,
+      POReference pOReference,
       String manufactureName,
       String invoiceNumber,
       bool isBonusMaterial,
-      String governmentMaterialCode,
-      String telephoneNumber,
-      ProductImages productImages});
+      PhoneNumber telephoneNumber,
+      ProductImages productImages,
+      DateTimeStringValue requestedDeliveryDate,
+      SpecialInstructions specialInstructions,
+      double tax});
 
   $ProductImagesCopyWith<$Res> get productImages;
 }
@@ -110,35 +92,25 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
   $Res call({
     Object? materialNumber = null,
     Object? materialDescription = null,
-    Object? defaultMaterialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
     Object? status = null,
     Object? deliveryDate = null,
-    Object? deliveryTime = null,
-    Object? lineNumber = null,
-    Object? tax = null,
-    Object? orderType = null,
     Object? orderNumber = null,
-    Object? ezrxNumber = null,
     Object? createdDate = null,
-    Object? createdTime = null,
-    Object? orderBy = null,
-    Object? purchaseOrderType = null,
-    Object? warehouseStorageCondition = null,
-    Object? available = null,
     Object? batch = null,
+    Object? orderBy = null,
     Object? expiryDate = null,
-    Object? isMarketplace = null,
-    Object? seller = null,
     Object? pOReference = null,
     Object? manufactureName = null,
     Object? invoiceNumber = null,
     Object? isBonusMaterial = null,
-    Object? governmentMaterialCode = null,
     Object? telephoneNumber = null,
     Object? productImages = null,
+    Object? requestedDeliveryDate = null,
+    Object? specialInstructions = null,
+    Object? tax = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -148,10 +120,6 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-      defaultMaterialDescription: null == defaultMaterialDescription
-          ? _value.defaultMaterialDescription
-          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       qty: null == qty
           ? _value.qty
@@ -173,74 +141,30 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      deliveryTime: null == deliveryTime
-          ? _value.deliveryTime
-          : deliveryTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      lineNumber: null == lineNumber
-          ? _value.lineNumber
-          : lineNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      tax: null == tax
-          ? _value.tax
-          : tax // ignore: cast_nullable_to_non_nullable
-              as double,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as OrderNumber,
-      ezrxNumber: null == ezrxNumber
-          ? _value.ezrxNumber
-          : ezrxNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      createdTime: null == createdTime
-          ? _value.createdTime
-          : createdTime // ignore: cast_nullable_to_non_nullable
+      batch: null == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
               as String,
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
-          ? _value.purchaseOrderType
-          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      warehouseStorageCondition: null == warehouseStorageCondition
-          ? _value.warehouseStorageCondition
-          : warehouseStorageCondition // ignore: cast_nullable_to_non_nullable
-              as String,
-      available: null == available
-          ? _value.available
-          : available // ignore: cast_nullable_to_non_nullable
-              as bool,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      isMarketplace: null == isMarketplace
-          ? _value.isMarketplace
-          : isMarketplace // ignore: cast_nullable_to_non_nullable
-              as bool,
-      seller: null == seller
-          ? _value.seller
-          : seller // ignore: cast_nullable_to_non_nullable
-              as String,
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       manufactureName: null == manufactureName
           ? _value.manufactureName
           : manufactureName // ignore: cast_nullable_to_non_nullable
@@ -253,18 +177,26 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.isBonusMaterial
           : isBonusMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      governmentMaterialCode: null == governmentMaterialCode
-          ? _value.governmentMaterialCode
-          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
-              as String,
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PhoneNumber,
       productImages: null == productImages
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      requestedDeliveryDate: null == requestedDeliveryDate
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as SpecialInstructions,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -288,35 +220,25 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
   $Res call(
       {MaterialNumber materialNumber,
       String materialDescription,
-      String defaultMaterialDescription,
       int qty,
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       StatusType status,
       DateTimeStringValue deliveryDate,
-      String deliveryTime,
-      String lineNumber,
-      double tax,
-      String orderType,
       OrderNumber orderNumber,
-      String ezrxNumber,
       DateTimeStringValue createdDate,
-      String createdTime,
-      String orderBy,
-      String purchaseOrderType,
-      String warehouseStorageCondition,
-      bool available,
       String batch,
+      String orderBy,
       DateTimeStringValue expiryDate,
-      bool isMarketplace,
-      String seller,
-      String pOReference,
+      POReference pOReference,
       String manufactureName,
       String invoiceNumber,
       bool isBonusMaterial,
-      String governmentMaterialCode,
-      String telephoneNumber,
-      ProductImages productImages});
+      PhoneNumber telephoneNumber,
+      ProductImages productImages,
+      DateTimeStringValue requestedDeliveryDate,
+      SpecialInstructions specialInstructions,
+      double tax});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
@@ -335,35 +257,25 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
     Object? materialDescription = null,
-    Object? defaultMaterialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
     Object? status = null,
     Object? deliveryDate = null,
-    Object? deliveryTime = null,
-    Object? lineNumber = null,
-    Object? tax = null,
-    Object? orderType = null,
     Object? orderNumber = null,
-    Object? ezrxNumber = null,
     Object? createdDate = null,
-    Object? createdTime = null,
-    Object? orderBy = null,
-    Object? purchaseOrderType = null,
-    Object? warehouseStorageCondition = null,
-    Object? available = null,
     Object? batch = null,
+    Object? orderBy = null,
     Object? expiryDate = null,
-    Object? isMarketplace = null,
-    Object? seller = null,
     Object? pOReference = null,
     Object? manufactureName = null,
     Object? invoiceNumber = null,
     Object? isBonusMaterial = null,
-    Object? governmentMaterialCode = null,
     Object? telephoneNumber = null,
     Object? productImages = null,
+    Object? requestedDeliveryDate = null,
+    Object? specialInstructions = null,
+    Object? tax = null,
   }) {
     return _then(_$_OrderHistoryItem(
       materialNumber: null == materialNumber
@@ -373,10 +285,6 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-      defaultMaterialDescription: null == defaultMaterialDescription
-          ? _value.defaultMaterialDescription
-          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       qty: null == qty
           ? _value.qty
@@ -398,74 +306,30 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      deliveryTime: null == deliveryTime
-          ? _value.deliveryTime
-          : deliveryTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      lineNumber: null == lineNumber
-          ? _value.lineNumber
-          : lineNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      tax: null == tax
-          ? _value.tax
-          : tax // ignore: cast_nullable_to_non_nullable
-              as double,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as OrderNumber,
-      ezrxNumber: null == ezrxNumber
-          ? _value.ezrxNumber
-          : ezrxNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      createdTime: null == createdTime
-          ? _value.createdTime
-          : createdTime // ignore: cast_nullable_to_non_nullable
+      batch: null == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
               as String,
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
-          ? _value.purchaseOrderType
-          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      warehouseStorageCondition: null == warehouseStorageCondition
-          ? _value.warehouseStorageCondition
-          : warehouseStorageCondition // ignore: cast_nullable_to_non_nullable
-              as String,
-      available: null == available
-          ? _value.available
-          : available // ignore: cast_nullable_to_non_nullable
-              as bool,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      isMarketplace: null == isMarketplace
-          ? _value.isMarketplace
-          : isMarketplace // ignore: cast_nullable_to_non_nullable
-              as bool,
-      seller: null == seller
-          ? _value.seller
-          : seller // ignore: cast_nullable_to_non_nullable
-              as String,
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       manufactureName: null == manufactureName
           ? _value.manufactureName
           : manufactureName // ignore: cast_nullable_to_non_nullable
@@ -478,18 +342,26 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.isBonusMaterial
           : isBonusMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      governmentMaterialCode: null == governmentMaterialCode
-          ? _value.governmentMaterialCode
-          : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
-              as String,
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PhoneNumber,
       productImages: null == productImages
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      requestedDeliveryDate: null == requestedDeliveryDate
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as SpecialInstructions,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -500,43 +372,31 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   _$_OrderHistoryItem(
       {required this.materialNumber,
       required this.materialDescription,
-      required this.defaultMaterialDescription,
       required this.qty,
       required this.unitPrice,
       required this.totalPrice,
       required this.status,
       required this.deliveryDate,
-      required this.deliveryTime,
-      required this.lineNumber,
-      required this.tax,
-      required this.orderType,
       required this.orderNumber,
-      required this.ezrxNumber,
       required this.createdDate,
-      required this.createdTime,
-      required this.orderBy,
-      required this.purchaseOrderType,
-      required this.warehouseStorageCondition,
-      required this.available,
       required this.batch,
+      required this.orderBy,
       required this.expiryDate,
-      required this.isMarketplace,
-      required this.seller,
       required this.pOReference,
       required this.manufactureName,
       required this.invoiceNumber,
       required this.isBonusMaterial,
-      required this.governmentMaterialCode,
       required this.telephoneNumber,
-      required this.productImages})
+      required this.productImages,
+      required this.requestedDeliveryDate,
+      required this.specialInstructions,
+      required this.tax})
       : super._();
 
   @override
   final MaterialNumber materialNumber;
   @override
   final String materialDescription;
-  @override
-  final String defaultMaterialDescription;
   @override
   final int qty;
   @override
@@ -548,39 +408,17 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final DateTimeStringValue deliveryDate;
   @override
-  final String deliveryTime;
-  @override
-  final String lineNumber;
-  @override
-  final double tax;
-  @override
-  final String orderType;
-  @override
   final OrderNumber orderNumber;
-  @override
-  final String ezrxNumber;
   @override
   final DateTimeStringValue createdDate;
   @override
-  final String createdTime;
+  final String batch;
   @override
   final String orderBy;
   @override
-  final String purchaseOrderType;
-  @override
-  final String warehouseStorageCondition;
-  @override
-  final bool available;
-  @override
-  final String batch;
-  @override
   final DateTimeStringValue expiryDate;
   @override
-  final bool isMarketplace;
-  @override
-  final String seller;
-  @override
-  final String pOReference;
+  final POReference pOReference;
   @override
   final String manufactureName;
   @override
@@ -588,15 +426,19 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final bool isBonusMaterial;
   @override
-  final String governmentMaterialCode;
-  @override
-  final String telephoneNumber;
+  final PhoneNumber telephoneNumber;
   @override
   final ProductImages productImages;
+  @override
+  final DateTimeStringValue requestedDeliveryDate;
+  @override
+  final SpecialInstructions specialInstructions;
+  @override
+  final double tax;
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, lineNumber: $lineNumber, tax: $tax, orderType: $orderType, orderNumber: $orderNumber, ezrxNumber: $ezrxNumber, createdDate: $createdDate, createdTime: $createdTime, orderBy: $orderBy, purchaseOrderType: $purchaseOrderType, warehouseStorageCondition: $warehouseStorageCondition, available: $available, batch: $batch, expiryDate: $expiryDate, isMarketplace: $isMarketplace, seller: $seller, pOReference: $pOReference, manufactureName: $manufactureName, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, governmentMaterialCode: $governmentMaterialCode, telephoneNumber: $telephoneNumber, productImages: $productImages)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax)';
   }
 
   @override
@@ -608,10 +450,6 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
-            (identical(other.defaultMaterialDescription,
-                    defaultMaterialDescription) ||
-                other.defaultMaterialDescription ==
-                    defaultMaterialDescription) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
@@ -620,35 +458,14 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.deliveryDate, deliveryDate) ||
                 other.deliveryDate == deliveryDate) &&
-            (identical(other.deliveryTime, deliveryTime) ||
-                other.deliveryTime == deliveryTime) &&
-            (identical(other.lineNumber, lineNumber) ||
-                other.lineNumber == lineNumber) &&
-            (identical(other.tax, tax) || other.tax == tax) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
-            (identical(other.ezrxNumber, ezrxNumber) ||
-                other.ezrxNumber == ezrxNumber) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
-            (identical(other.createdTime, createdTime) ||
-                other.createdTime == createdTime) &&
-            (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
-            (identical(other.purchaseOrderType, purchaseOrderType) ||
-                other.purchaseOrderType == purchaseOrderType) &&
-            (identical(other.warehouseStorageCondition,
-                    warehouseStorageCondition) ||
-                other.warehouseStorageCondition == warehouseStorageCondition) &&
-            (identical(other.available, available) ||
-                other.available == available) &&
             (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
-            (identical(other.isMarketplace, isMarketplace) ||
-                other.isMarketplace == isMarketplace) &&
-            (identical(other.seller, seller) || other.seller == seller) &&
             (identical(other.pOReference, pOReference) ||
                 other.pOReference == pOReference) &&
             (identical(other.manufactureName, manufactureName) ||
@@ -657,12 +474,15 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
                 other.invoiceNumber == invoiceNumber) &&
             (identical(other.isBonusMaterial, isBonusMaterial) ||
                 other.isBonusMaterial == isBonusMaterial) &&
-            (identical(other.governmentMaterialCode, governmentMaterialCode) ||
-                other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
             (identical(other.productImages, productImages) ||
-                other.productImages == productImages));
+                other.productImages == productImages) &&
+            (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
+                other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.specialInstructions, specialInstructions) ||
+                other.specialInstructions == specialInstructions) &&
+            (identical(other.tax, tax) || other.tax == tax));
   }
 
   @override
@@ -670,35 +490,25 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         runtimeType,
         materialNumber,
         materialDescription,
-        defaultMaterialDescription,
         qty,
         unitPrice,
         totalPrice,
         status,
         deliveryDate,
-        deliveryTime,
-        lineNumber,
-        tax,
-        orderType,
         orderNumber,
-        ezrxNumber,
         createdDate,
-        createdTime,
-        orderBy,
-        purchaseOrderType,
-        warehouseStorageCondition,
-        available,
         batch,
+        orderBy,
         expiryDate,
-        isMarketplace,
-        seller,
         pOReference,
         manufactureName,
         invoiceNumber,
         isBonusMaterial,
-        governmentMaterialCode,
         telephoneNumber,
-        productImages
+        productImages,
+        requestedDeliveryDate,
+        specialInstructions,
+        tax
       ]);
 
   @JsonKey(ignore: true)
@@ -712,43 +522,31 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   factory _OrderHistoryItem(
       {required final MaterialNumber materialNumber,
       required final String materialDescription,
-      required final String defaultMaterialDescription,
       required final int qty,
       required final ZpPrice unitPrice,
       required final TotalPrice totalPrice,
       required final StatusType status,
       required final DateTimeStringValue deliveryDate,
-      required final String deliveryTime,
-      required final String lineNumber,
-      required final double tax,
-      required final String orderType,
       required final OrderNumber orderNumber,
-      required final String ezrxNumber,
       required final DateTimeStringValue createdDate,
-      required final String createdTime,
-      required final String orderBy,
-      required final String purchaseOrderType,
-      required final String warehouseStorageCondition,
-      required final bool available,
       required final String batch,
+      required final String orderBy,
       required final DateTimeStringValue expiryDate,
-      required final bool isMarketplace,
-      required final String seller,
-      required final String pOReference,
+      required final POReference pOReference,
       required final String manufactureName,
       required final String invoiceNumber,
       required final bool isBonusMaterial,
-      required final String governmentMaterialCode,
-      required final String telephoneNumber,
-      required final ProductImages productImages}) = _$_OrderHistoryItem;
+      required final PhoneNumber telephoneNumber,
+      required final ProductImages productImages,
+      required final DateTimeStringValue requestedDeliveryDate,
+      required final SpecialInstructions specialInstructions,
+      required final double tax}) = _$_OrderHistoryItem;
   _OrderHistoryItem._() : super._();
 
   @override
   MaterialNumber get materialNumber;
   @override
   String get materialDescription;
-  @override
-  String get defaultMaterialDescription;
   @override
   int get qty;
   @override
@@ -760,39 +558,17 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   DateTimeStringValue get deliveryDate;
   @override
-  String get deliveryTime;
-  @override
-  String get lineNumber;
-  @override
-  double get tax;
-  @override
-  String get orderType;
-  @override
   OrderNumber get orderNumber;
-  @override
-  String get ezrxNumber;
   @override
   DateTimeStringValue get createdDate;
   @override
-  String get createdTime;
+  String get batch;
   @override
   String get orderBy;
   @override
-  String get purchaseOrderType;
-  @override
-  String get warehouseStorageCondition;
-  @override
-  bool get available;
-  @override
-  String get batch;
-  @override
   DateTimeStringValue get expiryDate;
   @override
-  bool get isMarketplace;
-  @override
-  String get seller;
-  @override
-  String get pOReference;
+  POReference get pOReference;
   @override
   String get manufactureName;
   @override
@@ -800,11 +576,15 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   bool get isBonusMaterial;
   @override
-  String get governmentMaterialCode;
-  @override
-  String get telephoneNumber;
+  PhoneNumber get telephoneNumber;
   @override
   ProductImages get productImages;
+  @override
+  DateTimeStringValue get requestedDeliveryDate;
+  @override
+  SpecialInstructions get specialInstructions;
+  @override
+  double get tax;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>

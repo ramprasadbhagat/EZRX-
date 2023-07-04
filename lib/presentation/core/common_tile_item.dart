@@ -18,12 +18,14 @@ class CommonTileItem extends StatelessWidget {
     required this.image,
     this.tag = '',
     this.footerWidget,
+    required this.priceComponent,
   }) : super(key: key);
 
   final String label;
   final String title;
   final String subtitle;
   final String headerText;
+  final Widget priceComponent;
   final Widget statusWidget;
   final String quantity;
   final bool isQuantityBelowImage;
@@ -103,6 +105,8 @@ class CommonTileItem extends StatelessWidget {
                           tileBody3: subtitle,
                           isQuantityBelowImage: isQuantityBelowImage,
                           quantity: quantity,
+                          isPriceComponent: true,
+                          priceComponent: priceComponent,
                         ),
                       ],
                     ),
@@ -125,34 +129,42 @@ class _Subtitle extends StatelessWidget {
     required this.tileBody3,
     required this.isQuantityBelowImage,
     required this.quantity,
+    required this.priceComponent,
+    required this.isPriceComponent,
   }) : super(key: key);
 
   final String tileBody3;
   final bool isQuantityBelowImage;
   final String quantity;
+  final Widget priceComponent;
+  final bool isPriceComponent;
 
   @override
   Widget build(BuildContext context) {
     return isQuantityBelowImage
-        ? Text(
-            tileBody3,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: ZPColors.darkerGrey,
-                ),
-          )
+        ? isPriceComponent
+            ? priceComponent
+            : Text(
+                tileBody3,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: ZPColors.darkerGrey,
+                    ),
+              )
         : Row(
             children: [
               Expanded(
-                child: Text(
-                  tileBody3,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                        fontSize: 10,
+                child: isPriceComponent
+                    ? priceComponent
+                    : Text(
+                        tileBody3,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: ZPColors.darkGray,
+                              fontSize: 10,
+                            ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
               ),
               Text(
                 'Qty: $quantity',
@@ -181,11 +193,16 @@ class _HeaderItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Text(
-            header,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: ZPColors.darkerGrey,
-                ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                header,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.darkerGrey,
+                    ),
+              ),
+            ],
           ),
         ),
         statusWidget,

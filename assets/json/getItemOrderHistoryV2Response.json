@@ -1,0 +1,47 @@
+{
+    "data": {
+        "orderHistoryV2": {
+            "OrderHistory": [
+                {
+                    "OrderBasicInformation": {
+                        "SoldTo": "0070149863",
+                        "CompanyName": "RSD HOSPITALS SDN BHD (SJMC)",
+                        "ShipTo": "0070149863",
+                        "PaymentTerm": {
+                            "PaymentTermCode": "",
+                            "PaymentTermDescription": ""
+                        }
+                    },
+                    "OrderItems": [
+                        {
+                            "MaterialCode": "000000000021038302",
+                            "MaterialDescription": "0.9% SODIUM CHLORIDEBP 96X50ML",
+                            "CreatedDate": "20230627",
+                            "Qty": 1,
+                            "UnitPrice": 364.8,
+                            "TotalPrice": 364.8,
+                            "Status": "Order Creating",
+                            "DeliveryDate": "",
+                            "EZRXNumber": "EZRX-57d9394",
+                            "OrderNumber": "42db99db-111f-48de-9109-20d39844bf98",
+                            "Batch": "12S017",
+                            "ExpiryDate": "20251130",
+                            "POReference": "",
+                            "ManufactureName": "BAXTER HEALTHCARE -M",
+                            "SpecialInstructions": "",
+                            "RequestedDeliveryDate": "2023-06-27",
+                            "IsBonusMaterial": false,
+                            "ParentID": "",
+                            "TelephoneNumber": "8767678987",
+                            "Tax": 0,
+                            "OrderBy": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "extensions": {
+        "traceId": "b087033baa314db68025a5cec55e0b32"
+    }
+}

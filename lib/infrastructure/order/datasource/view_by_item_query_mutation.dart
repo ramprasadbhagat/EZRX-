@@ -1,5 +1,5 @@
-class OrderHistoryQueryMutation {
-  String getOrderHistoryForCustomer() {
+class ViewByItemQueryMutation {
+  String getViewByItemForCustomer() {
     return '''
       query orderHistoryV2(                                                                   
       \$soldTo: String!,
@@ -41,35 +41,23 @@ class OrderHistoryQueryMutation {
       OrderItems {
         MaterialCode
         MaterialDescription
-        DefaultMaterialDescription
-        CreatedTime
         CreatedDate
         Qty
         UnitPrice
         TotalPrice
         Status
-        LineNumber
-        Tax
         DeliveryDate
-        DeliveryTime
-        OrderType
-        EZRXNumber
         OrderNumber
         OrderBy
-        PurchaseOrderType
-        WarehouseStorageCondition
         OrderNumber
-        Available
         Batch
         ExpiryDate
-        IsMarketplace
-        Seller
         POReference
         ManufactureName
         InvoiceNumber
         IsBonusMaterial
-        GovernmentMaterialCode
         TelephoneNumber
+        Tax
        
       }
       
@@ -79,7 +67,7 @@ class OrderHistoryQueryMutation {
       ''';
   }
 
-  String getOrderHistoryForSalesRep() {
+  String getViewByItemForSalesRep() {
     return '''
       query orderHistoryForSalesRepV2(
       \$orderStatus: [String!],  
@@ -119,40 +107,80 @@ class OrderHistoryQueryMutation {
       OrderItems {
         MaterialCode
         MaterialDescription
-        DefaultMaterialDescription
-        CreatedTime
         CreatedDate
         Qty
         UnitPrice
         TotalPrice
         Status
-        LineNumber
-        Tax
         DeliveryDate
-        DeliveryTime
         OrderType
-        EZRXNumber
-        OrderNumber
         OrderBy
-        PurchaseOrderType
-        WarehouseStorageCondition
         OrderNumber
-        Available
         Batch
         ExpiryDate
-        IsMarketplace
-        Seller
         POReference
         ManufactureName
         InvoiceNumber
         IsBonusMaterial
-        GovernmentMaterialCode
         TelephoneNumber
+        Tax
        
       }
       
     }
           }
         }''';
+  }
+
+  String getViewByItemDetails() {
+    return '''
+    query itemOrderHistoryV2(\$soldTo: String!, \$language: String, \$materialSearch: String, \$orderNumber: String) {
+  orderHistoryV2(
+    soldTo: \$soldTo
+    language: \$language
+    materialSearch: \$materialSearch
+    orderNumber: \$orderNumber
+  ) {
+    OrderHistory {
+      OrderBasicInformation {
+        SoldTo
+        CompanyName
+        ShipTo
+        PaymentTerm {
+          PaymentTermCode
+          PaymentTermDescription
+          
+        }
+       
+      }
+      OrderItems {
+        MaterialCode
+        MaterialDescription
+        CreatedDate
+        Qty
+        UnitPrice
+        TotalPrice
+        Status
+        DeliveryDate
+        OrderType
+        OrderNumber
+        OrderBy
+        Batch
+        ExpiryDate
+        POReference
+        ManufactureName
+        SpecialInstructions
+        RequestedDeliveryDate
+        IsBonusMaterial
+        ParentID
+        TelephoneNumber
+        
+      }
+      
+    }
+    
+  }
+}
+      ''';
   }
 }

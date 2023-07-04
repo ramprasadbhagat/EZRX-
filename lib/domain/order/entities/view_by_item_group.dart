@@ -8,11 +8,13 @@ part 'view_by_item_group.freezed.dart';
 class ViewByItemGroup with _$ViewByItemGroup {
   factory ViewByItemGroup({
     required DateTimeStringValue createdDate,
+    required String manufactureName,
     required List<OrderHistoryItem> orderHistoryItem,
   }) = _ViewByItemGroup;
 
   factory ViewByItemGroup.empty() => ViewByItemGroup(
         createdDate: DateTimeStringValue(''),
         orderHistoryItem: <OrderHistoryItem>[],
+        manufactureName: '',
       );
 }

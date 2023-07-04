@@ -14,40 +14,26 @@ class OrderHistoryItem with _$OrderHistoryItem {
   factory OrderHistoryItem({
     required MaterialNumber materialNumber,
     required String materialDescription,
-    required String defaultMaterialDescription,
     required int qty,
     required ZpPrice unitPrice,
     required TotalPrice totalPrice,
     required StatusType status,
     required DateTimeStringValue deliveryDate,
-    required String deliveryTime,
-    required String lineNumber,
-    required double tax,
-    required String orderType,
     required OrderNumber orderNumber,
-    required String ezrxNumber,
     required DateTimeStringValue createdDate,
-    required String createdTime,
-    required String orderBy,
-    required String purchaseOrderType,
-    required String warehouseStorageCondition,
-    required bool available,
     required String batch,
+    required String orderBy,
     required DateTimeStringValue expiryDate,
-    required bool isMarketplace,
-    required String seller,
-    required String pOReference,
+    required POReference pOReference,
     required String manufactureName,
     required String invoiceNumber,
     required bool isBonusMaterial,
-    required String governmentMaterialCode,
-    required String telephoneNumber,
+    required PhoneNumber telephoneNumber,
     required ProductImages productImages,
+    required DateTimeStringValue requestedDeliveryDate,
+    required SpecialInstructions specialInstructions,
+    required double tax,
   }) = _OrderHistoryItem;
-
-  DateTimeStringValue get deliveryDateTime => DateTimeStringValue(
-        '${deliveryDate.getOrDefaultValue('00000000')}$deliveryTime',
-      );
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
         materialNumber: MaterialNumber(''),
@@ -57,30 +43,20 @@ class OrderHistoryItem with _$OrderHistoryItem {
         totalPrice: TotalPrice('0.0'),
         status: StatusType(''),
         deliveryDate: DateTimeStringValue(''),
-        deliveryTime: '000000',
-        lineNumber: '',
-        tax: 0.0,
-        orderType: '',
         orderNumber: OrderNumber(''),
-        ezrxNumber: '',
         createdDate: DateTimeStringValue(''),
-        createdTime: '',
-        orderBy: '',
-        purchaseOrderType: '',
-        available: false,
         batch: '',
-        defaultMaterialDescription: '',
         expiryDate: DateTimeStringValue(''),
-        governmentMaterialCode: '',
         invoiceNumber: '',
         isBonusMaterial: false,
-        warehouseStorageCondition: '',
-        isMarketplace: false,
         manufactureName: '',
-        pOReference: '',
-        seller: '',
-        telephoneNumber: '',
+        pOReference: POReference(''),
+        telephoneNumber: PhoneNumber(''),
         productImages: ProductImages.empty(),
+        requestedDeliveryDate: DateTimeStringValue(''),
+        specialInstructions: SpecialInstructions(''),
+        tax: 0.0,
+        orderBy: '',
       );
 
   OrderHistoryItem copyWithTaxCal({
@@ -105,6 +81,23 @@ extension ViewByItemListExtension on List<OrderHistoryItem> {
           (entry) => ViewByItemGroup(
             createdDate: entry.key,
             orderHistoryItem: entry.value,
+            manufactureName: '',
+          ),
+        )
+        .toList();
+  }
+}
+
+extension ViewByItemDetailsListExtension on List<OrderHistoryItem> {
+  List<ViewByItemGroup> get getViewByOrderItemDetailsList {
+    return List<OrderHistoryItem>.from(this)
+        .groupListsBy((item) => item.manufactureName)
+        .entries
+        .map(
+          (entry) => ViewByItemGroup(
+            createdDate: DateTimeStringValue(''),
+            orderHistoryItem: entry.value,
+            manufactureName: entry.key,
           ),
         )
         .toList();

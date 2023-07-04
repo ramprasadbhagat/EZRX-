@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
   late dynamic data;
   group('Test order history details shipping info ', () {
     setUp(() async {
@@ -44,7 +45,7 @@ void main() {
     test('Test fromDomain', () {
       final configsDto = OrderHistoryItemDto.fromDomain(
           OrderHistoryItemDto.fromJson(data).toDomain());
-      expect(configsDto.deliveryTime, 'fake-time');
+      expect(configsDto.materialNumber, 'fake-code');
     });
 
     // test('Test toJson', () {

@@ -34,6 +34,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -90,6 +91,9 @@ import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
+import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_query.dart';
+import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_local.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_query.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_remote.dart';
@@ -104,6 +108,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/favourite_remote.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
@@ -245,6 +250,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
@@ -383,6 +389,8 @@ import 'package:ezrxmobile/infrastructure/order/repository/recent_order_reposito
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_remote_datasource.dart';
 
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_remote.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -1088,13 +1096,13 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(() => OrderHistoryLocalDataSource());
-  locator.registerLazySingleton(() => OrderHistoryQueryMutation());
+  locator.registerLazySingleton(() => ViewByItemQueryMutation());
   locator.registerLazySingleton(
     () => OrderHistoryRemoteDataSource(
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
-      orderHistoryQueryMutation: locator<OrderHistoryQueryMutation>(),
+      viewByItemQueryMutation: locator<ViewByItemQueryMutation>(),
     ),
   );
 
@@ -1103,6 +1111,8 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<OrderHistoryLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
+      productImageLocalDataSource: locator<ProductImageLocalDataSource>(),
+      productImageRemoteDataSource: locator<ProductImageRemoteDataSource>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2709,5 +2719,45 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => FavouriteMutation(),
+  );
+  //============================================================
+  //  View by item Details
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ViewByItemDetailsLocalDataSource());
+  locator.registerLazySingleton(() => ProductImageLocalDataSource());
+  locator.registerLazySingleton(() => ProductImageQuery());
+
+  locator.registerLazySingleton(() => ProductImageRemoteDataSource(
+        config: locator<Config>(),
+        httpService: locator<HttpService>(),
+        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+        productImageQuery: locator<ProductImageQuery>(),
+      ));
+
+  locator.registerLazySingleton(
+    () => ViewByItemDetailsRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ViewByItemDetailsLocalDataSource>(),
+      orderHistoryRemoteDataSource:
+          locator<ViewByItemDetailsRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ViewByItemDetailsBloc(
+      viewByItemDetailsRepository: locator<ViewByItemDetailsRepository>(),
+      productImagesRepository: locator<ProductImagesRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ViewByItemDetailsRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      viewByItemDetailsQueryMutation: locator<ViewByItemQueryMutation>(),
+    ),
   );
 }

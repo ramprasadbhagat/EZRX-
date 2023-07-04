@@ -5,7 +5,10 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
@@ -142,6 +145,13 @@ class _ViewByOrderItemGroup extends StatelessWidget {
                 children: orderHistoryItem.orderHistoryItem.map((e) {
                   return _ViewByOrderItem(
                     orderHistoryItem: e,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    orderHistoryBasicInfo: context
+                        .read<ViewByItemsBloc>()
+                        .state
+                        .orderHistoryList
+                        .orderBasicInformation,
                   );
                 }).toList(),
               ),
@@ -155,39 +165,61 @@ class _ViewByOrderItemGroup extends StatelessWidget {
 
 class _ViewByOrderItem extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
+  final CustomerCodeInfo customerCodeInfo;
+  final OrderHistoryBasicInfo orderHistoryBasicInfo;
 
   const _ViewByOrderItem({
     Key? key,
     required this.orderHistoryItem,
+    required this.customerCodeInfo,
+    required this.orderHistoryBasicInfo,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CommonTileItem(
-          label: orderHistoryItem.materialNumber.displayMatNo,
-          title: orderHistoryItem.materialDescription,
-          subtitle: orderHistoryItem.manufactureName,
-          headerText:
-              'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-          statusWidget: StatusLabel(
-            status: StatusType(
-              orderHistoryItem.status.getOrDefaultValue(''),
-            ),
+    return GestureDetector(
+      onTap: () {
+        context.read<ViewByItemDetailsBloc>().add(
+              ViewByItemDetailsEvent.fetch(
+                user: context.read<UserBloc>().state.user,
+                orderHistoryItem: orderHistoryItem,
+                soldTo: customerCodeInfo,
+              ),
+            );
+
+        context.router.push(
+          ViewByItemDetailsPageRoute(
+            orderHistoryItem: orderHistoryItem,
           ),
-          quantity: orderHistoryItem.qty.toString(),
-          footerWidget: orderHistoryItem.invoiceNumber.isNotEmpty
-              ? _InvoiceNumber(
-                  orderHistoryItem: orderHistoryItem,
-                )
-              : null,
-          image: orderHistoryItem.productImages.thumbNail,
-          isQuantityBelowImage: false,
-          tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
-        ),
-      ],
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CommonTileItem(
+            label: orderHistoryItem.materialNumber.displayMatNo,
+            title: orderHistoryItem.materialDescription,
+            subtitle: orderHistoryItem.manufactureName,
+            headerText:
+                'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+            statusWidget: StatusLabel(
+              status: StatusType(
+                orderHistoryItem.status.getOrDefaultValue(''),
+              ),
+            ),
+            quantity: orderHistoryItem.qty.toString(),
+            footerWidget: orderHistoryItem.invoiceNumber.isNotEmpty
+                ? _InvoiceNumber(
+                    orderHistoryItem: orderHistoryItem,
+                  )
+                : null,
+            image: orderHistoryItem.productImages.thumbNail,
+            isQuantityBelowImage: false,
+            tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
+            priceComponent: const SizedBox(),
+          ),
+        ],
+      ),
     );
   }
 }

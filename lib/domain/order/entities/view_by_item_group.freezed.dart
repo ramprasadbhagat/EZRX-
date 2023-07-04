@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ViewByItemGroup {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
+  String get manufactureName => throw _privateConstructorUsedError;
   List<OrderHistoryItem> get orderHistoryItem =>
       throw _privateConstructorUsedError;
 
@@ -33,6 +34,7 @@ abstract class $ViewByItemGroupCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
+      String manufactureName,
       List<OrderHistoryItem> orderHistoryItem});
 }
 
@@ -50,6 +52,7 @@ class _$ViewByItemGroupCopyWithImpl<$Res, $Val extends ViewByItemGroup>
   @override
   $Res call({
     Object? createdDate = null,
+    Object? manufactureName = null,
     Object? orderHistoryItem = null,
   }) {
     return _then(_value.copyWith(
@@ -57,6 +60,10 @@ class _$ViewByItemGroupCopyWithImpl<$Res, $Val extends ViewByItemGroup>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      manufactureName: null == manufactureName
+          ? _value.manufactureName
+          : manufactureName // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryItem: null == orderHistoryItem
           ? _value.orderHistoryItem
           : orderHistoryItem // ignore: cast_nullable_to_non_nullable
@@ -75,6 +82,7 @@ abstract class _$$_ViewByItemGroupCopyWith<$Res>
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
+      String manufactureName,
       List<OrderHistoryItem> orderHistoryItem});
 }
 
@@ -90,6 +98,7 @@ class __$$_ViewByItemGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? createdDate = null,
+    Object? manufactureName = null,
     Object? orderHistoryItem = null,
   }) {
     return _then(_$_ViewByItemGroup(
@@ -97,6 +106,10 @@ class __$$_ViewByItemGroupCopyWithImpl<$Res>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      manufactureName: null == manufactureName
+          ? _value.manufactureName
+          : manufactureName // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryItem: null == orderHistoryItem
           ? _value._orderHistoryItem
           : orderHistoryItem // ignore: cast_nullable_to_non_nullable
@@ -110,11 +123,14 @@ class __$$_ViewByItemGroupCopyWithImpl<$Res>
 class _$_ViewByItemGroup implements _ViewByItemGroup {
   _$_ViewByItemGroup(
       {required this.createdDate,
+      required this.manufactureName,
       required final List<OrderHistoryItem> orderHistoryItem})
       : _orderHistoryItem = orderHistoryItem;
 
   @override
   final DateTimeStringValue createdDate;
+  @override
+  final String manufactureName;
   final List<OrderHistoryItem> _orderHistoryItem;
   @override
   List<OrderHistoryItem> get orderHistoryItem {
@@ -126,7 +142,7 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
 
   @override
   String toString() {
-    return 'ViewByItemGroup(createdDate: $createdDate, orderHistoryItem: $orderHistoryItem)';
+    return 'ViewByItemGroup(createdDate: $createdDate, manufactureName: $manufactureName, orderHistoryItem: $orderHistoryItem)';
   }
 
   @override
@@ -136,12 +152,14 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
             other is _$_ViewByItemGroup &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
+            (identical(other.manufactureName, manufactureName) ||
+                other.manufactureName == manufactureName) &&
             const DeepCollectionEquality()
                 .equals(other._orderHistoryItem, _orderHistoryItem));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, createdDate,
+  int get hashCode => Object.hash(runtimeType, createdDate, manufactureName,
       const DeepCollectionEquality().hash(_orderHistoryItem));
 
   @JsonKey(ignore: true)
@@ -154,11 +172,14 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
 abstract class _ViewByItemGroup implements ViewByItemGroup {
   factory _ViewByItemGroup(
           {required final DateTimeStringValue createdDate,
+          required final String manufactureName,
           required final List<OrderHistoryItem> orderHistoryItem}) =
       _$_ViewByItemGroup;
 
   @override
   DateTimeStringValue get createdDate;
+  @override
+  String get manufactureName;
   @override
   List<OrderHistoryItem> get orderHistoryItem;
   @override

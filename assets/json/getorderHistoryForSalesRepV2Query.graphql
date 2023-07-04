@@ -26,28 +26,18 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
       OrderItems {
         MaterialCode
         MaterialDescription
-        CreatedTime
         CreatedDate
         Qty
         UnitPrice
         TotalPrice
         Status
-        LineNumber
-        Tax
         DeliveryDate
-        DeliveryTime
         OrderType
-        EZRXNumber
         OrderNumber
-        OrderBy
-        PurchaseOrderType
-        WarehouseStorageCondition
         OrderNumber
-        Available
         Batch
+        OrderBy
         ExpiryDate
-        IsMarketplace
-        Seller
         POReference
         ManufactureName
         InvoiceNumber

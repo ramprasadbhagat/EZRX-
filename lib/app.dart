@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -477,6 +478,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnListByRequestBloc>(
           create: (context) => locator<ReturnListByRequestBloc>(),
+        ),
+         BlocProvider<ViewByItemDetailsBloc>(
+          create: (context) => locator<ViewByItemDetailsBloc>(),
         ),
       ],
       child: MaterialApp.router(

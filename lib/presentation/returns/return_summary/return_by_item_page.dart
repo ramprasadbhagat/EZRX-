@@ -168,7 +168,9 @@ class _ReturnItem extends StatelessWidget {
                 title: data.materialName,
                 subtitle:
                     'Batch ${data.batch} (Expires ${data.expiry.toValidDateString})',
+
                 headerText: 'Return #${data.requestId}',
+
                 image:
                     '', //TODO: will pass the image url when API is implemented,for now, it's showing default image
                 quantity: data.itemQty.toString(),
@@ -178,6 +180,7 @@ class _ReturnItem extends StatelessWidget {
                     data.status.getOrDefaultValue(''),
                   ),
                 ),
+                priceComponent: const SizedBox(),
               ),
             ],
           ),
