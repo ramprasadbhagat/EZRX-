@@ -39,16 +39,4 @@ class RecentOrdersQueryMutation {
         }
    ''';
   }
-
-
-String fetchProductsFavouriteStatus() {
-    return '''
-        query materialDetails(\$materialNumber: String!, \$language: String) {
-          materialDetails(materialNumber: \$materialNumber, language: \$language) {
-            materialNumber
-            isFavourite
-          }
-        }
-      ''';
-  }
 }

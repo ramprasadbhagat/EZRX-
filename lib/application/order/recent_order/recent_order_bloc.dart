@@ -1,25 +1,17 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:ezrxmobile/domain/order/entities/recent_order_item.dart';
-
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-
 import 'package:ezrxmobile/domain/order/repository/i_recent_order_repository.dart';
-
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
 import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 
 part 'recent_order_event.dart';
@@ -29,9 +21,11 @@ part 'recent_order_bloc.freezed.dart';
 class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
   final IRecentOrderRepository recentOrderRepository;
   final IProductImagesRepository productImagesRepository;
+  final IFavouriteRepository favouriteRepository;
   RecentOrderBloc({
     required this.recentOrderRepository,
     required this.productImagesRepository,
+    required this.favouriteRepository,
   }) : super(RecentOrderState.initial()) {
     on<RecentOrderEvent>(_onEvent);
   }
@@ -82,9 +76,9 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
       },
       fetchProductsFavouriteStatus: (_FetchProductsFavouriteStatus e) async {
         final failureOrSuccess =
-            await recentOrderRepository.fetchProductsFavouriteStatus(
+            await favouriteRepository.getFavouritesForList(
           salesConfigs: e.configs,
-          productList: e.productList,
+          list: e.productList,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -92,10 +86,12 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
               apiFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (favouriteResponse) {
+          (updatedFavouritesList) {
             emit(
               state.copyWith(
-                recentlyOrderedProducts: favouriteResponse,
+                recentlyOrderedProducts: updatedFavouritesList
+                    .map((e) => e as RecentOrderItem)
+                    .toList(),
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
@@ -106,22 +102,22 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
         );
       },
       addFavourite: (_AddFavourite e) async {
-        final failureOrSuccess =
-            await recentOrderRepository.addFavouriteProduct(
-          materialCode: e.materialCode,
-          productList: state.recentlyOrderedProducts,
+        final failureOrSuccess = await favouriteRepository.addToFavourites(
+          materialNumber: e.materialCode,
+          list: state.recentlyOrderedProducts,
         );
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),              
             ),
           ),
-          (favouriteResponse) {
+          (updatedFavouritesList) {
             emit(
               state.copyWith(
-                recentlyOrderedProducts: favouriteResponse,
+                recentlyOrderedProducts: updatedFavouritesList
+                    .map((e) => e as RecentOrderItem)
+                    .toList(),
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
@@ -129,10 +125,9 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
         );
       },
       deleteFavourite: (_DeleteFavourite e) async {
-        final failureOrSuccess =
-            await recentOrderRepository.deleteFavouriteProduct(
-          materialCode: e.materialCode,
-          productList: state.recentlyOrderedProducts,
+        final failureOrSuccess = await favouriteRepository.removeFromFavourites(
+          materialNumber: e.materialCode,
+          list: state.recentlyOrderedProducts,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -140,10 +135,12 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
               apiFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (favouriteResponse) {
+          (updatedFavouritesList) {
             emit(
               state.copyWith(
-                recentlyOrderedProducts: favouriteResponse,
+                recentlyOrderedProducts: updatedFavouritesList
+                    .map((e) => e as RecentOrderItem)
+                    .toList(),
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );

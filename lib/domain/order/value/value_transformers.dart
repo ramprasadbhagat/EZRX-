@@ -90,3 +90,5 @@ int getParsedValue(String zDP5Value) =>
 bool isValueNotEmpty(String zDP5Value) => zDP5Value.isNotEmpty;
 
 String intToString(int value) => value == 0 ? '' : '$value';
+
+bool checkIfSuccessful(int value) => value == 1;

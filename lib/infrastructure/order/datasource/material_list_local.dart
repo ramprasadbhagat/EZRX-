@@ -1,11 +1,7 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/order/entities/material_add_favourite.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_remove_favourite.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/material_add_favourite_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/material_remove_favourite_dto.dart';
 import 'package:flutter/services.dart';
 
 class MaterialListLocalDataSource {
@@ -79,28 +75,5 @@ class MaterialListLocalDataSource {
     final finalData = data['data']['GetProductDetails'];
 
     return MaterialDto.fromJson(finalData).toDomain();
-  }
-
-
-  Future<MaterialAddFavourite> addFavouriteMaterial() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/addFavouriteMaterialResponse.json',
-      ),
-    );
-    final finalData = data['data'];
-
-    return MaterialAddFavouriteDto.fromJson(finalData).toDomain();
-  }
-
-  Future<MaterialRemoveFavourite> removeFavouriteMaterial() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/removeFavouriteMaterialResponse.json',
-      ),
-    );
-    final finalData = data['data'];
-
-    return MaterialRemoveFavouriteDto.fromJson(finalData).toDomain();
   }
 }

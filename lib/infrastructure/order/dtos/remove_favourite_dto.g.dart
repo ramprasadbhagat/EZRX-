@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'material_remove_favourite_dto.dart';
+part of 'remove_favourite_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MaterialRemoveFavouriteDto _$$_MaterialRemoveFavouriteDtoFromJson(
+_$_RemoveFavouriteDto _$$_RemoveFavouriteDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_MaterialRemoveFavouriteDto(
+    _$_RemoveFavouriteDto(
       removeFavouriteMaterial: json['removeFavouriteMaterial'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_MaterialRemoveFavouriteDtoToJson(
-        _$_MaterialRemoveFavouriteDto instance) =>
+Map<String, dynamic> _$$_RemoveFavouriteDtoToJson(
+        _$_RemoveFavouriteDto instance) =>
     <String, dynamic>{
       'removeFavouriteMaterial': instance.removeFavouriteMaterial,
     };

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -8,11 +9,14 @@ import 'package:mocktail/mocktail.dart';
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
 
+class MockFavouriteRepository extends Mock implements FavouriteRepository {}
+
 // const _defaultPageSize = 20;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListRepository materialListMockRepository;
+  late FavouriteRepository favouriteRepository;
   // final mockUser = User.empty();
   // final salesOrg2601 = SalesOrg('2601');
   // final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
@@ -26,6 +30,7 @@ void main() {
   final materialState = MaterialListState.initial();
   setUpAll(() async {
     materialListMockRepository = MockMaterialListRepository();
+    favouriteRepository = MockFavouriteRepository();
     // final loadedMaterialListMock =
     //     await MaterialListLocalDataSource().getMaterialList();
     // materialListMock = [
@@ -39,6 +44,7 @@ void main() {
       'Material List Initialize',
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteRepository,
       ),
       act: (MaterialListBloc bloc) =>
           bloc.add(const MaterialListEvent.initialized()),
@@ -139,8 +145,10 @@ void main() {
 
     blocTest(
       'Material List search update',
-      build: () =>
-          MaterialListBloc(materialListRepository: materialListMockRepository),
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteRepository,
+      ),
       act: (MaterialListBloc bloc) {
         bloc.add(const MaterialListEvent.updateSearchKey(searchKey: '1234'));
       },
@@ -271,8 +279,10 @@ void main() {
 
     blocTest(
       'Clear Material List search key',
-      build: () =>
-          MaterialListBloc(materialListRepository: materialListMockRepository),
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteRepository,
+      ),
       act: (MaterialListBloc bloc) {
         bloc.add(const MaterialListEvent.updateSearchKey(searchKey: ''));
       },

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'material_add_favourite_dto.dart';
+part of 'add_favourite_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,27 +14,26 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-MaterialAddFavouriteDto _$MaterialAddFavouriteDtoFromJson(
-    Map<String, dynamic> json) {
-  return _MaterialAddFavouriteDto.fromJson(json);
+AddFavouriteDto _$AddFavouriteDtoFromJson(Map<String, dynamic> json) {
+  return _AddFavouriteDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MaterialAddFavouriteDto {
+mixin _$AddFavouriteDto {
   @JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
   int get addFavouriteMaterial => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MaterialAddFavouriteDtoCopyWith<MaterialAddFavouriteDto> get copyWith =>
+  $AddFavouriteDtoCopyWith<AddFavouriteDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MaterialAddFavouriteDtoCopyWith<$Res> {
-  factory $MaterialAddFavouriteDtoCopyWith(MaterialAddFavouriteDto value,
-          $Res Function(MaterialAddFavouriteDto) then) =
-      _$MaterialAddFavouriteDtoCopyWithImpl<$Res, MaterialAddFavouriteDto>;
+abstract class $AddFavouriteDtoCopyWith<$Res> {
+  factory $AddFavouriteDtoCopyWith(
+          AddFavouriteDto value, $Res Function(AddFavouriteDto) then) =
+      _$AddFavouriteDtoCopyWithImpl<$Res, AddFavouriteDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
@@ -42,10 +41,9 @@ abstract class $MaterialAddFavouriteDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialAddFavouriteDtoCopyWithImpl<$Res,
-        $Val extends MaterialAddFavouriteDto>
-    implements $MaterialAddFavouriteDtoCopyWith<$Res> {
-  _$MaterialAddFavouriteDtoCopyWithImpl(this._value, this._then);
+class _$AddFavouriteDtoCopyWithImpl<$Res, $Val extends AddFavouriteDto>
+    implements $AddFavouriteDtoCopyWith<$Res> {
+  _$AddFavouriteDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,11 +65,11 @@ class _$MaterialAddFavouriteDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialAddFavouriteDtoCopyWith<$Res>
-    implements $MaterialAddFavouriteDtoCopyWith<$Res> {
-  factory _$$_MaterialAddFavouriteDtoCopyWith(_$_MaterialAddFavouriteDto value,
-          $Res Function(_$_MaterialAddFavouriteDto) then) =
-      __$$_MaterialAddFavouriteDtoCopyWithImpl<$Res>;
+abstract class _$$_AddFavouriteDtoCopyWith<$Res>
+    implements $AddFavouriteDtoCopyWith<$Res> {
+  factory _$$_AddFavouriteDtoCopyWith(
+          _$_AddFavouriteDto value, $Res Function(_$_AddFavouriteDto) then) =
+      __$$_AddFavouriteDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -80,12 +78,11 @@ abstract class _$$_MaterialAddFavouriteDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialAddFavouriteDtoCopyWithImpl<$Res>
-    extends _$MaterialAddFavouriteDtoCopyWithImpl<$Res,
-        _$_MaterialAddFavouriteDto>
-    implements _$$_MaterialAddFavouriteDtoCopyWith<$Res> {
-  __$$_MaterialAddFavouriteDtoCopyWithImpl(_$_MaterialAddFavouriteDto _value,
-      $Res Function(_$_MaterialAddFavouriteDto) _then)
+class __$$_AddFavouriteDtoCopyWithImpl<$Res>
+    extends _$AddFavouriteDtoCopyWithImpl<$Res, _$_AddFavouriteDto>
+    implements _$$_AddFavouriteDtoCopyWith<$Res> {
+  __$$_AddFavouriteDtoCopyWithImpl(
+      _$_AddFavouriteDto _value, $Res Function(_$_AddFavouriteDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +90,7 @@ class __$$_MaterialAddFavouriteDtoCopyWithImpl<$Res>
   $Res call({
     Object? addFavouriteMaterial = null,
   }) {
-    return _then(_$_MaterialAddFavouriteDto(
+    return _then(_$_AddFavouriteDto(
       addFavouriteMaterial: null == addFavouriteMaterial
           ? _value.addFavouriteMaterial
           : addFavouriteMaterial // ignore: cast_nullable_to_non_nullable
@@ -104,14 +101,14 @@ class __$$_MaterialAddFavouriteDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialAddFavouriteDto extends _MaterialAddFavouriteDto {
-  const _$_MaterialAddFavouriteDto(
+class _$_AddFavouriteDto extends _AddFavouriteDto {
+  const _$_AddFavouriteDto(
       {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
           required this.addFavouriteMaterial})
       : super._();
 
-  factory _$_MaterialAddFavouriteDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialAddFavouriteDtoFromJson(json);
+  factory _$_AddFavouriteDto.fromJson(Map<String, dynamic> json) =>
+      _$$_AddFavouriteDtoFromJson(json);
 
   @override
   @JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
@@ -119,14 +116,14 @@ class _$_MaterialAddFavouriteDto extends _MaterialAddFavouriteDto {
 
   @override
   String toString() {
-    return 'MaterialAddFavouriteDto(addFavouriteMaterial: $addFavouriteMaterial)';
+    return 'AddFavouriteDto(addFavouriteMaterial: $addFavouriteMaterial)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialAddFavouriteDto &&
+            other is _$_AddFavouriteDto &&
             (identical(other.addFavouriteMaterial, addFavouriteMaterial) ||
                 other.addFavouriteMaterial == addFavouriteMaterial));
   }
@@ -138,34 +135,31 @@ class _$_MaterialAddFavouriteDto extends _MaterialAddFavouriteDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialAddFavouriteDtoCopyWith<_$_MaterialAddFavouriteDto>
-      get copyWith =>
-          __$$_MaterialAddFavouriteDtoCopyWithImpl<_$_MaterialAddFavouriteDto>(
-              this, _$identity);
+  _$$_AddFavouriteDtoCopyWith<_$_AddFavouriteDto> get copyWith =>
+      __$$_AddFavouriteDtoCopyWithImpl<_$_AddFavouriteDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialAddFavouriteDtoToJson(
+    return _$$_AddFavouriteDtoToJson(
       this,
     );
   }
 }
 
-abstract class _MaterialAddFavouriteDto extends MaterialAddFavouriteDto {
-  const factory _MaterialAddFavouriteDto(
-          {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
-              required final int addFavouriteMaterial}) =
-      _$_MaterialAddFavouriteDto;
-  const _MaterialAddFavouriteDto._() : super._();
+abstract class _AddFavouriteDto extends AddFavouriteDto {
+  const factory _AddFavouriteDto(
+      {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
+          required final int addFavouriteMaterial}) = _$_AddFavouriteDto;
+  const _AddFavouriteDto._() : super._();
 
-  factory _MaterialAddFavouriteDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialAddFavouriteDto.fromJson;
+  factory _AddFavouriteDto.fromJson(Map<String, dynamic> json) =
+      _$_AddFavouriteDto.fromJson;
 
   @override
   @JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
   int get addFavouriteMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialAddFavouriteDtoCopyWith<_$_MaterialAddFavouriteDto>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_AddFavouriteDtoCopyWith<_$_AddFavouriteDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

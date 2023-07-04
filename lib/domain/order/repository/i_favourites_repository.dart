@@ -1,0 +1,21 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+abstract class IFavouriteRepository {
+  Future<Either<ApiFailure, List>> addToFavourites({
+    required MaterialNumber materialNumber,
+    required List list,
+  });
+
+  Future<Either<ApiFailure, List>> removeFromFavourites({
+    required MaterialNumber materialNumber,
+    required List list,
+  });
+
+  Future<Either<ApiFailure, List>> getFavouritesForList({
+    required SalesOrganisationConfigs salesConfigs,
+    required List list,
+  });
+}

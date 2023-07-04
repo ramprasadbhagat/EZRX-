@@ -97,6 +97,9 @@ import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_r
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/favourite_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
@@ -229,6 +232,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
@@ -931,6 +935,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialListBloc(
       materialListRepository: locator<MaterialListRepository>(),
+      favouriteRepository: locator<FavouriteRepository>(),
     ),
   );
 
@@ -2118,6 +2123,7 @@ void setupLocator() {
     () => RecentOrderBloc(
       recentOrderRepository: locator<RecentOrderRepository>(),
       productImagesRepository: locator<ProductImagesRepository>(),
+      favouriteRepository: locator<FavouriteRepository>(),
     ),
   );
 
@@ -2636,5 +2642,32 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
         () => ProductImagesQuery(),
+  );
+
+  //============================================================
+  //
+  // Favourites
+  //
+  //============================================================
+  locator.registerLazySingleton(
+        () => FavouriteRepository(
+      config: locator<Config>(),
+      favouriteLocalDataSource: locator<FavouriteLocalDataSource>(),
+      favouriteRemoteDataSource: locator<FavouriteRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+        () => FavouriteLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+        () => FavouriteRemoteDataSource(
+      httpService: locator<HttpService>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      favouriteMutation: locator<FavouriteMutation>(),
+    ),
+  );
+  locator.registerLazySingleton(
+        () => FavouriteMutation(),
   );
 }

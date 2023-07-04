@@ -1,0 +1,45 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/domain/order/entities/add_favourite.dart';
+import 'package:ezrxmobile/domain/order/entities/favourite_status.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/favourite_status_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/remove_favourite_dto.dart';
+import 'package:ezrxmobile/domain/order/entities/remove_favourite.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/add_favourite_dto.dart';
+import 'package:flutter/services.dart';
+
+class FavouriteLocalDataSource {
+  FavouriteLocalDataSource();
+
+  Future<AddFavourite> addFavouriteMaterial() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/addFavouriteMaterialResponse.json',
+      ),
+    );
+    final finalData = data['data'];
+
+    return AddFavouriteDto.fromJson(finalData).toDomain();
+  }
+
+  Future<RemoveFavourite> removeFavouriteMaterial() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/removeFavouriteMaterialResponse.json',
+      ),
+    );
+    final finalData = data['data'];
+
+    return RemoveFavouriteDto.fromJson(finalData).toDomain();
+  }
+
+  Future<FavouriteStatus> getFavouriteStatus() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/fetchProductsFavouriteStatusResponse.json'),
+    );
+    final finalData = data['data']['materialDetails'];
+
+    return FavouriteStatusDto.fromJson(finalData).toDomain();
+  }
+}

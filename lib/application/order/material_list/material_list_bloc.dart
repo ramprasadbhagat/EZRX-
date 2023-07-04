@@ -7,21 +7,26 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'material_list_bloc.freezed.dart';
+
 part 'material_list_event.dart';
+
 part 'material_list_state.dart';
 
 int _pageSize = 24;
 
 class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
+  final IFavouriteRepository favouriteRepository;
 
   MaterialListBloc({
     required this.materialListRepository,
+    required this.favouriteRepository,
   }) : super(MaterialListState.initial()) {
     on<_Initialized>((e, emit) async {
       emit(MaterialListState.initial());
@@ -129,10 +134,9 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     });
     on<_AddFavourite>(
       (e, emit) async {
-        final failureOrSuccess =
-            await materialListRepository.addFavouriteMaterial(
+        final failureOrSuccess = await favouriteRepository.addToFavourites(
           materialNumber: e.item.materialNumber,
-          materialList: state.materialList,
+          list: state.materialList,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -141,10 +145,12 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               isFetching: false,
             ),
           ),
-          (favouriteResponse) {
+          (updatedFavouritesList) {
             emit(
               state.copyWith(
-                materialList: favouriteResponse,
+                materialList: updatedFavouritesList
+                    .map((e) => e as MaterialInfo)
+                    .toList(),
                 isFetching: false,
               ),
             );
@@ -154,11 +160,9 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     );
     on<_DeleteFavourite>(
       ((e, emit) async {
-        final failureOrSuccess =
-            await materialListRepository.removeFavouriteMaterial(
+        final failureOrSuccess = await favouriteRepository.removeFromFavourites(
           materialNumber: e.item.materialNumber,
-          materialList: state.materialList,
-          filter: state.selectedMaterialFilter.isFavourite,
+          list: state.materialList,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -167,10 +171,12 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               isFetching: false,
             ),
           ),
-          (favouriteResponse) {
+          (updatedFavouritesList) {
             emit(
               state.copyWith(
-                materialList: favouriteResponse,
+                materialList: updatedFavouritesList
+                    .map((e) => e as MaterialInfo)
+                    .toList(),
                 isFetching: false,
               ),
             );

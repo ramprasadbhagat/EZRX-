@@ -886,3 +886,14 @@ class DataTotalHidden extends ValueObject<int> {
 
   bool get isDataHidden => notZero(value.getOrElse(() => 0));
 }
+
+class FavouriteResponse extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory FavouriteResponse(int input) => FavouriteResponse._(Right(input));
+
+  const FavouriteResponse._(this.value);
+
+  bool get isSuccessful => checkIfSuccessful(value.getOrElse(() => 0));
+}

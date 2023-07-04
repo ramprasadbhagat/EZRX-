@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recent_order_favourite_dto.dart';
+part of 'favourite_status_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RecentOrderFavouriteDto _$$_RecentOrderFavouriteDtoFromJson(
+_$_FavouriteStatusDto _$$_FavouriteStatusDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_RecentOrderFavouriteDto(
+    _$_FavouriteStatusDto(
       isFavourite: json['isFavourite'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_RecentOrderFavouriteDtoToJson(
-        _$_RecentOrderFavouriteDto instance) =>
+Map<String, dynamic> _$$_FavouriteStatusDtoToJson(
+        _$_FavouriteStatusDto instance) =>
     <String, dynamic>{
       'isFavourite': instance.isFavourite,
     };

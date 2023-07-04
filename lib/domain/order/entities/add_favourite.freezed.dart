@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'material_add_favourite.dart';
+part of 'add_favourite.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MaterialAddFavourite {
-  int get addFavouriteMaterial => throw _privateConstructorUsedError;
+mixin _$AddFavourite {
+  FavouriteResponse get addFavouriteMaterial =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $MaterialAddFavouriteCopyWith<MaterialAddFavourite> get copyWith =>
+  $AddFavouriteCopyWith<AddFavourite> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MaterialAddFavouriteCopyWith<$Res> {
-  factory $MaterialAddFavouriteCopyWith(MaterialAddFavourite value,
-          $Res Function(MaterialAddFavourite) then) =
-      _$MaterialAddFavouriteCopyWithImpl<$Res, MaterialAddFavourite>;
+abstract class $AddFavouriteCopyWith<$Res> {
+  factory $AddFavouriteCopyWith(
+          AddFavourite value, $Res Function(AddFavourite) then) =
+      _$AddFavouriteCopyWithImpl<$Res, AddFavourite>;
   @useResult
-  $Res call({int addFavouriteMaterial});
+  $Res call({FavouriteResponse addFavouriteMaterial});
 }
 
 /// @nodoc
-class _$MaterialAddFavouriteCopyWithImpl<$Res,
-        $Val extends MaterialAddFavourite>
-    implements $MaterialAddFavouriteCopyWith<$Res> {
-  _$MaterialAddFavouriteCopyWithImpl(this._value, this._then);
+class _$AddFavouriteCopyWithImpl<$Res, $Val extends AddFavourite>
+    implements $AddFavouriteCopyWith<$Res> {
+  _$AddFavouriteCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -52,28 +52,28 @@ class _$MaterialAddFavouriteCopyWithImpl<$Res,
       addFavouriteMaterial: null == addFavouriteMaterial
           ? _value.addFavouriteMaterial
           : addFavouriteMaterial // ignore: cast_nullable_to_non_nullable
-              as int,
+              as FavouriteResponse,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_MaterialAddFavouriteCopyWith<$Res>
-    implements $MaterialAddFavouriteCopyWith<$Res> {
-  factory _$$_MaterialAddFavouriteCopyWith(_$_MaterialAddFavourite value,
-          $Res Function(_$_MaterialAddFavourite) then) =
-      __$$_MaterialAddFavouriteCopyWithImpl<$Res>;
+abstract class _$$_AddFavouriteCopyWith<$Res>
+    implements $AddFavouriteCopyWith<$Res> {
+  factory _$$_AddFavouriteCopyWith(
+          _$_AddFavourite value, $Res Function(_$_AddFavourite) then) =
+      __$$_AddFavouriteCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int addFavouriteMaterial});
+  $Res call({FavouriteResponse addFavouriteMaterial});
 }
 
 /// @nodoc
-class __$$_MaterialAddFavouriteCopyWithImpl<$Res>
-    extends _$MaterialAddFavouriteCopyWithImpl<$Res, _$_MaterialAddFavourite>
-    implements _$$_MaterialAddFavouriteCopyWith<$Res> {
-  __$$_MaterialAddFavouriteCopyWithImpl(_$_MaterialAddFavourite _value,
-      $Res Function(_$_MaterialAddFavourite) _then)
+class __$$_AddFavouriteCopyWithImpl<$Res>
+    extends _$AddFavouriteCopyWithImpl<$Res, _$_AddFavourite>
+    implements _$$_AddFavouriteCopyWith<$Res> {
+  __$$_AddFavouriteCopyWithImpl(
+      _$_AddFavourite _value, $Res Function(_$_AddFavourite) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,34 +81,33 @@ class __$$_MaterialAddFavouriteCopyWithImpl<$Res>
   $Res call({
     Object? addFavouriteMaterial = null,
   }) {
-    return _then(_$_MaterialAddFavourite(
+    return _then(_$_AddFavourite(
       addFavouriteMaterial: null == addFavouriteMaterial
           ? _value.addFavouriteMaterial
           : addFavouriteMaterial // ignore: cast_nullable_to_non_nullable
-              as int,
+              as FavouriteResponse,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_MaterialAddFavourite extends _MaterialAddFavourite {
-  const _$_MaterialAddFavourite({required this.addFavouriteMaterial})
-      : super._();
+class _$_AddFavourite extends _AddFavourite {
+  const _$_AddFavourite({required this.addFavouriteMaterial}) : super._();
 
   @override
-  final int addFavouriteMaterial;
+  final FavouriteResponse addFavouriteMaterial;
 
   @override
   String toString() {
-    return 'MaterialAddFavourite(addFavouriteMaterial: $addFavouriteMaterial)';
+    return 'AddFavourite(addFavouriteMaterial: $addFavouriteMaterial)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialAddFavourite &&
+            other is _$_AddFavourite &&
             (identical(other.addFavouriteMaterial, addFavouriteMaterial) ||
                 other.addFavouriteMaterial == addFavouriteMaterial));
   }
@@ -119,20 +118,20 @@ class _$_MaterialAddFavourite extends _MaterialAddFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialAddFavouriteCopyWith<_$_MaterialAddFavourite> get copyWith =>
-      __$$_MaterialAddFavouriteCopyWithImpl<_$_MaterialAddFavourite>(
-          this, _$identity);
+  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+      __$$_AddFavouriteCopyWithImpl<_$_AddFavourite>(this, _$identity);
 }
 
-abstract class _MaterialAddFavourite extends MaterialAddFavourite {
-  const factory _MaterialAddFavourite(
-      {required final int addFavouriteMaterial}) = _$_MaterialAddFavourite;
-  const _MaterialAddFavourite._() : super._();
+abstract class _AddFavourite extends AddFavourite {
+  const factory _AddFavourite(
+          {required final FavouriteResponse addFavouriteMaterial}) =
+      _$_AddFavourite;
+  const _AddFavourite._() : super._();
 
   @override
-  int get addFavouriteMaterial;
+  FavouriteResponse get addFavouriteMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialAddFavouriteCopyWith<_$_MaterialAddFavourite> get copyWith =>
+  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
       throw _privateConstructorUsedError;
 }
