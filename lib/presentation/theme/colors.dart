@@ -78,6 +78,7 @@ abstract class ZPColors {
   static const Color lightBlueBorderColor = Color.fromRGBO(143, 181, 233, 1);
   static const Color darkTeal = Color.fromRGBO(0, 85, 91, 1);
   static const Color whiteBgCard = Color.fromRGBO(255, 255, 255, 1);
+  static const Color orangeChipColor = Color.fromRGBO(244, 214, 170, 1);
 
  
   static const MaterialColor kPrimaryColor = MaterialColor(

@@ -186,11 +186,7 @@ class _ShipToAddressSection extends StatelessWidget {
               ),
             ],
           ),
-          title: _TitleSection(
-            prefixText: shipToInfo.shipToCustomerCode,
-            suffixText: shipToInfo.shipToName.name1,
-            titleColor: ZPColors.neutralsBlack,
-          ),
+          title: _ShipToAddressTitle(shipToInfo: shipToInfo),
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
@@ -259,6 +255,61 @@ class _ShipToAddressSection extends StatelessWidget {
       customerCodeInfo.shipToInfos.length - 1;
 }
 
+class _ShipToAddressTitle extends StatelessWidget {
+  const _ShipToAddressTitle({
+    Key? key,
+    required this.shipToInfo,
+  }) : super(key: key);
+
+  final ShipToInfo shipToInfo;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: _TitleSection(
+            prefixText: shipToInfo.shipToCustomerCode,
+            suffixText: shipToInfo.shipToName.name1,
+            titleColor: ZPColors.neutralsBlack,
+          ),
+        ),
+        if (shipToInfo.defaultShipToAddress) const _ShowDefaultTag(),
+      ],
+    );
+  }
+}
+
+class _ShowDefaultTag extends StatelessWidget {
+  const _ShowDefaultTag({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 5.0),
+      child: Chip(
+        label: Text(
+          'Default'.tr(),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontSize: 10,
+                color: ZPColors.neutralsDarkBlack,
+              ),
+        ),
+        labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: -3),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        backgroundColor: ZPColors.orangeChipColor,
+        visualDensity: const VisualDensity(
+          horizontal: -4,
+          vertical: -4,
+        ),
+      ),
+    );
+  }
+}
+
 class _TitleSection extends StatelessWidget {
   final String prefixText;
   final String suffixText;
@@ -273,6 +324,7 @@ class _TitleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
+      overflow: TextOverflow.ellipsis,
       text: TextSpan(
         text: '$prefixText | ',
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
