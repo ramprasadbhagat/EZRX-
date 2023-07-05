@@ -29,6 +29,7 @@ mixin _$ReturnItem {
   String get customerName => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   DateTimeStringValue get expiry => throw _privateConstructorUsedError;
+  ProductImages get productImages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -54,7 +55,10 @@ abstract class $ReturnItemCopyWith<$Res> {
       String invoiceID,
       String customerName,
       String batch,
-      DateTimeStringValue expiry});
+      DateTimeStringValue expiry,
+      ProductImages productImages});
+
+  $ProductImagesCopyWith<$Res> get productImages;
 }
 
 /// @nodoc
@@ -83,6 +87,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? customerName = null,
     Object? batch = null,
     Object? expiry = null,
+    Object? productImages = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -137,7 +142,19 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      productImages: null == productImages
+          ? _value.productImages
+          : productImages // ignore: cast_nullable_to_non_nullable
+              as ProductImages,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductImagesCopyWith<$Res> get productImages {
+    return $ProductImagesCopyWith<$Res>(_value.productImages, (value) {
+      return _then(_value.copyWith(productImages: value) as $Val);
+    });
   }
 }
 
@@ -162,7 +179,11 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       String invoiceID,
       String customerName,
       String batch,
-      DateTimeStringValue expiry});
+      DateTimeStringValue expiry,
+      ProductImages productImages});
+
+  @override
+  $ProductImagesCopyWith<$Res> get productImages;
 }
 
 /// @nodoc
@@ -189,6 +210,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
     Object? customerName = null,
     Object? batch = null,
     Object? expiry = null,
+    Object? productImages = null,
   }) {
     return _then(_$_ReturnItem(
       requestId: null == requestId
@@ -243,6 +265,10 @@ class __$$_ReturnItemCopyWithImpl<$Res>
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      productImages: null == productImages
+          ? _value.productImages
+          : productImages // ignore: cast_nullable_to_non_nullable
+              as ProductImages,
     ));
   }
 }
@@ -263,7 +289,8 @@ class _$_ReturnItem extends _ReturnItem {
       required this.invoiceID,
       required this.customerName,
       required this.batch,
-      required this.expiry})
+      required this.expiry,
+      required this.productImages})
       : super._();
 
   @override
@@ -292,10 +319,12 @@ class _$_ReturnItem extends _ReturnItem {
   final String batch;
   @override
   final DateTimeStringValue expiry;
+  @override
+  final ProductImages productImages;
 
   @override
   String toString() {
-    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, expiry: $expiry)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, expiry: $expiry, productImages: $productImages)';
   }
 
   @override
@@ -326,7 +355,9 @@ class _$_ReturnItem extends _ReturnItem {
             (identical(other.customerName, customerName) ||
                 other.customerName == customerName) &&
             (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.expiry, expiry) || other.expiry == expiry));
+            (identical(other.expiry, expiry) || other.expiry == expiry) &&
+            (identical(other.productImages, productImages) ||
+                other.productImages == productImages));
   }
 
   @override
@@ -344,7 +375,8 @@ class _$_ReturnItem extends _ReturnItem {
       invoiceID,
       customerName,
       batch,
-      expiry);
+      expiry,
+      productImages);
 
   @JsonKey(ignore: true)
   @override
@@ -367,7 +399,8 @@ abstract class _ReturnItem extends ReturnItem {
       required final String invoiceID,
       required final String customerName,
       required final String batch,
-      required final DateTimeStringValue expiry}) = _$_ReturnItem;
+      required final DateTimeStringValue expiry,
+      required final ProductImages productImages}) = _$_ReturnItem;
   const _ReturnItem._() : super._();
 
   @override
@@ -396,6 +429,8 @@ abstract class _ReturnItem extends ReturnItem {
   String get batch;
   @override
   DateTimeStringValue get expiry;
+  @override
+  ProductImages get productImages;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemCopyWith<_$_ReturnItem> get copyWith =>

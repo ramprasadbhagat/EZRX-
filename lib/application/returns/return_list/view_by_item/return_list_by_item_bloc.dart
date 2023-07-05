@@ -4,7 +4,9 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,9 +20,12 @@ const int _pageSize = 24;
 class ReturnListByItemBloc
     extends Bloc<ReturnListByItemEvent, ReturnListByItemState> {
   final IReturnListRepository returnListRepository;
+  final IProductImagesRepository productImagesRepository;
 
-  ReturnListByItemBloc({required this.returnListRepository})
-      : super(ReturnListByItemState.initial()) {
+  ReturnListByItemBloc({
+    required this.returnListRepository,
+    required this.productImagesRepository,
+  }) : super(ReturnListByItemState.initial()) {
     on<ReturnListByItemEvent>(_onEvent);
   }
 
@@ -36,6 +41,7 @@ class ReturnListByItemBloc
             failureOrSuccessOption: none(),
             returnItemList: <ReturnItem>[],
             isFetching: true,
+            appliedFilter: e.appliedFilter,
           ),
         );
 
@@ -47,6 +53,7 @@ class ReturnListByItemBloc
           user: e.user,
           pageSize: _pageSize,
           offset: 0,
+          appliedFilter: e.appliedFilter,
         );
 
         failureOrSuccess.fold(
@@ -67,6 +74,7 @@ class ReturnListByItemBloc
                 isFetching: false,
               ),
             );
+            add(const ReturnListByItemEvent.fetchProductImage());
           },
         );
       },
@@ -89,6 +97,7 @@ class ReturnListByItemBloc
           user: e.user,
           pageSize: _pageSize,
           offset: state.returnItemList.length,
+          appliedFilter: state.appliedFilter,
         );
 
         failureOrSuccess.fold(
@@ -109,6 +118,29 @@ class ReturnListByItemBloc
                 failureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: moreItem.length >= _pageSize,
+              ),
+            );
+            add(const ReturnListByItemEvent.fetchProductImage());
+          },
+        );
+      },
+      fetchProductImage: (_) async {
+        final failureOrSuccess = await productImagesRepository.getProductImages(
+          list: state.returnItemList,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) async => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (updatedListWithImages) async {
+            emit(
+              state.copyWith(
+                returnItemList:
+                    updatedListWithImages.map((e) => e as ReturnItem).toList(),
+                failureOrSuccessOption: none(),
               ),
             );
           },

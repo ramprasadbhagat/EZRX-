@@ -1,9 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -57,13 +54,7 @@ class _BodyContent extends StatelessWidget {
           ),
           ElevatedButton(
             key: const Key('gotToReturnsSummary'),
-            onPressed: () {
-              context.router.pushAndPopUntil(
-                ReturnSummaryRoute(),
-                predicate: (route) =>
-                    route.settings.name == 'HomeNavigationTabbarRoute',
-              );
-            },
+            onPressed: () {},
             child: const Text(
               'Go To Returns Summary',
             ),

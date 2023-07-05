@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
 
 abstract class IReturnListRepository {
   Future<Either<ApiFailure, List<ReturnItem>>> fetchReturnListByItem({
@@ -14,6 +15,7 @@ abstract class IReturnListRepository {
     required User user,
     required int pageSize,
     required int offset,
+    required ViewByItemReturnFilter appliedFilter,
   });
 
   Future<Either<ApiFailure, List<ReturnItem>>> fetchReturnListByRequest({

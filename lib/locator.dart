@@ -48,8 +48,8 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
@@ -292,9 +292,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/return_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_list_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_request_by_user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/returns_overview_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/returns_overview_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/returns_overview_remote.dart';
@@ -310,7 +307,6 @@ import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repo
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/returns_overview_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
@@ -1651,6 +1647,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnListByItemBloc(
       returnListRepository: locator<ReturnListRepository>(),
+      productImagesRepository: locator<ProductImagesRepository>(),
     ),
   );
 
@@ -1658,6 +1655,10 @@ void setupLocator() {
     () => ReturnListByRequestBloc(
       returnListRepository: locator<ReturnListRepository>(),
     ),
+  );
+
+  locator.registerLazySingleton(
+    () => ViewByItemReturnFilterBloc(),
   );
 
   //============================================================
@@ -1868,38 +1869,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => ReturnApproverFilterBloc(),
-  );
-
-  //============================================================
-  //  Return Summary
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => ReturnSummaryBloc(
-      returnSummaryRepository: locator<ReturnSummaryRepository>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => ReturnSummaryLocalDataSource(),
-  );
-  locator.registerLazySingleton(
-    () => ReturnSummaryQueryMutation(),
-  );
-  locator.registerLazySingleton(
-    () => ReturnSummaryRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      returnSummaryQueryMutation: locator<ReturnSummaryQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-  locator.registerLazySingleton(
-    () => ReturnSummaryRepository(
-      config: locator<Config>(),
-      returnSummaryLocalDataSource: locator<ReturnSummaryLocalDataSource>(),
-      returnSummaryRemoteDataSource: locator<ReturnSummaryRemoteDataSource>(),
-    ),
   );
   //============================================================
   //  Return Summary Filter

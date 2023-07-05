@@ -132,6 +132,18 @@ String displayDateTimeStringOrEmpty(String text, String format) {
   return DateFormat(format).format(parsedDate);
 }
 
+String displayDateTimeStringOrReturnEmpty(String text, String format) {
+  if (getDateTimeIntValue(text) <= 0 && !text.contains('-')) {
+    return '';
+  }
+  final parsedDate = tryParseDateTime(text);
+  if (parsedDate == null) {
+    return '';
+  }
+
+  return DateFormat(format).format(parsedDate);
+}
+
 String showDateOrNAIfEmpty(String text, String format) {
   if (getDateTimeIntValue(text) <= 0) {
     return 'NA';
@@ -346,7 +358,7 @@ String getReturnSummaryStatus(String status) {
       return 'Pending Approval';
     case 'APPROVED':
     case 'FAILED':
-      return 'Approved for Return';
+      return 'Approved';
     case 'REJECTED':
       return 'Rejected';
     default:

@@ -8,6 +8,7 @@ class ReturnListByItemState with _$ReturnListByItemState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isFetching,
     required bool canLoadMore,
+    required ViewByItemReturnFilter appliedFilter,
   }) = _ReturnListByItemState;
 
   factory ReturnListByItemState.initial() => ReturnListByItemState(
@@ -15,5 +16,6 @@ class ReturnListByItemState with _$ReturnListByItemState {
         isFetching: false,
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
+        appliedFilter: ViewByItemReturnFilter.empty(),
       );
 }

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
@@ -65,6 +66,7 @@ class ReturnItemDto with _$ReturnItemDto {
       customerName: customerName,
       batch: batch,
       expiry: DateTimeStringValue(expiry),
+      productImages: ProductImages.empty(),
     );
   }
 

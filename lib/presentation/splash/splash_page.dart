@@ -26,7 +26,6 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
@@ -34,8 +33,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -461,8 +460,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             }
             if (state.haveSelectedSalesOrganisation &&
                 state.configs != SalesOrganisationConfigs.empty()) {
-              context.read<AnnouncementInfoBloc>().add(AnnouncementInfoEvent.getAnnouncement(
-                salesOrg: state.salesOrg, pageSize: 24,),);
+              context.read<AnnouncementInfoBloc>().add(
+                    AnnouncementInfoEvent.getAnnouncement(
+                      salesOrg: state.salesOrg,
+                      pageSize: 24,
+                    ),
+                  );
               _callBannerAndDocType(context, state, true);
 
               context.read<CustomerCodeBloc>().add(
@@ -630,15 +633,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               selectedOrderType: orderDocumentTypeState.selectedOrderType,
             ),
           );
-      context.read<ReturnSummaryBloc>().add(
-            ReturnSummaryEvent.fetch(
-              user: context.read<UserBloc>().state.user,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              returnSummaryFilter: ReturnSummaryFilter.empty(),
-            ),
-          );
 
       if (user.userCanAccessOrderHistory) {
         context.read<ViewByItemsBloc>().add(
@@ -736,6 +730,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               customerCodeInfo: customerCodeInfo,
               user: user,
+              appliedFilter: ViewByItemReturnFilter.empty(),
             ),
           );
       context.read<ReturnListByRequestBloc>().add(

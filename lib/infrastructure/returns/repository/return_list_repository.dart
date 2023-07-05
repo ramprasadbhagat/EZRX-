@@ -7,9 +7,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/view_by_item_return_filter_dto.dart';
 
 class ReturnListRepository extends IReturnListRepository {
   final Config config;
@@ -30,6 +32,7 @@ class ReturnListRepository extends IReturnListRepository {
     required User user,
     required int pageSize,
     required int offset,
+    required ViewByItemReturnFilter appliedFilter,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -48,6 +51,8 @@ class ReturnListRepository extends IReturnListRepository {
         userName: user.username.getOrCrash(),
         first: pageSize,
         after: offset,
+        filterQuery:
+            ViewByItemReturnFilterDto.fromDomain(appliedFilter).toMapList,
       );
 
       return Right(returnList);

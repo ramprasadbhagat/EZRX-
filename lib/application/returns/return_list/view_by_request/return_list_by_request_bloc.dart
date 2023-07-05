@@ -105,7 +105,7 @@ class ReturnListByRequestBloc
                 returnItemList: newItemList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: newItemList.length >= _pageSize,
+                canLoadMore: moreItem.length >= _pageSize,
               ),
             );
           },

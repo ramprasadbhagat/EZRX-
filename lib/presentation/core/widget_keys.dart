@@ -308,4 +308,12 @@ class WidgetKeys {
       Key('materialDetailsQuantityInput');
   static const Key materialDetailsAddToCartButton =
       Key('materialDetailsAddToCartButton');
+  //============================================================
+  //  Return
+  //============================================================
+
+  static const Key fromReturnDateField = Key('fromReturnDateField');
+  static const Key toReturnDateField = Key('toReturnDateField');
+  static const Key fromReturnAmountField = Key('fromReturnAmountField');
+  static const Key toReturnAmountField = Key('toReturnAmountField');
 }

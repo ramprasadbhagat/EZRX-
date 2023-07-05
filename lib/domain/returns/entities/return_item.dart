@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,6 +23,7 @@ class ReturnItem with _$ReturnItem {
     required String customerName,
     required String batch,
     required DateTimeStringValue expiry,
+    required ProductImages productImages,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
@@ -38,5 +40,6 @@ class ReturnItem with _$ReturnItem {
         customerName: '',
         batch: '',
         expiry: DateTimeStringValue(''),
+        productImages: ProductImages.empty(),
       );
 }
