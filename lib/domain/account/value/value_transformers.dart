@@ -386,3 +386,20 @@ String removeDash(String value) {
 
 bool paymentAdviceEdit(String value) =>
     value.toLowerCase() == 'Data Updated Successfully'.toLowerCase();
+
+String countryAnnouncementPath(String country) {
+  final salesOrgCountryMap = {
+    'MY': '947B6425-5858-4A84-9AFB-7AB3AF92530B',
+    'PH': '54E151C1-17CB-4A37-BD75-CE4631B9F173',
+    'SG': 'AE918C9A-67E9-407A-9772-83FE9211FB23',
+    'ID': 'F57EC59A-1251-42A0-A53C-21A8BE537AD3',
+    'KH': '4A5800F3-67BF-4CF0-8D63-40545183F1CF',
+    'KR': 'B5AE9F0E-B3AF-4324-BDA1-2B2179650858',
+    'MM': '28B03026-5384-4F96-B46E-5C0C7A5FE170',
+    'TH': '2887B446-E53E-4CEF-8A52-C637578D626A',
+    'TW': '78949980-128F-4B06-BD9F-9E6B2DB4A3A8',
+    'VN': 'AC387D5A-A251-4994-9118-5F82818EA2AC',
+  };
+  
+  return salesOrgCountryMap[country] ?? '';
+}

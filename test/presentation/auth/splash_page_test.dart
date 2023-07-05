@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
@@ -65,6 +66,10 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
+
+class AnnouncementInfoBlocMock
+    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
+    implements AnnouncementInfoBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -193,6 +198,7 @@ void main() {
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late AnnouncementInfoBloc announcementInfoBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
   late DeepLinkingBloc deepLinkingBlocMock;
   late ViewByItemsBloc mockViewByItemsBloc;
@@ -264,6 +270,7 @@ void main() {
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      announcementInfoBlocMock = AnnouncementInfoBlocMock();
       deepLinkingBlocMock = DeepLinkingMockBloc();
       mockViewByItemsBloc = ViewByItemsBlocMock();
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
@@ -387,6 +394,8 @@ void main() {
             BlocProvider<ChatBotBloc>(
               create: (context) => chatBotBloc,
             ),
+            BlocProvider<AnnouncementInfoBloc>(
+                create: (context) => announcementInfoBlocMock),
           ],
           child: const SplashPage(),
         ),

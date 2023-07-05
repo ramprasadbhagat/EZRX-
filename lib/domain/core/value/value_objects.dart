@@ -135,6 +135,11 @@ class DateTimeStringValue extends ValueObject<String> {
 
   int get dateTimeIntValue => getDateTimeIntValue(value.getOrElse(() => ''));
 
+  String get getAnnouncementDateFormat => displayAnnouncementDateOrEmpty(
+      value.getOrElse(() => ''),
+      DateTimeFormatString.displayDateFormat,
+    );
+
   const DateTimeStringValue._(this.value);
 }
 

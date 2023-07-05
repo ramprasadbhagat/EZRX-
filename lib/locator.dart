@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
@@ -76,6 +77,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_rem
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/forget_password_repository.dart';
@@ -379,6 +381,9 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_remote.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_query_mutation.dart';
 
@@ -2758,6 +2763,37 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       viewByItemDetailsQueryMutation: locator<ViewByItemQueryMutation>(),
+    ),
+  );
+
+  //============================================================
+  //  Announcement
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => AnnouncementInfoLocalDataSource());
+
+  locator.registerLazySingleton(() => AnnouncementInfoQueryMutation());
+
+  locator.registerLazySingleton(
+    () => AnnouncementInfoRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<AnnouncementInfoQueryMutation>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AnnouncementInfoRepository(
+      config: locator<Config>(),
+      localDataSource: locator<AnnouncementInfoLocalDataSource>(),
+      remoteDataSource: locator<AnnouncementInfoRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AnnouncementInfoBloc(
+      announcementInfoRepository: locator<AnnouncementInfoRepository>(),
     ),
   );
 }

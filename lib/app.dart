@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/payment_configuration/bank_benefi
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -481,6 +482,9 @@ class App extends StatelessWidget {
         ),
          BlocProvider<ViewByItemDetailsBloc>(
           create: (context) => locator<ViewByItemDetailsBloc>(),
+        ),
+        BlocProvider<AnnouncementInfoBloc>(
+          create: (context) => locator<AnnouncementInfoBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -44,6 +44,8 @@ class AuthInterceptor extends Interceptor {
         }
         if (options.baseUrl == config.getEZReachUrl) {
           options.headers['Authorization'] = config.eZReachToken;
+        } else if (options.path == config.announcementApiUrlPath) {
+          options.headers['X-GQL-Token'] = config.getAnnouncementApiKey;
         } else {
           options.headers['Authorization'] = 'Bearer V2 ${token.access}';
         }

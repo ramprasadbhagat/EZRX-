@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
@@ -83,6 +84,7 @@ class HomeTab extends StatelessWidget {
             const RecentOrdersSection(),
             const BrowseProduct(),
             const KRBanners(),
+            const AnnouncementSection(),
           ],
         ),
       ),

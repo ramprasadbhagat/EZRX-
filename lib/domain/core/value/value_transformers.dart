@@ -386,3 +386,12 @@ String getStatusMessage(
 Color getDisplayStatusTextColor(String status) {
   return status != 'Successful' ? ZPColors.red : ZPColors.black;
 }
+
+String displayAnnouncementDateOrEmpty(String text, String format) {
+  final parsedDate = tryParseDateTime(text);
+  if (parsedDate == null) {
+    return '-';
+  }
+
+  return DateFormat(format).format(parsedDate);
+}

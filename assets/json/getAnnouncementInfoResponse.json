@@ -1,0 +1,369 @@
+{
+    "data": {
+        "search": {
+            "total": 41,
+            "results": [
+                {
+                    "id": "086F872D092E4A70848414C1AEE60F37",
+                    "title": {
+                        "value": "Announcement 1"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T081203"
+                    }
+                },
+                {
+                    "id": "D6AFD64D9E2B414C9770ECE65AACA5C3",
+                    "title": {
+                        "value": "new announcement 02"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T081203"
+                    }
+                },
+                {
+                    "id": "2891AFDCC13A4109B9849CBC2BDC0AA5",
+                    "title": {
+                        "value": "New Announcement"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T081202"
+                    }
+                },
+                {
+                    "id": "5A48CAF283DE41A28053035DE30F03E4",
+                    "title": {
+                        "value": "Announcement"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T081202"
+                    }
+                },
+                {
+                    "id": "A37FE2476C24460E93BB45FA5D4D4410",
+                    "title": {
+                        "value": "Test announcement 01"
+                    },
+                    "summary": {
+                        "value": "1234"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/pexels-artem-podrez-4492093.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T081202"
+                    }
+                },
+                {
+                    "id": "B8AC30A119E540C994EE27CD23EDFDA4",
+                    "title": {
+                        "value": "new"
+                    },
+                    "summary": {
+                        "value": "1234"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T081202"
+                    }
+                },
+                {
+                    "id": "C1B4AAFF48C94AA19253D5B9E96EB368",
+                    "title": {
+                        "value": "Announcement SG 26 Jun"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/pexels-artem-podrez-4492093.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230626T080924"
+                    }
+                },
+                {
+                    "id": "7321BF853B3B428B8585495A82157432",
+                    "title": {
+                        "value": "Announcement24-06"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/1.jfif"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230624T082818"
+                    }
+                },
+                {
+                    "id": "DB7822F576284D86B76DB9A0AE19B01D",
+                    "title": {
+                        "value": "test 22-06 my"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Carousels/Desktop-455x455---Copy-(10).jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230622T095437"
+                    }
+                },
+                {
+                    "id": "1169A0A8C66C42E082F5670917E9295F",
+                    "title": {
+                        "value": "Announcement22-06"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/pexels-artem-podrez-4492093.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230622T091304"
+                    }
+                },
+                {
+                    "id": "24C66CFB5A4C4D61A47558E6213CD740",
+                    "title": {
+                        "value": "Test Announcement 19 Jun - TEXT"
+                    },
+                    "summary": {
+                        "value": "Awareness & Communication\r\nZuellig Pharma provides healthcare communication and education services to promote disease prevention and management for the healthcare community. "
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230619T070436"
+                    }
+                },
+                {
+                    "id": "ECA3519AFC3D4764839C2FF31F92B314",
+                    "title": {
+                        "value": "Announcement 10 may"
+                    },
+                    "summary": {
+                        "value": "test"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Carousels/Desktop-455x455---Copy-(10).jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230617T111001"
+                    }
+                },
+                {
+                    "id": "124A7BE0FAEA47FA9CB28CD03D49F782",
+                    "title": {
+                        "value": "eZRx Announcement test17"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Feature/JSS-Experience-Accelerator/Basic-Site/banner-image.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050600"
+                    }
+                },
+                {
+                    "id": "1EB4730ED01B4F97BCB90262CDC5A45F",
+                    "title": {
+                        "value": "Announcement"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "2308FD3A86634FC299A06AD1CBD70787",
+                    "title": {
+                        "value": "Announcement18-05a"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "29B1F870E57C499CBF8EEC70AE502136",
+                    "title": {
+                        "value": "[L'Oreal] Sep 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": {
+                        "value": "We will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th.\r\nPlease refrain from using the site as much as possible, as access may not be smooth during the site."
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "670FA57F737E4511882F096A9CB53C51",
+                    "title": {
+                        "value": "Announcement 15 MAY"
+                    },
+                    "summary": {
+                        "value": "test content mdas\r\nWe will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th. Please refrain from using the site as much as possible, as access may not be smooth during the site."
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "9B0FE4893A6E4BCCAABE4A1F2410E613",
+                    "title": {
+                        "value": "Announcement18-05"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "DB8D6384FD834DF3B972F1260A3E07A7",
+                    "title": {
+                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": {
+                        "value": "We will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th.\r\nPlease refrain from using the site as much as possible, as access may not be smooth during the site."
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "E2F8980FE53E43C3A17EE4A8164A3FD8",
+                    "title": {
+                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": {
+                        "value": "Hello, customer.\r\nWe will deliver an official notice from the pharmaceutical company regarding the"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "FAA0A308C32D49C9AC27ADB7743CC973",
+                    "title": {
+                        "value": "Announcement"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/mask1---Copy-(2).png"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "FD29494D0C5F440FB2D392F0E62E5045",
+                    "title": {
+                        "value": "Announcement 18 may !"
+                    },
+                    "summary": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050559"
+                    }
+                },
+                {
+                    "id": "26336023408A420E87C63C3AF5272D36",
+                    "title": {
+                        "value": "Novo Nordisk] Fiasp Flex Touch 100ML Product Resumption Schedule Notice 2"
+                    },
+                    "summary": {
+                        "value": "[ Novo Nordisk ]  We will inform you when the supply of Fiasp Flex Touch  100ML  will be resumed  .     \r\nPlease check the attached file for details .     "
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050558"
+                    }
+                },
+                {
+                    "id": "3FF1EE0E57844FB7A0CA167B3526C19E",
+                    "title": {
+                        "value": "[L'Oreal] Aug 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": {
+                        "value": "We will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th.\r\nPlease refrain from using the site as much as possible, as access may not be smooth during the site."
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230612T050558"
+                    }
+                }
+            ]
+        }
+    }
+}

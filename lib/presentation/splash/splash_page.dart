@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -460,6 +461,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             }
             if (state.haveSelectedSalesOrganisation &&
                 state.configs != SalesOrganisationConfigs.empty()) {
+              context.read<AnnouncementInfoBloc>().add(AnnouncementInfoEvent.getAnnouncement(
+                salesOrg: state.salesOrg, pageSize: 24,),);
               _callBannerAndDocType(context, state, true);
 
               context.read<CustomerCodeBloc>().add(

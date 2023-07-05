@@ -292,4 +292,27 @@ class Config {
   }
 
   String get getBotCustomURL => 'https://r3.cloud.yellow.ai';
+
+  //============================================================
+  //  Announcement Info
+  //
+  //============================================================
+
+  String get getAnnouncementApiKey {
+    switch (appFlavor) {
+      case Flavor.dev:
+        return 'TDFxR1Z0VlhIcjE5LzRHNHJ0MG9jNWMyUmhvUmdDdldjMS9LbzZoNnJYQT18enVlbGxpZ3BoYXI5YjM0LXpwY21zLXRlc3QtZmNmOQ==';
+      case Flavor.uat:
+        return 'YjdLWWNucEk1akpGNDBWdFU3VUFuaUx3Sk9MVExVMlRsUXo1Y1Y2bXpwQT18enVlbGxpZ3BoYXI0MDBmLXpwY21zLXVhdC1jZTBm';
+      case Flavor.prod:
+        return 'OGtnRUErUi9uZGl0cE9LV213L0tHZXh3Vjl5cjcwa1VNTGpWNk9acGprbz18enVlbGxpZ3BoYXIzYzkwLXpwY21zLXByb2QtNDUzMg==';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String get announcementApiUrlPath => '/api/announcement';
+
+  String get announcementTemplate => 'EA1748E3-EF3B-4D38-B2C9-937B90864DED';
 }
