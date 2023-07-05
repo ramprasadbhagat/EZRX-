@@ -114,12 +114,12 @@ List<RouteItem> _getTabs(BuildContext context) {
         ? [
             homeTabRouteItem,
             ordersTabRouteItem,
-            paymentsTabRouteItem,
+            notificationTabRouteItem,
             moreTabRouteItem,
           ]
         : [
             homeTabRouteItem,
-            paymentsTabRouteItem,
+            notificationTabRouteItem,
             moreTabRouteItem,
           ];
   }
@@ -128,7 +128,7 @@ List<RouteItem> _getTabs(BuildContext context) {
     homeTabRouteItem,
     productTabRouteItem,
     ordersTabRouteItem,
-    paymentsTabRouteItem,
+    notificationTabRouteItem,
     moreTabRouteItem,
   ];
 }
@@ -160,13 +160,13 @@ RouteItem ordersTabRouteItem = RouteItem(
   label: 'Orders',
 );
 
-const RouteItem paymentsTabRouteItem = RouteItem(
-  route: PaymentsTabRoute(),
+const RouteItem notificationTabRouteItem = RouteItem(
+  route: NotificationTabRoute(),
   icon: Icon(
-    Icons.payments_outlined,
-    key: WidgetKeys.paymentsTab,
+    Icons.notifications_none_outlined,
+    key: WidgetKeys.notificationTab,
   ),
-  label: 'Payments',
+  label: 'Notifications',
 );
 
 RouteItem moreTabRouteItem = const RouteItem(

@@ -36,7 +36,7 @@ class WidgetKeys {
   static const Key homeTab = Key('homeTab');
   static const Key productsTab = Key('productsTab');
   static const Key ordersTab = Key('ordersTab');
-  static const Key paymentsTab = Key('paymentsTab');
+  static const Key notificationTab = Key('notificationTab');
   static const Key moreTab = Key('moreTab');
   static const Key aupTcScreen = Key('aupTcScreen');
   static const Key customerCodeSelector = Key('customerCodeSelector');

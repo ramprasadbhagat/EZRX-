@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_me
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
+import 'package:ezrxmobile/presentation/notification/notificatoin_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
@@ -156,6 +157,25 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       reverseDurationInMilliseconds: 0,
     ),
     AutoRoute(
+      page: PaymentsTab,
+      path: 'payments/tab',
+      children: [
+        AutoRoute(
+          page: AccountSummaryPage,
+          path: 'payments/account_summary',
+          initial: true,
+        ),
+        AutoRoute(
+          page: PaymentsSummaryPage,
+          path: 'payments/payments_summary',
+        ),
+        AutoRoute(
+          page: StatementSummaryPage,
+          path: 'payments/statement_summary',
+        ),
+      ],
+    ),
+    AutoRoute(
       path: 'main',
       page: HomeNavigationTabbar,
       children: [
@@ -181,28 +201,14 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
             ),
           ],
         ),
-        AutoRoute(
-          page: PaymentsTab,
-          path: 'payments/tab',
-          children: [
-            AutoRoute(
-              page: AccountSummaryPage,
-              path: 'payments/account_summary',
-              initial: true,
-            ),
-            AutoRoute(
-              page: PaymentsSummaryPage,
-              path: 'payments/payments_summary',
-            ),
-            AutoRoute(
-              page: StatementSummaryPage,
-              path: 'payments/statement_summary',
-            ),
-          ],
-        ),
+        
         AutoRoute(
           page: MoreTab,
           path: 'more',
+        ),
+        AutoRoute(
+          page: NotificationTab,
+          path: 'notification_tab',
         ),
       ],
     ),

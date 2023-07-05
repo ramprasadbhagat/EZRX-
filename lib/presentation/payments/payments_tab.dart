@@ -14,7 +14,6 @@ class PaymentsTab extends StatelessWidget {
       key: WidgetKeys.paymentsTabPage,
       appBar: AppBar(
         title: const Text('Payments').tr(),
-        automaticallyImplyLeading: false,
         centerTitle: false,
       ),
       body: Column(
