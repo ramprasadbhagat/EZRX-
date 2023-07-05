@@ -10,7 +10,8 @@ import 'package:ezrxmobile/domain/payments/repository/i_credit_and_invoice_detai
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
 
-class CreditAndInvoiceDetailsRepository extends ICreditAndInvoiceDetailsRepository {
+class CreditAndInvoiceDetailsRepository
+    extends ICreditAndInvoiceDetailsRepository {
   final Config config;
   final CreditAndInvoiceDetailsLocalDataSource localDataSource;
   final CreditAndInvoiceDetailsRemoteDataSource remoteDataSource;
@@ -21,7 +22,8 @@ class CreditAndInvoiceDetailsRepository extends ICreditAndInvoiceDetailsReposito
   });
 
   @override
-  Future<Either<ApiFailure, List<CustomerDocumentDetail>>> getCreditAndInvoiceDetails({
+  Future<Either<ApiFailure, List<CustomerDocumentDetail>>>
+      getCreditAndInvoiceDetails({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required CreditAndInvoiceItem creditAndInvoiceItem,

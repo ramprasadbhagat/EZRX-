@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -253,7 +255,22 @@ class _CreditsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+      ),
       child: ListTile(
+        onTap: () {
+          context
+              .read<CreditAndInvoiceDetailsBloc>()
+              .add(CreditAndInvoiceDetailsEvent.fetch(
+                creditAndInvoiceItem: creditItem,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              ));
+          context.router.push(CreditDetailsPageRoute(creditItem: creditItem));
+        },
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -269,7 +286,9 @@ class _CreditsItem extends StatelessWidget {
           ],
         ),
         subtitle: Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 10),
+          padding: const EdgeInsets.only(
+            top: 8,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

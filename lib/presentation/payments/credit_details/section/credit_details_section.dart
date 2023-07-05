@@ -1,12 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreditDetailsSection extends StatelessWidget {
@@ -18,65 +18,102 @@ class CreditDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
-
-    return custom.ExpansionTile(
-      initiallyExpanded: true,
-      keepHeaderBorder: true,
-      title: Text(
-        'Credit Details'.tr(),
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium
-            ?.copyWith(fontWeight: FontWeight.w600),
-      ),
+    return Column(
       children: [
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Credit Note Date'.tr(),
-          valueText: creditItem.netDueDate.toValidDateString,
+        ListTile(
+          tileColor: ZPColors.primary,
+          minVerticalPadding: 20.0,
+          title: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '${creditItem.accountingDocumentType} #${creditItem.accountingDocument}',
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                ),
+              ),
+              StatusLabel(
+                status: StatusType(
+                  creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
+                ),
+              ),
+            ],
+          ),
+          subtitle: Column(children: [
+            BalanceTextRow(
+              keyText: 'Document date',
+              keyColor: ZPColors.white,
+              valueText: creditItem.documentDate.toValidDateString,
+              valueColor: ZPColors.white,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Document type',
+              keyColor: ZPColors.white,
+              valueText: creditItem.accountingDocumentType,
+              valueColor: ZPColors.white,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Return number',
+              keyColor: ZPColors.white,
+              valueText:
+                  '#${creditItem.invoiceReference.getOrDefaultValue('')}',
+              valueColor: ZPColors.white,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Details',
+              keyColor: ZPColors.white,
+              valueText: creditItem.postingKeyName,
+              valueColor: ZPColors.white,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+          ]),
         ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Credit Note Number'.tr(),
-          valueText: creditItem.referenceDocumentNumber.displayStringValue,
+        const ItemAddressSection(),
+        const Divider(
+          indent: 0,
+          height: 20,
+          endIndent: 0,
+          color: ZPColors.lightGray2,
         ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Credit Date'.tr(),
-          valueText: creditItem.postingDate.toValidDateString,
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Credit Amount'.tr(),
-          valueText: StringUtils.displayPrice(
-            salesOrgConfigs,
-            creditItem.convertIfAmountInTransactionCurrencyIsNegative,
+        ListTile(
+          minVerticalPadding: 20.0,
+          title: Text(
+            'Credit summary',
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(
+              top: 20.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Credit total:',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price:
+                      '${creditItem.convertIfAmountInTransactionCurrencyIsNegative}',
+                ),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Return ID'.tr(),
-          valueText: creditItem.invoiceReference.displayStringValue,
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Status'.tr(),
-          valueText: creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
-          isStatus: true,
-          valueColor: ZPColors.white,
+        const Divider(
+          indent: 0,
+          height: 20,
+          endIndent: 0,
+          color: ZPColors.lightGray2,
         ),
       ],
     );

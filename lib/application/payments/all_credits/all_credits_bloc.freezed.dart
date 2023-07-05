@@ -55,7 +55,7 @@ mixin _$AllCreditsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_ApplyFilters value) applyFilters,
@@ -63,7 +63,7 @@ mixin _$AllCreditsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_ApplyFilters value)? applyFilters,
@@ -71,7 +71,7 @@ mixin _$AllCreditsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_ApplyFilters value)? applyFilters,
@@ -99,25 +99,25 @@ class _$AllCreditsEventCopyWithImpl<$Res, $Val extends AllCreditsEvent>
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$AllCreditsEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized();
+class _$_Initialized implements _Initialized {
+  const _$_Initialized();
 
   @override
   String toString() {
@@ -127,7 +127,7 @@ class _$_initialized implements _initialized {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType && other is _$_Initialized);
   }
 
   @override
@@ -185,7 +185,7 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_ApplyFilters value) applyFilters,
@@ -196,7 +196,7 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_ApplyFilters value)? applyFilters,
@@ -207,7 +207,7 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_ApplyFilters value)? applyFilters,
@@ -220,8 +220,8 @@ class _$_initialized implements _initialized {
   }
 }
 
-abstract class _initialized implements AllCreditsEvent {
-  const factory _initialized() = _$_initialized;
+abstract class _Initialized implements AllCreditsEvent {
+  const factory _Initialized() = _$_Initialized;
 }
 
 /// @nodoc
@@ -367,7 +367,7 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_ApplyFilters value) applyFilters,
@@ -378,7 +378,7 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_ApplyFilters value)? applyFilters,
@@ -389,7 +389,7 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_ApplyFilters value)? applyFilters,
@@ -559,7 +559,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_ApplyFilters value) applyFilters,
@@ -570,7 +570,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_ApplyFilters value)? applyFilters,
@@ -581,7 +581,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_ApplyFilters value)? applyFilters,
@@ -730,7 +730,7 @@ class _$_ApplyFilters implements _ApplyFilters {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_ApplyFilters value) applyFilters,
@@ -741,7 +741,7 @@ class _$_ApplyFilters implements _ApplyFilters {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_ApplyFilters value)? applyFilters,
@@ -752,7 +752,7 @@ class _$_ApplyFilters implements _ApplyFilters {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_ApplyFilters value)? applyFilters,

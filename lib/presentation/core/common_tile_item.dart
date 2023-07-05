@@ -19,6 +19,7 @@ class CommonTileItem extends StatelessWidget {
     this.tag = '',
     this.footerWidget,
     required this.priceComponent,
+    this.isQuantityRequired = true,
   }) : super(key: key);
 
   final String label;
@@ -32,6 +33,7 @@ class CommonTileItem extends StatelessWidget {
   final String image;
   final String tag;
   final Widget? footerWidget;
+  final bool isQuantityRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,8 @@ class CommonTileItem extends StatelessWidget {
             Row(
               children: [
                 _ImageBox(
-                  isQuantityBelowImage: isQuantityBelowImage,
+                  isQuantityBelowImage:
+                      isQuantityRequired ? isQuantityBelowImage : false,
                   image: image,
                   quantity: quantity,
                 ),
@@ -103,7 +106,8 @@ class CommonTileItem extends StatelessWidget {
                         ),
                         _Subtitle(
                           tileBody3: subtitle,
-                          isQuantityBelowImage: isQuantityBelowImage,
+                          isQuantityBelowImage:
+                              isQuantityRequired ? isQuantityBelowImage : true,
                           quantity: quantity,
                           isPriceComponent: true,
                           priceComponent: priceComponent,

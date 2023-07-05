@@ -1,9 +1,8 @@
-import 'dart:async';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_credit_and_invoice_details_repository.dart';
@@ -17,10 +16,12 @@ part 'credit_and_invoice_details_bloc.freezed.dart';
 class CreditAndInvoiceDetailsBloc
     extends Bloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState> {
   final ICreditAndInvoiceDetailsRepository creditAndInvoiceDetailsRepository;
+  final IProductImagesRepository productImagesRepository;
   CreditAndInvoiceDetailsBloc({
     required this.creditAndInvoiceDetailsRepository,
+    required this.productImagesRepository,
   }) : super(CreditAndInvoiceDetailsState.initial()) {
-    on<CreditAndInvoiceDetailsEvent>(_onEvent);
+    on(_onEvent);
   }
 
   Future<void> _onEvent(
@@ -28,9 +29,8 @@ class CreditAndInvoiceDetailsBloc
     Emitter<CreditAndInvoiceDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (_Initialized e) async =>
-          emit(CreditAndInvoiceDetailsState.initial()),
-      fetch: (_Fetch e) async {
+      initialized: (_) async => emit(CreditAndInvoiceDetailsState.initial()),
+      fetch: (value) async {
         emit(
           state.copyWith(
             isLoading: true,
@@ -39,9 +39,9 @@ class CreditAndInvoiceDetailsBloc
         );
         final failureOrSuccess =
             await creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
-          creditAndInvoiceItem: e.creditAndInvoiceItem,
+          salesOrganisation: value.salesOrganisation,
+          customerCodeInfo: value.customerCodeInfo,
+          creditAndInvoiceItem: value.creditAndInvoiceItem,
         );
 
         failureOrSuccess.fold(
@@ -59,6 +59,30 @@ class CreditAndInvoiceDetailsBloc
                 details: data,
                 failureOrSuccessOption: none(),
                 isLoading: false,
+              ),
+            );
+            add(const _FetchProductImage());
+          },
+        );
+      },
+      fetchProductImage: (value) async {
+        final failureOrSuccess =
+            await productImagesRepository.getProductImages(
+          list: state.details,
+        );
+        await failureOrSuccess.fold(
+          (failure) async => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (updatedListWithImages) async {
+            emit(
+              state.copyWith(
+                details:updatedListWithImages
+                      .map((e) => e as CustomerDocumentDetail)
+                      .toList(),
+                failureOrSuccessOption: none(),
               ),
             );
           },

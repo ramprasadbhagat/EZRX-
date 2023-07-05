@@ -9,4 +9,5 @@ class CreditAndInvoiceDetailsEvent with _$CreditAndInvoiceDetailsEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) = _Fetch;
+  const factory CreditAndInvoiceDetailsEvent.fetchProductImage() = _FetchProductImage;
 }

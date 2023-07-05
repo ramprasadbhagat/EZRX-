@@ -1,10 +1,12 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/payments/common_section/basic_information_section.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_items_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreditDetailsPage extends StatelessWidget {
   final CreditAndInvoiceItem creditItem;
@@ -17,26 +19,27 @@ class CreditDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('#${creditItem.accountingDocument}'),
+        centerTitle: false,
+        elevation: 0,
+        title: const Text('Credit Details').tr(),
       ),
-      body: AnnouncementBanner(
-        currentPath: context.router.currentPath,
-        child: ListView(
-          padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            bottom: 20,
-          ),
-          children: <Widget>[
-            const BasicInformationSection(),
-            CreditDetailsSection(
-              creditItem: creditItem,
-            ),
-            CreditItemsSection(
-              creditItem: creditItem,
-            ),
-          ],
-        ),
+      body: BlocBuilder<CreditAndInvoiceDetailsBloc,
+          CreditAndInvoiceDetailsState>(
+        buildWhen: (previous, current) => previous.details != current.details,
+        builder: (context, state) {
+          if (state.isLoading) {
+            return LoadingShimmer.logo(
+              key: const Key('LoaderImage'),
+            );
+          }
+
+          return ListView(
+            children: [
+              CreditDetailsSection(creditItem: creditItem),
+              CreditItemsSection(creditItems: state.details.groupList),
+            ],
+          );
+        },
       ),
     );
   }

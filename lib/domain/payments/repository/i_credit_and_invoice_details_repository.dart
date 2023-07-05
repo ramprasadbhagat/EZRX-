@@ -10,5 +10,5 @@ abstract class ICreditAndInvoiceDetailsRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required CreditAndInvoiceItem creditAndInvoiceItem,
-  });
+  }); 
 }

@@ -17,8 +17,14 @@ class CreditAndInvoiceDetailsQueryMutation {
         netAmount
         taxAmount
         transactionCurrency
+        batchNumber
+        expiryDate
+        principalName
+        principalCode
       }
     }
     ''';
   }
+
+  
 }

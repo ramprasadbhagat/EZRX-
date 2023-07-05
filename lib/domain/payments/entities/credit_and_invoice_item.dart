@@ -131,7 +131,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
 extension CreditAndInvoiceListExtension on List<CreditAndInvoiceItem> {
   List<CreditAndInvoiceGroup> get groupList {
     return List<CreditAndInvoiceItem>.from(this)
-        .groupListsBy((item) => item.netDueDate)
+        .groupListsBy((item) => item.postingDate)
         .entries
         .map(
           (entry) => CreditAndInvoiceGroup(

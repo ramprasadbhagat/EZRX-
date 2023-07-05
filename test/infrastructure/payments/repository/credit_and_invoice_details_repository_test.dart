@@ -20,8 +20,10 @@ class CreditAndInvoiceDetailsRemoteDataSourceMock extends Mock
 class ConfigMock extends Mock implements Config {}
 
 void main() {
-  late CreditAndInvoiceDetailsLocalDataSource allCreditsAndInvoicesLocalDataSourceMock;
-  late CreditAndInvoiceDetailsRemoteDataSource allCreditsAndInvoicesRemoteDataSourceMock;
+  late CreditAndInvoiceDetailsLocalDataSource
+      allCreditsAndInvoicesLocalDataSourceMock;
+  late CreditAndInvoiceDetailsRemoteDataSource
+      allCreditsAndInvoicesRemoteDataSourceMock;
   late Config configMock;
   late CreditAndInvoiceDetailsRepository allCreditsAndInvoicesRepository;
   late CreditAndInvoiceItem fakeInvoice;
@@ -55,12 +57,13 @@ void main() {
     group('getCreditAndInvoiceDetails Test', () {
       test('=> getCreditAndInvoiceDetails locally success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-        when(() => allCreditsAndInvoicesLocalDataSourceMock.getCreditAndInvoiceDetails())
-            .thenAnswer(
+        when(() => allCreditsAndInvoicesLocalDataSourceMock
+            .getCreditAndInvoiceDetails()).thenAnswer(
           (invocation) async => fakeCreditAndInvoiceDetails,
         );
 
-        final result = await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
+        final result =
+            await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           creditAndInvoiceItem: fakeInvoice,
@@ -70,10 +73,12 @@ void main() {
 
       test('=> getCreditAndInvoiceDetails locally failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-        when(() => allCreditsAndInvoicesLocalDataSourceMock.getCreditAndInvoiceDetails())
+        when(() => allCreditsAndInvoicesLocalDataSourceMock
+                .getCreditAndInvoiceDetails())
             .thenThrow((invocation) async => MockException());
 
-        final result = await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
+        final result =
+            await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           creditAndInvoiceItem: fakeInvoice,
@@ -82,7 +87,8 @@ void main() {
       });
       test('=> getCreditAndInvoiceDetails remote success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-        when(() => allCreditsAndInvoicesRemoteDataSourceMock.getCreditAndInvoiceDetails(
+        when(() => allCreditsAndInvoicesRemoteDataSourceMock
+                .getCreditAndInvoiceDetails(
               customerCode: 'mock_soldTo',
               salesOrg: 'mock_salesOrg',
               bpCustomerNumber: fakeInvoice.bpCustomerNumber,
@@ -93,7 +99,8 @@ void main() {
           (invocation) async => fakeCreditAndInvoiceDetails,
         );
 
-        final result = await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
+        final result =
+            await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
           customerCodeInfo: CustomerCodeInfo.empty()
               .copyWith(customerCodeSoldTo: 'mock_soldTo'),
           salesOrganisation: SalesOrganisation.empty()
@@ -105,7 +112,8 @@ void main() {
 
       test('=> getCreditAndInvoiceDetails remote failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-        when(() => allCreditsAndInvoicesRemoteDataSourceMock.getCreditAndInvoiceDetails(
+        when(() => allCreditsAndInvoicesRemoteDataSourceMock
+                .getCreditAndInvoiceDetails(
               customerCode: 'mock_soldTo',
               salesOrg: 'mock_salesOrg',
               bpCustomerNumber: fakeInvoice.bpCustomerNumber,
@@ -114,7 +122,8 @@ void main() {
               accountingDocumentItem: fakeInvoice.accountingDocumentItem,
             )).thenThrow((invocation) async => MockException());
 
-        final result = await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
+        final result =
+            await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
           customerCodeInfo: CustomerCodeInfo.empty(),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),

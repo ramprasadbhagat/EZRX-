@@ -131,7 +131,7 @@ class InvoiceItemsSection extends StatelessWidget {
                                   keyFlex: 3,
                                   valueFlex: 5,
                                   keyText: 'Material'.tr(),
-                                  valueText: e.material.displayStringValue,
+                                  valueText: e.materialNumber.displayMatNo,
                                 ),
                                 const SizedBox(height: 8),
                                 BalanceTextRow(

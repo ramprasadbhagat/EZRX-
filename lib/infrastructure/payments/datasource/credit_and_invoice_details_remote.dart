@@ -34,7 +34,8 @@ class CreditAndInvoiceDetailsRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': creditAndInvoiceDetailsQueryMutation.getCreditAndInvoiceDetails(),
+          'query':
+              creditAndInvoiceDetailsQueryMutation.getCreditAndInvoiceDetails(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -54,7 +55,7 @@ class CreditAndInvoiceDetailsRemoteDataSource {
     for (final dynamic element in data) {
       result.add(CustomerDocumentDetailDto.fromJson(element).toDomain());
     }
-    
+
     return result;
   }
 

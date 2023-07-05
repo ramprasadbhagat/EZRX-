@@ -24,6 +24,7 @@ mixin _$CreditAndInvoiceDetailsEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
+    required TResult Function() fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$CreditAndInvoiceDetailsEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult? Function()? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$CreditAndInvoiceDetailsEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,18 +54,21 @@ mixin _$CreditAndInvoiceDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -133,6 +139,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
+    required TResult Function() fetchProductImage,
   }) {
     return initialized();
   }
@@ -146,6 +153,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult? Function()? fetchProductImage,
   }) {
     return initialized?.call();
   }
@@ -159,6 +167,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -172,6 +181,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return initialized(this);
   }
@@ -181,6 +191,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return initialized?.call(this);
   }
@@ -190,6 +201,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -326,6 +338,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
+    required TResult Function() fetchProductImage,
   }) {
     return fetch(creditAndInvoiceItem, salesOrganisation, customerCodeInfo);
   }
@@ -339,6 +352,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult? Function()? fetchProductImage,
   }) {
     return fetch?.call(
         creditAndInvoiceItem, salesOrganisation, customerCodeInfo);
@@ -353,6 +367,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -366,6 +381,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return fetch(this);
   }
@@ -375,6 +391,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return fetch?.call(this);
   }
@@ -384,6 +401,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -405,6 +423,126 @@ abstract class _Fetch implements CreditAndInvoiceDetailsEvent {
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchProductImageCopyWith<$Res> {
+  factory _$$_FetchProductImageCopyWith(_$_FetchProductImage value,
+          $Res Function(_$_FetchProductImage) then) =
+      __$$_FetchProductImageCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchProductImageCopyWithImpl<$Res>
+    extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res,
+        _$_FetchProductImage> implements _$$_FetchProductImageCopyWith<$Res> {
+  __$$_FetchProductImageCopyWithImpl(
+      _$_FetchProductImage _value, $Res Function(_$_FetchProductImage) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchProductImage implements _FetchProductImage {
+  const _$_FetchProductImage();
+
+  @override
+  String toString() {
+    return 'CreditAndInvoiceDetailsEvent.fetchProductImage()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FetchProductImage);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function() fetchProductImage,
+  }) {
+    return fetchProductImage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            CreditAndInvoiceItem creditAndInvoiceItem,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function()? fetchProductImage,
+  }) {
+    return fetchProductImage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function()? fetchProductImage,
+    required TResult orElse(),
+  }) {
+    if (fetchProductImage != null) {
+      return fetchProductImage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
+  }) {
+    return fetchProductImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
+  }) {
+    return fetchProductImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
+    required TResult orElse(),
+  }) {
+    if (fetchProductImage != null) {
+      return fetchProductImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchProductImage implements CreditAndInvoiceDetailsEvent {
+  const factory _FetchProductImage() = _$_FetchProductImage;
 }
 
 /// @nodoc

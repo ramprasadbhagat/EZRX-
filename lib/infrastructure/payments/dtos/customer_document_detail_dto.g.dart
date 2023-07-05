@@ -11,7 +11,7 @@ _$_CustomerDocumentDetailDto _$$_CustomerDocumentDetailDtoFromJson(
     _$_CustomerDocumentDetailDto(
       billingDocumentItem: json['billingDocumentItem'] as String? ?? '',
       salesDocumentItemType: json['salesDocumentItemType'] as String? ?? '',
-      material: json['material'] as String? ?? '',
+      materialNumber: json['material'] as String? ?? '',
       billingDocumentItemText: json['billingDocumentItemText'] as String? ?? '',
       billingQuantity: json['billingQuantity'] as String? ?? '',
       billingQuantityUnit: json['billingQuantityUnit'] as String? ?? '',
@@ -24,6 +24,10 @@ _$_CustomerDocumentDetailDto _$$_CustomerDocumentDetailDtoFromJson(
       netAmount: (json['netAmount'] as num?)?.toDouble() ?? 0.0,
       taxAmount: (json['taxAmount'] as num?)?.toDouble() ?? 0.0,
       transactionCurrency: json['transactionCurrency'] as String? ?? '',
+      batchNumber: json['batchNumber'] as String? ?? '',
+      expiryDate: json['expiryDate'] as String? ?? '',
+      principalName: json['principalName'] as String? ?? '',
+      principalCode: json['principalCode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
@@ -31,7 +35,7 @@ Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
     <String, dynamic>{
       'billingDocumentItem': instance.billingDocumentItem,
       'salesDocumentItemType': instance.salesDocumentItemType,
-      'material': instance.material,
+      'material': instance.materialNumber,
       'billingDocumentItemText': instance.billingDocumentItemText,
       'billingQuantity': instance.billingQuantity,
       'billingQuantityUnit': instance.billingQuantityUnit,
@@ -43,4 +47,8 @@ Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
       'netAmount': instance.netAmount,
       'taxAmount': instance.taxAmount,
       'transactionCurrency': instance.transactionCurrency,
+      'batchNumber': instance.batchNumber,
+      'expiryDate': instance.expiryDate,
+      'principalName': instance.principalName,
+      'principalCode': instance.principalCode,
     };

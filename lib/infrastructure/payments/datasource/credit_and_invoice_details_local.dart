@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_detail_dto.dart';
 import 'package:flutter/services.dart';
@@ -21,4 +20,5 @@ class CreditAndInvoiceDetailsLocalDataSource {
 
     return result;
   }
+
 }
