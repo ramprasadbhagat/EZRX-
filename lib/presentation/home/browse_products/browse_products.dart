@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -33,19 +34,46 @@ class BrowseProduct extends StatelessWidget {
             selectedMaterialFilter: MaterialFilter.empty(),
           ),
         ),
-      child: BlocListener<MaterialListBloc, MaterialListState>(
-        listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
-            current.apiFailureOrSuccessOption,
-        listener: (context, state) => state.apiFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<MaterialListBloc, MaterialListState>(
+            listenWhen: (previous, current) =>
+                previous.apiFailureOrSuccessOption !=
+                current.apiFailureOrSuccessOption,
+            listener: (context, state) => state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            ),
           ),
-        ),
+          BlocListener<CustomerCodeBloc, CustomerCodeState>(
+            listenWhen: (previous, current) =>
+                previous.customerCodeInfo != current.customerCodeInfo,
+            listener: (context, state) {
+              context.read<MaterialListBloc>().add(
+                    MaterialListEvent.fetch(
+                      salesOrganisation: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrganisation,
+                      configs:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      customerCodeInfo: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<EligibilityBloc>().state.shipToInfo,
+                      selectedMaterialFilter: MaterialFilter.empty(),
+                    ),
+                  );
+            },
+          ),
+        ],
         child: const _BodyContent(),
       ),
     );
@@ -61,7 +89,7 @@ class _BodyContent extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.materialList != current.materialList,
       builder: (context, state) {
-        return state.isFetching || state.materialList.isNotEmpty 
+        return state.isFetching || state.materialList.isNotEmpty
             ? Column(
                 children: [
                   Padding(
@@ -74,16 +102,15 @@ class _BodyContent extends StatelessWidget {
                   ),
                   state.isFetching
                       ? const _BrowseProductLoadingShimmer()
-                      :
-                  SizedBox(
+                      : SizedBox(
                           height: 300,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: state.materialList
-                          .map((e) => _BrowseProductCard(product: e))
-                          .toList(),
-                    ),
-                  ),
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: state.materialList
+                                .map((e) => _BrowseProductCard(product: e))
+                                .toList(),
+                          ),
+                        ),
                 ],
               )
             : const SizedBox.shrink();
@@ -145,4 +172,3 @@ class _BrowseProductLoadingShimmer extends StatelessWidget {
     );
   }
 }
-

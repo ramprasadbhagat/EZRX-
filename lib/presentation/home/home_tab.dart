@@ -71,27 +71,31 @@ class HomeTab extends StatelessWidget {
                 );
           }
         },
-        child: ListView(
-          children: [
-            AnnouncementWidget(
-              currentPath: const HomeTabRoute().path,
-              key: WidgetKeys.homeTabAnnouncementWidget,
-            ),
-            const EdiUserBanner(),
-            const AccountSuspendedBanner(),
-            const QuickAccessMenuPanel(),
-            const HomeBanner(),
-            const RecentOrdersSection(),
-            const BrowseProduct(),
-            const KRBanners(),
-            const AnnouncementSection(),
-          ],
+        //Singlechildscroll and column is needed
+        //as the listview was rebuilding the BrowseProduct
+        //and it was recreating the blocprovider
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AnnouncementWidget(
+                currentPath: const HomeTabRoute().path,
+                key: WidgetKeys.homeTabAnnouncementWidget,
+              ),
+              const EdiUserBanner(),
+              const AccountSuspendedBanner(),
+              const QuickAccessMenuPanel(),
+              const HomeBanner(),
+              const RecentOrdersSection(),
+              const BrowseProduct(),
+              const KRBanners(),
+              const AnnouncementSection(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
 
 // class _WelcomeUser extends StatelessWidget {
 //   const _WelcomeUser({Key? key}) : super(key: key);
@@ -130,4 +134,3 @@ class HomeTab extends StatelessWidget {
 //     );
 //   }
 // }
-
