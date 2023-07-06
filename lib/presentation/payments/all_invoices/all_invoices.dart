@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -299,7 +301,22 @@ class _InvoiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          context.read<CreditAndInvoiceDetailsBloc>().add(
+                CreditAndInvoiceDetailsEvent.fetch(
+                  creditAndInvoiceItem: invoiceItem,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                ),
+              );
+          context.router.push(
+            InvoiceDetailsPageRoute(
+              invoiceItem: invoiceItem,
+            ),
+          );
+        },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -323,7 +340,7 @@ class _InvoiceItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Order #${invoiceItem.orderId}',
+                    'Order #${invoiceItem.orderId.displayLabel}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(

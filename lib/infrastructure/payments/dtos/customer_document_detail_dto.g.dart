@@ -23,11 +23,9 @@ _$_CustomerDocumentDetailDto _$$_CustomerDocumentDetailDtoFromJson(
       grossAmount: (json['grossAmount'] as num?)?.toDouble() ?? 0.0,
       netAmount: (json['netAmount'] as num?)?.toDouble() ?? 0.0,
       taxAmount: (json['taxAmount'] as num?)?.toDouble() ?? 0.0,
-      transactionCurrency: json['transactionCurrency'] as String? ?? '',
       batchNumber: json['batchNumber'] as String? ?? '',
       expiryDate: json['expiryDate'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
-      principalCode: json['principalCode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
@@ -46,9 +44,7 @@ Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
       'grossAmount': instance.grossAmount,
       'netAmount': instance.netAmount,
       'taxAmount': instance.taxAmount,
-      'transactionCurrency': instance.transactionCurrency,
       'batchNumber': instance.batchNumber,
       'expiryDate': instance.expiryDate,
       'principalName': instance.principalName,
-      'principalCode': instance.principalCode,
     };

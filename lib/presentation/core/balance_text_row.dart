@@ -52,34 +52,34 @@ class BalanceTextRow extends StatelessWidget {
               style: keyStyle,
             ),
           ),
-          Expanded(
-            flex: valueFlex,
-            child: valueTextLoading
-                ? SizedBox(
-                    width: 40,
-                    child: LoadingShimmer.tile(),
-                  )
-                : isStatus
-                    ? Row(
-                        children: [
-                          Text(
-                            ': ',
-                            style: valueStyle,
-                          ),
-                          Flexible(
-                            child: StatusLabel(
-                              status: StatusType(valueText),
-                              valueColor:
-                                  valueStyle?.color ?? ZPColors.darkGray,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Text(
-                        ': $valueText',
-                        style: valueStyle,
+          isStatus
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      ': ',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    Flexible(
+                      child: StatusLabel(
+                        status: StatusType(valueText),
+                        valueColor: keyStyle?.color??ZPColors.black,
                       ),
-          ),
+                    ),
+                  ],
+                )
+              : Expanded(
+                  flex: valueFlex,
+                  child: valueTextLoading
+                      ? SizedBox(
+                          width: 40,
+                          child: LoadingShimmer.tile(),
+                        )
+                      : Text(
+                          ': $valueText',
+                          style: valueStyle,
+                        ),
+                ),
         ],
       ),
     );

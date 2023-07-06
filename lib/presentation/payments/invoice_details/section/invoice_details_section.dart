@@ -1,12 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InvoiceDetailsSection extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
@@ -17,69 +13,66 @@ class InvoiceDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
-
-    return custom.ExpansionTile(
-      initiallyExpanded: true,
-      keepHeaderBorder: true,
-      title: Text(
-        'Invoice Details'.tr(),
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium
-            ?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      children: [
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Due Date'.tr(),
-          valueText: invoiceItem.netDueDate.toValidDateString,
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Invoice Number'.tr(),
-          valueText: invoiceItem.invoiceReference.displayStringValue,
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Invoice Date'.tr(),
-          valueText: invoiceItem.postingDate.toValidDateString,
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Invoice Amount'.tr(),
-          valueText: StringUtils.displayPrice(
-            salesOrgConfigs,
-            invoiceItem.amountInTransactionCurrency,
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: const BoxDecoration(color: ZPColors.primary),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BalanceTextRow(
+            keyText:
+                'Invoice #${invoiceItem.referenceDocumentNumber.getOrDefaultValue('')}',
+            isStatus: true,
+            valueText:
+                invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
+            keyTextStyle: Theme.of(context)
+                .textTheme
+                .labelMedium
+                ?.copyWith(color: ZPColors.white),
           ),
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Order ID'.tr(),
-          valueText: invoiceItem.orderId,
-        ),
-        const SizedBox(height: 8),
-        BalanceTextRow(
-          keyFlex: 3,
-          valueFlex: 5,
-          keyText: 'Status'.tr(),
-          valueText: invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
-          isStatus: true,
-          valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: invoiceItem.invoiceProcessingStatus.displayDueDateColor,
+          const SizedBox(height: 8),
+          BalanceTextRow(
+            keyFlex: 2,
+            valueFlex: 3,
+            isStatus: false,
+            keyText: 'Document date:'.tr(),
+            valueText: invoiceItem.postingDate.toValidDateString,
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.white,
               ),
-        ),
-      ],
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.white,
+              ),
+          ),
+          const SizedBox(height: 8),
+          BalanceTextRow(
+            keyFlex: 2,
+            valueFlex: 3,
+            keyText: 'Due on:'.tr(),
+            valueText: invoiceItem.netDueDate.toValidDateString,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.white,
+              ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.white,
+              ),
+            
+          ),
+          const SizedBox(height: 8),
+          BalanceTextRow(
+            keyFlex: 2,
+            valueFlex: 3,
+            keyText: 'Order number:'.tr(),
+            valueText: invoiceItem.orderId.displayLabel,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.white,
+              ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.white,
+              ),
+          ),
+        ],
+      ),
     );
   }
 }

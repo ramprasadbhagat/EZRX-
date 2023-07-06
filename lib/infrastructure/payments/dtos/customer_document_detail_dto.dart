@@ -1,6 +1,6 @@
-
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -78,11 +78,6 @@ class CustomerDocumentDetailDto with _$CustomerDocumentDetailDto {
     )
         required double taxAmount,
     @JsonKey(
-      name: 'transactionCurrency',
-      defaultValue: '',
-    )
-        required String transactionCurrency,
-    @JsonKey(
       name: 'batchNumber',
       defaultValue: '',
     )
@@ -97,11 +92,6 @@ class CustomerDocumentDetailDto with _$CustomerDocumentDetailDto {
       defaultValue: '',
     )
         required String principalName,
-    @JsonKey(
-      name: 'principalCode',
-      defaultValue: '',
-    )
-        required String principalCode,
   }) = _CustomerDocumentDetailDto;
 
   CustomerDocumentDetail toDomain() {
@@ -119,11 +109,12 @@ class CustomerDocumentDetailDto with _$CustomerDocumentDetailDto {
       grossAmount: grossAmount,
       netAmount: netAmount,
       taxAmount: taxAmount,
-      transactionCurrency: transactionCurrency,
       batchNumber: BatchNumber(batchNumber),
       expiryDate: DateTimeStringValue(expiryDate),
-      principalName: PrincipalName(principalName),
-      principalCode: PrincipalCode(principalCode),
+      principalData: PrincipalData(
+        principalName: PrincipalName(principalName),
+        principalCode: PrincipalCode(''),
+      ),
       productImages: ProductImages.empty(),
     );
   }

@@ -66,23 +66,32 @@ class CreditAndInvoiceDetailsBloc
         );
       },
       fetchProductImage: (value) async {
+        if (state.details.isEmpty) return;
+        emit(
+          state.copyWith(
+            imageLoading: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
         final failureOrSuccess =
             await productImagesRepository.getProductImages(
           list: state.details,
         );
-        await failureOrSuccess.fold(
-          (failure) async => emit(
+        failureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
+              imageLoading: false,
             ),
           ),
-          (updatedListWithImages) async {
+          (updatedListWithImages) {
             emit(
               state.copyWith(
                 details:updatedListWithImages
                       .map((e) => e as CustomerDocumentDetail)
                       .toList(),
                 failureOrSuccessOption: none(),
+                imageLoading: false,
               ),
             );
           },

@@ -2391,8 +2391,11 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => CreditAndInvoiceDetailsRepository(
       config: locator<Config>(),
-      localDataSource: locator<CreditAndInvoiceDetailsLocalDataSource>(),
-      remoteDataSource: locator<CreditAndInvoiceDetailsRemoteDataSource>(),
+      localDataSource:
+          locator<CreditAndInvoiceDetailsLocalDataSource>(),
+      remoteDataSource:
+          locator<CreditAndInvoiceDetailsRemoteDataSource>(),
+      
     ),
   );
   locator.registerLazySingleton(

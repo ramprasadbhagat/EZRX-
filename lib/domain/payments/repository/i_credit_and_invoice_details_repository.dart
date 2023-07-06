@@ -6,7 +6,8 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 
 abstract class ICreditAndInvoiceDetailsRepository {
-  Future<Either<ApiFailure, List<CustomerDocumentDetail>>> getCreditAndInvoiceDetails({
+  Future<Either<ApiFailure, List<CustomerDocumentDetail>>>
+      getCreditAndInvoiceDetails({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required CreditAndInvoiceItem creditAndInvoiceItem,

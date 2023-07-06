@@ -43,7 +43,7 @@ class ItemHeaderSection extends StatelessWidget {
                     color: ZPColors.white,
                   ),
               valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.green,
+                    color: ZPColors.white,
                   ),
             ),
             BalanceTextRow(
@@ -75,7 +75,6 @@ class ItemHeaderSection extends StatelessWidget {
                     keyText: 'Requested Delivery Date',
                     valueText: orderHistoryItem
                         .requestedDeliveryDate.toValidDateString,
-                    
                     keyTextStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: ZPColors.white,
