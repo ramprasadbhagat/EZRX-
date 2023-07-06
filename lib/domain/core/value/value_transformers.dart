@@ -366,6 +366,19 @@ String getReturnSummaryStatus(String status) {
   }
 }
 
+String getReturnByRequestStatus(String status) {
+  switch (status) {
+    case 'PENDING':
+      return 'Pending Approval';
+    case 'REVIEWED':
+      return 'Reviewed';
+    case 'FAILED':
+      return 'Failed';
+    default:
+      return status;
+  }
+}
+
 String getReturnSummaryFilterByStatus(String filter) => filter == 'Active'
     ? 'PENDING'
     : filter != 'All'

@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'view_by_item_return_filter_dto.dart';
+part of 'return_filter_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ViewByItemReturnFilterDto _$$_ViewByItemReturnFilterDtoFromJson(
-        Map<String, dynamic> json) =>
-    _$_ViewByItemReturnFilterDto(
+_$_ReturnFilterDto _$$_ReturnFilterDtoFromJson(Map<String, dynamic> json) =>
+    _$_ReturnFilterDto(
       dateFrom: json['dateFrom'] as String? ?? '',
       dateTo: json['dateTo'] as String? ?? '',
       refundTotalFrom: json['refundTotalFrom'] as String? ?? '',
@@ -19,8 +18,7 @@ _$_ViewByItemReturnFilterDto _$$_ViewByItemReturnFilterDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_ViewByItemReturnFilterDtoToJson(
-        _$_ViewByItemReturnFilterDto instance) =>
+Map<String, dynamic> _$$_ReturnFilterDtoToJson(_$_ReturnFilterDto instance) =>
     <String, dynamic>{
       'dateFrom': instance.dateFrom,
       'dateTo': instance.dateTo,

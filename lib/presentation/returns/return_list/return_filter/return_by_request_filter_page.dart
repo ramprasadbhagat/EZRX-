@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -14,8 +14,8 @@ import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 
 final _decimalOnlyRegx = RegExp(r'^\d+\.?\d{0,10}');
 
-class ReturnByItemFilterPage extends StatelessWidget {
-  const ReturnByItemFilterPage({
+class ReturnByRequestFilterPage extends StatelessWidget {
+  const ReturnByRequestFilterPage({
     Key? key,
   }) : super(key: key);
 
@@ -57,7 +57,8 @@ class _ReturnFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) =>
           previous.showErrorMessage != current.showErrorMessage,
       builder: (context, state) {
@@ -156,7 +157,8 @@ class _AmountValueToFilter extends StatelessWidget {
   const _AmountValueToFilter({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) =>
           previous.filter.amountValueTo != current.filter.amountValueTo,
       builder: (
@@ -168,8 +170,8 @@ class _AmountValueToFilter extends StatelessWidget {
             key: WidgetKeys.amountValueTo,
             initialValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) =>
-                context.read<ViewByItemReturnFilterBloc>().add(
-                      ViewByItemReturnFilterEvent.setAmountTo(
+                context.read<ViewByRequestReturnFilterBloc>().add(
+                      ViewByRequestReturnFilterEvent.setAmountTo(
                         amountTo: value.isNotEmpty
                             ? StringUtils.formatter.format(double.parse(value))
                             : '',
@@ -196,7 +198,8 @@ class _AmountValueFromFilter extends StatelessWidget {
   const _AmountValueFromFilter({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) =>
           previous.filter.amountValueFrom != current.filter.amountValueFrom,
       builder: (
@@ -208,8 +211,8 @@ class _AmountValueFromFilter extends StatelessWidget {
             key: WidgetKeys.amountValueFrom,
             initialValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) =>
-                context.read<ViewByItemReturnFilterBloc>().add(
-                      ViewByItemReturnFilterEvent.setAmountFrom(
+                context.read<ViewByRequestReturnFilterBloc>().add(
+                      ViewByRequestReturnFilterEvent.setAmountFrom(
                         amountFrom: value.isNotEmpty
                             ? StringUtils.formatter.format(double.parse(value))
                             : '',
@@ -237,7 +240,8 @@ class _FromRequestDateFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) =>
           previous.filter.getReturnDateFilterDateRange !=
           current.filter.getReturnDateFilterDateRange,
@@ -246,8 +250,8 @@ class _FromRequestDateFilter extends StatelessWidget {
           child: TextFormField(
             key: WidgetKeys.fromReturnDateField,
             onTap: () async {
-              final returnByItemFilterBloc =
-                  context.read<ViewByItemReturnFilterBloc>();
+              final returnByRequestFilterBloc =
+                  context.read<ViewByRequestReturnFilterBloc>();
               final returnDateRange = await showDateRangePicker(
                 context: context,
                 firstDate: DateTime.now().subtract(const Duration(days: 365)),
@@ -255,8 +259,8 @@ class _FromRequestDateFilter extends StatelessWidget {
                 initialDateRange: state.filter.getReturnDateFilterDateRange,
               );
               if (returnDateRange == null) return;
-              returnByItemFilterBloc.add(
-                ViewByItemReturnFilterEvent.setReturnDate(
+              returnByRequestFilterBloc.add(
+                ViewByRequestReturnFilterEvent.setReturnDate(
                   returnDateRange: returnDateRange,
                 ),
               );
@@ -293,7 +297,8 @@ class _ToRequestDateFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) =>
           previous.filter.getReturnDateFilterDateRange !=
           current.filter.getReturnDateFilterDateRange,
@@ -302,8 +307,8 @@ class _ToRequestDateFilter extends StatelessWidget {
           child: TextFormField(
             key: WidgetKeys.toReturnDateField,
             onTap: () async {
-              final returnByItemFilterBloc =
-                  context.read<ViewByItemReturnFilterBloc>();
+              final returnByRequestFilterBloc =
+                  context.read<ViewByRequestReturnFilterBloc>();
               final returnDateRange = await showDateRangePicker(
                 context: context,
                 firstDate: DateTime.now().subtract(const Duration(days: 364)),
@@ -311,8 +316,8 @@ class _ToRequestDateFilter extends StatelessWidget {
                 initialDateRange: state.filter.getReturnDateFilterDateRange,
               );
               if (returnDateRange == null) return;
-              returnByItemFilterBloc.add(
-                ViewByItemReturnFilterEvent.setReturnDate(
+              returnByRequestFilterBloc.add(
+                ViewByRequestReturnFilterEvent.setReturnDate(
                   returnDateRange: returnDateRange,
                 ),
               );
@@ -351,7 +356,8 @@ class _StatusesSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) =>
           previous.filter.returnStatusList != current.filter.returnStatusList,
       builder: (
@@ -363,15 +369,15 @@ class _StatusesSelector extends StatelessWidget {
             return CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                status.displayStatus,
+                status.displayStatusForViewByRequest,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,
               dense: true,
               visualDensity: VisualDensity.compact,
               onChanged: (bool? value) {
-                context.read<ViewByItemReturnFilterBloc>().add(
-                      ViewByItemReturnFilterEvent.setReturnStatus(
+                context.read<ViewByRequestReturnFilterBloc>().add(
+                      ViewByRequestReturnFilterEvent.setReturnStatus(
                         status: status,
                         value: value ?? false,
                       ),
@@ -395,14 +401,14 @@ class _ResetButton extends StatelessWidget {
       child: OutlinedButton(
         key: WidgetKeys.filterResetButton,
         onPressed: () {
-          context.read<ViewByItemReturnFilterBloc>().add(
-                const ViewByItemReturnFilterEvent.initializeOrResetFilters(),
+          context.read<ViewByRequestReturnFilterBloc>().add(
+                const ViewByRequestReturnFilterEvent.initializeOrResetFilters(),
               );
           Navigator.of(context).pop(
             context
-                .read<ViewByItemReturnFilterBloc>()
+                .read<ViewByRequestReturnFilterBloc>()
                 .state
-                .emptyViewByItemReturnFilter,
+                .emptyViewByRequestReturnFilter,
           );
         },
         child: Text(
@@ -419,11 +425,12 @@ class _ApplyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
+    return BlocBuilder<ViewByRequestReturnFilterBloc,
+        ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) {
         final lastAppliedFilter =
-            context.read<ReturnListByItemBloc>().state.appliedFilter;
+            context.read<ReturnListByRequestBloc>().state.appliedFilter;
         final currentFilter = state.filter;
         final isEnable = lastAppliedFilter != currentFilter;
 
@@ -445,16 +452,16 @@ class _ApplyButton extends StatelessWidget {
     required BuildContext context,
   }) {
     final isValid = context
-        .read<ViewByItemReturnFilterBloc>()
+        .read<ViewByRequestReturnFilterBloc>()
         .state
         .filter
         .isReturnAmountValueRangeValid;
     isValid
         ? Navigator.of(context).pop(
-            context.read<ViewByItemReturnFilterBloc>().state.filter,
+            context.read<ViewByRequestReturnFilterBloc>().state.filter,
           )
-        : context.read<ViewByItemReturnFilterBloc>().add(
-              const ViewByItemReturnFilterEvent.setValidationFailure(),
+        : context.read<ViewByRequestReturnFilterBloc>().add(
+              const ViewByRequestReturnFilterEvent.setValidationFailure(),
             );
   }
 }

@@ -34,7 +34,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
-import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -730,7 +730,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               customerCodeInfo: customerCodeInfo,
               user: user,
-              appliedFilter: ViewByItemReturnFilter.empty(),
+              appliedFilter: ReturnFilter.empty(),
             ),
           );
       context.read<ReturnListByRequestBloc>().add(
@@ -740,6 +740,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               customerCodeInfo: customerCodeInfo,
               user: user,
+              appliedFilter: ReturnFilter.empty(),
             ),
           );
     } else {

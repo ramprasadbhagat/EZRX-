@@ -5,8 +5,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -72,7 +72,7 @@ class ReturnByItemPage extends StatelessWidget {
                                 .state
                                 .customerCodeInfo,
                             user: context.read<UserBloc>().state.user,
-                            appliedFilter: ViewByItemReturnFilter.empty(),
+                            appliedFilter: ReturnFilter.empty(),
                           ),
                         ),
                     onLoadingMore: () =>

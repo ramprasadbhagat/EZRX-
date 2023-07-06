@@ -5,13 +5,13 @@ class ViewByItemReturnFilterState with _$ViewByItemReturnFilterState {
   const ViewByItemReturnFilterState._();
 
   const factory ViewByItemReturnFilterState({
-    required ViewByItemReturnFilter filter,
+    required ReturnFilter filter,
     required List<StatusType> statusList,
     required bool showErrorMessage,
   }) = _ViewByItemReturnFilterState;
 
   factory ViewByItemReturnFilterState.initial() => ViewByItemReturnFilterState(
-        filter: ViewByItemReturnFilter.empty(),
+        filter: ReturnFilter.empty(),
         statusList: <StatusType>[
           StatusType('PENDING'),
           StatusType('APPROVED'),
@@ -20,6 +20,5 @@ class ViewByItemReturnFilterState with _$ViewByItemReturnFilterState {
         showErrorMessage: false,
       );
 
-  ViewByItemReturnFilter get emptyViewByItemReturnFilter =>
-      ViewByItemReturnFilter.empty();
+  ReturnFilter get emptyViewByItemReturnFilter => ReturnFilter.empty();
 }

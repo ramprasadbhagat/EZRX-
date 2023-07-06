@@ -37,6 +37,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -485,6 +486,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ViewByItemReturnFilterBloc>(
           create: (context) => locator<ViewByItemReturnFilterBloc>(),
+        ),
+        BlocProvider<ViewByRequestReturnFilterBloc>(
+          create: (context) => locator<ViewByRequestReturnFilterBloc>(),
         ),
       ],
       child: MaterialApp.router(

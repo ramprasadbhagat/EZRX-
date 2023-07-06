@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'view_by_item_return_filter_dto.dart';
+part of 'return_filter_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ViewByItemReturnFilterDto _$ViewByItemReturnFilterDtoFromJson(
-    Map<String, dynamic> json) {
-  return _ViewByItemReturnFilterDto.fromJson(json);
+ReturnFilterDto _$ReturnFilterDtoFromJson(Map<String, dynamic> json) {
+  return _ReturnFilterDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ViewByItemReturnFilterDto {
+mixin _$ReturnFilterDto {
   @JsonKey(name: 'dateFrom', defaultValue: '')
   String get dateFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateTo', defaultValue: '')
@@ -34,15 +33,15 @@ mixin _$ViewByItemReturnFilterDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ViewByItemReturnFilterDtoCopyWith<ViewByItemReturnFilterDto> get copyWith =>
+  $ReturnFilterDtoCopyWith<ReturnFilterDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByItemReturnFilterDtoCopyWith<$Res> {
-  factory $ViewByItemReturnFilterDtoCopyWith(ViewByItemReturnFilterDto value,
-          $Res Function(ViewByItemReturnFilterDto) then) =
-      _$ViewByItemReturnFilterDtoCopyWithImpl<$Res, ViewByItemReturnFilterDto>;
+abstract class $ReturnFilterDtoCopyWith<$Res> {
+  factory $ReturnFilterDtoCopyWith(
+          ReturnFilterDto value, $Res Function(ReturnFilterDto) then) =
+      _$ReturnFilterDtoCopyWithImpl<$Res, ReturnFilterDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'dateFrom', defaultValue: '')
@@ -58,10 +57,9 @@ abstract class $ViewByItemReturnFilterDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ViewByItemReturnFilterDtoCopyWithImpl<$Res,
-        $Val extends ViewByItemReturnFilterDto>
-    implements $ViewByItemReturnFilterDtoCopyWith<$Res> {
-  _$ViewByItemReturnFilterDtoCopyWithImpl(this._value, this._then);
+class _$ReturnFilterDtoCopyWithImpl<$Res, $Val extends ReturnFilterDto>
+    implements $ReturnFilterDtoCopyWith<$Res> {
+  _$ReturnFilterDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -103,12 +101,11 @@ class _$ViewByItemReturnFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemReturnFilterDtoCopyWith<$Res>
-    implements $ViewByItemReturnFilterDtoCopyWith<$Res> {
-  factory _$$_ViewByItemReturnFilterDtoCopyWith(
-          _$_ViewByItemReturnFilterDto value,
-          $Res Function(_$_ViewByItemReturnFilterDto) then) =
-      __$$_ViewByItemReturnFilterDtoCopyWithImpl<$Res>;
+abstract class _$$_ReturnFilterDtoCopyWith<$Res>
+    implements $ReturnFilterDtoCopyWith<$Res> {
+  factory _$$_ReturnFilterDtoCopyWith(
+          _$_ReturnFilterDto value, $Res Function(_$_ReturnFilterDto) then) =
+      __$$_ReturnFilterDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -125,13 +122,11 @@ abstract class _$$_ViewByItemReturnFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByItemReturnFilterDtoCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterDtoCopyWithImpl<$Res,
-        _$_ViewByItemReturnFilterDto>
-    implements _$$_ViewByItemReturnFilterDtoCopyWith<$Res> {
-  __$$_ViewByItemReturnFilterDtoCopyWithImpl(
-      _$_ViewByItemReturnFilterDto _value,
-      $Res Function(_$_ViewByItemReturnFilterDto) _then)
+class __$$_ReturnFilterDtoCopyWithImpl<$Res>
+    extends _$ReturnFilterDtoCopyWithImpl<$Res, _$_ReturnFilterDto>
+    implements _$$_ReturnFilterDtoCopyWith<$Res> {
+  __$$_ReturnFilterDtoCopyWithImpl(
+      _$_ReturnFilterDto _value, $Res Function(_$_ReturnFilterDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -143,7 +138,7 @@ class __$$_ViewByItemReturnFilterDtoCopyWithImpl<$Res>
     Object? refundTotalTo = null,
     Object? statusList = null,
   }) {
-    return _then(_$_ViewByItemReturnFilterDto(
+    return _then(_$_ReturnFilterDto(
       dateFrom: null == dateFrom
           ? _value.dateFrom
           : dateFrom // ignore: cast_nullable_to_non_nullable
@@ -170,8 +165,8 @@ class __$$_ViewByItemReturnFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ViewByItemReturnFilterDto extends _ViewByItemReturnFilterDto {
-  const _$_ViewByItemReturnFilterDto(
+class _$_ReturnFilterDto extends _ReturnFilterDto {
+  const _$_ReturnFilterDto(
       {@JsonKey(name: 'dateFrom', defaultValue: '')
           required this.dateFrom,
       @JsonKey(name: 'dateTo', defaultValue: '')
@@ -185,8 +180,8 @@ class _$_ViewByItemReturnFilterDto extends _ViewByItemReturnFilterDto {
       : _statusList = statusList,
         super._();
 
-  factory _$_ViewByItemReturnFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ViewByItemReturnFilterDtoFromJson(json);
+  factory _$_ReturnFilterDto.fromJson(Map<String, dynamic> json) =>
+      _$$_ReturnFilterDtoFromJson(json);
 
   @override
   @JsonKey(name: 'dateFrom', defaultValue: '')
@@ -211,14 +206,14 @@ class _$_ViewByItemReturnFilterDto extends _ViewByItemReturnFilterDto {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterDto(dateFrom: $dateFrom, dateTo: $dateTo, refundTotalFrom: $refundTotalFrom, refundTotalTo: $refundTotalTo, statusList: $statusList)';
+    return 'ReturnFilterDto(dateFrom: $dateFrom, dateTo: $dateTo, refundTotalFrom: $refundTotalFrom, refundTotalTo: $refundTotalTo, statusList: $statusList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemReturnFilterDto &&
+            other is _$_ReturnFilterDto &&
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom) &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
@@ -243,35 +238,33 @@ class _$_ViewByItemReturnFilterDto extends _ViewByItemReturnFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemReturnFilterDtoCopyWith<_$_ViewByItemReturnFilterDto>
-      get copyWith => __$$_ViewByItemReturnFilterDtoCopyWithImpl<
-          _$_ViewByItemReturnFilterDto>(this, _$identity);
+  _$$_ReturnFilterDtoCopyWith<_$_ReturnFilterDto> get copyWith =>
+      __$$_ReturnFilterDtoCopyWithImpl<_$_ReturnFilterDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ViewByItemReturnFilterDtoToJson(
+    return _$$_ReturnFilterDtoToJson(
       this,
     );
   }
 }
 
-abstract class _ViewByItemReturnFilterDto extends ViewByItemReturnFilterDto {
-  const factory _ViewByItemReturnFilterDto(
-          {@JsonKey(name: 'dateFrom', defaultValue: '')
-              required final String dateFrom,
-          @JsonKey(name: 'dateTo', defaultValue: '')
-              required final String dateTo,
-          @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-              required final String refundTotalFrom,
-          @JsonKey(name: 'refundTotalTo', defaultValue: '')
-              required final String refundTotalTo,
-          @JsonKey(name: 'status', defaultValue: <String>[])
-              required final List<String> statusList}) =
-      _$_ViewByItemReturnFilterDto;
-  const _ViewByItemReturnFilterDto._() : super._();
+abstract class _ReturnFilterDto extends ReturnFilterDto {
+  const factory _ReturnFilterDto(
+      {@JsonKey(name: 'dateFrom', defaultValue: '')
+          required final String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '')
+          required final String dateTo,
+      @JsonKey(name: 'refundTotalFrom', defaultValue: '')
+          required final String refundTotalFrom,
+      @JsonKey(name: 'refundTotalTo', defaultValue: '')
+          required final String refundTotalTo,
+      @JsonKey(name: 'status', defaultValue: <String>[])
+          required final List<String> statusList}) = _$_ReturnFilterDto;
+  const _ReturnFilterDto._() : super._();
 
-  factory _ViewByItemReturnFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_ViewByItemReturnFilterDto.fromJson;
+  factory _ReturnFilterDto.fromJson(Map<String, dynamic> json) =
+      _$_ReturnFilterDto.fromJson;
 
   @override
   @JsonKey(name: 'dateFrom', defaultValue: '')
@@ -290,6 +283,6 @@ abstract class _ViewByItemReturnFilterDto extends ViewByItemReturnFilterDto {
   List<String> get statusList;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemReturnFilterDtoCopyWith<_$_ViewByItemReturnFilterDto>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_ReturnFilterDtoCopyWith<_$_ReturnFilterDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

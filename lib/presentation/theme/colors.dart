@@ -57,6 +57,7 @@ abstract class ZPColors {
   static const Color error = Color.fromRGBO(227, 23, 16, 1);
   static const Color tender = Color.fromRGBO(246, 138, 37, 1);
   static const Color primary = Color.fromRGBO(35, 68, 85, 1.0);
+  static const Color lightPrimary = Color.fromRGBO(167, 180, 187, 1);
   static const Color secondary = Color.fromRGBO(229, 235, 177, 1.0);
   static const Color lightSecondary = Color.fromRGBO(227, 236, 147, 1.0);
   static const Color gradient = Color.fromRGBO(0, 133, 138, 1.0);

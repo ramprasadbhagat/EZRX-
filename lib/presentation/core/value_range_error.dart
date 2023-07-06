@@ -1,0 +1,29 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+class ValueRangeError extends StatelessWidget {
+  final String label;
+  final bool isValid;
+  const ValueRangeError({
+    Key? key,
+    required this.label,
+    required this.isValid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.only(
+        top: 8.0,
+      ),
+      child: Text(
+        isValid ? '' : label.tr(),
+        style: Theme.of(context).textTheme.titleSmall?.apply(
+              color: ZPColors.error,
+            ),
+      ).tr(),
+    );
+  }
+}

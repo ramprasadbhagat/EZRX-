@@ -5,12 +5,16 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_item_filter_page.dart';
+import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +121,15 @@ class _Filter extends StatelessWidget {
               return _FilterTuneIcon(viewByItem: viewByItem);
             },
           )
-        : _FilterTuneIcon(viewByItem: viewByItem);
+        : BlocBuilder<ReturnListByRequestBloc, ReturnListByRequestState>(
+            buildWhen: (previous, current) =>
+                previous.appliedFilter.appliedFilterCount !=
+                    current.appliedFilter.appliedFilterCount ||
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              return _FilterTuneIcon(viewByItem: viewByItem);
+            },
+          );
   }
 }
 
@@ -133,10 +145,14 @@ class _FilterTuneIcon extends StatelessWidget {
             .state
             .appliedFilter
             .appliedFilterCount
-        : 0;
+        : context
+            .read<ReturnListByRequestBloc>()
+            .state
+            .appliedFilter
+            .appliedFilterCount;
     final isNotFetching = viewByItem
         ? !context.read<ReturnListByItemBloc>().state.isFetching
-        : true;
+        : !context.read<ReturnListByRequestBloc>().state.isFetching;
 
     return CustomBadge(
       Icons.tune,
@@ -162,7 +178,12 @@ class _FilterTuneIcon extends StatelessWidget {
                     context.read<ReturnListByItemBloc>().state.appliedFilter,
               ),
             )
-        : null;
+        : context.read<ViewByRequestReturnFilterBloc>().add(
+              ViewByRequestReturnFilterEvent.updateFilterToLastApplied(
+                lastAppliedFilter:
+                    context.read<ReturnListByRequestBloc>().state.appliedFilter,
+              ),
+            );
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -175,27 +196,60 @@ class _FilterTuneIcon extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
-        return viewByItem ? const ReturnByItemFilterPage() : Container();
+        return viewByItem
+            ? const ReturnByItemFilterPage()
+            : const ReturnByRequestFilterPage();
       },
-    ).then((value) {
-      if (value != null) {
-        if (viewByItem) {
-          final appliedFilter =
-              context.read<ReturnListByItemBloc>().state.appliedFilter;
-          if (appliedFilter != value) {
-            context.read<ReturnListByItemBloc>().add(
-                  ReturnListByItemEvent.fetch(
-                    salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                    user: context.read<UserBloc>().state.user,
-                    appliedFilter: value,
-                  ),
-                );
-          }
-        }
-      }
-    });
+    ).then((value) => value != null
+        ? viewByItem
+            ? _doFetchReturnListByItem(
+                context: context,
+                filter: value as ReturnFilter,
+              )
+            : _doFetchReturnListByRequest(
+                context: context,
+                filter: value as ReturnFilter,
+              )
+        : null);
+  }
+
+  void _doFetchReturnListByItem({
+    required BuildContext context,
+    required ReturnFilter filter,
+  }) {
+    final appliedFilter =
+        context.read<ReturnListByItemBloc>().state.appliedFilter;
+    if (appliedFilter != filter) {
+      context.read<ReturnListByItemBloc>().add(
+            ReturnListByItemEvent.fetch(
+              salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              appliedFilter: filter,
+            ),
+          );
+    }
+  }
+
+  void _doFetchReturnListByRequest({
+    required BuildContext context,
+    required ReturnFilter filter,
+  }) {
+    final appliedFilter =
+        context.read<ReturnListByRequestBloc>().state.appliedFilter;
+    if (appliedFilter != filter) {
+      context.read<ReturnListByRequestBloc>().add(
+            ReturnListByRequestEvent.fetch(
+              salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              appliedFilter: filter,
+            ),
+          );
+    }
   }
 }

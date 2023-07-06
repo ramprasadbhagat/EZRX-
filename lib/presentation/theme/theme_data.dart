@@ -310,7 +310,7 @@ ElevatedButtonThemeData _elevatedButtonTheme() {
         fontWeight: FontWeight.w600,
       ),
       elevation: 0,
-      disabledBackgroundColor: ZPColors.darkGray,
+      disabledBackgroundColor: ZPColors.lightPrimary,
       minimumSize: const Size(120, 45),
     ),
   );

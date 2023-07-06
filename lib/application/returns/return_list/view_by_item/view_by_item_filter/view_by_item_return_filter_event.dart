@@ -5,7 +5,7 @@ class ViewByItemReturnFilterEvent with _$ViewByItemReturnFilterEvent {
   const factory ViewByItemReturnFilterEvent.initializeOrResetFilters() =
       _InitializeOrResetFilters;
   const factory ViewByItemReturnFilterEvent.updateFilterToLastApplied({
-    required ViewByItemReturnFilter lastAppliedFilter,
+    required ReturnFilter lastAppliedFilter,
   }) = _UpdateFiltersToLastApplied;
   const factory ViewByItemReturnFilterEvent.setReturnDate({
     required DateTimeRange returnDateRange,

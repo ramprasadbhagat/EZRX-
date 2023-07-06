@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -47,7 +48,7 @@ class ReturnByRequestPage extends StatelessWidget {
             );
           },
           buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
+              previous.returnItemList != current.returnItemList,
           builder: (context, state) {
             return state.isFetching && state.returnItemList.isEmpty
                 ? LoadingShimmer.logo(
@@ -75,6 +76,7 @@ class ReturnByRequestPage extends StatelessWidget {
                                     .state
                                     .customerCodeInfo,
                                 user: context.read<UserBloc>().state.user,
+                                appliedFilter: ReturnFilter.empty(),
                               ),
                             ),
                     onLoadingMore: () =>

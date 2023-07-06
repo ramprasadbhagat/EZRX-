@@ -5,23 +5,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
-part 'view_by_item_return_filter_event.dart';
-part 'view_by_item_return_filter_state.dart';
-part 'view_by_item_return_filter_bloc.freezed.dart';
+part 'view_by_request_return_filter_event.dart';
+part 'view_by_request_return_filter_state.dart';
+part 'view_by_request_return_filter_bloc.freezed.dart';
 
-class ViewByItemReturnFilterBloc
-    extends Bloc<ViewByItemReturnFilterEvent, ViewByItemReturnFilterState> {
-  ViewByItemReturnFilterBloc() : super(ViewByItemReturnFilterState.initial()) {
-    on<ViewByItemReturnFilterEvent>(_onEvent);
+class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
+    ViewByRequestReturnFilterState> {
+  ViewByRequestReturnFilterBloc()
+      : super(ViewByRequestReturnFilterState.initial()) {
+    on<ViewByRequestReturnFilterEvent>(_onEvent);
   }
 
   Future<void> _onEvent(
-    ViewByItemReturnFilterEvent event,
-    Emitter<ViewByItemReturnFilterState> emit,
+    ViewByRequestReturnFilterEvent event,
+    Emitter<ViewByRequestReturnFilterState> emit,
   ) async {
     await event.map(
       initializeOrResetFilters: (e) async => emit(
-        ViewByItemReturnFilterState.initial(),
+        ViewByRequestReturnFilterState.initial(),
       ),
       setReturnDate: (e) async => emit(
         state.copyWith(
@@ -62,14 +63,14 @@ class ViewByItemReturnFilterBloc
           ),
         );
       },
-      setValidationFailure: (_) async => emit(
-        state.copyWith(
-          showErrorMessage: !state.filter.isReturnAmountValueRangeValid,
-        ),
-      ),
       updateFilterToLastApplied: (e) async => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
+        ),
+      ),
+      setValidationFailure: (_) async => emit(
+        state.copyWith(
+          showErrorMessage: !state.filter.isReturnAmountValueRangeValid,
         ),
       ),
     );

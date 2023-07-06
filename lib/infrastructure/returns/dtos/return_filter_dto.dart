@@ -1,13 +1,13 @@
-import 'package:ezrxmobile/domain/returns/entities/view_by_item_return_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'view_by_item_return_filter_dto.freezed.dart';
-part 'view_by_item_return_filter_dto.g.dart';
+part 'return_filter_dto.freezed.dart';
+part 'return_filter_dto.g.dart';
 
 @freezed
-class ViewByItemReturnFilterDto with _$ViewByItemReturnFilterDto {
-  const ViewByItemReturnFilterDto._();
-  const factory ViewByItemReturnFilterDto({
+class ReturnFilterDto with _$ReturnFilterDto {
+  const ReturnFilterDto._();
+  const factory ReturnFilterDto({
     @JsonKey(
       name: 'dateFrom',
       defaultValue: '',
@@ -33,24 +33,23 @@ class ViewByItemReturnFilterDto with _$ViewByItemReturnFilterDto {
       defaultValue: <String>[],
     )
         required List<String> statusList,
-  }) = _ViewByItemReturnFilterDto;
+  }) = _ReturnFilterDto;
 
-  factory ViewByItemReturnFilterDto.fromDomain(
-    ViewByItemReturnFilter viewByItemReturnFilter,
+  factory ReturnFilterDto.fromDomain(
+    ReturnFilter returnFilter,
   ) {
-    return ViewByItemReturnFilterDto(
-      statusList: viewByItemReturnFilter.returnStatusList
-          .map((e) => e.getOrCrash())
-          .toList(),
-      dateTo: viewByItemReturnFilter.returnDateTo.apiDateTimeFormat,
-      dateFrom: viewByItemReturnFilter.returnDateFrom.apiDateTimeFormat,
-      refundTotalFrom: viewByItemReturnFilter.amountValueFrom.apiParameterValue,
-      refundTotalTo: viewByItemReturnFilter.amountValueTo.apiParameterValue,
+    return ReturnFilterDto(
+      statusList:
+          returnFilter.returnStatusList.map((e) => e.getOrCrash()).toList(),
+      dateTo: returnFilter.returnDateTo.apiDateTimeFormat,
+      dateFrom: returnFilter.returnDateFrom.apiDateTimeFormat,
+      refundTotalFrom: returnFilter.amountValueFrom.apiParameterValue,
+      refundTotalTo: returnFilter.amountValueTo.apiParameterValue,
     );
   }
 
-  factory ViewByItemReturnFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$ViewByItemReturnFilterDtoFromJson(json);
+  factory ReturnFilterDto.fromJson(Map<String, dynamic> json) =>
+      _$ReturnFilterDtoFromJson(json);
 
   Map<String, dynamic> get toMapList {
     final filterMap = <String, dynamic>{};

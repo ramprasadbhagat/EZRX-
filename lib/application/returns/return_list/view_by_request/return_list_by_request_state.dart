@@ -8,6 +8,7 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isFetching,
     required bool canLoadMore,
+    required ReturnFilter appliedFilter,
   }) = _ReturnListByRequestState;
 
   factory ReturnListByRequestState.initial() => ReturnListByRequestState(
@@ -15,5 +16,6 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
         isFetching: false,
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
+        appliedFilter: ReturnFilter.empty(),
       );
 }

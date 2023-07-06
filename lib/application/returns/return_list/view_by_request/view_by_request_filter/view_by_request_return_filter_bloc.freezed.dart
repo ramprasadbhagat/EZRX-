@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'view_by_item_return_filter_bloc.dart';
+part of 'view_by_request_return_filter_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ViewByItemReturnFilterEvent {
+mixin _$ViewByRequestReturnFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeOrResetFilters,
@@ -94,19 +94,19 @@ mixin _$ViewByItemReturnFilterEvent {
 }
 
 /// @nodoc
-abstract class $ViewByItemReturnFilterEventCopyWith<$Res> {
-  factory $ViewByItemReturnFilterEventCopyWith(
-          ViewByItemReturnFilterEvent value,
-          $Res Function(ViewByItemReturnFilterEvent) then) =
-      _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
-          ViewByItemReturnFilterEvent>;
+abstract class $ViewByRequestReturnFilterEventCopyWith<$Res> {
+  factory $ViewByRequestReturnFilterEventCopyWith(
+          ViewByRequestReturnFilterEvent value,
+          $Res Function(ViewByRequestReturnFilterEvent) then) =
+      _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+          ViewByRequestReturnFilterEvent>;
 }
 
 /// @nodoc
-class _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
-        $Val extends ViewByItemReturnFilterEvent>
-    implements $ViewByItemReturnFilterEventCopyWith<$Res> {
-  _$ViewByItemReturnFilterEventCopyWithImpl(this._value, this._then);
+class _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        $Val extends ViewByRequestReturnFilterEvent>
+    implements $ViewByRequestReturnFilterEventCopyWith<$Res> {
+  _$ViewByRequestReturnFilterEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -124,7 +124,7 @@ abstract class _$$_InitializeOrResetFiltersCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializeOrResetFiltersCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
         _$_InitializeOrResetFilters>
     implements _$$_InitializeOrResetFiltersCopyWith<$Res> {
   __$$_InitializeOrResetFiltersCopyWithImpl(_$_InitializeOrResetFilters _value,
@@ -139,7 +139,7 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.initializeOrResetFilters()';
+    return 'ViewByRequestReturnFilterEvent.initializeOrResetFilters()';
   }
 
   @override
@@ -253,7 +253,7 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
 }
 
 abstract class _InitializeOrResetFilters
-    implements ViewByItemReturnFilterEvent {
+    implements ViewByRequestReturnFilterEvent {
   const factory _InitializeOrResetFilters() = _$_InitializeOrResetFilters;
 }
 
@@ -271,7 +271,7 @@ abstract class _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
         _$_UpdateFiltersToLastApplied>
     implements _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
   __$$_UpdateFiltersToLastAppliedCopyWithImpl(
@@ -311,7 +311,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.updateFilterToLastApplied(lastAppliedFilter: $lastAppliedFilter)';
+    return 'ViewByRequestReturnFilterEvent.updateFilterToLastApplied(lastAppliedFilter: $lastAppliedFilter)';
   }
 
   @override
@@ -434,7 +434,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
 }
 
 abstract class _UpdateFiltersToLastApplied
-    implements ViewByItemReturnFilterEvent {
+    implements ViewByRequestReturnFilterEvent {
   const factory _UpdateFiltersToLastApplied(
           {required final ReturnFilter lastAppliedFilter}) =
       _$_UpdateFiltersToLastApplied;
@@ -456,7 +456,7 @@ abstract class _$$_SetReturnDateCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetReturnDateCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res, _$_SetReturnDate>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_SetReturnDate>
     implements _$$_SetReturnDateCopyWith<$Res> {
   __$$_SetReturnDateCopyWithImpl(
       _$_SetReturnDate _value, $Res Function(_$_SetReturnDate) _then)
@@ -486,7 +486,7 @@ class _$_SetReturnDate implements _SetReturnDate {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.setReturnDate(returnDateRange: $returnDateRange)';
+    return 'ViewByRequestReturnFilterEvent.setReturnDate(returnDateRange: $returnDateRange)';
   }
 
   @override
@@ -607,7 +607,7 @@ class _$_SetReturnDate implements _SetReturnDate {
   }
 }
 
-abstract class _SetReturnDate implements ViewByItemReturnFilterEvent {
+abstract class _SetReturnDate implements ViewByRequestReturnFilterEvent {
   const factory _SetReturnDate({required final DateTimeRange returnDateRange}) =
       _$_SetReturnDate;
 
@@ -628,7 +628,7 @@ abstract class _$$_SetAmountFromCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetAmountFromCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res, _$_SetAmountFrom>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_SetAmountFrom>
     implements _$$_SetAmountFromCopyWith<$Res> {
   __$$_SetAmountFromCopyWithImpl(
       _$_SetAmountFrom _value, $Res Function(_$_SetAmountFrom) _then)
@@ -658,7 +658,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.setAmountFrom(amountFrom: $amountFrom)';
+    return 'ViewByRequestReturnFilterEvent.setAmountFrom(amountFrom: $amountFrom)';
   }
 
   @override
@@ -779,7 +779,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   }
 }
 
-abstract class _SetAmountFrom implements ViewByItemReturnFilterEvent {
+abstract class _SetAmountFrom implements ViewByRequestReturnFilterEvent {
   const factory _SetAmountFrom({required final String amountFrom}) =
       _$_SetAmountFrom;
 
@@ -800,7 +800,7 @@ abstract class _$$_SetAmountToCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetAmountToCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res, _$_SetAmountTo>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_SetAmountTo>
     implements _$$_SetAmountToCopyWith<$Res> {
   __$$_SetAmountToCopyWithImpl(
       _$_SetAmountTo _value, $Res Function(_$_SetAmountTo) _then)
@@ -830,7 +830,7 @@ class _$_SetAmountTo implements _SetAmountTo {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.setAmountTo(amountTo: $amountTo)';
+    return 'ViewByRequestReturnFilterEvent.setAmountTo(amountTo: $amountTo)';
   }
 
   @override
@@ -951,7 +951,7 @@ class _$_SetAmountTo implements _SetAmountTo {
   }
 }
 
-abstract class _SetAmountTo implements ViewByItemReturnFilterEvent {
+abstract class _SetAmountTo implements ViewByRequestReturnFilterEvent {
   const factory _SetAmountTo({required final String amountTo}) = _$_SetAmountTo;
 
   String get amountTo;
@@ -971,8 +971,8 @@ abstract class _$$_SetReturnStatusCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetReturnStatusCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res, _$_SetReturnStatus>
-    implements _$$_SetReturnStatusCopyWith<$Res> {
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        _$_SetReturnStatus> implements _$$_SetReturnStatusCopyWith<$Res> {
   __$$_SetReturnStatusCopyWithImpl(
       _$_SetReturnStatus _value, $Res Function(_$_SetReturnStatus) _then)
       : super(_value, _then);
@@ -1008,7 +1008,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.setReturnStatus(status: $status, value: $value)';
+    return 'ViewByRequestReturnFilterEvent.setReturnStatus(status: $status, value: $value)';
   }
 
   @override
@@ -1129,7 +1129,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   }
 }
 
-abstract class _SetReturnStatus implements ViewByItemReturnFilterEvent {
+abstract class _SetReturnStatus implements ViewByRequestReturnFilterEvent {
   const factory _SetReturnStatus(
       {required final StatusType status,
       required final bool value}) = _$_SetReturnStatus;
@@ -1150,7 +1150,7 @@ abstract class _$$_SetValidationFailureCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetValidationFailureCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
         _$_SetValidationFailure>
     implements _$$_SetValidationFailureCopyWith<$Res> {
   __$$_SetValidationFailureCopyWithImpl(_$_SetValidationFailure _value,
@@ -1165,7 +1165,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.setValidationFailure()';
+    return 'ViewByRequestReturnFilterEvent.setValidationFailure()';
   }
 
   @override
@@ -1277,28 +1277,28 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   }
 }
 
-abstract class _SetValidationFailure implements ViewByItemReturnFilterEvent {
+abstract class _SetValidationFailure implements ViewByRequestReturnFilterEvent {
   const factory _SetValidationFailure() = _$_SetValidationFailure;
 }
 
 /// @nodoc
-mixin _$ViewByItemReturnFilterState {
+mixin _$ViewByRequestReturnFilterState {
   ReturnFilter get filter => throw _privateConstructorUsedError;
   List<StatusType> get statusList => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ViewByItemReturnFilterStateCopyWith<ViewByItemReturnFilterState>
+  $ViewByRequestReturnFilterStateCopyWith<ViewByRequestReturnFilterState>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByItemReturnFilterStateCopyWith<$Res> {
-  factory $ViewByItemReturnFilterStateCopyWith(
-          ViewByItemReturnFilterState value,
-          $Res Function(ViewByItemReturnFilterState) then) =
-      _$ViewByItemReturnFilterStateCopyWithImpl<$Res,
-          ViewByItemReturnFilterState>;
+abstract class $ViewByRequestReturnFilterStateCopyWith<$Res> {
+  factory $ViewByRequestReturnFilterStateCopyWith(
+          ViewByRequestReturnFilterState value,
+          $Res Function(ViewByRequestReturnFilterState) then) =
+      _$ViewByRequestReturnFilterStateCopyWithImpl<$Res,
+          ViewByRequestReturnFilterState>;
   @useResult
   $Res call(
       {ReturnFilter filter,
@@ -1309,10 +1309,10 @@ abstract class $ViewByItemReturnFilterStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ViewByItemReturnFilterStateCopyWithImpl<$Res,
-        $Val extends ViewByItemReturnFilterState>
-    implements $ViewByItemReturnFilterStateCopyWith<$Res> {
-  _$ViewByItemReturnFilterStateCopyWithImpl(this._value, this._then);
+class _$ViewByRequestReturnFilterStateCopyWithImpl<$Res,
+        $Val extends ViewByRequestReturnFilterState>
+    implements $ViewByRequestReturnFilterStateCopyWith<$Res> {
+  _$ViewByRequestReturnFilterStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1352,12 +1352,12 @@ class _$ViewByItemReturnFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemReturnFilterStateCopyWith<$Res>
-    implements $ViewByItemReturnFilterStateCopyWith<$Res> {
-  factory _$$_ViewByItemReturnFilterStateCopyWith(
-          _$_ViewByItemReturnFilterState value,
-          $Res Function(_$_ViewByItemReturnFilterState) then) =
-      __$$_ViewByItemReturnFilterStateCopyWithImpl<$Res>;
+abstract class _$$_ViewByRequestReturnFilterStateCopyWith<$Res>
+    implements $ViewByRequestReturnFilterStateCopyWith<$Res> {
+  factory _$$_ViewByRequestReturnFilterStateCopyWith(
+          _$_ViewByRequestReturnFilterState value,
+          $Res Function(_$_ViewByRequestReturnFilterState) then) =
+      __$$_ViewByRequestReturnFilterStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1370,13 +1370,13 @@ abstract class _$$_ViewByItemReturnFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByItemReturnFilterStateCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterStateCopyWithImpl<$Res,
-        _$_ViewByItemReturnFilterState>
-    implements _$$_ViewByItemReturnFilterStateCopyWith<$Res> {
-  __$$_ViewByItemReturnFilterStateCopyWithImpl(
-      _$_ViewByItemReturnFilterState _value,
-      $Res Function(_$_ViewByItemReturnFilterState) _then)
+class __$$_ViewByRequestReturnFilterStateCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterStateCopyWithImpl<$Res,
+        _$_ViewByRequestReturnFilterState>
+    implements _$$_ViewByRequestReturnFilterStateCopyWith<$Res> {
+  __$$_ViewByRequestReturnFilterStateCopyWithImpl(
+      _$_ViewByRequestReturnFilterState _value,
+      $Res Function(_$_ViewByRequestReturnFilterState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1386,7 +1386,7 @@ class __$$_ViewByItemReturnFilterStateCopyWithImpl<$Res>
     Object? statusList = null,
     Object? showErrorMessage = null,
   }) {
-    return _then(_$_ViewByItemReturnFilterState(
+    return _then(_$_ViewByRequestReturnFilterState(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -1405,8 +1405,9 @@ class __$$_ViewByItemReturnFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByItemReturnFilterState extends _ViewByItemReturnFilterState {
-  const _$_ViewByItemReturnFilterState(
+class _$_ViewByRequestReturnFilterState
+    extends _ViewByRequestReturnFilterState {
+  const _$_ViewByRequestReturnFilterState(
       {required this.filter,
       required final List<StatusType> statusList,
       required this.showErrorMessage})
@@ -1428,14 +1429,14 @@ class _$_ViewByItemReturnFilterState extends _ViewByItemReturnFilterState {
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterState(filter: $filter, statusList: $statusList, showErrorMessage: $showErrorMessage)';
+    return 'ViewByRequestReturnFilterState(filter: $filter, statusList: $statusList, showErrorMessage: $showErrorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemReturnFilterState &&
+            other is _$_ViewByRequestReturnFilterState &&
             (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._statusList, _statusList) &&
@@ -1450,18 +1451,19 @@ class _$_ViewByItemReturnFilterState extends _ViewByItemReturnFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemReturnFilterStateCopyWith<_$_ViewByItemReturnFilterState>
-      get copyWith => __$$_ViewByItemReturnFilterStateCopyWithImpl<
-          _$_ViewByItemReturnFilterState>(this, _$identity);
+  _$$_ViewByRequestReturnFilterStateCopyWith<_$_ViewByRequestReturnFilterState>
+      get copyWith => __$$_ViewByRequestReturnFilterStateCopyWithImpl<
+          _$_ViewByRequestReturnFilterState>(this, _$identity);
 }
 
-abstract class _ViewByItemReturnFilterState
-    extends ViewByItemReturnFilterState {
-  const factory _ViewByItemReturnFilterState(
-      {required final ReturnFilter filter,
-      required final List<StatusType> statusList,
-      required final bool showErrorMessage}) = _$_ViewByItemReturnFilterState;
-  const _ViewByItemReturnFilterState._() : super._();
+abstract class _ViewByRequestReturnFilterState
+    extends ViewByRequestReturnFilterState {
+  const factory _ViewByRequestReturnFilterState(
+          {required final ReturnFilter filter,
+          required final List<StatusType> statusList,
+          required final bool showErrorMessage}) =
+      _$_ViewByRequestReturnFilterState;
+  const _ViewByRequestReturnFilterState._() : super._();
 
   @override
   ReturnFilter get filter;
@@ -1471,6 +1473,6 @@ abstract class _ViewByItemReturnFilterState
   bool get showErrorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemReturnFilterStateCopyWith<_$_ViewByItemReturnFilterState>
+  _$$_ViewByRequestReturnFilterStateCopyWith<_$_ViewByRequestReturnFilterState>
       get copyWith => throw _privateConstructorUsedError;
 }

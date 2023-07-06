@@ -9,7 +9,7 @@ class ReturnListByItemEvent with _$ReturnListByItemEvent {
     required ShipToInfo shipInfo,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
-    required ViewByItemReturnFilter appliedFilter,
+    required ReturnFilter appliedFilter,
   }) = _Fetch;
   const factory ReturnListByItemEvent.loadMore({
     required User user,

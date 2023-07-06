@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +20,9 @@ class ReturnListByRequestBloc
     extends Bloc<ReturnListByRequestEvent, ReturnListByRequestState> {
   final IReturnListRepository returnListRepository;
 
-  ReturnListByRequestBloc({required this.returnListRepository})
-      : super(ReturnListByRequestState.initial()) {
+  ReturnListByRequestBloc({
+    required this.returnListRepository,
+  }) : super(ReturnListByRequestState.initial()) {
     on<ReturnListByRequestEvent>(_onEvent);
   }
 
@@ -36,6 +38,7 @@ class ReturnListByRequestBloc
             failureOrSuccessOption: none(),
             returnItemList: <ReturnItem>[],
             isFetching: true,
+            appliedFilter: e.appliedFilter,
           ),
         );
 
@@ -47,6 +50,7 @@ class ReturnListByRequestBloc
           user: e.user,
           pageSize: _pageSize,
           offset: 0,
+          appliedFilter: e.appliedFilter,
         );
 
         failureOrSuccess.fold(
@@ -87,6 +91,7 @@ class ReturnListByRequestBloc
           user: e.user,
           pageSize: _pageSize,
           offset: state.returnItemList.length,
+          appliedFilter: state.appliedFilter,
         );
 
         failureOrSuccess.fold(

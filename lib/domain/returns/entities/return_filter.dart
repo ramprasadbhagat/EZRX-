@@ -3,20 +3,20 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
-part 'view_by_item_return_filter.freezed.dart';
+part 'return_filter.freezed.dart';
 
 @freezed
-class ViewByItemReturnFilter with _$ViewByItemReturnFilter {
-  const ViewByItemReturnFilter._();
-  factory ViewByItemReturnFilter({
+class ReturnFilter with _$ReturnFilter {
+  const ReturnFilter._();
+  factory ReturnFilter({
     required DateTimeStringValue returnDateFrom,
     required DateTimeStringValue returnDateTo,
     required RangeValue amountValueFrom,
     required RangeValue amountValueTo,
     required List<StatusType> returnStatusList,
-  }) = _ViewByItemReturnFilter;
+  }) = _ReturnFilter;
 
-  factory ViewByItemReturnFilter.empty() => ViewByItemReturnFilter(
+  factory ReturnFilter.empty() => ReturnFilter(
         returnDateFrom: DateTimeStringValue(''),
         returnDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),

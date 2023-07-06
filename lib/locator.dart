@@ -51,6 +51,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
@@ -1662,6 +1663,10 @@ void setupLocator() {
     () => ViewByItemReturnFilterBloc(),
   );
 
+  locator.registerLazySingleton(
+    () => ViewByRequestReturnFilterBloc(),
+  );
+
   //============================================================
   //  Return Request List
   //
@@ -2394,7 +2399,7 @@ void setupLocator() {
     () => CreditAndInvoiceDetailsBloc(
       creditAndInvoiceDetailsRepository:
           locator<CreditAndInvoiceDetailsRepository>(),
-       productImagesRepository: locator<ProductImagesRepository>(),     
+      productImagesRepository: locator<ProductImagesRepository>(),
     ),
   );
   locator.registerLazySingleton(

@@ -80,6 +80,7 @@ class ReturnListRemoteDataSource {
     required String userName,
     required int first,
     required int after,
+    required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getRequestsByRequest();
@@ -90,6 +91,7 @@ class ReturnListRemoteDataSource {
         'username': userName,
         'first': first,
         'after': after,
+        ...filterQuery,
       };
 
       final res = await httpService.request(

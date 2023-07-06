@@ -141,9 +141,9 @@ class DateTimeStringValue extends ValueObject<String> {
   int get dateTimeIntValue => getDateTimeIntValue(value.getOrElse(() => ''));
 
   String get getAnnouncementDateFormat => displayAnnouncementDateOrEmpty(
-      value.getOrElse(() => ''),
-      DateTimeFormatString.displayDateFormat,
-    );
+        value.getOrElse(() => ''),
+        DateTimeFormatString.displayDateFormat,
+      );
 
   const DateTimeStringValue._(this.value);
 }
@@ -243,6 +243,9 @@ class StatusType extends ValueObject<String> {
   }
 
   String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
+
+  String get displayStatusForViewByRequest =>
+      getReturnByRequestStatus(value.getOrElse(() => ''));
 
   Color get displayStatusTextColor =>
       getStatusTextColor(value.getOrElse(() => ''));
