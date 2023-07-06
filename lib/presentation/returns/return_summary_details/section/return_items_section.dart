@@ -81,7 +81,12 @@ class ReturnItemsSection extends StatelessWidget {
                             keyText: 'SAP RO Creation'.tr(),
                             valueText: e.sAPROCreationValue,
                             valueTextLoading: state.isLoading,
-                            valueColor: ZPColors.red,
+                            valueTextStyle: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: ZPColors.red,
+                                ),
                           ),
                           const Divider(
                             endIndent: 0,

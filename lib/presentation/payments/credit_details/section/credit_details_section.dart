@@ -43,36 +43,48 @@ class CreditDetailsSection extends StatelessWidget {
           subtitle: Column(children: [
             BalanceTextRow(
               keyText: 'Document date',
-              keyColor: ZPColors.white,
               valueText: creditItem.documentDate.toValidDateString,
-              valueColor: ZPColors.white,
-              keyFlex: 1,
               valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'Document type',
-              keyColor: ZPColors.white,
               valueText: creditItem.accountingDocumentType,
-              valueColor: ZPColors.white,
-              keyFlex: 1,
               valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'Return number',
-              keyColor: ZPColors.white,
               valueText:
                   '#${creditItem.invoiceReference.getOrDefaultValue('')}',
-              valueColor: ZPColors.white,
-              keyFlex: 1,
               valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'Details',
-              keyColor: ZPColors.white,
               valueText: creditItem.postingKeyName,
-              valueColor: ZPColors.white,
-              keyFlex: 1,
               valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
           ]),
         ),

@@ -75,7 +75,9 @@ class InvoiceDetailsSection extends StatelessWidget {
           keyText: 'Status'.tr(),
           valueText: invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
           isStatus: true,
-          valueColor: invoiceItem.invoiceProcessingStatus.displayDueDateColor,
+          valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: invoiceItem.invoiceProcessingStatus.displayDueDateColor,
+              ),
         ),
       ],
     );

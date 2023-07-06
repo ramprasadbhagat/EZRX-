@@ -67,10 +67,13 @@ class _MaterialInfoDialog extends StatelessWidget {
           BalanceTextRow(
             keyText: 'Material Number'.tr(),
             valueText: materialInfo.materialNumber.displayMatNo,
-            keyFlex: 1,
             valueFlex: 1,
-            keyColor: ZPColors.black,
-            valueColor: ZPColors.darkGray,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
@@ -78,48 +81,64 @@ class _MaterialInfoDialog extends StatelessWidget {
             valueText:
                 materialInfo.principalData.principalName
                 .getOrDefaultValue(''),
-            keyFlex: 1,
             valueFlex: 1,
-            keyColor: ZPColors.black,
-            valueColor: ZPColors.darkGray,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Unit of measurement'.tr(),
             valueText: materialInfo.unitOfMeasurement,
-            keyFlex: 1,
             valueFlex: 1,
-            keyColor: ZPColors.black,
-            valueColor: ZPColors.darkGray,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Country of origin'.tr(),
             valueText: materialInfo.countryData.countryName,
-            keyFlex: 1,
             valueFlex: 1,
-            keyColor: ZPColors.black,
-            valueColor: ZPColors.darkGray,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Batch'.tr(),
             valueText:
                 productDetailAggregate.stockInfo.batch.getOrDefaultValue(''),
-            keyFlex: 1,
             valueFlex: 1,
-            keyColor: ZPColors.black,
-            valueColor: ZPColors.darkGray,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
                 keyText: 'Expiry'.tr(),
                 valueText: productDetailAggregate
                     .stockInfo.expiryDate.toSimpleDateString,
-            keyFlex: 1,
-            valueFlex: 1,
-                keyColor: ZPColors.black,
-                valueColor: ZPColors.darkGray,
+                valueFlex: 1,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.black,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.darkGray,
+                        ),
               ),
           Align(
             alignment: Alignment.centerRight,

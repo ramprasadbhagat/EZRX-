@@ -12,8 +12,6 @@ class BalanceTextRow extends StatelessWidget {
   final int valueFlex;
   final bool valueTextLoading;
   final bool isStatus;
-  final Color valueColor;
-  final Color keyColor;
   final TextStyle? keyTextStyle;
   final TextStyle? valueTextStyle;
 
@@ -25,14 +23,21 @@ class BalanceTextRow extends StatelessWidget {
     this.valueFlex = 2,
     this.valueTextLoading = false,
     this.isStatus = false,
-    this.valueColor = ZPColors.black,
-    this.keyColor = ZPColors.darkGray,
     this.keyTextStyle,
     this.valueTextStyle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final keyStyle = keyTextStyle ??
+        Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: ZPColors.darkGray,
+            );
+    final valueStyle = valueTextStyle ??
+        Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: ZPColors.black,
+            );
+
     return Padding(
       key: WidgetKeys.balanceTextRow(keyText, valueText),
       padding: const EdgeInsets.symmetric(
@@ -44,10 +49,7 @@ class BalanceTextRow extends StatelessWidget {
             flex: keyFlex,
             child: Text(
               keyText,
-              style: keyTextStyle ??
-                  Theme.of(context).textTheme.titleSmall?.apply(
-                        color: keyColor,
-                      ),
+              style: keyStyle,
             ),
           ),
           Expanded(
@@ -62,22 +64,20 @@ class BalanceTextRow extends StatelessWidget {
                         children: [
                           Text(
                             ': ',
-                            style: Theme.of(context).textTheme.titleSmall,
+                            style: valueStyle,
                           ),
                           Flexible(
                             child: StatusLabel(
                               status: StatusType(valueText),
-                              valueColor: valueColor,
+                              valueColor:
+                                  valueStyle?.color ?? ZPColors.darkGray,
                             ),
                           ),
                         ],
                       )
                     : Text(
                         ': $valueText',
-                        style: valueTextStyle ??
-                            Theme.of(context).textTheme.titleSmall?.apply(
-                                  color: valueColor,
-                                ),
+                        style: valueStyle,
                       ),
           ),
         ],

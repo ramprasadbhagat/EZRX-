@@ -15,8 +15,7 @@ class ItemHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final paymentTermDisplay =
-    //     context.read<EligibilityBloc>().state.isPaymentTermDescriptionEnable;
+    
     return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
@@ -39,21 +38,33 @@ class ItemHeaderSection extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Order date',
-              keyColor: ZPColors.white,
               valueText: orderHistoryItem.createdDate.toValidDateString,
-              valueColor: ZPColors.white,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.green,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'Invoice number',
-              keyColor: ZPColors.white,
               valueText: orderHistoryItem.invoiceNumber,
-              valueColor: ZPColors.white,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'PO reference',
-              keyColor: ZPColors.white,
               valueText: orderHistoryItem.pOReference.displayPOReference,
-              valueColor: ZPColors.white,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             !context
                     .read<EligibilityBloc>()
@@ -62,10 +73,17 @@ class ItemHeaderSection extends StatelessWidget {
                     .disableDeliveryDate
                 ? BalanceTextRow(
                     keyText: 'Requested Delivery Date',
-                    keyColor: ZPColors.white,
                     valueText: orderHistoryItem
                         .requestedDeliveryDate.toValidDateString,
-                    valueColor: ZPColors.white,
+                    
+                    keyTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                    valueTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
                   )
                 : const SizedBox.shrink(),
             //TODO:will add value after getting data  from orderHistoryv2 api for these fields
@@ -81,23 +99,35 @@ class ItemHeaderSection extends StatelessWidget {
             // ): const SizedBox.shrink(),
             BalanceTextRow(
               keyText: 'Contact person',
-              keyColor: ZPColors.white,
               valueText: orderHistoryItem.orderBy,
-              valueColor: ZPColors.white,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'Contact number',
-              keyColor: ZPColors.white,
               valueText:
                   orderHistoryItem.telephoneNumber.displayTelephoneNumber,
-              valueColor: ZPColors.white,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
             BalanceTextRow(
               keyText: 'Delivery instructions',
-              keyColor: ZPColors.white,
               valueText: orderHistoryItem
                   .specialInstructions.displaySpecialInstructions,
-              valueColor: ZPColors.white,
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
             ),
           ]),
         );
