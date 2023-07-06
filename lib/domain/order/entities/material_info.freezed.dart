@@ -30,7 +30,8 @@ mixin _$MaterialInfo {
   bool get isGimmick => throw _privateConstructorUsedError;
   List<StockInfo> get stockInfos => throw _privateConstructorUsedError;
   Bundle get bundle => throw _privateConstructorUsedError;
-  ProductImages get productImages =>
+  ProductImages get productImages => throw _privateConstructorUsedError;
+  CountryData get countryData =>
       throw _privateConstructorUsedError; //TODO: remove field from v2
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
@@ -80,6 +81,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       List<StockInfo> stockInfos,
       Bundle bundle,
       ProductImages productImages,
+      CountryData countryData,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
@@ -103,6 +105,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
   $PrincipalDataCopyWith<$Res> get principalData;
   $BundleCopyWith<$Res> get bundle;
   $ProductImagesCopyWith<$Res> get productImages;
+  $CountryDataCopyWith<$Res> get countryData;
 }
 
 /// @nodoc
@@ -133,6 +136,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? stockInfos = null,
     Object? bundle = null,
     Object? productImages = null,
+    Object? countryData = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
@@ -214,6 +218,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      countryData: null == countryData
+          ? _value.countryData
+          : countryData // ignore: cast_nullable_to_non_nullable
+              as CountryData,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -316,6 +324,14 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
       return _then(_value.copyWith(productImages: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CountryDataCopyWith<$Res> get countryData {
+    return $CountryDataCopyWith<$Res>(_value.countryData, (value) {
+      return _then(_value.copyWith(countryData: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -342,6 +358,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       List<StockInfo> stockInfos,
       Bundle bundle,
       ProductImages productImages,
+      CountryData countryData,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
@@ -368,6 +385,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
   $BundleCopyWith<$Res> get bundle;
   @override
   $ProductImagesCopyWith<$Res> get productImages;
+  @override
+  $CountryDataCopyWith<$Res> get countryData;
 }
 
 /// @nodoc
@@ -396,6 +415,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? stockInfos = null,
     Object? bundle = null,
     Object? productImages = null,
+    Object? countryData = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
@@ -477,6 +497,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
               as ProductImages,
+      countryData: null == countryData
+          ? _value.countryData
+          : countryData // ignore: cast_nullable_to_non_nullable
+              as CountryData,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -576,6 +600,7 @@ class _$_MaterialInfo extends _MaterialInfo {
       required final List<StockInfo> stockInfos,
       required this.bundle,
       required this.productImages,
+      required this.countryData,
       required this.defaultMaterialDescription,
       required this.governmentMaterialCode,
       required this.therapeuticClass,
@@ -643,6 +668,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   final Bundle bundle;
   @override
   final ProductImages productImages;
+  @override
+  final CountryData countryData;
 //TODO: remove field from v2
   @override
   final String defaultMaterialDescription;
@@ -697,7 +724,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
   }
 
   @override
@@ -731,6 +758,8 @@ class _$_MaterialInfo extends _MaterialInfo {
             (identical(other.bundle, bundle) || other.bundle == bundle) &&
             (identical(other.productImages, productImages) ||
                 other.productImages == productImages) &&
+            (identical(other.countryData, countryData) ||
+                other.countryData == countryData) &&
             (identical(other.defaultMaterialDescription,
                     defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
@@ -789,6 +818,7 @@ class _$_MaterialInfo extends _MaterialInfo {
         const DeepCollectionEquality().hash(_stockInfos),
         bundle,
         productImages,
+        countryData,
         defaultMaterialDescription,
         governmentMaterialCode,
         therapeuticClass,
@@ -834,6 +864,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final List<StockInfo> stockInfos,
       required final Bundle bundle,
       required final ProductImages productImages,
+      required final CountryData countryData,
       required final String defaultMaterialDescription,
       required final String governmentMaterialCode,
       required final String therapeuticClass,
@@ -885,6 +916,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   Bundle get bundle;
   @override
   ProductImages get productImages;
+  @override
+  CountryData get countryData;
   @override //TODO: remove field from v2
   String get defaultMaterialDescription;
   @override

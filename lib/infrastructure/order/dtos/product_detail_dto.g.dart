@@ -18,19 +18,13 @@ _$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
       itemBrand: json['itemBrand'] as String? ?? '',
       materialBrand: json['materialBrand'] as String? ?? '',
       isFavourite: json['isFavourite'] as bool? ?? false,
-      warehouseStorageCondition:
-          json['warehouseStorageCondition'] as String? ?? '',
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
-      isMarketplaceProduct: json['isMarketplaceProduct'] as bool? ?? false,
       country: json['country'] as String? ?? '',
       countryName: json['countryName'] as String? ?? '',
       hidePrice: json['hidePrice'] as bool? ?? false,
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
-      suspensionStatus: json['suspensionStatus'] as bool? ?? false,
-      promoStatus: json['promoStatus'] as bool? ?? false,
-      promoType: json['promoType'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
@@ -45,15 +39,10 @@ Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
       'itemBrand': instance.itemBrand,
       'materialBrand': instance.materialBrand,
       'isFavourite': instance.isFavourite,
-      'warehouseStorageCondition': instance.warehouseStorageCondition,
       'defaultMaterialDescription': instance.defaultMaterialDescription,
-      'isMarketplaceProduct': instance.isMarketplaceProduct,
       'country': instance.country,
       'countryName': instance.countryName,
       'hidePrice': instance.hidePrice,
       'governmentMaterialCode': instance.governmentMaterialCode,
       'itemRegistrationNumber': instance.itemRegistrationNumber,
-      'suspensionStatus': instance.suspensionStatus,
-      'promoStatus': instance.promoStatus,
-      'promoType': instance.promoType,
     };

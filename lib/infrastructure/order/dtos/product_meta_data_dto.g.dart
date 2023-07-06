@@ -30,31 +30,9 @@ Map<String, dynamic> _$$_ProductMetaDataDtoToJson(
 _$_ProductItemDto _$$_ProductItemDtoFromJson(Map<String, dynamic> json) =>
     _$_ProductItemDto(
       promotionMaterial: json['PromotionMaterial'] as String? ?? '',
-      hidePrice: json['HidePrice'] as bool? ?? false,
-      xp: ProductItemXpDto.fromJson(json['XP'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ProductItemDtoToJson(_$_ProductItemDto instance) =>
     <String, dynamic>{
       'PromotionMaterial': instance.promotionMaterial,
-      'HidePrice': instance.hidePrice,
-      'XP': instance.xp.toJson(),
-    };
-
-_$_ProductItemXpDto _$$_ProductItemXpDtoFromJson(Map<String, dynamic> json) =>
-    _$_ProductItemXpDto(
-      dosage: json['Dosage'] as String? ?? '',
-      howToUse: json['HowToUse'] as String? ?? '',
-      composition: json['Composition'] as String? ?? '',
-      deliveryInstructions: json['DeliveryInstructions'] as String? ?? '',
-      usability: json['Usability'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$$_ProductItemXpDtoToJson(_$_ProductItemXpDto instance) =>
-    <String, dynamic>{
-      'Dosage': instance.dosage,
-      'HowToUse': instance.howToUse,
-      'Composition': instance.composition,
-      'DeliveryInstructions': instance.deliveryInstructions,
-      'Usability': instance.usability,
     };

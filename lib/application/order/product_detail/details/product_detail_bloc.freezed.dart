@@ -48,6 +48,12 @@ mixin _$ProductDetailEvent {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +87,10 @@ mixin _$ProductDetailEvent {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,6 +124,10 @@ mixin _$ProductDetailEvent {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +140,8 @@ mixin _$ProductDetailEvent {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -137,6 +153,8 @@ mixin _$ProductDetailEvent {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -148,6 +166,8 @@ mixin _$ProductDetailEvent {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -239,6 +259,12 @@ class _$_Initialized implements _Initialized {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return initialized();
   }
@@ -275,6 +301,10 @@ class _$_Initialized implements _Initialized {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return initialized?.call();
   }
@@ -311,6 +341,10 @@ class _$_Initialized implements _Initialized {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -329,6 +363,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return initialized(this);
   }
@@ -343,6 +379,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return initialized?.call(this);
   }
@@ -357,6 +395,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -537,6 +577,12 @@ class _$_Fetch implements _Fetch {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return fetch(materialNumber, salesOrganisation, customerCodeInfo,
         shipToInfo, locale);
@@ -574,6 +620,10 @@ class _$_Fetch implements _Fetch {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return fetch?.call(materialNumber, salesOrganisation, customerCodeInfo,
         shipToInfo, locale);
@@ -611,6 +661,10 @@ class _$_Fetch implements _Fetch {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -630,6 +684,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return fetch(this);
   }
@@ -644,6 +700,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return fetch?.call(this);
   }
@@ -658,6 +716,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -844,6 +904,12 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return fetchSimilarProduct(
         salesOrganisation, customerCodeInfo, shipToInfo, locale);
@@ -881,6 +947,10 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return fetchSimilarProduct?.call(
         salesOrganisation, customerCodeInfo, shipToInfo, locale);
@@ -918,6 +988,10 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
@@ -937,6 +1011,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return fetchSimilarProduct(this);
   }
@@ -951,6 +1027,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return fetchSimilarProduct?.call(this);
   }
@@ -965,6 +1043,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
@@ -1148,6 +1228,12 @@ class _$_FetchMetaData implements _FetchMetaData {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return fetchMetaData(
         salesOrganisation, customerCodeInfo, shipToInfo, locale);
@@ -1185,6 +1271,10 @@ class _$_FetchMetaData implements _FetchMetaData {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return fetchMetaData?.call(
         salesOrganisation, customerCodeInfo, shipToInfo, locale);
@@ -1222,6 +1312,10 @@ class _$_FetchMetaData implements _FetchMetaData {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
@@ -1241,6 +1335,8 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return fetchMetaData(this);
   }
@@ -1255,6 +1351,8 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return fetchMetaData?.call(this);
   }
@@ -1269,6 +1367,8 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
@@ -1397,6 +1497,12 @@ class _$_FetchProductImage implements _FetchProductImage {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return fetchProductImage(materialNumbers);
   }
@@ -1433,6 +1539,10 @@ class _$_FetchProductImage implements _FetchProductImage {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return fetchProductImage?.call(materialNumbers);
   }
@@ -1469,6 +1579,10 @@ class _$_FetchProductImage implements _FetchProductImage {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchProductImage != null) {
@@ -1487,6 +1601,8 @@ class _$_FetchProductImage implements _FetchProductImage {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return fetchProductImage(this);
   }
@@ -1501,6 +1617,8 @@ class _$_FetchProductImage implements _FetchProductImage {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return fetchProductImage?.call(this);
   }
@@ -1515,6 +1633,8 @@ class _$_FetchProductImage implements _FetchProductImage {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchProductImage != null) {
@@ -1704,6 +1824,12 @@ class _$_FetchStock implements _FetchStock {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return fetchStock(materialNumber, salesOrganisation, customerCodeInfo,
         shipToInfo, locale);
@@ -1741,6 +1867,10 @@ class _$_FetchStock implements _FetchStock {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return fetchStock?.call(materialNumber, salesOrganisation, customerCodeInfo,
         shipToInfo, locale);
@@ -1778,6 +1908,10 @@ class _$_FetchStock implements _FetchStock {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
@@ -1797,6 +1931,8 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return fetchStock(this);
   }
@@ -1811,6 +1947,8 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return fetchStock?.call(this);
   }
@@ -1825,6 +1963,8 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
@@ -1946,6 +2086,12 @@ class _$_ChangeImage implements _ChangeImage {
             Locale locale)
         fetchStock,
     required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
   }) {
     return changeImage(index);
   }
@@ -1982,6 +2128,10 @@ class _$_ChangeImage implements _ChangeImage {
             Locale locale)?
         fetchStock,
     TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
   }) {
     return changeImage?.call(index);
   }
@@ -2018,6 +2168,10 @@ class _$_ChangeImage implements _ChangeImage {
             Locale locale)?
         fetchStock,
     TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
     required TResult orElse(),
   }) {
     if (changeImage != null) {
@@ -2036,6 +2190,8 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
   }) {
     return changeImage(this);
   }
@@ -2050,6 +2206,8 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
   }) {
     return changeImage?.call(this);
   }
@@ -2064,6 +2222,8 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (changeImage != null) {
@@ -2079,6 +2239,536 @@ abstract class _ChangeImage implements ProductDetailEvent {
   int get index;
   @JsonKey(ignore: true)
   _$$_ChangeImageCopyWith<_$_ChangeImage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddFavouriteCopyWith<$Res> {
+  factory _$$_AddFavouriteCopyWith(
+          _$_AddFavourite value, $Res Function(_$_AddFavourite) then) =
+      __$$_AddFavouriteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isForSimilarProduct, MaterialNumber materialNumber});
+}
+
+/// @nodoc
+class __$$_AddFavouriteCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$_AddFavourite>
+    implements _$$_AddFavouriteCopyWith<$Res> {
+  __$$_AddFavouriteCopyWithImpl(
+      _$_AddFavourite _value, $Res Function(_$_AddFavourite) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isForSimilarProduct = null,
+    Object? materialNumber = null,
+  }) {
+    return _then(_$_AddFavourite(
+      isForSimilarProduct: null == isForSimilarProduct
+          ? _value.isForSimilarProduct
+          : isForSimilarProduct // ignore: cast_nullable_to_non_nullable
+              as bool,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AddFavourite implements _AddFavourite {
+  _$_AddFavourite(
+      {required this.isForSimilarProduct, required this.materialNumber});
+
+  @override
+  final bool isForSimilarProduct;
+  @override
+  final MaterialNumber materialNumber;
+
+  @override
+  String toString() {
+    return 'ProductDetailEvent.addFavourite(isForSimilarProduct: $isForSimilarProduct, materialNumber: $materialNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AddFavourite &&
+            (identical(other.isForSimilarProduct, isForSimilarProduct) ||
+                other.isForSimilarProduct == isForSimilarProduct) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, isForSimilarProduct, materialNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+      __$$_AddFavouriteCopyWithImpl<_$_AddFavourite>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchSimilarProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchMetaData,
+    required TResult Function(List<MaterialNumber> materialNumbers)
+        fetchProductImage,
+    required TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStock,
+    required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
+  }) {
+    return addFavourite(isForSimilarProduct, materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchSimilarProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchMetaData,
+    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
+    TResult? Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStock,
+    TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+  }) {
+    return addFavourite?.call(isForSimilarProduct, materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchSimilarProduct,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchMetaData,
+    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
+    TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStock,
+    TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (addFavourite != null) {
+      return addFavourite(isForSimilarProduct, materialNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
+    required TResult Function(_FetchMetaData value) fetchMetaData,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return addFavourite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult? Function(_FetchMetaData value)? fetchMetaData,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return addFavourite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult Function(_FetchMetaData value)? fetchMetaData,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (addFavourite != null) {
+      return addFavourite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddFavourite implements ProductDetailEvent {
+  factory _AddFavourite(
+      {required final bool isForSimilarProduct,
+      required final MaterialNumber materialNumber}) = _$_AddFavourite;
+
+  bool get isForSimilarProduct;
+  MaterialNumber get materialNumber;
+  @JsonKey(ignore: true)
+  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteFavouriteCopyWith<$Res> {
+  factory _$$_DeleteFavouriteCopyWith(
+          _$_DeleteFavourite value, $Res Function(_$_DeleteFavourite) then) =
+      __$$_DeleteFavouriteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isForSimilarProduct, MaterialNumber materialNumber});
+}
+
+/// @nodoc
+class __$$_DeleteFavouriteCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$_DeleteFavourite>
+    implements _$$_DeleteFavouriteCopyWith<$Res> {
+  __$$_DeleteFavouriteCopyWithImpl(
+      _$_DeleteFavourite _value, $Res Function(_$_DeleteFavourite) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isForSimilarProduct = null,
+    Object? materialNumber = null,
+  }) {
+    return _then(_$_DeleteFavourite(
+      isForSimilarProduct: null == isForSimilarProduct
+          ? _value.isForSimilarProduct
+          : isForSimilarProduct // ignore: cast_nullable_to_non_nullable
+              as bool,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteFavourite implements _DeleteFavourite {
+  _$_DeleteFavourite(
+      {required this.isForSimilarProduct, required this.materialNumber});
+
+  @override
+  final bool isForSimilarProduct;
+  @override
+  final MaterialNumber materialNumber;
+
+  @override
+  String toString() {
+    return 'ProductDetailEvent.deleteFavourite(isForSimilarProduct: $isForSimilarProduct, materialNumber: $materialNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteFavourite &&
+            (identical(other.isForSimilarProduct, isForSimilarProduct) ||
+                other.isForSimilarProduct == isForSimilarProduct) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, isForSimilarProduct, materialNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
+      __$$_DeleteFavouriteCopyWithImpl<_$_DeleteFavourite>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchSimilarProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchMetaData,
+    required TResult Function(List<MaterialNumber> materialNumbers)
+        fetchProductImage,
+    required TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStock,
+    required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
+  }) {
+    return deleteFavourite(isForSimilarProduct, materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchSimilarProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchMetaData,
+    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
+    TResult? Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStock,
+    TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+  }) {
+    return deleteFavourite?.call(isForSimilarProduct, materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchSimilarProduct,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchMetaData,
+    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
+    TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStock,
+    TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (deleteFavourite != null) {
+      return deleteFavourite(isForSimilarProduct, materialNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
+    required TResult Function(_FetchMetaData value) fetchMetaData,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return deleteFavourite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult? Function(_FetchMetaData value)? fetchMetaData,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return deleteFavourite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult Function(_FetchMetaData value)? fetchMetaData,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (deleteFavourite != null) {
+      return deleteFavourite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteFavourite implements ProductDetailEvent {
+  factory _DeleteFavourite(
+      {required final bool isForSimilarProduct,
+      required final MaterialNumber materialNumber}) = _$_DeleteFavourite;
+
+  bool get isForSimilarProduct;
+  MaterialNumber get materialNumber;
+  @JsonKey(ignore: true)
+  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

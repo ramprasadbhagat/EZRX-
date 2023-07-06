@@ -6,11 +6,10 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +23,13 @@ part 'product_detail_bloc.freezed.dart';
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final IProductDetailRepository productDetailRepository;
   final IProductImagesRepository productImagesRepository;
+  final IFavouriteRepository favouriteRepository;
+
 
   ProductDetailBloc({
     required this.productDetailRepository,
     required this.productImagesRepository,
+    required this.favouriteRepository,
   }) : super(ProductDetailState.initial()) {
     on<ProductDetailEvent>(_onEvent);
   }
@@ -61,18 +63,19 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (productDetail) async => emit(
+          (materialInfo) async => emit(
             state.copyWith(
               isFetching: false,
               productDetailAggregate: state.productDetailAggregate.copyWith(
-                productDetail: productDetail,
+                materialInfo: materialInfo,
               ),
             ),
           ),
         );
         add(
           _FetchStock(
-            materialNumber: state.productDetailAggregate.materialNumber,
+            materialNumber:
+                state.productDetailAggregate.materialInfo.materialNumber,
             salesOrganisation: e.salesOrganisation,
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
@@ -88,7 +91,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           ),
         );
         final failureOrSuccess = await productDetailRepository.getStockInfo(
-          materialNumber: state.productDetailAggregate.materialNumber,
+          materialNumber:
+              state.productDetailAggregate.materialInfo.materialNumber,
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisation: e.salesOrganisation,
         );
@@ -127,25 +131,16 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
         final metaDataFailureOrSuccess =
             await productDetailRepository.getItemProductMetaData(
-          materialNumbers: [
-            state.productDetailAggregate.materialNumber,
-          ],
+          productDetailAggregate: state.productDetailAggregate,
         );
         metaDataFailureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(isFetching: false),
           ),
-          (metaData) => emit(
+          (productDetailAggregate) => emit(
             state.copyWith(
               isFetching: false,
-              productDetailAggregate: state.productDetailAggregate.copyWith(
-                productImages: metaData.productImages.isNotEmpty
-                    ? metaData.productImages.first
-                    : ProductImages.empty(),
-                productItem: metaData.items.isNotEmpty
-                    ? metaData.items.first
-                    : ProductItem.empty(),
-              ),
+              productDetailAggregate: productDetailAggregate,
             ),
           ),
         );
@@ -169,11 +164,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             await productDetailRepository.getSimilarProduct(
           customerCodeInfo: e.customerCodeInfo,
           locale: e.locale,
-          materialNumber: state.productDetailAggregate.materialNumber,
+          materialNumber:
+              state.productDetailAggregate.materialInfo.materialNumber,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
           principalCode: state
-              .productDetailAggregate.productDetail.principalData.principalCode,
+              .productDetailAggregate.materialInfo.principalData.principalCode,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -222,8 +218,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             state.copyWith(
               isFetching: false,
               productDetailAggregate: state.productDetailAggregate.copyWith(
-                  similarProduct:
-                      products.map((e) => e as MaterialInfo).toList(),
+                similarProduct: products.map((e) => e as MaterialInfo).toList(),
               ),
             ),
           ),
@@ -232,6 +227,78 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       changeImage: (_ChangeImage e) async => emit(
         state.copyWith(selectedImageIndex: e.index),
       ),
+      addFavourite: (_AddFavourite e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await favouriteRepository.addToFavourites(
+          materialNumber: e.materialNumber,
+          list: e.isForSimilarProduct
+              ? state.productDetailAggregate.similarProduct
+              : [state.productDetailAggregate.materialInfo],
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (updatedFavouritesList) {
+            emit(
+              state.copyWith(
+                productDetailAggregate: state.productDetailAggregate.copyWith(
+                  materialInfo: !e.isForSimilarProduct
+                      ? updatedFavouritesList.first
+                      : state.productDetailAggregate.materialInfo,
+                  similarProduct: e.isForSimilarProduct
+                      ? updatedFavouritesList
+                          .map((e) => e as MaterialInfo)
+                          .toList()
+                      : state.productDetailAggregate.similarProduct,
+                ),
+              ),
+            );
+          },
+        );
+      },
+      deleteFavourite: (_DeleteFavourite e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await favouriteRepository.removeFromFavourites(
+          materialNumber: e.materialNumber,
+          list: e.isForSimilarProduct
+              ? state.productDetailAggregate.similarProduct
+              : [state.productDetailAggregate.materialInfo],
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (updatedFavouritesList) {
+            emit(
+              state.copyWith(
+                productDetailAggregate: state.productDetailAggregate.copyWith(
+                  materialInfo: !e.isForSimilarProduct
+                      ? updatedFavouritesList.first
+                      : state.productDetailAggregate.materialInfo,
+                  similarProduct: e.isForSimilarProduct
+                      ? updatedFavouritesList
+                          .map((e) => e as MaterialInfo)
+                          .toList()
+                      : state.productDetailAggregate.similarProduct,
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

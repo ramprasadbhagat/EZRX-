@@ -13,10 +13,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
   final VoidCallback onTap;
+  final VoidCallback onFavouriteTap;
 
   const MaterialGridItem({
     required this.materialInfo,
     required this.onTap,
+    required this.onFavouriteTap,
     Key? key,
   }) : super(key: key);
 
@@ -68,7 +70,8 @@ class MaterialGridItem extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: FavouriteIcon(
-                        materialInfo: materialInfo,
+                        isFavourite: materialInfo.isFavourite,
+                        onTap: onFavouriteTap,
                       ),
                     ),
                   ],

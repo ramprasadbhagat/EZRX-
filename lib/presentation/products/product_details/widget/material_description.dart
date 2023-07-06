@@ -56,7 +56,6 @@ class _MaterialDescriptionState extends State<MaterialDescription> {
                           .productDetailAggregate.productItem.promotionMaterial
                           .getOrDefaultValue(''),
                     ),
-              const SizedBox(height: 20),
               Row(
                 key: WidgetKeys.materialDetailsPromoSeeMore,
                 children: [

@@ -173,8 +173,6 @@ abstract class _ProductMetaData extends ProductMetaData {
 /// @nodoc
 mixin _$ProductItem {
   StringValue get promotionMaterial => throw _privateConstructorUsedError;
-  bool get hidePrice => throw _privateConstructorUsedError;
-  ProductItemXp get xp => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductItemCopyWith<ProductItem> get copyWith =>
@@ -187,9 +185,7 @@ abstract class $ProductItemCopyWith<$Res> {
           ProductItem value, $Res Function(ProductItem) then) =
       _$ProductItemCopyWithImpl<$Res, ProductItem>;
   @useResult
-  $Res call({StringValue promotionMaterial, bool hidePrice, ProductItemXp xp});
-
-  $ProductItemXpCopyWith<$Res> get xp;
+  $Res call({StringValue promotionMaterial});
 }
 
 /// @nodoc
@@ -206,31 +202,13 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
   @override
   $Res call({
     Object? promotionMaterial = null,
-    Object? hidePrice = null,
-    Object? xp = null,
   }) {
     return _then(_value.copyWith(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      hidePrice: null == hidePrice
-          ? _value.hidePrice
-          : hidePrice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      xp: null == xp
-          ? _value.xp
-          : xp // ignore: cast_nullable_to_non_nullable
-              as ProductItemXp,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ProductItemXpCopyWith<$Res> get xp {
-    return $ProductItemXpCopyWith<$Res>(_value.xp, (value) {
-      return _then(_value.copyWith(xp: value) as $Val);
-    });
   }
 }
 
@@ -242,10 +220,7 @@ abstract class _$$_ProductItemCopyWith<$Res>
       __$$_ProductItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StringValue promotionMaterial, bool hidePrice, ProductItemXp xp});
-
-  @override
-  $ProductItemXpCopyWith<$Res> get xp;
+  $Res call({StringValue promotionMaterial});
 }
 
 /// @nodoc
@@ -260,22 +235,12 @@ class __$$_ProductItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? promotionMaterial = null,
-    Object? hidePrice = null,
-    Object? xp = null,
   }) {
     return _then(_$_ProductItem(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      hidePrice: null == hidePrice
-          ? _value.hidePrice
-          : hidePrice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      xp: null == xp
-          ? _value.xp
-          : xp // ignore: cast_nullable_to_non_nullable
-              as ProductItemXp,
     ));
   }
 }
@@ -283,22 +248,14 @@ class __$$_ProductItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ProductItem extends _ProductItem {
-  _$_ProductItem(
-      {required this.promotionMaterial,
-      required this.hidePrice,
-      required this.xp})
-      : super._();
+  _$_ProductItem({required this.promotionMaterial}) : super._();
 
   @override
   final StringValue promotionMaterial;
-  @override
-  final bool hidePrice;
-  @override
-  final ProductItemXp xp;
 
   @override
   String toString() {
-    return 'ProductItem(promotionMaterial: $promotionMaterial, hidePrice: $hidePrice, xp: $xp)';
+    return 'ProductItem(promotionMaterial: $promotionMaterial)';
   }
 
   @override
@@ -307,15 +264,11 @@ class _$_ProductItem extends _ProductItem {
         (other.runtimeType == runtimeType &&
             other is _$_ProductItem &&
             (identical(other.promotionMaterial, promotionMaterial) ||
-                other.promotionMaterial == promotionMaterial) &&
-            (identical(other.hidePrice, hidePrice) ||
-                other.hidePrice == hidePrice) &&
-            (identical(other.xp, xp) || other.xp == xp));
+                other.promotionMaterial == promotionMaterial));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, promotionMaterial, hidePrice, xp);
+  int get hashCode => Object.hash(runtimeType, promotionMaterial);
 
   @JsonKey(ignore: true)
   @override
@@ -325,228 +278,14 @@ class _$_ProductItem extends _ProductItem {
 }
 
 abstract class _ProductItem extends ProductItem {
-  factory _ProductItem(
-      {required final StringValue promotionMaterial,
-      required final bool hidePrice,
-      required final ProductItemXp xp}) = _$_ProductItem;
+  factory _ProductItem({required final StringValue promotionMaterial}) =
+      _$_ProductItem;
   _ProductItem._() : super._();
 
   @override
   StringValue get promotionMaterial;
   @override
-  bool get hidePrice;
-  @override
-  ProductItemXp get xp;
-  @override
   @JsonKey(ignore: true)
   _$$_ProductItemCopyWith<_$_ProductItem> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$ProductItemXp {
-  String get dosage => throw _privateConstructorUsedError;
-  String get howToUse => throw _privateConstructorUsedError;
-  String get composition => throw _privateConstructorUsedError;
-  String get deliveryInstructions => throw _privateConstructorUsedError;
-  String get usability => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ProductItemXpCopyWith<ProductItemXp> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ProductItemXpCopyWith<$Res> {
-  factory $ProductItemXpCopyWith(
-          ProductItemXp value, $Res Function(ProductItemXp) then) =
-      _$ProductItemXpCopyWithImpl<$Res, ProductItemXp>;
-  @useResult
-  $Res call(
-      {String dosage,
-      String howToUse,
-      String composition,
-      String deliveryInstructions,
-      String usability});
-}
-
-/// @nodoc
-class _$ProductItemXpCopyWithImpl<$Res, $Val extends ProductItemXp>
-    implements $ProductItemXpCopyWith<$Res> {
-  _$ProductItemXpCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? dosage = null,
-    Object? howToUse = null,
-    Object? composition = null,
-    Object? deliveryInstructions = null,
-    Object? usability = null,
-  }) {
-    return _then(_value.copyWith(
-      dosage: null == dosage
-          ? _value.dosage
-          : dosage // ignore: cast_nullable_to_non_nullable
-              as String,
-      howToUse: null == howToUse
-          ? _value.howToUse
-          : howToUse // ignore: cast_nullable_to_non_nullable
-              as String,
-      composition: null == composition
-          ? _value.composition
-          : composition // ignore: cast_nullable_to_non_nullable
-              as String,
-      deliveryInstructions: null == deliveryInstructions
-          ? _value.deliveryInstructions
-          : deliveryInstructions // ignore: cast_nullable_to_non_nullable
-              as String,
-      usability: null == usability
-          ? _value.usability
-          : usability // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_ProductItemXpCopyWith<$Res>
-    implements $ProductItemXpCopyWith<$Res> {
-  factory _$$_ProductItemXpCopyWith(
-          _$_ProductItemXp value, $Res Function(_$_ProductItemXp) then) =
-      __$$_ProductItemXpCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String dosage,
-      String howToUse,
-      String composition,
-      String deliveryInstructions,
-      String usability});
-}
-
-/// @nodoc
-class __$$_ProductItemXpCopyWithImpl<$Res>
-    extends _$ProductItemXpCopyWithImpl<$Res, _$_ProductItemXp>
-    implements _$$_ProductItemXpCopyWith<$Res> {
-  __$$_ProductItemXpCopyWithImpl(
-      _$_ProductItemXp _value, $Res Function(_$_ProductItemXp) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? dosage = null,
-    Object? howToUse = null,
-    Object? composition = null,
-    Object? deliveryInstructions = null,
-    Object? usability = null,
-  }) {
-    return _then(_$_ProductItemXp(
-      dosage: null == dosage
-          ? _value.dosage
-          : dosage // ignore: cast_nullable_to_non_nullable
-              as String,
-      howToUse: null == howToUse
-          ? _value.howToUse
-          : howToUse // ignore: cast_nullable_to_non_nullable
-              as String,
-      composition: null == composition
-          ? _value.composition
-          : composition // ignore: cast_nullable_to_non_nullable
-              as String,
-      deliveryInstructions: null == deliveryInstructions
-          ? _value.deliveryInstructions
-          : deliveryInstructions // ignore: cast_nullable_to_non_nullable
-              as String,
-      usability: null == usability
-          ? _value.usability
-          : usability // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ProductItemXp extends _ProductItemXp {
-  _$_ProductItemXp(
-      {required this.dosage,
-      required this.howToUse,
-      required this.composition,
-      required this.deliveryInstructions,
-      required this.usability})
-      : super._();
-
-  @override
-  final String dosage;
-  @override
-  final String howToUse;
-  @override
-  final String composition;
-  @override
-  final String deliveryInstructions;
-  @override
-  final String usability;
-
-  @override
-  String toString() {
-    return 'ProductItemXp(dosage: $dosage, howToUse: $howToUse, composition: $composition, deliveryInstructions: $deliveryInstructions, usability: $usability)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ProductItemXp &&
-            (identical(other.dosage, dosage) || other.dosage == dosage) &&
-            (identical(other.howToUse, howToUse) ||
-                other.howToUse == howToUse) &&
-            (identical(other.composition, composition) ||
-                other.composition == composition) &&
-            (identical(other.deliveryInstructions, deliveryInstructions) ||
-                other.deliveryInstructions == deliveryInstructions) &&
-            (identical(other.usability, usability) ||
-                other.usability == usability));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, dosage, howToUse, composition,
-      deliveryInstructions, usability);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ProductItemXpCopyWith<_$_ProductItemXp> get copyWith =>
-      __$$_ProductItemXpCopyWithImpl<_$_ProductItemXp>(this, _$identity);
-}
-
-abstract class _ProductItemXp extends ProductItemXp {
-  factory _ProductItemXp(
-      {required final String dosage,
-      required final String howToUse,
-      required final String composition,
-      required final String deliveryInstructions,
-      required final String usability}) = _$_ProductItemXp;
-  _ProductItemXp._() : super._();
-
-  @override
-  String get dosage;
-  @override
-  String get howToUse;
-  @override
-  String get composition;
-  @override
-  String get deliveryInstructions;
-  @override
-  String get usability;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ProductItemXpCopyWith<_$_ProductItemXp> get copyWith =>
       throw _privateConstructorUsedError;
 }

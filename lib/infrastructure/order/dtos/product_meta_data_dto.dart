@@ -41,67 +41,13 @@ class ProductItemDto with _$ProductItemDto {
       defaultValue: '',
     )
         required String promotionMaterial,
-    @JsonKey(
-      name: 'HidePrice',
-      defaultValue: false,
-    )
-        required bool hidePrice,
-    @JsonKey(
-      name: 'XP',
-    )
-        required ProductItemXpDto xp,
   }) = _ProductItemDto;
 
   ProductItem toDomain() => ProductItem(
-        hidePrice: hidePrice,
         promotionMaterial: StringValue(promotionMaterial),
-        xp: xp.toDomain(),
       );
 
   factory ProductItemDto.fromJson(Map<String, dynamic> json) =>
       _$ProductItemDtoFromJson(json);
 }
 
-@freezed
-class ProductItemXpDto with _$ProductItemXpDto {
-  const ProductItemXpDto._();
-
-  const factory ProductItemXpDto({
-    @JsonKey(
-      name: 'Dosage',
-      defaultValue: '',
-    )
-        required String dosage,
-    @JsonKey(
-      name: 'HowToUse',
-      defaultValue: '',
-    )
-        required String howToUse,
-    @JsonKey(
-      name: 'Composition',
-      defaultValue: '',
-    )
-        required String composition,
-    @JsonKey(
-      name: 'DeliveryInstructions',
-      defaultValue: '',
-    )
-        required String deliveryInstructions,
-    @JsonKey(
-      name: 'Usability',
-      defaultValue: '',
-    )
-        required String usability,
-  }) = _ProductItemXpDto;
-
-  ProductItemXp toDomain() => ProductItemXp(
-      dosage: dosage,
-      howToUse: howToUse,
-      composition: composition,
-      deliveryInstructions: deliveryInstructions,
-        usability: usability,
-      );
-
-  factory ProductItemXpDto.fromJson(Map<String, dynamic> json) =>
-      _$ProductItemXpDtoFromJson(json);
-}

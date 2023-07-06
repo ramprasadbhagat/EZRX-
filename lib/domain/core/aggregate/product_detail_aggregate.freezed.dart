@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProductDetailAggregate {
-  ProductDetail get productDetail => throw _privateConstructorUsedError;
-  ProductImages get productImages => throw _privateConstructorUsedError;
+  MaterialInfo get materialInfo => throw _privateConstructorUsedError;
   ProductItem get productItem => throw _privateConstructorUsedError;
   List<MaterialInfo> get similarProduct => throw _privateConstructorUsedError;
   StockInfo get stockInfo => throw _privateConstructorUsedError;
@@ -34,14 +33,12 @@ abstract class $ProductDetailAggregateCopyWith<$Res> {
       _$ProductDetailAggregateCopyWithImpl<$Res, ProductDetailAggregate>;
   @useResult
   $Res call(
-      {ProductDetail productDetail,
-      ProductImages productImages,
+      {MaterialInfo materialInfo,
       ProductItem productItem,
       List<MaterialInfo> similarProduct,
       StockInfo stockInfo});
 
-  $ProductDetailCopyWith<$Res> get productDetail;
-  $ProductImagesCopyWith<$Res> get productImages;
+  $MaterialInfoCopyWith<$Res> get materialInfo;
   $ProductItemCopyWith<$Res> get productItem;
   $StockInfoCopyWith<$Res> get stockInfo;
 }
@@ -60,21 +57,16 @@ class _$ProductDetailAggregateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? productDetail = null,
-    Object? productImages = null,
+    Object? materialInfo = null,
     Object? productItem = null,
     Object? similarProduct = null,
     Object? stockInfo = null,
   }) {
     return _then(_value.copyWith(
-      productDetail: null == productDetail
-          ? _value.productDetail
-          : productDetail // ignore: cast_nullable_to_non_nullable
-              as ProductDetail,
-      productImages: null == productImages
-          ? _value.productImages
-          : productImages // ignore: cast_nullable_to_non_nullable
-              as ProductImages,
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
       productItem: null == productItem
           ? _value.productItem
           : productItem // ignore: cast_nullable_to_non_nullable
@@ -92,17 +84,9 @@ class _$ProductDetailAggregateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $ProductDetailCopyWith<$Res> get productDetail {
-    return $ProductDetailCopyWith<$Res>(_value.productDetail, (value) {
-      return _then(_value.copyWith(productDetail: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ProductImagesCopyWith<$Res> get productImages {
-    return $ProductImagesCopyWith<$Res>(_value.productImages, (value) {
-      return _then(_value.copyWith(productImages: value) as $Val);
+  $MaterialInfoCopyWith<$Res> get materialInfo {
+    return $MaterialInfoCopyWith<$Res>(_value.materialInfo, (value) {
+      return _then(_value.copyWith(materialInfo: value) as $Val);
     });
   }
 
@@ -132,16 +116,13 @@ abstract class _$$_ProductDetailAggregateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ProductDetail productDetail,
-      ProductImages productImages,
+      {MaterialInfo materialInfo,
       ProductItem productItem,
       List<MaterialInfo> similarProduct,
       StockInfo stockInfo});
 
   @override
-  $ProductDetailCopyWith<$Res> get productDetail;
-  @override
-  $ProductImagesCopyWith<$Res> get productImages;
+  $MaterialInfoCopyWith<$Res> get materialInfo;
   @override
   $ProductItemCopyWith<$Res> get productItem;
   @override
@@ -160,21 +141,16 @@ class __$$_ProductDetailAggregateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? productDetail = null,
-    Object? productImages = null,
+    Object? materialInfo = null,
     Object? productItem = null,
     Object? similarProduct = null,
     Object? stockInfo = null,
   }) {
     return _then(_$_ProductDetailAggregate(
-      productDetail: null == productDetail
-          ? _value.productDetail
-          : productDetail // ignore: cast_nullable_to_non_nullable
-              as ProductDetail,
-      productImages: null == productImages
-          ? _value.productImages
-          : productImages // ignore: cast_nullable_to_non_nullable
-              as ProductImages,
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
       productItem: null == productItem
           ? _value.productItem
           : productItem // ignore: cast_nullable_to_non_nullable
@@ -195,8 +171,7 @@ class __$$_ProductDetailAggregateCopyWithImpl<$Res>
 
 class _$_ProductDetailAggregate extends _ProductDetailAggregate {
   _$_ProductDetailAggregate(
-      {required this.productDetail,
-      required this.productImages,
+      {required this.materialInfo,
       required this.productItem,
       required final List<MaterialInfo> similarProduct,
       required this.stockInfo})
@@ -204,9 +179,7 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
         super._();
 
   @override
-  final ProductDetail productDetail;
-  @override
-  final ProductImages productImages;
+  final MaterialInfo materialInfo;
   @override
   final ProductItem productItem;
   final List<MaterialInfo> _similarProduct;
@@ -222,7 +195,7 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
 
   @override
   String toString() {
-    return 'ProductDetailAggregate(productDetail: $productDetail, productImages: $productImages, productItem: $productItem, similarProduct: $similarProduct, stockInfo: $stockInfo)';
+    return 'ProductDetailAggregate(materialInfo: $materialInfo, productItem: $productItem, similarProduct: $similarProduct, stockInfo: $stockInfo)';
   }
 
   @override
@@ -230,10 +203,8 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductDetailAggregate &&
-            (identical(other.productDetail, productDetail) ||
-                other.productDetail == productDetail) &&
-            (identical(other.productImages, productImages) ||
-                other.productImages == productImages) &&
+            (identical(other.materialInfo, materialInfo) ||
+                other.materialInfo == materialInfo) &&
             (identical(other.productItem, productItem) ||
                 other.productItem == productItem) &&
             const DeepCollectionEquality()
@@ -243,13 +214,8 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      productDetail,
-      productImages,
-      productItem,
-      const DeepCollectionEquality().hash(_similarProduct),
-      stockInfo);
+  int get hashCode => Object.hash(runtimeType, materialInfo, productItem,
+      const DeepCollectionEquality().hash(_similarProduct), stockInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -261,17 +227,14 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
 
 abstract class _ProductDetailAggregate extends ProductDetailAggregate {
   factory _ProductDetailAggregate(
-      {required final ProductDetail productDetail,
-      required final ProductImages productImages,
+      {required final MaterialInfo materialInfo,
       required final ProductItem productItem,
       required final List<MaterialInfo> similarProduct,
       required final StockInfo stockInfo}) = _$_ProductDetailAggregate;
   _ProductDetailAggregate._() : super._();
 
   @override
-  ProductDetail get productDetail;
-  @override
-  ProductImages get productImages;
+  MaterialInfo get materialInfo;
   @override
   ProductItem get productItem;
   @override

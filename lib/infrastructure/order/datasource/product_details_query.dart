@@ -25,17 +25,12 @@ class ProductDetailQuery {
         itemBrand
         materialBrand
         isFavourite
-        warehouseStorageCondition
         defaultMaterialDescription
-        isMarketplaceProduct
         country
         countryName
         hidePrice
         governmentMaterialCode
         itemRegistrationNumber
-        suspensionStatus
-        promoStatus
-        promoType
       }
     }
      ''';
@@ -70,10 +65,6 @@ class ProductDetailQuery {
           defaultMaterialDescription
           itemBrand
           isFavourite
-          warehouseStorageCondition
-          suspensionStatus
-          promoType
-          promoStatus
           hidePrice
         }
       }
@@ -95,14 +86,6 @@ class ProductDetailQuery {
           }
           Items {
             PromotionMaterial
-            HidePrice
-            XP {
-              Dosage
-              HowToUse
-              Composition
-              DeliveryInstructions
-              Usability
-            }
           }
         }
       }

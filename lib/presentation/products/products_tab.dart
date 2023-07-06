@@ -92,7 +92,9 @@ class ProductsTab extends StatelessWidget {
                               item.type.typeMaterial
                                   ? MaterialGridItem(
                                       materialInfo: item,
-                                      onTap: () => _productOnTap(context, item),
+                                      onTap: () => _productOnTap(context, item), 
+                                      onFavouriteTap: () =>
+                                          onFavouriteTap(context, item),
                                     )
                                   : BundleGridItem(
                                       materialInfo: item,
@@ -160,6 +162,17 @@ class ProductsTab extends StatelessWidget {
           ),
         );
   }
+
+  void onFavouriteTap(BuildContext context, MaterialInfo materialInfo) =>
+      context.read<MaterialListBloc>().add(
+            materialInfo.isFavourite
+                ? MaterialListEvent.deleteFavourite(
+                    item: materialInfo,
+                  )
+                : MaterialListEvent.addFavourite(
+                    item: materialInfo,
+                  ),
+          );
 }
 
 class _TotalMaterialCount extends StatelessWidget {

@@ -1,5 +1,9 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/country_data.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/entities/product_details.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -29,12 +33,8 @@ class ProductDetailDto with _$ProductDetailDto {
         required String materialBrand,
     @JsonKey(name: 'isFavourite', defaultValue: false)
         required bool isFavourite,
-    @JsonKey(name: 'warehouseStorageCondition', defaultValue: '')
-        required String warehouseStorageCondition,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
         required String defaultMaterialDescription,
-    @JsonKey(name: 'isMarketplaceProduct', defaultValue: false)
-        required bool isMarketplaceProduct,
     @JsonKey(name: 'country', defaultValue: '') required String country,
     @JsonKey(name: 'countryName', defaultValue: '') required String countryName,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
@@ -42,38 +42,52 @@ class ProductDetailDto with _$ProductDetailDto {
         required String governmentMaterialCode,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
         required String itemRegistrationNumber,
-    @JsonKey(name: 'suspensionStatus', defaultValue: false)
-        required bool suspensionStatus,
-    @JsonKey(name: 'promoStatus', defaultValue: false)
-        required bool promoStatus,
-    @JsonKey(name: 'promoType', defaultValue: '') required String promoType,
   }) = _ProductDetailDto;
 
-  ProductDetail toDomain() => ProductDetail(
-        country: country,
-        countryName: countryName,
+  MaterialInfo toDomain() => MaterialInfo(
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: governmentMaterialCode,
         hidePrice: false,
         isFavourite: false,
-        isMarketplaceProduct: false,
         itemBrand: itemBrand,
         itemRegistrationNumber: itemRegistrationNumber,
-        materialBrand: materialBrand,
         materialDescription: materialDescription,
         materialNumber: MaterialNumber(materialNumber),
         principalData: PrincipalData(
           principalName: PrincipalName(principalName),
           principalCode: PrincipalCode(principalCode),
         ),
-        promoStatus: false,
-        promoType: promoType,
-        suspensionStatus: false,
         therapeuticClass: therapeuticClass,
         unitOfMeasurement: unitOfMeasurement,
-        warehouseStorageCondition: warehouseStorageCondition,
+        countryData: CountryData(
+          country: country,
+          countryName: countryName,
+        ),
+        ean: '',
+        materialGroup2: MaterialGroup.two(''),
+        materialGroup4: MaterialGroup.four(''),
+        isSampleMaterial: false,
+        hasValidTenderContract: false,
+        hasMandatoryTenderContract: false,
+        taxClassification: MaterialTaxClassification(''),
+        bundles: [],
+        isFOCMaterial: false,
+        quantity: 0,
+        remarks: '',
+        data: <MaterialData>[],
+        dataTotalCount: 0,
+        dataTotalHidden: DataTotalHidden(0),
+        isGimmick: false,
+        manufactured: '',
+        name: '',
+        type: MaterialInfoType(''),
+        stockInfos: <StockInfo>[],
+        bundle: Bundle.empty(),
+        productImages: ProductImages.empty(),
+        taxes: [],
       );
+      
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>
       _$ProductDetailDtoFromJson(json);

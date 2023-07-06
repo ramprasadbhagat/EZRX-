@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -216,6 +217,7 @@ class MaterialDto with _$MaterialDto {
       bundle: bundle.toDomain(),
       productImages:
           data.isNotEmpty ? data.first.toProductImage() : ProductImages.empty(),
+      countryData: CountryData.empty(),
     );
   }
 

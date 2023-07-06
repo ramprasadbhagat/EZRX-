@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/product_details.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
@@ -25,7 +24,7 @@ class ProductDetailRemoteDataSource {
     required this.dataSourceExceptionHandler,
     required this.config,
   });
-  Future<ProductDetail> getProductDetails({
+  Future<MaterialInfo> getProductDetails({
     required String materialNumber,
     required String language,
     required String salesOrg,

@@ -49,7 +49,8 @@ class _MaterialInfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final productDetailAggregate =
         context.read<ProductDetailBloc>().state.productDetailAggregate;
-        
+    final materialInfo = productDetailAggregate.materialInfo;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
       child: Column(
@@ -65,8 +66,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           BalanceTextRow(
             keyText: 'Material Number'.tr(),
-            valueText:
-                productDetailAggregate.materialNumber.displayMatNo,
+            valueText: materialInfo.materialNumber.displayMatNo,
             keyFlex: 1,
             valueFlex: 1,
             keyColor: ZPColors.black,
@@ -75,8 +75,8 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Manufacturer'.tr(),
-            valueText: productDetailAggregate
-                .productDetail.principalData.principalName
+            valueText:
+                materialInfo.principalData.principalName
                 .getOrDefaultValue(''),
             keyFlex: 1,
             valueFlex: 1,
@@ -86,7 +86,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Unit of measurement'.tr(),
-            valueText: productDetailAggregate.productDetail.unitOfMeasurement,
+            valueText: materialInfo.unitOfMeasurement,
             keyFlex: 1,
             valueFlex: 1,
             keyColor: ZPColors.black,
@@ -95,7 +95,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Country of origin'.tr(),
-            valueText: productDetailAggregate.productDetail.countryName,
+            valueText: materialInfo.countryData.countryName,
             keyFlex: 1,
             valueFlex: 1,
             keyColor: ZPColors.black,
@@ -112,32 +112,27 @@ class _MaterialInfoDialog extends StatelessWidget {
             valueColor: ZPColors.darkGray,
           ),
           const SizedBox(height: 7),
-          Column(
-            children: [
-              BalanceTextRow(
+          BalanceTextRow(
                 keyText: 'Expiry'.tr(),
                 valueText: productDetailAggregate
                     .stockInfo.expiryDate.toSimpleDateString,
-                keyFlex: 1,
-                valueFlex: 1,
+            keyFlex: 1,
+            valueFlex: 1,
                 keyColor: ZPColors.black,
                 valueColor: ZPColors.darkGray,
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                width: MediaQuery.of(context).size.width,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  child: Text(
-                    'Expiry date displayed is for reference, actual product may very',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 10,
-                          color: ZPColors.darkGray,
-                        ),
-                  ).tr(),
-                ),
-              ),
-            ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.43,
+              child: Text(
+                'Expiry date displayed is for reference, actual product may very',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 10,
+                      color: ZPColors.darkGray,
+                    ),
+              ).tr(),
+            ),
           ),
           const SizedBox(height: 20),
           Row(

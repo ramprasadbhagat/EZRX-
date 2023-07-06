@@ -6,10 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class ProductDetailImage extends StatelessWidget {
-  final bool isScrollAtInitialPosition;
   const ProductDetailImage({
     Key? key,
-    required this.isScrollAtInitialPosition,
   }) : super(key: key);
 
   @override
@@ -23,49 +21,13 @@ class ProductDetailImage extends StatelessWidget {
                   previous.selectedImage != current.selectedImage,
               builder: (context, state) {
                 return ProductImage(
+                  fit: BoxFit.contain,
                   imageUrl: state.selectedImage.getOrDefaultValue(''),
                   height: MediaQuery.of(context).size.height * 0.30,
                   width: double.infinity,
                 );
               },
             ),
-            isScrollAtInitialPosition
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        key: WidgetKeys.materialDetailsPageBack,
-                        onPressed: () => Navigator.pop(context),
-                        icon: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: ZPColors.darkGray,
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_ios_new_sharp,
-                            size: 12,
-                            color: ZPColors.white,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(16.0),
-                        padding: const EdgeInsets.all(4),
-                        key: WidgetKeys.materialDetailsPageCartIcon,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ZPColors.darkGray,
-                        ),
-                        child: const Icon(
-                          Icons.shopping_cart_outlined,
-                          size: 20,
-                          color: ZPColors.white,
-                        ),
-                      ),
-                    ],
-                  )
-                : const SizedBox.shrink(),
             const Positioned(
               bottom: 10,
               right: 10,
@@ -88,14 +50,15 @@ class _ProductImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.productDetailAggregate.productImages !=
-              current.productDetailAggregate.productImages ||
+          previous.productDetailAggregate.materialInfo.productImages !=
+              current.productDetailAggregate.materialInfo.productImages ||
           previous.selectedImage != current.selectedImage,
       builder: (context, state) {
         final images = context
             .read<ProductDetailBloc>()
             .state
             .productDetailAggregate
+            .materialInfo
             .productImages
             .image;
         if (images.isEmpty) return const SizedBox.shrink();
@@ -148,14 +111,15 @@ class _ImageCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.productDetailAggregate.productImages !=
-              current.productDetailAggregate.productImages ||
+          previous.productDetailAggregate.materialInfo.productImages !=
+              current.productDetailAggregate.materialInfo.productImages ||
           previous.selectedImage != current.selectedImage,
       builder: (context, state) {
         final images = context
             .read<ProductDetailBloc>()
             .state
             .productDetailAggregate
+            .materialInfo
             .productImages
             .image;
 

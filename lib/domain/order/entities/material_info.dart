@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/recent_order_item.dart';
@@ -31,6 +32,7 @@ class MaterialInfo with _$MaterialInfo {
     required List<StockInfo> stockInfos,
     required Bundle bundle,
     required ProductImages productImages,
+    required CountryData countryData,
 
     //TODO: remove field from v2
     required String defaultMaterialDescription,
@@ -92,6 +94,7 @@ class MaterialInfo with _$MaterialInfo {
         stockInfos: <StockInfo>[],
         bundle: Bundle.empty(),
         productImages: ProductImages.empty(),
+        countryData: CountryData.empty(),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

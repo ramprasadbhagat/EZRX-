@@ -1008,6 +1008,7 @@ void setupLocator() {
     () => ProductDetailBloc(
       productDetailRepository: locator<ProductDetailRepository>(),
       productImagesRepository: locator<ProductImagesRepository>(),
+      favouriteRepository: locator<FavouriteRepository>(),
     ),
   );
 

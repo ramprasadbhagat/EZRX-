@@ -39,4 +39,14 @@ class ProductDetailEvent with _$ProductDetailEvent {
 
   factory ProductDetailEvent.changeImage(int index) = _ChangeImage;
 
+  factory ProductDetailEvent.addFavourite({
+    required bool isForSimilarProduct,
+    required MaterialNumber materialNumber,
+  }) = _AddFavourite;
+
+  factory ProductDetailEvent.deleteFavourite({
+    required bool isForSimilarProduct,
+    required MaterialNumber materialNumber,
+  }) = _DeleteFavourite;
+
 }

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -59,65 +59,58 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: !_isScrollAtInitialPosition
-          ? AppBar(
-              elevation: 16,
-              titleSpacing: 0,
-              automaticallyImplyLeading: false,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    key: WidgetKeys.materialDetailsPageBack,
-                    onPressed: () => Navigator.pop(context),
-                    icon: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _isScrollAtInitialPosition
-                            ? ZPColors.darkGray
-                            : ZPColors.white,
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 12,
-                        color: ZPColors.black,
-                      ),
-                    ),
-                  ),
-                ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 16,
+        automaticallyImplyLeading: false,
+        backgroundColor:
+            _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,
+        leading: IconButton(
+          key: WidgetKeys.materialDetailsPageBack,
+          onPressed: () => Navigator.pop(context),
+          icon: CircleAvatar(
+            maxRadius: 16,
+            backgroundColor:
+                _isScrollAtInitialPosition
+                ? ZPColors.darkGray
+                : ZPColors.transparent,
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              size: 20,
+              color:
+                  _isScrollAtInitialPosition ? ZPColors.white : ZPColors.black,
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            key: WidgetKeys.materialDetailsPageCartIcon,
+            onPressed: () {},
+            icon: CircleAvatar(
+              maxRadius: 16,
+              backgroundColor: _isScrollAtInitialPosition
+                  ? ZPColors.darkGray
+                  : ZPColors.transparent,
+              child: Icon(
+                Icons.shopping_cart_outlined,
+                size: 20,
+                color: _isScrollAtInitialPosition
+                    ? ZPColors.white
+                    : ZPColors.black,
               ),
-              actions: const [
-                Padding(
-                  key: WidgetKeys.materialDetailsPageCartIcon,
-                  padding: EdgeInsets.all(20),
-                  child: Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 20,
-                    color: ZPColors.black,
-                  ),
-                ),
-              ],
-            )
-          : null,
+            ),
+          ),
+        ],
+      ),    
       floatingActionButton: !_isScrollAtInitialPosition
-          ? SizedBox(
-              height: MediaQuery.of(context).size.width * 0.05,
-              width: MediaQuery.of(context).size.width * 0.05,
-              child: FloatingActionButton(
-                key: WidgetKeys.materialDetailsFloatingButton,
-                onPressed: () => _scrollToTop(),
-                mini: true,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                backgroundColor: ZPColors.secondaryMustard,
-                child: Icon(
-                  Icons.expand_less,
-                  size: MediaQuery.of(context).size.width * 0.04,
-                  color: ZPColors.black,
-                ),
+          ? FloatingActionButton(
+              key: WidgetKeys.materialDetailsFloatingButton,
+              onPressed: () => _scrollToTop(),
+              mini: true,
+              backgroundColor: ZPColors.secondaryMustard,
+              child: const Icon(
+                Icons.expand_less,
+                color: ZPColors.black,
               ),
             )
           : const SizedBox.shrink(),
@@ -135,18 +128,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           );
         },
-        child: SafeArea(
-          child: ListView(
-            physics: const ClampingScrollPhysics(),
-            controller: _scrollController,
-            children: [
-              ProductDetailImage(
-                isScrollAtInitialPosition: _isScrollAtInitialPosition,
-              ),
-              const _BodyContent(),
-              const SimilarProduct(),
-            ],
-          ),
+        child: ListView(
+          controller: _scrollController,
+          children: const [
+              ProductDetailImage(),
+              _BodyContent(),
+              SimilarProduct(),
+          ],
         ),
       ),
       bottomNavigationBar: const _Footer(),
@@ -161,9 +149,12 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.productDetailAggregate.productDetail !=
-          current.productDetailAggregate.productDetail,
+          previous.productDetailAggregate.materialInfo !=
+          current.productDetailAggregate.materialInfo,
       builder: (context, state) {
+        final materialNumber =
+            state.productDetailAggregate.materialInfo.materialNumber;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -173,33 +164,18 @@ class _BodyContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    state.productDetailAggregate.materialNumber.displayMatNo,
+                    materialNumber.displayMatNo,
                     key: WidgetKeys.materialDetailsMaterialNumber,
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall
                         ?.copyWith(color: ZPColors.darkGray),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          state.productDetailAggregate.productDetail
-                              .defaultMaterialDescription,
-                          key: WidgetKeys.materialDetailsMaterialDescription,
-                          style: Theme.of(context).textTheme.labelSmall,
-                          maxLines: 2,
-                        ),
-                      ),
-                      FavouriteIcon(
-                            key: WidgetKeys.materialDetailsFavouriteIcon,
-                        materialInfo: state.productDetailAggregate.materialInfo,
-                      ),
-                    ],
+                  _Description(
+                    materialInfo: state.productDetailAggregate.materialInfo,
                   ),
                   ProductStockInfo(
-                    materialNumber: state.productDetailAggregate.materialNumber,
+                    materialNumber: materialNumber,
                   ),
                   ProductPriceLabel(
                     materialInfo: state.productDetailAggregate.materialInfo,
@@ -213,19 +189,16 @@ class _BodyContent extends StatelessWidget {
               thickness: 0.5,
             ),
             AvailableOffer(
-              materialNumber: context
-                  .read<ProductDetailBloc>()
-                  .state
-                  .productDetailAggregate
-                  .materialNumber,
+              materialNumber: materialNumber,
             ),
             const MaterialInformation(),
             const MaterialDescription(),
+            const SizedBox(height: 20),
             const Divider(
               endIndent: 0,
               indent: 0,
-              thickness: 4,
-              color: ZPColors.extraLightGrey3,
+              thickness: 8,
+              color: ZPColors.extraLightGray,
             ),
             const SizedBox(height: 20),
           ],
@@ -235,44 +208,88 @@ class _BodyContent extends StatelessWidget {
   }
 }
 
+class _Description extends StatelessWidget {
+  final MaterialInfo materialInfo;
+  const _Description({
+    Key? key,
+    required this.materialInfo,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            materialInfo.defaultMaterialDescription,
+            key: WidgetKeys.materialDetailsMaterialDescription,
+            style: Theme.of(context).textTheme.labelSmall,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        FavouriteIcon(
+          key: WidgetKeys.materialDetailsFavouriteIcon,
+          isFavourite: materialInfo.isFavourite,
+          onTap: () => context.read<ProductDetailBloc>().add(
+                materialInfo.isFavourite
+                    ? ProductDetailEvent.deleteFavourite(
+                        isForSimilarProduct: false,
+                        materialNumber: materialInfo.materialNumber,
+                      )
+                    : ProductDetailEvent.addFavourite(
+                        isForSimilarProduct: false,
+                        materialNumber: materialInfo.materialNumber,
+                      ),
+              ),
+        ),
+      ],
+    );
+  }
+}
+
 class _Footer extends StatelessWidget {
   const _Footer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.4,
-            child: CartItemQuantityInput(
-              key: WidgetKeys.materialDetailsQuantityInput,
-              addPressed: (value) {},
-              controller: TextEditingController(),
-              isEnabled: true,
-              onFieldChange: (value) {},
-              quantityAddKey: const ValueKey('quantityAddKey'),
-              quantityDeleteKey: const ValueKey('quantityDeleteKey'),
-              quantityTextKey: const ValueKey('quantityTextKey'),
-              minusPressed: (value) {},
-              height: MediaQuery.of(context).size.height * 0.055,
+    return SafeArea(
+      child: Container(
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: CartItemQuantityInput(
+                key: WidgetKeys.materialDetailsQuantityInput,
+                addPressed: (value) {},
+                controller: TextEditingController(),
+                isEnabled: true,
+                onFieldChange: (value) {},
+                quantityAddKey: const ValueKey('quantityAddKey'),
+                quantityDeleteKey: const ValueKey('quantityDeleteKey'),
+                quantityTextKey: const ValueKey('quantityTextKey'),
+                minusPressed: (value) {},
+                height: MediaQuery.of(context).size.height * 0.055,
+              ),
             ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.05,
-          ),
-          SizedBox(
-            key: WidgetKeys.materialDetailsAddToCartButton,
-            width: MediaQuery.of(context).size.width * 0.4,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Add To Cart').tr(),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.05,
             ),
-          ),
-        ],
+            SizedBox(
+              key: WidgetKeys.materialDetailsAddToCartButton,
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('Add To Cart').tr(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

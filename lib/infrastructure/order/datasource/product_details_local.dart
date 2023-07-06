@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/product_details.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/product_detail_dto.dart';
@@ -9,7 +8,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/product_meta_data_dto.dart'
 import 'package:flutter/services.dart';
 
 class ProductDetailLocalDataSource {
-  Future<ProductDetail> getProductDetails() async {
+  Future<MaterialInfo> getProductDetails() async {
     final res = json.decode(
       await rootBundle.loadString('assets/json/materialDetailsResponse.json'),
     );
