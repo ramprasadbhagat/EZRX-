@@ -22,7 +22,6 @@ mixin _$AllCreditsFilterEvent {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -34,7 +33,6 @@ mixin _$AllCreditsFilterEvent {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -46,7 +44,6 @@ mixin _$AllCreditsFilterEvent {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -60,7 +57,6 @@ mixin _$AllCreditsFilterEvent {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -73,7 +69,6 @@ mixin _$AllCreditsFilterEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -85,7 +80,6 @@ mixin _$AllCreditsFilterEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -156,7 +150,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -171,7 +164,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -186,7 +178,6 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -206,7 +197,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -222,7 +212,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -237,7 +226,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -335,7 +323,6 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -350,7 +337,6 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -365,7 +351,6 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -385,7 +370,6 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -401,7 +385,6 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -416,7 +399,6 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -483,7 +465,6 @@ class _$_ValidateFilters implements _ValidateFilters {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -498,7 +479,6 @@ class _$_ValidateFilters implements _ValidateFilters {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -513,7 +493,6 @@ class _$_ValidateFilters implements _ValidateFilters {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -533,7 +512,6 @@ class _$_ValidateFilters implements _ValidateFilters {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -549,7 +527,6 @@ class _$_ValidateFilters implements _ValidateFilters {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -564,7 +541,6 @@ class _$_ValidateFilters implements _ValidateFilters {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -580,147 +556,6 @@ class _$_ValidateFilters implements _ValidateFilters {
 
 abstract class _ValidateFilters implements AllCreditsFilterEvent {
   const factory _ValidateFilters() = _$_ValidateFilters;
-}
-
-/// @nodoc
-abstract class _$$_ResetFiltersCopyWith<$Res> {
-  factory _$$_ResetFiltersCopyWith(
-          _$_ResetFilters value, $Res Function(_$_ResetFilters) then) =
-      __$$_ResetFiltersCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_ResetFiltersCopyWithImpl<$Res>
-    extends _$AllCreditsFilterEventCopyWithImpl<$Res, _$_ResetFilters>
-    implements _$$_ResetFiltersCopyWith<$Res> {
-  __$$_ResetFiltersCopyWithImpl(
-      _$_ResetFilters _value, $Res Function(_$_ResetFilters) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_ResetFilters implements _ResetFilters {
-  const _$_ResetFilters();
-
-  @override
-  String toString() {
-    return 'AllCreditsFilterEvent.resetFilters()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetFilters);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(AllCreditsFilter appliedFilter)
-        openFilterBottomSheet,
-    required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
-    required TResult Function(String amountValueFrom) amountValueFromChanged,
-    required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(String filterStatus, bool selected) statusChanged,
-    required TResult Function(DateTimeRange dateRange) setDocumentDate,
-  }) {
-    return resetFilters();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
-    TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
-    TResult? Function(String amountValueFrom)? amountValueFromChanged,
-    TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(String filterStatus, bool selected)? statusChanged,
-    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
-  }) {
-    return resetFilters?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
-    TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
-    TResult Function(String amountValueFrom)? amountValueFromChanged,
-    TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(String filterStatus, bool selected)? statusChanged,
-    TResult Function(DateTimeRange dateRange)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (resetFilters != null) {
-      return resetFilters();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterBottomSheet value)
-        openFilterBottomSheet,
-    required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
-    required TResult Function(_AmountValueFromChanged value)
-        amountValueFromChanged,
-    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
-    required TResult Function(_StatusChanged value) statusChanged,
-    required TResult Function(_SetDocumentDate value) setDocumentDate,
-  }) {
-    return resetFilters(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
-    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
-    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
-    TResult? Function(_StatusChanged value)? statusChanged,
-    TResult? Function(_SetDocumentDate value)? setDocumentDate,
-  }) {
-    return resetFilters?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
-    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
-    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
-    TResult Function(_StatusChanged value)? statusChanged,
-    TResult Function(_SetDocumentDate value)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (resetFilters != null) {
-      return resetFilters(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ResetFilters implements AllCreditsFilterEvent {
-  const factory _ResetFilters() = _$_ResetFilters;
 }
 
 /// @nodoc
@@ -793,7 +628,6 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -808,7 +642,6 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -823,7 +656,6 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -843,7 +675,6 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -859,7 +690,6 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -874,7 +704,6 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -968,7 +797,6 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -983,7 +811,6 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -998,7 +825,6 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1018,7 +844,6 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1034,7 +859,6 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1049,7 +873,6 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1151,7 +974,6 @@ class _$_StatusChanged implements _StatusChanged {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -1166,7 +988,6 @@ class _$_StatusChanged implements _StatusChanged {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -1181,7 +1002,6 @@ class _$_StatusChanged implements _StatusChanged {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1201,7 +1021,6 @@ class _$_StatusChanged implements _StatusChanged {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1217,7 +1036,6 @@ class _$_StatusChanged implements _StatusChanged {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1232,7 +1050,6 @@ class _$_StatusChanged implements _StatusChanged {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1326,7 +1143,6 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     required TResult Function(AllCreditsFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
-    required TResult Function() resetFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -1341,7 +1157,6 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     TResult? Function()? initialized,
     TResult? Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult? Function()? validateFilters,
-    TResult? Function()? resetFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -1356,7 +1171,6 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     TResult Function()? initialized,
     TResult Function(AllCreditsFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
-    TResult Function()? resetFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1376,7 +1190,6 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
     required TResult Function(_ValidateFilters value) validateFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1392,7 +1205,6 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult? Function(_ValidateFilters value)? validateFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1407,7 +1219,6 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
     TResult Function(_ValidateFilters value)? validateFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1435,11 +1246,7 @@ abstract class _SetDocumentDate implements AllCreditsFilterEvent {
 mixin _$AllCreditsFilterState {
   AllCreditsFilter get filter => throw _privateConstructorUsedError;
   List<String> get statuses => throw _privateConstructorUsedError;
-  bool get applied => throw _privateConstructorUsedError;
-  bool get isFetching => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
-  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllCreditsFilterStateCopyWith<AllCreditsFilterState> get copyWith =>
@@ -1453,12 +1260,7 @@ abstract class $AllCreditsFilterStateCopyWith<$Res> {
       _$AllCreditsFilterStateCopyWithImpl<$Res, AllCreditsFilterState>;
   @useResult
   $Res call(
-      {AllCreditsFilter filter,
-      List<String> statuses,
-      bool applied,
-      bool isFetching,
-      bool showErrorMessages,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      {AllCreditsFilter filter, List<String> statuses, bool showErrorMessages});
 
   $AllCreditsFilterCopyWith<$Res> get filter;
 }
@@ -1479,10 +1281,7 @@ class _$AllCreditsFilterStateCopyWithImpl<$Res,
   $Res call({
     Object? filter = null,
     Object? statuses = null,
-    Object? applied = null,
-    Object? isFetching = null,
     Object? showErrorMessages = null,
-    Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
       filter: null == filter
@@ -1493,22 +1292,10 @@ class _$AllCreditsFilterStateCopyWithImpl<$Res,
           ? _value.statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      applied: null == applied
-          ? _value.applied
-          : applied // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: null == failureOrSuccessOption
-          ? _value.failureOrSuccessOption
-          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
 
@@ -1530,12 +1317,7 @@ abstract class _$$_AllCreditsFilterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AllCreditsFilter filter,
-      List<String> statuses,
-      bool applied,
-      bool isFetching,
-      bool showErrorMessages,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      {AllCreditsFilter filter, List<String> statuses, bool showErrorMessages});
 
   @override
   $AllCreditsFilterCopyWith<$Res> get filter;
@@ -1554,10 +1336,7 @@ class __$$_AllCreditsFilterStateCopyWithImpl<$Res>
   $Res call({
     Object? filter = null,
     Object? statuses = null,
-    Object? applied = null,
-    Object? isFetching = null,
     Object? showErrorMessages = null,
-    Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_AllCreditsFilterState(
       filter: null == filter
@@ -1568,22 +1347,10 @@ class __$$_AllCreditsFilterStateCopyWithImpl<$Res>
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      applied: null == applied
-          ? _value.applied
-          : applied // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: null == failureOrSuccessOption
-          ? _value.failureOrSuccessOption
-          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -1594,10 +1361,7 @@ class _$_AllCreditsFilterState extends _AllCreditsFilterState {
   const _$_AllCreditsFilterState(
       {required this.filter,
       required final List<String> statuses,
-      required this.applied,
-      required this.isFetching,
-      required this.showErrorMessages,
-      required this.failureOrSuccessOption})
+      required this.showErrorMessages})
       : _statuses = statuses,
         super._();
 
@@ -1612,17 +1376,11 @@ class _$_AllCreditsFilterState extends _AllCreditsFilterState {
   }
 
   @override
-  final bool applied;
-  @override
-  final bool isFetching;
-  @override
   final bool showErrorMessages;
-  @override
-  final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AllCreditsFilterState(filter: $filter, statuses: $statuses, applied: $applied, isFetching: $isFetching, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'AllCreditsFilterState(filter: $filter, statuses: $statuses, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -1632,24 +1390,13 @@ class _$_AllCreditsFilterState extends _AllCreditsFilterState {
             other is _$_AllCreditsFilterState &&
             (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
-            (identical(other.applied, applied) || other.applied == applied) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
-                other.showErrorMessages == showErrorMessages) &&
-            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.showErrorMessages == showErrorMessages));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      filter,
-      const DeepCollectionEquality().hash(_statuses),
-      applied,
-      isFetching,
-      showErrorMessages,
-      failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, filter,
+      const DeepCollectionEquality().hash(_statuses), showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -1663,11 +1410,7 @@ abstract class _AllCreditsFilterState extends AllCreditsFilterState {
   const factory _AllCreditsFilterState(
       {required final AllCreditsFilter filter,
       required final List<String> statuses,
-      required final bool applied,
-      required final bool isFetching,
-      required final bool showErrorMessages,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_AllCreditsFilterState;
+      required final bool showErrorMessages}) = _$_AllCreditsFilterState;
   const _AllCreditsFilterState._() : super._();
 
   @override
@@ -1675,13 +1418,7 @@ abstract class _AllCreditsFilterState extends AllCreditsFilterState {
   @override
   List<String> get statuses;
   @override
-  bool get applied;
-  @override
-  bool get isFetching;
-  @override
   bool get showErrorMessages;
-  @override
-  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_AllCreditsFilterStateCopyWith<_$_AllCreditsFilterState> get copyWith =>

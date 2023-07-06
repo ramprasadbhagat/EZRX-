@@ -33,15 +33,16 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           state.copyWith(
             failureOrSuccessOption: none(),
             items: <CreditAndInvoiceItem>[],
-            totalCount: 0,
             isLoading: true,
+            appliedFilter: value.appliedFilter,
           ),
         );
 
-        final failureOrSuccess = await allCreditsAndInvoicesRepository.filterCredits(
+        final failureOrSuccess =
+            await allCreditsAndInvoicesRepository.filterCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
-          filter: state.appliedFilter,
+          filter: value.appliedFilter,
           pageSize: _pageSize,
           offset: 0,
         );
@@ -55,12 +56,11 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
               ),
             );
           },
-          (paymentData) {
+          (responseData) {
             emit(
               state.copyWith(
-                items: paymentData.invoices,
-                totalCount: paymentData.totalCount,
-                canLoadMore: paymentData.invoices.length >= _pageSize,
+                items: responseData,
+                canLoadMore: responseData.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -78,7 +78,8 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           ),
         );
 
-        final failureOrSuccess = await allCreditsAndInvoicesRepository.filterCredits(
+        final failureOrSuccess =
+            await allCreditsAndInvoicesRepository.filterCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           filter: state.appliedFilter,
@@ -95,29 +96,19 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
               ),
             );
           },
-          (paymentData) {
+          (responseData) {
             final updateItemList = List<CreditAndInvoiceItem>.from(state.items)
-              ..addAll(paymentData.invoices);
+              ..addAll(responseData);
             emit(
               state.copyWith(
                 items: updateItemList,
-                totalCount: paymentData.totalCount,
-                canLoadMore: paymentData.invoices.length >= _pageSize,
+                canLoadMore: responseData.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
             );
           },
         );
-      },
-      applyFilters: (_ApplyFilters value) async {
-        if (state.appliedFilter != value.tempFilter) {
-            emit(
-              state.copyWith(
-                appliedFilter: value.tempFilter,
-              ),
-            );
-        }
       },
     );
   }

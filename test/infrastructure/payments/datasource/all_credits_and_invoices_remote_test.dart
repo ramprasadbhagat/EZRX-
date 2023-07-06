@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,14 +69,13 @@ void main() {
   group(
     'All Credits And Invoices Remote Datasource',
     () {
-
       group('All Credits And Invoices', () {
         test(
           'get All Credits And Invoices Success',
           () async {
             final res = json.decode(
-              await rootBundle
-                  .loadString('assets/json/customerDocumentHeaderResponse.json'),
+              await rootBundle.loadString(
+                  'assets/json/customerDocumentHeaderResponse.json'),
             );
 
             dioAdapter.onPost(
@@ -89,7 +88,7 @@ void main() {
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               data: jsonEncode({
                 'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
-                    .getCustomerDocumentHeaderQuery(),
+                    .getDocumentHeaderListQuery(),
                 'variables': variables,
               }),
             );
@@ -101,11 +100,14 @@ void main() {
                 offset: 0,
                 pageSize: 20);
 
+            final expectResult = <CreditAndInvoiceItem>[];
+            for (final dynamic item in res['data']['customerDocumentHeader']
+                ['documentHeaderList']) {
+              expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+            }
             expect(
               result,
-              CustomerDocumentHeaderDto.fromJson(
-                      res['data']['customerDocumentHeader'])
-                  .toDomain(),
+              expectResult,
             );
           },
         );
@@ -123,7 +125,7 @@ void main() {
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               data: jsonEncode({
                 'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
-                    .getCustomerDocumentHeaderQuery(),
+                    .getDocumentHeaderListQuery(),
                 'variables': variables,
               }),
             );
@@ -137,7 +139,7 @@ void main() {
                     pageSize: 20)
                 .onError((error, _) {
               expect(error, isA<ServerException>());
-              return CustomerDocumentHeader.empty();
+              return List<CreditAndInvoiceItem>.empty();
             });
           },
         );
@@ -160,7 +162,7 @@ void main() {
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               data: jsonEncode({
                 'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
-                    .getCustomerDocumentHeaderQuery(),
+                    .getDocumentHeaderListQuery(),
                 'variables': variables,
               }),
             );
@@ -174,7 +176,7 @@ void main() {
                     pageSize: 20)
                 .onError((error, _) {
               expect(error, isA<ServerException>());
-              return CustomerDocumentHeader.empty();
+              return List<CreditAndInvoiceItem>.empty();
             });
           },
         );

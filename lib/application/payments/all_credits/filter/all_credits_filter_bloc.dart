@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -33,45 +31,21 @@ class AllCreditsFilterBloc
         AllCreditsFilterState.initial(),
       ),
       openFilterBottomSheet: (_OpenFilterBottomSheet value) async {
-        if (state.applied ||
-            state.showErrorMessages ||
-            state.filter != value.appliedFilter) {
+        if (state.showErrorMessages || state.filter != value.appliedFilter) {
           emit(
             state.copyWith(
               filter: value.appliedFilter,
-              applied: false,
               showErrorMessages: false,
             ),
           );
         }
       },
       validateFilters: (_ValidateFilters value) async {
-        if (!state.filter.isValid) {
           emit(
             state.copyWith(
-              applied: false,
-              showErrorMessages: true,
+              showErrorMessages: !state.filter.isValid,
             ),
           );
-        } else {
-          emit(
-            state.copyWith(
-              applied: true,
-              showErrorMessages: false,
-            ),
-          );
-        }
-      },
-      resetFilters: (_ResetFilters value) async {
-        if (!state.filter.isEmpty) {
-          emit(
-            state.copyWith(
-              applied: true,
-              filter: AllCreditsFilter.empty(),
-              showErrorMessages: false,
-            ),
-          );
-        }
       },
       statusChanged: (_StatusChanged e) async {
         final statuses = List<String>.from(state.filter.filterStatuses);

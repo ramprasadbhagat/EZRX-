@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,13 +31,16 @@ void main() {
               'assets/json/customerDocumentHeaderResponse.json',
             ),
           );
-          final result = await localDataSource.getCustomerDocumentHeader();
+          final result = await localDataSource.getDocumentHeaderList();
 
+          final expectResult = <CreditAndInvoiceItem>[];
+          for (final dynamic item in res['data']['customerDocumentHeader']
+              ['documentHeaderList']) {
+            expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+          }
           expect(
             result,
-            CustomerDocumentHeaderDto.fromJson(
-                    res['data']['customerDocumentHeader'])
-                .toDomain(),
+            expectResult,
           );
         },
       );

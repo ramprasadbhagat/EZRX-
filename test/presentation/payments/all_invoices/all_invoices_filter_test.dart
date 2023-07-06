@@ -1,7 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
@@ -17,11 +22,21 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 
+class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements AllInvoicesBloc {}
+class CustomerCodeBlocMock extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
 class AllInvoicesFilterBlocMock
     extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
     implements AllInvoicesFilterBloc {}
 
 void main() {
+  late CustomerCodeBloc customerCodeBlocMock;
+  late AllInvoicesBloc allInvoicesBlocMock;
+  late SalesOrgBloc salesOrgBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
@@ -47,6 +62,12 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    salesOrgBlocMock = SalesOrgBlocMock();
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    customerCodeBlocMock = CustomerCodeBlocMock();
+    when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial());
+    allInvoicesBlocMock = AllInvoicesBlocMock();
+    when(() => allInvoicesBlocMock.state).thenReturn(AllInvoicesState.initial());
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     when(() => allInvoicesFilterBlocMock.state)
         .thenReturn(AllInvoicesFilterState.initial());
@@ -57,6 +78,18 @@ void main() {
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<AllInvoicesFilterBloc>(
+            create: (context) => allInvoicesFilterBlocMock,
+          ),
+          BlocProvider<AllInvoicesBloc>(
+            create: (context) => allInvoicesBlocMock,
+          ),
           BlocProvider<AllInvoicesFilterBloc>(
             create: (context) => allInvoicesFilterBlocMock,
           ),
@@ -73,9 +106,7 @@ void main() {
   group('All Invoices Filter Bottom Sheet Test', () {
     testWidgets('=> Listen When condition', (tester) async {
       final expectedState = [
-        AllInvoicesFilterState.initial().copyWith(
-          applied: true,
-        ),
+        AllInvoicesFilterState.initial(),
       ];
       whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
       await getWidget(tester);
@@ -95,71 +126,10 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('=> _DueDateFilterState Test', (tester) async {
-      when(() => allInvoicesFilterBlocMock.state)
-          .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        tempFilter: AllInvoicesFilter.empty().copyWith(
-          dueDateFrom: DateTimeStringValue(
-            getDateStringByDateTime(fakeFromDate),
-          ),
-          dueDateTo: DateTimeStringValue(
-            getDateStringByDateTime(fakeToDate),
-          ),
-        ),
-      ));
-
-      final expectedState = [
-        AllInvoicesFilterState.initial().copyWith(
-          tempFilter: AllInvoicesFilter.empty().copyWith(
-            dueDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
-            dueDateTo: DateTimeStringValue(
-              getDateStringByDateTime(fakeToDate),
-            ),
-          ),
-        ),
-      ];
-      whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
-
-      await getWidget(tester);
-      await tester.pumpAndSettle();
-
-      final toDueDateField = find.byKey(WidgetKeys.toDueDateField);
-      expect(toDueDateField, findsOneWidget);
-      await tester.tap(toDueDateField);
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('SAVE'));
-      await tester.pumpAndSettle();
-
-      verify(
-        () => allInvoicesFilterBlocMock.add(
-          AllInvoicesFilterEvent.setDueDate(
-              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
-        ),
-      ).called(1);
-
-      final fromDueDateField = find.byKey(WidgetKeys.fromDueDateField);
-      expect(fromDueDateField, findsOneWidget);
-      await tester.tap(fromDueDateField);
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('SAVE'));
-      await tester.pumpAndSettle();
-
-      verify(
-        () => allInvoicesFilterBlocMock.add(
-          AllInvoicesFilterEvent.setDueDate(
-              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
-        ),
-      ).called(1);
-    });
-
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        tempFilter: AllInvoicesFilter.empty().copyWith(
+        filter: AllInvoicesFilter.empty().copyWith(
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
@@ -171,7 +141,7 @@ void main() {
 
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          tempFilter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -217,11 +187,74 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets('=> _DueDateFilterState Test', (tester) async {
+      when(() => allInvoicesFilterBlocMock.state)
+          .thenReturn(AllInvoicesFilterState.initial().copyWith(
+        filter: AllInvoicesFilter.empty().copyWith(
+          documentDateFrom: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
+          ),
+          documentDateTo: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
+          ),
+        ),
+      ));
+
+      final expectedState = [
+        AllInvoicesFilterState.initial().copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            documentDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            documentDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+          ),
+        ),
+      ];
+      whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      final toDueDateField = find.byKey(WidgetKeys.toDueDateField);
+      expect(toDueDateField, findsOneWidget);
+      await tester.tap(toDueDateField);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('SAVE'));
+      await tester.pumpAndSettle();
+
+      verify(
+        () => allInvoicesFilterBlocMock.add(
+          AllInvoicesFilterEvent.setDueDate(
+              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+        ),
+      ).called(1);
+
+      final fromDueDateField =
+          find.byKey(WidgetKeys.fromDueDateField);
+      expect(fromDueDateField, findsOneWidget);
+      await tester.tap(fromDueDateField);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('SAVE'));
+      await tester.pumpAndSettle();
+
+      verify(
+        () => allInvoicesFilterBlocMock.add(
+          AllInvoicesFilterEvent.setDueDate(
+              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+        ),
+      ).called(1);
+    });
+    
     testWidgets('=> _AmountValueToFilter Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
-        tempFilter: AllInvoicesFilter.empty().copyWith(
+        filter: AllInvoicesFilter.empty().copyWith(
           amountValueTo: RangeValue('12'),
         ),
       ));
@@ -247,7 +280,7 @@ void main() {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
-        tempFilter: AllInvoicesFilter.empty().copyWith(
+        filter: AllInvoicesFilter.empty().copyWith(
           amountValueFrom: RangeValue('12'),
         ),
       ));
@@ -281,20 +314,17 @@ void main() {
       await tester.pump();
       verify(
         () => allInvoicesFilterBlocMock.add(
-          const AllInvoicesFilterEvent.applyFilters(),
+          const AllInvoicesFilterEvent.validateFilters(),
         ),
       ).called(1);
     });
 
     testWidgets('=> _ResetButton Test', (tester) async {
-      when(() => allInvoicesFilterBlocMock.state)
-          .thenReturn(AllInvoicesFilterState.initial().copyWith(
-        showErrorMessages: false,
-        appliedFilter: AllInvoicesFilter.empty().copyWith(
-          amountValueFrom: RangeValue('12'),
-          amountValueTo: RangeValue('22'),
-        ),
-      ));
+      when(() => allInvoicesBlocMock.state)
+          .thenReturn(AllInvoicesState.initial().copyWith(
+          appliedFilter:
+              AllInvoicesFilter.empty().copyWith(filterStatuses: ['Cleared']),
+        ),);
       await getWidget(tester);
       await tester.pumpAndSettle();
 
@@ -304,8 +334,12 @@ void main() {
       await tester.tap(filterResetButton);
       await tester.pump();
       verify(
-        () => allInvoicesFilterBlocMock.add(
-          const AllInvoicesFilterEvent.resetFilters(),
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
         ),
       ).called(1);
     });
@@ -316,7 +350,7 @@ void main() {
       when(() => allInvoicesFilterBlocMock.state)
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
-        tempFilter: AllInvoicesFilter.empty().copyWith(
+        filter: AllInvoicesFilter.empty().copyWith(
           amountValueFrom: RangeValue('15'),
           amountValueTo: RangeValue('12'),
         ),

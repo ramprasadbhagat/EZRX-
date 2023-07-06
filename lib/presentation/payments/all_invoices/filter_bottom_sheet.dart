@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +21,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.showErrorMessages != current.showErrorMessages ||
-          previous.applied != current.applied && current.applied,
+          previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -35,9 +38,6 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                 IconButton(
                   key: WidgetKeys.closeButton,
                   onPressed: () {
-                    context.read<AllInvoicesFilterBloc>().add(
-                          const AllInvoicesFilterEvent.closeFilterBottomSheet(),
-                        );
                     Navigator.of(context).pop();
                   },
                   icon: const Icon(
@@ -62,7 +62,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Text(
-                        'Document date',
+                        'Document date'.tr(),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -77,18 +77,15 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                       ),
                       const _ToDocumentDateFilter(),
                     ]),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Text(
-                        'Due date',
+                        'Due date'.tr(),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
                     Row(children: [
-                      _FromDueDateFilter(),
+                      const _FromDueDateFilter(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
@@ -98,13 +95,10 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                       ),
                       const _ToDueDateFilter(),
                     ]),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
                       child: Text(
-                        'Amount range',
+                        'Amount range'.tr(),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -120,19 +114,16 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                       const _AmountValueToFilter(),
                     ]),
                     (state.showErrorMessages &&
-                            !state.tempFilter.isAmountValueRangeValid)
+                            !state.filter.isAmountValueRangeValid)
                         ? ValueRangeError(
-                            valueName: 'Amount',
-                            isValid: state.tempFilter.isAmountValueRangeValid,
+                            valueName: 'Amount'.tr(),
+                            isValid: state.filter.isAmountValueRangeValid,
                           )
                         : const SizedBox.shrink(),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
                       child: Text(
-                        'Status',
+                        'Status'.tr(),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -169,8 +160,7 @@ class _StatusesSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.filterStatuses !=
-          current.tempFilter.filterStatuses,
+          previous.filter.filterStatuses != current.filter.filterStatuses,
       builder: (
         context,
         state,
@@ -185,7 +175,7 @@ class _StatusesSelector extends StatelessWidget {
               ),
               controlAffinity: ListTileControlAffinity.leading,
               dense: true,
-              visualDensity: VisualDensity.compact,
+              visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
               onChanged: (bool? value) {
                 context.read<AllInvoicesFilterBloc>().add(
                       AllInvoicesFilterEvent.statusChanged(
@@ -194,7 +184,7 @@ class _StatusesSelector extends StatelessWidget {
                       ),
                     );
               },
-              value: state.tempFilter.filterStatuses.contains(status),
+              value: state.filter.filterStatuses.contains(status),
             );
           }).toList(),
         );
@@ -214,21 +204,17 @@ class ValueRangeError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 4.0,
-          ),
-          child: Text(
-            isValid ? '' : 'Invalid $valueName range!'.tr(),
-            style: Theme.of(context).textTheme.titleSmall?.apply(
-                  color: ZPColors.error,
-                ),
-          ).tr(),
-        ),
-      ],
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.only(
+        top: 8.0,
+      ),
+      child: Text(
+        isValid ? '' : 'Invalid $valueName range!'.tr(),
+        style: Theme.of(context).textTheme.titleSmall?.apply(
+              color: ZPColors.error,
+            ),
+      ).tr(),
     );
   }
 }
@@ -239,7 +225,7 @@ class _AmountValueToFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.amountValueTo != current.tempFilter.amountValueTo,
+          previous.filter.amountValueTo != current.filter.amountValueTo,
       builder: (
         context,
         state,
@@ -248,7 +234,7 @@ class _AmountValueToFilter extends StatelessWidget {
           child: TextFormField(
             autocorrect: false,
             key: WidgetKeys.amountValueTo,
-            initialValue: state.tempFilter.amountValueTo.apiParameterValue,
+            initialValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.amountValueToChanged(
                     value.isNotEmpty
@@ -279,8 +265,7 @@ class _AmountValueFromFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.amountValueFrom !=
-          current.tempFilter.amountValueFrom,
+          previous.filter.amountValueFrom != current.filter.amountValueFrom,
       builder: (
         context,
         state,
@@ -289,7 +274,7 @@ class _AmountValueFromFilter extends StatelessWidget {
           child: TextFormField(
             autocorrect: false,
             key: WidgetKeys.amountValueFrom,
-            initialValue: state.tempFilter.amountValueFrom.apiParameterValue,
+            initialValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.amountValueFromChanged(
                     value.isNotEmpty
@@ -321,8 +306,8 @@ class _FromDocumentDateFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.getDocumentDateFilterDateRange !=
-          current.tempFilter.getDocumentDateFilterDateRange,
+          previous.filter.getDocumentDateFilterDateRange !=
+          current.filter.getDocumentDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
           autocorrect: false,
@@ -334,7 +319,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 365)),
               lastDate: DateTime.now(),
-              initialDateRange: state.tempFilter.getDocumentDateFilterDateRange,
+              initialDateRange: state.filter.getDocumentDateFilterDateRange,
             );
             if (documentDateRange == null) return;
             returnApproverFilterBloc.add(
@@ -345,7 +330,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.tempFilter.documentDateFrom.toValidDateString,
+            text: state.filter.documentDateFrom.toValidDateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -372,8 +357,8 @@ class _ToDocumentDateFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.getDocumentDateFilterDateRange !=
-          current.tempFilter.getDocumentDateFilterDateRange,
+          previous.filter.getDocumentDateFilterDateRange !=
+          current.filter.getDocumentDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
           autocorrect: false,
@@ -385,7 +370,7 @@ class _ToDocumentDateFilter extends StatelessWidget {
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 365)),
               lastDate: DateTime.now(),
-              initialDateRange: state.tempFilter.getDocumentDateFilterDateRange,
+              initialDateRange: state.filter.getDocumentDateFilterDateRange,
             );
             if (documentDateRange == null) return;
             returnApproverFilterBloc.add(
@@ -396,7 +381,7 @@ class _ToDocumentDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.tempFilter.documentDateTo.toValidDateString,
+            text: state.filter.documentDateTo.toValidDateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -417,12 +402,14 @@ class _ToDocumentDateFilter extends StatelessWidget {
 }
 
 class _FromDueDateFilter extends StatelessWidget {
+  const _FromDueDateFilter({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.getDueDateFilterDateRange !=
-          current.tempFilter.getDueDateFilterDateRange,
+          previous.filter.getDueDateFilterDateRange !=
+          current.filter.getDueDateFilterDateRange,
       builder: (context, state) => Expanded(
         child: TextFormField(
           autocorrect: false,
@@ -430,22 +417,22 @@ class _FromDueDateFilter extends StatelessWidget {
           onTap: () async {
             final returnApproverFilterBloc =
                 context.read<AllInvoicesFilterBloc>();
-            final documentDateRange = await showDateRangePicker(
+            final dueDateRange = await showDateRangePicker(
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 365)),
               lastDate: DateTime.now(),
-              initialDateRange: state.tempFilter.getDueDateFilterDateRange,
+              initialDateRange: state.filter.getDueDateFilterDateRange,
             );
-            if (documentDateRange == null) return;
+            if (dueDateRange == null) return;
             returnApproverFilterBloc.add(
               AllInvoicesFilterEvent.setDueDate(
-                documentDateRange,
+                dueDateRange,
               ),
             );
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.tempFilter.dueDateFrom.toValidDateString,
+            text: state.filter.dueDateFrom.toValidDateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -472,35 +459,31 @@ class _ToDueDateFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
       buildWhen: (previous, current) =>
-          previous.tempFilter.getDueDateFilterDateRange !=
-          current.tempFilter.getDueDateFilterDateRange,
-      builder: (
-        context,
-        state,
-      ) =>
-          Expanded(
+          previous.filter.getDueDateFilterDateRange !=
+          current.filter.getDueDateFilterDateRange,
+      builder: (context, state) => Expanded(
         child: TextFormField(
           autocorrect: false,
           key: WidgetKeys.toDueDateField,
           onTap: () async {
             final returnApproverFilterBloc =
                 context.read<AllInvoicesFilterBloc>();
-            final documentDateRange = await showDateRangePicker(
+            final dueDateRange = await showDateRangePicker(
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 365)),
               lastDate: DateTime.now(),
-              initialDateRange: state.tempFilter.getDueDateFilterDateRange,
+              initialDateRange: state.filter.getDueDateFilterDateRange,
             );
-            if (documentDateRange == null) return;
+            if (dueDateRange == null) return;
             returnApproverFilterBloc.add(
               AllInvoicesFilterEvent.setDueDate(
-                documentDateRange,
+                dueDateRange,
               ),
             );
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.tempFilter.dueDateTo.toValidDateString,
+            text: state.filter.dueDateTo.toValidDateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -529,9 +512,19 @@ class _ResetButton extends StatelessWidget {
       child: OutlinedButton(
         key: WidgetKeys.filterResetButton,
         onPressed: () {
-          context.read<AllInvoicesFilterBloc>().add(
-                const AllInvoicesFilterEvent.resetFilters(),
-              );
+          final emptyFilter = AllInvoicesFilter.empty();
+          if (context.read<AllInvoicesBloc>().state.appliedFilter !=
+              emptyFilter) {
+            context.read<AllInvoicesBloc>().add(
+                  AllInvoicesEvent.fetch(
+                    appliedFilter: emptyFilter,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  ),
+                );
+          }
           context.router.popForced();
         },
         child: Text(
@@ -552,11 +545,25 @@ class _ApplyButton extends StatelessWidget {
       child: ElevatedButton(
         key: WidgetKeys.filterApplyButton,
         onPressed: () {
-          final bloc = context.read<AllInvoicesFilterBloc>();
-          bloc.add(
-            const AllInvoicesFilterEvent.applyFilters(),
+          final filterBloc = context.read<AllInvoicesFilterBloc>();
+          filterBloc.add(
+            const AllInvoicesFilterEvent.validateFilters(),
           );
-          if (bloc.state.tempFilter.isValid) {
+          if (filterBloc.state.filter.isValid) {
+            if (filterBloc.state.filter !=
+                context.read<AllInvoicesBloc>().state.appliedFilter) {
+              context.read<AllInvoicesBloc>().add(
+                    AllInvoicesEvent.fetch(
+                      appliedFilter: filterBloc.state.filter,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                    ),
+                  );
+            }
             context.router.popForced();
           }
         },

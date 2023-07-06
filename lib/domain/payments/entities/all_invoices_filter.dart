@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/payments/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,7 +9,6 @@ part 'all_invoices_filter.freezed.dart';
 class AllInvoicesFilter with _$AllInvoicesFilter {
   const AllInvoicesFilter._();
   factory AllInvoicesFilter({
-    required DocumentNumber documentNumber,
     required DateTimeStringValue dueDateFrom,
     required DateTimeStringValue dueDateTo,
     required DateTimeStringValue documentDateFrom,
@@ -21,7 +19,6 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
   }) = _AllInvoicesFilter;
 
   factory AllInvoicesFilter.fullyEmpty() => AllInvoicesFilter(
-        documentNumber: DocumentNumber(''),
         dueDateFrom: DateTimeStringValue(''),
         dueDateTo: DateTimeStringValue(''),
         documentDateFrom: DateTimeStringValue(''),
@@ -32,7 +29,6 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
       );
 
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
-        documentNumber: DocumentNumber(''),
         dueDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(

@@ -18,9 +18,9 @@ void main() {
       test(
         '=> filterCredits',
         () async {
-          final result = await localDataSource.getCustomerDocumentHeader();
+          final result = await localDataSource.getDocumentHeaderList();
           expect(
-            result.invoices.length,
+            result.length,
             3,
           );
         },

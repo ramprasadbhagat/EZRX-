@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
@@ -29,7 +29,7 @@ void main() {
       allCreditsAndInvoicesRemoteDataSourceMock;
   late Config configMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-  late CustomerDocumentHeader mockCustomerDocumentHeader;
+  late List<CreditAndInvoiceItem> mockList;
   late AllCreditsFilter allCreditsFilter;
 
   final fakeToDate = DateTime.now();
@@ -49,7 +49,7 @@ void main() {
       localDataSource: allCreditsAndInvoicesLocalDataSourceMock,
       remoteDataSource: allCreditsAndInvoicesRemoteDataSourceMock,
     );
-    mockCustomerDocumentHeader = CustomerDocumentHeader.empty();
+    mockList = List<CreditAndInvoiceItem>.empty();
     allCreditsFilter = AllCreditsFilter.empty().copyWith(
       documentDateTo: DateTimeStringValue(
         getDateStringByDateTime(fakeToDate),
@@ -66,8 +66,8 @@ void main() {
     test('=> filterCredits locally success', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
       when(() => allCreditsAndInvoicesLocalDataSourceMock
-          .getCustomerDocumentHeader()).thenAnswer(
-        (invocation) async => mockCustomerDocumentHeader,
+          .getDocumentHeaderList()).thenAnswer(
+        (invocation) async => mockList,
       );
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(
@@ -83,7 +83,7 @@ void main() {
     test('=> filterCredits locally failed', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
       when(() => allCreditsAndInvoicesLocalDataSourceMock
-              .getCustomerDocumentHeader())
+              .getDocumentHeaderList())
           .thenThrow((invocation) async => MockException());
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(
@@ -113,7 +113,7 @@ void main() {
               amountValueFrom: RangeValue('1000'),
             )).toMapList,
           )).thenAnswer(
-        (invocation) async => mockCustomerDocumentHeader,
+        (invocation) async => mockList,
       );
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(

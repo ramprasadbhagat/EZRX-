@@ -18,10 +18,6 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
     )
         required String dueDateTo,
     @JsonKey(
-      name: 'documentNumber',
-    )
-        required String documentNumber,
-    @JsonKey(
       name: 'documentDateFrom',
       defaultValue: '',
     )
@@ -54,7 +50,6 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
     return AllInvoicesFilterDto(
       dueDateFrom: tempFilter.dueDateFrom.apiDateWithDashFormat,
       dueDateTo: tempFilter.dueDateTo.apiDateWithDashFormat,
-      documentNumber: tempFilter.documentNumber.getOrDefaultValue(''),
       documentDateTo: tempFilter.documentDateTo.apiDateWithDashFormat,
       documentDateFrom:
           tempFilter.documentDateFrom.apiDateWithDashFormat,
@@ -84,11 +79,6 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
           'field': 'netDueDate',
           'value': dueDateTo,
           'type': 'le',
-        },
-      if (documentNumber.isNotEmpty)
-        {
-          'field': 'accountingDocument',
-          'value': documentNumber,
         },
       if (documentDateFrom.isNotEmpty)
         {

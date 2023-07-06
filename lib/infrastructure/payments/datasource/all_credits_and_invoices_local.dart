@@ -1,20 +1,25 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 import 'package:flutter/services.dart';
 
 class AllCreditsAndInvoicesLocalDataSource {
   AllCreditsAndInvoicesLocalDataSource();
 
-  Future<CustomerDocumentHeader> getCustomerDocumentHeader() async {
+  Future<List<CreditAndInvoiceItem>> getDocumentHeaderList() async {
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/customerDocumentHeaderResponse.json',
       ),
     );
-    final res = data['data']['customerDocumentHeader'];
+    final res = data['data']['customerDocumentHeader']['documentHeaderList'];
+    
+    final result = <CreditAndInvoiceItem>[];
+    for (final dynamic item in res) {
+      result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+    }
 
-    return CustomerDocumentHeaderDto.fromJson(res).toDomain();
+    return result;
   }
 }

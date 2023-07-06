@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AllInvoicesFilter {
-  DocumentNumber get documentNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get dueDateFrom => throw _privateConstructorUsedError;
   DateTimeStringValue get dueDateTo => throw _privateConstructorUsedError;
   DateTimeStringValue get documentDateFrom =>
@@ -38,8 +37,7 @@ abstract class $AllInvoicesFilterCopyWith<$Res> {
       _$AllInvoicesFilterCopyWithImpl<$Res, AllInvoicesFilter>;
   @useResult
   $Res call(
-      {DocumentNumber documentNumber,
-      DateTimeStringValue dueDateFrom,
+      {DateTimeStringValue dueDateFrom,
       DateTimeStringValue dueDateTo,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
@@ -61,7 +59,6 @@ class _$AllInvoicesFilterCopyWithImpl<$Res, $Val extends AllInvoicesFilter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
     Object? dueDateFrom = null,
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
@@ -71,10 +68,6 @@ class _$AllInvoicesFilterCopyWithImpl<$Res, $Val extends AllInvoicesFilter>
     Object? filterStatuses = null,
   }) {
     return _then(_value.copyWith(
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as DocumentNumber,
       dueDateFrom: null == dueDateFrom
           ? _value.dueDateFrom
           : dueDateFrom // ignore: cast_nullable_to_non_nullable
@@ -116,8 +109,7 @@ abstract class _$$_AllInvoicesFilterCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DocumentNumber documentNumber,
-      DateTimeStringValue dueDateFrom,
+      {DateTimeStringValue dueDateFrom,
       DateTimeStringValue dueDateTo,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
@@ -137,7 +129,6 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentNumber = null,
     Object? dueDateFrom = null,
     Object? dueDateTo = null,
     Object? documentDateFrom = null,
@@ -147,10 +138,6 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
     Object? filterStatuses = null,
   }) {
     return _then(_$_AllInvoicesFilter(
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
-              as DocumentNumber,
       dueDateFrom: null == dueDateFrom
           ? _value.dueDateFrom
           : dueDateFrom // ignore: cast_nullable_to_non_nullable
@@ -187,8 +174,7 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
 
 class _$_AllInvoicesFilter extends _AllInvoicesFilter {
   _$_AllInvoicesFilter(
-      {required this.documentNumber,
-      required this.dueDateFrom,
+      {required this.dueDateFrom,
       required this.dueDateTo,
       required this.documentDateFrom,
       required this.documentDateTo,
@@ -198,8 +184,6 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
       : _filterStatuses = filterStatuses,
         super._();
 
-  @override
-  final DocumentNumber documentNumber;
   @override
   final DateTimeStringValue dueDateFrom;
   @override
@@ -222,7 +206,7 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
 
   @override
   String toString() {
-    return 'AllInvoicesFilter(documentNumber: $documentNumber, dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'AllInvoicesFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
   }
 
   @override
@@ -230,8 +214,6 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllInvoicesFilter &&
-            (identical(other.documentNumber, documentNumber) ||
-                other.documentNumber == documentNumber) &&
             (identical(other.dueDateFrom, dueDateFrom) ||
                 other.dueDateFrom == dueDateFrom) &&
             (identical(other.dueDateTo, dueDateTo) ||
@@ -251,7 +233,6 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      documentNumber,
       dueDateFrom,
       dueDateTo,
       documentDateFrom,
@@ -270,8 +251,7 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
 
 abstract class _AllInvoicesFilter extends AllInvoicesFilter {
   factory _AllInvoicesFilter(
-      {required final DocumentNumber documentNumber,
-      required final DateTimeStringValue dueDateFrom,
+      {required final DateTimeStringValue dueDateFrom,
       required final DateTimeStringValue dueDateTo,
       required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
@@ -280,8 +260,6 @@ abstract class _AllInvoicesFilter extends AllInvoicesFilter {
       required final List<String> filterStatuses}) = _$_AllInvoicesFilter;
   _AllInvoicesFilter._() : super._();
 
-  @override
-  DocumentNumber get documentNumber;
   @override
   DateTimeStringValue get dueDateFrom;
   @override

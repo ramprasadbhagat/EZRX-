@@ -5,15 +5,12 @@ class AllInvoicesFilterEvent with _$AllInvoicesFilterEvent {
 
   const factory AllInvoicesFilterEvent.initialized() = _Initialized;
 
-  const factory AllInvoicesFilterEvent.openFilterBottomSheet() =
+  const factory AllInvoicesFilterEvent.openFilterBottomSheet({
+    required AllInvoicesFilter appliedFilter,
+  }) =
       _OpenFilterBottomSheet;
 
-  const factory AllInvoicesFilterEvent.closeFilterBottomSheet() =
-      _CloseFilterBottomSheet;
-
-  const factory AllInvoicesFilterEvent.applyFilters() = _ApplyFilters;
-
-  const factory AllInvoicesFilterEvent.resetFilters() = _ResetFilters;
+  const factory AllInvoicesFilterEvent.validateFilters() = _ValidateFilters;
 
   const factory AllInvoicesFilterEvent.amountValueFromChanged(
     String amountValueFrom,

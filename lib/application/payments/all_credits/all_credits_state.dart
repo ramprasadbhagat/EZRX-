@@ -7,8 +7,6 @@ class AllCreditsState with _$AllCreditsState {
   const factory AllCreditsState({
     required AllCreditsFilter appliedFilter,
     required List<CreditAndInvoiceItem> items,
-    required int totalCount,
-    required String sortDirection,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
@@ -20,8 +18,6 @@ class AllCreditsState with _$AllCreditsState {
         canLoadMore: true,
         appliedFilter: AllCreditsFilter.empty(),
         items: <CreditAndInvoiceItem>[],
-        sortDirection: 'desc',
-        totalCount: 0,
       );
 
 }

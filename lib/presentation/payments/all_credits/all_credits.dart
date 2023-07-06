@@ -40,155 +40,121 @@ class AllCreditsPage extends StatelessWidget {
           SizedBox.shrink(),
         ],
       ),
-      body: BlocListener<AllCreditsBloc, AllCreditsState>(
-        listenWhen: (previous, current) =>
-            previous.appliedFilter != current.appliedFilter,
-        listener: (context, state) {
-          context.read<AllCreditsBloc>().add(
-                AllCreditsEvent.fetch(
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                ),
-              );
-        },
-        child: AnnouncementBanner(
-          currentPath: context.router.currentPath,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SearchBar(
-                        onSearchChanged: (String value) {},
-                        clearIconKey: WidgetKeys.clearIconKey,
-                        controller: TextEditingController(),
-                        onClear: () {},
-                      ),
+      body: AnnouncementBanner(
+        currentPath: context.router.currentPath,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SearchBar(
+                      onSearchChanged: (String value) {},
+                      clearIconKey: WidgetKeys.clearIconKey,
+                      controller: TextEditingController(),
+                      onClear: () {},
                     ),
-                    BlocBuilder<AllCreditsBloc, AllCreditsState>(
-                      buildWhen: (previous, current) =>
-                          previous.appliedFilter != current.appliedFilter,
-                      builder: (context, state) {
-                        return CustomBadge(
-                          Icons.tune,
-                          count: state.appliedFilter.appliedFilterCount,
-                          badgeColor: ZPColors.orange,
-                          onPressed: () {
-                            context.read<AllCreditsFilterBloc>().add(
-                                  AllCreditsFilterEvent.openFilterBottomSheet(
-                                    appliedFilter: state.appliedFilter,
-                                  ),
-                                );
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              isDismissible: false,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(16),
-                                ),
-                              ),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              context: context,
-                              builder: (_) {
-                                return const AllCreditsFilterBottomSheet();
-                              },
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              BlocListener<AllCreditsFilterBloc, AllCreditsFilterState>(
-                listenWhen: (previous, current) =>
-                    (previous.applied != current.applied && current.applied) &&
-                    current.filter.anyFilterApplied,
-                listener: (context, state) {
-                  context.read<AllCreditsBloc>().add(
-                        AllCreditsEvent.fetch(
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                        ),
-                      );
-                },
-                child: BlocConsumer<AllCreditsBloc, AllCreditsState>(
-                  listenWhen: (previous, current) =>
-                      previous.failureOrSuccessOption !=
-                      current.failureOrSuccessOption,
-                  listener: (context, state) {
-                    state.failureOrSuccessOption.fold(
-                      () {},
-                      (either) => either.fold(
-                        (failure) {
-                          ErrorUtils.handleApiFailure(context, failure);
-                        },
-                        (_) {},
-                      ),
-                    );
-                  },
-                  buildWhen: (previous, current) =>
-                      previous.isLoading != current.isLoading,
-                  builder: (context, state) {
-                    return Expanded(
-                      child: ScrollList<CreditAndInvoiceGroup>(
-                        noRecordFoundWidget:
-                            const NoRecordFound(title: 'No credit found'),
-                        controller: ScrollController(),
-                        onRefresh: () {
+                  ),
+                  BlocBuilder<AllCreditsBloc, AllCreditsState>(
+                    buildWhen: (previous, current) =>
+                        previous.appliedFilter != current.appliedFilter,
+                    builder: (context, state) {
+                      return CustomBadge(
+                        Icons.tune,
+                        count: state.appliedFilter.appliedFilterCount,
+                        badgeColor: ZPColors.orange,
+                        onPressed: () {
                           context.read<AllCreditsFilterBloc>().add(
-                                const AllCreditsFilterEvent.resetFilters(),
-                              );
-                          context.read<AllCreditsBloc>().add(
-                                AllCreditsEvent.fetch(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
+                                AllCreditsFilterEvent.openFilterBottomSheet(
+                                  appliedFilter: state.appliedFilter,
                                 ),
                               );
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            isDismissible: false,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16),
+                              ),
+                            ),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            context: context,
+                            builder: (_) {
+                              return const AllCreditsFilterBottomSheet();
+                            },
+                          );
                         },
-                        onLoadingMore: () {
-                          context.read<AllCreditsBloc>().add(
-                                AllCreditsEvent.loadMore(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
-                              );
-                        },
-                        isLoading: state.isLoading,
-                        itemBuilder: (context, index, item) => _CreditGroup(
-                          data: item,
-                          showDivider: index != 0,
-                        ),
-                        items: state.items.groupList,
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            BlocConsumer<AllCreditsBloc, AllCreditsState>(
+              listenWhen: (previous, current) =>
+                  previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption,
+              listener: (context, state) {
+                state.failureOrSuccessOption.fold(
+                  () {},
+                  (either) => either.fold(
+                    (failure) {
+                      ErrorUtils.handleApiFailure(context, failure);
+                    },
+                    (_) {},
+                  ),
+                );
+              },
+              buildWhen: (previous, current) =>
+                  previous.isLoading != current.isLoading,
+              builder: (context, state) {
+                return Expanded(
+                  child: ScrollList<CreditAndInvoiceGroup>(
+                    noRecordFoundWidget: NoRecordFound(
+                      title: 'No credit found'.tr(),
+                    ),
+                    controller: ScrollController(),
+                    onRefresh: () {
+                      context.read<AllCreditsBloc>().add(
+                            AllCreditsEvent.fetch(
+                              appliedFilter: state.appliedFilter,
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              customerCodeInfo: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                            ),
+                          );
+                    },
+                    onLoadingMore: () {
+                      context.read<AllCreditsBloc>().add(
+                            AllCreditsEvent.loadMore(
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              customerCodeInfo: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                            ),
+                          );
+                    },
+                    isLoading: state.isLoading,
+                    itemBuilder: (context, index, item) => _CreditGroup(
+                      data: item,
+                      showDivider: index != 0,
+                    ),
+                    items: state.items.groupList,
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

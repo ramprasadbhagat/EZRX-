@@ -2,9 +2,10 @@ part of 'all_credits_bloc.dart';
 
 @freezed
 class AllCreditsEvent with _$AllCreditsEvent {
-  const factory AllCreditsEvent.initialized() = _Initialized;
+  const factory AllCreditsEvent.initialized() = _initialized;
 
   const factory AllCreditsEvent.fetch({
+    required AllCreditsFilter appliedFilter,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) = _Fetch;
@@ -12,7 +13,4 @@ class AllCreditsEvent with _$AllCreditsEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) = _LoadMore;
-  const factory AllCreditsEvent.applyFilters({
-    required AllCreditsFilter tempFilter,
-  }) = _ApplyFilters;
 }

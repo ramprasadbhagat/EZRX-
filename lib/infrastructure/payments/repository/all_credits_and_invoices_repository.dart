@@ -3,7 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:dartz/dartz.dart';
@@ -24,7 +24,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   });
 
   @override
-  Future<Either<ApiFailure, CustomerDocumentHeader>> filterInvoices({
+  Future<Either<ApiFailure, List<CreditAndInvoiceItem>>> filterInvoices({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter filter,
@@ -33,7 +33,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final response = await localDataSource.getCustomerDocumentHeader();
+        final response = await localDataSource.getDocumentHeaderList();
 
         return Right(response);
       } catch (e) {
@@ -60,7 +60,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   }
 
   @override
-  Future<Either<ApiFailure, CustomerDocumentHeader>> filterCredits({
+  Future<Either<ApiFailure, List<CreditAndInvoiceItem>>> filterCredits({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required int pageSize,
@@ -69,7 +69,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final response = await localDataSource.getCustomerDocumentHeader();
+        final response = await localDataSource.getDocumentHeaderList();
 
         return Right(response);
       } catch (e) {
@@ -84,8 +84,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        filterMap:
-            AllCreditsFilterDto.fromDomain(filter).toMapList,
+        filterMap: AllCreditsFilterDto.fromDomain(filter).toMapList,
       );
 
       return Right(response);
@@ -95,5 +94,4 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
       );
     }
   }
-
 }

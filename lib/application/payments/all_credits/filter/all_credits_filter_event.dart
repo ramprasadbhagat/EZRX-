@@ -12,8 +12,6 @@ class AllCreditsFilterEvent with _$AllCreditsFilterEvent {
 
   const factory AllCreditsFilterEvent.validateFilters() = _ValidateFilters;
 
-  const factory AllCreditsFilterEvent.resetFilters() = _ResetFilters;
-
   const factory AllCreditsFilterEvent.amountValueFromChanged(
     String amountValueFrom,
   ) = _AmountValueFromChanged;

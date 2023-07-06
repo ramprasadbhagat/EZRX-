@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -19,8 +21,7 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AllCreditsFilterBloc, AllCreditsFilterState>(
       buildWhen: (previous, current) =>
-          previous.showErrorMessages != current.showErrorMessages ||
-          previous.applied != current.applied && current.applied,
+          previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -391,14 +392,19 @@ class _ResetButton extends StatelessWidget {
       child: OutlinedButton(
         key: WidgetKeys.filterResetButton,
         onPressed: () {
-          context.read<AllCreditsFilterBloc>().add(
-                const AllCreditsFilterEvent.resetFilters(),
-              );
-          context.read<AllCreditsBloc>().add(
-                AllCreditsEvent.applyFilters(
-                  tempFilter: AllCreditsFilter.empty(),
-                ),
-              );
+          final emptyFilter = AllCreditsFilter.empty();
+          if (context.read<AllCreditsBloc>().state.appliedFilter !=
+              emptyFilter) {
+            context.read<AllCreditsBloc>().add(
+                  AllCreditsEvent.fetch(
+                    appliedFilter: emptyFilter,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  ),
+                );
+          }
           context.router.popForced();
         },
         child: Text(
@@ -424,11 +430,20 @@ class _ApplyButton extends StatelessWidget {
             const AllCreditsFilterEvent.validateFilters(),
           );
           if (filterBloc.state.filter.isValid) {
-            context.read<AllCreditsBloc>().add(
-                  AllCreditsEvent.applyFilters(
-                    tempFilter: filterBloc.state.filter,
-                  ),
-                );
+            if (filterBloc.state.filter !=
+                context.read<AllCreditsBloc>().state.appliedFilter) {
+              context.read<AllCreditsBloc>().add(
+                    AllCreditsEvent.fetch(
+                      appliedFilter: filterBloc.state.filter,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                    ),
+                  );
+            }
             context.router.popForced();
           }
         },

@@ -1,8 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -18,15 +22,24 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 
-class AllCreditsBlocMock
-    extends MockBloc<AllCreditsEvent, AllCreditsState>
+class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
     implements AllCreditsBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
 class AllCreditsFilterBlocMock
     extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
     implements AllCreditsFilterBloc {}
 
 void main() {
+  late CustomerCodeBloc customerCodeBlocMock;
   late AllCreditsBloc allCreditsBlocMock;
+  late SalesOrgBloc salesOrgBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
@@ -52,9 +65,13 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    salesOrgBlocMock = SalesOrgBlocMock();
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    customerCodeBlocMock = CustomerCodeBlocMock();
+    when(() => customerCodeBlocMock.state)
+        .thenReturn(CustomerCodeState.initial());
     allCreditsBlocMock = AllCreditsBlocMock();
-    when(() => allCreditsBlocMock.state)
-        .thenReturn(AllCreditsState.initial());
+    when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
@@ -65,6 +82,15 @@ void main() {
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<AllCreditsFilterBloc>(
+            create: (context) => allCreditsFilterBlocMock,
+          ),
           BlocProvider<AllCreditsBloc>(
             create: (context) => allCreditsBlocMock,
           ),
@@ -84,9 +110,7 @@ void main() {
   group('All Credits Filter Bottom Sheet Test', () {
     testWidgets('=> Listen When condition', (tester) async {
       final expectedState = [
-        AllCreditsFilterState.initial().copyWith(
-          applied: true,
-        ),
+        AllCreditsFilterState.initial(),
       ];
       whenListen(allCreditsFilterBlocMock, Stream.fromIterable(expectedState));
       await getWidget(tester);
@@ -237,10 +261,12 @@ void main() {
     });
 
     testWidgets('=> _ResetButton Test', (tester) async {
-      when(() => allCreditsFilterBlocMock.state)
-          .thenReturn(AllCreditsFilterState.initial().copyWith(
-        showErrorMessages: false,
-      ));
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          appliedFilter:
+              AllCreditsFilter.empty().copyWith(filterStatuses: ['Cleared']),
+        ),
+      );
       await getWidget(tester);
       await tester.pumpAndSettle();
 
@@ -250,8 +276,12 @@ void main() {
       await tester.tap(filterResetButton);
       await tester.pump();
       verify(
-        () => allCreditsFilterBlocMock.add(
-          const AllCreditsFilterEvent.resetFilters(),
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
         ),
       ).called(1);
     });

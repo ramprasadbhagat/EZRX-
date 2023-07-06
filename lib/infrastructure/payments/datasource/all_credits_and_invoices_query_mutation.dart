@@ -9,28 +9,24 @@ class AllCreditsAndInvoicesQueryMutation {
     ''';
   }
 
-  String getCustomerDocumentHeaderQuery() {
+  String getDocumentHeaderListQuery() {
     return '''
     query customerDocumentHeader(\$input: customerDocumentHeaderRequest!) {
       customerDocumentHeader(request: \$input) {
-        documentHeaderList {
-          accountingDocument
-          accountingDocumentType
+          documentHeaderList {
+          bpCustomerNumber
           fiscalYear
           accountingDocumentItem
-          postingKeyName
           netDueDate
-          postingDate
-          transactionCurrency
           referenceDocumentNumber
-          invoiceProcessingStatus
-          grossAmount
-          netAmount
-          taxAmount
+          postingDate
           amountInTransactionCurrency
           invoiceReference
-          returnId
+          invoiceProcessingStatus
           orderId
+          accountingDocumentType
+          accountingDocument
+          postingKeyName
         }
         totalCount
       }

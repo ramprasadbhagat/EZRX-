@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,8 +17,7 @@ class AllCreditsAndInvoicesRepositoryMock extends Mock
 const _pageSize = 24;
 void main() {
   late AllCreditsAndInvoicesRepository repository;
-  late CustomerDocumentHeader fakeResult;
-  late List<CreditAndInvoiceItem> creditList;
+  late List<CreditAndInvoiceItem> fakeResult;
   late AllCreditsFilter allCreditsFilter;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -27,11 +25,9 @@ void main() {
   });
 
   setUp(() {
-    creditList = [
+    fakeResult = [
       CreditAndInvoiceItem.empty(),
     ];
-    fakeResult = CustomerDocumentHeader.empty()
-        .copyWith(invoices: creditList, totalCount: 1);
     allCreditsFilter = AllCreditsFilter.empty();
   });
 
@@ -72,6 +68,7 @@ void main() {
         },
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
           ),
@@ -109,6 +106,7 @@ void main() {
         },
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
           ),
@@ -118,133 +116,122 @@ void main() {
             isLoading: true,
           ),
           AllCreditsState.initial().copyWith(
-            items: creditList,
+            items: fakeResult,
             failureOrSuccessOption: none(),
             canLoadMore: false,
-            totalCount: 1,
           ),
         ],
       );
     },
   );
 
-  group(
-    'All Credits Bloc load more',
-    () {
-      blocTest(
-        'fetch -> credits load more fail',
-        build: () => AllCreditsBloc(
-          allCreditsAndInvoicesRepository: repository,
+  group('All Credits Bloc load more', () {
+    blocTest(
+      'fetch -> credits load more fail',
+      build: () => AllCreditsBloc(
+        allCreditsAndInvoicesRepository: repository,
+      ),
+      seed: () => AllCreditsState.initial().copyWith(
+        isLoading: false,
+        items: List.filled(
+          _pageSize,
+          fakeResult.first,
         ),
-        seed: () => AllCreditsState.initial().copyWith(
-          isLoading: false,
+      ),
+      setUp: () {
+        when(
+          () => repository.filterCredits(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            filter: allCreditsFilter,
+            offset: _pageSize,
+            pageSize: _pageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (AllCreditsBloc bloc) => bloc.add(
+        AllCreditsEvent.loadMore(
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+        ),
+      ),
+      expect: () => [
+        AllCreditsState.initial().copyWith(
           items: List.filled(
             _pageSize,
             CreditAndInvoiceItem.empty(),
           ),
-          totalCount: 1,
+          isLoading: true,
         ),
-        setUp: () {
-          when(
-            () => repository.filterCredits(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              filter: allCreditsFilter,
-              offset: _pageSize,
-              pageSize: _pageSize,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Left(
+        AllCreditsState.initial().copyWith(
+          items: List.filled(
+            _pageSize,
+            CreditAndInvoiceItem.empty(),
+          ),
+          failureOrSuccessOption: optionOf(
+            const Left(
               ApiFailure.other('fake-error'),
             ),
-          );
-        },
-        act: (AllCreditsBloc bloc) => bloc.add(
-          AllCreditsEvent.loadMore(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
           ),
         ),
-        expect: () => [
-          AllCreditsState.initial().copyWith(
-              items: List.filled(
-                _pageSize,
-                CreditAndInvoiceItem.empty(),
-              ),
-              isLoading: true,
-              totalCount: 1),
-          AllCreditsState.initial().copyWith(
-              items: List.filled(
-                _pageSize,
-                CreditAndInvoiceItem.empty(),
-              ),
-              failureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('fake-error'),
-                ),
-              ),
-              totalCount: 1),
-        ],
-      );
+      ],
+    );
 
-      blocTest(
-        'fetch -> credits load more success',
-        build: () => AllCreditsBloc(
-          allCreditsAndInvoicesRepository: repository,
+    blocTest(
+      'fetch -> credits load more success',
+      build: () => AllCreditsBloc(
+        allCreditsAndInvoicesRepository: repository,
+      ),
+      seed: () => AllCreditsState.initial().copyWith(
+        isLoading: false,
+        items: List.filled(
+          _pageSize,
+          fakeResult.first,
         ),
-        seed: () => AllCreditsState.initial().copyWith(
-          isLoading: false,
+      ),
+      setUp: () {
+        when(
+          () => repository.filterCredits(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            filter: allCreditsFilter,
+            offset: _pageSize,
+            pageSize: _pageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            List.filled(
+              _pageSize,
+              fakeResult.first,
+            ),
+          ),
+        );
+      },
+      act: (AllCreditsBloc bloc) => bloc.add(
+        AllCreditsEvent.loadMore(
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+        ),
+      ),
+      expect: () => [
+        AllCreditsState.initial().copyWith(
           items: List.filled(
             _pageSize,
-            CreditAndInvoiceItem.empty(),
+            fakeResult.first,
           ),
-          totalCount: _pageSize * 2,
+          isLoading: true,
         ),
-        setUp: () {
-          when(
-            () => repository.filterCredits(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              filter: allCreditsFilter,
-              offset: _pageSize,
-              pageSize: _pageSize,
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              CustomerDocumentHeader.empty().copyWith(
-                invoices: List.filled(
-                  _pageSize,
-                  creditList.first,
-                ),
-                totalCount: _pageSize * 2,
-              ),
-            ),
-          );
-        },
-        act: (AllCreditsBloc bloc) => bloc.add(
-          AllCreditsEvent.loadMore(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+        AllCreditsState.initial().copyWith(
+          items: List.filled(
+            _pageSize * 2,
+            fakeResult.first,
           ),
         ),
-        expect: () => [
-          AllCreditsState.initial().copyWith(
-            items: List.filled(
-              _pageSize,
-              CreditAndInvoiceItem.empty(),
-            ),
-            isLoading: true,
-            totalCount: _pageSize * 2,
-          ),
-          AllCreditsState.initial().copyWith(
-            items: List.filled(
-              _pageSize * 2,
-              CreditAndInvoiceItem.empty(),
-            ),
-            totalCount: _pageSize * 2,
-          ),
-        ],
-      );
-    },
-  );
+      ],
+    );
+  });
 }

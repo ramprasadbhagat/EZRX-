@@ -11,7 +11,6 @@ _$_AllInvoicesFilterDto _$$_AllInvoicesFilterDtoFromJson(
     _$_AllInvoicesFilterDto(
       dueDateFrom: json['dueDateFrom'] as String? ?? '',
       dueDateTo: json['dueDateTo'] as String? ?? '',
-      documentNumber: json['documentNumber'] as String,
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
       documentDateTo: json['documentDateTo'] as String? ?? '',
       amountValueFrom: json['amountValueFrom'] as String? ?? '',
@@ -24,7 +23,6 @@ Map<String, dynamic> _$$_AllInvoicesFilterDtoToJson(
     <String, dynamic>{
       'dueDateFrom': instance.dueDateFrom,
       'dueDateTo': instance.dueDateTo,
-      'documentNumber': instance.documentNumber,
       'documentDateFrom': instance.documentDateFrom,
       'documentDateTo': instance.documentDateTo,
       'amountValueFrom': instance.amountValueFrom,

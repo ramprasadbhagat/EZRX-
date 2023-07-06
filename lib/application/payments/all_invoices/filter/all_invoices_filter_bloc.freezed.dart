@@ -19,10 +19,9 @@ mixin _$AllInvoicesFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -33,10 +32,8 @@ mixin _$AllInvoicesFilterEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -47,10 +44,8 @@ mixin _$AllInvoicesFilterEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -64,10 +59,7 @@ mixin _$AllInvoicesFilterEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -80,9 +72,7 @@ mixin _$AllInvoicesFilterEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -94,9 +84,7 @@ mixin _$AllInvoicesFilterEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -165,10 +153,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -182,10 +169,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -199,10 +184,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -222,10 +205,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -241,9 +221,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -258,9 +236,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -284,6 +260,10 @@ abstract class _$$_OpenFilterBottomSheetCopyWith<$Res> {
   factory _$$_OpenFilterBottomSheetCopyWith(_$_OpenFilterBottomSheet value,
           $Res Function(_$_OpenFilterBottomSheet) then) =
       __$$_OpenFilterBottomSheetCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AllInvoicesFilter appliedFilter});
+
+  $AllInvoicesFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -293,69 +273,98 @@ class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
   __$$_OpenFilterBottomSheetCopyWithImpl(_$_OpenFilterBottomSheet _value,
       $Res Function(_$_OpenFilterBottomSheet) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appliedFilter = null,
+  }) {
+    return _then(_$_OpenFilterBottomSheet(
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
+              as AllInvoicesFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AllInvoicesFilterCopyWith<$Res> get appliedFilter {
+    return $AllInvoicesFilterCopyWith<$Res>(_value.appliedFilter, (value) {
+      return _then(_value.copyWith(appliedFilter: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
-  const _$_OpenFilterBottomSheet();
+  const _$_OpenFilterBottomSheet({required this.appliedFilter});
+
+  @override
+  final AllInvoicesFilter appliedFilter;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.openFilterBottomSheet()';
+    return 'AllInvoicesFilterEvent.openFilterBottomSheet(appliedFilter: $appliedFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_OpenFilterBottomSheet);
+        (other.runtimeType == runtimeType &&
+            other is _$_OpenFilterBottomSheet &&
+            (identical(other.appliedFilter, appliedFilter) ||
+                other.appliedFilter == appliedFilter));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, appliedFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OpenFilterBottomSheetCopyWith<_$_OpenFilterBottomSheet> get copyWith =>
+      __$$_OpenFilterBottomSheetCopyWithImpl<_$_OpenFilterBottomSheet>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
     required TResult Function(DateTimeRange dateRange) setDueDate,
     required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return openFilterBottomSheet();
+    return openFilterBottomSheet(appliedFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setDueDate,
     TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return openFilterBottomSheet?.call();
+    return openFilterBottomSheet?.call(appliedFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -364,7 +373,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     required TResult orElse(),
   }) {
     if (openFilterBottomSheet != null) {
-      return openFilterBottomSheet();
+      return openFilterBottomSheet(appliedFilter);
     }
     return orElse();
   }
@@ -375,10 +384,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -394,9 +400,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -411,9 +415,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -429,41 +431,46 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
 }
 
 abstract class _OpenFilterBottomSheet implements AllInvoicesFilterEvent {
-  const factory _OpenFilterBottomSheet() = _$_OpenFilterBottomSheet;
+  const factory _OpenFilterBottomSheet(
+          {required final AllInvoicesFilter appliedFilter}) =
+      _$_OpenFilterBottomSheet;
+
+  AllInvoicesFilter get appliedFilter;
+  @JsonKey(ignore: true)
+  _$$_OpenFilterBottomSheetCopyWith<_$_OpenFilterBottomSheet> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CloseFilterBottomSheetCopyWith<$Res> {
-  factory _$$_CloseFilterBottomSheetCopyWith(_$_CloseFilterBottomSheet value,
-          $Res Function(_$_CloseFilterBottomSheet) then) =
-      __$$_CloseFilterBottomSheetCopyWithImpl<$Res>;
+abstract class _$$_ValidateFiltersCopyWith<$Res> {
+  factory _$$_ValidateFiltersCopyWith(
+          _$_ValidateFilters value, $Res Function(_$_ValidateFilters) then) =
+      __$$_ValidateFiltersCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CloseFilterBottomSheetCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res,
-        _$_CloseFilterBottomSheet>
-    implements _$$_CloseFilterBottomSheetCopyWith<$Res> {
-  __$$_CloseFilterBottomSheetCopyWithImpl(_$_CloseFilterBottomSheet _value,
-      $Res Function(_$_CloseFilterBottomSheet) _then)
+class __$$_ValidateFiltersCopyWithImpl<$Res>
+    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_ValidateFilters>
+    implements _$$_ValidateFiltersCopyWith<$Res> {
+  __$$_ValidateFiltersCopyWithImpl(
+      _$_ValidateFilters _value, $Res Function(_$_ValidateFilters) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
-  const _$_CloseFilterBottomSheet();
+class _$_ValidateFilters implements _ValidateFilters {
+  const _$_ValidateFilters();
 
   @override
   String toString() {
-    return 'AllInvoicesFilterEvent.closeFilterBottomSheet()';
+    return 'AllInvoicesFilterEvent.validateFilters()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_CloseFilterBottomSheet);
+        (other.runtimeType == runtimeType && other is _$_ValidateFilters);
   }
 
   @override
@@ -473,44 +480,39 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
     required TResult Function(DateTimeRange dateRange) setDueDate,
     required TResult Function(DateTimeRange dateRange) setDocumentDate,
   }) {
-    return closeFilterBottomSheet();
+    return validateFilters();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setDueDate,
     TResult? Function(DateTimeRange dateRange)? setDocumentDate,
   }) {
-    return closeFilterBottomSheet?.call();
+    return validateFilters?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -518,8 +520,8 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
     TResult Function(DateTimeRange dateRange)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (closeFilterBottomSheet != null) {
-      return closeFilterBottomSheet();
+    if (validateFilters != null) {
+      return validateFilters();
     }
     return orElse();
   }
@@ -530,10 +532,7 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -541,7 +540,7 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
     required TResult Function(_SetDueDate value) setDueDate,
     required TResult Function(_SetDocumentDate value) setDocumentDate,
   }) {
-    return closeFilterBottomSheet(this);
+    return validateFilters(this);
   }
 
   @override
@@ -549,16 +548,14 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
     TResult? Function(_SetDueDate value)? setDueDate,
     TResult? Function(_SetDocumentDate value)? setDocumentDate,
   }) {
-    return closeFilterBottomSheet?.call(this);
+    return validateFilters?.call(this);
   }
 
   @override
@@ -566,9 +563,7 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -576,321 +571,15 @@ class _$_CloseFilterBottomSheet implements _CloseFilterBottomSheet {
     TResult Function(_SetDocumentDate value)? setDocumentDate,
     required TResult orElse(),
   }) {
-    if (closeFilterBottomSheet != null) {
-      return closeFilterBottomSheet(this);
+    if (validateFilters != null) {
+      return validateFilters(this);
     }
     return orElse();
   }
 }
 
-abstract class _CloseFilterBottomSheet implements AllInvoicesFilterEvent {
-  const factory _CloseFilterBottomSheet() = _$_CloseFilterBottomSheet;
-}
-
-/// @nodoc
-abstract class _$$_ApplyFiltersCopyWith<$Res> {
-  factory _$$_ApplyFiltersCopyWith(
-          _$_ApplyFilters value, $Res Function(_$_ApplyFilters) then) =
-      __$$_ApplyFiltersCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_ApplyFiltersCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_ApplyFilters>
-    implements _$$_ApplyFiltersCopyWith<$Res> {
-  __$$_ApplyFiltersCopyWithImpl(
-      _$_ApplyFilters _value, $Res Function(_$_ApplyFilters) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_ApplyFilters implements _ApplyFilters {
-  const _$_ApplyFilters();
-
-  @override
-  String toString() {
-    return 'AllInvoicesFilterEvent.applyFilters()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ApplyFilters);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
-    required TResult Function(String amountValueFrom) amountValueFromChanged,
-    required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(String filterStatus, bool selected) statusChanged,
-    required TResult Function(DateTimeRange dateRange) setDueDate,
-    required TResult Function(DateTimeRange dateRange) setDocumentDate,
-  }) {
-    return applyFilters();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
-    TResult? Function(String amountValueFrom)? amountValueFromChanged,
-    TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(String filterStatus, bool selected)? statusChanged,
-    TResult? Function(DateTimeRange dateRange)? setDueDate,
-    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
-  }) {
-    return applyFilters?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
-    TResult Function(String amountValueFrom)? amountValueFromChanged,
-    TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(String filterStatus, bool selected)? statusChanged,
-    TResult Function(DateTimeRange dateRange)? setDueDate,
-    TResult Function(DateTimeRange dateRange)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (applyFilters != null) {
-      return applyFilters();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterBottomSheet value)
-        openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
-    required TResult Function(_AmountValueFromChanged value)
-        amountValueFromChanged,
-    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
-    required TResult Function(_StatusChanged value) statusChanged,
-    required TResult Function(_SetDueDate value) setDueDate,
-    required TResult Function(_SetDocumentDate value) setDocumentDate,
-  }) {
-    return applyFilters(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
-    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
-    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
-    TResult? Function(_StatusChanged value)? statusChanged,
-    TResult? Function(_SetDueDate value)? setDueDate,
-    TResult? Function(_SetDocumentDate value)? setDocumentDate,
-  }) {
-    return applyFilters?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
-    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
-    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
-    TResult Function(_StatusChanged value)? statusChanged,
-    TResult Function(_SetDueDate value)? setDueDate,
-    TResult Function(_SetDocumentDate value)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (applyFilters != null) {
-      return applyFilters(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ApplyFilters implements AllInvoicesFilterEvent {
-  const factory _ApplyFilters() = _$_ApplyFilters;
-}
-
-/// @nodoc
-abstract class _$$_ResetFiltersCopyWith<$Res> {
-  factory _$$_ResetFiltersCopyWith(
-          _$_ResetFilters value, $Res Function(_$_ResetFilters) then) =
-      __$$_ResetFiltersCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_ResetFiltersCopyWithImpl<$Res>
-    extends _$AllInvoicesFilterEventCopyWithImpl<$Res, _$_ResetFilters>
-    implements _$$_ResetFiltersCopyWith<$Res> {
-  __$$_ResetFiltersCopyWithImpl(
-      _$_ResetFilters _value, $Res Function(_$_ResetFilters) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_ResetFilters implements _ResetFilters {
-  const _$_ResetFilters();
-
-  @override
-  String toString() {
-    return 'AllInvoicesFilterEvent.resetFilters()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetFilters);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
-    required TResult Function(String amountValueFrom) amountValueFromChanged,
-    required TResult Function(String amountValueTo) amountValueToChanged,
-    required TResult Function(String filterStatus, bool selected) statusChanged,
-    required TResult Function(DateTimeRange dateRange) setDueDate,
-    required TResult Function(DateTimeRange dateRange) setDocumentDate,
-  }) {
-    return resetFilters();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
-    TResult? Function(String amountValueFrom)? amountValueFromChanged,
-    TResult? Function(String amountValueTo)? amountValueToChanged,
-    TResult? Function(String filterStatus, bool selected)? statusChanged,
-    TResult? Function(DateTimeRange dateRange)? setDueDate,
-    TResult? Function(DateTimeRange dateRange)? setDocumentDate,
-  }) {
-    return resetFilters?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
-    TResult Function(String amountValueFrom)? amountValueFromChanged,
-    TResult Function(String amountValueTo)? amountValueToChanged,
-    TResult Function(String filterStatus, bool selected)? statusChanged,
-    TResult Function(DateTimeRange dateRange)? setDueDate,
-    TResult Function(DateTimeRange dateRange)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (resetFilters != null) {
-      return resetFilters();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_OpenFilterBottomSheet value)
-        openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
-    required TResult Function(_AmountValueFromChanged value)
-        amountValueFromChanged,
-    required TResult Function(_AmountValueToChanged value) amountValueToChanged,
-    required TResult Function(_StatusChanged value) statusChanged,
-    required TResult Function(_SetDueDate value) setDueDate,
-    required TResult Function(_SetDocumentDate value) setDocumentDate,
-  }) {
-    return resetFilters(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
-    TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
-    TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
-    TResult? Function(_StatusChanged value)? statusChanged,
-    TResult? Function(_SetDueDate value)? setDueDate,
-    TResult? Function(_SetDocumentDate value)? setDocumentDate,
-  }) {
-    return resetFilters?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
-    TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
-    TResult Function(_AmountValueToChanged value)? amountValueToChanged,
-    TResult Function(_StatusChanged value)? statusChanged,
-    TResult Function(_SetDueDate value)? setDueDate,
-    TResult Function(_SetDocumentDate value)? setDocumentDate,
-    required TResult orElse(),
-  }) {
-    if (resetFilters != null) {
-      return resetFilters(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ResetFilters implements AllInvoicesFilterEvent {
-  const factory _ResetFilters() = _$_ResetFilters;
+abstract class _ValidateFilters implements AllInvoicesFilterEvent {
+  const factory _ValidateFilters() = _$_ValidateFilters;
 }
 
 /// @nodoc
@@ -961,10 +650,9 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -978,10 +666,8 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -995,10 +681,8 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1018,10 +702,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1037,9 +718,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1054,9 +733,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1148,10 +825,9 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -1165,10 +841,8 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -1182,10 +856,8 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1205,10 +877,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1224,9 +893,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1241,9 +908,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1343,10 +1008,9 @@ class _$_StatusChanged implements _StatusChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -1360,10 +1024,8 @@ class _$_StatusChanged implements _StatusChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -1377,10 +1039,8 @@ class _$_StatusChanged implements _StatusChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1400,10 +1060,7 @@ class _$_StatusChanged implements _StatusChanged {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1419,9 +1076,7 @@ class _$_StatusChanged implements _StatusChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1436,9 +1091,7 @@ class _$_StatusChanged implements _StatusChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1530,10 +1183,9 @@ class _$_SetDueDate implements _SetDueDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -1547,10 +1199,8 @@ class _$_SetDueDate implements _SetDueDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -1564,10 +1214,8 @@ class _$_SetDueDate implements _SetDueDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1587,10 +1235,7 @@ class _$_SetDueDate implements _SetDueDate {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1606,9 +1251,7 @@ class _$_SetDueDate implements _SetDueDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1623,9 +1266,7 @@ class _$_SetDueDate implements _SetDueDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1715,10 +1356,9 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() openFilterBottomSheet,
-    required TResult Function() closeFilterBottomSheet,
-    required TResult Function() applyFilters,
-    required TResult Function() resetFilters,
+    required TResult Function(AllInvoicesFilter appliedFilter)
+        openFilterBottomSheet,
+    required TResult Function() validateFilters,
     required TResult Function(String amountValueFrom) amountValueFromChanged,
     required TResult Function(String amountValueTo) amountValueToChanged,
     required TResult Function(String filterStatus, bool selected) statusChanged,
@@ -1732,10 +1372,8 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? openFilterBottomSheet,
-    TResult? Function()? closeFilterBottomSheet,
-    TResult? Function()? applyFilters,
-    TResult? Function()? resetFilters,
+    TResult? Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult? Function()? validateFilters,
     TResult? Function(String amountValueFrom)? amountValueFromChanged,
     TResult? Function(String amountValueTo)? amountValueToChanged,
     TResult? Function(String filterStatus, bool selected)? statusChanged,
@@ -1749,10 +1387,8 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? openFilterBottomSheet,
-    TResult Function()? closeFilterBottomSheet,
-    TResult Function()? applyFilters,
-    TResult Function()? resetFilters,
+    TResult Function(AllInvoicesFilter appliedFilter)? openFilterBottomSheet,
+    TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
     TResult Function(String amountValueTo)? amountValueToChanged,
     TResult Function(String filterStatus, bool selected)? statusChanged,
@@ -1772,10 +1408,7 @@ class _$_SetDocumentDate implements _SetDocumentDate {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_OpenFilterBottomSheet value)
         openFilterBottomSheet,
-    required TResult Function(_CloseFilterBottomSheet value)
-        closeFilterBottomSheet,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_ValidateFilters value) validateFilters,
     required TResult Function(_AmountValueFromChanged value)
         amountValueFromChanged,
     required TResult Function(_AmountValueToChanged value) amountValueToChanged,
@@ -1791,9 +1424,7 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult? Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_ValidateFilters value)? validateFilters,
     TResult? Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult? Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult? Function(_StatusChanged value)? statusChanged,
@@ -1808,9 +1439,7 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_OpenFilterBottomSheet value)? openFilterBottomSheet,
-    TResult Function(_CloseFilterBottomSheet value)? closeFilterBottomSheet,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_ValidateFilters value)? validateFilters,
     TResult Function(_AmountValueFromChanged value)? amountValueFromChanged,
     TResult Function(_AmountValueToChanged value)? amountValueToChanged,
     TResult Function(_StatusChanged value)? statusChanged,
@@ -1837,14 +1466,9 @@ abstract class _SetDocumentDate implements AllInvoicesFilterEvent {
 
 /// @nodoc
 mixin _$AllInvoicesFilterState {
-  AllInvoicesFilter get tempFilter => throw _privateConstructorUsedError;
-  AllInvoicesFilter get appliedFilter => throw _privateConstructorUsedError;
+  AllInvoicesFilter get filter => throw _privateConstructorUsedError;
   List<String> get statuses => throw _privateConstructorUsedError;
-  bool get applied => throw _privateConstructorUsedError;
-  bool get isFetching => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
-  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllInvoicesFilterStateCopyWith<AllInvoicesFilterState> get copyWith =>
@@ -1858,16 +1482,11 @@ abstract class $AllInvoicesFilterStateCopyWith<$Res> {
       _$AllInvoicesFilterStateCopyWithImpl<$Res, AllInvoicesFilterState>;
   @useResult
   $Res call(
-      {AllInvoicesFilter tempFilter,
-      AllInvoicesFilter appliedFilter,
+      {AllInvoicesFilter filter,
       List<String> statuses,
-      bool applied,
-      bool isFetching,
-      bool showErrorMessages,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      bool showErrorMessages});
 
-  $AllInvoicesFilterCopyWith<$Res> get tempFilter;
-  $AllInvoicesFilterCopyWith<$Res> get appliedFilter;
+  $AllInvoicesFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -1884,59 +1503,31 @@ class _$AllInvoicesFilterStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tempFilter = null,
-    Object? appliedFilter = null,
+    Object? filter = null,
     Object? statuses = null,
-    Object? applied = null,
-    Object? isFetching = null,
     Object? showErrorMessages = null,
-    Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      tempFilter: null == tempFilter
-          ? _value.tempFilter
-          : tempFilter // ignore: cast_nullable_to_non_nullable
-              as AllInvoicesFilter,
-      appliedFilter: null == appliedFilter
-          ? _value.appliedFilter
-          : appliedFilter // ignore: cast_nullable_to_non_nullable
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
               as AllInvoicesFilter,
       statuses: null == statuses
           ? _value.statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      applied: null == applied
-          ? _value.applied
-          : applied // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: null == failureOrSuccessOption
-          ? _value.failureOrSuccessOption
-          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AllInvoicesFilterCopyWith<$Res> get tempFilter {
-    return $AllInvoicesFilterCopyWith<$Res>(_value.tempFilter, (value) {
-      return _then(_value.copyWith(tempFilter: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AllInvoicesFilterCopyWith<$Res> get appliedFilter {
-    return $AllInvoicesFilterCopyWith<$Res>(_value.appliedFilter, (value) {
-      return _then(_value.copyWith(appliedFilter: value) as $Val);
+  $AllInvoicesFilterCopyWith<$Res> get filter {
+    return $AllInvoicesFilterCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value) as $Val);
     });
   }
 }
@@ -1950,18 +1541,12 @@ abstract class _$$_AllInvoicesFilterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AllInvoicesFilter tempFilter,
-      AllInvoicesFilter appliedFilter,
+      {AllInvoicesFilter filter,
       List<String> statuses,
-      bool applied,
-      bool isFetching,
-      bool showErrorMessages,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      bool showErrorMessages});
 
   @override
-  $AllInvoicesFilterCopyWith<$Res> get tempFilter;
-  @override
-  $AllInvoicesFilterCopyWith<$Res> get appliedFilter;
+  $AllInvoicesFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -1976,43 +1561,23 @@ class __$$_AllInvoicesFilterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tempFilter = null,
-    Object? appliedFilter = null,
+    Object? filter = null,
     Object? statuses = null,
-    Object? applied = null,
-    Object? isFetching = null,
     Object? showErrorMessages = null,
-    Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_AllInvoicesFilterState(
-      tempFilter: null == tempFilter
-          ? _value.tempFilter
-          : tempFilter // ignore: cast_nullable_to_non_nullable
-              as AllInvoicesFilter,
-      appliedFilter: null == appliedFilter
-          ? _value.appliedFilter
-          : appliedFilter // ignore: cast_nullable_to_non_nullable
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
               as AllInvoicesFilter,
       statuses: null == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      applied: null == applied
-          ? _value.applied
-          : applied // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: null == failureOrSuccessOption
-          ? _value.failureOrSuccessOption
-          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -2021,20 +1586,14 @@ class __$$_AllInvoicesFilterStateCopyWithImpl<$Res>
 
 class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
   const _$_AllInvoicesFilterState(
-      {required this.tempFilter,
-      required this.appliedFilter,
+      {required this.filter,
       required final List<String> statuses,
-      required this.applied,
-      required this.isFetching,
-      required this.showErrorMessages,
-      required this.failureOrSuccessOption})
+      required this.showErrorMessages})
       : _statuses = statuses,
         super._();
 
   @override
-  final AllInvoicesFilter tempFilter;
-  @override
-  final AllInvoicesFilter appliedFilter;
+  final AllInvoicesFilter filter;
   final List<String> _statuses;
   @override
   List<String> get statuses {
@@ -2044,17 +1603,11 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
   }
 
   @override
-  final bool applied;
-  @override
-  final bool isFetching;
-  @override
   final bool showErrorMessages;
-  @override
-  final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterState(tempFilter: $tempFilter, appliedFilter: $appliedFilter, statuses: $statuses, applied: $applied, isFetching: $isFetching, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'AllInvoicesFilterState(filter: $filter, statuses: $statuses, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -2062,30 +1615,15 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AllInvoicesFilterState &&
-            (identical(other.tempFilter, tempFilter) ||
-                other.tempFilter == tempFilter) &&
-            (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter) &&
+            (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
-            (identical(other.applied, applied) || other.applied == applied) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
-                other.showErrorMessages == showErrorMessages) &&
-            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.showErrorMessages == showErrorMessages));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      tempFilter,
-      appliedFilter,
-      const DeepCollectionEquality().hash(_statuses),
-      applied,
-      isFetching,
-      showErrorMessages,
-      failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, filter,
+      const DeepCollectionEquality().hash(_statuses), showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -2097,30 +1635,17 @@ class _$_AllInvoicesFilterState extends _AllInvoicesFilterState {
 
 abstract class _AllInvoicesFilterState extends AllInvoicesFilterState {
   const factory _AllInvoicesFilterState(
-      {required final AllInvoicesFilter tempFilter,
-      required final AllInvoicesFilter appliedFilter,
+      {required final AllInvoicesFilter filter,
       required final List<String> statuses,
-      required final bool applied,
-      required final bool isFetching,
-      required final bool showErrorMessages,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_AllInvoicesFilterState;
+      required final bool showErrorMessages}) = _$_AllInvoicesFilterState;
   const _AllInvoicesFilterState._() : super._();
 
   @override
-  AllInvoicesFilter get tempFilter;
-  @override
-  AllInvoicesFilter get appliedFilter;
+  AllInvoicesFilter get filter;
   @override
   List<String> get statuses;
   @override
-  bool get applied;
-  @override
-  bool get isFetching;
-  @override
   bool get showErrorMessages;
-  @override
-  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_AllInvoicesFilterStateCopyWith<_$_AllInvoicesFilterState> get copyWith =>

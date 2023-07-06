@@ -10,45 +10,38 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
   const CreditAndInvoiceItem._();
   factory CreditAndInvoiceItem({
     required String bpCustomerNumber,
-    required String accountingDocument,
-    required String accountingDocumentType,
     required String fiscalYear,
+    required String accountingDocument,
     required String accountingDocumentItem,
+    required String accountingDocumentType,
     required String postingKeyName,
     required DateTimeStringValue netDueDate,
     required DateTimeStringValue postingDate,
     required StringValue referenceDocumentNumber,
-    required StatusType invoiceProcessingStatus,
-    required int grossAmount,
-    required int netAmount,
-    required int taxAmount,
     required DateTimeStringValue documentDate,
     required double amountInTransactionCurrency,
     required StringValue invoiceReference,
-    required String returnId,
+    required StatusType invoiceProcessingStatus,
     required StringValue orderId,
   }) = _CreditAndInvoiceItem;
 
   factory CreditAndInvoiceItem.empty() => CreditAndInvoiceItem(
         bpCustomerNumber: '',
-        accountingDocument: '',
-        accountingDocumentType: '',
         fiscalYear: '',
-        netDueDate: DateTimeStringValue(''),
+        accountingDocument: '',
         accountingDocumentItem: '',
+        accountingDocumentType: '',
         postingKeyName: '',
-        documentDate: DateTimeStringValue(''),
+        netDueDate: DateTimeStringValue(''),
         postingDate: DateTimeStringValue(''),
         referenceDocumentNumber: StringValue(''),
-        invoiceProcessingStatus: StatusType(''),
-        grossAmount: 0,
-        netAmount: 0,
-        taxAmount: 0,
+        documentDate: DateTimeStringValue(''),
         amountInTransactionCurrency: 0.0,
         invoiceReference: StringValue(''),
-        returnId: '',
+        invoiceProcessingStatus: StatusType(''),
         orderId: StringValue(''),
       );
+
 //to convert if amountInTransactionCurrency value is negative
   double get convertIfAmountInTransactionCurrencyIsNegative =>
       amountInTransactionCurrency * -1;

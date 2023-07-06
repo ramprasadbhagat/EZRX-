@@ -17,22 +17,18 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CreditAndInvoiceItem {
   String get bpCustomerNumber => throw _privateConstructorUsedError;
-  String get accountingDocument => throw _privateConstructorUsedError;
-  String get accountingDocumentType => throw _privateConstructorUsedError;
   String get fiscalYear => throw _privateConstructorUsedError;
+  String get accountingDocument => throw _privateConstructorUsedError;
   String get accountingDocumentItem => throw _privateConstructorUsedError;
+  String get accountingDocumentType => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
   DateTimeStringValue get netDueDate => throw _privateConstructorUsedError;
   DateTimeStringValue get postingDate => throw _privateConstructorUsedError;
   StringValue get referenceDocumentNumber => throw _privateConstructorUsedError;
-  StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
-  int get grossAmount => throw _privateConstructorUsedError;
-  int get netAmount => throw _privateConstructorUsedError;
-  int get taxAmount => throw _privateConstructorUsedError;
   DateTimeStringValue get documentDate => throw _privateConstructorUsedError;
   double get amountInTransactionCurrency => throw _privateConstructorUsedError;
   StringValue get invoiceReference => throw _privateConstructorUsedError;
-  String get returnId => throw _privateConstructorUsedError;
+  StatusType get invoiceProcessingStatus => throw _privateConstructorUsedError;
   StringValue get orderId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -48,22 +44,18 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
   @useResult
   $Res call(
       {String bpCustomerNumber,
-      String accountingDocument,
-      String accountingDocumentType,
       String fiscalYear,
+      String accountingDocument,
       String accountingDocumentItem,
+      String accountingDocumentType,
       String postingKeyName,
       DateTimeStringValue netDueDate,
       DateTimeStringValue postingDate,
       StringValue referenceDocumentNumber,
-      StatusType invoiceProcessingStatus,
-      int grossAmount,
-      int netAmount,
-      int taxAmount,
       DateTimeStringValue documentDate,
       double amountInTransactionCurrency,
       StringValue invoiceReference,
-      String returnId,
+      StatusType invoiceProcessingStatus,
       StringValue orderId});
 }
 
@@ -82,22 +74,18 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
   @override
   $Res call({
     Object? bpCustomerNumber = null,
-    Object? accountingDocument = null,
-    Object? accountingDocumentType = null,
     Object? fiscalYear = null,
+    Object? accountingDocument = null,
     Object? accountingDocumentItem = null,
+    Object? accountingDocumentType = null,
     Object? postingKeyName = null,
     Object? netDueDate = null,
     Object? postingDate = null,
     Object? referenceDocumentNumber = null,
-    Object? invoiceProcessingStatus = null,
-    Object? grossAmount = null,
-    Object? netAmount = null,
-    Object? taxAmount = null,
     Object? documentDate = null,
     Object? amountInTransactionCurrency = null,
     Object? invoiceReference = null,
-    Object? returnId = null,
+    Object? invoiceProcessingStatus = null,
     Object? orderId = null,
   }) {
     return _then(_value.copyWith(
@@ -105,21 +93,21 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.bpCustomerNumber
           : bpCustomerNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocument: null == accountingDocument
-          ? _value.accountingDocument
-          : accountingDocument // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountingDocumentType: null == accountingDocumentType
-          ? _value.accountingDocumentType
-          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
-              as String,
       fiscalYear: null == fiscalYear
           ? _value.fiscalYear
           : fiscalYear // ignore: cast_nullable_to_non_nullable
               as String,
+      accountingDocument: null == accountingDocument
+          ? _value.accountingDocument
+          : accountingDocument // ignore: cast_nullable_to_non_nullable
+              as String,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
           : accountingDocumentItem // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocumentType: null == accountingDocumentType
+          ? _value.accountingDocumentType
+          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
               as String,
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
@@ -137,22 +125,6 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.referenceDocumentNumber
           : referenceDocumentNumber // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      invoiceProcessingStatus: null == invoiceProcessingStatus
-          ? _value.invoiceProcessingStatus
-          : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
-              as StatusType,
-      grossAmount: null == grossAmount
-          ? _value.grossAmount
-          : grossAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      netAmount: null == netAmount
-          ? _value.netAmount
-          : netAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      taxAmount: null == taxAmount
-          ? _value.taxAmount
-          : taxAmount // ignore: cast_nullable_to_non_nullable
-              as int,
       documentDate: null == documentDate
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
@@ -165,10 +137,10 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      returnId: null == returnId
-          ? _value.returnId
-          : returnId // ignore: cast_nullable_to_non_nullable
-              as String,
+      invoiceProcessingStatus: null == invoiceProcessingStatus
+          ? _value.invoiceProcessingStatus
+          : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
+              as StatusType,
       orderId: null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
@@ -187,22 +159,18 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
   @useResult
   $Res call(
       {String bpCustomerNumber,
-      String accountingDocument,
-      String accountingDocumentType,
       String fiscalYear,
+      String accountingDocument,
       String accountingDocumentItem,
+      String accountingDocumentType,
       String postingKeyName,
       DateTimeStringValue netDueDate,
       DateTimeStringValue postingDate,
       StringValue referenceDocumentNumber,
-      StatusType invoiceProcessingStatus,
-      int grossAmount,
-      int netAmount,
-      int taxAmount,
       DateTimeStringValue documentDate,
       double amountInTransactionCurrency,
       StringValue invoiceReference,
-      String returnId,
+      StatusType invoiceProcessingStatus,
       StringValue orderId});
 }
 
@@ -218,22 +186,18 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bpCustomerNumber = null,
-    Object? accountingDocument = null,
-    Object? accountingDocumentType = null,
     Object? fiscalYear = null,
+    Object? accountingDocument = null,
     Object? accountingDocumentItem = null,
+    Object? accountingDocumentType = null,
     Object? postingKeyName = null,
     Object? netDueDate = null,
     Object? postingDate = null,
     Object? referenceDocumentNumber = null,
-    Object? invoiceProcessingStatus = null,
-    Object? grossAmount = null,
-    Object? netAmount = null,
-    Object? taxAmount = null,
     Object? documentDate = null,
     Object? amountInTransactionCurrency = null,
     Object? invoiceReference = null,
-    Object? returnId = null,
+    Object? invoiceProcessingStatus = null,
     Object? orderId = null,
   }) {
     return _then(_$_CreditAndInvoiceItem(
@@ -241,21 +205,21 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.bpCustomerNumber
           : bpCustomerNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocument: null == accountingDocument
-          ? _value.accountingDocument
-          : accountingDocument // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountingDocumentType: null == accountingDocumentType
-          ? _value.accountingDocumentType
-          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
-              as String,
       fiscalYear: null == fiscalYear
           ? _value.fiscalYear
           : fiscalYear // ignore: cast_nullable_to_non_nullable
               as String,
+      accountingDocument: null == accountingDocument
+          ? _value.accountingDocument
+          : accountingDocument // ignore: cast_nullable_to_non_nullable
+              as String,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
           : accountingDocumentItem // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocumentType: null == accountingDocumentType
+          ? _value.accountingDocumentType
+          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
               as String,
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
@@ -273,22 +237,6 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.referenceDocumentNumber
           : referenceDocumentNumber // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      invoiceProcessingStatus: null == invoiceProcessingStatus
-          ? _value.invoiceProcessingStatus
-          : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
-              as StatusType,
-      grossAmount: null == grossAmount
-          ? _value.grossAmount
-          : grossAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      netAmount: null == netAmount
-          ? _value.netAmount
-          : netAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      taxAmount: null == taxAmount
-          ? _value.taxAmount
-          : taxAmount // ignore: cast_nullable_to_non_nullable
-              as int,
       documentDate: null == documentDate
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
@@ -301,10 +249,10 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      returnId: null == returnId
-          ? _value.returnId
-          : returnId // ignore: cast_nullable_to_non_nullable
-              as String,
+      invoiceProcessingStatus: null == invoiceProcessingStatus
+          ? _value.invoiceProcessingStatus
+          : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
+              as StatusType,
       orderId: null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
@@ -318,35 +266,31 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
 class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   _$_CreditAndInvoiceItem(
       {required this.bpCustomerNumber,
-      required this.accountingDocument,
-      required this.accountingDocumentType,
       required this.fiscalYear,
+      required this.accountingDocument,
       required this.accountingDocumentItem,
+      required this.accountingDocumentType,
       required this.postingKeyName,
       required this.netDueDate,
       required this.postingDate,
       required this.referenceDocumentNumber,
-      required this.invoiceProcessingStatus,
-      required this.grossAmount,
-      required this.netAmount,
-      required this.taxAmount,
       required this.documentDate,
       required this.amountInTransactionCurrency,
       required this.invoiceReference,
-      required this.returnId,
+      required this.invoiceProcessingStatus,
       required this.orderId})
       : super._();
 
   @override
   final String bpCustomerNumber;
   @override
-  final String accountingDocument;
-  @override
-  final String accountingDocumentType;
-  @override
   final String fiscalYear;
   @override
+  final String accountingDocument;
+  @override
   final String accountingDocumentItem;
+  @override
+  final String accountingDocumentType;
   @override
   final String postingKeyName;
   @override
@@ -356,27 +300,19 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final StringValue referenceDocumentNumber;
   @override
-  final StatusType invoiceProcessingStatus;
-  @override
-  final int grossAmount;
-  @override
-  final int netAmount;
-  @override
-  final int taxAmount;
-  @override
   final DateTimeStringValue documentDate;
   @override
   final double amountInTransactionCurrency;
   @override
   final StringValue invoiceReference;
   @override
-  final String returnId;
+  final StatusType invoiceProcessingStatus;
   @override
   final StringValue orderId;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, accountingDocument: $accountingDocument, accountingDocumentType: $accountingDocumentType, fiscalYear: $fiscalYear, accountingDocumentItem: $accountingDocumentItem, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, invoiceProcessingStatus: $invoiceProcessingStatus, grossAmount: $grossAmount, netAmount: $netAmount, taxAmount: $taxAmount, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, invoiceReference: $invoiceReference, returnId: $returnId, orderId: $orderId)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId)';
   }
 
   @override
@@ -386,14 +322,14 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
             other is _$_CreditAndInvoiceItem &&
             (identical(other.bpCustomerNumber, bpCustomerNumber) ||
                 other.bpCustomerNumber == bpCustomerNumber) &&
-            (identical(other.accountingDocument, accountingDocument) ||
-                other.accountingDocument == accountingDocument) &&
-            (identical(other.accountingDocumentType, accountingDocumentType) ||
-                other.accountingDocumentType == accountingDocumentType) &&
             (identical(other.fiscalYear, fiscalYear) ||
                 other.fiscalYear == fiscalYear) &&
+            (identical(other.accountingDocument, accountingDocument) ||
+                other.accountingDocument == accountingDocument) &&
             (identical(other.accountingDocumentItem, accountingDocumentItem) ||
                 other.accountingDocumentItem == accountingDocumentItem) &&
+            (identical(other.accountingDocumentType, accountingDocumentType) ||
+                other.accountingDocumentType == accountingDocumentType) &&
             (identical(other.postingKeyName, postingKeyName) ||
                 other.postingKeyName == postingKeyName) &&
             (identical(other.netDueDate, netDueDate) ||
@@ -403,15 +339,6 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
             (identical(
                     other.referenceDocumentNumber, referenceDocumentNumber) ||
                 other.referenceDocumentNumber == referenceDocumentNumber) &&
-            (identical(
-                    other.invoiceProcessingStatus, invoiceProcessingStatus) ||
-                other.invoiceProcessingStatus == invoiceProcessingStatus) &&
-            (identical(other.grossAmount, grossAmount) ||
-                other.grossAmount == grossAmount) &&
-            (identical(other.netAmount, netAmount) ||
-                other.netAmount == netAmount) &&
-            (identical(other.taxAmount, taxAmount) ||
-                other.taxAmount == taxAmount) &&
             (identical(other.documentDate, documentDate) ||
                 other.documentDate == documentDate) &&
             (identical(other.amountInTransactionCurrency,
@@ -420,8 +347,9 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
                     amountInTransactionCurrency) &&
             (identical(other.invoiceReference, invoiceReference) ||
                 other.invoiceReference == invoiceReference) &&
-            (identical(other.returnId, returnId) ||
-                other.returnId == returnId) &&
+            (identical(
+                    other.invoiceProcessingStatus, invoiceProcessingStatus) ||
+                other.invoiceProcessingStatus == invoiceProcessingStatus) &&
             (identical(other.orderId, orderId) || other.orderId == orderId));
   }
 
@@ -429,22 +357,18 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   int get hashCode => Object.hash(
       runtimeType,
       bpCustomerNumber,
-      accountingDocument,
-      accountingDocumentType,
       fiscalYear,
+      accountingDocument,
       accountingDocumentItem,
+      accountingDocumentType,
       postingKeyName,
       netDueDate,
       postingDate,
       referenceDocumentNumber,
-      invoiceProcessingStatus,
-      grossAmount,
-      netAmount,
-      taxAmount,
       documentDate,
       amountInTransactionCurrency,
       invoiceReference,
-      returnId,
+      invoiceProcessingStatus,
       orderId);
 
   @JsonKey(ignore: true)
@@ -458,35 +382,31 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
 abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   factory _CreditAndInvoiceItem(
       {required final String bpCustomerNumber,
-      required final String accountingDocument,
-      required final String accountingDocumentType,
       required final String fiscalYear,
+      required final String accountingDocument,
       required final String accountingDocumentItem,
+      required final String accountingDocumentType,
       required final String postingKeyName,
       required final DateTimeStringValue netDueDate,
       required final DateTimeStringValue postingDate,
       required final StringValue referenceDocumentNumber,
-      required final StatusType invoiceProcessingStatus,
-      required final int grossAmount,
-      required final int netAmount,
-      required final int taxAmount,
       required final DateTimeStringValue documentDate,
       required final double amountInTransactionCurrency,
       required final StringValue invoiceReference,
-      required final String returnId,
+      required final StatusType invoiceProcessingStatus,
       required final StringValue orderId}) = _$_CreditAndInvoiceItem;
   _CreditAndInvoiceItem._() : super._();
 
   @override
   String get bpCustomerNumber;
   @override
-  String get accountingDocument;
-  @override
-  String get accountingDocumentType;
-  @override
   String get fiscalYear;
   @override
+  String get accountingDocument;
+  @override
   String get accountingDocumentItem;
+  @override
+  String get accountingDocumentType;
   @override
   String get postingKeyName;
   @override
@@ -496,21 +416,13 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   StringValue get referenceDocumentNumber;
   @override
-  StatusType get invoiceProcessingStatus;
-  @override
-  int get grossAmount;
-  @override
-  int get netAmount;
-  @override
-  int get taxAmount;
-  @override
   DateTimeStringValue get documentDate;
   @override
   double get amountInTransactionCurrency;
   @override
   StringValue get invoiceReference;
   @override
-  String get returnId;
+  StatusType get invoiceProcessingStatus;
   @override
   StringValue get orderId;
   @override

@@ -31,6 +31,7 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
@@ -686,14 +687,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<AllInvoicesBloc>().add(
             AllInvoicesEvent.fetch(
+              appliedFilter: AllInvoicesFilter.empty(),
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo:
                   context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              filter: AllInvoicesFilter.empty(),
             ),
           );
       context.read<AllCreditsBloc>().add(
             AllCreditsEvent.fetch(
+              appliedFilter: AllCreditsFilter.empty(),
               salesOrganisation:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
               customerCodeInfo:

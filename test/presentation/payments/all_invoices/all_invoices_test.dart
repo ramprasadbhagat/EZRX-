@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
@@ -17,7 +16,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -43,10 +41,6 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -61,7 +55,6 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 void main() {
   late AllInvoicesBloc allInvoicesBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
-  late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
 
   late UserBloc userBlocMock;
@@ -84,8 +77,6 @@ void main() {
     allInvoicesBlocMock = AllInvoicesBlocMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
-    downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
-
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
@@ -97,8 +88,6 @@ void main() {
         .thenReturn(AllInvoicesFilterState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => downloadPaymentAttachmentsBlocMock.state)
-        .thenReturn(DownloadPaymentAttachmentsState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -116,9 +105,6 @@ void main() {
           ),
           BlocProvider<AllInvoicesFilterBloc>(
             create: (context) => allInvoicesFilterBlocMock,
-          ),
-          BlocProvider<DownloadPaymentAttachmentsBloc>(
-            create: (context) => downloadPaymentAttachmentsBlocMock,
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
@@ -146,12 +132,8 @@ void main() {
       ));
       final expectedState = [
         AllInvoicesFilterState.initial(),
-        AllInvoicesFilterState.initial().copyWith(
-          applied: true,
-        ),
-        AllInvoicesFilterState.initial().copyWith(
-          tempFilter: AllInvoicesFilter.empty(),
-        ),
+        AllInvoicesFilterState.initial(),
+        AllInvoicesFilterState.initial(),
       ];
       whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
 
@@ -181,13 +163,8 @@ void main() {
       ));
 
       final expectedState = [
-        AllInvoicesFilterState.initial().copyWith(
-          applied: true,
-        ),
-        AllInvoicesFilterState.initial().copyWith(
-          applied: true,
-          tempFilter: AllInvoicesFilter.empty(),
-        ),
+        AllInvoicesFilterState.initial(),
+        AllInvoicesFilterState.initial(),
       ];
       whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
 
@@ -248,7 +225,6 @@ void main() {
               invoiceProcessingStatus: StatusType('Cleared'),
             )
           ],
-          totalCount: 1,
         ),
       ];
       whenListen(allInvoicesBlocMock, Stream.fromIterable(expectedState));
@@ -331,7 +307,6 @@ void main() {
               invoiceProcessingStatus: StatusType('Cleared'),
             ),
           ],
-          totalCount: 6,
         ),
       );
 

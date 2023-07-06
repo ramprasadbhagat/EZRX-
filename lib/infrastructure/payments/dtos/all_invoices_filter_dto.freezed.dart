@@ -24,8 +24,6 @@ mixin _$AllInvoicesFilterDto {
   String get dueDateFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'dueDateTo', defaultValue: '')
   String get dueDateTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'documentNumber')
-  String get documentNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
   String get documentDateFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -54,8 +52,6 @@ abstract class $AllInvoicesFilterDtoCopyWith<$Res> {
           String dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
           String dueDateTo,
-      @JsonKey(name: 'documentNumber')
-          String documentNumber,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
           String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -84,7 +80,6 @@ class _$AllInvoicesFilterDtoCopyWithImpl<$Res,
   $Res call({
     Object? dueDateFrom = null,
     Object? dueDateTo = null,
-    Object? documentNumber = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
     Object? amountValueFrom = null,
@@ -99,10 +94,6 @@ class _$AllInvoicesFilterDtoCopyWithImpl<$Res,
       dueDateTo: null == dueDateTo
           ? _value.dueDateTo
           : dueDateTo // ignore: cast_nullable_to_non_nullable
-              as String,
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
               as String,
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
@@ -141,8 +132,6 @@ abstract class _$$_AllInvoicesFilterDtoCopyWith<$Res>
           String dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
           String dueDateTo,
-      @JsonKey(name: 'documentNumber')
-          String documentNumber,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
           String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -168,7 +157,6 @@ class __$$_AllInvoicesFilterDtoCopyWithImpl<$Res>
   $Res call({
     Object? dueDateFrom = null,
     Object? dueDateTo = null,
-    Object? documentNumber = null,
     Object? documentDateFrom = null,
     Object? documentDateTo = null,
     Object? amountValueFrom = null,
@@ -183,10 +171,6 @@ class __$$_AllInvoicesFilterDtoCopyWithImpl<$Res>
       dueDateTo: null == dueDateTo
           ? _value.dueDateTo
           : dueDateTo // ignore: cast_nullable_to_non_nullable
-              as String,
-      documentNumber: null == documentNumber
-          ? _value.documentNumber
-          : documentNumber // ignore: cast_nullable_to_non_nullable
               as String,
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
@@ -220,8 +204,6 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
           required this.dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
           required this.dueDateTo,
-      @JsonKey(name: 'documentNumber')
-          required this.documentNumber,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
           required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -244,9 +226,6 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
   @JsonKey(name: 'dueDateTo', defaultValue: '')
   final String dueDateTo;
   @override
-  @JsonKey(name: 'documentNumber')
-  final String documentNumber;
-  @override
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
   final String documentDateFrom;
   @override
@@ -264,7 +243,7 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
 
   @override
   String toString() {
-    return 'AllInvoicesFilterDto(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentNumber: $documentNumber, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'AllInvoicesFilterDto(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
   }
 
   @override
@@ -276,8 +255,6 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
                 other.dueDateFrom == dueDateFrom) &&
             (identical(other.dueDateTo, dueDateTo) ||
                 other.dueDateTo == dueDateTo) &&
-            (identical(other.documentNumber, documentNumber) ||
-                other.documentNumber == documentNumber) &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
@@ -296,7 +273,6 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
       runtimeType,
       dueDateFrom,
       dueDateTo,
-      documentNumber,
       documentDateFrom,
       documentDateTo,
       amountValueFrom,
@@ -324,8 +300,6 @@ abstract class _AllInvoicesFilterDto extends AllInvoicesFilterDto {
           required final String dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
           required final String dueDateTo,
-      @JsonKey(name: 'documentNumber')
-          required final String documentNumber,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
           required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -347,9 +321,6 @@ abstract class _AllInvoicesFilterDto extends AllInvoicesFilterDto {
   @override
   @JsonKey(name: 'dueDateTo', defaultValue: '')
   String get dueDateTo;
-  @override
-  @JsonKey(name: 'documentNumber')
-  String get documentNumber;
   @override
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
   String get documentDateFrom;

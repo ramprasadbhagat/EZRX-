@@ -156,7 +156,7 @@ void main() {
     );
 
     blocTest(
-      'applyFilters with all valid filters',
+      'validateFilters with all valid filters',
       build: () =>
           AllCreditsFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllCreditsFilterState.initial().copyWith(
@@ -178,36 +178,11 @@ void main() {
         );
       },
       expect: () => [
-        AllCreditsFilterState.initial().copyWith(
-          applied: true,
-          filter: allCreditsFilter.copyWith(
-            documentDateTo: DateTimeStringValue(
-              getDateStringByDateTime(fakeToDate),
-            ),
-            documentDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
-            amountValueFrom: RangeValue('1'),
-            amountValueTo: RangeValue('10'),
-            filterStatuses: ['Cleared'],
-          ),
-          // appliedFilter: allCreditsFilter.copyWith(
-          //   documentDateTo: DateTimeStringValue(
-          //     getDateStringByDateTime(fakeToDate),
-          //   ),
-          //   documentDateFrom: DateTimeStringValue(
-          //     getDateStringByDateTime(fakeFromDate),
-          //   ),
-          //   amountValueFrom: RangeValue('1'),
-          //   amountValueTo: RangeValue('10'),
-          //   filterStatuses: ['Cleared'],
-          // ),
-        ),
       ],
     );
 
     blocTest(
-      'applyFilters with invalid filters',
+      'validateFilters with invalid filters',
       build: () =>
           AllCreditsFilterBloc(allCreditsAndInvoicesRepository: repository),
       seed: () => AllCreditsFilterState.initial().copyWith(
@@ -242,35 +217,6 @@ void main() {
             amountValueTo: RangeValue('10'),
             filterStatuses: ['Cleared'],
           ),
-        ),
-      ],
-    );
-
-    blocTest(
-      'resetFilters with all valid filters',
-      build: () =>
-          AllCreditsFilterBloc(allCreditsAndInvoicesRepository: repository),
-      seed: () => AllCreditsFilterState.initial().copyWith(
-        filter: allCreditsFilter.copyWith(
-          documentDateTo: DateTimeStringValue(
-            getDateStringByDateTime(fakeToDate),
-          ),
-          documentDateFrom: DateTimeStringValue(
-            getDateStringByDateTime(fakeFromDate),
-          ),
-          amountValueFrom: RangeValue('1'),
-          amountValueTo: RangeValue('10'),
-          filterStatuses: ['Cleared'],
-        ),
-      ),
-      act: (AllCreditsFilterBloc bloc) {
-        bloc.add(
-          const AllCreditsFilterEvent.resetFilters(),
-        );
-      },
-      expect: () => [
-        AllCreditsFilterState.initial().copyWith(
-          applied: true,
         ),
       ],
     );

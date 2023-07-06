@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 
 class AllCreditsAndInvoicesRemoteDataSource {
   HttpService httpService;
@@ -21,7 +21,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required this.config,
   });
 
-  Future<CustomerDocumentHeader> filterInvoices({
+  Future<List<CreditAndInvoiceItem>> filterInvoices({
     required String customerCode,
     required String salesOrg,
     required List<Map<String, String>> filterMap,
@@ -35,7 +35,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
       data: jsonEncode(
         {
           'query': allCreditsAndInvoicesQueryMutation
-              .getCustomerDocumentHeaderQuery(),
+              .getDocumentHeaderListQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -56,12 +56,17 @@ class AllCreditsAndInvoicesRemoteDataSource {
       ),
     );
     _exceptionChecker(property: 'customerDocumentHeader', res: res);
-    final data = res.data['data']['customerDocumentHeader'];
+    final data = res.data['data']['customerDocumentHeader']['documentHeaderList'];
+    
+    final result = <CreditAndInvoiceItem>[];
+    for (final dynamic item in data) {
+      result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+    }
 
-    return CustomerDocumentHeaderDto.fromJson(data).toDomain();
+    return result;
   }
 
-  Future<CustomerDocumentHeader> filterCredits({
+  Future<List<CreditAndInvoiceItem>> filterCredits({
     required String customerCode,
     required String salesOrg,
     required int offset,
@@ -75,7 +80,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
       data: jsonEncode(
         {
           'query': allCreditsAndInvoicesQueryMutation
-              .getCustomerDocumentHeaderQuery(),
+              .getDocumentHeaderListQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -96,9 +101,14 @@ class AllCreditsAndInvoicesRemoteDataSource {
       ),
     );
     _exceptionChecker(property: 'customerDocumentHeader', res: res);
-    final data = res.data['data']['customerDocumentHeader'];
+    final data = res.data['data']['customerDocumentHeader']['documentHeaderList'];
+    
+    final result = <CreditAndInvoiceItem>[];
+    for (final dynamic item in data) {
+      result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+    }
 
-    return CustomerDocumentHeaderDto.fromJson(data).toDomain();
+    return result;
   }
 
   void _exceptionChecker({

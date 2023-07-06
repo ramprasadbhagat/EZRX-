@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
@@ -27,7 +27,7 @@ void main() {
       allCreditsAndInvoicesRemoteDataSourceMock;
   late Config configMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-  late CustomerDocumentHeader mockCustomerDocumentHeader;
+  late List<CreditAndInvoiceItem> mockList;
   const fakeFromDate = '2023-05-01';
   const fakeToDate = '2023-05-28';
   final filterMap = [
@@ -50,7 +50,7 @@ void main() {
       localDataSource: allCreditsAndInvoicesLocalDataSourceMock,
       remoteDataSource: allCreditsAndInvoicesRemoteDataSourceMock,
     );
-    mockCustomerDocumentHeader = CustomerDocumentHeader.empty();
+    mockList = List<CreditAndInvoiceItem>.empty();
   });
 
   group('All Credits and Invoices Repository Test', () {
@@ -58,8 +58,8 @@ void main() {
       test('=> filterInvoices locally success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
         when(() => allCreditsAndInvoicesLocalDataSourceMock
-            .getCustomerDocumentHeader()).thenAnswer(
-          (invocation) async => mockCustomerDocumentHeader,
+            .getDocumentHeaderList()).thenAnswer(
+          (invocation) async => mockList,
         );
 
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
@@ -75,7 +75,7 @@ void main() {
       test('=> filterInvoices locally failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
         when(() => allCreditsAndInvoicesLocalDataSourceMock
-                .getCustomerDocumentHeader())
+                .getDocumentHeaderList())
             .thenThrow((invocation) async => MockException());
 
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
@@ -97,7 +97,7 @@ void main() {
               pageSize: 1,
               offset: 0,
             )).thenAnswer(
-          (invocation) async => mockCustomerDocumentHeader,
+          (invocation) async => mockList,
         );
 
         final result = await allCreditsAndInvoicesRepository.filterInvoices(

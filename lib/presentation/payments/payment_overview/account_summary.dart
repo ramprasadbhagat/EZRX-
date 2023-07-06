@@ -74,6 +74,7 @@ class AccountSummaryPage extends StatelessWidget {
                     onTap: () {
                       context.read<AllInvoicesBloc>().add(
                             AllInvoicesEvent.fetch(
+                              appliedFilter: AllInvoicesFilter.empty(),
                               salesOrganisation: context
                                   .read<SalesOrgBloc>()
                                   .state
@@ -82,7 +83,6 @@ class AccountSummaryPage extends StatelessWidget {
                                   .read<CustomerCodeBloc>()
                                   .state
                                   .customerCodeInfo,
-                              filter: AllInvoicesFilter.empty(),
                             ),
                           );
                       context.router.pushNamed('payments/all_invoices');
@@ -113,6 +113,7 @@ class AccountSummaryPage extends StatelessWidget {
                     onTap: () {
                       context.read<AllCreditsBloc>().add(
                             AllCreditsEvent.fetch(
+                              appliedFilter: AllCreditsFilter.empty(),
                               salesOrganisation: context
                                   .read<SalesOrgBloc>()
                                   .state
