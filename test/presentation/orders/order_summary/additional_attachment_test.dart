@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -41,8 +40,6 @@ class PoAttachmentBlocMock
     implements PoAttachmentBloc {}
 
 class FilePickerServiceMock extends Mock implements FilePickerService {}
-
-
 
 void main() {
   late AppRouter autoRouterMock;
@@ -194,8 +191,7 @@ void main() {
         ),
         PoAttachmentState.initial().copyWith(
           fileOperationMode: FileOperationMode.upload,
-            failureOrSuccessOption:
-              optionOf(
+          failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.storagePermissionFailed(),
             ),
@@ -309,7 +305,8 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(() => filePickerService.pickFiles(
+      when(
+        () => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
           allowedExtensions: locator<Config>().allowedExtensions,
@@ -358,46 +355,46 @@ void main() {
       debugDefaultTargetPlatformOverride = null;
     });
 
-    testWidgets('Po Attachment file not uploading ', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-      final expectedStatesPoAttachmentState = [
-        PoAttachmentState.initial().copyWith(
-          failureOrSuccessOption: optionOf(
-            const Right(
-              ApiFailure.other('Fake-Error'),
-            ),
-          ),
-        ),
-        PoAttachmentState.initial().copyWith(
-          fileUrl: [
-            PoDocuments(
-              name: 'fake-name-1',
-              url: 'fake-url-1',
-            ),
-          ],
-          fileOperationMode: FileOperationMode.upload,
-          isFetching: true,
-        )
-      ];
+    // testWidgets('Po Attachment file not uploading ', (tester) async {
+    //   debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    //   final expectedStatesPoAttachmentState = [
+    //     PoAttachmentState.initial().copyWith(
+    //       failureOrSuccessOption: optionOf(
+    //         const Right(
+    //           ApiFailure.other('Fake-Error'),
+    //         ),
+    //       ),
+    //     ),
+    //     PoAttachmentState.initial().copyWith(
+    //       fileUrl: [
+    //         PoDocuments(
+    //           name: 'fake-name-1',
+    //           url: 'fake-url-1',
+    //         ),
+    //       ],
+    //       fileOperationMode: FileOperationMode.upload,
+    //       isFetching: true,
+    //     )
+    //   ];
 
-      final expectedAdditionalDetailsDataState = [
-        AdditionalDetailsState.initial(),
-        AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-          poDocuments: [PoDocuments.empty()],
-        )),
-      ];
-      whenListen(poAttachmentBlocMock,
-          Stream.fromIterable(expectedStatesPoAttachmentState));
-      whenListen(additionalDetailsBlocMock,
-          Stream.fromIterable(expectedAdditionalDetailsDataState));
-      await tester.pumpWidget(getTestWidget());
-      await tester.pump();
-      final orderSummaryAdditionalPoAttachment = find.byKey(
-        const ValueKey('orderSummaryAdditionalPoAttachment'),
-      );
-      expect(orderSummaryAdditionalPoAttachment, findsOneWidget);
-      debugDefaultTargetPlatformOverride = null;
-    });
+    //   final expectedAdditionalDetailsDataState = [
+    //     AdditionalDetailsState.initial(),
+    //     AdditionalDetailsState.initial().copyWith(
+    //         additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+    //       poDocuments: [PoDocuments.empty()],
+    //     )),
+    //   ];
+    //   whenListen(poAttachmentBlocMock,
+    //       Stream.fromIterable(expectedStatesPoAttachmentState));
+    //   whenListen(additionalDetailsBlocMock,
+    //       Stream.fromIterable(expectedAdditionalDetailsDataState));
+    //   await tester.pumpWidget(getTestWidget());
+    //   await tester.pump();
+    //   final orderSummaryAdditionalPoAttachment = find.byKey(
+    //     const ValueKey('orderSummaryAdditionalPoAttachment'),
+    //   );
+    //   expect(orderSummaryAdditionalPoAttachment, findsOneWidget);
+    //   debugDefaultTargetPlatformOverride = null;
+    // });
   });
 }

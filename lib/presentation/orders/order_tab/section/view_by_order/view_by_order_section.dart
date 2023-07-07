@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -14,13 +17,17 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewByOrdersPage extends StatelessWidget {
+  final OrderHistoryItem orderHistoryItem;
+
   const ViewByOrdersPage({
     Key? key,
+    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override
@@ -79,6 +86,7 @@ class ViewByOrdersPage extends StatelessWidget {
           itemBuilder: (context, index, item) => _ViewByOrderGroup(
             viewByOrderHistoryItem: item,
             showDivider: index != 0,
+            orderHistoryItem: orderHistoryItem,
           ),
           items: state.viewByOrderList.orderHeaders.getViewByOrderGroupList,
         );
@@ -89,11 +97,14 @@ class ViewByOrdersPage extends StatelessWidget {
 
 class _ViewByOrderGroup extends StatelessWidget {
   final ViewByOrderHistoryGroup viewByOrderHistoryItem;
+  final OrderHistoryItem orderHistoryItem;
+
   final bool showDivider;
   const _ViewByOrderGroup({
     Key? key,
     required this.viewByOrderHistoryItem,
     required this.showDivider,
+    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override
@@ -127,6 +138,7 @@ class _ViewByOrderGroup extends StatelessWidget {
                       .map(
                         (e) => _ViewByOrder(
                           viewByOrderHistoryItem: e,
+                          orderHistoryItem: orderHistoryItem,
                         ),
                       )
                       .toList(),
@@ -142,8 +154,13 @@ class _ViewByOrderGroup extends StatelessWidget {
 
 class _ViewByOrder extends StatelessWidget {
   final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
-  const _ViewByOrder({Key? key, required this.viewByOrderHistoryItem})
-      : super(key: key);
+  final OrderHistoryItem orderHistoryItem;
+
+  const _ViewByOrder({
+    Key? key,
+    required this.viewByOrderHistoryItem,
+    required this.orderHistoryItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +171,17 @@ class _ViewByOrder extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         CustomCard(
           child: ListTile(
-            onTap: () {},
+            onTap: () {
+              context.read<ViewByOrderDetailsBloc>().add(
+                    ViewByOrderDetailsEvent.fetch(
+                      user: context.read<UserBloc>().state.user,
+                      orderHeader: viewByOrderHistoryItem,
+                    ),
+                  );
+              context.router.push(ViewByOrderDetailsPageRoute(
+                viewByOrderHistoryItem: viewByOrderHistoryItem,
+              ));
+            },
             contentPadding: const EdgeInsets.all(10),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

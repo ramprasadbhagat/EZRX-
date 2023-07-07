@@ -34,6 +34,8 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
           OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
               orderHistoryDetailsOrderItemTenderContractDetailsOverride(
                   json, 'TenderContractDetails') as Map<String, dynamic>),
+      principalName: json['PrincipalName'] as String? ?? '',
+      governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
@@ -55,4 +57,6 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'IsTenderContractMaterial': instance.isTenderContractMaterial,
       'Details': instance.details.map((e) => e.toJson()).toList(),
       'TenderContractDetails': instance.tenderContractDetails.toJson(),
+      'PrincipalName': instance.principalName,
+      'GovernmentMaterialCode': instance.governmentMaterialCode,
     };

@@ -23,6 +23,7 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/vi
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
@@ -46,6 +47,7 @@ import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
@@ -76,7 +78,6 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -94,7 +95,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -315,8 +315,8 @@ class App extends StatelessWidget {
         BlocProvider<OrderDocumentTypeBloc>(
           create: (context) => locator<OrderDocumentTypeBloc>(),
         ),
-        BlocProvider<OrderHistoryDetailsBloc>(
-          create: (context) => locator<OrderHistoryDetailsBloc>(),
+        BlocProvider<ViewByOrderDetailsBloc>(
+          create: (context) => locator<ViewByOrderDetailsBloc>(),
         ),
         BlocProvider<PoAttachmentBloc>(
           create: (context) => locator<PoAttachmentBloc>(),

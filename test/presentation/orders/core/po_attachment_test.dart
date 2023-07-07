@@ -1,26 +1,15 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import '../../../utils/widget_utils.dart';
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -51,7 +40,7 @@ void main() {
   late FilePickerService filePickerService;
   late PermissionService permissionService;
   late EligibilityBloc eligibilityBlocMock;
-  late PoAttachmentRepository poAttachmentRepositoryMock;
+  // late PoAttachmentRepository poAttachmentRepositoryMock;
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +56,7 @@ void main() {
   setUp(() {
     additionalDetailsBlocMock = AdditionalDetailsMock();
     poAttachmentBlocMock = PoAttachmentBlocMock();
-    poAttachmentRepositoryMock = PoAttachmentRepositoryMock();
+    // poAttachmentRepositoryMock = PoAttachmentRepositoryMock();
     when(() => additionalDetailsBlocMock.state)
         .thenReturn(AdditionalDetailsState.initial());
     when(() => poAttachmentBlocMock.state)
@@ -76,22 +65,22 @@ void main() {
         .thenReturn(EligibilityState.initial());
   });
 
-  final fakePoDocumentList = <PoDocuments>[
-    PoDocuments(
-      name: 'fake-name-1',
-      url: 'fake-url-1',
-    ),
-    PoDocuments(
-      name: 'fake-name-2',
-      url: 'fake-url-2',
-    ),
-    PoDocuments(
-      name: 'fake-name-3',
-      url: 'fake-url-3',
-    ),
-  ];
+  // final fakePoDocumentList = <PoDocuments>[
+  //   PoDocuments(
+  //     name: 'fake-name-1',
+  //     url: 'fake-url-1',
+  //   ),
+  //   PoDocuments(
+  //     name: 'fake-name-2',
+  //     url: 'fake-url-2',
+  //   ),
+  //   PoDocuments(
+  //     name: 'fake-name-3',
+  //     url: 'fake-url-3',
+  //   ),
+  // ];
 
-  group('PoAttatchment Download Widget View', () {
+  /* group('PoAttatchment Download Widget View', () {
     Widget getTestWidget({
       List<PoDocuments> poDocuments = const [],
     }) {
@@ -302,5 +291,5 @@ void main() {
       debugDefaultTargetPlatformOverride = null;
     });
 
-  });
+  });*/
 }

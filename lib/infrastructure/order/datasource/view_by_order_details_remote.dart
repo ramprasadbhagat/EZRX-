@@ -6,33 +6,32 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_dto.dart';
 
-class OrderHistoryDetailsRemoteDataSource {
+class ViewByOrderDetailsRemoteDataSource {
   HttpService httpService;
-  OrderHistoryDetailsQueryMutation orderHistoryDetailsQueryMutation;
+  ViewByOrderDetailsQueryMutation viewByOrderDetailsQueryMutation;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
-  OrderHistoryDetailsRemoteDataSource({
+  ViewByOrderDetailsRemoteDataSource({
     required this.httpService,
-    required this.orderHistoryDetailsQueryMutation,
+    required this.viewByOrderDetailsQueryMutation,
     required this.config,
     required this.dataSourceExceptionHandler,
   });
 
   Future<OrderHistoryDetails> getOrderHistoryDetails({
-    required String companyName,
     required String orderId,
     required String language,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData =
-          orderHistoryDetailsQueryMutation.getOrderHistoryDetails();
+          viewByOrderDetailsQueryMutation.getOrderHistoryDetails();
 
       final variables = {
         'salesDocument': orderId,
-        'companyName': companyName,
+        'language': language,
       };
 
       final res = await httpService.request(
@@ -65,7 +64,7 @@ class OrderHistoryDetailsRemoteDataSource {
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData =
-          orderHistoryDetailsQueryMutation.getOrderHistoryDetailsForSalesRep();
+          viewByOrderDetailsQueryMutation.getOrderHistoryDetailsForSalesRep();
 
       final variables = {
         'salesDocument': orderId,

@@ -17,7 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ViewByOrderHistoryGroup {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
+  PrincipalName get principalName => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderHeader> get orderHeaders =>
+      throw _privateConstructorUsedError;
+  List<OrderHistoryDetailsOrderItem> get viewByOrderItem =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,7 +36,9 @@ abstract class $ViewByOrderHistoryGroupCopyWith<$Res> {
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
-      List<OrderHistoryDetailsOrderHeader> orderHeaders});
+      PrincipalName principalName,
+      List<OrderHistoryDetailsOrderHeader> orderHeaders,
+      List<OrderHistoryDetailsOrderItem> viewByOrderItem});
 }
 
 /// @nodoc
@@ -51,17 +56,27 @@ class _$ViewByOrderHistoryGroupCopyWithImpl<$Res,
   @override
   $Res call({
     Object? createdDate = null,
+    Object? principalName = null,
     Object? orderHeaders = null,
+    Object? viewByOrderItem = null,
   }) {
     return _then(_value.copyWith(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as PrincipalName,
       orderHeaders: null == orderHeaders
           ? _value.orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderHeader>,
+      viewByOrderItem: null == viewByOrderItem
+          ? _value.viewByOrderItem
+          : viewByOrderItem // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryDetailsOrderItem>,
     ) as $Val);
   }
 }
@@ -76,7 +91,9 @@ abstract class _$$_ViewByOrderHistoryGroupCopyWith<$Res>
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
-      List<OrderHistoryDetailsOrderHeader> orderHeaders});
+      PrincipalName principalName,
+      List<OrderHistoryDetailsOrderHeader> orderHeaders,
+      List<OrderHistoryDetailsOrderItem> viewByOrderItem});
 }
 
 /// @nodoc
@@ -92,17 +109,27 @@ class __$$_ViewByOrderHistoryGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? createdDate = null,
+    Object? principalName = null,
     Object? orderHeaders = null,
+    Object? viewByOrderItem = null,
   }) {
     return _then(_$_ViewByOrderHistoryGroup(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as PrincipalName,
       orderHeaders: null == orderHeaders
           ? _value._orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderHeader>,
+      viewByOrderItem: null == viewByOrderItem
+          ? _value._viewByOrderItem
+          : viewByOrderItem // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryDetailsOrderItem>,
     ));
   }
 }
@@ -112,11 +139,16 @@ class __$$_ViewByOrderHistoryGroupCopyWithImpl<$Res>
 class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
   _$_ViewByOrderHistoryGroup(
       {required this.createdDate,
-      required final List<OrderHistoryDetailsOrderHeader> orderHeaders})
-      : _orderHeaders = orderHeaders;
+      required this.principalName,
+      required final List<OrderHistoryDetailsOrderHeader> orderHeaders,
+      required final List<OrderHistoryDetailsOrderItem> viewByOrderItem})
+      : _orderHeaders = orderHeaders,
+        _viewByOrderItem = viewByOrderItem;
 
   @override
   final DateTimeStringValue createdDate;
+  @override
+  final PrincipalName principalName;
   final List<OrderHistoryDetailsOrderHeader> _orderHeaders;
   @override
   List<OrderHistoryDetailsOrderHeader> get orderHeaders {
@@ -125,9 +157,17 @@ class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
     return EqualUnmodifiableListView(_orderHeaders);
   }
 
+  final List<OrderHistoryDetailsOrderItem> _viewByOrderItem;
+  @override
+  List<OrderHistoryDetailsOrderItem> get viewByOrderItem {
+    if (_viewByOrderItem is EqualUnmodifiableListView) return _viewByOrderItem;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_viewByOrderItem);
+  }
+
   @override
   String toString() {
-    return 'ViewByOrderHistoryGroup(createdDate: $createdDate, orderHeaders: $orderHeaders)';
+    return 'ViewByOrderHistoryGroup(createdDate: $createdDate, principalName: $principalName, orderHeaders: $orderHeaders, viewByOrderItem: $viewByOrderItem)';
   }
 
   @override
@@ -137,13 +177,21 @@ class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
             other is _$_ViewByOrderHistoryGroup &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
             const DeepCollectionEquality()
-                .equals(other._orderHeaders, _orderHeaders));
+                .equals(other._orderHeaders, _orderHeaders) &&
+            const DeepCollectionEquality()
+                .equals(other._viewByOrderItem, _viewByOrderItem));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, createdDate,
-      const DeepCollectionEquality().hash(_orderHeaders));
+  int get hashCode => Object.hash(
+      runtimeType,
+      createdDate,
+      principalName,
+      const DeepCollectionEquality().hash(_orderHeaders),
+      const DeepCollectionEquality().hash(_viewByOrderItem));
 
   @JsonKey(ignore: true)
   @override
@@ -157,13 +205,19 @@ class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
 abstract class _ViewByOrderHistoryGroup implements ViewByOrderHistoryGroup {
   factory _ViewByOrderHistoryGroup(
           {required final DateTimeStringValue createdDate,
-          required final List<OrderHistoryDetailsOrderHeader> orderHeaders}) =
+          required final PrincipalName principalName,
+          required final List<OrderHistoryDetailsOrderHeader> orderHeaders,
+          required final List<OrderHistoryDetailsOrderItem> viewByOrderItem}) =
       _$_ViewByOrderHistoryGroup;
 
   @override
   DateTimeStringValue get createdDate;
   @override
+  PrincipalName get principalName;
+  @override
   List<OrderHistoryDetailsOrderHeader> get orderHeaders;
+  @override
+  List<OrderHistoryDetailsOrderItem> get viewByOrderItem;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderHistoryGroupCopyWith<_$_ViewByOrderHistoryGroup>

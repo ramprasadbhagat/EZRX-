@@ -3,8 +3,8 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_dto.dart';
 import 'package:flutter/services.dart';
 
-class OrderHistoryDetailsLocalDataSource {
-  OrderHistoryDetailsLocalDataSource();
+class ViewByOrderDetailsLocalDataSource {
+  ViewByOrderDetailsLocalDataSource();
   Future<OrderHistoryDetails> getOrderHistoryDetails() async {
     
     final data = json.decode(

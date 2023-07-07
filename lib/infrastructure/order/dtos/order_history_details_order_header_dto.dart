@@ -60,7 +60,7 @@ class OrderHistoryDetailsOrderHeadersDto
       materialCount: orderHistoryDetailsOrderHeader.materialCount,
       orderNumber:
           orderHistoryDetailsOrderHeader.orderNumber.getOrDefaultValue(''),
-      pOReference: orderHistoryDetailsOrderHeader.pOReference,
+      pOReference: orderHistoryDetailsOrderHeader.pOReference.displayPOReference,
       shipTo: orderHistoryDetailsOrderHeader.shipTo,
       soldTo: orderHistoryDetailsOrderHeader.soldTo,
     );
@@ -84,7 +84,7 @@ class OrderHistoryDetailsOrderHeadersDto
       itmDescription: itmDescription,
       materialCount: materialCount,
       orderNumber: OrderNumber(orderNumber),
-      pOReference: pOReference,
+      pOReference: POReference(pOReference),
       shipTo: shipTo,
       soldTo: soldTo,
     );

@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -26,7 +27,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
     required String shipTo,
     required CompanyName companyName,
     required String createdTime,
-    required String pOReference,
+    required POReference pOReference,
     required int materialCount,
     required String itmDescription,
     required bool hasPOAttachment,
@@ -49,7 +50,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
         itmDescription: '',
         materialCount: 0,
         orderNumber: OrderNumber(''),
-        pOReference: '',
+        pOReference: POReference(''),
         shipTo: '',
         soldTo: '',
       );
@@ -66,6 +67,8 @@ extension ViewByOrderListExtension on List<OrderHistoryDetailsOrderHeader> {
           (entry) => ViewByOrderHistoryGroup(
             createdDate: entry.key,
             orderHeaders: entry.value,
+            principalName: PrincipalName(''),
+            viewByOrderItem: <OrderHistoryDetailsOrderItem>[],
           ),
         )
         .toList();

@@ -10,7 +10,6 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -68,23 +67,23 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                 if (state.additionalDetailsData.poDocuments.isNotEmpty ||
                     poAttachmentState.fileUploading) {
                   return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0,
-                          vertical: 10.0,
-                        ),
-                        child: PoAttachment(
-                          key: const ValueKey(
-                            'orderSummaryAdditionalPoAttachment',
-                          ),
-                          poDocuments: state.additionalDetailsData.poDocuments,
-                          poAttachMentRenderMode: PoAttachMentRenderMode.edit,
-                          uploadingPocDocument:
-                              poAttachmentState.uploadInProgressPoDocument,
-                        ),
-                      ),
-                      const Divider(
+                    children: const [
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //     horizontal: 10.0,
+                      //     vertical: 10.0,
+                      //   ),
+                      //   child: PoAttachment(
+                      //     key: const ValueKey(
+                      //       'orderSummaryAdditionalPoAttachment',
+                      //     ),
+                      //     poDocuments: state.additionalDetailsData.poDocuments,
+                      //     poAttachMentRenderMode: PoAttachMentRenderMode.edit,
+                      //     uploadingPocDocument:
+                      //         poAttachmentState.uploadInProgressPoDocument,
+                      //   ),
+                      // ),
+                      Divider(
                         color: ZPColors.lightGray,
                         endIndent: 0,
                         indent: 0,

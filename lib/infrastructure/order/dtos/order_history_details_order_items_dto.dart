@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
@@ -48,6 +49,10 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required List<OrderHistoryDetailsOrderItemDetailsDto> details,
     @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
         required OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
+    @JsonKey(name: 'PrincipalName', defaultValue: '')
+        required String principalName,
+          @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+        required String governmentMaterialCode,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -79,6 +84,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
           OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(
         orderHistoryDetailsOrderItem.tenderContractDetails,
       ),
+      principalName:
+          orderHistoryDetailsOrderItem.principalName.getOrDefaultValue(''),
+          governmentMaterialCode: orderHistoryDetailsOrderItem.governmentMaterialCode,
     );
   }
 
@@ -105,6 +113,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         tenderPackageDescription:
             tenderContractDetails.tenderPackageDescription,
       ),
+      principalName: PrincipalName(principalName),
+      productImages: ProductImages.empty(),
+      governmentMaterialCode:governmentMaterialCode,
     );
   }
 

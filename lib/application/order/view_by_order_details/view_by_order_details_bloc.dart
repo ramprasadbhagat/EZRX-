@@ -2,44 +2,49 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'order_history_details_event.dart';
-part 'order_history_details_state.dart';
-part 'order_history_details_bloc.freezed.dart';
+part 'view_by_order_details_event.dart';
+part 'view_by_order_details_state.dart';
+part 'view_by_order_details_bloc.freezed.dart';
 
-class OrderHistoryDetailsBloc
-    extends Bloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState> {
-  final IOrderHistoryDetailsRepository orderHistoryDetailsRepository;
-  OrderHistoryDetailsBloc({
-    required this.orderHistoryDetailsRepository,
-  }) : super(OrderHistoryDetailsState.initial()) {
-    on<OrderHistoryDetailsEvent>(_onEvent);
+class ViewByOrderDetailsBloc
+    extends Bloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState> {
+  final IViewByOrderDetailsRepository viewByOrderDetailsRepository;
+  final IProductImagesRepository productImagesRepository;
+
+  ViewByOrderDetailsBloc({
+    required this.viewByOrderDetailsRepository,
+    required this.productImagesRepository,
+  }) : super(ViewByOrderDetailsState.initial()) {
+    on<ViewByOrderDetailsEvent>(_onEvent);
   }
 
   Future<void> _onEvent(
-    OrderHistoryDetailsEvent event,
-    Emitter<OrderHistoryDetailsState> emit,
+    ViewByOrderDetailsEvent event,
+    Emitter<ViewByOrderDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(OrderHistoryDetailsState.initial()),
+      initialized: (e) async => emit(ViewByOrderDetailsState.initial()),
       fetch: (e) async {
         emit(
-          OrderHistoryDetailsState.initial().copyWith(
+          ViewByOrderDetailsState.initial().copyWith(
             isLoading: true,
           ),
         );
 
         final failureOrSuccess =
-            await orderHistoryDetailsRepository.getOrderHistoryDetails(
+            await viewByOrderDetailsRepository.getViewByOrderDetails(
           user: e.user,
-          orderHistoryItem: e.orderHistoryItem,
+          orderHeader: e.orderHeader,
         );
 
         failureOrSuccess.fold(
@@ -67,6 +72,40 @@ class OrderHistoryDetailsBloc
                     if (item.orderItem.isTenderContractMaterial)
                       item.orderItem.queryInfo: true,
                 },
+              ),
+            );
+             add(const _FetchProductImage());
+          },
+        );
+      },
+       fetchProductImage: (e) async {
+        emit(
+          state.copyWith(
+            isImageLoading: true,
+          ),
+        );
+
+        final failureOrSuccess = await productImagesRepository.getProductImages(
+          list: state.orderHistoryDetails.orderHistoryDetailsOrderItem,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) async => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isImageLoading: false,
+            ),
+          ),
+          (updatedListWithImages) async {
+            emit(
+              state.copyWith(
+                orderHistoryDetails: state.orderHistoryDetails.copyWith(
+                  orderHistoryDetailsOrderItem: updatedListWithImages
+                      .map((e) => e as OrderHistoryDetailsOrderItem)
+                      .toList(),
+                ),
+                failureOrSuccessOption: none(),
+                isImageLoading: false,
               ),
             );
           },

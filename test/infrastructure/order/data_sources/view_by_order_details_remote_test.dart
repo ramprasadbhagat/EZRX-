@@ -6,8 +6,8 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ import 'package:mocktail/mocktail.dart';
 class OrderHistoryDetailsMock extends Mock implements OrderHistoryDetails {}
 
 void main() {
-  late OrderHistoryDetailsRemoteDataSource remoteDataSource;
+  late ViewByOrderDetailsRemoteDataSource remoteDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -33,10 +33,10 @@ void main() {
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      remoteDataSource = OrderHistoryDetailsRemoteDataSource(
+      remoteDataSource = ViewByOrderDetailsRemoteDataSource(
         httpService: service,
         config: Config(),
-        orderHistoryDetailsQueryMutation: OrderHistoryDetailsQueryMutation(),
+        viewByOrderDetailsQueryMutation: ViewByOrderDetailsQueryMutation(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
       );
     },
@@ -48,7 +48,7 @@ void main() {
       test('Get OrderHistory Details', () async {
         final variables = {
           'salesDocument': 'fake-order',
-          'companyName': 'fake-companyname',
+          'language': 'fake-language',
         };
         final res = json.decode(
           await rootBundle
@@ -64,16 +64,14 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.orderHistoryDetailsQueryMutation
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetails(),
             'variables': variables
           }),
         );
 
         final result = await remoteDataSource.getOrderHistoryDetails(
-            companyName: 'fake-companyname',
-            language: 'fake-language',
-            orderId: 'fake-order');
+            language: 'fake-language', orderId: 'fake-order');
 
         expect(
             result,
@@ -103,7 +101,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.orderHistoryDetailsQueryMutation
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetailsForSalesRep(),
             'variables': variables
           }),
@@ -140,7 +138,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.orderHistoryDetailsQueryMutation
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetailsForSalesRep(),
             'variables': variables
           }),
@@ -181,7 +179,7 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.orderHistoryDetailsQueryMutation
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetailsForSalesRep(),
             'variables': variables
           }),

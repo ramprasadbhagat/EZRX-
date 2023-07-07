@@ -38,6 +38,7 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/vi
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
@@ -130,7 +131,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -216,9 +216,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart'
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
@@ -258,7 +258,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -269,6 +268,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/price_override_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_remote.dart';
@@ -321,7 +321,6 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_deta
 import 'package:ezrxmobile/infrastructure/returns/repository/returns_overview_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -402,6 +401,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_remote_
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_remote.dart';
+
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -1150,35 +1151,36 @@ void setupLocator() {
     () => OrderHistoryFilterByStatusBloc(),
   );
   //============================================================
-  //  Order History Details
+  // View by Order  Details
   //
   //============================================================
 
-  locator.registerLazySingleton(() => OrderHistoryDetailsLocalDataSource());
+  locator.registerLazySingleton(() => ViewByOrderDetailsLocalDataSource());
 
-  locator.registerLazySingleton(() => OrderHistoryDetailsQueryMutation());
+  locator.registerLazySingleton(() => ViewByOrderDetailsQueryMutation());
 
   locator.registerLazySingleton(
-    () => OrderHistoryDetailsRepository(
+    () => ViewByOrderDetailsRepository(
       config: locator<Config>(),
-      localDataSource: locator<OrderHistoryDetailsLocalDataSource>(),
+      localDataSource: locator<ViewByOrderDetailsLocalDataSource>(),
       orderHistoryDetailsRemoteDataSource:
-          locator<OrderHistoryDetailsRemoteDataSource>(),
+          locator<ViewByOrderDetailsRemoteDataSource>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => OrderHistoryDetailsBloc(
-      orderHistoryDetailsRepository: locator<OrderHistoryDetailsRepository>(),
+    () => ViewByOrderDetailsBloc(
+      viewByOrderDetailsRepository: locator<ViewByOrderDetailsRepository>(),
+      productImagesRepository: locator<ProductImagesRepository>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => OrderHistoryDetailsRemoteDataSource(
+    () => ViewByOrderDetailsRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      orderHistoryDetailsQueryMutation:
-          locator<OrderHistoryDetailsQueryMutation>(),
+      viewByOrderDetailsQueryMutation:
+          locator<ViewByOrderDetailsQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );

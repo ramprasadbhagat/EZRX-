@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -51,9 +52,9 @@ class OrdersTab extends StatelessWidget {
           ),
           Expanded(
             child: AutoTabsRouter.tabBar(
-              routes: const [
-                ViewByItemsPageRoute(),
-                ViewByOrdersPageRoute(),
+              routes: [
+                const ViewByItemsPageRoute(),
+                ViewByOrdersPageRoute(orderHistoryItem: OrderHistoryItem.empty()),
               ],
               builder: (context, child, tabController) => Column(
                 children: [

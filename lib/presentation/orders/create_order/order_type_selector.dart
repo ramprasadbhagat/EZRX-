@@ -10,7 +10,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
@@ -56,7 +56,7 @@ class OrderTypeSelector extends StatelessWidget {
                 dropDownTitle: 'Please select order type',
                 orderDocumentTypeState: state,
                 orderHistoryDetailsState:
-                    context.read<OrderHistoryDetailsBloc>().state,
+                    context.read<ViewByOrderDetailsBloc>().state,
               ),
               if (!hideReasonField && state.isReasonFieldEnable)
                 Container(
@@ -70,7 +70,7 @@ class OrderTypeSelector extends StatelessWidget {
                     isReason: true,
                     orderDocumentTypeState: state,
                     orderHistoryDetailsState:
-                        context.read<OrderHistoryDetailsBloc>().state,
+                        context.read<ViewByOrderDetailsBloc>().state,
                   ),
                 ),
               const SizedBox(
@@ -90,7 +90,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
   final String initialDropdownText;
   final String dropDownTitle;
   final OrderDocumentTypeState orderDocumentTypeState;
-  final OrderHistoryDetailsState orderHistoryDetailsState;
+  final ViewByOrderDetailsState orderHistoryDetailsState;
   final bool isReason;
   const _OrderTypeSelectorField({
     Key? key,

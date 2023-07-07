@@ -33,7 +33,7 @@ mixin _$OrderHistoryDetailsOrderHeader {
   String get shipTo => throw _privateConstructorUsedError;
   CompanyName get companyName => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
-  String get pOReference => throw _privateConstructorUsedError;
+  POReference get pOReference => throw _privateConstructorUsedError;
   int get materialCount => throw _privateConstructorUsedError;
   String get itmDescription => throw _privateConstructorUsedError;
   bool get hasPOAttachment => throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
       String shipTo,
       CompanyName companyName,
       String createdTime,
-      String pOReference,
+      POReference pOReference,
       int materialCount,
       String itmDescription,
       bool hasPOAttachment});
@@ -171,7 +171,7 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       materialCount: null == materialCount
           ? _value.materialCount
           : materialCount // ignore: cast_nullable_to_non_nullable
@@ -213,7 +213,7 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
       String shipTo,
       CompanyName companyName,
       String createdTime,
-      String pOReference,
+      POReference pOReference,
       int materialCount,
       String itmDescription,
       bool hasPOAttachment});
@@ -316,7 +316,7 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       materialCount: null == materialCount
           ? _value.materialCount
           : materialCount // ignore: cast_nullable_to_non_nullable
@@ -391,7 +391,7 @@ class _$_OrderHistoryDetailsOrderHeader
   @override
   final String createdTime;
   @override
-  final String pOReference;
+  final POReference pOReference;
   @override
   final int materialCount;
   @override
@@ -495,7 +495,7 @@ abstract class _OrderHistoryDetailsOrderHeader
       required final String shipTo,
       required final CompanyName companyName,
       required final String createdTime,
-      required final String pOReference,
+      required final POReference pOReference,
       required final int materialCount,
       required final String itmDescription,
       required final bool hasPOAttachment}) = _$_OrderHistoryDetailsOrderHeader;
@@ -532,7 +532,7 @@ abstract class _OrderHistoryDetailsOrderHeader
   @override
   String get createdTime;
   @override
-  String get pOReference;
+  POReference get pOReference;
   @override
   int get materialCount;
   @override

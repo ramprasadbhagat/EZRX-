@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +13,13 @@ import 'package:mocktail/mocktail.dart';
 class OrderTemplateMock extends Mock implements OrderTemplate {}
 
 void main() {
-  late OrderHistoryDetailsLocalDataSource localDataSource;
+  late ViewByOrderDetailsLocalDataSource localDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      localDataSource = OrderHistoryDetailsLocalDataSource();
+      localDataSource = ViewByOrderDetailsLocalDataSource();
     },
   );
 

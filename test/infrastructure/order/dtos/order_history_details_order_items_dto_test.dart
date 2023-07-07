@@ -17,7 +17,6 @@ void main() {
         'Tax': 0,
         'SAPStatus': 'fake-status',
         'PlannedDeliveryDate': 'fake-date',
-        'PickedQuantity': 0,
         'Batch': 'fake-batch',
         'ExpiryDate': 'fake-date',
         'LineReferenceNotes': '',

@@ -13,9 +13,9 @@ import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
@@ -26,23 +26,23 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
@@ -77,7 +77,6 @@ import 'package:upgrader/upgrader.dart';
 
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
@@ -404,29 +403,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 );
               },
               redirectHistoryDetail: (history) {
-                context.read<OrderHistoryDetailsBloc>().add(
-                      OrderHistoryDetailsEvent.fetch(
+                context.read<ViewByOrderDetailsBloc>().add(
+                      ViewByOrderDetailsEvent.fetch(
                         user: context.read<UserBloc>().state.user,
-                        orderHistoryItem: OrderHistoryItem.empty().copyWith(
+                        orderHeader:
+                            OrderHistoryDetailsOrderHeader.empty().copyWith(
                           orderNumber: OrderNumber(history),
                         ),
                       ),
                     );
-                context.router.push(HistoryDetailsRoute(
-                  orderHistoryItem: OrderHistoryItem.empty()
-                      .copyWith(orderNumber: OrderNumber(history)),
-                  billToInfo:
-                      eligibilityState.customerCodeInfo.billToInfos.isNotEmpty
-                          ? eligibilityState.customerCodeInfo.billToInfos.first
-                          : BillToInfo.empty(),
-                  customerCodeInfo: eligibilityState.customerCodeInfo,
-                  orderHistoryBasicInfo: context
-                      .read<ViewByItemsBloc>()
-                      .state
-                      .orderHistoryList
-                      .orderBasicInformation,
-                  salesOrgConfigs: eligibilityState.salesOrgConfigs,
-                ));
               },
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);

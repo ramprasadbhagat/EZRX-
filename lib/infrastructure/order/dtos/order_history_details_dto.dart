@@ -95,7 +95,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         itmDescription: orderHistoryDetailsOrderHeader.itmDescription,
         materialCount: orderHistoryDetailsOrderHeader.materialCount,
         orderNumber: OrderNumber(orderHistoryDetailsOrderHeader.orderNumber),
-        pOReference: orderHistoryDetailsOrderHeader.pOReference,
+        pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
         shipTo: orderHistoryDetailsOrderHeader.shipTo,
         soldTo: orderHistoryDetailsOrderHeader.soldTo,
       ),

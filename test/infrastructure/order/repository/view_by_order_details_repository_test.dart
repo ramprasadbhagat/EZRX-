@@ -5,34 +5,33 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
 
 class OrderHistoryDetailsLocalDataSourceMock extends Mock
-    implements OrderHistoryDetailsLocalDataSource {}
+    implements ViewByOrderDetailsLocalDataSource {}
 
 class OrderHistoryDetailsRemoteDataSourceMock extends Mock
-    implements OrderHistoryDetailsRemoteDataSource {}
-
+    implements ViewByOrderDetailsRemoteDataSource {}
 
 void main() {
-  late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
+  late ViewByOrderDetailsRepository orderHistoryDetailsRepository;
   late Config mockConfig;
-  late OrderHistoryDetailsLocalDataSource orderHistoryDetailsLocalDataSource;
-  late OrderHistoryDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
+  late ViewByOrderDetailsLocalDataSource orderHistoryDetailsLocalDataSource;
+  late ViewByOrderDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
 
   final orderHistoryDetailsMockList = OrderHistoryDetails.empty();
 
   final mockUser = User.empty();
 
-  final mockOrderHistoryItem = OrderHistoryItem.empty();
+  final mockOrderHistoryItem = OrderHistoryDetailsOrderHeader.empty();
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -41,7 +40,7 @@ void main() {
     orderHistoryDetailsRemoteDataSource =
         OrderHistoryDetailsRemoteDataSourceMock();
 
-    orderHistoryDetailsRepository = OrderHistoryDetailsRepository(
+    orderHistoryDetailsRepository = ViewByOrderDetailsRepository(
       config: mockConfig,
       localDataSource: orderHistoryDetailsLocalDataSource,
       orderHistoryDetailsRemoteDataSource: orderHistoryDetailsRemoteDataSource,
@@ -56,8 +55,8 @@ void main() {
               .getOrderHistoryDetailsForSalesRep())
           .thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem,
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem,
           user: mockUser.copyWith(
               role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
               username: Username('mock_user')));
@@ -72,8 +71,8 @@ void main() {
               .getOrderHistoryDetailsForSalesRep())
           .thenThrow((invocation) async => MockException());
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem,
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem,
           user: mockUser.copyWith(
               role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
               username: Username('mock_user')));
@@ -88,8 +87,8 @@ void main() {
       when(() => orderHistoryDetailsLocalDataSource.getOrderHistoryDetails())
           .thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem, user: mockUser);
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem, user: mockUser);
       expect(
         result.isRight(),
         true,
@@ -101,8 +100,8 @@ void main() {
       when(() => orderHistoryDetailsLocalDataSource.getOrderHistoryDetails())
           .thenThrow((invocation) async => MockException());
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem, user: mockUser);
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem, user: mockUser);
 
       expect(
         result.isLeft(),
@@ -120,8 +119,8 @@ void main() {
                   userName: 'user_test'))
           .thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem.copyWith(
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem.copyWith(
               orderNumber: OrderNumber('02001949952333')),
           user: mockUser.copyWith(
             role: Role.empty().copyWith(
@@ -139,14 +138,11 @@ void main() {
       when(
         () => orderHistoryDetailsRemoteDataSource
             .getOrderHistoryDetailsForSalesRep(
-                userName: '',
-                orderId: '',
-                language: '',
-                companyName: ''),
+                userName: '', orderId: '', language: '', companyName: ''),
       ).thenThrow((invocation) async => MockException());
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem,
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem,
           user: mockUser.copyWith(
               role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
               username: Username('mock_user')));
@@ -159,13 +155,11 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            companyName: '',
-            orderId: '200012',
-            language: ''),
+            orderId: '200012', language: ''),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem:
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader:
               mockOrderHistoryItem.copyWith(orderNumber: OrderNumber('200012')),
           user: mockUser);
       expect(
@@ -177,13 +171,12 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            companyName: '',
             orderId: mockOrderHistoryItem.orderNumber.getOrDefaultValue(''),
             language: ''),
       ).thenThrow((invocation) async => MockException());
 
-      final result = await orderHistoryDetailsRepository.getOrderHistoryDetails(
-          orderHistoryItem: mockOrderHistoryItem, user: mockUser);
+      final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
+          orderHeader: mockOrderHistoryItem, user: mockUser);
       expect(
         result.isLeft(),
         true,

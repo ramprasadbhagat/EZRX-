@@ -1,24 +1,26 @@
-part of 'order_history_details_bloc.dart';
+part of 'view_by_order_details_bloc.dart';
 
 @freezed
-class OrderHistoryDetailsState with _$OrderHistoryDetailsState {
-  const OrderHistoryDetailsState._();
-  const factory OrderHistoryDetailsState({
+class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
+  const ViewByOrderDetailsState._();
+  const factory ViewByOrderDetailsState({
     required OrderHistoryDetails orderHistoryDetails,
     required bool isLoading,
     required Map<MaterialQueryInfo, bool> isLoadingTenderContract,
     required bool showErrorMessage,
+     required bool isImageLoading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required Map<MaterialQueryInfo, PriceAggregate> materials,
-  }) = _OrderHistoryDetailsState;
+  }) = _ViewByOrderDetailsState;
 
-  factory OrderHistoryDetailsState.initial() => OrderHistoryDetailsState(
+  factory ViewByOrderDetailsState.initial() => ViewByOrderDetailsState(
         orderHistoryDetails: OrderHistoryDetails.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
         isLoadingTenderContract: {},
         showErrorMessage: false,
         materials: {},
+        isImageLoading: false,
       );
 
   bool get loadingTenderContractSuccess => isLoadingTenderContract.values.every(

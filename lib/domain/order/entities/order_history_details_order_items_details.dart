@@ -20,11 +20,11 @@ class OrderHistoryDetailsOrderItemDetails
       );
 }
 
-extension OrderHistoryDetailsOrderItemDetailsExtension
-    on List<OrderHistoryDetailsOrderItemDetails> {
-  String get discountRate {
-    final rateList = map((e) => e.rate).toList();
+// extension OrderHistoryDetailsOrderItemDetailsExtension
+//     on List<OrderHistoryDetailsOrderItemDetails> {
+//   String get discountRate {
+//     final rateList = map((e) => e.rate).toList();
 
-    return rateList.isEmpty ? '' : rateList.first;
-  }
-}
+//     return rateList.isEmpty ? '' : rateList.first;
+//   }
+// }

@@ -1,8 +1,8 @@
-class OrderHistoryDetailsQueryMutation {
+class ViewByOrderDetailsQueryMutation {
   String getOrderHistoryDetails() {
     return '''
-      query orderDetails(\$salesDocument: String!, \$language: String, \$companyName: String) {
-  orderDetails(salesDocument: \$salesDocument, language: \$language, companyName: \$companyName) {
+      query orderDetails(\$salesDocument: String!, \$language: String,) {
+  orderDetails(salesDocument: \$salesDocument, language: \$language,) {
     OrderHeader {
       TotalTax
       RequestedDeliveryDate
@@ -48,7 +48,8 @@ class OrderHistoryDetailsQueryMutation {
       Batch
       ExpiryDate
       LineReferenceNotes
-
+      PrincipalName
+      GovernmentMaterialCode
       Details {
         DiscountCode
         DiscountDescription
@@ -137,7 +138,8 @@ class OrderHistoryDetailsQueryMutation {
       Batch
       ExpiryDate
       LineReferenceNotes
-
+      PrincipalName
+      GovernmentMaterialCode
       Details {
         DiscountCode
         DiscountDescription

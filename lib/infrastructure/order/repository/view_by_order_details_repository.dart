@@ -4,24 +4,24 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 
-class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
+class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
   final Config config;
-  final OrderHistoryDetailsLocalDataSource localDataSource;
-  final OrderHistoryDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
-  OrderHistoryDetailsRepository({
+  final ViewByOrderDetailsLocalDataSource localDataSource;
+  final ViewByOrderDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
+  ViewByOrderDetailsRepository({
     required this.config,
     required this.localDataSource,
     required this.orderHistoryDetailsRemoteDataSource,
   });
   @override
-  Future<Either<ApiFailure, OrderHistoryDetails>> getOrderHistoryDetails({
+  Future<Either<ApiFailure, OrderHistoryDetails>> getViewByOrderDetails({
     required User user,
-    required OrderHistoryItem orderHistoryItem,
+    required OrderHistoryDetailsOrderHeader orderHeader,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -39,14 +39,13 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
           ? await orderHistoryDetailsRemoteDataSource
               .getOrderHistoryDetailsForSalesRep(
               companyName: '',
-              orderId: orderHistoryItem.orderNumber.getOrCrash(),
+              orderId: orderHeader.orderNumber.getOrCrash(),
               language: '',
               userName: user.username.getOrCrash(),
             )
           : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-              companyName: '',
-              orderId: orderHistoryItem.orderNumber.getOrCrash(),
-              language: '',
+              orderId: orderHeader.orderNumber.getOrCrash(),
+              language: user.preferredLanguage,
             );
 
       return Right(orderHistoryDetailsList);

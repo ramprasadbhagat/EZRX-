@@ -1,25 +1,30 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ItemHeaderSection extends StatelessWidget {
-  final OrderHistoryItem orderHistoryItem;
-  const ItemHeaderSection({
+class OrderHeaderSection extends StatelessWidget {
+  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+
+  const OrderHeaderSection({
     Key? key,
-    required this.orderHistoryItem,
+    required this.viewByOrderHistoryItem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
-    return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+    final paymentTermDisplay =
+        context.read<EligibilityBloc>().state.isPaymentTermDescriptionEnable;
+
+    return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
+        final orderDetails = state.orderHistoryDetails;
+
         return Container(
           color: ZPColors.primary,
           padding: const EdgeInsets.symmetric(
@@ -29,7 +34,7 @@ class ItemHeaderSection extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
-              'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+              'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -39,17 +44,7 @@ class ItemHeaderSection extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Order date'.tr(),
-              valueText: orderHistoryItem.createdDate.toValidDateString,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Invoice number'.tr(),
-              valueText: orderHistoryItem.invoiceNumber,
+              valueText: viewByOrderHistoryItem.createdDate.toValidDateString,
               keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -59,7 +54,8 @@ class ItemHeaderSection extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'PO reference'.tr(),
-              valueText: orderHistoryItem.pOReference.displayPOReference,
+              valueText: orderDetails.orderHistoryDetailsOrderHeader.pOReference
+                  .displayPOReference,
               keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -74,7 +70,7 @@ class ItemHeaderSection extends StatelessWidget {
                     .disableDeliveryDate
                 ? BalanceTextRow(
                     keyText: 'Requested Delivery Date'.tr(),
-                    valueText: orderHistoryItem
+                    valueText: orderDetails.orderHistoryDetailsOrderHeader
                         .requestedDeliveryDate.toValidDateString,
                     keyTextStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -86,20 +82,35 @@ class ItemHeaderSection extends StatelessWidget {
                             ),
                   )
                 : const SizedBox.shrink(),
-            //TODO:will add value after getting data  from orderHistoryv2 api for these fields
-            //       BalanceTextRow(
-            //   keyText: 'Reference Note',
-            //   valueText: orderHistoryItem.,
-            // ),
-            // paymentTermDisplay
-            // ? BalanceTextRow(
-            //   keyText: 'Payment Term',
-            //   valueText:
-            //       orderHistoryItem.,
-            // ): const SizedBox.shrink(),
+            BalanceTextRow(
+              keyText: 'Reference Note'.tr(),
+              valueText:
+                  orderDetails.orderHistoryDetailsOrderHeader.referenceNotes,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+            ),
+            paymentTermDisplay
+                ? BalanceTextRow(
+                    keyText: 'Payment Term'.tr(),
+                    valueText: orderDetails.orderHistoryDetailsPaymentTerm
+                        .paymentTermCode.displayPaymentTermCode,
+                    keyTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                    valueTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                  )
+                : const SizedBox.shrink(),
             BalanceTextRow(
               keyText: 'Contact person'.tr(),
-              valueText: orderHistoryItem.orderBy,
+              valueText: orderDetails.orderHistoryDetailsOrderHeader.orderBy,
               keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -109,8 +120,8 @@ class ItemHeaderSection extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Contact number'.tr(),
-              valueText:
-                  orderHistoryItem.telephoneNumber.displayTelephoneNumber,
+              valueText: orderDetails.orderHistoryDetailsOrderHeader
+                  .telephoneNumber.displayTelephoneNumber,
               keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -120,12 +131,12 @@ class ItemHeaderSection extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Delivery instructions'.tr(),
-              valueText: orderHistoryItem
-                  .specialInstructions.displaySpecialInstructions,
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+              valueText: orderDetails.orderHistoryDetailsSpecialInstructions
+                  .displaySpecialInstructions,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
                   ),
             ),
