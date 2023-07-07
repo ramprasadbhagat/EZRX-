@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -79,6 +80,9 @@ class AutoRouterMock extends Mock implements AppRouter {
 class MaterialListMockBloc
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
+class MaterialPriceMockBloc
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
 
 void main() {
   late GetIt locator;
@@ -97,6 +101,7 @@ void main() {
       PaymentCustomerInformationBlocMock();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late MaterialListBloc materialListBloc;
+  late MaterialPriceBloc materialPriceBloc;
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -116,6 +121,7 @@ void main() {
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
       deepLinkingBlocMock = DeepLinkingMockBloc();
       materialListBloc = MaterialListMockBloc();
+      materialPriceBloc = MaterialPriceMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -137,6 +143,8 @@ void main() {
           .thenReturn(const DeepLinkingState.initial());
       when(() => materialListBloc.state)
           .thenReturn(MaterialListState.initial());
+      when(() => materialPriceBloc.state)
+          .thenReturn(MaterialPriceState.initial());
 
     });
 
@@ -170,6 +178,8 @@ void main() {
               ),
               BlocProvider<MaterialListBloc>(
                   create: (context) => materialListBloc),
+              BlocProvider<MaterialPriceBloc>(
+                  create: (context) => materialPriceBloc),
             ],
             child: const LoginPage(),
           ),
@@ -275,6 +285,8 @@ void main() {
             ),
             BlocProvider<MaterialListBloc>(
                 create: (context) => materialListBloc),
+            BlocProvider<MaterialPriceBloc>(
+                create: (context) => materialPriceBloc),
           ],
           child: const SplashPage(),
         ),

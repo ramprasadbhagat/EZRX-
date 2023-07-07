@@ -113,4 +113,20 @@ class CartEvent with _$CartEvent {
   }) = _UpdateBatchInCartItem;
 
   const factory CartEvent.fetchProductsAddedToCart() = _FetchProductsAddedToCart;
+
+  const factory CartEvent.upsertCart({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required MaterialNumber cartProductNumber,
+    required int quantity,
+}) = _UpsertCart;
+
+  const factory CartEvent.getDetailsProductsAddedToCart({
+    required List<CartProduct> cartProducts,
+  }) = _GetDetailsProductsAddedToCart;
+
+  const factory CartEvent.updatePriceProduct({
+    required Map<MaterialNumber, Price> priceProducts,
+  }) = _UpdatePriceProduct;
 }

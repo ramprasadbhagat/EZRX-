@@ -102,6 +102,9 @@ import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
@@ -377,7 +380,6 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 
-import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_remote.dart';
@@ -1717,6 +1719,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => StockInfoLocalDataSource());
   locator.registerLazySingleton(() => StockInfoQueryMutation());
   locator.registerLazySingleton(() => CartLocalDataSource());
+  locator.registerLazySingleton(() => CartQueryMutation());
 
   locator.registerLazySingleton(
     () => StockInfoRemoteDataSource(
@@ -1724,6 +1727,15 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
       stockInfoQueryMutation: locator<StockInfoQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CartRemoteDataSource(
+      cartQueryMutation: locator<CartQueryMutation>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
     ),
   );
 
@@ -1737,6 +1749,9 @@ void setupLocator() {
       discountOverrideRemoteDataSource:
           locator<DiscountOverrideRemoteDataSource>(),
       cartLocalDataSource: locator<CartLocalDataSource>(),
+      cartRemoteDataSource: locator<CartRemoteDataSource>(),
+      orderHistoryLocalDataSource: locator<OrderHistoryLocalDataSource>(),
+      orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
     ),
   );
 

@@ -31,6 +31,7 @@ class NoRecordFound extends StatelessWidget {
             child: SvgPicture.asset(
               svgImage,
               key: WidgetKeys.noRecordsFoundSearchIcon,
+              height: 150,
             ),
           ),
           if (title.isNotEmpty)

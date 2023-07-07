@@ -44,6 +44,9 @@ abstract class ZPColors {
   static const Color unselectedTabColor = Color.fromRGBO(208, 208, 208, 1);
   static const Color lightYellow = Color.fromRGBO(250, 234, 176, 1);
   static const Color systemMessageColor = Color.fromRGBO(240, 248, 230, 1.0);
+  static const Color backgroundTopSnackBar = Color.fromRGBO(208, 223, 194, 1.0);
+  static const Color backgroundCloseButtonSnackBar = Color.fromRGBO(142, 142, 142, 1.0);
+  static const Color checkSnackBar = Color.fromRGBO(104, 153, 58, 1.0);
   static const Color defaultReturnSummaryStatusColor =
       Color.fromRGBO(23, 49, 62, 0.5);
   static const Color returnSummaryStatusTextColor =

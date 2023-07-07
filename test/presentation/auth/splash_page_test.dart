@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -169,6 +170,9 @@ class PushNotificationServiceMock extends Mock
 class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
     implements ChatBotBloc {}
 
+class MaterialPriceMockBloc extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -207,6 +211,7 @@ void main() {
   final mockViewByOrderBloc = ViewByOrderMockBloc();
   late PushNotificationService pushNotificationServiceMock;
   final chatBotBloc = ChatBotMockBloc();
+  late MaterialPriceBloc mockMaterialPriceBloc;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -243,6 +248,7 @@ void main() {
         () => remoteConfigServiceMock);
 
     locator.registerLazySingleton(() => mockViewByItemsBloc);
+    locator.registerLazySingleton(() => mockMaterialPriceBloc);
   });
 
   group('Splash Screen', () {
@@ -275,6 +281,7 @@ void main() {
       mockViewByItemsBloc = ViewByItemsBlocMock();
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
       settingBlocMock = SettingMockBloc();
+      mockMaterialPriceBloc = MaterialPriceMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -329,6 +336,8 @@ void main() {
           .thenReturn(ViewByItemFilterState.initial());
       when(() => mockViewByOrderBloc.state)
           .thenReturn(ViewByOrderState.initial());
+      when(() => mockMaterialPriceBloc.state)
+          .thenReturn(MaterialPriceState.initial());
     });
 
     Future getWidget(tester) async {
@@ -396,6 +405,8 @@ void main() {
             ),
             BlocProvider<AnnouncementInfoBloc>(
                 create: (context) => announcementInfoBlocMock),
+            BlocProvider<MaterialPriceBloc>(
+                create: (context) => mockMaterialPriceBloc),
           ],
           child: const SplashPage(),
         ),

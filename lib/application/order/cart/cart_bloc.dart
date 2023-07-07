@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_addition_info_product.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -27,7 +29,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc(this.repository) : super(CartState.initial()) {
     on<CartEvent>(_onEvent);
   }
-  
+
   Future<void> _onEvent(CartEvent event, Emitter<CartState> emit) async {
     await event.map(
       initialized: (e) async => emit(CartState.initial()),
@@ -212,7 +214,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      
       verifyMaterialDealBonus: (e) async {
         final cartItem = state.getMaterialCartItem(material: e.item);
         final material = cartItem.materials.first;
@@ -797,7 +798,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-
       fetchProductsAddedToCart: (e) async {
         emit(state.copyWith(
           isFetching: true,
@@ -824,6 +824,110 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
+        );
+      },
+      upsertCart: (e) async {
+        final index = state.cartProducts.indexWhere(
+            (element) => element.materialNumber == e.cartProductNumber,);
+        if (index != -1) {
+          final previousQuantity = state.cartProducts.elementAtOrNull(index);
+          if (previousQuantity?.quantity == e.quantity) return;
+        }
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isUpserting: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.upsertCart(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          productNumber: e.cartProductNumber,
+          quantity: e.quantity,
+          language: 'EN',
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isUpserting: false,
+              ),
+            );
+          },
+          (cartProductList) async {
+            final cartProductListTemp = List<CartProduct>.from(cartProductList);
+            for (var i = 0; i < cartProductListTemp.length; i++) {
+              cartProductListTemp[i] = cartProductListTemp[i].copyWith(
+                  price: state.cartProducts.elementAtOrNull(i)?.price ??
+                      Price.empty(),);
+            }
+            emit(
+              state.copyWith(
+                cartProducts: cartProductListTemp,
+                apiFailureOrSuccessOption: none(),
+                isUpserting: false,
+              ),
+            );
+          },
+        );
+      },
+      getDetailsProductsAddedToCart: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetchingCartProductDetail: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.getProducts(
+          materialNumbers: e.cartProducts.map((e) => e.materialNumber).toList(),
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingCartProductDetail: false,
+              ),
+            );
+          },
+          (cartProductList) async {
+            final newProductInfoMap =
+                Map<MaterialNumber, CartAdditionInfoProduct>.from(
+              state.additionInfo,
+            )..addAll(cartProductList);
+            emit(
+              state.copyWith(
+                additionInfo: newProductInfoMap,
+                apiFailureOrSuccessOption: none(),
+                isFetchingCartProductDetail: false,
+              ),
+            );
+          },
+        );
+      },
+      updatePriceProduct: (e) async {
+        emit(state.copyWith(
+          isMappingPrice: true,
+        ));
+        final cartProductList = List<CartProduct>.from(state.cartProducts);
+        for (var i = 0; i < cartProductList.length; i++) {
+          cartProductList[i] = cartProductList[i].copyWith(
+            price: e.priceProducts[cartProductList[i].materialNumber] ??
+                Price.empty(),
+          );
+        }
+
+        emit(
+          state.copyWith(
+            isMappingPrice: false,
+            cartProducts: cartProductList,
+          ),
         );
       },
     );

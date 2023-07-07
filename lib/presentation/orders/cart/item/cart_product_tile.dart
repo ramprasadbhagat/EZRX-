@@ -1,9 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -12,7 +19,9 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 
 class CartProductTile extends StatelessWidget {
   final CartProduct cartItem;
-  const CartProductTile({Key? key, required this.cartItem}) : super(key: key);
+  final int index;
+  const CartProductTile({Key? key, required this.cartItem, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +30,20 @@ class CartProductTile extends StatelessWidget {
         CustomSlidableAction(
           label: '',
           icon: Icons.delete_outline,
-          onPressed: (v) {},
+          onPressed: (v) {
+            context.read<CartBloc>().add(
+                  CartEvent.upsertCart(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    cartProductNumber: cartItem.materialNumber,
+                    quantity: 0,
+                  ),
+                );
+          },
         ),
       ],
       borderRadius: 8,
@@ -37,7 +59,10 @@ class CartProductTile extends StatelessWidget {
               endIndent: 0,
               color: ZPColors.accentColor,
             ),
-            const _ItemSubTotalSection(),
+            _ItemSubTotalSection(
+              cartProduct: cartItem,
+              index: index,
+            ),
             const Divider(
               indent: 0,
               endIndent: 0,
@@ -63,7 +88,7 @@ class _MaterialDetailsSection extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _MaterialImageSection(),
+          _MaterialImageSection(cartProduct: cartItem),
           const SizedBox(
             width: 8,
           ),
@@ -75,7 +100,11 @@ class _MaterialDetailsSection extends StatelessWidget {
 }
 
 class _ItemSubTotalSection extends StatelessWidget {
-  const _ItemSubTotalSection({Key? key}) : super(key: key);
+  final CartProduct cartProduct;
+  final int index;
+  const _ItemSubTotalSection(
+      {required this.cartProduct, Key? key, required this.index,})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,20 +121,28 @@ class _ItemSubTotalSection extends StatelessWidget {
                   color: ZPColors.darkGray,
                 ),
           ),
-          RichText(
-            text: TextSpan(
-              text: 'MYR ',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: ZPColors.primary,
+          LoadingShimmer.withChild(
+            enabled: context.read<CartBloc>().state.isMappingPrice ||
+                context.read<CartBloc>().state.isUpserting || context.read<MaterialPriceBloc>().state.isFetching,
+            child: RichText(
+              text: TextSpan(
+                text: 'MYR ',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: ZPColors.primary,
+                    ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: context
+                        .read<CartBloc>()
+                        .state
+                        .itemPrice(index: index)
+                        .toStringAsFixed(2),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.primary,
+                        ),
                   ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: '11,000.00',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: ZPColors.primary,
-                      ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -221,9 +258,49 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           quantityTextKey: WidgetKeys.quantityInputTextKey,
           controller: _controller,
           onFieldChange: (value) {},
-          minusPressed: (k) {},
-          addPressed: (k) {},
-          isLoading: false,
+          minusPressed: (k) {
+            context.read<CartBloc>().add(
+                  CartEvent.upsertCart(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    cartProductNumber: widget.cartItem.materialNumber,
+                    quantity: k,
+                  ),
+                );
+          },
+          addPressed: (k) {
+            context.read<CartBloc>().add(
+                  CartEvent.upsertCart(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    cartProductNumber: widget.cartItem.materialNumber,
+                    quantity: k,
+                  ),
+                );
+          },
+          onSubmit: (value) {
+            context.read<CartBloc>().add(
+                  CartEvent.upsertCart(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    cartProductNumber: widget.cartItem.materialNumber,
+                    quantity: value,
+                  ),
+                );
+          },
+          isLoading: context.read<CartBloc>().state.isUpserting,
         ),
       ),
     );
@@ -275,22 +352,53 @@ class _BonusSection extends StatelessWidget {
 }
 
 class _MaterialImageSection extends StatelessWidget {
-  const _MaterialImageSection({Key? key}) : super(key: key);
+  final CartProduct cartProduct;
+  const _MaterialImageSection({required this.cartProduct, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomCard(
-          showShadow: false,
-          showBorder: true,
-          padding: const EdgeInsets.all(12),
-          child: SvgPicture.asset(
-            'assets/svg/default_product_image.svg',
-            key: WidgetKeys.cartProductImage,
-            height: MediaQuery.of(context).size.height * 0.06,
-            width: MediaQuery.of(context).size.height * 0.06,
-          ),
+        BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) {
+            return CustomCard(
+              showShadow: false,
+              showBorder: true,
+              padding: const EdgeInsets.all(12),
+              child: CachedNetworkImage(
+                imageUrl: state.additionInfo[cartProduct.productID]
+                        ?.productImages.first.thumbNail ??
+                    '',
+                fit: BoxFit.fitHeight,
+                height: MediaQuery.of(context).size.height * 0.06,
+                width: MediaQuery.of(context).size.height * 0.06,
+                placeholder: (context, url) {
+                  return LoadingShimmer.withChild(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(8.0),
+                          topLeft: Radius.circular(8.0),
+                        ),
+                        color: ZPColors.white,
+                      ),
+                      width: MediaQuery.of(context).size.height * 0.06,
+                      height: MediaQuery.of(context).size.height * 0.06,
+                    ),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return SvgPicture.asset(
+                    'assets/svg/default_product_image.svg',
+                    key: WidgetKeys.cartProductImage,
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    width: MediaQuery.of(context).size.height * 0.06,
+                  );
+                },
+              ),
+            );
+          },
         ),
         const _OfferTag(),
       ],

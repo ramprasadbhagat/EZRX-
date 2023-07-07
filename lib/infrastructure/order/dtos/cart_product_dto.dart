@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -52,6 +53,7 @@ class CartProductDto with _$CartProductDto {
       taxClassification: taxClassification,
       therapeuticClass: therapeuticClass,
       type: MaterialItemType(type),
+      price: Price.empty(),
     );
   }
 

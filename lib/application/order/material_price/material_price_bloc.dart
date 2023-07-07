@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_repository.dart';
@@ -82,6 +83,47 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
                 materialPrice: newPriceMap,
               ),
             );
+          },
+        );
+      },
+      fetchPriceCartProduct: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+          ),
+        );
+
+        final materialNumbers =
+        e.products.map((e) => e.materialNumber).toList();
+
+        final failureOrSuccess = await repository.getMaterialPrice(
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          salesOrganisation: e.salesOrganisation,
+          salesConfigs: e.salesConfigs,
+          materialNumberList: materialNumbers.toSet().toList(),
+          comboDealEligible: e.comboDealEligible,
+        );
+
+        await failureOrSuccess.fold(
+              (_) async {
+            // emit(
+            //   state.copyWith(
+            //     isFetching: false,
+            //   ),
+            // );
+          },
+              (newPriceFetched) async {
+            final newPriceMap =
+            Map<MaterialNumber, Price>.from(state.materialPrice)
+              ..addAll(newPriceFetched);
+            emit(
+              state.copyWith(
+                isFetching: false,
+                materialPrice: newPriceMap,
+              ),
+            );
+
           },
         );
       },

@@ -7,4 +7,5 @@ abstract class SvgImage {
   static const String deliveryAddress = '${_basePath}delivery_address.svg';
   static const String emptyOrder = '${_basePath}empty_order.svg';
   static const String searchLogo = '${_basePath}search.svg';
+  static const String shoppingCart = '${_basePath}shopping_cart.svg';
 }

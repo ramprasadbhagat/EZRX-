@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -24,6 +25,7 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 
@@ -37,75 +39,122 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart'
 
 import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    if (context.read<CartBloc>().state.cartProducts.isNotEmpty) {
+      context.read<CartBloc>().add(
+            CartEvent.getDetailsProductsAddedToCart(
+              cartProducts: context.read<CartBloc>().state.cartProducts,
+            ),
+          );
+      context.read<MaterialPriceBloc>().add(
+            MaterialPriceEvent.fetchPriceCartProduct(
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              salesConfigs: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              comboDealEligible:
+                  context.read<EligibilityBloc>().state.comboDealEligible,
+              products: context.read<CartBloc>().state.cartProducts,
+            ),
+          );
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartBloc, CartState>(
+    return BlocListener<MaterialPriceBloc, MaterialPriceState>(
       listenWhen: (previous, current) =>
-          previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption ||
-          previous.cartItems != current.cartItems,
+          previous.isFetching != current.isFetching,
       listener: (context, state) {
-        if (state.cartItems.isEmpty) {
-          context.read<AdditionalDetailsBloc>().add(
-                AdditionalDetailsEvent.initialized(
-                  config: context.read<SalesOrgBloc>().state.configs,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+        if (!state.isFetching) {
+          context.read<CartBloc>().add(
+                CartEvent.updatePriceProduct(
+                  priceProducts: state.materialPrice,
                 ),
               );
         }
       },
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
-
-        return GestureDetector(
-          onTap: () {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          child: Scaffold(
-            key: WidgetKeys.cartPage,
-            appBar: AppBar(
-              title: Text(
-                'Cart'.tr(),
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              centerTitle: false,
-              titleSpacing: 0,
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.close,
-                ),
-                onPressed: () {
-                  context.router.pop();
-                },
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.delete_outlined,
-                    color: ZPColors.red,
+      child: BlocConsumer<CartBloc, CartState>(
+        listenWhen: (previous, current) =>
+            previous.apiFailureOrSuccessOption !=
+                current.apiFailureOrSuccessOption ||
+            previous.cartProducts != current.cartProducts,
+        listener: (context, state) {
+          if (state.cartProducts.isEmpty) {
+            context.read<AdditionalDetailsBloc>().add(
+                  AdditionalDetailsEvent.initialized(
+                    config: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   ),
-                  onPressed: () {},
+                );
+          }
+        },
+        buildWhen: (previous, current) => previous != current,
+        builder: (context, state) {
+          final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+
+          return GestureDetector(
+            onTap: () {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            child: Scaffold(
+              key: WidgetKeys.cartPage,
+              appBar: AppBar(
+                title: Text(
+                  'Cart'.tr(),
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
-              ],
-            ),
-            body: Column(
-              children: [
-                AnnouncementWidget(
-                  currentPath: context.router.currentPath,
+                centerTitle: false,
+                titleSpacing: 0,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                  ),
+                  onPressed: () {
+                    context.router.pop();
+                  },
                 ),
-                const AccountSuspendedBanner(),
-                _CartScrollList(state: state, taxCode: taxCode),
-                const _CheckoutSection(),
-              ],
+                actions: state.cartProducts.isNotEmpty ? [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.delete_outlined,
+                      color: ZPColors.red,
+                    ),
+                    onPressed: () {
+                      context.read<CartBloc>().add(
+                            const CartEvent.clearCart(),
+                          );
+                    },
+                  ),
+                ] : null,
+              ),
+              body: Column(
+                children: [
+                  AnnouncementWidget(
+                    currentPath: context.router.currentPath,
+                  ),
+                  const AccountSuspendedBanner(),
+                  _CartScrollList(state: state, taxCode: taxCode),
+                  state.cartProducts.isNotEmpty ? const _CheckoutSection() : const SizedBox.shrink(),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -176,13 +225,29 @@ class _CartScrollList extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ScrollList<CartProduct>(
-          noRecordFoundWidget: const NoRecordFound(title: 'Cart is Empty'),
+          noRecordFoundWidget: NoRecordFound(
+              title: 'Your cart is empty'.tr(),
+              subTitle:
+                  'Looks like you haven’t added anything to your cart yet.'
+                      .tr(),
+            actionButton: ElevatedButton(
+              key: WidgetKeys.startBrowsingProducts,
+              onPressed: () {
+                context.router.popUntilRouteWithPath( 'main');
+                context.router.pushNamed('main/products');
+              },
+              child: const Text('Start browsing').tr(),
+            ),
+            svgImage: SvgImage.shoppingCart,
+          ),
           controller: ScrollController(),
           onRefresh: () {},
-          isLoading: state.isFetching && state.cartItems.isEmpty,
+          isLoading:
+              state.isFetching && state.cartItems.isEmpty || state.isClearing,
           itemBuilder: (context, index, item) {
             return CartProductTile(
               cartItem: item,
+              index: index,
             );
           },
           items: state.cartProducts,
@@ -345,7 +410,8 @@ class _CheckoutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) => previous.cartItems != current.cartItems,
+      buildWhen: (previous, current) =>
+          previous.cartProducts != current.cartProducts,
       builder: (context, state) {
         return Column(
           children: [
@@ -373,7 +439,7 @@ class _CheckoutSection extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
-                '6 items',
+                '${state.cartProducts.length} items',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: RichText(
@@ -390,7 +456,7 @@ class _CheckoutSection extends StatelessWidget {
                           ),
                     ),
                     TextSpan(
-                      text: '11,000.00',
+                      text: state.totalPrice.toStringAsFixed(2),
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: ZPColors.primary,
                           ),

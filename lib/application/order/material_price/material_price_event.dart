@@ -11,4 +11,12 @@ class MaterialPriceEvent with _$MaterialPriceEvent {
     required List<MaterialInfo> materials,
     required bool comboDealEligible,
   }) = _Fetch;
+  const factory MaterialPriceEvent.fetchPriceCartProduct({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesConfigs,
+    required ShipToInfo shipToInfo,
+    required List<CartProduct> products,
+    required bool comboDealEligible,
+  }) = _fetchPriceCartProduct;
 }

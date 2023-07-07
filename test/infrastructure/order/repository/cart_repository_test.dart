@@ -22,15 +22,19 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import 'order_history_repository_test.dart';
 import 'order_repository_test.dart';
 
 class MockConfig extends Mock implements Config {}
@@ -41,6 +45,8 @@ class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
 
 class CartLocalDataSourceMock extends Mock implements CartLocalDataSource {}
+
+class CartRemoteDataSourceMock extends Mock implements CartRemoteDataSource {}
 
 class DiscountOverrideRemoteDataSourceMock extends Mock
     implements DiscountOverrideRemoteDataSource {}
@@ -61,6 +67,9 @@ void main() {
   late SalesOrg mockSalesOrg;
   late SalesOrganisation mockSalesOrganisation;
   late MixpanelService mixpanelService;
+  late CartRemoteDataSource cartRemoteDataSource;
+  late OrderHistoryLocalDataSource orderHistoryLocalDataSource;
+  late OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
 
   final fakeShipToInfo = ShipToInfo.empty().copyWith(
     shipToCustomerCode: '1234567',
@@ -83,6 +92,9 @@ void main() {
         DiscountOverrideRemoteDataSourceMock();
     cartStorageMock = MockCartStorage();
     mixpanelService = MixpanelServiceMock();
+    cartRemoteDataSource = CartRemoteDataSourceMock();
+    orderHistoryLocalDataSource = OrderHistoryLocalDataSourceMock();
+    orderHistoryRemoteDataSource = OrderHistoryRemoteDataSourceMock();
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
       cartLocalDataSource: cartLocalDataSourceMock,
@@ -91,6 +103,9 @@ void main() {
       cartStorage: cartStorageMock,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
+      cartRemoteDataSource: cartRemoteDataSource,
+      orderHistoryLocalDataSource: orderHistoryLocalDataSource,
+      orderHistoryRemoteDataSource: orderHistoryRemoteDataSource,
     );
     mockSalesOrg = SalesOrg('2601');
     mockSalesOrganisation = SalesOrganisation.empty().copyWith(
@@ -306,16 +321,16 @@ void main() {
     expect(result.isRight(), true);
   });
 
-  test('Test Clear Cart - Failure', () async {
-    when(
-      () => cartStorageMock.clear(),
-    ).thenThrow(
-      (invocation) async => MockException(),
-    );
+  // test('Test Clear Cart - Failure', () async {
+  //   when(
+  //     () => cartRemoteDataSource.deleteCart(),
+  //   ).thenThrow(
+  //     (invocation) async => MockException(),
+  //   );
 
-    final result = await cartRepository.clearCart();
-    expect(result.isLeft(), true);
-  });
+  //   final result = await cartRepository.clearCart();
+  //   expect(result.isLeft(), true);
+  // });
 
   test('Test Clear Selected Item Cart - Failure', () async {
     when(

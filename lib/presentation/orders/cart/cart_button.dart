@@ -9,7 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartButton extends StatelessWidget {
-  const CartButton({Key? key}) : super(key: key);
+  final Color? cartColor;
+  final Color? backgroundCartColor;
+  final double? size;
+  final double? iconSize;
+  final double? positionTop;
+  const CartButton({Key? key, this.cartColor, this.backgroundCartColor, this.size, this.iconSize, this.positionTop,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +25,33 @@ class CartButton extends StatelessWidget {
         ? const SizedBox.shrink()
         : BlocBuilder<CartBloc, CartState>(
             buildWhen: (previous, current) =>
-                previous.cartItems.length != current.cartItems.length,
+                previous.cartProducts.length != current.cartProducts.length,
             builder: (context, state) {
               return bd.Badge(
                 badgeContent: Text(
-                  state.cartItems.length.toString(),
+                  state.cartProducts.length.toString(),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.white,
                       ),
                 ),
                 badgeColor: ZPColors.red,
-                showBadge: state.cartItems.isNotEmpty,
+                showBadge: state.cartProducts.isNotEmpty,
                 elevation: 0,
-                position: bd.BadgePosition.topEnd(top: 0, end: 3),
+                position: bd.BadgePosition.topEnd(top: positionTop ?? 0, end: 3),
                 animationType: bd.BadgeAnimationType.fade,
                 child: Container(
-                  decoration: const BoxDecoration(
+                  height: size,
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: ZPColors.translucentWhite,
+                    color: backgroundCartColor ?? ZPColors.translucentWhite,
                   ),
                   child: IconButton(
                     visualDensity: VisualDensity.compact,
                     key: WidgetKeys.cartButton,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.shopping_cart_outlined,
-                      color: ZPColors.white,
+                      color: cartColor ?? ZPColors.white,
+                      size: iconSize,
                     ),
                     onPressed: () {
                       context.read<AdditionalDetailsBloc>().add(

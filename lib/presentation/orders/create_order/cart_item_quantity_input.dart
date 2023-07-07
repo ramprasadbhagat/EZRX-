@@ -13,6 +13,7 @@ class CartItemQuantityInput extends StatelessWidget {
   final Function(int) onFieldChange;
   final Function(int) minusPressed;
   final Function(int) addPressed;
+  final Function(int) onSubmit;
   final Key quantityAddKey;
   final Key quantityDeleteKey;
   final bool isEnabled;
@@ -27,6 +28,7 @@ class CartItemQuantityInput extends StatelessWidget {
     required this.controller,
     required this.quantityTextKey,
     required this.onFieldChange,
+    required this.onSubmit,
     required this.minusPressed,
     required this.addPressed,
     required this.quantityAddKey,
@@ -47,6 +49,18 @@ class CartItemQuantityInput extends StatelessWidget {
             width: double.infinity,
             height: height,
             child: TextField(
+              onTapOutside: (event) {
+                if (controller.text.isEmpty) {
+                  controller.value = TextEditingValue(
+                    text: 1.toString(),
+                    selection: TextSelection.collapsed(
+                      offset: controller.selection.base.offset,
+                    ),
+                  );
+                  onSubmit(1);
+                }
+                onSubmit(int.parse(controller.text));
+              },
               enabled: isEnabled,
               key: quantityTextKey,
               controller: controller,
@@ -69,6 +83,20 @@ class CartItemQuantityInput extends StatelessWidget {
                   return;
                 }
                 onFieldChange(int.parse(text));
+              },
+              onSubmitted: (String text) {
+                if (text.isEmpty) {
+                  controller.value = TextEditingValue(
+                    text: 1.toString(),
+                    selection: TextSelection.collapsed(
+                      offset: controller.selection.base.offset,
+                    ),
+                  );
+                  onSubmit(1);
+
+                  return;
+                }
+                onSubmit(int.parse(text));
               },
               decoration: InputDecoration(
                 isDense: true,

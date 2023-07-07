@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_addition_info_product.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -21,26 +22,30 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 
-import 'package:ezrxmobile/infrastructure/order/datasource/cart_local_datasource.dart';
-
 import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
-
 
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
   final Config config;
   final CartLocalDataSource cartLocalDataSource;
+  final CartRemoteDataSource cartRemoteDataSource;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
+  final OrderHistoryLocalDataSource orderHistoryLocalDataSource;
+  final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
 
   final MixpanelService mixpanelService;
 
@@ -52,6 +57,9 @@ class CartRepository implements ICartRepository {
     required this.discountOverrideRemoteDataSource,
     required this.mixpanelService,
     required this.cartLocalDataSource,
+    required this.cartRemoteDataSource,
+    required this.orderHistoryRemoteDataSource,
+    required this.orderHistoryLocalDataSource,
   });
 
   @override
@@ -68,11 +76,15 @@ class CartRepository implements ICartRepository {
 
   @override
   Future<Either<ApiFailure, Unit>> clearCart() async {
+    if (config.appFlavor == Flavor.mock) {
+      return const Right(unit);
+    }
+
     try {
-      await cartStorage.clear();
+      await cartRemoteDataSource.deleteCart();
 
       return const Right(unit);
-    } catch (e) {
+    } on Exception catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
   }
@@ -100,9 +112,9 @@ class CartRepository implements ICartRepository {
         salesOrganisationConfigs: salesOrganisationConfigs,
       );
       final isOutOfStockItem = cartItemWithStock
-          .copyWithInStockOnly(
-            allowOutOfStock: !doNotAllowOutOfStockMaterials,
-          ).materials.isEmpty;
+          .copyWithInStockOnly(allowOutOfStock: !doNotAllowOutOfStockMaterials)
+          .materials
+          .isEmpty;
       if (isOutOfStockItem) {
         mixpanelService.trackEvent(
           eventName: MixpanelEvents.addToCartFailed,
@@ -114,23 +126,10 @@ class CartRepository implements ICartRepository {
 
         return const Left(ApiFailure.productOutOfStock());
       }
-      final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
-      final savedCartItem = (inCartItem != null && !override)
-          ? inCartItem.copyWith(
-              materials: inCartItem.materials.map(
-                (material) {
-                  final qty = cartItemWithStock.materials
-                          .firstWhereOrNull((item) =>
-                              item.getMaterialNumber ==
-                              material.getMaterialNumber)
-                          ?.quantity ?? 0;
+      final savedCartItem = getSavedCartItem(cartItemWithStock: cartItemWithStock, override: override,);
 
-                  return material.copyWithIncreasedQty(qty: qty);
-                },
-              ).toList(),
-            ) : cartItemWithStock;
-
-      final updatedCartItem = await _verifyZdp5Discount(cartItem: savedCartItem,
+      final updatedCartItem = await _verifyZdp5Discount(
+        cartItem: savedCartItem,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
@@ -146,13 +145,36 @@ class CartRepository implements ICartRepository {
     } catch (e) {
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.addToCartFailed,
-       properties: {MixpanelProps.errorMessage:
+        properties: {
+          MixpanelProps.errorMessage:
               FailureHandler.handleFailure(e).failureMessage,
         },
       );
 
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  CartItem getSavedCartItem ({required CartItem cartItemWithStock, required bool override,}){
+    final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
+    final savedCartItem = (inCartItem != null && !override)
+        ? inCartItem.copyWith(
+      materials: inCartItem.materials.map(
+            (material) {
+          final qty = cartItemWithStock.materials
+              .firstWhereOrNull((item) =>
+          item.getMaterialNumber ==
+              material.getMaterialNumber)
+              ?.quantity ??
+              0;
+
+          return material.copyWithIncreasedQty(qty: qty);
+        },
+      ).toList(),
+    )
+        : cartItemWithStock;
+
+    return savedCartItem;
   }
 
   Future<CartItem> _verifyZdp5Discount({
@@ -174,7 +196,8 @@ class CartRepository implements ICartRepository {
           newPrice.fold((failure) => Price.empty(), (newPrice) => newPrice);
 
       updatedCartItem = cartItem.copyWithPrice(
-        exceedQty: cartItem.totalQty > cartItem.materials.first.price.zdp5RemainingQuota.intValue,
+        exceedQty: cartItem.totalQty >
+            cartItem.materials.first.price.zdp5RemainingQuota.intValue,
         newPrice: overRidenPrice.zdp5RemainingQuota.isValidValue
             ? overRidenPrice
             : overRidenPrice.copyWith(
@@ -285,6 +308,7 @@ class CartRepository implements ICartRepository {
     required CartItem item,
   }) async {
     try {
+      //TODO: Implement deleteCart
       await cartStorage.delete(id: item.id);
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.clearCart,
@@ -369,32 +393,10 @@ class CartRepository implements ICartRepository {
       if (inCartItem != null) {
         switch (inCartItem.itemType) {
           case CartItemType.material:
-            final material = inCartItem.materials.first;
-            var bonusExisting = false;
-            final updatedBonuses = material.addedBonusList.map((bonus) {
-              if (bonus.materialNumber == newBonusWithStock.materialNumber &&
-                  bonus.additionalBonusFlag ==
-                      newBonusWithStock.additionalBonusFlag) {
-                bonusExisting = true;
-
-                return bonus.copyWith(
-                  qty: overrideQty? newBonusWithStock.qty : bonus.qty + newBonusWithStock.qty,
-                  expiryDate: bonus.expiryDate,
-                );
-              }
-
-              return bonus;
-            }).toList();
-            if (!bonusExisting) {
-              updatedBonuses.add(newBonusWithStock);
-            }
-            final itemWithNewBonus = inCartItem.copyWith(
-              materials: [material.copyWith(addedBonusList: updatedBonuses)],
-            );
-            await cartStorage.put(
-              id: itemWithNewBonus.id,
-              item: CartItemDto.fromDomain(itemWithNewBonus),
-            );
+            await cartItemTypeMaterial(
+                cartItem: inCartItem,
+                newBonusWithStock: newBonusWithStock,
+                overrideQty: overrideQty,);
             break;
           case CartItemType.bundle:
           case CartItemType.comboDeal:
@@ -406,6 +408,39 @@ class CartRepository implements ICartRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  Future<void> cartItemTypeMaterial(
+      {required CartItem cartItem,
+      required MaterialItemBonus newBonusWithStock,
+      required bool overrideQty,}) async {
+    final material = cartItem.materials.first;
+    var bonusExisting = false;
+    final updatedBonuses = material.addedBonusList.map((bonus) {
+      if (bonus.materialNumber == newBonusWithStock.materialNumber &&
+          bonus.additionalBonusFlag == newBonusWithStock.additionalBonusFlag) {
+        bonusExisting = true;
+
+        return bonus.copyWith(
+          qty: overrideQty
+              ? newBonusWithStock.qty
+              : bonus.qty + newBonusWithStock.qty,
+          expiryDate: bonus.expiryDate,
+        );
+      }
+
+      return bonus;
+    }).toList();
+    if (!bonusExisting) {
+      updatedBonuses.add(newBonusWithStock);
+    }
+    final itemWithNewBonus = cartItem.copyWith(
+      materials: [material.copyWith(addedBonusList: updatedBonuses)],
+    );
+    await cartStorage.put(
+      id: itemWithNewBonus.id,
+      item: CartItemDto.fromDomain(itemWithNewBonus),
+    );
   }
 
   @override
@@ -956,13 +991,106 @@ class CartRepository implements ICartRepository {
 
   Future<Either<ApiFailure, List<CartProduct>>>
       getAddedToCartProductList() async {
-      try {
-        final savedCartList =
-            await cartLocalDataSource.getAddedToCartProductList();
+    try {
+      if (config.appFlavor == Flavor.mock) {
+        try {
+          final savedCartList =
+              await cartLocalDataSource.getAddedToCartProductList();
 
-        return Right(savedCartList);
+          return Right(savedCartList);
+        } catch (e) {
+          return Left(FailureHandler.handleFailure(e));
+        }
+      }
+      final savedCartList =
+          await cartRemoteDataSource.getAddedToCartProductList();
+
+      return Right(savedCartList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartProduct>>> upsertCart({
+    required MaterialNumber productNumber,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required int quantity,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final productList = await cartLocalDataSource.upsertCart();
+
+        return Right(productList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
+    }
+
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
+
+      final productList = await cartRemoteDataSource.upsertCart(
+        productId: productNumber.getOrDefaultValue(''),
+        qty: quantity,
+        customerCode: customerCode,
+        salesOrg: salesOrgCode,
+        shipToCode: shipToCode,
+        language: language,
+        parentId: '',
+      );
+
+      return Right(productList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Map<MaterialNumber, CartAdditionInfoProduct>>>
+      getProducts({
+    required List<MaterialNumber> materialNumbers,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final products =
+            await orderHistoryLocalDataSource.getItemProductDetails();
+
+        return Right({
+          for (var product in products.productImages)
+            product.materialNumber: products,
+        });
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final queryMaterialNumbers =
+          materialNumbers.map((e) => e.getOrCrash()).toList();
+      final additionInfoData = <MaterialNumber, CartAdditionInfoProduct>{};
+      await Future.wait(queryMaterialNumbers.map((e) async {
+        final products =
+            await orderHistoryRemoteDataSource.getItemProductDetails(
+          materialIDs: [e],
+        );
+
+        for (final product in products.productImages) {
+          additionInfoData.addAll({product.materialNumber: products});
+        }
+      }));
+
+      return Right(additionInfoData);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
   }
 }

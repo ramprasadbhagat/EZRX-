@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
@@ -112,6 +113,9 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
                         shipToInfo: shipToInfo,
                         customerCodeInfo: customerCodeInfo,
                       ),
+                    );
+                context.read<CartBloc>().add(
+                      const CartEvent.clearCart(),
                     );
                 trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
                   MixpanelProps.customerCode:

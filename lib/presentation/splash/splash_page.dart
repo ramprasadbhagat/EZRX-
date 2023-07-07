@@ -212,7 +212,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
               previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption,
+              current.apiFailureOrSuccessOption || previous.isFetching != current.isFetching || previous.isUpserting != current.isUpserting,
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
               () {},

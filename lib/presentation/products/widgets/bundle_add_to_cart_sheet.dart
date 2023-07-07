@@ -111,6 +111,7 @@ class _BundleMaterialListTile extends StatelessWidget {
                 onFieldChange: (value) {},
                 minusPressed: (k) {},
                 addPressed: (k) {},
+                onSubmit: (k) {},
                 isLoading: false,
                 returnZeroOnFieldEmpty: true,
                 minimumQty: 1,

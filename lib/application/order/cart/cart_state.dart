@@ -11,6 +11,10 @@ class CartState with _$CartState {
     required bool isFetching,
     required bool isClearing,
     required bool isFetchingBonus,
+    required bool isFetchingCartProductDetail,
+    required bool isUpserting,
+    required bool isMappingPrice,
+    required Map<MaterialNumber, CartAdditionInfoProduct> additionInfo,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
@@ -20,6 +24,10 @@ class CartState with _$CartState {
         isFetching: false,
         isClearing: false,
         isFetchingBonus: false,
+        isFetchingCartProductDetail: false,
+        isUpserting: false,
+        isMappingPrice: false,
+        additionInfo: <MaterialNumber, CartAdditionInfoProduct>{},
       );
 
   double subTotal({
@@ -165,4 +173,16 @@ class CartState with _$CartState {
             element.materials.first.salesOrgConfig.enableBatchNumber &&
             !element.materials.first.stockInfo.batch.isValid(),
       );
+
+  int getQuantityOfProduct({required MaterialNumber productNumber}) {
+    return cartProducts.where((element) => element.materialNumber == productNumber).elementAtOrNull(0)?.quantity ?? 0;
+  }
+
+  double get totalPrice => cartProducts.fold(0, (previousValue, element) => previousValue + (element.price.finalPrice.getValue() * element.quantity));
+
+  double itemPrice({required int index}) {
+    final cartProductsTemp = cartProducts.elementAt(index);
+
+    return cartProductsTemp.price.finalPrice.getValue() * cartProductsTemp.quantity;
+  }
 }

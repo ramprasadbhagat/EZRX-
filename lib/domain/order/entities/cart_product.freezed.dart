@@ -26,6 +26,7 @@ mixin _$CartProduct {
   String get taxClassification => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
+  Price get price => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartProductCopyWith<CartProduct> get copyWith =>
@@ -48,7 +49,10 @@ abstract class $CartProductCopyWith<$Res> {
       String therapeuticClass,
       String taxClassification,
       String itemRegistrationNumber,
-      String genericMaterialName});
+      String genericMaterialName,
+      Price price});
+
+  $PriceCopyWith<$Res> get price;
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$CartProductCopyWithImpl<$Res, $Val extends CartProduct>
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
+    Object? price = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -116,7 +121,19 @@ class _$CartProductCopyWithImpl<$Res, $Val extends CartProduct>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as Price,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceCopyWith<$Res> get price {
+    return $PriceCopyWith<$Res>(_value.price, (value) {
+      return _then(_value.copyWith(price: value) as $Val);
+    });
   }
 }
 
@@ -138,7 +155,11 @@ abstract class _$$_CartProductCopyWith<$Res>
       String therapeuticClass,
       String taxClassification,
       String itemRegistrationNumber,
-      String genericMaterialName});
+      String genericMaterialName,
+      Price price});
+
+  @override
+  $PriceCopyWith<$Res> get price;
 }
 
 /// @nodoc
@@ -162,6 +183,7 @@ class __$$_CartProductCopyWithImpl<$Res>
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
+    Object? price = null,
   }) {
     return _then(_$_CartProduct(
       productID: null == productID
@@ -204,6 +226,10 @@ class __$$_CartProductCopyWithImpl<$Res>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as Price,
     ));
   }
 }
@@ -221,7 +247,8 @@ class _$_CartProduct extends _CartProduct {
       required this.therapeuticClass,
       required this.taxClassification,
       required this.itemRegistrationNumber,
-      required this.genericMaterialName})
+      required this.genericMaterialName,
+      required this.price})
       : super._();
 
   @override
@@ -244,10 +271,12 @@ class _$_CartProduct extends _CartProduct {
   final String itemRegistrationNumber;
   @override
   final String genericMaterialName;
+  @override
+  final Price price;
 
   @override
   String toString() {
-    return 'CartProduct(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName)';
+    return 'CartProduct(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, price: $price)';
   }
 
   @override
@@ -273,7 +302,8 @@ class _$_CartProduct extends _CartProduct {
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
-                other.genericMaterialName == genericMaterialName));
+                other.genericMaterialName == genericMaterialName) &&
+            (identical(other.price, price) || other.price == price));
   }
 
   @override
@@ -288,7 +318,8 @@ class _$_CartProduct extends _CartProduct {
       therapeuticClass,
       taxClassification,
       itemRegistrationNumber,
-      genericMaterialName);
+      genericMaterialName,
+      price);
 
   @JsonKey(ignore: true)
   @override
@@ -308,7 +339,8 @@ abstract class _CartProduct extends CartProduct {
       required final String therapeuticClass,
       required final String taxClassification,
       required final String itemRegistrationNumber,
-      required final String genericMaterialName}) = _$_CartProduct;
+      required final String genericMaterialName,
+      required final Price price}) = _$_CartProduct;
   const _CartProduct._() : super._();
 
   @override
@@ -331,6 +363,8 @@ abstract class _CartProduct extends CartProduct {
   String get itemRegistrationNumber;
   @override
   String get genericMaterialName;
+  @override
+  Price get price;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductCopyWith<_$_CartProduct> get copyWith =>

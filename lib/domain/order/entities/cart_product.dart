@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,6 +19,7 @@ class CartProduct with _$CartProduct {
     required String taxClassification,
     required String itemRegistrationNumber,
     required String genericMaterialName,
+    required Price price,
   }) = _CartProduct;
 
   factory CartProduct.empty() => CartProduct(
@@ -31,5 +33,6 @@ class CartProduct with _$CartProduct {
        taxClassification: '',
        therapeuticClass: '',
        type: MaterialItemType(''),
+      price: Price.empty(),
       );
 }

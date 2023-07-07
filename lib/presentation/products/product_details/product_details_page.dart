@@ -1,10 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_description.dart';
@@ -70,8 +76,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           onPressed: () => Navigator.pop(context),
           icon: CircleAvatar(
             maxRadius: 16,
-            backgroundColor:
-                _isScrollAtInitialPosition
+            backgroundColor: _isScrollAtInitialPosition
                 ? ZPColors.darkGray
                 : ZPColors.transparent,
             child: Icon(
@@ -82,26 +87,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           ),
         ),
-        actions: [
-          IconButton(
+        actions: const [
+          Padding(
             key: WidgetKeys.materialDetailsPageCartIcon,
-            onPressed: () {},
-            icon: CircleAvatar(
-              maxRadius: 16,
-              backgroundColor: _isScrollAtInitialPosition
-                  ? ZPColors.darkGray
-                  : ZPColors.transparent,
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                size: 20,
-                color: _isScrollAtInitialPosition
-                    ? ZPColors.white
-                    : ZPColors.black,
-              ),
+            padding: EdgeInsets.all(10),
+            child: CartButton(
+              cartColor: ZPColors.black,
+              iconSize: 20,
+              positionTop: -8,
             ),
           ),
         ],
-      ),    
+      ),
       floatingActionButton: !_isScrollAtInitialPosition
           ? FloatingActionButton(
               key: WidgetKeys.materialDetailsFloatingButton,
@@ -131,9 +128,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         child: ListView(
           controller: _scrollController,
           children: const [
-              ProductDetailImage(),
-              _BodyContent(),
-              SimilarProduct(),
+            ProductDetailImage(),
+            _BodyContent(),
+            SimilarProduct(),
           ],
         ),
       ),
@@ -217,7 +214,6 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       children: [
         Expanded(
@@ -249,8 +245,27 @@ class _Description extends StatelessWidget {
   }
 }
 
-class _Footer extends StatelessWidget {
+class _Footer extends StatefulWidget {
   const _Footer({Key? key}) : super(key: key);
+
+  @override
+  State<_Footer> createState() => _FooterState();
+}
+
+class _FooterState extends State<_Footer> {
+  late TextEditingController _quantityEditingController;
+
+  @override
+  void initState() {
+    _quantityEditingController = TextEditingController(text: '1');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _quantityEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -258,35 +273,99 @@ class _Footer extends StatelessWidget {
       child: Container(
         padding:
             EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Wrap(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: CartItemQuantityInput(
-                key: WidgetKeys.materialDetailsQuantityInput,
-                addPressed: (value) {},
-                controller: TextEditingController(),
-                isEnabled: true,
-                onFieldChange: (value) {},
-                quantityAddKey: const ValueKey('quantityAddKey'),
-                quantityDeleteKey: const ValueKey('quantityDeleteKey'),
-                quantityTextKey: const ValueKey('quantityTextKey'),
-                minusPressed: (value) {},
-                height: MediaQuery.of(context).size.height * 0.055,
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.05,
-            ),
-            SizedBox(
-              key: WidgetKeys.materialDetailsAddToCartButton,
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Add To Cart').tr(),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: CartItemQuantityInput(
+                    key: WidgetKeys.materialDetailsQuantityInput,
+                    addPressed: (value) {},
+                    controller: TextEditingController(),
+                    isEnabled: true,
+                    onFieldChange: (value) {},
+                    onSubmit: (value) {},
+                    quantityAddKey: const ValueKey('quantityAddKey'),
+                    quantityDeleteKey: const ValueKey('quantityDeleteKey'),
+                    quantityTextKey: const ValueKey('quantityTextKey'),
+                    minusPressed: (value) {},
+                    height: MediaQuery.of(context).size.height * 0.055,
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.05,
+                ),
+                SizedBox(
+                  key: WidgetKeys.materialDetailsAddToCartButton,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                    builder: (context, stateDetail) {
+                      return BlocConsumer<CartBloc, CartState>(
+                        listenWhen: (previous, current) =>
+                            previous.isUpserting != current.isUpserting,
+                        listener: (context, state) {
+                          state.apiFailureOrSuccessOption.fold(
+                            () {
+                              if (!state.isUpserting &&
+                                  state.cartProducts.isNotEmpty) {
+                                showTopSnackBar(
+                                  context: context,
+                                  message: 'Item has been added to cart'.tr(),
+                                );
+                              }
+                            },
+                            (either) => {},
+                          );
+                        },
+                        builder: (context, stateCart) {
+                          return ElevatedButton(
+                            onPressed: stateCart.isUpserting
+                                    ? null
+                                    : () {
+                                        context.read<CartBloc>().add(
+                                              CartEvent.upsertCart(
+                                                salesOrganisation: context
+                                                    .read<SalesOrgBloc>()
+                                                    .state
+                                                    .salesOrganisation,
+                                                customerCodeInfo: context
+                                                    .read<CustomerCodeBloc>()
+                                                    .state
+                                                    .customerCodeInfo,
+                                                shipToInfo: context
+                                                    .read<CustomerCodeBloc>()
+                                                    .state
+                                                    .shipToInfo,
+                                                cartProductNumber: stateDetail
+                                                    .productDetailAggregate
+                                                    .materialInfo
+                                                    .materialNumber,
+                                                quantity: stateCart.getQuantityOfProduct(
+                                                        productNumber: stateDetail
+                                                            .productDetailAggregate
+                                                            .materialInfo
+                                                            .materialNumber,) +
+                                                    int.parse(
+                                                      _quantityEditingController
+                                                          .text,
+                                                    ),
+                                              ),
+                                            );
+                                      },
+                            child: LoadingShimmer.withChild(
+                              enabled: stateCart.isUpserting,
+                              child: const Text('Add To Cart').tr(),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),

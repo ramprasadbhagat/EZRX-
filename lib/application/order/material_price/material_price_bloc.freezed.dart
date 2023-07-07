@@ -27,6 +27,14 @@ mixin _$MaterialPriceEvent {
             List<MaterialInfo> materials,
             bool comboDealEligible)
         fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)
+        fetchPriceCartProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +48,14 @@ mixin _$MaterialPriceEvent {
             List<MaterialInfo> materials,
             bool comboDealEligible)?
         fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +69,14 @@ mixin _$MaterialPriceEvent {
             List<MaterialInfo> materials,
             bool comboDealEligible)?
         fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,18 +84,22 @@ mixin _$MaterialPriceEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_fetchPriceCartProduct value)
+        fetchPriceCartProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +170,14 @@ class _$_Initialized implements _Initialized {
             List<MaterialInfo> materials,
             bool comboDealEligible)
         fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)
+        fetchPriceCartProduct,
   }) {
     return initialized();
   }
@@ -158,6 +194,14 @@ class _$_Initialized implements _Initialized {
             List<MaterialInfo> materials,
             bool comboDealEligible)?
         fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
   }) {
     return initialized?.call();
   }
@@ -174,6 +218,14 @@ class _$_Initialized implements _Initialized {
             List<MaterialInfo> materials,
             bool comboDealEligible)?
         fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -187,6 +239,8 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_fetchPriceCartProduct value)
+        fetchPriceCartProduct,
   }) {
     return initialized(this);
   }
@@ -196,6 +250,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
   }) {
     return initialized?.call(this);
   }
@@ -205,6 +260,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -399,6 +455,14 @@ class _$_Fetch implements _Fetch {
             List<MaterialInfo> materials,
             bool comboDealEligible)
         fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)
+        fetchPriceCartProduct,
   }) {
     return fetch(customerCodeInfo, salesOrganisation, salesConfigs, shipToInfo,
         materials, comboDealEligible);
@@ -416,6 +480,14 @@ class _$_Fetch implements _Fetch {
             List<MaterialInfo> materials,
             bool comboDealEligible)?
         fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
   }) {
     return fetch?.call(customerCodeInfo, salesOrganisation, salesConfigs,
         shipToInfo, materials, comboDealEligible);
@@ -433,6 +505,14 @@ class _$_Fetch implements _Fetch {
             List<MaterialInfo> materials,
             bool comboDealEligible)?
         fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -447,6 +527,8 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_fetchPriceCartProduct value)
+        fetchPriceCartProduct,
   }) {
     return fetch(this);
   }
@@ -456,6 +538,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
   }) {
     return fetch?.call(this);
   }
@@ -465,6 +548,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -491,6 +575,312 @@ abstract class _Fetch implements MaterialPriceEvent {
   bool get comboDealEligible;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_fetchPriceCartProductCopyWith<$Res> {
+  factory _$$_fetchPriceCartProductCopyWith(_$_fetchPriceCartProduct value,
+          $Res Function(_$_fetchPriceCartProduct) then) =
+      __$$_fetchPriceCartProductCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {CustomerCodeInfo customerCodeInfo,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesConfigs,
+      ShipToInfo shipToInfo,
+      List<CartProduct> products,
+      bool comboDealEligible});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_fetchPriceCartProductCopyWithImpl<$Res>
+    extends _$MaterialPriceEventCopyWithImpl<$Res, _$_fetchPriceCartProduct>
+    implements _$$_fetchPriceCartProductCopyWith<$Res> {
+  __$$_fetchPriceCartProductCopyWithImpl(_$_fetchPriceCartProduct _value,
+      $Res Function(_$_fetchPriceCartProduct) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCodeInfo = null,
+    Object? salesOrganisation = null,
+    Object? salesConfigs = null,
+    Object? shipToInfo = null,
+    Object? products = null,
+    Object? comboDealEligible = null,
+  }) {
+    return _then(_$_fetchPriceCartProduct(
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<CartProduct>,
+      comboDealEligible: null == comboDealEligible
+          ? _value.comboDealEligible
+          : comboDealEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_fetchPriceCartProduct implements _fetchPriceCartProduct {
+  const _$_fetchPriceCartProduct(
+      {required this.customerCodeInfo,
+      required this.salesOrganisation,
+      required this.salesConfigs,
+      required this.shipToInfo,
+      required final List<CartProduct> products,
+      required this.comboDealEligible})
+      : _products = products;
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesConfigs;
+  @override
+  final ShipToInfo shipToInfo;
+  final List<CartProduct> _products;
+  @override
+  List<CartProduct> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
+  @override
+  final bool comboDealEligible;
+
+  @override
+  String toString() {
+    return 'MaterialPriceEvent.fetchPriceCartProduct(customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, shipToInfo: $shipToInfo, products: $products, comboDealEligible: $comboDealEligible)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_fetchPriceCartProduct &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.comboDealEligible, comboDealEligible) ||
+                other.comboDealEligible == comboDealEligible));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      customerCodeInfo,
+      salesOrganisation,
+      salesConfigs,
+      shipToInfo,
+      const DeepCollectionEquality().hash(_products),
+      comboDealEligible);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_fetchPriceCartProductCopyWith<_$_fetchPriceCartProduct> get copyWith =>
+      __$$_fetchPriceCartProductCopyWithImpl<_$_fetchPriceCartProduct>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials,
+            bool comboDealEligible)
+        fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)
+        fetchPriceCartProduct,
+  }) {
+    return fetchPriceCartProduct(customerCodeInfo, salesOrganisation,
+        salesConfigs, shipToInfo, products, comboDealEligible);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
+        fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
+  }) {
+    return fetchPriceCartProduct?.call(customerCodeInfo, salesOrganisation,
+        salesConfigs, shipToInfo, products, comboDealEligible);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
+        fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<CartProduct> products,
+            bool comboDealEligible)?
+        fetchPriceCartProduct,
+    required TResult orElse(),
+  }) {
+    if (fetchPriceCartProduct != null) {
+      return fetchPriceCartProduct(customerCodeInfo, salesOrganisation,
+          salesConfigs, shipToInfo, products, comboDealEligible);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_fetchPriceCartProduct value)
+        fetchPriceCartProduct,
+  }) {
+    return fetchPriceCartProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
+  }) {
+    return fetchPriceCartProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_fetchPriceCartProduct value)? fetchPriceCartProduct,
+    required TResult orElse(),
+  }) {
+    if (fetchPriceCartProduct != null) {
+      return fetchPriceCartProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _fetchPriceCartProduct implements MaterialPriceEvent {
+  const factory _fetchPriceCartProduct(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesConfigs,
+      required final ShipToInfo shipToInfo,
+      required final List<CartProduct> products,
+      required final bool comboDealEligible}) = _$_fetchPriceCartProduct;
+
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesConfigs;
+  ShipToInfo get shipToInfo;
+  List<CartProduct> get products;
+  bool get comboDealEligible;
+  @JsonKey(ignore: true)
+  _$$_fetchPriceCartProductCopyWith<_$_fetchPriceCartProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

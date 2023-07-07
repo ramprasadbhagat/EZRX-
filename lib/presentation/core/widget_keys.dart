@@ -206,6 +206,7 @@ class WidgetKeys {
   static const Key cartItemDeleteKey = Key('cartItemDeleteKey');
   static const Key quantityInputTextKey = Key('quantityInputTextKey');
   static const Key cartProductImage = Key('cartProductImage');
+  static const Key startBrowsingProducts = Key('startBrowsingProducts');
 
   //============================================================
   //  Cart Page Keys

@@ -213,7 +213,7 @@ class _ShipToAddressSection extends StatelessWidget {
     final cartBloc = context.read<CartBloc>();
     final customerBloc = context.read<CustomerCodeBloc>();
     if (shipToInfo != customerBloc.state.shipToInfo &&
-        cartBloc.state.cartItems.isNotEmpty) {
+        cartBloc.state.cartProducts.isNotEmpty) {
       showModalBottomSheet(
         isScrollControlled: true,
         context: context,
