@@ -23,6 +23,8 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
+import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
+
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
 
@@ -71,9 +73,6 @@ class HomeTab extends StatelessWidget {
                 );
           }
         },
-        //Singlechildscroll and column is needed
-        //as the listview was rebuilding the BrowseProduct
-        //and it was recreating the blocprovider
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -85,6 +84,7 @@ class HomeTab extends StatelessWidget {
               const AccountSuspendedBanner(),
               const QuickAccessMenuPanel(),
               const HomeBanner(),
+              const BundleSection(),
               const RecentOrdersSection(),
               const BrowseProduct(),
               const KRBanners(),

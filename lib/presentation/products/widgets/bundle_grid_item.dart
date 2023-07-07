@@ -22,7 +22,7 @@ class BundleGridItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            color: ZPColors.aliceBlue,
+            color: ZPColors.blueTagColor,
             padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
