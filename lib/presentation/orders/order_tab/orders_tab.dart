@@ -18,6 +18,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 class OrdersTab extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -81,13 +83,9 @@ class OrdersTab extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Expanded(
-                          child: SearchBar(
-                            onSearchChanged: (String value) {},
-                            clearIconKey: WidgetKeys.clearIconKey,
-                            controller: TextEditingController(),
-                            onClear: () {},
-                          ),
+                        _SearchBar(
+                          isFromViewByOrder: context.tabsRouter.current.name ==
+                              ViewByOrdersPageRoute.name,
                         ),
                         _Filter(
                           viewByItem: context.tabsRouter.current.name ==
@@ -294,5 +292,126 @@ class _Filter extends StatelessWidget {
               return _FilterTuneIcon(viewByItem: viewByItem);
             },
           );
+  }
+}
+
+class _SearchBar extends StatefulWidget {
+  final bool isFromViewByOrder;
+  const _SearchBar({Key? key, required this.isFromViewByOrder})
+      : super(key: key);
+
+  @override
+  State<_SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<_SearchBar> {
+  final TextEditingController _itemSearchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _itemSearchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.isFromViewByOrder) {
+      _itemSearchController.text =
+          context.read<ViewByOrderBloc>().state.searchKey.getOrDefaultValue('');
+
+      return BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
+        buildWhen: (previous, current) =>
+            previous.isFetching != current.isFetching,
+        listenWhen: (previous, current) =>
+            previous.searchKey != current.searchKey,
+        listener: (context, state) {
+          final searchText = state.searchKey.getValue();
+          _itemSearchController.value = TextEditingValue(
+            text: searchText,
+            selection: TextSelection.collapsed(
+              offset: _itemSearchController.selection.base.offset,
+            ),
+          );
+        },
+        builder: (context, state) {
+          return _OrderSearchBar(
+            isFromViewByOrder: widget.isFromViewByOrder,
+            isFetching: state.isFetching,
+            controller: _itemSearchController,
+          );
+        },
+      );
+    } else {
+      _itemSearchController.text = '';
+
+      return _OrderSearchBar(
+        isFromViewByOrder: widget.isFromViewByOrder,
+        isFetching: false,
+        controller: _itemSearchController,
+      );
+    }
+  }
+}
+
+class _OrderSearchBar extends StatelessWidget {
+  final bool isFromViewByOrder;
+  final bool isFetching;
+  final TextEditingController controller;
+  const _OrderSearchBar({
+    Key? key,
+    required this.isFromViewByOrder,
+    required this.isFetching,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SearchBar(
+        controller: controller,
+        enabled: !isFetching,
+        onSearchChanged: (value) {},
+        isAutoSearch: false,
+        onSearchSubmitted: (value) {
+          if (isFromViewByOrder) {
+            context.read<ViewByOrderBloc>().add(
+                  ViewByOrderEvent.searchByOrder(
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    user: context.read<UserBloc>().state.user,
+                    sortDirection: 'desc',
+                    searchKey: value,
+                    filter: context.read<ViewByOrderFilterBloc>().state.filter,
+                  ),
+                );
+          }
+        },
+        clearIconKey: WidgetKeys.clearIconKey,
+        customValidator: () => SearchKey.search(controller.text).isValid(),
+        onClear: () {
+          if (controller.text.isEmpty) return;
+          controller.clear();
+          if (isFromViewByOrder) {
+            context.read<ViewByOrderBloc>().add(
+                  ViewByOrderEvent.searchByOrder(
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    user: context.read<UserBloc>().state.user,
+                    sortDirection: 'desc',
+                    searchKey: '',
+                    filter: context.read<ViewByOrderFilterBloc>().state.filter,
+                  ),
+                );
+          }
+        },
+        border: InputBorder.none,
+      ),
+    );
   }
 }

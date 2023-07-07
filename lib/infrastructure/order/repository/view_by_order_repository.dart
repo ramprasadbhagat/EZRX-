@@ -14,6 +14,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.d
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_history_filter_dto.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 class ViewByOrderRepository implements IViewByOrderRepository {
   final Config config;
   final ViewByOrderLocalDataSource localDataSource;
@@ -35,7 +37,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
     required int offset,
     required String orderBy,
     required String sort,
-    required String searchKey,
+    required SearchKey searchKey,
     required List<String> creatingOrderIds,
     required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
     required ViewByOrder viewByOrder,
@@ -57,7 +59,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         pageSize: pageSize,
         offset: offset,
         language: user.preferredLanguage,
-        searchKey: searchKey,
+        searchKey: searchKey.getOrCrash(),
         orderBy: orderBy,
         creatingOrderIds: creatingOrderIds,
         filterQuery:

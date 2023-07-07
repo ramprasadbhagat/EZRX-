@@ -56,7 +56,7 @@ class SearchKey extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory SearchKey(String input) {
-    return SearchKey._(validateStringNotEmpty(input));
+    return SearchKey._(right(input));
   }
 
   factory SearchKey.search(String searchText) {

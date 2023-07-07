@@ -7,6 +7,7 @@ class ViewByOrderState with _$ViewByOrderState {
     required ViewByOrder viewByOrderList,
     required bool canLoadMore,
     required bool isFetching,
+    required SearchKey searchKey,
     required int nextPageIndex,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ViewByOrderHistoryFilter appliedFilter,
@@ -16,6 +17,7 @@ class ViewByOrderState with _$ViewByOrderState {
         canLoadMore: true,
         isFetching: false,
         nextPageIndex: 0,
+        searchKey: SearchKey(''),
         failureOrSuccessOption: none(),
         appliedFilter: ViewByOrderHistoryFilter.empty(),
       );
