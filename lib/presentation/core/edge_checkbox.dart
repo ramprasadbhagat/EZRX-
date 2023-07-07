@@ -1,27 +1,18 @@
-//ignore_for_file: unused-code
-
-//ignore_for_file: unused-class
-
-//ignore_for_file: unused-files
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
-class EdgeCheckbox extends StatefulWidget {
+class EdgeCheckbox extends StatelessWidget {
   final Widget body;
-  final Function() onTap;
+  final bool value;
+  final ValueChanged<bool> onChanged;
 
   const EdgeCheckbox({
     Key? key,
     required this.body,
-    required this.onTap,
+    required this.value,
+    required this.onChanged,
   }) : super(key: key);
 
-  @override
-  State<EdgeCheckbox> createState() => _EdgeCheckboxState();
-}
-
-class _EdgeCheckboxState extends State<EdgeCheckbox> {
-  bool visible = false;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -29,21 +20,23 @@ class _EdgeCheckboxState extends State<EdgeCheckbox> {
         DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(
-              color: visible ? ZPColors.greenIconColor : ZPColors.transparent,
+              color: value ? ZPColors.greenIconColor : ZPColors.transparent,
               width: 2,
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            color: Colors.white,
           ),
-          child: widget.body,
+          child: body,
         ),
-        _SelectedIcon(visible: visible),
+        _SelectedIcon(visible: value),
         Positioned.fill(
           child: Material(
             color: ZPColors.transparent,
             child: InkWell(
               onTap: () {
-                widget.onTap;
-                setState(() => visible = !visible);
+                onChanged(!value);
               },
             ),
           ),

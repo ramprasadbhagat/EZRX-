@@ -6,6 +6,9 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
@@ -139,7 +142,36 @@ class AccountSummaryPage extends StatelessWidget {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<OutstandingInvoicesBloc>().add(
+                      OutstandingInvoicesEvent.fetch(
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                      ),
+                    );
+                context.read<AvailableCreditsBloc>().add(
+                      AvailableCreditsEvent.fetch(
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                      ),
+                    );
+                context.read<NewPaymentBloc>().add(
+                      const NewPaymentEvent.initialized(),
+                    );
+                context.router.pushNamed('payments/new_payment');
+              },
               child: Text(
                 'New Payment'.tr(),
               ),

@@ -44,6 +44,9 @@ import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_f
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -277,6 +280,10 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_query.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/account_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
@@ -2434,6 +2441,46 @@ void setupLocator() {
           locator<CreditAndInvoiceDetailsQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
+  );
+
+  //============================================================
+  //  Payments: New Payment
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => NewPaymentQuery(),
+  );
+  locator.registerLazySingleton(
+    () => NewPaymentLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+    () => NewPaymentRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      newPaymentQuery: locator<NewPaymentQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => NewPaymentRepository(
+      config: locator<Config>(),
+      localDataSource: locator<NewPaymentLocalDataSource>(),
+      remoteDataSource: locator<NewPaymentRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => OutstandingInvoicesBloc(
+      newPaymentRepository: locator<NewPaymentRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => AvailableCreditsBloc(
+      newPaymentRepository: locator<NewPaymentRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => NewPaymentBloc(),
   );
 
   //============================================================

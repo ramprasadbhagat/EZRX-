@@ -29,6 +29,9 @@ import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_f
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -414,6 +417,15 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AllCreditsBloc>(
           create: (context) => locator<AllCreditsBloc>(),
+        ),
+        BlocProvider<OutstandingInvoicesBloc>(
+          create: (context) => locator<OutstandingInvoicesBloc>(),
+        ),
+        BlocProvider<AvailableCreditsBloc>(
+          create: (context) => locator<AvailableCreditsBloc>(),
+        ),
+        BlocProvider<NewPaymentBloc>(
+          create: (context) => locator<NewPaymentBloc>(),
         ),
         BlocProvider<ManagePaymentMethodsBloc>(
           create: (context) => locator<ManagePaymentMethodsBloc>(),

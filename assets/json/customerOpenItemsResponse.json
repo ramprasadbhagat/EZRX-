@@ -1,0 +1,25 @@
+{
+   "data": {
+       "customerOpenItems": {
+           "total": 2,
+           "customerOpenItemsResponse": [
+               {
+                   "status": "Overdue",
+                   "accountingDocument": "0340000002",
+                   "netDueDate": "2017-07-31",
+                   "amountInTransactionCurrency": 100,
+                   "documentReferenceID": "EHQ Perf3",
+                   "postingKeyName": "Invoice"
+               },
+               {
+                   "status": "Overdue",
+                   "accountingDocument": "0340000003",
+                   "netDueDate": "2017-07-31",
+                   "amountInTransactionCurrency": 150,
+                   "documentReferenceID": "EHQ Perf3",
+                   "postingKeyName": "Invoice"
+               }
+           ]
+       }
+   }
+}
