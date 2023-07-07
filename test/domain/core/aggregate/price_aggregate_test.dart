@@ -46,6 +46,25 @@ void main() {
   final emptyPriceAggregate = PriceAggregate.empty();
   final emptyComboDeal = ComboDeal.empty();
   late List<Price> materialPriceListFromLocal;
+  final bonusMaterial = BonusMaterial.empty().copyWith(
+    materialNumber: MaterialNumber('fake-number'),
+    qualifyingQuantity: 2,
+    bonusQuantity: 1,
+  );
+  final bonusPrice = Price.empty().copyWith(
+    finalPrice: MaterialPrice(10),
+    bonuses: [
+      PriceBonus(
+        items: [
+          PriceBonusItem(
+            calculation: BonusMaterialCalculation('915'),
+            bonusMaterials: [bonusMaterial],
+            qualifyingQuantity: 2,
+          )
+        ],
+      )
+    ],
+  );
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
       final priceAggregate = PriceAggregate(
@@ -127,7 +146,7 @@ void main() {
           emptyPriceAggregate.stockInfo.salesDistrict);
       expect(
           submitMaterialInfo.materialItemOverride,
-          MaterialItemOverrideDto.fromPrice(emptyPriceAggregate.price)
+          MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
               .toDomain());
       expect(submitMaterialInfo.tenderContract,
           emptyPriceAggregate.tenderContract);
@@ -151,7 +170,7 @@ void main() {
           emptyPriceAggregate.stockInfo.salesDistrict);
       expect(
           submitMaterialInfo.materialItemOverride,
-          MaterialItemOverrideDto.fromPrice(emptyPriceAggregate.price)
+          MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
               .toDomain());
       expect(submitMaterialInfo.tenderContract,
           emptyPriceAggregate.tenderContract);
@@ -1519,7 +1538,7 @@ void main() {
           emptyPriceAggregate.stockInfo.salesDistrict);
       expect(
           submitMaterialInfo.materialItemOverride,
-          MaterialItemOverrideDto.fromPrice(emptyPriceAggregate.price)
+          MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
               .toDomain());
       expect(submitMaterialInfo.tenderContract,
           emptyPriceAggregate.tenderContract);
@@ -1711,5 +1730,84 @@ void main() {
         ],
       );
     });
+  });
+
+  group('PriceAggregate ZPO1', () {
+    test(
+      'PriceAggregate ZPO1 test on BonusOverrideFlag',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          quantity: 3,
+          price: bonusPrice,
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              qty: 2,
+              materialInfo: MaterialInfo.empty()
+                  .copyWith(materialNumber: MaterialNumber('fake-number')),
+              bonusOverrideFlag: true,
+            )
+          ],
+          salesOrgConfig: SalesOrganisationConfigs.empty()
+              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('myr')),
+        );
+        expect(
+          customPriceAggregate
+              .toSubmitMaterialInfo()
+              .materialItemOverride
+              .valueOverride
+              .first
+              .price,
+          10,
+        );
+        expect(
+          customPriceAggregate
+              .toSubmitMaterialInfo()
+              .materialItemOverride
+              .valueOverride
+              .first
+              .currency,
+          Currency('myr'),
+        );
+      },
+    );
+
+    test(
+      'PriceAggregate ZPO1 test on additionalBonusFlag',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          quantity: 3,
+          price: Price.empty().copyWith(finalPrice: MaterialPrice(10)),
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              qty: 2,
+              materialInfo: MaterialInfo.empty()
+                  .copyWith(materialNumber: MaterialNumber('fake-number')),
+              bonusOverrideFlag: true,
+              additionalBonusFlag: true,
+            )
+          ],
+          salesOrgConfig: SalesOrganisationConfigs.empty()
+              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('myr')),
+        );
+        expect(
+          customPriceAggregate
+              .toSubmitMaterialInfo()
+              .materialItemOverride
+              .valueOverride
+              .first
+              .price,
+          10,
+        );
+        expect(
+          customPriceAggregate
+              .toSubmitMaterialInfo()
+              .materialItemOverride
+              .valueOverride
+              .first
+              .currency,
+          Currency('myr'),
+        );
+      },
+    );
   });
 }

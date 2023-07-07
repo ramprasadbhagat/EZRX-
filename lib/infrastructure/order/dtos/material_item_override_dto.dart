@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'material_item_override_dto.freezed.dart';
@@ -49,22 +49,25 @@ class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
     );
   }
 
-  factory MaterialItemOverrideDto.fromPrice(Price price) {
+  factory MaterialItemOverrideDto.fromPriceAggregate(
+    PriceAggregate priceAggregate,
+  ) {
     return MaterialItemOverrideDto(
       reference: '',
       valueOverride: [
-        if (price.isPriceOverride)
+        if (priceAggregate.price.isPriceOverride)
           ValueOverrideDto.fromDomain(
             ValueOverride.empty().copyWith(
-              price: price.finalPrice.getOrDefaultValue(0),
+              price: priceAggregate.price.finalPrice.getOrDefaultValue(0),
+              currency: priceAggregate.salesOrgConfig.currency,
             ),
           ),
       ],
       percentageOverride: [
-        if (price.zdp8Override.isValid())
+        if (priceAggregate.price.zdp8Override.isValid())
           PercentageOverrideDto.fromDomain(
             PercentageOverride(
-              percentage: price.zdp8Override.getValue(),
+              percentage: priceAggregate.price.zdp8Override.getValue(),
             ),
           ),
       ],

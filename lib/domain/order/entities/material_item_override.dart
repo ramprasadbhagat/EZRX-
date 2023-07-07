@@ -30,7 +30,7 @@ class ValueOverride with _$ValueOverride {
 
   factory ValueOverride.empty() => ValueOverride(
         price: 0,
-        currency: Currency('sgd'),
+        currency: Currency(''),
       );
 }
 
