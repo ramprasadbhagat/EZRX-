@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +26,7 @@ class _IntroPageState extends State<IntroPage> {
       description:
           'With our interactive engagement portal, you can now order prescription drugs, and view order history and status on eZRx+ mobile app.',
       buttonText: 'Skip',
-      assetsPath: SvgImage.introScreen1,
+      assetsPath: 'assets/images/temp1.png',
       backgroundColor: ZPColors.navyBlueBGColor,
       headingColor: ZPColors.white,
       descriptionColor: ZPColors.shadowColor,
@@ -40,7 +39,7 @@ class _IntroPageState extends State<IntroPage> {
       description:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
       buttonText: 'Skip',
-      assetsPath: SvgImage.introScreen2,
+      assetsPath: 'assets/images/temp2.png',
       backgroundColor: ZPColors.lightVioletBGColor,
       headingColor: ZPColors.primary,
       descriptionColor: ZPColors.neutralsBlack,
@@ -53,7 +52,7 @@ class _IntroPageState extends State<IntroPage> {
       description:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
       buttonText: 'Get started',
-      assetsPath: SvgImage.introScreen3,
+      assetsPath: 'assets/images/temp3.png',
       backgroundColor: ZPColors.blueBGColor,
       headingColor: ZPColors.white,
       descriptionColor: ZPColors.shadowColor,
@@ -110,7 +109,7 @@ class _IntroPageState extends State<IntroPage> {
             elevation: 0,
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
-            title:  BlocBuilder<IntroBloc, IntroState>(
+            title: BlocBuilder<IntroBloc, IntroState>(
               buildWhen: (previous, current) => previous.index != current.index,
               builder: (context, state) {
                 _timer?.cancel();
@@ -127,9 +126,8 @@ class _IntroPageState extends State<IntroPage> {
           ),
           body: IntroStep(
             introObject: getOnBoardingObject[i],
-            buttonOnTap: () => i == lastIndexIntroObject
-                ? _getStarted(context)
-                : _nextPage(),
+            buttonOnTap: () =>
+                i == lastIndexIntroObject ? _getStarted(context) : _nextPage(),
           ),
         );
       },
@@ -140,16 +138,18 @@ class _IntroPageState extends State<IntroPage> {
 class _CustomIndicator extends StatelessWidget {
   final int index;
   final int lastIndex;
-  const _CustomIndicator(
-      {Key? key, required this.index, required this.lastIndex,})
-      : super(key: key);
+  const _CustomIndicator({
+    Key? key,
+    required this.index,
+    required this.lastIndex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(
         3,
-            (i) => Expanded(
+        (i) => Expanded(
           child: _HorizontalDivider(isActive: index == i),
         ),
       ),
@@ -172,9 +172,7 @@ class _HorizontalDivider extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: isActive
-            ? ZPColors.white
-            : ZPColors.unselectedIndicatorColor,
+        color: isActive ? ZPColors.white : ZPColors.unselectedIndicatorColor,
       ),
     );
   }

@@ -22,7 +22,7 @@ class MoreDetailsTile {
   factory MoreDetailsTile.faq() => const MoreDetailsTile(
         icon: Icon(
           Icons.contact_support_outlined,
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'FAQ',
       );
@@ -31,7 +31,7 @@ class MoreDetailsTile {
         icon: Icon(
           Icons
               .menu_book_outlined, //TODO : will update it after Design Them update the Figma
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'User guide',
       );
@@ -39,7 +39,7 @@ class MoreDetailsTile {
   factory MoreDetailsTile.aboutUs() => const MoreDetailsTile(
         icon: Icon(
           Icons.error_outline_outlined,
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'About us',
       );
@@ -120,28 +120,28 @@ class MoreDetailsTile {
         onTap: () => context.navigateTo(const PaymentsTabRoute()),
       );
 
-  factory MoreDetailsTile.loyaltyTab() => const MoreDetailsTile(
-        icon: Icon(
-          Icons
-              .discount_outlined, //TODO : will update it after Design Them update the Figma
-          color: ZPColors.greenIconColor,
-        ),
-        label: 'Loyalty',
-      );
+  // factory MoreDetailsTile.loyaltyTab() => const MoreDetailsTile(
+  //       icon: Icon(
+  //         Icons
+  //             .discount_outlined, //TODO : will update it after Design Them update the Figma
+  //         color: ZPColors.greenIconColor,
+  //       ),
+  //       label: 'Loyalty',
+  //     );
 
-  factory MoreDetailsTile.webLoginTab() => const MoreDetailsTile(
-        icon: Icon(
-          Icons
-              .center_focus_weak_outlined, //TODO : will update it after Design Them update the Figma
-          color: ZPColors.greenIconColor,
-        ),
-        label: 'Web Login',
-      );
+  // factory MoreDetailsTile.webLoginTab() => const MoreDetailsTile(
+  //       icon: Icon(
+  //         Icons
+  //             .center_focus_weak_outlined, //TODO : will update it after Design Them update the Figma
+  //         color: ZPColors.greenIconColor,
+  //       ),
+  //       label: 'Web Login',
+  //     );
 
   factory MoreDetailsTile.account() => const MoreDetailsTile(
         icon: Icon(
           Icons.perm_identity_outlined,
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'Account',
       );
@@ -149,27 +149,26 @@ class MoreDetailsTile {
   factory MoreDetailsTile.security() => const MoreDetailsTile(
         icon: Icon(
           Icons.https_outlined,
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'Security',
       );
 
-  factory MoreDetailsTile.notifications(BuildContext context) =>
-      MoreDetailsTile(
-        icon: const Icon(
+  factory MoreDetailsTile.notifications() => const MoreDetailsTile(
+        icon: Icon(
           Icons.notifications_none_outlined,
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'Notifications',
-        onTap: () => context.navigateTo(
-          const NotificationSettingsPageRoute(),
-        ),
+        // onTap: () => context.navigateTo(
+        //   const NotificationSettingsPageRoute(),
+        // ),
       );
 
   factory MoreDetailsTile.privacy() => const MoreDetailsTile(
         icon: Icon(
           Icons.security_outlined,
-          color: ZPColors.greenIconColor,
+          color: ZPColors.lightGray,
         ),
         label: 'Privacy',
       );

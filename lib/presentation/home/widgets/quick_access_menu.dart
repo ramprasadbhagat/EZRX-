@@ -27,7 +27,6 @@ class QuickAccessMenuPanel extends StatelessWidget {
         ),
         scrollDirection: Axis.horizontal,
         children: quickAccessItems.map((quickAccessItem) {
-          
           return _QuickAccessMenu(
             quickAccessMenuData: quickAccessItem,
           );
@@ -102,12 +101,12 @@ class _QuickAccessMenuData {
 }
 
 List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
-  final homeQuickAccessWebLoginMenu = _QuickAccessMenuData(
-    key: WidgetKeys.homeQuickAccessWebLoginMenu,
-    icon: 'web_login_menu.svg',
-    label: 'Web login',
-    onTap: () {},
-  );
+  // final homeQuickAccessWebLoginMenu = _QuickAccessMenuData(
+  //   key: WidgetKeys.homeQuickAccessWebLoginMenu,
+  //   icon: 'web_login_menu.svg',
+  //   label: 'Web login',
+  //   onTap: () {},
+  // );
   final homeQuickAccessOrdersMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessOrdersMenu,
     icon: 'order_menu.svg',
@@ -129,12 +128,12 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     onTap: () => context.navigateTo(const PaymentsTabRoute()),
   );
 
-  final homeQuickAccessLoyaltyMenu = _QuickAccessMenuData(
-    key: WidgetKeys.homeQuickAccessLoyaltyMenu,
-    icon: 'loyalty_menu.svg',
-    label: 'Loyalty',
-    onTap: () => {},
-  );
+  // final homeQuickAccessLoyaltyMenu = _QuickAccessMenuData(
+  //   key: WidgetKeys.homeQuickAccessLoyaltyMenu,
+  //   icon: 'loyalty_menu.svg',
+  //   label: 'Loyalty',
+  //   onTap: () => {},
+  // );
 
   final homeQuickAccessChatSupportMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessChatSupportMenu,
@@ -146,18 +145,18 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
 
   return context.read<UserBloc>().state.user.userCanAccessOrderHistory
       ? [
-          homeQuickAccessWebLoginMenu,
+          // homeQuickAccessWebLoginMenu,
           homeQuickAccessOrdersMenu,
           homeQuickAccessReturnsMenu,
           homeQuickAccessPaymentsMenu,
-          homeQuickAccessLoyaltyMenu,
+          // homeQuickAccessLoyaltyMenu,
           homeQuickAccessChatSupportMenu,
         ]
       : [
-          homeQuickAccessWebLoginMenu,
+          // homeQuickAccessWebLoginMenu,
           homeQuickAccessReturnsMenu,
           homeQuickAccessPaymentsMenu,
-          homeQuickAccessLoyaltyMenu,
+          // homeQuickAccessLoyaltyMenu,
           homeQuickAccessChatSupportMenu,
         ];
 }

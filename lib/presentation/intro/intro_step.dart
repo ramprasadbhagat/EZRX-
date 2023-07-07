@@ -1,14 +1,15 @@
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class IntroStep extends StatelessWidget {
   final IntroObject introObject;
   final Function() buttonOnTap;
 
-  const IntroStep(
-      {Key? key, required this.introObject, required this.buttonOnTap,})
-      : super(key: key);
+  const IntroStep({
+    Key? key,
+    required this.introObject,
+    required this.buttonOnTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,10 @@ class IntroStep extends StatelessWidget {
         children: [
           Expanded(
             flex: 6,
-            child: SvgPicture.asset(introObject.assetsPath,),
+            child: Image.asset(
+              introObject.assetsPath,
+              fit: BoxFit.cover,
+            ),
           ),
           Expanded(
             flex: 4,

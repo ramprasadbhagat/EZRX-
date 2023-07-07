@@ -47,14 +47,14 @@ class ServiceTile extends StatelessWidget {
             MoreDetailsTile.orderTab(context),
             MoreDetailsTile.returnsTab(context),
             MoreDetailsTile.paymentsTab(context),
-            MoreDetailsTile.loyaltyTab(),
-            MoreDetailsTile.webLoginTab(),
+            // MoreDetailsTile.loyaltyTab(),
+            // MoreDetailsTile.webLoginTab(),
           ]
         : [
             MoreDetailsTile.returnsTab(context),
             MoreDetailsTile.paymentsTab(context),
-            MoreDetailsTile.loyaltyTab(),
-            MoreDetailsTile.webLoginTab(),
+            // MoreDetailsTile.loyaltyTab(),
+            // MoreDetailsTile.webLoginTab(),
           ];
   }
 }
