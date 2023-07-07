@@ -6,41 +6,40 @@ import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'additional_details_data.freezed.dart';
+part 'delivery_info_data.freezed.dart';
 
 @freezed
-class AdditionalDetailsData with _$AdditionalDetailsData {
-  const AdditionalDetailsData._();
-  const factory AdditionalDetailsData({
-    required CustomerPoReference customerPoReference,
-    required SpecialInstruction specialInstruction,
+class DeliveryInfoData with _$DeliveryInfoData {
+  const DeliveryInfoData._();
+  const factory DeliveryInfoData({
+    required PoReference poReference,
+    required DeliveryInstruction deliveryInstruction,
     required ReferenceNote referenceNote,
-    required CollectiveNumber collectiveNumber,
     required ContactPerson contactPerson,
-    required ContactNumber contactNumber,
+    required MobileNumber mobileNumber,
     required PaymentTerm paymentTerm,
     required DeliveryDate deliveryDate,
     required List<PoDocuments> poDocuments,
     required bool greenDeliveryEnabled,
-  }) = _AdditionalDetailsData;
+  }) = _DeliveryInfoData;
 
-  factory AdditionalDetailsData.fromSavedOrder({
+  factory DeliveryInfoData.fromSavedOrder({
     required SavedOrder orderDetail,
     required CustomerCodeInfo customerCodeInfo,
   }) {
     final orderDeliveryDate = orderDetail.requestedDeliveryDate;
 
-    return AdditionalDetailsData.empty().copyWith(
+    return DeliveryInfoData.empty().copyWith(
       contactPerson: ContactPerson(orderDetail.contactPerson),
-      contactNumber: ContactNumber(
+      mobileNumber: MobileNumber(
         orderDetail.phonenumber.isEmpty
             ? customerCodeInfo.telephoneNumber.displayTelephoneNumber
             : orderDetail.phonenumber,
       ),
-      customerPoReference: CustomerPoReference(orderDetail.poReference),
-      specialInstruction: SpecialInstruction(orderDetail.specialInstructions),
+      poReference: PoReference(orderDetail.poReference),
+      deliveryInstruction: DeliveryInstruction(orderDetail.specialInstructions),
       referenceNote: ReferenceNote(orderDetail.referenceNotes),
-      collectiveNumber: CollectiveNumber(orderDetail.collectiveNo),
+      // collectiveNumber: CollectiveNumber(orderDetail.collectiveNo),
       paymentTerm: PaymentTerm(orderDetail.payTerm),
       poDocuments: orderDetail.poAttachent,
       deliveryDate: orderDeliveryDate.isEmpty
@@ -50,28 +49,28 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
     );
   }
 
-  factory AdditionalDetailsData.fromOrderHistory({
+  factory DeliveryInfoData.fromOrderHistory({
     required OrderHistoryDetails orderHistoryDetails,
   }) {
-    return AdditionalDetailsData.empty().copyWith(
-      customerPoReference: CustomerPoReference(
+    return DeliveryInfoData.empty().copyWith(
+      poReference: PoReference(
         orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference.displayPOReference,
       ),
       contactPerson: ContactPerson(
         orderHistoryDetails.orderHistoryDetailsOrderHeader.orderBy,
       ),
-      contactNumber: ContactNumber(
+      mobileNumber: MobileNumber(
         orderHistoryDetails.orderHistoryDetailsOrderHeader.telephoneNumber
             .getOrDefaultValue(''),
       ),
-      specialInstruction: SpecialInstruction(
+      deliveryInstruction: DeliveryInstruction(
         orderHistoryDetails.orderHistoryDetailsSpecialInstructions
             .getOrDefaultValue(''),
       ),
       referenceNote: ReferenceNote(
         orderHistoryDetails.orderHistoryDetailsOrderHeader.referenceNotes,
       ),
-      collectiveNumber: CollectiveNumber(''),
+      // collectiveNumber: CollectiveNumber(''),
       paymentTerm: PaymentTerm(
         '${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermCode.getOrDefaultValue('')}-${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermDescription.getOrDefaultValue('')}',
       ),
@@ -79,13 +78,13 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
     );
   }
 
-  factory AdditionalDetailsData.empty() => AdditionalDetailsData(
-        customerPoReference: CustomerPoReference(''),
-        specialInstruction: SpecialInstruction(''),
+  factory DeliveryInfoData.empty() => DeliveryInfoData(
+        poReference: PoReference(''),
+        deliveryInstruction: DeliveryInstruction(''),
         referenceNote: ReferenceNote(''),
-        collectiveNumber: CollectiveNumber(''),
+        // collectiveNumber: CollectiveNumber(''),
         contactPerson: ContactPerson(''),
-        contactNumber: ContactNumber(''),
+        mobileNumber: MobileNumber(''),
         paymentTerm: PaymentTerm(''),
         deliveryDate: defaultDeliveryDate,
         poDocuments: <PoDocuments>[],

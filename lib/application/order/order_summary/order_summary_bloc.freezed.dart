@@ -31,7 +31,7 @@ mixin _$OrderSummaryEvent {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)
         submitOrder,
@@ -52,7 +52,7 @@ mixin _$OrderSummaryEvent {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -73,7 +73,7 @@ mixin _$OrderSummaryEvent {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -250,7 +250,7 @@ class _$_Initialized implements _Initialized {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)
         submitOrder,
@@ -274,7 +274,7 @@ class _$_Initialized implements _Initialized {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -298,7 +298,7 @@ class _$_Initialized implements _Initialized {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -418,7 +418,7 @@ class _$_StepContinue implements _StepContinue {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)
         submitOrder,
@@ -442,7 +442,7 @@ class _$_StepContinue implements _StepContinue {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -466,7 +466,7 @@ class _$_StepContinue implements _StepContinue {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -574,7 +574,7 @@ class _$_StepCancel implements _StepCancel {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)
         submitOrder,
@@ -598,7 +598,7 @@ class _$_StepCancel implements _StepCancel {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -622,7 +622,7 @@ class _$_StepCancel implements _StepCancel {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -756,7 +756,7 @@ class _$_StepTapped implements _StepTapped {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)
         submitOrder,
@@ -780,7 +780,7 @@ class _$_StepTapped implements _StepTapped {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -804,7 +804,7 @@ class _$_StepTapped implements _StepTapped {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -879,7 +879,7 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
       double grandTotal,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
-      AdditionalDetailsData data,
+      DeliveryInfoData data,
       OrderDocumentType orderDocumentType,
       SalesOrganisationConfigs config});
 
@@ -887,7 +887,7 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
   $UserCopyWith<$Res> get user;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $AdditionalDetailsDataCopyWith<$Res> get data;
+  $DeliveryInfoDataCopyWith<$Res> get data;
   $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
   $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
@@ -941,7 +941,7 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as AdditionalDetailsData,
+              as DeliveryInfoData,
       orderDocumentType: null == orderDocumentType
           ? _value.orderDocumentType
           : orderDocumentType // ignore: cast_nullable_to_non_nullable
@@ -987,8 +987,8 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $AdditionalDetailsDataCopyWith<$Res> get data {
-    return $AdditionalDetailsDataCopyWith<$Res>(_value.data, (value) {
+  $DeliveryInfoDataCopyWith<$Res> get data {
+    return $DeliveryInfoDataCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value));
     });
   }
@@ -1044,7 +1044,7 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final AdditionalDetailsData data;
+  final DeliveryInfoData data;
   @override
   final OrderDocumentType orderDocumentType;
   @override
@@ -1112,7 +1112,7 @@ class _$_SubmitOrder implements _SubmitOrder {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)
         submitOrder,
@@ -1137,7 +1137,7 @@ class _$_SubmitOrder implements _SubmitOrder {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -1162,7 +1162,7 @@ class _$_SubmitOrder implements _SubmitOrder {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            AdditionalDetailsData data,
+            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
             SalesOrganisationConfigs config)?
         submitOrder,
@@ -1224,7 +1224,7 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
       required final double grandTotal,
       required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
-      required final AdditionalDetailsData data,
+      required final DeliveryInfoData data,
       required final OrderDocumentType orderDocumentType,
       required final SalesOrganisationConfigs config}) = _$_SubmitOrder;
 
@@ -1234,7 +1234,7 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
   double get grandTotal;
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
-  AdditionalDetailsData get data;
+  DeliveryInfoData get data;
   OrderDocumentType get orderDocumentType;
   SalesOrganisationConfigs get config;
   @JsonKey(ignore: true)

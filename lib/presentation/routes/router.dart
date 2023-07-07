@@ -21,6 +21,7 @@ import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/payment_methods_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
@@ -147,6 +148,10 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'orders/cart',
       page: CartPage,
+    ),
+    AutoRoute(
+      path: 'orders/cart/checkout',
+      page: CheckoutPage,
     ),
     AutoRoute(
       path: 'orders/order_confirmation',

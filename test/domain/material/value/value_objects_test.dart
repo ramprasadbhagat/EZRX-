@@ -328,7 +328,7 @@ void main() {
     test('should return value when contact number value is less than 16',
         () async {
       const input = '1234567890123';
-      final contactNumber = ContactNumber(input);
+      final contactNumber = MobileNumber(input);
       final result = contactNumber.getTelephone;
       expect(result, '1234567890123');
     });
@@ -337,7 +337,7 @@ void main() {
         'should return value as substing from 0 to 16 when contact number value is more than 16',
         () async {
       const input = '123456789012345678';
-      final contactNumber = ContactNumber(input);
+      final contactNumber = MobileNumber(input);
       final result = contactNumber.getTelephone;
       expect(result, '1234567890123456');
     });

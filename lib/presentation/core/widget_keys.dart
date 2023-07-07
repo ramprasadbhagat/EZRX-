@@ -225,6 +225,14 @@ class WidgetKeys {
   static const Key cartButton = Key('cartButton');
 
   //============================================================
+  //  Checkout Page Keys
+  //============================================================
+  static const Key checkoutPage = Key('checkoutPage');
+  static const Key showDeliveryInfo = Key('showDeliveryInfo');
+  static const Key checkoutProductImage = Key('checkoutProductImage');
+  static const Key deliveryDate = Key('deliveryDate');
+
+  //============================================================
   //  Material List
   //============================================================
 

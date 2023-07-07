@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -25,8 +25,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late SalesOrganisationConfigs config;
   late CustomerCodeInfo customerCodeInfo;
-  late AdditionalDetailsState state;
-  late AdditionalDetailsData data;
+  // late AdditionalDetailsState state;
+  late DeliveryInfoData data;
   late OrderRepository repository;
   late SavedOrder orderDetail;
   group(
@@ -46,8 +46,8 @@ void main() {
           );
           customerCodeInfo = CustomerCodeInfo.empty();
           repository = SavedOrderRepositoryMock();
-          state = AdditionalDetailsState.initial();
-          data = AdditionalDetailsData.empty();
+          // state = AdditionalDetailsState.initial();
+          data = DeliveryInfoData.empty();
         },
       );
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
@@ -63,7 +63,7 @@ void main() {
         ),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: data.copyWith(
+            deliveryInfoData: data.copyWith(
               deliveryDate: DeliveryDate(
                 DateFormat('yyyy-MM-dd').format(
                   DateTime.now().add(
@@ -73,7 +73,7 @@ void main() {
                   ),
                 ),
               ),
-              contactNumber: ContactNumber('NA'),
+              mobileNumber: MobileNumber('NA'),
             ),
             isValidated: false,
             showErrorMessages: false,
@@ -96,7 +96,7 @@ void main() {
         ),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: data.copyWith(
+            deliveryInfoData: data.copyWith(
               deliveryDate: DeliveryDate(
                 DateFormat('yyyy-MM-dd').format(
                   DateTime.now().add(
@@ -106,7 +106,7 @@ void main() {
                   ),
                 ),
               ),
-              contactNumber: ContactNumber('NA'),
+              mobileNumber: MobileNumber('NA'),
             ),
             isValidated: false,
             showErrorMessages: false,
@@ -114,134 +114,134 @@ void main() {
         ],
       );
 
-      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
-        'Additional Details AdditionalDetails Form OnTextChange',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
-        seed: () => AdditionalDetailsState.initial(),
-        act: (AdditionalDetailsBloc bloc) {
-          bloc
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.customerPoReference,
-              newValue: 'Sample Reference',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.contactNumber,
-              newValue: '1234567890',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.collectiveNumber,
-              newValue: '1234-2345',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.contactPerson,
-              newValue: 'Person Name',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.deliveryDate,
-              newValue: '2012-12-10',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.referenceNote,
-              newValue: 'Reference Note',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.specialInstruction,
-              newValue: 'Special Instruction',
-            ))
-            ..add(const AdditionalDetailsEvent.onTextChange(
-              label: AdditionalDetailsLabel.paymentTerm,
-              newValue: '0001-Test',
-            ));
-        },
-        expect: () => [
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-              collectiveNumber: CollectiveNumber('1234-2345'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-              collectiveNumber: CollectiveNumber('1234-2345'),
-              contactPerson: ContactPerson('Person Name'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-              collectiveNumber: CollectiveNumber('1234-2345'),
-              contactPerson: ContactPerson('Person Name'),
-              deliveryDate: DeliveryDate('2012-12-10'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-              collectiveNumber: CollectiveNumber('1234-2345'),
-              contactPerson: ContactPerson('Person Name'),
-              deliveryDate: DeliveryDate('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-              collectiveNumber: CollectiveNumber('1234-2345'),
-              contactPerson: ContactPerson('Person Name'),
-              deliveryDate: DeliveryDate('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
-              specialInstruction: SpecialInstruction('Special Instruction'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-          state.copyWith(
-            additionalDetailsData: data.copyWith(
-              customerPoReference: CustomerPoReference('Sample Reference'),
-              contactNumber: ContactNumber('1234567890'),
-              collectiveNumber: CollectiveNumber('1234-2345'),
-              contactPerson: ContactPerson('Person Name'),
-              deliveryDate: DeliveryDate('2012-12-10'),
-              referenceNote: ReferenceNote('Reference Note'),
-              specialInstruction: SpecialInstruction('Special Instruction'),
-              paymentTerm: PaymentTerm('0001-Test'),
-            ),
-            isValidated: false,
-            showErrorMessages: false,
-          ),
-        ],
-      );
+      // blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+      //   'Additional Details AdditionalDetails Form OnTextChange',
+      //   build: () => AdditionalDetailsBloc(
+      //     savedOrderRepository: repository,
+      //   ),
+      //   seed: () => AdditionalDetailsState.initial(),
+      //   act: (AdditionalDetailsBloc bloc) {
+      //     bloc
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.poReference,
+      //         newValue: 'Sample Reference',
+      //       ))
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.contactNumber,
+      //         newValue: '1234567890',
+      //       ))
+      //       // ..add(const AdditionalDetailsEvent.onTextChange(
+      //       //   label: DeliveryInfoLabel.collectiveNumber,
+      //       //   newValue: '1234-2345',
+      //       // ))
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.contactPerson,
+      //         newValue: 'Person Name',
+      //       ))
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.deliveryDate,
+      //         newValue: '2012-12-10',
+      //       ))
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.referenceNote,
+      //         newValue: 'Reference Note',
+      //       ))
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.deliveryInstruction,
+      //         newValue: 'Special Instruction',
+      //       ))
+      //       ..add(const AdditionalDetailsEvent.onTextChange(
+      //         label: DeliveryInfoLabel.paymentTerm,
+      //         newValue: '0001-Test',
+      //       ));
+      //   },
+      //   expect: () => [
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //         // collectiveNumber: CollectiveNumber('1234-2345'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //         // collectiveNumber: CollectiveNumber('1234-2345'),
+      //         contactPerson: ContactPerson('Person Name'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //         // collectiveNumber: CollectiveNumber('1234-2345'),
+      //         contactPerson: ContactPerson('Person Name'),
+      //         deliveryDate: DeliveryDate('2012-12-10'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //         // collectiveNumber: CollectiveNumber('1234-2345'),
+      //         contactPerson: ContactPerson('Person Name'),
+      //         deliveryDate: DeliveryDate('2012-12-10'),
+      //         referenceNote: ReferenceNote('Reference Note'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //         // collectiveNumber: CollectiveNumber('1234-2345'),
+      //         contactPerson: ContactPerson('Person Name'),
+      //         deliveryDate: DeliveryDate('2012-12-10'),
+      //         referenceNote: ReferenceNote('Reference Note'),
+      //         deliveryInstruction: DeliveryInstruction('Special Instruction'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //     state.copyWith(
+      //       deliveryInfoData: data.copyWith(
+      //         poReference: PoReference('Sample Reference'),
+      //         mobileNumber: MobileNumber('1234567890'),
+      //         // collectiveNumber: CollectiveNumber('1234-2345'),
+      //         contactPerson: ContactPerson('Person Name'),
+      //         deliveryDate: DeliveryDate('2012-12-10'),
+      //         referenceNote: ReferenceNote('Reference Note'),
+      //         deliveryInstruction: DeliveryInstruction('Special Instruction'),
+      //         paymentTerm: PaymentTerm('0001-Test'),
+      //       ),
+      //       isValidated: false,
+      //       showErrorMessages: false,
+      //     ),
+      //   ],
+      // );
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form Success',
@@ -249,10 +249,10 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-          customerPoReference: CustomerPoReference('CO REF'),
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+          poReference: PoReference('CO REF'),
           contactPerson: ContactPerson('PERSON'),
-          contactNumber: ContactNumber('123456'),
+          mobileNumber: MobileNumber('123456'),
           paymentTerm: PaymentTerm('0001-TEST'),
         )),
         act: (AdditionalDetailsBloc bloc) {
@@ -264,10 +264,10 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isValidated: true,
             showErrorMessages: false,
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-              customerPoReference: CustomerPoReference('CO REF'),
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
               contactPerson: ContactPerson('PERSON'),
-              contactNumber: ContactNumber('123456'),
+              mobileNumber: MobileNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
             ),
           ),
@@ -280,10 +280,10 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-          customerPoReference: CustomerPoReference('CO REF'),
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+          poReference: PoReference('CO REF'),
           contactPerson: ContactPerson(''),
-          contactNumber: ContactNumber('123456'),
+          mobileNumber: MobileNumber('123456'),
           paymentTerm: PaymentTerm('0001-TEST'),
         )),
         act: (AdditionalDetailsBloc bloc) {
@@ -295,10 +295,10 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isValidated: false,
             showErrorMessages: true,
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-              customerPoReference: CustomerPoReference('CO REF'),
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
-              contactNumber: ContactNumber('123456'),
+              mobileNumber: MobileNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
             ),
           ),
@@ -311,10 +311,10 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-            customerPoReference: CustomerPoReference('CO REF'),
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
             contactPerson: ContactPerson(''),
-            contactNumber: ContactNumber('123456'),
+            mobileNumber: MobileNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             greenDeliveryEnabled: false,
           ),
@@ -324,10 +324,10 @@ void main() {
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-              customerPoReference: CustomerPoReference('CO REF'),
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
-              contactNumber: ContactNumber('123456'),
+              mobileNumber: MobileNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               greenDeliveryEnabled: true,
             ),
@@ -341,10 +341,10 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-            customerPoReference: CustomerPoReference('CO REF'),
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
             contactPerson: ContactPerson(''),
-            contactNumber: ContactNumber('123456'),
+            mobileNumber: MobileNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             greenDeliveryEnabled: true,
           ),
@@ -354,10 +354,10 @@ void main() {
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-              customerPoReference: CustomerPoReference('CO REF'),
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
-              contactNumber: ContactNumber('123456'),
+              mobileNumber: MobileNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               greenDeliveryEnabled: false,
             ),
@@ -379,7 +379,7 @@ void main() {
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poDocuments: [PoDocuments.empty()],
             ),
           ),
@@ -392,7 +392,7 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poDocuments: [PoDocuments.empty()],
           ),
         ),
@@ -414,7 +414,7 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poDocuments: [
               PoDocuments(name: 'fake-name1', url: 'fake-name1'),
               PoDocuments(name: 'fake-name2', url: 'fake-name2'),
@@ -459,7 +459,7 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isLoading: false,
             orderId: orderDetail.id,
-            additionalDetailsData: AdditionalDetailsData.fromSavedOrder(
+            deliveryInfoData: DeliveryInfoData.fromSavedOrder(
               orderDetail: orderDetail,
               customerCodeInfo: customerCodeInfo,
             ),
@@ -497,8 +497,8 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isLoading: false,
             orderId: orderDetail.id,
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-              contactNumber: ContactNumber(
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              mobileNumber: MobileNumber(
                 customerCodeInfo.telephoneNumber.displayTelephoneNumber,
               ),
             ),

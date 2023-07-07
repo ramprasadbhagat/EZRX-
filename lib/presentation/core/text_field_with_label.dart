@@ -15,6 +15,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.initValue,
     this.obscureText = false,
     this.onDone,
+    this.maxLines = 1,
   }) : super(key: key);
   final Key fieldKey;
   final String labelText;
@@ -28,6 +29,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final String? initValue;
   final bool obscureText;
   final Function(String)? onDone;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class TextFieldWithLabel extends StatelessWidget {
           validator: (value) => validator(value),
           initialValue: initValue,
           onFieldSubmitted: onDone,
+          maxLines: maxLines,
         ),
       ],
     );

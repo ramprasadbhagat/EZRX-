@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -124,7 +124,7 @@ class OrderRepository implements IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
   }) async {
     final draftOrder = _getCreateDraftOrderRequest(
       shipToInfo: shipToInfo,
@@ -179,7 +179,7 @@ class OrderRepository implements IOrderRepository {
   @override
   Future<Either<ApiFailure, SavedOrder>> updateDraftOrder({
     required List<CartItem> cartItems,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
     required double grandTotal,
     required String orderId,
     required User user,
@@ -242,7 +242,7 @@ class OrderRepository implements IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
     required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs configs,
   }) async {
@@ -330,7 +330,7 @@ class OrderRepository implements IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
   }) {
     //bonus calculation
 
@@ -350,16 +350,16 @@ class OrderRepository implements IOrderRepository {
       companyName: CompanyName(shipToInfo.shipToName.toString()),
       country: shipToInfo.country,
       postCode1: shipToInfo.postalCode,
-      specialInstructions: data.specialInstruction.getValue(),
-      poReference: data.customerPoReference.getValue(),
+      specialInstructions: data.deliveryInstruction.getValue(),
+      poReference: data.poReference.getValue(),
       payTerm: data.paymentTerm.getValue(),
-      collectiveNo: data.collectiveNumber.getValue(),
+      // collectiveNo: data.collectiveNumber.getValue(),
       totalOrderValue: grandTotal,
       draftorder: true,
       address1: shipToInfo.shipToAddress.street,
       address2: shipToInfo.shipToAddress.street2,
       city: shipToInfo.city1,
-      phonenumber: data.contactNumber.getValue(),
+      phonenumber: data.mobileNumber.getValue(),
       user: user.id,
       contactPerson: data.contactPerson.getValue().isNotEmpty
           ? data.contactPerson.getValue()
@@ -373,7 +373,7 @@ class OrderRepository implements IOrderRepository {
   SubmitOrder _getSubmitOrderRequest({
     required ShipToInfo shipToInfo,
     required User user,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
     required List<PriceAggregate> cartItems,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
@@ -384,13 +384,13 @@ class OrderRepository implements IOrderRepository {
       userName: data.contactPerson.getValue().isNotEmpty
           ? data.contactPerson.getValue()
           : user.fullName.toString(),
-      poReference: data.customerPoReference.getValue(),
+      poReference: data.poReference.getValue(),
       referenceNotes: data.referenceNote.getValue(),
-      specialInstructions: data.specialInstruction.getValue(),
+      specialInstructions: data.deliveryInstruction.getValue(),
       companyName: CompanyName(shipToInfo.shipToName.toString()),
       requestedDeliveryDate: data.deliveryDate.getValue(),
       poDate: data.deliveryDate.getValue(),
-      telephone: data.contactNumber.getTelephone,
+      telephone: data.mobileNumber.getTelephone,
       trackingLevel: 'items',
       collectiveNumber: '',
       subscribeStatusChange: true,
@@ -473,7 +473,7 @@ class OrderRepository implements IOrderRepository {
 
 String _getPaymentTerms({
   required List<PriceAggregate> cartItems,
-  required AdditionalDetailsData data,
+  required DeliveryInfoData data,
 }) {
   final priceAggregate = cartItems.firstWhere(
     (element) =>

@@ -16,7 +16,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -312,14 +312,14 @@ void main() {
         )
       ];
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -335,13 +335,13 @@ void main() {
         userName: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
             : user.fullName.toString(),
-        poReference: data.customerPoReference.getValue(),
+        poReference: data.poReference.getValue(),
         referenceNotes: data.referenceNote.getValue(),
-        specialInstructions: data.specialInstruction.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         requestedDeliveryDate: data.deliveryDate.getValue(),
         poDate: data.deliveryDate.getValue(),
-        telephone: data.contactNumber.getTelephone,
+        telephone: data.mobileNumber.getTelephone,
         trackingLevel: 'items',
         collectiveNumber: '',
         subscribeStatusChange: true,
@@ -484,7 +484,7 @@ void main() {
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-        data: AdditionalDetailsData.empty(),
+        data: DeliveryInfoData.empty(),
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: salesOrganisationConfigs,
@@ -522,14 +522,14 @@ void main() {
         )
       ];
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -545,13 +545,13 @@ void main() {
         userName: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
             : user.fullName.toString(),
-        poReference: data.customerPoReference.getValue(),
+        poReference: data.poReference.getValue(),
         referenceNotes: data.referenceNote.getValue(),
-        specialInstructions: data.specialInstruction.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         requestedDeliveryDate: data.deliveryDate.getValue(),
         poDate: data.deliveryDate.getValue(),
-        telephone: data.contactNumber.getTelephone,
+        telephone: data.mobileNumber.getTelephone,
         trackingLevel: 'items',
         collectiveNumber: '',
         subscribeStatusChange: true,
@@ -670,14 +670,14 @@ void main() {
         )
       ];
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
         greenDeliveryEnabled: true,
       );
@@ -695,13 +695,13 @@ void main() {
         userName: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
             : user.fullName.toString(),
-        poReference: data.customerPoReference.getValue(),
+        poReference: data.poReference.getValue(),
         referenceNotes: data.referenceNote.getValue(),
-        specialInstructions: data.specialInstruction.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         requestedDeliveryDate: data.deliveryDate.getValue(),
         poDate: data.deliveryDate.getValue(),
-        telephone: data.contactNumber.getTelephone,
+        telephone: data.mobileNumber.getTelephone,
         trackingLevel: 'items',
         collectiveNumber: '',
         subscribeStatusChange: true,
@@ -828,7 +828,7 @@ void main() {
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-        data: AdditionalDetailsData.empty(),
+        data: DeliveryInfoData.empty(),
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: SalesOrganisationConfigs.empty()
@@ -895,14 +895,14 @@ void main() {
     test('createDraftOrder  successfully locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -926,16 +926,16 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.specialInstruction.getValue(),
-        poReference: data.customerPoReference.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        poReference: data.poReference.getValue(),
         payTerm: data.paymentTerm.getValue(),
-        collectiveNo: data.collectiveNumber.getValue(),
+        // collectiveNo: data.collectiveNumber.getValue(),
         totalOrderValue: 100.0,
         draftorder: true,
         address1: mockShipToInfo.shipToAddress.street,
         address2: mockShipToInfo.shipToAddress.street2,
         city: mockShipToInfo.city1,
-        phonenumber: data.contactNumber.getValue(),
+        phonenumber: data.mobileNumber.getValue(),
         user: user.id,
         contactPerson: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
@@ -1007,14 +1007,14 @@ void main() {
     test('createDraftOrder  with not isDraft  locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -1038,16 +1038,16 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.specialInstruction.getValue(),
-        poReference: data.customerPoReference.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        poReference: data.poReference.getValue(),
         payTerm: data.paymentTerm.getValue(),
-        collectiveNo: data.collectiveNumber.getValue(),
+        // collectiveNo: data.collectiveNumber.getValue(),
         totalOrderValue: 100.0,
         draftorder: true,
         address1: mockShipToInfo.shipToAddress.street,
         address2: mockShipToInfo.shipToAddress.street2,
         city: mockShipToInfo.city1,
-        phonenumber: data.contactNumber.getValue(),
+        phonenumber: data.mobileNumber.getValue(),
         user: user.id,
         contactPerson: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
@@ -1109,14 +1109,14 @@ void main() {
     test('createDraftOrder with contact person empty', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson(''),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -1140,16 +1140,16 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.specialInstruction.getValue(),
-        poReference: data.customerPoReference.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        poReference: data.poReference.getValue(),
         payTerm: data.paymentTerm.getValue(),
-        collectiveNo: data.collectiveNumber.getValue(),
+        // collectiveNo: data.collectiveNumber.getValue(),
         totalOrderValue: 100.0,
         draftorder: true,
         address1: mockShipToInfo.shipToAddress.street,
         address2: mockShipToInfo.shipToAddress.street2,
         city: mockShipToInfo.city1,
-        phonenumber: data.contactNumber.getValue(),
+        phonenumber: data.mobileNumber.getValue(),
         user: user.id,
         contactPerson: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
@@ -1231,14 +1231,14 @@ void main() {
         grandTotal: 0.0,
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
-        data: AdditionalDetailsData.empty().copyWith(
-          customerPoReference: CustomerPoReference('CO REF'),
+        data: DeliveryInfoData.empty().copyWith(
+          poReference: PoReference('CO REF'),
           contactPerson: ContactPerson('PERSON'),
-          contactNumber: ContactNumber('123456'),
+          mobileNumber: MobileNumber('123456'),
           paymentTerm: PaymentTerm('0001-TEST'),
           deliveryDate: DeliveryDate('01/02/2023'),
-          specialInstruction: SpecialInstruction('test'),
-          collectiveNumber: CollectiveNumber('543678909'),
+          deliveryInstruction: DeliveryInstruction('test'),
+          // collectiveNumber: CollectiveNumber('543678909'),
           referenceNote: ReferenceNote('note'),
         ),
       );
@@ -1251,14 +1251,14 @@ void main() {
     test('createDraftOrder  successfully remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -1282,16 +1282,16 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.specialInstruction.getValue(),
-        poReference: data.customerPoReference.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        poReference: data.poReference.getValue(),
         payTerm: data.paymentTerm.getValue(),
-        collectiveNo: data.collectiveNumber.getValue(),
+        // collectiveNo: data.collectiveNumber.getValue(),
         totalOrderValue: 100.0,
         draftorder: true,
         address1: mockShipToInfo.shipToAddress.street,
         address2: mockShipToInfo.shipToAddress.street2,
         city: mockShipToInfo.city1,
-        phonenumber: data.contactNumber.getValue(),
+        phonenumber: data.mobileNumber.getValue(),
         user: user.id,
         contactPerson: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
@@ -1353,14 +1353,14 @@ void main() {
     test('createDraftOrder  with not isDraft  remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -1384,16 +1384,16 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.specialInstruction.getValue(),
-        poReference: data.customerPoReference.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        poReference: data.poReference.getValue(),
         payTerm: data.paymentTerm.getValue(),
-        collectiveNo: data.collectiveNumber.getValue(),
+        // collectiveNo: data.collectiveNumber.getValue(),
         totalOrderValue: 100.0,
         draftorder: true,
         address1: mockShipToInfo.shipToAddress.street,
         address2: mockShipToInfo.shipToAddress.street2,
         city: mockShipToInfo.city1,
-        phonenumber: data.contactNumber.getValue(),
+        phonenumber: data.mobileNumber.getValue(),
         user: user.id,
         contactPerson: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
@@ -1455,14 +1455,14 @@ void main() {
     test('createDraftOrder  fail remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      final data = AdditionalDetailsData.empty().copyWith(
-        customerPoReference: CustomerPoReference('CO REF'),
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
-        contactNumber: ContactNumber('123456'),
+        mobileNumber: MobileNumber('123456'),
         paymentTerm: PaymentTerm('0001-TEST'),
         deliveryDate: DeliveryDate('01/02/2023'),
-        specialInstruction: SpecialInstruction('test'),
-        collectiveNumber: CollectiveNumber('543678909'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
         referenceNote: ReferenceNote('note'),
       );
 
@@ -1486,16 +1486,16 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.specialInstruction.getValue(),
-        poReference: data.customerPoReference.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        poReference: data.poReference.getValue(),
         payTerm: data.paymentTerm.getValue(),
-        collectiveNo: data.collectiveNumber.getValue(),
+        // collectiveNo: data.collectiveNumber.getValue(),
         totalOrderValue: 100.0,
         draftorder: true,
         address1: mockShipToInfo.shipToAddress.street,
         address2: mockShipToInfo.shipToAddress.street2,
         city: mockShipToInfo.city1,
-        phonenumber: data.contactNumber.getValue(),
+        phonenumber: data.mobileNumber.getValue(),
         user: user.id,
         contactPerson: data.contactPerson.getValue().isNotEmpty
             ? data.contactPerson.getValue()
@@ -1621,7 +1621,7 @@ void main() {
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
         shipToInfo: mockShipToInfo,
-        data: AdditionalDetailsData.empty(),
+        data: DeliveryInfoData.empty(),
         grandTotal: 0,
         orderId: fakeSavedOrderId,
         cartItems: [],
@@ -1643,7 +1643,7 @@ void main() {
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
         shipToInfo: mockShipToInfo,
-        data: AdditionalDetailsData.empty(),
+        data: DeliveryInfoData.empty(),
         grandTotal: 0,
         orderId: fakeSavedOrderId,
         cartItems: [],
@@ -1668,7 +1668,7 @@ void main() {
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
         shipToInfo: mockShipToInfo,
-        data: AdditionalDetailsData.empty(),
+        data: DeliveryInfoData.empty(),
         grandTotal: 0,
         orderId: fakeSavedOrderId,
         cartItems: [],
@@ -1695,7 +1695,7 @@ void main() {
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
         shipToInfo: mockShipToInfo,
-        data: AdditionalDetailsData.empty(),
+        data: DeliveryInfoData.empty(),
         grandTotal: 0,
         orderId: fakeSavedOrderId,
         cartItems: [],
@@ -1724,14 +1724,14 @@ void main() {
       )
     ];
 
-    final data = AdditionalDetailsData.empty().copyWith(
-      customerPoReference: CustomerPoReference('CO REF'),
+    final data = DeliveryInfoData.empty().copyWith(
+      poReference: PoReference('CO REF'),
       contactPerson: ContactPerson('PERSON'),
-      contactNumber: ContactNumber('123456'),
+      mobileNumber: MobileNumber('123456'),
       paymentTerm: PaymentTerm('0001-TEST'),
       deliveryDate: DeliveryDate('01/02/2023'),
-      specialInstruction: SpecialInstruction('test'),
-      collectiveNumber: CollectiveNumber('543678909'),
+      deliveryInstruction: DeliveryInstruction('test'),
+      // collectiveNumber: CollectiveNumber('543678909'),
       referenceNote: ReferenceNote('note'),
     );
 
@@ -1747,13 +1747,13 @@ void main() {
       userName: data.contactPerson.getValue().isNotEmpty
           ? data.contactPerson.getValue()
           : user.fullName.toString(),
-      poReference: data.customerPoReference.getValue(),
+      poReference: data.poReference.getValue(),
       referenceNotes: data.referenceNote.getValue(),
-      specialInstructions: data.specialInstruction.getValue(),
+      specialInstructions: data.deliveryInstruction.getValue(),
       companyName: CompanyName(mockShipToInfo.shipToName.toString()),
       requestedDeliveryDate: data.deliveryDate.getValue(),
       poDate: data.deliveryDate.getValue(),
-      telephone: data.contactNumber.getTelephone,
+      telephone: data.mobileNumber.getTelephone,
       trackingLevel: 'items',
       collectiveNumber: '',
       subscribeStatusChange: true,

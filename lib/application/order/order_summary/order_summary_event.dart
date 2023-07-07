@@ -20,7 +20,7 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
     required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs config,
   

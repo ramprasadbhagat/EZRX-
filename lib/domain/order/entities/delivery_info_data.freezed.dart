@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'additional_details_data.dart';
+part of 'delivery_info_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,38 +15,35 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AdditionalDetailsData {
-  CustomerPoReference get customerPoReference =>
-      throw _privateConstructorUsedError;
-  SpecialInstruction get specialInstruction =>
+mixin _$DeliveryInfoData {
+  PoReference get poReference => throw _privateConstructorUsedError;
+  DeliveryInstruction get deliveryInstruction =>
       throw _privateConstructorUsedError;
   ReferenceNote get referenceNote => throw _privateConstructorUsedError;
-  CollectiveNumber get collectiveNumber => throw _privateConstructorUsedError;
   ContactPerson get contactPerson => throw _privateConstructorUsedError;
-  ContactNumber get contactNumber => throw _privateConstructorUsedError;
+  MobileNumber get mobileNumber => throw _privateConstructorUsedError;
   PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
   DeliveryDate get deliveryDate => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
   bool get greenDeliveryEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AdditionalDetailsDataCopyWith<AdditionalDetailsData> get copyWith =>
+  $DeliveryInfoDataCopyWith<DeliveryInfoData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AdditionalDetailsDataCopyWith<$Res> {
-  factory $AdditionalDetailsDataCopyWith(AdditionalDetailsData value,
-          $Res Function(AdditionalDetailsData) then) =
-      _$AdditionalDetailsDataCopyWithImpl<$Res, AdditionalDetailsData>;
+abstract class $DeliveryInfoDataCopyWith<$Res> {
+  factory $DeliveryInfoDataCopyWith(
+          DeliveryInfoData value, $Res Function(DeliveryInfoData) then) =
+      _$DeliveryInfoDataCopyWithImpl<$Res, DeliveryInfoData>;
   @useResult
   $Res call(
-      {CustomerPoReference customerPoReference,
-      SpecialInstruction specialInstruction,
+      {PoReference poReference,
+      DeliveryInstruction deliveryInstruction,
       ReferenceNote referenceNote,
-      CollectiveNumber collectiveNumber,
       ContactPerson contactPerson,
-      ContactNumber contactNumber,
+      MobileNumber mobileNumber,
       PaymentTerm paymentTerm,
       DeliveryDate deliveryDate,
       List<PoDocuments> poDocuments,
@@ -54,10 +51,9 @@ abstract class $AdditionalDetailsDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AdditionalDetailsDataCopyWithImpl<$Res,
-        $Val extends AdditionalDetailsData>
-    implements $AdditionalDetailsDataCopyWith<$Res> {
-  _$AdditionalDetailsDataCopyWithImpl(this._value, this._then);
+class _$DeliveryInfoDataCopyWithImpl<$Res, $Val extends DeliveryInfoData>
+    implements $DeliveryInfoDataCopyWith<$Res> {
+  _$DeliveryInfoDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,42 +63,37 @@ class _$AdditionalDetailsDataCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerPoReference = null,
-    Object? specialInstruction = null,
+    Object? poReference = null,
+    Object? deliveryInstruction = null,
     Object? referenceNote = null,
-    Object? collectiveNumber = null,
     Object? contactPerson = null,
-    Object? contactNumber = null,
+    Object? mobileNumber = null,
     Object? paymentTerm = null,
     Object? deliveryDate = null,
     Object? poDocuments = null,
     Object? greenDeliveryEnabled = null,
   }) {
     return _then(_value.copyWith(
-      customerPoReference: null == customerPoReference
-          ? _value.customerPoReference
-          : customerPoReference // ignore: cast_nullable_to_non_nullable
-              as CustomerPoReference,
-      specialInstruction: null == specialInstruction
-          ? _value.specialInstruction
-          : specialInstruction // ignore: cast_nullable_to_non_nullable
-              as SpecialInstruction,
+      poReference: null == poReference
+          ? _value.poReference
+          : poReference // ignore: cast_nullable_to_non_nullable
+              as PoReference,
+      deliveryInstruction: null == deliveryInstruction
+          ? _value.deliveryInstruction
+          : deliveryInstruction // ignore: cast_nullable_to_non_nullable
+              as DeliveryInstruction,
       referenceNote: null == referenceNote
           ? _value.referenceNote
           : referenceNote // ignore: cast_nullable_to_non_nullable
               as ReferenceNote,
-      collectiveNumber: null == collectiveNumber
-          ? _value.collectiveNumber
-          : collectiveNumber // ignore: cast_nullable_to_non_nullable
-              as CollectiveNumber,
       contactPerson: null == contactPerson
           ? _value.contactPerson
           : contactPerson // ignore: cast_nullable_to_non_nullable
               as ContactPerson,
-      contactNumber: null == contactNumber
-          ? _value.contactNumber
-          : contactNumber // ignore: cast_nullable_to_non_nullable
-              as ContactNumber,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as MobileNumber,
       paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
@@ -124,20 +115,19 @@ class _$AdditionalDetailsDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsDataCopyWith<$Res>
-    implements $AdditionalDetailsDataCopyWith<$Res> {
-  factory _$$_AdditionalDetailsDataCopyWith(_$_AdditionalDetailsData value,
-          $Res Function(_$_AdditionalDetailsData) then) =
-      __$$_AdditionalDetailsDataCopyWithImpl<$Res>;
+abstract class _$$_DeliveryInfoDataCopyWith<$Res>
+    implements $DeliveryInfoDataCopyWith<$Res> {
+  factory _$$_DeliveryInfoDataCopyWith(
+          _$_DeliveryInfoData value, $Res Function(_$_DeliveryInfoData) then) =
+      __$$_DeliveryInfoDataCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {CustomerPoReference customerPoReference,
-      SpecialInstruction specialInstruction,
+      {PoReference poReference,
+      DeliveryInstruction deliveryInstruction,
       ReferenceNote referenceNote,
-      CollectiveNumber collectiveNumber,
       ContactPerson contactPerson,
-      ContactNumber contactNumber,
+      MobileNumber mobileNumber,
       PaymentTerm paymentTerm,
       DeliveryDate deliveryDate,
       List<PoDocuments> poDocuments,
@@ -145,52 +135,47 @@ abstract class _$$_AdditionalDetailsDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsDataCopyWithImpl<$Res>
-    extends _$AdditionalDetailsDataCopyWithImpl<$Res, _$_AdditionalDetailsData>
-    implements _$$_AdditionalDetailsDataCopyWith<$Res> {
-  __$$_AdditionalDetailsDataCopyWithImpl(_$_AdditionalDetailsData _value,
-      $Res Function(_$_AdditionalDetailsData) _then)
+class __$$_DeliveryInfoDataCopyWithImpl<$Res>
+    extends _$DeliveryInfoDataCopyWithImpl<$Res, _$_DeliveryInfoData>
+    implements _$$_DeliveryInfoDataCopyWith<$Res> {
+  __$$_DeliveryInfoDataCopyWithImpl(
+      _$_DeliveryInfoData _value, $Res Function(_$_DeliveryInfoData) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerPoReference = null,
-    Object? specialInstruction = null,
+    Object? poReference = null,
+    Object? deliveryInstruction = null,
     Object? referenceNote = null,
-    Object? collectiveNumber = null,
     Object? contactPerson = null,
-    Object? contactNumber = null,
+    Object? mobileNumber = null,
     Object? paymentTerm = null,
     Object? deliveryDate = null,
     Object? poDocuments = null,
     Object? greenDeliveryEnabled = null,
   }) {
-    return _then(_$_AdditionalDetailsData(
-      customerPoReference: null == customerPoReference
-          ? _value.customerPoReference
-          : customerPoReference // ignore: cast_nullable_to_non_nullable
-              as CustomerPoReference,
-      specialInstruction: null == specialInstruction
-          ? _value.specialInstruction
-          : specialInstruction // ignore: cast_nullable_to_non_nullable
-              as SpecialInstruction,
+    return _then(_$_DeliveryInfoData(
+      poReference: null == poReference
+          ? _value.poReference
+          : poReference // ignore: cast_nullable_to_non_nullable
+              as PoReference,
+      deliveryInstruction: null == deliveryInstruction
+          ? _value.deliveryInstruction
+          : deliveryInstruction // ignore: cast_nullable_to_non_nullable
+              as DeliveryInstruction,
       referenceNote: null == referenceNote
           ? _value.referenceNote
           : referenceNote // ignore: cast_nullable_to_non_nullable
               as ReferenceNote,
-      collectiveNumber: null == collectiveNumber
-          ? _value.collectiveNumber
-          : collectiveNumber // ignore: cast_nullable_to_non_nullable
-              as CollectiveNumber,
       contactPerson: null == contactPerson
           ? _value.contactPerson
           : contactPerson // ignore: cast_nullable_to_non_nullable
               as ContactPerson,
-      contactNumber: null == contactNumber
-          ? _value.contactNumber
-          : contactNumber // ignore: cast_nullable_to_non_nullable
-              as ContactNumber,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as MobileNumber,
       paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
@@ -213,14 +198,13 @@ class __$$_AdditionalDetailsDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionalDetailsData extends _AdditionalDetailsData {
-  const _$_AdditionalDetailsData(
-      {required this.customerPoReference,
-      required this.specialInstruction,
+class _$_DeliveryInfoData extends _DeliveryInfoData {
+  const _$_DeliveryInfoData(
+      {required this.poReference,
+      required this.deliveryInstruction,
       required this.referenceNote,
-      required this.collectiveNumber,
       required this.contactPerson,
-      required this.contactNumber,
+      required this.mobileNumber,
       required this.paymentTerm,
       required this.deliveryDate,
       required final List<PoDocuments> poDocuments,
@@ -229,17 +213,15 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
         super._();
 
   @override
-  final CustomerPoReference customerPoReference;
+  final PoReference poReference;
   @override
-  final SpecialInstruction specialInstruction;
+  final DeliveryInstruction deliveryInstruction;
   @override
   final ReferenceNote referenceNote;
   @override
-  final CollectiveNumber collectiveNumber;
-  @override
   final ContactPerson contactPerson;
   @override
-  final ContactNumber contactNumber;
+  final MobileNumber mobileNumber;
   @override
   final PaymentTerm paymentTerm;
   @override
@@ -257,26 +239,24 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
 
   @override
   String toString() {
-    return 'AdditionalDetailsData(customerPoReference: $customerPoReference, specialInstruction: $specialInstruction, referenceNote: $referenceNote, collectiveNumber: $collectiveNumber, contactPerson: $contactPerson, contactNumber: $contactNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments, greenDeliveryEnabled: $greenDeliveryEnabled)';
+    return 'DeliveryInfoData(poReference: $poReference, deliveryInstruction: $deliveryInstruction, referenceNote: $referenceNote, contactPerson: $contactPerson, mobileNumber: $mobileNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments, greenDeliveryEnabled: $greenDeliveryEnabled)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsData &&
-            (identical(other.customerPoReference, customerPoReference) ||
-                other.customerPoReference == customerPoReference) &&
-            (identical(other.specialInstruction, specialInstruction) ||
-                other.specialInstruction == specialInstruction) &&
+            other is _$_DeliveryInfoData &&
+            (identical(other.poReference, poReference) ||
+                other.poReference == poReference) &&
+            (identical(other.deliveryInstruction, deliveryInstruction) ||
+                other.deliveryInstruction == deliveryInstruction) &&
             (identical(other.referenceNote, referenceNote) ||
                 other.referenceNote == referenceNote) &&
-            (identical(other.collectiveNumber, collectiveNumber) ||
-                other.collectiveNumber == collectiveNumber) &&
             (identical(other.contactPerson, contactPerson) ||
                 other.contactPerson == contactPerson) &&
-            (identical(other.contactNumber, contactNumber) ||
-                other.contactNumber == contactNumber) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
             (identical(other.paymentTerm, paymentTerm) ||
                 other.paymentTerm == paymentTerm) &&
             (identical(other.deliveryDate, deliveryDate) ||
@@ -290,12 +270,11 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      customerPoReference,
-      specialInstruction,
+      poReference,
+      deliveryInstruction,
       referenceNote,
-      collectiveNumber,
       contactPerson,
-      contactNumber,
+      mobileNumber,
       paymentTerm,
       deliveryDate,
       const DeepCollectionEquality().hash(_poDocuments),
@@ -304,37 +283,33 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsDataCopyWith<_$_AdditionalDetailsData> get copyWith =>
-      __$$_AdditionalDetailsDataCopyWithImpl<_$_AdditionalDetailsData>(
-          this, _$identity);
+  _$$_DeliveryInfoDataCopyWith<_$_DeliveryInfoData> get copyWith =>
+      __$$_DeliveryInfoDataCopyWithImpl<_$_DeliveryInfoData>(this, _$identity);
 }
 
-abstract class _AdditionalDetailsData extends AdditionalDetailsData {
-  const factory _AdditionalDetailsData(
-      {required final CustomerPoReference customerPoReference,
-      required final SpecialInstruction specialInstruction,
+abstract class _DeliveryInfoData extends DeliveryInfoData {
+  const factory _DeliveryInfoData(
+      {required final PoReference poReference,
+      required final DeliveryInstruction deliveryInstruction,
       required final ReferenceNote referenceNote,
-      required final CollectiveNumber collectiveNumber,
       required final ContactPerson contactPerson,
-      required final ContactNumber contactNumber,
+      required final MobileNumber mobileNumber,
       required final PaymentTerm paymentTerm,
       required final DeliveryDate deliveryDate,
       required final List<PoDocuments> poDocuments,
-      required final bool greenDeliveryEnabled}) = _$_AdditionalDetailsData;
-  const _AdditionalDetailsData._() : super._();
+      required final bool greenDeliveryEnabled}) = _$_DeliveryInfoData;
+  const _DeliveryInfoData._() : super._();
 
   @override
-  CustomerPoReference get customerPoReference;
+  PoReference get poReference;
   @override
-  SpecialInstruction get specialInstruction;
+  DeliveryInstruction get deliveryInstruction;
   @override
   ReferenceNote get referenceNote;
   @override
-  CollectiveNumber get collectiveNumber;
-  @override
   ContactPerson get contactPerson;
   @override
-  ContactNumber get contactNumber;
+  MobileNumber get mobileNumber;
   @override
   PaymentTerm get paymentTerm;
   @override
@@ -345,6 +320,6 @@ abstract class _AdditionalDetailsData extends AdditionalDetailsData {
   bool get greenDeliveryEnabled;
   @override
   @JsonKey(ignore: true)
-  _$$_AdditionalDetailsDataCopyWith<_$_AdditionalDetailsData> get copyWith =>
+  _$$_DeliveryInfoDataCopyWith<_$_DeliveryInfoData> get copyWith =>
       throw _privateConstructorUsedError;
 }

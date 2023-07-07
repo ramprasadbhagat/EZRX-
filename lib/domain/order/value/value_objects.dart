@@ -602,26 +602,26 @@ class TenderContractInfo extends ValueObject<String> {
   const TenderContractInfo._(this.value);
 }
 
-class CustomerPoReference extends ValueObject<String> {
+class PoReference extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory CustomerPoReference(String input) {
-    return CustomerPoReference._(validateStringNotEmpty(input));
+  factory PoReference(String input) {
+    return PoReference._(validateStringNotEmpty(input));
   }
 
-  const CustomerPoReference._(this.value);
+  const PoReference._(this.value);
 }
 
-class SpecialInstruction extends ValueObject<String> {
+class DeliveryInstruction extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory SpecialInstruction(String input) {
-    return SpecialInstruction._(validateStringNotEmpty(input));
+  factory DeliveryInstruction(String input) {
+    return DeliveryInstruction._(validateStringNotEmpty(input));
   }
 
-  const SpecialInstruction._(this.value);
+  const DeliveryInstruction._(this.value);
 }
 
 class ReferenceNote extends ValueObject<String> {
@@ -646,19 +646,19 @@ class CollectiveNumber extends ValueObject<String> {
   const CollectiveNumber._(this.value);
 }
 
-class ContactNumber extends ValueObject<String> {
+class MobileNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory ContactNumber(String input) {
-    return ContactNumber._(validateStringNotEmpty(input));
+  factory MobileNumber(String input) {
+    return MobileNumber._(validateStringNotEmpty(input));
   }
 
   String get getTelephone {
     return getTelephoneNotGreaterThan16(value.getOrElse(() => ''));
   }
 
-  const ContactNumber._(this.value);
+  const MobileNumber._(this.value);
 }
 
 class ContactPerson extends ValueObject<String> {

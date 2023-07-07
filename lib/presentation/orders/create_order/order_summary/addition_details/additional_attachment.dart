@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+// import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -61,35 +62,35 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
           builder: (context, poAttachmentState) {
             return BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
               buildWhen: (previous, current) =>
-                  current.additionalDetailsData.poDocuments !=
-                  previous.additionalDetailsData.poDocuments,
+                  current.deliveryInfoData.poDocuments !=
+                  previous.deliveryInfoData.poDocuments,
               builder: (context, state) {
-                if (state.additionalDetailsData.poDocuments.isNotEmpty ||
+                if (state.deliveryInfoData.poDocuments.isNotEmpty ||
                     poAttachmentState.fileUploading) {
-                  return Column(
-                    children: const [
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //     horizontal: 10.0,
-                      //     vertical: 10.0,
-                      //   ),
-                      //   child: PoAttachment(
-                      //     key: const ValueKey(
-                      //       'orderSummaryAdditionalPoAttachment',
-                      //     ),
-                      //     poDocuments: state.additionalDetailsData.poDocuments,
-                      //     poAttachMentRenderMode: PoAttachMentRenderMode.edit,
-                      //     uploadingPocDocument:
-                      //         poAttachmentState.uploadInProgressPoDocument,
-                      //   ),
-                      // ),
-                      Divider(
-                        color: ZPColors.lightGray,
-                        endIndent: 0,
-                        indent: 0,
-                      ),
-                    ],
-                  );
+                  // return Column(
+                  //   children: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.symmetric(
+                  //         horizontal: 10.0,
+                  //         vertical: 10.0,
+                  //       ),
+                        // child: PoAttachment(
+                        //   key: const ValueKey(
+                        //     'orderSummaryAdditionalPoAttachment',
+                        //   ),
+                        //   poDocuments: state.deliveryInfoData.poDocuments,
+                        //   poAttachMentRenderMode: PoAttachMentRenderMode.edit,
+                        //   uploadingPocDocument:
+                        //       poAttachmentState.uploadInProgressPoDocument,
+                        // ),
+                  //     ),
+                  //     const Divider(
+                  //       color: ZPColors.lightGray,
+                  //       endIndent: 0,
+                  //       indent: 0,
+                  //     ),
+                  //   ],
+                  // );
                 }
 
                 return const SizedBox.shrink();
@@ -229,7 +230,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
             uploadedPODocument: context
                 .read<AdditionalDetailsBloc>()
                 .state
-                .additionalDetailsData
+                .deliveryInfoData
                 .poDocuments,
             uploadOptionType: uploadOptionType,
           ),

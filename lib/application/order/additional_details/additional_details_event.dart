@@ -12,7 +12,7 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
     required String orderId,
   }) = _InitFromSavedOrder;
   const factory AdditionalDetailsEvent.onTextChange({
-    required AdditionalDetailsLabel label,
+    required DeliveryInfoLabel label,
     required String newValue,
   }) = _AdditionalDetailsTextOnChange;
   const factory AdditionalDetailsEvent.validateForm({
@@ -31,16 +31,16 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   const factory AdditionalDetailsEvent.clearSavedOrderId() =
       _AdditionalDetailsClearSavedOrderId;
   const factory AdditionalDetailsEvent.initiateFromHistory({
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
     required CustomerCodeInfo customerCodeInfo,
   }) = _AdditionalDetailsInitiateFromHistory;
 }
 
-enum AdditionalDetailsLabel {
-  customerPoReference,
-  specialInstruction,
+enum DeliveryInfoLabel {
+  poReference,
+  deliveryInstruction,
   referenceNote,
-  collectiveNumber,
+  // collectiveNumber,
   contactPerson,
   contactNumber,
   paymentTerm,

@@ -5,7 +5,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
   const AdditionalDetailsState._();
 
   const factory AdditionalDetailsState({
-    required AdditionalDetailsData additionalDetailsData,
+    required DeliveryInfoData deliveryInfoData,
     required String orderId,
     required bool isValidated,
     required bool isLoading,
@@ -13,7 +13,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
   }) = _AdditionalDetailsState;
 
   factory AdditionalDetailsState.initial() => AdditionalDetailsState(
-        additionalDetailsData: AdditionalDetailsData.empty(),
+        deliveryInfoData: DeliveryInfoData.empty(),
         orderId: '',
         isValidated: false,
         isLoading: false,

@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -27,8 +27,8 @@ class AdditionalDetailsBloc
   ) async {
     await event.map(
       initialized: (value) async => emit(
-        AdditionalDetailsState.initial().copyWith.additionalDetailsData(
-              contactNumber: ContactNumber(
+        AdditionalDetailsState.initial().copyWith.deliveryInfoData(
+              mobileNumber: MobileNumber(
                 value.customerCodeInfo.telephoneNumber.displayTelephoneNumber,
               ),
             ),
@@ -44,16 +44,16 @@ class AdditionalDetailsBloc
       ),
       addPoDocument: (value) async => emit(
         state.copyWith(
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            poDocuments: List.from(state.additionalDetailsData.poDocuments)
+          deliveryInfoData: state.deliveryInfoData.copyWith(
+            poDocuments: List.from(state.deliveryInfoData.poDocuments)
               ..addAll(value.poDocuments),
           ),
         ),
       ),
       removePoDocument: (value) async => emit(
         state.copyWith(
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            poDocuments: List.from(state.additionalDetailsData.poDocuments)
+          deliveryInfoData: state.deliveryInfoData.copyWith(
+            poDocuments: List.from(state.deliveryInfoData.poDocuments)
               ..removeWhere(
                 (PoDocuments element) => element == value.poDocument,
               ),
@@ -62,16 +62,16 @@ class AdditionalDetailsBloc
       ),
       removeAllPoDocument: (value) async => emit(
         state.copyWith(
-          additionalDetailsData:
-              state.additionalDetailsData.copyWith(poDocuments: []),
+          deliveryInfoData:
+              state.deliveryInfoData.copyWith(poDocuments: <PoDocuments>[]),
         ),
       ),
       toggleGreenDelivery: (value) async {
-        final currentValue = state.additionalDetailsData.greenDeliveryEnabled;
+        final currentValue = state.deliveryInfoData.greenDeliveryEnabled;
 
         emit(
           state.copyWith(
-            additionalDetailsData: state.additionalDetailsData.copyWith(
+            deliveryInfoData: state.deliveryInfoData.copyWith(
               greenDeliveryEnabled: !currentValue,
             ),
           ),
@@ -93,8 +93,8 @@ class AdditionalDetailsBloc
           (failure) async {
             emit(
               state.copyWith(
-                additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-                  contactNumber: ContactNumber(
+                deliveryInfoData: DeliveryInfoData.empty().copyWith(
+                  mobileNumber: MobileNumber(
                     value.customerCodeInfo.telephoneNumber
                         .displayTelephoneNumber,
                   ),
@@ -106,7 +106,7 @@ class AdditionalDetailsBloc
           (orderDetail) async {
             emit(
               state.copyWith(
-                additionalDetailsData: AdditionalDetailsData.fromSavedOrder(
+                deliveryInfoData: DeliveryInfoData.fromSavedOrder(
                   orderDetail: orderDetail,
                   customerCodeInfo: value.customerCodeInfo,
                 ),
@@ -119,8 +119,8 @@ class AdditionalDetailsBloc
       initiateFromHistory: (value) async {
         emit(
           AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: value.data.copyWith(
-              contactNumber: ContactNumber(
+            deliveryInfoData: value.data.copyWith(
+              mobileNumber: MobileNumber(
                 value.customerCodeInfo.telephoneNumber.displayTelephoneNumber,
               ),
             ),
@@ -146,16 +146,16 @@ class AdditionalDetailsBloc
       ),
     );
     final isCustomerPoReferenceValid = config.poNumberRequired
-        ? state.additionalDetailsData.customerPoReference.isValid()
+        ? state.deliveryInfoData.poReference.isValid()
         : true;
     final isContactPersonValid = config.enableMobileNumber
-        ? state.additionalDetailsData.contactPerson.isValid()
+        ? state.deliveryInfoData.contactPerson.isValid()
         : true;
     final isContactNumberValid = config.enableMobileNumber
-        ? state.additionalDetailsData.contactNumber.isValid()
+        ? state.deliveryInfoData.mobileNumber.isValid()
         : true;
     final isPaymentTermValid = config.enablePaymentTerms
-        ? state.additionalDetailsData.paymentTerm.isValid()
+        ? state.deliveryInfoData.paymentTerm.isValid()
         : true;
     final isFormValid = isCustomerPoReferenceValid &&
         isContactPersonValid &&
@@ -172,82 +172,82 @@ class AdditionalDetailsBloc
 
   void _emitAfterOnTextChange({
     required Emitter<AdditionalDetailsState> emit,
-    required AdditionalDetailsData additionalDetailsData,
+    required DeliveryInfoData deliveryInfoData,
   }) {
     emit(
       state.copyWith(
-        additionalDetailsData: additionalDetailsData,
+        deliveryInfoData: deliveryInfoData,
       ),
     );
   }
 
   void _onTextChange({
-    required AdditionalDetailsLabel label,
+    required DeliveryInfoLabel label,
     required String newValue,
     required Emitter<AdditionalDetailsState> emit,
   }) {
     switch (label) {
-      case AdditionalDetailsLabel.customerPoReference:
+      case DeliveryInfoLabel.poReference:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            customerPoReference: CustomerPoReference(newValue),
+          deliveryInfoData: state.deliveryInfoData.copyWith(
+            poReference: PoReference(newValue),
           ),
         );
         break;
-      case AdditionalDetailsLabel.collectiveNumber:
+      // case AdditionalDetailsLabel.collectiveNumber:
+      //   _emitAfterOnTextChange(
+      //     emit: emit,
+      //     additionalDetailsData: state.additionalDetailsData.copyWith(
+      //       collectiveNumber: CollectiveNumber(newValue),
+      //     ),
+      //   );
+      //   break;
+      case DeliveryInfoLabel.contactNumber:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            collectiveNumber: CollectiveNumber(newValue),
+          deliveryInfoData: state.deliveryInfoData.copyWith(
+            mobileNumber: MobileNumber(newValue),
           ),
         );
         break;
-      case AdditionalDetailsLabel.contactNumber:
+      case DeliveryInfoLabel.contactPerson:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            contactNumber: ContactNumber(newValue),
-          ),
-        );
-        break;
-      case AdditionalDetailsLabel.contactPerson:
-        _emitAfterOnTextChange(
-          emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
+          deliveryInfoData: state.deliveryInfoData.copyWith(
             contactPerson: ContactPerson(newValue),
           ),
         );
         break;
-      case AdditionalDetailsLabel.deliveryDate:
+      case DeliveryInfoLabel.deliveryDate:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
+          deliveryInfoData: state.deliveryInfoData.copyWith(
             deliveryDate: DeliveryDate(newValue),
           ),
         );
         break;
-      case AdditionalDetailsLabel.paymentTerm:
+      case DeliveryInfoLabel.paymentTerm:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
+          deliveryInfoData: state.deliveryInfoData.copyWith(
             paymentTerm: PaymentTerm(newValue),
           ),
         );
         break;
-      case AdditionalDetailsLabel.referenceNote:
+      case DeliveryInfoLabel.referenceNote:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
+          deliveryInfoData: state.deliveryInfoData.copyWith(
             referenceNote: ReferenceNote(newValue),
           ),
         );
         break;
-      case AdditionalDetailsLabel.specialInstruction:
+      case DeliveryInfoLabel.deliveryInstruction:
         _emitAfterOnTextChange(
           emit: emit,
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            specialInstruction: SpecialInstruction(newValue),
+          deliveryInfoData: state.deliveryInfoData.copyWith(
+            deliveryInstruction: DeliveryInstruction(newValue),
           ),
         );
         break;

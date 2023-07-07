@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
@@ -198,7 +198,7 @@ void main() {
                   CustomerCodeInfo.empty().copyWith(division: 'div'),
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('2601')),
-              data: AdditionalDetailsData.empty(),
+              data: DeliveryInfoData.empty(),
               orderDocumentType: OrderDocumentType.empty()
                   .copyWith(documentType: DocumentType(''), orderReason: ''),
               configs: SalesOrganisationConfigs.empty()
@@ -221,7 +221,7 @@ void main() {
                 CustomerCodeInfo.empty().copyWith(division: 'div'),
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-            data: AdditionalDetailsData.empty(),
+            data: DeliveryInfoData.empty(),
             orderDocumentType: OrderDocumentType.empty()
                 .copyWith(documentType: DocumentType(''), orderReason: ''), 
             config: SalesOrganisationConfigs.empty()
@@ -260,7 +260,7 @@ void main() {
                       CustomerCodeInfo.empty().copyWith(division: 'div'),
                   salesOrganisation: SalesOrganisation.empty()
                       .copyWith(salesOrg: SalesOrg('2601')),
-                  data: AdditionalDetailsData.empty(),
+                  data: DeliveryInfoData.empty(),
                   orderDocumentType: OrderDocumentType.empty().copyWith(
                       documentType: DocumentType(''), orderReason: ''), 
                   configs: SalesOrganisationConfigs.empty()
@@ -285,7 +285,7 @@ void main() {
                 CustomerCodeInfo.empty().copyWith(division: 'div'),
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-            data: AdditionalDetailsData.empty(),
+            data: DeliveryInfoData.empty(),
              orderDocumentType: OrderDocumentType.empty()
                 .copyWith(documentType: DocumentType(''), orderReason: ''), 
             config: SalesOrganisationConfigs.empty()

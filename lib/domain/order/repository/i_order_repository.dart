@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
@@ -34,7 +34,7 @@ abstract class IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
   });
 
   Future<Either<ApiFailure, SubmitOrderResponse>> submitOrder({
@@ -44,7 +44,7 @@ abstract class IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
     required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs configs,
   });
@@ -61,6 +61,6 @@ abstract class IOrderRepository {
     required String orderId,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required AdditionalDetailsData data,
+    required DeliveryInfoData data,
   });
 }

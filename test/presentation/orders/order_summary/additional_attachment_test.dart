@@ -41,6 +41,8 @@ class PoAttachmentBlocMock
 
 class FilePickerServiceMock extends Mock implements FilePickerService {}
 
+
+
 void main() {
   late AppRouter autoRouterMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
@@ -191,7 +193,8 @@ void main() {
         ),
         PoAttachmentState.initial().copyWith(
           fileOperationMode: FileOperationMode.upload,
-          failureOrSuccessOption: optionOf(
+            failureOrSuccessOption:
+              optionOf(
             const Left(
               ApiFailure.storagePermissionFailed(),
             ),
@@ -305,8 +308,7 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(
-        () => filePickerService.pickFiles(
+      when(() => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
           allowedExtensions: locator<Config>().allowedExtensions,
@@ -376,11 +378,11 @@ void main() {
     //       isFetching: true,
     //     )
     //   ];
-
+    //
     //   final expectedAdditionalDetailsDataState = [
     //     AdditionalDetailsState.initial(),
     //     AdditionalDetailsState.initial().copyWith(
-    //         additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+    //         deliveryInfoData: DeliveryInfoData.empty().copyWith(
     //       poDocuments: [PoDocuments.empty()],
     //     )),
     //   ];

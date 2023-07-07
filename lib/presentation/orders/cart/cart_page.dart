@@ -474,6 +474,7 @@ class _CheckoutSection extends StatelessWidget {
                   key: WidgetKeys.checkoutButton,
                   onPressed: () {
                     FocusScope.of(context).requestFocus(FocusNode());
+                    context.router.pushNamed('orders/cart/checkout');
                   },
                   child: const Text('Check out').tr(),
                 ),

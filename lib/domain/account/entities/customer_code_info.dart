@@ -90,4 +90,6 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
 
   BillToInfo get getBillToInfo =>
       billToInfos.isNotEmpty ? billToInfos.first : BillToInfo.empty();
+
+  String get fullCustomerAddress => '${customerAddress.toAddress()} $postalCode';
 }
