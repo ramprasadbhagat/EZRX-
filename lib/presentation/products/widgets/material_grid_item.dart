@@ -34,7 +34,7 @@ class MaterialGridItem extends StatelessWidget {
             Expanded(
               flex: 3,
               child: ColoredBox(
-                color: ZPColors.extraLightGrey3,
+                color: ZPColors.white,
                 child: Stack(
                   children: [
                     Center(

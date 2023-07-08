@@ -21,43 +21,43 @@ class _IntroPageState extends State<IntroPage> {
       PageController(initialPage: 0, keepPage: true);
 
   List<IntroObject> getOnBoardingObject = [
-    IntroObject(
-      heading: 'Order and track easily',
-      description:
-          'With our interactive engagement portal, you can now order prescription drugs, and view order history and status on eZRx+ mobile app.',
-      buttonText: 'Skip',
-      assetsPath: 'assets/images/temp1.png',
-      backgroundColor: ZPColors.navyBlueBGColor,
-      headingColor: ZPColors.white,
-      descriptionColor: ZPColors.shadowColor,
-      buttonBorderColor: ZPColors.white,
-      buttonTextColor: ZPColors.white,
-      buttonBGColor: ZPColors.navyBlueBGColor,
-    ),
-    IntroObject(
-      heading: 'Payments on the go',
-      description:
-          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-      buttonText: 'Skip',
-      assetsPath: 'assets/images/temp2.png',
-      backgroundColor: ZPColors.lightVioletBGColor,
-      headingColor: ZPColors.primary,
-      descriptionColor: ZPColors.neutralsBlack,
-      buttonBorderColor: ZPColors.primary,
-      buttonTextColor: ZPColors.primary,
-      buttonBGColor: ZPColors.lightVioletBGColor,
-    ),
+    // IntroObject(
+    //   heading: 'Order and track easily',
+    //   description:
+    //       'With our interactive engagement portal, you can now order prescription drugs, and view order history and status on eZRx+ mobile app.',
+    //   buttonText: 'Skip',
+    //   assetsPath: 'assets/images/temp1.png',
+    //   backgroundColor: ZPColors.introBlueBGColor,
+    //   headingColor: ZPColors.primary,
+    //   descriptionColor: ZPColors.neutralsBlack,
+    //   buttonBorderColor: ZPColors.neutralsBlack,
+    //   buttonTextColor: ZPColors.neutralsBlack,
+    //   buttonBGColor: ZPColors.introBlueBGColor,
+    // ),
+    // IntroObject(
+    //   heading: 'Payments on the go',
+    //   description:
+    //       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
+    //   buttonText: 'Skip',
+    //   assetsPath: 'assets/images/temp3.png',
+    //   backgroundColor: ZPColors.lightVioletBGColor,
+    //   headingColor: ZPColors.primary,
+    //   descriptionColor: ZPColors.neutralsBlack,
+    //   buttonBorderColor: ZPColors.neutralsBlack,
+    //   buttonTextColor: ZPColors.neutralsBlack,
+    //   buttonBGColor: ZPColors.lightVioletBGColor,
+    // ),
     IntroObject(
       heading: 'Fuss-free returns',
       description:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
       buttonText: 'Get started',
-      assetsPath: 'assets/images/temp3.png',
+      assetsPath: 'assets/images/temp2.png',
       backgroundColor: ZPColors.blueBGColor,
       headingColor: ZPColors.white,
-      descriptionColor: ZPColors.shadowColor,
+      descriptionColor: ZPColors.white,
       buttonBorderColor: ZPColors.white,
-      buttonTextColor: ZPColors.primary,
+      buttonTextColor: ZPColors.neutralsBlack,
       buttonBGColor: ZPColors.white,
     ),
   ];
@@ -72,7 +72,7 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void startTimer() => _timer = Timer.periodic(
-        const Duration(seconds: 6),
+        const Duration(seconds: 12),
         (timer) => _nextPage(),
       );
 
@@ -105,25 +105,25 @@ class _IntroPageState extends State<IntroPage> {
         return Scaffold(
           backgroundColor: getOnBoardingObject[i].backgroundColor,
           extendBody: true,
-          appBar: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            title: BlocBuilder<IntroBloc, IntroState>(
-              buildWhen: (previous, current) => previous.index != current.index,
-              builder: (context, state) {
-                _timer?.cancel();
-                if (state.index < lastIndexIntroObject) {
-                  startTimer();
-                }
+          // appBar: AppBar(
+          //   elevation: 0,
+          //   automaticallyImplyLeading: false,
+          //   backgroundColor: Colors.transparent,
+          //   title: BlocBuilder<IntroBloc, IntroState>(
+          //     buildWhen: (previous, current) => previous.index != current.index,
+          //     builder: (context, state) {
+          //       _timer?.cancel();
+          //       if (state.index < lastIndexIntroObject) {
+          //         startTimer();
+          //       }
 
-                return _CustomIndicator(
-                  index: state.index,
-                  lastIndex: lastIndexIntroObject,
-                );
-              },
-            ),
-          ),
+          //       return _CustomIndicator(
+          //           index: state.index,
+          //           lastIndex: lastIndexIntroObject,
+          //           length: getOnBoardingObject.length);
+          //     },
+          //   ),
+          // ),
           body: IntroStep(
             introObject: getOnBoardingObject[i],
             buttonOnTap: () =>
@@ -135,45 +135,47 @@ class _IntroPageState extends State<IntroPage> {
   }
 }
 
-class _CustomIndicator extends StatelessWidget {
-  final int index;
-  final int lastIndex;
-  const _CustomIndicator({
-    Key? key,
-    required this.index,
-    required this.lastIndex,
-  }) : super(key: key);
+// class _CustomIndicator extends StatelessWidget {
+//   final int index;
+//   final int lastIndex;
+//   final int length;
+//   const _CustomIndicator({
+//     Key? key,
+//     required this.index,
+//     required this.lastIndex,
+//     required this.length,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: List.generate(
-        3,
-        (i) => Expanded(
-          child: _HorizontalDivider(isActive: index == i),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: List.generate(
+//         length,
+//         (i) => Expanded(
+//           child: _HorizontalDivider(isActive: index == i),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class _HorizontalDivider extends StatelessWidget {
-  const _HorizontalDivider({
-    Key? key,
-    required this.isActive,
-  }) : super(key: key);
+// class _HorizontalDivider extends StatelessWidget {
+//   const _HorizontalDivider({
+//     Key? key,
+//     required this.isActive,
+//   }) : super(key: key);
 
-  final bool isActive;
+//   final bool isActive;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 4,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        color: isActive ? ZPColors.white : ZPColors.unselectedIndicatorColor,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 4,
+//       margin: const EdgeInsets.symmetric(horizontal: 4),
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(4),
+//         color: isActive ? ZPColors.white : ZPColors.unselectedIndicatorColor,
+//       ),
+//     );
+//   }
+// }

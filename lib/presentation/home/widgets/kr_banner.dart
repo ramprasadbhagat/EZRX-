@@ -43,10 +43,13 @@ class _KRAds extends StatelessWidget {
       padding: fullWidth
           ? EdgeInsets.zero
           : const EdgeInsets.symmetric(horizontal: 16.0, vertical: 3),
-      child: Image.asset(
-        image,
-        fit: BoxFit.cover,
-        width: MediaQuery.of(context).size.width,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Image.asset(
+          image,
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+        ),
       ),
     );
   }
