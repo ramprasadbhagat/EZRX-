@@ -9,6 +9,7 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required ShipToInfo shipToInfo,
     required User user,
     required ViewByItemHistoryFilter viewByItemHistoryFilter,
+    required SearchKey searchKey,
   }) = _Fetch;
   const factory ViewByItemsEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,

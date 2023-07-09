@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 
@@ -16,5 +17,6 @@ abstract class IViewByItemRepository {
     required int pageSize,
     required int offset,
     required ViewByItemHistoryFilter viewByItemHistoryFilter,
+    required SearchKey searchKey,
   });
 }

@@ -11,25 +11,26 @@ class ViewByItemsState with _$ViewByItemsState {
     required bool isImageLoading,
     required int nextPageIndex,
     required ViewByItemHistoryFilter appliedFilter,
+    required SearchKey searchKey,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _ViewByItemsState;
 
-  factory ViewByItemsState.initial() =>
-      ViewByItemsState(
+  factory ViewByItemsState.initial() => ViewByItemsState(
         orderHistoryList: OrderHistory.empty(),
         canLoadMore: true,
         isFetching: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
         isImageLoading: false,
+        searchKey: SearchKey(''),
         appliedFilter: ViewByItemHistoryFilter.empty(),
       );
 
   List<OrderHistoryItem> getFilterItem(List<StatusType> filter) {
     return List.from(orderHistoryList.orderHistoryItems)
       ..retainWhere(
-            (orderHistoryItem) =>
-        filter.any((e) => orderHistoryItem.status.statusContains(e)) ||
+        (orderHistoryItem) =>
+            filter.any((e) => orderHistoryItem.status.statusContains(e)) ||
             filter.isEmpty,
       );
   }

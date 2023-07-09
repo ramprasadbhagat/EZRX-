@@ -24,7 +24,8 @@ mixin _$ViewByItemsEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
@@ -40,7 +41,8 @@ mixin _$ViewByItemsEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -59,7 +61,8 @@ mixin _$ViewByItemsEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -160,7 +163,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
@@ -179,7 +183,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -201,7 +206,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -270,7 +276,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       User user,
-      ViewByItemHistoryFilter viewByItemHistoryFilter});
+      ViewByItemHistoryFilter viewByItemHistoryFilter,
+      SearchKey searchKey});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -294,6 +301,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? user = null,
     Object? viewByItemHistoryFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_Fetch(
       salesOrgConfigs: null == salesOrgConfigs
@@ -316,6 +324,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.viewByItemHistoryFilter
           : viewByItemHistoryFilter // ignore: cast_nullable_to_non_nullable
               as ViewByItemHistoryFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 
@@ -370,7 +382,8 @@ class _$_Fetch implements _Fetch {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.user,
-      required this.viewByItemHistoryFilter});
+      required this.viewByItemHistoryFilter,
+      required this.searchKey});
 
   @override
   final SalesOrganisationConfigs salesOrgConfigs;
@@ -382,10 +395,12 @@ class _$_Fetch implements _Fetch {
   final User user;
   @override
   final ViewByItemHistoryFilter viewByItemHistoryFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemHistoryFilter: $viewByItemHistoryFilter)';
+    return 'ViewByItemsEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemHistoryFilter: $viewByItemHistoryFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -402,12 +417,14 @@ class _$_Fetch implements _Fetch {
             (identical(other.user, user) || other.user == user) &&
             (identical(
                     other.viewByItemHistoryFilter, viewByItemHistoryFilter) ||
-                other.viewByItemHistoryFilter == viewByItemHistoryFilter));
+                other.viewByItemHistoryFilter == viewByItemHistoryFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
-      customerCodeInfo, shipToInfo, user, viewByItemHistoryFilter);
+      customerCodeInfo, shipToInfo, user, viewByItemHistoryFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -424,7 +441,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
@@ -432,7 +450,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function() fetchProductImage,
   }) {
     return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        viewByItemHistoryFilter);
+        viewByItemHistoryFilter, searchKey);
   }
 
   @override
@@ -444,7 +462,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -455,7 +474,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? fetchProductImage,
   }) {
     return fetch?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        viewByItemHistoryFilter);
+        viewByItemHistoryFilter, searchKey);
   }
 
   @override
@@ -467,7 +486,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -480,7 +500,7 @@ class _$_Fetch implements _Fetch {
   }) {
     if (fetch != null) {
       return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-          viewByItemHistoryFilter);
+          viewByItemHistoryFilter, searchKey);
     }
     return orElse();
   }
@@ -525,18 +545,19 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements ViewByItemsEvent {
   const factory _Fetch(
-          {required final SalesOrganisationConfigs salesOrgConfigs,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final User user,
-          required final ViewByItemHistoryFilter viewByItemHistoryFilter}) =
-      _$_Fetch;
+      {required final SalesOrganisationConfigs salesOrgConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final ViewByItemHistoryFilter viewByItemHistoryFilter,
+      required final SearchKey searchKey}) = _$_Fetch;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
   ViewByItemHistoryFilter get viewByItemHistoryFilter;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -686,7 +707,8 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
@@ -705,7 +727,8 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -727,7 +750,8 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -842,7 +866,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
@@ -861,7 +886,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -883,7 +909,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemHistoryFilter viewByItemHistoryFilter)?
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -951,6 +978,7 @@ mixin _$ViewByItemsState {
   int get nextPageIndex => throw _privateConstructorUsedError;
   ViewByItemHistoryFilter get appliedFilter =>
       throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -972,6 +1000,7 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
       bool isImageLoading,
       int nextPageIndex,
       ViewByItemHistoryFilter appliedFilter,
+      SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $OrderHistoryCopyWith<$Res> get orderHistoryList;
@@ -997,6 +1026,7 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
     Object? isImageLoading = null,
     Object? nextPageIndex = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -1024,6 +1054,10 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as ViewByItemHistoryFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1064,6 +1098,7 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
       bool isImageLoading,
       int nextPageIndex,
       ViewByItemHistoryFilter appliedFilter,
+      SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
@@ -1089,6 +1124,7 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
     Object? isImageLoading = null,
     Object? nextPageIndex = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_ViewByItemsState(
@@ -1116,6 +1152,10 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as ViewByItemHistoryFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1134,6 +1174,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       required this.isImageLoading,
       required this.nextPageIndex,
       required this.appliedFilter,
+      required this.searchKey,
       required this.failureOrSuccessOption})
       : super._();
 
@@ -1150,11 +1191,13 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   @override
   final ViewByItemHistoryFilter appliedFilter;
   @override
+  final SearchKey searchKey;
+  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ViewByItemsState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, isImageLoading: $isImageLoading, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemsState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, isImageLoading: $isImageLoading, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1174,6 +1217,8 @@ class _$_ViewByItemsState extends _ViewByItemsState {
                 other.nextPageIndex == nextPageIndex) &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
   }
@@ -1187,6 +1232,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       isImageLoading,
       nextPageIndex,
       appliedFilter,
+      searchKey,
       failureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -1204,6 +1250,7 @@ abstract class _ViewByItemsState extends ViewByItemsState {
       required final bool isImageLoading,
       required final int nextPageIndex,
       required final ViewByItemHistoryFilter appliedFilter,
+      required final SearchKey searchKey,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_ViewByItemsState;
   const _ViewByItemsState._() : super._();
@@ -1220,6 +1267,8 @@ abstract class _ViewByItemsState extends ViewByItemsState {
   int get nextPageIndex;
   @override
   ViewByItemHistoryFilter get appliedFilter;
+  @override
+  SearchKey get searchKey;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

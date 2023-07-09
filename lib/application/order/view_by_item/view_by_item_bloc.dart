@@ -41,6 +41,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
             appliedFilter: e.viewByItemHistoryFilter,
+            searchKey: e.searchKey,
           ),
         );
 
@@ -52,6 +53,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           pageSize: _pageSize,
           offset: 0,
           viewByItemHistoryFilter: e.viewByItemHistoryFilter,
+          searchKey: e.searchKey,
         );
 
         failureOrSuccess.fold(
@@ -92,6 +94,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         pageSize: _pageSize,
         offset: state.orderHistoryList.orderHistoryItems.length,
         viewByItemHistoryFilter: state.appliedFilter,
+        searchKey: state.searchKey,
       );
 
       await failureOrSuccess.fold(

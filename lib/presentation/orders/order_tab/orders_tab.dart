@@ -8,6 +8,8 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/vi
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -21,14 +23,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 class OrdersTab extends StatelessWidget {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  OrdersTab({Key? key}) : super(key: key);
+  const OrdersTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(
         key: WidgetKeys.ordersTab,
         title: const Text('Orders').tr(),
@@ -56,7 +55,9 @@ class OrdersTab extends StatelessWidget {
             child: AutoTabsRouter.tabBar(
               routes: [
                 const ViewByItemsPageRoute(),
-                ViewByOrdersPageRoute(orderHistoryItem: OrderHistoryItem.empty()),
+                ViewByOrdersPageRoute(
+                  orderHistoryItem: OrderHistoryItem.empty(),
+                ),
               ],
               builder: (context, child, tabController) => Column(
                 children: [
@@ -222,50 +223,56 @@ class _FilterElement extends StatelessWidget {
       },
     ).then(
       (value) {
-        if (value != null) {
-          if (viewByItem) {
-            if (context
-                .read<ViewByItemsBloc>()
-                .state
-                .appliedFilter
-                .isNotEqual(newFilter: value)) {
-              context.read<ViewByItemsBloc>().add(
-                    ViewByItemsEvent.fetch(
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrgConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      user: context.read<UserBloc>().state.user,
-                      viewByItemHistoryFilter: value,
-                    ),
-                  );
-            }
-          } else {
-            if (context.read<ViewByOrderBloc>().state.appliedFilter != value) {
-              context.read<ViewByOrderBloc>().add(
-                    ViewByOrderEvent.fetch(
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrgConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      user: context.read<UserBloc>().state.user,
-                      sortDirection: 'desc',
-                      filter: value,
-                    ),
-                  );
-            }
-          }
-        }
+        if (value == null) return;
+        viewByItem
+            ? _doFetchViewByItem(
+                context: context,
+                filter: value as ViewByItemHistoryFilter,
+              )
+            : _doFetchViewByOrder(
+                context: context,
+                filter: value as ViewByOrderHistoryFilter,
+              );
       },
     );
+  }
+
+  void _doFetchViewByItem({
+    required BuildContext context,
+    required ViewByItemHistoryFilter filter,
+  }) {
+    if (context.read<ViewByItemsBloc>().state.appliedFilter != filter) {
+      context.read<ViewByItemsBloc>().add(
+            ViewByItemsEvent.fetch(
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              viewByItemHistoryFilter: filter,
+              searchKey: context.read<ViewByItemsBloc>().state.searchKey,
+            ),
+          );
+    }
+  }
+
+  void _doFetchViewByOrder({
+    required BuildContext context,
+    required ViewByOrderHistoryFilter filter,
+  }) {
+    if (context.read<ViewByOrderBloc>().state.appliedFilter != filter) {
+      context.read<ViewByOrderBloc>().add(
+            ViewByOrderEvent.fetch(
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              sortDirection: 'desc',
+              filter: filter,
+            ),
+          );
+    }
   }
 }
 
@@ -315,41 +322,55 @@ class _SearchBarState extends State<_SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isFromViewByOrder) {
-      _itemSearchController.text =
-          context.read<ViewByOrderBloc>().state.searchKey.getOrDefaultValue('');
+    _itemSearchController.text = widget.isFromViewByOrder
+        ? context.read<ViewByOrderBloc>().state.searchKey.getOrDefaultValue('')
+        : context.read<ViewByItemsBloc>().state.searchKey.getOrDefaultValue('');
 
-      return BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
-        listenWhen: (previous, current) =>
-            previous.searchKey != current.searchKey,
-        listener: (context, state) {
-          final searchText = state.searchKey.getValue();
-          _itemSearchController.value = TextEditingValue(
-            text: searchText,
-            selection: TextSelection.collapsed(
-              offset: _itemSearchController.selection.base.offset,
-            ),
+    return widget.isFromViewByOrder
+        ? BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            listenWhen: (previous, current) =>
+                previous.searchKey != current.searchKey,
+            listener: (context, state) {
+              final searchText = state.searchKey.getValue();
+              _itemSearchController.value = TextEditingValue(
+                text: searchText,
+                selection: TextSelection.collapsed(
+                  offset: _itemSearchController.selection.base.offset,
+                ),
+              );
+            },
+            builder: (context, state) {
+              return _OrderSearchBar(
+                isFromViewByOrder: widget.isFromViewByOrder,
+                isFetching: state.isFetching,
+                controller: _itemSearchController,
+              );
+            },
+          )
+        : BlocConsumer<ViewByItemsBloc, ViewByItemsState>(
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            listenWhen: (previous, current) =>
+                previous.searchKey != current.searchKey,
+            listener: (context, state) {
+              final searchText = state.searchKey.getValue();
+              _itemSearchController.value = TextEditingValue(
+                text: searchText,
+                selection: TextSelection.collapsed(
+                  offset: _itemSearchController.selection.base.offset,
+                ),
+              );
+            },
+            builder: (context, state) {
+              return _OrderSearchBar(
+                isFromViewByOrder: widget.isFromViewByOrder,
+                isFetching: state.isFetching,
+                controller: _itemSearchController,
+              );
+            },
           );
-        },
-        builder: (context, state) {
-          return _OrderSearchBar(
-            isFromViewByOrder: widget.isFromViewByOrder,
-            isFetching: state.isFetching,
-            controller: _itemSearchController,
-          );
-        },
-      );
-    } else {
-      _itemSearchController.text = '';
-
-      return _OrderSearchBar(
-        isFromViewByOrder: widget.isFromViewByOrder,
-        isFetching: false,
-        controller: _itemSearchController,
-      );
-    }
   }
 }
 
@@ -373,45 +394,72 @@ class _OrderSearchBar extends StatelessWidget {
         onSearchChanged: (value) {},
         isAutoSearch: false,
         onSearchSubmitted: (value) {
-          if (isFromViewByOrder) {
-            context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.searchByOrder(
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    user: context.read<UserBloc>().state.user,
-                    sortDirection: 'desc',
-                    searchKey: value,
-                    filter: context.read<ViewByOrderFilterBloc>().state.filter,
-                  ),
+          isFromViewByOrder
+              ? _doSearchByOrder(
+                  context: context,
+                  searchKey: value,
+                )
+              : _doFetchViewByItem(
+                  context: context,
+                  searchKey: value,
                 );
-          }
         },
         clearIconKey: WidgetKeys.clearIconKey,
         customValidator: () => SearchKey.search(controller.text).isValid(),
         onClear: () {
           if (controller.text.isEmpty) return;
           controller.clear();
-          if (isFromViewByOrder) {
-            context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.searchByOrder(
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    user: context.read<UserBloc>().state.user,
-                    sortDirection: 'desc',
-                    searchKey: '',
-                    filter: context.read<ViewByOrderFilterBloc>().state.filter,
-                  ),
+          isFromViewByOrder
+              ? _doSearchByOrder(
+                  context: context,
+                  searchKey: controller.text,
+                )
+              : _doFetchViewByItem(
+                  context: context,
+                  searchKey: controller.text,
                 );
-          }
         },
         border: InputBorder.none,
       ),
     );
+  }
+
+  void _doFetchViewByItem({
+    required BuildContext context,
+    required String searchKey,
+  }) {
+    final stateSearchKey = context.read<ViewByItemsBloc>().state.searchKey;
+    if (stateSearchKey == SearchKey(searchKey)) return;
+
+    context.read<ViewByItemsBloc>().add(
+          ViewByItemsEvent.fetch(
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            viewByItemHistoryFilter:
+                context.read<ViewByItemsBloc>().state.appliedFilter,
+            searchKey: SearchKey(searchKey),
+          ),
+        );
+  }
+
+  void _doSearchByOrder({
+    required BuildContext context,
+    required String searchKey,
+  }) {
+    context.read<ViewByOrderBloc>().add(
+          ViewByOrderEvent.searchByOrder(
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            sortDirection: 'desc',
+            searchKey: searchKey,
+            filter: context.read<ViewByOrderFilterBloc>().state.filter,
+          ),
+        );
   }
 }

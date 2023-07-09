@@ -30,6 +30,7 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
@@ -211,7 +212,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
               previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption || previous.isFetching != current.isFetching || previous.isUpserting != current.isUpserting,
+                  current.apiFailureOrSuccessOption ||
+              previous.isFetching != current.isFetching ||
+              previous.isUpserting != current.isUpserting,
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
               () {},
@@ -629,6 +632,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 customerCodeInfo: customerCodeInfo,
                 viewByItemHistoryFilter:
                     context.read<ViewByItemsBloc>().state.appliedFilter,
+                searchKey: SearchKey(''),
               ),
             );
       }

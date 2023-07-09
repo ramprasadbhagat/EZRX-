@@ -156,6 +156,7 @@ class WidgetKeys {
   //  SearchBar Keys
   //============================================================
   static const Key clearIconKey = Key('clearIconKey');
+  static const Key searchIconKey = Key('searchIconKey');
   static const Key clearUserRestrictionListSearch =
       Key('clearUserRestrictionListSearch');
   static const Key clearPolicyConfigurationSearch =

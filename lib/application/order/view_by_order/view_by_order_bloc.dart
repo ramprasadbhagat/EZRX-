@@ -56,19 +56,19 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
 
         failureOrSuccess.fold(
           (failure) => emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
               appliedFilter: e.filter,
-              ),
+            ),
           ),
           (viewByOrderList) => emit(
-              state.copyWith(
-                viewByOrderList: viewByOrderList,
-                failureOrSuccessOption: none(),
+            state.copyWith(
+              viewByOrderList: viewByOrderList,
+              failureOrSuccessOption: none(),
               appliedFilter: e.filter,
-                isFetching: false,
-              ),
+              isFetching: false,
+            ),
           ),
         );
       },
@@ -95,20 +95,19 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
 
       failureOrSuccess.fold(
         (failure) => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
+          state.copyWith(
+            failureOrSuccessOption: optionOf(failureOrSuccess),
+            isFetching: false,
+          ),
         ),
-        (viewByOrder) => 
-          emit(
-            state.copyWith(
+        (viewByOrder) => emit(
+          state.copyWith(
             viewByOrderList: viewByOrder,
-              failureOrSuccessOption: none(),
-              isFetching: false,
+            failureOrSuccessOption: none(),
+            isFetching: false,
             canLoadMore: viewByOrder.orderHeaders.length >= _pageSize,
-              nextPageIndex: state.nextPageIndex + 1,
-            ),
+            nextPageIndex: state.nextPageIndex + 1,
+          ),
         ),
       );
     });

@@ -82,6 +82,7 @@ class ViewByItemsPage extends StatelessWidget {
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     viewByItemHistoryFilter: ViewByItemHistoryFilter.empty(),
+                    searchKey: SearchKey(''),
                   ),
                 );
           },

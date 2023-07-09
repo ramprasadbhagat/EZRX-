@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
@@ -39,6 +40,7 @@ class ViewByItemRepository implements IViewByItemRepository {
     required int pageSize,
     required int offset,
     required ViewByItemHistoryFilter viewByItemHistoryFilter,
+    required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -64,6 +66,7 @@ class ViewByItemRepository implements IViewByItemRepository {
               filterQuery:
                   ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
                       .toJson(),
+              query: searchKey.getOrCrash(),
             )
           : await orderHistoryRemoteDataSource.getOrderHistory(
               shipTo: shipTo.shipToCustomerCode,
@@ -74,7 +77,7 @@ class ViewByItemRepository implements IViewByItemRepository {
               filterQuery:
                   ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
                       .toJson(),
-              query: '',
+              searchKey: searchKey.getOrCrash(),
             );
 
       return Right(orderHistoryItemList);
