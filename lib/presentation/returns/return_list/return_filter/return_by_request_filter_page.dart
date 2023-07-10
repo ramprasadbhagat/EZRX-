@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -62,6 +63,8 @@ class _ReturnFilter extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.showErrorMessage != current.showErrorMessage,
       builder: (context, state) {
+        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+
         return ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +95,7 @@ class _ReturnFilter extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Request amount'.tr(),
+                '${'Request amount'.tr()} (${salesOrgConfig.currency.code})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),

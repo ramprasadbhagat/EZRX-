@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 
 final _decimalOnlyRegx = RegExp(r'^\d+\.?\d{0,10}');
 
@@ -61,6 +61,8 @@ class _ReturnFilter extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.showErrorMessage != current.showErrorMessage,
       builder: (context, state) {
+        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+
         return ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +93,7 @@ class _ReturnFilter extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Request amount'.tr(),
+                '${'Request amount'.tr()} (${salesOrgConfig.currency.code})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
