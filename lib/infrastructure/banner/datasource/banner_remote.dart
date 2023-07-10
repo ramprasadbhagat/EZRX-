@@ -63,14 +63,14 @@ class BannerRemoteDataSource {
         url: config.getEZReachUrl,
         data: jsonEncode({
           'query': bannerQueryMutation.getEZReachBannerQuery(),
-          'variables': {            
+          'variables': {
             'country': country,
             'SalesOrg': salesOrg,
             'role': role,
             'targetProduct': config.targetProduct,
-            'bannerPlacement': 'Banner Carousel',
-  	        'sortField': 'banner_slot',
-            'sort': 'asc',    
+            'bannerPlacement': 'banner_carousel',
+            'sortField': 'banner_slot',
+            'sort': 'asc',
           },
         }),
         overrideBaseUrl: true,

@@ -12,6 +12,7 @@ query getLiveCampaigns(
       role: $role
       targetProduct: $targetProduct
       sort: $sort
+      bannerPlacement: banner_carousel
     }
   ) {
     statusCode

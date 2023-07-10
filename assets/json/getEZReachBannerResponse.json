@@ -26,7 +26,7 @@
           "status": "active",
           "customers": true,
           "companyName": "Organon",
-          "targetProduct": "eZRx Core",
+          "targetProduct": "EZRX+",
           "keyWord": "https://cloud.mail.organon.sg/ATOZET_Form_Page"
         },
         {
@@ -51,7 +51,7 @@
           "status": "active",
           "customers": true,
           "companyName": "Novartis (Singapore) Pte Ltd",
-          "targetProduct": "eZRx Core",
+          "targetProduct": "EZRX+",
           "keyWord": "Letrozole"
         }
       ]
