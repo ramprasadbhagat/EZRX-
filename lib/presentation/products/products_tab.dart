@@ -57,7 +57,8 @@ class ProductsTab extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.materialList != current.materialList,
+            previous.materialList != current.materialList ||
+            previous.isFetching != current.isFetching,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +93,7 @@ class ProductsTab extends StatelessWidget {
                               item.type.typeMaterial
                                   ? MaterialGridItem(
                                       materialInfo: item,
-                                      onTap: () => _productOnTap(context, item), 
+                                      onTap: () => _productOnTap(context, item),
                                       onFavouriteTap: () =>
                                           onFavouriteTap(context, item),
                                     )
