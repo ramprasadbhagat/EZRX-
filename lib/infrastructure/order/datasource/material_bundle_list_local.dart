@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MaterialBundleListLocalDatasource {
@@ -37,7 +38,8 @@ class MaterialBundleListLocalDatasource {
         '(?<key>[\\w\\d]+)(?:\\"|\')(?:\\:\\s*)',
       ),
       (Match m) {
-        return m.group(0)![0].toLowerCase() + m.group(0)!.substring(1);
+        return m.group(0)![0].toLowerCase() +
+            m.group(0)!.characters.getRange(1).toString();
       },
     );
 

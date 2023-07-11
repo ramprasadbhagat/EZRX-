@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StringUtils {
@@ -41,10 +42,10 @@ class StringUtils {
     final semiCamel = sentence
         .split(' ')
         .map((e) =>
-            '${e.substring(0, 1).toUpperCase()}${e.substring(1).toLowerCase()}')
+            '${e.characters.getRange(0, 1).toUpperCase()}${e.characters.getRange(1).toLowerCase()}')
         .toList()
         .join();
 
-    return '${semiCamel.substring(0, 1).toLowerCase()}${semiCamel.substring(1)}';
+    return '${semiCamel.characters.getRange(0, 1).toLowerCase()}${semiCamel.characters.getRange(1)}';
   }
 }

@@ -127,3 +127,4 @@ dart_code_metrics:
     - binary-expression-operand-order
     - no-object-declaration
     - prefer-last
+    - avoid-substring

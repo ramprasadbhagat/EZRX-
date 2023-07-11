@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -12,7 +11,7 @@ String stringCapitalize(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
 
-  return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
+  return '${text[0].toUpperCase()}${text.characters.getRange(1).toLowerCase()}';
 }
 
 bool isNotEmpty(String text) {
@@ -66,7 +65,9 @@ String getMaterialInStockText(bool inStock) {
 }
 
 String getTelephoneNotGreaterThan16(String text) {
-  return hasLengthGreaterThanN(text, 16) ? text.substring(0, 16) : text;
+  return hasLengthGreaterThanN(text, 16)
+      ? text.characters.getRange(0, 16).toString()
+      : text;
 }
 
 bool isMinCharacter({required String input, required int minLength}) =>
@@ -183,12 +184,18 @@ DateTime? tryParseDateTime(String input) {
       //input with format yyyyddmmhh
       if (getDateTimeIntValue(input) > 0) {
         final standardInput = input.padRight(14, '0');
-        final year = int.parse(standardInput.substring(0, 4));
-        final month = int.parse(standardInput.substring(4, 6));
-        final day = int.parse(standardInput.substring(6, 8));
-        final hour = int.parse(standardInput.substring(8, 10));
-        final minute = int.parse(standardInput.substring(10, 12));
-        final second = int.parse(standardInput.substring(12, 14));
+        final year =
+            int.parse(standardInput.characters.getRange(0, 4).toString());
+        final month =
+            int.parse(standardInput.characters.getRange(4, 6).toString());
+        final day =
+            int.parse(standardInput.characters.getRange(6, 8).toString());
+        final hour =
+            int.parse(standardInput.characters.getRange(8, 10).toString());
+        final minute =
+            int.parse(standardInput.characters.getRange(10, 12).toString());
+        final second =
+            int.parse(standardInput.characters.getRange(12, 14).toString());
 
         //if length is 10, then it convert dateTime till hour
         //yyyyddmmhh (only for principal Date)

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // This method is used to convert all keys in lowercase from raw Json
@@ -10,7 +11,8 @@ dynamic makeResponseCamelCase(String resp) {
       '(?<key>[\\w\\d]+)(?:\\"|\')(?:\\:\\s*)',
     ),
     (Match m) {
-      return m.group(0)![0].toLowerCase() + m.group(0)!.substring(1);
+      return m.group(0)![0].toLowerCase() +
+          m.group(0)!.characters.getRange(1).toString();
     },
   );
 

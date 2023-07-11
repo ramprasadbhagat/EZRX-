@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'saved_order_dto.freezed.dart';
@@ -213,7 +214,10 @@ class _PoDocumentsListConverter
     // we will need to remove 2 characters " first and let jsonDecode do the rest
     return List.from(
       jsonDecode(
-        json.substring(1, json.length - 1).replaceAll('\\"', '"'),
+        json.characters
+            .getRange(1, json.length - 1)
+            .toString()
+            .replaceAll('\\"', '"'),
       ),
     ).map((e) => PoDocumentsDto.fromJson(e)).toList();
   }

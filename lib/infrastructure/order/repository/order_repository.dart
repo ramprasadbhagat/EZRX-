@@ -30,12 +30,13 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
+import 'package:flutter/material.dart';
 
 class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
   final OrderRemoteDataSource remoteDataSource;
-  
+
   late MixpanelService mixpanelService;
 
   OrderRepository({
@@ -43,7 +44,6 @@ class OrderRepository implements IOrderRepository {
     required this.mixpanelService,
     required this.localDataSource,
     required this.remoteDataSource,
-    
   });
 
   @override
@@ -488,7 +488,9 @@ String _getPaymentTerms({
       ? priceAggregate.tenderContract.contractPaymentTerm.getValue()
       : paymentTerm.isEmpty
           ? paymentTerm
-          : paymentTerm.substring(0, paymentTerm.indexOf('-'));
+          : paymentTerm.characters
+              .getRange(0, paymentTerm.indexOf('-'))
+              .toString();
 }
 
 SubmitOrderCustomer _getSubmitOrderCustomer({
