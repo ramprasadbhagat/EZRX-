@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/proxy_login.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -106,7 +108,8 @@ class _PaymentConfigurationTile extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.user.role.type != current.user.role.type,
       builder: (context, state) {
-        return state.user.role.type.isRootAdmin
+        return state.user.role.type.isRootAdmin &&
+                locator<RemoteConfigService>().getPaymentsConfig()
             ? ListTile(
                 key: const Key('paymentConfigurationTile'),
                 leading: const Icon(Icons.payments_outlined),
