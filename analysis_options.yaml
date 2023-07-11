@@ -122,7 +122,7 @@ dart_code_metrics:
     - avoid-unnecessary-setstate
     - always-remove-listener
     - avoid-expanded-as-spacer
-    # - prefer-correct-edge-insets-constructor
+    - avoid-top-level-members-in-tests
     - avoid-returning-widgets
     - avoid-unused-parameters
     - binary-expression-operand-order
