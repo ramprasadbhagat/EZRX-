@@ -21,7 +21,6 @@ class ValidCustomerMaterialRemoteDataSource {
   });
 
   Future<List<MaterialNumber>> getValidMaterialList({
-    required String userName,
     required String salesOrganisation,
     required String customerCode,
     required String shipToCode,

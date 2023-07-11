@@ -40,9 +40,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
         final returnRequestInformation = await Future.wait(returnRequestIds
             .map(
               (e) async => await returnRequestInformationLocalDataSource
-                  .getApproverReturnRequestInformation(
-                returnRequestId: e.requestId,
-              ),
+                  .getApproverReturnRequestInformation(),
             )
             .toList());
 

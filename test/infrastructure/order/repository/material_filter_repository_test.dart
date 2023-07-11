@@ -102,7 +102,6 @@ void main() {
               shipToCustomerCode: '1234567',
               language: ApiLanguageCode.english,
               gimmickMaterial: false,
-              pickAndPack: '',
               userName: 'user'))
           .thenAnswer((invocation) async => MaterialFilter.empty());
 
@@ -168,7 +167,6 @@ void main() {
           shipToCustomerCode: '1234567',
           language: ApiLanguageCode.english,
           gimmickMaterial: false,
-          pickAndPack: '',
           userName: 'user')).thenThrow((invocation) async => MockException());
 
       final result = await materialFilterRepository.getMaterialFilterList(

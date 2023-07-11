@@ -627,11 +627,9 @@ class AppRouter extends _i78.RootStackRouter {
       );
     },
     OrdersTabRoute.name: (routeData) {
-      final args = routeData.argsAs<OrdersTabRouteArgs>(
-          orElse: () => const OrdersTabRouteArgs());
       return _i78.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i68.OrdersTab(key: args.key),
+        child: const _i68.OrdersTab(),
       );
     },
     MoreTabRoute.name: (routeData) {
@@ -2279,29 +2277,15 @@ class ProductsTabRoute extends _i78.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i68.OrdersTab]
-class OrdersTabRoute extends _i78.PageRouteInfo<OrdersTabRouteArgs> {
-  OrdersTabRoute({
-    _i79.Key? key,
-    List<_i78.PageRouteInfo>? children,
-  }) : super(
+class OrdersTabRoute extends _i78.PageRouteInfo<void> {
+  const OrdersTabRoute({List<_i78.PageRouteInfo>? children})
+      : super(
           OrdersTabRoute.name,
           path: 'orders_tab',
-          args: OrdersTabRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'OrdersTabRoute';
-}
-
-class OrdersTabRouteArgs {
-  const OrdersTabRouteArgs({this.key});
-
-  final _i79.Key? key;
-
-  @override
-  String toString() {
-    return 'OrdersTabRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

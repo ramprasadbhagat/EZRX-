@@ -58,7 +58,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
         final localFile = Future.wait(files.map(
           (e) async {
             final downloadedFile =
-                await localDataSource.fileDownload(e.name, e.url);
+                await localDataSource.fileDownload(e.name);
 
             return await fileSystemHelper.getDownloadedFile(downloadedFile);
           },
@@ -97,7 +97,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       try {
         final localFile = await localDataSource.fileDownload(
           files.name,
-          files.url,
         );
         final result = await fileSystemHelper.openFile(localFile);
         if (result.type != ofs.ResultType.done) {

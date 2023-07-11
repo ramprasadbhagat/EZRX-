@@ -30,9 +30,7 @@ class ReturnSummaryDetailsRepository
       try {
         final returnRequestInformation =
             await returnSummaryDetailsRequestInformationLocal
-                .getRequestInformation(
-          returnRequestId: returnRequestId.requestId,
-        );
+                .getRequestInformation();
 
         return Right(returnRequestInformation);
       } catch (e) {

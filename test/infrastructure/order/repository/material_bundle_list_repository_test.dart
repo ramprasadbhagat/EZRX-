@@ -135,7 +135,6 @@ void main() {
 
       when(() => materialBundleListRemoteDataSource.getMaterialBundleList(
         customerCode: '123456777',
-              shipToCode: '875433',
               salesOrganisation: '2601'))
           .thenAnswer((invocation) async => <MaterialInfo>[]);
 
@@ -181,7 +180,6 @@ void main() {
 
       when(() => materialBundleListRemoteDataSource.getMaterialBundleList(
               customerCode: '123456777',
-              shipToCode: '875433',
               salesOrganisation: '2601'))
           .thenThrow((invocation) async => MockException());
 

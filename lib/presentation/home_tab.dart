@@ -151,9 +151,9 @@ RouteItem productTabRouteItem = const RouteItem(
   label: 'Products',
 );
 
-RouteItem ordersTabRouteItem = RouteItem(
+RouteItem ordersTabRouteItem = const RouteItem(
   route: OrdersTabRoute(),
-  icon: const Icon(
+  icon: Icon(
     Icons.article_outlined,
     key: WidgetKeys.ordersTab,
   ),

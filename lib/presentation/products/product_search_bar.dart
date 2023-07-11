@@ -54,7 +54,7 @@ class _SearchBarState extends State<ProductSearchBar> {
       autofocus: widget.autofocus,
       controller: widget.controller,
       enabled: widget.enabled,
-      onChanged: (value) => _onSearchChanged(context, value),
+      onChanged: (value) => _onSearchChanged(value),
       onFieldSubmitted: (value) => _onSearch(context, value),
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
@@ -97,7 +97,7 @@ class _SearchBarState extends State<ProductSearchBar> {
     }
   }
 
-  void _onSearchChanged(BuildContext context, String value) {
+  void _onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     final isValid = _isValid();
     if (isValid) {

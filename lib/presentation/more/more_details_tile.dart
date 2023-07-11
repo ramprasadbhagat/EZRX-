@@ -95,7 +95,7 @@ class MoreDetailsTile {
         ),
         label: 'Orders',
         onTap: () => context.navigateTo(
-          OrdersTabRoute(),
+          const OrdersTabRoute(),
         ),
       );
 

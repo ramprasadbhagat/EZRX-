@@ -98,7 +98,6 @@ void main() {
             customerCode: 'fake-customer-code',
             // shipToCode: 'fake-ship-code',
             materialNumbers: [],
-            salesDeal: [],
           )).thenAnswer((invocation) async => <Price>[]);
 
       final result = await materialPriceRepository.getMaterialPrice(
@@ -121,7 +120,6 @@ void main() {
             customerCode: '',
             materialNumbers: [],
             // shipToCode: 'fake-ship-code',
-            salesDeal: [],
           )).thenThrow((invocation) async => MockException());
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
@@ -147,7 +145,6 @@ void main() {
             customerCode: 'fake-customer-code',
             // shipToCode: 'fake-ship-code',
             materialNumber: 'fake-number',
-            salesDeal: [],
           )).thenAnswer((invocation) async => Price.empty().copyWith(
             finalPrice: MaterialPrice(123),
           ));

@@ -124,6 +124,7 @@ dart_code_metrics:
     - avoid-expanded-as-spacer
     # - prefer-correct-edge-insets-constructor
     - avoid-returning-widgets
+    - avoid-unused-parameters
     - binary-expression-operand-order
     - no-object-declaration
     - prefer-last

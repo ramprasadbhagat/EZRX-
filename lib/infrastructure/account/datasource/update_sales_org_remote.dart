@@ -17,9 +17,9 @@ class UpdateSalesOrgRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<UpdateSalesOrganisationConfigs> updateSalesOrgConfig(
-      {required String salesOrg,
-      required Map<String, dynamic> variableData,}) async {
+  Future<UpdateSalesOrganisationConfigs> updateSalesOrgConfig({
+    required Map<String, dynamic> variableData,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',

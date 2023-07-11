@@ -13,7 +13,7 @@ void main() {
 
   group('Return Summary Details Local DataSource Test', () {
     test('=> getRequestInformation', () async {
-      final result = await localDataSource.getRequestInformation(returnRequestId: 'mock_id');
+      final result = await localDataSource.getRequestInformation();
       expect(
         result.requestInformation.length,
         1,

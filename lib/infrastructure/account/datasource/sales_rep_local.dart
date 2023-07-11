@@ -7,9 +7,7 @@ import 'package:flutter/services.dart';
 class SalesRepLocalDataSource {
   SalesRepLocalDataSource();
 
-  Future<SalesRepresentativeInfo> getSalesRepInfo({
-    required String userName,
-  }) async {
+  Future<SalesRepresentativeInfo> getSalesRepInfo() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getSalesRepInfoResponse.json'),
     );

@@ -436,7 +436,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ErrorUtils.handleApiFailure(context, failure);
 
                   if (state.haveSelectedSalesOrganisation) {
-                    _callBannerAndDocType(context, state, false);
+                    _callBannerAndDocType(context, state);
                   } else {
                     _initBlocs(context);
                   }
@@ -455,7 +455,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       pageSize: 24,
                     ),
                   );
-              _callBannerAndDocType(context, state, true);
+              _callBannerAndDocType(context, state);
 
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.loadStoredCustomerCode(
@@ -903,7 +903,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _callBannerAndDocType(
     BuildContext context,
     SalesOrgState state,
-    bool fetchCustomer,
   ) {
     context.read<BannerBloc>().add(
           BannerEvent.fetch(

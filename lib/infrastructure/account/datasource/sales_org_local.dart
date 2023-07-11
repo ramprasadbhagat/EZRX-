@@ -7,9 +7,7 @@ import 'package:flutter/services.dart';
 class SalesOrgLocalDataSource {
   SalesOrgLocalDataSource();
 
-  Future<SalesOrganisationConfigs> getConfig({
-    required String salesOrg,
-  }) async {
+  Future<SalesOrganisationConfigs> getConfig() async {
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/getSalesOrgConfigsResponse.json'),

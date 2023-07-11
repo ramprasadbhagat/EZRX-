@@ -122,7 +122,6 @@ void main() {
           shipToCustomerCode: 'fake-shiptocode',
           soldToCustomerCode: 'fake-customer-code',
           gimmickMaterial: false,
-          pickAndPack: '',
           userName: 'fake-username',
         );
         final finalData =
@@ -163,7 +162,6 @@ void main() {
           shipToCustomerCode: 'fake-shiptocode',
           soldToCustomerCode: 'fake-customer-code',
           gimmickMaterial: false,
-          pickAndPack: '',
           userName: 'fake-username',
         )
             .onError((error, _) async {
@@ -209,7 +207,6 @@ void main() {
           shipToCustomerCode: 'fake-shiptocode',
           soldToCustomerCode: 'fake-customer-code',
           gimmickMaterial: false,
-          pickAndPack: '',
           userName: 'fake-username',
         )
             .onError((error, _) async {

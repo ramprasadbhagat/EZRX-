@@ -7,10 +7,7 @@ import 'package:flutter/services.dart';
 class ApproverReturnRequestInformationLocal {
   ApproverReturnRequestInformationLocal();
 
-  Future<RequestInformation> getApproverReturnRequestInformation(
-      {
-    required String returnRequestId,
-  }) async {
+  Future<RequestInformation> getApproverReturnRequestInformation() async {
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/returnRequestInformationV2Response.json',

@@ -213,7 +213,6 @@ void main() {
             customerCode: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
-            hidecustomer: hideCustomer,
             userName: mockCustomerCode,
             offset: 0,
           );

@@ -10,9 +10,10 @@ _$_UserRestrictionStatusDto _$$_UserRestrictionStatusDtoFromJson(
         Map<String, dynamic> json) =>
     _$_UserRestrictionStatusDto(
       userRestrictionStatus:
-          userRestrictionOverride(json, 'approverRightStatus') as String? ?? '',
+          _userRestrictionOverride(json, 'approverRightStatus') as String? ??
+              '',
       userReturnApprovalLimit:
-          userReturnApprovalLimitOverride(json, 'approvalLimitStatus')
+          _userReturnApprovalLimitOverride(json, 'approvalLimitStatus')
                   as bool? ??
               false,
     );

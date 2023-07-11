@@ -120,7 +120,6 @@ class ProductDetailRepository implements IProductDetailRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         language: locale.languageCode,
         materialNumber: materialNumber.getOrCrash(),
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         principalCode: principalCode.getOrCrash(),
       );
       final stockInfoData = await getStockInfoList(

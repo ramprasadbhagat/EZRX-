@@ -53,7 +53,6 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
           ? await remoteDataSource.getSalesRepCustomerCodeList(
               salesOrg: salesOrg,
               customerCode: customerCode,
-              hidecustomer: hideCustomer,
               userName: user.username.getOrCrash(),
               pageSize: pageSize,
               offset: offset,

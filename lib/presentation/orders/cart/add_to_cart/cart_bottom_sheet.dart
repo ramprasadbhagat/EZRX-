@@ -43,7 +43,6 @@ class CartBottomSheet {
   static void showAddToCartBottomSheet({
     required BuildContext context,
     required PriceAggregate priceAggregate,
-    bool isCovid19Tab = false,
   }) {
     final cartBloc = context.read<CartBloc>();
     final currentCartItem = cartBloc.state

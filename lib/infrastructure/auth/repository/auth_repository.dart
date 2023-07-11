@@ -72,10 +72,7 @@ class AuthRepository implements IAuthRepository {
     final passwordStr = password.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final login = await localDataSource.loginWithPassword(
-          username: usernameStr,
-          password: passwordStr,
-        );
+        final login = await localDataSource.loginWithPassword();
 
         return Right(login);
       } catch (e) {
@@ -120,9 +117,7 @@ class AuthRepository implements IAuthRepository {
     final usernameStr = username.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final login = await localDataSource.proxyLoginWithUsername(
-          username: usernameStr,
-        );
+        final login = await localDataSource.proxyLoginWithUsername();
 
         return Right(login);
       } catch (e) {
@@ -173,9 +168,7 @@ class AuthRepository implements IAuthRepository {
     final token = oktaAccessToken.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final login = await localDataSource.loginWithOktaToken(
-          oktaAccessToken: token,
-        );
+        final login = await localDataSource.loginWithOktaToken();
 
         return Right(login);
       } catch (e) {
@@ -498,9 +491,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<ApiFailure, Login>> getAccessToken(JWT refreshToken) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final login = await localDataSource.getAccessToken(
-          refreshToken: refreshToken.getOrDefaultValue(''),
-        );
+        final login = await localDataSource.getAccessToken();
 
         return Right(login);
       } catch (e) {

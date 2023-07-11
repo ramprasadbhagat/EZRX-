@@ -167,7 +167,6 @@ void main() {
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
           customerCode: mockCustomerCode,
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          hidecustomer: hideCustomer,
           userName: mockSalesRepUser.username.getOrCrash(),
           pageSize: pageSize,
           offset: offset,
@@ -194,7 +193,6 @@ void main() {
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
           customerCode: mockCustomerCode,
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          hidecustomer: hideCustomer,
           userName: mockSalesRepUser.username.getOrCrash(),
           pageSize: pageSize,
           offset: offset,

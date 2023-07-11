@@ -329,7 +329,7 @@ List<String> getValidationText(
   CartState cartState,
 ) {
   final list = <String>[];
-  final dialogContent = cartState.dialogContent(initial, selected);
+  final dialogContent = cartState.dialogContent(selected);
   if (initial != selected &&
       cartState.showDialog(selected) &&
       dialogContent.isNotEmpty) {

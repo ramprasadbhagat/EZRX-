@@ -28,7 +28,6 @@ class MaterialBundleListRemoteDataSource {
 
   Future<List<MaterialInfo>> getMaterialBundleList({
     required String customerCode,
-    required String shipToCode,
     required String salesOrganisation,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {

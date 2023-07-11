@@ -50,12 +50,8 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
     try {
       final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
       final customerCode = customerCodeInfo.customerCodeSoldTo;
-      final shipToCode = shipToInfo.shipToCustomerCode;
       final queryMaterialNumbers =
           materialNumberList.map((e) => e.getOrCrash()).toList();
-      final queryComboDeals = comboDealEligible
-          ? customerCodeInfo.salesDeals.map((e) => e.getOrCrash()).toList()
-          : <String>[];
 
       final priceData = <MaterialNumber, Price>{};
 
@@ -64,8 +60,6 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
           salesOrgCode: salesOrgCode,
           customerCode: customerCode,
           materialNumber: e,
-          shipToCode: shipToCode,
-          salesDeal: queryComboDeals,
         );
         price.fold(
           (failure) {},
@@ -84,16 +78,13 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
   Future<Either<ApiFailure, Price>> getPrice({
     required String salesOrgCode,
     required String customerCode,
-    required String shipToCode,
     required String materialNumber,
-    required List<String> salesDeal,
   }) async {
     try {
       final price = await remoteDataSource.getMaterialPrice(
         salesOrgCode: salesOrgCode,
         customerCode: customerCode,
         materialNumber: materialNumber,
-        salesDeal: salesDeal,
       );
 
       return Right(

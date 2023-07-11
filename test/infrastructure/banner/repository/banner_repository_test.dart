@@ -38,8 +38,6 @@ void main() {
           .copyWith(shipToInfos: [SalesOrgShipToInfo.empty()])
     ],
   );
-  const mockRole = 'customer';
-  const mockCountry = 'SG';
 
   setUpAll(
     () async {
@@ -47,10 +45,7 @@ void main() {
       configMock = Config()..appFlavor = Flavor.mock;
       localDataSourceMock = BannerLocalDataSourceMock();
       when(
-        () => localDataSourceMock.getBanners(
-          isPreSalesOrg: false,
-          salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
-        ),
+        () => localDataSourceMock.getBanners(),
       ).thenAnswer((invocation) async {
         final res = json.decode(
           await rootBundle.loadString('assets/json/getBannersResponse.json'),
@@ -62,11 +57,7 @@ void main() {
       });
 
       when(
-        () => localDataSourceMock.getEZReachBanners(
-          salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
-          role: mockRole,
-          country: mockCountry,
-        ),
+        () => localDataSourceMock.getEZReachBanners(),
       ).thenAnswer((invocation) async {
         final res = json.decode(
           await rootBundle
@@ -90,22 +81,12 @@ void main() {
 
   group('Banner Repository', () {
     test('Get banner from remote success', () async {
-      bannerListMock = await localDataSourceMock.getBanners(
-        isPreSalesOrg: false,
-        salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
-      );
+      bannerListMock = await localDataSourceMock.getBanners();
 
-      eZReachBannerListMock = await localDataSourceMock.getEZReachBanners(
-        salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
-        role: mockRole,
-        country: mockCountry,
-      );
+      eZReachBannerListMock = await localDataSourceMock.getEZReachBanners();
 
       when(
-        () => localDataSourceMock.getBanners(
-          isPreSalesOrg: false,
-          salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
-        ),
+        () => localDataSourceMock.getBanners(),
       ).thenAnswer(
         (invocation) async => eZReachBannerListMock + bannerListMock,
       );
@@ -174,10 +155,7 @@ void main() {
         localDataSource: localDataSourceMock,
       );
       when(
-        () => localDataSourceMock.getBanners(
-          isPreSalesOrg: false,
-          salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
-        ),
+        () => localDataSourceMock.getBanners(),
       ).thenThrow(
         () => Exception('fake-error'),
       );

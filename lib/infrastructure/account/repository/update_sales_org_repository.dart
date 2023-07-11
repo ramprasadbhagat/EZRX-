@@ -47,7 +47,6 @@ class UpdateSalesOrgRepository {
           .toJson();
       final updatedSalesOrgConfigs =
           await remoteDataSource.updateSalesOrgConfig(
-        salesOrg: salesOrg,
         variableData: variableData,
       );
 

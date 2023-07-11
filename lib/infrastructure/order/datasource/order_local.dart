@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_response_dto.dart';
 import 'package:flutter/services.dart';
 
@@ -22,7 +21,7 @@ class OrderLocalDataSource {
         .toList();
   }
 
-  Future<SavedOrder> deleteSavedOrder({required SavedOrder item}) async {
+  Future<SavedOrder> deleteSavedOrder() async {
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/deleteSavedOrderTemplateResponse.json'),
@@ -33,9 +32,7 @@ class OrderLocalDataSource {
     ).toDomain();
   }
 
-  Future<SavedOrder> createDraftOrder({
-    required SavedOrderDto draftOrder,
-  }) async {
+  Future<SavedOrder> createDraftOrder() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/createDraftOrderResponse.json'),
     );
@@ -43,9 +40,7 @@ class OrderLocalDataSource {
     return SavedOrderDto.fromJson(data['data']['createDraftOrder']).toDomain();
   }
 
-  Future<SubmitOrderResponse> submitOrder({
-    required SubmitOrderDto submitOrder,
-  }) async {
+  Future<SubmitOrderResponse> submitOrder() async {
     await Future.delayed(const Duration(seconds: 5));
     final data = json.decode(
       await rootBundle.loadString('assets/json/submitOrderResponse.json'),

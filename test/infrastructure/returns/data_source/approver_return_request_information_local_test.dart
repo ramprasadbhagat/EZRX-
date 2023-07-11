@@ -32,9 +32,7 @@ void main() {
           );
 
           final result =
-              await localDataSource.getApproverReturnRequestInformation(
-            returnRequestId: 'fake-requestId',
-          );
+              await localDataSource.getApproverReturnRequestInformation();
 
           expect(
             result,

@@ -175,7 +175,7 @@ class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepo
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final localFile = await localDataSource.fileDownload(files.url);
+        final localFile = await localDataSource.fileDownload();
         final downloadedFile = await fileSystemHelper.getDownloadedFile(localFile);
 
         return Right(downloadedFile);

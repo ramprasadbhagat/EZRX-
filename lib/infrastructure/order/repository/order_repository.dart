@@ -137,9 +137,7 @@ class OrderRepository implements IOrderRepository {
     );
     if (config.appFlavor == Flavor.mock) {
       try {
-        final savedOrder = await localDataSource.createDraftOrder(
-          draftOrder: SavedOrderDto.fromDomain(draftOrder),
-        );
+        final savedOrder = await localDataSource.createDraftOrder();
         if (savedOrder.isDraftOrder) {
           final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
 
@@ -258,12 +256,7 @@ class OrderRepository implements IOrderRepository {
     );
     if (config.appFlavor == Flavor.mock) {
       try {
-        final submitOrderResponse = await localDataSource.submitOrder(
-          submitOrder: SubmitOrderDto.fromDomain(
-            submitOrder,
-            configs.currency.getValue(),
-          ),
-        );
+        final submitOrderResponse = await localDataSource.submitOrder();
 
         return Right(submitOrderResponse);
       } catch (e) {
@@ -397,7 +390,6 @@ class OrderRepository implements IOrderRepository {
       orderType: getOrderType(
         orderType: orderDocumentType.documentType.documentTypeCode,
         cartItems: cartItems,
-        user: user,
       ),
       orderReason: cartItems
               .map((cartItem) =>
@@ -515,7 +507,6 @@ List<SubmitMaterialInfo> _getMaterialInfoList({
 String getOrderType({
   required String orderType,
   required List<PriceAggregate> cartItems,
-  required User user,
 }) {
   return cartItems
           .where((element) => element.materialInfo.materialGroup4.isFOC)

@@ -77,13 +77,13 @@ void main() {
           );
 
           final result = await remoteDataSource.getValidMaterialList(
-              customerCode: 'fake-customercode',
-              focMaterialList: [],
-              materialList: [],
-              pickAndPackValue: '',
-              salesOrganisation: 'fake-salesorg',
-              shipToCode: 'fake-shipto',
-              userName: 'fake-username');
+            customerCode: 'fake-customercode',
+            focMaterialList: [],
+            materialList: [],
+            pickAndPackValue: '',
+            salesOrganisation: 'fake-salesorg',
+            shipToCode: 'fake-shipto',
+          );
 
           final finalData = res['data']['validCustomerMaterials']['materials'];
           expect(
@@ -126,13 +126,13 @@ void main() {
 
           await remoteDataSource
               .getValidMaterialList(
-                  customerCode: 'fake-customercode',
-                  focMaterialList: [],
-                  materialList: [],
-                  pickAndPackValue: '',
-                  salesOrganisation: 'fake-salesorg',
-                  shipToCode: 'fake-shipto',
-                  userName: 'fake-username')
+            customerCode: 'fake-customercode',
+            focMaterialList: [],
+            materialList: [],
+            pickAndPackValue: '',
+            salesOrganisation: 'fake-salesorg',
+            shipToCode: 'fake-shipto',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<MaterialNumberMock>[]);
@@ -174,13 +174,13 @@ void main() {
 
           await remoteDataSource
               .getValidMaterialList(
-                  customerCode: 'fake-customercode',
-                  focMaterialList: [],
-                  materialList: [],
-                  pickAndPackValue: '',
-                  salesOrganisation: 'fake-salesorg',
-                  shipToCode: 'fake-shipto',
-                  userName: 'fake-username')
+            customerCode: 'fake-customercode',
+            focMaterialList: [],
+            materialList: [],
+            pickAndPackValue: '',
+            salesOrganisation: 'fake-salesorg',
+            shipToCode: 'fake-shipto',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<MaterialNumberMock>[]);

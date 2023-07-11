@@ -57,7 +57,6 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
               soldToCustomerCode: customerCode,
               shipToCustomerCode: shipToCode,
               gimmickMaterial: gimmickMaterial,
-              pickAndPack: pickAndPack,
               language: language,
               userName: userName,
             )

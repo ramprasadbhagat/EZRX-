@@ -23,8 +23,6 @@ class AccountSelectorStorageMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
-
-
 void main() {
   late Config configMock;
   late String mockSalesOrgName;
@@ -65,9 +63,7 @@ void main() {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
 
       when(
-        () => salesOrgLocalDataSourceMock.getConfig(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-        ),
+        () => salesOrgLocalDataSourceMock.getConfig(),
       ).thenAnswer((invocation) async => SalesOrganisationConfigs.empty());
 
       final result =
@@ -81,9 +77,7 @@ void main() {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
 
       when(
-        () => salesOrgLocalDataSourceMock.getConfig(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-        ),
+        () => salesOrgLocalDataSourceMock.getConfig(),
       ).thenThrow((invocation) async => MockException());
 
       final result =

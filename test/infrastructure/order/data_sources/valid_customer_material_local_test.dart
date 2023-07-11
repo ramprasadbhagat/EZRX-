@@ -34,15 +34,7 @@ void main() {
                 .loadString('assets/json/validCustomerMaterialsResponse.json'),
           );
 
-          final result = await localDataSource.getValidMaterialList(
-            customerCode: '',
-            focMaterialList: [],
-            materialList: [],
-            pickAndPackValue: '',
-            salesOrganisation: '',
-            shipToCode: '',
-            userName: '',
-          );
+          final result = await localDataSource.getValidMaterialList();
 
           final finalData = res['data']['validCustomerMaterials']['materials'];
 

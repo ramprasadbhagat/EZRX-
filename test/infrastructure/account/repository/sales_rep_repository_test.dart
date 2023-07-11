@@ -47,8 +47,7 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => salesRepLocalDataSourceMock.getSalesRepInfo(
-              userName: mockUserName))
+      when(() => salesRepLocalDataSourceMock.getSalesRepInfo())
           .thenAnswer((invocation) async => SalesRepresentativeInfo.empty());
 
       final result = await repository.getSalesRepInfo(user: mockUser);
@@ -59,8 +58,7 @@ void main() {
     test('Get Sales Rep Info from local data source failed test', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => salesRepLocalDataSourceMock.getSalesRepInfo(
-              userName: mockUserName))
+      when(() => salesRepLocalDataSourceMock.getSalesRepInfo())
           .thenThrow((invocation) async => MockException());
 
       final result = await repository.getSalesRepInfo(user: mockUser);

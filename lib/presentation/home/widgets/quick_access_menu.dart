@@ -111,7 +111,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     key: WidgetKeys.homeQuickAccessOrdersMenu,
     icon: 'order_menu.svg',
     label: 'Orders',
-    onTap: () => context.navigateTo(OrdersTabRoute()),
+    onTap: () => context.navigateTo(const OrdersTabRoute()),
   );
 
   final homeQuickAccessReturnsMenu = _QuickAccessMenuData(

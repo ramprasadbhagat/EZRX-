@@ -35,9 +35,7 @@ class SalesOrgRepository implements ISalesOrgRepository {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final salesOrgConfigs = await localDataSource.getConfig(
-          salesOrg: salesOrg,
-        );
+        final salesOrgConfigs = await localDataSource.getConfig();
 
         return Right(salesOrgConfigs);
       } catch (e) {

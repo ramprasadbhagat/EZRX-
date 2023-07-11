@@ -28,10 +28,7 @@ class BannerRepository implements IBannerRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final banners = await localDataSource.getBanners(
-          isPreSalesOrg: isPreSalesOrg,
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        );
+        final banners = await localDataSource.getBanners();
 
         return Right(banners);
       } catch (e) {
@@ -58,11 +55,7 @@ class BannerRepository implements IBannerRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final ezReachBanners = await localDataSource.getEZReachBanners(
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-          country: country,
-          role: role,
-        );
+        final ezReachBanners = await localDataSource.getEZReachBanners();
 
         return Right(ezReachBanners);
       } catch (e) {

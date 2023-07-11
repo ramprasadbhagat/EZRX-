@@ -4,15 +4,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/services.dart';
 
 class ValidCustomerMaterialLocalDataSource {
-  Future<List<MaterialNumber>> getValidMaterialList({
-    required String userName,
-    required String salesOrganisation,
-    required String customerCode,
-    required String shipToCode,
-    required String pickAndPackValue,
-    required List<String> materialList,
-    required List<String> focMaterialList,
-  }) async {
+  Future<List<MaterialNumber>> getValidMaterialList() async {
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/validCustomerMaterialsResponse.json'),

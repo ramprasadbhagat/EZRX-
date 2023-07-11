@@ -28,7 +28,6 @@ class MaterialPriceRemoteDataSource {
     required String salesOrgCode,
     required String customerCode,
     required List<String> materialNumbers,
-    required List<String> salesDeal,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getMaterialPrice();
@@ -66,7 +65,6 @@ class MaterialPriceRemoteDataSource {
     required String salesOrgCode,
     required String customerCode,
     required String materialNumber,
-    required List<String> salesDeal,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getMaterialPrice();

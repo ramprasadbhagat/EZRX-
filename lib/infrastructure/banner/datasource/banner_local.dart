@@ -8,10 +8,7 @@ import 'package:flutter/services.dart';
 class BannerLocalDataSource {
   BannerLocalDataSource();
 
-  Future<List<BannerItem>> getBanners({
-    required bool isPreSalesOrg,
-    required String salesOrg,
-  }) async {
+  Future<List<BannerItem>> getBanners() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getBannersResponse.json'),
     );
@@ -21,11 +18,7 @@ class BannerLocalDataSource {
         .toList();
   }
 
-  Future<List<BannerItem>> getEZReachBanners({
-    required String salesOrg,
-    required String country,
-    required String role,
-  }) async {
+  Future<List<BannerItem>> getEZReachBanners() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getEZReachBannerResponse.json'),
     );

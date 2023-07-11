@@ -98,7 +98,7 @@ class _BodyContent extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10,top: 5),
                     child: SectionTitle(
                       title: 'Recently ordered',
-                      onTapIconButton: () => context.navigateTo(OrdersTabRoute()),
+                      onTapIconButton: () => context.navigateTo(const OrdersTabRoute()),
                     ),
                   ),
                   SizedBox(

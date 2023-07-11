@@ -66,7 +66,6 @@ class MaterialFilterRemoteDataSource {
     required String shipToCustomerCode,
     required String userName,
     required bool gimmickMaterial,
-    required String pickAndPack,
     required String language,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {

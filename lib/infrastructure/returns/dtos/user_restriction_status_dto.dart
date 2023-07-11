@@ -13,13 +13,13 @@ class UserRestrictionStatusDto with _$UserRestrictionStatusDto {
     @JsonKey(
       name: 'approverRightStatus',
       defaultValue: '',
-      readValue: userRestrictionOverride,
+      readValue: _userRestrictionOverride,
     )
         required String userRestrictionStatus,
     @JsonKey(
       name: 'approvalLimitStatus',
       defaultValue: false,
-      readValue: userReturnApprovalLimitOverride,
+      readValue: _userReturnApprovalLimitOverride,
     )
         required bool userReturnApprovalLimit,
   }) = _UserRestrictionStatusDto;
@@ -35,12 +35,12 @@ class UserRestrictionStatusDto with _$UserRestrictionStatusDto {
       _$UserRestrictionStatusDtoFromJson(json);
 }
 
-String userRestrictionOverride(Map json, String key) =>
+String _userRestrictionOverride(Map json, String _) =>
     json['addRestriction']?['status'] ??
     json['deleteRestriction']?['status'] ??
     '';
 
-bool userReturnApprovalLimitOverride(Map json, String key) =>
+bool _userReturnApprovalLimitOverride(Map json, String _) =>
     json['addReturnApprovalLimit']?['status'] ??
     json['deleteReturnApprovalLimit']?['status'] ??
     false;

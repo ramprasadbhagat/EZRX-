@@ -148,7 +148,6 @@ void main() {
 
       when(
         () => updateSalesOrgRemoteDataSourceMock.updateSalesOrgConfig(
-          salesOrg: mockSalesOrg.salesOrg.country,
           variableData : variableData,
         ),
       ).thenAnswer((invocation) async => configs);
@@ -168,7 +167,6 @@ void main() {
 
       when(
         () => updateSalesOrgRemoteDataSourceMock.updateSalesOrgConfig(
-          salesOrg: mockSalesOrg.salesOrg.country,
           variableData : variableData,
         ),
       ).thenThrow((invocation) async => Exception());

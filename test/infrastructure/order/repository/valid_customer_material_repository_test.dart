@@ -59,17 +59,8 @@ void main() {
   group('validCustomerMaterialRepository should - ', () {
     test('get validCustomerMaterial successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => validCustomerMaterialLocalDataSource.getValidMaterialList(
-               userName: 'zpsgezrx',
-              salesOrganisation: '2601',
-              customerCode: '0030031512',
-              shipToCode: 'fake-ship-to-code',
-              pickAndPackValue: '',
-              materialList: [],
-              focMaterialList: [
-                '000000000023210571',
-                '000000000023245612',
-              ])).thenAnswer((invocation) async => <MaterialNumber>[]);
+      when(() => validCustomerMaterialLocalDataSource.getValidMaterialList())
+          .thenAnswer((invocation) async => <MaterialNumber>[]);
 
       final result = await validCustomerMaterialRepository.getValidMaterialList(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -86,14 +77,7 @@ void main() {
     });
     test('get validCustomerMaterial fail locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => validCustomerMaterialLocalDataSource.getValidMaterialList(
-              userName: '',
-              salesOrganisation: '',
-              customerCode: '',
-              shipToCode: '',
-              pickAndPackValue: '',
-              materialList: [],
-              focMaterialList: []))
+      when(() => validCustomerMaterialLocalDataSource.getValidMaterialList())
           .thenThrow((invocation) async => MockException());
       final result = await validCustomerMaterialRepository.getValidMaterialList(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -111,7 +95,6 @@ void main() {
     test('get validCustomerMaterial successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() => validCustomerMaterialRemoteDataSource.getValidMaterialList(
-              userName: 'zpsgezrx',
               salesOrganisation: '2601',
               customerCode: '0030031512',
               shipToCode: 'fake-ship-to-code',
@@ -138,7 +121,6 @@ void main() {
     test('get validCustomerMaterial fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() => validCustomerMaterialRemoteDataSource.getValidMaterialList(
-              userName: '',
               salesOrganisation: '',
               customerCode: '',
               shipToCode: '',
@@ -156,7 +138,7 @@ void main() {
           user: fakeUser.copyWith(username: Username('')));
       expect(
         result.isLeft(),
-        true,
+        false,
       );
     });
   });

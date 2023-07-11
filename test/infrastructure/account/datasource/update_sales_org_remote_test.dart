@@ -129,7 +129,7 @@ void main() {
           }),
         );
         final result = await remoteDataSource.updateSalesOrgConfig(
-            salesOrg: salesOrg.country, variableData: variableData);
+            variableData: variableData);
         final resTest = UpdateSalesOrganisationConfigsDto.fromJson(
           res['data']['updateSalesOrgConfig']['salesOrgConfig'],
         ).toDomain();
@@ -158,7 +158,7 @@ void main() {
           }),
         );
         final result = await remoteDataSource.updateSalesOrgConfig(
-            salesOrg: salesOrg.country, variableData: variableData);
+            variableData: variableData);
 
         expect(result, UpdateSalesOrganisationConfigs.empty());
       },
@@ -187,7 +187,7 @@ void main() {
           }),
         );
         await remoteDataSource
-            .updateSalesOrgConfig(salesOrg: salesOrg.country, variableData: variableData)
+            .updateSalesOrgConfig(variableData: variableData)
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(UpdateSalesOrganisationConfigs.empty());
@@ -197,7 +197,6 @@ void main() {
     test(
       'Status code != 200',
       () async {
-
         dioAdapter.onPost(
           '/api/strapiEngineMutation',
           (server) => server.reply(
@@ -216,7 +215,7 @@ void main() {
           }),
         );
         await remoteDataSource
-            .updateSalesOrgConfig(salesOrg: salesOrg.country, variableData: variableData)
+            .updateSalesOrgConfig(variableData: variableData)
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(UpdateSalesOrganisationConfigs.empty());

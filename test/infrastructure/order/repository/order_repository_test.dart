@@ -192,7 +192,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(() =>
-              orderLocalDataSource.deleteSavedOrder(item: SavedOrder.empty()))
+              orderLocalDataSource.deleteSavedOrder())
           .thenAnswer((invocation) async => SavedOrder.empty());
 
       final result = await orderRepository.deleteSavedOrder(
@@ -209,7 +209,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(() =>
-              orderLocalDataSource.deleteSavedOrder(item: SavedOrder.empty()))
+              orderLocalDataSource.deleteSavedOrder())
           .thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.deleteSavedOrder(
@@ -225,14 +225,8 @@ void main() {
 
     test('get OrderRepository fail locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => orderLocalDataSource.deleteSavedOrder(
-              item: SavedOrder.empty().copyWith(
-            id: '6891',
-            items: [
-              MaterialItem.empty()
-                  .copyWith(materialNumber: MaterialNumber('123'))
-            ],
-          ))).thenThrow((invocation) async => MockException());
+      when(() => orderLocalDataSource.deleteSavedOrder())
+          .thenThrow((invocation) async => MockException());
       final result = await orderRepository.deleteSavedOrder(
         orderItem: SavedOrder.empty().copyWith(
           id: '6891',
@@ -402,8 +396,7 @@ void main() {
         ].map((e) => e.toSubmitMaterialInfo()).toList(),
       );
 
-      when(() => orderLocalDataSource.submitOrder(
-              submitOrder: SubmitOrderDto.fromDomain(submitOrder, 'PHP')))
+      when(() => orderLocalDataSource.submitOrder())
           .thenAnswer((invocation) async => SubmitOrderResponse.empty()
                   .copyWith(salesDocument: 'fake-sales-document', messages: [
                 SubmitOrderResponseMessage.empty().copyWith(
@@ -471,8 +464,7 @@ void main() {
             cartMaterial.any((item) => item.checkSalesCutOff),
       );
 
-      when(() => orderLocalDataSource.submitOrder(
-              submitOrder: SubmitOrderDto.fromDomain((submitOrder), '')))
+      when(() => orderLocalDataSource.submitOrder())
           .thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.submitOrder(
@@ -913,57 +905,56 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
 
-      final draftOrder = SavedOrder.empty().copyWith(
-        requestedDeliveryDate: '01/02/2023',
-        deliveryDocument: mockShipToInfo.shipToName.name1,
-        billingDocument: mockCustomerCodeInfo.customerName.name1,
-        salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
-        principal: '',
-        soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
-        shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
-        processingStatus: 'Draft',
-        isDraftOrder: true,
-        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.country,
-        postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.deliveryInstruction.getValue(),
-        poReference: data.poReference.getValue(),
-        payTerm: data.paymentTerm.getValue(),
-        // collectiveNo: data.collectiveNumber.getValue(),
-        totalOrderValue: 100.0,
-        draftorder: true,
-        address1: mockShipToInfo.shipToAddress.street,
-        address2: mockShipToInfo.shipToAddress.street2,
-        city: mockShipToInfo.city1,
-        phonenumber: data.mobileNumber.getValue(),
-        user: user.id,
-        contactPerson: data.contactPerson.getValue().isNotEmpty
-            ? data.contactPerson.getValue()
-            : user.fullName.toString(),
-        referenceNotes: data.referenceNote.getValue(),
-        items: getItemList([
-          CartItem(
-            materials: [
-              PriceAggregate.empty().copyWith(
-                price: Price.empty().copyWith(
-                  bundles: [],
-                  materialNumber: MaterialNumber('234567'),
-                  priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0),
-                ),
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('234567'),
-                ),
-              ),
-            ],
-            itemType: CartItemType.material,
-          ),
-        ]),
-        poAttachent: [],
-      );
+      // final draftOrder = SavedOrder.empty().copyWith(
+      //   requestedDeliveryDate: '01/02/2023',
+      //   deliveryDocument: mockShipToInfo.shipToName.name1,
+      //   billingDocument: mockCustomerCodeInfo.customerName.name1,
+      //   salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
+      //   principal: '',
+      //   soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
+      //   shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
+      //   processingStatus: 'Draft',
+      //   isDraftOrder: true,
+      //   companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+      //   country: mockShipToInfo.country,
+      //   postCode1: mockShipToInfo.postalCode,
+      //   specialInstructions: data.deliveryInstruction.getValue(),
+      //   poReference: data.poReference.getValue(),
+      //   payTerm: data.paymentTerm.getValue(),
+      //   // collectiveNo: data.collectiveNumber.getValue(),
+      //   totalOrderValue: 100.0,
+      //   draftorder: true,
+      //   address1: mockShipToInfo.shipToAddress.street,
+      //   address2: mockShipToInfo.shipToAddress.street2,
+      //   city: mockShipToInfo.city1,
+      //   phonenumber: data.mobileNumber.getValue(),
+      //   user: user.id,
+      //   contactPerson: data.contactPerson.getValue().isNotEmpty
+      //       ? data.contactPerson.getValue()
+      //       : user.fullName.toString(),
+      //   referenceNotes: data.referenceNote.getValue(),
+      //   items: getItemList([
+      //     CartItem(
+      //       materials: [
+      //         PriceAggregate.empty().copyWith(
+      //           price: Price.empty().copyWith(
+      //             bundles: [],
+      //             materialNumber: MaterialNumber('234567'),
+      //             priceOverride: PriceOverrideValue(12.0),
+      //             zdp8Override: Zdp8OverrideValue(2.0),
+      //           ),
+      //           materialInfo: MaterialInfo.empty().copyWith(
+      //             materialNumber: MaterialNumber('234567'),
+      //           ),
+      //         ),
+      //       ],
+      //       itemType: CartItemType.material,
+      //     ),
+      //   ]),
+      //   poAttachent: [],
+      // );
 
-      when(() => orderLocalDataSource.createDraftOrder(
-          draftOrder: SavedOrderDto.fromDomain(draftOrder))).thenAnswer(
+      when(() => orderLocalDataSource.createDraftOrder()).thenAnswer(
         (invocation) async {
           await Future.delayed(const Duration(seconds: 1));
           return SavedOrder.empty().copyWith(
@@ -1025,52 +1016,51 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
 
-      final draftOrder = SavedOrder.empty().copyWith(
-        requestedDeliveryDate: '01/02/2023',
-        deliveryDocument: mockShipToInfo.shipToName.name1,
-        billingDocument: mockCustomerCodeInfo.customerName.name1,
-        salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
-        principal: '',
-        soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
-        shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
-        processingStatus: 'Draft',
-        isDraftOrder: true,
-        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.country,
-        postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.deliveryInstruction.getValue(),
-        poReference: data.poReference.getValue(),
-        payTerm: data.paymentTerm.getValue(),
-        // collectiveNo: data.collectiveNumber.getValue(),
-        totalOrderValue: 100.0,
-        draftorder: true,
-        address1: mockShipToInfo.shipToAddress.street,
-        address2: mockShipToInfo.shipToAddress.street2,
-        city: mockShipToInfo.city1,
-        phonenumber: data.mobileNumber.getValue(),
-        user: user.id,
-        contactPerson: data.contactPerson.getValue().isNotEmpty
-            ? data.contactPerson.getValue()
-            : user.fullName.toString(),
-        referenceNotes: data.referenceNote.getValue(),
-        items: getItemList([
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
-                  bundles: [],
-                  materialNumber: MaterialNumber('234567'),
-                  priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
-              ),
-            ),
-          ], itemType: CartItemType.material),
-        ]),
-      );
+      // final draftOrder = SavedOrder.empty().copyWith(
+      //   requestedDeliveryDate: '01/02/2023',
+      //   deliveryDocument: mockShipToInfo.shipToName.name1,
+      //   billingDocument: mockCustomerCodeInfo.customerName.name1,
+      //   salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
+      //   principal: '',
+      //   soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
+      //   shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
+      //   processingStatus: 'Draft',
+      //   isDraftOrder: true,
+      //   companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+      //   country: mockShipToInfo.country,
+      //   postCode1: mockShipToInfo.postalCode,
+      //   specialInstructions: data.deliveryInstruction.getValue(),
+      //   poReference: data.poReference.getValue(),
+      //   payTerm: data.paymentTerm.getValue(),
+      //   // collectiveNo: data.collectiveNumber.getValue(),
+      //   totalOrderValue: 100.0,
+      //   draftorder: true,
+      //   address1: mockShipToInfo.shipToAddress.street,
+      //   address2: mockShipToInfo.shipToAddress.street2,
+      //   city: mockShipToInfo.city1,
+      //   phonenumber: data.mobileNumber.getValue(),
+      //   user: user.id,
+      //   contactPerson: data.contactPerson.getValue().isNotEmpty
+      //       ? data.contactPerson.getValue()
+      //       : user.fullName.toString(),
+      //   referenceNotes: data.referenceNote.getValue(),
+      //   items: getItemList([
+      //     CartItem(materials: [
+      //       PriceAggregate.empty().copyWith(
+      //         price: Price.empty().copyWith(
+      //             bundles: [],
+      //             materialNumber: MaterialNumber('234567'),
+      //             priceOverride: PriceOverrideValue(12.0),
+      //             zdp8Override: Zdp8OverrideValue(2.0)),
+      //         materialInfo: MaterialInfo.empty().copyWith(
+      //           materialNumber: MaterialNumber('234567'),
+      //         ),
+      //       ),
+      //     ], itemType: CartItemType.material),
+      //   ]),
+      // );
 
-      when(() => orderLocalDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(draftOrder)))
+      when(() => orderLocalDataSource.createDraftOrder())
           .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
                 draftorder: true,
                 isDraftOrder: false,
@@ -1127,52 +1117,51 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
 
-      final draftOrder = SavedOrder.empty().copyWith(
-        requestedDeliveryDate: '01/02/2023',
-        deliveryDocument: mockShipToInfo.shipToName.name1,
-        billingDocument: mockCustomerCodeInfo.customerName.name1,
-        salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
-        principal: '',
-        soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
-        shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
-        processingStatus: 'Draft',
-        isDraftOrder: true,
-        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.country,
-        postCode1: mockShipToInfo.postalCode,
-        specialInstructions: data.deliveryInstruction.getValue(),
-        poReference: data.poReference.getValue(),
-        payTerm: data.paymentTerm.getValue(),
-        // collectiveNo: data.collectiveNumber.getValue(),
-        totalOrderValue: 100.0,
-        draftorder: true,
-        address1: mockShipToInfo.shipToAddress.street,
-        address2: mockShipToInfo.shipToAddress.street2,
-        city: mockShipToInfo.city1,
-        phonenumber: data.mobileNumber.getValue(),
-        user: user.id,
-        contactPerson: data.contactPerson.getValue().isNotEmpty
-            ? data.contactPerson.getValue()
-            : user.fullName.toString(),
-        referenceNotes: data.referenceNote.getValue(),
-        items: getItemList([
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
-                  bundles: [],
-                  materialNumber: MaterialNumber('234567'),
-                  priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
-              ),
-            ),
-          ], itemType: CartItemType.material),
-        ]),
-      );
+      // final draftOrder = SavedOrder.empty().copyWith(
+      //   requestedDeliveryDate: '01/02/2023',
+      //   deliveryDocument: mockShipToInfo.shipToName.name1,
+      //   billingDocument: mockCustomerCodeInfo.customerName.name1,
+      //   salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
+      //   principal: '',
+      //   soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
+      //   shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
+      //   processingStatus: 'Draft',
+      //   isDraftOrder: true,
+      //   companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+      //   country: mockShipToInfo.country,
+      //   postCode1: mockShipToInfo.postalCode,
+      //   specialInstructions: data.deliveryInstruction.getValue(),
+      //   poReference: data.poReference.getValue(),
+      //   payTerm: data.paymentTerm.getValue(),
+      //   // collectiveNo: data.collectiveNumber.getValue(),
+      //   totalOrderValue: 100.0,
+      //   draftorder: true,
+      //   address1: mockShipToInfo.shipToAddress.street,
+      //   address2: mockShipToInfo.shipToAddress.street2,
+      //   city: mockShipToInfo.city1,
+      //   phonenumber: data.mobileNumber.getValue(),
+      //   user: user.id,
+      //   contactPerson: data.contactPerson.getValue().isNotEmpty
+      //       ? data.contactPerson.getValue()
+      //       : user.fullName.toString(),
+      //   referenceNotes: data.referenceNote.getValue(),
+      //   items: getItemList([
+      //     CartItem(materials: [
+      //       PriceAggregate.empty().copyWith(
+      //         price: Price.empty().copyWith(
+      //             bundles: [],
+      //             materialNumber: MaterialNumber('234567'),
+      //             priceOverride: PriceOverrideValue(12.0),
+      //             zdp8Override: Zdp8OverrideValue(2.0)),
+      //         materialInfo: MaterialInfo.empty().copyWith(
+      //           materialNumber: MaterialNumber('234567'),
+      //         ),
+      //       ),
+      //     ], itemType: CartItemType.material),
+      //   ]),
+      // );
 
-      when(() => orderLocalDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(draftOrder)))
+      when(() => orderLocalDataSource.createDraftOrder())
           .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
                 draftorder: true,
                 isDraftOrder: true,
@@ -1211,13 +1200,7 @@ void main() {
     test('createDraftOrder  fail locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => orderLocalDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(SavedOrder.empty().copyWith(
-                  salesOrganization: '',
-                  isDraftOrder: false,
-                  companyName: CompanyName('fake-company-name'),
-                  shipToParty: ShipToParty('fake_shipToParty'),
-                  soldToParty: SoldToParty('fake_soldToPart')))))
+      when(() => orderLocalDataSource.createDraftOrder())
           .thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.createDraftOrder(

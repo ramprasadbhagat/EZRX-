@@ -26,9 +26,7 @@ class SalesRepRepository implements ISalesRepRepository {
     final usernameStr = user.username.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final salesRep = await localDataSource.getSalesRepInfo(
-          userName: usernameStr,
-        );
+        final salesRep = await localDataSource.getSalesRepInfo();
 
         return Right(salesRep);
       } catch (e) {

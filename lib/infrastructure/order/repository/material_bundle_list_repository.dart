@@ -52,7 +52,6 @@ class MaterialBundleListRepository implements IMaterialBundleListRepository {
             )
           : await materialBundleListRemoteDatasource.getMaterialBundleList(
               customerCode: customerCode.customerCodeSoldTo,
-              shipToCode: shipToCode.shipToCustomerCode,
               salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
             );
 

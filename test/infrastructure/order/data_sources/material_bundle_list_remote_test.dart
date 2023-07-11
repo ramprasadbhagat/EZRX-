@@ -73,7 +73,6 @@ void main() {
         final result = await remoteDataSource.getMaterialBundleList(
           customerCode: '',
           salesOrganisation: '',
-          shipToCode: '',
         );
         dynamic makeResponseCamelCase(String resp) {
           final camelCaseJsonKeys = resp.replaceAllMapped(

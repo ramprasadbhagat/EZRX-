@@ -30,7 +30,7 @@ void main() {
           final res = await rootBundle.load('assets/images/splash.png');
 
           final result =
-              await localDataSource.fileDownload('fake-name', 'fake-url');
+              await localDataSource.fileDownload('fake-name');
 
           expect(
             result,

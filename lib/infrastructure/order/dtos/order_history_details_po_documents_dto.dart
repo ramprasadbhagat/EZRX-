@@ -36,7 +36,7 @@ class PoDocumentsDto with _$PoDocumentsDto {
       _$PoDocumentsDtoFromJson(json);
 }
 
-String _readUrl(Map json, String key) => json['Url'] ?? json['url'] ?? '';
+String _readUrl(Map json, String key) => json['Url'] ?? json[key] ?? '';
 
 String _readName(Map json, String key) =>
     json[key] ?? json['Name'] ?? json['filename'] ?? '';

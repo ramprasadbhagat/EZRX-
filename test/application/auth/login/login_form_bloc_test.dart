@@ -34,10 +34,7 @@ void main() {
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    loginMockData = await AuthLocalDataSource().loginWithPassword(
-      username: fakeUser.getValue(),
-      password: fakePassword.getValue(),
-    );
+    loginMockData = await AuthLocalDataSource().loginWithPassword();
     // loginWithOktaMockData = await AuthLocalDataSource().loginWithOktaToken(
     //   oktaAccessToken: fakeOktaToken,
     // );

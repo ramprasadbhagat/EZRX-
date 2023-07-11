@@ -5,10 +5,7 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
 import 'package:flutter/services.dart';
 
 class AuthLocalDataSource {
-  Future<Login> loginWithPassword({
-    required String username,
-    required String password,
-  }) async {
+  Future<Login> loginWithPassword() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/loginAdResponse.json'),
     );
@@ -16,9 +13,7 @@ class AuthLocalDataSource {
     return LoginDto.fromJson(data['data']['loginV4']).toDomain();
   }
 
-  Future<Login> loginWithOktaToken({
-    required String oktaAccessToken,
-  }) async {
+  Future<Login> loginWithOktaToken() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/loginAdResponse.json'),
     );
@@ -26,7 +21,7 @@ class AuthLocalDataSource {
     return LoginDto.fromJson(data['data']['loginV4']).toDomain();
   }
 
-  Future<Login> proxyLoginWithUsername({required String username}) async {
+  Future<Login> proxyLoginWithUsername() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
     );
@@ -34,9 +29,7 @@ class AuthLocalDataSource {
     return LoginDto.fromJson(data['data']['proxyLoginV4']).toDomain();
   }
 
-  Future<Login> getAccessToken({
-    required String refreshToken,
-  }) async {
+  Future<Login> getAccessToken() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getAccessToken.json'),
     );

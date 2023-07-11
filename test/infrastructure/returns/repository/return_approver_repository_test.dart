@@ -207,8 +207,7 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(() => approverReturnRequestInformationLocalMock
-              .getApproverReturnRequestInformation(
-                  returnRequestId: 'fake-requestId')).thenAnswer(
+              .getApproverReturnRequestInformation()).thenAnswer(
             (invocation) async => RequestInformation.empty(),
           );
 
@@ -228,8 +227,7 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(() => approverReturnRequestInformationLocalMock
-                  .getApproverReturnRequestInformation(
-                      returnRequestId: 'fake-requestId'))
+                  .getApproverReturnRequestInformation())
               .thenThrow(const ApiFailure.serverTimeout());
 
           final result = await returnApproverRepository

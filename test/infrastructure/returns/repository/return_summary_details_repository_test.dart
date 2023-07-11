@@ -36,7 +36,7 @@ void main(){
 
     test('=> getReturnInformation locally success', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnSummaryDetailsRequestInformationLocal.getRequestInformation(returnRequestId: 'mock_id'))
+      when(() => returnSummaryDetailsRequestInformationLocal.getRequestInformation())
           .thenAnswer((invocation) async => RequestInformation.empty(),
       );
 
@@ -48,7 +48,7 @@ void main(){
 
     test('=> getReturnInformation locally failed', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnSummaryDetailsRequestInformationLocal.getRequestInformation(returnRequestId: 'mock_id'))
+      when(() => returnSummaryDetailsRequestInformationLocal.getRequestInformation())
           .thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(

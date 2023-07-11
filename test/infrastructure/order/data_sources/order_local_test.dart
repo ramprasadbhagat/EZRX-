@@ -2,12 +2,8 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_response_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -59,9 +55,7 @@ void main() {
                 'assets/json/deleteSavedOrderTemplateResponse.json'),
           );
 
-          final result = await localDataSource.deleteSavedOrder(
-            item: SavedOrder.empty(),
-          );
+          final result = await localDataSource.deleteSavedOrder();
 
           expect(
             result,
@@ -79,11 +73,7 @@ void main() {
             await rootBundle.loadString('assets/json/submitOrderResponse.json'),
           );
 
-          final result = await localDataSource.submitOrder(
-              submitOrder: SubmitOrderDto.fromDomain(
-                  SubmitOrder.empty()
-                      .copyWith(companyName: CompanyName('fake-name')),
-                  'fake-currency'));
+          final result = await localDataSource.submitOrder();
 
           expect(
             result,
@@ -101,11 +91,7 @@ void main() {
                 .loadString('assets/json/createDraftOrderResponse.json'),
           );
 
-          final result = await localDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(SavedOrder.empty().copyWith(
-                  companyName: CompanyName('fake-name'),
-                  shipToParty: ShipToParty('fake-shipto'),
-                  soldToParty: SoldToParty('fake-soldto'))));
+          final result = await localDataSource.createDraftOrder();
 
           expect(
             result,

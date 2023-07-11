@@ -59,7 +59,6 @@ class ProductDetailRemoteDataSource {
   Future<List<MaterialInfo>> getSimilarProduct({
     required String materialNumber,
     required String language,
-    required String salesOrg,
     required String customerCode,
     required String shipToCode,
     required String principalCode,

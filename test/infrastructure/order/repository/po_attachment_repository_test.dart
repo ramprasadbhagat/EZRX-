@@ -92,7 +92,6 @@ void main() {
       when(
         () => poDocumentLocalDataSourceMock.fileDownload(
           'fake-name',
-          'fake-url',
         ),
       ).thenAnswer(
         (invocation) async =>
@@ -188,7 +187,6 @@ void main() {
       when(
         () => poDocumentLocalDataSourceMock.fileDownload(
           'fake-name',
-          'fake-url',
         ),
       ).thenAnswer(
         (invocation) async =>
@@ -247,7 +245,6 @@ void main() {
 
       when(() => poDocumentLocalDataSourceMock.fileDownload(
             'fake-name',
-            'fake-url',
           )).thenThrow(MockException());
       when(
         () => fileSystemHelperMock.openFile(

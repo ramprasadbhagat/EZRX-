@@ -260,10 +260,8 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.loginWithPassword(
-              password: 'od',
-              username: 'old',
-            )).thenThrow((invocation) async => Exception('fake-error'));
+        when(() => localDataSourceMock.loginWithPassword())
+            .thenThrow((invocation) async => Exception('fake-error'));
         final pass = Password.login('old');
         final userName = Username('old');
 
@@ -294,9 +292,8 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.loginWithPassword(
-            password: 'old',
-            username: 'old')).thenAnswer((invocation) async => Login.empty());
+        when(() => localDataSourceMock.loginWithPassword())
+            .thenAnswer((invocation) async => Login.empty());
         final pass = Password.login('old');
         final userName = Username('old');
         final result =
@@ -326,7 +323,7 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.proxyLoginWithUsername(username: 'old'))
+        when(() => localDataSourceMock.proxyLoginWithUsername())
             .thenAnswer((invocation) async => Login.empty());
         final userName = Username('old');
         final result = await repository.proxyLogin(username: userName);
@@ -355,7 +352,7 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.proxyLoginWithUsername(username: 'old'))
+        when(() => localDataSourceMock.proxyLoginWithUsername())
             .thenThrow((invocation) async => Exception('fake-error'));
         final userName = Username('old');
         final result = await repository.proxyLogin(username: userName);
@@ -438,8 +435,7 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.loginWithOktaToken(
-                oktaAccessToken: fakeJWT.getOrCrash()))
+        when(() => localDataSourceMock.loginWithOktaToken())
             .thenAnswer((invocation) async => Login.empty());
         final result = await repository.getEZRXJWT(fakeJWT);
         expect(result.isRight(), true);
@@ -501,8 +497,7 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.loginWithOktaToken(
-                oktaAccessToken: fakeJWT.getOrCrash()))
+        when(() => localDataSourceMock.loginWithOktaToken())
             .thenThrow((invocation) async => Exception('fake-error'));
         final result = await repository.getEZRXJWT(fakeJWT);
         expect(result.isLeft(), true);
@@ -859,7 +854,7 @@ void main() {
           settingStorage: settingStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,       
+          pushNotificationService: pushNotificationServiceMock,
         );
 
         final result = await repository.isEligibleProxyLogin(

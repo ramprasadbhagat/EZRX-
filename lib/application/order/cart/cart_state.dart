@@ -106,7 +106,7 @@ class CartState with _$CartState {
   bool get isBonusRestricted =>
       containsSpecialOrderTypeMaterials || getCartItemMaterialList.isEmpty;
 
-  String dialogContent(OrderDocumentType initial, OrderDocumentType selected) =>
+  String dialogContent(OrderDocumentType selected) =>
       selected.documentType.isSpecialOrderType
           ? selected.documentType.isZPFB && containNonSampleMaterial
               ? 'non-sample'

@@ -33,18 +33,7 @@ class ValidCustomerMaterialRepository
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final validMaterialList = await localDataSource.getValidMaterialList(
-          userName: user.username.getOrCrash(),
-          salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
-          customerCode: customerCodeInfo.customerCodeSoldTo,
-          shipToCode: shipToInfo.shipToCustomerCode,
-          pickAndPackValue: pickAndPack,
-          materialList:
-              materialList.map((MaterialNumber e) => e.getOrCrash()).toList(),
-          focMaterialList: focMaterialList
-              .map((MaterialNumber e) => e.getOrCrash())
-              .toList(),
-        );
+        final validMaterialList = await localDataSource.getValidMaterialList();
 
         return Right(validMaterialList);
       } catch (e) {
@@ -53,7 +42,6 @@ class ValidCustomerMaterialRepository
     }
     try {
       final validMaterialList = await remoteDataSource.getValidMaterialList(
-        userName: user.username.getOrCrash(),
         salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,

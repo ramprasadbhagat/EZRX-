@@ -36,9 +36,7 @@ class DownloadPaymentAttachmentLocalDataSource {
         .toDomain();
   }
 
-  Future<PoDocumentsBuffer> fileDownload(
-    String fileUrl,
-) async {
+  Future<PoDocumentsBuffer> fileDownload() async {
     final data = await rootBundle.load('assets/images/splash.png');
 
     return PoDocumentsBuffer(

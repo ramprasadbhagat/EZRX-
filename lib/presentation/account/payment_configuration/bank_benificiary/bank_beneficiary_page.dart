@@ -177,7 +177,6 @@ class _BankBeneficiaryListItem extends StatelessWidget {
                           : _deleteBeneficiaryDialog(
                               context: context,
                               manageBeneficiary: beneficiaryData,
-                              deleteIndex: index,
                             ),
                     ),
                   ],
@@ -232,7 +231,6 @@ class _BankBeneficiaryListItem extends StatelessWidget {
   void _deleteBeneficiaryDialog({
     required BuildContext context,
     required BankBeneficiary manageBeneficiary,
-    required int deleteIndex,
   }) {
     CustomDialogs.confirmationDialog(
       context: context,

@@ -72,7 +72,6 @@ void main() {
 
         final result = await remoteDataSource.getMaterialPriceList(
           customerCode: 'fake-customer-code',
-          salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
         );
@@ -114,7 +113,6 @@ void main() {
 
         final result = await remoteDataSource.getMaterialPrice(
           customerCode: 'fake-customer-code',
-          salesDeal: [],
           materialNumber: 'fake-number',
           salesOrgCode: 'fake-sales-org',
         );
@@ -150,7 +148,6 @@ void main() {
         await remoteDataSource
             .getMaterialPriceList(
           customerCode: 'fake-customer-code',
-          salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
         )
@@ -193,7 +190,6 @@ void main() {
         await remoteDataSource
             .getMaterialPriceList(
           customerCode: 'fake-customer-code',
-          salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
         )

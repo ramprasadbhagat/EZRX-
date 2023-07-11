@@ -9,13 +9,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late BannerLocalDataSource localDataSource;
-  late String saleOrgName;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
     localDataSource = BannerLocalDataSource();
-    saleOrgName = '2601';
   });
 
   group('Banners Local', () {
@@ -23,8 +21,7 @@ void main() {
       final res = json.decode(
         await rootBundle.loadString('assets/json/getBannersResponse.json'),
       );
-      final result = await localDataSource.getBanners(
-          isPreSalesOrg: false, salesOrg: saleOrgName);
+      final result = await localDataSource.getBanners();
 
       expect(result.length, List.from(res['data']['getBanners']).length);
     });

@@ -62,7 +62,6 @@ class CustomerCodeRemoteDataSource {
   Future<List<CustomerCodeInfo>> getSalesRepCustomerCodeList({
     required String customerCode,
     required String salesOrg,
-    required bool hidecustomer,
     required String userName,
     required int pageSize,
     required int offset,

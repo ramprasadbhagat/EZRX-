@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 class PoDocumentLocalDataSource {
   Future<PoDocumentsBuffer> fileDownload(
     String name,
-    String imgUrl,
   ) async {
     await Future.delayed(const Duration(seconds: 3));
     final data = await rootBundle.load('assets/images/splash.png');
