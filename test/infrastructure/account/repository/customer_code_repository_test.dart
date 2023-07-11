@@ -33,7 +33,8 @@ void main() {
   late bool hideCustomer;
   late String mockCustomerCode;
   late SalesOrganisation mockSalesOrg;
-  late User mockClientUser, mockSalesRepUser;
+  late User mockClientUser;
+  late User mockSalesRepUser;
   late CustomerCodeRepository customerCodeRepository;
   late AccountSelectorStorage accountSelectorStorageMock;
   late CustomerCodeLocalDataSource customerCodeLocalDataSourceMock;

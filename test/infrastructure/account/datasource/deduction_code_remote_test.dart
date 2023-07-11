@@ -30,9 +30,9 @@ void main() {
   late String amountType;
   late String deductionDescription;
 
-  late Map<String, Object> getDeductionCodeVariables,
-      addDeductionCodeVariables,
-      deleteDeductionCodeVariables;
+  late Map<String, Object> getDeductionCodeVariables;
+  late Map<String, Object> addDeductionCodeVariables;
+  late Map<String, Object> deleteDeductionCodeVariables;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(

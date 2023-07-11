@@ -32,9 +32,9 @@ void main() {
   late String newPaymentMethod;
   late String oldPaymentMethod;
 
-  late Map<String, Object> getPaymentMethodVariables,
-      updatePaymentMethodVariables,
-      deletePaymentMethodVariables;
+  late Map<String, Object> getPaymentMethodVariables;
+  late Map<String, Object> updatePaymentMethodVariables;
+  late Map<String, Object> deletePaymentMethodVariables;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(

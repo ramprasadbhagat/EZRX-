@@ -17,7 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginMobile extends StatelessWidget {
-  final TextEditingController usernameController, passwordController;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
   final LoginFormState state;
   const LoginMobile({
     Key? key,

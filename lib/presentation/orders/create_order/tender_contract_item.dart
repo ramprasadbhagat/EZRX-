@@ -168,7 +168,8 @@ class TenderContractBody extends StatelessWidget {
 }
 
 class TenderInfoText extends StatelessWidget {
-  final String title, info;
+  final String title;
+  final String info;
 
   const TenderInfoText({Key? key, required this.title, required this.info})
       : super(key: key);

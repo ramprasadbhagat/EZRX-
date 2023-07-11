@@ -20,7 +20,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late DeductionCodeRepository deductionCodeRepositoryMock;
-  late AddDeductionCode addDeductionCode, deleteDeductionCode;
+  late AddDeductionCode addDeductionCode;
+  late AddDeductionCode deleteDeductionCode;
   late List<DeductionCode> deductionCodeList;
 
   group(

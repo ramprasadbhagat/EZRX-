@@ -13,7 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginWeb extends StatelessWidget {
-  final TextEditingController usernameController, passwordController;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
   final LoginFormState state;
 
   const LoginWeb({
@@ -52,7 +53,8 @@ class LoginWeb extends StatelessWidget {
 }
 
 class _LoginBanner extends StatelessWidget {
-  final double width, height;
+  final double width;
+  final double height;
   const _LoginBanner({
     Key? key,
     required this.width,
@@ -142,7 +144,8 @@ class _LoginBanner extends StatelessWidget {
 }
 
 class _LoginFormWeb extends StatelessWidget {
-  final TextEditingController usernameController, passwordController;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
   final LoginFormState state;
   const _LoginFormWeb({
     Key? key,

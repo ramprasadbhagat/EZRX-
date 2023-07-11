@@ -28,7 +28,8 @@ void main() {
   late BannerRemoteDataSource remoteDataSourceMock;
   late Config configMock;
   late BannerLocalDataSource localDataSourceMock;
-  late List<BannerItem> bannerListMock, eZReachBannerListMock;
+  late List<BannerItem> bannerListMock;
+  late List<BannerItem> eZReachBannerListMock;
   final salesOrg2601 = SalesOrg('2601');
   final mockSalesOrganisation = SalesOrganisation(
     salesOrg: salesOrg2601,
@@ -60,7 +61,6 @@ void main() {
             .toList();
       });
 
-
       when(
         () => localDataSourceMock.getEZReachBanners(
           salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -69,7 +69,8 @@ void main() {
         ),
       ).thenAnswer((invocation) async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/getEZReachBannerResponse.json'),
+          await rootBundle
+              .loadString('assets/json/getEZReachBannerResponse.json'),
         );
 
         return List.from(res['data']['getLiveCampaigns']['data'])
@@ -106,7 +107,7 @@ void main() {
           salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
         ),
       ).thenAnswer(
-        (invocation) async => eZReachBannerListMock+bannerListMock,
+        (invocation) async => eZReachBannerListMock + bannerListMock,
       );
 
       final result = await repository.getBanner(

@@ -78,6 +78,7 @@ linter:
     - implementation_imports
     - prefer_final_in_for_each
     - prefer_final_locals
+    - avoid_multiple_declarations_per_line
 
 dart_code_metrics:
   # extends:
