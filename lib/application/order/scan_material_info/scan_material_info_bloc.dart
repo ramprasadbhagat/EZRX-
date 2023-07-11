@@ -150,7 +150,7 @@ class ScanMaterialInfoBloc
   void didScan(BarcodeCapture barcodeCapture, BarcodeCaptureSession session) {
     scanInfoRepository.disableMaterialScan();
 
-    final barcode = session.newlyRecognizedBarcodes[0];
+    final barcode = session.newlyRecognizedBarcodes.first;
     final scannedMessage = barcode.data ?? '';
 
     scanResultController.sink.add(scannedMessage);

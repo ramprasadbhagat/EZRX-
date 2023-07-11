@@ -130,3 +130,4 @@ dart_code_metrics:
     - prefer-immediate-return
     - prefer-last
     - avoid-substring
+    - prefer-first

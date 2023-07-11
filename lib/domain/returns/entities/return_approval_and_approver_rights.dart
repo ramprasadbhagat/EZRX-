@@ -14,7 +14,7 @@ class UserRestrictions with _$UserRestrictions {
   }) = _UserRestrictions;
   ApprovalLimits get approverLimitsDetails {
     return approverLimits.isNotEmpty
-        ? approverLimits[0]
+        ? approverLimits.first
         : ApprovalLimits.empty();
   }
 }

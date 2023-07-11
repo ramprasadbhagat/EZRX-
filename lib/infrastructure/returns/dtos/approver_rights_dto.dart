@@ -21,7 +21,7 @@ class ApproverRightsDto with _$ApproverRightsDto {
 
   ApproverRights toDomain() {
     return ApproverRights(
-        userName: Username(usernames[0]),
+        userName: Username(usernames.first),
         approverRightsList:
             approverRights.map((e) => e.toDomain()).toList(),);
   }

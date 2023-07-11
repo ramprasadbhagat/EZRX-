@@ -79,7 +79,7 @@ class Announcement with _$Announcement {
   bool get _isCustomAnnouncement => descriptionList.length != 1;
 
   String get _dayDisplay =>
-      !startTime.isValid() ? '' : startTime.getOrCrash().split(' ')[0];
+      !startTime.isValid() ? '' : startTime.getOrCrash().split(' ').first;
 
   bool get hasValidAnnouncement =>
       this != Announcement.empty() && active && !_isExpired;
