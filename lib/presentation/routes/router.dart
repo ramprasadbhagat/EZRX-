@@ -51,6 +51,7 @@ import 'package:ezrxmobile/presentation/payments/payment_overview/account_summar
 import 'package:ezrxmobile/presentation/payments/payment_overview/payments_summary.dart';
 import 'package:ezrxmobile/presentation/payments/payment_overview/statement_summary.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment.dart';
+import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 import 'package:ezrxmobile/presentation/payments/payments_tab.dart';
 import 'package:ezrxmobile/presentation/products/bundle_detail_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
@@ -251,6 +252,10 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: PaymentSummaryPage,
     ),
     AutoRoute(
+      path: 'payments/payment_summary/payment_summary_details',
+      page: PaymentSummaryDetailsPage,
+    ),
+    AutoRoute(
       path: 'orders/scan_material_info',
       page: ScanMaterialInfo,
     ),
@@ -277,20 +282,20 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'payments/new_payment',
       page: NewPaymentPage,
-          children: [
-            AutoRoute(
-              page: OutstandingInvoicesTab,
-              path: 'payments/new_payment/outstanding_invoices',
-            ),
-            AutoRoute(
-              page: AvailableCreditsTab,
-              path: 'payments/new_payment/available_credits',
-            ),
-            AutoRoute(
-              page: PaymentMethodTab,
-              path: 'payments/new_payment/payment_method',
-            ),
-          ],
+      children: [
+        AutoRoute(
+          page: OutstandingInvoicesTab,
+          path: 'payments/new_payment/outstanding_invoices',
+        ),
+        AutoRoute(
+          page: AvailableCreditsTab,
+          path: 'payments/new_payment/available_credits',
+        ),
+        AutoRoute(
+          page: PaymentMethodTab,
+          path: 'payments/new_payment/payment_method',
+        ),
+      ],
     ),
     CustomRoute(
       path: 'orders/bundle_item_detail',

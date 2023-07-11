@@ -1,0 +1,16 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
+
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+
+abstract class IPaymentItemRepository {
+  Future<Either<ApiFailure, List<PaymentItem>>> fetchPaymentItemList({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required String paymentID,
+    required String paymentBatchAdditionalInfo,
+    required String accountingDocExternalReference,
+  });
+}

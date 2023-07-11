@@ -258,5 +258,12 @@ class StatusType extends ValueObject<String> {
   ) =>
       getStatusMessage(value.getOrElse(() => ''), paymentSummaryDetails);
 
+  String paymentDate(String date) =>
+      getPaymentDate(value.getOrElse(() => ''), date);
+  String adviceExpiry(String date) =>
+      getAdviceExpiry(value.getOrElse(() => ''), date);
+
+  bool get getIsSuccessful => isSuccessful(value.getOrElse(() => ''));
+
   const StatusType._(this.value);
 }

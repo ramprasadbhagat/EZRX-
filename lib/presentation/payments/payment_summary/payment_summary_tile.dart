@@ -3,7 +3,12 @@
 //ignore_for_file: unused-class
 
 //ignore_for_file: unused-files
+
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -51,12 +56,13 @@ class PaymentSummaryGroupSection extends StatelessWidget {
               ),
             ),
             Column(
-              children: [
-                ...paymentSummaryGroup.paymentSummaryDetails
-                    .map((e) => _PaymentSummaryTiles(
-                          paymentSummaryDetails: e,
-                        )),
-              ],
+              children: paymentSummaryGroup.paymentSummaryDetails
+                  .map(
+                    (e) => _PaymentSummaryTiles(
+                      paymentSummaryDetails: e,
+                    ),
+                  )
+                  .toList(),
             ),
             const SizedBox(
               height: 20,
@@ -77,6 +83,26 @@ class _PaymentSummaryTiles extends StatelessWidget {
     return CustomCard(
       margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
       child: ListTile(
+        onTap: () {
+          context.read<PaymentItemBloc>().add(
+                PaymentItemEvent.fetchPaymentItemList(
+                  salesOrganization:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  paymentID: paymentSummaryDetails.paymentID,
+                  paymentBatchAdditionalInfo:
+                      paymentSummaryDetails.paymentBatchAdditionalInfo,
+                  accountingDocExternalReference:
+                      paymentSummaryDetails.accountingDocExternalReference,
+                ),
+              );
+          context.router.push(
+            PaymentSummaryDetailsPageRoute(
+              paymentSummaryDetails: paymentSummaryDetails,
+            ),
+          );
+        },
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         title: Row(

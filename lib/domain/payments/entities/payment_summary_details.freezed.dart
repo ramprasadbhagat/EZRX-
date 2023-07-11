@@ -38,6 +38,9 @@ mixin _$PaymentSummaryDetails {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   StringValue get zzAdvice => throw _privateConstructorUsedError;
   StringValue get adviceExpiry => throw _privateConstructorUsedError;
+  String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
+  String get accountingDocExternalReference =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryDetailsCopyWith<PaymentSummaryDetails> get copyWith =>
@@ -72,7 +75,9 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       String customId,
       DateTimeStringValue createdDate,
       StringValue zzAdvice,
-      StringValue adviceExpiry});
+      StringValue adviceExpiry,
+      String paymentBatchAdditionalInfo,
+      String accountingDocExternalReference});
 }
 
 /// @nodoc
@@ -111,6 +116,8 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
     Object? createdDate = null,
     Object? zzAdvice = null,
     Object? adviceExpiry = null,
+    Object? paymentBatchAdditionalInfo = null,
+    Object? accountingDocExternalReference = null,
   }) {
     return _then(_value.copyWith(
       paymentID: null == paymentID
@@ -201,6 +208,14 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
           ? _value.adviceExpiry
           : adviceExpiry // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
+          ? _value.paymentBatchAdditionalInfo
+          : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocExternalReference: null == accountingDocExternalReference
+          ? _value.accountingDocExternalReference
+          : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -235,7 +250,9 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       String customId,
       DateTimeStringValue createdDate,
       StringValue zzAdvice,
-      StringValue adviceExpiry});
+      StringValue adviceExpiry,
+      String paymentBatchAdditionalInfo,
+      String accountingDocExternalReference});
 }
 
 /// @nodoc
@@ -271,6 +288,8 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? zzAdvice = null,
     Object? adviceExpiry = null,
+    Object? paymentBatchAdditionalInfo = null,
+    Object? accountingDocExternalReference = null,
   }) {
     return _then(_$_PaymentSummaryDetails(
       paymentID: null == paymentID
@@ -361,6 +380,14 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
           ? _value.adviceExpiry
           : adviceExpiry // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
+          ? _value.paymentBatchAdditionalInfo
+          : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocExternalReference: null == accountingDocExternalReference
+          ? _value.accountingDocExternalReference
+          : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -390,7 +417,9 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
       required this.customId,
       required this.createdDate,
       required this.zzAdvice,
-      required this.adviceExpiry})
+      required this.adviceExpiry,
+      required this.paymentBatchAdditionalInfo,
+      required this.accountingDocExternalReference})
       : super._();
 
   @override
@@ -437,10 +466,14 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   final StringValue zzAdvice;
   @override
   final StringValue adviceExpiry;
+  @override
+  final String paymentBatchAdditionalInfo;
+  @override
+  final String accountingDocExternalReference;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetails(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankIdentification: $bankIdentification, bankCountryKey: $bankCountryKey, bankKey: $bankKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry)';
+    return 'PaymentSummaryDetails(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankIdentification: $bankIdentification, bankCountryKey: $bankCountryKey, bankKey: $bankKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference)';
   }
 
   @override
@@ -489,7 +522,15 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
             (identical(other.zzAdvice, zzAdvice) ||
                 other.zzAdvice == zzAdvice) &&
             (identical(other.adviceExpiry, adviceExpiry) ||
-                other.adviceExpiry == adviceExpiry));
+                other.adviceExpiry == adviceExpiry) &&
+            (identical(other.paymentBatchAdditionalInfo,
+                    paymentBatchAdditionalInfo) ||
+                other.paymentBatchAdditionalInfo ==
+                    paymentBatchAdditionalInfo) &&
+            (identical(other.accountingDocExternalReference,
+                    accountingDocExternalReference) ||
+                other.accountingDocExternalReference ==
+                    accountingDocExternalReference));
   }
 
   @override
@@ -516,7 +557,9 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
         customId,
         createdDate,
         zzAdvice,
-        adviceExpiry
+        adviceExpiry,
+        paymentBatchAdditionalInfo,
+        accountingDocExternalReference
       ]);
 
   @JsonKey(ignore: true)
@@ -529,28 +572,31 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
 
 abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   const factory _PaymentSummaryDetails(
-      {required final String paymentID,
-      required final DateTimeStringValue valueDate,
-      required final double paymentAmount,
-      required final String transactionCurrency,
-      required final String paymentDocument,
-      required final StatusType status,
-      required final String paymentMethod,
-      required final String iban,
-      required final String bankIdentification,
-      required final String bankCountryKey,
-      required final String bankKey,
-      required final String bankAccountNumber,
-      required final String bankName,
-      required final String paymentCardID,
-      required final String paymentCardNumber,
-      required final String paymentCardHolderName,
-      required final String paymentCardMaskedNumber,
-      required final String paymentCardTypeName,
-      required final String customId,
-      required final DateTimeStringValue createdDate,
-      required final StringValue zzAdvice,
-      required final StringValue adviceExpiry}) = _$_PaymentSummaryDetails;
+          {required final String paymentID,
+          required final DateTimeStringValue valueDate,
+          required final double paymentAmount,
+          required final String transactionCurrency,
+          required final String paymentDocument,
+          required final StatusType status,
+          required final String paymentMethod,
+          required final String iban,
+          required final String bankIdentification,
+          required final String bankCountryKey,
+          required final String bankKey,
+          required final String bankAccountNumber,
+          required final String bankName,
+          required final String paymentCardID,
+          required final String paymentCardNumber,
+          required final String paymentCardHolderName,
+          required final String paymentCardMaskedNumber,
+          required final String paymentCardTypeName,
+          required final String customId,
+          required final DateTimeStringValue createdDate,
+          required final StringValue zzAdvice,
+          required final StringValue adviceExpiry,
+          required final String paymentBatchAdditionalInfo,
+          required final String accountingDocExternalReference}) =
+      _$_PaymentSummaryDetails;
   const _PaymentSummaryDetails._() : super._();
 
   @override
@@ -597,6 +643,10 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   StringValue get zzAdvice;
   @override
   StringValue get adviceExpiry;
+  @override
+  String get paymentBatchAdditionalInfo;
+  @override
+  String get accountingDocExternalReference;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentSummaryDetailsCopyWith<_$_PaymentSummaryDetails> get copyWith =>

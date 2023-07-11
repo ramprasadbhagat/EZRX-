@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary.dart';
 import 'package:flutter/material.dart';
 
 class PaymentsSummaryPage extends StatelessWidget {
@@ -7,10 +7,12 @@ class PaymentsSummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        key: WidgetKeys.paymentsSummaryTab,
-        child: const SizedBox.shrink(),
-      ),
+      // body: Container(
+      //   key: WidgetKeys.paymentsSummaryTab,
+      //   child: const SizedBox.shrink(),
+      // ),
+      body:
+          PaymentSummaryPage(), //Temporary route for review need to remove when it is dome
     );
   }
 }

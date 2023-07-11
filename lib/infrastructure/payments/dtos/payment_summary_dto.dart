@@ -49,6 +49,10 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
     @JsonKey(name: 'zzAdvice', defaultValue: '') required String zzAdvice,
     @JsonKey(name: 'adviceExpiry', defaultValue: '')
         required String adviceExpiry,
+    @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+        required String accountingDocExternalReference,
+    @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
+        required String paymentBatchAdditionalInfo,
   }) = _PaymentSummaryDetailsDto;
 
   PaymentSummaryDetails toDomain() {
@@ -75,6 +79,8 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       createdDate: DateTimeStringValue(createdDate),
       adviceExpiry: StringValue(adviceExpiry),
       zzAdvice: StringValue(zzAdvice),
+      accountingDocExternalReference: accountingDocExternalReference,
+      paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
     );
   }
 

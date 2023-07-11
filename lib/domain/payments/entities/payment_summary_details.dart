@@ -33,6 +33,8 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required DateTimeStringValue createdDate,
     required StringValue zzAdvice,
     required StringValue adviceExpiry,
+    required String paymentBatchAdditionalInfo,
+    required String accountingDocExternalReference,
   }) = _PaymentSummaryDetails;
   factory PaymentSummaryDetails.empty() => PaymentSummaryDetails(
         bankAccountNumber: '',
@@ -57,6 +59,8 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         createdDate: DateTimeStringValue(''),
         adviceExpiry: StringValue(''),
         zzAdvice: StringValue(''),
+        paymentBatchAdditionalInfo: '',
+        accountingDocExternalReference: '',
       );
 }
 

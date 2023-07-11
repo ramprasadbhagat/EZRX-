@@ -31,6 +31,10 @@ _$_PaymentSummaryDetailsDto _$$_PaymentSummaryDetailsDtoFromJson(
       createdDate: createdAtDate(json, 'createdDate') as String? ?? '',
       zzAdvice: json['zzAdvice'] as String? ?? '',
       adviceExpiry: json['adviceExpiry'] as String? ?? '',
+      accountingDocExternalReference:
+          json['accountingDocExternalReference'] as String? ?? '',
+      paymentBatchAdditionalInfo:
+          json['paymentBatchAdditionalInfo'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_PaymentSummaryDetailsDtoToJson(
@@ -58,4 +62,6 @@ Map<String, dynamic> _$$_PaymentSummaryDetailsDtoToJson(
       'createdDate': instance.createdDate,
       'zzAdvice': instance.zzAdvice,
       'adviceExpiry': instance.adviceExpiry,
+      'accountingDocExternalReference': instance.accountingDocExternalReference,
+      'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
     };

@@ -403,13 +403,29 @@ String getStatusMessage(
   String status,
   PaymentSummaryDetails paymentSummaryDetails,
 ) {
-  return status != 'Successful'
-      ? 'Expires in ${paymentSummaryDetails.adviceExpiry.displayStringValue}'
-      : 'Payment date: ${paymentSummaryDetails.createdDate.toValidDateString}';
+  return isSuccessful(status)
+      ? 'Payment date: ${paymentSummaryDetails.createdDate.toValidDateString}'
+      : 'Expires in ${paymentSummaryDetails.adviceExpiry.displayStringValue}';
 }
 
+String getPaymentDate(
+  String status,
+  String date,
+) {
+  return isSuccessful(status) ? date : '-';
+}
+
+String getAdviceExpiry(
+  String status,
+  String data,
+) {
+  return isSuccessful(status) ? 'NA' : 'in $data';
+}
+
+bool isSuccessful(String status) => status == 'Successful';
+
 Color getDisplayStatusTextColor(String status) {
-  return status != 'Successful' ? ZPColors.red : ZPColors.black;
+  return isSuccessful(status) ? ZPColors.black : ZPColors.red;
 }
 
 String displayAnnouncementDateOrEmpty(String text, String format) {

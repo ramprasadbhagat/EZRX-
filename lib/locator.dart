@@ -284,6 +284,9 @@ import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_reposi
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_query.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/account_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
@@ -389,6 +392,8 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_
 import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_remote.dart';
+import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/payment_item_repository.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_query_mutation.dart';
 
@@ -1951,6 +1956,41 @@ void setupLocator() {
     ),
   );
 
+//============================================================
+  //  Payment Item
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PaymentItemBloc(
+      paymentItemRepository: locator<PaymentItedmRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentItemLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentItemQuery(),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentItemRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      paymentItemQuery: locator<PaymentItemQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentItedmRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PaymentItemLocalDataSource>(),
+      remoteDataSource: locator<PaymentItemRemoteDataSource>(),
+    ),
+  );
   //============================================================
   //  Combo Deals
   //
@@ -2415,11 +2455,8 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => CreditAndInvoiceDetailsRepository(
       config: locator<Config>(),
-      localDataSource:
-          locator<CreditAndInvoiceDetailsLocalDataSource>(),
-      remoteDataSource:
-          locator<CreditAndInvoiceDetailsRemoteDataSource>(),
-      
+      localDataSource: locator<CreditAndInvoiceDetailsLocalDataSource>(),
+      remoteDataSource: locator<CreditAndInvoiceDetailsRemoteDataSource>(),
     ),
   );
   locator.registerLazySingleton(
