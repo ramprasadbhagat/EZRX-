@@ -64,13 +64,15 @@ class BannerRemoteDataSource {
         data: jsonEncode({
           'query': bannerQueryMutation.getEZReachBannerQuery(),
           'variables': {
-            'country': country,
-            'SalesOrg': salesOrg,
-            'role': role,
-            'targetProduct': config.targetProduct,
-            'bannerPlacement': 'banner_carousel',
-            'sortField': 'banner_slot',
-            'sort': 'asc',
+            'getLiveCampaignInput': {
+              'country': country,
+              'Salesorg': salesOrg,
+              'role': role,
+              'targetProduct': config.targetProduct,
+              'bannerPlacement': 'banner_carousel',
+              'sortField': 'banner_slot',
+              'sort': 'asc',
+            },
           },
         }),
         overrideBaseUrl: true,
@@ -95,3 +97,4 @@ class BannerRemoteDataSource {
     }
   }
 }
+

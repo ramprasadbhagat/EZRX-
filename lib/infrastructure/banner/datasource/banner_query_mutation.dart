@@ -30,22 +30,8 @@ class BannerQueryMutation {
 
   String getEZReachBannerQuery() {
     return '''
-      query getLiveCampaigns(
-  \$country: String
-  \$Salesorg: String
-  \$role: String
-  \$targetProduct: String
-  \$sort: String
-) {
-  getLiveCampaigns(
-    request: {
-      country: \$country
-      Salesorg: \$Salesorg
-      role: \$role
-      targetProduct: \$targetProduct
-      sort: \$sort
-    }
-  ) {
+      query getLiveCampaigns(\$getLiveCampaignInput: getLiveCampaignInput) {
+  getLiveCampaigns(request: \$getLiveCampaignInput) {
     statusCode
     statusMessage
     data {
@@ -69,7 +55,7 @@ class BannerQueryMutation {
     }
   }
 }
-
     ''';
   }
 }
+
