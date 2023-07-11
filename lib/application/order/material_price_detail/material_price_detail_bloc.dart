@@ -267,15 +267,10 @@ class MaterialPriceDetailBloc
 
     return failureOrSuccess.fold(
       (failure) => [],
-      (validMaterialNumbers) async {
-        final validMaterials = materials
-            .where(
-              (material) => validMaterialNumbers.contains(material.value),
-            )
-            .toList();
-
-        return validMaterials;
-      },
+      (validMaterialNumbers) => materials
+          .where(
+            (material) => validMaterialNumbers.contains(material.value),
+          ).toList(),
     );
   }
 

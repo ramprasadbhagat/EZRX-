@@ -17,13 +17,11 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
   final Config config;
   final OrderTemplateLocalDataSource orderTemplateLocalDataSource;
   final OrderTemplateRemoteDataSource orderTemplateRemoteDataSource;
-  
 
   OrderTemplateRepository({
     required this.config,
     required this.orderTemplateLocalDataSource,
     required this.orderTemplateRemoteDataSource,
-    
   });
 
   @override
@@ -86,15 +84,11 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
     }
   }
 
-  List<MaterialItem> _getItemList(List<CartItem> cartItemList) {
-    final saveOrderItems = cartItemList
-        .map((cartItem) => cartItem.toSavedOrderMaterial())
-        .toList()
-        .expand((element) => element)
-        .toList();
-
-    return saveOrderItems;
-  }
+  List<MaterialItem> _getItemList(List<CartItem> cartItemList) => cartItemList
+      .map((cartItem) => cartItem.toSavedOrderMaterial())
+      .toList()
+      .expand((element) => element)
+      .toList();
 
   @override
   Future<Either<ApiFailure, List<OrderTemplate>>> saveOrderTemplate({

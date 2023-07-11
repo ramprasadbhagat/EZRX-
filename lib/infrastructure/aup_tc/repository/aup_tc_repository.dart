@@ -48,9 +48,7 @@ class AupTcRepository implements IAupTcRepository {
       return true;
     }
     try {
-      final isTncEnabled = remoteConfigService.getTncConfig();
-
-      return isTncEnabled;
+      return remoteConfigService.getTncConfig();
     } catch (e) {
       return false;
     }

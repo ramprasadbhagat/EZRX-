@@ -345,24 +345,21 @@ class CartItem with _$CartItem {
       case ComboDealScheme.k1:
         return true;
       case ComboDealScheme.k2:
-        if (comboDeal.groupDeal != ComboDealGroupDeal.empty()) {
-          final includeAllComboSet = comboDeal.materialComboDeals.every(
-            (setItem) {
-              final totalSetQty = materials
-                  .where(
-                    (material) => setItem.materialNumbers
-                        .contains(material.getMaterialNumber),
-                  )
-                  .fold<int>(0, (sum, item) => sum + item.quantity);
+        return comboDeal.groupDeal != ComboDealGroupDeal.empty()
+            ? comboDeal.materialComboDeals.every(
+                (setItem) {
+                  final totalSetQty = materials
+                      .where(
+                        (material) => setItem.materialNumbers
+                            .contains(material.getMaterialNumber),
+                      )
+                      .fold<int>(0, (sum, item) => sum + item.quantity);
 
-              return totalSetQty != 0;
-            },
-          );
+                  return totalSetQty != 0;
+                },
+              )
+            : eligibleComboDealQtyTier != ComboDealQtyTier.empty();
 
-          return includeAllComboSet;
-        } else {
-          return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
-        }
       case ComboDealScheme.k3:
         return eligibleComboDealSKUTier != ComboDealSKUTier.empty();
       case ComboDealScheme.k4:

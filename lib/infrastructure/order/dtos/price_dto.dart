@@ -130,8 +130,11 @@ class PriceDto with _$PriceDto {
       zdp5RemainingQuota: price.zdp5RemainingQuota.getOrCrash(),
       exceedQty: price.exceedQty,
       overrideRulePresent: price.overrideRulePresent,
-      overridenRules: price.overridenRules.map((e) => PriceRuleDto.fromDomain(e)).toList(),
-      overridenRuleTier: price.overridenRuleTier.map((e) => OverridenRuleTierDto.fromDomain(e)).toList(),
+      overridenRules:
+          price.overridenRules.map((e) => PriceRuleDto.fromDomain(e)).toList(),
+      overridenRuleTier: price.overridenRuleTier
+          .map((e) => OverridenRuleTierDto.fromDomain(e))
+          .toList(),
       isPriceOverride: price.isPriceOverride,
       zdp8Override: price.zdp8Override.getOrDefaultValue(0),
       priceOverride: price.priceOverride.getOrDefaultValue(0),
@@ -157,14 +160,11 @@ class PriceDto with _$PriceDto {
     return data;
   }
 
-   Map<String, dynamic> materialQueryWithExceedQty(bool exceedQty) {
-    final data = <String, dynamic>{
-      'MaterialNumber': materialNumber,
-      'exceedQty': exceedQty,
-    };
-
-    return data;
-  }
+  Map<String, dynamic> materialQueryWithExceedQty(bool exceedQty) =>
+      <String, dynamic>{
+        'MaterialNumber': materialNumber,
+        'exceedQty': exceedQty,
+      };
 
   Map<String, dynamic> priceOverrideQuery(double overridePrice) {
     final data = <String, dynamic>{

@@ -222,15 +222,11 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
-  List<MaterialItem> _getItemList(List<CartItem> cartItemList) {
-    final saveOrderItems = cartItemList
-        .map((cartItem) => cartItem.toSavedOrderMaterial())
-        .toList()
-        .expand((element) => element)
-        .toList();
-
-    return saveOrderItems;
-  }
+  List<MaterialItem> _getItemList(List<CartItem> cartItemList) => cartItemList
+      .map((cartItem) => cartItem.toSavedOrderMaterial())
+      .toList()
+      .expand((element) => element)
+      .toList();
 
   @override
   Future<Either<ApiFailure, SubmitOrderResponse>> submitOrder({

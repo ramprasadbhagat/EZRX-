@@ -14,10 +14,8 @@ Map<String, dynamic> getJWTPayload(String token) {
     // Decode payload, the result is a String
     final payloadString = utf8.decode(base64.decode(normalizedPayload));
     // Parse the String to a Map<String, dynamic>
-    final decodedPayload = jsonDecode(payloadString);
-
-    // Return the decoded payload
-    return decodedPayload;
+    
+    return jsonDecode(payloadString);
   } catch (error) {
     throw const FormatException('Invalid payload');
   }
@@ -27,11 +25,10 @@ Map<String, dynamic> getJWTPayload(String token) {
 DateTime getJWTExpirationDate(String token) {
   if (token.isEmpty) return DateTime.now();
   final decodedToken = getJWTPayload(token);
-  final expirationDate = DateTime.fromMillisecondsSinceEpoch(0).add(
+
+  return DateTime.fromMillisecondsSinceEpoch(0).add(
     Duration(seconds: decodedToken['exp'].toInt()),
   );
-
-  return expirationDate;
 }
 
 /// Returns token issuing date (iat)

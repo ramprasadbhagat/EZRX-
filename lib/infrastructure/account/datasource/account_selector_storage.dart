@@ -31,12 +31,10 @@ class AccountSelectorStorage {
 
   Future<AccountSelectorStorageDto> get() async {
     try {
-      final AccountSelectorStorageDto accountSelectorStorageDto = await box.get(
+      return await box.get(
         _credKey,
         defaultValue: AccountSelectorStorageDto.empty(),
       );
-
-      return accountSelectorStorageDto;
     } catch (e) {
       throw CacheException(message: e.toString());
     }

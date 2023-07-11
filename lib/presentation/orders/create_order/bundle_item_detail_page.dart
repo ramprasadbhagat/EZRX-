@@ -170,7 +170,7 @@ class BundleItemDetailPage extends StatelessWidget {
         final itemInfo =
             materialPriceDetailBloc.state.materialDetails[material.queryInfo];
         if (itemInfo != null) {
-          final priceAggregate = PriceAggregate(
+          return PriceAggregate(
             banner: BannerItem.empty(),
             price: itemInfo.price,
             materialInfo: itemInfo.info,
@@ -185,8 +185,6 @@ class BundleItemDetailPage extends StatelessWidget {
             tenderContract: TenderContract.empty(),
             comboDeal: ComboDeal.empty(),
           );
-
-          return priceAggregate;
         }
 
         return PriceAggregate.empty();

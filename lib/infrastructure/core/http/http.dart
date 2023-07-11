@@ -42,12 +42,10 @@ class HttpService {
       _dio.options.responseType = responseType;
       _dio.options.headers['apiEndpoint'] = apiEndpoint;
 
-      final response = await _dio.request(
+      return await _dio.request(
         url,
         data: data,
       );
-
-      return response;
     } on DioError catch (e) {
       throw e.error;
       // switch (e.error.runtimeType) {

@@ -190,12 +190,8 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
 
   List<ReturnItem> get _getInitializedReturnItemList => <ReturnItem>[];
 
-  List<ReturnItem> _getSortedList(List<ReturnItem> oldList, String direction) {
-    final newList = oldList
-      ..sort((a, b) => _compareTo(a.expiry, b.expiry, direction));
-
-    return newList;
-  }
+  List<ReturnItem> _getSortedList(List<ReturnItem> oldList, String direction) =>
+      oldList..sort((a, b) => _compareTo(a.expiry, b.expiry, direction));
 
   int _compareTo(
     DateTimeStringValue a,

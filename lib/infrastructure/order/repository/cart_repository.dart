@@ -126,7 +126,10 @@ class CartRepository implements ICartRepository {
 
         return const Left(ApiFailure.productOutOfStock());
       }
-      final savedCartItem = getSavedCartItem(cartItemWithStock: cartItemWithStock, override: override,);
+      final savedCartItem = getSavedCartItem(
+        cartItemWithStock: cartItemWithStock,
+        override: override,
+      );
 
       final updatedCartItem = await _verifyZdp5Discount(
         cartItem: savedCartItem,
@@ -155,26 +158,28 @@ class CartRepository implements ICartRepository {
     }
   }
 
-  CartItem getSavedCartItem ({required CartItem cartItemWithStock, required bool override,}){
+  CartItem getSavedCartItem({
+    required CartItem cartItemWithStock,
+    required bool override,
+  }) {
     final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
-    final savedCartItem = (inCartItem != null && !override)
+    
+    return (inCartItem != null && !override)
         ? inCartItem.copyWith(
-      materials: inCartItem.materials.map(
-            (material) {
-          final qty = cartItemWithStock.materials
-              .firstWhereOrNull((item) =>
-          item.getMaterialNumber ==
-              material.getMaterialNumber)
-              ?.quantity ??
-              0;
+            materials: inCartItem.materials.map(
+              (material) {
+                final qty = cartItemWithStock.materials
+                        .firstWhereOrNull((item) =>
+                            item.getMaterialNumber ==
+                            material.getMaterialNumber)
+                        ?.quantity ??
+                    0;
 
-          return material.copyWithIncreasedQty(qty: qty);
-        },
-      ).toList(),
-    )
+                return material.copyWithIncreasedQty(qty: qty);
+              },
+            ).toList(),
+          )
         : cartItemWithStock;
-
-    return savedCartItem;
   }
 
   Future<CartItem> _verifyZdp5Discount({
@@ -394,9 +399,10 @@ class CartRepository implements ICartRepository {
         switch (inCartItem.itemType) {
           case CartItemType.material:
             await cartItemTypeMaterial(
-                cartItem: inCartItem,
-                newBonusWithStock: newBonusWithStock,
-                overrideQty: overrideQty,);
+              cartItem: inCartItem,
+              newBonusWithStock: newBonusWithStock,
+              overrideQty: overrideQty,
+            );
             break;
           case CartItemType.bundle:
           case CartItemType.comboDeal:
@@ -410,10 +416,11 @@ class CartRepository implements ICartRepository {
     }
   }
 
-  Future<void> cartItemTypeMaterial(
-      {required CartItem cartItem,
-      required MaterialItemBonus newBonusWithStock,
-      required bool overrideQty,}) async {
+  Future<void> cartItemTypeMaterial({
+    required CartItem cartItem,
+    required MaterialItemBonus newBonusWithStock,
+    required bool overrideQty,
+  }) async {
     final material = cartItem.materials.first;
     var bonusExisting = false;
     final updatedBonuses = material.addedBonusList.map((bonus) {
@@ -625,35 +632,32 @@ class CartRepository implements ICartRepository {
   @override
   List<CartItem> updateDiscountQty({
     required List<CartItem> items,
-  }) {
-    final updatedCart = items.map((item) {
-      switch (item.itemType) {
-        case CartItemType.material:
-          final material = item.materials.first;
-          var updatedMaterial = material.copyWith(discountedMaterialCount: 0);
-          if (material.price.zmgDiscount) {
-            updatedMaterial = material.copyWith(
-              discountedMaterialCount: items.zmgMaterialsQty(
-                material.materialInfo.materialGroup2,
-              ),
+  }) =>
+      items.map((item) {
+        switch (item.itemType) {
+          case CartItemType.material:
+            final material = item.materials.first;
+            var updatedMaterial = material.copyWith(discountedMaterialCount: 0);
+            if (material.price.zmgDiscount) {
+              updatedMaterial = material.copyWith(
+                discountedMaterialCount: items.zmgMaterialsQty(
+                  material.materialInfo.materialGroup2,
+                ),
+              );
+            } else if (material.price.isTireDiscountEligible) {
+              updatedMaterial = material.copyWith(
+                discountedMaterialCount: material.quantity,
+              );
+            }
+            return item.copyWith(
+              materials: [updatedMaterial],
             );
-          } else if (material.price.isTireDiscountEligible) {
-            updatedMaterial = material.copyWith(
-              discountedMaterialCount: material.quantity,
-            );
-          }
-          return item.copyWith(
-            materials: [updatedMaterial],
-          );
 
-        case CartItemType.bundle:
-        case CartItemType.comboDeal:
-          return item;
-      }
-    }).toList();
-
-    return updatedCart;
-  }
+          case CartItemType.bundle:
+          case CartItemType.comboDeal:
+            return item;
+        }
+      }).toList();
 
   @override
   Future<Either<ApiFailure, List<CartItem>>> updateSelectionInCart({

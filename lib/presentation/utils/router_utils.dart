@@ -11,8 +11,7 @@ class RouterUtils {
 
     var words = match?.group(2)?.split('_') ?? [];
     words = words.map((word) => stringCapitalize(word)).toList();
-    final routeName = '${words.join(' ')} Page';
 
-    return routeName;
+    return '${words.join(' ')} Page';
   }
 }

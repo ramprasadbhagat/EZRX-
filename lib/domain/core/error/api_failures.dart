@@ -52,42 +52,40 @@ class ApiFailure with _$ApiFailure {
 }
 
 extension ApiFailureExt on ApiFailure {
-  String get failureMessage {
-    final failureMessage = map(
-      other: (other) => other.message,
-      serverError: (serverError) => serverError.message,
-      poorConnection: (_) => 'Poor Internet connection',
-      serverTimeout: (_) => 'Server time out',
-      userNotFound: (_) => 'User not found.',
-      invalidEmailAndPasswordCombination: (_) =>
-          'Incorrect username and/or password.',
-      accountLocked: (_) => 'Account is Locked',
-      accountExpired: (_) => 'Account is Expired',
-      tokenExpired: (_) => 'Session token is Expired',
-      authenticationFailed: (_) => 'Your session has expired',
-      deviceNotSupportBiometric: (_) => 'Device not support biometric',
-      cannotCheckBiometrics: (_) => 'Unable to check your biometric',
-      noSupportedBiometrics: (_) => 'No supported biometric',
-      invalidBiometric: (_) => 'Incorrect biometric',
-      priceOverrideNotFound: (_) => 'Price override not found!',
-      proxyLoginRolePermissionNotMatch: (_) =>
-          'Only Root Admin and ZP Admin can login on behalf',
-      proxyLoginZPSalesOrgNotMatch: (_) =>
-          'ZP Admin can only login on behalf of users from the same Sales Org',
-      proxyLoginZPTargetRoleNotMatch: (_) =>
-          'ZP Admin can only login on behalf of Sales Rep and Customer users',
-      productOutOfStock: (_) => 'Product Not Available',
-      photoPermissionFailed: (_) =>
-          'Please enable Photos permission from the app settings',
-      storagePermissionFailed: (_) =>
-          'Please enable Storage permission from the app settings',
-      invalidFileFormat: (_) =>
-          'Unable to upload file as either file format not supported or something wrong with the file',
-      uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
-      materialDetailRoute: (_) => 'This material is not available on your account',
-      historyDetailRoute: (_) => 'This order history is not available on your account', 
-    );
-
-    return failureMessage;
-  }
+  String get failureMessage => map(
+        other: (other) => other.message,
+        serverError: (serverError) => serverError.message,
+        poorConnection: (_) => 'Poor Internet connection',
+        serverTimeout: (_) => 'Server time out',
+        userNotFound: (_) => 'User not found.',
+        invalidEmailAndPasswordCombination: (_) =>
+            'Incorrect username and/or password.',
+        accountLocked: (_) => 'Account is Locked',
+        accountExpired: (_) => 'Account is Expired',
+        tokenExpired: (_) => 'Session token is Expired',
+        authenticationFailed: (_) => 'Your session has expired',
+        deviceNotSupportBiometric: (_) => 'Device not support biometric',
+        cannotCheckBiometrics: (_) => 'Unable to check your biometric',
+        noSupportedBiometrics: (_) => 'No supported biometric',
+        invalidBiometric: (_) => 'Incorrect biometric',
+        priceOverrideNotFound: (_) => 'Price override not found!',
+        proxyLoginRolePermissionNotMatch: (_) =>
+            'Only Root Admin and ZP Admin can login on behalf',
+        proxyLoginZPSalesOrgNotMatch: (_) =>
+            'ZP Admin can only login on behalf of users from the same Sales Org',
+        proxyLoginZPTargetRoleNotMatch: (_) =>
+            'ZP Admin can only login on behalf of Sales Rep and Customer users',
+        productOutOfStock: (_) => 'Product Not Available',
+        photoPermissionFailed: (_) =>
+            'Please enable Photos permission from the app settings',
+        storagePermissionFailed: (_) =>
+            'Please enable Storage permission from the app settings',
+        invalidFileFormat: (_) =>
+            'Unable to upload file as either file format not supported or something wrong with the file',
+        uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
+        materialDetailRoute: (_) =>
+            'This material is not available on your account',
+        historyDetailRoute: (_) =>
+            'This order history is not available on your account',
+      );
 }

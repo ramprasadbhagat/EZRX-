@@ -39,8 +39,7 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
   ) {
     return AllCreditsFilterDto(
       documentDateTo: tempFilter.documentDateTo.apiDateWithDashFormat,
-      documentDateFrom:
-          tempFilter.documentDateFrom.apiDateWithDashFormat,
+      documentDateFrom: tempFilter.documentDateFrom.apiDateWithDashFormat,
       amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses: tempFilter.filterStatuses.join(','),
@@ -50,43 +49,39 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
   factory AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =>
       _$AllCreditsFilterDtoFromJson(json);
 
-  List<Map<String, String>> get toMapList {
-    final filterMapList = <Map<String, String>>[
-      {
-        'field': 'debitCreditCode',
-        'value': 'H',
-      },
-      if (documentDateFrom.isNotEmpty)
+  List<Map<String, String>> get toMapList => <Map<String, String>>[
         {
-          'field': 'documentDate',
-          'value': documentDateFrom,
-          'type': 'ge',
+          'field': 'debitCreditCode',
+          'value': 'H',
         },
-      if (documentDateTo.isNotEmpty)
-        {
-          'field': 'documentDate',
-          'value': documentDateTo,
-          'type': 'le',
-        },
-      if (amountValueFrom.isNotEmpty)
-        {
-          'field': 'amountInTransactionCurrency',
-          'value': amountValueFrom,
-          'type': 'ge',
-        },
-      if (amountValueTo.isNotEmpty)
-        {
-          'field': 'amountInTransactionCurrency',
-          'value': amountValueTo,
-          'type': 'le',
-        },
-      if (filterStatuses.isNotEmpty)
-        {
-          'field': 'invoiceProcessingStatus',
-          'value': filterStatuses,
-        },
-    ];
-
-    return filterMapList;
-  }
+        if (documentDateFrom.isNotEmpty)
+          {
+            'field': 'documentDate',
+            'value': documentDateFrom,
+            'type': 'ge',
+          },
+        if (documentDateTo.isNotEmpty)
+          {
+            'field': 'documentDate',
+            'value': documentDateTo,
+            'type': 'le',
+          },
+        if (amountValueFrom.isNotEmpty)
+          {
+            'field': 'amountInTransactionCurrency',
+            'value': amountValueFrom,
+            'type': 'ge',
+          },
+        if (amountValueTo.isNotEmpty)
+          {
+            'field': 'amountInTransactionCurrency',
+            'value': amountValueTo,
+            'type': 'le',
+          },
+        if (filterStatuses.isNotEmpty)
+          {
+            'field': 'invoiceProcessingStatus',
+            'value': filterStatuses,
+          },
+      ];
 }

@@ -238,17 +238,13 @@ class PriceAggregate with _$PriceAggregate {
       )
       .rate;
 
-  double getNewPrice() {
-    final newPrice = materialInfo.taxClassification.isExempt
-        ? price.finalPrice.getOrCrash()
-        : ((price.finalPrice.getOrCrash()) /
-            (1 +
-                (materialInfo.taxClassification.isNoTax
-                    ? salesOrgConfig.vatValue
-                    : 0)));
-
-    return newPrice;
-  }
+  double getNewPrice() => materialInfo.taxClassification.isExempt
+      ? price.finalPrice.getOrCrash()
+      : ((price.finalPrice.getOrCrash()) /
+          (1 +
+              (materialInfo.taxClassification.isNoTax
+                  ? salesOrgConfig.vatValue
+                  : 0)));
 
   String display(PriceType priceType) {
     if (price.isFOC) return 'FOC';

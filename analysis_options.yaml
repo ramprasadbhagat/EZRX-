@@ -127,5 +127,6 @@ dart_code_metrics:
     - avoid-unused-parameters
     - binary-expression-operand-order
     - no-object-declaration
+    - prefer-immediate-return
     - prefer-last
     - avoid-substring
