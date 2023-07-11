@@ -78,7 +78,7 @@ class _CurvedRectangle extends CustomPainter {
     var smallQuarterCircle = smallSemiCircle / 2;
     arc.arcToPoint(
       Offset(width, smallQuarterCircle),
-      radius: Radius.circular(height / (2 * semiCircleRadius)),
+      radius: Radius.circular(height / (semiCircleRadius * 2)),
       clockwise: isLeft,
     );
     canvas.drawPath(arc, paint);
@@ -95,7 +95,7 @@ class _CurvedRectangle extends CustomPainter {
     }
     arc.arcToPoint(
       Offset(spacing, smallQuarterCircle - smallSemiCircle / 2),
-      radius: Radius.circular(height / (2 * semiCircleRadius)),
+      radius: Radius.circular(height / (semiCircleRadius * 2)),
       clockwise: isLeft,
     );
     canvas.drawPath(arc, paint);

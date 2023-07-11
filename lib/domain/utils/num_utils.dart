@@ -4,6 +4,6 @@ class NumUtils {
   }
 
   static double priceByRate(double num, double rate) => roundToPlaces(
-        num * (100 + rate) / 100,
+        num * (rate + 100) / 100,
       );
 }
