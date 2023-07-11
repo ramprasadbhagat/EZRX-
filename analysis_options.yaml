@@ -125,3 +125,4 @@ dart_code_metrics:
     # - prefer-correct-edge-insets-constructor
     - avoid-returning-widgets
     - binary-expression-operand-order
+    - no-object-declaration
