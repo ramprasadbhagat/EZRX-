@@ -126,3 +126,4 @@ dart_code_metrics:
     - avoid-returning-widgets
     - binary-expression-operand-order
     - no-object-declaration
+    - prefer-last
