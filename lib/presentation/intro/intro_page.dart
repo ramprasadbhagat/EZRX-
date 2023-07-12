@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,9 +75,7 @@ class _IntroPageState extends State<IntroPage> {
       );
 
   void _getStarted(BuildContext context) {
-    context.router.push(
-      HomeNavigationTabbarRoute(),
-    );
+    context.read<IntroBloc>().add(const IntroEvent.setAppFirstLaunch());
     context.read<IntroBloc>().add(const IntroEvent.initialIndex());
   }
 

@@ -2,16 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeNavigationTabbar extends StatelessWidget {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   HomeNavigationTabbar({Key? key}) : super(key: key);
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,54 +26,102 @@ class HomeNavigationTabbar extends StatelessWidget {
             ? const AupTCDialog(
                 key: WidgetKeys.aupTcScreen,
               )
-            : WillPopScope(
-                onWillPop: () async => false,
-                child: BlocBuilder<UserBloc, UserState>(
-                  buildWhen: (previous, current) => previous != current,
-                  builder: (context, state) {
-                    return Material(
-                      color: Colors.white,
-                      child: AutoTabsRouter.tabBar(
-                        routes: _getTabs(context)
-                            .map((item) => item.route)
-                            .toList(),
-                        builder: (context, child, tabController) => Column(
-                          children: [
-                            Expanded(child: child),
-                            SafeArea(
-                              bottom: true,
-                              top: false,
-                              child: TabBar(
-                                key: WidgetKeys.homeTabBar,
-                                indicator: TopIndicator(),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 8.0,
-                                ),
-                                controller: tabController,
-                                labelPadding: EdgeInsets.zero,
-                                tabs: _getTabs(context)
-                                    .map(
-                                      (item) => Tab(
-                                        icon: item.icon,
-                                        text: item.label.tr(),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+            : BlocBuilder<IntroBloc, IntroState>(
+                buildWhen: (previous, current) =>
+                    previous.isAppFirstLaunch != current.isAppFirstLaunch,
+                builder: (context, state) {
+                  return state.isAppFirstLaunch
+                      ? const IntroPage()
+                      : WillPopScope(
+                          onWillPop: () async => false,
+                          child: BlocBuilder<UserBloc, UserState>(
+                            buildWhen: (previous, current) =>
+                                previous != current,
+                            builder: (context, state) {
+                              return _CustomTabBar(
+                                routes: _getTabs(context),
+                              );
+                            },
+                          ),
+                        );
+                },
               );
       },
     );
   }
 }
 
-class TopIndicator extends Decoration {
+class _CustomTabBar extends StatefulWidget {
+  final List<RouteItem> routes;
+
+  const _CustomTabBar({
+    Key? key,
+    required this.routes,
+  }) : super(key: key);
+
+  @override
+  State<_CustomTabBar> createState() => _CustomTabBarState();
+}
+
+class _CustomTabBarState extends State<_CustomTabBar>
+    with TickerProviderStateMixin {
+  TabController? tabController;
+
+  List<PageRouteInfo> _getRouteList(List<RouteItem> routes) =>
+      routes.map((e) => e.route).toList();
+
+  @override
+  Widget build(BuildContext context) {
+    final routerList = _getRouteList(widget.routes);
+    tabController = TabController(
+      length: widget.routes.length,
+      vsync: this,
+    );
+
+    return Material(
+      color: ZPColors.white,
+      child: AutoTabsRouter.pageView(
+        routes: routerList,
+        builder: (context, child, _) {
+          final tabsRouter = AutoTabsRouter.of(context);
+          tabController?.animateTo(tabsRouter.activeIndex);
+
+          return Column(
+            children: [
+              Expanded(child: child),
+              SafeArea(
+                bottom: true,
+                top: false,
+                child: TabBar(
+                  controller: tabController,
+                  key: WidgetKeys.homeTabBar,
+                  indicator: _TopIndicator(),
+                  onTap: (index) {
+                    tabsRouter.setActiveIndex(index);
+                  },
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                  ),
+                  labelPadding: EdgeInsets.zero,
+                  tabs: _getTabs(context)
+                      .map(
+                        (item) => Tab(
+                          icon: item.icon,
+                          text: item.label.tr(),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _TopIndicator extends Decoration {
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _TopIndicatorBox();
@@ -133,7 +184,7 @@ List<RouteItem> _getTabs(BuildContext context) {
   ];
 }
 
-const RouteItem homeTabRouteItem = RouteItem(
+RouteItem homeTabRouteItem = const RouteItem(
   route: HomeTabRoute(),
   icon: Icon(
     Icons.home_outlined,
@@ -160,7 +211,7 @@ RouteItem ordersTabRouteItem = const RouteItem(
   label: 'Orders',
 );
 
-const RouteItem notificationTabRouteItem = RouteItem(
+RouteItem notificationTabRouteItem = const RouteItem(
   route: NotificationTabRoute(),
   icon: Icon(
     Icons.notifications_none_outlined,

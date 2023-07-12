@@ -47,6 +47,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -172,6 +173,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<CartStorage>().init();
   await locator<SettingStorage>().init();
   await locator<OrderStorage>().init();
+  await locator<DeviceStorage>().init();
   await locator<ProductSuggestionHistoryStorage>().init();
   locator<MixpanelService>().init(
     mixpanel: await Mixpanel.init(

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -170,7 +171,11 @@ class PushNotificationServiceMock extends Mock
 class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
     implements ChatBotBloc {}
 
-class MaterialPriceMockBloc extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
+    implements IntroBloc {}
+
+class MaterialPriceMockBloc
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
 void main() {
@@ -195,6 +200,7 @@ void main() {
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
+  late IntroBloc introBlocMock;
 
   late MaterialFilterBloc materialFilterBlocMock;
 
@@ -282,6 +288,7 @@ void main() {
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
       settingBlocMock = SettingMockBloc();
       mockMaterialPriceBloc = MaterialPriceMockBloc();
+      introBlocMock = IntroBlocMock();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -338,6 +345,7 @@ void main() {
           .thenReturn(ViewByOrderState.initial());
       when(() => mockMaterialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
+      when(() => introBlocMock.state).thenReturn(IntroState.initial());
     });
 
     Future getWidget(tester) async {
@@ -407,6 +415,7 @@ void main() {
                 create: (context) => announcementInfoBlocMock),
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => mockMaterialPriceBloc),
+            BlocProvider<IntroBloc>(create: (context) => introBlocMock),
           ],
           child: const SplashPage(),
         ),
@@ -449,7 +458,7 @@ void main() {
       await getWidget(tester);
       await tester.pump();
       verify(() => userBlocMock.add(const UserEvent.fetch())).called(1);
-      expect(autoRouterMock.current.name, IntroPageRoute.name);
+      expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
     });
 
     testWidgets('When PaymentCustomerInformation bloc is listening',

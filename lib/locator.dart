@@ -96,6 +96,8 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
@@ -448,6 +450,12 @@ void setupLocator() {
     () => RouterObserver(
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
       mixpanelService: locator<MixpanelService>(),
+    ),
+  );
+  locator.registerLazySingleton(() => DeviceStorage());
+  locator.registerLazySingleton(
+    () => DeviceRepository(
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
   locator.registerLazySingleton(() => SecureStorage());
@@ -2678,7 +2686,9 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => IntroBloc(),
+    () => IntroBloc(
+      deviceRepository: locator<DeviceRepository>(),
+    ),
   );
 
   //============================================================

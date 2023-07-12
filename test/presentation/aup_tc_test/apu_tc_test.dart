@@ -169,7 +169,8 @@ void main() {
     when(() => deepLinkingBlocMock.state)
         .thenReturn(const DeepLinkingState.initial());
     when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
-    when(() => materialPriceBloc.state).thenReturn(MaterialPriceState.initial());
+    when(() => materialPriceBloc.state)
+        .thenReturn(MaterialPriceState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {

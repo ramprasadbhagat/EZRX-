@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -24,20 +24,30 @@ class BrowseProduct extends StatelessWidget {
     final ctx = context;
 
     return BlocProvider<MaterialListBloc>(
-      create: (context) => locator<MaterialListBloc>()
-        ..add(
-          MaterialListEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-            selectedMaterialFilter: MaterialFilter.empty(),
-          ),
-        ),
+      create: (context) => locator<MaterialListBloc>(),
       child: MultiBlocListener(
         listeners: [
+          BlocListener<EligibilityBloc, EligibilityState>(
+            listenWhen: (previous, current) =>
+                previous.customerCodeInfo != current.customerCodeInfo ||
+                previous.shipToInfo != current.shipToInfo,
+            listener: (context, state) {
+              context.read<MaterialListBloc>().add(
+                    MaterialListEvent.fetch(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<EligibilityBloc>().state.shipToInfo,
+                      selectedMaterialFilter: MaterialFilter.empty(),
+                    ),
+                  );
+            },
+          ),
           BlocListener<MaterialListBloc, MaterialListState>(
             listenWhen: (previous, current) =>
                 previous.apiFailureOrSuccessOption !=
@@ -51,29 +61,6 @@ class BrowseProduct extends StatelessWidget {
                 (_) {},
               ),
             ),
-          ),
-          BlocListener<CustomerCodeBloc, CustomerCodeState>(
-            listenWhen: (previous, current) =>
-                previous.customerCodeInfo != current.customerCodeInfo,
-            listener: (context, state) {
-              context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      configs:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<EligibilityBloc>().state.shipToInfo,
-                      selectedMaterialFilter: MaterialFilter.empty(),
-                    ),
-                  );
-            },
           ),
         ],
         child: BlocBuilder<MaterialListBloc, MaterialListState>(

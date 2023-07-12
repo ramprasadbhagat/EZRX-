@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -144,10 +145,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       const AnnouncementEvent.getAnnouncement(),
                     );
                 context.read<UserBloc>().add(const UserEvent.fetch());
+
+                context.read<IntroBloc>().add(
+                      const IntroEvent.checkAppFirstLaunch(),
+                    );
+
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
-                    const IntroPageRoute(),
+                    HomeNavigationTabbarRoute(),
                   ],
                 );
               },
@@ -163,6 +169,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context
                     .read<EligibilityBloc>()
                     .add(const EligibilityEvent.initialized());
+
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),

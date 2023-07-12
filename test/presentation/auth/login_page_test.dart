@@ -77,9 +77,11 @@ class AutoRouterMock extends Mock implements AppRouter {
   @override
   String currentPath = '';
 }
+
 class MaterialListMockBloc
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
+
 class MaterialPriceMockBloc
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
@@ -145,7 +147,6 @@ void main() {
           .thenReturn(MaterialListState.initial());
       when(() => materialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
-
     });
 
     Widget loginTestPage() => WidgetUtils.getScopedWidget(

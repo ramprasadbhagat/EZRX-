@@ -20,18 +20,24 @@ mixin _$IntroEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
+    required TResult Function() checkAppFirstLaunch,
+    required TResult Function() setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
+    TResult? Function()? checkAppFirstLaunch,
+    TResult? Function()? setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
+    TResult Function()? checkAppFirstLaunch,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +45,24 @@ mixin _$IntroEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
+    required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
+    TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
+    TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +126,8 @@ class _$_InitialIndex implements _InitialIndex {
   TResult when<TResult extends Object?>({
     required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
+    required TResult Function() checkAppFirstLaunch,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return initialIndex();
   }
@@ -123,6 +137,8 @@ class _$_InitialIndex implements _InitialIndex {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
+    TResult? Function()? checkAppFirstLaunch,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return initialIndex?.call();
   }
@@ -132,6 +148,8 @@ class _$_InitialIndex implements _InitialIndex {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
+    TResult Function()? checkAppFirstLaunch,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (initialIndex != null) {
@@ -145,6 +163,8 @@ class _$_InitialIndex implements _InitialIndex {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
+    required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return initialIndex(this);
   }
@@ -154,6 +174,8 @@ class _$_InitialIndex implements _InitialIndex {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
+    TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return initialIndex?.call(this);
   }
@@ -163,6 +185,8 @@ class _$_InitialIndex implements _InitialIndex {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
+    TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (initialIndex != null) {
@@ -242,6 +266,8 @@ class _$_SetIndex implements _SetIndex {
   TResult when<TResult extends Object?>({
     required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
+    required TResult Function() checkAppFirstLaunch,
+    required TResult Function() setAppFirstLaunch,
   }) {
     return setIndex(index);
   }
@@ -251,6 +277,8 @@ class _$_SetIndex implements _SetIndex {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
+    TResult? Function()? checkAppFirstLaunch,
+    TResult? Function()? setAppFirstLaunch,
   }) {
     return setIndex?.call(index);
   }
@@ -260,6 +288,8 @@ class _$_SetIndex implements _SetIndex {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
+    TResult Function()? checkAppFirstLaunch,
+    TResult Function()? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (setIndex != null) {
@@ -273,6 +303,8 @@ class _$_SetIndex implements _SetIndex {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
+    required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
   }) {
     return setIndex(this);
   }
@@ -282,6 +314,8 @@ class _$_SetIndex implements _SetIndex {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
+    TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
   }) {
     return setIndex?.call(this);
   }
@@ -291,6 +325,8 @@ class _$_SetIndex implements _SetIndex {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
+    TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
     required TResult orElse(),
   }) {
     if (setIndex != null) {
@@ -310,8 +346,237 @@ abstract class _SetIndex implements IntroEvent {
 }
 
 /// @nodoc
+abstract class _$$_CheckAppFirstLaunchCopyWith<$Res> {
+  factory _$$_CheckAppFirstLaunchCopyWith(_$_CheckAppFirstLaunch value,
+          $Res Function(_$_CheckAppFirstLaunch) then) =
+      __$$_CheckAppFirstLaunchCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CheckAppFirstLaunchCopyWithImpl<$Res>
+    extends _$IntroEventCopyWithImpl<$Res, _$_CheckAppFirstLaunch>
+    implements _$$_CheckAppFirstLaunchCopyWith<$Res> {
+  __$$_CheckAppFirstLaunchCopyWithImpl(_$_CheckAppFirstLaunch _value,
+      $Res Function(_$_CheckAppFirstLaunch) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
+  const _$_CheckAppFirstLaunch();
+
+  @override
+  String toString() {
+    return 'IntroEvent.checkAppFirstLaunch()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CheckAppFirstLaunch);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialIndex,
+    required TResult Function(int index) setIndex,
+    required TResult Function() checkAppFirstLaunch,
+    required TResult Function() setAppFirstLaunch,
+  }) {
+    return checkAppFirstLaunch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialIndex,
+    TResult? Function(int index)? setIndex,
+    TResult? Function()? checkAppFirstLaunch,
+    TResult? Function()? setAppFirstLaunch,
+  }) {
+    return checkAppFirstLaunch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialIndex,
+    TResult Function(int index)? setIndex,
+    TResult Function()? checkAppFirstLaunch,
+    TResult Function()? setAppFirstLaunch,
+    required TResult orElse(),
+  }) {
+    if (checkAppFirstLaunch != null) {
+      return checkAppFirstLaunch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialIndex value) initialIndex,
+    required TResult Function(_SetIndex value) setIndex,
+    required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
+  }) {
+    return checkAppFirstLaunch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialIndex value)? initialIndex,
+    TResult? Function(_SetIndex value)? setIndex,
+    TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
+  }) {
+    return checkAppFirstLaunch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialIndex value)? initialIndex,
+    TResult Function(_SetIndex value)? setIndex,
+    TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
+    required TResult orElse(),
+  }) {
+    if (checkAppFirstLaunch != null) {
+      return checkAppFirstLaunch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckAppFirstLaunch implements IntroEvent {
+  const factory _CheckAppFirstLaunch() = _$_CheckAppFirstLaunch;
+}
+
+/// @nodoc
+abstract class _$$_SetAppFirstLaunchCopyWith<$Res> {
+  factory _$$_SetAppFirstLaunchCopyWith(_$_SetAppFirstLaunch value,
+          $Res Function(_$_SetAppFirstLaunch) then) =
+      __$$_SetAppFirstLaunchCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SetAppFirstLaunchCopyWithImpl<$Res>
+    extends _$IntroEventCopyWithImpl<$Res, _$_SetAppFirstLaunch>
+    implements _$$_SetAppFirstLaunchCopyWith<$Res> {
+  __$$_SetAppFirstLaunchCopyWithImpl(
+      _$_SetAppFirstLaunch _value, $Res Function(_$_SetAppFirstLaunch) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
+  const _$_SetAppFirstLaunch();
+
+  @override
+  String toString() {
+    return 'IntroEvent.setAppFirstLaunch()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SetAppFirstLaunch);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialIndex,
+    required TResult Function(int index) setIndex,
+    required TResult Function() checkAppFirstLaunch,
+    required TResult Function() setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialIndex,
+    TResult? Function(int index)? setIndex,
+    TResult? Function()? checkAppFirstLaunch,
+    TResult? Function()? setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialIndex,
+    TResult Function(int index)? setIndex,
+    TResult Function()? checkAppFirstLaunch,
+    TResult Function()? setAppFirstLaunch,
+    required TResult orElse(),
+  }) {
+    if (setAppFirstLaunch != null) {
+      return setAppFirstLaunch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialIndex value) initialIndex,
+    required TResult Function(_SetIndex value) setIndex,
+    required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
+    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialIndex value)? initialIndex,
+    TResult? Function(_SetIndex value)? setIndex,
+    TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
+  }) {
+    return setAppFirstLaunch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialIndex value)? initialIndex,
+    TResult Function(_SetIndex value)? setIndex,
+    TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
+    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
+    required TResult orElse(),
+  }) {
+    if (setAppFirstLaunch != null) {
+      return setAppFirstLaunch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetAppFirstLaunch implements IntroEvent {
+  const factory _SetAppFirstLaunch() = _$_SetAppFirstLaunch;
+}
+
+/// @nodoc
 mixin _$IntroState {
   int get index => throw _privateConstructorUsedError;
+  bool get isAppFirstLaunch => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IntroStateCopyWith<IntroState> get copyWith =>
@@ -324,7 +589,7 @@ abstract class $IntroStateCopyWith<$Res> {
           IntroState value, $Res Function(IntroState) then) =
       _$IntroStateCopyWithImpl<$Res, IntroState>;
   @useResult
-  $Res call({int index});
+  $Res call({int index, bool isAppFirstLaunch});
 }
 
 /// @nodoc
@@ -341,12 +606,17 @@ class _$IntroStateCopyWithImpl<$Res, $Val extends IntroState>
   @override
   $Res call({
     Object? index = null,
+    Object? isAppFirstLaunch = null,
   }) {
     return _then(_value.copyWith(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
+      isAppFirstLaunch: null == isAppFirstLaunch
+          ? _value.isAppFirstLaunch
+          : isAppFirstLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -359,7 +629,7 @@ abstract class _$$_IntroStateCopyWith<$Res>
       __$$_IntroStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int index});
+  $Res call({int index, bool isAppFirstLaunch});
 }
 
 /// @nodoc
@@ -374,12 +644,17 @@ class __$$_IntroStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? index = null,
+    Object? isAppFirstLaunch = null,
   }) {
     return _then(_$_IntroState(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
+      isAppFirstLaunch: null == isAppFirstLaunch
+          ? _value.isAppFirstLaunch
+          : isAppFirstLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -387,14 +662,17 @@ class __$$_IntroStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IntroState extends _IntroState {
-  const _$_IntroState({required this.index}) : super._();
+  const _$_IntroState({required this.index, required this.isAppFirstLaunch})
+      : super._();
 
   @override
   final int index;
+  @override
+  final bool isAppFirstLaunch;
 
   @override
   String toString() {
-    return 'IntroState(index: $index)';
+    return 'IntroState(index: $index, isAppFirstLaunch: $isAppFirstLaunch)';
   }
 
   @override
@@ -402,11 +680,13 @@ class _$_IntroState extends _IntroState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IntroState &&
-            (identical(other.index, index) || other.index == index));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.isAppFirstLaunch, isAppFirstLaunch) ||
+                other.isAppFirstLaunch == isAppFirstLaunch));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index);
+  int get hashCode => Object.hash(runtimeType, index, isAppFirstLaunch);
 
   @JsonKey(ignore: true)
   @override
@@ -416,11 +696,15 @@ class _$_IntroState extends _IntroState {
 }
 
 abstract class _IntroState extends IntroState {
-  const factory _IntroState({required final int index}) = _$_IntroState;
+  const factory _IntroState(
+      {required final int index,
+      required final bool isAppFirstLaunch}) = _$_IntroState;
   const _IntroState._() : super._();
 
   @override
   int get index;
+  @override
+  bool get isAppFirstLaunch;
   @override
   @JsonKey(ignore: true)
   _$$_IntroStateCopyWith<_$_IntroState> get copyWith =>
