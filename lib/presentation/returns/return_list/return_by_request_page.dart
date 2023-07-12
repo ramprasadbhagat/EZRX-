@@ -109,7 +109,7 @@ class ReturnByRequestPage extends StatelessWidget {
                       return currentGroup != previousGroup
                           ? _ReturnItem(
                               data: item,
-                              showDivider: index == 0 ? false : true,
+                              showDivider: index != 0,
                               showHeader: true,
                             )
                           : _ReturnItem(

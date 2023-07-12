@@ -60,7 +60,7 @@ class _HomeBannerState extends State<HomeBanner> {
                 key: WidgetKeys.visibilityDetector,
                 onVisibilityChanged: (info) {
                   final visiblePercentage = info.visibleFraction * 100;
-                  isBannerVisible = visiblePercentage >= 80 ? true : false;
+                  isBannerVisible = visiblePercentage >= 80;
                 },
                 child: PageView.builder(
                   key: WidgetKeys.homeBanner,

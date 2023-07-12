@@ -132,3 +132,4 @@ dart_code_metrics:
     - avoid-substring
     - prefer-first
     - avoid-wrapping-in-padding
+    - avoid-unnecessary-conditionals

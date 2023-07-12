@@ -567,8 +567,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 dialogStyle: Platform.isIOS
                     ? UpgradeDialogStyle.cupertino
                     : UpgradeDialogStyle.material,
-                debugLogging:
-                    locator<Config>().appFlavor == Flavor.prod ? false : true,
+                debugLogging: locator<Config>().appFlavor != Flavor.prod,
                 minAppVersion: '1.0.0',
               ),
               child: const _Splash(),
