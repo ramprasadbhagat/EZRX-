@@ -26,4 +26,6 @@ class MaterialListState with _$MaterialListState {
         searchKey: SearchKey(''),
         selectedMaterialFilter: MaterialFilter.empty(),
       );
+
+  bool get isFilterSelected => selectedMaterialFilter != MaterialFilter.empty();
 }

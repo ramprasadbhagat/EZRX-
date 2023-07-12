@@ -21,6 +21,8 @@ class BrowseProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ctx = context;
+
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>()
         ..add(
@@ -74,48 +76,55 @@ class BrowseProduct extends StatelessWidget {
             },
           ),
         ],
-        child: const _BodyContent(),
+        child: BlocBuilder<MaterialListBloc, MaterialListState>(
+          buildWhen: (previous, current) =>
+              previous.materialList != current.materialList,
+          builder: (context, state) {
+            return state.isFetching || state.materialList.isNotEmpty
+                ? Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 5),
+                        child: SectionTitle(
+                          title: 'Browse products',
+                          onTapIconButton: () => _navigateForMoreProducts(ctx),
+                        ),
+                      ),
+                      state.isFetching
+                          ? const _BrowseProductLoadingShimmer()
+                          : SizedBox(
+                              height: 300,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: state.materialList
+                                    .map((e) => _BrowseProductCard(product: e))
+                                    .toList(),
+                              ),
+                            ),
+                    ],
+                  )
+                : const SizedBox.shrink();
+          },
+        ),
       ),
     );
   }
-}
 
-class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MaterialListBloc, MaterialListState>(
-      buildWhen: (previous, current) =>
-          previous.materialList != current.materialList,
-      builder: (context, state) {
-        return state.isFetching || state.materialList.isNotEmpty
-            ? Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: SectionTitle(
-                      title: 'Browse products',
-                      onTapIconButton: () =>
-                          context.navigateTo(const ProductsTabRoute()),
-                    ),
-                  ),
-                  state.isFetching
-                      ? const _BrowseProductLoadingShimmer()
-                      : SizedBox(
-                          height: 300,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: state.materialList
-                                .map((e) => _BrowseProductCard(product: e))
-                                .toList(),
-                          ),
-                        ),
-                ],
-              )
-            : const SizedBox.shrink();
-      },
-    );
+  void _navigateForMoreProducts(BuildContext context) {
+    if (context.read<MaterialListBloc>().state.isFilterSelected) {
+      context.read<MaterialListBloc>().add(
+            MaterialListEvent.fetch(
+              salesOrganisation:
+                  context.read<EligibilityBloc>().state.salesOrganisation,
+              configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
+              customerCodeInfo:
+                  context.read<EligibilityBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+              selectedMaterialFilter: MaterialFilter.empty(),
+            ),
+          );
+    }
+    context.navigateTo(const ProductsTabRoute());
   }
 }
 
@@ -134,7 +143,7 @@ class _BrowseProductCard extends StatelessWidget {
           : MediaQuery.of(context).size.width * 0.5,
       child: MaterialGridItem(
         materialInfo: product,
-        onTap: () => _productOnTap(context, product), 
+        onTap: () => _productOnTap(context, product),
         onFavouriteTap: () {},
       ),
     );
