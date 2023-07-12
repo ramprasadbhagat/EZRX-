@@ -131,3 +131,4 @@ dart_code_metrics:
     - prefer-last
     - avoid-substring
     - prefer-first
+    - avoid-wrapping-in-padding
