@@ -42,17 +42,16 @@ class ProductImage extends StatelessWidget {
           ),
         );
       },
-      errorWidget: (context, url, error) {
-        return Container(
+      errorWidget: (context, url, error) =>
+          Container(
           color: ZPColors.extraLightGrey3,
           width: width,
           height: height,
-          child: SvgPicture.asset(
+            child: SvgPicture.asset(
             'assets/svg/product_default.svg',
             fit: BoxFit.contain,
           ),
-        );
-      },
+          ),
     );
   }
 }

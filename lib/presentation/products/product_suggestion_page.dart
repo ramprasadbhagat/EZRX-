@@ -248,6 +248,7 @@ class _SuggestedProductTile extends StatelessWidget {
             customerCodeInfo: eligibilityBlocState.customerCodeInfo,
             shipToInfo: eligibilityBlocState.shipToInfo,
             locale: context.locale,
+            type: product.type,
           ),
         );
     context.router.pushNamed('orders/material_details');

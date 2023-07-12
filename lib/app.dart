@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -267,6 +268,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ProductDetailBloc>(
           create: (context) => locator<ProductDetailBloc>(),
+        ),
+        BlocProvider<BundleAddToCartBloc>(
+          create: (context) => locator<BundleAddToCartBloc>(),
         ),
         BlocProvider<ViewByItemsBloc>(
           create: (context) => locator<ViewByItemsBloc>(),

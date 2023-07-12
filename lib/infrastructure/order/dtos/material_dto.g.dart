@@ -38,7 +38,15 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       remarks: fields[21] == null ? '' : fields[21] as String,
       genericMaterialName: fields[22] == null ? '' : fields[22] as String,
       ean: fields[23] == null ? '' : fields[23] as String,
-      bundles: fields[17] == null ? [] : (fields[17] as List).cast<BundleDto>(),
+      bundle: fields[39] == null
+          ? const BundleDto(
+              bonusEligible: false,
+              bundleCode: '',
+              bundleInformation: [],
+              bundleName: '',
+              conditions: '',
+              materials: [])
+          : fields[39] as BundleDto,
       code: fields[24] == null ? '' : fields[24] as String,
       name: fields[25] == null ? '' : fields[25] as String,
       principalCode: fields[27] == null ? '' : fields[27] as String,
@@ -54,15 +62,7 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       data: fields[38] == null
           ? []
           : (fields[38] as List).cast<MaterialDataDto>(),
-      bundle: fields[39] == null
-          ? const BundleDto(
-              bonusEligible: false,
-              bundleCode: '',
-              bundleInformation: [],
-              bundleName: '',
-              conditions: '',
-              materials: [])
-          : fields[39] as BundleDto,
+      bundles: fields[17] == null ? [] : (fields[17] as List).cast<BundleDto>(),
     );
   }
 
@@ -106,6 +106,8 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       ..write(obj.genericMaterialName)
       ..writeByte(23)
       ..write(obj.ean)
+      ..writeByte(39)
+      ..write(obj.bundle)
       ..writeByte(24)
       ..write(obj.code)
       ..writeByte(25)
@@ -130,14 +132,12 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       ..write(obj.dataTotalHidden)
       ..writeByte(37)
       ..write(obj.isGimmick)
-      ..writeByte(39)
-      ..write(obj.bundle)
       ..writeByte(16)
       ..write(obj.taxes)
-      ..writeByte(17)
-      ..write(obj.bundles)
       ..writeByte(38)
-      ..write(obj.data);
+      ..write(obj.data)
+      ..writeByte(17)
+      ..write(obj.bundles);
   }
 
   @override
@@ -233,10 +233,8 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       remarks: json['remarks'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       ean: json['ean'] as String? ?? '',
-      bundles: (json['bundles'] as List<dynamic>?)
-              ?.map((e) => BundleDto.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+      bundle: BundleDto.fromJson(
+          _nullCheck(json, 'BundleInformation') as Map<String, dynamic>),
       code: json['Code'] as String? ?? '',
       name: json['Name'] as String? ?? '',
       principalCode:
@@ -255,8 +253,10 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => MaterialDataDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      bundle: BundleDto.fromJson(
-          _nullCheck(json, 'BundleInformation') as Map<String, dynamic>),
+      bundles: (json['bundles'] as List<dynamic>?)
+              ?.map((e) => BundleDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -280,7 +280,7 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'remarks': instance.remarks,
       'genericMaterialName': instance.genericMaterialName,
       'ean': instance.ean,
-      'bundles': instance.bundles.map((e) => e.toJson()).toList(),
+      'BundleInformation': instance.bundle.toJson(),
       'Code': instance.code,
       'Name': instance.name,
       'PrincipalCode': instance.principalCode,
@@ -294,12 +294,12 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'DataTotalHidden': instance.dataTotalHidden,
       'IsGimmick': instance.isGimmick,
       'Data': instance.data.map((e) => e.toJson()).toList(),
-      'BundleInformation': instance.bundle.toJson(),
+      'bundles': instance.bundles.map((e) => e.toJson()).toList(),
     };
 
 _$_MaterialDataDto _$$_MaterialDataDtoFromJson(Map<String, dynamic> json) =>
     _$_MaterialDataDto(
-      code: json['Code'] as String? ?? '',
+      code: materialNumberReadValue(json, 'Code') as String? ?? '',
       manufactured: json['Manufactured'] as String? ?? '',
       materialDescription: json['MaterialDescription'] as String? ?? '',
       defaultMaterialDescription:

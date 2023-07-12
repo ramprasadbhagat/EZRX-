@@ -22,4 +22,5 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
         stockInfo: StockInfo.empty(),
       );
 
+  
 }

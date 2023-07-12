@@ -149,6 +149,7 @@ class _BrowseProductCard extends StatelessWidget {
             customerCodeInfo: eligibilityBlocState.customerCodeInfo,
             shipToInfo: eligibilityBlocState.shipToInfo,
             locale: context.locale,
+            type: materialInfo.type,
           ),
         );
     context.router.pushNamed('orders/material_details');

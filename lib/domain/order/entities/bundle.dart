@@ -34,6 +34,11 @@ class Bundle with _$Bundle {
           (a, b) => a.sequence.compareTo(b.sequence),
         );
 
+  BundleInfo get minimumQuantityBundleMaterial =>
+      sortedBundleInformation.isNotEmpty
+      ? sortedBundleInformation.first
+      : BundleInfo.empty();
+
   List<String> get bundleInfoMessage => sortedBundleInformation
       .map((e) =>
           '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}')

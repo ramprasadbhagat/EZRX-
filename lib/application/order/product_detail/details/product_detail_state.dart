@@ -17,7 +17,7 @@ class ProductDetailState with _$ProductDetailState {
       );
 
   StringValue get selectedImage {
-    final images = productDetailAggregate.materialInfo.productImages.image;
+    final images = productDetailAggregate.materialInfo.images;
 
     return images.isNotEmpty
         ? StringValue(images.elementAt(selectedImageIndex))

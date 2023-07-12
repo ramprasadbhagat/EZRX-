@@ -55,6 +55,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           materialNumber: e.materialNumber,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
+          type: e.type,
         );
         await failureOrSuccess.fold(
           (failure) async => emit(
@@ -72,6 +73,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             ),
           ),
         );
+        if (e.type.typeBundle) return;
         add(
           _FetchStock(
             materialNumber:
@@ -135,7 +137,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
         metaDataFailureOrSuccess.fold(
           (failure) => emit(
-            state.copyWith(isFetching: false),
+            state.copyWith(
+              isFetching: false,
+              failureOrSuccessOption: optionOf(metaDataFailureOrSuccess),
+            ),
           ),
           (productDetailAggregate) => emit(
             state.copyWith(

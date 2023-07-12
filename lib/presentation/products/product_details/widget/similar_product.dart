@@ -114,6 +114,7 @@ class _SimilarProductCard extends StatelessWidget {
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
             locale: context.locale,
+            type: materialInfo.type,
           ),
         );
     context.read<MaterialPriceBloc>().add(

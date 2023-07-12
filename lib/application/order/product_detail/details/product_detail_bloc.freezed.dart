@@ -24,7 +24,8 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -64,7 +65,8 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -101,7 +103,8 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -235,7 +238,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -278,7 +282,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -318,7 +323,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -420,7 +426,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      Locale locale});
+      Locale locale,
+      MaterialInfoType type});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -442,6 +449,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? locale = null,
+    Object? type = null,
   }) {
     return _then(_$_Fetch(
       materialNumber: null == materialNumber
@@ -464,6 +472,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MaterialInfoType,
     ));
   }
 
@@ -500,7 +512,8 @@ class _$_Fetch implements _Fetch {
       required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.locale});
+      required this.locale,
+      required this.type});
 
   @override
   final MaterialNumber materialNumber;
@@ -512,10 +525,12 @@ class _$_Fetch implements _Fetch {
   final ShipToInfo shipToInfo;
   @override
   final Locale locale;
+  @override
+  final MaterialInfoType type;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetch(materialNumber: $materialNumber, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, locale: $locale)';
+    return 'ProductDetailEvent.fetch(materialNumber: $materialNumber, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, locale: $locale, type: $type)';
   }
 
   @override
@@ -531,12 +546,13 @@ class _$_Fetch implements _Fetch {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, materialNumber,
-      salesOrganisation, customerCodeInfo, shipToInfo, locale);
+      salesOrganisation, customerCodeInfo, shipToInfo, locale, type);
 
   @JsonKey(ignore: true)
   @override
@@ -553,7 +569,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -585,7 +602,7 @@ class _$_Fetch implements _Fetch {
         deleteFavourite,
   }) {
     return fetch(materialNumber, salesOrganisation, customerCodeInfo,
-        shipToInfo, locale);
+        shipToInfo, locale, type);
   }
 
   @override
@@ -597,7 +614,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -626,7 +644,7 @@ class _$_Fetch implements _Fetch {
         deleteFavourite,
   }) {
     return fetch?.call(materialNumber, salesOrganisation, customerCodeInfo,
-        shipToInfo, locale);
+        shipToInfo, locale, type);
   }
 
   @override
@@ -638,7 +656,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -669,7 +688,7 @@ class _$_Fetch implements _Fetch {
   }) {
     if (fetch != null) {
       return fetch(materialNumber, salesOrganisation, customerCodeInfo,
-          shipToInfo, locale);
+          shipToInfo, locale, type);
     }
     return orElse();
   }
@@ -733,13 +752,15 @@ abstract class _Fetch implements ProductDetailEvent {
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final Locale locale}) = _$_Fetch;
+      required final Locale locale,
+      required final MaterialInfoType type}) = _$_Fetch;
 
   MaterialNumber get materialNumber;
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   Locale get locale;
+  MaterialInfoType get type;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -880,7 +901,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -924,7 +946,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -965,7 +988,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -1204,7 +1228,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -1248,7 +1273,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -1289,7 +1315,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -1473,7 +1500,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -1516,7 +1544,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -1556,7 +1585,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -1800,7 +1830,8 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -1844,7 +1875,8 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -1885,7 +1917,8 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -2062,7 +2095,8 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -2105,7 +2139,8 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -2145,7 +2180,8 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -2324,7 +2360,8 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -2367,7 +2404,8 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -2407,7 +2445,8 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,
@@ -2589,7 +2628,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            MaterialInfoType type)
         fetch,
     required TResult Function(
             SalesOrganisation salesOrganisation,
@@ -2632,7 +2672,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult? Function(
             SalesOrganisation salesOrganisation,
@@ -2672,7 +2713,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            MaterialInfoType type)?
         fetch,
     TResult Function(
             SalesOrganisation salesOrganisation,

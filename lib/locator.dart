@@ -26,6 +26,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
@@ -1017,6 +1018,8 @@ void setupLocator() {
       productDetailRemoteDataSource: locator<ProductDetailRemoteDataSource>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
+      materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
     ),
   );
 
@@ -1026,6 +1029,15 @@ void setupLocator() {
       productImagesRepository: locator<ProductImagesRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),
     ),
+  );
+
+  //============================================================
+  //  Bundle Add To Cart
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => BundleAddToCartBloc(),
   );
 
   //============================================================
@@ -2035,6 +2047,8 @@ void setupLocator() {
       repository: locator<MaterialListRepository>(),
     ),
   );
+
+  
 
   //============================================================
   //  Scan Material Information

@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -75,9 +74,9 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'ean', defaultValue: '')
     @HiveField(23, defaultValue: '')
         required String ean,
-    @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-    @HiveField(17, defaultValue: <BundleDto>[])
-        required List<BundleDto> bundles,
+    @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+    @HiveField(39, defaultValue: _emptyConstBundleDto)
+        required BundleDto bundle,
 
     // new field from v3
     @JsonKey(name: 'Code', defaultValue: '')
@@ -129,9 +128,9 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
     @HiveField(38, defaultValue: [])
         required List<MaterialDataDto> data,
-    @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
-    @HiveField(39, defaultValue: _emptyConstBundleDto)
-        required BundleDto bundle,
+    @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+    @HiveField(17, defaultValue: <BundleDto>[])
+        required List<BundleDto> bundles,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -257,7 +256,7 @@ class MaterialDataDto with _$MaterialDataDto {
   const MaterialDataDto._();
   @HiveType(typeId: 3, adapterName: 'MaterialDataDtoAdapter')
   factory MaterialDataDto({
-    @JsonKey(name: 'Code', defaultValue: '')
+    @JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
     @HiveField(1, defaultValue: '')
         required String code,
     @JsonKey(name: 'Manufactured', defaultValue: '')
@@ -290,7 +289,7 @@ class MaterialDataDto with _$MaterialDataDto {
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: governmentMaterialCode,
-        materialImageURL: StringValue(materialImageURL),
+        materialImageURL: materialImageURL,
       );
 
   factory MaterialDataDto.fromDomain(MaterialData materialData) =>
@@ -301,12 +300,15 @@ class MaterialDataDto with _$MaterialDataDto {
         defaultMaterialDescription: materialData.defaultMaterialDescription,
         genericMaterialName: materialData.genericMaterialName,
         governmentMaterialCode: materialData.governmentMaterialCode,
-        materialImageURL: materialData.materialImageURL.getOrDefaultValue(''),
+        materialImageURL: materialData.materialImageURL,
       );
 
   ProductImages toProductImage() =>
       ProductImages.empty().copyWith(thumbNail: materialImageURL);
 }
+
+String materialNumberReadValue(Map json, String key) =>
+    json[key] ?? json['MaterialCode'];
 
 @freezed
 class MaterialResponseDto with _$MaterialResponseDto {
@@ -325,6 +327,8 @@ class MaterialResponseDto with _$MaterialResponseDto {
         products: products.map((e) => e.toDomain()).toList(),
       );
 }
+
+
 
 const _emptyConstBundleDto = BundleDto(
   bonusEligible: false,

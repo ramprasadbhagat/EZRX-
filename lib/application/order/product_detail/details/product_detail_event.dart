@@ -9,6 +9,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
+    required MaterialInfoType type, 
   }) = _Fetch;
 
   factory ProductDetailEvent.fetchSimilarProduct({

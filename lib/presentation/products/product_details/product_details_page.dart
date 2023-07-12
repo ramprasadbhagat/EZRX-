@@ -15,9 +15,9 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_description.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
-import 'package:ezrxmobile/presentation/products/product_details/widget/product_image.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
+import 'package:ezrxmobile/presentation/products/widgets/product_image.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -323,38 +323,40 @@ class _FooterState extends State<_Footer> {
                         builder: (context, stateCart) {
                           return ElevatedButton(
                             onPressed: stateCart.isUpserting
-                                    ? null
-                                    : () {
-                                        context.read<CartBloc>().add(
-                                              CartEvent.upsertCart(
-                                                salesOrganisation: context
-                                                    .read<SalesOrgBloc>()
-                                                    .state
-                                                    .salesOrganisation,
-                                                customerCodeInfo: context
-                                                    .read<CustomerCodeBloc>()
-                                                    .state
-                                                    .customerCodeInfo,
-                                                shipToInfo: context
-                                                    .read<CustomerCodeBloc>()
-                                                    .state
-                                                    .shipToInfo,
-                                                cartProductNumber: stateDetail
-                                                    .productDetailAggregate
-                                                    .materialInfo
-                                                    .materialNumber,
-                                                quantity: stateCart.getQuantityOfProduct(
-                                                        productNumber: stateDetail
-                                                            .productDetailAggregate
-                                                            .materialInfo
-                                                            .materialNumber,) +
+                                ? null
+                                : () {
+                                    context.read<CartBloc>().add(
+                                          CartEvent.upsertCart(
+                                            salesOrganisation: context
+                                                .read<SalesOrgBloc>()
+                                                .state
+                                                .salesOrganisation,
+                                            customerCodeInfo: context
+                                                .read<CustomerCodeBloc>()
+                                                .state
+                                                .customerCodeInfo,
+                                            shipToInfo: context
+                                                .read<CustomerCodeBloc>()
+                                                .state
+                                                .shipToInfo,
+                                            cartProductNumber: stateDetail
+                                                .productDetailAggregate
+                                                .materialInfo
+                                                .materialNumber,
+                                            quantity:
+                                                stateCart.getQuantityOfProduct(
+                                                      productNumber: stateDetail
+                                                          .productDetailAggregate
+                                                          .materialInfo
+                                                          .materialNumber,
+                                                    ) +
                                                     int.parse(
                                                       _quantityEditingController
                                                           .text,
                                                     ),
-                                              ),
-                                            );
-                                      },
+                                          ),
+                                        );
+                                  },
                             child: LoadingShimmer.withChild(
                               enabled: stateCart.isUpserting,
                               child: const Text('Add To Cart').tr(),

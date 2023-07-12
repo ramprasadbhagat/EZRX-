@@ -108,7 +108,7 @@ import '../payments/payment_summary/payment_summary.dart' as _i36;
 import '../payments/payment_summary_details/payment_summary_details_screen.dart'
     as _i37;
 import '../payments/payments_tab.dart' as _i31;
-import '../products/bundle_detail_page.dart' as _i61;
+import '../products/bundle_details/bundle_detail_page.dart' as _i61;
 import '../products/product_details/product_details_page.dart' as _i62;
 import '../products/product_suggestion_page.dart' as _i30;
 import '../products/products_tab.dart' as _i67;

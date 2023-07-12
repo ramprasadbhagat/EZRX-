@@ -31,10 +31,11 @@ mixin _$MaterialInfo {
   List<StockInfo> get stockInfos => throw _privateConstructorUsedError;
   Bundle get bundle => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
-  CountryData get countryData =>
-      throw _privateConstructorUsedError; //TODO: remove field from v2
+  CountryData get countryData => throw _privateConstructorUsedError;
+  int get quantity => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
-  String get governmentMaterialCode => throw _privateConstructorUsedError;
+  String get governmentMaterialCode =>
+      throw _privateConstructorUsedError; //TODO: remove field from v2
   String get therapeuticClass => throw _privateConstructorUsedError;
   String get itemBrand => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
@@ -49,7 +50,6 @@ mixin _$MaterialInfo {
   List<String> get taxes => throw _privateConstructorUsedError;
   List<Bundle> get bundles => throw _privateConstructorUsedError;
   bool get isFOCMaterial => throw _privateConstructorUsedError;
-  int get quantity => throw _privateConstructorUsedError;
   String get remarks => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
   String get ean => throw _privateConstructorUsedError;
@@ -82,6 +82,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       Bundle bundle,
       ProductImages productImages,
       CountryData countryData,
+      int quantity,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
@@ -97,7 +98,6 @@ abstract class $MaterialInfoCopyWith<$Res> {
       List<String> taxes,
       List<Bundle> bundles,
       bool isFOCMaterial,
-      int quantity,
       String remarks,
       String genericMaterialName,
       String ean});
@@ -137,6 +137,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? bundle = null,
     Object? productImages = null,
     Object? countryData = null,
+    Object? quantity = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
@@ -152,7 +153,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? taxes = null,
     Object? bundles = null,
     Object? isFOCMaterial = null,
-    Object? quantity = null,
     Object? remarks = null,
     Object? genericMaterialName = null,
     Object? ean = null,
@@ -222,6 +222,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.countryData
           : countryData // ignore: cast_nullable_to_non_nullable
               as CountryData,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -282,10 +286,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.isFOCMaterial
           : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -359,6 +359,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       Bundle bundle,
       ProductImages productImages,
       CountryData countryData,
+      int quantity,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
@@ -374,7 +375,6 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       List<String> taxes,
       List<Bundle> bundles,
       bool isFOCMaterial,
-      int quantity,
       String remarks,
       String genericMaterialName,
       String ean});
@@ -416,6 +416,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? bundle = null,
     Object? productImages = null,
     Object? countryData = null,
+    Object? quantity = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
     Object? therapeuticClass = null,
@@ -431,7 +432,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? taxes = null,
     Object? bundles = null,
     Object? isFOCMaterial = null,
-    Object? quantity = null,
     Object? remarks = null,
     Object? genericMaterialName = null,
     Object? ean = null,
@@ -501,6 +501,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.countryData
           : countryData // ignore: cast_nullable_to_non_nullable
               as CountryData,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -561,10 +565,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.isFOCMaterial
           : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -601,6 +601,7 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.bundle,
       required this.productImages,
       required this.countryData,
+      required this.quantity,
       required this.defaultMaterialDescription,
       required this.governmentMaterialCode,
       required this.therapeuticClass,
@@ -616,7 +617,6 @@ class _$_MaterialInfo extends _MaterialInfo {
       required final List<String> taxes,
       required final List<Bundle> bundles,
       required this.isFOCMaterial,
-      required this.quantity,
       required this.remarks,
       required this.genericMaterialName,
       required this.ean})
@@ -670,11 +670,13 @@ class _$_MaterialInfo extends _MaterialInfo {
   final ProductImages productImages;
   @override
   final CountryData countryData;
-//TODO: remove field from v2
+  @override
+  final int quantity;
   @override
   final String defaultMaterialDescription;
   @override
   final String governmentMaterialCode;
+//TODO: remove field from v2
   @override
   final String therapeuticClass;
   @override
@@ -714,8 +716,6 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final bool isFOCMaterial;
   @override
-  final int quantity;
-  @override
   final String remarks;
   @override
   final String genericMaterialName;
@@ -724,7 +724,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
   }
 
   @override
@@ -760,6 +760,8 @@ class _$_MaterialInfo extends _MaterialInfo {
                 other.productImages == productImages) &&
             (identical(other.countryData, countryData) ||
                 other.countryData == countryData) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
             (identical(other.defaultMaterialDescription,
                     defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
@@ -792,8 +794,6 @@ class _$_MaterialInfo extends _MaterialInfo {
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.isFOCMaterial, isFOCMaterial) ||
                 other.isFOCMaterial == isFOCMaterial) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
@@ -819,6 +819,7 @@ class _$_MaterialInfo extends _MaterialInfo {
         bundle,
         productImages,
         countryData,
+        quantity,
         defaultMaterialDescription,
         governmentMaterialCode,
         therapeuticClass,
@@ -834,7 +835,6 @@ class _$_MaterialInfo extends _MaterialInfo {
         const DeepCollectionEquality().hash(_taxes),
         const DeepCollectionEquality().hash(_bundles),
         isFOCMaterial,
-        quantity,
         remarks,
         genericMaterialName,
         ean
@@ -865,6 +865,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final Bundle bundle,
       required final ProductImages productImages,
       required final CountryData countryData,
+      required final int quantity,
       required final String defaultMaterialDescription,
       required final String governmentMaterialCode,
       required final String therapeuticClass,
@@ -880,7 +881,6 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final List<String> taxes,
       required final List<Bundle> bundles,
       required final bool isFOCMaterial,
-      required final int quantity,
       required final String remarks,
       required final String genericMaterialName,
       required final String ean}) = _$_MaterialInfo;
@@ -918,11 +918,13 @@ abstract class _MaterialInfo extends MaterialInfo {
   ProductImages get productImages;
   @override
   CountryData get countryData;
-  @override //TODO: remove field from v2
+  @override
+  int get quantity;
+  @override
   String get defaultMaterialDescription;
   @override
   String get governmentMaterialCode;
-  @override
+  @override //TODO: remove field from v2
   String get therapeuticClass;
   @override
   String get itemBrand;
@@ -949,8 +951,6 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   bool get isFOCMaterial;
   @override
-  int get quantity;
-  @override
   String get remarks;
   @override
   String get genericMaterialName;
@@ -969,7 +969,7 @@ mixin _$MaterialData {
   String get materialDescription => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
-  StringValue get materialImageURL => throw _privateConstructorUsedError;
+  String get materialImageURL => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -989,7 +989,7 @@ abstract class $MaterialDataCopyWith<$Res> {
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      StringValue materialImageURL,
+      String materialImageURL,
       String governmentMaterialCode});
 }
 
@@ -1038,7 +1038,7 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
       materialImageURL: null == materialImageURL
           ? _value.materialImageURL
           : materialImageURL // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -1061,7 +1061,7 @@ abstract class _$$_MaterialDataCopyWith<$Res>
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      StringValue materialImageURL,
+      String materialImageURL,
       String governmentMaterialCode});
 }
 
@@ -1108,7 +1108,7 @@ class __$$_MaterialDataCopyWithImpl<$Res>
       materialImageURL: null == materialImageURL
           ? _value.materialImageURL
           : materialImageURL // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -1141,7 +1141,7 @@ class _$_MaterialData extends _MaterialData {
   @override
   final String genericMaterialName;
   @override
-  final StringValue materialImageURL;
+  final String materialImageURL;
   @override
   final String governmentMaterialCode;
 
@@ -1197,7 +1197,7 @@ abstract class _MaterialData extends MaterialData {
       required final String materialDescription,
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
-      required final StringValue materialImageURL,
+      required final String materialImageURL,
       required final String governmentMaterialCode}) = _$_MaterialData;
   _MaterialData._() : super._();
 
@@ -1212,7 +1212,7 @@ abstract class _MaterialData extends MaterialData {
   @override
   String get genericMaterialName;
   @override
-  StringValue get materialImageURL;
+  String get materialImageURL;
   @override
   String get governmentMaterialCode;
   @override

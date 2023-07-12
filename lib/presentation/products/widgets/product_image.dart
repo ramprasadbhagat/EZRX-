@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,8 +51,8 @@ class _ProductImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.productDetailAggregate.materialInfo.productImages !=
-              current.productDetailAggregate.materialInfo.productImages ||
+          previous.productDetailAggregate.materialInfo.images !=
+              current.productDetailAggregate.materialInfo.images ||
           previous.selectedImage != current.selectedImage,
       builder: (context, state) {
         final images = context
@@ -59,8 +60,8 @@ class _ProductImages extends StatelessWidget {
             .state
             .productDetailAggregate
             .materialInfo
-            .productImages
-            .image;
+            .images;
+
         if (images.isEmpty) return const SizedBox.shrink();
 
         return Container(
@@ -71,28 +72,32 @@ class _ProductImages extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: images.length,
             itemBuilder: (context, index) {
+              final isSelected =
+                  context.read<ProductDetailBloc>().state.selectedImageIndex ==
+                      index;
+
               return GestureDetector(
                 onTap: () => context.read<ProductDetailBloc>().add(
                       ProductDetailEvent.changeImage(index),
                     ),
                 child: Container(
-                  decoration: context
-                              .read<ProductDetailBloc>()
-                              .state
-                              .selectedImageIndex ==
-                          index
-                      ? BoxDecoration(
-                          border: Border.all(
-                            color: ZPColors.secondaryMustard,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        )
-                      : null,
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: isSelected
+                          ? ZPColors.secondaryMustard
+                          : ZPColors.extraLightGrey3,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
                   child: ProductImage(
                     imageUrl: images.elementAt(index),
                     height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.width * 0.1,
+                    width: Responsive.isLargerThan(context, Breakpoint.desktop)
+                        ? MediaQuery.of(context).size.width * 0.08
+                        : MediaQuery.of(context).size.width * 0.1,
+                    fit: BoxFit.fill,
                   ),
                 ),
               );
@@ -111,17 +116,16 @@ class _ImageCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.productDetailAggregate.materialInfo.productImages !=
-              current.productDetailAggregate.materialInfo.productImages ||
-          previous.selectedImage != current.selectedImage,
+          previous.productDetailAggregate.materialInfo.images !=
+              current.productDetailAggregate.materialInfo.images ||
+          previous.selectedImageIndex != current.selectedImageIndex,
       builder: (context, state) {
         final images = context
             .read<ProductDetailBloc>()
             .state
             .productDetailAggregate
             .materialInfo
-            .productImages
-            .image;
+            .images;
 
         if (images.isEmpty) return const SizedBox.shrink();
 
