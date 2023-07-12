@@ -110,11 +110,6 @@ class _SearchAndFilterState extends State<SearchAndFilter> {
                       .countryListSelected !=
                   value.countryListSelected) {
             context.read<MaterialListBloc>().add(
-                  MaterialListEvent.updateSelectedMaterialFilter(
-                    selectedMaterialFilter: value,
-                  ),
-                );
-            context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,

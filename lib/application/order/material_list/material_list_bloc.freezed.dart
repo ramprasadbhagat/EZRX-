@@ -31,13 +31,10 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,13 +52,10 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,13 +73,10 @@ mixin _$MaterialListEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -97,8 +88,6 @@ mixin _$MaterialListEvent {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,8 +98,6 @@ mixin _$MaterialListEvent {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -121,8 +108,6 @@ mixin _$MaterialListEvent {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -197,13 +182,10 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) {
     return initialized();
   }
@@ -224,13 +206,10 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) {
     return initialized?.call();
   }
@@ -251,13 +230,10 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -275,8 +251,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) {
     return initialized(this);
   }
@@ -290,8 +264,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) {
     return initialized?.call(this);
   }
@@ -305,8 +277,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -489,13 +459,10 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) {
     return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
         selectedMaterialFilter);
@@ -517,13 +484,10 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) {
     return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
         selectedMaterialFilter);
@@ -545,13 +509,10 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -570,8 +531,6 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) {
     return fetch(this);
   }
@@ -585,8 +544,6 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) {
     return fetch?.call(this);
   }
@@ -600,8 +557,6 @@ class _$_Fetch implements _Fetch {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -707,13 +662,10 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) {
     return updateSearchKey(searchKey);
   }
@@ -734,13 +686,10 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) {
     return updateSearchKey?.call(searchKey);
   }
@@ -761,13 +710,10 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -785,8 +731,6 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) {
     return updateSearchKey(this);
   }
@@ -800,8 +744,6 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -815,8 +757,6 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -846,14 +786,12 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      MaterialFilter selectedMaterialFilter});
+      ShipToInfo shipToInfo});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
 }
 
 /// @nodoc
@@ -871,7 +809,6 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
-    Object? selectedMaterialFilter = null,
   }) {
     return _then(_$_LoadMore(
       salesOrganisation: null == salesOrganisation
@@ -890,10 +827,6 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      selectedMaterialFilter: null == selectedMaterialFilter
-          ? _value.selectedMaterialFilter
-          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
-              as MaterialFilter,
     ));
   }
 
@@ -928,15 +861,6 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
-    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
-        (value) {
-      return _then(_value.copyWith(selectedMaterialFilter: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -946,8 +870,7 @@ class _$_LoadMore implements _LoadMore {
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.selectedMaterialFilter});
+      required this.shipToInfo});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -957,12 +880,10 @@ class _$_LoadMore implements _LoadMore {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
-  @override
-  final MaterialFilter selectedMaterialFilter;
 
   @override
   String toString() {
-    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter)';
+    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -976,14 +897,12 @@ class _$_LoadMore implements _LoadMore {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
-                other.selectedMaterialFilter == selectedMaterialFilter));
+                other.shipToInfo == shipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
-      customerCodeInfo, shipToInfo, selectedMaterialFilter);
+  int get hashCode => Object.hash(
+      runtimeType, salesOrganisation, configs, customerCodeInfo, shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -1007,16 +926,12 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) {
-    return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-        selectedMaterialFilter);
+    return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo);
   }
 
   @override
@@ -1035,16 +950,13 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) {
-    return loadMore?.call(salesOrganisation, configs, customerCodeInfo,
-        shipToInfo, selectedMaterialFilter);
+    return loadMore?.call(
+        salesOrganisation, configs, customerCodeInfo, shipToInfo);
   }
 
   @override
@@ -1063,18 +975,14 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-          selectedMaterialFilter);
+      return loadMore(salesOrganisation, configs, customerCodeInfo, shipToInfo);
     }
     return orElse();
   }
@@ -1088,8 +996,6 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) {
     return loadMore(this);
   }
@@ -1103,8 +1009,6 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) {
     return loadMore?.call(this);
   }
@@ -1118,8 +1022,6 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -1134,14 +1036,12 @@ abstract class _LoadMore implements MaterialListEvent {
       {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final MaterialFilter selectedMaterialFilter}) = _$_LoadMore;
+      required final ShipToInfo shipToInfo}) = _$_LoadMore;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
-  MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1234,13 +1134,10 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) {
     return addFavourite(item);
   }
@@ -1261,13 +1158,10 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) {
     return addFavourite?.call(item);
   }
@@ -1288,13 +1182,10 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -1312,8 +1203,6 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) {
     return addFavourite(this);
   }
@@ -1327,8 +1216,6 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) {
     return addFavourite?.call(this);
   }
@@ -1342,8 +1229,6 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -1449,13 +1334,10 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
+            ShipToInfo shipToInfo)
         loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
   }) {
     return deleteFavourite(item);
   }
@@ -1476,13 +1358,10 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
   }) {
     return deleteFavourite?.call(item);
   }
@@ -1503,13 +1382,10 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
+            ShipToInfo shipToInfo)?
         loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -1527,8 +1403,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
   }) {
     return deleteFavourite(this);
   }
@@ -1542,8 +1416,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
   }) {
     return deleteFavourite?.call(this);
   }
@@ -1557,8 +1429,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -1576,229 +1446,6 @@ abstract class _DeleteFavourite implements MaterialListEvent {
   @JsonKey(ignore: true)
   _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_updateSelectedMaterialFilterCopyWith<$Res> {
-  factory _$$_updateSelectedMaterialFilterCopyWith(
-          _$_updateSelectedMaterialFilter value,
-          $Res Function(_$_updateSelectedMaterialFilter) then) =
-      __$$_updateSelectedMaterialFilterCopyWithImpl<$Res>;
-  @useResult
-  $Res call({MaterialFilter selectedMaterialFilter});
-
-  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
-}
-
-/// @nodoc
-class __$$_updateSelectedMaterialFilterCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res,
-        _$_updateSelectedMaterialFilter>
-    implements _$$_updateSelectedMaterialFilterCopyWith<$Res> {
-  __$$_updateSelectedMaterialFilterCopyWithImpl(
-      _$_updateSelectedMaterialFilter _value,
-      $Res Function(_$_updateSelectedMaterialFilter) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedMaterialFilter = null,
-  }) {
-    return _then(_$_updateSelectedMaterialFilter(
-      selectedMaterialFilter: null == selectedMaterialFilter
-          ? _value.selectedMaterialFilter
-          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
-              as MaterialFilter,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
-    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
-        (value) {
-      return _then(_value.copyWith(selectedMaterialFilter: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
-  _$_updateSelectedMaterialFilter({required this.selectedMaterialFilter});
-
-  @override
-  final MaterialFilter selectedMaterialFilter;
-
-  @override
-  String toString() {
-    return 'MaterialListEvent.updateSelectedMaterialFilter(selectedMaterialFilter: $selectedMaterialFilter)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_updateSelectedMaterialFilter &&
-            (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
-                other.selectedMaterialFilter == selectedMaterialFilter));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, selectedMaterialFilter);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_updateSelectedMaterialFilterCopyWith<_$_updateSelectedMaterialFilter>
-      get copyWith => __$$_updateSelectedMaterialFilterCopyWithImpl<
-          _$_updateSelectedMaterialFilter>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
-        fetch,
-    required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)
-        loadMore,
-    required TResult Function(MaterialInfo item) addFavourite,
-    required TResult Function(MaterialInfo item) deleteFavourite,
-    required TResult Function(MaterialFilter selectedMaterialFilter)
-        updateSelectedMaterialFilter,
-  }) {
-    return updateSelectedMaterialFilter(selectedMaterialFilter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
-        fetch,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
-        loadMore,
-    TResult? Function(MaterialInfo item)? addFavourite,
-    TResult? Function(MaterialInfo item)? deleteFavourite,
-    TResult? Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
-  }) {
-    return updateSelectedMaterialFilter?.call(selectedMaterialFilter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
-        fetch,
-    TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter)?
-        loadMore,
-    TResult Function(MaterialInfo item)? addFavourite,
-    TResult Function(MaterialInfo item)? deleteFavourite,
-    TResult Function(MaterialFilter selectedMaterialFilter)?
-        updateSelectedMaterialFilter,
-    required TResult orElse(),
-  }) {
-    if (updateSelectedMaterialFilter != null) {
-      return updateSelectedMaterialFilter(selectedMaterialFilter);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateSearchKey value) updateSearchKey,
-    required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_AddFavourite value) addFavourite,
-    required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_updateSelectedMaterialFilter value)
-        updateSelectedMaterialFilter,
-  }) {
-    return updateSelectedMaterialFilter(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_AddFavourite value)? addFavourite,
-    TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
-  }) {
-    return updateSelectedMaterialFilter?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_AddFavourite value)? addFavourite,
-    TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_updateSelectedMaterialFilter value)?
-        updateSelectedMaterialFilter,
-    required TResult orElse(),
-  }) {
-    if (updateSelectedMaterialFilter != null) {
-      return updateSelectedMaterialFilter(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _updateSelectedMaterialFilter implements MaterialListEvent {
-  factory _updateSelectedMaterialFilter(
-          {required final MaterialFilter selectedMaterialFilter}) =
-      _$_updateSelectedMaterialFilter;
-
-  MaterialFilter get selectedMaterialFilter;
-  @JsonKey(ignore: true)
-  _$$_updateSelectedMaterialFilterCopyWith<_$_updateSelectedMaterialFilter>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

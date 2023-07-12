@@ -19,7 +19,6 @@ class MaterialListEvent with _$MaterialListEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required MaterialFilter selectedMaterialFilter,
   }) = _LoadMore;
 
   factory MaterialListEvent.addFavourite({
@@ -29,8 +28,4 @@ class MaterialListEvent with _$MaterialListEvent {
   factory MaterialListEvent.deleteFavourite({
     required MaterialInfo item,
   }) = _DeleteFavourite;
-
-  factory MaterialListEvent.updateSelectedMaterialFilter({
-    required MaterialFilter selectedMaterialFilter,
-  }) = _updateSelectedMaterialFilter;
 }

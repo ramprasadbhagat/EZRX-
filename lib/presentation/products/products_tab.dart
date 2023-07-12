@@ -134,8 +134,6 @@ class ProductsTab extends StatelessWidget {
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter:
-                context.read<MaterialFilterBloc>().state.materialFilter,
           ),
         );
   }

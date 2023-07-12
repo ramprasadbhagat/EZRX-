@@ -47,6 +47,16 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             nextPageIndex: 0,
             apiFailureOrSuccessOption: none(),
             isScanFromBarcode: false,
+            selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
+              isFavourite: e.selectedMaterialFilter.isFavourite,
+              bundleOffers: e.selectedMaterialFilter.bundleOffers,
+              sortBy: e.selectedMaterialFilter.sortBy,
+              countryListSelected:
+              e.selectedMaterialFilter.countryListSelected,
+              brandList: e.selectedMaterialFilter.brandList,
+              manufactureListSelected:
+              e.selectedMaterialFilter.manufactureListSelected,
+            ),
           ),
         );
         final failureOrSuccess = await materialListRepository.getMaterialList(
@@ -74,16 +84,6 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 isFetching: false,
                 canLoadMore: productResponse.products.length >= _pageSize,
                 nextPageIndex: 1,
-                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                  isFavourite: e.selectedMaterialFilter.isFavourite,
-                  bundleOffers: e.selectedMaterialFilter.bundleOffers,
-                  sortBy: e.selectedMaterialFilter.sortBy,
-                  countryListSelected:
-                      e.selectedMaterialFilter.countryListSelected,
-                  brandList: e.selectedMaterialFilter.brandList,
-                  manufactureListSelected:
-                      e.selectedMaterialFilter.manufactureListSelected,
-                ),
               ),
             );
           },
@@ -106,7 +106,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         shipToInfo: e.shipToInfo,
         pageSize: _pageSize,
         offset: state.materialList.length,
-        selectedMaterialFilter: e.selectedMaterialFilter,
+        selectedMaterialFilter: state.selectedMaterialFilter,
       );
       failureOrSuccess.fold(
         (failure) => emit(
@@ -126,7 +126,6 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               isFetching: false,
               canLoadMore: productList.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
-              selectedMaterialFilter: e.selectedMaterialFilter,
             ),
           );
         },
@@ -184,21 +183,6 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         );
       }),
     );
-    on<_updateSelectedMaterialFilter>((e, emit) {
-      emit(
-        state.copyWith(
-          selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-            isFavourite: e.selectedMaterialFilter.isFavourite,
-            bundleOffers: e.selectedMaterialFilter.bundleOffers,
-            sortBy: e.selectedMaterialFilter.sortBy,
-            countryListSelected: e.selectedMaterialFilter.countryListSelected,
-            brandList: e.selectedMaterialFilter.brandList,
-            manufactureListSelected:
-                e.selectedMaterialFilter.manufactureListSelected,
-          ),
-        ),
-      );
-    });
   }
 
   @override
