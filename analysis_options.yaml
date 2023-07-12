@@ -136,3 +136,4 @@ dart_code_metrics:
     - avoid-redundant-async
     - check-for-equals-in-render-object-setters
     - consistent-update-render-object
+    - use-setstate-synchronously

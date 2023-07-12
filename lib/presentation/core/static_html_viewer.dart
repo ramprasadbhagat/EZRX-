@@ -69,9 +69,11 @@ class StaticHtmlViewerState extends State<StaticHtmlViewer> {
                     source: widget.styleCss,
                   );
                 }
-                setState(() {
-                  isLoading = false;
-                });
+                if (mounted) {
+                  setState(() {
+                    isLoading = false;
+                  });
+                }
               },
             ),
             isLoading
