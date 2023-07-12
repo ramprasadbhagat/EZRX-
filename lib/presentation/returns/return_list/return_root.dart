@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -80,12 +81,15 @@ class ReturnRoot extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: SearchBar(
-                            onSearchChanged: (String value) {},
-                            clearIconKey: WidgetKeys.clearIconKey,
-                            controller: TextEditingController(),
-                            onClear: () {},
-                          ),
+                          child: context.tabsRouter.current.name ==
+                                  ReturnByItemPageRoute.name
+                              ? SearchBar(
+                                  onSearchChanged: (String value) {},
+                                  clearIconKey: WidgetKeys.clearIconKey,
+                                  controller: TextEditingController(),
+                                  onClear: () {},
+                                )
+                              : const _ListByRequestSearchBar(),
                         ),
                         _Filter(
                           viewByItem: context.tabsRouter.current.name ==
@@ -248,8 +252,94 @@ class _FilterTuneIcon extends StatelessWidget {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: context.read<UserBloc>().state.user,
               appliedFilter: filter,
+              searchKey: SearchKey(''),
             ),
           );
     }
+  }
+}
+
+class _ListByRequestSearchBar extends StatefulWidget {
+  const _ListByRequestSearchBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_ListByRequestSearchBar> createState() =>
+      _ListByRequestSearchBarState();
+}
+
+class _ListByRequestSearchBarState extends State<_ListByRequestSearchBar> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _search({
+    required BuildContext context,
+    required String searchKey,
+  }) {
+    final searchFilter =
+        context.read<ReturnListByRequestBloc>().state.searchKey;
+    final key = SearchKey(searchKey);
+    if (searchFilter == key) return;
+
+    context.read<ReturnListByRequestBloc>().add(
+          ReturnListByRequestEvent.fetch(
+            salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            appliedFilter:
+                context.read<ReturnListByRequestBloc>().state.appliedFilter,
+            searchKey: key,
+          ),
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<ReturnListByRequestBloc, ReturnListByRequestState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      listenWhen: (previous, current) =>
+          previous.searchKey != current.searchKey,
+      listener: (context, state) {
+        final searchText = state.searchKey.getValue();
+        controller.value = TextEditingValue(
+          text: searchText,
+          selection: TextSelection.collapsed(
+            offset: controller.selection.base.offset,
+          ),
+        );
+      },
+      builder: (context, state) {
+        return SearchBar(
+          controller: controller,
+          enabled: !state.isFetching,
+          onSearchChanged: (value) {},
+          isAutoSearch: false,
+          onSearchSubmitted: (value) => _search(
+            context: context,
+            searchKey: value,
+          ),
+          clearIconKey: WidgetKeys.clearIconKey,
+          customValidator: () => SearchKey.search(controller.text).isValid(),
+          onClear: () {
+            if (controller.text.isEmpty) return;
+            controller.clear();
+            _search(
+              context: context,
+              searchKey: controller.text,
+            );
+          },
+          border: InputBorder.none,
+        );
+      },
+    );
   }
 }

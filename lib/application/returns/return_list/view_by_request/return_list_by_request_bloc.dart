@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
@@ -39,6 +40,7 @@ class ReturnListByRequestBloc
             returnItemList: <ReturnItem>[],
             isFetching: true,
             appliedFilter: e.appliedFilter,
+            searchKey: e.searchKey,
           ),
         );
 
@@ -51,6 +53,7 @@ class ReturnListByRequestBloc
           pageSize: _pageSize,
           offset: 0,
           appliedFilter: e.appliedFilter,
+          searchKey: e.searchKey,
         );
 
         failureOrSuccess.fold(
@@ -92,6 +95,7 @@ class ReturnListByRequestBloc
           pageSize: _pageSize,
           offset: state.returnItemList.length,
           appliedFilter: state.appliedFilter,
+          searchKey: state.searchKey,
         );
 
         failureOrSuccess.fold(

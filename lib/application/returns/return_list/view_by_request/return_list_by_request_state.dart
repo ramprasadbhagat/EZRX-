@@ -9,6 +9,7 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
     required bool isFetching,
     required bool canLoadMore,
     required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _ReturnListByRequestState;
 
   factory ReturnListByRequestState.initial() => ReturnListByRequestState(
@@ -17,5 +18,6 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
         appliedFilter: ReturnFilter.empty(),
+        searchKey: SearchKey(''),
       );
 }

@@ -24,7 +24,8 @@ mixin _$ReturnListByRequestEvent {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
@@ -39,7 +40,8 @@ mixin _$ReturnListByRequestEvent {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -54,7 +56,8 @@ mixin _$ReturnListByRequestEvent {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -149,7 +152,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
@@ -167,7 +171,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -185,7 +190,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -247,7 +253,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       ShipToInfo shipInfo,
       CustomerCodeInfo customerCodeInfo,
       User user,
-      ReturnFilter appliedFilter});
+      ReturnFilter appliedFilter,
+      SearchKey searchKey});
 
   $ShipToInfoCopyWith<$Res> get shipInfo;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -270,6 +277,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? user = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_Fetch(
       salesOrg: null == salesOrg
@@ -292,6 +300,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as ReturnFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 
@@ -336,7 +348,8 @@ class _$_Fetch implements _Fetch {
       required this.shipInfo,
       required this.customerCodeInfo,
       required this.user,
-      required this.appliedFilter});
+      required this.appliedFilter,
+      required this.searchKey});
 
   @override
   final SalesOrg salesOrg;
@@ -348,10 +361,12 @@ class _$_Fetch implements _Fetch {
   final User user;
   @override
   final ReturnFilter appliedFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'ReturnListByRequestEvent.fetch(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user, appliedFilter: $appliedFilter)';
+    return 'ReturnListByRequestEvent.fetch(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -367,12 +382,14 @@ class _$_Fetch implements _Fetch {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter));
+                other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrg, shipInfo, customerCodeInfo, user, appliedFilter);
+  int get hashCode => Object.hash(runtimeType, salesOrg, shipInfo,
+      customerCodeInfo, user, appliedFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -389,13 +406,15 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
   }) {
-    return fetch(salesOrg, shipInfo, customerCodeInfo, user, appliedFilter);
+    return fetch(
+        salesOrg, shipInfo, customerCodeInfo, user, appliedFilter, searchKey);
   }
 
   @override
@@ -407,14 +426,15 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
   }) {
     return fetch?.call(
-        salesOrg, shipInfo, customerCodeInfo, user, appliedFilter);
+        salesOrg, shipInfo, customerCodeInfo, user, appliedFilter, searchKey);
   }
 
   @override
@@ -426,7 +446,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -434,7 +455,8 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrg, shipInfo, customerCodeInfo, user, appliedFilter);
+      return fetch(
+          salesOrg, shipInfo, customerCodeInfo, user, appliedFilter, searchKey);
     }
     return orElse();
   }
@@ -480,13 +502,15 @@ abstract class _Fetch implements ReturnListByRequestEvent {
       required final ShipToInfo shipInfo,
       required final CustomerCodeInfo customerCodeInfo,
       required final User user,
-      required final ReturnFilter appliedFilter}) = _$_Fetch;
+      required final ReturnFilter appliedFilter,
+      required final SearchKey searchKey}) = _$_Fetch;
 
   SalesOrg get salesOrg;
   ShipToInfo get shipInfo;
   CustomerCodeInfo get customerCodeInfo;
   User get user;
   ReturnFilter get appliedFilter;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -626,7 +650,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
@@ -644,7 +669,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -662,7 +688,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo,
             User user,
-            ReturnFilter appliedFilter)?
+            ReturnFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
@@ -734,6 +761,7 @@ mixin _$ReturnListByRequestState {
   bool get isFetching => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   ReturnFilter get appliedFilter => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnListByRequestStateCopyWith<ReturnListByRequestState> get copyWith =>
@@ -751,7 +779,8 @@ abstract class $ReturnListByRequestStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isFetching,
       bool canLoadMore,
-      ReturnFilter appliedFilter});
+      ReturnFilter appliedFilter,
+      SearchKey searchKey});
 
   $ReturnFilterCopyWith<$Res> get appliedFilter;
 }
@@ -775,6 +804,7 @@ class _$ReturnListByRequestStateCopyWithImpl<$Res,
     Object? isFetching = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       returnItemList: null == returnItemList
@@ -797,6 +827,10 @@ class _$ReturnListByRequestStateCopyWithImpl<$Res,
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as ReturnFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 
@@ -823,7 +857,8 @@ abstract class _$$_ReturnListByRequestStateCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isFetching,
       bool canLoadMore,
-      ReturnFilter appliedFilter});
+      ReturnFilter appliedFilter,
+      SearchKey searchKey});
 
   @override
   $ReturnFilterCopyWith<$Res> get appliedFilter;
@@ -846,6 +881,7 @@ class __$$_ReturnListByRequestStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_ReturnListByRequestState(
       returnItemList: null == returnItemList
@@ -868,6 +904,10 @@ class __$$_ReturnListByRequestStateCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as ReturnFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -880,7 +920,8 @@ class _$_ReturnListByRequestState extends _ReturnListByRequestState {
       required this.failureOrSuccessOption,
       required this.isFetching,
       required this.canLoadMore,
-      required this.appliedFilter})
+      required this.appliedFilter,
+      required this.searchKey})
       : _returnItemList = returnItemList,
         super._();
 
@@ -900,10 +941,12 @@ class _$_ReturnListByRequestState extends _ReturnListByRequestState {
   final bool canLoadMore;
   @override
   final ReturnFilter appliedFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'ReturnListByRequestState(returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isFetching: $isFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter)';
+    return 'ReturnListByRequestState(returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isFetching: $isFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -920,7 +963,9 @@ class _$_ReturnListByRequestState extends _ReturnListByRequestState {
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter));
+                other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -930,7 +975,8 @@ class _$_ReturnListByRequestState extends _ReturnListByRequestState {
       failureOrSuccessOption,
       isFetching,
       canLoadMore,
-      appliedFilter);
+      appliedFilter,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -946,7 +992,8 @@ abstract class _ReturnListByRequestState extends ReturnListByRequestState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isFetching,
       required final bool canLoadMore,
-      required final ReturnFilter appliedFilter}) = _$_ReturnListByRequestState;
+      required final ReturnFilter appliedFilter,
+      required final SearchKey searchKey}) = _$_ReturnListByRequestState;
   const _ReturnListByRequestState._() : super._();
 
   @override
@@ -959,6 +1006,8 @@ abstract class _ReturnListByRequestState extends ReturnListByRequestState {
   bool get canLoadMore;
   @override
   ReturnFilter get appliedFilter;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnListByRequestStateCopyWith<_$_ReturnListByRequestState>

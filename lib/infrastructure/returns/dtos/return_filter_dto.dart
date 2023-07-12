@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -48,25 +49,20 @@ class ReturnFilterDto with _$ReturnFilterDto {
     );
   }
 
+  ReturnFilter toDomain() {
+    return ReturnFilter(
+      returnStatusList: statusList.map((e) => StatusType(e)).toList(),
+      returnDateTo: DateTimeStringValue(dateTo),
+      returnDateFrom: DateTimeStringValue(dateFrom),
+      amountValueFrom: RangeValue(refundTotalFrom),
+      amountValueTo: RangeValue(refundTotalTo),
+    );
+  }
+
   factory ReturnFilterDto.fromJson(Map<String, dynamic> json) =>
       _$ReturnFilterDtoFromJson(json);
 
-  Map<String, dynamic> get toMapList {
-    final filterMap = <String, dynamic>{};
-    dateFrom.isNotEmpty
-        ? filterMap.putIfAbsent('dateFrom', () => dateFrom)
-        : null;
-    dateTo.isNotEmpty ? filterMap.putIfAbsent('dateTo', () => dateTo) : null;
-    refundTotalFrom.isNotEmpty
-        ? filterMap.putIfAbsent('refundTotalFrom', () => refundTotalFrom)
-        : null;
-    refundTotalTo.isNotEmpty
-        ? filterMap.putIfAbsent('refundTotalTo', () => refundTotalTo)
-        : null;
-    statusList.isNotEmpty
-        ? filterMap.putIfAbsent('status', () => statusList)
-        : null;
-
-    return filterMap;
-  }
+  Map<String, dynamic> toMap() => toJson()
+    ..removeWhere((key, value) =>
+        (value is String && value.isEmpty) || (value is List && value.isEmpty));
 }

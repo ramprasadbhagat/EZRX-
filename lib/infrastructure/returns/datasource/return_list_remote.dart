@@ -23,25 +23,10 @@ class ReturnListRemoteDataSource {
   });
 
   Future<List<ReturnItem>> fetchReturnByItems({
-    required String custCode,
-    required String salesOrg,
-    required String shipToInfo,
-    required String userName,
-    required int first,
-    required int after,
-    required Map<String, dynamic> filterQuery,
+    required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getRequestsByItems();
-      final variables = {
-        'salesOrg': salesOrg,
-        'soldTo': custCode,
-        'shipTo': shipToInfo,
-        'username': userName,
-        'first': first,
-        'after': after,
-        ...filterQuery,
-      };
 
       final res = await httpService.request(
         method: 'POST',
@@ -50,7 +35,7 @@ class ReturnListRemoteDataSource {
           {
             'query': queryData,
             'variables': {
-              'request': variables,
+              'request': requestParams,
             },
           },
         ),
@@ -74,25 +59,10 @@ class ReturnListRemoteDataSource {
   }
 
   Future<List<ReturnItem>> fetchReturnByRequest({
-    required String custCode,
-    required String salesOrg,
-    required String shipToInfo,
-    required String userName,
-    required int first,
-    required int after,
-    required Map<String, dynamic> filterQuery,
+    required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getRequestsByRequest();
-      final variables = {
-        'salesOrg': salesOrg,
-        'soldTo': custCode,
-        'shipTo': shipToInfo,
-        'username': userName,
-        'first': first,
-        'after': after,
-        ...filterQuery,
-      };
 
       final res = await httpService.request(
         method: 'POST',
@@ -101,7 +71,7 @@ class ReturnListRemoteDataSource {
           {
             'query': queryData,
             'variables': {
-              'requestsByUserRequest': variables,
+              'requestsByUserRequest': requestParams,
             },
           },
         ),
