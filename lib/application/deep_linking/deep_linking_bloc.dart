@@ -35,12 +35,12 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
       initialize: (event) async {
         dynamicLinkStream ??= await service.initDynamicLinks();
       },
-      addPendingLink: (event) async {
+      addPendingLink: (event) {
         emit(
           DeepLinkingState.linkPending(event.link),
         );
       },
-      consumePendingLink: (event) async {
+      consumePendingLink: (event) {
         state.when(
           initial: () {},
           linkPending: (link) {

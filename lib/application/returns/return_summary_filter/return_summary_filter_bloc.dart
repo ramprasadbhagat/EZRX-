@@ -15,13 +15,13 @@ class ReturnSummaryFilterBloc
     on<ReturnSummaryFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     ReturnSummaryFilterEvent event,
     Emitter<ReturnSummaryFilterState> emit,
-  ) async {
+  ) {
     event.map(
-      initialized: (_) async => emit(ReturnSummaryFilterState.initial()),
-      applyFilters: (_) async {
+      initialized: (_) => emit(ReturnSummaryFilterState.initial()),
+      applyFilters: (_) {
         emit(state.copyWith(
           isSubmitting: false,
         ));

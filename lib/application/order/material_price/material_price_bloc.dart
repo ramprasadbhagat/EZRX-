@@ -65,15 +65,15 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
           comboDealEligible: e.comboDealEligible,
         );
 
-        await failureOrSuccess.fold(
-          (_) async {
+        failureOrSuccess.fold(
+          (_) {
             emit(
               state.copyWith(
                 isFetching: false,
               ),
             );
           },
-          (newPriceFetched) async {
+          (newPriceFetched) {
             final newPriceMap =
                 Map<MaterialNumber, Price>.from(state.materialPrice)
                   ..addAll(newPriceFetched);
@@ -94,7 +94,7 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
         );
 
         final materialNumbers =
-        e.products.map((e) => e.materialNumber).toList();
+            e.products.map((e) => e.materialNumber).toList();
 
         final failureOrSuccess = await repository.getMaterialPrice(
           customerCodeInfo: e.customerCodeInfo,
@@ -105,25 +105,18 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
           comboDealEligible: e.comboDealEligible,
         );
 
-        await failureOrSuccess.fold(
-              (_) async {
-            // emit(
-            //   state.copyWith(
-            //     isFetching: false,
-            //   ),
-            // );
-          },
-              (newPriceFetched) async {
+        failureOrSuccess.fold(
+          (_) {},
+          (newPriceFetched) {
             final newPriceMap =
-            Map<MaterialNumber, Price>.from(state.materialPrice)
-              ..addAll(newPriceFetched);
+                Map<MaterialNumber, Price>.from(state.materialPrice)
+                  ..addAll(newPriceFetched);
             emit(
               state.copyWith(
                 isFetching: false,
                 materialPrice: newPriceMap,
               ),
             );
-
           },
         );
       },

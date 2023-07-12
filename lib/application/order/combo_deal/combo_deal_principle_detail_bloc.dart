@@ -39,7 +39,7 @@ class ComboDealPrincipleDetailBloc
   ) async {
     await event.map(
       initialize: (e) async => emit(ComboDealPrincipleDetailState.initial()),
-      initFromCart: (e) async {
+      initFromCart: (e) {
         emit(
           state.copyWith(
             items: Map.from(state.items)..addAll(e.items.mapByMaterialNumber),
@@ -126,8 +126,8 @@ class ComboDealPrincipleDetailBloc
           principles: e.principles,
         );
 
-        await failureOrSuccess.fold(
-          (failure) async {
+        failureOrSuccess.fold(
+          (failure) {
             emit(
               state.copyWith(
                 isFetchingMaterials: false,
@@ -135,7 +135,7 @@ class ComboDealPrincipleDetailBloc
               ),
             );
           },
-          (materialList) async {
+          (materialList) {
             emit(
               state.copyWith(
                 isFetchingMaterials: false,
@@ -184,7 +184,7 @@ class ComboDealPrincipleDetailBloc
           ),
         );
       },
-      setComboDealInfo: (e) async {
+      setComboDealInfo: (e) {
         final itemsWithComboDealInfo = state.items.map(
           (key, value) => MapEntry(
             key,
@@ -199,7 +199,7 @@ class ComboDealPrincipleDetailBloc
           ),
         );
       },
-      updateItemQuantity: (e) async {
+      updateItemQuantity: (e) {
         final updatedItems = state.items.map(
           (key, value) => MapEntry(
             key,
@@ -213,7 +213,7 @@ class ComboDealPrincipleDetailBloc
           ),
         );
       },
-      updateItemSelection: (e) async {
+      updateItemSelection: (e) {
         final selectionStatus =
             Map<MaterialNumber, bool>.from(state.selectedItems);
         selectionStatus[e.item] = !(selectionStatus[e.item] ?? false);

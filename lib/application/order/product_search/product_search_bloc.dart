@@ -31,7 +31,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
   ProductSearchBloc({required this.productSearchRepository})
       : super(ProductSearchState.initial()) {
     on<_AutoSearchProduct>(
-      (e, emit) async {
+      (e, emit) {
         if (e.searchKey != state.searchKey.getValue()) {
           add(
             _SearchProduct(
@@ -135,7 +135,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     );
 
     on<_ClearSearch>(
-      (e, emit) async {
+      (e, emit) {
         emit(
           state.copyWith(
             searchKey: SearchKey(''),
@@ -145,7 +145,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           ),
         );
 
-      add(
+        add(
           const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
         );
       },

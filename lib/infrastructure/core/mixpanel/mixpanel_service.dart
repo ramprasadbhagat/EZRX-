@@ -21,13 +21,13 @@ class MixpanelService {
     );
   }
 
-  Future<void> registerSuperProps({
+  void registerSuperProps({
     required String username,
     required String salesOrg,
     required String customerCode,
     required String shipToAddress,
     required String userRole,
-  }) async {
+  }) {
     mixpanel.registerSuperProperties({
       MixpanelProps.username: username,
       MixpanelProps.salesOrg: salesOrg,

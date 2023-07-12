@@ -88,7 +88,7 @@ class WebViewPageState extends State<WebViewPage> {
                         Uri? url,
                         int i,
                         String s,
-                      ) async {
+                      ) {
                         setState(() {
                           errorLoadingUrl = true;
                         });

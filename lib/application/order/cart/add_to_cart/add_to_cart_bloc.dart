@@ -48,8 +48,8 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
           shipToCodeInfo: e.shipToCode,
         );
 
-        await failureOrSuccess.fold(
-          (failure) async {
+        failureOrSuccess.fold(
+          (failure) {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
@@ -57,7 +57,7 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
               ),
             );
           },
-          (materialPriceDetail) async {
+          (materialPriceDetail) {
             add(
               _SetCartItem(
                 PriceAggregate.empty().copyWith(
@@ -80,7 +80,7 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
           },
         );
       },
-      setCartItem: (e) async {
+      setCartItem: (e) {
         emit(
           state.copyWith(
             cartItem: e.cartItem,
@@ -98,9 +98,9 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
             shipToInfo: e.shipToCode,
           );
 
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {},
-            (newItem) async {
+            (newItem) {
               emit(state.copyWith(cartItem: newItem));
             },
           );

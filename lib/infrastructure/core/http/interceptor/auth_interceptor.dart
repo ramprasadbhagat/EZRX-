@@ -149,7 +149,7 @@ class AuthInterceptor extends Interceptor {
       requestOptions.headers['Authorization'] = 'Bearer V2 ${jwt.access}';
     }
 
-    return dio.request(
+    return await dio.request(
       requestOptions.path,
       data: requestOptions.data,
       queryParameters: requestOptions.queryParameters,

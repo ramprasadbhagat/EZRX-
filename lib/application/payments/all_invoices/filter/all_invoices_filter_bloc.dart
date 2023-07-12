@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
@@ -30,10 +28,8 @@ class AllInvoicesFilterBloc
       initialized: (_Initialized e) async => emit(
         AllInvoicesFilterState.initial(),
       ),
-      openFilterBottomSheet: (_OpenFilterBottomSheet value) async {
-        if (
-            state.showErrorMessages ||
-            state.filter != value.appliedFilter) {
+      openFilterBottomSheet: (_OpenFilterBottomSheet value) {
+        if (state.showErrorMessages || state.filter != value.appliedFilter) {
           emit(
             state.copyWith(
               filter: value.appliedFilter,
@@ -42,14 +38,14 @@ class AllInvoicesFilterBloc
           );
         }
       },
-      validateFilters: (_ValidateFilters value) async {
-          emit(
-            state.copyWith(
-              showErrorMessages: !state.filter.isValid,
-            ),
-          );
+      validateFilters: (_ValidateFilters value) {
+        emit(
+          state.copyWith(
+            showErrorMessages: !state.filter.isValid,
+          ),
+        );
       },
-      statusChanged: (_StatusChanged e) async {
+      statusChanged: (_StatusChanged e) {
         final statuses = List<String>.from(state.filter.filterStatuses);
         e.selected
             ? statuses.add(e.filterStatus)

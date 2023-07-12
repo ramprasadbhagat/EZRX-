@@ -812,9 +812,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           context.read<AuthBloc>().add(const AuthEvent.visitedAppSettings());
         }
       },
-      onCancelPressed: () async {
-        context.read<AuthBloc>().add(const AuthEvent.logout());
-      },
+      onCancelPressed: () async =>
+          context.read<AuthBloc>().add(const AuthEvent.logout()),
     );
   }
 

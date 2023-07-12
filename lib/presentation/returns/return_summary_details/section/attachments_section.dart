@@ -42,7 +42,7 @@ class _ReturnSummaryDetailsAttachmentState
               previous != current &&
               current.fileDownloading &&
               !current.isFetching,
-          listener: (context, state) async {
+          listener: (context, state) {
             state.failureOrSuccessOption.fold(
               () => {},
               (either) => either.fold(

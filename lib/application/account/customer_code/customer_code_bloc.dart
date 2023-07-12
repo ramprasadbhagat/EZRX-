@@ -23,9 +23,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   CustomerCodeBloc({
     required this.customerCodeRepository,
   }) : super(CustomerCodeState.initial()) {
-    on<_Initialized>((e, emit) async {
-      emit(CustomerCodeState.initial());
-    });
+    on<_Initialized>(
+      (e, emit) => emit(CustomerCodeState.initial()),
+    );
     on<_Selected>((e, emit) async {
       await customerCodeRepository.storeCustomerInfo(
         customerCode: e.customerCodeInfo.customerCodeSoldTo,

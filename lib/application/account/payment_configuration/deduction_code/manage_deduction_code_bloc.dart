@@ -77,7 +77,7 @@ class ManageDeductionCodeBloc
             deductionCode: state.deductionCodeData,
           );
 
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
@@ -86,7 +86,7 @@ class ManageDeductionCodeBloc
                 ),
               );
             },
-            (success) async {
+            (success) {
               final modifiedList =
                   List<DeductionCode>.from(state.deductionCodeList);
               value.isEdit
@@ -149,7 +149,7 @@ class ManageDeductionCodeBloc
 
         final failureOrSuccess = await deductionCodeRepository
             .deleteDeductionCode(deductionCode: value.data);
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             final editedList = List<DeductionCode>.from(state.deductionCodeList)
                 .map((element) => element.key == value.data.key
@@ -166,7 +166,7 @@ class ManageDeductionCodeBloc
               ),
             );
           },
-          (deleteDeductionCodeResponse) async {
+          (deleteDeductionCodeResponse) {
             final modifiedList =
                 List<DeductionCode>.from(state.deductionCodeList);
             modifiedList

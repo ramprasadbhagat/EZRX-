@@ -17,46 +17,54 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
   ) async {
     await event.map(
       initialized: (_) async => emit(NewPaymentState.initial()),
-      updateAllInvoices: (_SelectAllInvoices e) async {
-          emit(
-            state.copyWith(
-              selectedInvoices: e.items,
-            ),
-          );
+      updateAllInvoices: (_SelectAllInvoices e) {
+        emit(
+          state.copyWith(
+            selectedInvoices: e.items,
+          ),
+        );
       },
-      toggleInvoice: (_ToggleInvoice e) async {
-        if(e.selected) {
+      toggleInvoice: (_ToggleInvoice e) {
+        if (e.selected) {
           emit(
             state.copyWith(
-              selectedInvoices: List<CustomerOpenItem>.from(state.selectedInvoices)..add(e.item),
+              selectedInvoices:
+                  List<CustomerOpenItem>.from(state.selectedInvoices)
+                    ..add(e.item),
             ),
           );
         } else {
           emit(
             state.copyWith(
-              selectedInvoices: List<CustomerOpenItem>.from(state.selectedInvoices)..remove(e.item),
+              selectedInvoices:
+                  List<CustomerOpenItem>.from(state.selectedInvoices)
+                    ..remove(e.item),
             ),
           );
         }
       },
-      updateAllCredits: (_SelectAllCredits e) async {
-          emit(
-            state.copyWith(
-              selectedCredits: e.items,
-            ),
-          );
+      updateAllCredits: (_SelectAllCredits e) {
+        emit(
+          state.copyWith(
+            selectedCredits: e.items,
+          ),
+        );
       },
-      toggleCredit: (_ToggleCredit e) async {
-        if(e.selected) {
+      toggleCredit: (_ToggleCredit e) {
+        if (e.selected) {
           emit(
             state.copyWith(
-              selectedCredits: List<CustomerOpenItem>.from(state.selectedCredits)..add(e.item),
+              selectedCredits:
+                  List<CustomerOpenItem>.from(state.selectedCredits)
+                    ..add(e.item),
             ),
           );
         } else {
           emit(
             state.copyWith(
-              selectedCredits: List<CustomerOpenItem>.from(state.selectedCredits)..remove(e.item),
+              selectedCredits:
+                  List<CustomerOpenItem>.from(state.selectedCredits)
+                    ..remove(e.item),
             ),
           );
         }

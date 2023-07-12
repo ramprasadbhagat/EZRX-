@@ -32,36 +32,7 @@ class AccountSummaryPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.accountSummaryTab,
       body: RefreshIndicator(
-        onRefresh: () async {
-          context.read<AccountSummaryBloc>().add(
-                AccountSummaryEvent.fetchInvoiceSummary(
-                  custCode: context
-                      .read<CustomerCodeBloc>()
-                      .state
-                      .customerCodeInfo
-                      .customerCodeSoldTo,
-                  salesOrg: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .salesOrganisation
-                      .salesOrg,
-                ),
-              );
-          context.read<AccountSummaryBloc>().add(
-                AccountSummaryEvent.fetchCreditSummary(
-                  custCode: context
-                      .read<CustomerCodeBloc>()
-                      .state
-                      .customerCodeInfo
-                      .customerCodeSoldTo,
-                  salesOrg: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .salesOrganisation
-                      .salesOrg,
-                ),
-              );
-        },
+        onRefresh: () async => _onRefresh(context),
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
@@ -180,6 +151,31 @@ class AccountSummaryPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onRefresh(BuildContext context) {
+    context.read<AccountSummaryBloc>().add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo
+                .customerCodeSoldTo,
+            salesOrg:
+                context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+          ),
+        );
+    context.read<AccountSummaryBloc>().add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo
+                .customerCodeSoldTo,
+            salesOrg:
+                context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+          ),
+        );
   }
 }
 

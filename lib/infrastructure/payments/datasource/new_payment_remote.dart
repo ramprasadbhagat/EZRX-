@@ -27,7 +27,7 @@ class NewPaymentRemoteDataSource {
     required int offset,
     required int pageSize,
   }) async {
-    return getCustomerOpenItems(
+    return await getCustomerOpenItems(
       customerCode: customerCode,
       salesOrg: salesOrg,
       debitCreditType: 'debit',
@@ -42,7 +42,7 @@ class NewPaymentRemoteDataSource {
     required int offset,
     required int pageSize,
   }) async {
-    return getCustomerOpenItems(
+    return await getCustomerOpenItems(
       customerCode: customerCode,
       salesOrg: salesOrg,
       debitCreditType: 'credit',
@@ -82,7 +82,8 @@ class NewPaymentRemoteDataSource {
       ),
     );
     _exceptionChecker(property: 'customerOpenItems', res: res);
-    final data = res.data['data']['customerOpenItems']['customerOpenItemsResponse'];
+    final data =
+        res.data['data']['customerOpenItems']['customerOpenItemsResponse'];
 
     final result = <CustomerOpenItem>[];
     for (final dynamic item in data) {

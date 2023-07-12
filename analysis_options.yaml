@@ -133,3 +133,4 @@ dart_code_metrics:
     - prefer-first
     - avoid-wrapping-in-padding
     - avoid-unnecessary-conditionals
+    - avoid-redundant-async

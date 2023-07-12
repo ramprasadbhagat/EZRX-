@@ -43,7 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 authRepository.isBiometricEnabled();
             await isBiometricEnabledResult.fold(
               (error) async => emit(const AuthState.authenticated()),
-              (isEnable) async {
+              (isEnable) {
                 isEnable
                     ? add(const AuthEvent.checkIfBiometricDenied())
                     : emit(const AuthState.authenticated());
@@ -70,7 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                     authRepository.isBiometricEnabled();
                 await isBiometricEnabledResult.fold(
                   (error) async => emit(const AuthState.authenticated()),
-                  (isEnable) async {
+                  (isEnable) {
                     isEnable
                         ? add(const AuthEvent.bioCheck())
                         : emit(const AuthState.authenticated());
@@ -97,7 +97,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
         );
       },
-      visitedAppSettings: (e) async {
+      visitedAppSettings: (e) {
         emit(const AuthState.visitedAppSettings());
       },
     );

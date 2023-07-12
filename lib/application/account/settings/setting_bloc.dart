@@ -23,7 +23,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     Emitter<SettingState> emit,
   ) async {
     await event.map(
-      fetchBiometricFlag: (e) async {
+      fetchBiometricFlag: (e) {
         final failureOrSuccess = authRepository.isBiometricEnabled();
         failureOrSuccess.fold(
           (failure) {

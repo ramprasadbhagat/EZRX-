@@ -53,7 +53,7 @@ class AdminPoAttachmentBloc
               isFetching: false,
             ),
           ),
-          (adminPoAttachmentList) async {
+          (adminPoAttachmentList) {
             emit(
               state.copyWith(
                 adminPoAttachmentList: adminPoAttachmentList,

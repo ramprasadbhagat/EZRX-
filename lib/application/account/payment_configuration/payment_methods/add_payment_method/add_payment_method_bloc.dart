@@ -45,7 +45,7 @@ class AddPaymentMethodBloc
             newPaymentMethod: state.paymentMethod,
             oldPaymentMethod: PaymentMethod(''),
           );
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
@@ -54,7 +54,7 @@ class AddPaymentMethodBloc
                 ),
               );
             },
-            (addPaymentMethod) async {
+            (addPaymentMethod) {
               emit(
                 state.copyWith(
                   paymentMethod: PaymentMethod(''),
@@ -70,7 +70,7 @@ class AddPaymentMethodBloc
           );
         }
       },
-      paymentMethodChanged: (e) async {
+      paymentMethodChanged: (e) {
         emit(
           state.copyWith(
             paymentMethod: PaymentMethod(e.paymentMethod),
@@ -78,7 +78,7 @@ class AddPaymentMethodBloc
           ),
         );
       },
-      salesOrgChanged: (e) async {
+      salesOrgChanged: (e) {
         emit(
           state.copyWith(
             salesOrg: SalesOrg(e.salesOrg),

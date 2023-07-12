@@ -59,7 +59,7 @@ class UserRestrictionListBloc
           },
         );
       },
-      updateSearchKey: (e) async {
+      updateSearchKey: (e) {
         emit(
           state.copyWith(
             searchKey: e.searchKey,

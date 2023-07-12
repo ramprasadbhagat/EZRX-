@@ -28,13 +28,11 @@ class CartDeleteItemButton extends StatelessWidget {
           message: 'Are you sure you want to delete this item from cart?',
           confirmText: 'Yes',
           cancelText: 'No',
-          onAcceptPressed: () async {
-            context.read<CartBloc>().add(
-                  CartEvent.removeFromCart(
-                    item: item,
-                  ),
-                );
-          },
+          onAcceptPressed: () async => context.read<CartBloc>().add(
+                CartEvent.removeFromCart(
+                  item: item,
+                ),
+              ),
         );
       },
       icon: const Icon(

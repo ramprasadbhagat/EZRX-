@@ -66,7 +66,7 @@ class AdditionalDetailsBloc
               state.deliveryInfoData.copyWith(poDocuments: <PoDocuments>[]),
         ),
       ),
-      toggleGreenDelivery: (value) async {
+      toggleGreenDelivery: (value) {
         final currentValue = state.deliveryInfoData.greenDeliveryEnabled;
 
         emit(
@@ -89,8 +89,8 @@ class AdditionalDetailsBloc
           orderId: value.orderId,
         );
 
-        await failureOrSuccess.fold(
-          (failure) async {
+        failureOrSuccess.fold(
+          (failure) {
             emit(
               state.copyWith(
                 deliveryInfoData: DeliveryInfoData.empty().copyWith(
@@ -103,7 +103,7 @@ class AdditionalDetailsBloc
               ),
             );
           },
-          (orderDetail) async {
+          (orderDetail) {
             emit(
               state.copyWith(
                 deliveryInfoData: DeliveryInfoData.fromSavedOrder(
@@ -116,7 +116,7 @@ class AdditionalDetailsBloc
           },
         );
       },
-      initiateFromHistory: (value) async {
+      initiateFromHistory: (value) {
         emit(
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: value.data.copyWith(
@@ -127,7 +127,7 @@ class AdditionalDetailsBloc
           ),
         );
       },
-      clearSavedOrderId: (e) async {
+      clearSavedOrderId: (e) {
         emit(
           state.copyWith(orderId: ''),
         );

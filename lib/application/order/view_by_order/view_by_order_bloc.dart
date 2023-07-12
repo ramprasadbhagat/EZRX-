@@ -23,9 +23,9 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
   ViewByOrderBloc({
     required this.viewByOrderRepository,
   }) : super(ViewByOrderState.initial()) {
-    on<_Initialized>((event, emit) async {
-      emit(ViewByOrderState.initial());
-    });
+    on<_Initialized>(
+      (event, emit) => emit(ViewByOrderState.initial()),
+    );
     on<_Fetch>(
       (e, emit) async {
         emit(
@@ -112,7 +112,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
       );
     });
 
-    on<_SearchByOrder>((e, emit) async {
+    on<_SearchByOrder>((e, emit) {
       if (e.searchKey != state.searchKey.getValue()) {
         add(
           ViewByOrderEvent.fetch(

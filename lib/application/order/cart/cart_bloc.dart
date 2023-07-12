@@ -44,7 +44,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         final failureOrSuccess = repository.fetchCart();
         await failureOrSuccess.fold(
-          (failure) async {
+          (failure) {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
@@ -194,7 +194,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           cartItem: CartItem.material(e.item),
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -203,7 +203,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
+          (cartItemList) {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
@@ -235,7 +235,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: e.shipToInfo,
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -244,7 +244,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
+          (cartItemList) {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
@@ -273,7 +273,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -282,7 +282,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
+          (cartItemList) {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
@@ -312,7 +312,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           override: e.overrideQty,
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -321,7 +321,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
+          (cartItemList) {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
@@ -412,7 +412,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -421,7 +421,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
+          (cartItemList) {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
@@ -595,8 +595,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.clearCart();
-        await failureOrSuccess.fold(
-          (failure) async {
+        failureOrSuccess.fold(
+          (failure) {
             emit(
               state.copyWith(
                 isClearing: false,
@@ -604,11 +604,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
-            emit(
-              CartState.initial(),
-            );
-          },
+          (cartItemList) => emit(
+            CartState.initial(),
+          ),
         );
       },
       clearSelectedItemsFromCart: (e) async {
@@ -622,23 +620,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final failureOrSuccess = await repository.clearCartOnlySelectedItems(
           selectedItemIds: e.selectedItemIds,
         );
-        await failureOrSuccess.fold(
-          (failure) async {
-            emit(
-              state.copyWith(
-                isClearing: false,
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            );
-          },
-          (cartItemList) async {
-            emit(
-              state.copyWith(
-                isClearing: false,
-                cartItems: cartItemList,
-              ),
-            );
-          },
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              isClearing: false,
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (cartItemList) => emit(
+            state.copyWith(
+              isClearing: false,
+              cartItems: cartItemList,
+            ),
+          ),
         );
       },
       replaceWithOrderItems: (e) async {
@@ -687,7 +681,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 shipToInfo: e.shipToInfo,
               );
 
-              await failureOrSuccess.fold(
+              failureOrSuccess.fold(
                 (failure) {
                   emit(
                     state.copyWith(
@@ -696,7 +690,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                     ),
                   );
                 },
-                (cartItemList) async {
+                (cartItemList) {
                   if (material == state.getCartItemMaterialList.last) {
                     emit(
                       state.copyWith(
@@ -747,7 +741,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -756,7 +750,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) async {
+          (cartItemList) {
             emit(
               state.copyWith(
                 cartItems: cartItemList,
@@ -828,7 +822,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       },
       upsertCart: (e) async {
         final index = state.cartProducts.indexWhere(
-            (element) => element.materialNumber == e.cartProductNumber,);
+          (element) => element.materialNumber == e.cartProductNumber,
+        );
         if (index != -1) {
           final previousQuantity = state.cartProducts.elementAtOrNull(index);
           if (previousQuantity?.quantity == e.quantity) return;
@@ -849,7 +844,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           language: 'EN',
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -858,12 +853,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartProductList) async {
+          (cartProductList) {
             final cartProductListTemp = List<CartProduct>.from(cartProductList);
             for (var i = 0; i < cartProductListTemp.length; i++) {
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
-                  price: state.cartProducts.elementAtOrNull(i)?.price ??
-                      Price.empty(),);
+                price: state.cartProducts.elementAtOrNull(i)?.price ??
+                    Price.empty(),
+              );
             }
             emit(
               state.copyWith(
@@ -887,7 +883,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           materialNumbers: e.cartProducts.map((e) => e.materialNumber).toList(),
         );
 
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -896,7 +892,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartProductList) async {
+          (cartProductList) {
             final newProductInfoMap =
                 Map<MaterialNumber, CartAdditionInfoProduct>.from(
               state.additionInfo,
@@ -911,7 +907,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      updatePriceProduct: (e) async {
+      updatePriceProduct: (e) {
         emit(state.copyWith(
           isMappingPrice: true,
         ));

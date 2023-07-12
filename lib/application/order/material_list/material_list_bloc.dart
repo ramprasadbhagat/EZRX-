@@ -28,16 +28,18 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     required this.materialListRepository,
     required this.favouriteRepository,
   }) : super(MaterialListState.initial()) {
-    on<_Initialized>((e, emit) async {
+    on<_Initialized>((e, emit) {
       emit(MaterialListState.initial());
     });
-    on<_UpdateSearchKey>((e, emit) async {
-      emit(
-        state.copyWith(
-          searchKey: SearchKey.search(e.searchKey),
-        ),
-      );
-    });
+    on<_UpdateSearchKey>(
+      (e, emit) {
+        emit(
+          state.copyWith(
+            searchKey: SearchKey.search(e.searchKey),
+          ),
+        );
+      },
+    );
     on<_Fetch>(
       (e, emit) async {
         emit(

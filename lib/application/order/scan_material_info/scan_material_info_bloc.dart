@@ -45,7 +45,7 @@ class ScanMaterialInfoBloc
     Emitter<ScanMaterialInfoState> emit,
   ) async {
     await event.map(
-      initialized: (e) async {
+      initialized: (e) {
         scanInfoRepository.fetchBarcodeCapture().addListener(this);
         emit(ScanMaterialInfoState.initial());
       },

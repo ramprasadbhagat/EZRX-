@@ -49,7 +49,7 @@ class ViewByItemReturnFilterBloc
           ),
         ),
       ),
-      setReturnStatus: (e) async {
+      setReturnStatus: (e) {
         final selectedStatusList = List<StatusType>.from(
           state.filter.returnStatusList,
         );

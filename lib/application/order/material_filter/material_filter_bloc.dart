@@ -67,8 +67,8 @@ class MaterialFilterBloc
           },
         );
       },
-      search: (e) async {},
-      updateSelectedMaterialFilter: (e) async {
+      search: (e) {},
+      updateSelectedMaterialFilter: (e) {
         switch (e.filterType) {
           case MaterialFilterType.countryList:
             final materialFilterCountry = Map<MaterialFilterCountry, bool>.from(
@@ -145,7 +145,7 @@ class MaterialFilterBloc
           searchKey: SearchKey(e.searchkey),
         ),
       ),
-      initSelectedMaterialFilter: (e) async {
+      initSelectedMaterialFilter: (e) {
         final manufactureMap = Map<String, bool>.from(
           state.materialFilter.manufactureMapOptions,
         );

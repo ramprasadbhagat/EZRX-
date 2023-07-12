@@ -84,7 +84,7 @@ class UserRestrictionDetailsBloc
           },
         );
       },
-      updateTextField: (e) async {
+      updateTextField: (e) {
         _updateTextField(
           emit: emit,
           index: e.index,
@@ -95,8 +95,7 @@ class UserRestrictionDetailsBloc
       addUserRestriction: (e) async {
         emit(
           state.copyWith(
-            userRestrictionStatus:
-                UserRestrictionStatus.empty(),
+            userRestrictionStatus: UserRestrictionStatus.empty(),
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -106,7 +105,7 @@ class UserRestrictionDetailsBloc
           approverLimits: state.approvalLimits,
         );
 
-        await addApprovalLimit.fold(
+        addApprovalLimit.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -115,7 +114,7 @@ class UserRestrictionDetailsBloc
               ),
             );
           },
-          (addApprovalLimit) async {
+          (addApprovalLimit) {
             add(const UserRestrictionDetailsEvent.configureUserRestriction());
           },
         );
@@ -123,8 +122,7 @@ class UserRestrictionDetailsBloc
       configureUserRestriction: (e) async {
         emit(
           state.copyWith(
-            userRestrictionStatus:
-                UserRestrictionStatus.empty(),
+            userRestrictionStatus: UserRestrictionStatus.empty(),
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -160,8 +158,7 @@ class UserRestrictionDetailsBloc
       deleteUserRestriction: (e) async {
         emit(
           state.copyWith(
-            userRestrictionStatus:
-                UserRestrictionStatus.empty(),
+            userRestrictionStatus: UserRestrictionStatus.empty(),
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -185,8 +182,7 @@ class UserRestrictionDetailsBloc
             if (state.approvalLimits.isNotValidApprovalLimit) {
               emit(
                 state.copyWith(
-                  userRestrictionStatus:
-                      UserRestrictionStatus.empty().copyWith(
+                  userRestrictionStatus: UserRestrictionStatus.empty().copyWith(
                     approvalLimitStatus: deleteUserRestriction,
                   ),
                   apiFailureOrSuccessOption: none(),

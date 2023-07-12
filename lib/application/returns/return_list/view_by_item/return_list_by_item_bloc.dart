@@ -139,7 +139,7 @@ class ReturnListByItemBloc
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (updatedListWithImages) async {
+          (updatedListWithImages) {
             emit(
               state.copyWith(
                 returnItemList:

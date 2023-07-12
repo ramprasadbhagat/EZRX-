@@ -22,11 +22,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   BonusMaterialBloc({
     required this.bonusMaterialRepository,
   }) : super(BonusMaterialState.initial()) {
-    on<_Initialized>(
-      (e, emit) async {
-        emit(BonusMaterialState.initial());
-      },
-    );
+    on<_Initialized>((e, emit) => emit(BonusMaterialState.initial()));
     on<_Fetch>(
       (e, emit) async {
         emit(
@@ -70,7 +66,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
       },
     );
     on<_AutoSearch>(
-      (e, emit) async {
+      (e, emit) {
         if (e.searchKey != state.searchKey.getValue()) {
           add(
             _Fetch(

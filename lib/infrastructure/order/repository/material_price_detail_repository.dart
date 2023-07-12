@@ -166,9 +166,9 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         materialQueryList: materialZDP5EnabledQueryList,
       );
 
-      await materialDetailZDP5EnabledMap.fold(
-        (failure) async {},
-        (materialDetailZDP5Enabled) async {
+      materialDetailZDP5EnabledMap.fold(
+        (failure) {},
+        (materialDetailZDP5Enabled) {
           materialDetails.addAll(
             {
               for (final materialDetail in materialDetailZDP5Enabled)

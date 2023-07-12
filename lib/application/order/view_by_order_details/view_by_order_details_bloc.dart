@@ -74,11 +74,11 @@ class ViewByOrderDetailsBloc
                 },
               ),
             );
-             add(const _FetchProductImage());
+            add(const _FetchProductImage());
           },
         );
       },
-       fetchProductImage: (e) async {
+      fetchProductImage: (e) async {
         emit(
           state.copyWith(
             isImageLoading: true,
@@ -89,14 +89,14 @@ class ViewByOrderDetailsBloc
           list: state.orderHistoryDetails.orderHistoryDetailsOrderItem,
         );
 
-        await failureOrSuccess.fold(
-          (failure) async => emit(
+        failureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isImageLoading: false,
             ),
           ),
-          (updatedListWithImages) async {
+          (updatedListWithImages) {
             emit(
               state.copyWith(
                 orderHistoryDetails: state.orderHistoryDetails.copyWith(

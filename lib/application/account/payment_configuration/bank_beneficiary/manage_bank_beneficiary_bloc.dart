@@ -77,11 +77,12 @@ class ManageBankBeneficiaryBloc
                 beneficiaryData: e.fromAdd
                     ? state.beneficiaryData.copyWith(
                         salesDistrict: salesDistrict.isNotEmpty
-                      ? salesDistrict
-                          .first.salesDistrictInfo.first.salesDistrictHeader
-                          .getValue()
-                      : '',
-                    ) : state.beneficiaryData,
+                            ? salesDistrict.first.salesDistrictInfo.first
+                                .salesDistrictHeader
+                                .getValue()
+                            : '',
+                      )
+                    : state.beneficiaryData,
                 isFetching: false,
                 failureOrSuccessOption: none(),
               ),
@@ -89,12 +90,12 @@ class ManageBankBeneficiaryBloc
           },
         );
       },
-      onValueChange: (e) async =>_onValueChanged(
+      onValueChange: (e) async => _onValueChanged(
         emit: emit,
         label: e.label,
         newValue: e.newValue,
       ),
-      setBeneficiary: (e) async {
+      setBeneficiary: (e) {
         emit(state.copyWith(beneficiaryData: e.beneficiary));
       },
       addOrUpdateBeneficiary: (e) async {
@@ -115,7 +116,7 @@ class ManageBankBeneficiaryBloc
               await bankBeneficiaryRepository.addOrUpdateBeneficiary(
             beneficiaryData: state.beneficiaryData,
           );
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
@@ -124,7 +125,7 @@ class ManageBankBeneficiaryBloc
                 ),
               );
             },
-            (success) async {
+            (success) {
               final beneficiaryList =
                   List<BankBeneficiary>.from(state.beneficiaryList);
               e.isEdit
@@ -185,8 +186,7 @@ class ManageBankBeneficiaryBloc
             );
           },
           (deleteBeneficiary) {
-            final modifiedList =
-                List<BankBeneficiary>.from(beneficiaryList);
+            final modifiedList = List<BankBeneficiary>.from(beneficiaryList);
             modifiedList
                 .removeWhere((element) => element.key == e.beneficiary.key);
             emit(

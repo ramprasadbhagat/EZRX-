@@ -25,9 +25,9 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
     await event.map(
       loadLastSavedCred: (e) async {
         final failureOrSuccess = await authRepository.loadCredential();
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (_) {},
-          (cred) async {
+          (cred) {
             if (cred.username.isValid() && cred.password.isValid()) {
               emit(state.copyWith(
                 username: cred.username,
@@ -72,7 +72,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           );
 
           await failureOrSuccess.fold(
-            (_) async {
+            (_) {
               emit(state.copyWith(
                 isSubmitting: false,
                 showErrorMessages: true,
@@ -113,7 +113,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         ));
         final oktaLoginResult = await authRepository.loginWithOkta();
         await oktaLoginResult.fold(
-          (failure) async {
+          (failure) {
             emit(state.copyWith(
               isSubmitting: false,
               showErrorMessages: true,
@@ -126,7 +126,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       refreshOktaToken: (e) async {
         final oktaAccessResult = await authRepository.getOktaAccessToken();
         await oktaAccessResult.fold(
-          (failure) async {
+          (failure) {
             emit(state.copyWith(
               isSubmitting: false,
               showErrorMessages: true,

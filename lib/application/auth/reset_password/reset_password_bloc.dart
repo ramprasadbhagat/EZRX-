@@ -26,7 +26,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     Emitter<ResetPasswordState> emit,
   ) async {
     await event.map(
-      togglePasswordVisibility: (e) async {
+      togglePasswordVisibility: (e) {
         switch (e.fieldType) {
           case PasswordFieldType.oldPassword:
             emit(state.copyWith(

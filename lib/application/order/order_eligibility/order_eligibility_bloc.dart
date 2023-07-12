@@ -21,8 +21,8 @@ class OrderEligibilityBloc
     OrderEligibilityEvent event,
     Emitter<OrderEligibilityState> emit,
   ) async {
-    event.map(
-      initialized: (e) => emit(
+    await event.map(
+      initialized: (e) async => emit(
         state.copyWith(
           cartItems: e.cartItems,
           configs: e.configs,
@@ -35,7 +35,7 @@ class OrderEligibilityBloc
           subTotal: e.subTotal,
         ),
       ),
-      update: (e) => emit(
+      update: (e) async => emit(
         state.copyWith(
           subTotal: e.subTotal,
           grandTotal: e.grandTotal,

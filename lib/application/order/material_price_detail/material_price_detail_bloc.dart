@@ -36,7 +36,7 @@ class MaterialPriceDetailBloc
       initialized: (_) async => emit(
         MaterialPriceDetailState.initial(),
       ),
-      refresh: (e) async {
+      refresh: (e) {
         emit(
           state.copyWith(
             materialDetails: Map.from(state.materialDetails)

@@ -91,7 +91,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           ),
         );
       },
-      updatePaymentNotificationSettings: (e) async {
+      updatePaymentNotificationSettings: (e) {
         emit(
           state.copyWith(
             user: state.user.copyWith(

@@ -81,7 +81,7 @@ class SalesDistrictBloc extends Bloc<SalesDistrictEvent, SalesDistrictState> {
             salesOrg: state.selectedSalesOrg,
             salesDistrictInfo: state.selectedSalesDistrictInfo,
           );
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
@@ -90,7 +90,7 @@ class SalesDistrictBloc extends Bloc<SalesDistrictEvent, SalesDistrictState> {
                 ),
               );
             },
-            (salesDistrictResponseMessage) async {
+            (salesDistrictResponseMessage) {
               emit(
                 state.copyWith(
                   isSubmitting: false,
@@ -122,7 +122,7 @@ class SalesDistrictBloc extends Bloc<SalesDistrictEvent, SalesDistrictState> {
             salesOrg: state.selectedSalesOrg,
             salesDistrictInfo: state.selectedSalesDistrictInfo,
           );
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
@@ -131,7 +131,7 @@ class SalesDistrictBloc extends Bloc<SalesDistrictEvent, SalesDistrictState> {
                 ),
               );
             },
-            (salesDistrictResponseMessage) async {
+            (salesDistrictResponseMessage) {
               final salesDistrictInfo = SalesDistrictInfo(
                 id: state.selectedSalesDistrictInfo.id,
                 salesDistrictHeader:

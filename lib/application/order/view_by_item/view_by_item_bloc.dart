@@ -29,9 +29,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
     required this.viewByItemRepository,
     required this.productImagesRepository,
   }) : super(ViewByItemsState.initial()) {
-    on<_Initialized>((event, emit) async {
-      emit(ViewByItemsState.initial());
-    });
+    on<_Initialized>((event, emit) => emit(ViewByItemsState.initial()));
     on<_Fetch>(
       (e, emit) async {
         emit(
@@ -97,8 +95,8 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         searchKey: state.searchKey,
       );
 
-      await failureOrSuccess.fold(
-        (failure) async {
+      failureOrSuccess.fold(
+        (failure) {
           emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -106,7 +104,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
             ),
           );
         },
-        (orderHistoryList) async {
+        (orderHistoryList) {
           final newOrderHistoryList = List<OrderHistoryItem>.from(
             state.orderHistoryList.orderHistoryItems,
           )..addAll(orderHistoryList.orderHistoryItems);
@@ -140,14 +138,14 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           list: state.orderHistoryList.orderHistoryItems,
         );
 
-        await failureOrSuccess.fold(
-          (failure) async => emit(
+        failureOrSuccess.fold(
+          (failure) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isImageLoading: false,
             ),
           ),
-          (updatedListWithImages) async {
+          (updatedListWithImages) {
             emit(
               state.copyWith(
                 orderHistoryList: state.orderHistoryList.copyWith(

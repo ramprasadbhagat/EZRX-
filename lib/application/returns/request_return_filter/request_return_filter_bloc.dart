@@ -15,13 +15,13 @@ class RequestReturnFilterBloc
     on<RequestReturnFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     RequestReturnFilterEvent event,
     Emitter<RequestReturnFilterState> emit,
-  ) async {
+  ) {
     event.map(
       initialized: (value) => emit(RequestReturnFilterState.initial()),
-      filterRequestReturn: (value) async {
+      filterRequestReturn: (value) {
         emit(state.copyWith(
           isSubmitting: false,
         ));

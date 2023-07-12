@@ -75,8 +75,7 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
         );
       },
       fetchProductsFavouriteStatus: (_FetchProductsFavouriteStatus e) async {
-        final failureOrSuccess =
-            await favouriteRepository.getFavouritesForList(
+        final failureOrSuccess = await favouriteRepository.getFavouritesForList(
           salesConfigs: e.configs,
           list: e.productList,
         );
@@ -109,7 +108,7 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),              
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (updatedFavouritesList) {
@@ -158,7 +157,7 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
               apiFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (updatedListWithImages) async {
+          (updatedListWithImages) {
             emit(
               state.copyWith(
                 recentlyOrderedProducts: updatedListWithImages

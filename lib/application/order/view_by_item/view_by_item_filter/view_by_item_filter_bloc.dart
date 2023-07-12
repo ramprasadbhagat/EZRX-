@@ -31,7 +31,7 @@ class ViewByItemFilterBloc
           ),
         ),
       ),
-      setOrderStatus: (e) async {
+      setOrderStatus: (e) {
         final selectedStatusList = List<StatusType>.from(
           state.filter.orderStatusList,
         );

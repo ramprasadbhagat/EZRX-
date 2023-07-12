@@ -85,7 +85,7 @@ class ViewByItemDetailsBloc
               isImageLoading: false,
             ),
           ),
-          (updatedListWithImages) async {
+          (updatedListWithImages) {
             emit(
               state.copyWith(
                 viewByItemDetails: state.viewByItemDetails.copyWith(

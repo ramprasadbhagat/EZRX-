@@ -38,15 +38,15 @@ class DiscountOverrideBloc
           price: e.price,
           shipToInfo: e.shipToInfo,
         );
-        await failureOrSuccess.fold(
-          (_) async {
+        failureOrSuccess.fold(
+          (_) {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
           },
-          (price) async {
+          (price) {
             emit(
               state.copyWith(
                 materialPrice: price.copyWith(

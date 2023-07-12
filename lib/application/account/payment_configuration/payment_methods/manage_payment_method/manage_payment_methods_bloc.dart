@@ -49,7 +49,7 @@ class ManagePaymentMethodsBloc
             oldPaymentMethod: e.oldPaymentMethod,
             newPaymentMethod: state.paymentMethod,
           );
-          await failureOrSuccess.fold(
+          failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
@@ -58,7 +58,7 @@ class ManagePaymentMethodsBloc
                 ),
               );
             },
-            (editPaymentMethod) async {
+            (editPaymentMethod) {
               emit(
                 state.copyWith(
                   paymentMethod: PaymentMethod(''),
@@ -87,7 +87,7 @@ class ManagePaymentMethodsBloc
           salesOrg: e.salesOrg,
           paymentMethod: e.paymentMethod,
         );
-        await failureOrSuccess.fold(
+        failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
@@ -97,7 +97,7 @@ class ManagePaymentMethodsBloc
               ),
             );
           },
-          (deletePaymentMethod) async {
+          (deletePaymentMethod) {
             emit(
               state.copyWith(
                 deleteIndex: -1,

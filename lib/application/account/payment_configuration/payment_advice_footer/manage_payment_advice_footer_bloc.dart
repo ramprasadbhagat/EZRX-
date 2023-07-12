@@ -112,10 +112,10 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
             success.message.isEdit
                 ? paymentAdviceList.removeWhere(
                     (element) =>
-                    element.salesOrg ==
-                        state.paymentAdviceFooterData.salesOrg &&
-                    element.salesDistrict.salesDistrictHeader ==
-                        state.paymentAdviceFooterData.salesDistrict
+                        element.salesOrg ==
+                            state.paymentAdviceFooterData.salesOrg &&
+                        element.salesDistrict.salesDistrictHeader ==
+                            state.paymentAdviceFooterData.salesDistrict
                                 .salesDistrictHeader,
                   )
                 : null;
@@ -136,7 +136,7 @@ class ManagePaymentAdviceFooterBloc extends Bloc<ManagePaymentAdviceFooterEvent,
         newValue: e.newValue,
         emit: emit,
       ),
-      headerTextToggle: (_HeaderTextToggle e) async {
+      headerTextToggle: (_HeaderTextToggle e) {
         emit(
           state.copyWith(
             paymentAdviceFooterData: state.paymentAdviceFooterData.copyWith(
