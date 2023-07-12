@@ -83,12 +83,7 @@ class ReturnRoot extends StatelessWidget {
                         Expanded(
                           child: context.tabsRouter.current.name ==
                                   ReturnByItemPageRoute.name
-                              ? SearchBar(
-                                  onSearchChanged: (String value) {},
-                                  clearIconKey: WidgetKeys.clearIconKey,
-                                  controller: TextEditingController(),
-                                  onClear: () {},
-                                )
+                              ? const _ListByItemSearchBar()
                               : const _ListByRequestSearchBar(),
                         ),
                         _Filter(
@@ -204,8 +199,10 @@ class _FilterTuneIcon extends StatelessWidget {
             ? const ReturnByItemFilterPage()
             : const ReturnByRequestFilterPage();
       },
-    ).then((value) => value != null
-        ? viewByItem
+    ).then(
+      (value) {
+        if (value == null) return;
+        viewByItem
             ? _doFetchReturnListByItem(
                 context: context,
                 filter: value as ReturnFilter,
@@ -213,8 +210,9 @@ class _FilterTuneIcon extends StatelessWidget {
             : _doFetchReturnListByRequest(
                 context: context,
                 filter: value as ReturnFilter,
-              )
-        : null);
+              );
+      },
+    );
   }
 
   void _doFetchReturnListByItem({
@@ -232,6 +230,7 @@ class _FilterTuneIcon extends StatelessWidget {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: context.read<UserBloc>().state.user,
               appliedFilter: filter,
+              searchKey: context.read<ReturnListByItemBloc>().state.searchKey,
             ),
           );
     }
@@ -256,6 +255,94 @@ class _FilterTuneIcon extends StatelessWidget {
             ),
           );
     }
+  }
+}
+
+class _ListByItemSearchBar extends StatefulWidget {
+  const _ListByItemSearchBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_ListByItemSearchBar> createState() => _ListByItemSearchBarState();
+}
+
+class _ListByItemSearchBarState extends State<_ListByItemSearchBar> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _search({
+    required BuildContext context,
+    required String searchKey,
+  }) {
+    final searchFilter = context.read<ReturnListByItemBloc>().state.searchKey;
+    if (searchFilter == SearchKey(searchKey)) return;
+
+    context.read<ReturnListByItemBloc>().add(
+          ReturnListByItemEvent.fetch(
+            salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            appliedFilter:
+                context.read<ReturnListByItemBloc>().state.appliedFilter,
+            searchKey: SearchKey(searchKey),
+          ),
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    controller.text = context
+        .read<ReturnListByItemBloc>()
+        .state
+        .searchKey
+        .getOrDefaultValue('');
+
+    return BlocConsumer<ReturnListByItemBloc, ReturnListByItemState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      listenWhen: (previous, current) =>
+          previous.searchKey != current.searchKey,
+      listener: (context, state) {
+        final searchText = state.searchKey.getValue();
+        controller.value = TextEditingValue(
+          text: searchText,
+          selection: TextSelection.collapsed(
+            offset: controller.selection.base.offset,
+          ),
+        );
+      },
+      builder: (context, state) {
+        return SearchBar(
+          controller: controller,
+          enabled: !state.isFetching,
+          onSearchChanged: (value) {},
+          isAutoSearch: false,
+          onSearchSubmitted: (value) => _search(
+            context: context,
+            searchKey: value,
+          ),
+          clearIconKey: WidgetKeys.clearIconKey,
+          customValidator: () => SearchKey.search(controller.text).isValid(),
+          onClear: () {
+            if (controller.text.isEmpty) return;
+            controller.clear();
+            _search(
+              context: context,
+              searchKey: controller.text,
+            );
+          },
+          border: InputBorder.none,
+        );
+      },
+    );
   }
 }
 
@@ -303,6 +390,12 @@ class _ListByRequestSearchBarState extends State<_ListByRequestSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    controller.text = context
+        .read<ReturnListByRequestBloc>()
+        .state
+        .searchKey
+        .getOrDefaultValue('');
+
     return BlocConsumer<ReturnListByRequestBloc, ReturnListByRequestState>(
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,

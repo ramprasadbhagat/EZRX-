@@ -17,6 +17,7 @@ abstract class IReturnListRepository {
     required int pageSize,
     required int offset,
     required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
   });
 
   Future<Either<ApiFailure, List<ReturnItem>>> fetchReturnListByRequest({

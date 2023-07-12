@@ -73,6 +73,7 @@ class ReturnByItemPage extends StatelessWidget {
                                 .customerCodeInfo,
                             user: context.read<UserBloc>().state.user,
                             appliedFilter: ReturnFilter.empty(),
+                            searchKey: SearchKey(''),
                           ),
                         ),
                     onLoadingMore: () =>

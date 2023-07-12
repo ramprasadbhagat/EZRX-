@@ -10,6 +10,7 @@ class ReturnListByItemEvent with _$ReturnListByItemEvent {
     required CustomerCodeInfo customerCodeInfo,
     required User user,
     required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _Fetch;
   const factory ReturnListByItemEvent.loadMore({
     required User user,

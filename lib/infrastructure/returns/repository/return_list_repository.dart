@@ -35,6 +35,7 @@ class ReturnListRepository extends IReturnListRepository {
     required int pageSize,
     required int offset,
     required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -54,7 +55,7 @@ class ReturnListRepository extends IReturnListRepository {
         pageSize: pageSize,
         offset: offset,
         appliedFilter: appliedFilter,
-        searchKey: SearchKey(''),
+        searchKey: searchKey,
       );
       final returnList = await remoteDataSource.fetchReturnByItems(
         requestParams:

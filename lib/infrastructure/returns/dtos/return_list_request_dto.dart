@@ -69,5 +69,4 @@ class ReturnListRequestDto with _$ReturnListRequestDto {
   Map<String, dynamic> toMap() => toJson()
     ..removeWhere((key, value) => value is String && value.isEmpty)
     ..addAll(filterQuery.toMap());
-    
 }

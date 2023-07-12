@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -175,9 +174,7 @@ class _AmountValueToFilter extends StatelessWidget {
             onChanged: (value) =>
                 context.read<ViewByRequestReturnFilterBloc>().add(
                       ViewByRequestReturnFilterEvent.setAmountTo(
-                        amountTo: value.isNotEmpty
-                            ? StringUtils.formatter.format(double.parse(value))
-                            : '',
+                        amountTo: value.isNotEmpty ? value : '',
                       ),
                     ),
             keyboardType: TextInputType.number,
@@ -216,9 +213,7 @@ class _AmountValueFromFilter extends StatelessWidget {
             onChanged: (value) =>
                 context.read<ViewByRequestReturnFilterBloc>().add(
                       ViewByRequestReturnFilterEvent.setAmountFrom(
-                        amountFrom: value.isNotEmpty
-                            ? StringUtils.formatter.format(double.parse(value))
-                            : '',
+                        amountFrom: value.isNotEmpty ? value : '',
                       ),
                     ),
             keyboardType: TextInputType.number,

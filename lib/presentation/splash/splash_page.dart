@@ -722,6 +722,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeInfo,
               user: user,
               appliedFilter: ReturnFilter.empty(),
+              searchKey: SearchKey(''),
             ),
           );
       context.read<ReturnListByRequestBloc>().add(

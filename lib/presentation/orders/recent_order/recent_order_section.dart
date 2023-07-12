@@ -95,7 +95,7 @@ class _BodyContent extends StatelessWidget {
             ? Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10,top: 5),
+                    padding: const EdgeInsets.only(left: 10, top: 5),
                     child: SectionTitle(
                       title: 'Recently ordered',
                       onTapIconButton: () => context.navigateTo(const OrdersTabRoute()),
@@ -260,6 +260,7 @@ class _PriceLabel extends StatelessWidget {
     );
   }
 }
+
 class _DefaultProductImage extends StatelessWidget {
   const _DefaultProductImage({Key? key}) : super(key: key);
 
