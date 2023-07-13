@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/payments/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -187,7 +189,9 @@ class _DocumentDateFilter extends StatelessWidget {
                 context.read<AllCreditsFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.allCreditsFilter.getDocumentDateFilterDateRange,

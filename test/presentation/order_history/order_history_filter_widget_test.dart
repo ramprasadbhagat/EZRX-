@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
@@ -43,19 +44,15 @@ void main() {
     ),
   );
 
-  final fakeFromDate = DateTime.parse(
-    DateFormat('yyyyMMdd').format(
-      DateTime.now().subtract(
-        const Duration(days: 28),
-      ),
-    ),
-  );
+  const fakeFromDate = Duration(days: 28);
 
   setUpAll(() {
     locator = GetIt.instance;
     locator.registerLazySingleton(() => MockAppRouter());
     locator.registerLazySingleton(() => mockOrderHistoryFilterBloc);
     salesOrgBlocMock = SalesOrgBlocMock();
+    locator.registerSingleton<Config>(
+        Config()..dateRangePickerDuration = fakeFromDate);
   });
   group('Order-History Filter', () {
     setUp(() {
@@ -67,7 +64,6 @@ void main() {
       when(() => autoRouterMock.popForced())
           .thenAnswer((invocation) async => true);
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-
     });
 
     Widget getWUT() {
@@ -77,7 +73,6 @@ void main() {
           BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-
         ],
         child: const OrderHistoryFilterDrawer(),
       );
@@ -270,7 +265,13 @@ void main() {
             showErrorMessages: true,
             orderHistoryFilter: OrderHistoryFilter.empty().copyWith(
                 fromDate:
-                    DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+                    DateTimeStringValue(getDateStringByDateTime(DateTime.parse(
+                  DateFormat('yyyyMMdd').format(
+                    DateTime.now().subtract(
+                      fakeFromDate,
+                    ),
+                  ),
+                ))),
                 toDate:
                     DateTimeStringValue(getDateStringByDateTime(fakeToDate))),
           ),
@@ -297,8 +298,15 @@ void main() {
         verify(
           () => mockOrderHistoryFilterBloc.add(
             OrderHistoryFilterEvent.setOrderDate(
-                orderDateRange:
-                    DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+                orderDateRange: DateTimeRange(
+                    start: DateTime.parse(
+                      DateFormat('yyyyMMdd').format(
+                        DateTime.now().subtract(
+                          fakeFromDate,
+                        ),
+                      ),
+                    ),
+                    end: fakeToDate)),
           ),
         ).called(1);
       },

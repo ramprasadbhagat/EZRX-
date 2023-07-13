@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -55,6 +56,7 @@ class AutoRouterMock extends Mock implements AppRouter {}
 
 class FavoriteRemoteDataSourceMock extends Mock
     implements FavouriteRemoteDataSource {}
+
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -65,6 +67,8 @@ class ProxyLoginFormBlocMock
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 final locator = GetIt.instance;
 
@@ -128,8 +132,14 @@ void main() {
   late CartBloc cartBlocMock;
   late ProxyLoginFormBloc proxyLoginFormBlocMock;
   late MaterialListBloc materialListBlocMock;
+  late RemoteConfigService remoteConfigServiceMock;
+
   setUpAll(() {
+    remoteConfigServiceMock = RemoteConfigServiceMock();
+
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    locator.registerLazySingleton(() => remoteConfigServiceMock);
+
     locator.registerLazySingleton(() => AppRouter());
   });
   group('Account Tab Screen', () {
@@ -282,6 +292,8 @@ void main() {
         ),
       ];
       whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+      when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(false);
+
       final expectedStates1 = [
         ProxyLoginFormState.initial().copyWith(
           isSubmitting: true,
@@ -319,6 +331,8 @@ void main() {
           ),
         ),
       ];
+      when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(false);
+
       whenListen(userBlocMock, Stream.fromIterable(expectedStates));
       final expectedStates1 = [
         ProxyLoginFormState.initial().copyWith(
@@ -437,6 +451,7 @@ void main() {
           ),
         ),
       ];
+      when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
 
       whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
 

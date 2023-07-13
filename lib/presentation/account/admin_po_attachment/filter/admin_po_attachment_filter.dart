@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -41,64 +42,64 @@ class AdminPoAttachmentFilterDrawer extends StatelessWidget {
             ),
           ),
         child: BlocConsumer<AdminPoAttachmentFilterBloc,
-          AdminPoAttachmentFilterState>(
-        listenWhen: (previous, current) =>
-            previous.isSubmitting != current.isSubmitting,
-        listener: (context, state) {
-          if (state.isSubmitting) {
-            context.router.popForced();
-          }
-        },
-        builder: (context, state) {
-          return Form(
-            autovalidateMode: state.showErrorMessages
-                ? AutovalidateMode.always
-                : AutovalidateMode.disabled,
-            child: Column(
-              children: <Widget>[
-                const _FilterHeader(),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 30,
+            AdminPoAttachmentFilterState>(
+          listenWhen: (previous, current) =>
+              previous.isSubmitting != current.isSubmitting,
+          listener: (context, state) {
+            if (state.isSubmitting) {
+              context.router.popForced();
+            }
+          },
+          builder: (context, state) {
+            return Form(
+              autovalidateMode: state.showErrorMessages
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
+              child: Column(
+                children: <Widget>[
+                  const _FilterHeader(),
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 30,
+                      ),
+                      children: <Widget>[
+                        const _OrderNoByFilter(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const _EzrxNumberFilter(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const _SalesOrgByFilter(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const _CustomerCodeByFilter(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const _AdminAttachmentDateFilter(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: const [
+                            _ClearButton(),
+                            _ApplyButton(),
+                          ],
+                        ),
+                      ],
                     ),
-                    children: <Widget>[
-                      const _OrderNoByFilter(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const _EzrxNumberFilter(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const _SalesOrgByFilter(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const _CustomerCodeByFilter(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const _AdminAttachmentDateFilter(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
-                          _ClearButton(),
-                          _ApplyButton(),
-                        ],
-                      ),
-                    ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -310,7 +311,9 @@ class _AdminAttachmentDateFilter extends StatelessWidget {
                 context.read<AdminPoAttachmentFilterBloc>();
             final dateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange: state.adminPoAttachmentFilter.filterDateRange,
               locale: context.read<SalesOrgBloc>().state.salesOrg.locale,

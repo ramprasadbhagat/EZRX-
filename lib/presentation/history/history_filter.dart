@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,8 +120,7 @@ class _OrderIdByFilter extends StatelessWidget {
               ),
           validator: (_) => state.orderHistoryFilter.orderId.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -156,8 +157,7 @@ class _PoNumberFilter extends StatelessWidget {
               ),
           validator: (_) => state.orderHistoryFilter.poNumber.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -195,8 +195,7 @@ class _MaterialSearchByFilter extends StatelessWidget {
               ),
           validator: (_) => state.orderHistoryFilter.materialSearch.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -232,8 +231,7 @@ class _PrincipalSearchByFilter extends StatelessWidget {
               ),
           validator: (_) => state.orderHistoryFilter.principalSearch.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -293,7 +291,6 @@ class _ApplyButton extends StatelessWidget {
 }
 
 class _OrderDateFilter extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
@@ -301,14 +298,18 @@ class _OrderDateFilter extends StatelessWidget {
           previous.orderHistoryFilter.getOrderDateFiltered !=
           current.orderHistoryFilter.getOrderDateFiltered,
       builder: (context, state) {
-
         return TextFormField(
-          key:  Key('filterOrderDateField+${state.orderHistoryFilter.getOrderDateFiltered}'),
+          key: Key(
+            'filterOrderDateField+${state.orderHistoryFilter.getOrderDateFiltered}',
+          ),
           onTap: () async {
-            final orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
+            final orderHistoryFilterBloc =
+                context.read<OrderHistoryFilterBloc>();
             final orderDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.orderHistoryFilter.getOrderFilterDateRange,
@@ -316,10 +317,10 @@ class _OrderDateFilter extends StatelessWidget {
             );
             if (orderDateRange == null) return;
             orderHistoryFilterBloc.add(
-                  OrderHistoryFilterEvent.setOrderDate(
-                    orderDateRange: orderDateRange,
-                  ),
-                );
+              OrderHistoryFilterEvent.setOrderDate(
+                orderDateRange: orderDateRange,
+              ),
+            );
           },
           readOnly: true,
           initialValue: state.orderHistoryFilter.getOrderDateFiltered,

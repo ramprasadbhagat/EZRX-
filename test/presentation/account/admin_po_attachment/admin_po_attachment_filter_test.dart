@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -26,19 +27,20 @@ import '../../../utils/widget_utils.dart';
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
-class AdminPoAttachmentFilterBlocMock extends MockBloc<AdminPoAttachmentFilterEvent, AdminPoAttachmentFilterState>
+class AdminPoAttachmentFilterBlocMock
+    extends MockBloc<AdminPoAttachmentFilterEvent, AdminPoAttachmentFilterState>
     implements AdminPoAttachmentFilterBloc {}
 
-class CustomerCodeBlocMock extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class UserBlocMock extends MockBloc<UserEvent, UserState>
-    implements UserBloc {}
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
-void main(){
+void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
   late AppRouter autoRouterMock;
@@ -48,20 +50,13 @@ void main(){
   late UserBloc mockUserBloc;
   late SalesOrgBloc salesOrgBlocMock;
 
-
   final fakeToDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
       DateTime.now(),
     ),
   );
 
-  final fakeFromDate = DateTime.parse(
-    DateFormat('yyyyMMdd').format(
-      DateTime.now().subtract(
-        const Duration(days: 28),
-      ),
-    ),
-  );
+  const fakeFromDate = Duration(days: 28);
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -72,18 +67,22 @@ void main(){
     locator.registerLazySingleton(() => mockAdminPoAttachmentFilterBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
     locator.registerLazySingleton(() => mockUserBloc);
+    locator.registerSingleton<Config>(
+        Config()..dateRangePickerDuration = fakeFromDate);
   });
 
   group('admin po attachment filter', () {
-
     setUp(() {
       mockEligibilityBlocMock = EligibilityBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      when(() => mockEligibilityBlocMock.state).thenReturn(EligibilityState.initial());
+      when(() => mockEligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
       mockAdminPoAttachmentFilterBloc = AdminPoAttachmentFilterBlocMock();
-      when(() => mockAdminPoAttachmentFilterBloc.state).thenReturn(AdminPoAttachmentFilterState.initial());
+      when(() => mockAdminPoAttachmentFilterBloc.state)
+          .thenReturn(AdminPoAttachmentFilterState.initial());
       mockCustomerCodeBloc = CustomerCodeBlocMock();
-      when(() => mockCustomerCodeBloc.state).thenReturn(CustomerCodeState.initial());
+      when(() => mockCustomerCodeBloc.state)
+          .thenReturn(CustomerCodeState.initial());
       mockUserBloc = UserBlocMock();
       when(() => mockUserBloc.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -103,12 +102,14 @@ void main(){
         child: WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
-            BlocProvider<CustomerCodeBloc>(create: (context) => mockCustomerCodeBloc),
-            BlocProvider<AdminPoAttachmentFilterBloc>(create: (context) => mockAdminPoAttachmentFilterBloc),
-            BlocProvider<EligibilityBloc>(create: (context) => mockEligibilityBlocMock),
+            BlocProvider<CustomerCodeBloc>(
+                create: (context) => mockCustomerCodeBloc),
+            BlocProvider<AdminPoAttachmentFilterBloc>(
+                create: (context) => mockAdminPoAttachmentFilterBloc),
+            BlocProvider<EligibilityBloc>(
+                create: (context) => mockEligibilityBlocMock),
             BlocProvider<UserBloc>(create: (context) => mockUserBloc),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-
           ],
           child: const Material(child: AdminPoAttachmentFilterDrawer()),
         ),
@@ -116,16 +117,16 @@ void main(){
     }
 
     testWidgets('admin po attachment filter test', (tester) async {
-
-      when(() => mockUserBloc.state).thenReturn(UserState.initial().copyWith(
-        user: User.empty().copyWith(
-          userSalesOrganisations: [
-            SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('mock_sales_org'),
-            ),
-          ],
+      when(() => mockUserBloc.state).thenReturn(
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            userSalesOrganisations: [
+              SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('mock_sales_org'),
+              ),
+            ],
+          ),
         ),
-      ),
       );
 
       final expectedStates = [
@@ -158,13 +159,19 @@ void main(){
             salesOrg: SalesOrg(''),
             soldTo: CustomerCodeInfo.empty(),
             fromDate:
-            DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
-            toDate:
-            DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
+                DateTimeStringValue(getDateStringByDateTime(DateTime.parse(
+              DateFormat('yyyyMMdd').format(
+                DateTime.now().subtract(
+                  fakeFromDate,
+                ),
+              ),
+            ))),
+            toDate: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
           ),
         ),
       ];
-      whenListen(mockAdminPoAttachmentFilterBloc, Stream.fromIterable(expectedStates));
+      whenListen(
+          mockAdminPoAttachmentFilterBloc, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -175,13 +182,15 @@ void main(){
 
       final filterOrderNoFieldKey = find.byKey(const Key('filterOrderNoField'));
       expect(filterOrderNoFieldKey, findsOneWidget);
-      await tester.enterText(filterOrderNoFieldKey,'1234');
+      await tester.enterText(filterOrderNoFieldKey, '1234');
 
-      final filterEzrxNumberFieldKey = find.byKey(const Key('filterEzrxNumberField'));
+      final filterEzrxNumberFieldKey =
+          find.byKey(const Key('filterEzrxNumberField'));
       expect(filterEzrxNumberFieldKey, findsOneWidget);
-      await tester.enterText(filterEzrxNumberFieldKey,'1234');
+      await tester.enterText(filterEzrxNumberFieldKey, '1234');
 
-      final filterCustomerCodeSearchFieldKey = find.byKey(const Key('filterCustomerCodeSearchField ${''}'));
+      final filterCustomerCodeSearchFieldKey =
+          find.byKey(const Key('filterCustomerCodeSearchField ${''}'));
       expect(filterCustomerCodeSearchFieldKey, findsOneWidget);
       await tester.tap(filterCustomerCodeSearchFieldKey);
 
@@ -193,7 +202,9 @@ void main(){
       expect(filterClearButtonKey, findsOneWidget);
       await tester.tap(filterClearButtonKey);
 
-      final filterAdminPoAttachmentDateFieldKey = find.ancestor(of: find.text('Order Date'.tr()), matching: find.byType(TextFormField));
+      final filterAdminPoAttachmentDateFieldKey = find.ancestor(
+          of: find.text('Order Date'.tr()),
+          matching: find.byType(TextFormField));
       expect(filterAdminPoAttachmentDateFieldKey, findsOneWidget);
       await tester.tap(filterAdminPoAttachmentDateFieldKey);
       await tester.pumpAndSettle(const Duration(seconds: 4));
@@ -204,7 +215,8 @@ void main(){
       await tester.pumpAndSettle();
       expect(saveButton, findsNothing);
 
-      final filterSalesOrgdKey = find.byKey(const Key('filterSalesOrgSearchField${''}'));
+      final filterSalesOrgdKey =
+          find.byKey(const Key('filterSalesOrgSearchField${''}'));
       expect(filterSalesOrgdKey, findsOneWidget);
       await tester.tap(filterSalesOrgdKey);
 
@@ -213,13 +225,12 @@ void main(){
       final selectSalesOrg = find.text('Please select a Sales Org'.tr());
       expect(selectSalesOrg, findsOneWidget);
 
-      final salesOrgOptionKey = find.byKey(const Key('salesOrgOption${'mock_sales_org'}'));
+      final salesOrgOptionKey =
+          find.byKey(const Key('salesOrgOption${'mock_sales_org'}'));
       expect(salesOrgOptionKey, findsOneWidget);
       await tester.tap(salesOrgOptionKey);
 
       await tester.pump();
     });
-
   });
-
 }

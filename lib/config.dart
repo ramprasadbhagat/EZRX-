@@ -8,7 +8,7 @@ class Config {
   int httpSendTimeout = 150000;
   int httpConnectTimeout = 150000;
   int httpReceiveTimeout = 150000;
-
+  Duration dateRangePickerDuration = const Duration(days: 1095);
   String get targetProduct => 'EZRX';
 
   String get baseUrl {

@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/presentation/returns/request_return/request_return_filter_drawer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -22,9 +23,10 @@ class RequestReturnBlocMock
     implements RequestReturnBloc {}
 
 class MockAppRouter extends Mock implements AppRouter {}
+
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
-    
+
 void main() {
   late GetIt locator;
   final mockRequestReturnFilterBloc = RequestReturnFilterMockBloc();
@@ -36,6 +38,7 @@ void main() {
     locator = GetIt.instance;
     locator.registerLazySingleton(() => MockAppRouter());
     locator.registerLazySingleton(() => mockRequestReturnFilterBloc);
+    locator.registerSingleton<Config>(Config()..dateRangePickerDuration);
   });
 
   group(
@@ -50,7 +53,6 @@ void main() {
         when(() => autoRouterMock.popForced())
             .thenAnswer((invocation) async => true);
         when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-
       });
 
       Widget getWUT() {
@@ -60,7 +62,6 @@ void main() {
             BlocProvider<RequestReturnFilterBloc>(
                 create: (context) => mockRequestReturnFilterBloc),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-
           ],
           child: const RequestReturnFilterDrawer(),
         );

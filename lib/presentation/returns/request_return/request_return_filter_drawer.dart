@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -305,7 +307,9 @@ class _InvoiceDateFilter extends StatelessWidget {
 
             final invoiceDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.requestReturnFilter.getInvoiceFilterDateRange,
@@ -365,9 +369,8 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: const Key('filterApplyButton'),
-      onPressed: () =>
-        context.read<RequestReturnFilterBloc>().add(
-              const RequestReturnFilterEvent.filterRequestReturn(),
+      onPressed: () => context.read<RequestReturnFilterBloc>().add(
+            const RequestReturnFilterEvent.filterRequestReturn(),
           ),
       child: Text(
         'Apply'.tr(),

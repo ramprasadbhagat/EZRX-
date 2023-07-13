@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/payments/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -190,7 +192,8 @@ class _DebitValueToFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
-            initialValue: state.allInvoicesFilter.debitValueTo.apiParameterValue,
+            initialValue:
+                state.allInvoicesFilter.debitValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.debitValueToChanged(
                     value.isNotEmpty
@@ -226,7 +229,8 @@ class _DebitValueFromFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
-            initialValue: state.allInvoicesFilter.debitValueFrom.apiParameterValue,
+            initialValue:
+                state.allInvoicesFilter.debitValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.debitValueFromChanged(
                     value.isNotEmpty
@@ -309,7 +313,9 @@ class _DueDateFilter extends StatelessWidget {
                 context.read<AllInvoicesFilterBloc>();
             final dueDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.allInvoicesFilter.getDueDateFilterDateRange,
@@ -357,7 +363,9 @@ class _DocumentDateFilter extends StatelessWidget {
                 context.read<AllInvoicesFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.allInvoicesFilter.getDocumentDateFilterDateRange,

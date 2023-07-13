@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -122,8 +124,7 @@ class _ReturnIdByFilter extends StatelessWidget {
               ),
           validator: (_) => state.approverReturnFilter.returnId.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -161,8 +162,7 @@ class _CreatedByFilter extends StatelessWidget {
               ),
           validator: (_) => state.approverReturnFilter.createdBy.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -199,8 +199,7 @@ class _ShipToFilter extends StatelessWidget {
               ),
           validator: (_) => state.approverReturnFilter.shipTo.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -235,8 +234,7 @@ class _SoldToFilter extends StatelessWidget {
               ),
           validator: (_) => state.approverReturnFilter.soldTo.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -282,9 +280,8 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: const Key('filterApplyButton'),
-      onPressed: () => 
-        context.read<ReturnApproverFilterBloc>().add(
-              const ReturnApproverFilterEvent.applyFilters(),
+      onPressed: () => context.read<ReturnApproverFilterBloc>().add(
+            const ReturnApproverFilterEvent.applyFilters(),
           ),
       child: Text(
         'Apply'.tr(),
@@ -304,13 +301,16 @@ class _InvoiceDateFilter extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: Key(
-              'filterInvoiceDateField+${state.approverReturnFilter.getFilteredInvoiceDate}',),
+            'filterInvoiceDateField+${state.approverReturnFilter.getFilteredInvoiceDate}',
+          ),
           onTap: () async {
             final returnApproverFilterBloc =
                 context.read<ReturnApproverFilterBloc>();
             final invoiceDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.approverReturnFilter.getInvoiceFilterDateRange,

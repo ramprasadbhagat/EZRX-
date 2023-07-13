@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -132,8 +134,7 @@ class _ReturnIdByFilter extends StatelessWidget {
               ),
           validator: (_) => state.returnSummaryFilter.requestId.value.fold(
             (f) => f.maybeMap(
-              subceedLength: (f) =>
-                  'Please enter at least 2 characters.'.tr(),
+              subceedLength: (f) => 'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -203,7 +204,7 @@ class _TotalPriceFromFilter extends StatelessWidget {
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalFromChanged(
                     value.isNotEmpty
-                        ? StringUtils.formatter.format( double.parse(value))
+                        ? StringUtils.formatter.format(double.parse(value))
                         : '',
                   ),
                 ),
@@ -282,7 +283,9 @@ class _SubmittedDateFilter extends StatelessWidget {
                 context.read<ReturnSummaryFilterBloc>();
             final submittedDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(
+                locator<Config>().dateRangePickerDuration,
+              ),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.returnSummaryFilter.getSubmittedFilterDateRange,
