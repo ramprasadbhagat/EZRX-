@@ -256,11 +256,19 @@ class _TextFormFieldState extends State<_TextFormField> {
                   style: Theme.of(context).textTheme.bodySmall,
                 );
               },
-              onChanged: (value) {
+              onFieldSubmitted: (value) {
                 context.read<AdditionalDetailsBloc>().add(
                       AdditionalDetailsEvent.onTextChange(
                         label: widget.label,
                         newValue: value,
+                      ),
+                    );
+              },
+              onTapOutside: (value) {
+                context.read<AdditionalDetailsBloc>().add(
+                      AdditionalDetailsEvent.onTextChange(
+                        label: widget.label,
+                        newValue: _controller.text,
                       ),
                     );
               },
