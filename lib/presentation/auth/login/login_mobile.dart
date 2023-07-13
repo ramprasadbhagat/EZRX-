@@ -40,28 +40,26 @@ class LoginMobile extends StatelessWidget {
             children: [
               const Logo(),
               Expanded(
-                child: SingleChildScrollView(
+                child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    children: [
-                      UsernameField(
-                        controller: usernameController,
-                      ),
-                      const SizedBox(height: 25),
-                      PasswordField(
-                        controller: passwordController,
-                      ),
-                      const RememberPassword(),
-                      const SizedBox(height: 15),
-                      const LoginButton(),
-                      const SizedBox(height: 25),
-                      const _OrDivider(),
-                      const SizedBox(height: 25),
-                      const _SSOLoginButton(),
-                      const SizedBox(height: 15),
-                      const _CreateAccount(),
-                    ],
-                  ),
+                  children: [
+                    UsernameField(
+                      controller: usernameController,
+                    ),
+                    const SizedBox(height: 25),
+                    PasswordField(
+                      controller: passwordController,
+                    ),
+                    const RememberPassword(),
+                    const SizedBox(height: 15),
+                    const LoginButton(),
+                    const SizedBox(height: 25),
+                    const _OrDivider(),
+                    const SizedBox(height: 25),
+                    const _SSOLoginButton(),
+                    const SizedBox(height: 15),
+                    const _CreateAccount(),
+                  ],
                 ),
               ),
             ],

@@ -73,6 +73,9 @@ class HomeTab extends StatelessWidget {
                 );
           }
         },
+        //SingleChildScrollView and Column is needed
+        //as the ListView is rebuilding the BrowseProduct & BundleSection
+        //and it was recreating the BlocProvider
         child: SingleChildScrollView(
           child: Column(
             children: [

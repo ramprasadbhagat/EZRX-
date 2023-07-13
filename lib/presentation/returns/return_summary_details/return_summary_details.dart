@@ -57,19 +57,17 @@ class ReturnSummaryDetails extends StatelessWidget {
         ),
         body: AnnouncementBanner(
           currentPath: context.router.currentPath,
-          child: SingleChildScrollView(
+          child: ListView(
             padding: const EdgeInsets.only(
               left: 15,
               right: 15,
               bottom: 20,
             ),
-            child: Column(
-              children: const [
-                ReturnSummaryCustomerDetailsSection(),
-                ReturnSummaryDetailsSection(),
-                ReturnItemsSection(),
-              ],
-            ),
+            children: const [
+              ReturnSummaryCustomerDetailsSection(),
+              ReturnSummaryDetailsSection(),
+              ReturnItemsSection(),
+            ],
           ),
         ),
       ),
