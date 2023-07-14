@@ -6,6 +6,7 @@ class CustomSlidable extends StatelessWidget {
   final Widget child;
   final bool enabled;
   final double borderRadius;
+  final double extentRatio;
   final List<CustomSlidableAction> endActionPaneActions;
 
   const CustomSlidable({
@@ -14,6 +15,7 @@ class CustomSlidable extends StatelessWidget {
     this.enabled = true,
     this.borderRadius = 0,
     this.endActionPaneActions = const <CustomSlidableAction>[],
+    this.extentRatio = 0.5,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class CustomSlidable extends StatelessWidget {
       endActionPane: endActionPaneActions.isEmpty
           ? null
           : ActionPane(
+              extentRatio: extentRatio,
               motion: const ScrollMotion(),
               children: endActionPaneActions
                   .map(

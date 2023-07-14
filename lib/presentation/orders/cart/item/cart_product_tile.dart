@@ -26,6 +26,7 @@ class CartProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomSlidable(
+      extentRatio: 0.24,
       endActionPaneActions: [
         CustomSlidableAction(
           label: '',
@@ -102,9 +103,11 @@ class _MaterialDetailsSection extends StatelessWidget {
 class _ItemSubTotalSection extends StatelessWidget {
   final CartProduct cartProduct;
   final int index;
-  const _ItemSubTotalSection(
-      {required this.cartProduct, Key? key, required this.index,})
-      : super(key: key);
+  const _ItemSubTotalSection({
+    required this.cartProduct,
+    Key? key,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +126,8 @@ class _ItemSubTotalSection extends StatelessWidget {
           ),
           LoadingShimmer.withChild(
             enabled: context.read<CartBloc>().state.isMappingPrice ||
-                context.read<CartBloc>().state.isUpserting || context.read<MaterialPriceBloc>().state.isFetching,
+                context.read<CartBloc>().state.isUpserting ||
+                context.read<MaterialPriceBloc>().state.isFetching,
             child: RichText(
               text: TextSpan(
                 text: 'MYR ',
