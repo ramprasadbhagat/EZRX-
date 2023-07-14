@@ -32,6 +32,7 @@ class MaterialListRemoteDataSource {
     required String language,
     required bool isFavourite,
     required bool bundleOffers,
+    required bool isProductOffer,
     required String orderByName,
     required List<String> manufactureList,
     required List<String> countryListCode,
@@ -54,6 +55,7 @@ class MaterialListRemoteDataSource {
 
       if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
       if (bundleOffers) variables['request']!['Type'] = 'bundle';
+      if (isProductOffer) variables['request']!['isOffer'] = isProductOffer;
       if (manufactureList.isNotEmpty) {
         variables['request']!['Manufactured'] = manufactureList;
       }

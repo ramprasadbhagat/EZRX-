@@ -52,6 +52,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
               isFavourite: e.selectedMaterialFilter.isFavourite,
               bundleOffers: e.selectedMaterialFilter.bundleOffers,
+              isProductOffer: e.selectedMaterialFilter.isProductOffer,
               sortBy: e.selectedMaterialFilter.sortBy,
               countryListSelected:
               e.selectedMaterialFilter.countryListSelected,
@@ -82,7 +83,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               state.copyWith(
                 materialCount: productResponse.count,
                 materialList: productResponse.products,
-                apiFailureOrSuccessOption: none(),
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
                 canLoadMore: productResponse.products.length >= _pageSize,
                 nextPageIndex: 1,

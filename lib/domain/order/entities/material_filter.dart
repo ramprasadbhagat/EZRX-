@@ -10,12 +10,14 @@ class MaterialFilter with _$MaterialFilter {
   const factory MaterialFilter({
     @Default(false) bool isFavourite,
     @Default(false) bool bundleOffers,
+    @Default(false) bool isProductOffer,
     @Default(Sort.az) Sort sortBy,
     required Map<String, bool> manufactureMapOptions,
     required Map<MaterialFilterCountry, bool> countryMapOptions,
     required List<String> brandList,
     @Default(<String>[]) List<String> manufactureListSelected,
-    @Default(<MaterialFilterCountry>[]) List<MaterialFilterCountry> countryListSelected,
+    @Default(<MaterialFilterCountry>[])
+        List<MaterialFilterCountry> countryListSelected,
   }) = _MaterialFilter;
 
   factory MaterialFilter.empty() => const MaterialFilter(

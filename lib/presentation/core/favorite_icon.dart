@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class FavouriteIcon extends StatelessWidget {
   final bool isFavourite;
+  final VisualDensity? visualDensity;
   final VoidCallback onTap;
   const FavouriteIcon({
     Key? key,
     required this.isFavourite,
+    this.visualDensity,
     required this.onTap,
   }) : super(key: key);
 
@@ -14,6 +16,8 @@ class FavouriteIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onTap,
+      visualDensity: visualDensity,
+      padding: EdgeInsets.zero,
       icon: Icon(
         isFavourite
             ? Icons.favorite

@@ -130,12 +130,20 @@ class _ShowProduct extends StatelessWidget {
             ListTileTheme(
               horizontalTitleGap: 0,
               child: CheckboxListTile(
-                value: state.materialFilter.bundleOffers,
+                value: state.materialFilter.isProductOffer,
                 onChanged: (value) {
+                  if (state.materialFilter.bundleOffers) {
+                    context.read<MaterialFilterBloc>().add(
+                          MaterialFilterEvent.updateSelectedMaterialFilter(
+                            MaterialFilterType.bundleOffers,
+                            !state.materialFilter.bundleOffers,
+                          ),
+                        );
+                  }
                   context.read<MaterialFilterBloc>().add(
                         MaterialFilterEvent.updateSelectedMaterialFilter(
-                          MaterialFilterType.bundleOffers,
-                          !state.materialFilter.bundleOffers,
+                          MaterialFilterType.productOffers,
+                          !state.materialFilter.isProductOffer,
                         ),
                       );
                 },
@@ -157,6 +165,15 @@ class _ShowProduct extends StatelessWidget {
               child: CheckboxListTile(
                 value: state.materialFilter.bundleOffers,
                 onChanged: (value) {
+                  if (!state.materialFilter.isProductOffer) {
+                    context.read<MaterialFilterBloc>().add(
+                           MaterialFilterEvent
+                              .updateSelectedMaterialFilter(
+                            MaterialFilterType.productOffers,
+                            !state.materialFilter.isProductOffer,
+                          ),
+                        );
+                  }
                   context.read<MaterialFilterBloc>().add(
                         MaterialFilterEvent.updateSelectedMaterialFilter(
                           MaterialFilterType.bundleOffers,

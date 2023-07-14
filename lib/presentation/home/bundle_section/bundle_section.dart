@@ -131,6 +131,7 @@ class BundleSection extends StatelessWidget {
           shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
           selectedMaterialFilter: MaterialFilter.empty().copyWith(
             bundleOffers: true,
+            isProductOffer: true,
           ),
         ));
     context.navigateTo(const ProductsTabRoute());

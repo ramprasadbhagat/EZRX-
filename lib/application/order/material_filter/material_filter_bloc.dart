@@ -128,6 +128,14 @@ class MaterialFilterBloc
               ),
             );
             break;
+          case MaterialFilterType.productOffers:
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(isProductOffer: e.key as bool),
+              ),
+            );
+            break;
           case MaterialFilterType.sortBy:
             emit(
               state.copyWith(
@@ -169,6 +177,7 @@ class MaterialFilterBloc
               isFavourite: e.selectedMaterialFilter.isFavourite,
               sortBy: e.selectedMaterialFilter.sortBy,
               bundleOffers: e.selectedMaterialFilter.bundleOffers,
+              isProductOffer: e.selectedMaterialFilter.isProductOffer,
               manufactureMapOptions: manufactureMap,
               countryMapOptions: countryMap,
               manufactureListSelected:

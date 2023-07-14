@@ -66,6 +66,7 @@ class MaterialListRepository implements IMaterialListRepository {
         gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
         isFavourite: selectedMaterialFilter.isFavourite,
         bundleOffers: selectedMaterialFilter.bundleOffers,
+        isProductOffer: selectedMaterialFilter.isProductOffer,
         offset: offset,
         orderByName: selectedMaterialFilter.sortBy.valueRequest,
         manufactureList: selectedMaterialFilter.manufactureListSelected,

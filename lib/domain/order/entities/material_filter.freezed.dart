@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MaterialFilter {
   bool get isFavourite => throw _privateConstructorUsedError;
   bool get bundleOffers => throw _privateConstructorUsedError;
+  bool get isProductOffer => throw _privateConstructorUsedError;
   Sort get sortBy => throw _privateConstructorUsedError;
   Map<String, bool> get manufactureMapOptions =>
       throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $MaterialFilterCopyWith<$Res> {
   $Res call(
       {bool isFavourite,
       bool bundleOffers,
+      bool isProductOffer,
       Sort sortBy,
       Map<String, bool> manufactureMapOptions,
       Map<MaterialFilterCountry, bool> countryMapOptions,
@@ -66,6 +68,7 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
   $Res call({
     Object? isFavourite = null,
     Object? bundleOffers = null,
+    Object? isProductOffer = null,
     Object? sortBy = null,
     Object? manufactureMapOptions = null,
     Object? countryMapOptions = null,
@@ -81,6 +84,10 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
       bundleOffers: null == bundleOffers
           ? _value.bundleOffers
           : bundleOffers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isProductOffer: null == isProductOffer
+          ? _value.isProductOffer
+          : isProductOffer // ignore: cast_nullable_to_non_nullable
               as bool,
       sortBy: null == sortBy
           ? _value.sortBy
@@ -121,6 +128,7 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
   $Res call(
       {bool isFavourite,
       bool bundleOffers,
+      bool isProductOffer,
       Sort sortBy,
       Map<String, bool> manufactureMapOptions,
       Map<MaterialFilterCountry, bool> countryMapOptions,
@@ -142,6 +150,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
   $Res call({
     Object? isFavourite = null,
     Object? bundleOffers = null,
+    Object? isProductOffer = null,
     Object? sortBy = null,
     Object? manufactureMapOptions = null,
     Object? countryMapOptions = null,
@@ -157,6 +166,10 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
       bundleOffers: null == bundleOffers
           ? _value.bundleOffers
           : bundleOffers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isProductOffer: null == isProductOffer
+          ? _value.isProductOffer
+          : isProductOffer // ignore: cast_nullable_to_non_nullable
               as bool,
       sortBy: null == sortBy
           ? _value.sortBy
@@ -192,6 +205,7 @@ class _$_MaterialFilter extends _MaterialFilter {
   const _$_MaterialFilter(
       {this.isFavourite = false,
       this.bundleOffers = false,
+      this.isProductOffer = false,
       this.sortBy = Sort.az,
       required final Map<String, bool> manufactureMapOptions,
       required final Map<MaterialFilterCountry, bool> countryMapOptions,
@@ -212,6 +226,9 @@ class _$_MaterialFilter extends _MaterialFilter {
   @override
   @JsonKey()
   final bool bundleOffers;
+  @override
+  @JsonKey()
+  final bool isProductOffer;
   @override
   @JsonKey()
   final Sort sortBy;
@@ -263,7 +280,7 @@ class _$_MaterialFilter extends _MaterialFilter {
 
   @override
   String toString() {
-    return 'MaterialFilter(isFavourite: $isFavourite, bundleOffers: $bundleOffers, sortBy: $sortBy, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
+    return 'MaterialFilter(isFavourite: $isFavourite, bundleOffers: $bundleOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
   }
 
   @override
@@ -275,6 +292,8 @@ class _$_MaterialFilter extends _MaterialFilter {
                 other.isFavourite == isFavourite) &&
             (identical(other.bundleOffers, bundleOffers) ||
                 other.bundleOffers == bundleOffers) &&
+            (identical(other.isProductOffer, isProductOffer) ||
+                other.isProductOffer == isProductOffer) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
             const DeepCollectionEquality()
                 .equals(other._manufactureMapOptions, _manufactureMapOptions) &&
@@ -293,6 +312,7 @@ class _$_MaterialFilter extends _MaterialFilter {
       runtimeType,
       isFavourite,
       bundleOffers,
+      isProductOffer,
       sortBy,
       const DeepCollectionEquality().hash(_manufactureMapOptions),
       const DeepCollectionEquality().hash(_countryMapOptions),
@@ -311,6 +331,7 @@ abstract class _MaterialFilter extends MaterialFilter {
   const factory _MaterialFilter(
           {final bool isFavourite,
           final bool bundleOffers,
+          final bool isProductOffer,
           final Sort sortBy,
           required final Map<String, bool> manufactureMapOptions,
           required final Map<MaterialFilterCountry, bool> countryMapOptions,
@@ -324,6 +345,8 @@ abstract class _MaterialFilter extends MaterialFilter {
   bool get isFavourite;
   @override
   bool get bundleOffers;
+  @override
+  bool get isProductOffer;
   @override
   Sort get sortBy;
   @override
