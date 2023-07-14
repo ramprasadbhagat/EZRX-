@@ -98,11 +98,12 @@ class _BodyContent extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: SectionTitle(
                       title: 'Recently ordered',
-                      onTapIconButton: () => context.navigateTo(const OrdersTabRoute()),
+                      onTapIconButton: () =>
+                          context.navigateTo(const OrdersTabRoute()),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.16,
+                    height: 150,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: state.recentlyOrderedProducts
@@ -140,8 +141,8 @@ class _ProductTile extends StatelessWidget {
                   10,
                 ),
                 child: CachedNetworkImage(
-                  width: MediaQuery.of(context).size.height * 0.06,
-                  height: MediaQuery.of(context).size.height * 0.06,
+                  width: 80,
+                  height: 120,
                   imageUrl: product.productImages.thumbNail,
                   placeholder: (context, url) => const _DefaultProductImage(),
                   errorWidget: (context, url, error) =>
@@ -187,8 +188,10 @@ class _ProductTile extends StatelessWidget {
                         _PriceLabel(product: product),
                         IconButton(
                           padding: EdgeInsets.zero,
-                          visualDensity:
-                              const VisualDensity(horizontal: -4, vertical: -4),
+                          visualDensity: const VisualDensity(
+                            horizontal: -4,
+                            vertical: -4,
+                          ),
                           onPressed: () {
                             product.isFavourite
                                 ? context.read<RecentOrderBloc>().add(
