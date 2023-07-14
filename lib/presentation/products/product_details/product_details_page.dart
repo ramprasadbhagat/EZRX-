@@ -270,9 +270,10 @@ class _FooterState extends State<_Footer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
+      child: Padding(
+        padding: MediaQuery.of(context)
+            .viewInsets
+            .copyWith(top: MediaQuery.of(context).size.height * 0.01),
         child: Wrap(
           children: [
             Row(
@@ -284,7 +285,7 @@ class _FooterState extends State<_Footer> {
                   child: CartItemQuantityInput(
                     key: WidgetKeys.materialDetailsQuantityInput,
                     addPressed: (value) {},
-                    controller: TextEditingController(),
+                    controller: _quantityEditingController,
                     isEnabled: true,
                     onFieldChange: (value) {},
                     onSubmit: (value) {},
