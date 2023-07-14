@@ -29,8 +29,9 @@ class BrowseProduct extends StatelessWidget {
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
             listenWhen: (previous, current) =>
-                previous.customerCodeInfo != current.customerCodeInfo ||
-                previous.shipToInfo != current.shipToInfo,
+                current != EligibilityState.initial() &&
+                (previous.customerCodeInfo != current.customerCodeInfo ||
+                    previous.shipToInfo != current.shipToInfo),
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(

@@ -286,6 +286,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
               // context.read<UserBloc>().state.userCanCreateOrder &&
+              current != EligibilityState.initial() &&
               (previous.isCovidMaterialEnable !=
                       current.isCovidMaterialEnable ||
                   previous.salesOrgConfigs.disableBundles !=
@@ -307,6 +308,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     filter: ViewByOrderHistoryFilter.empty(),
                   ),
                 );
+
             if (state.isOrderTypeEnable) {
               context.read<OrderDocumentTypeBloc>().add(
                     OrderDocumentTypeEvent.fetch(
@@ -386,7 +388,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              previous.shipToInfo != current.shipToInfo,
+              previous.shipToInfo != current.shipToInfo &&
+              current != EligibilityState.initial(),
           listener: (context, state) {
             _getAdminPoAttachment(state);
             context.read<CartBloc>().add(

@@ -27,26 +27,14 @@ class BundleSection extends StatelessWidget {
     final ctx = context;
 
     return BlocProvider<MaterialListBloc>(
-      create: (context) => locator<MaterialListBloc>()
-        ..add(
-          MaterialListEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-            selectedMaterialFilter: MaterialFilter.empty().copyWith(
-              bundleOffers: true,
-            ),
-          ),
-        ),
+      create: (context) => locator<MaterialListBloc>(),
       child: MultiBlocListener(
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
             listenWhen: (previous, current) =>
-                previous.customerCodeInfo != current.customerCodeInfo ||
-                previous.shipToInfo != current.shipToInfo,
+                current != EligibilityState.initial() &&
+                (previous.customerCodeInfo != current.customerCodeInfo ||
+                    previous.shipToInfo != current.shipToInfo),
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(
