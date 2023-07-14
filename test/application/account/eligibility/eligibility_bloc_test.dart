@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -28,7 +29,8 @@ void main() {
         customerCodeSoldTo: CustomerCode('fake-customer-code'), shipToInfos: [])
   ];
 
-  final fakeShipToInfo = ShipToInfo.empty().copyWith(building: 'fakeBuilding',shipToCustomerCode: '123');
+  final fakeShipToInfo = ShipToInfo.empty()
+      .copyWith(building: 'fakeBuilding', shipToCustomerCode: '123');
   final fakeBillToInfo =
       BillToInfo.empty().copyWith(billToCustomerCode: 'customer1234');
   final fakeCustomerInfo = CustomerCodeInfo.empty().copyWith(
@@ -101,7 +103,7 @@ void main() {
     enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
     comboDealsUserRole: ComboDealUserRole(0),
-    enableGMN:false,
+    enableGMN: false,
   );
   final chatBotRepositoryMock = ChatBotRepositoryMock();
 
@@ -114,11 +116,10 @@ void main() {
         expect: () => [EligibilityState.initial()]);
 
     blocTest(
-      'Eligibility Update',
+      'Eligibility Update fail',
       build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
       setUp: () {
-        when(() => chatBotRepositoryMock
-            .passPayloadToChatbot(
+        when(() => chatBotRepositoryMock.passPayloadToChatbot(
               customerCodeInfo: fakeCustomerInfo,
               salesOrganisation: fakeSaleOrg,
               salesOrganisationConfigs: fakeSaleOrgConfig,
@@ -142,16 +143,69 @@ void main() {
       },
       expect: () => [
         EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: fakeSaleOrgConfig,
+            customerCodeInfo: fakeCustomerInfo,
+            shipToInfo: fakeShipToInfo,
+            failureOrSuccessOption: const None()),
+      ],
+    );
+
+    blocTest(
+      'Eligibility Update',
+      build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
+      setUp: () {
+        when(() => chatBotRepositoryMock.passPayloadToChatbot(
+              customerCodeInfo: fakeCustomerInfo,
+              salesOrganisation: fakeSaleOrg,
+              salesOrganisationConfigs: fakeSaleOrgConfig,
+              shipToInfo: fakeShipToInfo,
+              user: fakeUser,
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('Fake Error'),
+          ),
+        );
+      },
+      act: (EligibilityBloc bloc) {
+        bloc.add(
+          EligibilityEvent.update(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: fakeSaleOrgConfig,
+            customerCodeInfo: fakeCustomerInfo,
+            shipToInfo: fakeShipToInfo,
+            selectedOrderType: OrderDocumentType.empty(),
+          ),
+        );
+      },
+      expect: () => [
+        EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
           salesOrgConfigs: fakeSaleOrgConfig,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: const None()
+          failureOrSuccessOption: const None(),
+        ),
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          salesOrganisation: fakeSaleOrg,
+          salesOrgConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeShipToInfo,
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('Fake Error'),
+            ),
+          ),
         ),
       ],
     );
   });
+
+  
 
   test(
     'Check pnpValueMaterial for eligibility state returns empty string if user role type is not SalesRep',
@@ -383,6 +437,114 @@ void main() {
     },
   );
 
+  test(
+    'isPaymentTermDescriptionEnable',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+      );
+
+      expect(eligibilityState.isPaymentTermDescriptionEnable, true);
+    },
+  );
+
+  test(
+    'isSalesRepAndBonusEligible',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+          hasBonusOverride: true,
+        ),
+        salesOrganisation: SalesOrganisation.empty().copyWith(
+          salesOrg: SalesOrg('2001'),
+        ),
+      );
+
+      expect(eligibilityState.isSalesRepAndBonusEligible, true);
+    },
+  );
+
+  test(
+    'isBundleMaterialEnable',
+    () {
+      final eligibilityState = EligibilityState.initial();
+
+      expect(eligibilityState.isBundleMaterialEnable, true);
+    },
+  );
+
+  test(
+    'isMYMarketSalesRep',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+        ),
+        salesOrganisation: SalesOrganisation.empty().copyWith(
+          salesOrg: SalesOrg('2001'),
+        ),
+      );
+
+      expect(eligibilityState.isMYMarketSalesRep, true);
+    },
+  );
+
+  test(
+    'isOrderSummaryPPEDisclaimerEnable',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        salesOrganisation: SalesOrganisation.empty().copyWith(
+          salesOrg: SalesOrg('2601'),
+        ),
+      );
+
+      expect(eligibilityState.isOrderSummaryPPEDisclaimerEnable, true);
+    },
+  );
+
+  test(
+    'isBundleMaterialEnable',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+        ),
+        salesOrganisation: SalesOrganisation.empty().copyWith(
+          salesOrg: SalesOrg('2001'),
+        ),
+      );
+
+      expect(eligibilityState.isMYMarketSalesRep, true);
+    },
+  );
+
+  test(
+    'isCovidMaterialEnable',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('client_user'),
+          ),
+        ),
+        salesOrganisation: SalesOrganisation.empty().copyWith(
+          salesOrg: SalesOrg('2601'),
+        ),
+        customerCodeInfo:
+            fakeCustomerInfo.copyWith(customerAttr7: CustomerAttr7('ZEV')),
+      );
+
+      expect(eligibilityState.isCovidMaterialEnable, true);
+    },
+  );
+
   group(
     'Combo Deal Eligible -',
     () {
@@ -508,4 +670,189 @@ void main() {
       );
     },
   );
+
+  group('Override ', () {
+    test(
+      'bonus override none sales rep ',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          salesOrgConfigs:
+              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+        );
+        expect(eligibilityState.isBonusOverrideEnable, true);
+      },
+    );
+
+    test(
+      'bonus override sales rep ',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+            hasBonusOverride: true,
+          ),
+        );
+
+        expect(eligibilityState.isBonusOverrideEnable, true);
+      },
+    );
+
+    test(
+      'ZDP8Override Override',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(enableZDP8Override: true),
+        );
+
+        expect(eligibilityState.isZDP8Override, true);
+      },
+    );
+    test(
+      'isPriceOverrideEnable Override none sales rep ',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          salesOrgConfigs:
+              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+        );
+
+        expect(eligibilityState.isPriceOverrideEnable, true);
+      },
+    );
+
+    test(
+      'isPriceOverrideEnable Override sales rep ',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+            hasPriceOverride: true,
+          ),
+        );
+
+        expect(eligibilityState.isPriceOverrideEnable, true);
+      },
+    );
+  });
+
+  group('Return', () {
+    test(
+      'Return disable for any user with disableReturns',
+      () {
+        final eligibilityState = EligibilityState.initial()
+            .copyWith(user: fakeUser.copyWith(disableReturns: true));
+
+        expect(eligibilityState.isReturnsEnable, false);
+      },
+    );
+    test(
+      'Return disable for sales rep user with disableReturnsAccessSR',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableReturnsAccessSR: true),
+        );
+
+        expect(eligibilityState.isReturnsEnable, false);
+      },
+    );
+
+    test(
+      'Return disable for customer user with disableReturnsAccessSR',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('client_user')),
+          ),
+        );
+
+        expect(eligibilityState.isReturnsEnable, true);
+      },
+    );
+
+    test(
+      'Return enable',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('client_user')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableReturnsAccess: true),
+        );
+
+        expect(eligibilityState.isReturnsEnable, false);
+      },
+    );
+  });
+
+
+  group('showGreenDeliveryBox', () {
+    test(
+      'showGreenDeliveryBox salesOrgConfigs disable',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableGreenDelivery: false,
+          ),
+        );
+
+        expect(eligibilityState.showGreenDeliveryBox, false);
+      },
+    );
+
+    test(
+      'salesOrgConfigs gdEligibleRole all user',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableGreenDelivery: true,
+            greenDeliveryUserRole: GreenDeliveryUserRole(1),
+          ),
+        );
+
+        expect(eligibilityState.showGreenDeliveryBox, true);
+      },
+    );
+
+    test(
+      'salesOrgConfigs gdEligibleRole customer',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('client_user')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableGreenDelivery: true,
+            greenDeliveryUserRole: GreenDeliveryUserRole(2),
+          ),
+        );
+
+        expect(eligibilityState.showGreenDeliveryBox, true);
+      },
+    );
+
+    test(
+      'salesOrgConfigs gdEligibleRole sales rep',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableGreenDelivery: true,
+            greenDeliveryUserRole: GreenDeliveryUserRole(3),
+          ),
+        );
+
+        expect(eligibilityState.showGreenDeliveryBox, true);
+      },
+    );
+  });
 }
