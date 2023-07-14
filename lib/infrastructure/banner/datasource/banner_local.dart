@@ -18,9 +18,13 @@ class BannerLocalDataSource {
         .toList();
   }
 
-  Future<List<BannerItem>> getEZReachBanners() async {
+  Future<List<BannerItem>> getEZReachBanners({
+    required String bannerType,
+  }) async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getEZReachBannerResponse.json'),
+      await rootBundle.loadString(bannerType == 'banner_carousel'
+          ? 'assets/json/getEZReachBannerResponse.json'
+          : 'assets/json/getEZReachTopAdvertBoxResponse.json'),
     );
 
     return List.from(data['data']['getLiveCampaigns']['data'])

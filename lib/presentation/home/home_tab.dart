@@ -2,11 +2,12 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
-import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section.dart/product_offer_section.dart';
+import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
+import 'package:ezrxmobile/presentation/home/banners/kr_banner/kr_banner.dart';
+import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
-import 'package:ezrxmobile/presentation/home/widgets/kr_banner.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -87,11 +88,12 @@ class HomeTab extends StatelessWidget {
               const EdiUserBanner(),
               const AccountSuspendedBanner(),
               const QuickAccessMenuPanel(),
-              const HomeBanner(),
+              const CarouselBanner(),
               const ProductsOnOffer(),
               const BundleSection(),
               const RecentOrdersSection(),
               const BrowseProduct(),
+              const TopAdvertBoxBanner(),
               const KRBanners(),
               const AnnouncementSection(),
             ],

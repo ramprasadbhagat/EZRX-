@@ -56,6 +56,7 @@ class BannerRemoteDataSource {
     required String salesOrg,
     required String country,
     required String role,
+    required String bannerType,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await eZReachHttpService.request(
@@ -69,7 +70,7 @@ class BannerRemoteDataSource {
               'Salesorg': salesOrg,
               'role': role,
               'targetProduct': config.targetProduct,
-              'bannerPlacement': 'banner_carousel',
+              'bannerPlacement': bannerType,
               'sortField': 'banner_slot',
               'sort': 'asc',
             },
@@ -97,4 +98,3 @@ class BannerRemoteDataSource {
     }
   }
 }
-

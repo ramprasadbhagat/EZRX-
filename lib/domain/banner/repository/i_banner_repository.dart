@@ -13,5 +13,6 @@ abstract class IBannerRepository {
     required SalesOrganisation salesOrganisation,
     required String country,
     required String role,
+    required String bannerType,
   });
 }

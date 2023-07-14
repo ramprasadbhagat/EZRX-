@@ -11,7 +11,7 @@ import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
+import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -104,7 +104,7 @@ void main() {
         isKeyword: true,
         keyword: 'Test Keyword',
       );
-      final bannerTile = BannerTile(banner: banner, bannerPosition: 1);
+      final bannerTile = CarouselBannerTile(banner: banner, bannerPosition: 1);
       return MaterialApp(
         home: Scaffold(
           body: bannerTile,
@@ -116,7 +116,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      final bannerTile = find.byType(BannerTile);
+      final bannerTile = find.byType(CarouselBannerTile);
       expect(
         bannerTile,
         findsOneWidget,
@@ -135,7 +135,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-          MaterialApp(home: BannerTile(banner: banner, bannerPosition: 1)));
+          MaterialApp(home: CarouselBannerTile(banner: banner, bannerPosition: 1)));
 
       expect(find.text('Test Banner'), findsNothing);
       expect(find.byType(CachedNetworkImage), findsOneWidget);

@@ -52,10 +52,11 @@ class BannerRepository implements IBannerRepository {
     required SalesOrganisation salesOrganisation,
     required String country,
     required String role,
+    required String bannerType,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final ezReachBanners = await localDataSource.getEZReachBanners();
+        final ezReachBanners = await localDataSource.getEZReachBanners(bannerType: bannerType);
 
         return Right(ezReachBanners);
       } catch (e) {
@@ -67,6 +68,7 @@ class BannerRepository implements IBannerRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         country: country,
         role: role,
+        bannerType: bannerType,
       );
 
       return Right(ezReachBanners);

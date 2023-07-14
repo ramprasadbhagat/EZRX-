@@ -82,6 +82,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               country: country,
               role: role,
+              bannerType: 'banner_carousel',
             )).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
@@ -92,6 +93,7 @@ void main() {
           salesOrganisation: mockSalesOrganisation,
           role: role,
           country: country,
+          bannerType: 'banner_carousel',
         ));
       },
       expect: () => [
@@ -118,6 +120,7 @@ void main() {
               salesOrganisation: salesOrganisation2601,
               country: country,
               role: role,
+              bannerType: 'banner_carousel',
             )).thenAnswer(
           (invocation) async => Right([BannerItem.empty()]),
         );
@@ -128,6 +131,7 @@ void main() {
           salesOrganisation: salesOrganisation2601,
           role: role,
           country: country,
+          bannerType: 'banner_carousel',
         ));
       },
       expect: () => [
@@ -157,6 +161,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               country: country,
               role: role,
+              bannerType: 'banner_carousel',
             )).thenAnswer(
           (invocation) async => Right([BannerItem.empty()]),
         );
@@ -167,6 +172,7 @@ void main() {
           salesOrganisation: mockSalesOrganisation,
           role: role,
           country: country,
+          bannerType: 'banner_carousel',
         ));
       },
       expect: () => [

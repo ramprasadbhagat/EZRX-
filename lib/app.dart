@@ -71,7 +71,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -246,7 +245,6 @@ class App extends StatelessWidget {
           create: (context) => locator<ProxyLoginFormBloc>(),
         ),
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
-        BlocProvider<BannerBloc>(create: (context) => locator<BannerBloc>()),
         BlocProvider<SalesOrgBloc>(
           create: (context) =>
               locator<SalesOrgBloc>()..add(const SalesOrgEvent.initialized()),

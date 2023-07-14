@@ -693,7 +693,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => BannerBloc(
       bannerRepository: locator<BannerRepository>(),
     ),

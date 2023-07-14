@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 
 // aware issue :
 // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3443/eZRx-banner-workflow-doubt
-class BannerTile extends StatelessWidget {
+class CarouselBannerTile extends StatelessWidget {
   final BannerItem banner;
   final int bannerPosition;
 
-  const BannerTile({
+  const CarouselBannerTile({
     Key? key,
     required this.bannerPosition,
     required this.banner,

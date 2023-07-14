@@ -8,7 +8,7 @@ import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_b
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
-import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+//import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -465,12 +465,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
-
-                  if (state.haveSelectedSalesOrganisation) {
-                    _callBannerAndDocType(context, state);
-                  } else {
-                    _initBlocs(context);
-                  }
+                  _initBlocs(context);
                 },
                 (_) {},
               ),
@@ -486,7 +481,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       pageSize: 24,
                     ),
                   );
-              _callBannerAndDocType(context, state);
 
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.loadStoredCustomerCode(
@@ -924,31 +918,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   }
 
   void _initBlocs(BuildContext context) {
-    context.read<BannerBloc>().add(const BannerEvent.initialized());
+    //context.read<BannerBloc>().add(const BannerEvent.initialized());
     context
         .read<OrderDocumentTypeBloc>()
         .add(const OrderDocumentTypeEvent.initialized());
     context.read<CustomerCodeBloc>().add(const CustomerCodeEvent.initialized());
-  }
-
-  void _callBannerAndDocType(
-    BuildContext context,
-    SalesOrgState state,
-  ) {
-    context.read<BannerBloc>().add(
-          BannerEvent.fetch(
-            isPreSalesOrg: false,
-            salesOrganisation: state.salesOrganisation,
-            country: state.salesOrg.country,
-            role: context
-                .read<UserBloc>()
-                .state
-                .user
-                .role
-                .type
-                .getEZReachRoleType,
-          ),
-        );
   }
 }
 

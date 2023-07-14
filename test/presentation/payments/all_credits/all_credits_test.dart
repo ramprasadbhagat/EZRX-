@@ -310,10 +310,10 @@ void main() {
       );
 
       await getWidget(tester);
-      await tester.drag(
-        find.textContaining('123456780').last,
-        const Offset(0.0, -1000.0),
-      );
+      // await tester.drag(
+      //   find.textContaining('123456780').last,
+      //   const Offset(0.0, -1000.0),
+      // );
       await tester.pump(const Duration(seconds: 1));
       await tester
           .pump(const Duration(seconds: 1)); // finish the scroll animation

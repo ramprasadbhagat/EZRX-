@@ -28,6 +28,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
           salesOrganisation: e.salesOrganisation,
           country: e.country,
           role: e.role,
+          bannerType: e.bannerType,
         );
 
         //Fetch eZRx Banner
