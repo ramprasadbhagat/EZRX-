@@ -22,6 +22,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -261,6 +262,26 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   );
             }
           },
+        ),
+        BlocListener<ViewByItemsBloc, ViewByItemsState>(
+          listenWhen: (previous, current) =>
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) =>
+            state.failureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {
+                  if (!state.isFetching) {
+                    context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
+                          list: state.orderHistoryList.orderHistoryItems,
+                        ));
+                  }
+                },
+              ),
+            ),
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>

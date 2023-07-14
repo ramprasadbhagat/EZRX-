@@ -67,7 +67,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
             emit(
               state.copyWith(
                 orderHistoryList: orderHistoryList,
-                failureOrSuccessOption: none(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
                 canLoadMore:
                     orderHistoryList.orderHistoryItems.length >= _pageSize,
@@ -75,7 +75,6 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 appliedFilter: e.viewByItemHistoryFilter,
               ),
             );
-            add(const _FetchProductImage());
           },
         );
       },
@@ -114,52 +113,15 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               orderHistoryList: state.orderHistoryList.copyWith(
                 orderHistoryItems: newOrderHistoryList,
               ),
-              failureOrSuccessOption: none(),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
               canLoadMore:
                   orderHistoryList.orderHistoryItems.length >= _pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );
-          add(const _FetchProductImage());
         },
       );
     });
-
-    on<_FetchProductImage>(
-      (event, emit) async {
-        emit(
-          state.copyWith(
-            isImageLoading: true,
-          ),
-        );
-
-        final failureOrSuccess = await productImagesRepository.getProductImages(
-          list: state.orderHistoryList.orderHistoryItems,
-        );
-
-        failureOrSuccess.fold(
-          (failure) => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-              isImageLoading: false,
-            ),
-          ),
-          (updatedListWithImages) {
-            emit(
-              state.copyWith(
-                orderHistoryList: state.orderHistoryList.copyWith(
-                  orderHistoryItems: updatedListWithImages
-                      .map((e) => e as OrderHistoryItem)
-                      .toList(),
-                ),
-                failureOrSuccessOption: none(),
-                isImageLoading: false,
-              ),
-            );
-          },
-        );
-      },
-    );
   }
 }

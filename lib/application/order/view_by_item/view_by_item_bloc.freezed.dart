@@ -974,7 +974,6 @@ mixin _$ViewByItemsState {
   OrderHistory get orderHistoryList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
-  bool get isImageLoading => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   ViewByItemHistoryFilter get appliedFilter =>
       throw _privateConstructorUsedError;
@@ -997,7 +996,6 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
       {OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
-      bool isImageLoading,
       int nextPageIndex,
       ViewByItemHistoryFilter appliedFilter,
       SearchKey searchKey,
@@ -1023,7 +1021,6 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
-    Object? isImageLoading = null,
     Object? nextPageIndex = null,
     Object? appliedFilter = null,
     Object? searchKey = null,
@@ -1041,10 +1038,6 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isImageLoading: null == isImageLoading
-          ? _value.isImageLoading
-          : isImageLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1095,7 +1088,6 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
       {OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
-      bool isImageLoading,
       int nextPageIndex,
       ViewByItemHistoryFilter appliedFilter,
       SearchKey searchKey,
@@ -1121,7 +1113,6 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
-    Object? isImageLoading = null,
     Object? nextPageIndex = null,
     Object? appliedFilter = null,
     Object? searchKey = null,
@@ -1139,10 +1130,6 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isImageLoading: null == isImageLoading
-          ? _value.isImageLoading
-          : isImageLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1171,7 +1158,6 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       {required this.orderHistoryList,
       required this.canLoadMore,
       required this.isFetching,
-      required this.isImageLoading,
       required this.nextPageIndex,
       required this.appliedFilter,
       required this.searchKey,
@@ -1185,8 +1171,6 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   @override
   final bool isFetching;
   @override
-  final bool isImageLoading;
-  @override
   final int nextPageIndex;
   @override
   final ViewByItemHistoryFilter appliedFilter;
@@ -1197,7 +1181,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
 
   @override
   String toString() {
-    return 'ViewByItemsState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, isImageLoading: $isImageLoading, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemsState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1211,8 +1195,6 @@ class _$_ViewByItemsState extends _ViewByItemsState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
-            (identical(other.isImageLoading, isImageLoading) ||
-                other.isImageLoading == isImageLoading) &&
             (identical(other.nextPageIndex, nextPageIndex) ||
                 other.nextPageIndex == nextPageIndex) &&
             (identical(other.appliedFilter, appliedFilter) ||
@@ -1229,7 +1211,6 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       orderHistoryList,
       canLoadMore,
       isFetching,
-      isImageLoading,
       nextPageIndex,
       appliedFilter,
       searchKey,
@@ -1247,7 +1228,6 @@ abstract class _ViewByItemsState extends ViewByItemsState {
       {required final OrderHistory orderHistoryList,
       required final bool canLoadMore,
       required final bool isFetching,
-      required final bool isImageLoading,
       required final int nextPageIndex,
       required final ViewByItemHistoryFilter appliedFilter,
       required final SearchKey searchKey,
@@ -1261,8 +1241,6 @@ abstract class _ViewByItemsState extends ViewByItemsState {
   bool get canLoadMore;
   @override
   bool get isFetching;
-  @override
-  bool get isImageLoading;
   @override
   int get nextPageIndex;
   @override

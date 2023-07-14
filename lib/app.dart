@@ -35,6 +35,7 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/av
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -511,6 +512,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PaymentItemBloc>(
           create: (context) => locator<PaymentItemBloc>(),
+        ),
+        BlocProvider<ProductImageBloc>(
+          create: (context) => locator<ProductImageBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -173,7 +173,7 @@ class _ReturnItem extends StatelessWidget {
                 subtitle:
                     'Batch ${data.batch} (Expires ${data.expiry.toValidDateString})',
                 headerText: 'Return #${data.requestId}',
-                image: data.productImages.thumbNail,
+                materialNumber: data.materialNumber,
                 quantity: data.itemQty.toString(),
                 isQuantityBelowImage: true,
                 statusWidget: StatusLabel(

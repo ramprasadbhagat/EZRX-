@@ -1,21 +1,21 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CommonTileItem extends StatelessWidget {
   const CommonTileItem({
     Key? key,
     required this.label,
+    required this.materialNumber,
     required this.title,
     required this.subtitle,
     required this.headerText,
     required this.statusWidget,
     required this.quantity,
     required this.isQuantityBelowImage,
-    required this.image,
     this.tag = '',
     this.footerWidget,
     required this.priceComponent,
@@ -23,6 +23,7 @@ class CommonTileItem extends StatelessWidget {
   }) : super(key: key);
 
   final String label;
+  final MaterialNumber materialNumber;
   final String title;
   final String subtitle;
   final String headerText;
@@ -30,7 +31,6 @@ class CommonTileItem extends StatelessWidget {
   final Widget statusWidget;
   final String quantity;
   final bool isQuantityBelowImage;
-  final String image;
   final String tag;
   final Widget? footerWidget;
   final bool isQuantityRequired;
@@ -52,8 +52,8 @@ class CommonTileItem extends StatelessWidget {
                 _ImageBox(
                   isQuantityBelowImage:
                       isQuantityRequired ? isQuantityBelowImage : false,
-                  image: image,
                   quantity: quantity,
+                  materialNumber: materialNumber,
                 ),
                 Expanded(
                   child: Padding(
@@ -218,12 +218,12 @@ class _HeaderItem extends StatelessWidget {
 class _ImageBox extends StatelessWidget {
   const _ImageBox({
     required this.isQuantityBelowImage,
-    required this.image,
     required this.quantity,
+    required this.materialNumber,
   });
   final bool isQuantityBelowImage;
-  final String image;
   final String quantity;
+  final MaterialNumber materialNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -234,18 +234,13 @@ class _ImageBox extends StatelessWidget {
               CustomCard(
                 showBorder: true,
                 showShadow: false,
+                clipBehavior: Clip.antiAlias,
                 margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
-                padding: const EdgeInsets.all(
-                  10,
-                ),
-                child: CachedNetworkImage(
+                child: ProductImage(
                   width: MediaQuery.of(context).size.height * 0.06,
                   height: MediaQuery.of(context).size.height * 0.06,
-                  imageUrl: image,
-                  placeholder: (context, url) => const _DefaultProductImage(),
-                  errorWidget: (context, url, error) =>
-                      const _DefaultProductImage(),
                   fit: BoxFit.fitHeight,
+                  materialNumber: materialNumber,
                 ),
               ),
               const SizedBox(
@@ -262,32 +257,14 @@ class _ImageBox extends StatelessWidget {
         : CustomCard(
             showBorder: true,
             showShadow: false,
+            clipBehavior: Clip.antiAlias,
             margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
-            padding: const EdgeInsets.all(
-              10,
-            ),
-            child: CachedNetworkImage(
+            child: ProductImage(
               width: MediaQuery.of(context).size.height * 0.06,
               height: MediaQuery.of(context).size.height * 0.06,
-              imageUrl: image,
-              placeholder: (context, url) => const _DefaultProductImage(),
-              errorWidget: (context, url, error) =>
-                  const _DefaultProductImage(),
+              materialNumber: materialNumber,
               fit: BoxFit.fitHeight,
             ),
           );
-  }
-}
-
-class _DefaultProductImage extends StatelessWidget {
-  const _DefaultProductImage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      'assets/svg/product_default.svg',
-      height: MediaQuery.of(context).size.height * 0.05,
-      width: MediaQuery.of(context).size.height * 0.05,
-    );
   }
 }

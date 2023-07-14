@@ -84,7 +84,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
           showShadow: false,
           showBorder: true,
           child: ProductImage(
-            imageUrl: widget.materialInfo.productImages.thumbNail,
+            materialNumber: widget.materialInfo.materialNumber,
             height: MediaQuery.of(context).size.height * 0.1,
             width: Responsive.isLargerThan(context, Breakpoint.desktop)
                 ? MediaQuery.of(context).size.width * 0.16

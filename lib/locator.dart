@@ -49,6 +49,7 @@ import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credi
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -2801,6 +2802,11 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => ProductImagesQuery(),
+  );
+  locator.registerLazySingleton(
+    () => ProductImageBloc(
+      productImagesRepository: locator<ProductImagesRepository>(),
+    ),
   );
 
   //============================================================

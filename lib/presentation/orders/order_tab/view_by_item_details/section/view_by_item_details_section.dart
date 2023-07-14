@@ -52,7 +52,7 @@ class ItemDetailsSection extends StatelessWidget {
               ),
             ),
             quantity: orderHistoryItem.qty.toString(),
-            image: orderHistoryItem.productImages.thumbNail,
+            materialNumber: orderHistoryItem.materialNumber,
             isQuantityBelowImage: false,
             tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
             headerText:

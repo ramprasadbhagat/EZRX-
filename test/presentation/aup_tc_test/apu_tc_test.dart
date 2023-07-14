@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -89,6 +90,9 @@ class MaterialPriceMockBloc
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
+class ViewByItemsMockBloc extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -108,6 +112,7 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late MaterialListBloc materialListBloc;
   late MaterialPriceBloc materialPriceBloc;
+  late ViewByItemsBloc viewByItemsBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -122,6 +127,7 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     materialListBloc = MaterialListMockBloc();
     materialPriceBloc = MaterialPriceMockBloc();
+    viewByItemsBloc = ViewByItemsMockBloc();
     locator = GetIt.instance;
     locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
@@ -171,6 +177,8 @@ void main() {
     when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
     when(() => materialPriceBloc.state)
         .thenReturn(MaterialPriceState.initial());
+    when(() => viewByItemsBloc.state)
+        .thenReturn(ViewByItemsState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
@@ -200,6 +208,8 @@ void main() {
                   create: (context) => materialListBloc),
               BlocProvider<MaterialPriceBloc>(
                   create: (context) => materialPriceBloc),
+              BlocProvider<ViewByItemsBloc>(
+                  create: (context) => viewByItemsBloc),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -296,6 +306,8 @@ void main() {
                 create: (context) => materialListBloc),
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => materialPriceBloc),
+            BlocProvider<ViewByItemsBloc>(
+                  create: (context) => viewByItemsBloc),
           ],
           child: const SplashPage(),
         ),

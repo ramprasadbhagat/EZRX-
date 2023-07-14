@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -32,23 +31,9 @@ class ViewByItemsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ViewByItemsBloc, ViewByItemsState>(
-      listenWhen: (previous, current) =>
-          previous.failureOrSuccessOption != current.failureOrSuccessOption,
-      listener: (context, state) {
-        state.failureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
-      },
+    return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching ||
-          previous.isImageLoading != current.isImageLoading,
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         if (state.isFetching &&
             state.orderHistoryList.orderHistoryItems.isEmpty) {
@@ -214,7 +199,7 @@ class _ViewByOrderItem extends StatelessWidget {
                     orderHistoryItem: orderHistoryItem,
                   )
                 : null,
-            image: orderHistoryItem.productImages.thumbNail,
+            materialNumber: orderHistoryItem.materialNumber,
             isQuantityBelowImage: false,
             tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
             priceComponent: const SizedBox(),

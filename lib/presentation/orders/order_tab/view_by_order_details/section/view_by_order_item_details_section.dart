@@ -76,7 +76,7 @@ class OrderItemDetailsSection extends StatelessWidget {
                                           ),
                                         ),
                                         quantity: '',
-                                        image: e.productImages.thumbNail,
+                                        materialNumber: e.materialNumber,
                                         isQuantityBelowImage: true,
                                         isQuantityRequired: false,
                                         headerText:

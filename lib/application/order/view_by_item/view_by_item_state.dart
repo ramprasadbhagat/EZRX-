@@ -8,7 +8,6 @@ class ViewByItemsState with _$ViewByItemsState {
     required OrderHistory orderHistoryList,
     required bool canLoadMore,
     required bool isFetching,
-    required bool isImageLoading,
     required int nextPageIndex,
     required ViewByItemHistoryFilter appliedFilter,
     required SearchKey searchKey,
@@ -21,7 +20,6 @@ class ViewByItemsState with _$ViewByItemsState {
         isFetching: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
-        isImageLoading: false,
         searchKey: SearchKey(''),
         appliedFilter: ViewByItemHistoryFilter.empty(),
       );

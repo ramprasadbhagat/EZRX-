@@ -23,8 +23,7 @@ class OtherItemDetailsSection extends StatelessWidget {
     return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
       buildWhen: (previous, current) =>
           previous.viewByItemDetails.orderHistoryItems !=
-              current.viewByItemDetails.orderHistoryItems ||
-          previous.isImageLoading != current.isImageLoading,
+              current.viewByItemDetails.orderHistoryItems,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(
@@ -84,7 +83,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                             ),
                                           ),
                                           quantity: e.qty.toString(),
-                                          image: e.productImages.thumbNail,
+                                          materialNumber: e.materialNumber,
                                           isQuantityBelowImage: false,
                                           tag: e.isBonusMaterial ? 'Bonus' : '',
                                           headerText:
