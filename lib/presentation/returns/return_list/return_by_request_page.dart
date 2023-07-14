@@ -48,6 +48,7 @@ class ReturnByRequestPage extends StatelessWidget {
             );
           },
           buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching ||
               previous.returnItemList != current.returnItemList,
           builder: (context, state) {
             return state.isFetching && state.returnItemList.isEmpty
