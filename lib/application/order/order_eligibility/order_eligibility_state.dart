@@ -30,7 +30,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get isMinOrderValuePassed {
     if (hasPrincipal) {
-      return false;
+      return true;
     }
     if (eligibleOrderType) {
       return true;

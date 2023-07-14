@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -206,6 +207,85 @@ void main() {
           expect(orderEligibilityState.isMinOrderValuePassed, false);
         },
       );
+
+      test(
+        'Mini order value bypass for Sales rep for material with principalCode == 100225',
+        () {
+          final eligibilityState = OrderEligibilityState.initial().copyWith(
+            user: fakeUser,
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  principalData: PrincipalData.empty().copyWith(
+                    principalCode: PrincipalCode('100225'),
+                  ),
+                ),
+              )
+            ],
+            subTotal: 99,
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(minOrderAmount: '100'),
+          );
+
+          expect(eligibilityState.isMinOrderValuePassed, true);
+        },
+      );
+      test(
+        'Mini order value not bypass for Sales rep for material with principalCode != 100225',
+        () {
+          final eligibilityState = OrderEligibilityState.initial().copyWith(
+            user: fakeUser,
+            cartItems: [PriceAggregate.empty()],
+            grandTotal: 99,
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(minOrderAmount: '100'),
+          );
+
+          expect(eligibilityState.isMinOrderValuePassed, false);
+        },
+      );
+
+      test(
+        'Mini order value bypass for Client User for material with principalCode == 100822',
+        () {
+          final eligibilityState = OrderEligibilityState.initial().copyWith(
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('client_user'),
+              ),
+            ),
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  principalData: PrincipalData.empty().copyWith(
+                    principalCode: PrincipalCode('100822'),
+                  ),
+                ),
+              )
+            ],
+            grandTotal: 99,
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(minOrderAmount: '100'),
+          );
+
+          expect(eligibilityState.isMinOrderValuePassed, true);
+        },
+      );
+      test(
+        'Mini order value not bypass for Client User for material with principalCode != 100822',
+        () {
+          final eligibilityState = OrderEligibilityState.initial().copyWith(
+            user: fakeUser,
+            cartItems: [PriceAggregate.empty()],
+            grandTotal: 99,
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(minOrderAmount: '100'),
+          );
+
+          expect(eligibilityState.isMinOrderValuePassed, false);
+        },
+      );
+
     },
   );
 }
