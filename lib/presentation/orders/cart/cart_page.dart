@@ -114,7 +114,7 @@ class _CartPageState extends State<CartPage> {
               key: WidgetKeys.cartPage,
               appBar: AppBar(
                 title: Text(
-                  'Cart'.tr(),
+                  '${'Cart'.tr()} (${state.cartProducts.length})',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 centerTitle: false,
@@ -127,19 +127,21 @@ class _CartPageState extends State<CartPage> {
                     context.router.pop();
                   },
                 ),
-                actions: state.cartProducts.isNotEmpty ? [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.delete_outlined,
-                      color: ZPColors.red,
-                    ),
-                    onPressed: () {
-                      context.read<CartBloc>().add(
-                            const CartEvent.clearCart(),
-                          );
-                    },
-                  ),
-                ] : null,
+                actions: state.cartProducts.isNotEmpty
+                    ? [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.delete_outlined,
+                            color: ZPColors.red,
+                          ),
+                          onPressed: () {
+                            context.read<CartBloc>().add(
+                                  const CartEvent.clearCart(),
+                                );
+                          },
+                        ),
+                      ]
+                    : null,
               ),
               body: Column(
                 children: [
@@ -148,7 +150,9 @@ class _CartPageState extends State<CartPage> {
                   ),
                   const AccountSuspendedBanner(),
                   _CartScrollList(state: state, taxCode: taxCode),
-                  state.cartProducts.isNotEmpty ? const _CheckoutSection() : const SizedBox.shrink(),
+                  state.cartProducts.isNotEmpty
+                      ? const _CheckoutSection()
+                      : const SizedBox.shrink(),
                 ],
               ),
             ),
@@ -226,14 +230,13 @@ class _CartScrollList extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ScrollList<CartProduct>(
           noRecordFoundWidget: NoRecordFound(
-              title: 'Your cart is empty'.tr(),
-              subTitle:
-                  'Looks like you haven’t added anything to your cart yet.'
-                      .tr(),
+            title: 'Your cart is empty'.tr(),
+            subTitle:
+                'Looks like you haven’t added anything to your cart yet.'.tr(),
             actionButton: ElevatedButton(
               key: WidgetKeys.startBrowsingProducts,
               onPressed: () {
-                context.router.popUntilRouteWithPath( 'main');
+                context.router.popUntilRouteWithPath('main');
                 context.router.pushNamed('main/products');
               },
               child: const Text('Start browsing').tr(),
