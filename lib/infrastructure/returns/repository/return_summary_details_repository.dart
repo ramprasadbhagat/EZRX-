@@ -25,6 +25,7 @@ class ReturnSummaryDetailsRepository
   @override
   Future<Either<ApiFailure, RequestInformation>> getReturnInformation({
     required ReturnRequestsId returnRequestId,
+    required String invoiceId,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -42,6 +43,7 @@ class ReturnSummaryDetailsRepository
           await returnSummaryDetailsRequestInformationRemote
               .getRequestInformation(
         returnRequestId: returnRequestId.requestId,
+        invoiceId: invoiceId,
       );
 
       return Right(returnRequestInformation);

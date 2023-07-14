@@ -5,22 +5,23 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   late ReturnSummaryDetailsRequestInformationLocal localDataSource;
 
-  setUpAll(() {
-    WidgetsFlutterBinding.ensureInitialized();
-    localDataSource = ReturnSummaryDetailsRequestInformationLocal();
-  },
+  setUpAll(
+    () {
+      WidgetsFlutterBinding.ensureInitialized();
+      localDataSource = ReturnSummaryDetailsRequestInformationLocal();
+    },
   );
 
   group('Return Summary Details Local DataSource Test', () {
-    test('=> getRequestInformation', () async {
-      final result = await localDataSource.getRequestInformation();
-      expect(
-        result.requestInformation.length,
-        1,
-      );
-    },
+    test(
+      '=> getRequestInformation',
+      () async {
+        final result = await localDataSource.getRequestInformation();
+        expect(
+          result.returnRequestInformationList.length,
+          1,
+        );
+      },
     );
-  },
-  );
-
+  });
 }

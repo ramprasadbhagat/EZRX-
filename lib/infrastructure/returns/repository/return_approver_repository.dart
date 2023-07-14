@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -91,7 +90,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
         filterQuery:
             ReturnApproverFilterDto.fromDomain(approverReturnFilter).toJson(),
       );
-      
+
       return Right(approverReturnRequestsIds);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

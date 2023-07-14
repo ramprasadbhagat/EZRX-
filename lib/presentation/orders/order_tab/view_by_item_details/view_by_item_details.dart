@@ -52,7 +52,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
               StatusTrackerSection(
                 createDate: orderHistoryItem.createdDate,
                 title: 'Order status'.tr(),
-                status: orderHistoryItem.status,
+                status: orderHistoryItem.status.displayStringValue,
                 onTap: () {
                   _showDEtailsPagePage(context: context);
                 },

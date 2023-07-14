@@ -454,3 +454,42 @@ String displayAnnouncementDateOrEmpty(String text, String format) {
 
   return DateFormat(format).format(parsedDate);
 }
+
+bool isApproved(String status) {
+  return status == 'APPROVED';
+}
+
+String sAPROCreationValue(
+  String status,
+  String bapiStatus,
+  String bapiSalesDocNumber,
+) {
+  switch (status) {
+    case 'APPROVED':
+    case 'COMPLETED':
+    case 'PENDING':
+      return bapiStatusType(bapiStatus, bapiSalesDocNumber);
+
+    case 'REJECTED':
+      return '-';
+
+    default:
+      return '-';
+  }
+}
+
+String bapiStatusType(String bapiStatus, String bapiSalesDocNumber) {
+  switch (bapiStatus) {
+    case 'FAILED':
+      return 'Request Failed';
+    case 'PENDING':
+      return 'Pending';
+    case 'SUCCESS':
+      return bapiSalesDocNumber;
+    case '':
+      return '-';
+
+    default:
+      return '-';
+  }
+}

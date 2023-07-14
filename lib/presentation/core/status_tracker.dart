@@ -11,7 +11,7 @@ class StatusTrackerSection extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
   final String title;
-  final StatusType status;
+  final String status;
   final DateTimeStringValue createDate;
   final VoidCallback onTap;
   @override
@@ -48,7 +48,7 @@ class StatusTrackerSection extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    status.displayStringValue,
+                    status,
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall

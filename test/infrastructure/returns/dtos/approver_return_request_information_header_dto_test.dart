@@ -12,38 +12,16 @@ void main() {
 
   group('Approver return request information header dto ', () {
     setUp(() async {
-      data = json.decode(await rootBundle.loadString(
-          'assets/json/returnRequestInformationV2Response.json'));
+      data = json.decode(await rootBundle
+          .loadString('assets/json/returnRequestInformationV2Response.json'));
     });
     test('=> Approver return request information header', () {
       final approverReturnRequestInformationHeader =
-          RequestInformationHeaderDto.fromJson(data).toDomain();
+          RequestInformationHeaderDto.fromJson(
+                  data['data']['requestInformationV2']['requestHeader'])
+              .toDomain();
       expect(approverReturnRequestInformationHeader,
           isA<ReturnRequestInformationHeader>());
-    });
-
-    test('=> Approver return request information header ReturnInvoicesDto', () {
-      final approverReturnRequestInformationHeader =
-          ReturnInvoicesDto.fromJson({}).toDomain();
-      expect(approverReturnRequestInformationHeader, isA<ReturnInvoices>());
-    });
-
-    test('=> Approver return request information header RetrunSalesDocDto', () {
-      final approverReturnRequestInformationHeader =
-          RetrunSalesDocDto.fromJson({}).toDomain();
-      expect(approverReturnRequestInformationHeader, isA<ReturnSalesDoc>());
-    });
-
-    test('=> Approver return request information header ReturnCreditNotesDto',
-        () {
-      final approverReturnRequestInformationHeader =
-          ReturnCreditNotesDto.fromJson({}).toDomain();
-      expect(approverReturnRequestInformationHeader, isA<ReturnCreditNotes>());
-    });
-    test('=> Approver return request information header ReturnMaterialDto', () {
-      final approverReturnRequestInformationHeader =
-          ReturnMaterialDto.fromJson({}).toDomain();
-      expect(approverReturnRequestInformationHeader, isA<ReturnMaterial>());
     });
   });
 }

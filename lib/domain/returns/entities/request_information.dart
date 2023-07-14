@@ -8,20 +8,19 @@ part 'request_information.freezed.dart';
 class RequestInformation with _$RequestInformation {
   const RequestInformation._();
   factory RequestInformation({
-    required ReturnRequestInformationHeader requestHeader,
-    required List<ReturnRequestInformation> requestInformation,
+    required ReturnRequestInformationHeader requestInformationHeader,
+    required List<ReturnRequestInformation> returnRequestInformationList,
   }) = _RequestInformation;
 
-  String get returnId => requestHeader.requestID;
-  String get customerName => requestHeader.cName1;
-  String get submittedDate => requestHeader.createdDate.toValidDateString;
-  double get refundTotal => requestHeader.refundTotal.refundTotal;
-  String get createdBy => requestHeader.createdBy;
-  String get soldTo => requestHeader.soldTo;
-
   factory RequestInformation.empty() => RequestInformation(
-        requestHeader: ReturnRequestInformationHeader.empty(),
-        requestInformation: [],
+        requestInformationHeader: ReturnRequestInformationHeader.empty(),
+        returnRequestInformationList: <ReturnRequestInformation>[],
       );
-  
+  String get returnId => requestInformationHeader.requestID;
+  String get customerName => requestInformationHeader.cName1;
+  String get submittedDate =>
+      requestInformationHeader.createdDate.toValidDateString;
+  double get refundTotal => requestInformationHeader.refundTotal.refundTotal;
+  String get createdBy => requestInformationHeader.createdBy;
+  String get soldTo => requestInformationHeader.soldTo;
 }

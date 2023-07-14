@@ -260,6 +260,7 @@ class StatusType extends ValueObject<String> {
     PaymentSummaryDetails paymentSummaryDetails,
   ) =>
       getStatusMessage(value.getOrElse(() => ''), paymentSummaryDetails);
+  bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
 
   String paymentDate(String date) =>
       getPaymentDate(value.getOrElse(() => ''), date);
@@ -267,6 +268,14 @@ class StatusType extends ValueObject<String> {
       getAdviceExpiry(value.getOrElse(() => ''), date);
 
   bool get getIsSuccessful => isSuccessful(value.getOrElse(() => ''));
+  String getSAPROCreationValue(String bapiStatus, String bapiSalesDocNumber) =>
+      sAPROCreationValue(
+        value.getOrElse(() => ''),
+        bapiStatus,
+        bapiSalesDocNumber,
+      );
+  String getbapiStatusType(String bapiSalesDocNumber) =>
+      bapiStatusType(value.getOrElse(() => ''), bapiSalesDocNumber);
 
   const StatusType._(this.value);
 }

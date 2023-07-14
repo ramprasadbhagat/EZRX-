@@ -63,7 +63,7 @@ import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_conf
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_request_page.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_root.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_details/return_summary_details.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
@@ -274,10 +274,7 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       path: 'orders/scan_material_info',
       page: ScanMaterialInfo,
     ),
-    AutoRoute(
-      path: 'returns/return_summary_details',
-      page: ReturnSummaryDetails,
-    ),
+
     AutoRoute(
       path: 'payments/invoice_details',
       page: InvoiceDetailsPage,
@@ -369,6 +366,10 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'orders/material_details',
       page: ProductDetailsPage,
+    ),
+    AutoRoute(
+      path: 'returns/return_summary_details_v3',
+      page: ReturnRequestSummaryByItemDetails,
     ),
   ],
 )

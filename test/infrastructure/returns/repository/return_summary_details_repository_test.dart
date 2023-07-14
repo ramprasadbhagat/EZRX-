@@ -8,78 +8,96 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_deta
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class ReturnSummaryLocalDataSourceMock extends Mock implements ReturnSummaryDetailsRequestInformationLocal {}
+class ReturnSummaryLocalDataSourceMock extends Mock
+    implements ReturnSummaryDetailsRequestInformationLocal {}
 
-class ReturnSummaryRemoteDataSourceMock extends Mock implements ReturnSummaryDetailsRequestInformationRemote {}
+class ReturnSummaryRemoteDataSourceMock extends Mock
+    implements ReturnSummaryDetailsRequestInformationRemote {}
 
 class ConfigMock extends Mock implements Config {}
 
-void main(){
-  late ReturnSummaryDetailsRequestInformationLocal returnSummaryDetailsRequestInformationLocal;
-  late ReturnSummaryDetailsRequestInformationRemote returnSummaryDetailsRequestInformationRemote;
+void main() {
+  late ReturnSummaryDetailsRequestInformationLocal
+      returnSummaryDetailsRequestInformationLocal;
+  late ReturnSummaryDetailsRequestInformationRemote
+      returnSummaryDetailsRequestInformationRemote;
   late Config config;
   late ReturnSummaryDetailsRepository returnSummaryDetailsRepository;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    returnSummaryDetailsRequestInformationLocal = ReturnSummaryLocalDataSourceMock();
-    returnSummaryDetailsRequestInformationRemote = ReturnSummaryRemoteDataSourceMock();
+    returnSummaryDetailsRequestInformationLocal =
+        ReturnSummaryLocalDataSourceMock();
+    returnSummaryDetailsRequestInformationRemote =
+        ReturnSummaryRemoteDataSourceMock();
     config = ConfigMock();
     returnSummaryDetailsRepository = ReturnSummaryDetailsRepository(
       config: config,
-      returnSummaryDetailsRequestInformationLocal: returnSummaryDetailsRequestInformationLocal,
-      returnSummaryDetailsRequestInformationRemote: returnSummaryDetailsRequestInformationRemote,
+      returnSummaryDetailsRequestInformationLocal:
+          returnSummaryDetailsRequestInformationLocal,
+      returnSummaryDetailsRequestInformationRemote:
+          returnSummaryDetailsRequestInformationRemote,
     );
   });
 
   group('Return Summary Details Repository Test', () {
-
     test('=> getReturnInformation locally success', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnSummaryDetailsRequestInformationLocal.getRequestInformation())
-          .thenAnswer((invocation) async => RequestInformation.empty(),
+      when(() => returnSummaryDetailsRequestInformationLocal
+          .getRequestInformation()).thenAnswer(
+        (invocation) async => RequestInformation.empty(),
       );
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-       returnRequestId: ReturnRequestsId(requestId: 'mock_id')
+        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        invoiceId: 'mock_id',
       );
       expect(result.isRight(), true);
     });
 
     test('=> getReturnInformation locally failed', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnSummaryDetailsRequestInformationLocal.getRequestInformation())
+      when(() => returnSummaryDetailsRequestInformationLocal
+              .getRequestInformation())
           .thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-          returnRequestId: ReturnRequestsId(requestId: 'mock_id')
+        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        invoiceId: 'mock_id',
       );
       expect(result.isLeft(), true);
     });
 
     test('=> getReturnInformation remote success', () async {
       when(() => config.appFlavor).thenReturn(Flavor.uat);
-      when(() => returnSummaryDetailsRequestInformationRemote.getRequestInformation(returnRequestId: 'mock_id'))
-          .thenAnswer((invocation) async => RequestInformation.empty(),
+      when(() =>
+          returnSummaryDetailsRequestInformationRemote.getRequestInformation(
+            returnRequestId: 'mock_id',
+            invoiceId: 'mock_id',
+          )).thenAnswer(
+        (invocation) async => RequestInformation.empty(),
       );
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-          returnRequestId: ReturnRequestsId(requestId: 'mock_id')
+        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        invoiceId: 'mock_id',
       );
       expect(result.isRight(), true);
     });
 
     test('=> getReturnInformation remote failure', () async {
       when(() => config.appFlavor).thenReturn(Flavor.uat);
-      when(() => returnSummaryDetailsRequestInformationRemote.getRequestInformation(returnRequestId: 'mock_id'))
-          .thenThrow((invocation) async => MockException());
+      when(() =>
+          returnSummaryDetailsRequestInformationRemote.getRequestInformation(
+            returnRequestId: 'mock_id',
+            invoiceId: 'mock_id',
+          )).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-          returnRequestId: ReturnRequestsId(requestId: 'mock_id')
+        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        invoiceId: 'mock_id',
       );
       expect(result.isLeft(), true);
     });
-
   });
-
 }

@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_summary_details_repository.dart';
@@ -27,39 +28,45 @@ class ReturnSummaryDetailsBloc
     Emitter<ReturnSummaryDetailsState> emit,
   ) async {
     await event.map(
-        initialized: (_Initialized e) async =>
-            emit(ReturnSummaryDetailsState.initial()),
-        fetch: (_Fetch e) async {
-          emit(
-            state.copyWith(
-              isLoading: true,
-              failureOrSuccessOption: none(),
-            ),
-          );
+      initialized: (_Initialized e) async =>
+          emit(ReturnSummaryDetailsState.initial()),
+      fetch: (_Fetch e) async {
+        emit(
+          state.copyWith(
+            isLoading: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
 
-          final returnInformationfailureOrSuccess =
-              await returnSummaryDetailsRepository.getReturnInformation(
-            returnRequestId:
-                ReturnRequestsId(requestId: e.returnSummaryRequests.returnId),
-          );
-          await returnInformationfailureOrSuccess.fold(
-            (failure) async => emit(
-              state.copyWith(
-                isLoading: false,
-                failureOrSuccessOption:
-                    optionOf(returnInformationfailureOrSuccess),
-              ),
+        final returnInformationfailureOrSuccess =
+            await returnSummaryDetailsRepository.getReturnInformation(
+          returnRequestId: ReturnRequestsId(requestId: e.returnId),
+          invoiceId: e.invoiceId,
+        );
+        await returnInformationfailureOrSuccess.fold(
+          (failure) async => emit(
+            state.copyWith(
+              isLoading: false,
+              failureOrSuccessOption:
+                  optionOf(returnInformationfailureOrSuccess),
             ),
-            (returnSummaryDetails) {
-              emit(
-                state.copyWith(
-                  requestInformation: returnSummaryDetails,
-                  failureOrSuccessOption: none(),
-                  isLoading: false,
-                ),
-              );
-            },
-          );
-        },);
+          ),
+          (returnSummaryDetails) {
+            emit(
+              state.copyWith(
+                requestInformation: returnSummaryDetails
+                        .returnRequestInformationList.isNotEmpty
+                    ? returnSummaryDetails.returnRequestInformationList.first
+                    : ReturnRequestInformation.empty(),
+                requestInformationHeader:
+                    returnSummaryDetails.requestInformationHeader,
+                failureOrSuccessOption: none(),
+                isLoading: false,
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

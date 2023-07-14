@@ -15,6 +15,7 @@ import 'package:mocktail/mocktail.dart';
 
 class ReturnApproverRepositoryMock extends Mock
     implements ReturnApproverRepository {}
+
 const _pageSize = 20;
 void main() {
   late ReturnApproverRepository repository;
@@ -383,10 +384,10 @@ void main() {
             nextPageIndex: 1,
           ),
           ReturnApproverState.initial().copyWith(
-              approverReturnRequestList: List.filled(
+            approverReturnRequestList: List.filled(
               _pageSize * 2,
-                RequestInformation.empty(),
-              ),
+              RequestInformation.empty(),
+            ),
             nextPageIndex: 2,
           ),
         ],

@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RequestInformation {
-  ReturnRequestInformationHeader get requestHeader =>
+  ReturnRequestInformationHeader get requestInformationHeader =>
       throw _privateConstructorUsedError;
-  List<ReturnRequestInformation> get requestInformation =>
+  List<ReturnRequestInformation> get returnRequestInformationList =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,10 +33,10 @@ abstract class $RequestInformationCopyWith<$Res> {
       _$RequestInformationCopyWithImpl<$Res, RequestInformation>;
   @useResult
   $Res call(
-      {ReturnRequestInformationHeader requestHeader,
-      List<ReturnRequestInformation> requestInformation});
+      {ReturnRequestInformationHeader requestInformationHeader,
+      List<ReturnRequestInformation> returnRequestInformationList});
 
-  $ReturnRequestInformationHeaderCopyWith<$Res> get requestHeader;
+  $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
 }
 
 /// @nodoc
@@ -52,27 +52,27 @@ class _$RequestInformationCopyWithImpl<$Res, $Val extends RequestInformation>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestHeader = null,
-    Object? requestInformation = null,
+    Object? requestInformationHeader = null,
+    Object? returnRequestInformationList = null,
   }) {
     return _then(_value.copyWith(
-      requestHeader: null == requestHeader
-          ? _value.requestHeader
-          : requestHeader // ignore: cast_nullable_to_non_nullable
+      requestInformationHeader: null == requestInformationHeader
+          ? _value.requestInformationHeader
+          : requestInformationHeader // ignore: cast_nullable_to_non_nullable
               as ReturnRequestInformationHeader,
-      requestInformation: null == requestInformation
-          ? _value.requestInformation
-          : requestInformation // ignore: cast_nullable_to_non_nullable
+      returnRequestInformationList: null == returnRequestInformationList
+          ? _value.returnRequestInformationList
+          : returnRequestInformationList // ignore: cast_nullable_to_non_nullable
               as List<ReturnRequestInformation>,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestInformationHeaderCopyWith<$Res> get requestHeader {
-    return $ReturnRequestInformationHeaderCopyWith<$Res>(_value.requestHeader,
-        (value) {
-      return _then(_value.copyWith(requestHeader: value) as $Val);
+  $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader {
+    return $ReturnRequestInformationHeaderCopyWith<$Res>(
+        _value.requestInformationHeader, (value) {
+      return _then(_value.copyWith(requestInformationHeader: value) as $Val);
     });
   }
 }
@@ -86,11 +86,11 @@ abstract class _$$_RequestInformationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ReturnRequestInformationHeader requestHeader,
-      List<ReturnRequestInformation> requestInformation});
+      {ReturnRequestInformationHeader requestInformationHeader,
+      List<ReturnRequestInformation> returnRequestInformationList});
 
   @override
-  $ReturnRequestInformationHeaderCopyWith<$Res> get requestHeader;
+  $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
 }
 
 /// @nodoc
@@ -104,17 +104,17 @@ class __$$_RequestInformationCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestHeader = null,
-    Object? requestInformation = null,
+    Object? requestInformationHeader = null,
+    Object? returnRequestInformationList = null,
   }) {
     return _then(_$_RequestInformation(
-      requestHeader: null == requestHeader
-          ? _value.requestHeader
-          : requestHeader // ignore: cast_nullable_to_non_nullable
+      requestInformationHeader: null == requestInformationHeader
+          ? _value.requestInformationHeader
+          : requestInformationHeader // ignore: cast_nullable_to_non_nullable
               as ReturnRequestInformationHeader,
-      requestInformation: null == requestInformation
-          ? _value._requestInformation
-          : requestInformation // ignore: cast_nullable_to_non_nullable
+      returnRequestInformationList: null == returnRequestInformationList
+          ? _value._returnRequestInformationList
+          : returnRequestInformationList // ignore: cast_nullable_to_non_nullable
               as List<ReturnRequestInformation>,
     ));
   }
@@ -124,25 +124,26 @@ class __$$_RequestInformationCopyWithImpl<$Res>
 
 class _$_RequestInformation extends _RequestInformation {
   _$_RequestInformation(
-      {required this.requestHeader,
-      required final List<ReturnRequestInformation> requestInformation})
-      : _requestInformation = requestInformation,
+      {required this.requestInformationHeader,
+      required final List<ReturnRequestInformation>
+          returnRequestInformationList})
+      : _returnRequestInformationList = returnRequestInformationList,
         super._();
 
   @override
-  final ReturnRequestInformationHeader requestHeader;
-  final List<ReturnRequestInformation> _requestInformation;
+  final ReturnRequestInformationHeader requestInformationHeader;
+  final List<ReturnRequestInformation> _returnRequestInformationList;
   @override
-  List<ReturnRequestInformation> get requestInformation {
-    if (_requestInformation is EqualUnmodifiableListView)
-      return _requestInformation;
+  List<ReturnRequestInformation> get returnRequestInformationList {
+    if (_returnRequestInformationList is EqualUnmodifiableListView)
+      return _returnRequestInformationList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_requestInformation);
+    return EqualUnmodifiableListView(_returnRequestInformationList);
   }
 
   @override
   String toString() {
-    return 'RequestInformation(requestHeader: $requestHeader, requestInformation: $requestInformation)';
+    return 'RequestInformation(requestInformationHeader: $requestInformationHeader, returnRequestInformationList: $returnRequestInformationList)';
   }
 
   @override
@@ -150,15 +151,17 @@ class _$_RequestInformation extends _RequestInformation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RequestInformation &&
-            (identical(other.requestHeader, requestHeader) ||
-                other.requestHeader == requestHeader) &&
-            const DeepCollectionEquality()
-                .equals(other._requestInformation, _requestInformation));
+            (identical(
+                    other.requestInformationHeader, requestInformationHeader) ||
+                other.requestInformationHeader == requestInformationHeader) &&
+            const DeepCollectionEquality().equals(
+                other._returnRequestInformationList,
+                _returnRequestInformationList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, requestHeader,
-      const DeepCollectionEquality().hash(_requestInformation));
+  int get hashCode => Object.hash(runtimeType, requestInformationHeader,
+      const DeepCollectionEquality().hash(_returnRequestInformationList));
 
   @JsonKey(ignore: true)
   @override
@@ -170,15 +173,15 @@ class _$_RequestInformation extends _RequestInformation {
 
 abstract class _RequestInformation extends RequestInformation {
   factory _RequestInformation(
-          {required final ReturnRequestInformationHeader requestHeader,
-          required final List<ReturnRequestInformation> requestInformation}) =
-      _$_RequestInformation;
+      {required final ReturnRequestInformationHeader requestInformationHeader,
+      required final List<ReturnRequestInformation>
+          returnRequestInformationList}) = _$_RequestInformation;
   _RequestInformation._() : super._();
 
   @override
-  ReturnRequestInformationHeader get requestHeader;
+  ReturnRequestInformationHeader get requestInformationHeader;
   @override
-  List<ReturnRequestInformation> get requestInformation;
+  List<ReturnRequestInformation> get returnRequestInformationList;
   @override
   @JsonKey(ignore: true)
   _$$_RequestInformationCopyWith<_$_RequestInformation> get copyWith =>

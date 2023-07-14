@@ -6,14 +6,15 @@ class ReturnSummaryDetailsState with _$ReturnSummaryDetailsState {
     required bool isLoading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ReturnSummaryRequest returnSummaryRequests,
-    required RequestInformation requestInformation,
-
+    required ReturnRequestInformation requestInformation,
+    required ReturnRequestInformationHeader requestInformationHeader,
   }) = _ReturnSummaryDetailsState;
 
   factory ReturnSummaryDetailsState.initial() => ReturnSummaryDetailsState(
         failureOrSuccessOption: none(),
         isLoading: false,
         returnSummaryRequests: ReturnSummaryRequest.empty(),
-        requestInformation: RequestInformation.empty(),
+        requestInformation: ReturnRequestInformation.empty(),
+        requestInformationHeader: ReturnRequestInformationHeader.empty(),
       );
 }

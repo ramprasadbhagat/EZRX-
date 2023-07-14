@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_approver_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -78,7 +78,6 @@ class ReturnApproverBloc
                     canLoadMore: approverReturnRequestInformationList.length >=
                         _pageSize,
                     nextPageIndex: 1,
-
                   ),
                 );
               },
@@ -129,8 +128,7 @@ class ReturnApproverBloc
                     isFetching: false,
                     approverReturnRequestList: List<RequestInformation>.from(
                       state.approverReturnRequestList,
-                    )
-                          ..addAll(approverReturnRequestInformationList),
+                    )..addAll(approverReturnRequestInformationList),
                     failureOrSuccessOption: none(),
                     canLoadMore: approverReturnRequestInformationList.length >=
                         _pageSize,

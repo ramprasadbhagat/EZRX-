@@ -19,19 +19,19 @@ mixin _$ReturnSummaryDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnSummaryRequest returnSummaryRequests) fetch,
+    required TResult Function(String returnId, String invoiceId) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnSummaryRequest returnSummaryRequests)? fetch,
+    TResult? Function(String returnId, String invoiceId)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnSummaryRequest returnSummaryRequests)? fetch,
+    TResult Function(String returnId, String invoiceId)? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,7 +114,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnSummaryRequest returnSummaryRequests) fetch,
+    required TResult Function(String returnId, String invoiceId) fetch,
   }) {
     return initialized();
   }
@@ -123,7 +123,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnSummaryRequest returnSummaryRequests)? fetch,
+    TResult? Function(String returnId, String invoiceId)? fetch,
   }) {
     return initialized?.call();
   }
@@ -132,7 +132,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnSummaryRequest returnSummaryRequests)? fetch,
+    TResult Function(String returnId, String invoiceId)? fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -182,9 +182,7 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnSummaryRequest returnSummaryRequests});
-
-  $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests;
+  $Res call({String returnId, String invoiceId});
 }
 
 /// @nodoc
@@ -197,37 +195,35 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? returnSummaryRequests = null,
+    Object? returnId = null,
+    Object? invoiceId = null,
   }) {
     return _then(_$_Fetch(
-      returnSummaryRequests: null == returnSummaryRequests
-          ? _value.returnSummaryRequests
-          : returnSummaryRequests // ignore: cast_nullable_to_non_nullable
-              as ReturnSummaryRequest,
+      returnId: null == returnId
+          ? _value.returnId
+          : returnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceId: null == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests {
-    return $ReturnSummaryRequestCopyWith<$Res>(_value.returnSummaryRequests,
-        (value) {
-      return _then(_value.copyWith(returnSummaryRequests: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.returnSummaryRequests});
+  const _$_Fetch({required this.returnId, required this.invoiceId});
 
   @override
-  final ReturnSummaryRequest returnSummaryRequests;
+  final String returnId;
+  @override
+  final String invoiceId;
 
   @override
   String toString() {
-    return 'ReturnSummaryDetailsEvent.fetch(returnSummaryRequests: $returnSummaryRequests)';
+    return 'ReturnSummaryDetailsEvent.fetch(returnId: $returnId, invoiceId: $invoiceId)';
   }
 
   @override
@@ -235,12 +231,14 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.returnSummaryRequests, returnSummaryRequests) ||
-                other.returnSummaryRequests == returnSummaryRequests));
+            (identical(other.returnId, returnId) ||
+                other.returnId == returnId) &&
+            (identical(other.invoiceId, invoiceId) ||
+                other.invoiceId == invoiceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, returnSummaryRequests);
+  int get hashCode => Object.hash(runtimeType, returnId, invoiceId);
 
   @JsonKey(ignore: true)
   @override
@@ -252,29 +250,29 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnSummaryRequest returnSummaryRequests) fetch,
+    required TResult Function(String returnId, String invoiceId) fetch,
   }) {
-    return fetch(returnSummaryRequests);
+    return fetch(returnId, invoiceId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnSummaryRequest returnSummaryRequests)? fetch,
+    TResult? Function(String returnId, String invoiceId)? fetch,
   }) {
-    return fetch?.call(returnSummaryRequests);
+    return fetch?.call(returnId, invoiceId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnSummaryRequest returnSummaryRequests)? fetch,
+    TResult Function(String returnId, String invoiceId)? fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(returnSummaryRequests);
+      return fetch(returnId, invoiceId);
     }
     return orElse();
   }
@@ -313,9 +311,11 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements ReturnSummaryDetailsEvent {
   const factory _Fetch(
-      {required final ReturnSummaryRequest returnSummaryRequests}) = _$_Fetch;
+      {required final String returnId,
+      required final String invoiceId}) = _$_Fetch;
 
-  ReturnSummaryRequest get returnSummaryRequests;
+  String get returnId;
+  String get invoiceId;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -328,7 +328,9 @@ mixin _$ReturnSummaryDetailsState {
       throw _privateConstructorUsedError;
   ReturnSummaryRequest get returnSummaryRequests =>
       throw _privateConstructorUsedError;
-  RequestInformation get requestInformation =>
+  ReturnRequestInformation get requestInformation =>
+      throw _privateConstructorUsedError;
+  ReturnRequestInformationHeader get requestInformationHeader =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -346,10 +348,12 @@ abstract class $ReturnSummaryDetailsStateCopyWith<$Res> {
       {bool isLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ReturnSummaryRequest returnSummaryRequests,
-      RequestInformation requestInformation});
+      ReturnRequestInformation requestInformation,
+      ReturnRequestInformationHeader requestInformationHeader});
 
   $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests;
-  $RequestInformationCopyWith<$Res> get requestInformation;
+  $ReturnRequestInformationCopyWith<$Res> get requestInformation;
+  $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
 }
 
 /// @nodoc
@@ -370,6 +374,7 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
     Object? failureOrSuccessOption = null,
     Object? returnSummaryRequests = null,
     Object? requestInformation = null,
+    Object? requestInformationHeader = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -387,7 +392,11 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
       requestInformation: null == requestInformation
           ? _value.requestInformation
           : requestInformation // ignore: cast_nullable_to_non_nullable
-              as RequestInformation,
+              as ReturnRequestInformation,
+      requestInformationHeader: null == requestInformationHeader
+          ? _value.requestInformationHeader
+          : requestInformationHeader // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestInformationHeader,
     ) as $Val);
   }
 
@@ -402,10 +411,19 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $RequestInformationCopyWith<$Res> get requestInformation {
-    return $RequestInformationCopyWith<$Res>(_value.requestInformation,
+  $ReturnRequestInformationCopyWith<$Res> get requestInformation {
+    return $ReturnRequestInformationCopyWith<$Res>(_value.requestInformation,
         (value) {
       return _then(_value.copyWith(requestInformation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader {
+    return $ReturnRequestInformationHeaderCopyWith<$Res>(
+        _value.requestInformationHeader, (value) {
+      return _then(_value.copyWith(requestInformationHeader: value) as $Val);
     });
   }
 }
@@ -423,12 +441,15 @@ abstract class _$$_ReturnSummaryDetailsStateCopyWith<$Res>
       {bool isLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ReturnSummaryRequest returnSummaryRequests,
-      RequestInformation requestInformation});
+      ReturnRequestInformation requestInformation,
+      ReturnRequestInformationHeader requestInformationHeader});
 
   @override
   $ReturnSummaryRequestCopyWith<$Res> get returnSummaryRequests;
   @override
-  $RequestInformationCopyWith<$Res> get requestInformation;
+  $ReturnRequestInformationCopyWith<$Res> get requestInformation;
+  @override
+  $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
 }
 
 /// @nodoc
@@ -448,6 +469,7 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? returnSummaryRequests = null,
     Object? requestInformation = null,
+    Object? requestInformationHeader = null,
   }) {
     return _then(_$_ReturnSummaryDetailsState(
       isLoading: null == isLoading
@@ -465,7 +487,11 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
       requestInformation: null == requestInformation
           ? _value.requestInformation
           : requestInformation // ignore: cast_nullable_to_non_nullable
-              as RequestInformation,
+              as ReturnRequestInformation,
+      requestInformationHeader: null == requestInformationHeader
+          ? _value.requestInformationHeader
+          : requestInformationHeader // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestInformationHeader,
     ));
   }
 }
@@ -477,7 +503,8 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
       {required this.isLoading,
       required this.failureOrSuccessOption,
       required this.returnSummaryRequests,
-      required this.requestInformation});
+      required this.requestInformation,
+      required this.requestInformationHeader});
 
   @override
   final bool isLoading;
@@ -486,11 +513,13 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
   @override
   final ReturnSummaryRequest returnSummaryRequests;
   @override
-  final RequestInformation requestInformation;
+  final ReturnRequestInformation requestInformation;
+  @override
+  final ReturnRequestInformationHeader requestInformationHeader;
 
   @override
   String toString() {
-    return 'ReturnSummaryDetailsState(isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption, returnSummaryRequests: $returnSummaryRequests, requestInformation: $requestInformation)';
+    return 'ReturnSummaryDetailsState(isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption, returnSummaryRequests: $returnSummaryRequests, requestInformation: $requestInformation, requestInformationHeader: $requestInformationHeader)';
   }
 
   @override
@@ -505,12 +534,20 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
             (identical(other.returnSummaryRequests, returnSummaryRequests) ||
                 other.returnSummaryRequests == returnSummaryRequests) &&
             (identical(other.requestInformation, requestInformation) ||
-                other.requestInformation == requestInformation));
+                other.requestInformation == requestInformation) &&
+            (identical(
+                    other.requestInformationHeader, requestInformationHeader) ||
+                other.requestInformationHeader == requestInformationHeader));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading,
-      failureOrSuccessOption, returnSummaryRequests, requestInformation);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      failureOrSuccessOption,
+      returnSummaryRequests,
+      requestInformation,
+      requestInformationHeader);
 
   @JsonKey(ignore: true)
   @override
@@ -525,8 +562,9 @@ abstract class _ReturnSummaryDetailsState implements ReturnSummaryDetailsState {
       {required final bool isLoading,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final ReturnSummaryRequest returnSummaryRequests,
-      required final RequestInformation
-          requestInformation}) = _$_ReturnSummaryDetailsState;
+      required final ReturnRequestInformation requestInformation,
+      required final ReturnRequestInformationHeader
+          requestInformationHeader}) = _$_ReturnSummaryDetailsState;
 
   @override
   bool get isLoading;
@@ -535,7 +573,9 @@ abstract class _ReturnSummaryDetailsState implements ReturnSummaryDetailsState {
   @override
   ReturnSummaryRequest get returnSummaryRequests;
   @override
-  RequestInformation get requestInformation;
+  ReturnRequestInformation get requestInformation;
+  @override
+  ReturnRequestInformationHeader get requestInformationHeader;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnSummaryDetailsStateCopyWith<_$_ReturnSummaryDetailsState>

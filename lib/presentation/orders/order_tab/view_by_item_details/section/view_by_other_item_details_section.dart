@@ -60,6 +60,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                   children: e.orderHistoryItem
                                       .map(
                                         (e) => CommonTileItem(
+                                          isQuantityRequired: true,
                                           label: e.materialNumber.displayMatNo,
                                           title: e.materialDescription,
                                           priceComponent: PriceComponent(

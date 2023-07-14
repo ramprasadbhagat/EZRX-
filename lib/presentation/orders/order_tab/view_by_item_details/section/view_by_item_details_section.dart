@@ -35,6 +35,7 @@ class ItemDetailsSection extends StatelessWidget {
             height: 10,
           ),
           CommonTileItem(
+            isQuantityRequired: true,
             subtitle: '',
             label: orderHistoryItem.materialNumber.displayMatNo,
             title: orderHistoryItem.materialDescription,

@@ -21,8 +21,7 @@ class ApproverReturnRequestInformationRemote {
     required this.config,
   });
 
-  Future<RequestInformation> getApproverReturnRequestInformation(
-      {
+  Future<RequestInformation> getApproverReturnRequestInformation({
     required String returnRequestId,
   }) async {
     final res = await httpService.request(

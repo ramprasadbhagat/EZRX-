@@ -36,8 +36,7 @@ void main() {
 
           expect(
             result,
-            RequestInformationDto.fromJson(
-                    res['data']['requestInformationV2'])
+            RequestInformationDto.fromJson(res['data']['requestInformationV2'])
                 .toDomain(),
           );
         },
