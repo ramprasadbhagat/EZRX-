@@ -96,6 +96,8 @@ void main() {
     const tier1UnitPrice = '200';
     const tier2UnitPrice = '300';
     const tier3UnitPrice = tier2UnitPrice;
+    const principleFullText = 'NOVARTIS HEALTHCARE PHILIPPINES,';
+    const principleSearchText = 'NOV';
 
     //init app
     await runAppForTesting(tester);
@@ -126,6 +128,24 @@ void main() {
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
     materialRootRobot.findMaterialTab();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     materialRootRobot.findBundlesTab();
     materialRootRobot.findCovidTab();
     //Bonus Material

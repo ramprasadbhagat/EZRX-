@@ -93,6 +93,8 @@ void main() {
     const materialSubTotalPrice = materialTotalPrice;
     const materialGrandTotalPrice = materialSubTotalPrice; //0% vat
     const materialPriceNew = '35';
+    const principleFullText = 'Besins';
+    const principleSearchText = 'Bes';
 
     //init app
     await runAppForTesting(tester);
@@ -122,6 +124,24 @@ void main() {
     await homeRobot.goToCreateOrder();
     materialRootRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     materialRootRobot.findBundlesTab();
     //add material
     materialListRobot.verify();
@@ -169,7 +189,8 @@ void main() {
     orderTemplateListRobot.findTemplateItem(orderTemplateName);
     await orderTemplateListRobot.tapTemplateItem(orderTemplateName);
     orderTemplateDetailRobot.verifyMaterialNumber(materialAbsolute);
-    orderTemplateDetailRobot.verifyMaterialQuantity(materialQuantity.toString());
+    orderTemplateDetailRobot
+        .verifyMaterialQuantity(materialQuantity.toString());
     orderTemplateDetailRobot.findAddToCart();
     await orderTemplateDetailRobot.tapAddToCart();
     cartRobot.verify();

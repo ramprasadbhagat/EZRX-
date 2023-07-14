@@ -92,6 +92,8 @@ void main() {
     const unitPrice = '10.35';
     const totalPrice = '207';
     const subTotal = '245';
+    const principleFullText = 'Pfizer Global Trading (VC)';
+    const principleSearchText = 'Pfi';
     await runAppForTesting(tester);
     await loginRobot.findAndCloseAnnouncementIcon();
     await loginRobot.login(username, password);
@@ -223,6 +225,24 @@ void main() {
     await homeRobot.goToCreateOrder();
     materialRootRobot.findMaterialTab();
     materialListRobot.verify();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     await materialListRobot.clearSearchMaterial();
     await materialListRobot.search(materialAbsolute);
     await materialListRobot.tapMaterial(material);

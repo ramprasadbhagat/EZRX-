@@ -102,6 +102,8 @@ void main() {
     const bundleMaterial = '000000000023348769';
     const orderTemplateName = 'myExternalSalesRepTemplate';
     const orderType = 'ZPOR';
+    const principleFullText = 'PARVUS SDN BHD';
+    const principleSearchText = 'PAR';
 
     //============================================================
     // Material Price's
@@ -170,6 +172,24 @@ void main() {
 
     materialListRobot.verify();
     materialListRobot.verifyDisableOrderTypeSelection();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
 
     //verify tired pricing
     await materialListRobot.search(tieredMaterialAbsolute);

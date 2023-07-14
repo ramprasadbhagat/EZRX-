@@ -96,6 +96,8 @@ void main() {
     const tierQuantityUnitPrice1 = '171,899.7';
     const tierQuantityUnitPrice8 = '154,709.73';
     const minimumOrderAmount = '1,000,000 $currency';
+    const principleFullText = 'Besins Healthcare (Hong Kong) Ltd.';
+    const principleSearchText = 'Bes';
 
     Future<void> tenderOrderValidation({
       required String materialNumber,
@@ -151,8 +153,27 @@ void main() {
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
+
     //Disable Order Type Selection as Enable
     materialListRobot.verifyDisableOrderTypeSelection();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
 
     //check bundle tab disabled
     materialRootRobot.findNoBundleTab();
@@ -506,7 +527,7 @@ void main() {
     await materialListRobot.search(material1);
     await materialListRobot.tapMaterial(material1);
     materialDetailRobot.verify();
-    await tenderOrderValidation(materialNumber: material1,qty: 1);
+    await tenderOrderValidation(materialNumber: material1, qty: 1);
     materialListRobot.verify();
     materialListRobot.findCartButton();
     await materialListRobot.tapCartButton();

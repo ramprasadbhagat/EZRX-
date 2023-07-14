@@ -92,6 +92,9 @@ void main() {
   const regularMaterialDiscountOverridePrice =
       '15,352.21'; // 10 % discount override price
 
+  const principleFullText = 'Stryker (Thailand) Ltd.';
+  const principleSearchText = 'Str';
+
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('E2E External Sales Rep User (TH Market) - Order',
@@ -136,6 +139,24 @@ void main() {
     await homeRobot.goToCreateOrder();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     materialRootRobot.findNoBundleTab();
     //block submitting order when less than min order amount
     await materialListRobot.search(minimumOrderMaterial.displayMatNo);

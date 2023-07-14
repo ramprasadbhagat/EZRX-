@@ -435,6 +435,39 @@ void main() {
       expect(find.text('RandomKey'), findsOneWidget);
     });
 
+    testWidgets('Enter text in Search Field and press submit', (tester) async {
+      when(() => materialfilterBlocMock.state).thenReturn(
+        MaterialFilterState.initial().copyWith(
+          materialFilter: const MaterialFilter(
+            uniqueItemBrand: [],
+            uniquePrincipalName: [
+              'GSK Consumer Healthcare',
+              'Pfizer PFE Private Limited test'
+            ],
+            uniqueTherapeuticClass: [],
+          ),
+        ),
+      );
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+          filterType: MaterialFilterType.principal,
+        )));
+      });
+
+      await tester.pump();
+      final searchBarField = find.byKey(const Key('materialFilterSearchField'));
+      await tester.enterText(searchBarField, 'GSK');
+      await tester.pump();
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      verify(
+        () => materialfilterBlocMock.add(
+          const MaterialFilterEvent.updateSearchKey('GSK'),
+        ),
+      ).called(1);
+    });
+
     testWidgets(
         'Material Filter Clear All button appears when atleast one item in the selected list and onTapping clears the selected item for respective type',
         (tester) async {

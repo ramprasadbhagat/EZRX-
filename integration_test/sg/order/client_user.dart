@@ -125,6 +125,8 @@ void main() {
     const material2GrandTotalPrice = '1,014.55'; //8% vat
     const material2UnitPrice = '469.7';
     const material2TotalPrice = material2SubTotalPrice;
+    const principleFullText = 'Becton Dickinson Holdings Pte Ltd';
+    const principleSearchText = 'Bec';
 
     //init app
     await runAppForTesting(tester);
@@ -308,6 +310,23 @@ void main() {
     //create order for non-EDi customer
     await homeRobot.goToCreateOrder();
     materialRootRobot.findMaterialTab();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
     materialRootRobot.findBundlesTab();
     materialRootRobot.findCovidTab();
     materialListRobot.verify();
@@ -335,24 +354,14 @@ void main() {
     await orderSummaryRobot.tapContinueButton(3);
     //Minimum Order Amount
     orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
-    orderSummaryRobot.verifySubTotalPrice(
-      currency, material1SubTotalPrice
-    );
-    orderSummaryRobot.verifyGrandTotalPrice(
-      currency, material1GrandTotalPrice
-    );
+    orderSummaryRobot.verifySubTotalPrice(currency, material1SubTotalPrice);
+    orderSummaryRobot.verifyGrandTotalPrice(currency, material1GrandTotalPrice);
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(materialWithoutPrice, 1);
     orderSummaryRobot.verifyMaterialUnitPrice(
-      false,
-      currency,
-      material1UnitPrice
-    );
+        false, currency, material1UnitPrice);
     orderSummaryRobot.verifyMaterialTotalPrice(
-      false,
-      currency,
-      material1TotalPrice
-    );
+        false, currency, material1TotalPrice);
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //could not able to place an order as it does not cross

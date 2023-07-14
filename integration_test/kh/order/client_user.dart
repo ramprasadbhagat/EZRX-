@@ -75,6 +75,8 @@ void main() {
   const clientUserRole = 'Client User';
   final materialActualNumber = num.parse(materialNumber).toInt().toString();
   var unitPrice = '200';
+  const principleFullText = 'Abbott Products Operations A.G';
+  const principleSearchText = 'Abbott';
 
   void onChangeQuantity({required int qty}) {
     quantity = qty;
@@ -349,6 +351,24 @@ void main() {
     await homeRobot.goToCreateOrder();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     await addMaterialToCart(
       materialSearchText: materialLessMinSearchText,
       materialNumber: materialLessMinNumber,

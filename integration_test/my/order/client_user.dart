@@ -101,6 +101,8 @@ void main() {
     const bundleMaterial = '000000000023348769';
     const orderTemplateName = 'myClientUserTemplate';
     const orderType = 'ZPOR';
+    const principleFullText = 'AMO IRELAND';
+    const principleSearchText = 'AMO';
 
     //============================================================
     // Material Price's
@@ -166,6 +168,24 @@ void main() {
     materialRootRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
 
     //verify bonus deals
     await materialListRobot.search(bonusDealsMaterialAbsolute);

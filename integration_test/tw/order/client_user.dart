@@ -92,6 +92,9 @@ void main() {
     const materialSubTotalPrice = materialTotalPrice;
     const materialGrandTotalPrice = materialSubTotalPrice; //0% vat
 
+    const principleFullText = 'Bora Corporation';
+    const principleSearchText = 'Bor';
+
     //init app
     await runAppForTesting(tester);
     await loginRobot.findAndCloseAnnouncementIcon();
@@ -121,6 +124,24 @@ void main() {
     materialRootRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     await materialListRobot.search(materialWithoutPriceAbsolute);
 
     //Enable Government Material Code
@@ -271,7 +292,8 @@ void main() {
     orderTemplateListRobot.findTemplateItem(orderTemplateName);
     await orderTemplateListRobot.tapTemplateItem(orderTemplateName);
     orderTemplateDetailRobot.verifyMaterialNumber(materialAbsolute);
-    orderTemplateDetailRobot.verifyMaterialQuantity(materialQuantity.toString());
+    orderTemplateDetailRobot
+        .verifyMaterialQuantity(materialQuantity.toString());
     orderTemplateDetailRobot.findAddToCart();
     await orderTemplateDetailRobot.tapAddToCart();
     cartRobot.verifyHideStockDisplay();

@@ -88,6 +88,9 @@ void main() {
   const regularMaterialGrandTotalPrice = regularMaterialUnitPrice;
   const regularMaterialTotalPrice = regularMaterialUnitPrice;
 
+  const principleFullText = 'Becton Dickinson Holdings Pte Ltd';
+  const principleSearchText = 'Bec';
+
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('E2E Client User (TH Market) - Order', (tester) async {
@@ -135,6 +138,24 @@ void main() {
     await homeRobot.goToCreateOrder();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     materialRootRobot.findNoBundleTab();
     //block submitting order when less than min order amount
     await materialListRobot.search(minimumOrderMaterial.displayMatNo);

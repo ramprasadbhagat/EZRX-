@@ -104,6 +104,8 @@ void main() {
     const grandTotalPrice2 = '19,845,000'; //Tax calculated at material level.
     const materialTotalPrice2 = '19,845,000';
     const subTotalPrice2 = '18,900,000';
+    const principleFullText = 'Besins Healthcare (Hong Kong) Ltd.';
+    const principleSearchText = 'Bes';
 
     Future<void> tenderOrderValidation({
       required String materialNumber,
@@ -159,6 +161,24 @@ void main() {
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
 
     //check bundle tab disabled
     materialRootRobot.findNoBundleTab();

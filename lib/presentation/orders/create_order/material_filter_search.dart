@@ -42,9 +42,8 @@ class _MaterialFilterSearch extends State<MaterialFilterSearch> {
     return SearchBar(
       key: const Key('materialFilterSearchField'),
       controller: _searchController,
-      onSearchChanged: (value) {
-        widget.onSearchMethod(value);
-      },
+      onSearchChanged: (value) => widget.onSearchMethod(value),
+      onSearchSubmitted: (value) => widget.onSearchMethod(value),
       suffixIconKey: const Key('clearMaterialFilterSearch'),
       isDense: true,
       border: InputBorder.none,

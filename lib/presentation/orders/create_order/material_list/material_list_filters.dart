@@ -21,6 +21,7 @@ class MaterialListFilters extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomSelector(
+                key: const Key('principleSelector'),
                 title: 'Principal'.tr(),
                 child: Text(
                   state.getFilterLabel(MaterialFilterType.principal).tr(),
@@ -35,6 +36,7 @@ class MaterialListFilters extends StatelessWidget {
                 ),
               ),
               CustomSelector(
+                key: const Key('therapeuticSelector'),
                 title: 'Therapeutic'.tr(),
                 child: Text(
                   state.getFilterLabel(MaterialFilterType.therapeutic).tr(),
@@ -49,6 +51,7 @@ class MaterialListFilters extends StatelessWidget {
                 ),
               ),
               CustomSelector(
+                key: const Key('brandSelector'),
                 title: 'Brand'.tr(),
                 child: Text(
                   state.getFilterLabel(MaterialFilterType.brand).tr(),

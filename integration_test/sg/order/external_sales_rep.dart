@@ -112,6 +112,8 @@ void main() {
     const material2GrandTotalPrice = '1,847.88'; //8% vat
     const material2UnitPrice = '85.55';
     const material2TotalPrice = '1,711';
+    const principleFullText = 'Becton Dickinson Holdings Pte Ltd';
+    const principleSearchText = 'Bec';
 
     //init app
     await runAppForTesting(tester);
@@ -280,6 +282,24 @@ void main() {
     //create order for non-EDi customer
     await homeRobot.goToCreateOrder();
     materialRootRobot.findMaterialTab();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    await materialRootRobot.enterTextAndSubmit(
+        principleSearchText: principleSearchText);
+    materialRootRobot.verifySearchResultAppears(
+        principleFullText: principleFullText);
+    await materialRootRobot.tapOnSearchResult(
+        principleFullText: principleFullText);
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
+    materialRootRobot.findPrincipleSelector();
+    await materialRootRobot.tapPrincipleSelector();
+    materialRootRobot.verifyMaterialFilterPage();
+    materialRootRobot.findClearFilter();
+    await materialRootRobot.tapClearFilter();
+    materialRootRobot.verifyApplyButton();
+    await materialRootRobot.tapApplyButton();
     materialRootRobot.findBundlesTab();
     materialListRobot.verify();
     await materialListRobot.search(materialWithoutPriceAbsolute);
