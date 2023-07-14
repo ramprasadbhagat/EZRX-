@@ -24,7 +24,7 @@ class CreditAndInvoiceDetailsRemoteDataSource {
   Future<List<CustomerDocumentDetail>> getCreditAndInvoiceDetails({
     required String customerCode,
     required String salesOrg,
-    required String accountingDocument,
+    required String searchKey,
     required String fiscalYear,
     required String bpCustomerNumber,
     required String accountingDocumentItem,
@@ -40,7 +40,7 @@ class CreditAndInvoiceDetailsRemoteDataSource {
             'input': {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
-              'accountingDocument': accountingDocument,
+              'accountingDocument': searchKey,
               'fiscalYear': fiscalYear,
               'bpCustomerNumber': bpCustomerNumber,
               'accountingDocumentItem': accountingDocumentItem,

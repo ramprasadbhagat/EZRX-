@@ -27,7 +27,7 @@ class CreditDetailsSection extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '${creditItem.accountingDocumentType} #${creditItem.accountingDocument}',
+                  '${creditItem.accountingDocumentType} #${creditItem.searchKey}',
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: ZPColors.white,
                       ),

@@ -45,7 +45,7 @@ class CreditAndInvoiceDetailsRepository
         customerCode: customerCodeInfo.customerCodeSoldTo,
         bpCustomerNumber: creditAndInvoiceItem.bpCustomerNumber,
         fiscalYear: creditAndInvoiceItem.fiscalYear,
-        accountingDocument: creditAndInvoiceItem.accountingDocument,
+        searchKey: creditAndInvoiceItem.searchKey,
         accountingDocumentItem: creditAndInvoiceItem.accountingDocumentItem,
       );
 

@@ -34,6 +34,8 @@ mixin _$AllInvoicesFilterDto {
   String get amountValueTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'accountingDocument', defaultValue: '')
+  String get searchKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +63,9 @@ abstract class $AllInvoicesFilterDtoCopyWith<$Res> {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses});
+          String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          String searchKey});
 }
 
 /// @nodoc
@@ -85,6 +89,7 @@ class _$AllInvoicesFilterDtoCopyWithImpl<$Res,
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       dueDateFrom: null == dueDateFrom
@@ -115,6 +120,10 @@ class _$AllInvoicesFilterDtoCopyWithImpl<$Res,
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -141,7 +150,9 @@ abstract class _$$_AllInvoicesFilterDtoCopyWith<$Res>
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses});
+          String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          String searchKey});
 }
 
 /// @nodoc
@@ -162,6 +173,7 @@ class __$$_AllInvoicesFilterDtoCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_AllInvoicesFilterDto(
       dueDateFrom: null == dueDateFrom
@@ -192,6 +204,10 @@ class __$$_AllInvoicesFilterDtoCopyWithImpl<$Res>
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -213,7 +229,9 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           required this.amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required this.filterStatuses})
+          required this.filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          required this.searchKey})
       : super._();
 
   factory _$_AllInvoicesFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -240,10 +258,13 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
   @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   final String filterStatuses;
+  @override
+  @JsonKey(name: 'accountingDocument', defaultValue: '')
+  final String searchKey;
 
   @override
   String toString() {
-    return 'AllInvoicesFilterDto(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'AllInvoicesFilterDto(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
@@ -264,7 +285,9 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             (identical(other.filterStatuses, filterStatuses) ||
-                other.filterStatuses == filterStatuses));
+                other.filterStatuses == filterStatuses) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @JsonKey(ignore: true)
@@ -277,7 +300,8 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
       documentDateTo,
       amountValueFrom,
       amountValueTo,
-      filterStatuses);
+      filterStatuses,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -309,7 +333,9 @@ abstract class _AllInvoicesFilterDto extends AllInvoicesFilterDto {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           required final String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required final String filterStatuses}) = _$_AllInvoicesFilterDto;
+          required final String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          required final String searchKey}) = _$_AllInvoicesFilterDto;
   const _AllInvoicesFilterDto._() : super._();
 
   factory _AllInvoicesFilterDto.fromJson(Map<String, dynamic> json) =
@@ -336,6 +362,9 @@ abstract class _AllInvoicesFilterDto extends AllInvoicesFilterDto {
   @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses;
+  @override
+  @JsonKey(name: 'accountingDocument', defaultValue: '')
+  String get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_AllInvoicesFilterDtoCopyWith<_$_AllInvoicesFilterDto> get copyWith =>

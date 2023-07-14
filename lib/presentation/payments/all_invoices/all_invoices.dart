@@ -3,20 +3,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,64 +28,10 @@ class AllInvoicesPage extends StatelessWidget {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Text('Invoices').tr(),
-        actions: const [
-          SizedBox.shrink(),
-        ],
-      ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SearchBar(
-                      onSearchChanged: (String value) {},
-                      clearIconKey: WidgetKeys.clearIconKey,
-                      controller: TextEditingController(),
-                      onClear: () {},
-                    ),
-                  ),
-                  BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
-                    buildWhen: (previous, current) =>
-                        previous.appliedFilter != current.appliedFilter,
-                    builder: (context, state) {
-                      return CustomBadge(
-                        Icons.tune,
-                        count: state.appliedFilter.appliedFilterCount,
-                        badgeColor: ZPColors.orange,
-                        onPressed: () {
-                          context.read<AllInvoicesFilterBloc>().add(
-                                AllInvoicesFilterEvent.openFilterBottomSheet(
-                                  appliedFilter: state.appliedFilter,
-                                ),
-                              );
-                          showModalBottomSheet(
-                            isScrollControlled: true,
-                            isDismissible: false,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16),
-                              ),
-                            ),
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            context: context,
-                            builder: (_) {
-                              return const AllInvoicesFilterBottomSheet();
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
             BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
               listenWhen: (previous, current) =>
                   previous.failureOrSuccessOption !=
@@ -114,10 +56,16 @@ class AllInvoicesPage extends StatelessWidget {
                       title: 'No invoice found'.tr(),
                     ),
                     controller: ScrollController(),
-                    onRefresh: () {
+                    onRefresh: () =>
                       context.read<AllInvoicesBloc>().add(
                             AllInvoicesEvent.fetch(
-                              appliedFilter: state.appliedFilter,
+                            appliedFilter: AllInvoicesFilter.empty().copyWith(
+                              searchKey: context
+                                  .read<AllInvoicesBloc>()
+                                  .state
+                                  .appliedFilter
+                                  .searchKey,
+                            ),
                               salesOrganisation: context
                                   .read<SalesOrgBloc>()
                                   .state
@@ -125,10 +73,9 @@ class AllInvoicesPage extends StatelessWidget {
                               customerCodeInfo: context
                                   .read<CustomerCodeBloc>()
                                   .state
-                                  .customerCodeInfo,
+                                .customerCodeInfo,
                             ),
-                          );
-                    },
+                        ),
                     onLoadingMore: () {
                       context.read<AllInvoicesBloc>().add(
                             AllInvoicesEvent.loadMore(
@@ -228,7 +175,7 @@ class _InvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Invoice #${invoiceItem.accountingDocument}',
+                  'Invoice #${invoiceItem.searchKey}',
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 StatusLabel(

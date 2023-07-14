@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({
@@ -18,6 +19,8 @@ class SearchBar extends StatefulWidget {
     required this.onClear,
     this.border,
     this.isAutoSearch = true,
+    this.inputFormatters = const <TextInputFormatter>[],
+    this.keyboardType = TextInputType.multiline,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -31,6 +34,8 @@ class SearchBar extends StatefulWidget {
   final bool Function()? customValidator;
   final void Function(String) onSearchChanged;
   final bool isAutoSearch;
+  final List<TextInputFormatter> inputFormatters;
+  final TextInputType keyboardType;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -53,6 +58,8 @@ class _SearchBarState extends State<SearchBar> {
       enabled: widget.enabled,
       onChanged: (value) => _onSearchChanged(value),
       onFieldSubmitted: (value) => _onSearch(context, value),
+      inputFormatters: widget.inputFormatters,
+      keyboardType: widget.keyboardType,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 24 / 16),
       decoration: InputDecoration(
         isDense: widget.isDense,

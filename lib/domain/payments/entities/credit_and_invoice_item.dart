@@ -11,7 +11,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
   factory CreditAndInvoiceItem({
     required String bpCustomerNumber,
     required String fiscalYear,
-    required String accountingDocument,
+    required String searchKey,
     required String accountingDocumentItem,
     required String accountingDocumentType,
     required String postingKeyName,
@@ -28,7 +28,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
   factory CreditAndInvoiceItem.empty() => CreditAndInvoiceItem(
         bpCustomerNumber: '',
         fiscalYear: '',
-        accountingDocument: '',
+        searchKey: '',
         accountingDocumentItem: '',
         accountingDocumentType: '',
         postingKeyName: '',

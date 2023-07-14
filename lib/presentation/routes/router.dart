@@ -40,6 +40,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/vi
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
+import 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
@@ -184,6 +185,20 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       ],
     ),
     AutoRoute(
+      path: 'payments/invoice_credit',
+      page: AccountSummary,
+      children: [
+        AutoRoute(
+          path: 'all_invoices',
+          page: AllInvoicesPage,
+        ),
+        AutoRoute(
+          path: 'all_credits',
+          page: AllCreditsPage,
+        ),
+      ],
+    ),
+    AutoRoute(
       path: 'main',
       page: HomeNavigationTabbar,
       children: [
@@ -264,16 +279,8 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
       page: ReturnSummaryDetails,
     ),
     AutoRoute(
-      path: 'payments/all_invoices',
-      page: AllInvoicesPage,
-    ),
-    AutoRoute(
       path: 'payments/invoice_details',
       page: InvoiceDetailsPage,
-    ),
-    AutoRoute(
-      path: 'payments/all_credits',
-      page: AllCreditsPage,
     ),
     AutoRoute(
       path: 'payments/credit_details',

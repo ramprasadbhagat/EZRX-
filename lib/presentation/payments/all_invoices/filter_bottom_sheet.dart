@@ -508,30 +508,47 @@ class _ResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton(
-        key: WidgetKeys.filterResetButton,
-        onPressed: () {
-          final emptyFilter = AllInvoicesFilter.empty();
-          if (context.read<AllInvoicesBloc>().state.appliedFilter !=
-              emptyFilter) {
-            context.read<AllInvoicesBloc>().add(
-                  AllInvoicesEvent.fetch(
-                    appliedFilter: emptyFilter,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  ),
-                );
-          }
-          context.router.popForced();
-        },
-        child: Text(
-          'Reset'.tr(),
-          style: const TextStyle(color: ZPColors.primary),
-        ),
-      ),
+    return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
+      builder: (context, state) {
+        return Expanded(
+          child: OutlinedButton(
+            key: WidgetKeys.filterResetButton,
+            onPressed: () {
+              if (context
+                      .read<AllInvoicesFilterBloc>()
+                      .state
+                      .filter
+                      .excludeSearch !=
+                  AllInvoicesFilter.empty()) {
+                context.read<AllInvoicesBloc>().add(
+                      AllInvoicesEvent.fetch(
+                        appliedFilter: AllInvoicesFilter.empty().copyWith(
+                            searchKey: context
+                                .read<AllInvoicesBloc>()
+                                .state
+                                .appliedFilter
+                              .searchKey,
+                        ),
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                      ),
+                    );
+              }
+              context.router.popForced();
+            },
+            child: Text(
+              'Reset'.tr(),
+              style: const TextStyle(color: ZPColors.primary),
+            ),
+          ),
+        );
+      },
     );
   }
 }

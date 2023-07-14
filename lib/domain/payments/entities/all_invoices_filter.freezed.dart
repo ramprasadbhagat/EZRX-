@@ -24,6 +24,7 @@ mixin _$AllInvoicesFilter {
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<String> get filterStatuses => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllInvoicesFilterCopyWith<AllInvoicesFilter> get copyWith =>
@@ -43,7 +44,8 @@ abstract class $AllInvoicesFilterCopyWith<$Res> {
       DateTimeStringValue documentDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<String> filterStatuses});
+      List<String> filterStatuses,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$AllInvoicesFilterCopyWithImpl<$Res, $Val extends AllInvoicesFilter>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       dueDateFrom: null == dueDateFrom
@@ -96,6 +99,10 @@ class _$AllInvoicesFilterCopyWithImpl<$Res, $Val extends AllInvoicesFilter>
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 }
@@ -115,7 +122,8 @@ abstract class _$$_AllInvoicesFilterCopyWith<$Res>
       DateTimeStringValue documentDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<String> filterStatuses});
+      List<String> filterStatuses,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -136,6 +144,7 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_AllInvoicesFilter(
       dueDateFrom: null == dueDateFrom
@@ -166,6 +175,10 @@ class __$$_AllInvoicesFilterCopyWithImpl<$Res>
           ? _value._filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -180,7 +193,8 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
       required this.documentDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
-      required final List<String> filterStatuses})
+      required final List<String> filterStatuses,
+      required this.searchKey})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -205,8 +219,11 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
   }
 
   @override
+  final SearchKey searchKey;
+
+  @override
   String toString() {
-    return 'AllInvoicesFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'AllInvoicesFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
@@ -227,7 +244,9 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             const DeepCollectionEquality()
-                .equals(other._filterStatuses, _filterStatuses));
+                .equals(other._filterStatuses, _filterStatuses) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -239,7 +258,8 @@ class _$_AllInvoicesFilter extends _AllInvoicesFilter {
       documentDateTo,
       amountValueFrom,
       amountValueTo,
-      const DeepCollectionEquality().hash(_filterStatuses));
+      const DeepCollectionEquality().hash(_filterStatuses),
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -257,7 +277,8 @@ abstract class _AllInvoicesFilter extends AllInvoicesFilter {
       required final DateTimeStringValue documentDateTo,
       required final RangeValue amountValueFrom,
       required final RangeValue amountValueTo,
-      required final List<String> filterStatuses}) = _$_AllInvoicesFilter;
+      required final List<String> filterStatuses,
+      required final SearchKey searchKey}) = _$_AllInvoicesFilter;
   _AllInvoicesFilter._() : super._();
 
   @override
@@ -274,6 +295,8 @@ abstract class _AllInvoicesFilter extends AllInvoicesFilter {
   RangeValue get amountValueTo;
   @override
   List<String> get filterStatuses;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_AllInvoicesFilterCopyWith<_$_AllInvoicesFilter> get copyWith =>

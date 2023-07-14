@@ -16,6 +16,7 @@ _$_AllInvoicesFilterDto _$$_AllInvoicesFilterDtoFromJson(
       amountValueFrom: json['amountValueFrom'] as String? ?? '',
       amountValueTo: json['amountValueTo'] as String? ?? '',
       filterStatuses: json['filterStatuses'] as String? ?? '',
+      searchKey: json['accountingDocument'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_AllInvoicesFilterDtoToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_AllInvoicesFilterDtoToJson(
       'amountValueFrom': instance.amountValueFrom,
       'amountValueTo': instance.amountValueTo,
       'filterStatuses': instance.filterStatuses,
+      'accountingDocument': instance.searchKey,
     };

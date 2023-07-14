@@ -42,7 +42,7 @@ class PaymentItemDto with _$PaymentItemDto {
 
   PaymentItem toDomain() {
     return PaymentItem(
-      accountingDocument: accountingDocument,
+      searchKey: accountingDocument,
       accountingDocumentItem: accountingDocumentItem,
       netDueDate: DateTimeStringValue(netDueDate),
       postingDate: DateTimeStringValue(postingDate),

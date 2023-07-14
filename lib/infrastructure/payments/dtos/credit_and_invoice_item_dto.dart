@@ -85,7 +85,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
     return CreditAndInvoiceItem(
       bpCustomerNumber: bpCustomerNumber,
       fiscalYear: fiscalYear,
-      accountingDocument: accountingDocument,
+      searchKey: accountingDocument,
       accountingDocumentItem: accountingDocumentItem,
       accountingDocumentType: accountingDocumentType,
       postingKeyName: postingKeyName,

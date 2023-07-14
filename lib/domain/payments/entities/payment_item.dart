@@ -9,7 +9,7 @@ class PaymentItem with _$PaymentItem {
   const PaymentItem._();
 
   const factory PaymentItem({
-    required String accountingDocument,
+    required String searchKey,
     required String accountingDocumentItem,
     required DateTimeStringValue netDueDate,
     required DateTimeStringValue postingDate,
@@ -20,7 +20,7 @@ class PaymentItem with _$PaymentItem {
   }) = _PaymentItem;
 
   factory PaymentItem.empty() => PaymentItem(
-        accountingDocument: '',
+        searchKey: '',
         accountingDocumentItem: '',
         netDueDate: DateTimeStringValue(''),
         postingDate: DateTimeStringValue(''),

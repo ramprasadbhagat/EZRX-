@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreditAndInvoiceItem {
   String get bpCustomerNumber => throw _privateConstructorUsedError;
   String get fiscalYear => throw _privateConstructorUsedError;
-  String get accountingDocument => throw _privateConstructorUsedError;
+  String get searchKey => throw _privateConstructorUsedError;
   String get accountingDocumentItem => throw _privateConstructorUsedError;
   String get accountingDocumentType => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
   $Res call(
       {String bpCustomerNumber,
       String fiscalYear,
-      String accountingDocument,
+      String searchKey,
       String accountingDocumentItem,
       String accountingDocumentType,
       String postingKeyName,
@@ -75,7 +75,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
   $Res call({
     Object? bpCustomerNumber = null,
     Object? fiscalYear = null,
-    Object? accountingDocument = null,
+    Object? searchKey = null,
     Object? accountingDocumentItem = null,
     Object? accountingDocumentType = null,
     Object? postingKeyName = null,
@@ -97,9 +97,9 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.fiscalYear
           : fiscalYear // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocument: null == accountingDocument
-          ? _value.accountingDocument
-          : accountingDocument // ignore: cast_nullable_to_non_nullable
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
@@ -160,7 +160,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
   $Res call(
       {String bpCustomerNumber,
       String fiscalYear,
-      String accountingDocument,
+      String searchKey,
       String accountingDocumentItem,
       String accountingDocumentType,
       String postingKeyName,
@@ -187,7 +187,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
   $Res call({
     Object? bpCustomerNumber = null,
     Object? fiscalYear = null,
-    Object? accountingDocument = null,
+    Object? searchKey = null,
     Object? accountingDocumentItem = null,
     Object? accountingDocumentType = null,
     Object? postingKeyName = null,
@@ -209,9 +209,9 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.fiscalYear
           : fiscalYear // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocument: null == accountingDocument
-          ? _value.accountingDocument
-          : accountingDocument // ignore: cast_nullable_to_non_nullable
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
@@ -267,7 +267,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   _$_CreditAndInvoiceItem(
       {required this.bpCustomerNumber,
       required this.fiscalYear,
-      required this.accountingDocument,
+      required this.searchKey,
       required this.accountingDocumentItem,
       required this.accountingDocumentType,
       required this.postingKeyName,
@@ -286,7 +286,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final String fiscalYear;
   @override
-  final String accountingDocument;
+  final String searchKey;
   @override
   final String accountingDocumentItem;
   @override
@@ -312,7 +312,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId)';
   }
 
   @override
@@ -324,8 +324,8 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
                 other.bpCustomerNumber == bpCustomerNumber) &&
             (identical(other.fiscalYear, fiscalYear) ||
                 other.fiscalYear == fiscalYear) &&
-            (identical(other.accountingDocument, accountingDocument) ||
-                other.accountingDocument == accountingDocument) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             (identical(other.accountingDocumentItem, accountingDocumentItem) ||
                 other.accountingDocumentItem == accountingDocumentItem) &&
             (identical(other.accountingDocumentType, accountingDocumentType) ||
@@ -358,7 +358,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       runtimeType,
       bpCustomerNumber,
       fiscalYear,
-      accountingDocument,
+      searchKey,
       accountingDocumentItem,
       accountingDocumentType,
       postingKeyName,
@@ -383,7 +383,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   factory _CreditAndInvoiceItem(
       {required final String bpCustomerNumber,
       required final String fiscalYear,
-      required final String accountingDocument,
+      required final String searchKey,
       required final String accountingDocumentItem,
       required final String accountingDocumentType,
       required final String postingKeyName,
@@ -402,7 +402,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   String get fiscalYear;
   @override
-  String get accountingDocument;
+  String get searchKey;
   @override
   String get accountingDocumentItem;
   @override

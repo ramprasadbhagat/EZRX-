@@ -326,4 +326,10 @@ class WidgetKeys {
   static const Key toReturnDateField = Key('toReturnDateField');
   static const Key fromReturnAmountField = Key('fromReturnAmountField');
   static const Key toReturnAmountField = Key('toReturnAmountField');
+
+  //============================================================
+  //  Payment Summary
+  //============================================================
+  static const Key invoiceTab = Key('invoiceTab');
+  static const Key creditsTab = Key('creditsTab');
 }

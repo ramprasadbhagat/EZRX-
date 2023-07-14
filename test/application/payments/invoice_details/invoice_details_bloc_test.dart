@@ -39,7 +39,7 @@ void main() {
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
       fiscalYear: '2023',
-      accountingDocument: '1080005528',
+      searchKey: '1080005528',
       accountingDocumentItem: '001',
     );
   });

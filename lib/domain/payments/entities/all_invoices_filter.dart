@@ -16,6 +16,8 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required RangeValue amountValueFrom,
     required RangeValue amountValueTo,
     required List<String> filterStatuses,
+    required SearchKey searchKey,
+    
   }) = _AllInvoicesFilter;
 
   factory AllInvoicesFilter.fullyEmpty() => AllInvoicesFilter(
@@ -25,7 +27,8 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         documentDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
-        filterStatuses: [],
+        filterStatuses: <String>[],
+        searchKey: SearchKey(''),
       );
 
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
@@ -56,10 +59,12 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
+        searchKey: SearchKey(''),
       );
 
-  AllInvoicesFilter get _defaultValue => AllInvoicesFilter.empty();
-
+  AllInvoicesFilter get excludeSearch => copyWith(
+        searchKey: SearchKey(''),
+      );
 
   DateTimeRange get getDueDateFilterDateRange => DateTimeRange(
         start: dueDateFrom.dateTimeByDateString,
@@ -97,5 +102,4 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
 
   bool get anyFilterApplied => appliedFilterCount > 0;
 
-  bool get isEmpty => this == _defaultValue;
 }

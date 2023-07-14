@@ -85,7 +85,7 @@ void main() {
               salesOrg: 'fake-sale-org',
               bpCustomerNumber: fakeBpCustomerNumber,
               fiscalYear: fakeFiscalYear,
-              accountingDocument: fakeAccountingDocument,
+              searchKey: fakeAccountingDocument,
               accountingDocumentItem: fakeAccountingDocumentItem,
             );
 
@@ -126,7 +126,7 @@ void main() {
               salesOrg: 'fake-sale-org',
               bpCustomerNumber: fakeBpCustomerNumber,
               fiscalYear: fakeFiscalYear,
-              accountingDocument: fakeAccountingDocument,
+              searchKey: fakeAccountingDocument,
               accountingDocumentItem: fakeAccountingDocumentItem,
             )
                 .onError((error, _) {
@@ -165,7 +165,7 @@ void main() {
               salesOrg: 'fake-sale-org',
               bpCustomerNumber: fakeBpCustomerNumber,
               fiscalYear: fakeFiscalYear,
-              accountingDocument: fakeAccountingDocument,
+              searchKey: fakeAccountingDocument,
               accountingDocumentItem: fakeAccountingDocumentItem,
             )
                 .onError((error, _) {

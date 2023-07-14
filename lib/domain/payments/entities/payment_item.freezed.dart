@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PaymentItem {
-  String get accountingDocument => throw _privateConstructorUsedError;
+  String get searchKey => throw _privateConstructorUsedError;
   String get accountingDocumentItem => throw _privateConstructorUsedError;
   DateTimeStringValue get netDueDate => throw _privateConstructorUsedError;
   DateTimeStringValue get postingDate => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $PaymentItemCopyWith<$Res> {
       _$PaymentItemCopyWithImpl<$Res, PaymentItem>;
   @useResult
   $Res call(
-      {String accountingDocument,
+      {String searchKey,
       String accountingDocumentItem,
       DateTimeStringValue netDueDate,
       DateTimeStringValue postingDate,
@@ -61,7 +61,7 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountingDocument = null,
+    Object? searchKey = null,
     Object? accountingDocumentItem = null,
     Object? netDueDate = null,
     Object? postingDate = null,
@@ -71,9 +71,9 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
     Object? accountingDocumentType = null,
   }) {
     return _then(_value.copyWith(
-      accountingDocument: null == accountingDocument
-          ? _value.accountingDocument
-          : accountingDocument // ignore: cast_nullable_to_non_nullable
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
@@ -116,7 +116,7 @@ abstract class _$$_PaymentItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String accountingDocument,
+      {String searchKey,
       String accountingDocumentItem,
       DateTimeStringValue netDueDate,
       DateTimeStringValue postingDate,
@@ -137,7 +137,7 @@ class __$$_PaymentItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountingDocument = null,
+    Object? searchKey = null,
     Object? accountingDocumentItem = null,
     Object? netDueDate = null,
     Object? postingDate = null,
@@ -147,9 +147,9 @@ class __$$_PaymentItemCopyWithImpl<$Res>
     Object? accountingDocumentType = null,
   }) {
     return _then(_$_PaymentItem(
-      accountingDocument: null == accountingDocument
-          ? _value.accountingDocument
-          : accountingDocument // ignore: cast_nullable_to_non_nullable
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentItem: null == accountingDocumentItem
           ? _value.accountingDocumentItem
@@ -187,7 +187,7 @@ class __$$_PaymentItemCopyWithImpl<$Res>
 
 class _$_PaymentItem extends _PaymentItem {
   const _$_PaymentItem(
-      {required this.accountingDocument,
+      {required this.searchKey,
       required this.accountingDocumentItem,
       required this.netDueDate,
       required this.postingDate,
@@ -198,7 +198,7 @@ class _$_PaymentItem extends _PaymentItem {
       : super._();
 
   @override
-  final String accountingDocument;
+  final String searchKey;
   @override
   final String accountingDocumentItem;
   @override
@@ -216,7 +216,7 @@ class _$_PaymentItem extends _PaymentItem {
 
   @override
   String toString() {
-    return 'PaymentItem(accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, accountingDocumentType: $accountingDocumentType)';
+    return 'PaymentItem(searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, accountingDocumentType: $accountingDocumentType)';
   }
 
   @override
@@ -224,8 +224,8 @@ class _$_PaymentItem extends _PaymentItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentItem &&
-            (identical(other.accountingDocument, accountingDocument) ||
-                other.accountingDocument == accountingDocument) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             (identical(other.accountingDocumentItem, accountingDocumentItem) ||
                 other.accountingDocumentItem == accountingDocumentItem) &&
             (identical(other.netDueDate, netDueDate) ||
@@ -247,7 +247,7 @@ class _$_PaymentItem extends _PaymentItem {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      accountingDocument,
+      searchKey,
       accountingDocumentItem,
       netDueDate,
       postingDate,
@@ -265,7 +265,7 @@ class _$_PaymentItem extends _PaymentItem {
 
 abstract class _PaymentItem extends PaymentItem {
   const factory _PaymentItem(
-          {required final String accountingDocument,
+          {required final String searchKey,
           required final String accountingDocumentItem,
           required final DateTimeStringValue netDueDate,
           required final DateTimeStringValue postingDate,
@@ -277,7 +277,7 @@ abstract class _PaymentItem extends PaymentItem {
   const _PaymentItem._() : super._();
 
   @override
-  String get accountingDocument;
+  String get searchKey;
   @override
   String get accountingDocumentItem;
   @override

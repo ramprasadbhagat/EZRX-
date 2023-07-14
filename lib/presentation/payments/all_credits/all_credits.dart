@@ -3,20 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -33,64 +28,10 @@ class AllCreditsPage extends StatelessWidget {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Text('Credits').tr(),
-        actions: const [
-          SizedBox.shrink(),
-        ],
-      ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SearchBar(
-                      onSearchChanged: (String value) {},
-                      clearIconKey: WidgetKeys.clearIconKey,
-                      controller: TextEditingController(),
-                      onClear: () {},
-                    ),
-                  ),
-                  BlocBuilder<AllCreditsBloc, AllCreditsState>(
-                    buildWhen: (previous, current) =>
-                        previous.appliedFilter != current.appliedFilter,
-                    builder: (context, state) {
-                      return CustomBadge(
-                        Icons.tune,
-                        count: state.appliedFilter.appliedFilterCount,
-                        badgeColor: ZPColors.orange,
-                        onPressed: () {
-                          context.read<AllCreditsFilterBloc>().add(
-                                AllCreditsFilterEvent.openFilterBottomSheet(
-                                  appliedFilter: state.appliedFilter,
-                                ),
-                              );
-                          showModalBottomSheet(
-                            isScrollControlled: true,
-                            isDismissible: false,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16),
-                              ),
-                            ),
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            context: context,
-                            builder: (_) {
-                              return const AllCreditsFilterBottomSheet();
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
             BlocConsumer<AllCreditsBloc, AllCreditsState>(
               listenWhen: (previous, current) =>
                   previous.failureOrSuccessOption !=
@@ -241,7 +182,7 @@ class _CreditsItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${creditItem.accountingDocumentType} #${creditItem.accountingDocument}',
+              '${creditItem.accountingDocumentType} #${creditItem.searchKey}',
               style: Theme.of(context).textTheme.labelSmall,
             ),
             StatusLabel(

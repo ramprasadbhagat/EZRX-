@@ -45,7 +45,7 @@ void main() {
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
       fiscalYear: '2023',
-      accountingDocument: '1080005528',
+      searchKey: '1080005528',
       accountingDocumentItem: '001',
     );
     fakeCreditAndInvoiceDetails = <CustomerDocumentDetail>[
@@ -93,7 +93,7 @@ void main() {
               salesOrg: 'mock_salesOrg',
               bpCustomerNumber: fakeInvoice.bpCustomerNumber,
               fiscalYear: fakeInvoice.fiscalYear,
-              accountingDocument: fakeInvoice.accountingDocument,
+              searchKey: fakeInvoice.searchKey,
               accountingDocumentItem: fakeInvoice.accountingDocumentItem,
             )).thenAnswer(
           (invocation) async => fakeCreditAndInvoiceDetails,
@@ -118,7 +118,7 @@ void main() {
               salesOrg: 'mock_salesOrg',
               bpCustomerNumber: fakeInvoice.bpCustomerNumber,
               fiscalYear: fakeInvoice.fiscalYear,
-              accountingDocument: fakeInvoice.accountingDocument,
+              searchKey: fakeInvoice.searchKey,
               accountingDocumentItem: fakeInvoice.accountingDocumentItem,
             )).thenThrow((invocation) async => MockException());
 

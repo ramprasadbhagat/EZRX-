@@ -2,7 +2,7 @@ part of 'all_invoices_bloc.dart';
 
 @freezed
 class AllInvoicesState with _$AllInvoicesState {
-  //Constructor created for Getter 
+  //Constructor created for Getter
   const AllInvoicesState._();
   const factory AllInvoicesState({
     required AllInvoicesFilter appliedFilter,
@@ -13,11 +13,11 @@ class AllInvoicesState with _$AllInvoicesState {
   }) = _AllInvoicesState;
 
   factory AllInvoicesState.initial() => AllInvoicesState(
-        failureOrSuccessOption: none(),
-        isLoading: false,
-        canLoadMore: true,
-        appliedFilter: AllInvoicesFilter.empty(),
+      failureOrSuccessOption: none(),
+      isLoading: false,
+      canLoadMore: true,
+      appliedFilter: AllInvoicesFilter.empty(),
         items: <CreditAndInvoiceItem>[],
       );
-
+      
 }

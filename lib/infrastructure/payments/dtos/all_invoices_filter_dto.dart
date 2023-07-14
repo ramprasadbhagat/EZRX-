@@ -42,6 +42,11 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
       defaultValue: '',
     )
         required String filterStatuses,
+    @JsonKey(
+      name: 'accountingDocument',
+      defaultValue: '',
+    )
+        required String searchKey,
   }) = _AllInvoicesFilterDto;
 
   factory AllInvoicesFilterDto.fromDomain(
@@ -55,6 +60,7 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
       amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses: tempFilter.filterStatuses.join(','),
+      searchKey: tempFilter.searchKey.getOrDefaultValue(''),
     );
   }
 
@@ -106,6 +112,11 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
           {
             'field': 'invoiceProcessingStatus',
             'value': filterStatuses,
+          },
+        if (searchKey.isNotEmpty)
+          {
+            'field': 'accountingDocument',
+            'value': searchKey,
           },
       ];
 }

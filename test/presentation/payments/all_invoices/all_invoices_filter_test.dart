@@ -325,6 +325,12 @@ void main() {
           appliedFilter:
               AllInvoicesFilter.empty().copyWith(filterStatuses: ['Cleared']),
         ),);
+      when(() => allInvoicesFilterBlocMock.state).thenReturn(
+        AllInvoicesFilterState.initial().copyWith(
+          filter:
+              AllInvoicesFilter.empty().copyWith(filterStatuses: ['Cleared']),
+        ),
+      );
       await getWidget(tester);
       await tester.pumpAndSettle();
 

@@ -59,7 +59,8 @@ class AccountSummaryPage extends StatelessWidget {
                                   .customerCodeInfo,
                             ),
                           );
-                      context.router.pushNamed('payments/all_invoices');
+                      context.router
+                          .pushNamed('payments/invoice_credit/all_invoices');
                     },
                     child: _ItemCard(
                       label: 'Invoices',
@@ -98,7 +99,8 @@ class AccountSummaryPage extends StatelessWidget {
                                   .customerCodeInfo,
                             ),
                           );
-                      context.router.pushNamed('payments/all_credits');
+                      context.router
+                          .pushNamed('payments/invoice_credit/all_credits');
                     },
                     child: _ItemCard(
                       label: 'Credits',
