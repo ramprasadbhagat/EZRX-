@@ -3,10 +3,13 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -15,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/filter/outstanding_invoice_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,12 +42,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                   onClear: () {},
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.tune,
-                ),
-              ),
+              _FilterTune(),
             ],
           ),
         ),
@@ -122,6 +121,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                                 .read<CustomerCodeBloc>()
                                 .state
                                 .customerCodeInfo,
+                            appliedFilter: OutstandingInvoiceFilter.empty(),
                           ),
                         );
                   },
@@ -238,6 +238,65 @@ class _PaymentItem extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _FilterTune extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
+      builder: (context, state) {
+        return CustomBadge(
+          Icons.tune,
+          count: state.appliedFilter.appliedFilterCount,
+          badgeColor: ZPColors.orange,
+          onPressed: () =>
+              !state.isLoading ? _showFilterPage(context: context) : null,
+        );
+      },
+    );
+  }
+
+  void _showFilterPage({required BuildContext context}) {
+    context.read<OutstandingInvoiceFilterBloc>().add(
+          OutstandingInvoiceFilterEvent.updateFilterToLastApplied(
+            lastAppliedFilter:
+                context.read<OutstandingInvoicesBloc>().state.appliedFilter,
+          ),
+        );
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: true,
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return const OutstandingInvoicePaymentFilterPage();
+      },
+    ).then(
+      (value) {
+        if (value == null) return;
+        final newFilter = value as OutstandingInvoiceFilter;
+        final alreadyAppliedFilter =
+            context.read<OutstandingInvoicesBloc>().state.appliedFilter;
+        if (newFilter != alreadyAppliedFilter) {
+          context.read<OutstandingInvoicesBloc>().add(
+                OutstandingInvoicesEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  appliedFilter: newFilter,
+                ),
+              );
+        }
+      },
     );
   }
 }

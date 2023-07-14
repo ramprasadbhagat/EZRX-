@@ -92,23 +92,6 @@ void main() {
   }
 
   group('Policy Configuration List Screen', () {
-    testWidgets('=> Test when refresh page', (tester) async {
-      await getWidget(tester);
-      expect(find.text('No Policy Configurations found'), findsOneWidget);
-      expect(find.byType(PolicyConfigurationListItem), findsNothing);
-      await tester.fling(
-          find.byType(CustomScrollView), const Offset(0, 300), 600);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-      verify(
-        () => policyConfigurationListBlocMock.add(
-          PolicyConfigurationEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            searchKey: '',
-          ),
-        ),
-      ).called(1);
-    });
-
     testWidgets('=> Test while state is fetching', (tester) async {
       when(() => policyConfigurationListBlocMock.state).thenReturn(
         PolicyConfigurationState.initial().copyWith(

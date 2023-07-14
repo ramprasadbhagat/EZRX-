@@ -8,6 +8,7 @@ class AvailableCreditsState with _$AvailableCreditsState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
+    required AvailableCreditFilter appliedFilter,
   }) = _AvailableCreditsState;
 
   factory AvailableCreditsState.initial() => AvailableCreditsState(
@@ -15,5 +16,6 @@ class AvailableCreditsState with _$AvailableCreditsState {
         isLoading: false,
         canLoadMore: true,
         items: <CustomerOpenItem>[],
+        appliedFilter: AvailableCreditFilter.empty(),
       );
 }

@@ -373,6 +373,17 @@ String getReturnSummaryStatus(String status) {
   }
 }
 
+String getPaymentStatus(String status) {
+  switch (status) {
+    case 'OPEN':
+      return 'Open';
+    case 'OVERDUE':
+      return 'Overdue';
+    default:
+      return status;
+  }
+}
+
 String getReturnByRequestStatus(String status) {
   switch (status) {
     case 'PENDING':

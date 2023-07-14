@@ -244,6 +244,9 @@ class StatusType extends ValueObject<String> {
 
   String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
 
+  String get displayPaymentStatus =>
+      getPaymentStatus(value.getOrElse(() => ''));
+
   String get displayStatusForViewByRequest =>
       getReturnByRequestStatus(value.getOrElse(() => ''));
 

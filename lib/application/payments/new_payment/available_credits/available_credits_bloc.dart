@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
@@ -34,6 +35,7 @@ class AvailableCreditsBloc
             failureOrSuccessOption: none(),
             items: <CustomerOpenItem>[],
             isLoading: true,
+            appliedFilter: value.appliedFilter,
           ),
         );
 
@@ -43,6 +45,7 @@ class AvailableCreditsBloc
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
           offset: 0,
+          appliedFilter: value.appliedFilter,
         );
 
         failureOrSuccess.fold(
@@ -58,7 +61,7 @@ class AvailableCreditsBloc
             emit(
               state.copyWith(
                 items: data,
-                canLoadMore: data.length >=_pageSize,
+                canLoadMore: data.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -82,6 +85,7 @@ class AvailableCreditsBloc
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
           offset: state.items.length,
+          appliedFilter: state.appliedFilter,
         );
 
         failureOrSuccess.fold(

@@ -26,6 +26,7 @@ class NewPaymentRemoteDataSource {
     required String salesOrg,
     required int offset,
     required int pageSize,
+    required Map<String, dynamic> filterBy,
   }) async {
     return await getCustomerOpenItems(
       customerCode: customerCode,
@@ -33,6 +34,7 @@ class NewPaymentRemoteDataSource {
       debitCreditType: 'debit',
       offset: offset,
       pageSize: pageSize,
+      filterBy: filterBy,
     );
   }
 
@@ -41,6 +43,7 @@ class NewPaymentRemoteDataSource {
     required String salesOrg,
     required int offset,
     required int pageSize,
+    required Map<String, dynamic> filterBy,
   }) async {
     return await getCustomerOpenItems(
       customerCode: customerCode,
@@ -48,6 +51,7 @@ class NewPaymentRemoteDataSource {
       debitCreditType: 'credit',
       offset: offset,
       pageSize: pageSize,
+      filterBy: filterBy,
     );
   }
 
@@ -58,6 +62,7 @@ class NewPaymentRemoteDataSource {
     String sortDirection = 'desc',
     required int offset,
     required int pageSize,
+    required Map<String, dynamic> filterBy,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -76,6 +81,7 @@ class NewPaymentRemoteDataSource {
                 'order': sortDirection,
                 'field': 'postingKeyName',
               },
+              ...filterBy,
             },
           },
         },

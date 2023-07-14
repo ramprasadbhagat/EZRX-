@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -34,6 +35,7 @@ class OutstandingInvoicesBloc
             failureOrSuccessOption: none(),
             items: <CustomerOpenItem>[],
             isLoading: true,
+            appliedFilter: value.appliedFilter,
           ),
         );
 
@@ -43,6 +45,7 @@ class OutstandingInvoicesBloc
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
           offset: 0,
+          appliedFilter: value.appliedFilter,
         );
 
         failureOrSuccess.fold(
@@ -82,6 +85,7 @@ class OutstandingInvoicesBloc
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
           offset: state.items.length,
+          appliedFilter: state.appliedFilter,
         );
 
         failureOrSuccess.fold(

@@ -70,6 +70,7 @@ class ViewByItemReturnFilterBloc
       updateFilterToLastApplied: (e) async => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
+          showErrorMessage: false,
         ),
       ),
     );

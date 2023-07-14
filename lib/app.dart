@@ -32,7 +32,9 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -513,6 +515,12 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ProductImageBloc>(
           create: (context) => locator<ProductImageBloc>(),
+        ),
+        BlocProvider<OutstandingInvoiceFilterBloc>(
+          create: (context) => locator<OutstandingInvoiceFilterBloc>(),
+        ),
+        BlocProvider<AvailableCreditFilterBloc>(
+          create: (context) => locator<AvailableCreditFilterBloc>(),
         ),
       ],
       child: MaterialApp.router(

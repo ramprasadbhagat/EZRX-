@@ -23,8 +23,7 @@ class NoRecordFound extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 25),

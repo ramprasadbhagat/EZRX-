@@ -12,8 +12,10 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -126,6 +128,7 @@ class AccountSummaryPage extends StatelessWidget {
                             .read<CustomerCodeBloc>()
                             .state
                             .customerCodeInfo,
+                        appliedFilter: OutstandingInvoiceFilter.empty(),
                       ),
                     );
                 context.read<AvailableCreditsBloc>().add(
@@ -138,6 +141,7 @@ class AccountSummaryPage extends StatelessWidget {
                             .read<CustomerCodeBloc>()
                             .state
                             .customerCodeInfo,
+                        appliedFilter: AvailableCreditFilter.empty(),
                       ),
                     );
                 context.read<NewPaymentBloc>().add(

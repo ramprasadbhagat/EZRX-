@@ -8,6 +8,7 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
+    required OutstandingInvoiceFilter appliedFilter,
   }) = _OutstandingInvoicesState;
 
   factory OutstandingInvoicesState.initial() => OutstandingInvoicesState(
@@ -15,5 +16,6 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
         isLoading: false,
         canLoadMore: true,
         items: <CustomerOpenItem>[],
+        appliedFilter: OutstandingInvoiceFilter.empty(),
       );
 }

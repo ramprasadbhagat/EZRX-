@@ -3,9 +3,12 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -13,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/filter/available_credit_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,12 +40,7 @@ class AvailableCreditsTab extends StatelessWidget {
                   onClear: () {},
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.tune,
-                ),
-              ),
+              _FilterTune(),
             ],
           ),
         ),
@@ -121,6 +120,7 @@ class AvailableCreditsTab extends StatelessWidget {
                                 .read<CustomerCodeBloc>()
                                 .state
                                 .customerCodeInfo,
+                            appliedFilter: AvailableCreditFilter.empty(),
                           ),
                         );
                   },
@@ -236,6 +236,65 @@ class _PaymentItem extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _FilterTune extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AvailableCreditsBloc, AvailableCreditsState>(
+      builder: (context, state) {
+        return CustomBadge(
+          Icons.tune,
+          count: state.appliedFilter.appliedFilterCount,
+          badgeColor: ZPColors.orange,
+          onPressed: () =>
+              !state.isLoading ? _showFilterPage(context: context) : null,
+        );
+      },
+    );
+  }
+
+  void _showFilterPage({required BuildContext context}) {
+    context.read<AvailableCreditFilterBloc>().add(
+          AvailableCreditFilterEvent.updateFilterToLastApplied(
+            lastAppliedFilter:
+                context.read<AvailableCreditsBloc>().state.appliedFilter,
+          ),
+        );
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: true,
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return const AvailableCreditPaymentFilterPage();
+      },
+    ).then(
+      (value) {
+        if (value == null) return;
+        final newFilter = value as AvailableCreditFilter;
+        final alreadyAppliedFilter =
+            context.read<AvailableCreditsBloc>().state.appliedFilter;
+        if (newFilter != alreadyAppliedFilter) {
+          context.read<AvailableCreditsBloc>().add(
+                AvailableCreditsEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  appliedFilter: newFilter,
+                ),
+              );
+        }
+      },
     );
   }
 }

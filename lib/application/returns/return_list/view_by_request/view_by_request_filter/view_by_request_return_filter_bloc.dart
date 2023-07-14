@@ -66,6 +66,7 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
       updateFilterToLastApplied: (e) async => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
+          showErrorMessage: false,
         ),
       ),
       setValidationFailure: (_) async => emit(
