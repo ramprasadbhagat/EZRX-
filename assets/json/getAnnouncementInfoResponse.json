@@ -8,9 +8,7 @@
                     "title": {
                         "value": "Announcement 1"
                     },
-                    "summary": {
-                        "value": ""
-                    },
+                    "summary": null,
                     "thumbnail": {
                         "src": null
                     },

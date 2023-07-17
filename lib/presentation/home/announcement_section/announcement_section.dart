@@ -19,6 +19,8 @@ class AnnouncementSection extends StatelessWidget {
       builder: (context, state) {
         if (state.isLoading) {
           return const _AnnouncementSectionLoadingShimmer();
+        } else if (state.announcementInfo.announcementList.isEmpty) {
+          return const SizedBox.shrink();
         }
 
         return Column(
@@ -26,7 +28,8 @@ class AnnouncementSection extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: SectionTitle(title: 'Announcements', onTapIconButton: (){}),
+              child:
+                  SectionTitle(title: 'Announcements', onTapIconButton: () {}),
             ),
             _AnnouncementSectionItemScrollList(
               announcementItemList: state.announcementInfo.announcementList,
@@ -47,7 +50,6 @@ class _AnnouncementSectionItemScrollList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       height: 140,
       child: ListView.builder(
@@ -55,7 +57,6 @@ class _AnnouncementSectionItemScrollList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: announcementItemList.length,
         itemBuilder: (context, index) {
-
           return _AnnouncementSectionItem(
             announcementItem: announcementItemList[index],
           );
@@ -137,7 +138,6 @@ class _AnnouncementSectionLoadingShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: LoadingShimmer.withChild(

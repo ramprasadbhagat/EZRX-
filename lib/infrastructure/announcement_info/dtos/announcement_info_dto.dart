@@ -49,9 +49,11 @@ class AnnouncementItemDto with _$AnnouncementItemDto {
       publishedDate: DateTimeStringValue(publishedDate),);
 }
 
-String getValue(Map json, String key) => json[key]['value'] ?? '';
+String getValue(Map json, String key) => json[key] != null ?
+  json[key]['value'] ?? '' : '';
 
-String getSrcValue(Map json, String key) => json[key]['src'] ?? '';
+String getSrcValue(Map json, String key) => json[key] != null ?
+  json[key]['src'] ?? '' : '';
 
-String getDateValue(Map json, String key) =>
-    json[key]['isoValue'] ?? '';
+String getDateValue(Map json, String key) => json[key] != null ?
+  json[key]['isoValue'] ?? '' : '';
