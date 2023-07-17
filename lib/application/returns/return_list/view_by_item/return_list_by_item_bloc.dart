@@ -65,6 +65,7 @@ class ReturnListByItemBloc
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
+                canLoadMore: false,
               ),
             );
           },
