@@ -23,13 +23,4 @@ class ViewByItemsState with _$ViewByItemsState {
         searchKey: SearchKey(''),
         appliedFilter: ViewByItemHistoryFilter.empty(),
       );
-
-  List<OrderHistoryItem> getFilterItem(List<StatusType> filter) {
-    return List.from(orderHistoryList.orderHistoryItems)
-      ..retainWhere(
-        (orderHistoryItem) =>
-            filter.any((e) => orderHistoryItem.status.statusContains(e)) ||
-            filter.isEmpty,
-      );
-  }
 }
