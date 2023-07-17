@@ -25,7 +25,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final IProductImagesRepository productImagesRepository;
   final IFavouriteRepository favouriteRepository;
 
-
   ProductDetailBloc({
     required this.productDetailRepository,
     required this.productImagesRepository,
@@ -64,25 +63,27 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (materialInfo) async => emit(
-            state.copyWith(
-              isFetching: false,
-              productDetailAggregate: state.productDetailAggregate.copyWith(
-                materialInfo: materialInfo,
+          (materialInfo) async {
+            emit(
+              state.copyWith(
+                isFetching: false,
+                productDetailAggregate: state.productDetailAggregate.copyWith(
+                  materialInfo: materialInfo,
+                ),
               ),
-            ),
-          ),
-        );
-        if (e.type.typeBundle) return;
-        add(
-          _FetchStock(
-            materialNumber:
-                state.productDetailAggregate.materialInfo.materialNumber,
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
-            locale: e.locale,
-          ),
+            );
+            if (e.type.typeBundle) return;
+            add(
+              _FetchStock(
+                materialNumber:
+                    state.productDetailAggregate.materialInfo.materialNumber,
+                salesOrganisation: e.salesOrganisation,
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
+                locale: e.locale,
+              ),
+            );
+          },
         );
       },
       fetchStock: (_FetchStock e) async {
