@@ -34,12 +34,12 @@ mixin _$MaterialInfo {
   CountryData get countryData => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
-  String get governmentMaterialCode =>
+  String get governmentMaterialCode => throw _privateConstructorUsedError;
+  StringValue get unitOfMeasurement =>
       throw _privateConstructorUsedError; //TODO: remove field from v2
   String get therapeuticClass => throw _privateConstructorUsedError;
   String get itemBrand => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
-  String get unitOfMeasurement => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   bool get isSampleMaterial => throw _privateConstructorUsedError;
@@ -85,10 +85,10 @@ abstract class $MaterialInfoCopyWith<$Res> {
       int quantity,
       String defaultMaterialDescription,
       String governmentMaterialCode,
+      StringValue unitOfMeasurement,
       String therapeuticClass,
       String itemBrand,
       String itemRegistrationNumber,
-      String unitOfMeasurement,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       bool isSampleMaterial,
@@ -140,10 +140,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? quantity = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
+    Object? unitOfMeasurement = null,
     Object? therapeuticClass = null,
     Object? itemBrand = null,
     Object? itemRegistrationNumber = null,
-    Object? unitOfMeasurement = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
     Object? isSampleMaterial = null,
@@ -234,6 +234,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      unitOfMeasurement: null == unitOfMeasurement
+          ? _value.unitOfMeasurement
+          : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       therapeuticClass: null == therapeuticClass
           ? _value.therapeuticClass
           : therapeuticClass // ignore: cast_nullable_to_non_nullable
@@ -245,10 +249,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitOfMeasurement: null == unitOfMeasurement
-          ? _value.unitOfMeasurement
-          : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
               as String,
       materialGroup2: null == materialGroup2
           ? _value.materialGroup2
@@ -362,10 +362,10 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       int quantity,
       String defaultMaterialDescription,
       String governmentMaterialCode,
+      StringValue unitOfMeasurement,
       String therapeuticClass,
       String itemBrand,
       String itemRegistrationNumber,
-      String unitOfMeasurement,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       bool isSampleMaterial,
@@ -419,10 +419,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? quantity = null,
     Object? defaultMaterialDescription = null,
     Object? governmentMaterialCode = null,
+    Object? unitOfMeasurement = null,
     Object? therapeuticClass = null,
     Object? itemBrand = null,
     Object? itemRegistrationNumber = null,
-    Object? unitOfMeasurement = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
     Object? isSampleMaterial = null,
@@ -513,6 +513,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      unitOfMeasurement: null == unitOfMeasurement
+          ? _value.unitOfMeasurement
+          : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       therapeuticClass: null == therapeuticClass
           ? _value.therapeuticClass
           : therapeuticClass // ignore: cast_nullable_to_non_nullable
@@ -524,10 +528,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitOfMeasurement: null == unitOfMeasurement
-          ? _value.unitOfMeasurement
-          : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
               as String,
       materialGroup2: null == materialGroup2
           ? _value.materialGroup2
@@ -604,10 +604,10 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.quantity,
       required this.defaultMaterialDescription,
       required this.governmentMaterialCode,
+      required this.unitOfMeasurement,
       required this.therapeuticClass,
       required this.itemBrand,
       required this.itemRegistrationNumber,
-      required this.unitOfMeasurement,
       required this.materialGroup2,
       required this.materialGroup4,
       required this.isSampleMaterial,
@@ -676,6 +676,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   final String defaultMaterialDescription;
   @override
   final String governmentMaterialCode;
+  @override
+  final StringValue unitOfMeasurement;
 //TODO: remove field from v2
   @override
   final String therapeuticClass;
@@ -683,8 +685,6 @@ class _$_MaterialInfo extends _MaterialInfo {
   final String itemBrand;
   @override
   final String itemRegistrationNumber;
-  @override
-  final String unitOfMeasurement;
   @override
   final MaterialGroup materialGroup2;
   @override
@@ -724,7 +724,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, itemRegistrationNumber: $itemRegistrationNumber, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean)';
   }
 
   @override
@@ -768,14 +768,14 @@ class _$_MaterialInfo extends _MaterialInfo {
                     defaultMaterialDescription) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.unitOfMeasurement, unitOfMeasurement) ||
+                other.unitOfMeasurement == unitOfMeasurement) &&
             (identical(other.therapeuticClass, therapeuticClass) ||
                 other.therapeuticClass == therapeuticClass) &&
             (identical(other.itemBrand, itemBrand) ||
                 other.itemBrand == itemBrand) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
-            (identical(other.unitOfMeasurement, unitOfMeasurement) ||
-                other.unitOfMeasurement == unitOfMeasurement) &&
             (identical(other.materialGroup2, materialGroup2) ||
                 other.materialGroup2 == materialGroup2) &&
             (identical(other.materialGroup4, materialGroup4) ||
@@ -822,10 +822,10 @@ class _$_MaterialInfo extends _MaterialInfo {
         quantity,
         defaultMaterialDescription,
         governmentMaterialCode,
+        unitOfMeasurement,
         therapeuticClass,
         itemBrand,
         itemRegistrationNumber,
-        unitOfMeasurement,
         materialGroup2,
         materialGroup4,
         isSampleMaterial,
@@ -868,10 +868,10 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final int quantity,
       required final String defaultMaterialDescription,
       required final String governmentMaterialCode,
+      required final StringValue unitOfMeasurement,
       required final String therapeuticClass,
       required final String itemBrand,
       required final String itemRegistrationNumber,
-      required final String unitOfMeasurement,
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
       required final bool isSampleMaterial,
@@ -924,14 +924,14 @@ abstract class _MaterialInfo extends MaterialInfo {
   String get defaultMaterialDescription;
   @override
   String get governmentMaterialCode;
+  @override
+  StringValue get unitOfMeasurement;
   @override //TODO: remove field from v2
   String get therapeuticClass;
   @override
   String get itemBrand;
   @override
   String get itemRegistrationNumber;
-  @override
-  String get unitOfMeasurement;
   @override
   MaterialGroup get materialGroup2;
   @override

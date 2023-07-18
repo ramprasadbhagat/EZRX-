@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -148,7 +149,7 @@ class MaterialDto with _$MaterialDto {
           materialInfo.principalData.principalCode.getOrDefaultValue(''),
       taxClassification: materialInfo.taxClassification.getOrDefaultValue(''),
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
-      unitOfMeasurement: materialInfo.unitOfMeasurement,
+      unitOfMeasurement: materialInfo.unitOfMeasurement.getOrDefaultValue(''),
       materialGroup2: materialInfo.materialGroup2.getOrDefaultValue(''),
       materialGroup4: materialInfo.materialGroup4.getOrDefaultValue(''),
       isSampleMaterial: materialInfo.isSampleMaterial,
@@ -189,7 +190,7 @@ class MaterialDto with _$MaterialDto {
       ),
       taxClassification: MaterialTaxClassification(taxClassification),
       itemRegistrationNumber: itemRegistrationNumber,
-      unitOfMeasurement: unitOfMeasurement,
+      unitOfMeasurement: StringValue(unitOfMeasurement),
       materialGroup2: MaterialGroup.two(materialGroup2),
       materialGroup4: MaterialGroup.four(materialGroup4),
       isSampleMaterial: isSampleMaterial,

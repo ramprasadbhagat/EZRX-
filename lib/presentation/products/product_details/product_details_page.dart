@@ -228,6 +228,7 @@ class _Description extends StatelessWidget {
         FavouriteIcon(
           key: WidgetKeys.materialDetailsFavouriteIcon,
           isFavourite: materialInfo.isFavourite,
+          constraints: const BoxConstraints(),
           onTap: () => context.read<ProductDetailBloc>().add(
                 materialInfo.isFavourite
                     ? ProductDetailEvent.deleteFavourite(

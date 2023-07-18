@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -35,12 +36,12 @@ class MaterialInfo with _$MaterialInfo {
     required int quantity,
     required String defaultMaterialDescription,
     required String governmentMaterialCode,
+    required StringValue unitOfMeasurement,
 
     //TODO: remove field from v2
     required String therapeuticClass,
     required String itemBrand,
     required String itemRegistrationNumber,
-    required String unitOfMeasurement,
     required MaterialGroup materialGroup2,
     required MaterialGroup materialGroup4,
     required bool isSampleMaterial,
@@ -67,7 +68,7 @@ class MaterialInfo with _$MaterialInfo {
         ),
         taxClassification: MaterialTaxClassification(''),
         itemRegistrationNumber: '',
-        unitOfMeasurement: '',
+        unitOfMeasurement: StringValue(''),
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
         isSampleMaterial: false,

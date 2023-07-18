@@ -80,7 +80,7 @@ class _MaterialInfoDialog extends StatelessWidget {
             keyText: 'Manufacturer'.tr(),
             valueText:
                 materialInfo.principalData.principalName
-                .getOrDefaultValue(''),
+                .name,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -92,7 +92,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Unit of measurement'.tr(),
-            valueText: materialInfo.unitOfMeasurement,
+            valueText: materialInfo.unitOfMeasurement.displayLabel,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -104,7 +104,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Country of origin'.tr(),
-            valueText: materialInfo.countryData.countryName,
+            valueText: materialInfo.countryData.countryName.displayLabel,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -117,7 +117,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           BalanceTextRow(
             keyText: 'Batch'.tr(),
             valueText:
-                productDetailAggregate.stockInfo.batch.getOrDefaultValue(''),
+                productDetailAggregate.stockInfo.batch.displayLabel,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -130,7 +130,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           BalanceTextRow(
                 keyText: 'Expiry'.tr(),
                 valueText: productDetailAggregate
-                    .stockInfo.expiryDate.toSimpleDateString,
+                .stockInfo.expiryDate.toValidDateStringNaIfEmpty,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.black,

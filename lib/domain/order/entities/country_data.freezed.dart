@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CountryData {
   String get country => throw _privateConstructorUsedError;
-  String get countryName => throw _privateConstructorUsedError;
+  StringValue get countryName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CountryDataCopyWith<CountryData> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $CountryDataCopyWith<$Res> {
           CountryData value, $Res Function(CountryData) then) =
       _$CountryDataCopyWithImpl<$Res, CountryData>;
   @useResult
-  $Res call({String country, String countryName});
+  $Res call({String country, StringValue countryName});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$CountryDataCopyWithImpl<$Res, $Val extends CountryData>
       countryName: null == countryName
           ? _value.countryName
           : countryName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_CountryDataCopyWith<$Res>
       __$$_CountryDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String country, String countryName});
+  $Res call({String country, StringValue countryName});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$_CountryDataCopyWithImpl<$Res>
       countryName: null == countryName
           ? _value.countryName
           : countryName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ));
   }
 }
@@ -109,7 +109,7 @@ class _$_CountryData extends _CountryData {
   @override
   final String country;
   @override
-  final String countryName;
+  final StringValue countryName;
 
   @override
   String toString() {
@@ -139,13 +139,13 @@ class _$_CountryData extends _CountryData {
 abstract class _CountryData extends CountryData {
   factory _CountryData(
       {required final String country,
-      required final String countryName}) = _$_CountryData;
+      required final StringValue countryName}) = _$_CountryData;
   _CountryData._() : super._();
 
   @override
   String get country;
   @override
-  String get countryName;
+  StringValue get countryName;
   @override
   @JsonKey(ignore: true)
   _$$_CountryDataCopyWith<_$_CountryData> get copyWith =>

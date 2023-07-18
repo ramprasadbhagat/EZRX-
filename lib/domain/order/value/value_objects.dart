@@ -833,10 +833,13 @@ class BatchNumber extends ValueObject<String> {
   factory BatchNumber(String input) {
     return BatchNumber._(validateStringNotEmpty(input));
   }
-
+  
+  String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
   String get selectOrGetBatch {
     return value.getOrElse(() => 'Select'.tr());
   }
+
+   
 
   const BatchNumber._(this.value);
 }

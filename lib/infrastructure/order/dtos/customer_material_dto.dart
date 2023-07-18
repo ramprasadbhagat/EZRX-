@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -68,7 +69,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
           principalName: PrincipalName(principalName),
         ),
         itemRegistrationNumber: itemRegistrationNumber,
-        unitOfMeasurement: unitOfMeasurement,
+        unitOfMeasurement: StringValue(unitOfMeasurement),
         materialGroup2: MaterialGroup.two(
           materialGroup2,
         ),

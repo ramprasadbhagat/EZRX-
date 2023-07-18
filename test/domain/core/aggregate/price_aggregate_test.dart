@@ -187,7 +187,8 @@ void main() {
           type: MaterialItemType('Comm'),
           itemRegistrationNumber:
               emptyPriceAggregate.materialInfo.itemRegistrationNumber,
-          unitOfMeasurement: emptyPriceAggregate.materialInfo.unitOfMeasurement,
+          unitOfMeasurement: emptyPriceAggregate.materialInfo.unitOfMeasurement
+              .getOrDefaultValue(''),
           bonuses: emptyPriceAggregate.addedBonusList
               .where((element) => element.additionalBonusFlag)
               .toList(),

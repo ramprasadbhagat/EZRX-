@@ -124,7 +124,7 @@ class PriceAggregate with _$PriceAggregate {
       defaultMaterialDescription: materialInfo.materialDescription,
       type: MaterialItemType('Comm'),
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
-      unitOfMeasurement: materialInfo.unitOfMeasurement,
+      unitOfMeasurement: materialInfo.unitOfMeasurement.getOrDefaultValue(''),
       bonuses: addedBonusList
           .where((element) => element.additionalBonusFlag)
           .toList(),

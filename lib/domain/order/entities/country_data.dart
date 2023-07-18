@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'country_data.freezed.dart';
@@ -7,11 +8,11 @@ class CountryData with _$CountryData {
   const CountryData._();
   factory CountryData({
     required String country,
-    required String countryName,
+    required StringValue countryName,
   }) = _CountryData;
 
   factory CountryData.empty() => CountryData(
         country: '',
-        countryName: '',
+        countryName: StringValue(''),
       );
 }

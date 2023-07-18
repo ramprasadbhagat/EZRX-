@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -59,10 +60,10 @@ class ProductDetailDto with _$ProductDetailDto {
           principalCode: PrincipalCode(principalCode),
         ),
         therapeuticClass: therapeuticClass,
-        unitOfMeasurement: unitOfMeasurement,
+        unitOfMeasurement: StringValue(unitOfMeasurement),
         countryData: CountryData(
           country: country,
-          countryName: countryName,
+          countryName: StringValue(countryName),
         ),
         ean: '',
         materialGroup2: MaterialGroup.two(''),
