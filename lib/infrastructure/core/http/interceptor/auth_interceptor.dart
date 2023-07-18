@@ -10,11 +10,13 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthInterceptor extends Interceptor {
+  final DeviceStorage deviceStorage;
   final TokenStorage tokenStorage;
   final PackageInfoService packageInfoService;
   final Config config;
@@ -22,6 +24,7 @@ class AuthInterceptor extends Interceptor {
   final PushNotificationService pushNotificationService;
 
   AuthInterceptor({
+    required this.deviceStorage,
     required this.tokenStorage,
     required this.packageInfoService,
     required this.config,
@@ -33,6 +36,13 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    if (options.baseUrl != config.getEZReachUrl) {
+      options.baseUrl = config.baseUrl(
+        currentMarket: AppMarket(
+          deviceStorage.currentMarket(),
+        ),
+      );
+    }
     try {
       var token = await tokenStorage.get();
       if (token.access.isNotEmpty) {
@@ -101,7 +111,11 @@ class AuthInterceptor extends Interceptor {
       final refreshToken = JWT(token.refresh);
       final dio = Dio(
         BaseOptions(
-          baseUrl: config.baseUrl,
+          baseUrl: config.baseUrl(
+            currentMarket: AppMarket(
+              deviceStorage.currentMarket(),
+            ),
+          ),
           method: 'POST',
         ),
       );
@@ -138,7 +152,11 @@ class AuthInterceptor extends Interceptor {
   ) async {
     final dio = Dio(
       BaseOptions(
-        baseUrl: config.baseUrl,
+        baseUrl: config.baseUrl(
+          currentMarket: AppMarket(
+            deviceStorage.currentMarket(),
+          ),
+        ),
         sendTimeout: config.httpSendTimeout,
         connectTimeout: config.httpConnectTimeout,
         receiveTimeout: config.httpReceiveTimeout,

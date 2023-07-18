@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class DeviceStorage {
   static const _boxName = 'device_storage_box';
   static const _id = 'device_storage';
+  static const _currentMarketKey = 'currentMarket';
 
   late Box _box;
 
@@ -37,6 +38,25 @@ class DeviceStorage {
       );
     } catch (e) {
       throw (CacheException(message: e.toString()));
+    }
+  }
+
+  String currentMarket() {
+    try {
+      return _box.get(
+        _currentMarketKey,
+        defaultValue: 'my',
+      );
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
+
+  Future<void> putCurrentMarket({required String currentMarket}) async {
+    try {
+      await _box.put(_currentMarketKey, currentMarket);
+    } catch (e) {
+      throw CacheException(message: e.toString());
     }
   }
 }

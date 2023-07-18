@@ -78,3 +78,20 @@ RoleName getJWTRoleName(String token) {
 
   return RoleName(payload['role']);
 }
+
+String getMarketName(String marketDomain) {
+  final marketNameMap = {
+    'hk': 'Hong Kong',
+    'kh': 'Cambodia',
+    'kr': 'Korea',
+    'mm': 'Myanmar',
+    'ph': 'Philippines',
+    'sg': 'Singapore',
+    'th': 'Thailand',
+    'tw': 'Taiwan',
+    'vn': 'Vietnam',
+    'my': 'Malaysia',
+  };
+
+  return marketNameMap[marketDomain] ?? 'Malaysia';
+}

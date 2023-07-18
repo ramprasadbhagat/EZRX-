@@ -241,7 +241,8 @@ class App extends StatelessWidget {
           create: (context) => locator<AuthBloc>()..add(const AuthEvent.init()),
         ),
         BlocProvider<LoginFormBloc>(
-          create: (context) => locator<LoginFormBloc>(),
+          create: (context) => locator<LoginFormBloc>()
+            ..add(const LoginFormEvent.fetchCurrentMarket()),
         ),
         BlocProvider<ProxyLoginFormBloc>(
           create: (context) => locator<ProxyLoginFormBloc>(),

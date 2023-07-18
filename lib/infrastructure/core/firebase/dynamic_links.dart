@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -11,8 +13,13 @@ class DynamicLinksService {
   static final _dynamicLinks = FirebaseDynamicLinks.instance;
   final Config config;
   final AppRouter appRouter;
+  final DeviceStorage deviceStorage;
 
-  DynamicLinksService({required this.config, required this.appRouter});
+  DynamicLinksService({
+    required this.config,
+    required this.appRouter,
+    required this.deviceStorage,
+  });
 
   Future<StreamSubscription> initDynamicLinks() async {
     // 1. Get the initial dynamic link if the app is opened with a dynamic link
@@ -41,7 +48,11 @@ class DynamicLinksService {
 
   Future<String> generateReferralLink() async {
     final parameters = DynamicLinkParameters(
-      uriPrefix: config.baseUrl,
+      uriPrefix: config.baseUrl(
+        currentMarket: AppMarket(
+          deviceStorage.currentMarket(),
+        ),
+      ),
       link: Uri.parse('${config.baseUrl}/?action=refer'),
       androidParameters: AndroidParameters(packageName: config.packageName),
       iosParameters: IOSParameters(bundleId: config.packageName),

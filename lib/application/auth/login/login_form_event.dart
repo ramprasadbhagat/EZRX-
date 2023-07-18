@@ -17,4 +17,7 @@ class LoginFormEvent with _$LoginFormEvent {
   const factory LoginFormEvent.refreshOktaToken() = _RefreshOktaToken;
   const factory LoginFormEvent.exchanhgeEZRXToken(JWT oktaAccessToken) =
       _ExchanhgeEZRXToken;
+  const factory LoginFormEvent.fetchCurrentMarket() = _FetchCurrentMarket;
+  const factory LoginFormEvent.setCurrentMarket(String currentMarket) =
+      _SetCurrentMarket;
 }

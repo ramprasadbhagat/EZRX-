@@ -27,6 +27,8 @@ mixin _$LoginFormEvent {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +42,8 @@ mixin _$LoginFormEvent {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +57,8 @@ mixin _$LoginFormEvent {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +76,8 @@ mixin _$LoginFormEvent {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +93,8 @@ mixin _$LoginFormEvent {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -100,6 +110,8 @@ mixin _$LoginFormEvent {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +182,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return loadLastSavedCred();
   }
@@ -186,6 +200,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return loadLastSavedCred?.call();
   }
@@ -202,6 +218,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (loadLastSavedCred != null) {
@@ -225,6 +243,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return loadLastSavedCred(this);
   }
@@ -243,6 +263,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return loadLastSavedCred?.call(this);
   }
@@ -261,6 +283,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (loadLastSavedCred != null) {
@@ -348,6 +372,8 @@ class _$_UsernameChanged implements _UsernameChanged {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return usernameChanged(usernameStr);
   }
@@ -364,6 +390,8 @@ class _$_UsernameChanged implements _UsernameChanged {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -380,6 +408,8 @@ class _$_UsernameChanged implements _UsernameChanged {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -403,6 +433,8 @@ class _$_UsernameChanged implements _UsernameChanged {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return usernameChanged(this);
   }
@@ -421,6 +453,8 @@ class _$_UsernameChanged implements _UsernameChanged {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return usernameChanged?.call(this);
   }
@@ -439,6 +473,8 @@ class _$_UsernameChanged implements _UsernameChanged {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -531,6 +567,8 @@ class _$_PasswordChanged implements _PasswordChanged {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return passwordChanged(passwordStr);
   }
@@ -547,6 +585,8 @@ class _$_PasswordChanged implements _PasswordChanged {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return passwordChanged?.call(passwordStr);
   }
@@ -563,6 +603,8 @@ class _$_PasswordChanged implements _PasswordChanged {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (passwordChanged != null) {
@@ -586,6 +628,8 @@ class _$_PasswordChanged implements _PasswordChanged {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return passwordChanged(this);
   }
@@ -604,6 +648,8 @@ class _$_PasswordChanged implements _PasswordChanged {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return passwordChanged?.call(this);
   }
@@ -622,6 +668,8 @@ class _$_PasswordChanged implements _PasswordChanged {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (passwordChanged != null) {
@@ -688,6 +736,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return passwordVisibilityChanged();
   }
@@ -704,6 +754,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return passwordVisibilityChanged?.call();
   }
@@ -720,6 +772,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (passwordVisibilityChanged != null) {
@@ -743,6 +797,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return passwordVisibilityChanged(this);
   }
@@ -761,6 +817,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return passwordVisibilityChanged?.call(this);
   }
@@ -779,6 +837,8 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (passwordVisibilityChanged != null) {
@@ -839,6 +899,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return rememberCheckChanged();
   }
@@ -855,6 +917,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return rememberCheckChanged?.call();
   }
@@ -871,6 +935,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (rememberCheckChanged != null) {
@@ -894,6 +960,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return rememberCheckChanged(this);
   }
@@ -912,6 +980,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return rememberCheckChanged?.call(this);
   }
@@ -930,6 +1000,8 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (rememberCheckChanged != null) {
@@ -995,6 +1067,8 @@ class _$_LoginWithEmailAndPasswordPressed
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return loginWithEmailAndPasswordPressed();
   }
@@ -1011,6 +1085,8 @@ class _$_LoginWithEmailAndPasswordPressed
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return loginWithEmailAndPasswordPressed?.call();
   }
@@ -1027,6 +1103,8 @@ class _$_LoginWithEmailAndPasswordPressed
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (loginWithEmailAndPasswordPressed != null) {
@@ -1050,6 +1128,8 @@ class _$_LoginWithEmailAndPasswordPressed
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return loginWithEmailAndPasswordPressed(this);
   }
@@ -1068,6 +1148,8 @@ class _$_LoginWithEmailAndPasswordPressed
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return loginWithEmailAndPasswordPressed?.call(this);
   }
@@ -1086,6 +1168,8 @@ class _$_LoginWithEmailAndPasswordPressed
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (loginWithEmailAndPasswordPressed != null) {
@@ -1150,6 +1234,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return loginWithOktaButtonPressed();
   }
@@ -1166,6 +1252,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return loginWithOktaButtonPressed?.call();
   }
@@ -1182,6 +1270,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (loginWithOktaButtonPressed != null) {
@@ -1205,6 +1295,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return loginWithOktaButtonPressed(this);
   }
@@ -1223,6 +1315,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return loginWithOktaButtonPressed?.call(this);
   }
@@ -1241,6 +1335,8 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (loginWithOktaButtonPressed != null) {
@@ -1301,6 +1397,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return refreshOktaToken();
   }
@@ -1317,6 +1415,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return refreshOktaToken?.call();
   }
@@ -1333,6 +1433,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (refreshOktaToken != null) {
@@ -1356,6 +1458,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return refreshOktaToken(this);
   }
@@ -1374,6 +1478,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return refreshOktaToken?.call(this);
   }
@@ -1392,6 +1498,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (refreshOktaToken != null) {
@@ -1480,6 +1588,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
     required TResult Function() loginWithOktaButtonPressed,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
   }) {
     return exchanhgeEZRXToken(oktaAccessToken);
   }
@@ -1496,6 +1606,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
     TResult? Function()? loginWithOktaButtonPressed,
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
   }) {
     return exchanhgeEZRXToken?.call(oktaAccessToken);
   }
@@ -1512,6 +1624,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
     TResult Function()? loginWithOktaButtonPressed,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (exchanhgeEZRXToken != null) {
@@ -1535,6 +1649,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
         loginWithOktaButtonPressed,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
   }) {
     return exchanhgeEZRXToken(this);
   }
@@ -1553,6 +1669,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
         loginWithOktaButtonPressed,
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
   }) {
     return exchanhgeEZRXToken?.call(this);
   }
@@ -1571,6 +1689,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
         loginWithOktaButtonPressed,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
     required TResult orElse(),
   }) {
     if (exchanhgeEZRXToken != null) {
@@ -1591,6 +1711,365 @@ abstract class _ExchanhgeEZRXToken implements LoginFormEvent {
 }
 
 /// @nodoc
+abstract class _$$_FetchCurrentMarketCopyWith<$Res> {
+  factory _$$_FetchCurrentMarketCopyWith(_$_FetchCurrentMarket value,
+          $Res Function(_$_FetchCurrentMarket) then) =
+      __$$_FetchCurrentMarketCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchCurrentMarketCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$_FetchCurrentMarket>
+    implements _$$_FetchCurrentMarketCopyWith<$Res> {
+  __$$_FetchCurrentMarketCopyWithImpl(
+      _$_FetchCurrentMarket _value, $Res Function(_$_FetchCurrentMarket) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchCurrentMarket implements _FetchCurrentMarket {
+  const _$_FetchCurrentMarket();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.fetchCurrentMarket()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FetchCurrentMarket);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() passwordVisibilityChanged,
+    required TResult Function() rememberCheckChanged,
+    required TResult Function() loginWithEmailAndPasswordPressed,
+    required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
+  }) {
+    return fetchCurrentMarket();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadLastSavedCred,
+    TResult? Function(String usernameStr)? usernameChanged,
+    TResult? Function(String passwordStr)? passwordChanged,
+    TResult? Function()? passwordVisibilityChanged,
+    TResult? Function()? rememberCheckChanged,
+    TResult? Function()? loginWithEmailAndPasswordPressed,
+    TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
+  }) {
+    return fetchCurrentMarket?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
+    required TResult orElse(),
+  }) {
+    if (fetchCurrentMarket != null) {
+      return fetchCurrentMarket();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
+    required TResult Function(_UsernameChanged value) usernameChanged,
+    required TResult Function(_PasswordChanged value) passwordChanged,
+    required TResult Function(_PasswordVisibleChanged value)
+        passwordVisibilityChanged,
+    required TResult Function(_RememberCheckChanged value) rememberCheckChanged,
+    required TResult Function(_LoginWithEmailAndPasswordPressed value)
+        loginWithEmailAndPasswordPressed,
+    required TResult Function(_LoginWithOktaButtonPressed value)
+        loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
+  }) {
+    return fetchCurrentMarket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult? Function(_UsernameChanged value)? usernameChanged,
+    TResult? Function(_PasswordChanged value)? passwordChanged,
+    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult? Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
+  }) {
+    return fetchCurrentMarket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
+    required TResult orElse(),
+  }) {
+    if (fetchCurrentMarket != null) {
+      return fetchCurrentMarket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchCurrentMarket implements LoginFormEvent {
+  const factory _FetchCurrentMarket() = _$_FetchCurrentMarket;
+}
+
+/// @nodoc
+abstract class _$$_SetCurrentMarketCopyWith<$Res> {
+  factory _$$_SetCurrentMarketCopyWith(
+          _$_SetCurrentMarket value, $Res Function(_$_SetCurrentMarket) then) =
+      __$$_SetCurrentMarketCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String currentMarket});
+}
+
+/// @nodoc
+class __$$_SetCurrentMarketCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$_SetCurrentMarket>
+    implements _$$_SetCurrentMarketCopyWith<$Res> {
+  __$$_SetCurrentMarketCopyWithImpl(
+      _$_SetCurrentMarket _value, $Res Function(_$_SetCurrentMarket) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentMarket = null,
+  }) {
+    return _then(_$_SetCurrentMarket(
+      null == currentMarket
+          ? _value.currentMarket
+          : currentMarket // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetCurrentMarket implements _SetCurrentMarket {
+  const _$_SetCurrentMarket(this.currentMarket);
+
+  @override
+  final String currentMarket;
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.setCurrentMarket(currentMarket: $currentMarket)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetCurrentMarket &&
+            (identical(other.currentMarket, currentMarket) ||
+                other.currentMarket == currentMarket));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, currentMarket);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetCurrentMarketCopyWith<_$_SetCurrentMarket> get copyWith =>
+      __$$_SetCurrentMarketCopyWithImpl<_$_SetCurrentMarket>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() passwordVisibilityChanged,
+    required TResult Function() rememberCheckChanged,
+    required TResult Function() loginWithEmailAndPasswordPressed,
+    required TResult Function() loginWithOktaButtonPressed,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) exchanhgeEZRXToken,
+    required TResult Function() fetchCurrentMarket,
+    required TResult Function(String currentMarket) setCurrentMarket,
+  }) {
+    return setCurrentMarket(currentMarket);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadLastSavedCred,
+    TResult? Function(String usernameStr)? usernameChanged,
+    TResult? Function(String passwordStr)? passwordChanged,
+    TResult? Function()? passwordVisibilityChanged,
+    TResult? Function()? rememberCheckChanged,
+    TResult? Function()? loginWithEmailAndPasswordPressed,
+    TResult? Function()? loginWithOktaButtonPressed,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult? Function()? fetchCurrentMarket,
+    TResult? Function(String currentMarket)? setCurrentMarket,
+  }) {
+    return setCurrentMarket?.call(currentMarket);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? exchanhgeEZRXToken,
+    TResult Function()? fetchCurrentMarket,
+    TResult Function(String currentMarket)? setCurrentMarket,
+    required TResult orElse(),
+  }) {
+    if (setCurrentMarket != null) {
+      return setCurrentMarket(currentMarket);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
+    required TResult Function(_UsernameChanged value) usernameChanged,
+    required TResult Function(_PasswordChanged value) passwordChanged,
+    required TResult Function(_PasswordVisibleChanged value)
+        passwordVisibilityChanged,
+    required TResult Function(_RememberCheckChanged value) rememberCheckChanged,
+    required TResult Function(_LoginWithEmailAndPasswordPressed value)
+        loginWithEmailAndPasswordPressed,
+    required TResult Function(_LoginWithOktaButtonPressed value)
+        loginWithOktaButtonPressed,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_ExchanhgeEZRXToken value) exchanhgeEZRXToken,
+    required TResult Function(_FetchCurrentMarket value) fetchCurrentMarket,
+    required TResult Function(_SetCurrentMarket value) setCurrentMarket,
+  }) {
+    return setCurrentMarket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult? Function(_UsernameChanged value)? usernameChanged,
+    TResult? Function(_PasswordChanged value)? passwordChanged,
+    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult? Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult? Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult? Function(_SetCurrentMarket value)? setCurrentMarket,
+  }) {
+    return setCurrentMarket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_ExchanhgeEZRXToken value)? exchanhgeEZRXToken,
+    TResult Function(_FetchCurrentMarket value)? fetchCurrentMarket,
+    TResult Function(_SetCurrentMarket value)? setCurrentMarket,
+    required TResult orElse(),
+  }) {
+    if (setCurrentMarket != null) {
+      return setCurrentMarket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetCurrentMarket implements LoginFormEvent {
+  const factory _SetCurrentMarket(final String currentMarket) =
+      _$_SetCurrentMarket;
+
+  String get currentMarket;
+  @JsonKey(ignore: true)
+  _$$_SetCurrentMarketCopyWith<_$_SetCurrentMarket> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$LoginFormState {
   Username get username => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
@@ -1600,6 +2079,7 @@ mixin _$LoginFormState {
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  AppMarket get currentMarket => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginFormStateCopyWith<LoginFormState> get copyWith =>
@@ -1619,7 +2099,8 @@ abstract class $LoginFormStateCopyWith<$Res> {
       bool rememberPassword,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption,
+      AppMarket currentMarket});
 }
 
 /// @nodoc
@@ -1642,6 +2123,7 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
+    Object? currentMarket = null,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -1672,6 +2154,10 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      currentMarket: null == currentMarket
+          ? _value.currentMarket
+          : currentMarket // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
     ) as $Val);
   }
 }
@@ -1691,7 +2177,8 @@ abstract class _$$_LoginFormStateCopyWith<$Res>
       bool rememberPassword,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption,
+      AppMarket currentMarket});
 }
 
 /// @nodoc
@@ -1712,6 +2199,7 @@ class __$$_LoginFormStateCopyWithImpl<$Res>
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
+    Object? currentMarket = null,
   }) {
     return _then(_$_LoginFormState(
       username: null == username
@@ -1742,6 +2230,10 @@ class __$$_LoginFormStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      currentMarket: null == currentMarket
+          ? _value.currentMarket
+          : currentMarket // ignore: cast_nullable_to_non_nullable
+              as AppMarket,
     ));
   }
 }
@@ -1756,7 +2248,8 @@ class _$_LoginFormState implements _LoginFormState {
       required this.rememberPassword,
       required this.showErrorMessages,
       required this.isSubmitting,
-      required this.authFailureOrSuccessOption});
+      required this.authFailureOrSuccessOption,
+      required this.currentMarket});
 
   @override
   final Username username;
@@ -1772,10 +2265,12 @@ class _$_LoginFormState implements _LoginFormState {
   final bool isSubmitting;
   @override
   final Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption;
+  @override
+  final AppMarket currentMarket;
 
   @override
   String toString() {
-    return 'LoginFormState(username: $username, password: $password, passwordVisible: $passwordVisible, rememberPassword: $rememberPassword, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'LoginFormState(username: $username, password: $password, passwordVisible: $passwordVisible, rememberPassword: $rememberPassword, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption, currentMarket: $currentMarket)';
   }
 
   @override
@@ -1798,7 +2293,9 @@ class _$_LoginFormState implements _LoginFormState {
             (identical(other.authFailureOrSuccessOption,
                     authFailureOrSuccessOption) ||
                 other.authFailureOrSuccessOption ==
-                    authFailureOrSuccessOption));
+                    authFailureOrSuccessOption) &&
+            (identical(other.currentMarket, currentMarket) ||
+                other.currentMarket == currentMarket));
   }
 
   @override
@@ -1810,7 +2307,8 @@ class _$_LoginFormState implements _LoginFormState {
       rememberPassword,
       showErrorMessages,
       isSubmitting,
-      authFailureOrSuccessOption);
+      authFailureOrSuccessOption,
+      currentMarket);
 
   @JsonKey(ignore: true)
   @override
@@ -1828,7 +2326,8 @@ abstract class _LoginFormState implements LoginFormState {
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<ApiFailure, dynamic>>
-          authFailureOrSuccessOption}) = _$_LoginFormState;
+          authFailureOrSuccessOption,
+      required final AppMarket currentMarket}) = _$_LoginFormState;
 
   @override
   Username get username;
@@ -1844,6 +2343,8 @@ abstract class _LoginFormState implements LoginFormState {
   bool get isSubmitting;
   @override
   Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption;
+  @override
+  AppMarket get currentMarket;
   @override
   @JsonKey(ignore: true)
   _$$_LoginFormStateCopyWith<_$_LoginFormState> get copyWith =>

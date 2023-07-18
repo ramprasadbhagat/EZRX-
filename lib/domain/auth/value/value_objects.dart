@@ -8,6 +8,19 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 
+class AppMarket extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory AppMarket(String input) {
+    return AppMarket._(validateStringNotEmpty(input));
+  }
+
+  String get marketName => getMarketName(value.getOrElse(() => ''));
+
+  const AppMarket._(this.value);
+}
+
 class Username extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -32,7 +45,7 @@ class EmailAddress extends ValueObject<String> {
   factory EmailAddress.optional(String input) {
     return EmailAddress._(
       (validateStringIsEmpty(input).fold(
-        (l) => validateEmailAddress(input), 
+        (l) => validateEmailAddress(input),
         (r) => Right(r),
       )),
     );

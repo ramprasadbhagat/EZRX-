@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 
@@ -10,17 +11,43 @@ class Config {
   int httpReceiveTimeout = 150000;
   Duration dateRangePickerDuration = const Duration(days: 1095);
 
-  String get baseUrl {
+  String baseUrl({AppMarket? currentMarket}) {
+    final marketDomain = currentMarket?.getOrDefaultValue('my');
+    switch (appFlavor) {
+      case Flavor.prod:
+        return '$schema$marketDomain.ezrx.com$urlConstants';
+      case Flavor.mock:
+      case Flavor.dev:
+      case Flavor.uat:
+      default:
+        return '$schema$env-$marketDomain.ezrx.com';
+    }
+  }
+
+  String get env {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'http://127.0.0.1:7091';
+        return 'mock';
       case Flavor.dev:
-        return 'https://dev-my.ezrx.com';
+        return 'dev';
       case Flavor.uat:
-        return 'https://uat-my.ezrx.com';
+        return 'uat';
+      case Flavor.prod:
+        return 'prod';
+      default:
+        return '';
+    }
+  }
+
+  String get schema {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'http://';
+      case Flavor.dev:
+      case Flavor.uat:
       case Flavor.prod:
       default:
-        return 'https://my.ezrx.com';
+        return 'https://';
     }
   }
 
@@ -312,7 +339,7 @@ class Config {
     }
   }
 
-  String get announcementApiUrlPath => '/api/announcement';
+  String get announcementApiUrlPath => 'announcement';
 
   String get announcementTemplate => 'EA1748E3-EF3B-4D38-B2C9-937B90864DED';
 }

@@ -70,7 +70,9 @@ class MaterialListRepository implements IMaterialListRepository {
         offset: offset,
         orderByName: selectedMaterialFilter.sortBy.valueRequest,
         manufactureList: selectedMaterialFilter.manufactureListSelected,
-        countryListCode: selectedMaterialFilter.countryListSelected.map((e) => e.code).toList(),
+        countryListCode: selectedMaterialFilter.countryListSelected
+            .map((e) => e.code)
+            .toList(),
       );
       final stockInfoList = await getStockInfoList(
         materials: materialListData.products,
@@ -85,13 +87,10 @@ class MaterialListRepository implements IMaterialListRepository {
       );
       final materialListDataWithStock = materialListData.products.map(
         (MaterialInfo materialInfo) {
-          final materialStockInfo =
-              stockInfoList.getOrElse(() => []).firstWhere(
-                    (MaterialStockInfo materialStockInfo) =>
-                        materialStockInfo.materialNumber ==
-                        materialInfo.materialNumber,
-                    orElse: () => MaterialStockInfo.empty(),
-                  );
+          final materialStockInfo = getMaterialStockInfo(
+            stockInfoList: stockInfoList,
+            materialInfo: materialInfo,
+          );
           final upDatedMaterialInfo =
               bundleData.getOrElse(() => {}).putIfAbsent(
                     materialInfo.materialNumber,
@@ -110,6 +109,17 @@ class MaterialListRepository implements IMaterialListRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  MaterialStockInfo getMaterialStockInfo({
+    required Either<ApiFailure, List<MaterialStockInfo>> stockInfoList,
+    required MaterialInfo materialInfo,
+  }) {
+    return stockInfoList.getOrElse(() => []).firstWhere(
+          (MaterialStockInfo materialStockInfo) =>
+              materialStockInfo.materialNumber == materialInfo.materialNumber,
+          orElse: () => MaterialStockInfo.empty(),
+        );
   }
 
   @override

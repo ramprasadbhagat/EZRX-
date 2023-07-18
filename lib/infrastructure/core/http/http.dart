@@ -13,7 +13,7 @@ class HttpService {
   }) {
     _dio = Dio(
       BaseOptions(
-        baseUrl: config.baseUrl,
+        baseUrl: config.baseUrl(),
         sendTimeout: config.httpSendTimeout,
         connectTimeout: config.httpConnectTimeout,
         receiveTimeout: config.httpReceiveTimeout,

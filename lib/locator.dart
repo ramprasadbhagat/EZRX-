@@ -477,6 +477,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => AuthInterceptor(
+      deviceStorage: locator<DeviceStorage>(),
       tokenStorage: locator<TokenStorage>(),
       packageInfoService: locator<PackageInfoService>(),
       config: locator<Config>(),
@@ -560,7 +561,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => LoginFormBloc(authRepository: locator<AuthRepository>()),
+    () => LoginFormBloc(
+      authRepository: locator<AuthRepository>(),
+      deviceRepository: locator<DeviceRepository>(),
+    ),
   );
 
   locator.registerLazySingleton(
@@ -2059,8 +2063,6 @@ void setupLocator() {
     ),
   );
 
-  
-
   //============================================================
   //  Scan Material Information
   //
@@ -2121,6 +2123,7 @@ void setupLocator() {
     () => DynamicLinksService(
       config: locator<Config>(),
       appRouter: locator<AppRouter>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 

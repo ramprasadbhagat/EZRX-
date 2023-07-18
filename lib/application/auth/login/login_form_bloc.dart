@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,9 +12,11 @@ part 'login_form_state.dart';
 
 class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   final IAuthRepository authRepository;
+  final IDeviceRepository deviceRepository;
 
   LoginFormBloc({
     required this.authRepository,
+    required this.deviceRepository,
   }) : super(LoginFormState.initial()) {
     on<LoginFormEvent>(_onEvent);
   }
@@ -158,6 +161,44 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               showErrorMessages: false,
               authFailureOrSuccessOption: optionOf(ezrxResult),
             ));
+          },
+        );
+      },
+      fetchCurrentMarket: (e) async {
+        final currentMarket = await deviceRepository.getCurrentMarket();
+        await currentMarket.fold(
+          (failure) async => emit(
+            state.copyWith(
+              authFailureOrSuccessOption: optionOf(currentMarket),
+            ),
+          ),
+          (market) {
+            emit(
+              state.copyWith(
+                currentMarket: AppMarket(market),
+                authFailureOrSuccessOption: optionOf(currentMarket),
+              ),
+            );
+          },
+        );
+      },
+      setCurrentMarket: (e) async {
+        final currentMarket = await deviceRepository.setCurrentMarket(
+          currentMarket: e.currentMarket,
+        );
+        await currentMarket.fold(
+          (failure) async => emit(
+            state.copyWith(
+              authFailureOrSuccessOption: optionOf(currentMarket),
+            ),
+          ),
+          (market) {
+            emit(
+              state.copyWith(
+                currentMarket: AppMarket(e.currentMarket),
+                authFailureOrSuccessOption: optionOf(currentMarket),
+              ),
+            );
           },
         );
       },

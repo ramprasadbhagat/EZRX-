@@ -10,6 +10,7 @@ class LoginFormState with _$LoginFormState {
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption,
+    required AppMarket currentMarket,
   }) = _LoginFormState;
 
   factory LoginFormState.initial() => LoginFormState(
@@ -20,5 +21,6 @@ class LoginFormState with _$LoginFormState {
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
+        currentMarket: AppMarket('my'),
       );
 }

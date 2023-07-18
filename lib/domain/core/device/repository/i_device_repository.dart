@@ -9,4 +9,10 @@ abstract class IDeviceRepository {
   });
 
   Future<Either<ApiFailure, Unit>> initDeviceStorage();
+
+  Future<Either<ApiFailure, String>> getCurrentMarket();
+
+  Future<Either<ApiFailure, Unit>> setCurrentMarket({
+    required String currentMarket,
+  });
 }

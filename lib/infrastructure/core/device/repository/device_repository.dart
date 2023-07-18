@@ -47,4 +47,30 @@ class DeviceRepository implements IDeviceRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, Unit>> setCurrentMarket({
+    required String currentMarket,
+  }) async {
+    try {
+      await deviceStorage.putCurrentMarket(
+        currentMarket: currentMarket,
+      );
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, String>> getCurrentMarket() async {
+    try {
+      final currentMarket = deviceStorage.currentMarket();
+
+      return Right(currentMarket);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }
