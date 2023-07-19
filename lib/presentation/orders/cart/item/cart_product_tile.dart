@@ -44,6 +44,7 @@ class CartProductTile extends StatelessWidget {
         );
       },
       child: CustomSlidable(
+        extentRatio: 0.24,
         endActionPaneActions: [
           CustomSlidableAction(
             label: '',
