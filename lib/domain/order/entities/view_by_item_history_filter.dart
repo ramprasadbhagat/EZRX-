@@ -1,7 +1,9 @@
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:intl/intl.dart';
 part 'view_by_item_history_filter.freezed.dart';
 
 @freezed
@@ -14,9 +16,17 @@ class ViewByItemHistoryFilter with _$ViewByItemHistoryFilter {
 
   factory ViewByItemHistoryFilter.empty() => ViewByItemHistoryFilter(
         dateRange: DateTimeRange(
-          end: DateTime.now(),
-          start: DateTime.now().subtract(
-            const Duration(days: 7),
+          end: DateTime.parse(
+            DateFormat(DateTimeFormatString.apiDateFormat).format(
+              DateTime.now(),
+            ),
+          ),
+          start: DateTime.parse(
+            DateFormat(DateTimeFormatString.apiDateFormat).format(
+              DateTime.now().subtract(
+                const Duration(days: 7),
+              ),
+            ),
           ),
         ),
         orderStatusList: <StatusType>[],
