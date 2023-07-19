@@ -25,6 +25,7 @@ class WidgetKeys {
   static const Key loginSubmitButton = Key('loginSubmitButton');
   static const Key ssoLoginButton = Key('ssoLoginButton');
   static const Key appMarketSelector = Key('appMarketSelector');
+  static const Key createAccountButton = Key('createAccountButton');
   //============================================================
   //  AupTCDialog
   //============================================================

@@ -171,6 +171,7 @@ class _CreateAccount extends StatelessWidget {
           width: 8.0,
         ),
         TextButton(
+          key: WidgetKeys.createAccountButton,
           child: Text(
             'Create an account'.tr(),
           ),

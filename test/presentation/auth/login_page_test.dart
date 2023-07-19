@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_page.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,7 @@ void main() {
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final CartBloc cartBlocMock = CartBlocMock();
   final eligibilityBlocMock = EligibilityBlocMock();
-  late AutoRouterMock autoRouterMock;
+  late AppRouter autoRouterMock;
   final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock =
       PaymentCustomerInformationBlocMock();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
@@ -114,6 +115,7 @@ void main() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(() => AppRouter());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
@@ -121,7 +123,7 @@ void main() {
     setUp(() {
       WidgetsFlutterBinding.ensureInitialized();
       loginBlocMock = LoginFormBlocMock();
-      autoRouterMock = AutoRouterMock();
+      autoRouterMock = locator<AppRouter>();
       authBlocMock = AuthBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
       announcementBlocMock = AnnnouncementBlocMock();
@@ -153,11 +155,11 @@ void main() {
           .thenReturn(MaterialListState.initial());
       when(() => materialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
-      when(() => viewByItemsBloc.state)
-        .thenReturn(ViewByItemsState.initial());
+      when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
     });
 
-    Widget loginTestPage() => WidgetUtils.getScopedWidget(
+    Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
+          useMediaQuery: useMediaQuery ?? true,
           autoRouterMock: autoRouterMock,
           child: MultiBlocProvider(
             providers: [
@@ -298,8 +300,7 @@ void main() {
                 create: (context) => materialListBloc),
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => materialPriceBloc),
-            BlocProvider<ViewByItemsBloc>(
-                  create: (context) => viewByItemsBloc),
+            BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
           ],
           child: const SplashPage(),
         ),
@@ -548,5 +549,38 @@ void main() {
         expect(passwordErrorText, findsOneWidget);
       },
     );
+
+    testWidgets(' Test After click on Create Account Button for Mobile',
+        (tester) async {
+      await tester.pumpWidget(loginTestPage());
+
+      final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
+      final createAccount = find.byKey(WidgetKeys.createAccountButton);
+      await tester.pump();
+      expect(loginSubmitButton, findsOneWidget);
+      await tester.drag(
+        loginSubmitButton,
+        const Offset(0.0, -1000.0),
+      );
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      expect(createAccount, findsOneWidget);
+      await tester.tap(createAccount);
+      await tester.pumpAndSettle();
+      expect(autoRouterMock.current.name, WebViewPageRoute.name);
+    });
+
+    testWidgets(' Test After click on Create Account Button for Tablet',
+        (tester) async {
+      tester.binding.window.physicalSizeTestValue = const Size(2732, 2048);
+      tester.binding.window.devicePixelRatioTestValue = 1;
+      await tester.pumpWidget(loginTestPage(useMediaQuery: false));
+      await tester.pump();
+
+      final createAccountButton = find.byKey(WidgetKeys.createAccountButton);
+      expect(createAccountButton, findsOneWidget);
+      await tester.tap(createAccountButton);
+      await tester.pumpAndSettle();
+      expect(autoRouterMock.current.name, WebViewPageRoute.name);
+    });
   });
 }

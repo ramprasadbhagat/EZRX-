@@ -6,15 +6,19 @@ import 'material_frame_wrapper.dart';
 class MultiBlocProviderFrameWrapper extends StatelessWidget {
   final List<BlocProvider> providers;
   final Widget child;
-
-  const MultiBlocProviderFrameWrapper(
-      {Key? key, required this.providers, required this.child})
-      : super(key: key);
+  final bool useMediaQuery;
+  const MultiBlocProviderFrameWrapper({
+    Key? key,
+    required this.providers,
+    required this.child,
+    this.useMediaQuery = true,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: providers,
       child: MaterialFrameWrapper(
+        useMediaQuery: useMediaQuery,
         child: child,
       ),
     );

@@ -6,10 +6,14 @@ import 'package:sizer/sizer.dart';
 class MaterialFrameWrapper extends StatelessWidget {
   final Widget child;
   final bool usingLocalization;
+  final bool useMediaQuery;
 
-  const MaterialFrameWrapper(
-      {Key? key, required this.child, this.usingLocalization = false})
-      : super(key: key);
+  const MaterialFrameWrapper({
+    Key? key,
+    required this.child,
+    this.usingLocalization = false,
+    this.useMediaQuery = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class MaterialFrameWrapper extends StatelessWidget {
             )
           : MaterialApp(
               theme: appThemeData[AppTheme.light],
-              home: _buildHome(),
+              home: useMediaQuery ? _buildHome() : child,
             );
     });
   }

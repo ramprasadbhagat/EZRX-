@@ -11,6 +11,7 @@ class WidgetUtils {
   static RouteDataScope getScopedWidget({
     required AppRouter autoRouterMock,
     required Widget child,
+    final bool useMediaQuery = true,
     List<BlocProvider> providers = const <BlocProvider>[],
     String? routeName,
   }) {
@@ -39,10 +40,12 @@ class WidgetUtils {
               stateHash: 0,
               child: providers.isNotEmpty
                   ? MultiBlocProviderFrameWrapper(
+                      useMediaQuery: useMediaQuery,
                       providers: providers,
                       child: child,
                     )
                   : MaterialFrameWrapper(
+                      useMediaQuery: useMediaQuery,
                       child: child,
                     ),
             )));
