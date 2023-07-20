@@ -35,6 +35,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
             searchKey: SearchKey(e.searchKey),
+            appliedFilter: e.filter,
           ),
         );
 
