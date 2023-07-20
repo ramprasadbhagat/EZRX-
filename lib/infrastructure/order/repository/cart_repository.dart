@@ -34,8 +34,6 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
-
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
   final Config config;
@@ -163,7 +161,7 @@ class CartRepository implements ICartRepository {
     required bool override,
   }) {
     final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
-    
+
     return (inCartItem != null && !override)
         ? inCartItem.copyWith(
             materials: inCartItem.materials.map(
@@ -490,57 +488,54 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<CartItem>>> updateMaterialDealBonus({
-    required PriceAggregate material,
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateMaterialDealBonus({
+    required List<PriceAggregate> materials,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   }) async {
     try {
-      final failureOrSuccess = await getStockInfoList(
-        items: material.getMaterialItemBonus
-            .map((bonus) => bonus.materialInfo)
-            .toList(),
-        customerCodeInfo: customerCodeInfo,
-        salesOrganisationConfigs: salesOrganisationConfigs,
-        salesOrganisation: salesOrganisation,
-        shipToInfo: shipToInfo,
-      );
-      final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
-      final dealBonusWithStockInfo = material.getMaterialItemBonus.map((bonus) {
-        final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
-        if (stockInfoList.isNotEmpty) {
-          final stockInfo = stockInfoList.firstWhere(
-            (element) =>
-                element.materialNumber == bonus.materialInfo.materialNumber,
-            orElse: () => StockInfo.empty(),
-          );
+      final materialTemp = [...materials];
+      for (var i = 0; i < materialTemp.length; i++) {
+        final failureOrSuccess = await getStockInfoList(
+          items: materialTemp[i]
+              .getMaterialItemBonus
+              .map((bonus) => bonus.materialInfo)
+              .toList(),
+          customerCodeInfo: customerCodeInfo,
+          salesOrganisationConfigs: salesOrganisationConfigs,
+          salesOrganisation: salesOrganisation,
+          shipToInfo: shipToInfo,
+        );
+        final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
+        final dealBonusWithStockInfo =
+            materialTemp[i].getMaterialItemBonus.map((bonus) {
+          final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
+          if (stockInfoList.isNotEmpty) {
+            final stockInfo = stockInfoList.firstWhere(
+              (element) =>
+                  element.materialNumber == bonus.materialInfo.materialNumber,
+              orElse: () => StockInfo.empty(),
+            );
 
-          return bonus.copyWith(
-            inStock: stockInfo.inStock.getOrCrash(),
-          );
-        }
+            return bonus.copyWith(
+              inStock: stockInfo.inStock.getOrCrash(),
+            );
+          }
 
-        return bonus;
-      }).toList();
-      final newMaterialBonus = [...material.addedBonusList]
-        ..removeWhere(
-          (bonus) => !bonus.additionalBonusFlag,
-        )
-        ..addAll(dealBonusWithStockInfo);
+          return bonus;
+        }).toList();
+        final newMaterialBonus = [...materialTemp[i].addedBonusList]
+          ..removeWhere(
+            (bonus) => !bonus.additionalBonusFlag,
+          )
+          ..addAll(dealBonusWithStockInfo);
+        materialTemp[i] =
+            materialTemp[i].copyWith(addedBonusList: newMaterialBonus);
+      }
 
-      final newCartItemWithBonus = CartItem.material(
-        material.copyWith(
-          addedBonusList: newMaterialBonus,
-        ),
-      );
-      await cartStorage.put(
-        id: newCartItemWithBonus.id,
-        item: CartItemDto.fromDomain(newCartItemWithBonus),
-      );
-
-      return fetchCart();
+      return Right(materialTemp);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -993,7 +988,7 @@ class CartRepository implements ICartRepository {
     }
   }
 
-  Future<Either<ApiFailure, List<CartProduct>>>
+  Future<Either<ApiFailure, List<MaterialInfo>>>
       getAddedToCartProductList() async {
     try {
       if (config.appFlavor == Flavor.mock) {
@@ -1016,7 +1011,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<CartProduct>>> upsertCart({
+  Future<Either<ApiFailure, List<MaterialInfo>>> upsertCart({
     required MaterialNumber productNumber,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,

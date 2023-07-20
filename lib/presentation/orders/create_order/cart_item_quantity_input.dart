@@ -2,6 +2,7 @@
 //ignore_for_file: unused-code
 //ignore_for_file: unused-class
 //ignore_for_file: unused-files
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -99,6 +100,8 @@ class CartItemQuantityInput extends StatelessWidget {
                 onSubmit(int.parse(text));
               },
               decoration: InputDecoration(
+                fillColor:
+                    isEnabled ? ZPColors.white : ZPColors.extraLightGrey5,
                 isDense: true,
                 prefixIcon: IconButton(
                   key: quantityDeleteKey,

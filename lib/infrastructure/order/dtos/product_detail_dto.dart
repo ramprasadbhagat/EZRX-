@@ -87,8 +87,9 @@ class ProductDetailDto with _$ProductDetailDto {
         bundle: Bundle.empty(),
         productImages: ProductImages.empty(),
         taxes: [],
+        parentID: '',
+        itemType: MaterialItemType(''),
       );
-      
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>
       _$ProductDetailDtoFromJson(json);

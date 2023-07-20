@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
@@ -22,7 +22,7 @@ class CartRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<List<CartProduct>> getAddedToCartProductList() async {
+  Future<List<MaterialInfo>> getAddedToCartProductList() async {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.cart();
       final variables = {};
@@ -64,7 +64,7 @@ class CartRemoteDataSource {
     });
   }
 
-  Future<List<CartProduct>> upsertCart({
+  Future<List<MaterialInfo>> upsertCart({
     required String productId,
     required int qty,
     required String shipToCode,

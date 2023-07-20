@@ -14,13 +14,16 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +39,6 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
-
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -65,7 +66,12 @@ class _CartPageState extends State<CartPage> {
               shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               comboDealEligible:
                   context.read<EligibilityBloc>().state.comboDealEligible,
-              products: context.read<CartBloc>().state.cartProducts,
+              products: context
+                  .read<CartBloc>()
+                  .state
+                  .cartProducts
+                  .map((e) => e.materialInfo)
+                  .toList(),
             ),
           );
     }
@@ -82,6 +88,13 @@ class _CartPageState extends State<CartPage> {
           context.read<CartBloc>().add(
                 CartEvent.updatePriceProduct(
                   priceProducts: state.materialPrice,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                  salesOrganisationConfigs:
+                      context.read<SalesOrgBloc>().state.configs,
                 ),
               );
         }
@@ -228,7 +241,7 @@ class _CartScrollList extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: ScrollList<CartProduct>(
+        child: ScrollList<PriceAggregate>(
           noRecordFoundWidget: NoRecordFound(
             title: 'Your cart is empty'.tr(),
             subTitle:
@@ -245,16 +258,59 @@ class _CartScrollList extends StatelessWidget {
           ),
           controller: ScrollController(),
           onRefresh: () {},
-          isLoading:
-              state.isFetching && state.cartItems.isEmpty || state.isClearing,
+          isLoading: state.isFetching && state.cartProducts.isEmpty ||
+              state.isClearing,
           itemBuilder: (context, index, item) {
-            return CartProductTile(
-              cartItem: item,
-              index: index,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                index == 0 ||
+                        state.cartProducts[index].materialInfo.principalData
+                                .principalName
+                                .getValue() !=
+                            state.cartProducts[index - 1].materialInfo
+                                .principalData.principalName
+                                .getValue()
+                    ? _ManufacturerName(
+                        cartProduct: item.materialInfo,
+                      )
+                    : const SizedBox(),
+                CartProductTile(
+                  cartItem: item,
+                  index: index,
+                ),
+                state.cartProducts[index].addedBonusList.isNotEmpty
+                    ? CartProductTileBonus(
+                        cartItem: item,
+                        index: index,
+                      )
+                    : const SizedBox.shrink(),
+              ],
             );
           },
           items: state.cartProducts,
         ),
+      ),
+    );
+  }
+}
+
+class _ManufacturerName extends StatelessWidget {
+  final MaterialInfo cartProduct;
+  const _ManufacturerName({
+    Key? key,
+    required this.cartProduct,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 24.0),
+      child: Text(
+        cartProduct.principalData.principalName.getValue(),
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: ZPColors.neutralsBlack,
+            ),
       ),
     );
   }
@@ -425,11 +481,12 @@ class _CheckoutSection extends StatelessWidget {
               height: 15,
             ),
             ListTile(
+              onTap: () => _showSumaryInfo(context),
               dense: true,
               visualDensity: VisualDensity.compact,
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
-                'Order for RSD Hospitals SDN BHD',
+                'Order for ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               trailing: const Icon(
@@ -486,6 +543,106 @@ class _CheckoutSection extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  void _showSumaryInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      useSafeArea: true,
+      builder: (_) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.6,
+          child: Padding(
+            padding: const EdgeInsets.all(
+              20,
+            ),
+            child: Column(
+              children: [
+                const _SummaryInfo(),
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.router.pop();
+                    },
+                    child: Text(
+                      'Close'.tr(),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SummaryInfo extends StatelessWidget {
+  const _SummaryInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Order for ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        Text(
+          'Customer code: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}',
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Text(
+          context
+              .read<CustomerCodeBloc>()
+              .state
+              .customerCodeInfo
+              .fullCustomerAddress,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        Text(
+          'Deliver to: ${context.read<CustomerCodeBloc>().state.shipToInfo.shipToCustomerCode}',
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Text(
+          context.read<CustomerCodeBloc>().state.shipToInfo.deliveryAddress,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+      ],
     );
   }
 }

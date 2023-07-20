@@ -32,7 +32,7 @@ mixin _$MaterialPriceEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)
         fetchPriceCartProduct,
   }) =>
@@ -53,7 +53,7 @@ mixin _$MaterialPriceEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
   }) =>
@@ -74,7 +74,7 @@ mixin _$MaterialPriceEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
     required TResult orElse(),
@@ -175,7 +175,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)
         fetchPriceCartProduct,
   }) {
@@ -199,7 +199,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
   }) {
@@ -223,7 +223,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
     required TResult orElse(),
@@ -460,7 +460,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)
         fetchPriceCartProduct,
   }) {
@@ -485,7 +485,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
   }) {
@@ -510,7 +510,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
     required TResult orElse(),
@@ -589,7 +589,7 @@ abstract class _$$_fetchPriceCartProductCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesConfigs,
       ShipToInfo shipToInfo,
-      List<CartProduct> products,
+      List<MaterialInfo> products,
       bool comboDealEligible});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -636,7 +636,7 @@ class __$$_fetchPriceCartProductCopyWithImpl<$Res>
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<CartProduct>,
+              as List<MaterialInfo>,
       comboDealEligible: null == comboDealEligible
           ? _value.comboDealEligible
           : comboDealEligible // ignore: cast_nullable_to_non_nullable
@@ -686,7 +686,7 @@ class _$_fetchPriceCartProduct implements _fetchPriceCartProduct {
       required this.salesOrganisation,
       required this.salesConfigs,
       required this.shipToInfo,
-      required final List<CartProduct> products,
+      required final List<MaterialInfo> products,
       required this.comboDealEligible})
       : _products = products;
 
@@ -698,9 +698,9 @@ class _$_fetchPriceCartProduct implements _fetchPriceCartProduct {
   final SalesOrganisationConfigs salesConfigs;
   @override
   final ShipToInfo shipToInfo;
-  final List<CartProduct> _products;
+  final List<MaterialInfo> _products;
   @override
-  List<CartProduct> get products {
+  List<MaterialInfo> get products {
     if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_products);
@@ -766,7 +766,7 @@ class _$_fetchPriceCartProduct implements _fetchPriceCartProduct {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)
         fetchPriceCartProduct,
   }) {
@@ -791,7 +791,7 @@ class _$_fetchPriceCartProduct implements _fetchPriceCartProduct {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
   }) {
@@ -816,7 +816,7 @@ class _$_fetchPriceCartProduct implements _fetchPriceCartProduct {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<CartProduct> products,
+            List<MaterialInfo> products,
             bool comboDealEligible)?
         fetchPriceCartProduct,
     required TResult orElse(),
@@ -870,14 +870,14 @@ abstract class _fetchPriceCartProduct implements MaterialPriceEvent {
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesConfigs,
       required final ShipToInfo shipToInfo,
-      required final List<CartProduct> products,
+      required final List<MaterialInfo> products,
       required final bool comboDealEligible}) = _$_fetchPriceCartProduct;
 
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesConfigs;
   ShipToInfo get shipToInfo;
-  List<CartProduct> get products;
+  List<MaterialInfo> get products;
   bool get comboDealEligible;
   @JsonKey(ignore: true)
   _$$_fetchPriceCartProductCopyWith<_$_fetchPriceCartProduct> get copyWith =>

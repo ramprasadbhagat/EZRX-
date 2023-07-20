@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -20,7 +20,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 
 class CartProductTile extends StatelessWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   final int index;
   const CartProductTile({Key? key, required this.cartItem, required this.index})
       : super(key: key);
@@ -60,8 +60,10 @@ class CartProductTile extends StatelessWidget {
                           .customerCodeInfo,
                       shipToInfo:
                           context.read<CustomerCodeBloc>().state.shipToInfo,
-                      cartProductNumber: cartItem.materialNumber,
+                      priceAggregate: cartItem,
                       quantity: 0,
+                      salesOrganisationConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
                     ),
                   );
             },
@@ -99,7 +101,7 @@ class CartProductTile extends StatelessWidget {
 }
 
 class _MaterialDetailsSection extends StatelessWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   const _MaterialDetailsSection({Key? key, required this.cartItem})
       : super(key: key);
 
@@ -122,7 +124,7 @@ class _MaterialDetailsSection extends StatelessWidget {
 }
 
 class _ItemSubTotalSection extends StatelessWidget {
-  final CartProduct cartProduct;
+  final PriceAggregate cartProduct;
   final int index;
   const _ItemSubTotalSection({
     required this.cartProduct,
@@ -177,7 +179,7 @@ class _ItemSubTotalSection extends StatelessWidget {
 }
 
 class _MaterialDetails extends StatelessWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   const _MaterialDetails({Key? key, required this.cartItem}) : super(key: key);
 
   @override
@@ -189,7 +191,7 @@ class _MaterialDetails extends StatelessWidget {
           Row(
             children: [
               Text(
-                cartItem.productID.displayMatNo,
+                cartItem.materialInfo.materialNumber.displayMatNo,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -205,7 +207,7 @@ class _MaterialDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              cartItem.materialDescription,
+              cartItem.materialInfo.materialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
@@ -242,7 +244,7 @@ class _MaterialDetails extends StatelessWidget {
 }
 
 class _MaterialQuantitySection extends StatefulWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   const _MaterialQuantitySection({Key? key, required this.cartItem})
       : super(key: key);
 
@@ -292,8 +294,10 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
-                    cartProductNumber: widget.cartItem.materialNumber,
+                    priceAggregate: widget.cartItem,
                     quantity: k,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
                   ),
                 );
           },
@@ -306,8 +310,10 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
-                    cartProductNumber: widget.cartItem.materialNumber,
+                    priceAggregate: widget.cartItem,
                     quantity: k,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
                   ),
                 );
           },
@@ -320,8 +326,10 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
-                    cartProductNumber: widget.cartItem.materialNumber,
+                    priceAggregate: widget.cartItem,
                     quantity: value,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
                   ),
                 );
           },
@@ -377,7 +385,7 @@ class _BonusSection extends StatelessWidget {
 }
 
 class _MaterialImageSection extends StatelessWidget {
-  final CartProduct cartProduct;
+  final PriceAggregate cartProduct;
   const _MaterialImageSection({required this.cartProduct, Key? key})
       : super(key: key);
 
@@ -392,8 +400,11 @@ class _MaterialImageSection extends StatelessWidget {
               showBorder: true,
               padding: const EdgeInsets.all(12),
               child: CachedNetworkImage(
-                imageUrl: state.additionInfo[cartProduct.productID]
-                        ?.productImages.first.thumbNail ??
+                imageUrl: state
+                        .additionInfo[cartProduct.materialInfo.materialNumber]
+                        ?.productImages
+                        .first
+                        .thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
                 height: MediaQuery.of(context).size.height * 0.06,
@@ -425,7 +436,9 @@ class _MaterialImageSection extends StatelessWidget {
             );
           },
         ),
-        const _OfferTag(),
+        cartProduct.price.isBonusDealEligible
+            ? const _OfferTag()
+            : const SizedBox.shrink(),
       ],
     );
   }

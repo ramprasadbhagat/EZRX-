@@ -169,72 +169,7 @@ void main() {
     ],
   );
 
-  blocTest<CartBloc, CartState>(
-    'Add Material to ComboDeal when have combo in cart',
-    build: () => CartBloc(cartRepositoryMock),
-    seed: () => CartState.initial().copyWith(cartItems: [
-      CartItem.comboDeal(
-        [
-          fakeMaterialWithComboDeal.copyWith(
-            quantity: 3,
-          ),
-        ],
-      )
-    ]),
-    setUp: () {
-      when(
-        () => cartRepositoryMock.updateMaterialQtyInCartItem(
-          updatedQtyItem: fakeMaterial.copyWith(quantity: 4),
-          cartItem: CartItem.comboDeal(
-            [
-              fakeMaterialWithComboDeal.copyWith(
-                quantity: 3,
-              ),
-            ],
-          ),
-          override: false,
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          doNotAllowOutOfStockMaterials: true,
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        ),
-      ).thenAnswer(
-          (invocation) async => Right(<CartItem>[mockMaterialCartItemFirst]));
-    },
-    act: (bloc) => bloc.add(
-      CartEvent.addMaterialToCart(
-        item: fakeMaterial.copyWith(quantity: 4),
-        overrideQty: false,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      ),
-    ),
-    expect: () => [
-      CartState.initial().copyWith(
-        apiFailureOrSuccessOption: none(),
-        isFetching: true,
-        cartItems: [
-          CartItem.comboDeal(
-            [
-              fakeMaterial.copyWith(
-                comboDeal: fakeComboDealDetail,
-                quantity: 3,
-              ),
-            ],
-          )
-        ],
-      ),
-      CartState.initial().copyWith(
-        apiFailureOrSuccessOption: none(),
-        cartItems: mockMaterialCartItemList,
-        isFetching: false,
-      ),
-    ],
-  );
+  ///Todo: Write Add Material to ComboDeal when have combo in cart test
 
   blocTest<CartBloc, CartState>(
       'Add ComboDeal when have material that stays in combo in cart',

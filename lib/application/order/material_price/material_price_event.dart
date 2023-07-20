@@ -16,7 +16,7 @@ class MaterialPriceEvent with _$MaterialPriceEvent {
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesConfigs,
     required ShipToInfo shipToInfo,
-    required List<CartProduct> products,
+    required List<MaterialInfo> products,
     required bool comboDealEligible,
   }) = _fetchPriceCartProduct;
 }

@@ -136,32 +136,31 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(() => cartRepositoryMock.replaceCartWithItems(
-                  items: cartItemListWithBonus,
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                  doNotAllowOutOfStockMaterials: true,
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                ))
-            .thenAnswer((invocation) async => Right(cartItemListWithBonus));
-        when(() => cartRepositoryMock.updateDiscountQty(
-                items: cartItemListWithBonus))
-            .thenAnswer((invocation) => [CartItem(
-              itemType: CartItemType.material,
-              materials: cartItemListWithBonus.first.materials
-            )]);
-        when(() => cartRepositoryMock.updateMaterialDealBonus(
-              material: cartItemListWithBonus.first.materials.first,
+              items: cartItemListWithBonus,
               customerCodeInfo: CustomerCodeInfo.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
+              doNotAllowOutOfStockMaterials: true,
               salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            )).thenAnswer((invocation) async => Right([
-            CartItem(materials: [
-              mockMaterialCartItemList.first.materials.first
-                  .copyWith(quantity: 10)
-            ], itemType: CartItemType.material)
-          ]));
+            )).thenAnswer((invocation) async => Right(cartItemListWithBonus));
+        when(() => cartRepositoryMock
+                .updateDiscountQty(items: cartItemListWithBonus))
+            .thenAnswer((invocation) => [
+                  CartItem(
+                      itemType: CartItemType.material,
+                      materials: cartItemListWithBonus.first.materials)
+                ]);
+        when(() => cartRepositoryMock.updateMaterialDealBonus(
+                  materials: cartItemListWithBonus.first.materials,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                ))
+            .thenAnswer((invocation) async => Right([
+                  mockMaterialCartItemList.first.materials.first
+                      .copyWith(quantity: 10)
+                ]));
       },
       act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
         items: cartItemListWithBonus,
@@ -178,19 +177,24 @@ void main() {
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          cartItems: [CartItem(
-              itemType: CartItemType.material,
-              materials: cartItemListWithBonus.first.materials
-            )],
+          cartItems: [
+            CartItem(
+                itemType: CartItemType.material,
+                materials: cartItemListWithBonus.first.materials)
+          ],
           isFetching: false,
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           cartItems: [
             CartItem(materials: [
-              mockMaterialCartItemList.first.materials.first
-                  .copyWith(quantity: 10)
+              mockMaterialCartItemList.first.materials.first.copyWith(
+                  price: cartItemListWithBonus.first.materials.first.price)
             ], itemType: CartItemType.material)
+          ],
+          cartProducts: [
+            mockMaterialCartItemList.first.materials.first
+                .copyWith(quantity: 10)
           ],
           isFetching: false,
         ),

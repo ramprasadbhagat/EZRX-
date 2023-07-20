@@ -12,16 +12,6 @@ class CartEvent with _$CartEvent {
     required bool comboDealEligible,
     @Default(false) bool isSpecialOrderType,
   }) = _Fetch;
-  const factory CartEvent.addMaterialToCart({
-    required PriceAggregate item,
-    @Default(false) bool overrideQty,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required bool doNotallowOutOfStockMaterial,
-    @Default(false) bool isSpecialOrderType,
-  }) = _AddMaterialToCart;
   const factory CartEvent.discountOverride({
     required PriceAggregate item,
   }) = _DiscountOverride;
@@ -54,7 +44,9 @@ class CartEvent with _$CartEvent {
     required bool doNotallowOutOfStockMaterial,
   }) = _UpdateMaterialQtyInCartItem;
   const factory CartEvent.verifyMaterialDealBonus({
+    ///Todo: consider to remove it
     required PriceAggregate item,
+    required List<PriceAggregate> items,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -112,21 +104,27 @@ class CartEvent with _$CartEvent {
     required StockInfo stockInfo,
   }) = _UpdateBatchInCartItem;
 
-  const factory CartEvent.fetchProductsAddedToCart() = _FetchProductsAddedToCart;
+  const factory CartEvent.fetchProductsAddedToCart() =
+      _FetchProductsAddedToCart;
 
   const factory CartEvent.upsertCart({
     required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required MaterialNumber cartProductNumber,
+    required PriceAggregate priceAggregate,
     required int quantity,
-}) = _UpsertCart;
+  }) = _UpsertCart;
 
   const factory CartEvent.getDetailsProductsAddedToCart({
-    required List<CartProduct> cartProducts,
+    required List<PriceAggregate> cartProducts,
   }) = _GetDetailsProductsAddedToCart;
 
   const factory CartEvent.updatePriceProduct({
     required Map<MaterialNumber, Price> priceProducts,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
   }) = _UpdatePriceProduct;
 }

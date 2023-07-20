@@ -40,6 +40,8 @@ mixin _$CartProductDto {
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'genericMaterialName', defaultValue: '')
   String get genericMaterialName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'principalName', defaultValue: '')
+  String get principalName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -73,7 +75,9 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          String genericMaterialName});
+          String genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName});
 }
 
 /// @nodoc
@@ -99,6 +103,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
+    Object? principalName = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -141,6 +146,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -173,7 +182,9 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          String genericMaterialName});
+          String genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName});
 }
 
 /// @nodoc
@@ -197,6 +208,7 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
+    Object? principalName = null,
   }) {
     return _then(_$_CartProductDto(
       productID: null == productID
@@ -239,6 +251,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -266,7 +282,9 @@ class _$_CartProductDto extends _CartProductDto {
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           required this.itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          required this.genericMaterialName})
+          required this.genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          required this.principalName})
       : super._();
 
   factory _$_CartProductDto.fromJson(Map<String, dynamic> json) =>
@@ -302,10 +320,13 @@ class _$_CartProductDto extends _CartProductDto {
   @override
   @JsonKey(name: 'genericMaterialName', defaultValue: '')
   final String genericMaterialName;
+  @override
+  @JsonKey(name: 'principalName', defaultValue: '')
+  final String principalName;
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName)';
   }
 
   @override
@@ -331,7 +352,9 @@ class _$_CartProductDto extends _CartProductDto {
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
-                other.genericMaterialName == genericMaterialName));
+                other.genericMaterialName == genericMaterialName) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName));
   }
 
   @JsonKey(ignore: true)
@@ -347,7 +370,8 @@ class _$_CartProductDto extends _CartProductDto {
       therapeuticClass,
       taxClassification,
       itemRegistrationNumber,
-      genericMaterialName);
+      genericMaterialName,
+      principalName);
 
   @JsonKey(ignore: true)
   @override
@@ -384,7 +408,9 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           required final String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          required final String genericMaterialName}) = _$_CartProductDto;
+          required final String genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          required final String principalName}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
@@ -420,6 +446,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'genericMaterialName', defaultValue: '')
   String get genericMaterialName;
+  @override
+  @JsonKey(name: 'principalName', defaultValue: '')
+  String get principalName;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>

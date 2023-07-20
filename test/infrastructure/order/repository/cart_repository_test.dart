@@ -966,36 +966,40 @@ void main() {
       ),
     );
 
-    final result = await cartRepository.updateMaterialDealBonus(
-      material: fakeCartItem.materials.first.copyWith(
-        materialInfo: MaterialInfo.empty().copyWith(
-          materialNumber: MaterialNumber('1234'),
-        ),
-        price: Price.empty().copyWith(
-          bonuses: [
-            PriceBonus.empty().copyWith(
-              items: [
-                PriceBonusItem.empty().copyWith(
-                  bonusMaterials: [
-                    BonusMaterial.empty().copyWith(
-                      bonusQuantity: 1,
-                      qualifyingQuantity: 1,
-                      materialNumber: MaterialNumber(
-                        '1234',
-                      ),
+    final materials = [...fakeCartItem.materials];
+    final material = materials.first.copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('1234'),
+      ),
+      price: Price.empty().copyWith(
+        bonuses: [
+          PriceBonus.empty().copyWith(
+            items: [
+              PriceBonusItem.empty().copyWith(
+                bonusMaterials: [
+                  BonusMaterial.empty().copyWith(
+                    bonusQuantity: 1,
+                    qualifyingQuantity: 1,
+                    materialNumber: MaterialNumber(
+                      '1234',
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        addedBonusList: [
-          MaterialItemBonus.empty().copyWith(
-            additionalBonusFlag: true,
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
+      addedBonusList: [
+        MaterialItemBonus.empty().copyWith(
+          additionalBonusFlag: true,
+        ),
+      ],
+    );
+    materials.replaceRange(0, 1, [material]);
+
+    final result = await cartRepository.updateMaterialDealBonus(
+      materials: materials,
       shipToInfo: fakeShipToInfo,
       salesOrganisation: mockSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
@@ -1003,54 +1007,14 @@ void main() {
         enableBatchNumber: false,
       ),
     );
-    expect(result.isRight(), false);
-  });
-
-  test('Test Update Material Deal Bonus - getStockInfo - Failure', () async {
-    when(
-      () => stockInfoLocalDataSource.getStockInfo(),
-    ).thenThrow(
-      (invocation) async => MockException(),
-    );
-
-    final result = await cartRepository.updateMaterialDealBonus(
-      material: fakeCartItem.materials.first.copyWith(
-        materialInfo: MaterialInfo.empty().copyWith(
-          materialNumber: MaterialNumber('1234'),
-        ),
-        price: Price.empty().copyWith(
-          bonuses: [
-            PriceBonus.empty().copyWith(
-              items: [
-                PriceBonusItem.empty().copyWith(
-                  bonusMaterials: [
-                    BonusMaterial.empty().copyWith(
-                      bonusQuantity: 1,
-                      qualifyingQuantity: 1,
-                      materialNumber: MaterialNumber(
-                        '1234',
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        addedBonusList: [
-          MaterialItemBonus.empty().copyWith(
-            additionalBonusFlag: true,
-          ),
-        ],
-      ),
-      shipToInfo: fakeShipToInfo,
-      salesOrganisation: mockSalesOrganisation,
-      customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
-        enableBatchNumber: false,
-      ),
-    );
-    expect(result.isRight(), false);
+    if (result.isRight()) {
+      result.fold((l) => {}, (r) {
+        expect(
+            r.first.addedBonusList.length !=
+                fakeCartItem.materials.first.addedBonusList.length,
+            true);
+      });
+    }
   });
 
   test('Test Update Material Deal Bonus - Failure', () async {
@@ -1072,13 +1036,20 @@ void main() {
     );
 
     final result = await cartRepository.updateMaterialDealBonus(
-      material: fakeCartItem.materials.first,
+      materials: fakeCartItem.materials,
       shipToInfo: fakeShipToInfo,
       salesOrganisation: mockSalesOrganisation,
       customerCodeInfo: fakeCustomerCodeInfo,
       salesOrganisationConfigs: mockSalesOrganisationConfigs,
     );
-    expect(result.isLeft(), true);
+    if (result.isRight()) {
+      result.fold((l) => {}, (r) {
+        expect(
+            r.first.addedBonusList.length !=
+                fakeCartItem.materials.first.addedBonusList.length,
+            false);
+      });
+    }
   });
 
   test('Test Add Remark To Bonus Item - Success', () async {

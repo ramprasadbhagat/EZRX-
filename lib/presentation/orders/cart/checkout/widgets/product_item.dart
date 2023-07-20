@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -10,8 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CheckoutProductItem extends StatelessWidget {
-  final CartProduct cartItem;
-  const CheckoutProductItem({required this.cartItem, Key? key}) : super(key: key);
+  final PriceAggregate cartItem;
+  const CheckoutProductItem({required this.cartItem, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CheckoutProductItem extends StatelessWidget {
 }
 
 class _ProductDetailsSection extends StatelessWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   const _ProductDetailsSection({Key? key, required this.cartItem})
       : super(key: key);
 
@@ -42,7 +43,9 @@ class _ProductDetailsSection extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _ProductImageSection(cartProduct: cartItem,),
+          _ProductImageSection(
+            cartProduct: cartItem,
+          ),
           const SizedBox(
             width: 8,
           ),
@@ -54,8 +57,9 @@ class _ProductDetailsSection extends StatelessWidget {
 }
 
 class _ProductImageSection extends StatelessWidget {
-  final CartProduct cartProduct;
-  const _ProductImageSection({Key? key, required this.cartProduct}) : super(key: key);
+  final PriceAggregate cartProduct;
+  const _ProductImageSection({Key? key, required this.cartProduct})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +72,11 @@ class _ProductImageSection extends StatelessWidget {
               showBorder: true,
               padding: const EdgeInsets.all(12),
               child: CachedNetworkImage(
-                imageUrl: state.additionInfo[cartProduct.productID]
-                    ?.productImages.first.thumbNail ??
+                imageUrl: state
+                        .additionInfo[cartProduct.materialInfo.materialNumber]
+                        ?.productImages
+                        .first
+                        .thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
                 height: MediaQuery.of(context).size.height * 0.06,
@@ -133,7 +140,7 @@ class _OfferTag extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   const _ProductDetails({required this.cartItem, Key? key}) : super(key: key);
 
   @override
@@ -145,12 +152,12 @@ class _ProductDetails extends StatelessWidget {
           Row(
             children: [
               Text(
-                cartItem.productID.displayMatNo,
+                cartItem.materialInfo.materialNumber.displayMatNo,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
+                      color: ZPColors.darkGray,
+                    ),
               ),
               const SizedBox(
                 width: 4,
@@ -161,7 +168,7 @@ class _ProductDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              cartItem.materialDescription,
+              cartItem.materialInfo.materialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
@@ -169,16 +176,16 @@ class _ProductDetails extends StatelessWidget {
             text: TextSpan(
               text: 'MYR 11,200.00 ',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ZPColors.darkGray,
-                decoration: TextDecoration.lineThrough,
-              ),
+                    color: ZPColors.darkGray,
+                    decoration: TextDecoration.lineThrough,
+                  ),
               children: <TextSpan>[
                 TextSpan(
                   text: 'MYR 11,000.00',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.extraLightGrey4,
-                    decoration: TextDecoration.none,
-                  ),
+                        color: ZPColors.extraLightGrey4,
+                        decoration: TextDecoration.none,
+                      ),
                 ),
               ],
             ),
@@ -186,9 +193,9 @@ class _ProductDetails extends StatelessWidget {
           Text(
             'Requested counter offer',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontStyle: FontStyle.italic,
-              color: ZPColors.extraLightGrey4,
-            ),
+                  fontStyle: FontStyle.italic,
+                  color: ZPColors.extraLightGrey4,
+                ),
           ),
         ],
       ),
@@ -219,7 +226,7 @@ class _OrderTag extends StatelessWidget {
 }
 
 class _QuantityAndPrice extends StatelessWidget {
-  final CartProduct cartItem;
+  final PriceAggregate cartItem;
   const _QuantityAndPrice({required this.cartItem, Key? key}) : super(key: key);
 
   @override
@@ -232,21 +239,23 @@ class _QuantityAndPrice extends StatelessWidget {
           Text(
             'Qty: ${cartItem.quantity}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: ZPColors.neutralsBlack,
-            ),
+                  color: ZPColors.neutralsBlack,
+                ),
           ),
           RichText(
             text: TextSpan(
               text: 'MYR ',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: ZPColors.primary,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: (cartItem.price.finalPrice.getValue() * cartItem.quantity).toStringAsFixed(2),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.primary,
                   ),
+              children: <TextSpan>[
+                TextSpan(
+                  text:
+                      (cartItem.price.finalPrice.getValue() * cartItem.quantity)
+                          .toStringAsFixed(2),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.primary,
+                      ),
                 ),
               ],
             ),
@@ -256,6 +265,3 @@ class _QuantityAndPrice extends StatelessWidget {
     );
   }
 }
-
-
-

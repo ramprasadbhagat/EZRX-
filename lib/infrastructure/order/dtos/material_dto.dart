@@ -218,6 +218,8 @@ class MaterialDto with _$MaterialDto {
       productImages:
           data.isNotEmpty ? data.first.toProductImage() : ProductImages.empty(),
       countryData: CountryData.empty(),
+      parentID: '',
+      itemType: MaterialItemType(''),
     );
   }
 
@@ -328,8 +330,6 @@ class MaterialResponseDto with _$MaterialResponseDto {
         products: products.map((e) => e.toDomain()).toList(),
       );
 }
-
-
 
 const _emptyConstBundleDto = BundleDto(
   bonusEligible: false,

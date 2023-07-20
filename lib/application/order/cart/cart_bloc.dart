@@ -18,8 +18,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
-
 part 'cart_bloc.freezed.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -108,80 +106,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      addMaterialToCart: (e) async {
-        final comboDeal = e.item.price.comboDeal;
-        final inCartComboDeal = state.getComboDealCartItem(
-          comboDealQuery: comboDeal,
-        );
-        if (inCartComboDeal.materials.isNotEmpty) {
-          add(
-            _UpdateMaterialQtyInCartItem(
-              updatedQtyItem: e.item,
-              currentItem: inCartComboDeal,
-              salesOrganisationConfigs: e.salesOrganisationConfigs,
-              salesOrganisation: e.salesOrganisation,
-              customerCodeInfo: e.customerCodeInfo,
-              shipToInfo: e.shipToInfo,
-              doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
-              overrideQty: false,
-            ),
-          );
-
-          return;
-        }
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-
-        final failureOrSuccess = await repository.addItemToCart(
-          cartItem: CartItem.material(
-            e.item.copyWith(
-              isSpecialOrderType: e.isSpecialOrderType,
-            ),
-          ),
-          override: e.overrideQty,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-        );
-
-        await failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) async {
-            emit(
-              state.copyWith(
-                cartItems: repository.updateDiscountQty(
-                  items: cartItemList,
-                ),
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-            if (e.isSpecialOrderType) return;
-            add(
-              _VerifyMaterialDealBonus(
-                item: e.item,
-                salesOrganisationConfigs: e.salesOrganisationConfigs,
-                salesOrganisation: e.salesOrganisation,
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
-              ),
-            );
-          },
-        );
-      },
       discountOverride: (e) async {
         emit(
           state.copyWith(
@@ -215,11 +139,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       verifyMaterialDealBonus: (e) async {
-        final cartItem = state.getMaterialCartItem(material: e.item);
-        final material = cartItem.materials.first;
+        final material = e.item;
+        if (material != PriceAggregate.empty()) {
+          if (!material.refreshAddedBonus) {
+            emit(
+              state.copyWith(
+                cartProducts: e.items,
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
 
-        if (!material.refreshAddedBonus) {
-          return;
+            return;
+          }
         }
         emit(
           state.copyWith(
@@ -228,7 +159,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
         final failureOrSuccess = await repository.updateMaterialDealBonus(
-          material: material,
+          materials: e.items,
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisationConfigs: e.salesOrganisationConfigs,
           salesOrganisation: e.salesOrganisation,
@@ -240,14 +171,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
+                isFetching: true,
               ),
             );
           },
           (cartItemList) {
             emit(
               state.copyWith(
-                cartItems: cartItemList,
+                cartProducts: cartItemList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),
@@ -674,7 +605,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
             for (final material in state.getCartItemMaterialList) {
               final failureOrSuccess = await repository.updateMaterialDealBonus(
-                material: material.materials.first,
+                // material: material.materials.first,
+                materials: material.materials,
                 customerCodeInfo: e.customerCodeInfo,
                 salesOrganisationConfigs: e.salesOrganisationConfigs,
                 salesOrganisation: e.salesOrganisation,
@@ -694,7 +626,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   if (material == state.getCartItemMaterialList.last) {
                     emit(
                       state.copyWith(
-                        cartItems: cartItemList,
+                        cartProducts: cartItemList,
                         apiFailureOrSuccessOption: none(),
                         isFetching: false,
                       ),
@@ -810,9 +742,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (productAddedToCartList) {
+            final priceAggregateAddedToCartList = productAddedToCartList
+                .map((e) => PriceAggregate.empty().copyWith(
+                      materialInfo: e,
+                      quantity: e.quantity,
+                    ))
+                .toList();
             emit(
               state.copyWith(
-                cartProducts: productAddedToCartList,
+                cartProducts: priceAggregateAddedToCartList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),
@@ -822,7 +760,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       },
       upsertCart: (e) async {
         final index = state.cartProducts.indexWhere(
-          (element) => element.materialNumber == e.cartProductNumber,
+          (element) =>
+              element.materialInfo.materialNumber ==
+              e.priceAggregate.materialInfo.materialNumber,
         );
         if (index != -1) {
           final previousQuantity = state.cartProducts.elementAtOrNull(index);
@@ -839,7 +779,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
-          productNumber: e.cartProductNumber,
+          productNumber: e.priceAggregate.materialInfo.materialNumber,
           quantity: e.quantity,
           language: 'EN',
         );
@@ -854,16 +794,37 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartProductList) {
-            final cartProductListTemp = List<CartProduct>.from(cartProductList);
+            final cartProductListTemp = List<PriceAggregate>.from(
+              cartProductList.map(
+                (e) => PriceAggregate.empty()
+                    .copyWith(materialInfo: e, quantity: e.quantity),
+              ),
+            );
             for (var i = 0; i < cartProductListTemp.length; i++) {
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
                 price: state.cartProducts.elementAtOrNull(i)?.price ??
                     Price.empty(),
+                addedBonusList:
+                    state.cartProducts.elementAtOrNull(i)?.addedBonusList ?? [],
               );
             }
+            add(
+              _VerifyMaterialDealBonus(
+                item: cartProductListTemp
+                    .where((element) =>
+                        element.materialInfo.materialNumber ==
+                        e.priceAggregate.materialInfo.materialNumber)
+                    .toList()
+                    .first,
+                items: cartProductListTemp,
+                salesOrganisationConfigs: e.salesOrganisationConfigs,
+                salesOrganisation: e.salesOrganisation,
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
+              ),
+            );
             emit(
               state.copyWith(
-                cartProducts: cartProductListTemp,
                 apiFailureOrSuccessOption: none(),
                 isUpserting: false,
               ),
@@ -880,7 +841,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.getProducts(
-          materialNumbers: e.cartProducts.map((e) => e.materialNumber).toList(),
+          materialNumbers:
+              e.cartProducts.map((e) => e.materialInfo.materialNumber).toList(),
         );
 
         failureOrSuccess.fold(
@@ -911,18 +873,29 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(state.copyWith(
           isMappingPrice: true,
         ));
-        final cartProductList = List<CartProduct>.from(state.cartProducts);
+        final cartProductList = List<PriceAggregate>.from(state.cartProducts);
         for (var i = 0; i < cartProductList.length; i++) {
           cartProductList[i] = cartProductList[i].copyWith(
-            price: e.priceProducts[cartProductList[i].materialNumber] ??
+            price: e.priceProducts[
+                    cartProductList[i].materialInfo.materialNumber] ??
                 Price.empty(),
           );
         }
 
+        add(
+          _VerifyMaterialDealBonus(
+            item: PriceAggregate.empty(),
+            items: cartProductList,
+            salesOrganisationConfigs: e.salesOrganisationConfigs,
+            salesOrganisation: e.salesOrganisation,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+          ),
+        );
         emit(
           state.copyWith(
             isMappingPrice: false,
-            cartProducts: cartProductList,
+            // cartProducts: cartProductList,
           ),
         );
       },

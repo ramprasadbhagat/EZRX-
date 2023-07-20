@@ -2,8 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -333,6 +336,10 @@ class _FooterState extends State<_Footer> {
                                                 .read<SalesOrgBloc>()
                                                 .state
                                                 .salesOrganisation,
+                                            salesOrganisationConfigs: context
+                                                .read<SalesOrgBloc>()
+                                                .state
+                                                .configs,
                                             customerCodeInfo: context
                                                 .read<CustomerCodeBloc>()
                                                 .state
@@ -341,10 +348,21 @@ class _FooterState extends State<_Footer> {
                                                 .read<CustomerCodeBloc>()
                                                 .state
                                                 .shipToInfo,
-                                            cartProductNumber: stateDetail
-                                                .productDetailAggregate
-                                                .materialInfo
-                                                .materialNumber,
+                                            priceAggregate:
+                                                PriceAggregate.empty().copyWith(
+                                              materialInfo: stateDetail
+                                                  .productDetailAggregate
+                                                  .materialInfo,
+                                              price: context
+                                                          .read<MaterialPriceBloc>()
+                                                          .state
+                                                          .materialPrice[
+                                                      stateDetail
+                                                          .productDetailAggregate
+                                                          .materialInfo
+                                                          .materialNumber] ??
+                                                  Price.empty(),
+                                            ),
                                             quantity:
                                                 stateCart.getQuantityOfProduct(
                                                       productNumber: stateDetail

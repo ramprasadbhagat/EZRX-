@@ -99,6 +99,8 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         bundle: Bundle.empty(),
         productImages: ProductImages.empty(),
         countryData: CountryData.empty(),
+        parentID: '',
+        itemType: MaterialItemType(''),
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

@@ -18,6 +18,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       taxClassification: json['taxClassification'] as String? ?? '',
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
+      principalName: json['principalName'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'taxClassification': instance.taxClassification,
       'itemRegistrationNumber': instance.itemRegistrationNumber,
       'genericMaterialName': instance.genericMaterialName,
+      'principalName': instance.principalName,
     };

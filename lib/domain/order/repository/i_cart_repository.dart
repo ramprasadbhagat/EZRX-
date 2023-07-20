@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_addition_info_product.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -16,7 +15,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
   //TODO: evaluate which methods can be removed
-  Future<Either<ApiFailure, Map<MaterialNumber, CartAdditionInfoProduct>>> getProducts({
+  Future<Either<ApiFailure, Map<MaterialNumber, CartAdditionInfoProduct>>>
+      getProducts({
     required List<MaterialNumber> materialNumbers,
   });
 
@@ -78,8 +78,8 @@ abstract class ICartRepository {
     required CartItem item,
     required MaterialItemBonus deletedBonus,
   });
-  Future<Either<ApiFailure, List<CartItem>>> updateMaterialDealBonus({
-    required PriceAggregate material,
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateMaterialDealBonus({
+    required List<PriceAggregate> materials,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
@@ -149,7 +149,7 @@ abstract class ICartRepository {
   });
 
   //TODO: evaluate which methods will be removed with addition to this
-  Future<Either<ApiFailure, List<CartProduct>>> upsertCart({
+  Future<Either<ApiFailure, List<MaterialInfo>>> upsertCart({
     required MaterialNumber productNumber,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,

@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -155,25 +153,6 @@ class AddToCartButton extends StatelessWidget {
                 .tr(),
       );
     } else {
-      final eligibilityState = context.read<EligibilityBloc>().state;
-      final selectedTenderContract =
-          context.read<TenderContractBloc>().state.selectedTenderContract;
-
-      context.read<CartBloc>().add(
-            CartEvent.addMaterialToCart(
-              item: cartItem.copyWith(tenderContract: selectedTenderContract),
-              customerCodeInfo: eligibilityState.customerCodeInfo,
-              salesOrganisation: eligibilityState.salesOrganisation,
-              salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-              shipToInfo: eligibilityState.shipToInfo,
-              doNotallowOutOfStockMaterial:
-                  eligibilityState.doNotAllowOutOfStockMaterials,
-              isSpecialOrderType: context
-                  .read<OrderDocumentTypeBloc>()
-                  .state
-                  .isSpecialOrderType,
-            ),
-          );
       context.router.pop();
     }
   }

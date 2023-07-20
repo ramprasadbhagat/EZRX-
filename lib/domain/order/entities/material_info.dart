@@ -37,22 +37,24 @@ class MaterialInfo with _$MaterialInfo {
     required String defaultMaterialDescription,
     required String governmentMaterialCode,
     required StringValue unitOfMeasurement,
+    required String parentID,
+    required MaterialItemType itemType,
+    required String therapeuticClass,
+    required MaterialTaxClassification taxClassification,
+    required String itemRegistrationNumber,
+    required String genericMaterialName,
 
     //TODO: remove field from v2
-    required String therapeuticClass,
     required String itemBrand,
-    required String itemRegistrationNumber,
     required MaterialGroup materialGroup2,
     required MaterialGroup materialGroup4,
     required bool isSampleMaterial,
     required bool hasValidTenderContract,
     required bool hasMandatoryTenderContract,
-    required MaterialTaxClassification taxClassification,
     required List<String> taxes,
     required List<Bundle> bundles,
     required bool isFOCMaterial,
     required String remarks,
-    required String genericMaterialName,
     required String ean,
   }) = _MaterialInfo;
 
@@ -95,6 +97,8 @@ class MaterialInfo with _$MaterialInfo {
         bundle: Bundle.empty(),
         productImages: ProductImages.empty(),
         countryData: CountryData.empty(),
+        parentID: '',
+        itemType: MaterialItemType(''),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

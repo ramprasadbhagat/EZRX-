@@ -1,15 +1,14 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:flutter/services.dart';
-
-import 'package:ezrxmobile/domain/order/entities/cart_product.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 
 class CartLocalDataSource {
   CartLocalDataSource();
 
-  Future<List<CartProduct>> getAddedToCartProductList() async {
+  Future<List<MaterialInfo>> getAddedToCartProductList() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getAddedToCartProductList.json'),
     );
@@ -20,7 +19,7 @@ class CartLocalDataSource {
         .toList();
   }
 
-  Future<List<CartProduct>> upsertCart() async {
+  Future<List<MaterialInfo>> upsertCart() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/upsertQueryResponse.json'),
     );

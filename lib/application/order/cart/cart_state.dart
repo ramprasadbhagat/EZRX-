@@ -6,7 +6,7 @@ class CartState with _$CartState {
 
   const factory CartState({
     required List<CartItem> cartItems,
-    required List<CartProduct> cartProducts,
+    required List<PriceAggregate> cartProducts,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
     required bool isClearing,
@@ -19,7 +19,7 @@ class CartState with _$CartState {
 
   factory CartState.initial() => CartState(
         cartItems: <CartItem>[],
-        cartProducts: <CartProduct>[],
+        cartProducts: <PriceAggregate>[],
         apiFailureOrSuccessOption: none(),
         isFetching: false,
         isClearing: false,
@@ -175,14 +175,24 @@ class CartState with _$CartState {
       );
 
   int getQuantityOfProduct({required MaterialNumber productNumber}) {
-    return cartProducts.where((element) => element.materialNumber == productNumber).elementAtOrNull(0)?.quantity ?? 0;
+    return cartProducts
+            .where((element) =>
+                element.materialInfo.materialNumber == productNumber)
+            .elementAtOrNull(0)
+            ?.quantity ??
+        0;
   }
 
-  double get totalPrice => cartProducts.fold(0, (previousValue, element) => previousValue + (element.price.finalPrice.getValue() * element.quantity));
+  double get totalPrice => cartProducts.fold(
+      0,
+      (previousValue, element) =>
+          previousValue +
+          (element.price.finalPrice.getValue() * element.quantity),);
 
   double itemPrice({required int index}) {
     final cartProductsTemp = cartProducts.elementAt(index);
 
-    return cartProductsTemp.price.finalPrice.getValue() * cartProductsTemp.quantity;
+    return cartProductsTemp.price.finalPrice.getValue() *
+        cartProductsTemp.quantity;
   }
 }
