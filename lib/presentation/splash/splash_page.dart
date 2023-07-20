@@ -85,6 +85,8 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -499,6 +501,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     AnnouncementInfoEvent.getAnnouncement(
                       salesOrg: state.salesOrg,
                       pageSize: 24,
+                    ),
+                  );
+              context.read<ArticlesInfoBloc>().add(
+                    ArticlesInfoEvent.getArticles(
+                      salesOrg: state.salesOrg,
+                      user: context.read<UserBloc>().state.user,
                     ),
                   );
 

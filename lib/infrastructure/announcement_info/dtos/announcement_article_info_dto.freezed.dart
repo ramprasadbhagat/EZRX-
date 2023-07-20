@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'announcement_info_dto.dart';
+part of 'announcement_article_info_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,41 +14,48 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AnnouncementInfoDto _$AnnouncementInfoDtoFromJson(Map<String, dynamic> json) {
-  return _AnnouncementInfoDto.fromJson(json);
+AnnouncementArticleInfoDto _$AnnouncementArticleInfoDtoFromJson(
+    Map<String, dynamic> json) {
+  return _AnnouncementArticleInfoDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$AnnouncementInfoDto {
+mixin _$AnnouncementArticleInfoDto {
+  @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+  String get endCursor => throw _privateConstructorUsedError;
   @JsonKey(name: 'total', defaultValue: 0)
   int get total => throw _privateConstructorUsedError;
-  @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-  List<AnnouncementItemDto> get announcementList =>
+  @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+  List<AnnouncementArticleItemDto> get announcementList =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AnnouncementInfoDtoCopyWith<AnnouncementInfoDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AnnouncementArticleInfoDtoCopyWith<AnnouncementArticleInfoDto>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnnouncementInfoDtoCopyWith<$Res> {
-  factory $AnnouncementInfoDtoCopyWith(
-          AnnouncementInfoDto value, $Res Function(AnnouncementInfoDto) then) =
-      _$AnnouncementInfoDtoCopyWithImpl<$Res, AnnouncementInfoDto>;
+abstract class $AnnouncementArticleInfoDtoCopyWith<$Res> {
+  factory $AnnouncementArticleInfoDtoCopyWith(AnnouncementArticleInfoDto value,
+          $Res Function(AnnouncementArticleInfoDto) then) =
+      _$AnnouncementArticleInfoDtoCopyWithImpl<$Res,
+          AnnouncementArticleInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'total', defaultValue: 0)
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          String endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
           int total,
-      @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-          List<AnnouncementItemDto> announcementList});
+      @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+          List<AnnouncementArticleItemDto> announcementList});
 }
 
 /// @nodoc
-class _$AnnouncementInfoDtoCopyWithImpl<$Res, $Val extends AnnouncementInfoDto>
-    implements $AnnouncementInfoDtoCopyWith<$Res> {
-  _$AnnouncementInfoDtoCopyWithImpl(this._value, this._then);
+class _$AnnouncementArticleInfoDtoCopyWithImpl<$Res,
+        $Val extends AnnouncementArticleInfoDto>
+    implements $AnnouncementArticleInfoDtoCopyWith<$Res> {
+  _$AnnouncementArticleInfoDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -58,10 +65,15 @@ class _$AnnouncementInfoDtoCopyWithImpl<$Res, $Val extends AnnouncementInfoDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? endCursor = null,
     Object? total = null,
     Object? announcementList = null,
   }) {
     return _then(_value.copyWith(
+      endCursor: null == endCursor
+          ? _value.endCursor
+          : endCursor // ignore: cast_nullable_to_non_nullable
+              as String,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -69,41 +81,51 @@ class _$AnnouncementInfoDtoCopyWithImpl<$Res, $Val extends AnnouncementInfoDto>
       announcementList: null == announcementList
           ? _value.announcementList
           : announcementList // ignore: cast_nullable_to_non_nullable
-              as List<AnnouncementItemDto>,
+              as List<AnnouncementArticleItemDto>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementInfoDtoCopyWith<$Res>
-    implements $AnnouncementInfoDtoCopyWith<$Res> {
-  factory _$$_AnnouncementInfoDtoCopyWith(_$_AnnouncementInfoDto value,
-          $Res Function(_$_AnnouncementInfoDto) then) =
-      __$$_AnnouncementInfoDtoCopyWithImpl<$Res>;
+abstract class _$$_AnnouncementArticleInfoDtoCopyWith<$Res>
+    implements $AnnouncementArticleInfoDtoCopyWith<$Res> {
+  factory _$$_AnnouncementArticleInfoDtoCopyWith(
+          _$_AnnouncementArticleInfoDto value,
+          $Res Function(_$_AnnouncementArticleInfoDto) then) =
+      __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'total', defaultValue: 0)
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          String endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
           int total,
-      @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-          List<AnnouncementItemDto> announcementList});
+      @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+          List<AnnouncementArticleItemDto> announcementList});
 }
 
 /// @nodoc
-class __$$_AnnouncementInfoDtoCopyWithImpl<$Res>
-    extends _$AnnouncementInfoDtoCopyWithImpl<$Res, _$_AnnouncementInfoDto>
-    implements _$$_AnnouncementInfoDtoCopyWith<$Res> {
-  __$$_AnnouncementInfoDtoCopyWithImpl(_$_AnnouncementInfoDto _value,
-      $Res Function(_$_AnnouncementInfoDto) _then)
+class __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>
+    extends _$AnnouncementArticleInfoDtoCopyWithImpl<$Res,
+        _$_AnnouncementArticleInfoDto>
+    implements _$$_AnnouncementArticleInfoDtoCopyWith<$Res> {
+  __$$_AnnouncementArticleInfoDtoCopyWithImpl(
+      _$_AnnouncementArticleInfoDto _value,
+      $Res Function(_$_AnnouncementArticleInfoDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? endCursor = null,
     Object? total = null,
     Object? announcementList = null,
   }) {
-    return _then(_$_AnnouncementInfoDto(
+    return _then(_$_AnnouncementArticleInfoDto(
+      endCursor: null == endCursor
+          ? _value.endCursor
+          : endCursor // ignore: cast_nullable_to_non_nullable
+              as String,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -111,32 +133,37 @@ class __$$_AnnouncementInfoDtoCopyWithImpl<$Res>
       announcementList: null == announcementList
           ? _value._announcementList
           : announcementList // ignore: cast_nullable_to_non_nullable
-              as List<AnnouncementItemDto>,
+              as List<AnnouncementArticleItemDto>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnouncementInfoDto extends _AnnouncementInfoDto {
-  const _$_AnnouncementInfoDto(
-      {@JsonKey(name: 'total', defaultValue: 0)
+class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
+  const _$_AnnouncementArticleInfoDto(
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          required this.endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
           required this.total,
-      @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-          required final List<AnnouncementItemDto> announcementList})
+      @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+          required final List<AnnouncementArticleItemDto> announcementList})
       : _announcementList = announcementList,
         super._();
 
-  factory _$_AnnouncementInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementInfoDtoFromJson(json);
+  factory _$_AnnouncementArticleInfoDto.fromJson(Map<String, dynamic> json) =>
+      _$$_AnnouncementArticleInfoDtoFromJson(json);
 
+  @override
+  @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+  final String endCursor;
   @override
   @JsonKey(name: 'total', defaultValue: 0)
   final int total;
-  final List<AnnouncementItemDto> _announcementList;
+  final List<AnnouncementArticleItemDto> _announcementList;
   @override
-  @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-  List<AnnouncementItemDto> get announcementList {
+  @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+  List<AnnouncementArticleItemDto> get announcementList {
     if (_announcementList is EqualUnmodifiableListView)
       return _announcementList;
     // ignore: implicit_dynamic_type
@@ -145,14 +172,16 @@ class _$_AnnouncementInfoDto extends _AnnouncementInfoDto {
 
   @override
   String toString() {
-    return 'AnnouncementInfoDto(total: $total, announcementList: $announcementList)';
+    return 'AnnouncementArticleInfoDto(endCursor: $endCursor, total: $total, announcementList: $announcementList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementInfoDto &&
+            other is _$_AnnouncementArticleInfoDto &&
+            (identical(other.endCursor, endCursor) ||
+                other.endCursor == endCursor) &&
             (identical(other.total, total) || other.total == total) &&
             const DeepCollectionEquality()
                 .equals(other._announcementList, _announcementList));
@@ -160,54 +189,60 @@ class _$_AnnouncementInfoDto extends _AnnouncementInfoDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, total,
+  int get hashCode => Object.hash(runtimeType, endCursor, total,
       const DeepCollectionEquality().hash(_announcementList));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementInfoDtoCopyWith<_$_AnnouncementInfoDto> get copyWith =>
-      __$$_AnnouncementInfoDtoCopyWithImpl<_$_AnnouncementInfoDto>(
-          this, _$identity);
+  _$$_AnnouncementArticleInfoDtoCopyWith<_$_AnnouncementArticleInfoDto>
+      get copyWith => __$$_AnnouncementArticleInfoDtoCopyWithImpl<
+          _$_AnnouncementArticleInfoDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnouncementInfoDtoToJson(
+    return _$$_AnnouncementArticleInfoDtoToJson(
       this,
     );
   }
 }
 
-abstract class _AnnouncementInfoDto extends AnnouncementInfoDto {
-  const factory _AnnouncementInfoDto(
-          {@JsonKey(name: 'total', defaultValue: 0)
-              required final int total,
-          @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-              required final List<AnnouncementItemDto> announcementList}) =
-      _$_AnnouncementInfoDto;
-  const _AnnouncementInfoDto._() : super._();
+abstract class _AnnouncementArticleInfoDto extends AnnouncementArticleInfoDto {
+  const factory _AnnouncementArticleInfoDto(
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          required final String endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
+          required final int total,
+      @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+          required final List<AnnouncementArticleItemDto>
+              announcementList}) = _$_AnnouncementArticleInfoDto;
+  const _AnnouncementArticleInfoDto._() : super._();
 
-  factory _AnnouncementInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementInfoDto.fromJson;
+  factory _AnnouncementArticleInfoDto.fromJson(Map<String, dynamic> json) =
+      _$_AnnouncementArticleInfoDto.fromJson;
 
+  @override
+  @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+  String get endCursor;
   @override
   @JsonKey(name: 'total', defaultValue: 0)
   int get total;
   @override
-  @JsonKey(name: 'results', defaultValue: <AnnouncementItemDto>[])
-  List<AnnouncementItemDto> get announcementList;
+  @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+  List<AnnouncementArticleItemDto> get announcementList;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementInfoDtoCopyWith<_$_AnnouncementInfoDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AnnouncementArticleInfoDtoCopyWith<_$_AnnouncementArticleInfoDto>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
-AnnouncementItemDto _$AnnouncementItemDtoFromJson(Map<String, dynamic> json) {
-  return _AnnouncementItemDto.fromJson(json);
+AnnouncementArticleItemDto _$AnnouncementArticleItemDtoFromJson(
+    Map<String, dynamic> json) {
+  return _AnnouncementArticleItemDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$AnnouncementItemDto {
+mixin _$AnnouncementArticleItemDto {
   @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'title', readValue: getValue)
@@ -216,20 +251,23 @@ mixin _$AnnouncementItemDto {
   String get summary => throw _privateConstructorUsedError;
   @JsonKey(name: 'thumbnail', readValue: getSrcValue)
   String get thumbnail => throw _privateConstructorUsedError;
+  @JsonKey(name: 'content', readValue: getContent)
+  String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'publishedDate', readValue: getDateValue)
   String get publishedDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AnnouncementItemDtoCopyWith<AnnouncementItemDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AnnouncementArticleItemDtoCopyWith<AnnouncementArticleItemDto>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnnouncementItemDtoCopyWith<$Res> {
-  factory $AnnouncementItemDtoCopyWith(
-          AnnouncementItemDto value, $Res Function(AnnouncementItemDto) then) =
-      _$AnnouncementItemDtoCopyWithImpl<$Res, AnnouncementItemDto>;
+abstract class $AnnouncementArticleItemDtoCopyWith<$Res> {
+  factory $AnnouncementArticleItemDtoCopyWith(AnnouncementArticleItemDto value,
+          $Res Function(AnnouncementArticleItemDto) then) =
+      _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
+          AnnouncementArticleItemDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
@@ -240,14 +278,17 @@ abstract class $AnnouncementItemDtoCopyWith<$Res> {
           String summary,
       @JsonKey(name: 'thumbnail', readValue: getSrcValue)
           String thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
           String publishedDate});
 }
 
 /// @nodoc
-class _$AnnouncementItemDtoCopyWithImpl<$Res, $Val extends AnnouncementItemDto>
-    implements $AnnouncementItemDtoCopyWith<$Res> {
-  _$AnnouncementItemDtoCopyWithImpl(this._value, this._then);
+class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
+        $Val extends AnnouncementArticleItemDto>
+    implements $AnnouncementArticleItemDtoCopyWith<$Res> {
+  _$AnnouncementArticleItemDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -261,6 +302,7 @@ class _$AnnouncementItemDtoCopyWithImpl<$Res, $Val extends AnnouncementItemDto>
     Object? title = null,
     Object? summary = null,
     Object? thumbnail = null,
+    Object? content = null,
     Object? publishedDate = null,
   }) {
     return _then(_value.copyWith(
@@ -280,6 +322,10 @@ class _$AnnouncementItemDtoCopyWithImpl<$Res, $Val extends AnnouncementItemDto>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
       publishedDate: null == publishedDate
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
@@ -289,11 +335,12 @@ class _$AnnouncementItemDtoCopyWithImpl<$Res, $Val extends AnnouncementItemDto>
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementItemDtoCopyWith<$Res>
-    implements $AnnouncementItemDtoCopyWith<$Res> {
-  factory _$$_AnnouncementItemDtoCopyWith(_$_AnnouncementItemDto value,
-          $Res Function(_$_AnnouncementItemDto) then) =
-      __$$_AnnouncementItemDtoCopyWithImpl<$Res>;
+abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
+    implements $AnnouncementArticleItemDtoCopyWith<$Res> {
+  factory _$$_AnnouncementArticleItemDtoCopyWith(
+          _$_AnnouncementArticleItemDto value,
+          $Res Function(_$_AnnouncementArticleItemDto) then) =
+      __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -305,16 +352,20 @@ abstract class _$$_AnnouncementItemDtoCopyWith<$Res>
           String summary,
       @JsonKey(name: 'thumbnail', readValue: getSrcValue)
           String thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
           String publishedDate});
 }
 
 /// @nodoc
-class __$$_AnnouncementItemDtoCopyWithImpl<$Res>
-    extends _$AnnouncementItemDtoCopyWithImpl<$Res, _$_AnnouncementItemDto>
-    implements _$$_AnnouncementItemDtoCopyWith<$Res> {
-  __$$_AnnouncementItemDtoCopyWithImpl(_$_AnnouncementItemDto _value,
-      $Res Function(_$_AnnouncementItemDto) _then)
+class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
+    extends _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
+        _$_AnnouncementArticleItemDto>
+    implements _$$_AnnouncementArticleItemDtoCopyWith<$Res> {
+  __$$_AnnouncementArticleItemDtoCopyWithImpl(
+      _$_AnnouncementArticleItemDto _value,
+      $Res Function(_$_AnnouncementArticleItemDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -324,9 +375,10 @@ class __$$_AnnouncementItemDtoCopyWithImpl<$Res>
     Object? title = null,
     Object? summary = null,
     Object? thumbnail = null,
+    Object? content = null,
     Object? publishedDate = null,
   }) {
-    return _then(_$_AnnouncementItemDto(
+    return _then(_$_AnnouncementArticleItemDto(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -343,6 +395,10 @@ class __$$_AnnouncementItemDtoCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
       publishedDate: null == publishedDate
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
@@ -353,8 +409,8 @@ class __$$_AnnouncementItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnouncementItemDto extends _AnnouncementItemDto {
-  const _$_AnnouncementItemDto(
+class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
+  const _$_AnnouncementArticleItemDto(
       {@JsonKey(name: 'id', defaultValue: '')
           required this.id,
       @JsonKey(name: 'title', readValue: getValue)
@@ -363,12 +419,14 @@ class _$_AnnouncementItemDto extends _AnnouncementItemDto {
           required this.summary,
       @JsonKey(name: 'thumbnail', readValue: getSrcValue)
           required this.thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          required this.content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
           required this.publishedDate})
       : super._();
 
-  factory _$_AnnouncementItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementItemDtoFromJson(json);
+  factory _$_AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
+      _$$_AnnouncementArticleItemDtoFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -383,50 +441,54 @@ class _$_AnnouncementItemDto extends _AnnouncementItemDto {
   @JsonKey(name: 'thumbnail', readValue: getSrcValue)
   final String thumbnail;
   @override
+  @JsonKey(name: 'content', readValue: getContent)
+  final String content;
+  @override
   @JsonKey(name: 'publishedDate', readValue: getDateValue)
   final String publishedDate;
 
   @override
   String toString() {
-    return 'AnnouncementItemDto(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate)';
+    return 'AnnouncementArticleItemDto(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementItemDto &&
+            other is _$_AnnouncementArticleItemDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.publishedDate, publishedDate) ||
                 other.publishedDate == publishedDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, summary, thumbnail, publishedDate);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, summary, thumbnail, content, publishedDate);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementItemDtoCopyWith<_$_AnnouncementItemDto> get copyWith =>
-      __$$_AnnouncementItemDtoCopyWithImpl<_$_AnnouncementItemDto>(
-          this, _$identity);
+  _$$_AnnouncementArticleItemDtoCopyWith<_$_AnnouncementArticleItemDto>
+      get copyWith => __$$_AnnouncementArticleItemDtoCopyWithImpl<
+          _$_AnnouncementArticleItemDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnouncementItemDtoToJson(
+    return _$$_AnnouncementArticleItemDtoToJson(
       this,
     );
   }
 }
 
-abstract class _AnnouncementItemDto extends AnnouncementItemDto {
-  const factory _AnnouncementItemDto(
+abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
+  const factory _AnnouncementArticleItemDto(
       {@JsonKey(name: 'id', defaultValue: '')
           required final String id,
       @JsonKey(name: 'title', readValue: getValue)
@@ -435,12 +497,14 @@ abstract class _AnnouncementItemDto extends AnnouncementItemDto {
           required final String summary,
       @JsonKey(name: 'thumbnail', readValue: getSrcValue)
           required final String thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          required final String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
-          required final String publishedDate}) = _$_AnnouncementItemDto;
-  const _AnnouncementItemDto._() : super._();
+          required final String publishedDate}) = _$_AnnouncementArticleItemDto;
+  const _AnnouncementArticleItemDto._() : super._();
 
-  factory _AnnouncementItemDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementItemDto.fromJson;
+  factory _AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =
+      _$_AnnouncementArticleItemDto.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -455,10 +519,13 @@ abstract class _AnnouncementItemDto extends AnnouncementItemDto {
   @JsonKey(name: 'thumbnail', readValue: getSrcValue)
   String get thumbnail;
   @override
+  @JsonKey(name: 'content', readValue: getContent)
+  String get content;
+  @override
   @JsonKey(name: 'publishedDate', readValue: getDateValue)
   String get publishedDate;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementItemDtoCopyWith<_$_AnnouncementItemDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AnnouncementArticleItemDtoCopyWith<_$_AnnouncementArticleItemDto>
+      get copyWith => throw _privateConstructorUsedError;
 }

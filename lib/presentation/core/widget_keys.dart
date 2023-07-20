@@ -57,6 +57,8 @@ class WidgetKeys {
       Key('homeQuickAccessLoyaltyMenu');
   static const Key homeQuickAccessChatSupportMenu =
       Key('homeQuickAccessChatSupportMenu');
+  static const Key announcementsTab = Key('announcementsTab');
+  static Key announcementsArticleTabItems(String tabItem) => Key(tabItem);
 
   //============================================================
   //  MORE TAB BAR

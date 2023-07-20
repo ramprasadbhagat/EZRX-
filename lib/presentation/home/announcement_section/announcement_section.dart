@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
-import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info.dart';
+import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -28,8 +29,11 @@ class AnnouncementSection extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child:
-                  SectionTitle(title: 'Announcements', onTapIconButton: () {}),
+              child: SectionTitle(
+                title: 'Announcements',
+                onTapIconButton: () =>
+                    context.router.pushNamed('announcements_page'),
+              ),
             ),
             _AnnouncementSectionItemScrollList(
               announcementItemList: state.announcementInfo.announcementList,
@@ -42,7 +46,7 @@ class AnnouncementSection extends StatelessWidget {
 }
 
 class _AnnouncementSectionItemScrollList extends StatelessWidget {
-  final List<AnnouncementItem> announcementItemList;
+  final List<AnnouncementArticleItem> announcementItemList;
   const _AnnouncementSectionItemScrollList({
     Key? key,
     required this.announcementItemList,
@@ -67,7 +71,7 @@ class _AnnouncementSectionItemScrollList extends StatelessWidget {
 }
 
 class _AnnouncementSectionItem extends StatelessWidget {
-  final AnnouncementItem announcementItem;
+  final AnnouncementArticleItem announcementItem;
   const _AnnouncementSectionItem({Key? key, required this.announcementItem})
       : super(key: key);
 

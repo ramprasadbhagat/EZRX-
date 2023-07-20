@@ -400,6 +400,23 @@ String countryAnnouncementPath(String country) {
     'TW': '78949980-128F-4B06-BD9F-9E6B2DB4A3A8',
     'VN': 'AC387D5A-A251-4994-9118-5F82818EA2AC',
   };
-  
+
+  return salesOrgCountryMap[country] ?? '';
+}
+
+String countryArticlePath(String country) {
+  final salesOrgCountryMap = {
+    'MY': '188B233B-B81D-4679-A70B-036F07B2F649',
+    'PH': '4B59DB24-B8C4-4BAE-947E-DE73D7D5C7AB',
+    'SG': 'A1102055-6945-4C9A-BD31-E8A693F48CCB',
+    'ID': 'EFBA9577-4545-446E-AF2D-3397A0C9D7EB',
+    'KH': '33F72ED6-AAEF-4C1A-AF92-51BFFE236821',
+    'KR': 'D94CEEC3-760D-410C-AF22-9EECB628B4CB',
+    'MM': 'EBF6065D-FE92-4A7B-9E31-AC54081EB239',
+    'TH': '0D2B87E3-8EED-477F-BDBF-DAFF4A13F4A7',
+    'TW': '8608BB54-0D3B-4EEB-9069-9C106C1CB488',
+    'VN': 'E151DCDD-DF32-445E-AB3B-8D49E063C99B',
+  };
+
   return salesOrgCountryMap[country] ?? '';
 }

@@ -2,7 +2,7 @@
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info.dart';
+import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/announcement_info/repository/i_announcement_info_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -21,7 +21,7 @@ class AnnouncementInfoRepository extends IAnnouncementInfoRepository{
     required this.localDataSource,
   });
   @override
-  Future<Either<ApiFailure, AnnouncementInfo>> getAnnouncement({
+  Future<Either<ApiFailure, AnnouncementArticleInfo>> getAnnouncement({
     required SalesOrg salesOrg,
     required int pageSize,
   }) async {

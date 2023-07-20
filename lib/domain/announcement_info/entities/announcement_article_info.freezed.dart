@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'announcement_info.dart';
+part of 'announcement_article_info.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,34 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AnnouncementInfo {
+mixin _$AnnouncementArticleInfo {
   int get total => throw _privateConstructorUsedError;
-  List<AnnouncementItem> get announcementList =>
+  String get endCursor => throw _privateConstructorUsedError;
+  List<AnnouncementArticleItem> get announcementList =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AnnouncementInfoCopyWith<AnnouncementInfo> get copyWith =>
+  $AnnouncementArticleInfoCopyWith<AnnouncementArticleInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnnouncementInfoCopyWith<$Res> {
-  factory $AnnouncementInfoCopyWith(
-          AnnouncementInfo value, $Res Function(AnnouncementInfo) then) =
-      _$AnnouncementInfoCopyWithImpl<$Res, AnnouncementInfo>;
+abstract class $AnnouncementArticleInfoCopyWith<$Res> {
+  factory $AnnouncementArticleInfoCopyWith(AnnouncementArticleInfo value,
+          $Res Function(AnnouncementArticleInfo) then) =
+      _$AnnouncementArticleInfoCopyWithImpl<$Res, AnnouncementArticleInfo>;
   @useResult
-  $Res call({int total, List<AnnouncementItem> announcementList});
+  $Res call(
+      {int total,
+      String endCursor,
+      List<AnnouncementArticleItem> announcementList});
 }
 
 /// @nodoc
-class _$AnnouncementInfoCopyWithImpl<$Res, $Val extends AnnouncementInfo>
-    implements $AnnouncementInfoCopyWith<$Res> {
-  _$AnnouncementInfoCopyWithImpl(this._value, this._then);
+class _$AnnouncementArticleInfoCopyWithImpl<$Res,
+        $Val extends AnnouncementArticleInfo>
+    implements $AnnouncementArticleInfoCopyWith<$Res> {
+  _$AnnouncementArticleInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -48,6 +53,7 @@ class _$AnnouncementInfoCopyWithImpl<$Res, $Val extends AnnouncementInfo>
   @override
   $Res call({
     Object? total = null,
+    Object? endCursor = null,
     Object? announcementList = null,
   }) {
     return _then(_value.copyWith(
@@ -55,66 +61,82 @@ class _$AnnouncementInfoCopyWithImpl<$Res, $Val extends AnnouncementInfo>
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
+      endCursor: null == endCursor
+          ? _value.endCursor
+          : endCursor // ignore: cast_nullable_to_non_nullable
+              as String,
       announcementList: null == announcementList
           ? _value.announcementList
           : announcementList // ignore: cast_nullable_to_non_nullable
-              as List<AnnouncementItem>,
+              as List<AnnouncementArticleItem>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementInfoCopyWith<$Res>
-    implements $AnnouncementInfoCopyWith<$Res> {
-  factory _$$_AnnouncementInfoCopyWith(
-          _$_AnnouncementInfo value, $Res Function(_$_AnnouncementInfo) then) =
-      __$$_AnnouncementInfoCopyWithImpl<$Res>;
+abstract class _$$_AnnouncementArticleInfoCopyWith<$Res>
+    implements $AnnouncementArticleInfoCopyWith<$Res> {
+  factory _$$_AnnouncementArticleInfoCopyWith(_$_AnnouncementArticleInfo value,
+          $Res Function(_$_AnnouncementArticleInfo) then) =
+      __$$_AnnouncementArticleInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int total, List<AnnouncementItem> announcementList});
+  $Res call(
+      {int total,
+      String endCursor,
+      List<AnnouncementArticleItem> announcementList});
 }
 
 /// @nodoc
-class __$$_AnnouncementInfoCopyWithImpl<$Res>
-    extends _$AnnouncementInfoCopyWithImpl<$Res, _$_AnnouncementInfo>
-    implements _$$_AnnouncementInfoCopyWith<$Res> {
-  __$$_AnnouncementInfoCopyWithImpl(
-      _$_AnnouncementInfo _value, $Res Function(_$_AnnouncementInfo) _then)
+class __$$_AnnouncementArticleInfoCopyWithImpl<$Res>
+    extends _$AnnouncementArticleInfoCopyWithImpl<$Res,
+        _$_AnnouncementArticleInfo>
+    implements _$$_AnnouncementArticleInfoCopyWith<$Res> {
+  __$$_AnnouncementArticleInfoCopyWithImpl(_$_AnnouncementArticleInfo _value,
+      $Res Function(_$_AnnouncementArticleInfo) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? total = null,
+    Object? endCursor = null,
     Object? announcementList = null,
   }) {
-    return _then(_$_AnnouncementInfo(
+    return _then(_$_AnnouncementArticleInfo(
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
+      endCursor: null == endCursor
+          ? _value.endCursor
+          : endCursor // ignore: cast_nullable_to_non_nullable
+              as String,
       announcementList: null == announcementList
           ? _value._announcementList
           : announcementList // ignore: cast_nullable_to_non_nullable
-              as List<AnnouncementItem>,
+              as List<AnnouncementArticleItem>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AnnouncementInfo extends _AnnouncementInfo {
-  const _$_AnnouncementInfo(
+class _$_AnnouncementArticleInfo extends _AnnouncementArticleInfo {
+  const _$_AnnouncementArticleInfo(
       {required this.total,
-      required final List<AnnouncementItem> announcementList})
+      required this.endCursor,
+      required final List<AnnouncementArticleItem> announcementList})
       : _announcementList = announcementList,
         super._();
 
   @override
   final int total;
-  final List<AnnouncementItem> _announcementList;
   @override
-  List<AnnouncementItem> get announcementList {
+  final String endCursor;
+  final List<AnnouncementArticleItem> _announcementList;
+  @override
+  List<AnnouncementArticleItem> get announcementList {
     if (_announcementList is EqualUnmodifiableListView)
       return _announcementList;
     // ignore: implicit_dynamic_type
@@ -123,78 +145,88 @@ class _$_AnnouncementInfo extends _AnnouncementInfo {
 
   @override
   String toString() {
-    return 'AnnouncementInfo(total: $total, announcementList: $announcementList)';
+    return 'AnnouncementArticleInfo(total: $total, endCursor: $endCursor, announcementList: $announcementList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementInfo &&
+            other is _$_AnnouncementArticleInfo &&
             (identical(other.total, total) || other.total == total) &&
+            (identical(other.endCursor, endCursor) ||
+                other.endCursor == endCursor) &&
             const DeepCollectionEquality()
                 .equals(other._announcementList, _announcementList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, total,
+  int get hashCode => Object.hash(runtimeType, total, endCursor,
       const DeepCollectionEquality().hash(_announcementList));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementInfoCopyWith<_$_AnnouncementInfo> get copyWith =>
-      __$$_AnnouncementInfoCopyWithImpl<_$_AnnouncementInfo>(this, _$identity);
+  _$$_AnnouncementArticleInfoCopyWith<_$_AnnouncementArticleInfo>
+      get copyWith =>
+          __$$_AnnouncementArticleInfoCopyWithImpl<_$_AnnouncementArticleInfo>(
+              this, _$identity);
 }
 
-abstract class _AnnouncementInfo extends AnnouncementInfo {
-  const factory _AnnouncementInfo(
+abstract class _AnnouncementArticleInfo extends AnnouncementArticleInfo {
+  const factory _AnnouncementArticleInfo(
           {required final int total,
-          required final List<AnnouncementItem> announcementList}) =
-      _$_AnnouncementInfo;
-  const _AnnouncementInfo._() : super._();
+          required final String endCursor,
+          required final List<AnnouncementArticleItem> announcementList}) =
+      _$_AnnouncementArticleInfo;
+  const _AnnouncementArticleInfo._() : super._();
 
   @override
   int get total;
   @override
-  List<AnnouncementItem> get announcementList;
+  String get endCursor;
+  @override
+  List<AnnouncementArticleItem> get announcementList;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementInfoCopyWith<_$_AnnouncementInfo> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AnnouncementArticleInfoCopyWith<_$_AnnouncementArticleInfo>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$AnnouncementItem {
+mixin _$AnnouncementArticleItem {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
+  StringValue get content => throw _privateConstructorUsedError;
   DateTimeStringValue get publishedDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AnnouncementItemCopyWith<AnnouncementItem> get copyWith =>
+  $AnnouncementArticleItemCopyWith<AnnouncementArticleItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnnouncementItemCopyWith<$Res> {
-  factory $AnnouncementItemCopyWith(
-          AnnouncementItem value, $Res Function(AnnouncementItem) then) =
-      _$AnnouncementItemCopyWithImpl<$Res, AnnouncementItem>;
+abstract class $AnnouncementArticleItemCopyWith<$Res> {
+  factory $AnnouncementArticleItemCopyWith(AnnouncementArticleItem value,
+          $Res Function(AnnouncementArticleItem) then) =
+      _$AnnouncementArticleItemCopyWithImpl<$Res, AnnouncementArticleItem>;
   @useResult
   $Res call(
       {String id,
       String title,
       String summary,
       String thumbnail,
+      StringValue content,
       DateTimeStringValue publishedDate});
 }
 
 /// @nodoc
-class _$AnnouncementItemCopyWithImpl<$Res, $Val extends AnnouncementItem>
-    implements $AnnouncementItemCopyWith<$Res> {
-  _$AnnouncementItemCopyWithImpl(this._value, this._then);
+class _$AnnouncementArticleItemCopyWithImpl<$Res,
+        $Val extends AnnouncementArticleItem>
+    implements $AnnouncementArticleItemCopyWith<$Res> {
+  _$AnnouncementArticleItemCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -208,6 +240,7 @@ class _$AnnouncementItemCopyWithImpl<$Res, $Val extends AnnouncementItem>
     Object? title = null,
     Object? summary = null,
     Object? thumbnail = null,
+    Object? content = null,
     Object? publishedDate = null,
   }) {
     return _then(_value.copyWith(
@@ -227,6 +260,10 @@ class _$AnnouncementItemCopyWithImpl<$Res, $Val extends AnnouncementItem>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       publishedDate: null == publishedDate
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
@@ -236,11 +273,11 @@ class _$AnnouncementItemCopyWithImpl<$Res, $Val extends AnnouncementItem>
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementItemCopyWith<$Res>
-    implements $AnnouncementItemCopyWith<$Res> {
-  factory _$$_AnnouncementItemCopyWith(
-          _$_AnnouncementItem value, $Res Function(_$_AnnouncementItem) then) =
-      __$$_AnnouncementItemCopyWithImpl<$Res>;
+abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
+    implements $AnnouncementArticleItemCopyWith<$Res> {
+  factory _$$_AnnouncementArticleItemCopyWith(_$_AnnouncementArticleItem value,
+          $Res Function(_$_AnnouncementArticleItem) then) =
+      __$$_AnnouncementArticleItemCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -248,15 +285,17 @@ abstract class _$$_AnnouncementItemCopyWith<$Res>
       String title,
       String summary,
       String thumbnail,
+      StringValue content,
       DateTimeStringValue publishedDate});
 }
 
 /// @nodoc
-class __$$_AnnouncementItemCopyWithImpl<$Res>
-    extends _$AnnouncementItemCopyWithImpl<$Res, _$_AnnouncementItem>
-    implements _$$_AnnouncementItemCopyWith<$Res> {
-  __$$_AnnouncementItemCopyWithImpl(
-      _$_AnnouncementItem _value, $Res Function(_$_AnnouncementItem) _then)
+class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
+    extends _$AnnouncementArticleItemCopyWithImpl<$Res,
+        _$_AnnouncementArticleItem>
+    implements _$$_AnnouncementArticleItemCopyWith<$Res> {
+  __$$_AnnouncementArticleItemCopyWithImpl(_$_AnnouncementArticleItem _value,
+      $Res Function(_$_AnnouncementArticleItem) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -266,9 +305,10 @@ class __$$_AnnouncementItemCopyWithImpl<$Res>
     Object? title = null,
     Object? summary = null,
     Object? thumbnail = null,
+    Object? content = null,
     Object? publishedDate = null,
   }) {
-    return _then(_$_AnnouncementItem(
+    return _then(_$_AnnouncementArticleItem(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -285,6 +325,10 @@ class __$$_AnnouncementItemCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       publishedDate: null == publishedDate
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
@@ -295,12 +339,13 @@ class __$$_AnnouncementItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementItem extends _AnnouncementItem {
-  const _$_AnnouncementItem(
+class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
+  const _$_AnnouncementArticleItem(
       {required this.id,
       required this.title,
       required this.summary,
       required this.thumbnail,
+      required this.content,
       required this.publishedDate})
       : super._();
 
@@ -313,46 +358,53 @@ class _$_AnnouncementItem extends _AnnouncementItem {
   @override
   final String thumbnail;
   @override
+  final StringValue content;
+  @override
   final DateTimeStringValue publishedDate;
 
   @override
   String toString() {
-    return 'AnnouncementItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, publishedDate: $publishedDate)';
+    return 'AnnouncementArticleItem(id: $id, title: $title, summary: $summary, thumbnail: $thumbnail, content: $content, publishedDate: $publishedDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementItem &&
+            other is _$_AnnouncementArticleItem &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.publishedDate, publishedDate) ||
                 other.publishedDate == publishedDate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, summary, thumbnail, publishedDate);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, summary, thumbnail, content, publishedDate);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementItemCopyWith<_$_AnnouncementItem> get copyWith =>
-      __$$_AnnouncementItemCopyWithImpl<_$_AnnouncementItem>(this, _$identity);
+  _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>
+      get copyWith =>
+          __$$_AnnouncementArticleItemCopyWithImpl<_$_AnnouncementArticleItem>(
+              this, _$identity);
 }
 
-abstract class _AnnouncementItem extends AnnouncementItem {
-  const factory _AnnouncementItem(
-      {required final String id,
-      required final String title,
-      required final String summary,
-      required final String thumbnail,
-      required final DateTimeStringValue publishedDate}) = _$_AnnouncementItem;
-  const _AnnouncementItem._() : super._();
+abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
+  const factory _AnnouncementArticleItem(
+          {required final String id,
+          required final String title,
+          required final String summary,
+          required final String thumbnail,
+          required final StringValue content,
+          required final DateTimeStringValue publishedDate}) =
+      _$_AnnouncementArticleItem;
+  const _AnnouncementArticleItem._() : super._();
 
   @override
   String get id;
@@ -363,9 +415,11 @@ abstract class _AnnouncementItem extends AnnouncementItem {
   @override
   String get thumbnail;
   @override
+  StringValue get content;
+  @override
   DateTimeStringValue get publishedDate;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementItemCopyWith<_$_AnnouncementItem> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>
+      get copyWith => throw _privateConstructorUsedError;
 }

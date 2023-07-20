@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/announcement_info/dtos/announcement_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/announcement_info/dtos/announcement_article_info_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,12 +31,12 @@ void main() {
             json[key]['isoValue'] ?? '' : '';
 
           final announcementInfo =
-              AnnouncementInfoDto.fromJson(data['data']['search']).toDomain;
+              AnnouncementArticleInfoDto.fromJson(data['data']['search']).toDomain;
           expect(announcementInfo.announcementList.isNotEmpty, true);
 
           final itemData = data['data']['search']['results'][0];
           final announcementItem =
-              AnnouncementItemDto.fromJson(itemData).toDomain;
+              AnnouncementArticleItemDto.fromJson(itemData).toDomain;
           expect(announcementItem.id, itemData['id']);
           expect(announcementItem.publishedDate,
               DateTimeStringValue(getDateValue(itemData, 'publishedDate')));

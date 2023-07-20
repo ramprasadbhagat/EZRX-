@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info.dart';
+import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
@@ -17,7 +17,7 @@ const _pageSize = 24;
 
 void main() {
   late AnnouncementInfoRepositoryRepo repository;
-  late AnnouncementInfo announcementInfoMock;
+  late AnnouncementArticleInfo announcementInfoMock;
   final announcementInfoState = AnnouncementInfoState.initial();
   final salesOrg = SalesOrg('');
 

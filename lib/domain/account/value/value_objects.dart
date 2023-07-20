@@ -94,6 +94,7 @@ class SalesOrg extends ValueObject<String> {
   Locale get locale => Locale(languageCode, country);
 
   String get announcementVariablePath => countryAnnouncementPath(country);
+  String get articleVariablePath => countryArticlePath(country);
 
   const SalesOrg._(this.value);
 }

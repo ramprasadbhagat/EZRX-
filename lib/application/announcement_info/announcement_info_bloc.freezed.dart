@@ -244,7 +244,8 @@ abstract class _GetAnnouncementInfo implements AnnouncementInfoEvent {
 
 /// @nodoc
 mixin _$AnnouncementInfoState {
-  AnnouncementInfo get announcementInfo => throw _privateConstructorUsedError;
+  AnnouncementArticleInfo get announcementInfo =>
+      throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -258,9 +259,9 @@ abstract class $AnnouncementInfoStateCopyWith<$Res> {
           $Res Function(AnnouncementInfoState) then) =
       _$AnnouncementInfoStateCopyWithImpl<$Res, AnnouncementInfoState>;
   @useResult
-  $Res call({AnnouncementInfo announcementInfo, bool isLoading});
+  $Res call({AnnouncementArticleInfo announcementInfo, bool isLoading});
 
-  $AnnouncementInfoCopyWith<$Res> get announcementInfo;
+  $AnnouncementArticleInfoCopyWith<$Res> get announcementInfo;
 }
 
 /// @nodoc
@@ -284,7 +285,7 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
       announcementInfo: null == announcementInfo
           ? _value.announcementInfo
           : announcementInfo // ignore: cast_nullable_to_non_nullable
-              as AnnouncementInfo,
+              as AnnouncementArticleInfo,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -294,8 +295,9 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $AnnouncementInfoCopyWith<$Res> get announcementInfo {
-    return $AnnouncementInfoCopyWith<$Res>(_value.announcementInfo, (value) {
+  $AnnouncementArticleInfoCopyWith<$Res> get announcementInfo {
+    return $AnnouncementArticleInfoCopyWith<$Res>(_value.announcementInfo,
+        (value) {
       return _then(_value.copyWith(announcementInfo: value) as $Val);
     });
   }
@@ -309,10 +311,10 @@ abstract class _$$_AnnouncementInfoStateCopyWith<$Res>
       __$$_AnnouncementInfoStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AnnouncementInfo announcementInfo, bool isLoading});
+  $Res call({AnnouncementArticleInfo announcementInfo, bool isLoading});
 
   @override
-  $AnnouncementInfoCopyWith<$Res> get announcementInfo;
+  $AnnouncementArticleInfoCopyWith<$Res> get announcementInfo;
 }
 
 /// @nodoc
@@ -333,7 +335,7 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
       announcementInfo: null == announcementInfo
           ? _value.announcementInfo
           : announcementInfo // ignore: cast_nullable_to_non_nullable
-              as AnnouncementInfo,
+              as AnnouncementArticleInfo,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -350,7 +352,7 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
       : super._();
 
   @override
-  final AnnouncementInfo announcementInfo;
+  final AnnouncementArticleInfo announcementInfo;
   @override
   final bool isLoading;
 
@@ -383,12 +385,12 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
 
 abstract class _AnnouncementInfoState extends AnnouncementInfoState {
   const factory _AnnouncementInfoState(
-      {required final AnnouncementInfo announcementInfo,
+      {required final AnnouncementArticleInfo announcementInfo,
       required final bool isLoading}) = _$_AnnouncementInfoState;
   const _AnnouncementInfoState._() : super._();
 
   @override
-  AnnouncementInfo get announcementInfo;
+  AnnouncementArticleInfo get announcementInfo;
   @override
   bool get isLoading;
   @override

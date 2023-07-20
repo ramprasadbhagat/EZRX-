@@ -415,6 +415,16 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+
+import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_remote.dart';
+
+import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_query_mutation.dart';
+
+import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -2884,6 +2894,35 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       viewByItemDetailsQueryMutation: locator<ViewByItemQueryMutation>(),
+    ),
+  );
+
+  //============================================================
+  //  Articles
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ArticleInfoQueryMutation());
+  locator.registerLazySingleton(() => ArticleInfoLocalDataSource());
+
+  locator.registerLazySingleton(() => ArticleInfoRemoteDataSource(
+        httpService: locator<HttpService>(),
+        exceptionHandler: locator<DataSourceExceptionHandler>(),
+        queryMutation: locator<ArticleInfoQueryMutation>(),
+      ));
+
+  locator.registerLazySingleton(
+    () => ArticleInfoRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ArticleInfoLocalDataSource>(),
+      remoteDataSource:
+          locator<ArticleInfoRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ArticlesInfoBloc(
+      articleInfoRepository: locator<ArticleInfoRepository>(),
     ),
   );
 

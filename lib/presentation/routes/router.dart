@@ -80,6 +80,15 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
 
 import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
 
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
+
+
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
+
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';
+
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/articles_tab.dart';
+
 //ignore: unused-code
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
@@ -370,6 +379,24 @@ import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
     AutoRoute(
       path: 'returns/return_summary_details_v3',
       page: ReturnRequestSummaryByItemDetails,
+    ),
+    AutoRoute(
+      path: 'announcements_page',
+      page: AnnouncementsPage,
+      children: [
+        AutoRoute(
+          page: ArticlesTab,
+          path: 'articles_tab',
+        ),
+        AutoRoute(
+          page: AnnouncementsTab,
+          path: 'announcements_tab',
+        ),
+      ],
+    ),
+    AutoRoute(
+      path: 'article_details',
+      page: ArticleDetails,
     ),
   ],
 )

@@ -133,6 +133,8 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_
 
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -522,6 +524,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AvailableCreditFilterBloc>(
           create: (context) => locator<AvailableCreditFilterBloc>(),
+        ),
+        BlocProvider<ArticlesInfoBloc>(
+          create: (context) => locator<ArticlesInfoBloc>(),
         ),
       ],
       child: MaterialApp.router(

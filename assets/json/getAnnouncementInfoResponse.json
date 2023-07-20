@@ -1,6 +1,9 @@
 {
     "data": {
         "search": {
+            "pageInfo": {
+                "endCursor": "eyJzZWFyY2hBZnRlciI6WyIyMDIzMDcxM3QwOTU3NTkiLCIzMjUxRENEN0I3MEM0ODU2OEVFODg1RDIwMkY4OTA4NiIsIjMyNTFEQ0Q3QjcwQzQ4NTY4RUU4ODVEMjAyRjg5MDg2Il0sImNvdW50IjoyOH0="
+            },
             "total": 41,
             "results": [
                 {
