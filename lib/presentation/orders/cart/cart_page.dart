@@ -24,6 +24,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -101,9 +102,7 @@ class _CartPageState extends State<CartPage> {
       },
       child: BlocConsumer<CartBloc, CartState>(
         listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
-                current.apiFailureOrSuccessOption ||
-            previous.cartProducts != current.cartProducts,
+            previous.cartProducts.length != current.cartProducts.length,
         listener: (context, state) {
           if (state.cartProducts.isEmpty) {
             context.read<AdditionalDetailsBloc>().add(
@@ -114,6 +113,17 @@ class _CartPageState extends State<CartPage> {
                   ),
                 );
           }
+          state.apiFailureOrSuccessOption.fold(
+            () {
+              if (!state.isUpserting || !state.isClearing) {
+                showTopSnackBar(
+                  context: context,
+                  message: 'Item has been removed from cart.'.tr(),
+                );
+              }
+            },
+            (either) => {},
+          );
         },
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {

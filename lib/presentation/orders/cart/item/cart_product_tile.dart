@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -8,7 +7,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -27,73 +25,54 @@ class CartProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.cartProducts.length != current.cartProducts.length,
-      listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () {
-            if (!state.isUpserting || !state.isClearing) {
-              showTopSnackBar(
-                context: context,
-                message: 'Item has been removed from cart.'.tr(),
-              );
-            }
+    return CustomSlidable(
+      extentRatio: 0.24,
+      endActionPaneActions: [
+        CustomSlidableAction(
+          label: '',
+          icon: Icons.delete_outline,
+          onPressed: (v) {
+            context.read<CartBloc>().add(
+                  CartEvent.upsertCart(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    priceAggregate: cartItem,
+                    quantity: 0,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                  ),
+                );
           },
-          (either) => {},
-        );
-      },
-      child: CustomSlidable(
-        extentRatio: 0.24,
-        endActionPaneActions: [
-          CustomSlidableAction(
-            label: '',
-            icon: Icons.delete_outline,
-            onPressed: (v) {
-              context.read<CartBloc>().add(
-                    CartEvent.upsertCart(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      priceAggregate: cartItem,
-                      quantity: 0,
-                      salesOrganisationConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                    ),
-                  );
-            },
-          ),
-        ],
-        borderRadius: 8,
-        child: CustomCard(
-          margin: const EdgeInsets.only(top: 25.0),
-          child: Column(
-            children: [
-              _MaterialDetailsSection(
-                cartItem: cartItem,
-              ),
-              const Divider(
-                indent: 0,
-                endIndent: 0,
-                color: ZPColors.accentColor,
-              ),
-              _ItemSubTotalSection(
-                cartProduct: cartItem,
-                index: index,
-              ),
-              const Divider(
-                indent: 0,
-                endIndent: 0,
-                color: ZPColors.accentColor,
-              ),
-              const _BonusSection(),
-            ],
-          ),
+        ),
+      ],
+      borderRadius: 8,
+      child: CustomCard(
+        margin: const EdgeInsets.only(top: 25.0),
+        child: Column(
+          children: [
+            _MaterialDetailsSection(
+              cartItem: cartItem,
+            ),
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+              color: ZPColors.accentColor,
+            ),
+            _ItemSubTotalSection(
+              cartProduct: cartItem,
+              index: index,
+            ),
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+              color: ZPColors.accentColor,
+            ),
+            const _BonusSection(),
+          ],
         ),
       ),
     );

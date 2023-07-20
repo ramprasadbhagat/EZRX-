@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -315,7 +316,9 @@ class _FooterState extends State<_Footer> {
                           state.apiFailureOrSuccessOption.fold(
                             () {
                               if (!state.isUpserting &&
-                                  state.cartProducts.isNotEmpty) {
+                                  state.cartProducts.isNotEmpty &&
+                                  context.router.current.path ==
+                                      'orders/material_details') {
                                 showTopSnackBar(
                                   context: context,
                                   message: 'Item has been added to cart'.tr(),
