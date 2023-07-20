@@ -30,7 +30,6 @@ mixin _$ReturnListByItemEvent {
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
-    required TResult Function() fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,7 +46,6 @@ mixin _$ReturnListByItemEvent {
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult? Function()? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,7 +62,6 @@ mixin _$ReturnListByItemEvent {
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +70,6 @@ mixin _$ReturnListByItemEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,7 +77,6 @@ mixin _$ReturnListByItemEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,7 +84,6 @@ mixin _$ReturnListByItemEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -164,7 +158,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
-    required TResult Function() fetchProductImage,
   }) {
     return initialized();
   }
@@ -184,7 +177,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult? Function()? fetchProductImage,
   }) {
     return initialized?.call();
   }
@@ -204,7 +196,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -219,7 +210,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return initialized(this);
   }
@@ -230,7 +220,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return initialized?.call(this);
   }
@@ -241,7 +230,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -424,7 +412,6 @@ class _$_Fetch implements _Fetch {
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
-    required TResult Function() fetchProductImage,
   }) {
     return fetch(
         salesOrg, shipInfo, customerCodeInfo, user, appliedFilter, searchKey);
@@ -445,7 +432,6 @@ class _$_Fetch implements _Fetch {
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult? Function()? fetchProductImage,
   }) {
     return fetch?.call(
         salesOrg, shipInfo, customerCodeInfo, user, appliedFilter, searchKey);
@@ -466,7 +452,6 @@ class _$_Fetch implements _Fetch {
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -482,7 +467,6 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return fetch(this);
   }
@@ -493,7 +477,6 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return fetch?.call(this);
   }
@@ -504,7 +487,6 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -674,7 +656,6 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
-    required TResult Function() fetchProductImage,
   }) {
     return loadMore(user, salesOrg, shipInfo, customerCodeInfo);
   }
@@ -694,7 +675,6 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult? Function()? fetchProductImage,
   }) {
     return loadMore?.call(user, salesOrg, shipInfo, customerCodeInfo);
   }
@@ -714,7 +694,6 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -729,7 +708,6 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return loadMore(this);
   }
@@ -740,7 +718,6 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return loadMore?.call(this);
   }
@@ -751,7 +728,6 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -775,147 +751,6 @@ abstract class _LoadMore implements ReturnListByItemEvent {
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_FetchProductImageCopyWith<$Res> {
-  factory _$$_FetchProductImageCopyWith(_$_FetchProductImage value,
-          $Res Function(_$_FetchProductImage) then) =
-      __$$_FetchProductImageCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_FetchProductImageCopyWithImpl<$Res>
-    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_FetchProductImage>
-    implements _$$_FetchProductImageCopyWith<$Res> {
-  __$$_FetchProductImageCopyWithImpl(
-      _$_FetchProductImage _value, $Res Function(_$_FetchProductImage) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_FetchProductImage implements _FetchProductImage {
-  const _$_FetchProductImage();
-
-  @override
-  String toString() {
-    return 'ReturnListByItemEvent.fetchProductImage()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchProductImage);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg,
-            ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo,
-            User user,
-            ReturnFilter appliedFilter,
-            SearchKey searchKey)
-        fetch,
-    required TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
-        loadMore,
-    required TResult Function() fetchProductImage,
-  }) {
-    return fetchProductImage();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrg salesOrg,
-            ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo,
-            User user,
-            ReturnFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
-    TResult? Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
-        loadMore,
-    TResult? Function()? fetchProductImage,
-  }) {
-    return fetchProductImage?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrg salesOrg,
-            ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo,
-            User user,
-            ReturnFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
-    TResult Function(User user, SalesOrg salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
-        loadMore,
-    TResult Function()? fetchProductImage,
-    required TResult orElse(),
-  }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
-  }) {
-    return fetchProductImage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
-  }) {
-    return fetchProductImage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
-    required TResult orElse(),
-  }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchProductImage implements ReturnListByItemEvent {
-  const factory _FetchProductImage() = _$_FetchProductImage;
 }
 
 /// @nodoc

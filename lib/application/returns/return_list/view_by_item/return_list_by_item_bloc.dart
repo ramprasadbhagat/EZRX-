@@ -74,11 +74,10 @@ class ReturnListByItemBloc
               state.copyWith(
                 returnItemList: returnList,
                 canLoadMore: returnList.length >= _pageSize,
-                failureOrSuccessOption: none(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
               ),
             );
-            add(const ReturnListByItemEvent.fetchProductImage());
           },
         );
       },
@@ -120,32 +119,9 @@ class ReturnListByItemBloc
             emit(
               state.copyWith(
                 returnItemList: newItemList,
-                failureOrSuccessOption: none(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
                 canLoadMore: moreItem.length >= _pageSize,
-              ),
-            );
-            add(const ReturnListByItemEvent.fetchProductImage());
-          },
-        );
-      },
-      fetchProductImage: (_) async {
-        final failureOrSuccess = await productImagesRepository.getProductImages(
-          list: state.returnItemList,
-        );
-
-        await failureOrSuccess.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (updatedListWithImages) {
-            emit(
-              state.copyWith(
-                returnItemList:
-                    updatedListWithImages.map((e) => e as ReturnItem).toList(),
-                failureOrSuccessOption: none(),
               ),
             );
           },

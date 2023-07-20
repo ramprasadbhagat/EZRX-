@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
@@ -93,6 +94,10 @@ class MaterialPriceMockBloc
 class ViewByItemsMockBloc extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
+class ReturnListByItemMockBloc
+    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
+    implements ReturnListByItemBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -113,6 +118,7 @@ void main() {
   late MaterialListBloc materialListBloc;
   late MaterialPriceBloc materialPriceBloc;
   late ViewByItemsBloc viewByItemsBloc;
+  late ReturnListByItemBloc returnListByItemBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -128,6 +134,7 @@ void main() {
     materialListBloc = MaterialListMockBloc();
     materialPriceBloc = MaterialPriceMockBloc();
     viewByItemsBloc = ViewByItemsMockBloc();
+    returnListByItemBloc = ReturnListByItemMockBloc();
     locator = GetIt.instance;
     locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
@@ -177,8 +184,9 @@ void main() {
     when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
     when(() => materialPriceBloc.state)
         .thenReturn(MaterialPriceState.initial());
-    when(() => viewByItemsBloc.state)
-        .thenReturn(ViewByItemsState.initial());
+    when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
+    when(() => returnListByItemBloc.state)
+        .thenReturn(ReturnListByItemState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
@@ -210,6 +218,8 @@ void main() {
                   create: (context) => materialPriceBloc),
               BlocProvider<ViewByItemsBloc>(
                   create: (context) => viewByItemsBloc),
+              BlocProvider<ReturnListByItemBloc>(
+                  create: (context) => returnListByItemBloc),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -306,8 +316,9 @@ void main() {
                 create: (context) => materialListBloc),
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => materialPriceBloc),
-            BlocProvider<ViewByItemsBloc>(
-                  create: (context) => viewByItemsBloc),
+            BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
+            BlocProvider<ReturnListByItemBloc>(
+                  create: (context) => returnListByItemBloc),
           ],
           child: const SplashPage(),
         ),

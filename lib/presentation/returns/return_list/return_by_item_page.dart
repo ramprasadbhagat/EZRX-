@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -31,23 +30,9 @@ class ReturnByItemPage extends StatelessWidget {
       key: WidgetKeys.returnByItemPage,
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocConsumer<ReturnListByItemBloc, ReturnListByItemState>(
-          listenWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-          },
+        child: BlocBuilder<ReturnListByItemBloc, ReturnListByItemState>(
           buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching ||
-              previous.returnItemList != current.returnItemList,
+              previous.isFetching != current.isFetching,
           builder: (context, state) {
             return state.isFetching && state.returnItemList.isEmpty
                 ? LoadingShimmer.logo(

@@ -29,6 +29,7 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
@@ -178,6 +179,10 @@ class MaterialPriceMockBloc
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
+class ReturnListByItemMockBloc
+    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
+    implements ReturnListByItemBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -201,6 +206,7 @@ void main() {
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
   late IntroBloc introBlocMock;
+  late ReturnListByItemBloc returnListByItemBlocMock;
 
   late MaterialFilterBloc materialFilterBlocMock;
 
@@ -289,6 +295,7 @@ void main() {
       settingBlocMock = SettingMockBloc();
       mockMaterialPriceBloc = MaterialPriceMockBloc();
       introBlocMock = IntroBlocMock();
+      returnListByItemBlocMock = ReturnListByItemMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -346,6 +353,8 @@ void main() {
       when(() => mockMaterialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => introBlocMock.state).thenReturn(IntroState.initial());
+      when(() => returnListByItemBlocMock.state)
+          .thenReturn(ReturnListByItemState.initial());
     });
 
     Future getWidget(tester) async {
@@ -416,6 +425,8 @@ void main() {
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => mockMaterialPriceBloc),
             BlocProvider<IntroBloc>(create: (context) => introBlocMock),
+            BlocProvider<ReturnListByItemBloc>(
+                create: (context) => returnListByItemBlocMock),
           ],
           child: const SplashPage(),
         ),

@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -91,6 +92,10 @@ class MaterialPriceMockBloc
 class ViewByItemsMockBloc extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
+class ReturnListByItemMockBloc
+    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
+    implements ReturnListByItemBloc {}
+
 void main() {
   late GetIt locator;
   late LoginFormBloc loginBlocMock;
@@ -110,6 +115,7 @@ void main() {
   late MaterialListBloc materialListBloc;
   late MaterialPriceBloc materialPriceBloc;
   late ViewByItemsBloc viewByItemsBloc;
+  late ReturnListByItemBloc returnListByItemBloc;
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -132,6 +138,7 @@ void main() {
       materialListBloc = MaterialListMockBloc();
       materialPriceBloc = MaterialPriceMockBloc();
       viewByItemsBloc = ViewByItemsMockBloc();
+      returnListByItemBloc = ReturnListByItemMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -156,6 +163,8 @@ void main() {
       when(() => materialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
+      when(() => returnListByItemBloc.state)
+          .thenReturn(ReturnListByItemState.initial());
     });
 
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
@@ -193,6 +202,8 @@ void main() {
                   create: (context) => materialPriceBloc),
               BlocProvider<ViewByItemsBloc>(
                   create: (context) => viewByItemsBloc),
+              BlocProvider<ReturnListByItemBloc>(
+                  create: (context) => returnListByItemBloc),
             ],
             child: const LoginPage(),
           ),
@@ -301,6 +312,8 @@ void main() {
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => materialPriceBloc),
             BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
+            BlocProvider<ReturnListByItemBloc>(
+                  create: (context) => returnListByItemBloc),
           ],
           child: const SplashPage(),
         ),

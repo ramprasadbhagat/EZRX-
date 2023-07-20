@@ -18,5 +18,4 @@ class ReturnListByItemEvent with _$ReturnListByItemEvent {
     required ShipToInfo shipInfo,
     required CustomerCodeInfo customerCodeInfo,
   }) = _LoadMore;
-  const factory ReturnListByItemEvent.fetchProductImage() = _FetchProductImage;
 }
