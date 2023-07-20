@@ -110,7 +110,7 @@ class _BundleMaterial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       key: WidgetKeys.materialListBundleMaterial(
-        materialData.code.getOrDefaultValue(''),
+        materialData.materialNumber.getOrDefaultValue(''),
       ),
       children: [
         CustomCard(
@@ -118,7 +118,7 @@ class _BundleMaterial extends StatelessWidget {
           showShadow: false,
           showBorder: true,
             child: ProductImage(
-            materialNumber: materialData.code,
+            materialNumber: materialData.materialNumber,
             height: MediaQuery.of(context).size.height * 0.03,
             width: MediaQuery.of(context).size.height * 0.03,
             fit: BoxFit.contain,

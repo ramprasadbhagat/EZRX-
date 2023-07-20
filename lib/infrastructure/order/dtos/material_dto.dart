@@ -274,9 +274,6 @@ class MaterialDataDto with _$MaterialDataDto {
     @JsonKey(name: 'GenericMaterialName', defaultValue: '')
     @HiveField(5, defaultValue: '')
         required String genericMaterialName,
-    @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-    @HiveField(6, defaultValue: '')
-        required String materialImageURL,
     @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
     @HiveField(7, defaultValue: '')
         required String governmentMaterialCode,
@@ -286,28 +283,26 @@ class MaterialDataDto with _$MaterialDataDto {
       _$MaterialDataDtoFromJson(json);
 
   MaterialData toDomain() => MaterialData(
-        code: MaterialNumber(code),
+        materialNumber: MaterialNumber(code),
         manufactured: manufactured,
         materialDescription: materialDescription,
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: governmentMaterialCode,
-        materialImageURL: materialImageURL,
       );
 
   factory MaterialDataDto.fromDomain(MaterialData materialData) =>
       MaterialDataDto(
-        code: materialData.code.getOrCrash(),
+        code: materialData.materialNumber.getOrCrash(),
         manufactured: materialData.manufactured,
         materialDescription: materialData.materialDescription,
         defaultMaterialDescription: materialData.defaultMaterialDescription,
         genericMaterialName: materialData.genericMaterialName,
         governmentMaterialCode: materialData.governmentMaterialCode,
-        materialImageURL: materialData.materialImageURL,
       );
 
   ProductImages toProductImage() =>
-      ProductImages.empty().copyWith(thumbNail: materialImageURL);
+      ProductImages.empty();
 }
 
 String materialNumberReadValue(Map json, String key) =>

@@ -1474,9 +1474,6 @@ mixin _$MaterialDataDto {
   @JsonKey(name: 'GenericMaterialName', defaultValue: '')
   @HiveField(5, defaultValue: '')
   String get genericMaterialName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-  @HiveField(6, defaultValue: '')
-  String get materialImageURL => throw _privateConstructorUsedError;
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   @HiveField(7, defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
@@ -1510,9 +1507,6 @@ abstract class $MaterialDataDtoCopyWith<$Res> {
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           String genericMaterialName,
-      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String materialImageURL,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       @HiveField(7, defaultValue: '')
           String governmentMaterialCode});
@@ -1536,7 +1530,6 @@ class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
     Object? materialDescription = null,
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
-    Object? materialImageURL = null,
     Object? governmentMaterialCode = null,
   }) {
     return _then(_value.copyWith(
@@ -1559,10 +1552,6 @@ class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
       genericMaterialName: null == genericMaterialName
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialImageURL: null == materialImageURL
-          ? _value.materialImageURL
-          : materialImageURL // ignore: cast_nullable_to_non_nullable
               as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
@@ -1597,9 +1586,6 @@ abstract class _$$_MaterialDataDtoCopyWith<$Res>
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           String genericMaterialName,
-      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String materialImageURL,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       @HiveField(7, defaultValue: '')
           String governmentMaterialCode});
@@ -1621,7 +1607,6 @@ class __$$_MaterialDataDtoCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
-    Object? materialImageURL = null,
     Object? governmentMaterialCode = null,
   }) {
     return _then(_$_MaterialDataDto(
@@ -1644,10 +1629,6 @@ class __$$_MaterialDataDtoCopyWithImpl<$Res>
       genericMaterialName: null == genericMaterialName
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialImageURL: null == materialImageURL
-          ? _value.materialImageURL
-          : materialImageURL // ignore: cast_nullable_to_non_nullable
               as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
@@ -1678,9 +1659,6 @@ class _$_MaterialDataDto extends _MaterialDataDto {
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           required this.genericMaterialName,
-      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required this.materialImageURL,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       @HiveField(7, defaultValue: '')
           required this.governmentMaterialCode})
@@ -1710,17 +1688,13 @@ class _$_MaterialDataDto extends _MaterialDataDto {
   @HiveField(5, defaultValue: '')
   final String genericMaterialName;
   @override
-  @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-  @HiveField(6, defaultValue: '')
-  final String materialImageURL;
-  @override
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   @HiveField(7, defaultValue: '')
   final String governmentMaterialCode;
 
   @override
   String toString() {
-    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, materialImageURL: $materialImageURL, governmentMaterialCode: $governmentMaterialCode)';
+    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode)';
   }
 
   @override
@@ -1739,8 +1713,6 @@ class _$_MaterialDataDto extends _MaterialDataDto {
                     defaultMaterialDescription) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
-            (identical(other.materialImageURL, materialImageURL) ||
-                other.materialImageURL == materialImageURL) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode));
   }
@@ -1754,7 +1726,6 @@ class _$_MaterialDataDto extends _MaterialDataDto {
       materialDescription,
       defaultMaterialDescription,
       genericMaterialName,
-      materialImageURL,
       governmentMaterialCode);
 
   @JsonKey(ignore: true)
@@ -1789,9 +1760,6 @@ abstract class _MaterialDataDto extends MaterialDataDto {
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
       @HiveField(5, defaultValue: '')
           required final String genericMaterialName,
-      @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required final String materialImageURL,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       @HiveField(7, defaultValue: '')
           required final String governmentMaterialCode}) = _$_MaterialDataDto;
@@ -1820,10 +1788,6 @@ abstract class _MaterialDataDto extends MaterialDataDto {
   @JsonKey(name: 'GenericMaterialName', defaultValue: '')
   @HiveField(5, defaultValue: '')
   String get genericMaterialName;
-  @override
-  @JsonKey(name: 'MaterialImageURL', defaultValue: '')
-  @HiveField(6, defaultValue: '')
-  String get materialImageURL;
   @override
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   @HiveField(7, defaultValue: '')

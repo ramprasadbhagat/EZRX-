@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
@@ -16,13 +15,6 @@ import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
@@ -54,50 +46,28 @@ class HomeTab extends StatelessWidget {
           child: HomeProductSearchBar(),
         ),
       ),
-      body: BlocListener<MaterialListBloc, MaterialListState>(
-        listenWhen: (previous, current) =>
-            previous.nextPageIndex != current.nextPageIndex,
-        listener: (context, state) {
-          if (state.materialList.isNotEmpty) {
-            context.read<MaterialPriceBloc>().add(
-                  MaterialPriceEvent.fetch(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesConfigs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    comboDealEligible:
-                        context.read<EligibilityBloc>().state.comboDealEligible,
-                    materials: state.materialList,
-                  ),
-                );
-          }
-        },
         //SingleChildScrollView and Column is needed
         //as the ListView is rebuilding the BrowseProduct & BundleSection
         //and it was recreating the BlocProvider
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AnnouncementWidget(
-                currentPath: const HomeTabRoute().path,
-                key: WidgetKeys.homeTabAnnouncementWidget,
-              ),
-              const EdiUserBanner(),
-              const AccountSuspendedBanner(),
-              const QuickAccessMenuPanel(),
-              const CarouselBanner(),
-              const ProductsOnOffer(),
-              const BundleSection(),
-              const RecentOrdersSection(),
-              const BrowseProduct(),
-              const TopAdvertBoxBanner(),
-              const KRBanners(),
-              const AnnouncementSection(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AnnouncementWidget(
+              currentPath: const HomeTabRoute().path,
+              key: WidgetKeys.homeTabAnnouncementWidget,
+            ),
+            const EdiUserBanner(),
+            const AccountSuspendedBanner(),
+            const QuickAccessMenuPanel(),
+            const CarouselBanner(),
+            const ProductsOnOffer(),
+            const BundleSection(),
+            const RecentOrdersSection(),
+            const BrowseProduct(),
+            const TopAdvertBoxBanner(),
+            const KRBanners(),
+            const AnnouncementSection(),
+          ],
         ),
       ),
     );

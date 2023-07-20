@@ -1,14 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
@@ -27,6 +25,7 @@ class MaterialGridItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: CustomCard(
+        clipBehavior: Clip.antiAlias,
         key: WidgetKeys.materialListMaterialCard,
         margin: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 3),
         child: Column(
@@ -38,30 +37,10 @@ class MaterialGridItem extends StatelessWidget {
                 child: Stack(
                   children: [
                     Center(
-                      child: CachedNetworkImage(
-                        imageUrl: materialInfo.productImages.thumbNail,
-                        fit: BoxFit.fitHeight,
-                        placeholder: (context, url) {
-                          return LoadingShimmer.withChild(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8.0),
-                                  topLeft: Radius.circular(8.0),
-                                ),
-                                color: ZPColors.white,
-                              ),
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.20,
-                            ),
-                          );
-                        },
-                        errorWidget: (context, url, error) {
-                          return SvgPicture.asset(
-                            'assets/svg/product_default.svg',
-                            fit: BoxFit.fill,
-                          );
-                        },
+                      child: ProductImage(
+                        materialNumber: materialInfo.materialNumber,
+                        fit: BoxFit.fill,
+                        width: double.infinity,
                       ),
                     ),
                     StockLabel(

@@ -167,7 +167,6 @@ class MaterialDataDtoAdapter extends TypeAdapter<_$_MaterialDataDto> {
       materialDescription: fields[3] == null ? '' : fields[3] as String,
       defaultMaterialDescription: fields[4] == null ? '' : fields[4] as String,
       genericMaterialName: fields[5] == null ? '' : fields[5] as String,
-      materialImageURL: fields[6] == null ? '' : fields[6] as String,
       governmentMaterialCode: fields[7] == null ? '' : fields[7] as String,
     );
   }
@@ -175,7 +174,7 @@ class MaterialDataDtoAdapter extends TypeAdapter<_$_MaterialDataDto> {
   @override
   void write(BinaryWriter writer, _$_MaterialDataDto obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(1)
       ..write(obj.code)
       ..writeByte(2)
@@ -186,8 +185,6 @@ class MaterialDataDtoAdapter extends TypeAdapter<_$_MaterialDataDto> {
       ..write(obj.defaultMaterialDescription)
       ..writeByte(5)
       ..write(obj.genericMaterialName)
-      ..writeByte(6)
-      ..write(obj.materialImageURL)
       ..writeByte(7)
       ..write(obj.governmentMaterialCode);
   }
@@ -305,7 +302,6 @@ _$_MaterialDataDto _$$_MaterialDataDtoFromJson(Map<String, dynamic> json) =>
       defaultMaterialDescription:
           json['DefaultMaterialDescription'] as String? ?? '',
       genericMaterialName: json['GenericMaterialName'] as String? ?? '',
-      materialImageURL: json['MaterialImageURL'] as String? ?? '',
       governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
     );
 
@@ -316,7 +312,6 @@ Map<String, dynamic> _$$_MaterialDataDtoToJson(_$_MaterialDataDto instance) =>
       'MaterialDescription': instance.materialDescription,
       'DefaultMaterialDescription': instance.defaultMaterialDescription,
       'GenericMaterialName': instance.genericMaterialName,
-      'MaterialImageURL': instance.materialImageURL,
       'GovernmentMaterialCode': instance.governmentMaterialCode,
     };
 

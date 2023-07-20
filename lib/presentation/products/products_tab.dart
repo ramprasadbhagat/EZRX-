@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
@@ -41,21 +40,7 @@ class ProductsTab extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocConsumer<MaterialListBloc, MaterialListState>(
-        listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
-            current.apiFailureOrSuccessOption,
-        listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
+      body: BlocBuilder<MaterialListBloc, MaterialListState>(
         buildWhen: (previous, current) =>
             previous.materialList != current.materialList ||
             previous.isFetching != current.isFetching,

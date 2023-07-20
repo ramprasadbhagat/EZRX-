@@ -267,23 +267,49 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<ViewByItemsBloc, ViewByItemsState>(
           listenWhen: (previous, current) =>
-          previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) =>
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {
-                  if (!state.isFetching) {
-                    context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-                          list: state.orderHistoryList.orderHistoryItems,
-                        ));
-                  }
-                },
-              ),
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {
+                if (!state.isFetching) {
+                  context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
+                        list: state.orderHistoryList.orderHistoryItems,
+                      ));
+                }
+              },
             ),
+          ),
+        ),
+        BlocListener<MaterialListBloc, MaterialListState>(
+          listenWhen: (previous, current) =>
+              previous.nextPageIndex != current.nextPageIndex,
+          listener: (context, state) {
+            if (state.materialList.isNotEmpty) {
+              context.read<MaterialPriceBloc>().add(
+                    MaterialPriceEvent.fetch(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesConfigs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
+                      comboDealEligible: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .comboDealEligible,
+                      materials: state.materialList,
+                    ),
+                  );
+              _productImageFetch(state, context);
+            }
+          },
         ),
         BlocListener<ReturnListByItemBloc, ReturnListByItemState>(
           listenWhen: (previous, current) =>
@@ -626,6 +652,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               child: const _Splash(),
             ),
     );
+  }
+
+  void _productImageFetch(MaterialListState state, BuildContext context) {
+    if (state.selectedMaterialFilter.bundleOffers) {
+      for (final materialData in state.materialList) {
+        context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
+          list: materialData.data,
+        ));
+      }
+    }else{
+      context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
+          list: state.materialList,
+        ));
+    }
   }
 
   //ignore:long-method

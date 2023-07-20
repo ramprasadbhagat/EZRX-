@@ -165,12 +165,11 @@ class MaterialInfo with _$MaterialInfo {
 class MaterialData with _$MaterialData {
   const MaterialData._();
   factory MaterialData({
-    required MaterialNumber code,
+    required MaterialNumber materialNumber,
     required String manufactured,
     required String materialDescription,
     required String defaultMaterialDescription,
     required String genericMaterialName,
-    required String materialImageURL,
     required String governmentMaterialCode,
   }) = _MaterialData;
 
@@ -179,12 +178,12 @@ class MaterialData with _$MaterialData {
       : defaultMaterialDescription;
 
   MaterialInfo get toMaterialInfo => MaterialInfo.empty().copyWith(
-        materialNumber: code,
+        materialNumber: materialNumber,
         materialDescription: materialDescription,
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         productImages:
-            ProductImages.empty().copyWith(thumbNail: materialImageURL),
+            ProductImages.empty(),
         governmentMaterialCode: governmentMaterialCode,
       );
 }

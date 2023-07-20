@@ -1008,12 +1008,11 @@ abstract class _MaterialInfo extends MaterialInfo {
 
 /// @nodoc
 mixin _$MaterialData {
-  MaterialNumber get code => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get manufactured => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
-  String get materialImageURL => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1028,12 +1027,11 @@ abstract class $MaterialDataCopyWith<$Res> {
       _$MaterialDataCopyWithImpl<$Res, MaterialData>;
   @useResult
   $Res call(
-      {MaterialNumber code,
+      {MaterialNumber materialNumber,
       String manufactured,
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      String materialImageURL,
       String governmentMaterialCode});
 }
 
@@ -1050,18 +1048,17 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
+    Object? materialNumber = null,
     Object? manufactured = null,
     Object? materialDescription = null,
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
-    Object? materialImageURL = null,
     Object? governmentMaterialCode = null,
   }) {
     return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
       manufactured: null == manufactured
           ? _value.manufactured
@@ -1078,10 +1075,6 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
       genericMaterialName: null == genericMaterialName
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialImageURL: null == materialImageURL
-          ? _value.materialImageURL
-          : materialImageURL // ignore: cast_nullable_to_non_nullable
               as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
@@ -1100,12 +1093,11 @@ abstract class _$$_MaterialDataCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MaterialNumber code,
+      {MaterialNumber materialNumber,
       String manufactured,
       String materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      String materialImageURL,
       String governmentMaterialCode});
 }
 
@@ -1120,18 +1112,17 @@ class __$$_MaterialDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
+    Object? materialNumber = null,
     Object? manufactured = null,
     Object? materialDescription = null,
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
-    Object? materialImageURL = null,
     Object? governmentMaterialCode = null,
   }) {
     return _then(_$_MaterialData(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
       manufactured: null == manufactured
           ? _value.manufactured
@@ -1149,10 +1140,6 @@ class __$$_MaterialDataCopyWithImpl<$Res>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
-      materialImageURL: null == materialImageURL
-          ? _value.materialImageURL
-          : materialImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -1165,17 +1152,16 @@ class __$$_MaterialDataCopyWithImpl<$Res>
 
 class _$_MaterialData extends _MaterialData {
   _$_MaterialData(
-      {required this.code,
+      {required this.materialNumber,
       required this.manufactured,
       required this.materialDescription,
       required this.defaultMaterialDescription,
       required this.genericMaterialName,
-      required this.materialImageURL,
       required this.governmentMaterialCode})
       : super._();
 
   @override
-  final MaterialNumber code;
+  final MaterialNumber materialNumber;
   @override
   final String manufactured;
   @override
@@ -1185,13 +1171,11 @@ class _$_MaterialData extends _MaterialData {
   @override
   final String genericMaterialName;
   @override
-  final String materialImageURL;
-  @override
   final String governmentMaterialCode;
 
   @override
   String toString() {
-    return 'MaterialData(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, materialImageURL: $materialImageURL, governmentMaterialCode: $governmentMaterialCode)';
+    return 'MaterialData(materialNumber: $materialNumber, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode)';
   }
 
   @override
@@ -1199,7 +1183,8 @@ class _$_MaterialData extends _MaterialData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialData &&
-            (identical(other.code, code) || other.code == code) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
             (identical(other.manufactured, manufactured) ||
                 other.manufactured == manufactured) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -1210,8 +1195,6 @@ class _$_MaterialData extends _MaterialData {
                     defaultMaterialDescription) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
-            (identical(other.materialImageURL, materialImageURL) ||
-                other.materialImageURL == materialImageURL) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode));
   }
@@ -1219,12 +1202,11 @@ class _$_MaterialData extends _MaterialData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      code,
+      materialNumber,
       manufactured,
       materialDescription,
       defaultMaterialDescription,
       genericMaterialName,
-      materialImageURL,
       governmentMaterialCode);
 
   @JsonKey(ignore: true)
@@ -1236,17 +1218,16 @@ class _$_MaterialData extends _MaterialData {
 
 abstract class _MaterialData extends MaterialData {
   factory _MaterialData(
-      {required final MaterialNumber code,
+      {required final MaterialNumber materialNumber,
       required final String manufactured,
       required final String materialDescription,
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
-      required final String materialImageURL,
       required final String governmentMaterialCode}) = _$_MaterialData;
   _MaterialData._() : super._();
 
   @override
-  MaterialNumber get code;
+  MaterialNumber get materialNumber;
   @override
   String get manufactured;
   @override
@@ -1255,8 +1236,6 @@ abstract class _MaterialData extends MaterialData {
   String get defaultMaterialDescription;
   @override
   String get genericMaterialName;
-  @override
-  String get materialImageURL;
   @override
   String get governmentMaterialCode;
   @override
