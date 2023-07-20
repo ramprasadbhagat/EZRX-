@@ -336,4 +336,12 @@ class WidgetKeys {
   //============================================================
   static const Key invoiceTab = Key('invoiceTab');
   static const Key creditsTab = Key('creditsTab');
+
+  //============================================================
+  //  New Payment
+  //============================================================
+  static const Key newPaymentPage = Key('newPaymentPage');
+  static const Key backButton = Key('backButton');
+  static const Key nextButton = Key('nextButton');
+  static const Key payButton = Key('payButton');
 }
