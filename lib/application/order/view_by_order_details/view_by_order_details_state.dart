@@ -8,7 +8,7 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     required bool isLoading,
     required Map<MaterialQueryInfo, bool> isLoadingTenderContract,
     required bool showErrorMessage,
-     required bool isImageLoading,
+    required bool isImageLoading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required Map<MaterialQueryInfo, PriceAggregate> materials,
   }) = _ViewByOrderDetailsState;
@@ -22,8 +22,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
         materials: {},
         isImageLoading: false,
       );
-
-  bool get loadingTenderContractSuccess => isLoadingTenderContract.values.every(
-        (isLoading) => !isLoading,
-      );
+  //TODO:Need To Revisit when tender contract is implemented for V3
+  // bool get loadingTenderContractSuccess => isLoadingTenderContract.values.every(
+  //       (isLoading) => !isLoading,
+  //     );
 }
