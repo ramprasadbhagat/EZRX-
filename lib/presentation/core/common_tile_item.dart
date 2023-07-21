@@ -20,6 +20,7 @@ class CommonTileItem extends StatelessWidget {
     this.footerWidget,
     required this.priceComponent,
     this.isQuantityRequired = true,
+    this.onTap,
   }) : super(key: key);
 
   final String label;
@@ -34,11 +35,13 @@ class CommonTileItem extends StatelessWidget {
   final String tag;
   final Widget? footerWidget;
   final bool isQuantityRequired;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       child: ListTile(
+        onTap: onTap,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

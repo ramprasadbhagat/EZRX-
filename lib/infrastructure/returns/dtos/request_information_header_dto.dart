@@ -20,6 +20,7 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
     @JsonKey(name: 'soldTo', defaultValue: '') required String soldTo,
     @JsonKey(name: 'requestID', defaultValue: '') required String requestID,
     @JsonKey(name: 'createdBy', defaultValue: '') required String createdBy,
+    @JsonKey(name: 'bapiStatus', defaultValue: '') required String bapiStatus,
   }) = _RequestInformationHeaderDto;
 
   ReturnRequestInformationHeader toDomain() {
@@ -32,6 +33,7 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
       refundTotal: RefundTotal(refundTotal),
       requestID: requestID,
       soldTo: soldTo,
+      bapiStatus: StatusType(bapiStatus),
     );
   }
 

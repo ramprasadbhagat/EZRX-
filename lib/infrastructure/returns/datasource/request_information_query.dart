@@ -12,6 +12,7 @@ class RequestInformationQuery {
       requestID
       createdDate
       createdBy
+      bapiStatus
     }
     requestInformationV2 {
       invoiceNo

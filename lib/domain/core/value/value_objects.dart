@@ -268,6 +268,9 @@ class StatusType extends ValueObject<String> {
       getAdviceExpiry(value.getOrElse(() => ''), date);
 
   bool get getIsSuccessful => isSuccessful(value.getOrElse(() => ''));
+  bool get getIsBapiStatusFailed =>
+      isBapiStatusFailed(value.getOrElse(() => ''));
+
   String getSAPROCreationValue(String bapiStatus, String bapiSalesDocNumber) =>
       sAPROCreationValue(
         value.getOrElse(() => ''),

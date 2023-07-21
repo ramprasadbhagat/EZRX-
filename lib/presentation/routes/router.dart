@@ -64,6 +64,7 @@ import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_request_page.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_root.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
@@ -81,7 +82,6 @@ import 'package:ezrxmobile/presentation/more/more_tab.dart';
 import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
 
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
-
 
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
 
@@ -397,6 +397,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'article_details',
       page: ArticleDetails,
+    ),
+    AutoRoute(
+      page: ReturnRequestDetails,
+      path: 'returns/return_summary_details_by_request',
     ),
   ],
 )

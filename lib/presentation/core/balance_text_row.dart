@@ -14,6 +14,7 @@ class BalanceTextRow extends StatelessWidget {
   final bool isStatus;
   final TextStyle? keyTextStyle;
   final TextStyle? valueTextStyle;
+  final Color statusTextColor;
 
   const BalanceTextRow({
     Key? key,
@@ -25,6 +26,7 @@ class BalanceTextRow extends StatelessWidget {
     this.isStatus = false,
     this.keyTextStyle,
     this.valueTextStyle,
+    this.statusTextColor = ZPColors.black,
   }) : super(key: key);
 
   @override
@@ -63,7 +65,7 @@ class BalanceTextRow extends StatelessWidget {
                     Flexible(
                       child: StatusLabel(
                         status: StatusType(valueText),
-                        valueColor: keyStyle?.color??ZPColors.black,
+                        valueColor: statusTextColor,
                       ),
                     ),
                   ],

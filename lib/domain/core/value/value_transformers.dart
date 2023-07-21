@@ -493,3 +493,7 @@ String bapiStatusType(String bapiStatus, String bapiSalesDocNumber) {
       return '-';
   }
 }
+
+bool isBapiStatusFailed(String status) {
+  return status == 'FAILED';
+}

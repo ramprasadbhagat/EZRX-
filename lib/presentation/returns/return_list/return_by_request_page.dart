@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -176,6 +178,16 @@ class _ReturnItem extends StatelessWidget {
               CustomCard(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ListTile(
+                  onTap: () {
+                    context.read<ReturnDetailsByRequestBloc>().add(
+                          ReturnDetailsByRequestEvent.fetch(
+                            returnId: data.requestId,
+                          ),
+                        );
+                    context.router.push(
+                      ReturnRequestDetailsRoute(returnItem: data),
+                    );
+                  },
                   title: Column(
                     children: [
                       Row(

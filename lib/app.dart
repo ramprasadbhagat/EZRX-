@@ -44,6 +44,7 @@ import 'package:ezrxmobile/application/returns/request_return/request_return_blo
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
@@ -527,6 +528,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ArticlesInfoBloc>(
           create: (context) => locator<ArticlesInfoBloc>(),
+        ),
+        BlocProvider<ReturnDetailsByRequestBloc>(
+          create: (context) => locator<ReturnDetailsByRequestBloc>(),
         ),
       ],
       child: MaterialApp.router(
