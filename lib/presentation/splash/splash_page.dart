@@ -313,23 +313,22 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<ReturnListByItemBloc, ReturnListByItemState>(
           listenWhen: (previous, current) =>
-          previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) =>
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {
-                  if (!state.isFetching) {
-                    context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-                          list: state.returnItemList,
-                        ));
-                  }
-                },
-              ),
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {
+                if (!state.isFetching) {
+                  context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
+                        list: state.returnItemList,
+                      ));
+                }
+              },
             ),
+          ),
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
@@ -658,13 +657,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     if (state.selectedMaterialFilter.bundleOffers) {
       for (final materialData in state.materialList) {
         context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-          list: materialData.data,
-        ));
+              list: materialData.data,
+            ));
       }
-    }else{
+    } else {
       context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-          list: state.materialList,
-        ));
+            list: state.materialList,
+          ));
     }
   }
 

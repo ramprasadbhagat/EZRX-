@@ -261,9 +261,9 @@ void main() {
     });
 
     testWidgets('=> _ResetButton Test', (tester) async {
-      when(() => allCreditsBlocMock.state).thenReturn(
-        AllCreditsState.initial().copyWith(
-          appliedFilter:
+      when(() => allCreditsFilterBlocMock.state).thenReturn(
+        AllCreditsFilterState.initial().copyWith(
+          filter:
               AllCreditsFilter.empty().copyWith(filterStatuses: ['Cleared']),
         ),
       );

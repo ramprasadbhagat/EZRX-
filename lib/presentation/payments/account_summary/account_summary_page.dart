@@ -124,7 +124,12 @@ class _SearchBarState extends State<_SearchBar> {
             .appliedFilter
             .searchKey
             .getOrDefaultValue('')
-        : '';
+        : context
+            .read<AllCreditsBloc>()
+            .state
+            .appliedFilter
+            .searchKey
+            .getOrDefaultValue('');
 
     return widget.isInvoiceTabActive
         ? BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
@@ -155,8 +160,9 @@ class _SearchBarState extends State<_SearchBar> {
                 previous.isLoading != current.isLoading,
             listenWhen: (previous, current) => previous != current,
             listener: (context, state) {
+              final searchText = state.appliedFilter.searchKey.getValue();
               _itemSearchController.value = TextEditingValue(
-                text: '',
+                text: searchText,
                 selection: TextSelection.collapsed(
                   offset: _itemSearchController.selection.base.offset,
                 ),
@@ -186,7 +192,6 @@ class _SummarySearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Expanded(
       child: SearchBar(
         controller: controller,
@@ -201,7 +206,10 @@ class _SummarySearchBar extends StatelessWidget {
                   context: context,
                   searchKey: value,
                 )
-              : null;
+              : _fetchCredit(
+                  context: context,
+                  searchKey: value,
+                );
         },
         clearIconKey: WidgetKeys.clearIconKey,
         customValidator: () => SearchKey.search(controller.text).isValid(),
@@ -213,7 +221,10 @@ class _SummarySearchBar extends StatelessWidget {
                   context: context,
                   searchKey: '',
                 )
-              : null;
+              : _fetchCredit(
+                  context: context,
+                  searchKey: '',
+                );
         },
         border: InputBorder.none,
       ),
@@ -229,6 +240,26 @@ class _SummarySearchBar extends StatelessWidget {
 
     context.read<AllInvoicesBloc>().add(
           AllInvoicesEvent.fetch(
+            appliedFilter: appliedFilter.copyWith(
+              searchKey: SearchKey(searchKey),
+            ),
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          ),
+        );
+  }
+
+  void _fetchCredit({
+    required BuildContext context,
+    required String searchKey,
+  }) {
+    final appliedFilter = context.read<AllCreditsBloc>().state.appliedFilter;
+    if (appliedFilter.searchKey == SearchKey(searchKey)) return;
+
+    context.read<AllCreditsBloc>().add(
+          AllCreditsEvent.fetch(
             appliedFilter: appliedFilter.copyWith(
               searchKey: SearchKey(searchKey),
             ),

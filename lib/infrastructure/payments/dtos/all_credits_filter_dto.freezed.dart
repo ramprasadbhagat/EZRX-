@@ -30,6 +30,8 @@ mixin _$AllCreditsFilterDto {
   String get amountValueTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'accountingDocument', defaultValue: '')
+  String get searchKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +55,9 @@ abstract class $AllCreditsFilterDtoCopyWith<$Res> {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses});
+          String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          String searchKey});
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$AllCreditsFilterDtoCopyWithImpl<$Res, $Val extends AllCreditsFilterDto>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       documentDateFrom: null == documentDateFrom
@@ -95,6 +100,10 @@ class _$AllCreditsFilterDtoCopyWithImpl<$Res, $Val extends AllCreditsFilterDto>
       filterStatuses: null == filterStatuses
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -118,7 +127,9 @@ abstract class _$$_AllCreditsFilterDtoCopyWith<$Res>
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses});
+          String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          String searchKey});
 }
 
 /// @nodoc
@@ -137,6 +148,7 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_AllCreditsFilterDto(
       documentDateFrom: null == documentDateFrom
@@ -159,6 +171,10 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -176,7 +192,9 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           required this.amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required this.filterStatuses})
+          required this.filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          required this.searchKey})
       : super._();
 
   factory _$_AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -197,10 +215,13 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
   @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   final String filterStatuses;
+  @override
+  @JsonKey(name: 'accountingDocument', defaultValue: '')
+  final String searchKey;
 
   @override
   String toString() {
-    return 'AllCreditsFilterDto(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'AllCreditsFilterDto(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
@@ -217,13 +238,15 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             (identical(other.filterStatuses, filterStatuses) ||
-                other.filterStatuses == filterStatuses));
+                other.filterStatuses == filterStatuses) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, documentDateFrom, documentDateTo,
-      amountValueFrom, amountValueTo, filterStatuses);
+      amountValueFrom, amountValueTo, filterStatuses, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -251,7 +274,9 @@ abstract class _AllCreditsFilterDto extends AllCreditsFilterDto {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
           required final String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required final String filterStatuses}) = _$_AllCreditsFilterDto;
+          required final String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          required final String searchKey}) = _$_AllCreditsFilterDto;
   const _AllCreditsFilterDto._() : super._();
 
   factory _AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =
@@ -272,6 +297,9 @@ abstract class _AllCreditsFilterDto extends AllCreditsFilterDto {
   @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses;
+  @override
+  @JsonKey(name: 'accountingDocument', defaultValue: '')
+  String get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_AllCreditsFilterDtoCopyWith<_$_AllCreditsFilterDto> get copyWith =>

@@ -32,6 +32,11 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
       defaultValue: '',
     )
         required String filterStatuses,
+    @JsonKey(
+      name: 'accountingDocument',
+      defaultValue: '',
+    )
+        required String searchKey,
   }) = _AllCreditsFilterDto;
 
   factory AllCreditsFilterDto.fromDomain(
@@ -43,6 +48,7 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
       amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses: tempFilter.filterStatuses.join(','),
+      searchKey: tempFilter.searchKey.getOrDefaultValue(''),
     );
   }
 
@@ -51,8 +57,8 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
 
   List<Map<String, String>> get toMapList => <Map<String, String>>[
         {
-          'field': 'debitCreditCode',
-          'value': 'H',
+          'field': 'accountingDocumentType',
+          'value': 'Credit Memo',
         },
         if (documentDateFrom.isNotEmpty)
           {
@@ -82,6 +88,11 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
           {
             'field': 'invoiceProcessingStatus',
             'value': filterStatuses,
+          },
+        if (searchKey.isNotEmpty)
+          {
+            'field': 'accountingDocument',
+            'value': searchKey,
           },
       ];
 }

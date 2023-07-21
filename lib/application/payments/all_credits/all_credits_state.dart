@@ -2,7 +2,7 @@ part of 'all_credits_bloc.dart';
 
 @freezed
 class AllCreditsState with _$AllCreditsState {
-  //Constructor created for Getter 
+  //Constructor created for Getter
   const AllCreditsState._();
   const factory AllCreditsState({
     required AllCreditsFilter appliedFilter,
@@ -19,5 +19,4 @@ class AllCreditsState with _$AllCreditsState {
         appliedFilter: AllCreditsFilter.empty(),
         items: <CreditAndInvoiceItem>[],
       );
-
 }

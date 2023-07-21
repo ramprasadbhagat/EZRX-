@@ -392,12 +392,17 @@ class _ResetButton extends StatelessWidget {
       child: OutlinedButton(
         key: WidgetKeys.filterResetButton,
         onPressed: () {
-          final emptyFilter = AllCreditsFilter.empty();
-          if (context.read<AllCreditsBloc>().state.appliedFilter !=
-              emptyFilter) {
+          if (context.read<AllCreditsFilterBloc>().state.filter.excludeSearch !=
+              AllCreditsFilter.empty()) {
             context.read<AllCreditsBloc>().add(
                   AllCreditsEvent.fetch(
-                    appliedFilter: emptyFilter,
+                    appliedFilter: AllCreditsFilter.empty().copyWith(
+                      searchKey: context
+                          .read<AllCreditsBloc>()
+                          .state
+                          .appliedFilter
+                          .searchKey,
+                    ),
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     customerCodeInfo:

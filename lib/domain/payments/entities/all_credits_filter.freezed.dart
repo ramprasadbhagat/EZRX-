@@ -22,6 +22,7 @@ mixin _$AllCreditsFilter {
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<String> get filterStatuses => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllCreditsFilterCopyWith<AllCreditsFilter> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $AllCreditsFilterCopyWith<$Res> {
       DateTimeStringValue documentDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<String> filterStatuses});
+      List<String> filterStatuses,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       documentDateFrom: null == documentDateFrom
@@ -82,6 +85,10 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 }
@@ -99,7 +106,8 @@ abstract class _$$_AllCreditsFilterCopyWith<$Res>
       DateTimeStringValue documentDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<String> filterStatuses});
+      List<String> filterStatuses,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -118,6 +126,7 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_AllCreditsFilter(
       documentDateFrom: null == documentDateFrom
@@ -140,6 +149,10 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
           ? _value._filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -152,7 +165,8 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
       required this.documentDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
-      required final List<String> filterStatuses})
+      required final List<String> filterStatuses,
+      required this.searchKey})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -173,8 +187,11 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
   }
 
   @override
+  final SearchKey searchKey;
+
+  @override
   String toString() {
-    return 'AllCreditsFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'AllCreditsFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
@@ -191,7 +208,9 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             const DeepCollectionEquality()
-                .equals(other._filterStatuses, _filterStatuses));
+                .equals(other._filterStatuses, _filterStatuses) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -201,7 +220,8 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
       documentDateTo,
       amountValueFrom,
       amountValueTo,
-      const DeepCollectionEquality().hash(_filterStatuses));
+      const DeepCollectionEquality().hash(_filterStatuses),
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +236,8 @@ abstract class _AllCreditsFilter extends AllCreditsFilter {
       required final DateTimeStringValue documentDateTo,
       required final RangeValue amountValueFrom,
       required final RangeValue amountValueTo,
-      required final List<String> filterStatuses}) = _$_AllCreditsFilter;
+      required final List<String> filterStatuses,
+      required final SearchKey searchKey}) = _$_AllCreditsFilter;
   _AllCreditsFilter._() : super._();
 
   @override
@@ -229,6 +250,8 @@ abstract class _AllCreditsFilter extends AllCreditsFilter {
   RangeValue get amountValueTo;
   @override
   List<String> get filterStatuses;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_AllCreditsFilterCopyWith<_$_AllCreditsFilter> get copyWith =>

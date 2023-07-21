@@ -14,6 +14,7 @@ _$_AllCreditsFilterDto _$$_AllCreditsFilterDtoFromJson(
       amountValueFrom: json['amountValueFrom'] as String? ?? '',
       amountValueTo: json['amountValueTo'] as String? ?? '',
       filterStatuses: json['filterStatuses'] as String? ?? '',
+      searchKey: json['accountingDocument'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_AllCreditsFilterDtoToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_AllCreditsFilterDtoToJson(
       'amountValueFrom': instance.amountValueFrom,
       'amountValueTo': instance.amountValueTo,
       'filterStatuses': instance.filterStatuses,
+      'accountingDocument': instance.searchKey,
     };

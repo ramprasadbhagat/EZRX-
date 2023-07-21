@@ -65,8 +65,9 @@ void main() {
   group('All Credits Repository Test', () {
     test('=> filterCredits locally success', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-      when(() => allCreditsAndInvoicesLocalDataSourceMock
-          .getDocumentHeaderList()).thenAnswer(
+      when(() =>
+              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList())
+          .thenAnswer(
         (invocation) async => mockList,
       );
 
@@ -82,8 +83,8 @@ void main() {
 
     test('=> filterCredits locally failed', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-      when(() => allCreditsAndInvoicesLocalDataSourceMock
-              .getDocumentHeaderList())
+      when(() =>
+              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList())
           .thenThrow((invocation) async => MockException());
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(
@@ -147,12 +148,13 @@ void main() {
           )).thenThrow((invocation) async => MockException());
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
-          pageSize: 1,
-          offset: 0,
-          filter: allCreditsFilter);
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
+        pageSize: 1,
+        offset: 0,
+        filter: allCreditsFilter,
+      );
       expect(result.isLeft(), true);
     });
   });
