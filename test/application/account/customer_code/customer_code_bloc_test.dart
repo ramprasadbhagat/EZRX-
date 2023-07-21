@@ -248,6 +248,9 @@ void main() {
       'Customer Code Search Success',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      seed: () => CustomerCodeState.initial().copyWith(
+        shipToInfo: fakeShipToInfo,
+      ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
               salesOrganisation: fakeSaleOrg,
@@ -276,16 +279,18 @@ void main() {
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
             isFetching: true,
+            shipToInfo: fakeShipToInfo,
             searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
-          customerCodeList: [
-            CustomerCodeInfo.empty()
-                .copyWith(customerCodeSoldTo: 'fake-customer-code')
-          ],
-          searchKey: SearchKey('fake-customer-code'),
-          canLoadMore: false,
-          isSearchActive: true,
-        )
+            customerCodeList: [
+              CustomerCodeInfo.empty()
+                  .copyWith(customerCodeSoldTo: 'fake-customer-code')
+            ],
+            shipToInfo: fakeShipToInfo,
+            searchKey: SearchKey('fake-customer-code'),
+            canLoadMore: false,
+            isSearchActive: true,
+            isFetching: false)
       ],
     );
 

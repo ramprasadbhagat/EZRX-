@@ -55,9 +55,11 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         if (state.isFetching) return;
         final previousSearchKey = SearchKey(e.searchValue);
         final previousCustomerCodeState = state.customerCodeInfo;
+        final previousShipToInfo = state.shipToInfo;
         emit(CustomerCodeState.initial().copyWith(
           searchKey: previousSearchKey,
           customerCodeInfo: previousCustomerCodeState,
+          shipToInfo: previousShipToInfo,
           isSearchActive: true,
           isFetching: true,
         ));
