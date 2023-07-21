@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWithLabel extends StatelessWidget {
@@ -16,6 +17,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.obscureText = false,
     this.onDone,
     this.maxLines = 1,
+    this.mandatory = false,
   }) : super(key: key);
   final Key fieldKey;
   final String labelText;
@@ -30,15 +32,28 @@ class TextFieldWithLabel extends StatelessWidget {
   final bool obscureText;
   final Function(String)? onDone;
   final int maxLines;
+  final bool mandatory;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          labelText,
-          style: Theme.of(context).textTheme.labelSmall,
+        RichText(
+          text: TextSpan(
+            text: labelText,
+            style: Theme.of(context).textTheme.labelSmall,
+            children: <TextSpan>[
+              if (mandatory)
+                TextSpan(
+                  text: ' *',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(color: ZPColors.red),
+                ),
+            ],
+          ),
         ),
         const SizedBox(height: 8),
         TextFormField(

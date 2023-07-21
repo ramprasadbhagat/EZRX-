@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ForgotPassword {
-  bool get requestResetPassword => throw _privateConstructorUsedError;
+  bool get success => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ForgotPasswordCopyWith<ForgotPassword> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $ForgotPasswordCopyWith<$Res> {
           ForgotPassword value, $Res Function(ForgotPassword) then) =
       _$ForgotPasswordCopyWithImpl<$Res, ForgotPassword>;
   @useResult
-  $Res call({bool requestResetPassword});
+  $Res call({bool success, String email});
 }
 
 /// @nodoc
@@ -45,13 +46,18 @@ class _$ForgotPasswordCopyWithImpl<$Res, $Val extends ForgotPassword>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestResetPassword = null,
+    Object? success = null,
+    Object? email = null,
   }) {
     return _then(_value.copyWith(
-      requestResetPassword: null == requestResetPassword
-          ? _value.requestResetPassword
-          : requestResetPassword // ignore: cast_nullable_to_non_nullable
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$_ForgotPasswordCopyWith<$Res>
       __$$_ForgotPasswordCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool requestResetPassword});
+  $Res call({bool success, String email});
 }
 
 /// @nodoc
@@ -78,28 +84,35 @@ class __$$_ForgotPasswordCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestResetPassword = null,
+    Object? success = null,
+    Object? email = null,
   }) {
     return _then(_$_ForgotPassword(
-      requestResetPassword: null == requestResetPassword
-          ? _value.requestResetPassword
-          : requestResetPassword // ignore: cast_nullable_to_non_nullable
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ForgotPassword implements _ForgotPassword {
-  _$_ForgotPassword({required this.requestResetPassword});
+class _$_ForgotPassword extends _ForgotPassword {
+  _$_ForgotPassword({required this.success, required this.email}) : super._();
 
   @override
-  final bool requestResetPassword;
+  final bool success;
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'ForgotPassword(requestResetPassword: $requestResetPassword)';
+    return 'ForgotPassword(success: $success, email: $email)';
   }
 
   @override
@@ -107,12 +120,12 @@ class _$_ForgotPassword implements _ForgotPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ForgotPassword &&
-            (identical(other.requestResetPassword, requestResetPassword) ||
-                other.requestResetPassword == requestResetPassword));
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, requestResetPassword);
+  int get hashCode => Object.hash(runtimeType, success, email);
 
   @JsonKey(ignore: true)
   @override
@@ -121,12 +134,16 @@ class _$_ForgotPassword implements _ForgotPassword {
       __$$_ForgotPasswordCopyWithImpl<_$_ForgotPassword>(this, _$identity);
 }
 
-abstract class _ForgotPassword implements ForgotPassword {
-  factory _ForgotPassword({required final bool requestResetPassword}) =
-      _$_ForgotPassword;
+abstract class _ForgotPassword extends ForgotPassword {
+  factory _ForgotPassword(
+      {required final bool success,
+      required final String email}) = _$_ForgotPassword;
+  _ForgotPassword._() : super._();
 
   @override
-  bool get requestResetPassword;
+  bool get success;
+  @override
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$$_ForgotPasswordCopyWith<_$_ForgotPassword> get copyWith =>

@@ -26,6 +26,7 @@ class ApiFailure with _$ApiFailure {
       _ProxyLoginZPTargetRoleNotMatch;
   const factory ApiFailure.proxyLoginZPSalesOrgNotMatch() =
       _ProxyLoginZPSalesOrgNotMatch;
+  const factory ApiFailure.passwordResetFail() = _PasswordResetFail;
 
   // Bio failure
   const factory ApiFailure.deviceNotSupportBiometric() =
@@ -87,5 +88,6 @@ extension ApiFailureExt on ApiFailure {
             'This material is not available on your account',
         historyDetailRoute: (_) =>
             'This order history is not available on your account',
+        passwordResetFail: (_) => 'Unable to reset password',
       );
 }

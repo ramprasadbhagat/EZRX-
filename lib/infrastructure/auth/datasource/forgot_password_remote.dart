@@ -26,23 +26,26 @@ class ForgotPasswordRemoteDataSource {
     required String language,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final variable = {
+        'username': username,
+        'language': language,
+      };
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}license',
         data: jsonEncode(
           {
-            'query': authQueryMutation.requestResetPassword(username, language),
-            'variables': {},
+            'query': authQueryMutation.requestResetPassword(),
+            'variables': variable,
           },
         ),
         apiEndpoint: 'requestResetPasswordLink',
       );
 
-      _exceptionChecker(
-        res: res,
-      );
-
-      return ForgotPasswordDto.fromJson(res.data['data']).toDomain();
+      _exceptionChecker(res: res);
+      final data = res.data['data']['requestResetPassword'];
+      
+      return ForgotPasswordDto.fromJson(data).toDomain();
     });
   }
 

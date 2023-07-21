@@ -478,6 +478,8 @@ mixin _$ForgotPasswordState {
   bool get showErrorMessages => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get resetPasswordFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  ForgotPassword get resetPasswordResponse =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ForgotPasswordStateCopyWith<ForgotPasswordState> get copyWith =>
@@ -494,7 +496,10 @@ abstract class $ForgotPasswordStateCopyWith<$Res> {
       {Username username,
       bool isSubmitting,
       bool showErrorMessages,
-      Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption,
+      ForgotPassword resetPasswordResponse});
+
+  $ForgotPasswordCopyWith<$Res> get resetPasswordResponse;
 }
 
 /// @nodoc
@@ -514,6 +519,7 @@ class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
     Object? resetPasswordFailureOrSuccessOption = null,
+    Object? resetPasswordResponse = null,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -533,7 +539,19 @@ class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
           ? _value.resetPasswordFailureOrSuccessOption
           : resetPasswordFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      resetPasswordResponse: null == resetPasswordResponse
+          ? _value.resetPasswordResponse
+          : resetPasswordResponse // ignore: cast_nullable_to_non_nullable
+              as ForgotPassword,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ForgotPasswordCopyWith<$Res> get resetPasswordResponse {
+    return $ForgotPasswordCopyWith<$Res>(_value.resetPasswordResponse, (value) {
+      return _then(_value.copyWith(resetPasswordResponse: value) as $Val);
+    });
   }
 }
 
@@ -549,7 +567,11 @@ abstract class _$$_ForgotPasswordStateCopyWith<$Res>
       {Username username,
       bool isSubmitting,
       bool showErrorMessages,
-      Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption,
+      ForgotPassword resetPasswordResponse});
+
+  @override
+  $ForgotPasswordCopyWith<$Res> get resetPasswordResponse;
 }
 
 /// @nodoc
@@ -567,6 +589,7 @@ class __$$_ForgotPasswordStateCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
     Object? resetPasswordFailureOrSuccessOption = null,
+    Object? resetPasswordResponse = null,
   }) {
     return _then(_$_ForgotPasswordState(
       username: null == username
@@ -586,6 +609,10 @@ class __$$_ForgotPasswordStateCopyWithImpl<$Res>
           ? _value.resetPasswordFailureOrSuccessOption
           : resetPasswordFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      resetPasswordResponse: null == resetPasswordResponse
+          ? _value.resetPasswordResponse
+          : resetPasswordResponse // ignore: cast_nullable_to_non_nullable
+              as ForgotPassword,
     ));
   }
 }
@@ -597,7 +624,8 @@ class _$_ForgotPasswordState implements _ForgotPasswordState {
       {required this.username,
       required this.isSubmitting,
       required this.showErrorMessages,
-      required this.resetPasswordFailureOrSuccessOption});
+      required this.resetPasswordFailureOrSuccessOption,
+      required this.resetPasswordResponse});
 
   @override
   final Username username;
@@ -607,10 +635,12 @@ class _$_ForgotPasswordState implements _ForgotPasswordState {
   final bool showErrorMessages;
   @override
   final Option<Either<ApiFailure, dynamic>> resetPasswordFailureOrSuccessOption;
+  @override
+  final ForgotPassword resetPasswordResponse;
 
   @override
   String toString() {
-    return 'ForgotPasswordState(username: $username, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, resetPasswordFailureOrSuccessOption: $resetPasswordFailureOrSuccessOption)';
+    return 'ForgotPasswordState(username: $username, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, resetPasswordFailureOrSuccessOption: $resetPasswordFailureOrSuccessOption, resetPasswordResponse: $resetPasswordResponse)';
   }
 
   @override
@@ -627,12 +657,19 @@ class _$_ForgotPasswordState implements _ForgotPasswordState {
             (identical(other.resetPasswordFailureOrSuccessOption,
                     resetPasswordFailureOrSuccessOption) ||
                 other.resetPasswordFailureOrSuccessOption ==
-                    resetPasswordFailureOrSuccessOption));
+                    resetPasswordFailureOrSuccessOption) &&
+            (identical(other.resetPasswordResponse, resetPasswordResponse) ||
+                other.resetPasswordResponse == resetPasswordResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, isSubmitting,
-      showErrorMessages, resetPasswordFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      username,
+      isSubmitting,
+      showErrorMessages,
+      resetPasswordFailureOrSuccessOption,
+      resetPasswordResponse);
 
   @JsonKey(ignore: true)
   @override
@@ -644,11 +681,13 @@ class _$_ForgotPasswordState implements _ForgotPasswordState {
 
 abstract class _ForgotPasswordState implements ForgotPasswordState {
   const factory _ForgotPasswordState(
-      {required final Username username,
-      required final bool isSubmitting,
-      required final bool showErrorMessages,
-      required final Option<Either<ApiFailure, dynamic>>
-          resetPasswordFailureOrSuccessOption}) = _$_ForgotPasswordState;
+          {required final Username username,
+          required final bool isSubmitting,
+          required final bool showErrorMessages,
+          required final Option<Either<ApiFailure, dynamic>>
+              resetPasswordFailureOrSuccessOption,
+          required final ForgotPassword resetPasswordResponse}) =
+      _$_ForgotPasswordState;
 
   @override
   Username get username;
@@ -658,6 +697,8 @@ abstract class _ForgotPasswordState implements ForgotPasswordState {
   bool get showErrorMessages;
   @override
   Option<Either<ApiFailure, dynamic>> get resetPasswordFailureOrSuccessOption;
+  @override
+  ForgotPassword get resetPasswordResponse;
   @override
   @JsonKey(ignore: true)
   _$$_ForgotPasswordStateCopyWith<_$_ForgotPasswordState> get copyWith =>

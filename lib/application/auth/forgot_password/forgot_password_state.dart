@@ -8,6 +8,7 @@ class ForgotPasswordState with _$ForgotPasswordState {
     required bool showErrorMessages,
     required Option<Either<ApiFailure, dynamic>>
         resetPasswordFailureOrSuccessOption,
+    required ForgotPassword resetPasswordResponse,
   }) = _ForgotPasswordState;
 
   factory ForgotPasswordState.initial() => ForgotPasswordState(
@@ -15,5 +16,6 @@ class ForgotPasswordState with _$ForgotPasswordState {
         isSubmitting: false,
         showErrorMessages: false,
         resetPasswordFailureOrSuccessOption: none(),
+        resetPasswordResponse: ForgotPassword.empty(),
       );
 }

@@ -20,8 +20,10 @@ ForgotPasswordDto _$ForgotPasswordDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ForgotPasswordDto {
-  @JsonKey(name: 'requestResetPassword')
-  bool get requestResetPassword => throw _privateConstructorUsedError;
+  @JsonKey(name: 'success', defaultValue: false)
+  bool get success => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email', defaultValue: '')
+  String get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,9 @@ abstract class $ForgotPasswordDtoCopyWith<$Res> {
           ForgotPasswordDto value, $Res Function(ForgotPasswordDto) then) =
       _$ForgotPasswordDtoCopyWithImpl<$Res, ForgotPasswordDto>;
   @useResult
-  $Res call({@JsonKey(name: 'requestResetPassword') bool requestResetPassword});
+  $Res call(
+      {@JsonKey(name: 'success', defaultValue: false) bool success,
+      @JsonKey(name: 'email', defaultValue: '') String email});
 }
 
 /// @nodoc
@@ -51,13 +55,18 @@ class _$ForgotPasswordDtoCopyWithImpl<$Res, $Val extends ForgotPasswordDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestResetPassword = null,
+    Object? success = null,
+    Object? email = null,
   }) {
     return _then(_value.copyWith(
-      requestResetPassword: null == requestResetPassword
-          ? _value.requestResetPassword
-          : requestResetPassword // ignore: cast_nullable_to_non_nullable
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -70,7 +79,9 @@ abstract class _$$_ForgotPasswordDtoCopyWith<$Res>
       __$$_ForgotPasswordDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'requestResetPassword') bool requestResetPassword});
+  $Res call(
+      {@JsonKey(name: 'success', defaultValue: false) bool success,
+      @JsonKey(name: 'email', defaultValue: '') String email});
 }
 
 /// @nodoc
@@ -84,13 +95,18 @@ class __$$_ForgotPasswordDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestResetPassword = null,
+    Object? success = null,
+    Object? email = null,
   }) {
     return _then(_$_ForgotPasswordDto(
-      requestResetPassword: null == requestResetPassword
-          ? _value.requestResetPassword
-          : requestResetPassword // ignore: cast_nullable_to_non_nullable
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -99,20 +115,23 @@ class __$$_ForgotPasswordDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ForgotPasswordDto extends _ForgotPasswordDto {
   _$_ForgotPasswordDto(
-      {@JsonKey(name: 'requestResetPassword')
-          required this.requestResetPassword})
+      {@JsonKey(name: 'success', defaultValue: false) required this.success,
+      @JsonKey(name: 'email', defaultValue: '') required this.email})
       : super._();
 
   factory _$_ForgotPasswordDto.fromJson(Map<String, dynamic> json) =>
       _$$_ForgotPasswordDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'requestResetPassword')
-  final bool requestResetPassword;
+  @JsonKey(name: 'success', defaultValue: false)
+  final bool success;
+  @override
+  @JsonKey(name: 'email', defaultValue: '')
+  final String email;
 
   @override
   String toString() {
-    return 'ForgotPasswordDto(requestResetPassword: $requestResetPassword)';
+    return 'ForgotPasswordDto(success: $success, email: $email)';
   }
 
   @override
@@ -120,13 +139,13 @@ class _$_ForgotPasswordDto extends _ForgotPasswordDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ForgotPasswordDto &&
-            (identical(other.requestResetPassword, requestResetPassword) ||
-                other.requestResetPassword == requestResetPassword));
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, requestResetPassword);
+  int get hashCode => Object.hash(runtimeType, success, email);
 
   @JsonKey(ignore: true)
   @override
@@ -145,16 +164,21 @@ class _$_ForgotPasswordDto extends _ForgotPasswordDto {
 
 abstract class _ForgotPasswordDto extends ForgotPasswordDto {
   factory _ForgotPasswordDto(
-      {@JsonKey(name: 'requestResetPassword')
-          required final bool requestResetPassword}) = _$_ForgotPasswordDto;
+      {@JsonKey(name: 'success', defaultValue: false)
+          required final bool success,
+      @JsonKey(name: 'email', defaultValue: '')
+          required final String email}) = _$_ForgotPasswordDto;
   _ForgotPasswordDto._() : super._();
 
   factory _ForgotPasswordDto.fromJson(Map<String, dynamic> json) =
       _$_ForgotPasswordDto.fromJson;
 
   @override
-  @JsonKey(name: 'requestResetPassword')
-  bool get requestResetPassword;
+  @JsonKey(name: 'success', defaultValue: false)
+  bool get success;
+  @override
+  @JsonKey(name: 'email', defaultValue: '')
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$$_ForgotPasswordDtoCopyWith<_$_ForgotPasswordDto> get copyWith =>

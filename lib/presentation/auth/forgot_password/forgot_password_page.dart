@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/back_to_login_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
@@ -11,14 +12,11 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-
 class ForgetPasswordPage extends StatelessWidget {
   const ForgetPasswordPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -35,6 +33,7 @@ class ForgetPasswordPage extends StatelessWidget {
               children: [
                 const _ForgetPasswordTitle(),
                 const SizedBox(height: 25),
+                const _Error(),
                 _UsernameField(
                   controller: TextEditingController(),
                 ),
@@ -47,6 +46,41 @@ class ForgetPasswordPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _Error extends StatelessWidget {
+  const _Error({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+        buildWhen: (previous, current) =>
+            previous.resetPasswordFailureOrSuccessOption !=
+            current.resetPasswordFailureOrSuccessOption,
+        builder: (context, state) {
+          return state.resetPasswordFailureOrSuccessOption.fold(
+            () => const SizedBox.shrink(),
+            (either) => either.fold(
+              (failure) => Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                margin: const EdgeInsets.only(top: 6, bottom: 16),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: ZPColors.lightRedStatusColor,
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                child: Text(failure.failureMessage),
+              ),
+              (success) => const SizedBox.shrink(),
+            ),
+          );
+        },
       ),
     );
   }
@@ -70,7 +104,7 @@ class _UsernameField extends StatelessWidget {
         state.resetPasswordFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
-            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (failure) => {},
             (success) =>
                 context.router.pushNamed('forgot_password_confirmation'),
           ),
@@ -86,6 +120,7 @@ class _UsernameField extends StatelessWidget {
           child: TextFieldWithLabel(
             fieldKey: WidgetKeys.forgotUsernameField,
             labelText: 'Username'.tr(),
+            mandatory: true,
             decoration: InputDecoration(
               hintText: 'Enter username'.tr(),
             ),
@@ -148,15 +183,13 @@ class _ForgetPasswordTitle extends StatelessWidget {
       children: <Widget>[
         Text(
           'Forgot password?',
-          style: Theme.of(context)
-              .textTheme
-              .labelSmall?.copyWith(
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: ZPColors.textButtonColor,
               ),
         ).tr(),
         const SizedBox(height: 15),
         const Text(
-          'Let us know your Zuellig Pharma username and we’ll send you a verification email.',
+          'Let us know your Zuellig Pharma username and we`ll send you a verification email.',
         ).tr(),
       ],
     );

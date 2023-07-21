@@ -8,11 +8,13 @@ part of 'forgot_password_dto.dart';
 
 _$_ForgotPasswordDto _$$_ForgotPasswordDtoFromJson(Map<String, dynamic> json) =>
     _$_ForgotPasswordDto(
-      requestResetPassword: json['requestResetPassword'] as bool,
+      success: json['success'] as bool? ?? false,
+      email: json['email'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ForgotPasswordDtoToJson(
         _$_ForgotPasswordDto instance) =>
     <String, dynamic>{
-      'requestResetPassword': instance.requestResetPassword,
+      'success': instance.success,
+      'email': instance.email,
     };

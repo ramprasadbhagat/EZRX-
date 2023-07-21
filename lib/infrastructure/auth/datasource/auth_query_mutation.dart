@@ -160,10 +160,13 @@ class AuthQueryMutation {
         ''';
   }
 
-  String requestResetPassword(String userName, String language) {
+  String requestResetPassword() {
     return '''
-        mutation requestResetPasswordLink {
-            requestResetPassword(username: "$userName", language: "$language")
+        mutation requestResetPasswordLink(\$username: String!, \$language: String!) {
+            requestResetPassword(username: \$username, language: \$language){
+              success
+              email
+            }
         }
     ''';
   }

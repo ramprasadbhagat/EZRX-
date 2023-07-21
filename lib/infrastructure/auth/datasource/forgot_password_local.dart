@@ -11,6 +11,7 @@ class ForgotPasswordLocalDataSource {
           .loadString('assets/json/requestResetPasswordLinkResponse.json'),
     );
 
-    return ForgotPasswordDto.fromJson(data['data']).toDomain();
+    return ForgotPasswordDto.fromJson(data['data']['requestResetPassword'])
+        .toDomain();
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_forgot_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -33,6 +34,7 @@ class ForgotPasswordBloc
         state.copyWith(
           username: Username(e.usernameStr),
           resetPasswordFailureOrSuccessOption: none(),
+          showErrorMessages: false,
         ),
       ),
       requestPasswordReset: (_RequestPasswordReset e) async {
@@ -62,11 +64,12 @@ class ForgotPasswordBloc
               showErrorMessages: true,
             ),
           ),
-          (success) => emit(
+          (resetPasswordResponse) => emit(
             state.copyWith(
               isSubmitting: false,
               resetPasswordFailureOrSuccessOption: optionOf(failureOrSuccess),
               showErrorMessages: false,
+              resetPasswordResponse: resetPasswordResponse,
             ),
           ),
         );

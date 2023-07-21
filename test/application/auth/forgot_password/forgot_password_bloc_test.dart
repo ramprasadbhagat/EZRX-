@@ -80,7 +80,7 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            ForgotPassword(requestResetPassword: false),
+            ForgotPassword(success: false, email: ''),
           ),
         );
       },
@@ -97,7 +97,7 @@ void main() {
           username: userName,
           resetPasswordFailureOrSuccessOption: optionOf(
             Right(
-              ForgotPassword(requestResetPassword: false),
+              ForgotPassword(success: false, email: ''),
             ),
           ),
         ),

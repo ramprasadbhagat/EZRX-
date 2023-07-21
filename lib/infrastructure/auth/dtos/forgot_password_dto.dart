@@ -8,13 +8,16 @@ part 'forgot_password_dto.g.dart';
 class ForgotPasswordDto with _$ForgotPasswordDto {
   const ForgotPasswordDto._();
   factory ForgotPasswordDto({
-    @JsonKey(name: 'requestResetPassword') required bool requestResetPassword,
+    @JsonKey(name: 'success', defaultValue: false) required bool success,
+    @JsonKey(name: 'email', defaultValue: '') required String email,
+
   }) = _ForgotPasswordDto;
 
   factory ForgotPasswordDto.fromJson(Map<String, dynamic> json) =>
       _$ForgotPasswordDtoFromJson(json);
 
   ForgotPassword toDomain() => ForgotPassword(
-        requestResetPassword: requestResetPassword,
+        success: success,
+        email: email,
       );
 }
