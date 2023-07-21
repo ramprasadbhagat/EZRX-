@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_remote_datasource.dart';
 
@@ -186,6 +187,34 @@ class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepo
     try {
       final localFile = await remoteDataSource.fileDownload(files.url);
       final downloadedFile = await fileSystemHelper.getDownloadedFile(localFile);
+
+      return Right(downloadedFile);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, File>> soaDownload({
+    required SoaData soaData,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final localFile = await localDataSource.soaDownload();
+        final downloadedFile =
+            await fileSystemHelper.getDownloadedFile(localFile);
+
+        return Right(downloadedFile);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final localFile = await remoteDataSource.soaDownload(
+        soaData.getOrCrash(),
+      );
+      final downloadedFile =
+          await fileSystemHelper.getDownloadedFile(localFile);
 
       return Right(downloadedFile);
     } catch (e) {

@@ -6,7 +6,6 @@ class PaymentSummaryQuery {
     total
     showing
     totalPaymentInProgress
-    resultPaymentInProgress
     customerPaymentResponse {
       paymentID
       valueDate

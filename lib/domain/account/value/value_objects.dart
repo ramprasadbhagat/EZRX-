@@ -89,6 +89,8 @@ class SalesOrg extends ValueObject<String> {
     return countrySupportOrderType(country);
   }
 
+  bool get isPaymentClaimEnabled => isPH;
+
   int get countWhenValid => isValid() ? 1 : 0;
 
   Locale get locale => Locale(languageCode, country);

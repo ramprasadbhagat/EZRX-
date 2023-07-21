@@ -103,7 +103,6 @@ class WidgetKeys {
   static const Key paymentsTabPage = Key('paymentsTabPage');
   static const Key accountSummaryTab = Key('accountSummaryPage');
   static const Key paymentsSummaryTab = Key('paymentsSummaryPage');
-  static const Key statementSummaryTab = Key('statementSummaryPage');
 
   //============================================================
   //  MaterialListSearch Page Keys
@@ -345,4 +344,12 @@ class WidgetKeys {
   static const Key backButton = Key('backButton');
   static const Key nextButton = Key('nextButton');
   static const Key payButton = Key('payButton');
+  //============================================================
+  //  Payment
+  //============================================================
+  static const Key accountSummaryMenu = Key('accountSummary');
+  static const Key paymentSummaryMenu = Key('paymentSummary');
+  static const Key statementOfAccountsMenu = Key('statementOfAccounts');
+  static const Key claimsMenu = Key('claims');
+
 }

@@ -107,6 +107,25 @@ class DownloadPaymentAttachmentRemoteDataSource {
     });
   }
 
+  Future<PoDocumentsBuffer> soaDownload(
+    String fileUrl,
+  ) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}/payment/downloadSoa',
+        data: {'url': fileUrl},
+        responseType: ResponseType.bytes,
+      );
+      _fileDownloadExceptionChecker(res: res);
+
+      return PoDocumentsBuffer(
+        name: Uri.parse(fileUrl).pathSegments.last,
+        buffer: res.data,
+      );
+    });
+  }
+
   void _approverReturnRequestInformationExceptionChecker({
     required Response<dynamic> res,
   }) {

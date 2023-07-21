@@ -1,22 +1,20 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_response.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_response_dto.dart';
 import 'package:flutter/services.dart';
 
-import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_dto.dart';
 
 class PaymentSummaryLocalDataSource {
   PaymentSummaryLocalDataSource();
 
-  Future<List<PaymentSummaryDetails>> getPaymentSummary() async {
+  Future<PaymentSummaryDetailsResponse> getPaymentSummary() async {
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/paymentSummaryList.json',
       ),
     );
 
-    return List.from(data['customerPayment']['customerPaymentResponse'])
-        .map((e) => PaymentSummaryDetailsDto.fromJson(e).toDomain())
-        .toList();
+    return PaymentSummaryDetailsResponseDto.fromJson(data).toDomain();
   }
 }

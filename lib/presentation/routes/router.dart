@@ -48,12 +48,9 @@ import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method_tab.dart';
-import 'package:ezrxmobile/presentation/payments/payment_overview/account_summary.dart';
-import 'package:ezrxmobile/presentation/payments/payment_overview/payments_summary.dart';
-import 'package:ezrxmobile/presentation/payments/payment_overview/statement_summary.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
-import 'package:ezrxmobile/presentation/payments/payments_tab.dart';
+import 'package:ezrxmobile/presentation/payments/payment_page.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
@@ -175,23 +172,12 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       reverseDurationInMilliseconds: 0,
     ),
     AutoRoute(
-      page: PaymentsTab,
-      path: 'payments/tab',
-      children: [
-        AutoRoute(
-          page: AccountSummaryPage,
-          path: 'payments/account_summary',
-          initial: true,
-        ),
-        AutoRoute(
-          page: PaymentsSummaryPage,
-          path: 'payments/payments_summary',
-        ),
-        AutoRoute(
-          page: StatementSummaryPage,
-          path: 'payments/statement_summary',
-        ),
-      ],
+      page: PaymentPage,
+      path: 'payments',
+    ),
+    AutoRoute(
+      path: 'payments/payment_summary',
+      page: PaymentSummaryPage,
     ),
     AutoRoute(
       path: 'payments/invoice_credit',
@@ -270,10 +256,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
           path: 'return_by_request',
         ),
       ],
-    ),
-    AutoRoute(
-      path: 'payments/payment_summary',
-      page: PaymentSummaryPage,
     ),
     AutoRoute(
       path: 'payments/payment_summary/payment_summary_details',

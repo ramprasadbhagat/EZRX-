@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_limit_dto.freezed.dart';
@@ -43,7 +44,7 @@ class CreditLimitDto with _$CreditLimitDto {
       currency: Currency(currency),
       creditLimit: StringValue(creditLimit),
       creditExposure: StringValue(creditExposure),
-      creditBalance: StringValue(creditBalance),
+      creditBalance: CreditLimitValue(creditBalance),
     );
   }
 

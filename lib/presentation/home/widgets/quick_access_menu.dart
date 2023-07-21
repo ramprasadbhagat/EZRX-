@@ -125,7 +125,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     key: WidgetKeys.homeQuickAccessPaymentsMenu,
     icon: 'payments_menu.svg',
     label: 'Payments',
-    onTap: () => context.navigateTo(const PaymentsTabRoute()),
+    onTap: () => context.navigateTo(const PaymentPageRoute()),
   );
 
   // final homeQuickAccessLoyaltyMenu = _QuickAccessMenuData(

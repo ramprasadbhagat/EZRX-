@@ -117,7 +117,7 @@ class MoreDetailsTile {
           color: ZPColors.greenIconColor,
         ),
         label: 'Payments',
-        onTap: () => context.navigateTo(const PaymentsTabRoute()),
+        onTap: () => context.navigateTo(const PaymentPageRoute()),
       );
 
   // factory MoreDetailsTile.loyaltyTab() => const MoreDetailsTile(

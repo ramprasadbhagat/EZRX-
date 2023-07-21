@@ -9,7 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
-import 'package:ezrxmobile/presentation/home/widgets/section_title.dart';
+import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';

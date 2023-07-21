@@ -44,4 +44,13 @@ class DownloadPaymentAttachmentLocalDataSource {
       buffer: data.buffer.asUint8List(),
     );
   }
+
+  Future<PoDocumentsBuffer> soaDownload() async {
+    final data = await rootBundle.load('assets/images/splash.png');
+
+    return PoDocumentsBuffer(
+      name: 'paymentAttachments',
+      buffer: data.buffer.asUint8List(),
+    );
+  }
 }

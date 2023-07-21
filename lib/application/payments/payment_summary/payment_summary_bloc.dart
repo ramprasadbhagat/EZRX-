@@ -1,7 +1,7 @@
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -34,7 +34,7 @@ class PaymentSummaryBloc
         emit(state.copyWith(
           isFetching: true,
           canLoadMorePaymentSummary: true,
-          paymentSummaryList: [],
+          paymentSummaryDetailsResponse: PaymentSummaryDetailsResponse.empty(),
           failureOrSuccessOption: none(),
         ));
 
@@ -42,22 +42,25 @@ class PaymentSummaryBloc
             await paymentSummaryRepository.fetchPaymentSummaryList(
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
-          offset: state.paymentSummaryList.length,
+          offset: state.paymentSummaryDetailsResponse.paymentSummaryList.length,
           pageSize: _pageSize,
+          paymentSummaryDetails: state.paymentSummaryDetailsResponse,
         );
 
         failureOrSuccess.fold(
-          (failure) {
+          (failure) =>
             emit(state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
-            ));
-          },
-          (paymentSummary) => emit(state.copyWith(
-            paymentSummaryList: paymentSummary,
+            ),
+          ),
+          (paymentSummaryDetailsResponse) => emit(
+            state.copyWith(
+              paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
             isFetching: false,
             failureOrSuccessOption: none(),
-          )),
+            ),
+          ),
         );
       },
       loadMorePaymentSummary: (e) async {
@@ -72,28 +75,28 @@ class PaymentSummaryBloc
             await paymentSummaryRepository.fetchPaymentSummaryList(
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
-          offset: state.paymentSummaryList.length,
+          offset: state.paymentSummaryDetailsResponse.paymentSummaryList.length,
           pageSize: _pageSize,
+          paymentSummaryDetails: state.paymentSummaryDetailsResponse,
         );
 
         failureOrSuccess.fold(
-          (failure) {
+          (failure) =>
             emit(state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
-            ));
-          },
-          (paymentSummary) {
-            final loadedPaymentSummaryList =
-                List<PaymentSummaryDetails>.from(state.paymentSummaryList)
-                  ..addAll(paymentSummary);
+            ),
+          ),
+          (paymentSummaryDetailsResponse) =>
             emit(state.copyWith(
-              paymentSummaryList: loadedPaymentSummaryList,
+              paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
               isFetching: false,
-              canLoadMorePaymentSummary: paymentSummary.length >= _pageSize,
+              canLoadMorePaymentSummary:
+                  paymentSummaryDetailsResponse.paymentSummaryList.length >=
+                      _pageSize,
               failureOrSuccessOption: none(),
-            ));
-          },
+            ),
+          ),
         );
       },
     );

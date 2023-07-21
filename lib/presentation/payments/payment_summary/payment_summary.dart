@@ -212,10 +212,13 @@ class _PaymentSummaryScrollList extends StatelessWidget {
                 showDivider: index != 0,
               );
             },
-            items: state.paymentSummaryList.getPaymentSummaryGroupList,
+            items: state.paymentSummaryDetailsResponse.paymentSummaryList
+                .getPaymentSummaryGroupList,
           ),
         ),
       ],
     );
   }
 }
+
+

@@ -13,6 +13,7 @@ class PriceComponent extends StatelessWidget {
     this.priceTextStyle,
     this.currencyCodeTextStyle,
     this.priceLabelStyle,
+    this.obscured = false,
   }) : super(key: key);
 
   final SalesOrganisationConfigs salesOrgConfig;
@@ -21,6 +22,7 @@ class PriceComponent extends StatelessWidget {
   final TextStyle? priceTextStyle;
   final TextStyle? currencyCodeTextStyle;
   final TextStyle? priceLabelStyle;
+  final bool obscured;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,10 @@ class PriceComponent extends StatelessWidget {
 
     final defaultStyle = Theme.of(context).textTheme.labelSmall;
 
+    final obscuredValue = priceValue.replaceAll(RegExp(r'[0-9]'), '*');
+
     return EasyRichText(
-      '$title$priceValue',
+      '$title${obscured ? obscuredValue : priceValue}',
       defaultStyle: priceTextStyle ?? defaultStyle,
       overflow: TextOverflow.ellipsis,
       patternList: [

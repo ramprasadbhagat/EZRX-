@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_limit.freezed.dart';
@@ -13,7 +14,7 @@ class CreditLimit with _$CreditLimit {
     required Currency currency,
     required StringValue creditLimit,
     required StringValue creditExposure,
-    required StringValue creditBalance,
+    required CreditLimitValue creditBalance,
   }) = _CreditLimit;
 
   factory CreditLimit.empty() => CreditLimit(
@@ -21,6 +22,6 @@ class CreditLimit with _$CreditLimit {
         currency: Currency(''),
         creditLimit: StringValue(''),
         creditExposure: StringValue(''),
-        creditBalance: StringValue(''),
+        creditBalance: CreditLimitValue(''),
       );
 }

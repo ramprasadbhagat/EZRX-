@@ -487,7 +487,7 @@ abstract class _LoadMorePaymentSummary implements PaymentSummaryEvent {
 
 /// @nodoc
 mixin _$PaymentSummaryState {
-  List<PaymentSummaryDetails> get paymentSummaryList =>
+  PaymentSummaryDetailsResponse get paymentSummaryDetailsResponse =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get canLoadMorePaymentSummary => throw _privateConstructorUsedError;
@@ -506,10 +506,13 @@ abstract class $PaymentSummaryStateCopyWith<$Res> {
       _$PaymentSummaryStateCopyWithImpl<$Res, PaymentSummaryState>;
   @useResult
   $Res call(
-      {List<PaymentSummaryDetails> paymentSummaryList,
+      {PaymentSummaryDetailsResponse paymentSummaryDetailsResponse,
       bool isFetching,
       bool canLoadMorePaymentSummary,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+
+  $PaymentSummaryDetailsResponseCopyWith<$Res>
+      get paymentSummaryDetailsResponse;
 }
 
 /// @nodoc
@@ -525,16 +528,16 @@ class _$PaymentSummaryStateCopyWithImpl<$Res, $Val extends PaymentSummaryState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentSummaryList = null,
+    Object? paymentSummaryDetailsResponse = null,
     Object? isFetching = null,
     Object? canLoadMorePaymentSummary = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      paymentSummaryList: null == paymentSummaryList
-          ? _value.paymentSummaryList
-          : paymentSummaryList // ignore: cast_nullable_to_non_nullable
-              as List<PaymentSummaryDetails>,
+      paymentSummaryDetailsResponse: null == paymentSummaryDetailsResponse
+          ? _value.paymentSummaryDetailsResponse
+          : paymentSummaryDetailsResponse // ignore: cast_nullable_to_non_nullable
+              as PaymentSummaryDetailsResponse,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -549,6 +552,17 @@ class _$PaymentSummaryStateCopyWithImpl<$Res, $Val extends PaymentSummaryState>
               as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentSummaryDetailsResponseCopyWith<$Res>
+      get paymentSummaryDetailsResponse {
+    return $PaymentSummaryDetailsResponseCopyWith<$Res>(
+        _value.paymentSummaryDetailsResponse, (value) {
+      return _then(
+          _value.copyWith(paymentSummaryDetailsResponse: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -560,10 +574,14 @@ abstract class _$$_PaymentSummaryStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<PaymentSummaryDetails> paymentSummaryList,
+      {PaymentSummaryDetailsResponse paymentSummaryDetailsResponse,
       bool isFetching,
       bool canLoadMorePaymentSummary,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+
+  @override
+  $PaymentSummaryDetailsResponseCopyWith<$Res>
+      get paymentSummaryDetailsResponse;
 }
 
 /// @nodoc
@@ -577,16 +595,16 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentSummaryList = null,
+    Object? paymentSummaryDetailsResponse = null,
     Object? isFetching = null,
     Object? canLoadMorePaymentSummary = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_PaymentSummaryState(
-      paymentSummaryList: null == paymentSummaryList
-          ? _value._paymentSummaryList
-          : paymentSummaryList // ignore: cast_nullable_to_non_nullable
-              as List<PaymentSummaryDetails>,
+      paymentSummaryDetailsResponse: null == paymentSummaryDetailsResponse
+          ? _value.paymentSummaryDetailsResponse
+          : paymentSummaryDetailsResponse // ignore: cast_nullable_to_non_nullable
+              as PaymentSummaryDetailsResponse,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -607,22 +625,14 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
 
 class _$_PaymentSummaryState extends _PaymentSummaryState {
   const _$_PaymentSummaryState(
-      {required final List<PaymentSummaryDetails> paymentSummaryList,
+      {required this.paymentSummaryDetailsResponse,
       required this.isFetching,
       required this.canLoadMorePaymentSummary,
       required this.failureOrSuccessOption})
-      : _paymentSummaryList = paymentSummaryList,
-        super._();
+      : super._();
 
-  final List<PaymentSummaryDetails> _paymentSummaryList;
   @override
-  List<PaymentSummaryDetails> get paymentSummaryList {
-    if (_paymentSummaryList is EqualUnmodifiableListView)
-      return _paymentSummaryList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_paymentSummaryList);
-  }
-
+  final PaymentSummaryDetailsResponse paymentSummaryDetailsResponse;
   @override
   final bool isFetching;
   @override
@@ -632,7 +642,7 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
 
   @override
   String toString() {
-    return 'PaymentSummaryState(paymentSummaryList: $paymentSummaryList, isFetching: $isFetching, canLoadMorePaymentSummary: $canLoadMorePaymentSummary, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'PaymentSummaryState(paymentSummaryDetailsResponse: $paymentSummaryDetailsResponse, isFetching: $isFetching, canLoadMorePaymentSummary: $canLoadMorePaymentSummary, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -640,8 +650,10 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentSummaryState &&
-            const DeepCollectionEquality()
-                .equals(other._paymentSummaryList, _paymentSummaryList) &&
+            (identical(other.paymentSummaryDetailsResponse,
+                    paymentSummaryDetailsResponse) ||
+                other.paymentSummaryDetailsResponse ==
+                    paymentSummaryDetailsResponse) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.canLoadMorePaymentSummary,
@@ -652,12 +664,8 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_paymentSummaryList),
-      isFetching,
-      canLoadMorePaymentSummary,
-      failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, paymentSummaryDetailsResponse,
+      isFetching, canLoadMorePaymentSummary, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -669,7 +677,8 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
 
 abstract class _PaymentSummaryState extends PaymentSummaryState {
   const factory _PaymentSummaryState(
-      {required final List<PaymentSummaryDetails> paymentSummaryList,
+      {required final PaymentSummaryDetailsResponse
+          paymentSummaryDetailsResponse,
       required final bool isFetching,
       required final bool canLoadMorePaymentSummary,
       required final Option<Either<ApiFailure, dynamic>>
@@ -677,7 +686,7 @@ abstract class _PaymentSummaryState extends PaymentSummaryState {
   const _PaymentSummaryState._() : super._();
 
   @override
-  List<PaymentSummaryDetails> get paymentSummaryList;
+  PaymentSummaryDetailsResponse get paymentSummaryDetailsResponse;
   @override
   bool get isFetching;
   @override

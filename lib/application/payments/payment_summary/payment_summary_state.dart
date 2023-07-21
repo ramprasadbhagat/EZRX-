@@ -4,7 +4,7 @@ part of 'payment_summary_bloc.dart';
 class PaymentSummaryState with _$PaymentSummaryState {
   const PaymentSummaryState._();
   const factory PaymentSummaryState({
-    required List<PaymentSummaryDetails> paymentSummaryList,
+    required PaymentSummaryDetailsResponse paymentSummaryDetailsResponse,
     required bool isFetching,
     required bool canLoadMorePaymentSummary,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -14,6 +14,6 @@ class PaymentSummaryState with _$PaymentSummaryState {
         failureOrSuccessOption: none(),
         isFetching: false,
         canLoadMorePaymentSummary: true,
-        paymentSummaryList: <PaymentSummaryDetails>[],
+        paymentSummaryDetailsResponse: PaymentSummaryDetailsResponse.empty(),
       );
 }

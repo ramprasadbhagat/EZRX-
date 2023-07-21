@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -133,6 +134,48 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
             final failureOrSuccess =
                 await paymentAttachmentRepository.downloadFiles(
               files: e.files,
+            );
+            failureOrSuccess.fold(
+              (failure) => emit(
+                state.copyWith(
+                  isDownloadInProgress: false,
+                  failureOrSuccessOption: optionOf(failureOrSuccess),
+                ),
+              ),
+              (_) => emit(
+                state.copyWith(
+                  isDownloadInProgress: false,
+                  failureOrSuccessOption: optionOf(failureOrSuccess),
+                ),
+              ),
+            );
+          },
+        );
+      },
+      downloadSOA: (_DownloadSOA e) async {
+        emit(
+          state.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+            fileUrl: DownloadPaymentAttachment(
+              url: e.soaData.getOrDefaultValue(''),
+            ),
+          ),
+        );
+        final failureOrSuccessPermission =
+            await paymentAttachmentRepository.downloadPermission();
+
+        await failureOrSuccessPermission.fold(
+          (failure) async => emit(
+            state.copyWith(
+              isDownloadInProgress: false,
+              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+            ),
+          ),
+          (_) async {
+            final failureOrSuccess =
+                await paymentAttachmentRepository.soaDownload(
+              soaData: e.soaData,
             );
             failureOrSuccess.fold(
               (failure) => emit(
