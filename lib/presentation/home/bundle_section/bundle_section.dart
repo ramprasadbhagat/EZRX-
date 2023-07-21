@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/icon_label.dart';
@@ -28,50 +27,27 @@ class BundleSection extends StatelessWidget {
 
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>(),
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<EligibilityBloc, EligibilityState>(
-            listenWhen: (previous, current) =>
-                current != EligibilityState.initial() &&
-                (previous.customerCodeInfo != current.customerCodeInfo ||
-                    previous.shipToInfo != current.shipToInfo),
-            listener: (context, state) {
-              context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      configs:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<EligibilityBloc>().state.shipToInfo,
-                      selectedMaterialFilter: MaterialFilter.empty().copyWith(
-                        bundleOffers: true,
-                      ),
-                    ),
-                  );
-            },
-          ),
-          BlocListener<MaterialListBloc, MaterialListState>(
-            listenWhen: (previous, current) =>
-                previous.apiFailureOrSuccessOption !=
-                current.apiFailureOrSuccessOption,
-            listener: (context, state) => state.apiFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            ),
-          ),
-        ],
+      child: BlocListener<EligibilityBloc, EligibilityState>(
+        listenWhen: (previous, current) =>
+            current != EligibilityState.initial() &&
+            (previous.customerCodeInfo != current.customerCodeInfo ||
+                previous.shipToInfo != current.shipToInfo),
+        listener: (context, state) {
+          context.read<MaterialListBloc>().add(
+                MaterialListEvent.fetch(
+                  salesOrganisation:
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  configs:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  customerCodeInfo:
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+                  selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                    bundleOffers: true,
+                  ),
+                ),
+              );
+        },
         child: BlocBuilder<MaterialListBloc, MaterialListState>(
           buildWhen: (previous, current) =>
               previous.materialList != current.materialList,

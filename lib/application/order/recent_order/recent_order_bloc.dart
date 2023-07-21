@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_recent_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 
 part 'recent_order_event.dart';
 part 'recent_order_state.dart';
@@ -20,11 +19,9 @@ part 'recent_order_bloc.freezed.dart';
 
 class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
   final IRecentOrderRepository recentOrderRepository;
-  final IProductImagesRepository productImagesRepository;
   final IFavouriteRepository favouriteRepository;
   RecentOrderBloc({
     required this.recentOrderRepository,
-    required this.productImagesRepository,
     required this.favouriteRepository,
   }) : super(RecentOrderState.initial()) {
     on<RecentOrderEvent>(_onEvent);
@@ -94,9 +91,6 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
-            add(
-              RecentOrderEvent.getProductImages(),
-            );
           },
         );
       },
@@ -138,29 +132,6 @@ class RecentOrderBloc extends Bloc<RecentOrderEvent, RecentOrderState> {
             emit(
               state.copyWith(
                 recentlyOrderedProducts: updatedFavouritesList
-                    .map((e) => e as RecentOrderItem)
-                    .toList(),
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            );
-          },
-        );
-      },
-      getProductImages: (_GetProductImages e) async {
-        final failureOrSuccess = await productImagesRepository.getProductImages(
-          list: state.recentlyOrderedProducts,
-        );
-
-        await failureOrSuccess.fold(
-          (failure) async => emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (updatedListWithImages) {
-            emit(
-              state.copyWith(
-                recentlyOrderedProducts: updatedListWithImages
                     .map((e) => e as RecentOrderItem)
                     .toList(),
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),

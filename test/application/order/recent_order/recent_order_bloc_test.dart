@@ -14,7 +14,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/recent_order_reposito
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../payments/invoice_details/invoice_details_bloc_test.dart';
 
 class RecentOrderRepositoryMock extends Mock implements RecentOrderRepository {}
 
@@ -22,7 +21,6 @@ class FavoriteRepositoryMock extends Mock implements FavouriteRepository {}
 
 void main() {
   final recentOrderRepository = RecentOrderRepositoryMock();
-  final productImagesRepository = ProductImageRepositoryMock();
   final favoriteRepository = FavoriteRepositoryMock();
 
   final salesOrgConfigMock = SalesOrganisationConfigs.empty();
@@ -74,7 +72,6 @@ void main() {
       'Fetch recently ordered products success',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -91,12 +88,6 @@ void main() {
               list: recentOrderItemsMock,
             )).thenAnswer(
           (invocation) async => Right(updatedRecentOrderItemsMock),
-        );
-
-        when(() => productImagesRepository.getProductImages(
-              list: updatedRecentOrderItemsMock,
-            )).thenAnswer(
-          (invocation) async => Right(updatedRecentOrderItemsWithImagesMock),
         );
       },
       act: (RecentOrderBloc bloc) => bloc.add(
@@ -127,14 +118,6 @@ void main() {
             ),
           ),
         ),
-        RecentOrderState.initial().copyWith(
-          recentlyOrderedProducts: updatedRecentOrderItemsWithImagesMock,
-          apiFailureOrSuccessOption: some(
-            Right(
-              updatedRecentOrderItemsWithImagesMock,
-            ),
-          ),
-        ),
       ],
       verify: (RecentOrderBloc bloc) =>
           bloc.state.toMaterialInfo == materialInfoMock,
@@ -144,7 +127,6 @@ void main() {
       'Fetch recently ordered products failure',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -184,7 +166,6 @@ void main() {
       'Fetch products favorite failure',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -218,7 +199,6 @@ void main() {
       'Add favorite success',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -248,7 +228,6 @@ void main() {
       'Add favorite failure',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -281,7 +260,6 @@ void main() {
       'Delete favorite success',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -313,7 +291,6 @@ void main() {
       'Delete favorite failure',
       build: () => RecentOrderBloc(
         recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
@@ -330,36 +307,6 @@ void main() {
         RecentOrderEvent.deleteFavourite(
           materialCode: mockMaterialNumber,
         ),
-      ),
-      expect: () => [
-        RecentOrderState.initial().copyWith(
-          apiFailureOrSuccessOption: some(
-            const Left(
-              ApiFailure.other('mock-error'),
-            ),
-          ),
-        ),
-      ],
-    );
-
-    blocTest(
-      'Get Product Images failure',
-      build: () => RecentOrderBloc(
-        recentOrderRepository: recentOrderRepository,
-        productImagesRepository: productImagesRepository,
-        favouriteRepository: favoriteRepository,
-      ),
-      setUp: () {
-        when(() => productImagesRepository.getProductImages(
-              list: <RecentOrderItem>[],
-            )).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('mock-error'),
-          ),
-        );
-      },
-      act: (RecentOrderBloc bloc) => bloc.add(
-        RecentOrderEvent.getProductImages(),
       ),
       expect: () => [
         RecentOrderState.initial().copyWith(

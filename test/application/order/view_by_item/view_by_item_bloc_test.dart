@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +20,9 @@ import 'package:mocktail/mocktail.dart';
 
 class ViewByItemRepositoryMock extends Mock implements ViewByItemRepository {}
 
-class ProductImagesRepositoryMock extends Mock
-    implements ProductImagesRepository {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ViewByItemRepository viewByItemRepository;
-  late ProductImagesRepository productImagesRepository;
   late OrderHistory orderHistoryMockData;
 
   final salesOrgConfig = SalesOrganisationConfigs.empty()
@@ -57,7 +52,6 @@ void main() {
   group('Orders View By Item', () {
     setUp(() async {
       viewByItemRepository = ViewByItemRepositoryMock();
-      productImagesRepository = ProductImagesRepositoryMock();
       orderHistoryMockData =
           await OrderHistoryLocalDataSource().getOrderHistory();
       WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +61,6 @@ void main() {
       'Orders view by item fetch fail',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
-        productImagesRepository: productImagesRepository,
       ),
       setUp: () {
         when(() => viewByItemRepository.getOrderHistory(
@@ -117,7 +110,6 @@ void main() {
       'Orders view by item fetch Success',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
-        productImagesRepository: productImagesRepository,
       ),
       setUp: () {
         when(() => viewByItemRepository.getOrderHistory(
@@ -169,7 +161,6 @@ void main() {
       'Orders view by item loadMore',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
-        productImagesRepository: productImagesRepository,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
         appliedFilter: viewByItemHistoryFilter,
@@ -189,17 +180,6 @@ void main() {
             )).thenAnswer(
           (invocation) async => Right(
             orderHistoryMockData,
-          ),
-        );
-        when(() => productImagesRepository.getProductImages(list: [
-              ...orderHistoryMockData.orderHistoryItems,
-              ...orderHistoryMockData.orderHistoryItems
-            ])).thenAnswer(
-          (invocation) async => Right(
-            [
-              ...orderHistoryMockData.orderHistoryItems,
-              ...orderHistoryMockData.orderHistoryItems
-            ],
           ),
         );
       },
@@ -239,7 +219,6 @@ void main() {
       'Orders view by item loadMore failure',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
-        productImagesRepository: productImagesRepository,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
         appliedFilter: viewByItemHistoryFilter,

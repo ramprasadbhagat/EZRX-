@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
@@ -98,6 +99,10 @@ class ReturnListByItemMockBloc
     extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
     implements ReturnListByItemBloc {}
 
+class RecentOrderMockBloc
+    extends MockBloc<RecentOrderEvent, RecentOrderState>
+    implements RecentOrderBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -119,6 +124,7 @@ void main() {
   late MaterialPriceBloc materialPriceBloc;
   late ViewByItemsBloc viewByItemsBloc;
   late ReturnListByItemBloc returnListByItemBloc;
+  late RecentOrderBloc recentOrderBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -135,6 +141,7 @@ void main() {
     materialPriceBloc = MaterialPriceMockBloc();
     viewByItemsBloc = ViewByItemsMockBloc();
     returnListByItemBloc = ReturnListByItemMockBloc();
+    recentOrderBloc = RecentOrderMockBloc();
     locator = GetIt.instance;
     locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
@@ -187,6 +194,8 @@ void main() {
     when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
     when(() => returnListByItemBloc.state)
         .thenReturn(ReturnListByItemState.initial());
+    when(() => recentOrderBloc.state)
+          .thenReturn(RecentOrderState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
@@ -220,6 +229,8 @@ void main() {
                   create: (context) => viewByItemsBloc),
               BlocProvider<ReturnListByItemBloc>(
                   create: (context) => returnListByItemBloc),
+              BlocProvider<RecentOrderBloc>(
+                  create: (context) => recentOrderBloc),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -319,6 +330,8 @@ void main() {
             BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
             BlocProvider<ReturnListByItemBloc>(
                   create: (context) => returnListByItemBloc),
+            BlocProvider<RecentOrderBloc>(
+                  create: (context) => recentOrderBloc),
           ],
           child: const SplashPage(),
         ),

@@ -26,7 +26,7 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductImageBloc, ProductImageState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.materialUrlMap != current.materialUrlMap,
       builder: (context, state) {
         return CachedNetworkImage(
           key: WidgetKeys.productImage,

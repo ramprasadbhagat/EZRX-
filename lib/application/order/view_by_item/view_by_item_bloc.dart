@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -23,11 +22,9 @@ const int _pageSize = 24;
 
 class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
   final IViewByItemRepository viewByItemRepository;
-  final IProductImagesRepository productImagesRepository;
 
   ViewByItemsBloc({
     required this.viewByItemRepository,
-    required this.productImagesRepository,
   }) : super(ViewByItemsState.initial()) {
     on<_Initialized>((event, emit) => emit(ViewByItemsState.initial()));
     on<_Fetch>(

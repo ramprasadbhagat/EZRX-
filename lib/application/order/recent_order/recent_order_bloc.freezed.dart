@@ -26,7 +26,6 @@ mixin _$RecentOrderEvent {
         fetchProductsFavouriteStatus,
     required TResult Function(MaterialNumber materialCode) addFavourite,
     required TResult Function(MaterialNumber materialCode) deleteFavourite,
-    required TResult Function() getProductImages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,7 +38,6 @@ mixin _$RecentOrderEvent {
         fetchProductsFavouriteStatus,
     TResult? Function(MaterialNumber materialCode)? addFavourite,
     TResult? Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult? Function()? getProductImages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,7 +50,6 @@ mixin _$RecentOrderEvent {
         fetchProductsFavouriteStatus,
     TResult Function(MaterialNumber materialCode)? addFavourite,
     TResult Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult Function()? getProductImages,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,7 +61,6 @@ mixin _$RecentOrderEvent {
         fetchProductsFavouriteStatus,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_GetProductImages value) getProductImages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,7 +71,6 @@ mixin _$RecentOrderEvent {
         fetchProductsFavouriteStatus,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_GetProductImages value)? getProductImages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -86,7 +81,6 @@ mixin _$RecentOrderEvent {
         fetchProductsFavouriteStatus,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_GetProductImages value)? getProductImages,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -239,7 +233,6 @@ class _$_FetchRecentlyOrderedProducts implements _FetchRecentlyOrderedProducts {
         fetchProductsFavouriteStatus,
     required TResult Function(MaterialNumber materialCode) addFavourite,
     required TResult Function(MaterialNumber materialCode) deleteFavourite,
-    required TResult Function() getProductImages,
   }) {
     return fetchRecentlyOrderedProducts(configs, customerCodeInfo, shipToInfo);
   }
@@ -255,7 +248,6 @@ class _$_FetchRecentlyOrderedProducts implements _FetchRecentlyOrderedProducts {
         fetchProductsFavouriteStatus,
     TResult? Function(MaterialNumber materialCode)? addFavourite,
     TResult? Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult? Function()? getProductImages,
   }) {
     return fetchRecentlyOrderedProducts?.call(
         configs, customerCodeInfo, shipToInfo);
@@ -272,7 +264,6 @@ class _$_FetchRecentlyOrderedProducts implements _FetchRecentlyOrderedProducts {
         fetchProductsFavouriteStatus,
     TResult Function(MaterialNumber materialCode)? addFavourite,
     TResult Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult Function()? getProductImages,
     required TResult orElse(),
   }) {
     if (fetchRecentlyOrderedProducts != null) {
@@ -291,7 +282,6 @@ class _$_FetchRecentlyOrderedProducts implements _FetchRecentlyOrderedProducts {
         fetchProductsFavouriteStatus,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_GetProductImages value) getProductImages,
   }) {
     return fetchRecentlyOrderedProducts(this);
   }
@@ -305,7 +295,6 @@ class _$_FetchRecentlyOrderedProducts implements _FetchRecentlyOrderedProducts {
         fetchProductsFavouriteStatus,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_GetProductImages value)? getProductImages,
   }) {
     return fetchRecentlyOrderedProducts?.call(this);
   }
@@ -319,7 +308,6 @@ class _$_FetchRecentlyOrderedProducts implements _FetchRecentlyOrderedProducts {
         fetchProductsFavouriteStatus,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_GetProductImages value)? getProductImages,
     required TResult orElse(),
   }) {
     if (fetchRecentlyOrderedProducts != null) {
@@ -448,7 +436,6 @@ class _$_FetchProductsFavouriteStatus implements _FetchProductsFavouriteStatus {
         fetchProductsFavouriteStatus,
     required TResult Function(MaterialNumber materialCode) addFavourite,
     required TResult Function(MaterialNumber materialCode) deleteFavourite,
-    required TResult Function() getProductImages,
   }) {
     return fetchProductsFavouriteStatus(productList, configs);
   }
@@ -464,7 +451,6 @@ class _$_FetchProductsFavouriteStatus implements _FetchProductsFavouriteStatus {
         fetchProductsFavouriteStatus,
     TResult? Function(MaterialNumber materialCode)? addFavourite,
     TResult? Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult? Function()? getProductImages,
   }) {
     return fetchProductsFavouriteStatus?.call(productList, configs);
   }
@@ -480,7 +466,6 @@ class _$_FetchProductsFavouriteStatus implements _FetchProductsFavouriteStatus {
         fetchProductsFavouriteStatus,
     TResult Function(MaterialNumber materialCode)? addFavourite,
     TResult Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult Function()? getProductImages,
     required TResult orElse(),
   }) {
     if (fetchProductsFavouriteStatus != null) {
@@ -498,7 +483,6 @@ class _$_FetchProductsFavouriteStatus implements _FetchProductsFavouriteStatus {
         fetchProductsFavouriteStatus,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_GetProductImages value) getProductImages,
   }) {
     return fetchProductsFavouriteStatus(this);
   }
@@ -512,7 +496,6 @@ class _$_FetchProductsFavouriteStatus implements _FetchProductsFavouriteStatus {
         fetchProductsFavouriteStatus,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_GetProductImages value)? getProductImages,
   }) {
     return fetchProductsFavouriteStatus?.call(this);
   }
@@ -526,7 +509,6 @@ class _$_FetchProductsFavouriteStatus implements _FetchProductsFavouriteStatus {
         fetchProductsFavouriteStatus,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_GetProductImages value)? getProductImages,
     required TResult orElse(),
   }) {
     if (fetchProductsFavouriteStatus != null) {
@@ -622,7 +604,6 @@ class _$_AddFavourite implements _AddFavourite {
         fetchProductsFavouriteStatus,
     required TResult Function(MaterialNumber materialCode) addFavourite,
     required TResult Function(MaterialNumber materialCode) deleteFavourite,
-    required TResult Function() getProductImages,
   }) {
     return addFavourite(materialCode);
   }
@@ -638,7 +619,6 @@ class _$_AddFavourite implements _AddFavourite {
         fetchProductsFavouriteStatus,
     TResult? Function(MaterialNumber materialCode)? addFavourite,
     TResult? Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult? Function()? getProductImages,
   }) {
     return addFavourite?.call(materialCode);
   }
@@ -654,7 +634,6 @@ class _$_AddFavourite implements _AddFavourite {
         fetchProductsFavouriteStatus,
     TResult Function(MaterialNumber materialCode)? addFavourite,
     TResult Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult Function()? getProductImages,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -672,7 +651,6 @@ class _$_AddFavourite implements _AddFavourite {
         fetchProductsFavouriteStatus,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_GetProductImages value) getProductImages,
   }) {
     return addFavourite(this);
   }
@@ -686,7 +664,6 @@ class _$_AddFavourite implements _AddFavourite {
         fetchProductsFavouriteStatus,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_GetProductImages value)? getProductImages,
   }) {
     return addFavourite?.call(this);
   }
@@ -700,7 +677,6 @@ class _$_AddFavourite implements _AddFavourite {
         fetchProductsFavouriteStatus,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_GetProductImages value)? getProductImages,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -793,7 +769,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         fetchProductsFavouriteStatus,
     required TResult Function(MaterialNumber materialCode) addFavourite,
     required TResult Function(MaterialNumber materialCode) deleteFavourite,
-    required TResult Function() getProductImages,
   }) {
     return deleteFavourite(materialCode);
   }
@@ -809,7 +784,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         fetchProductsFavouriteStatus,
     TResult? Function(MaterialNumber materialCode)? addFavourite,
     TResult? Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult? Function()? getProductImages,
   }) {
     return deleteFavourite?.call(materialCode);
   }
@@ -825,7 +799,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         fetchProductsFavouriteStatus,
     TResult Function(MaterialNumber materialCode)? addFavourite,
     TResult Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult Function()? getProductImages,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -843,7 +816,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         fetchProductsFavouriteStatus,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_GetProductImages value) getProductImages,
   }) {
     return deleteFavourite(this);
   }
@@ -857,7 +829,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         fetchProductsFavouriteStatus,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_GetProductImages value)? getProductImages,
   }) {
     return deleteFavourite?.call(this);
   }
@@ -871,7 +842,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         fetchProductsFavouriteStatus,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_GetProductImages value)? getProductImages,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -889,144 +859,6 @@ abstract class _DeleteFavourite implements RecentOrderEvent {
   @JsonKey(ignore: true)
   _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_GetProductImagesCopyWith<$Res> {
-  factory _$$_GetProductImagesCopyWith(
-          _$_GetProductImages value, $Res Function(_$_GetProductImages) then) =
-      __$$_GetProductImagesCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_GetProductImagesCopyWithImpl<$Res>
-    extends _$RecentOrderEventCopyWithImpl<$Res, _$_GetProductImages>
-    implements _$$_GetProductImagesCopyWith<$Res> {
-  __$$_GetProductImagesCopyWithImpl(
-      _$_GetProductImages _value, $Res Function(_$_GetProductImages) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_GetProductImages implements _GetProductImages {
-  _$_GetProductImages();
-
-  @override
-  String toString() {
-    return 'RecentOrderEvent.getProductImages()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetProductImages);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        fetchRecentlyOrderedProducts,
-    required TResult Function(
-            List<RecentOrderItem> productList, SalesOrganisationConfigs configs)
-        fetchProductsFavouriteStatus,
-    required TResult Function(MaterialNumber materialCode) addFavourite,
-    required TResult Function(MaterialNumber materialCode) deleteFavourite,
-    required TResult Function() getProductImages,
-  }) {
-    return getProductImages();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        fetchRecentlyOrderedProducts,
-    TResult? Function(List<RecentOrderItem> productList,
-            SalesOrganisationConfigs configs)?
-        fetchProductsFavouriteStatus,
-    TResult? Function(MaterialNumber materialCode)? addFavourite,
-    TResult? Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult? Function()? getProductImages,
-  }) {
-    return getProductImages?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        fetchRecentlyOrderedProducts,
-    TResult Function(List<RecentOrderItem> productList,
-            SalesOrganisationConfigs configs)?
-        fetchProductsFavouriteStatus,
-    TResult Function(MaterialNumber materialCode)? addFavourite,
-    TResult Function(MaterialNumber materialCode)? deleteFavourite,
-    TResult Function()? getProductImages,
-    required TResult orElse(),
-  }) {
-    if (getProductImages != null) {
-      return getProductImages();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_FetchRecentlyOrderedProducts value)
-        fetchRecentlyOrderedProducts,
-    required TResult Function(_FetchProductsFavouriteStatus value)
-        fetchProductsFavouriteStatus,
-    required TResult Function(_AddFavourite value) addFavourite,
-    required TResult Function(_DeleteFavourite value) deleteFavourite,
-    required TResult Function(_GetProductImages value) getProductImages,
-  }) {
-    return getProductImages(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchRecentlyOrderedProducts value)?
-        fetchRecentlyOrderedProducts,
-    TResult? Function(_FetchProductsFavouriteStatus value)?
-        fetchProductsFavouriteStatus,
-    TResult? Function(_AddFavourite value)? addFavourite,
-    TResult? Function(_DeleteFavourite value)? deleteFavourite,
-    TResult? Function(_GetProductImages value)? getProductImages,
-  }) {
-    return getProductImages?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchRecentlyOrderedProducts value)?
-        fetchRecentlyOrderedProducts,
-    TResult Function(_FetchProductsFavouriteStatus value)?
-        fetchProductsFavouriteStatus,
-    TResult Function(_AddFavourite value)? addFavourite,
-    TResult Function(_DeleteFavourite value)? deleteFavourite,
-    TResult Function(_GetProductImages value)? getProductImages,
-    required TResult orElse(),
-  }) {
-    if (getProductImages != null) {
-      return getProductImages(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetProductImages implements RecentOrderEvent {
-  factory _GetProductImages() = _$_GetProductImages;
 }
 
 /// @nodoc

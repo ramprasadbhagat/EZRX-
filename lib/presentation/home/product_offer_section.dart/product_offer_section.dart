@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -19,7 +20,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:ezrxmobile/presentation/home/widgets/section_title.dart';
 
@@ -81,9 +81,7 @@ class ProductsOnOffer extends StatelessWidget {
           ),
           BlocListener<MaterialListBloc, MaterialListState>(
             listenWhen: (previous, current) =>
-                previous.apiFailureOrSuccessOption !=
-                    current.apiFailureOrSuccessOption ||
-                previous.materialList != current.materialList,
+                previous.nextPageIndex != current.nextPageIndex,
             listener: (context, state) {
               state.apiFailureOrSuccessOption.fold(
                 () {},
@@ -115,6 +113,13 @@ class ProductsOnOffer extends StatelessWidget {
                             materials: state.materialList,
                           ),
                         );
+                    if (state.selectedMaterialFilter.isProductOffer) {
+                      context
+                          .read<ProductImageBloc>()
+                          .add(ProductImageEvent.fetch(
+                            list: state.materialList,
+                          ));
+                    }
                   },
                 ),
               );
@@ -161,7 +166,7 @@ class _BodyContent extends StatelessWidget {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: state.materialList
-                          .map((e) => _ProductTile(product: e))
+                          .map((e) => _ProductTile(materialInfo: e))
                           .toList(),
                     ),
                   ),
@@ -189,8 +194,8 @@ class _BodyContent extends StatelessWidget {
 }
 
 class _ProductTile extends StatelessWidget {
-  final MaterialInfo product;
-  const _ProductTile({Key? key, required this.product}) : super(key: key);
+  final MaterialInfo materialInfo;
+  const _ProductTile({Key? key, required this.materialInfo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -211,13 +216,10 @@ class _ProductTile extends StatelessWidget {
                   padding: const EdgeInsets.all(
                     10,
                   ),
-                  child: CachedNetworkImage(
+                  child: ProductImage(
                     width: MediaQuery.of(context).size.height * 0.06,
                     height: 50,
-                    imageUrl: product.productImages.thumbNail,
-                    placeholder: (context, url) => const _DefaultProductImage(),
-                    errorWidget: (context, url, error) =>
-                        const _DefaultProductImage(),
+                    materialNumber: materialInfo.materialNumber,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -230,7 +232,7 @@ class _ProductTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        product.materialNumber.displayMatNo,
+                        materialInfo.materialNumber.displayMatNo,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall
@@ -239,14 +241,14 @@ class _ProductTile extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Text(
-                          product.name,
+                          materialInfo.name,
                           style: Theme.of(context).textTheme.labelSmall,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Text(
-                        product.getManufactured,
+                        materialInfo.getManufactured,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.extraLightGrey4,
                               fontSize: 10,
@@ -256,23 +258,23 @@ class _ProductTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _PriceLabel(product: product),
+                          _PriceLabel(product: materialInfo),
                           FavouriteIcon(
-                            isFavourite: product.isFavourite,
+                            isFavourite: materialInfo.isFavourite,
                             visualDensity: const VisualDensity(
                               horizontal: -4,
                               vertical: -4,
                             ),
                             onTap: () {
-                              product.isFavourite
+                              materialInfo.isFavourite
                                   ? context.read<MaterialListBloc>().add(
                                         MaterialListEvent.deleteFavourite(
-                                          item: product,
+                                          item: materialInfo,
                                         ),
                                       )
                                   : context.read<MaterialListBloc>().add(
                                         MaterialListEvent.addFavourite(
-                                          item: product,
+                                          item: materialInfo,
                                         ),
                                       );
                             },
@@ -333,19 +335,6 @@ class _PriceLabel extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         );
       },
-    );
-  }
-}
-
-class _DefaultProductImage extends StatelessWidget {
-  const _DefaultProductImage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      'assets/svg/product_default.svg',
-      height: 50,
-      width: MediaQuery.of(context).size.height * 0.05,
     );
   }
 }

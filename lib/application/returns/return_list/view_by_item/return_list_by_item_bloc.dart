@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
@@ -21,11 +20,9 @@ const int _pageSize = 24;
 class ReturnListByItemBloc
     extends Bloc<ReturnListByItemEvent, ReturnListByItemState> {
   final IReturnListRepository returnListRepository;
-  final IProductImagesRepository productImagesRepository;
 
   ReturnListByItemBloc({
     required this.returnListRepository,
-    required this.productImagesRepository,
   }) : super(ReturnListByItemState.initial()) {
     on<ReturnListByItemEvent>(_onEvent);
   }

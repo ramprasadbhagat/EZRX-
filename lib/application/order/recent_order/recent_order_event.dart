@@ -20,6 +20,4 @@ class RecentOrderEvent with _$RecentOrderEvent {
   factory RecentOrderEvent.deleteFavourite({
     required MaterialNumber materialCode,
   }) = _DeleteFavourite;
-
-  factory RecentOrderEvent.getProductImages() = _GetProductImages;
 }

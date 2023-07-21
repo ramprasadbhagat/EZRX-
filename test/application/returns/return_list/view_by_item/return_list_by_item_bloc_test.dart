@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,25 +15,20 @@ import 'package:mocktail/mocktail.dart';
 
 class ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
 
-class ProductImagesRepositoryMock extends Mock
-    implements ProductImagesRepository {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ReturnListRepository returnListRepositoryMock;
-  late ProductImagesRepository productImagesRepositoryMock;
 
   group('Return List BLOC Testing=>', () {
     setUp(() {
       returnListRepositoryMock = ReturnListRepositoryMock();
-      productImagesRepositoryMock = ProductImagesRepositoryMock();
     });
 
     blocTest<ReturnListByItemBloc, ReturnListByItemState>(
       'For "initialized" Event',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
-        productImagesRepository: productImagesRepositoryMock,
       ),
       act: (bloc) => bloc.add(const ReturnListByItemEvent.initialized()),
       expect: () => [ReturnListByItemState.initial()],
@@ -44,7 +38,6 @@ void main() {
       'For "fetch" Event with failure',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
-        productImagesRepository: productImagesRepositoryMock,
       ),
       setUp: () {
         when(
@@ -88,7 +81,6 @@ void main() {
       'For "loadMore" Event with failure',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
-        productImagesRepository: productImagesRepositoryMock,
       ),
       setUp: () {
         when(

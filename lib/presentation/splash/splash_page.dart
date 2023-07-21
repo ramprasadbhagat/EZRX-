@@ -276,9 +276,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               (_) {
                 if (!state.isFetching) {
-                  context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-                        list: state.orderHistoryList.orderHistoryItems,
-                      ));
+                  _fetchProductImage(
+                    context,
+                    state.orderHistoryList.orderHistoryItems,
+                  );
                 }
               },
             ),
@@ -307,8 +308,50 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       materials: state.materialList,
                     ),
                   );
-              _productImageFetch(state, context);
+              _fetchMaterialListProductImage(state, context);
             }
+          },
+        ),
+        BlocListener<RecentOrderBloc, RecentOrderState>(
+          listenWhen: (previous, current) =>
+              previous.isFetching != current.isFetching,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {
+                  if (state.recentlyOrderedProducts.isNotEmpty) {
+                    context.read<MaterialPriceBloc>().add(
+                          MaterialPriceEvent.fetch(
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            salesConfigs:
+                                context.read<SalesOrgBloc>().state.configs,
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            shipToInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .shipToInfo,
+                            comboDealEligible: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .comboDealEligible,
+                            materials: state.toMaterialInfo,
+                          ),
+                        );
+                    _fetchProductImage(context, state.recentlyOrderedProducts);
+                  }
+                },
+              ),
+            );
           },
         ),
         BlocListener<ReturnListByItemBloc, ReturnListByItemState>(
@@ -322,9 +365,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               (_) {
                 if (!state.isFetching) {
-                  context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-                        list: state.returnItemList,
-                      ));
+                  _fetchProductImage(
+                    context,
+                    state.returnItemList,
+                  );
                 }
               },
             ),
@@ -653,17 +697,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     );
   }
 
-  void _productImageFetch(MaterialListState state, BuildContext context) {
+  void _fetchProductImage(BuildContext context, List list) =>
+      context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
+            list: list,
+          ));
+
+  void _fetchMaterialListProductImage(
+      MaterialListState state, BuildContext context,) {
     if (state.selectedMaterialFilter.bundleOffers) {
       for (final materialData in state.materialList) {
-        context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-              list: materialData.data,
-            ));
+        _fetchProductImage(
+          context,
+          materialData.data,
+        );
       }
     } else {
-      context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-            list: state.materialList,
-          ));
+      _fetchProductImage(
+        context,
+        state.materialList,
+      );
     }
   }
 
