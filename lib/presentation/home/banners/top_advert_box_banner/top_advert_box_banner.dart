@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
@@ -13,15 +14,16 @@ class TopAdvertBoxBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => locator<BannerBloc>(),
-      child: BlocListener<SalesOrgBloc, SalesOrgState>(
+      child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
         listenWhen: (previous, current) =>
-            previous.salesOrganisation != current.salesOrganisation,
+            previous.customerCodeInfo != current.customerCodeInfo,
         listener: (context, state) {
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
-                  salesOrganisation: state.salesOrganisation,
-                  country: state.salesOrg.country,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  country: context.read<SalesOrgBloc>().state.salesOrg.country,
                   role: context
                       .read<UserBloc>()
                       .state
