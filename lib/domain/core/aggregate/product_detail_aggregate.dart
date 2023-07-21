@@ -21,6 +21,9 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
         similarProduct: <MaterialInfo>[],
         stockInfo: StockInfo.empty(),
       );
-
+  
+  bool get productDetailsAvailable =>
+      productItem != ProductItem.empty() ||
+      materialInfo.productImages.description.isValid();
   
 }

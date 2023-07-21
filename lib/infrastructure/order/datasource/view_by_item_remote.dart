@@ -5,12 +5,12 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_addition_info_product.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/cart_addition_info_product_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/product_meta_data_dto.dart';
 
 class OrderHistoryRemoteDataSource {
   HttpService httpService;
@@ -115,7 +115,7 @@ class OrderHistoryRemoteDataSource {
     });
   }
 
-  Future<CartAdditionInfoProduct> getItemProductDetails({
+  Future<ProductMetaData> getItemProductDetails({
     required List<String> materialIDs,
   }) async {
     final res = await httpService.request(
@@ -135,7 +135,7 @@ class OrderHistoryRemoteDataSource {
     _orderHistoryExceptionChecker(res: res);
     final data = res.data['data']['getProduct'];
 
-    return CartAdditionInfoProductDto.fromJson(data).toDomain;
+    return ProductMetaDataDto.fromJson(data).toDomain;
   }
 
   void _orderHistoryExceptionChecker({required Response<dynamic> res}) {

@@ -22,15 +22,23 @@ class ProductMetaDataDto with _$ProductMetaDataDto {
         required List<ProductItemDto> items,
   }) = _ProductMetaDataDto;
 
-  ProductMetaData toDomain() => ProductMetaData(
+  ProductMetaData get toDomain => ProductMetaData(
         productImages: productImages.map((e) => e.toDomain()).toList(),
-        items: items.map((e) => e.toDomain()).toList(),
+        items: items.map((e) => e.toDomain).toList(),
+      );
+  factory ProductMetaDataDto.fromDomain(ProductMetaData productMetaData) =>
+      ProductMetaDataDto(
+        productImages: productMetaData.productImages
+            .map((e) => ProductImagesDto.fromDomain(e))
+            .toList(),
+        items: productMetaData.items
+            .map((e) => ProductItemDto.fromDomain(e))
+            .toList(),
       );
 
   factory ProductMetaDataDto.fromJson(Map<String, dynamic> json) =>
       _$ProductMetaDataDtoFromJson(json);
 }
-
 
 @freezed
 class ProductItemDto with _$ProductItemDto {
@@ -41,13 +49,67 @@ class ProductItemDto with _$ProductItemDto {
       defaultValue: '',
     )
         required String promotionMaterial,
+    @JsonKey(name: 'XP')
+        required ProductItemXpDto xp,
   }) = _ProductItemDto;
 
-  ProductItem toDomain() => ProductItem(
+  ProductItem get toDomain => ProductItem(
         promotionMaterial: StringValue(promotionMaterial),
+        productItemXp: xp.toDomain,
+      );
+
+  factory ProductItemDto.fromDomain(ProductItem productItem) => ProductItemDto(
+      promotionMaterial: productItem.promotionMaterial.getOrDefaultValue(''),
+        xp: ProductItemXpDto.fromDomain(productItem.productItemXp),
       );
 
   factory ProductItemDto.fromJson(Map<String, dynamic> json) =>
       _$ProductItemDtoFromJson(json);
 }
 
+@freezed
+class ProductItemXpDto with _$ProductItemXpDto {
+  const ProductItemXpDto._();
+
+  const factory ProductItemXpDto({
+    @JsonKey(
+      name: 'Dosage',
+      defaultValue: '',
+    )
+        required String dosage,
+    @JsonKey(
+      name: 'HowToUse',
+      defaultValue: '',
+    )
+        required String howToUse,
+    @JsonKey(
+      name: 'Composition',
+      defaultValue: '',
+    )
+        required String composition,
+    @JsonKey(
+      name: 'DeliveryInstructions',
+      defaultValue: '',
+    )
+        required String deliveryInstructions,
+  }) = _ProductItemXpDto;
+
+  ProductItemXp get toDomain => ProductItemXp(
+        dosage: StringValue(dosage),
+        howToUse: StringValue(howToUse),
+        composition: StringValue(composition),
+        deliveryInstructions: StringValue(deliveryInstructions),
+      );
+
+  factory ProductItemXpDto.fromDomain(ProductItemXp productItemXp) =>
+      ProductItemXpDto(
+        composition: productItemXp.composition.getOrDefaultValue(''),
+        deliveryInstructions:
+            productItemXp.deliveryInstructions.getOrDefaultValue(''),
+        dosage: productItemXp.dosage.getOrDefaultValue(''),
+        howToUse: productItemXp.howToUse.getOrDefaultValue(''),
+      );
+
+  factory ProductItemXpDto.fromJson(Map<String, dynamic> json) =>
+      _$ProductItemXpDtoFromJson(json);
+}

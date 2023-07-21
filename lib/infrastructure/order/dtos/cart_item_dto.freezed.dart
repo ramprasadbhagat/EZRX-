@@ -40,13 +40,13 @@ abstract class $CartItemDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'materials')
       @HiveField(0, defaultValue: [])
-          List<PriceAggregateDto> materials,
+      List<PriceAggregateDto> materials,
       @JsonKey(name: 'type')
       @HiveField(1, defaultValue: CartItemType.material)
-          CartItemType itemType,
+      CartItemType itemType,
       @JsonKey(name: 'isSelected')
       @HiveField(2, defaultValue: true)
-          bool isSelected});
+      bool isSelected});
 }
 
 /// @nodoc
@@ -94,13 +94,13 @@ abstract class _$$_CartItemDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'materials')
       @HiveField(0, defaultValue: [])
-          List<PriceAggregateDto> materials,
+      List<PriceAggregateDto> materials,
       @JsonKey(name: 'type')
       @HiveField(1, defaultValue: CartItemType.material)
-          CartItemType itemType,
+      CartItemType itemType,
       @JsonKey(name: 'isSelected')
       @HiveField(2, defaultValue: true)
-          bool isSelected});
+      bool isSelected});
 }
 
 /// @nodoc
@@ -142,13 +142,13 @@ class _$_CartItemDto extends _CartItemDto {
   const _$_CartItemDto(
       {@JsonKey(name: 'materials')
       @HiveField(0, defaultValue: [])
-          required final List<PriceAggregateDto> materials,
+      required final List<PriceAggregateDto> materials,
       @JsonKey(name: 'type')
       @HiveField(1, defaultValue: CartItemType.material)
-          required this.itemType,
+      required this.itemType,
       @JsonKey(name: 'isSelected')
       @HiveField(2, defaultValue: true)
-          required this.isSelected})
+      required this.isSelected})
       : _materials = materials,
         super._();
 
@@ -204,13 +204,13 @@ abstract class _CartItemDto extends CartItemDto {
   const factory _CartItemDto(
       {@JsonKey(name: 'materials')
       @HiveField(0, defaultValue: [])
-          required final List<PriceAggregateDto> materials,
+      required final List<PriceAggregateDto> materials,
       @JsonKey(name: 'type')
       @HiveField(1, defaultValue: CartItemType.material)
-          required final CartItemType itemType,
+      required final CartItemType itemType,
       @JsonKey(name: 'isSelected')
       @HiveField(2, defaultValue: true)
-          required final bool isSelected}) = _$_CartItemDto;
+      required final bool isSelected}) = _$_CartItemDto;
   const _CartItemDto._() : super._();
 
   @override

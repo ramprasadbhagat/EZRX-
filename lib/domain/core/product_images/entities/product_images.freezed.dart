@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductImages {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  StringValue get description => throw _privateConstructorUsedError;
   List<String> get image => throw _privateConstructorUsedError;
   String get thumbNail => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $ProductImagesCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       String name,
-      String description,
+      StringValue description,
       List<String> image,
       String thumbNail});
 }
@@ -72,7 +72,7 @@ class _$ProductImagesCopyWithImpl<$Res, $Val extends ProductImages>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -96,7 +96,7 @@ abstract class _$$_ProductImagesCopyWith<$Res>
   $Res call(
       {MaterialNumber materialNumber,
       String name,
-      String description,
+      StringValue description,
       List<String> image,
       String thumbNail});
 }
@@ -130,7 +130,7 @@ class __$$_ProductImagesCopyWithImpl<$Res>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       image: null == image
           ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ class _$_ProductImages extends _ProductImages {
   @override
   final String name;
   @override
-  final String description;
+  final StringValue description;
   final List<String> _image;
   @override
   List<String> get image {
@@ -207,7 +207,7 @@ abstract class _ProductImages extends ProductImages {
   const factory _ProductImages(
       {required final MaterialNumber materialNumber,
       required final String name,
-      required final String description,
+      required final StringValue description,
       required final List<String> image,
       required final String thumbNail}) = _$_ProductImages;
   const _ProductImages._() : super._();
@@ -217,7 +217,7 @@ abstract class _ProductImages extends ProductImages {
   @override
   String get name;
   @override
-  String get description;
+  StringValue get description;
   @override
   List<String> get image;
   @override

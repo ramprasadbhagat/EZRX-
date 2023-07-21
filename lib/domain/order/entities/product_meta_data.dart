@@ -25,11 +25,30 @@ class ProductItem with _$ProductItem {
   const ProductItem._();
   factory ProductItem({
     required StringValue promotionMaterial,
+    required ProductItemXp productItemXp,
   }) = _ProductItem;
 
   factory ProductItem.empty() => ProductItem(
         promotionMaterial: StringValue(''),
+        productItemXp: ProductItemXp.empty(),
       );
 }
 
+@freezed
+class ProductItemXp with _$ProductItemXp {
+  const ProductItemXp._();
+  factory ProductItemXp({
+    required StringValue dosage,
+    required StringValue howToUse,
+    required StringValue composition,
+    required StringValue deliveryInstructions,
+  }) = _ProductItemXp;
+
+  factory ProductItemXp.empty() => ProductItemXp(
+        composition: StringValue(''),
+        deliveryInstructions: StringValue(''),
+        dosage: StringValue(''),
+        howToUse: StringValue(''),
+      );
+}
 

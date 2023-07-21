@@ -115,7 +115,7 @@ class ProductDetailRemoteDataSource {
     _exceptionChecker(res: res);
     final data = res.data['data']['getProduct'];
 
-    return ProductMetaDataDto.fromJson(data).toDomain();
+    return ProductMetaDataDto.fromJson(data).toDomain;
   }
 
   void _exceptionChecker({required Response<dynamic> res}) {

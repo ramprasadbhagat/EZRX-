@@ -14,7 +14,7 @@ class CartState with _$CartState {
     required bool isFetchingCartProductDetail,
     required bool isUpserting,
     required bool isMappingPrice,
-    required Map<MaterialNumber, CartAdditionInfoProduct> additionInfo,
+    required Map<MaterialNumber, ProductMetaData> additionInfo,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
@@ -27,7 +27,7 @@ class CartState with _$CartState {
         isFetchingCartProductDetail: false,
         isUpserting: false,
         isMappingPrice: false,
-        additionInfo: <MaterialNumber, CartAdditionInfoProduct>{},
+        additionInfo: <MaterialNumber, ProductMetaData>{},
       );
 
   double subTotal({

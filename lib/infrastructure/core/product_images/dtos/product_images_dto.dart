@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -41,7 +42,7 @@ class ProductImagesDto with _$ProductImagesDto {
     return ProductImagesDto(
       materialNumber: productImages.materialNumber.displayMatNo,
       name: productImages.name,
-      description: productImages.description,
+      description: productImages.description.getOrDefaultValue(''),
       thumbNail: productImages.thumbNail,
       image: productImages.image,
     );
@@ -50,7 +51,7 @@ class ProductImagesDto with _$ProductImagesDto {
     return ProductImages(
       materialNumber: MaterialNumber(materialNumber),
       name: name,
-      description: description,
+      description: StringValue(description),
       thumbNail: thumbNail,
       image: image,
     );

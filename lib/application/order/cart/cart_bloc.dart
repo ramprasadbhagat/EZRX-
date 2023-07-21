@@ -1,10 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_addition_info_product.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
@@ -856,7 +856,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (cartProductList) {
             final newProductInfoMap =
-                Map<MaterialNumber, CartAdditionInfoProduct>.from(
+                Map<MaterialNumber, ProductMetaData>.from(
               state.additionInfo,
             )..addAll(cartProductList);
             emit(

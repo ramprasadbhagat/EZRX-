@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,14 +11,14 @@ class ProductImages with _$ProductImages {
   const factory ProductImages({
     required MaterialNumber materialNumber,
     required String name,
-    required String description,
+    required StringValue description,
     required List<String> image,
     required String thumbNail,
   }) = _ProductImages;
   factory ProductImages.empty() => ProductImages(
         materialNumber: MaterialNumber(''),
         name: '',
-        description: '',
+        description: StringValue(''),
         image: <String>[],
         thumbNail: '',
       );

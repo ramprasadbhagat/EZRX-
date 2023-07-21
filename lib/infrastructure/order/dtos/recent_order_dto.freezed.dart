@@ -66,38 +66,26 @@ abstract class $RecentOrderDtoCopyWith<$Res> {
       _$RecentOrderDtoCopyWithImpl<$Res, RecentOrderDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          String materialCode,
+      {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialCode,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription,
+      String materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          double totalPrice,
+      String defaultMaterialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          String manufactureName,
-      @JsonKey(name: 'Seller', defaultValue: '')
-          String seller,
-      @JsonKey(name: 'IsMarketplace', defaultValue: false)
-          bool isMarketplace,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          String eZRXNumber,
+      String manufactureName,
+      @JsonKey(name: 'Seller', defaultValue: '') String seller,
+      @JsonKey(name: 'IsMarketplace', defaultValue: false) bool isMarketplace,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'WarehouseStorageCondition', defaultValue: '')
-          String warehouseStorageCondition,
-      @JsonKey(name: 'Available', defaultValue: false)
-          bool available,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          String orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '')
-          String orderType,
-      @JsonKey(name: 'HidePrice', defaultValue: false)
-          bool hidePrice});
+      String warehouseStorageCondition,
+      @JsonKey(name: 'Available', defaultValue: false) bool available,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'OrderType', defaultValue: '') String orderType,
+      @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice});
 }
 
 /// @nodoc
@@ -208,38 +196,26 @@ abstract class _$$_RecentOrderDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          String materialCode,
+      {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialCode,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription,
+      String materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          double totalPrice,
+      String defaultMaterialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          String manufactureName,
-      @JsonKey(name: 'Seller', defaultValue: '')
-          String seller,
-      @JsonKey(name: 'IsMarketplace', defaultValue: false)
-          bool isMarketplace,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          String eZRXNumber,
+      String manufactureName,
+      @JsonKey(name: 'Seller', defaultValue: '') String seller,
+      @JsonKey(name: 'IsMarketplace', defaultValue: false) bool isMarketplace,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'WarehouseStorageCondition', defaultValue: '')
-          String warehouseStorageCondition,
-      @JsonKey(name: 'Available', defaultValue: false)
-          bool available,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          String orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '')
-          String orderType,
-      @JsonKey(name: 'HidePrice', defaultValue: false)
-          bool hidePrice});
+      String warehouseStorageCondition,
+      @JsonKey(name: 'Available', defaultValue: false) bool available,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'OrderType', defaultValue: '') String orderType,
+      @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice});
 }
 
 /// @nodoc
@@ -344,37 +320,27 @@ class __$$_RecentOrderDtoCopyWithImpl<$Res>
 class _$_RecentOrderDto extends _RecentOrderDto {
   _$_RecentOrderDto(
       {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          required this.materialCode,
+      required this.materialCode,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required this.materialDescription,
+      required this.materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          required this.defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          required this.qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          required this.unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          required this.totalPrice,
+      required this.defaultMaterialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) required this.qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          required this.manufactureName,
-      @JsonKey(name: 'Seller', defaultValue: '')
-          required this.seller,
+      required this.manufactureName,
+      @JsonKey(name: 'Seller', defaultValue: '') required this.seller,
       @JsonKey(name: 'IsMarketplace', defaultValue: false)
-          required this.isMarketplace,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          required this.orderNumber,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          required this.eZRXNumber,
+      required this.isMarketplace,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'WarehouseStorageCondition', defaultValue: '')
-          required this.warehouseStorageCondition,
-      @JsonKey(name: 'Available', defaultValue: false)
-          required this.available,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          required this.orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '')
-          required this.orderType,
-      @JsonKey(name: 'HidePrice', defaultValue: false)
-          required this.hidePrice})
+      required this.warehouseStorageCondition,
+      @JsonKey(name: 'Available', defaultValue: false) required this.available,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
+      @JsonKey(name: 'OrderType', defaultValue: '') required this.orderType,
+      @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice})
       : super._();
 
   factory _$_RecentOrderDto.fromJson(Map<String, dynamic> json) =>
@@ -511,37 +477,34 @@ class _$_RecentOrderDto extends _RecentOrderDto {
 abstract class _RecentOrderDto extends RecentOrderDto {
   factory _RecentOrderDto(
       {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          required final String materialCode,
+      required final String materialCode,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required final String materialDescription,
+      required final String materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          required final String defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          required final int qty,
+      required final String defaultMaterialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) required final int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          required final double unitPrice,
+      required final double unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          required final double totalPrice,
+      required final double totalPrice,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          required final String manufactureName,
-      @JsonKey(name: 'Seller', defaultValue: '')
-          required final String seller,
+      required final String manufactureName,
+      @JsonKey(name: 'Seller', defaultValue: '') required final String seller,
       @JsonKey(name: 'IsMarketplace', defaultValue: false)
-          required final bool isMarketplace,
+      required final bool isMarketplace,
       @JsonKey(name: 'OrderNumber', defaultValue: '')
-          required final String orderNumber,
+      required final String orderNumber,
       @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          required final String eZRXNumber,
+      required final String eZRXNumber,
       @JsonKey(name: 'WarehouseStorageCondition', defaultValue: '')
-          required final String warehouseStorageCondition,
+      required final String warehouseStorageCondition,
       @JsonKey(name: 'Available', defaultValue: false)
-          required final bool available,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          required final String orderBy,
+      required final bool available,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required final String orderBy,
       @JsonKey(name: 'OrderType', defaultValue: '')
-          required final String orderType,
+      required final String orderType,
       @JsonKey(name: 'HidePrice', defaultValue: false)
-          required final bool hidePrice}) = _$_RecentOrderDto;
+      required final bool hidePrice}) = _$_RecentOrderDto;
   _RecentOrderDto._() : super._();
 
   factory _RecentOrderDto.fromJson(Map<String, dynamic> json) =

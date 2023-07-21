@@ -158,15 +158,12 @@ class __$$_ProductImagesDtoCopyWithImpl<$Res>
 class _$_ProductImagesDto extends _ProductImagesDto {
   const _$_ProductImagesDto(
       {@JsonKey(name: 'materialID', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'name', defaultValue: '')
-          required this.name,
-      @JsonKey(name: 'description', defaultValue: '')
-          required this.description,
-      @JsonKey(name: 'thumbNail', defaultValue: '')
-          required this.thumbNail,
+      required this.materialNumber,
+      @JsonKey(name: 'name', defaultValue: '') required this.name,
+      @JsonKey(name: 'description', defaultValue: '') required this.description,
+      @JsonKey(name: 'thumbNail', defaultValue: '') required this.thumbNail,
       @JsonKey(name: 'image', defaultValue: <String>[])
-          required final List<String> image})
+      required final List<String> image})
       : _image = image,
         super._();
 
@@ -236,15 +233,14 @@ class _$_ProductImagesDto extends _ProductImagesDto {
 abstract class _ProductImagesDto extends ProductImagesDto {
   const factory _ProductImagesDto(
       {@JsonKey(name: 'materialID', defaultValue: '')
-          required final String materialNumber,
-      @JsonKey(name: 'name', defaultValue: '')
-          required final String name,
+      required final String materialNumber,
+      @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'description', defaultValue: '')
-          required final String description,
+      required final String description,
       @JsonKey(name: 'thumbNail', defaultValue: '')
-          required final String thumbNail,
+      required final String thumbNail,
       @JsonKey(name: 'image', defaultValue: <String>[])
-          required final List<String> image}) = _$_ProductImagesDto;
+      required final List<String> image}) = _$_ProductImagesDto;
   const _ProductImagesDto._() : super._();
 
   factory _ProductImagesDto.fromJson(Map<String, dynamic> json) =

@@ -17,7 +17,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
-import 'package:ezrxmobile/presentation/products/product_details/widget/material_description.dart';
+import 'package:ezrxmobile/presentation/products/product_details/widget/material_details.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
@@ -84,19 +84,22 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ? ZPColors.darkGray
                 : ZPColors.transparent,
             child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              size: 20,
+              Icons.chevron_left,
               color:
                   _isScrollAtInitialPosition ? ZPColors.white : ZPColors.black,
             ),
           ),
         ),
-        actions: const [
+        actions: [
           Padding(
             key: WidgetKeys.materialDetailsPageCartIcon,
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: CartButton(
-              cartColor: ZPColors.black,
+              backgroundCartColor: _isScrollAtInitialPosition
+                  ? ZPColors.darkGray
+                  : ZPColors.transparent,
+              cartColor:
+                  _isScrollAtInitialPosition ? ZPColors.white : ZPColors.black,
               iconSize: 20,
               positionTop: -8,
             ),
@@ -189,11 +192,9 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
-            AvailableOffer(
-              materialNumber: materialNumber,
-            ),
+            AvailableOffer(materialNumber: materialNumber),
             const MaterialInformation(),
-            const MaterialDescription(),
+            const MaterialDetailsToggle(),
             const SizedBox(height: 20),
             const Divider(
               endIndent: 0,

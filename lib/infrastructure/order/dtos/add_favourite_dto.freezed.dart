@@ -37,7 +37,7 @@ abstract class $AddFavouriteDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
-          int addFavouriteMaterial});
+      int addFavouriteMaterial});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ abstract class _$$_AddFavouriteDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
-          int addFavouriteMaterial});
+      int addFavouriteMaterial});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$_AddFavouriteDtoCopyWithImpl<$Res>
 class _$_AddFavouriteDto extends _AddFavouriteDto {
   const _$_AddFavouriteDto(
       {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
-          required this.addFavouriteMaterial})
+      required this.addFavouriteMaterial})
       : super._();
 
   factory _$_AddFavouriteDto.fromJson(Map<String, dynamic> json) =>
@@ -149,7 +149,7 @@ class _$_AddFavouriteDto extends _AddFavouriteDto {
 abstract class _AddFavouriteDto extends AddFavouriteDto {
   const factory _AddFavouriteDto(
       {@JsonKey(name: 'addFavouriteMaterial', defaultValue: 0)
-          required final int addFavouriteMaterial}) = _$_AddFavouriteDto;
+      required final int addFavouriteMaterial}) = _$_AddFavouriteDto;
   const _AddFavouriteDto._() : super._();
 
   factory _AddFavouriteDto.fromJson(Map<String, dynamic> json) =

@@ -155,9 +155,8 @@ class _$_ManagePaymentAdviceFooterResponseDto
 abstract class _ManagePaymentAdviceFooterResponseDto
     extends ManagePaymentAdviceFooterResponseDto {
   factory _ManagePaymentAdviceFooterResponseDto(
-          {@JsonKey(name: 'info', defaultValue: '')
-              required final String info}) =
-      _$_ManagePaymentAdviceFooterResponseDto;
+      {@JsonKey(name: 'info', defaultValue: '')
+      required final String info}) = _$_ManagePaymentAdviceFooterResponseDto;
   _ManagePaymentAdviceFooterResponseDto._() : super._();
 
   factory _ManagePaymentAdviceFooterResponseDto.fromJson(

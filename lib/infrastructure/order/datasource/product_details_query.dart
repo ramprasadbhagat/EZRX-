@@ -86,6 +86,12 @@ class ProductDetailQuery {
           }
           Items {
             PromotionMaterial
+            XP {
+              Dosage
+              HowToUse
+              Composition
+              DeliveryInstructions
+            }
           }
         }
       }

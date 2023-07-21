@@ -173,6 +173,7 @@ abstract class _ProductMetaData extends ProductMetaData {
 /// @nodoc
 mixin _$ProductItem {
   StringValue get promotionMaterial => throw _privateConstructorUsedError;
+  ProductItemXp get productItemXp => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductItemCopyWith<ProductItem> get copyWith =>
@@ -185,7 +186,9 @@ abstract class $ProductItemCopyWith<$Res> {
           ProductItem value, $Res Function(ProductItem) then) =
       _$ProductItemCopyWithImpl<$Res, ProductItem>;
   @useResult
-  $Res call({StringValue promotionMaterial});
+  $Res call({StringValue promotionMaterial, ProductItemXp productItemXp});
+
+  $ProductItemXpCopyWith<$Res> get productItemXp;
 }
 
 /// @nodoc
@@ -202,13 +205,26 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
   @override
   $Res call({
     Object? promotionMaterial = null,
+    Object? productItemXp = null,
   }) {
     return _then(_value.copyWith(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      productItemXp: null == productItemXp
+          ? _value.productItemXp
+          : productItemXp // ignore: cast_nullable_to_non_nullable
+              as ProductItemXp,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductItemXpCopyWith<$Res> get productItemXp {
+    return $ProductItemXpCopyWith<$Res>(_value.productItemXp, (value) {
+      return _then(_value.copyWith(productItemXp: value) as $Val);
+    });
   }
 }
 
@@ -220,7 +236,10 @@ abstract class _$$_ProductItemCopyWith<$Res>
       __$$_ProductItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StringValue promotionMaterial});
+  $Res call({StringValue promotionMaterial, ProductItemXp productItemXp});
+
+  @override
+  $ProductItemXpCopyWith<$Res> get productItemXp;
 }
 
 /// @nodoc
@@ -235,12 +254,17 @@ class __$$_ProductItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? promotionMaterial = null,
+    Object? productItemXp = null,
   }) {
     return _then(_$_ProductItem(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      productItemXp: null == productItemXp
+          ? _value.productItemXp
+          : productItemXp // ignore: cast_nullable_to_non_nullable
+              as ProductItemXp,
     ));
   }
 }
@@ -248,14 +272,17 @@ class __$$_ProductItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ProductItem extends _ProductItem {
-  _$_ProductItem({required this.promotionMaterial}) : super._();
+  _$_ProductItem({required this.promotionMaterial, required this.productItemXp})
+      : super._();
 
   @override
   final StringValue promotionMaterial;
+  @override
+  final ProductItemXp productItemXp;
 
   @override
   String toString() {
-    return 'ProductItem(promotionMaterial: $promotionMaterial)';
+    return 'ProductItem(promotionMaterial: $promotionMaterial, productItemXp: $productItemXp)';
   }
 
   @override
@@ -264,11 +291,14 @@ class _$_ProductItem extends _ProductItem {
         (other.runtimeType == runtimeType &&
             other is _$_ProductItem &&
             (identical(other.promotionMaterial, promotionMaterial) ||
-                other.promotionMaterial == promotionMaterial));
+                other.promotionMaterial == promotionMaterial) &&
+            (identical(other.productItemXp, productItemXp) ||
+                other.productItemXp == productItemXp));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, promotionMaterial);
+  int get hashCode =>
+      Object.hash(runtimeType, promotionMaterial, productItemXp);
 
   @JsonKey(ignore: true)
   @override
@@ -278,14 +308,204 @@ class _$_ProductItem extends _ProductItem {
 }
 
 abstract class _ProductItem extends ProductItem {
-  factory _ProductItem({required final StringValue promotionMaterial}) =
-      _$_ProductItem;
+  factory _ProductItem(
+      {required final StringValue promotionMaterial,
+      required final ProductItemXp productItemXp}) = _$_ProductItem;
   _ProductItem._() : super._();
 
   @override
   StringValue get promotionMaterial;
   @override
+  ProductItemXp get productItemXp;
+  @override
   @JsonKey(ignore: true)
   _$$_ProductItemCopyWith<_$_ProductItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ProductItemXp {
+  StringValue get dosage => throw _privateConstructorUsedError;
+  StringValue get howToUse => throw _privateConstructorUsedError;
+  StringValue get composition => throw _privateConstructorUsedError;
+  StringValue get deliveryInstructions => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ProductItemXpCopyWith<ProductItemXp> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductItemXpCopyWith<$Res> {
+  factory $ProductItemXpCopyWith(
+          ProductItemXp value, $Res Function(ProductItemXp) then) =
+      _$ProductItemXpCopyWithImpl<$Res, ProductItemXp>;
+  @useResult
+  $Res call(
+      {StringValue dosage,
+      StringValue howToUse,
+      StringValue composition,
+      StringValue deliveryInstructions});
+}
+
+/// @nodoc
+class _$ProductItemXpCopyWithImpl<$Res, $Val extends ProductItemXp>
+    implements $ProductItemXpCopyWith<$Res> {
+  _$ProductItemXpCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dosage = null,
+    Object? howToUse = null,
+    Object? composition = null,
+    Object? deliveryInstructions = null,
+  }) {
+    return _then(_value.copyWith(
+      dosage: null == dosage
+          ? _value.dosage
+          : dosage // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      howToUse: null == howToUse
+          ? _value.howToUse
+          : howToUse // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      composition: null == composition
+          ? _value.composition
+          : composition // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      deliveryInstructions: null == deliveryInstructions
+          ? _value.deliveryInstructions
+          : deliveryInstructions // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ProductItemXpCopyWith<$Res>
+    implements $ProductItemXpCopyWith<$Res> {
+  factory _$$_ProductItemXpCopyWith(
+          _$_ProductItemXp value, $Res Function(_$_ProductItemXp) then) =
+      __$$_ProductItemXpCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {StringValue dosage,
+      StringValue howToUse,
+      StringValue composition,
+      StringValue deliveryInstructions});
+}
+
+/// @nodoc
+class __$$_ProductItemXpCopyWithImpl<$Res>
+    extends _$ProductItemXpCopyWithImpl<$Res, _$_ProductItemXp>
+    implements _$$_ProductItemXpCopyWith<$Res> {
+  __$$_ProductItemXpCopyWithImpl(
+      _$_ProductItemXp _value, $Res Function(_$_ProductItemXp) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dosage = null,
+    Object? howToUse = null,
+    Object? composition = null,
+    Object? deliveryInstructions = null,
+  }) {
+    return _then(_$_ProductItemXp(
+      dosage: null == dosage
+          ? _value.dosage
+          : dosage // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      howToUse: null == howToUse
+          ? _value.howToUse
+          : howToUse // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      composition: null == composition
+          ? _value.composition
+          : composition // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      deliveryInstructions: null == deliveryInstructions
+          ? _value.deliveryInstructions
+          : deliveryInstructions // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ProductItemXp extends _ProductItemXp {
+  _$_ProductItemXp(
+      {required this.dosage,
+      required this.howToUse,
+      required this.composition,
+      required this.deliveryInstructions})
+      : super._();
+
+  @override
+  final StringValue dosage;
+  @override
+  final StringValue howToUse;
+  @override
+  final StringValue composition;
+  @override
+  final StringValue deliveryInstructions;
+
+  @override
+  String toString() {
+    return 'ProductItemXp(dosage: $dosage, howToUse: $howToUse, composition: $composition, deliveryInstructions: $deliveryInstructions)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProductItemXp &&
+            (identical(other.dosage, dosage) || other.dosage == dosage) &&
+            (identical(other.howToUse, howToUse) ||
+                other.howToUse == howToUse) &&
+            (identical(other.composition, composition) ||
+                other.composition == composition) &&
+            (identical(other.deliveryInstructions, deliveryInstructions) ||
+                other.deliveryInstructions == deliveryInstructions));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, dosage, howToUse, composition, deliveryInstructions);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProductItemXpCopyWith<_$_ProductItemXp> get copyWith =>
+      __$$_ProductItemXpCopyWithImpl<_$_ProductItemXp>(this, _$identity);
+}
+
+abstract class _ProductItemXp extends ProductItemXp {
+  factory _ProductItemXp(
+      {required final StringValue dosage,
+      required final StringValue howToUse,
+      required final StringValue composition,
+      required final StringValue deliveryInstructions}) = _$_ProductItemXp;
+  _ProductItemXp._() : super._();
+
+  @override
+  StringValue get dosage;
+  @override
+  StringValue get howToUse;
+  @override
+  StringValue get composition;
+  @override
+  StringValue get deliveryInstructions;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ProductItemXpCopyWith<_$_ProductItemXp> get copyWith =>
       throw _privateConstructorUsedError;
 }

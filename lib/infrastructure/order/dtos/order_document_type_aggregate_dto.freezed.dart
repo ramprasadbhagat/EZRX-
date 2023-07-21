@@ -51,19 +51,19 @@ abstract class $OrderDocumentTypeDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          String salesOrg,
+      String salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          String documentType,
+      String documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          String description,
+      String description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          String shippingCondition,
+      String shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          String orderReason});
+      String orderReason});
 }
 
 /// @nodoc
@@ -122,19 +122,19 @@ abstract class _$$_OrderDocumentTypeDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          String salesOrg,
+      String salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          String documentType,
+      String documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          String description,
+      String description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          String shippingCondition,
+      String shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          String orderReason});
+      String orderReason});
 }
 
 /// @nodoc
@@ -186,19 +186,19 @@ class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
   const _$_OrderDocumentTypeDto(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          required this.salesOrg,
+      required this.salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          required this.documentType,
+      required this.documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          required this.description,
+      required this.description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          required this.shippingCondition,
+      required this.shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          required this.orderReason})
+      required this.orderReason})
       : super._();
 
   factory _$_OrderDocumentTypeDto.fromJson(Map<String, dynamic> json) =>
@@ -271,19 +271,19 @@ abstract class _OrderDocumentTypeDto extends OrderDocumentTypeDto {
   const factory _OrderDocumentTypeDto(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          required final String documentType,
+      required final String documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          required final String description,
+      required final String description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          required final String shippingCondition,
+      required final String shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          required final String orderReason}) = _$_OrderDocumentTypeDto;
+      required final String orderReason}) = _$_OrderDocumentTypeDto;
   const _OrderDocumentTypeDto._() : super._();
 
   factory _OrderDocumentTypeDto.fromJson(Map<String, dynamic> json) =

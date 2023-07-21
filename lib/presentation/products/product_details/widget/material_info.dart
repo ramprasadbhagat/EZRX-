@@ -25,11 +25,10 @@ class MaterialInformation extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .bodyMedium
-            ?.copyWith(color: ZPColors.darkGray),
+            ?.copyWith(color: ZPColors.extraLightGrey4),
       ).tr(),
-      trailing: Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: MediaQuery.of(context).size.width * 0.04,
+      trailing: const Icon(
+        Icons.chevron_right,
       ),
       onTap: () => showModalBottomSheet(
         isScrollControlled: true,

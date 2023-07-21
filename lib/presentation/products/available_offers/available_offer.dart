@@ -97,8 +97,7 @@ class _AvailableOfferLabel extends StatelessWidget {
         style: Theme.of(context).textTheme.labelMedium,
       ),
       trailing: const Icon(
-        Icons.arrow_forward_ios_outlined,
-        size: 18,
+        Icons.chevron_right,
       ),
       onTap: () => _showOfferDialog(context),
     );

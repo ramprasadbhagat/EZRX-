@@ -30,9 +30,27 @@ Map<String, dynamic> _$$_ProductMetaDataDtoToJson(
 _$_ProductItemDto _$$_ProductItemDtoFromJson(Map<String, dynamic> json) =>
     _$_ProductItemDto(
       promotionMaterial: json['PromotionMaterial'] as String? ?? '',
+      xp: ProductItemXpDto.fromJson(json['XP'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ProductItemDtoToJson(_$_ProductItemDto instance) =>
     <String, dynamic>{
       'PromotionMaterial': instance.promotionMaterial,
+      'XP': instance.xp.toJson(),
+    };
+
+_$_ProductItemXpDto _$$_ProductItemXpDtoFromJson(Map<String, dynamic> json) =>
+    _$_ProductItemXpDto(
+      dosage: json['Dosage'] as String? ?? '',
+      howToUse: json['HowToUse'] as String? ?? '',
+      composition: json['Composition'] as String? ?? '',
+      deliveryInstructions: json['DeliveryInstructions'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_ProductItemXpDtoToJson(_$_ProductItemXpDto instance) =>
+    <String, dynamic>{
+      'Dosage': instance.dosage,
+      'HowToUse': instance.howToUse,
+      'Composition': instance.composition,
+      'DeliveryInstructions': instance.deliveryInstructions,
     };
