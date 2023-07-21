@@ -109,3 +109,8 @@ jobs:
   displayName: Test presentation -> payments
   steps: 
   - bash: flutter375 test test/presentation/payments
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> products
+  steps: 
+  - bash: flutter375 test test/presentation/products

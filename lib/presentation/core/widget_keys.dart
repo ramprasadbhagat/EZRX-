@@ -45,6 +45,7 @@ class WidgetKeys {
   static const Key homeTabAnnouncementWidget = Key('homeTabAnnouncementWidget');
   static const Key homeScreen = Key('homeScreen');
   static const Key homeProductSearchBar = Key('homeProductSearchBar');
+  static const Key productSearchSuggestion = Key('productSearchSuggestion');
   static const Key homeQuickAccessPanel = Key('homeQuickAccessPanel');
   static const Key homeQuickAccessWebLoginMenu =
       Key('homeQuickAccessWebLoginMenu');

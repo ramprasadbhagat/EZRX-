@@ -45,7 +45,7 @@ class _BodyContent extends StatelessWidget {
     return BlocBuilder<ProductSearchBloc, ProductSearchState>(
       buildWhen: (previous, current) => previous.searchKey != current.searchKey,
       builder: (context, state) {
-        return state.searchKey.isValid()
+        return state.searchKey.validFilterSearchKey
             ? const _ProductSuggestionSection()
             : const _ProductSearchHistorySuggestionSection();
       },
@@ -179,6 +179,7 @@ class _ProductSuggestionSection extends StatelessWidget {
           previous.isSearching != current.isSearching,
       builder: (context, state) {
         return ScrollList<MaterialInfo>(
+          key: WidgetKeys.productSearchSuggestion,
           controller: ScrollController(),
           onRefresh: () {
             context.read<ProductSearchBloc>().add(
