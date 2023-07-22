@@ -244,22 +244,24 @@ flutter:
 flutter_icons:
   image_path: assets/images/launcher_icon.png
   android: true
+  adaptive_icon_background: "#023507"
+  adaptive_icon_foreground: assets/images/launcher_icon.png
   ios: true
   remove_alpha_ios: true
+  web: 
+    generate: true
   
 flutter_native_splash:
   android: true
   ios: true
   web: true
   color: "#FFFFFF"
-  image: assets/images/splash.png
-  ios_content_mode: scaleAspectFit
+  image: assets/images/ezrxlogo.png
+  ios_content_mode: center
+  web_image_mode: center
   fullscreen: true
 
-  web_image_mode: center
-  image_web: assets/images/launcher_icon.png
-
   android_12:
-  #   image: assets/images/launcher_icon.png
+    image: assets/images/android12splash.png
     icon_background_color: "#FFFFFF"
     color: "#FFFFFF"

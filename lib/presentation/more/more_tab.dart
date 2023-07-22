@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/more/section/profile_tile_section.dart';
+import 'package:ezrxmobile/presentation/more/section/version_display.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -80,6 +81,7 @@ class MoreTab extends StatelessWidget {
                     const AuthEvent.logout(),
                   ),
             ),
+            const VersionDisplay(),
           ],
         ),
       ),
