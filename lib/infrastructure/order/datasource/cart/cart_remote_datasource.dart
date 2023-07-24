@@ -38,9 +38,9 @@ class CartRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(res: res);
+      _emptyCartExceptionChecker(res: res);
 
-      final productList = res.data['data']['cart']['EzRxItems'] ?? [];
+      final productList = res.data['data']['cart']?['EzRxItems'] ?? [];
 
       return List.from(productList)
           .map((e) => CartProductDto.fromJson(e).toDomain)
@@ -108,6 +108,15 @@ class CartRemoteDataSource {
           .map((e) => CartProductDto.fromJson(e).toDomain)
           .toList();
     });
+  }
+
+  void _emptyCartExceptionChecker({required Response<dynamic> res}) {
+    if (res.statusCode != 200) {
+      throw ServerException(
+        code: res.statusCode ?? 0,
+        message: res.statusMessage ?? '',
+      );
+    }
   }
 
   void _exceptionChecker({required Response<dynamic> res}) {
