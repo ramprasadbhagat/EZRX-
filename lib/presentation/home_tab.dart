@@ -99,6 +99,7 @@ class _CustomTabBarState extends State<_CustomTabBar>
                   onTap: (index) {
                     tabsRouter.setActiveIndex(index);
                   },
+                  labelStyle: Theme.of(context).textTheme.bodySmall,
                   padding: const EdgeInsets.symmetric(
                     vertical: 8.0,
                   ),
@@ -205,7 +206,7 @@ RouteItem productTabRouteItem = const RouteItem(
 RouteItem ordersTabRouteItem = const RouteItem(
   route: OrdersTabRoute(),
   icon: Icon(
-    Icons.article_outlined,
+    Icons.receipt_long_outlined,
     key: WidgetKeys.ordersTab,
   ),
   label: 'Orders',
@@ -223,7 +224,7 @@ RouteItem notificationTabRouteItem = const RouteItem(
 RouteItem moreTabRouteItem = const RouteItem(
   route: MoreTabRoute(),
   icon: Icon(
-    Icons.reorder_outlined,
+    Icons.menu_outlined,
     key: WidgetKeys.moreTab,
   ),
   label: 'More',

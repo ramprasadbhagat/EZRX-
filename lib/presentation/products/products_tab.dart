@@ -56,11 +56,7 @@ class ProductsTab extends StatelessWidget {
                 child: state.isFetching && state.materialList.isEmpty
                     ? const LoadingShimmerGridItem()
                     : Padding(
-                        padding: const EdgeInsets.only(
-                          left: 5.0,
-                          right: 5.0,
-                          bottom: 10.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: ScrollableGridView<MaterialInfo>(
                           emptyMessage: 'No material found'.tr(),
                           header: const _TotalMaterialCount(),
