@@ -31,30 +31,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   ) async {
     await event.map(
       initialized: (value) {
-        emit(state.copyWith(
-          isSubmitSuccess: false,
-          maxSteps: value.maxSteps,
-          step: value.step,
-          additionalDetailsStep: value.additionalDetailsStep,
-        ));
-      },
-      stepContinue: (value) {
-        emit(state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          step: state.step < state.maxSteps ? state.step + 1 : state.step,
-        ));
-      },
-      stepCancel: (value) {
-        emit(state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          step: state.step - 1 >= 0 ? state.step - 1 : 0,
-        ));
-      },
-      stepTapped: (value) {
-        emit(state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          step: value.step,
-        ));
+        emit(OrderSummaryState.initial());
       },
       submitOrder: (value) async {
         if (state.isSubmitting) return;
@@ -67,8 +44,9 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
         final failureOrSuccess = await repository.submitOrder(
           shipToInfo: value.shipToInfo,
           user: value.user,
-          cartItems: value.cartItems,
+          cartProducts: value.cartProducts,
           grandTotal: value.grandTotal,
+          orderValue: value.orderValue,
           customerCodeInfo: value.customerCodeInfo,
           salesOrganisation: value.salesOrganisation,
           data: value.data,
@@ -81,7 +59,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isSubmitting: false,
-                isSubmitSuccess: false,
               ),
             );
           },
@@ -90,7 +67,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 isSubmitting: false,
-                isSubmitSuccess: true,
                 submitOrderResponse: submitOrderResponse,
               ),
             );

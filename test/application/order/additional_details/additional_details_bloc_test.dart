@@ -73,7 +73,7 @@ void main() {
                   ),
                 ),
               ),
-              mobileNumber: MobileNumber('NA'),
+              mobileNumber: MobileNumber(''),
             ),
             isValidated: false,
             showErrorMessages: false,
@@ -106,7 +106,7 @@ void main() {
                   ),
                 ),
               ),
-              mobileNumber: MobileNumber('NA'),
+              mobileNumber: MobileNumber(''),
             ),
             isValidated: false,
             showErrorMessages: false,
@@ -254,6 +254,8 @@ void main() {
           contactPerson: ContactPerson('PERSON'),
           mobileNumber: MobileNumber('123456'),
           paymentTerm: PaymentTerm('0001-TEST'),
+          referenceNote: ReferenceNote('Reference Note Test'),
+          deliveryInstruction: DeliveryInstruction('Instruction Test'),
         )),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(AdditionalDetailsEvent.validateForm(
@@ -269,6 +271,8 @@ void main() {
               contactPerson: ContactPerson('PERSON'),
               mobileNumber: MobileNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
+              referenceNote: ReferenceNote('Reference Note Test'),
+              deliveryInstruction: DeliveryInstruction('Instruction Test'),
             ),
           ),
         ],
@@ -285,6 +289,8 @@ void main() {
           contactPerson: ContactPerson(''),
           mobileNumber: MobileNumber('123456'),
           paymentTerm: PaymentTerm('0001-TEST'),
+          referenceNote: ReferenceNote('Reference Note Test'),
+          deliveryInstruction: DeliveryInstruction('Instruction Test'),
         )),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(AdditionalDetailsEvent.validateForm(
@@ -295,11 +301,14 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             isValidated: false,
             showErrorMessages: true,
+            focusTo: DeliveryInfoLabel.contactPerson,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
               mobileNumber: MobileNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
+              referenceNote: ReferenceNote('Reference Note Test'),
+              deliveryInstruction: DeliveryInstruction('Instruction Test'),
             ),
           ),
         ],

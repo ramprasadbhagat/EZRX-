@@ -32,30 +32,24 @@ class SubmitOrderDto with _$SubmitOrderDto {
         required String poDate,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
-    @JsonKey(name: 'specialInstructions', defaultValue: '')
+    @JsonKey(name: 'SpecialInstructions', defaultValue: '')
         required String specialInstructions,
-    @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-        required String purchaseOrderType,
-    @JsonKey(name: 'orderType', defaultValue: '')
-        required String orderType,
-    @JsonKey(name: 'orderReason', defaultValue: '')
-        required String orderReason,
-    @JsonKey(name: 'shippingCondition', defaultValue: '')
-        required String shippingCondition,
-    @JsonKey(name: 'telephone', defaultValue: '')
+    @JsonKey(name: 'orderValue', defaultValue: 0)
+        required double orderValue,
+    @JsonKey(name: 'Telephone', defaultValue: '')
         required String telephone,
     @JsonKey(name: 'referenceNotes', defaultValue: '')
         required String referenceNotes,
     @JsonKey(name: 'paymentTerms', defaultValue: '')
         required String paymentTerms,
-    @JsonKey(name: 'collectiveNumber', defaultValue: '')
+    @JsonKey(name: 'CollectiveNumber', defaultValue: '')
         required String collectiveNumber,
-    @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-        required bool subscribeStatusChange,
-    @JsonKey(name: 'trackingLevel', defaultValue: '')
-        required String trackingLevel,
     @JsonKey(name: 'blockOrder', defaultValue: false)
         required bool blockOrder,
+    @JsonKey(name: 'language', defaultValue: 'EN')
+        required String language,
+    @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+        required String paymentMethod,
     @JsonKey(
       name: 'poDocuments',
       defaultValue: <PoDocumentsDto>[],
@@ -69,53 +63,49 @@ class SubmitOrderDto with _$SubmitOrderDto {
       companyName: CompanyName(companyName),
       customer: customer.toDomain(),
       poReference: poReference,
-      materials: materials.map((e) => e.toDomain()).toList(),
+      products: materials.map((e) => e.toDomain()).toList(),
       poDate: poDate,
       requestedDeliveryDate: requestedDeliveryDate,
       specialInstructions: specialInstructions,
-      purchaseOrderType: purchaseOrderType,
-      orderType: orderType,
-      orderReason: orderReason,
-      shippingCondition: ShippingCondition(shippingCondition),
+      orderValue: orderValue,
       telephone: telephone,
       referenceNotes: referenceNotes,
       paymentTerms: paymentTerms,
       collectiveNumber: collectiveNumber,
-      subscribeStatusChange: subscribeStatusChange,
-      trackingLevel: trackingLevel,
       blockOrder: blockOrder,
       poDocuments: poDocuments.map((e) => e.toDomain()).toList(),
+      language: language,
+      paymentMethod: paymentMethod,
     );
   }
 
-  factory SubmitOrderDto.fromDomain(SubmitOrder submitOrder, String currency) {
+  factory SubmitOrderDto.fromDomain(
+    SubmitOrder submitOrder,
+  ) {
     return SubmitOrderDto(
       userName: submitOrder.userName,
       companyName: submitOrder.companyName.getOrDefaultValue(''),
       customer: SubmitOrderCustomerDto.fromDomain(submitOrder.customer),
       poReference: submitOrder.poReference,
-      materials: submitOrder.materials
-          .map((e) => SubmitMaterialInfoDto.fromDomain(e, currency))
+      materials: submitOrder.products
+          .map((e) => SubmitMaterialInfoDto.fromDomain(e))
           .toList(),
       poDate: submitOrder.poDate,
       requestedDeliveryDate: submitOrder.requestedDeliveryDate,
       specialInstructions: submitOrder.specialInstructions,
-      purchaseOrderType: submitOrder.purchaseOrderType,
-      orderType: submitOrder.orderType,
-      orderReason: submitOrder.orderReason,
-      shippingCondition: submitOrder.shippingCondition.getOrDefaultValue(''),
+      orderValue: submitOrder.orderValue,
       telephone: submitOrder.telephone,
       referenceNotes: submitOrder.referenceNotes,
       paymentTerms: submitOrder.paymentTerms,
       collectiveNumber: submitOrder.collectiveNumber,
-      subscribeStatusChange: submitOrder.subscribeStatusChange,
-      trackingLevel: submitOrder.trackingLevel,
       blockOrder: submitOrder.blockOrder,
       poDocuments: submitOrder.poDocuments
           .map(
             (e) => PoDocumentsDto.fromDomain(e),
           )
           .toList(),
+      language: submitOrder.language,
+      paymentMethod: submitOrder.paymentMethod,
     );
   }
 

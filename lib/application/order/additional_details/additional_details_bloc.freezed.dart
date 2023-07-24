@@ -2450,6 +2450,7 @@ mixin _$AdditionalDetailsState {
   bool get isValidated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
+  DeliveryInfoLabel? get focusTo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AdditionalDetailsStateCopyWith<AdditionalDetailsState> get copyWith =>
@@ -2467,7 +2468,8 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
       String orderId,
       bool isValidated,
       bool isLoading,
-      bool showErrorMessages});
+      bool showErrorMessages,
+      DeliveryInfoLabel? focusTo});
 
   $DeliveryInfoDataCopyWith<$Res> get deliveryInfoData;
 }
@@ -2491,6 +2493,7 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
     Object? isValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
+    Object? focusTo = freezed,
   }) {
     return _then(_value.copyWith(
       deliveryInfoData: null == deliveryInfoData
@@ -2513,6 +2516,10 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      focusTo: freezed == focusTo
+          ? _value.focusTo
+          : focusTo // ignore: cast_nullable_to_non_nullable
+              as DeliveryInfoLabel?,
     ) as $Val);
   }
 
@@ -2538,7 +2545,8 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
       String orderId,
       bool isValidated,
       bool isLoading,
-      bool showErrorMessages});
+      bool showErrorMessages,
+      DeliveryInfoLabel? focusTo});
 
   @override
   $DeliveryInfoDataCopyWith<$Res> get deliveryInfoData;
@@ -2561,6 +2569,7 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
     Object? isValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
+    Object? focusTo = freezed,
   }) {
     return _then(_$_AdditionalDetailsState(
       deliveryInfoData: null == deliveryInfoData
@@ -2583,6 +2592,10 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      focusTo: freezed == focusTo
+          ? _value.focusTo
+          : focusTo // ignore: cast_nullable_to_non_nullable
+              as DeliveryInfoLabel?,
     ));
   }
 }
@@ -2595,7 +2608,8 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
       required this.orderId,
       required this.isValidated,
       required this.isLoading,
-      required this.showErrorMessages})
+      required this.showErrorMessages,
+      this.focusTo})
       : super._();
 
   @override
@@ -2608,10 +2622,12 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   final bool isLoading;
   @override
   final bool showErrorMessages;
+  @override
+  final DeliveryInfoLabel? focusTo;
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages)';
+    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, focusTo: $focusTo)';
   }
 
   @override
@@ -2627,12 +2643,13 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
-                other.showErrorMessages == showErrorMessages));
+                other.showErrorMessages == showErrorMessages) &&
+            (identical(other.focusTo, focusTo) || other.focusTo == focusTo));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, deliveryInfoData, orderId,
-      isValidated, isLoading, showErrorMessages);
+      isValidated, isLoading, showErrorMessages, focusTo);
 
   @JsonKey(ignore: true)
   @override
@@ -2648,7 +2665,8 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
       required final String orderId,
       required final bool isValidated,
       required final bool isLoading,
-      required final bool showErrorMessages}) = _$_AdditionalDetailsState;
+      required final bool showErrorMessages,
+      final DeliveryInfoLabel? focusTo}) = _$_AdditionalDetailsState;
   const _AdditionalDetailsState._() : super._();
 
   @override
@@ -2661,6 +2679,8 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   bool get isLoading;
   @override
   bool get showErrorMessages;
+  @override
+  DeliveryInfoLabel? get focusTo;
   @override
   @JsonKey(ignore: true)
   _$$_AdditionalDetailsStateCopyWith<_$_AdditionalDetailsState> get copyWith =>

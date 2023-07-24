@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -19,9 +20,9 @@ import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -36,6 +37,7 @@ class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
   final OrderRemoteDataSource remoteDataSource;
+  final Encryption encryption;
 
   late MixpanelService mixpanelService;
 
@@ -44,6 +46,7 @@ class OrderRepository implements IOrderRepository {
     required this.mixpanelService,
     required this.localDataSource,
     required this.remoteDataSource,
+    required this.encryption,
   });
 
   @override
@@ -232,8 +235,9 @@ class OrderRepository implements IOrderRepository {
   Future<Either<ApiFailure, SubmitOrderResponse>> submitOrder({
     required ShipToInfo shipToInfo,
     required User user,
-    required List<PriceAggregate> cartItems,
+    required List<PriceAggregate> cartProducts,
     required double grandTotal,
+    required double orderValue,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required DeliveryInfoData data,
@@ -244,12 +248,13 @@ class OrderRepository implements IOrderRepository {
       shipToInfo: shipToInfo,
       user: user,
       data: data,
-      cartItems: cartItems,
-      orderDocumentType: orderDocumentType,
+      cartProducts: cartProducts,
+      orderValue: orderValue,
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       configs: configs,
     );
+
     if (config.appFlavor == Flavor.mock) {
       try {
         final submitOrderResponse = await localDataSource.submitOrder();
@@ -262,12 +267,15 @@ class OrderRepository implements IOrderRepository {
       }
     }
     try {
-      final submitOrderResponse = await remoteDataSource.submitOrder(
-        submitOrder:
-            SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
+      final encription = encryption.encryptionData(
+        data: SubmitOrderDto.fromDomain(
+          submitOrder,
+        ).toJson(),
       );
 
-      _trackOrderSuccessEvent(cartItems, grandTotal);
+      final submitOrderResponse =
+          await remoteDataSource.submitOrder(orderEncryption: encription);
+      _trackOrderSuccessEvent(cartProducts, grandTotal);
 
       return Right(submitOrderResponse);
     } catch (e) {
@@ -363,11 +371,11 @@ class OrderRepository implements IOrderRepository {
     required ShipToInfo shipToInfo,
     required User user,
     required DeliveryInfoData data,
-    required List<PriceAggregate> cartItems,
+    required List<PriceAggregate> cartProducts,
+    required double orderValue,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
-    required OrderDocumentType orderDocumentType,
   }) {
     return SubmitOrder.empty().copyWith(
       userName: data.contactPerson.getValue().isNotEmpty
@@ -378,35 +386,26 @@ class OrderRepository implements IOrderRepository {
       specialInstructions: data.deliveryInstruction.getValue(),
       companyName: CompanyName(shipToInfo.shipToName.toString()),
       requestedDeliveryDate: data.deliveryDate.getValue(),
-      poDate: data.deliveryDate.getValue(),
+      poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
       telephone: data.mobileNumber.getTelephone,
-      trackingLevel: 'items',
       collectiveNumber: '',
-      subscribeStatusChange: true,
-      orderType: getOrderType(
-        orderType: orderDocumentType.documentType.documentTypeCode,
-        cartItems: cartItems,
-      ),
-      orderReason: cartItems
-              .map((cartItem) =>
-                  cartItem.tenderContract.tenderOrderReason.getValue())
-              .contains('730')
-          ? '730'
-          : orderDocumentType.orderReason,
-      purchaseOrderType: user.role.type.purchaseOrderType,
-      shippingCondition: data.greenDeliveryEnabled
-          ? ShippingCondition.greenDelivery()
-          : ShippingCondition(''),
-      paymentTerms: _getPaymentTerms(cartItems: cartItems, data: data),
+      paymentTerms: data.paymentTerm
+          .getValue()
+          .characters
+          .getRange(0, data.paymentTerm.getValue().indexOf('-'))
+          .string,
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       ),
-      blockOrder: configs.enablePrincipalList &&
-          cartItems.any((item) => item.checkSalesCutOff),
-      materials: _getMaterialInfoList(cartItems: cartItems),
+      blockOrder: configs.enablePrincipalList,
+      // && cartItems.any((item) => item.checkSalesCutOff)
+      products: _getMaterialInfoList(cartProducts: cartProducts),
       poDocuments: data.poDocuments,
+      orderValue: orderValue,
+      language: user.settings.languagePreference.getValue(),
+      paymentMethod: 'Bank Transfer',
     );
   }
 
@@ -459,28 +458,6 @@ class OrderRepository implements IOrderRepository {
   }
 }
 
-String _getPaymentTerms({
-  required List<PriceAggregate> cartItems,
-  required DeliveryInfoData data,
-}) {
-  final priceAggregate = cartItems.firstWhere(
-    (element) =>
-        element.tenderContract != TenderContract.empty() &&
-        element.tenderContract != TenderContract.noContract(),
-    orElse: () => PriceAggregate.empty(),
-  );
-
-  final paymentTerm = data.paymentTerm.getOrDefaultValue('');
-
-  return priceAggregate != PriceAggregate.empty()
-      ? priceAggregate.tenderContract.contractPaymentTerm.getValue()
-      : paymentTerm.isEmpty
-          ? paymentTerm
-          : paymentTerm.characters
-              .getRange(0, paymentTerm.indexOf('-'))
-              .toString();
-}
-
 SubmitOrderCustomer _getSubmitOrderCustomer({
   required ShipToInfo shipToInfo,
   required SalesOrganisation salesOrganisation,
@@ -495,20 +472,7 @@ SubmitOrderCustomer _getSubmitOrderCustomer({
 }
 
 List<SubmitMaterialInfo> _getMaterialInfoList({
-  required List<PriceAggregate> cartItems,
+  required List<PriceAggregate> cartProducts,
 }) {
-  return cartItems.map((e) => e.toSubmitMaterialInfo()).toList();
-}
-
-String getOrderType({
-  required String orderType,
-  required List<PriceAggregate> cartItems,
-}) {
-  return cartItems
-          .where((element) => element.materialInfo.materialGroup4.isFOC)
-          .isNotEmpty
-      ? 'ZPFC'
-      : orderType.isEmpty
-          ? 'ZPOR'
-          : orderType;
+  return cartProducts.map((e) => e.toSubmitMaterialInfo()).toList();
 }

@@ -46,7 +46,7 @@ class OrderLocalDataSource {
       await rootBundle.loadString('assets/json/submitOrderResponse.json'),
     );
 
-    return SubmitOrderResponseDto.fromJson(data['data']['submitOrderTwo'])
+    return SubmitOrderResponseDto.fromJson(data['data']['submitOrder'])
         .toDomain();
   }
 

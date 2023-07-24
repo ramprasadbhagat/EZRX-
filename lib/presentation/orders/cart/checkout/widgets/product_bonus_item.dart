@@ -1,19 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CheckoutProductItem extends StatelessWidget {
+class CheckoutProductBonusItem extends StatelessWidget {
   final PriceAggregate cartItem;
-  const CheckoutProductItem({required this.cartItem, Key? key})
+  const CheckoutProductBonusItem({required this.cartItem, Key? key})
       : super(key: key);
 
   @override
@@ -65,16 +64,14 @@ class _ProductImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CustomCard(
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) {
+        return CustomCard(
           showShadow: false,
           showBorder: true,
           padding: const EdgeInsets.all(12),
           child: CachedNetworkImage(
-            imageUrl: context
-                    .read<CartBloc>()
-                    .state
+            imageUrl: state
                     .additionInfo[cartProduct.materialInfo.materialNumber]
                     ?.productImages
                     .first
@@ -107,36 +104,8 @@ class _ProductImageSection extends StatelessWidget {
               );
             },
           ),
-        ),
-        cartProduct.price.isBonusDealEligible
-            ? const _OfferTag()
-            : const SizedBox.shrink(),
-      ],
-    );
-  }
-}
-
-class _OfferTag extends StatelessWidget {
-  const _OfferTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 4,
-      ),
-      decoration: const BoxDecoration(
-        color: ZPColors.darkYellow,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        ),
-      ),
-      child: const Icon(
-        Icons.local_offer_outlined,
-        color: ZPColors.white,
-      ),
+        );
+      },
     );
   }
 }
@@ -164,7 +133,7 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              const _OrderTag(),
+              const _BonusTag(),
             ],
           ),
           Padding(
@@ -174,28 +143,9 @@ class _ProductDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          RichText(
-            text: TextSpan(
-              text: 'MYR 11,200.00 ',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.darkGray,
-                    decoration: TextDecoration.lineThrough,
-                  ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'MYR 11,000.00',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.extraLightGrey4,
-                        decoration: TextDecoration.none,
-                      ),
-                ),
-              ],
-            ),
-          ),
           Text(
-            'Requested counter offer',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontStyle: FontStyle.italic,
+            'FREE',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.extraLightGrey4,
                 ),
           ),
@@ -205,23 +155,24 @@ class _ProductDetails extends StatelessWidget {
   }
 }
 
-class _OrderTag extends StatelessWidget {
-  const _OrderTag({Key? key}) : super(key: key);
+class _BonusTag extends StatelessWidget {
+  const _BonusTag({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: const BoxDecoration(
-        color: ZPColors.lightYellow,
+        color: ZPColors.primary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Text(
-        'Preorder',
-        style: Theme.of(context)
-            .textTheme
-            .titleSmall
-            ?.copyWith(fontWeight: FontWeight.w500, fontSize: 10),
+        'Bonus',
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w500,
+              fontSize: 10,
+              color: ZPColors.white,
+            ),
       ),
     );
   }
@@ -239,21 +190,16 @@ class _QuantityAndPrice extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Qty: ${cartItem.quantity}',
+            'Qty: ${(cartItem.addedBonusList.firstOrNull?.qty ?? 0).toString()}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
           ),
-          PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-            price: cartItem.finalPriceTotal.toString(),
-            priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+          Text(
+            'FREE',
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: ZPColors.primary,
                 ),
-            currencyCodeTextStyle:
-                Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: ZPColors.primary,
-                    ),
           ),
         ],
       ),

@@ -43,6 +43,7 @@ class MaterialInfo with _$MaterialInfo {
     required MaterialTaxClassification taxClassification,
     required String itemRegistrationNumber,
     required String genericMaterialName,
+    required String remarks,
 
     //TODO: remove field from v2
     required String itemBrand,
@@ -54,7 +55,6 @@ class MaterialInfo with _$MaterialInfo {
     required List<String> taxes,
     required List<Bundle> bundles,
     required bool isFOCMaterial,
-    required String remarks,
     required String ean,
   }) = _MaterialInfo;
 

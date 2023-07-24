@@ -40,9 +40,8 @@ enum DeliveryInfoLabel {
   poReference,
   deliveryInstruction,
   referenceNote,
-  // collectiveNumber,
   contactPerson,
-  contactNumber,
+  mobileNumber,
   paymentTerm,
   deliveryDate
 }

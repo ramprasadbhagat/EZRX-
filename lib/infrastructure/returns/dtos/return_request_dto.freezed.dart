@@ -48,9 +48,13 @@ abstract class $ReturnRequestDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           bool isSearchComplete,
-      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
+      @JsonKey(
+          name: 'materialBasicInformation', defaultValue: <
+              MaterialBasicInformationDto>[])
           List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
+      @JsonKey(
+          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
+              ReturnItemDto>[])
           List<ReturnItemDto> items});
 }
 
@@ -99,9 +103,13 @@ abstract class _$$_ReturnRequestDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           bool isSearchComplete,
-      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
+      @JsonKey(
+          name: 'materialBasicInformation', defaultValue: <
+              MaterialBasicInformationDto>[])
           List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
+      @JsonKey(
+          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
+              ReturnItemDto>[])
           List<ReturnItemDto> items});
 }
 
@@ -143,9 +151,13 @@ class _$_ReturnRequestDto extends _ReturnRequestDto {
   const _$_ReturnRequestDto(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           required this.isSearchComplete,
-      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
+      @JsonKey(
+          name: 'materialBasicInformation', defaultValue: <
+              MaterialBasicInformationDto>[])
           required final List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
+      @JsonKey(
+          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
+              ReturnItemDto>[])
           required final List<ReturnItemDto> items})
       : _basicInformations = basicInformations,
         _items = items,
@@ -224,9 +236,13 @@ abstract class _ReturnRequestDto extends ReturnRequestDto {
   const factory _ReturnRequestDto(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           required final bool isSearchComplete,
-      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
+      @JsonKey(
+          name: 'materialBasicInformation', defaultValue: <
+              MaterialBasicInformationDto>[])
           required final List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
+      @JsonKey(
+          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
+              ReturnItemDto>[])
           required final List<ReturnItemDto> items}) = _$_ReturnRequestDto;
   const _ReturnRequestDto._() : super._();
 

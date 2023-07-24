@@ -18,14 +18,17 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SubmitMaterialInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
-  TenderContract get tenderContract => throw _privateConstructorUsedError;
   List<SubmitMaterialItemBonus> get bonuses =>
       throw _privateConstructorUsedError;
+  String get productType => throw _privateConstructorUsedError;
+  String get parentID => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
-  BatchNumber get batch => throw _privateConstructorUsedError;
-  String get salesDistrict => throw _privateConstructorUsedError;
   MaterialItemOverride get materialItemOverride =>
       throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
+
+  ///Todo: consider to delete it
+  BatchNumber get batch => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitMaterialInfoCopyWith<SubmitMaterialInfo> get copyWith =>
@@ -41,14 +44,14 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       int quantity,
-      TenderContract tenderContract,
       List<SubmitMaterialItemBonus> bonuses,
+      String productType,
+      String parentID,
       String comment,
-      BatchNumber batch,
-      String salesDistrict,
-      MaterialItemOverride materialItemOverride});
+      MaterialItemOverride materialItemOverride,
+      double price,
+      BatchNumber batch});
 
-  $TenderContractCopyWith<$Res> get tenderContract;
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
 }
 
@@ -67,12 +70,13 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
   $Res call({
     Object? materialNumber = null,
     Object? quantity = null,
-    Object? tenderContract = null,
     Object? bonuses = null,
+    Object? productType = null,
+    Object? parentID = null,
     Object? comment = null,
-    Object? batch = null,
-    Object? salesDistrict = null,
     Object? materialItemOverride = null,
+    Object? price = null,
+    Object? batch = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -83,39 +87,35 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      tenderContract: null == tenderContract
-          ? _value.tenderContract
-          : tenderContract // ignore: cast_nullable_to_non_nullable
-              as TenderContract,
       bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<SubmitMaterialItemBonus>,
+      productType: null == productType
+          ? _value.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentID: null == parentID
+          ? _value.parentID
+          : parentID // ignore: cast_nullable_to_non_nullable
+              as String,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
-      salesDistrict: null == salesDistrict
-          ? _value.salesDistrict
-          : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
       materialItemOverride: null == materialItemOverride
           ? _value.materialItemOverride
           : materialItemOverride // ignore: cast_nullable_to_non_nullable
               as MaterialItemOverride,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      batch: null == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
+              as BatchNumber,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TenderContractCopyWith<$Res> get tenderContract {
-    return $TenderContractCopyWith<$Res>(_value.tenderContract, (value) {
-      return _then(_value.copyWith(tenderContract: value) as $Val);
-    });
   }
 
   @override
@@ -139,15 +139,14 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
   $Res call(
       {MaterialNumber materialNumber,
       int quantity,
-      TenderContract tenderContract,
       List<SubmitMaterialItemBonus> bonuses,
+      String productType,
+      String parentID,
       String comment,
-      BatchNumber batch,
-      String salesDistrict,
-      MaterialItemOverride materialItemOverride});
+      MaterialItemOverride materialItemOverride,
+      double price,
+      BatchNumber batch});
 
-  @override
-  $TenderContractCopyWith<$Res> get tenderContract;
   @override
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
 }
@@ -165,12 +164,13 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
     Object? quantity = null,
-    Object? tenderContract = null,
     Object? bonuses = null,
+    Object? productType = null,
+    Object? parentID = null,
     Object? comment = null,
-    Object? batch = null,
-    Object? salesDistrict = null,
     Object? materialItemOverride = null,
+    Object? price = null,
+    Object? batch = null,
   }) {
     return _then(_$_SubmitMaterialInfo(
       materialNumber: null == materialNumber
@@ -181,30 +181,34 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      tenderContract: null == tenderContract
-          ? _value.tenderContract
-          : tenderContract // ignore: cast_nullable_to_non_nullable
-              as TenderContract,
       bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<SubmitMaterialItemBonus>,
+      productType: null == productType
+          ? _value.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentID: null == parentID
+          ? _value.parentID
+          : parentID // ignore: cast_nullable_to_non_nullable
+              as String,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
-      salesDistrict: null == salesDistrict
-          ? _value.salesDistrict
-          : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
       materialItemOverride: null == materialItemOverride
           ? _value.materialItemOverride
           : materialItemOverride // ignore: cast_nullable_to_non_nullable
               as MaterialItemOverride,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      batch: null == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
+              as BatchNumber,
     ));
   }
 }
@@ -215,12 +219,13 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   const _$_SubmitMaterialInfo(
       {required this.materialNumber,
       required this.quantity,
-      required this.tenderContract,
       required final List<SubmitMaterialItemBonus> bonuses,
+      required this.productType,
+      required this.parentID,
       required this.comment,
-      required this.batch,
-      required this.salesDistrict,
-      required this.materialItemOverride})
+      required this.materialItemOverride,
+      required this.price,
+      required this.batch})
       : _bonuses = bonuses,
         super._();
 
@@ -228,8 +233,6 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   final MaterialNumber materialNumber;
   @override
   final int quantity;
-  @override
-  final TenderContract tenderContract;
   final List<SubmitMaterialItemBonus> _bonuses;
   @override
   List<SubmitMaterialItemBonus> get bonuses {
@@ -239,17 +242,23 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   }
 
   @override
+  final String productType;
+  @override
+  final String parentID;
+  @override
   final String comment;
   @override
-  final BatchNumber batch;
-  @override
-  final String salesDistrict;
-  @override
   final MaterialItemOverride materialItemOverride;
+  @override
+  final double price;
+
+  ///Todo: consider to delete it
+  @override
+  final BatchNumber batch;
 
   @override
   String toString() {
-    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, tenderContract: $tenderContract, bonuses: $bonuses, comment: $comment, batch: $batch, salesDistrict: $salesDistrict, materialItemOverride: $materialItemOverride)';
+    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, batch: $batch)';
   }
 
   @override
@@ -261,15 +270,16 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
                 other.materialNumber == materialNumber) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.tenderContract, tenderContract) ||
-                other.tenderContract == tenderContract) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType) &&
+            (identical(other.parentID, parentID) ||
+                other.parentID == parentID) &&
             (identical(other.comment, comment) || other.comment == comment) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict) &&
             (identical(other.materialItemOverride, materialItemOverride) ||
-                other.materialItemOverride == materialItemOverride));
+                other.materialItemOverride == materialItemOverride) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.batch, batch) || other.batch == batch));
   }
 
   @override
@@ -277,12 +287,13 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       runtimeType,
       materialNumber,
       quantity,
-      tenderContract,
       const DeepCollectionEquality().hash(_bonuses),
+      productType,
+      parentID,
       comment,
-      batch,
-      salesDistrict,
-      materialItemOverride);
+      materialItemOverride,
+      price,
+      batch);
 
   @JsonKey(ignore: true)
   @override
@@ -294,15 +305,15 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
 
 abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   const factory _SubmitMaterialInfo(
-          {required final MaterialNumber materialNumber,
-          required final int quantity,
-          required final TenderContract tenderContract,
-          required final List<SubmitMaterialItemBonus> bonuses,
-          required final String comment,
-          required final BatchNumber batch,
-          required final String salesDistrict,
-          required final MaterialItemOverride materialItemOverride}) =
-      _$_SubmitMaterialInfo;
+      {required final MaterialNumber materialNumber,
+      required final int quantity,
+      required final List<SubmitMaterialItemBonus> bonuses,
+      required final String productType,
+      required final String parentID,
+      required final String comment,
+      required final MaterialItemOverride materialItemOverride,
+      required final double price,
+      required final BatchNumber batch}) = _$_SubmitMaterialInfo;
   const _SubmitMaterialInfo._() : super._();
 
   @override
@@ -310,17 +321,21 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   @override
   int get quantity;
   @override
-  TenderContract get tenderContract;
-  @override
   List<SubmitMaterialItemBonus> get bonuses;
+  @override
+  String get productType;
+  @override
+  String get parentID;
   @override
   String get comment;
   @override
-  BatchNumber get batch;
-  @override
-  String get salesDistrict;
-  @override
   MaterialItemOverride get materialItemOverride;
+  @override
+  double get price;
+  @override
+
+  ///Todo: consider to delete it
+  BatchNumber get batch;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitMaterialInfoCopyWith<_$_SubmitMaterialInfo> get copyWith =>

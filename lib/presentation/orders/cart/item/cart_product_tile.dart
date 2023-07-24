@@ -19,8 +19,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 
 class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
-  final int index;
-  const CartProductTile({Key? key, required this.cartItem, required this.index})
+  const CartProductTile({Key? key, required this.cartItem,})
       : super(key: key);
 
   @override
@@ -64,7 +63,6 @@ class CartProductTile extends StatelessWidget {
             ),
             _ItemSubTotalSection(
               cartProduct: cartItem,
-              index: index,
             ),
             const Divider(
               indent: 0,
@@ -104,11 +102,9 @@ class _MaterialDetailsSection extends StatelessWidget {
 
 class _ItemSubTotalSection extends StatelessWidget {
   final PriceAggregate cartProduct;
-  final int index;
   const _ItemSubTotalSection({
     required this.cartProduct,
     Key? key,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -138,11 +134,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                     ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: context
-                        .read<CartBloc>()
-                        .state
-                        .itemPrice(index: index)
-                        .toStringAsFixed(2),
+                    text: cartProduct.finalPriceTotal.toString(),
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                           color: ZPColors.primary,
                         ),

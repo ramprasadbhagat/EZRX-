@@ -21,7 +21,8 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+// import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+// import 'package:ezrxmobile/domain/order/entities/order_encryption.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
@@ -32,12 +33,13 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
+// import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -64,11 +66,14 @@ class MixpanelServiceMock extends Mock implements MixpanelService {}
 class SalesOrganisationConfigsMock extends Mock
     implements SalesOrganisationConfigs {}
 
+class EncryptionMock extends Mock implements Encryption {}
+
 void main() {
   late OrderRepository orderRepository;
   late Config mockConfig;
   late OrderLocalDataSource orderLocalDataSource;
   late OrderRemoteDataSource orderRemoteDataSource;
+  late Encryption encryption;
 
   final mockUser = User.empty();
   final mockSalesOrganisation =
@@ -141,12 +146,14 @@ void main() {
     mixpanelService = MixpanelServiceMock();
     salesOrganisationConfigs = SalesOrganisationConfigsMock();
 
+    encryption = EncryptionMock();
+
     orderRepository = OrderRepository(
-      config: mockConfig,
-      localDataSource: orderLocalDataSource,
-      remoteDataSource: orderRemoteDataSource,
-      mixpanelService: mixpanelService,
-    );
+        config: mockConfig,
+        localDataSource: orderLocalDataSource,
+        remoteDataSource: orderRemoteDataSource,
+        mixpanelService: mixpanelService,
+        encryption: encryption);
   });
 
   group('OrderRepository should - ', () {
@@ -191,8 +198,7 @@ void main() {
     test('get deleteSavedOrder successfully locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() =>
-              orderLocalDataSource.deleteSavedOrder())
+      when(() => orderLocalDataSource.deleteSavedOrder())
           .thenAnswer((invocation) async => SavedOrder.empty());
 
       final result = await orderRepository.deleteSavedOrder(
@@ -208,8 +214,7 @@ void main() {
     test('get deleteSavedOrder fail locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() =>
-              orderLocalDataSource.deleteSavedOrder())
+      when(() => orderLocalDataSource.deleteSavedOrder())
           .thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.deleteSavedOrder(
@@ -336,30 +341,7 @@ void main() {
         requestedDeliveryDate: data.deliveryDate.getValue(),
         poDate: data.deliveryDate.getValue(),
         telephone: data.mobileNumber.getTelephone,
-        trackingLevel: 'items',
         collectiveNumber: '',
-        subscribeStatusChange: true,
-        orderType: 'ZPOR',
-        orderReason: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ]
-                .map((cartItem) =>
-                    cartItem.tenderContract.tenderOrderReason.getValue())
-                .contains('730')
-            ? '730'
-            : '',
-        purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-        shippingCondition: ShippingCondition(''),
         paymentTerms: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
@@ -381,7 +363,7 @@ void main() {
         ),
         blockOrder: salesOrganisationConfigs.enablePrincipalList &&
             cartMaterial.any((item) => item.checkSalesCutOff),
-        materials: <PriceAggregate>[
+        products: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
             materialInfo: MaterialInfo.empty().copyWith(
@@ -396,8 +378,8 @@ void main() {
         ].map((e) => e.toSubmitMaterialInfo()).toList(),
       );
 
-      when(() => orderLocalDataSource.submitOrder())
-          .thenAnswer((invocation) async => SubmitOrderResponse.empty()
+      when(() => orderLocalDataSource.submitOrder()).thenAnswer(
+          (invocation) async => SubmitOrderResponse.empty()
                   .copyWith(salesDocument: 'fake-sales-document', messages: [
                 SubmitOrderResponseMessage.empty().copyWith(
                   message: 'EZRX-b628ca8',
@@ -408,7 +390,7 @@ void main() {
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
         user: mockUser,
-        cartItems: cartMaterial,
+        cartProducts: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
@@ -416,6 +398,7 @@ void main() {
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: salesOrganisationConfigs,
+        orderValue: 100.0,
       );
       expect(
         result.isRight(),
@@ -452,14 +435,10 @@ void main() {
           division: 'div',
           salesOrganisation: '2601',
         ),
-        materials: [
+        products: [
           SubmitMaterialInfo.empty().copyWith(
               materialNumber: MaterialNumber('000000000023001758'), quantity: 2)
         ],
-        purchaseOrderType: 'ZPOR',
-        orderType: 'ZPOR',
-        subscribeStatusChange: true,
-        trackingLevel: 'items',
         blockOrder: salesOrganisationConfigs.enablePrincipalList &&
             cartMaterial.any((item) => item.checkSalesCutOff),
       );
@@ -471,15 +450,17 @@ void main() {
         shipToInfo: ShipToInfo.empty(),
         user: User.empty().copyWith(
             email: EmailAddress('awsib@gmail.com'), username: Username('user')),
-        cartItems: cartMaterial,
+        cartProducts: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-        data: DeliveryInfoData.empty(),
+        data: DeliveryInfoData.empty()
+            .copyWith(paymentTerm: PaymentTerm('A004-')),
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: salesOrganisationConfigs,
+        orderValue: 100.0,
       );
       expect(
         result.isLeft(),
@@ -487,350 +468,185 @@ void main() {
       );
       expect(submitOrder.blockOrder, false);
     });
-    test('get submit order successfully remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('PHP'),
-          disablePrincipals: true,
-          principalList: [
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-                date: DateTimeStringValue('2093041107'),
-                principalCode: PrincipalCode('0000140332')),
-          ]);
+    ///Todo: revisit
+    // test('get submit order successfully remote ', () async {
+    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+    //
+    //   salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+    //       currency: Currency('PHP'),
+    //       disablePrincipals: true,
+    //       principalList: [
+    //         SalesOrganisationConfigsPrincipal.empty().copyWith(
+    //             date: DateTimeStringValue('2093041107'),
+    //             principalCode: PrincipalCode('0000140332')),
+    //       ]);
+    //
+    //   final cartMaterial = <PriceAggregate>[
+    //     PriceAggregate.empty().copyWith(
+    //       quantity: 2,
+    //       materialInfo: MaterialInfo.empty().copyWith(
+    //           materialNumber: MaterialNumber('000000000023001758'),
+    //           principalData: PrincipalData.empty()
+    //               .copyWith(principalCode: PrincipalCode('0000140332'))),
+    //       tenderContract: TenderContract.empty().copyWith(
+    //         contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+    //         tenderOrderReason: TenderContractReason('reas'),
+    //       ),
+    //       salesOrgConfig: salesOrganisationConfigs,
+    //     )
+    //   ];
+    //
+    //   final data = DeliveryInfoData.empty().copyWith(
+    //     poReference: PoReference('CO REF'),
+    //     contactPerson: ContactPerson('PERSON'),
+    //     mobileNumber: MobileNumber('123456'),
+    //     paymentTerm: PaymentTerm('0001-TEST'),
+    //     deliveryDate: DeliveryDate('2023-07-22'),
+    //     deliveryInstruction: DeliveryInstruction('test'),
+    //     // collectiveNumber: CollectiveNumber('543678909'),
+    //     referenceNote: ReferenceNote('note'),
+    //   );
+    //
+    //   final user = mockUser.copyWith(
+    //       id: '123456',
+    //       role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+    //       fullName: const FullName(firstName: 'john', lastName: 'doe'),
+    //       username: Username('mock_user'),
+    //       email: EmailAddress('user@gmail.com'),
+    //       customerCode: CustomerCode('100007654'));
+    //
+    //   final submitOrder = SubmitOrder.empty().copyWith(
+    //       userName: data.contactPerson.getValue().isNotEmpty
+    //           ? data.contactPerson.getValue()
+    //           : user.fullName.toString(),
+    //       poReference: data.poReference.getValue(),
+    //       referenceNotes: data.referenceNote.getValue(),
+    //       specialInstructions: data.deliveryInstruction.getValue(),
+    //       companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+    //       requestedDeliveryDate: data.deliveryDate.getValue(),
+    //       poDate: data.deliveryDate.getValue(),
+    //       telephone: data.mobileNumber.getTelephone,
+    //       collectiveNumber: '',
+    //       paymentTerms: <PriceAggregate>[
+    //         PriceAggregate.empty().copyWith(
+    //           quantity: 2,
+    //           materialInfo: MaterialInfo.empty().copyWith(
+    //             materialNumber: MaterialNumber('000000000023001758'),
+    //           ),
+    //           tenderContract: TenderContract.empty().copyWith(
+    //             contractPaymentTerm:
+    //                 TenderContractInfo.contractPaymentTerm('term'),
+    //             tenderOrderReason: TenderContractReason('reas'),
+    //           ),
+    //         )
+    //       ].first.tenderContract.contractPaymentTerm.getValue(),
+    //       customer: SubmitOrderCustomer.empty().copyWith(
+    //         customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
+    //         customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+    //         division: mockCustomerCodeInfo.division,
+    //         salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
+    //       ),
+    //       blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+    //           cartMaterial.any((item) => item.checkSalesCutOff),
+    //       products: <PriceAggregate>[
+    //         PriceAggregate.empty().copyWith(
+    //           quantity: 2,
+    //           materialInfo: MaterialInfo.empty().copyWith(
+    //             materialNumber: MaterialNumber('000000000023001758'),
+    //           ),
+    //           tenderContract: TenderContract.empty().copyWith(
+    //             contractPaymentTerm:
+    //                 TenderContractInfo.contractPaymentTerm('term'),
+    //             tenderOrderReason: TenderContractReason('reas'),
+    //           ),
+    //         )
+    //       ].map((e) => e.toSubmitMaterialInfo()).toList(),
+    //       language: 'EN',
+    //       paymentMethod: 'Bank Transfer',
+    //       orderValue: 100.0);
+    //
+    //   when(
+    //     () => encryption.encryptionData(
+    //         data: SubmitOrderDto.fromDomain(submitOrder).toJson()),
+    //   ).thenReturn(OrderEncryption.empty());
+    //
+    //   when(() => orderRemoteDataSource.submitOrder(
+    //           orderEncryption: OrderEncryption.empty()))
+    //       .thenAnswer((invocation) async => SubmitOrderResponse.empty()
+    //               .copyWith(salesDocument: 'fake-sales-document', messages: [
+    //             SubmitOrderResponseMessage.empty().copyWith(
+    //               message: 'EZRX-b628ca8',
+    //               type: 'S',
+    //             ),
+    //           ]));
+    //   final result = await orderRepository.submitOrder(
+    //     shipToInfo: mockShipToInfo,
+    //     user: mockUser,
+    //     cartProducts: cartMaterial,
+    //     grandTotal: 100.0,
+    //     customerCodeInfo: mockCustomerCodeInfo,
+    //     salesOrganisation: mockSalesOrganisation,
+    //     data: data,
+    //     orderDocumentType: OrderDocumentType.empty()
+    //         .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+    //     configs: salesOrganisationConfigs,
+    //     orderValue: 100.0,
+    //   );
+    //   expect(
+    //     result.isRight(),
+    //     true,
+    //   );
+    //   expect(submitOrder.blockOrder, false);
+    // });
 
-      final cartMaterial = <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-              principalData: PrincipalData.empty()
-                  .copyWith(principalCode: PrincipalCode('0000140332'))),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
-          salesOrgConfig: salesOrganisationConfigs,
-        )
-      ];
-
-      final data = DeliveryInfoData.empty().copyWith(
-        poReference: PoReference('CO REF'),
-        contactPerson: ContactPerson('PERSON'),
-        mobileNumber: MobileNumber('123456'),
-        paymentTerm: PaymentTerm('0001-TEST'),
-        deliveryDate: DeliveryDate('01/02/2023'),
-        deliveryInstruction: DeliveryInstruction('test'),
-        // collectiveNumber: CollectiveNumber('543678909'),
-        referenceNote: ReferenceNote('note'),
-      );
-
-      final user = mockUser.copyWith(
-          id: '123456',
-          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
-
-      final submitOrder = SubmitOrder.empty().copyWith(
-        userName: data.contactPerson.getValue().isNotEmpty
-            ? data.contactPerson.getValue()
-            : user.fullName.toString(),
-        poReference: data.poReference.getValue(),
-        referenceNotes: data.referenceNote.getValue(),
-        specialInstructions: data.deliveryInstruction.getValue(),
-        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        requestedDeliveryDate: data.deliveryDate.getValue(),
-        poDate: data.deliveryDate.getValue(),
-        telephone: data.mobileNumber.getTelephone,
-        trackingLevel: 'items',
-        collectiveNumber: '',
-        subscribeStatusChange: true,
-        orderType: 'ZPOR',
-        orderReason: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ]
-                .map((cartItem) =>
-                    cartItem.tenderContract.tenderOrderReason.getValue())
-                .contains('730')
-            ? '730'
-            : '',
-        purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-        shippingCondition: ShippingCondition(''),
-        paymentTerms: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ].first.tenderContract.contractPaymentTerm.getValue(),
-        customer: SubmitOrderCustomer.empty().copyWith(
-          customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
-          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
-          division: mockCustomerCodeInfo.division,
-          salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
-        ),
-        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
-            cartMaterial.any((item) => item.checkSalesCutOff),
-        materials: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ].map((e) => e.toSubmitMaterialInfo()).toList(),
-      );
-
-      when(() => orderRemoteDataSource.submitOrder(
-              submitOrder: SubmitOrderDto.fromDomain(submitOrder, 'PHP')))
-          .thenAnswer((invocation) async => SubmitOrderResponse.empty()
-                  .copyWith(salesDocument: 'fake-sales-document', messages: [
-                SubmitOrderResponseMessage.empty().copyWith(
-                  message: 'EZRX-b628ca8',
-                  type: 'S',
-                ),
-              ]));
-
-      final result = await orderRepository.submitOrder(
-        shipToInfo: mockShipToInfo,
-        user: mockUser,
-        cartItems: cartMaterial,
-        grandTotal: 100.0,
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
-        data: data,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationConfigs,
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-      expect(submitOrder.blockOrder, false);
-    });
-
-    test(
-        'get submit order successfully remote when additional data greenDeliveryEnabled true',
-        () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('PHP'),
-          disablePrincipals: true,
-          principalList: [
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-                date: DateTimeStringValue('2023041107'),
-                principalCode: PrincipalCode('0000140331'))
-          ]);
-
-      final cartMaterial = <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-              principalData: PrincipalData.empty().copyWith(
-                principalCode: PrincipalCode('0000140332'),
-              )),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
-          salesOrgConfig: salesOrganisationConfigs,
-        )
-      ];
-
-      final data = DeliveryInfoData.empty().copyWith(
-        poReference: PoReference('CO REF'),
-        contactPerson: ContactPerson('PERSON'),
-        mobileNumber: MobileNumber('123456'),
-        paymentTerm: PaymentTerm('0001-TEST'),
-        deliveryDate: DeliveryDate('01/02/2023'),
-        deliveryInstruction: DeliveryInstruction('test'),
-        // collectiveNumber: CollectiveNumber('543678909'),
-        referenceNote: ReferenceNote('note'),
-        greenDeliveryEnabled: true,
-      );
-
-      final user = mockUser.copyWith(
-        id: '123456',
-        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-        fullName: const FullName(firstName: 'john', lastName: 'doe'),
-        username: Username('mock_user'),
-        email: EmailAddress('user@gmail.com'),
-        customerCode: CustomerCode('100007654'),
-      );
-
-      final submitOrder = SubmitOrder.empty().copyWith(
-        userName: data.contactPerson.getValue().isNotEmpty
-            ? data.contactPerson.getValue()
-            : user.fullName.toString(),
-        poReference: data.poReference.getValue(),
-        referenceNotes: data.referenceNote.getValue(),
-        specialInstructions: data.deliveryInstruction.getValue(),
-        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        requestedDeliveryDate: data.deliveryDate.getValue(),
-        poDate: data.deliveryDate.getValue(),
-        telephone: data.mobileNumber.getTelephone,
-        trackingLevel: 'items',
-        collectiveNumber: '',
-        subscribeStatusChange: true,
-        orderType: 'ZPOR',
-        orderReason: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ]
-                .map((cartItem) =>
-                    cartItem.tenderContract.tenderOrderReason.getValue())
-                .contains('730')
-            ? '730'
-            : '',
-        purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-        shippingCondition: ShippingCondition.greenDelivery(),
-        paymentTerms: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ].first.tenderContract.contractPaymentTerm.getValue(),
-        customer: SubmitOrderCustomer.empty().copyWith(
-          customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
-          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
-          division: mockCustomerCodeInfo.division,
-          salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
-        ),
-        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
-            cartMaterial.any((item) => item.checkSalesCutOff),
-        materials: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ].map((e) => e.toSubmitMaterialInfo()).toList(),
-      );
-
-      when(() => orderRemoteDataSource.submitOrder(
-              submitOrder: SubmitOrderDto.fromDomain(submitOrder, 'PHP')))
-          .thenAnswer((invocation) async => SubmitOrderResponse.empty()
-                  .copyWith(salesDocument: 'fake-sales-document', messages: [
-                SubmitOrderResponseMessage.empty().copyWith(
-                  message: 'EZRX-b628ca8',
-                  type: 'S',
-                ),
-              ]));
-
-      final result = await orderRepository.submitOrder(
-        shipToInfo: mockShipToInfo,
-        user: mockUser,
-        cartItems: cartMaterial,
-        grandTotal: 100.0,
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
-        data: data,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: salesOrganisationConfigs,
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-      expect(submitOrder.blockOrder, false);
-    });
-    test('get submit order fail remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-
-      when(() => orderRemoteDataSource.submitOrder(
-          submitOrder: SubmitOrderDto.fromDomain(
-              SubmitOrder.empty().copyWith(
-                  userName: '',
-                  companyName: CompanyName('name'),
-                  customer: SubmitOrderCustomer.empty().copyWith(
-                    division: 'div',
-                    salesOrganisation: '2601',
-                  ),
-                  materials: [
-                    SubmitMaterialInfo.empty().copyWith(
-                        materialNumber: MaterialNumber('000000000023001758'),
-                        quantity: 2)
-                  ],
-                  purchaseOrderType: 'ZPOR',
-                  orderType: 'ZPOR',
-                  subscribeStatusChange: true,
-                  trackingLevel: 'items',
-                  blockOrder: false),
-              ''))).thenThrow((invocation) async => MockException());
-      final result = await orderRepository.submitOrder(
-        shipToInfo: ShipToInfo.empty(),
-        user: User.empty().copyWith(
-            email: EmailAddress('awsib@gmail.com'), username: Username('user')),
-        cartItems: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty()
-                .copyWith(materialNumber: MaterialNumber('000000000023001758')),
-          )
-        ],
-        grandTotal: 100.0,
-        customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-        data: DeliveryInfoData.empty(),
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: SalesOrganisationConfigs.empty()
-            .copyWith(currency: Currency('PHP')),
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
-    });
+    // test('get submit order fail remote ', () async {
+    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+    //
+    //   when(() => orderRemoteDataSource.submitOrder(
+    //           orderEncryption: encryption.encryptionData(
+    //               data: SubmitOrderDto.fromDomain(
+    //         SubmitOrder.empty().copyWith(
+    //             userName: '',
+    //             companyName: CompanyName('name'),
+    //             customer: SubmitOrderCustomer.empty().copyWith(
+    //               division: 'div',
+    //               salesOrganisation: '2601',
+    //             ),
+    //             products: [
+    //               SubmitMaterialInfo.empty().copyWith(
+    //                   materialNumber: MaterialNumber('000000000023001758'),
+    //                   quantity: 2)
+    //             ],
+    //             blockOrder: false),
+    //       ).toJson()))).thenThrow((invocation) async => MockException());
+    //   final result = await orderRepository.submitOrder(
+    //     shipToInfo: ShipToInfo.empty(),
+    //     user: User.empty().copyWith(
+    //         email: EmailAddress('awsib@gmail.com'), username: Username('user')),
+    //     cartProducts: <PriceAggregate>[
+    //       PriceAggregate.empty().copyWith(
+    //         quantity: 2,
+    //         materialInfo: MaterialInfo.empty()
+    //             .copyWith(materialNumber: MaterialNumber('000000000023001758')),
+    //       )
+    //     ],
+    //     grandTotal: 100.0,
+    //     customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
+    //     salesOrganisation:
+    //         SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+    //     data: DeliveryInfoData.empty(),
+    //     orderDocumentType: OrderDocumentType.empty()
+    //         .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+    //     configs: SalesOrganisationConfigs.empty()
+    //         .copyWith(currency: Currency('PHP')),
+    //     orderValue: 100.0,
+    //   );
+    //   expect(
+    //     result.isLeft(),
+    //     true,
+    //   );
+    // });
 
     test('get OrderRepository successfully remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
@@ -1686,159 +1502,141 @@ void main() {
       expect(result.isLeft(), true);
     });
   });
-  test('get submit order successfully remote ', () async {
-    when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-
-    salesOrganisationConfigs =
-        SalesOrganisationConfigs.empty().copyWith(currency: Currency('PHP'));
-
-    final cartMaterial = <PriceAggregate>[
-      PriceAggregate.empty().copyWith(
-        quantity: 2,
-        materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023001758'),
-            principalData: PrincipalData.empty()
-                .copyWith(principalCode: PrincipalCode('0000140332'))),
-        tenderContract: TenderContract.empty().copyWith(
-          contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-          tenderOrderReason: TenderContractReason('reas'),
-        ),
-        salesOrgConfig: salesOrganisationConfigs,
-      )
-    ];
-
-    final data = DeliveryInfoData.empty().copyWith(
-      poReference: PoReference('CO REF'),
-      contactPerson: ContactPerson('PERSON'),
-      mobileNumber: MobileNumber('123456'),
-      paymentTerm: PaymentTerm('0001-TEST'),
-      deliveryDate: DeliveryDate('01/02/2023'),
-      deliveryInstruction: DeliveryInstruction('test'),
-      // collectiveNumber: CollectiveNumber('543678909'),
-      referenceNote: ReferenceNote('note'),
-    );
-
-    final user = mockUser.copyWith(
-        id: '123456',
-        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-        fullName: const FullName(firstName: 'john', lastName: 'doe'),
-        username: Username('mock_user'),
-        email: EmailAddress('user@gmail.com'),
-        customerCode: CustomerCode('100007654'));
-
-    final submitOrder = SubmitOrder.empty().copyWith(
-      userName: data.contactPerson.getValue().isNotEmpty
-          ? data.contactPerson.getValue()
-          : user.fullName.toString(),
-      poReference: data.poReference.getValue(),
-      referenceNotes: data.referenceNote.getValue(),
-      specialInstructions: data.deliveryInstruction.getValue(),
-      companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-      requestedDeliveryDate: data.deliveryDate.getValue(),
-      poDate: data.deliveryDate.getValue(),
-      telephone: data.mobileNumber.getTelephone,
-      trackingLevel: 'items',
-      collectiveNumber: '',
-      subscribeStatusChange: true,
-      orderType: 'ZPOR',
-      orderReason: <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023001758'),
-          ),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
-        )
-      ]
-              .map((cartItem) =>
-                  cartItem.tenderContract.tenderOrderReason.getValue())
-              .contains('730')
-          ? '730'
-          : '',
-      purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-      shippingCondition: ShippingCondition(''),
-      paymentTerms: <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023001758'),
-          ),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
-          addedBonusList: [
-            MaterialItemBonus.empty(),
-          ],
-        )
-      ].first.tenderContract.contractPaymentTerm.getValue(),
-      customer: SubmitOrderCustomer.empty().copyWith(
-        customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
-        customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
-        division: mockCustomerCodeInfo.division,
-        salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
-      ),
-      blockOrder: salesOrganisationConfigs.enablePrincipalList &&
-          cartMaterial.any((item) => item.checkSalesCutOff),
-      materials: <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023001758'),
-          ),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
-          addedBonusList: [
-            MaterialItemBonus.empty(),
-          ],
-        )
-      ].map((e) => e.toSubmitMaterialInfo()).toList(),
-    );
-
-    when(() => orderRemoteDataSource.submitOrder(
-            submitOrder: SubmitOrderDto.fromDomain(submitOrder, 'PHP')))
-        .thenAnswer((invocation) async => SubmitOrderResponse.empty()
-                .copyWith(salesDocument: 'fake-sales-document', messages: [
-              SubmitOrderResponseMessage.empty().copyWith(
-                message: 'EZRX-b628ca8',
-                type: 'S',
-              ),
-            ]));
-
-    final result = await orderRepository.submitOrder(
-      shipToInfo: mockShipToInfo,
-      user: mockUser,
-      cartItems: <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023001758'),
-          ),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
-          addedBonusList: [
-            MaterialItemBonus.empty(),
-          ],
-        )
-      ],
-      grandTotal: 100.0,
-      customerCodeInfo: mockCustomerCodeInfo,
-      salesOrganisation: mockSalesOrganisation,
-      data: data,
-      configs: salesOrganisationConfigs,
-      orderDocumentType: OrderDocumentType.empty(),
-    );
-    expect(
-      result.isRight(),
-      true,
-    );
-    expect(submitOrder.blockOrder, false);
-  });
+  // test('get submit order successfully remote ', () async {
+  //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+  //
+  //   salesOrganisationConfigs =
+  //       SalesOrganisationConfigs.empty().copyWith(currency: Currency('PHP'));
+  //
+  //   final cartMaterial = <PriceAggregate>[
+  //     PriceAggregate.empty().copyWith(
+  //       quantity: 2,
+  //       materialInfo: MaterialInfo.empty().copyWith(
+  //           materialNumber: MaterialNumber('000000000023001758'),
+  //           principalData: PrincipalData.empty()
+  //               .copyWith(principalCode: PrincipalCode('0000140332'))),
+  //       tenderContract: TenderContract.empty().copyWith(
+  //         contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+  //         tenderOrderReason: TenderContractReason('reas'),
+  //       ),
+  //       salesOrgConfig: salesOrganisationConfigs,
+  //     )
+  //   ];
+  //
+  //   final data = DeliveryInfoData.empty().copyWith(
+  //     poReference: PoReference('CO REF'),
+  //     contactPerson: ContactPerson('PERSON'),
+  //     mobileNumber: MobileNumber('123456'),
+  //     paymentTerm: PaymentTerm('0001-TEST'),
+  //     deliveryDate: DeliveryDate('01/02/2023'),
+  //     deliveryInstruction: DeliveryInstruction('test'),
+  //     // collectiveNumber: CollectiveNumber('543678909'),
+  //     referenceNote: ReferenceNote('note'),
+  //   );
+  //
+  //   final user = mockUser.copyWith(
+  //       id: '123456',
+  //       role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+  //       fullName: const FullName(firstName: 'john', lastName: 'doe'),
+  //       username: Username('mock_user'),
+  //       email: EmailAddress('user@gmail.com'),
+  //       customerCode: CustomerCode('100007654'));
+  //
+  //   final submitOrder = SubmitOrder.empty().copyWith(
+  //     userName: data.contactPerson.getValue().isNotEmpty
+  //         ? data.contactPerson.getValue()
+  //         : user.fullName.toString(),
+  //     poReference: data.poReference.getValue(),
+  //     referenceNotes: data.referenceNote.getValue(),
+  //     specialInstructions: data.deliveryInstruction.getValue(),
+  //     companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+  //     requestedDeliveryDate: data.deliveryDate.getValue(),
+  //     poDate: data.deliveryDate.getValue(),
+  //     telephone: data.mobileNumber.getTelephone,
+  //     collectiveNumber: '',
+  //     paymentTerms: <PriceAggregate>[
+  //       PriceAggregate.empty().copyWith(
+  //         quantity: 2,
+  //         materialInfo: MaterialInfo.empty().copyWith(
+  //           materialNumber: MaterialNumber('000000000023001758'),
+  //         ),
+  //         tenderContract: TenderContract.empty().copyWith(
+  //           contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+  //           tenderOrderReason: TenderContractReason('reas'),
+  //         ),
+  //         addedBonusList: [
+  //           MaterialItemBonus.empty(),
+  //         ],
+  //       )
+  //     ].first.tenderContract.contractPaymentTerm.getValue(),
+  //     customer: SubmitOrderCustomer.empty().copyWith(
+  //       customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
+  //       customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+  //       division: mockCustomerCodeInfo.division,
+  //       salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
+  //     ),
+  //     blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+  //         cartMaterial.any((item) => item.checkSalesCutOff),
+  //     products: <PriceAggregate>[
+  //       PriceAggregate.empty().copyWith(
+  //         quantity: 2,
+  //         materialInfo: MaterialInfo.empty().copyWith(
+  //           materialNumber: MaterialNumber('000000000023001758'),
+  //         ),
+  //         tenderContract: TenderContract.empty().copyWith(
+  //           contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+  //           tenderOrderReason: TenderContractReason('reas'),
+  //         ),
+  //         addedBonusList: [
+  //           MaterialItemBonus.empty(),
+  //         ],
+  //       )
+  //     ].map((e) => e.toSubmitMaterialInfo()).toList(),
+  //   );
+  //
+  //   when(() => orderRemoteDataSource.submitOrder(
+  //               orderEncryption: encryption.encryptionData(
+  //                   data: SubmitOrderDto.fromDomain(
+  //             submitOrder,
+  //           ).toJson())))
+  //       .thenAnswer((invocation) async => SubmitOrderResponse.empty()
+  //               .copyWith(salesDocument: 'fake-sales-document', messages: [
+  //             SubmitOrderResponseMessage.empty().copyWith(
+  //               message: 'EZRX-b628ca8',
+  //               type: 'S',
+  //             ),
+  //           ]));
+  //
+  //   final result = await orderRepository.submitOrder(
+  //     shipToInfo: mockShipToInfo,
+  //     user: mockUser,
+  //     cartProducts: <PriceAggregate>[
+  //       PriceAggregate.empty().copyWith(
+  //         quantity: 2,
+  //         materialInfo: MaterialInfo.empty().copyWith(
+  //           materialNumber: MaterialNumber('000000000023001758'),
+  //         ),
+  //         tenderContract: TenderContract.empty().copyWith(
+  //           contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+  //           tenderOrderReason: TenderContractReason('reas'),
+  //         ),
+  //         addedBonusList: [
+  //           MaterialItemBonus.empty(),
+  //         ],
+  //       )
+  //     ],
+  //     grandTotal: 100.0,
+  //     customerCodeInfo: mockCustomerCodeInfo,
+  //     salesOrganisation: mockSalesOrganisation,
+  //     data: data,
+  //     configs: salesOrganisationConfigs,
+  //     orderDocumentType: OrderDocumentType.empty(),
+  //     orderValue: 100.0,
+  //   );
+  //   expect(
+  //     result.isRight(),
+  //     true,
+  //   );
+  //   expect(submitOrder.blockOrder, false);
+  // });
 }

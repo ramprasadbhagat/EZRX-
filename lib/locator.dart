@@ -102,6 +102,7 @@ import 'package:ezrxmobile/application/returns/request_return/request_return_blo
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -915,11 +916,16 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
+    () => Encryption(),
+  );
+
+  locator.registerLazySingleton(
     () => OrderRepository(
       config: locator<Config>(),
       localDataSource: locator<OrderLocalDataSource>(),
       remoteDataSource: locator<OrderRemoteDataSource>(),
       mixpanelService: locator<MixpanelService>(),
+      encryption: locator<Encryption>(),
     ),
   );
 
@@ -2984,8 +2990,7 @@ void setupLocator() {
     () => ArticleInfoRepository(
       config: locator<Config>(),
       localDataSource: locator<ArticleInfoLocalDataSource>(),
-      remoteDataSource:
-          locator<ArticleInfoRemoteDataSource>(),
+      remoteDataSource: locator<ArticleInfoRemoteDataSource>(),
     ),
   );
 

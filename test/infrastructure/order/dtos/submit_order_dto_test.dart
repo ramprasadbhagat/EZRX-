@@ -9,8 +9,8 @@ void main() {
     setUp(() async {
       data = {
         'username': 'test-name',
-        'companyName':'test-name',
-        'customer':<String,dynamic>{}
+        'companyName': 'test-name',
+        'customer': <String, dynamic>{}
       };
     });
     test('Test toDomain', () {
@@ -20,12 +20,16 @@ void main() {
     });
 
     test('Test fromDomain', () {
-      final configsDto = SubmitOrderDto.fromDomain(SubmitOrderDto.fromJson(data).toDomain(),'fake-currency');
+      final configsDto = SubmitOrderDto.fromDomain(
+        SubmitOrderDto.fromJson(data).toDomain(),
+      );
       expect(configsDto.companyName, 'test-name');
     });
 
     test('Test toJson', () {
-      final configsDto = SubmitOrderDto.fromDomain(SubmitOrderDto.fromJson(data).toDomain(),'fake-currency').toJson();
+      final configsDto = SubmitOrderDto.fromDomain(
+        SubmitOrderDto.fromJson(data).toDomain(),
+      ).toJson();
       expect(configsDto['companyName'], 'test-name');
     });
   });

@@ -236,6 +236,11 @@ class WidgetKeys {
   static const Key showDeliveryInfo = Key('showDeliveryInfo');
   static const Key checkoutProductImage = Key('checkoutProductImage');
   static const Key deliveryDate = Key('deliveryDate');
+  static const Key paymentTermKey = Key('paymentTermKey');
+  static const Key paymentTermDropdownKey = Key('paymentTermDropdownKey');
+  static const Key selectDate = Key('selectDate');
+  static const Key additionalDetailsForm = Key('additionalDetailsForm');
+  static const Key mobileNumber = Key('mobileNumberKey');
 
   //============================================================
   //  Material List

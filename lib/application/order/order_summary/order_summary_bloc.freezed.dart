@@ -16,19 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderSummaryEvent {
+  SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)
-        initialized,
-    required TResult Function() stepContinue,
-    required TResult Function() stepCancel,
-    required TResult Function(int step) stepTapped,
+    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -39,17 +36,13 @@ mixin _$OrderSummaryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult? Function()? stepContinue,
-    TResult? Function()? stepCancel,
-    TResult? Function(int step)? stepTapped,
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -60,17 +53,13 @@ mixin _$OrderSummaryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -83,30 +72,25 @@ mixin _$OrderSummaryEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_StepContinue value) stepContinue,
-    required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_StepTapped value) stepTapped,
     required TResult Function(_SubmitOrder value) submitOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_StepContinue value)? stepContinue,
-    TResult? Function(_StepCancel value)? stepCancel,
-    TResult? Function(_StepTapped value)? stepTapped,
     TResult? Function(_SubmitOrder value)? submitOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
     TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $OrderSummaryEventCopyWith<OrderSummaryEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -115,6 +99,10 @@ abstract class $OrderSummaryEventCopyWith<$Res> {
   factory $OrderSummaryEventCopyWith(
           OrderSummaryEvent value, $Res Function(OrderSummaryEvent) then) =
       _$OrderSummaryEventCopyWithImpl<$Res, OrderSummaryEvent>;
+  @useResult
+  $Res call({SalesOrganisationConfigs config});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -126,20 +114,40 @@ class _$OrderSummaryEventCopyWithImpl<$Res, $Val extends OrderSummaryEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? config = null,
+  }) {
+    return _then(_value.copyWith(
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
+abstract class _$$_InitializedCopyWith<$Res>
+    implements $OrderSummaryEventCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call(
-      {int step,
-      int maxSteps,
-      int additionalDetailsStep,
-      SalesOrganisationConfigs config});
+  $Res call({SalesOrganisationConfigs config});
 
+  @override
   $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
@@ -154,61 +162,28 @@ class __$$_InitializedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? step = null,
-    Object? maxSteps = null,
-    Object? additionalDetailsStep = null,
     Object? config = null,
   }) {
     return _then(_$_Initialized(
-      step: null == step
-          ? _value.step
-          : step // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxSteps: null == maxSteps
-          ? _value.maxSteps
-          : maxSteps // ignore: cast_nullable_to_non_nullable
-              as int,
-      additionalDetailsStep: null == additionalDetailsStep
-          ? _value.additionalDetailsStep
-          : additionalDetailsStep // ignore: cast_nullable_to_non_nullable
-              as int,
       config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
     ));
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized(
-      {required this.step,
-      required this.maxSteps,
-      required this.additionalDetailsStep,
-      required this.config});
+  const _$_Initialized({required this.config});
 
-  @override
-  final int step;
-  @override
-  final int maxSteps;
-  @override
-  final int additionalDetailsStep;
   @override
   final SalesOrganisationConfigs config;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.initialized(step: $step, maxSteps: $maxSteps, additionalDetailsStep: $additionalDetailsStep, config: $config)';
+    return 'OrderSummaryEvent.initialized(config: $config)';
   }
 
   @override
@@ -216,17 +191,11 @@ class _$_Initialized implements _Initialized {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initialized &&
-            (identical(other.step, step) || other.step == step) &&
-            (identical(other.maxSteps, maxSteps) ||
-                other.maxSteps == maxSteps) &&
-            (identical(other.additionalDetailsStep, additionalDetailsStep) ||
-                other.additionalDetailsStep == additionalDetailsStep) &&
             (identical(other.config, config) || other.config == config));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, step, maxSteps, additionalDetailsStep, config);
+  int get hashCode => Object.hash(runtimeType, config);
 
   @JsonKey(ignore: true)
   @override
@@ -237,17 +206,13 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)
-        initialized,
-    required TResult Function() stepContinue,
-    required TResult Function() stepCancel,
-    required TResult Function(int step) stepTapped,
+    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -255,23 +220,19 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs config)
         submitOrder,
   }) {
-    return initialized(step, maxSteps, additionalDetailsStep, config);
+    return initialized(config);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult? Function()? stepContinue,
-    TResult? Function()? stepCancel,
-    TResult? Function(int step)? stepTapped,
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -279,23 +240,19 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs config)?
         submitOrder,
   }) {
-    return initialized?.call(step, maxSteps, additionalDetailsStep, config);
+    return initialized?.call(config);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -305,7 +262,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(step, maxSteps, additionalDetailsStep, config);
+      return initialized(config);
     }
     return orElse();
   }
@@ -314,9 +271,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_StepContinue value) stepContinue,
-    required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_StepTapped value) stepTapped,
     required TResult Function(_SubmitOrder value) submitOrder,
   }) {
     return initialized(this);
@@ -326,9 +280,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_StepContinue value)? stepContinue,
-    TResult? Function(_StepCancel value)? stepCancel,
-    TResult? Function(_StepTapped value)? stepTapped,
     TResult? Function(_SubmitOrder value)? submitOrder,
   }) {
     return initialized?.call(this);
@@ -338,9 +289,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
     TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) {
@@ -352,531 +300,31 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements OrderSummaryEvent {
-  const factory _Initialized(
-      {required final int step,
-      required final int maxSteps,
-      required final int additionalDetailsStep,
-      required final SalesOrganisationConfigs config}) = _$_Initialized;
+  const factory _Initialized({required final SalesOrganisationConfigs config}) =
+      _$_Initialized;
 
-  int get step;
-  int get maxSteps;
-  int get additionalDetailsStep;
+  @override
   SalesOrganisationConfigs get config;
+  @override
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_StepContinueCopyWith<$Res> {
-  factory _$$_StepContinueCopyWith(
-          _$_StepContinue value, $Res Function(_$_StepContinue) then) =
-      __$$_StepContinueCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_StepContinueCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_StepContinue>
-    implements _$$_StepContinueCopyWith<$Res> {
-  __$$_StepContinueCopyWithImpl(
-      _$_StepContinue _value, $Res Function(_$_StepContinue) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_StepContinue implements _StepContinue {
-  const _$_StepContinue();
-
-  @override
-  String toString() {
-    return 'OrderSummaryEvent.stepContinue()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StepContinue);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)
-        initialized,
-    required TResult Function() stepContinue,
-    required TResult Function() stepCancel,
-    required TResult Function(int step) stepTapped,
-    required TResult Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
-        submitOrder,
-  }) {
-    return stepContinue();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult? Function()? stepContinue,
-    TResult? Function()? stepCancel,
-    TResult? Function(int step)? stepTapped,
-    TResult? Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
-        submitOrder,
-  }) {
-    return stepContinue?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
-    TResult Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
-        submitOrder,
-    required TResult orElse(),
-  }) {
-    if (stepContinue != null) {
-      return stepContinue();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_StepContinue value) stepContinue,
-    required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_StepTapped value) stepTapped,
-    required TResult Function(_SubmitOrder value) submitOrder,
-  }) {
-    return stepContinue(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_StepContinue value)? stepContinue,
-    TResult? Function(_StepCancel value)? stepCancel,
-    TResult? Function(_StepTapped value)? stepTapped,
-    TResult? Function(_SubmitOrder value)? submitOrder,
-  }) {
-    return stepContinue?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
-    TResult Function(_SubmitOrder value)? submitOrder,
-    required TResult orElse(),
-  }) {
-    if (stepContinue != null) {
-      return stepContinue(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _StepContinue implements OrderSummaryEvent {
-  const factory _StepContinue() = _$_StepContinue;
-}
-
-/// @nodoc
-abstract class _$$_StepCancelCopyWith<$Res> {
-  factory _$$_StepCancelCopyWith(
-          _$_StepCancel value, $Res Function(_$_StepCancel) then) =
-      __$$_StepCancelCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_StepCancelCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_StepCancel>
-    implements _$$_StepCancelCopyWith<$Res> {
-  __$$_StepCancelCopyWithImpl(
-      _$_StepCancel _value, $Res Function(_$_StepCancel) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_StepCancel implements _StepCancel {
-  const _$_StepCancel();
-
-  @override
-  String toString() {
-    return 'OrderSummaryEvent.stepCancel()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StepCancel);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)
-        initialized,
-    required TResult Function() stepContinue,
-    required TResult Function() stepCancel,
-    required TResult Function(int step) stepTapped,
-    required TResult Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
-        submitOrder,
-  }) {
-    return stepCancel();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult? Function()? stepContinue,
-    TResult? Function()? stepCancel,
-    TResult? Function(int step)? stepTapped,
-    TResult? Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
-        submitOrder,
-  }) {
-    return stepCancel?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
-    TResult Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
-        submitOrder,
-    required TResult orElse(),
-  }) {
-    if (stepCancel != null) {
-      return stepCancel();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_StepContinue value) stepContinue,
-    required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_StepTapped value) stepTapped,
-    required TResult Function(_SubmitOrder value) submitOrder,
-  }) {
-    return stepCancel(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_StepContinue value)? stepContinue,
-    TResult? Function(_StepCancel value)? stepCancel,
-    TResult? Function(_StepTapped value)? stepTapped,
-    TResult? Function(_SubmitOrder value)? submitOrder,
-  }) {
-    return stepCancel?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
-    TResult Function(_SubmitOrder value)? submitOrder,
-    required TResult orElse(),
-  }) {
-    if (stepCancel != null) {
-      return stepCancel(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _StepCancel implements OrderSummaryEvent {
-  const factory _StepCancel() = _$_StepCancel;
-}
-
-/// @nodoc
-abstract class _$$_StepTappedCopyWith<$Res> {
-  factory _$$_StepTappedCopyWith(
-          _$_StepTapped value, $Res Function(_$_StepTapped) then) =
-      __$$_StepTappedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int step});
-}
-
-/// @nodoc
-class __$$_StepTappedCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_StepTapped>
-    implements _$$_StepTappedCopyWith<$Res> {
-  __$$_StepTappedCopyWithImpl(
-      _$_StepTapped _value, $Res Function(_$_StepTapped) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? step = null,
-  }) {
-    return _then(_$_StepTapped(
-      step: null == step
-          ? _value.step
-          : step // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_StepTapped implements _StepTapped {
-  const _$_StepTapped({required this.step});
-
-  @override
-  final int step;
-
-  @override
-  String toString() {
-    return 'OrderSummaryEvent.stepTapped(step: $step)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_StepTapped &&
-            (identical(other.step, step) || other.step == step));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, step);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_StepTappedCopyWith<_$_StepTapped> get copyWith =>
-      __$$_StepTappedCopyWithImpl<_$_StepTapped>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)
-        initialized,
-    required TResult Function() stepContinue,
-    required TResult Function() stepCancel,
-    required TResult Function(int step) stepTapped,
-    required TResult Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
-        submitOrder,
-  }) {
-    return stepTapped(step);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult? Function()? stepContinue,
-    TResult? Function()? stepCancel,
-    TResult? Function(int step)? stepTapped,
-    TResult? Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
-        submitOrder,
-  }) {
-    return stepTapped?.call(step);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
-    TResult Function(
-            ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartItems,
-            double grandTotal,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
-            OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
-        submitOrder,
-    required TResult orElse(),
-  }) {
-    if (stepTapped != null) {
-      return stepTapped(step);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_StepContinue value) stepContinue,
-    required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_StepTapped value) stepTapped,
-    required TResult Function(_SubmitOrder value) submitOrder,
-  }) {
-    return stepTapped(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_StepContinue value)? stepContinue,
-    TResult? Function(_StepCancel value)? stepCancel,
-    TResult? Function(_StepTapped value)? stepTapped,
-    TResult? Function(_SubmitOrder value)? submitOrder,
-  }) {
-    return stepTapped?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
-    TResult Function(_SubmitOrder value)? submitOrder,
-    required TResult orElse(),
-  }) {
-    if (stepTapped != null) {
-      return stepTapped(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _StepTapped implements OrderSummaryEvent {
-  const factory _StepTapped({required final int step}) = _$_StepTapped;
-
-  int get step;
-  @JsonKey(ignore: true)
-  _$$_StepTappedCopyWith<_$_StepTapped> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_SubmitOrderCopyWith<$Res> {
+abstract class _$$_SubmitOrderCopyWith<$Res>
+    implements $OrderSummaryEventCopyWith<$Res> {
   factory _$$_SubmitOrderCopyWith(
           _$_SubmitOrder value, $Res Function(_$_SubmitOrder) then) =
       __$$_SubmitOrderCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
       {ShipToInfo shipToInfo,
       User user,
-      List<PriceAggregate> cartItems,
+      List<PriceAggregate> cartProducts,
       double grandTotal,
+      double orderValue,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
       DeliveryInfoData data,
@@ -889,6 +337,7 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $DeliveryInfoDataCopyWith<$Res> get data;
   $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
+  @override
   $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
@@ -905,8 +354,9 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
   $Res call({
     Object? shipToInfo = null,
     Object? user = null,
-    Object? cartItems = null,
+    Object? cartProducts = null,
     Object? grandTotal = null,
+    Object? orderValue = null,
     Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
     Object? data = null,
@@ -922,13 +372,17 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      cartItems: null == cartItems
-          ? _value._cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
+      cartProducts: null == cartProducts
+          ? _value._cartProducts
+          : cartProducts // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
               as double,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
@@ -1000,14 +454,6 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
       return _then(_value.copyWith(orderDocumentType: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -1016,29 +462,32 @@ class _$_SubmitOrder implements _SubmitOrder {
   const _$_SubmitOrder(
       {required this.shipToInfo,
       required this.user,
-      required final List<PriceAggregate> cartItems,
+      required final List<PriceAggregate> cartProducts,
       required this.grandTotal,
+      required this.orderValue,
       required this.customerCodeInfo,
       required this.salesOrganisation,
       required this.data,
       required this.orderDocumentType,
       required this.config})
-      : _cartItems = cartItems;
+      : _cartProducts = cartProducts;
 
   @override
   final ShipToInfo shipToInfo;
   @override
   final User user;
-  final List<PriceAggregate> _cartItems;
+  final List<PriceAggregate> _cartProducts;
   @override
-  List<PriceAggregate> get cartItems {
-    if (_cartItems is EqualUnmodifiableListView) return _cartItems;
+  List<PriceAggregate> get cartProducts {
+    if (_cartProducts is EqualUnmodifiableListView) return _cartProducts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cartItems);
+    return EqualUnmodifiableListView(_cartProducts);
   }
 
   @override
   final double grandTotal;
+  @override
+  final double orderValue;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
@@ -1052,7 +501,7 @@ class _$_SubmitOrder implements _SubmitOrder {
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.submitOrder(shipToInfo: $shipToInfo, user: $user, cartItems: $cartItems, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, data: $data, orderDocumentType: $orderDocumentType, config: $config)';
+    return 'OrderSummaryEvent.submitOrder(shipToInfo: $shipToInfo, user: $user, cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, data: $data, orderDocumentType: $orderDocumentType, config: $config)';
   }
 
   @override
@@ -1064,9 +513,11 @@ class _$_SubmitOrder implements _SubmitOrder {
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
-                .equals(other._cartItems, _cartItems) &&
+                .equals(other._cartProducts, _cartProducts) &&
             (identical(other.grandTotal, grandTotal) ||
                 other.grandTotal == grandTotal) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -1082,8 +533,9 @@ class _$_SubmitOrder implements _SubmitOrder {
       runtimeType,
       shipToInfo,
       user,
-      const DeepCollectionEquality().hash(_cartItems),
+      const DeepCollectionEquality().hash(_cartProducts),
       grandTotal,
+      orderValue,
       customerCodeInfo,
       salesOrganisation,
       data,
@@ -1099,17 +551,13 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)
-        initialized,
-    required TResult Function() stepContinue,
-    required TResult Function() stepCancel,
-    required TResult Function(int step) stepTapped,
+    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -1117,24 +565,20 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisationConfigs config)
         submitOrder,
   }) {
-    return submitOrder(shipToInfo, user, cartItems, grandTotal,
+    return submitOrder(shipToInfo, user, cartProducts, grandTotal, orderValue,
         customerCodeInfo, salesOrganisation, data, orderDocumentType, config);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult? Function()? stepContinue,
-    TResult? Function()? stepCancel,
-    TResult? Function(int step)? stepTapped,
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -1142,24 +586,29 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisationConfigs config)?
         submitOrder,
   }) {
-    return submitOrder?.call(shipToInfo, user, cartItems, grandTotal,
-        customerCodeInfo, salesOrganisation, data, orderDocumentType, config);
+    return submitOrder?.call(
+        shipToInfo,
+        user,
+        cartProducts,
+        grandTotal,
+        orderValue,
+        customerCodeInfo,
+        salesOrganisation,
+        data,
+        orderDocumentType,
+        config);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int step, int maxSteps, int additionalDetailsStep,
-            SalesOrganisationConfigs config)?
-        initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<PriceAggregate> cartProducts,
             double grandTotal,
+            double orderValue,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
             DeliveryInfoData data,
@@ -1169,7 +618,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
-      return submitOrder(shipToInfo, user, cartItems, grandTotal,
+      return submitOrder(shipToInfo, user, cartProducts, grandTotal, orderValue,
           customerCodeInfo, salesOrganisation, data, orderDocumentType, config);
     }
     return orElse();
@@ -1179,9 +628,6 @@ class _$_SubmitOrder implements _SubmitOrder {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_StepContinue value) stepContinue,
-    required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_StepTapped value) stepTapped,
     required TResult Function(_SubmitOrder value) submitOrder,
   }) {
     return submitOrder(this);
@@ -1191,9 +637,6 @@ class _$_SubmitOrder implements _SubmitOrder {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_StepContinue value)? stepContinue,
-    TResult? Function(_StepCancel value)? stepCancel,
-    TResult? Function(_StepTapped value)? stepTapped,
     TResult? Function(_SubmitOrder value)? submitOrder,
   }) {
     return submitOrder?.call(this);
@@ -1203,9 +646,6 @@ class _$_SubmitOrder implements _SubmitOrder {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
     TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) {
@@ -1220,8 +660,9 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
   const factory _SubmitOrder(
       {required final ShipToInfo shipToInfo,
       required final User user,
-      required final List<PriceAggregate> cartItems,
+      required final List<PriceAggregate> cartProducts,
       required final double grandTotal,
+      required final double orderValue,
       required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
       required final DeliveryInfoData data,
@@ -1230,13 +671,16 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
 
   ShipToInfo get shipToInfo;
   User get user;
-  List<PriceAggregate> get cartItems;
+  List<PriceAggregate> get cartProducts;
   double get grandTotal;
+  double get orderValue;
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
   DeliveryInfoData get data;
   OrderDocumentType get orderDocumentType;
+  @override
   SalesOrganisationConfigs get config;
+  @override
   @JsonKey(ignore: true)
   _$$_SubmitOrderCopyWith<_$_SubmitOrder> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1246,11 +690,7 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
 mixin _$OrderSummaryState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  int get step => throw _privateConstructorUsedError;
-  int get maxSteps => throw _privateConstructorUsedError;
-  int get additionalDetailsStep => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  bool get isSubmitSuccess => throw _privateConstructorUsedError;
   SubmitOrderResponse get submitOrderResponse =>
       throw _privateConstructorUsedError;
 
@@ -1267,11 +707,7 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      int step,
-      int maxSteps,
-      int additionalDetailsStep,
       bool isSubmitting,
-      bool isSubmitSuccess,
       SubmitOrderResponse submitOrderResponse});
 
   $SubmitOrderResponseCopyWith<$Res> get submitOrderResponse;
@@ -1291,11 +727,7 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
   @override
   $Res call({
     Object? apiFailureOrSuccessOption = null,
-    Object? step = null,
-    Object? maxSteps = null,
-    Object? additionalDetailsStep = null,
     Object? isSubmitting = null,
-    Object? isSubmitSuccess = null,
     Object? submitOrderResponse = null,
   }) {
     return _then(_value.copyWith(
@@ -1303,25 +735,9 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      step: null == step
-          ? _value.step
-          : step // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxSteps: null == maxSteps
-          ? _value.maxSteps
-          : maxSteps // ignore: cast_nullable_to_non_nullable
-              as int,
-      additionalDetailsStep: null == additionalDetailsStep
-          ? _value.additionalDetailsStep
-          : additionalDetailsStep // ignore: cast_nullable_to_non_nullable
-              as int,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSubmitSuccess: null == isSubmitSuccess
-          ? _value.isSubmitSuccess
-          : isSubmitSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
       submitOrderResponse: null == submitOrderResponse
           ? _value.submitOrderResponse
@@ -1350,11 +766,7 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
   @useResult
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      int step,
-      int maxSteps,
-      int additionalDetailsStep,
       bool isSubmitting,
-      bool isSubmitSuccess,
       SubmitOrderResponse submitOrderResponse});
 
   @override
@@ -1373,11 +785,7 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? apiFailureOrSuccessOption = null,
-    Object? step = null,
-    Object? maxSteps = null,
-    Object? additionalDetailsStep = null,
     Object? isSubmitting = null,
-    Object? isSubmitSuccess = null,
     Object? submitOrderResponse = null,
   }) {
     return _then(_$_OrderSummaryState(
@@ -1385,25 +793,9 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      step: null == step
-          ? _value.step
-          : step // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxSteps: null == maxSteps
-          ? _value.maxSteps
-          : maxSteps // ignore: cast_nullable_to_non_nullable
-              as int,
-      additionalDetailsStep: null == additionalDetailsStep
-          ? _value.additionalDetailsStep
-          : additionalDetailsStep // ignore: cast_nullable_to_non_nullable
-              as int,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSubmitSuccess: null == isSubmitSuccess
-          ? _value.isSubmitSuccess
-          : isSubmitSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
       submitOrderResponse: null == submitOrderResponse
           ? _value.submitOrderResponse
@@ -1418,32 +810,20 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
 class _$_OrderSummaryState extends _OrderSummaryState {
   const _$_OrderSummaryState(
       {required this.apiFailureOrSuccessOption,
-      required this.step,
-      required this.maxSteps,
-      required this.additionalDetailsStep,
       required this.isSubmitting,
-      required this.isSubmitSuccess,
       required this.submitOrderResponse})
       : super._();
 
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
-  final int step;
-  @override
-  final int maxSteps;
-  @override
-  final int additionalDetailsStep;
-  @override
   final bool isSubmitting;
-  @override
-  final bool isSubmitSuccess;
   @override
   final SubmitOrderResponse submitOrderResponse;
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps, additionalDetailsStep: $additionalDetailsStep, isSubmitting: $isSubmitting, isSubmitSuccess: $isSubmitSuccess, submitOrderResponse: $submitOrderResponse)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, submitOrderResponse: $submitOrderResponse)';
   }
 
   @override
@@ -1454,29 +834,15 @@ class _$_OrderSummaryState extends _OrderSummaryState {
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
-            (identical(other.step, step) || other.step == step) &&
-            (identical(other.maxSteps, maxSteps) ||
-                other.maxSteps == maxSteps) &&
-            (identical(other.additionalDetailsStep, additionalDetailsStep) ||
-                other.additionalDetailsStep == additionalDetailsStep) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
-            (identical(other.isSubmitSuccess, isSubmitSuccess) ||
-                other.isSubmitSuccess == isSubmitSuccess) &&
             (identical(other.submitOrderResponse, submitOrderResponse) ||
                 other.submitOrderResponse == submitOrderResponse));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      apiFailureOrSuccessOption,
-      step,
-      maxSteps,
-      additionalDetailsStep,
-      isSubmitting,
-      isSubmitSuccess,
-      submitOrderResponse);
+  int get hashCode => Object.hash(runtimeType, apiFailureOrSuccessOption,
+      isSubmitting, submitOrderResponse);
 
   @JsonKey(ignore: true)
   @override
@@ -1490,11 +856,7 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   const factory _OrderSummaryState(
           {required final Option<Either<ApiFailure, dynamic>>
               apiFailureOrSuccessOption,
-          required final int step,
-          required final int maxSteps,
-          required final int additionalDetailsStep,
           required final bool isSubmitting,
-          required final bool isSubmitSuccess,
           required final SubmitOrderResponse submitOrderResponse}) =
       _$_OrderSummaryState;
   const _OrderSummaryState._() : super._();
@@ -1502,15 +864,7 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
-  int get step;
-  @override
-  int get maxSteps;
-  @override
-  int get additionalDetailsStep;
-  @override
   bool get isSubmitting;
-  @override
-  bool get isSubmitSuccess;
   @override
   SubmitOrderResponse get submitOrderResponse;
   @override

@@ -57,25 +57,28 @@ abstract class $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
       _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res,
           OrderHistoryDetailsShippingInformationDto>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'Address', defaultValue: '')
-          String address,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          String invoiceNumber,
-      @JsonKey(name: 'InvoiceDate', defaultValue: '')
-          String invoiceDate,
-      @JsonKey(name: 'PostalCode', defaultValue: '')
-          String postalCode,
-      @JsonKey(name: 'Country', defaultValue: '')
-          String country,
-      @JsonKey(name: 'Phone', defaultValue: '')
-          String phone,
-      @JsonKey(name: 'Fax', defaultValue: '')
-          String fax,
-      @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
-          List<OrderHistoryDetailsInvoicesDto> invoices});
+  $Res
+      call(
+          {@JsonKey(name: 'Address', defaultValue: '')
+              String address,
+          @JsonKey(name: 'POReference', defaultValue: '')
+              String pOReference,
+          @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+              String invoiceNumber,
+          @JsonKey(name: 'InvoiceDate', defaultValue: '')
+              String invoiceDate,
+          @JsonKey(name: 'PostalCode', defaultValue: '')
+              String postalCode,
+          @JsonKey(name: 'Country', defaultValue: '')
+              String country,
+          @JsonKey(name: 'Phone', defaultValue: '')
+              String phone,
+          @JsonKey(name: 'Fax', defaultValue: '')
+              String fax,
+          @JsonKey(
+              name: 'Invoices', defaultValue: <
+                  OrderHistoryDetailsInvoicesDto>[])
+              List<OrderHistoryDetailsInvoicesDto> invoices});
 }
 
 /// @nodoc
@@ -153,25 +156,28 @@ abstract class _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
       __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'Address', defaultValue: '')
-          String address,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          String invoiceNumber,
-      @JsonKey(name: 'InvoiceDate', defaultValue: '')
-          String invoiceDate,
-      @JsonKey(name: 'PostalCode', defaultValue: '')
-          String postalCode,
-      @JsonKey(name: 'Country', defaultValue: '')
-          String country,
-      @JsonKey(name: 'Phone', defaultValue: '')
-          String phone,
-      @JsonKey(name: 'Fax', defaultValue: '')
-          String fax,
-      @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
-          List<OrderHistoryDetailsInvoicesDto> invoices});
+  $Res
+      call(
+          {@JsonKey(name: 'Address', defaultValue: '')
+              String address,
+          @JsonKey(name: 'POReference', defaultValue: '')
+              String pOReference,
+          @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+              String invoiceNumber,
+          @JsonKey(name: 'InvoiceDate', defaultValue: '')
+              String invoiceDate,
+          @JsonKey(name: 'PostalCode', defaultValue: '')
+              String postalCode,
+          @JsonKey(name: 'Country', defaultValue: '')
+              String country,
+          @JsonKey(name: 'Phone', defaultValue: '')
+              String phone,
+          @JsonKey(name: 'Fax', defaultValue: '')
+              String fax,
+          @JsonKey(
+              name: 'Invoices', defaultValue: <
+                  OrderHistoryDetailsInvoicesDto>[])
+              List<OrderHistoryDetailsInvoicesDto> invoices});
 }
 
 /// @nodoc

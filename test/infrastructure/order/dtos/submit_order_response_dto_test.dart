@@ -17,14 +17,14 @@ void main() {
     });
     test('Test fromDomain', () {
       final configsDto = SubmitOrderResponseDto.fromDomain(
-          SubmitOrderResponseDto.fromJson(data['data']['submitOrderTwo']).toDomain());
+          SubmitOrderResponseDto.fromJson(data['data']['submitOrder']).toDomain());
 
       expect(configsDto.salesDocument, '27faf203-62e6-43cf-a9cc-9edd3e22d032');
     });
 
     test('Test toJson', () {
       final configsDto = SubmitOrderResponseDto.fromDomain(
-          SubmitOrderResponseDto.fromJson(data['data']['submitOrderTwo']).toDomain()).toJson();
+          SubmitOrderResponseDto.fromJson(data['data']['submitOrder']).toDomain()).toJson();
 
       expect(configsDto['SalesDocument'], '27faf203-62e6-43cf-a9cc-9edd3e22d032');
     });

@@ -45,8 +45,8 @@ class OrderQueryMutation {
 
   String submitOrder() {
     return '''
-    mutation submitOrderMutation(\$order: NewOrderTwoInput!){
-      submitOrderTwo(order: \$order) {
+    mutation submitOrderMutation(\$NewOrderInput: NewOrderInputSecure!) {
+      submitOrder(order: \$NewOrderInput) {
         SalesDocument
         Messages {
           Type

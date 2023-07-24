@@ -184,10 +184,31 @@ class CartState with _$CartState {
   }
 
   double get totalPrice => cartProducts.fold(
-      0,
-      (previousValue, element) =>
-          previousValue +
-          (element.price.finalPrice.getValue() * element.quantity),);
+        0,
+        (previousValue, element) =>
+            previousValue +
+            (element.price.finalPrice.getValue() * element.quantity),
+      );
+
+  double get totalPriceWithTax => cartProducts.fold(
+        0,
+        (previousValue, element) =>
+            previousValue +
+            (element.price.finalPrice.getValue() *
+                element.quantity *
+                (100 + element.salesOrgConfig.vatValue) /
+                100),
+      );
+
+  double get tax => cartProducts.fold(
+        0,
+        (previousValue, element) =>
+            previousValue +
+            (element.price.finalPrice.getValue() *
+                element.quantity *
+                element.salesOrgConfig.vatValue /
+                100),
+      );
 
   double itemPrice({required int index}) {
     final cartProductsTemp = cartProducts.elementAt(index);

@@ -31,7 +31,8 @@ void main() {
     });
     test('Test fromDomain', () {
       final configsDto = SubmitMaterialInfoDto.fromDomain(
-          SubmitMaterialInfoDto.fromJson(data).toDomain(),'fake-currency');
+        SubmitMaterialInfoDto.fromJson(data).toDomain(),
+      );
 
       expect(configsDto.materialNumber, '1234');
     });
@@ -44,8 +45,8 @@ void main() {
 
     test('Test toJson', () {
       final configsDto = SubmitMaterialInfoDto.fromDomain(
-              SubmitMaterialInfoDto.fromJson(data).toDomain(),'fake-currency')
-          .toJson();
+        SubmitMaterialInfoDto.fromJson(data).toDomain(),
+      ).toJson();
 
       expect(configsDto['qty'], 20);
     });
@@ -57,8 +58,8 @@ void main() {
       final config = overrideTojson(configDto);
 
       expect(config, {
-        'reference' : '',
-        'valueOverride':[
+        'reference': '',
+        'valueOverride': [
           {'code': '', 'price': 10, 'currency': 'fake-currency'}
         ]
       });

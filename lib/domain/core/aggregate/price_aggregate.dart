@@ -88,7 +88,7 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get didPriceOrBonusOverride =>
       price.priceOverride.isValid() ||
-          anyDealBonusOverride ||
+      anyDealBonusOverride ||
       additionalBonusOverride;
 
   SubmitMaterialInfo toSubmitMaterialInfo() {
@@ -104,15 +104,18 @@ class PriceAggregate with _$PriceAggregate {
       comment: materialInfo.remarks,
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
-      salesDistrict: stockInfo.salesDistrict,
       materialItemOverride: MaterialItemOverrideDto.fromPriceAggregate(
         copyWith(
           price: price.copyWith(
-          isPriceOverride: didPriceOrBonusOverride,
+            isPriceOverride: didPriceOrBonusOverride,
           ),
         ),
       ).toDomain(),
-      tenderContract: tenderContract,
+      price: price.finalPrice.getValue(),
+
+      ///Todo: revisit
+      productType: 'MATERIAL',
+      parentID: materialInfo.parentID,
     );
   }
 

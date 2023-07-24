@@ -8,14 +8,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 
@@ -30,12 +28,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
-
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-
-import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
@@ -184,56 +176,6 @@ class _CartPageState extends State<CartPage> {
       ),
     );
   }
-
-  void _goToOrderSummary(BuildContext context) {
-    final isMYMarketSalesRep =
-        context.read<EligibilityBloc>().state.isMYMarketSalesRep;
-    final config = context.read<SalesOrgBloc>().state.configs;
-    final customerCodeInfo =
-        context.read<CustomerCodeBloc>().state.customerCodeInfo;
-    final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
-        ? customerCodeInfo.billToInfos.first
-        : BillToInfo.empty();
-    var maxStep = 4;
-    var additionDetailsStep = 3;
-    if (config.enableBillTo &&
-        billToInfo.billToCustomerCode.isNotEmpty &&
-        customerCodeInfo.customerCodeSoldTo != billToInfo.billToCustomerCode) {
-      maxStep = 5;
-      additionDetailsStep = 4;
-    }
-    context.read<OrderSummaryBloc>().add(OrderSummaryEvent.initialized(
-          additionalDetailsStep: additionDetailsStep,
-          maxSteps: maxStep,
-          step: 0,
-          config: config,
-        ));
-
-    context.read<OrderEligibilityBloc>().add(
-          OrderEligibilityEvent.initialized(
-            cartItems:
-                context.read<CartBloc>().state.selectedCartItems.allMaterials,
-            configs: config,
-            customerCodeInfo: customerCodeInfo,
-            grandTotal: context.read<CartBloc>().state.grandTotal(
-                  isMYMarketSalesRep: isMYMarketSalesRep,
-                ),
-            orderType: context
-                .read<OrderDocumentTypeBloc>()
-                .state
-                .selectedOrderType
-                .documentType
-                .getOrDefaultValue(''),
-            salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-            shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-            user: context.read<UserBloc>().state.user,
-            subTotal: context.read<CartBloc>().state.subTotal(
-                  isMYMarketSalesRep: isMYMarketSalesRep,
-                ),
-          ),
-        );
-    context.router.pushNamed('orders/order_summary');
-  }
 }
 
 class _CartScrollList extends StatelessWidget {
@@ -287,7 +229,6 @@ class _CartScrollList extends StatelessWidget {
                     : const SizedBox(),
                 CartProductTile(
                   cartItem: item,
-                  index: index,
                 ),
                 state.cartProducts[index].addedBonusList.isNotEmpty
                     ? CartProductTileBonus(
@@ -472,7 +413,6 @@ class _TotalPriceSection extends StatelessWidget {
   }
 }
 
-//TODO: Static data to be removed once add to cart flow is implemented
 class _CheckoutSection extends StatelessWidget {
   const _CheckoutSection({Key? key}) : super(key: key);
 
@@ -563,35 +503,37 @@ class _CheckoutSection extends StatelessWidget {
       enableDrag: false,
       useSafeArea: true,
       builder: (_) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.6,
-          child: Padding(
-            padding: const EdgeInsets.all(
-              20,
-            ),
-            child: Column(
-              children: [
-                const _SummaryInfo(),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      context.router.pop();
-                    },
-                    child: Text(
-                      'Close'.tr(),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.white,
-                          ),
+        return Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(
+                20,
+              ),
+              child: Column(
+                children: [
+                  const _SummaryInfo(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.router.pop();
+                      },
+                      child: Text(
+                        'Close'.tr(),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );

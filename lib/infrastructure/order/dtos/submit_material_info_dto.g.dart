@@ -11,18 +11,18 @@ _$_SubmitMaterialInfoDto _$$_SubmitMaterialInfoDtoFromJson(
     _$_SubmitMaterialInfoDto(
       materialNumber: json['materialNumber'] as String? ?? '',
       qty: json['qty'] as int? ?? 0,
-      tenderContract: SubmitTenderContractDto.fromJson(
-          json['contract'] as Map<String, dynamic>),
       bonuses: (json['bonuses'] as List<dynamic>?)
               ?.map((e) => SubmitMaterialItemBonusDto.fromJson(
                   e as Map<String, dynamic>))
               .toList() ??
           [],
-      comment: json['comment'] as String? ?? '',
-      batch: json['batch'] as String? ?? '',
-      salesDistrict: json['salesDistrict'] as String? ?? '',
+      comment: json['Comment'] as String? ?? '',
+      parentId: json['ParentID'] as String? ?? '',
       materialItemOverride: MaterialItemOverrideDto.fromJson(
           materialItemOverrideread(json, 'override') as Map<String, dynamic>),
+      productType: json['ProductType'] as String? ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0,
+      batch: json['batch'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
@@ -30,9 +30,9 @@ Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
   final val = <String, dynamic>{
     'materialNumber': instance.materialNumber,
     'qty': instance.qty,
-    'contract': instance.tenderContract.toJson(),
     'bonuses': instance.bonuses.map((e) => e.toJson()).toList(),
-    'comment': instance.comment,
+    'Comment': instance.comment,
+    'ParentID': instance.parentId,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -41,8 +41,9 @@ Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
     }
   }
 
-  writeNotNull('batch', overrideBatchJson(instance.batch));
-  val['salesDistrict'] = instance.salesDistrict;
   writeNotNull('override', overrideTojson(instance.materialItemOverride));
+  val['ProductType'] = instance.productType;
+  val['price'] = instance.price;
+  writeNotNull('batch', overrideBatchJson(instance.batch));
   return val;
 }

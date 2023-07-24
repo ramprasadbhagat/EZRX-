@@ -10,6 +10,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
     required bool isValidated,
     required bool isLoading,
     required bool showErrorMessages,
+    DeliveryInfoLabel? focusTo,
   }) = _AdditionalDetailsState;
 
   factory AdditionalDetailsState.initial() => AdditionalDetailsState(

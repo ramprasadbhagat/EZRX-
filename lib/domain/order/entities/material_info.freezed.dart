@@ -42,7 +42,8 @@ mixin _$MaterialInfo {
   MaterialTaxClassification get taxClassification =>
       throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
-  String get genericMaterialName =>
+  String get genericMaterialName => throw _privateConstructorUsedError;
+  String get remarks =>
       throw _privateConstructorUsedError; //TODO: remove field from v2
   String get itemBrand => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
@@ -53,7 +54,6 @@ mixin _$MaterialInfo {
   List<String> get taxes => throw _privateConstructorUsedError;
   List<Bundle> get bundles => throw _privateConstructorUsedError;
   bool get isFOCMaterial => throw _privateConstructorUsedError;
-  String get remarks => throw _privateConstructorUsedError;
   String get ean => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -94,6 +94,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       MaterialTaxClassification taxClassification,
       String itemRegistrationNumber,
       String genericMaterialName,
+      String remarks,
       String itemBrand,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
@@ -103,7 +104,6 @@ abstract class $MaterialInfoCopyWith<$Res> {
       List<String> taxes,
       List<Bundle> bundles,
       bool isFOCMaterial,
-      String remarks,
       String ean});
 
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -151,6 +151,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
+    Object? remarks = null,
     Object? itemBrand = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -160,7 +161,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? taxes = null,
     Object? bundles = null,
     Object? isFOCMaterial = null,
-    Object? remarks = null,
     Object? ean = null,
   }) {
     return _then(_value.copyWith(
@@ -268,6 +268,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
       itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
@@ -304,10 +308,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.isFOCMaterial
           : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      remarks: null == remarks
-          ? _value.remarks
-          : remarks // ignore: cast_nullable_to_non_nullable
-              as String,
       ean: null == ean
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
@@ -383,6 +383,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       MaterialTaxClassification taxClassification,
       String itemRegistrationNumber,
       String genericMaterialName,
+      String remarks,
       String itemBrand,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
@@ -392,7 +393,6 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       List<String> taxes,
       List<Bundle> bundles,
       bool isFOCMaterial,
-      String remarks,
       String ean});
 
   @override
@@ -442,6 +442,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
+    Object? remarks = null,
     Object? itemBrand = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -451,7 +452,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? taxes = null,
     Object? bundles = null,
     Object? isFOCMaterial = null,
-    Object? remarks = null,
     Object? ean = null,
   }) {
     return _then(_$_MaterialInfo(
@@ -559,6 +559,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
               as String,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
       itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
@@ -595,10 +599,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.isFOCMaterial
           : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      remarks: null == remarks
-          ? _value.remarks
-          : remarks // ignore: cast_nullable_to_non_nullable
-              as String,
       ean: null == ean
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
@@ -637,6 +637,7 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.taxClassification,
       required this.itemRegistrationNumber,
       required this.genericMaterialName,
+      required this.remarks,
       required this.itemBrand,
       required this.materialGroup2,
       required this.materialGroup4,
@@ -646,7 +647,6 @@ class _$_MaterialInfo extends _MaterialInfo {
       required final List<String> taxes,
       required final List<Bundle> bundles,
       required this.isFOCMaterial,
-      required this.remarks,
       required this.ean})
       : _data = data,
         _stockInfos = stockInfos,
@@ -718,6 +718,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   final String itemRegistrationNumber;
   @override
   final String genericMaterialName;
+  @override
+  final String remarks;
 //TODO: remove field from v2
   @override
   final String itemBrand;
@@ -750,13 +752,11 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final bool isFOCMaterial;
   @override
-  final String remarks;
-  @override
   final String ean;
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, itemType: $itemType, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, remarks: $remarks, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, itemType: $itemType, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean)';
   }
 
   @override
@@ -814,6 +814,7 @@ class _$_MaterialInfo extends _MaterialInfo {
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.itemBrand, itemBrand) ||
                 other.itemBrand == itemBrand) &&
             (identical(other.materialGroup2, materialGroup2) ||
@@ -832,7 +833,6 @@ class _$_MaterialInfo extends _MaterialInfo {
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.isFOCMaterial, isFOCMaterial) ||
                 other.isFOCMaterial == isFOCMaterial) &&
-            (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.ean, ean) || other.ean == ean));
   }
 
@@ -865,6 +865,7 @@ class _$_MaterialInfo extends _MaterialInfo {
         taxClassification,
         itemRegistrationNumber,
         genericMaterialName,
+        remarks,
         itemBrand,
         materialGroup2,
         materialGroup4,
@@ -874,7 +875,6 @@ class _$_MaterialInfo extends _MaterialInfo {
         const DeepCollectionEquality().hash(_taxes),
         const DeepCollectionEquality().hash(_bundles),
         isFOCMaterial,
-        remarks,
         ean
       ]);
 
@@ -913,6 +913,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final MaterialTaxClassification taxClassification,
       required final String itemRegistrationNumber,
       required final String genericMaterialName,
+      required final String remarks,
       required final String itemBrand,
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
@@ -922,7 +923,6 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final List<String> taxes,
       required final List<Bundle> bundles,
       required final bool isFOCMaterial,
-      required final String remarks,
       required final String ean}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
 
@@ -978,6 +978,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   String get itemRegistrationNumber;
   @override
   String get genericMaterialName;
+  @override
+  String get remarks;
   @override //TODO: remove field from v2
   String get itemBrand;
   @override
@@ -996,8 +998,6 @@ abstract class _MaterialInfo extends MaterialInfo {
   List<Bundle> get bundles;
   @override
   bool get isFOCMaterial;
-  @override
-  String get remarks;
   @override
   String get ean;
   @override

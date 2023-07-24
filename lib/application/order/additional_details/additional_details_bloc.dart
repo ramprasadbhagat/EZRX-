@@ -29,7 +29,7 @@ class AdditionalDetailsBloc
       initialized: (value) async => emit(
         AdditionalDetailsState.initial().copyWith.deliveryInfoData(
               mobileNumber: MobileNumber(
-                value.customerCodeInfo.telephoneNumber.displayTelephoneNumber,
+                value.customerCodeInfo.telephoneNumber.getValue(),
               ),
             ),
       ),
@@ -40,7 +40,6 @@ class AdditionalDetailsBloc
       ),
       validateForm: (value) async => _validateAdditionalDetails(
         emit: emit,
-        config: value.config,
       ),
       addPoDocument: (value) async => emit(
         state.copyWith(
@@ -137,7 +136,6 @@ class AdditionalDetailsBloc
 
   void _validateAdditionalDetails({
     required Emitter<AdditionalDetailsState> emit,
-    required SalesOrganisationConfigs config,
   }) {
     emit(
       state.copyWith(
@@ -145,27 +143,38 @@ class AdditionalDetailsBloc
         showErrorMessages: false,
       ),
     );
-    final isCustomerPoReferenceValid = config.poNumberRequired
-        ? state.deliveryInfoData.poReference.isValid()
-        : true;
-    final isContactPersonValid = config.enableMobileNumber
-        ? state.deliveryInfoData.contactPerson.isValid()
-        : true;
-    final isContactNumberValid = config.enableMobileNumber
-        ? state.deliveryInfoData.mobileNumber.isValid()
-        : true;
-    final isPaymentTermValid = config.enablePaymentTerms
-        ? state.deliveryInfoData.paymentTerm.isValid()
-        : true;
+    final isCustomerPoReferenceValid =
+        state.deliveryInfoData.poReference.isValid();
+    final isReferenceNoteValid = state.deliveryInfoData.referenceNote.isValid();
+    final isContactPersonValid = state.deliveryInfoData.contactPerson.isValid();
+    final isContactNumberValid = state.deliveryInfoData.mobileNumber.isValid();
+    final isPaymentTermValid = state.deliveryInfoData.paymentTerm.isValid();
+    final isDeliveryInstructionsValid =
+        state.deliveryInfoData.deliveryInstruction.isValid();
     final isFormValid = isCustomerPoReferenceValid &&
+        isReferenceNoteValid &&
         isContactPersonValid &&
         isContactNumberValid &&
-        isPaymentTermValid;
+        isPaymentTermValid &&
+        isDeliveryInstructionsValid;
 
     emit(
       state.copyWith(
         isValidated: isFormValid,
         showErrorMessages: !isFormValid,
+        focusTo: !isCustomerPoReferenceValid
+            ? DeliveryInfoLabel.poReference
+            : !isReferenceNoteValid
+                ? DeliveryInfoLabel.referenceNote
+                : !isContactPersonValid
+                    ? DeliveryInfoLabel.contactPerson
+                    : !isContactNumberValid
+                        ? DeliveryInfoLabel.mobileNumber
+                        : !isDeliveryInstructionsValid
+                            ? DeliveryInfoLabel.deliveryInstruction
+                            : !isPaymentTermValid
+                                ? DeliveryInfoLabel.paymentTerm
+                                : null,
       ),
     );
   }
@@ -195,15 +204,7 @@ class AdditionalDetailsBloc
           ),
         );
         break;
-      // case AdditionalDetailsLabel.collectiveNumber:
-      //   _emitAfterOnTextChange(
-      //     emit: emit,
-      //     additionalDetailsData: state.additionalDetailsData.copyWith(
-      //       collectiveNumber: CollectiveNumber(newValue),
-      //     ),
-      //   );
-      //   break;
-      case DeliveryInfoLabel.contactNumber:
+      case DeliveryInfoLabel.mobileNumber:
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(

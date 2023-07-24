@@ -49,17 +49,17 @@ abstract class $AdminPoAttachmentFilterDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
-      String orderNumber,
+          String orderNumber,
       @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
-      String exRxNo,
+          String exRxNo,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-      String salesOrg,
+          String salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
-      String soldTo,
+          String soldTo,
       @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
-      String toDate,
+          String toDate,
       @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
-      String fromDate});
+          String fromDate});
 }
 
 /// @nodoc
@@ -123,17 +123,17 @@ abstract class _$$_AdminPoAttachmentFilterDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
-      String orderNumber,
+          String orderNumber,
       @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
-      String exRxNo,
+          String exRxNo,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-      String salesOrg,
+          String salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
-      String soldTo,
+          String soldTo,
       @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
-      String toDate,
+          String toDate,
       @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
-      String fromDate});
+          String fromDate});
 }
 
 /// @nodoc
@@ -190,17 +190,17 @@ class __$$_AdminPoAttachmentFilterDtoCopyWithImpl<$Res>
 class _$_AdminPoAttachmentFilterDto extends _AdminPoAttachmentFilterDto {
   _$_AdminPoAttachmentFilterDto(
       {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
-      required this.orderNumber,
+          required this.orderNumber,
       @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
-      required this.exRxNo,
+          required this.exRxNo,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-      required this.salesOrg,
+          required this.salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
-      required this.soldTo,
+          required this.soldTo,
       @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
-      required this.toDate,
+          required this.toDate,
       @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
-      required this.fromDate})
+          required this.fromDate})
       : super._();
 
   factory _$_AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -269,17 +269,17 @@ class _$_AdminPoAttachmentFilterDto extends _AdminPoAttachmentFilterDto {
 abstract class _AdminPoAttachmentFilterDto extends AdminPoAttachmentFilterDto {
   factory _AdminPoAttachmentFilterDto(
       {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
-      required final String orderNumber,
+          required final String orderNumber,
       @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
-      required final String exRxNo,
+          required final String exRxNo,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-      required final String salesOrg,
+          required final String salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
-      required final String soldTo,
+          required final String soldTo,
       @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
-      required final String toDate,
+          required final String toDate,
       @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
-      required final String fromDate}) = _$_AdminPoAttachmentFilterDto;
+          required final String fromDate}) = _$_AdminPoAttachmentFilterDto;
   _AdminPoAttachmentFilterDto._() : super._();
 
   factory _AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =

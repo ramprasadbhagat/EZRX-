@@ -38,9 +38,10 @@ abstract class $MaterialStockInfoDtoCopyWith<$Res> {
       _$MaterialStockInfoDtoCopyWithImpl<$Res, MaterialStockInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber', defaultValue: '') String materialNumber,
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+          String materialNumber,
       @JsonKey(name: 'StockInformation', defaultValue: [])
-      List<StockInfoDto> stockInformation});
+          List<StockInfoDto> stockInformation});
 }
 
 /// @nodoc
@@ -82,9 +83,10 @@ abstract class _$$_MaterialStockInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber', defaultValue: '') String materialNumber,
+      {@JsonKey(name: 'MaterialNumber', defaultValue: '')
+          String materialNumber,
       @JsonKey(name: 'StockInformation', defaultValue: [])
-      List<StockInfoDto> stockInformation});
+          List<StockInfoDto> stockInformation});
 }
 
 /// @nodoc
@@ -119,9 +121,9 @@ class __$$_MaterialStockInfoDtoCopyWithImpl<$Res>
 class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
   _$_MaterialStockInfoDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
-      required this.materialNumber,
+          required this.materialNumber,
       @JsonKey(name: 'StockInformation', defaultValue: [])
-      required final List<StockInfoDto> stockInformation})
+          required final List<StockInfoDto> stockInformation})
       : _stockInformation = stockInformation,
         super._();
 
@@ -180,9 +182,9 @@ class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
 abstract class _MaterialStockInfoDto extends MaterialStockInfoDto {
   factory _MaterialStockInfoDto(
           {@JsonKey(name: 'MaterialNumber', defaultValue: '')
-          required final String materialNumber,
+              required final String materialNumber,
           @JsonKey(name: 'StockInformation', defaultValue: [])
-          required final List<StockInfoDto> stockInformation}) =
+              required final List<StockInfoDto> stockInformation}) =
       _$_MaterialStockInfoDto;
   _MaterialStockInfoDto._() : super._();
 
@@ -238,19 +240,19 @@ abstract class $StockInfoDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      String materialNumber,
+          String materialNumber,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      String expiryDate,
+          String expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      String batch,
+          String batch,
       @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
-      String inStock,
+          String inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      String salesDistrict});
+          String salesDistrict});
 }
 
 /// @nodoc
@@ -308,19 +310,19 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      String materialNumber,
+          String materialNumber,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      String expiryDate,
+          String expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      String batch,
+          String batch,
       @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
-      String inStock,
+          String inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      String salesDistrict});
+          String salesDistrict});
 }
 
 /// @nodoc
@@ -372,19 +374,19 @@ class _$_StockInfoDto extends _StockInfoDto {
   const _$_StockInfoDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      required this.materialNumber,
+          required this.materialNumber,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      required this.expiryDate,
+          required this.expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      required this.batch,
+          required this.batch,
       @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
-      required this.inStock,
+          required this.inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      required this.salesDistrict})
+          required this.salesDistrict})
       : super._();
 
   factory _$_StockInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -454,19 +456,19 @@ abstract class _StockInfoDto extends StockInfoDto {
   const factory _StockInfoDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      required final String materialNumber,
+          required final String materialNumber,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      required final String expiryDate,
+          required final String expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      required final String batch,
+          required final String batch,
       @JsonKey(name: 'InStock', defaultValue: '')
       @HiveField(3, defaultValue: '')
-      required final String inStock,
+          required final String inStock,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      required final String salesDistrict}) = _$_StockInfoDto;
+          required final String salesDistrict}) = _$_StockInfoDto;
   const _StockInfoDto._() : super._();
 
   factory _StockInfoDto.fromJson(Map<String, dynamic> json) =

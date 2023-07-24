@@ -133,7 +133,9 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
           bool outsidePolicy,
       @JsonKey(name: 'invoiceDate', defaultValue: '')
           String invoiceDate,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
+      @JsonKey(
+          name: 'bonusInformation', defaultValue: <
+              ReturnRequestInformationDto>[])
           List<ReturnRequestInformationDto> bonusInformation});
 }
 
@@ -333,7 +335,9 @@ abstract class _$$_ReturnRequestInformationDtoCopyWith<$Res>
           bool outsidePolicy,
       @JsonKey(name: 'invoiceDate', defaultValue: '')
           String invoiceDate,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
+      @JsonKey(
+          name: 'bonusInformation', defaultValue: <
+              ReturnRequestInformationDto>[])
           List<ReturnRequestInformationDto> bonusInformation});
 }
 
@@ -526,7 +530,9 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
           required this.outsidePolicy,
       @JsonKey(name: 'invoiceDate', defaultValue: '')
           required this.invoiceDate,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
+      @JsonKey(
+          name: 'bonusInformation', defaultValue: <
+              ReturnRequestInformationDto>[])
           required final List<ReturnRequestInformationDto> bonusInformation})
       : _imageUrl = imageUrl,
         _attachments = attachments,
@@ -778,8 +784,11 @@ abstract class _ReturnRequestInformationDto
           required final bool outsidePolicy,
       @JsonKey(name: 'invoiceDate', defaultValue: '')
           required final String invoiceDate,
-      @JsonKey(name: 'bonusInformation', defaultValue: <ReturnRequestInformationDto>[])
-          required final List<ReturnRequestInformationDto> bonusInformation}) = _$_ReturnRequestInformationDto;
+      @JsonKey(
+          name: 'bonusInformation', defaultValue: <
+              ReturnRequestInformationDto>[])
+          required final List<ReturnRequestInformationDto>
+              bonusInformation}) = _$_ReturnRequestInformationDto;
   _ReturnRequestInformationDto._() : super._();
 
   factory _ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =

@@ -141,14 +141,10 @@ void main() {
       expect(submitMaterialInfo.materialNumber,
           emptyPriceAggregate.materialInfo.materialNumber);
       expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
-      expect(submitMaterialInfo.salesDistrict,
-          emptyPriceAggregate.stockInfo.salesDistrict);
       expect(
           submitMaterialInfo.materialItemOverride,
           MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
               .toDomain());
-      expect(submitMaterialInfo.tenderContract,
-          emptyPriceAggregate.tenderContract);
     });
 
     test(
@@ -165,14 +161,10 @@ void main() {
       expect(submitMaterialInfo.materialNumber,
           emptyPriceAggregate.materialInfo.materialNumber);
       expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
-      expect(submitMaterialInfo.salesDistrict,
-          emptyPriceAggregate.stockInfo.salesDistrict);
       expect(
           submitMaterialInfo.materialItemOverride,
           MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
               .toDomain());
-      expect(submitMaterialInfo.tenderContract,
-          emptyPriceAggregate.tenderContract);
     });
 
     test(
@@ -1488,14 +1480,10 @@ void main() {
       expect(submitMaterialInfo.materialNumber,
           emptyPriceAggregate.materialInfo.materialNumber);
       expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
-      expect(submitMaterialInfo.salesDistrict,
-          emptyPriceAggregate.stockInfo.salesDistrict);
       expect(
           submitMaterialInfo.materialItemOverride,
           MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
               .toDomain());
-      expect(submitMaterialInfo.tenderContract,
-          emptyPriceAggregate.tenderContract);
     });
   });
 

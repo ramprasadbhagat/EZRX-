@@ -1,10 +1,8 @@
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'submit_material_info_dto.freezed.dart';
@@ -19,42 +17,40 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     @JsonKey(name: 'materialNumber', defaultValue: '')
         required String materialNumber,
     @JsonKey(name: 'qty', defaultValue: 0) required int qty,
-    @JsonKey(name: 'contract') required SubmitTenderContractDto tenderContract,
     @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
         required List<SubmitMaterialItemBonusDto> bonuses,
-    @JsonKey(name: 'comment', defaultValue: '') required String comment,
-    @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
-        required String batch,
-    @JsonKey(name: 'salesDistrict', defaultValue: '')
-        required String salesDistrict,
+    @JsonKey(name: 'Comment', defaultValue: '') required String comment,
+    @JsonKey(name: 'ParentID', defaultValue: '') required String parentId,
     @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
         required MaterialItemOverrideDto materialItemOverride,
+    @JsonKey(name: 'ProductType', defaultValue: '') required String productType,
+    @JsonKey(name: 'price', defaultValue: 0) required double price,
+
+    ///Todo: consider to delete it
+    @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
+        required String batch,
   }) = _SubmitMaterialInfoDto;
 
   SubmitMaterialInfo toDomain() {
     return SubmitMaterialInfo(
       materialNumber: MaterialNumber(materialNumber),
       quantity: qty,
-      tenderContract: TenderContract.empty(),
       bonuses: bonuses.map((e) => e.toDomain()).toList(),
       comment: comment,
       batch: BatchNumber(batch),
-      salesDistrict: salesDistrict,
       materialItemOverride: MaterialItemOverride.empty(),
+      parentID: parentId,
+      productType: '',
+      price: price,
     );
   }
 
   factory SubmitMaterialInfoDto.fromDomain(
     SubmitMaterialInfo submitMaterialInfo,
-    String currency,
   ) {
     return SubmitMaterialInfoDto(
       materialNumber: submitMaterialInfo.materialNumber.getOrCrash(),
       qty: submitMaterialInfo.quantity,
-      tenderContract: SubmitTenderContractDto.fromDomain(
-        submitMaterialInfo.tenderContract,
-        currency,
-      ),
       bonuses: submitMaterialInfo.bonuses
           .map(
             (e) => SubmitMaterialItemBonusDto.fromDomain(e),
@@ -62,11 +58,12 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
           .toList(),
       comment: submitMaterialInfo.comment,
       batch: submitMaterialInfo.batch.getOrDefaultValue(''),
-      salesDistrict:
-          submitMaterialInfo.tenderContract.salesDistrict.getOrCrash(),
       materialItemOverride: MaterialItemOverrideDto.fromDomain(
         submitMaterialInfo.materialItemOverride,
       ),
+      parentId: submitMaterialInfo.parentID,
+      productType: submitMaterialInfo.productType,
+      price: submitMaterialInfo.price,
     );
   }
 

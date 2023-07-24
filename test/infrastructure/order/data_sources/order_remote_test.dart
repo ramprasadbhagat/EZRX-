@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
@@ -30,13 +31,14 @@ void main() {
   late int pageSize;
   late int offset;
   late SavedOrderDto draftOrder;
+  late Encryption encryption;
 
   late Map<String, Object> variables;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://uat.ezrx.com',
+      baseUrl: 'https://uat.my-ezrx.com',
     ),
   );
   final dioAdapter = DioAdapter(dio: dio);
@@ -93,6 +95,7 @@ void main() {
         user: '',
         poAttachent: [],
       );
+      encryption = Encryption();
 
       variables = {
         'whereQuery': {
@@ -198,6 +201,7 @@ void main() {
         },
       );
 
+      ///Todo: revisit
       test(
         'Submit Order',
         () async {
@@ -214,20 +218,22 @@ void main() {
               poDate: '',
               requestedDeliveryDate: '',
               specialInstructions: '',
-              purchaseOrderType: '',
-              orderType: '',
-              orderReason: '',
-              shippingCondition: '',
               telephone: '',
               referenceNotes: '',
               paymentTerms: '',
               collectiveNumber: '',
-              subscribeStatusChange: false,
-              trackingLevel: '',
               blockOrder: false,
-              poDocuments: []);
+              poDocuments: [],
+              orderValue: 0,
+              language: '',
+              paymentMethod: '');
+          final encryptedData =
+              encryption.encryptionData(data: submitOrder.toJson());
           final variables = {
-            'order': submitOrder.toJson(),
+            'NewOrderInput': {
+              'data': encryptedData.data,
+              'hash': encryptedData.hash
+            }
           };
 
           final res = json.decode(
@@ -235,7 +241,7 @@ void main() {
           );
 
           dioAdapter.onPost(
-            '/api/orderMutation',
+            '/api/order',
             (server) => server.reply(
               200,
               res,
@@ -247,13 +253,12 @@ void main() {
               'variables': variables,
             }),
           );
-
-          final result =
-              await remoteDataSource.submitOrder(submitOrder: submitOrder);
+          final result = await remoteDataSource.submitOrder(
+              orderEncryption: encryptedData);
 
           expect(
               result,
-              SubmitOrderResponseDto.fromJson(res['data']['submitOrderTwo'])
+              SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
                   .toDomain());
         },
       );

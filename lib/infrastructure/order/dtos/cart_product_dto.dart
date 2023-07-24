@@ -28,6 +28,7 @@ class CartProductDto with _$CartProductDto {
         required String genericMaterialName,
     @JsonKey(name: 'principalName', defaultValue: '')
         required String principalName,
+    @JsonKey(name: 'Comment', defaultValue: '') required String remarks,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     MaterialInfo cartItemDetails,
@@ -46,6 +47,7 @@ class CartProductDto with _$CartProductDto {
       type: cartItemDetails.type.getOrCrash(),
       principalName:
           cartItemDetails.principalData.principalName.getOrDefaultValue(''),
+      remarks: cartItemDetails.remarks,
     );
   }
   MaterialInfo get toDomain {
@@ -62,6 +64,7 @@ class CartProductDto with _$CartProductDto {
         principalName: PrincipalName(principalName),
       ),
       itemType: MaterialItemType(type),
+      remarks: remarks,
     );
   }
 

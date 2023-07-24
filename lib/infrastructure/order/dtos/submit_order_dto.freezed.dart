@@ -35,30 +35,24 @@ mixin _$SubmitOrderDto {
   String get poDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'specialInstructions', defaultValue: '')
+  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
   String get specialInstructions => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-  String get purchaseOrderType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'orderType', defaultValue: '')
-  String get orderType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'orderReason', defaultValue: '')
-  String get orderReason => throw _privateConstructorUsedError;
-  @JsonKey(name: 'shippingCondition', defaultValue: '')
-  String get shippingCondition => throw _privateConstructorUsedError;
-  @JsonKey(name: 'telephone', defaultValue: '')
+  @JsonKey(name: 'orderValue', defaultValue: 0)
+  double get orderValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Telephone', defaultValue: '')
   String get telephone => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   String get referenceNotes => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentTerms', defaultValue: '')
   String get paymentTerms => throw _privateConstructorUsedError;
-  @JsonKey(name: 'collectiveNumber', defaultValue: '')
+  @JsonKey(name: 'CollectiveNumber', defaultValue: '')
   String get collectiveNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-  bool get subscribeStatusChange => throw _privateConstructorUsedError;
-  @JsonKey(name: 'trackingLevel', defaultValue: '')
-  String get trackingLevel => throw _privateConstructorUsedError;
   @JsonKey(name: 'blockOrder', defaultValue: false)
   bool get blockOrder => throw _privateConstructorUsedError;
+  @JsonKey(name: 'language', defaultValue: 'EN')
+  String get language => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+  String get paymentMethod => throw _privateConstructorUsedError;
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get poDocuments => throw _privateConstructorUsedError;
 
@@ -75,46 +69,29 @@ abstract class $SubmitOrderDtoCopyWith<$Res> {
       _$SubmitOrderDtoCopyWithImpl<$Res, SubmitOrderDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'username', defaultValue: '')
-          String userName,
-      @JsonKey(name: 'companyName', defaultValue: '')
-          String companyName,
-      @JsonKey(name: 'customer')
-          SubmitOrderCustomerDto customer,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String poReference,
+      {@JsonKey(name: 'username', defaultValue: '') String userName,
+      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
+      @JsonKey(name: 'customer') SubmitOrderCustomerDto customer,
+      @JsonKey(name: 'POReference', defaultValue: '') String poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-          List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '')
-          String poDate,
+      List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '') String poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          String requestedDeliveryDate,
-      @JsonKey(name: 'specialInstructions', defaultValue: '')
-          String specialInstructions,
-      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-          String purchaseOrderType,
-      @JsonKey(name: 'orderType', defaultValue: '')
-          String orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '')
-          String orderReason,
-      @JsonKey(name: 'shippingCondition', defaultValue: '')
-          String shippingCondition,
-      @JsonKey(name: 'telephone', defaultValue: '')
-          String telephone,
-      @JsonKey(name: 'referenceNotes', defaultValue: '')
-          String referenceNotes,
-      @JsonKey(name: 'paymentTerms', defaultValue: '')
-          String paymentTerms,
-      @JsonKey(name: 'collectiveNumber', defaultValue: '')
-          String collectiveNumber,
-      @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          bool subscribeStatusChange,
-      @JsonKey(name: 'trackingLevel', defaultValue: '')
-          String trackingLevel,
-      @JsonKey(name: 'blockOrder', defaultValue: false)
-          bool blockOrder,
+      String requestedDeliveryDate,
+      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      String specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0) double orderValue,
+      @JsonKey(name: 'Telephone', defaultValue: '') String telephone,
+      @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
+      @JsonKey(name: 'paymentTerms', defaultValue: '') String paymentTerms,
+      @JsonKey(name: 'CollectiveNumber', defaultValue: '')
+      String collectiveNumber,
+      @JsonKey(name: 'blockOrder', defaultValue: false) bool blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN') String language,
+      @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+      String paymentMethod,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-          List<PoDocumentsDto> poDocuments});
+      List<PoDocumentsDto> poDocuments});
 
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
 }
@@ -140,17 +117,14 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
     Object? poDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
-    Object? purchaseOrderType = null,
-    Object? orderType = null,
-    Object? orderReason = null,
-    Object? shippingCondition = null,
+    Object? orderValue = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
     Object? collectiveNumber = null,
-    Object? subscribeStatusChange = null,
-    Object? trackingLevel = null,
     Object? blockOrder = null,
+    Object? language = null,
+    Object? paymentMethod = null,
     Object? poDocuments = null,
   }) {
     return _then(_value.copyWith(
@@ -186,22 +160,10 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
-          ? _value.purchaseOrderType
-          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderReason: null == orderReason
-          ? _value.orderReason
-          : orderReason // ignore: cast_nullable_to_non_nullable
-              as String,
-      shippingCondition: null == shippingCondition
-          ? _value.shippingCondition
-          : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as String,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -218,18 +180,18 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
           ? _value.collectiveNumber
           : collectiveNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      subscribeStatusChange: null == subscribeStatusChange
-          ? _value.subscribeStatusChange
-          : subscribeStatusChange // ignore: cast_nullable_to_non_nullable
-              as bool,
-      trackingLevel: null == trackingLevel
-          ? _value.trackingLevel
-          : trackingLevel // ignore: cast_nullable_to_non_nullable
-              as String,
       blockOrder: null == blockOrder
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentMethod: null == paymentMethod
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as String,
       poDocuments: null == poDocuments
           ? _value.poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -255,46 +217,29 @@ abstract class _$$_SubmitOrderDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'username', defaultValue: '')
-          String userName,
-      @JsonKey(name: 'companyName', defaultValue: '')
-          String companyName,
-      @JsonKey(name: 'customer')
-          SubmitOrderCustomerDto customer,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String poReference,
+      {@JsonKey(name: 'username', defaultValue: '') String userName,
+      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
+      @JsonKey(name: 'customer') SubmitOrderCustomerDto customer,
+      @JsonKey(name: 'POReference', defaultValue: '') String poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-          List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '')
-          String poDate,
+      List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '') String poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          String requestedDeliveryDate,
-      @JsonKey(name: 'specialInstructions', defaultValue: '')
-          String specialInstructions,
-      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-          String purchaseOrderType,
-      @JsonKey(name: 'orderType', defaultValue: '')
-          String orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '')
-          String orderReason,
-      @JsonKey(name: 'shippingCondition', defaultValue: '')
-          String shippingCondition,
-      @JsonKey(name: 'telephone', defaultValue: '')
-          String telephone,
-      @JsonKey(name: 'referenceNotes', defaultValue: '')
-          String referenceNotes,
-      @JsonKey(name: 'paymentTerms', defaultValue: '')
-          String paymentTerms,
-      @JsonKey(name: 'collectiveNumber', defaultValue: '')
-          String collectiveNumber,
-      @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          bool subscribeStatusChange,
-      @JsonKey(name: 'trackingLevel', defaultValue: '')
-          String trackingLevel,
-      @JsonKey(name: 'blockOrder', defaultValue: false)
-          bool blockOrder,
+      String requestedDeliveryDate,
+      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      String specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0) double orderValue,
+      @JsonKey(name: 'Telephone', defaultValue: '') String telephone,
+      @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
+      @JsonKey(name: 'paymentTerms', defaultValue: '') String paymentTerms,
+      @JsonKey(name: 'CollectiveNumber', defaultValue: '')
+      String collectiveNumber,
+      @JsonKey(name: 'blockOrder', defaultValue: false) bool blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN') String language,
+      @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+      String paymentMethod,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-          List<PoDocumentsDto> poDocuments});
+      List<PoDocumentsDto> poDocuments});
 
   @override
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
@@ -319,17 +264,14 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
     Object? poDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
-    Object? purchaseOrderType = null,
-    Object? orderType = null,
-    Object? orderReason = null,
-    Object? shippingCondition = null,
+    Object? orderValue = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
     Object? collectiveNumber = null,
-    Object? subscribeStatusChange = null,
-    Object? trackingLevel = null,
     Object? blockOrder = null,
+    Object? language = null,
+    Object? paymentMethod = null,
     Object? poDocuments = null,
   }) {
     return _then(_$_SubmitOrderDto(
@@ -365,22 +307,10 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
-          ? _value.purchaseOrderType
-          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderReason: null == orderReason
-          ? _value.orderReason
-          : orderReason // ignore: cast_nullable_to_non_nullable
-              as String,
-      shippingCondition: null == shippingCondition
-          ? _value.shippingCondition
-          : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as String,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -397,18 +327,18 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
           ? _value.collectiveNumber
           : collectiveNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      subscribeStatusChange: null == subscribeStatusChange
-          ? _value.subscribeStatusChange
-          : subscribeStatusChange // ignore: cast_nullable_to_non_nullable
-              as bool,
-      trackingLevel: null == trackingLevel
-          ? _value.trackingLevel
-          : trackingLevel // ignore: cast_nullable_to_non_nullable
-              as String,
       blockOrder: null == blockOrder
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentMethod: null == paymentMethod
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as String,
       poDocuments: null == poDocuments
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -421,46 +351,32 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SubmitOrderDto extends _SubmitOrderDto {
   const _$_SubmitOrderDto(
-      {@JsonKey(name: 'username', defaultValue: '')
-          required this.userName,
-      @JsonKey(name: 'companyName', defaultValue: '')
-          required this.companyName,
-      @JsonKey(name: 'customer')
-          required this.customer,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          required this.poReference,
+      {@JsonKey(name: 'username', defaultValue: '') required this.userName,
+      @JsonKey(name: 'companyName', defaultValue: '') required this.companyName,
+      @JsonKey(name: 'customer') required this.customer,
+      @JsonKey(name: 'POReference', defaultValue: '') required this.poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-          required final List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '')
-          required this.poDate,
+      required final List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '') required this.poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          required this.requestedDeliveryDate,
-      @JsonKey(name: 'specialInstructions', defaultValue: '')
-          required this.specialInstructions,
-      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-          required this.purchaseOrderType,
-      @JsonKey(name: 'orderType', defaultValue: '')
-          required this.orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '')
-          required this.orderReason,
-      @JsonKey(name: 'shippingCondition', defaultValue: '')
-          required this.shippingCondition,
-      @JsonKey(name: 'telephone', defaultValue: '')
-          required this.telephone,
+      required this.requestedDeliveryDate,
+      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      required this.specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0) required this.orderValue,
+      @JsonKey(name: 'Telephone', defaultValue: '') required this.telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
-          required this.referenceNotes,
+      required this.referenceNotes,
       @JsonKey(name: 'paymentTerms', defaultValue: '')
-          required this.paymentTerms,
-      @JsonKey(name: 'collectiveNumber', defaultValue: '')
-          required this.collectiveNumber,
-      @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          required this.subscribeStatusChange,
-      @JsonKey(name: 'trackingLevel', defaultValue: '')
-          required this.trackingLevel,
+      required this.paymentTerms,
+      @JsonKey(name: 'CollectiveNumber', defaultValue: '')
+      required this.collectiveNumber,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-          required this.blockOrder,
+      required this.blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN') required this.language,
+      @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+      required this.paymentMethod,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-          required final List<PoDocumentsDto> poDocuments})
+      required final List<PoDocumentsDto> poDocuments})
       : _materials = materials,
         _poDocuments = poDocuments,
         super._();
@@ -496,22 +412,13 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
   @override
-  @JsonKey(name: 'specialInstructions', defaultValue: '')
+  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
   final String specialInstructions;
   @override
-  @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-  final String purchaseOrderType;
+  @JsonKey(name: 'orderValue', defaultValue: 0)
+  final double orderValue;
   @override
-  @JsonKey(name: 'orderType', defaultValue: '')
-  final String orderType;
-  @override
-  @JsonKey(name: 'orderReason', defaultValue: '')
-  final String orderReason;
-  @override
-  @JsonKey(name: 'shippingCondition', defaultValue: '')
-  final String shippingCondition;
-  @override
-  @JsonKey(name: 'telephone', defaultValue: '')
+  @JsonKey(name: 'Telephone', defaultValue: '')
   final String telephone;
   @override
   @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -520,17 +427,17 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
   @JsonKey(name: 'paymentTerms', defaultValue: '')
   final String paymentTerms;
   @override
-  @JsonKey(name: 'collectiveNumber', defaultValue: '')
+  @JsonKey(name: 'CollectiveNumber', defaultValue: '')
   final String collectiveNumber;
-  @override
-  @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-  final bool subscribeStatusChange;
-  @override
-  @JsonKey(name: 'trackingLevel', defaultValue: '')
-  final String trackingLevel;
   @override
   @JsonKey(name: 'blockOrder', defaultValue: false)
   final bool blockOrder;
+  @override
+  @JsonKey(name: 'language', defaultValue: 'EN')
+  final String language;
+  @override
+  @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+  final String paymentMethod;
   final List<PoDocumentsDto> _poDocuments;
   @override
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
@@ -542,7 +449,7 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
 
   @override
   String toString() {
-    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, purchaseOrderType: $purchaseOrderType, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, subscribeStatusChange: $subscribeStatusChange, trackingLevel: $trackingLevel, blockOrder: $blockOrder, poDocuments: $poDocuments)';
+    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, poDocuments: $poDocuments)';
   }
 
   @override
@@ -565,14 +472,8 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.specialInstructions, specialInstructions) ||
                 other.specialInstructions == specialInstructions) &&
-            (identical(other.purchaseOrderType, purchaseOrderType) ||
-                other.purchaseOrderType == purchaseOrderType) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
-            (identical(other.orderReason, orderReason) ||
-                other.orderReason == orderReason) &&
-            (identical(other.shippingCondition, shippingCondition) ||
-                other.shippingCondition == shippingCondition) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
             (identical(other.telephone, telephone) ||
                 other.telephone == telephone) &&
             (identical(other.referenceNotes, referenceNotes) ||
@@ -581,41 +482,37 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
                 other.paymentTerms == paymentTerms) &&
             (identical(other.collectiveNumber, collectiveNumber) ||
                 other.collectiveNumber == collectiveNumber) &&
-            (identical(other.subscribeStatusChange, subscribeStatusChange) ||
-                other.subscribeStatusChange == subscribeStatusChange) &&
-            (identical(other.trackingLevel, trackingLevel) ||
-                other.trackingLevel == trackingLevel) &&
             (identical(other.blockOrder, blockOrder) ||
                 other.blockOrder == blockOrder) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.paymentMethod, paymentMethod) ||
+                other.paymentMethod == paymentMethod) &&
             const DeepCollectionEquality()
                 .equals(other._poDocuments, _poDocuments));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        userName,
-        companyName,
-        customer,
-        poReference,
-        const DeepCollectionEquality().hash(_materials),
-        poDate,
-        requestedDeliveryDate,
-        specialInstructions,
-        purchaseOrderType,
-        orderType,
-        orderReason,
-        shippingCondition,
-        telephone,
-        referenceNotes,
-        paymentTerms,
-        collectiveNumber,
-        subscribeStatusChange,
-        trackingLevel,
-        blockOrder,
-        const DeepCollectionEquality().hash(_poDocuments)
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      userName,
+      companyName,
+      customer,
+      poReference,
+      const DeepCollectionEquality().hash(_materials),
+      poDate,
+      requestedDeliveryDate,
+      specialInstructions,
+      orderValue,
+      telephone,
+      referenceNotes,
+      paymentTerms,
+      collectiveNumber,
+      blockOrder,
+      language,
+      paymentMethod,
+      const DeepCollectionEquality().hash(_poDocuments));
 
   @JsonKey(ignore: true)
   @override
@@ -634,45 +531,37 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
 abstract class _SubmitOrderDto extends SubmitOrderDto {
   const factory _SubmitOrderDto(
       {@JsonKey(name: 'username', defaultValue: '')
-          required final String userName,
+      required final String userName,
       @JsonKey(name: 'companyName', defaultValue: '')
-          required final String companyName,
-      @JsonKey(name: 'customer')
-          required final SubmitOrderCustomerDto customer,
+      required final String companyName,
+      @JsonKey(name: 'customer') required final SubmitOrderCustomerDto customer,
       @JsonKey(name: 'POReference', defaultValue: '')
-          required final String poReference,
+      required final String poReference,
       @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
-          required final List<SubmitMaterialInfoDto> materials,
-      @JsonKey(name: 'PODate', defaultValue: '')
-          required final String poDate,
+      required final List<SubmitMaterialInfoDto> materials,
+      @JsonKey(name: 'PODate', defaultValue: '') required final String poDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          required final String requestedDeliveryDate,
-      @JsonKey(name: 'specialInstructions', defaultValue: '')
-          required final String specialInstructions,
-      @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-          required final String purchaseOrderType,
-      @JsonKey(name: 'orderType', defaultValue: '')
-          required final String orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '')
-          required final String orderReason,
-      @JsonKey(name: 'shippingCondition', defaultValue: '')
-          required final String shippingCondition,
-      @JsonKey(name: 'telephone', defaultValue: '')
-          required final String telephone,
+      required final String requestedDeliveryDate,
+      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      required final String specialInstructions,
+      @JsonKey(name: 'orderValue', defaultValue: 0)
+      required final double orderValue,
+      @JsonKey(name: 'Telephone', defaultValue: '')
+      required final String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
-          required final String referenceNotes,
+      required final String referenceNotes,
       @JsonKey(name: 'paymentTerms', defaultValue: '')
-          required final String paymentTerms,
-      @JsonKey(name: 'collectiveNumber', defaultValue: '')
-          required final String collectiveNumber,
-      @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          required final bool subscribeStatusChange,
-      @JsonKey(name: 'trackingLevel', defaultValue: '')
-          required final String trackingLevel,
+      required final String paymentTerms,
+      @JsonKey(name: 'CollectiveNumber', defaultValue: '')
+      required final String collectiveNumber,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-          required final bool blockOrder,
+      required final bool blockOrder,
+      @JsonKey(name: 'language', defaultValue: 'EN')
+      required final String language,
+      @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+      required final String paymentMethod,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-          required final List<PoDocumentsDto> poDocuments}) = _$_SubmitOrderDto;
+      required final List<PoDocumentsDto> poDocuments}) = _$_SubmitOrderDto;
   const _SubmitOrderDto._() : super._();
 
   factory _SubmitOrderDto.fromJson(Map<String, dynamic> json) =
@@ -700,22 +589,13 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
   @override
-  @JsonKey(name: 'specialInstructions', defaultValue: '')
+  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
   String get specialInstructions;
   @override
-  @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
-  String get purchaseOrderType;
+  @JsonKey(name: 'orderValue', defaultValue: 0)
+  double get orderValue;
   @override
-  @JsonKey(name: 'orderType', defaultValue: '')
-  String get orderType;
-  @override
-  @JsonKey(name: 'orderReason', defaultValue: '')
-  String get orderReason;
-  @override
-  @JsonKey(name: 'shippingCondition', defaultValue: '')
-  String get shippingCondition;
-  @override
-  @JsonKey(name: 'telephone', defaultValue: '')
+  @JsonKey(name: 'Telephone', defaultValue: '')
   String get telephone;
   @override
   @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -724,17 +604,17 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @JsonKey(name: 'paymentTerms', defaultValue: '')
   String get paymentTerms;
   @override
-  @JsonKey(name: 'collectiveNumber', defaultValue: '')
+  @JsonKey(name: 'CollectiveNumber', defaultValue: '')
   String get collectiveNumber;
-  @override
-  @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-  bool get subscribeStatusChange;
-  @override
-  @JsonKey(name: 'trackingLevel', defaultValue: '')
-  String get trackingLevel;
   @override
   @JsonKey(name: 'blockOrder', defaultValue: false)
   bool get blockOrder;
+  @override
+  @JsonKey(name: 'language', defaultValue: 'EN')
+  String get language;
+  @override
+  @JsonKey(name: 'paymentMethod', defaultValue: 'Bank Transfer')
+  String get paymentMethod;
   @override
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get poDocuments;

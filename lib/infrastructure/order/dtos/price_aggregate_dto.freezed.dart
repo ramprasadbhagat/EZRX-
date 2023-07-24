@@ -60,33 +60,22 @@ abstract class $PriceAggregateDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0, defaultValue: _emptyConstMaterialDto)
-          MaterialDto materialDto,
-      @HiveField(1, defaultValue: 1)
-          int quantity,
-      @HiveField(2, defaultValue: _emptyPriceDto)
-          PriceDto priceDto,
+      MaterialDto materialDto,
+      @HiveField(1, defaultValue: 1) int quantity,
+      @HiveField(2, defaultValue: _emptyPriceDto) PriceDto priceDto,
       @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
-          SalesOrganisationConfigsDto salesOrganisationConfigsDto,
-      @HiveField(4, defaultValue: 0)
-          int zmgMaterialCountOnCart,
-      @HiveField(5, defaultValue: _emptyBundleDto)
-          BundleDto bundleDto,
-      @HiveField(6, defaultValue: [])
-          List<MaterialItemBonusDto> bonusItem,
-      @HiveField(7, defaultValue: _emptyStockInfoDto)
-          StockInfoDto stockInfoDto,
+      SalesOrganisationConfigsDto salesOrganisationConfigsDto,
+      @HiveField(4, defaultValue: 0) int zmgMaterialCountOnCart,
+      @HiveField(5, defaultValue: _emptyBundleDto) BundleDto bundleDto,
+      @HiveField(6, defaultValue: []) List<MaterialItemBonusDto> bonusItem,
+      @HiveField(7, defaultValue: _emptyStockInfoDto) StockInfoDto stockInfoDto,
       @HiveField(8, defaultValue: _emptyTenderContractDto)
-          TenderContractDto tenderContractDto,
-      @HiveField(9, defaultValue: ComboDealDto.empty)
-          ComboDealDto comboDealDto,
-      @HiveField(10, defaultValue: false)
-          bool isSpecialOrderType,
-      @HiveField(11, defaultValue: [])
-          List<StockInfoDto> stockInfoDtoList,
-      @HiveField(12, defaultValue: BannerDto.empty)
-          BannerDto bannerDto,
-      @HiveField(13, defaultValue: false)
-          bool exceedQty});
+      TenderContractDto tenderContractDto,
+      @HiveField(9, defaultValue: ComboDealDto.empty) ComboDealDto comboDealDto,
+      @HiveField(10, defaultValue: false) bool isSpecialOrderType,
+      @HiveField(11, defaultValue: []) List<StockInfoDto> stockInfoDtoList,
+      @HiveField(12, defaultValue: BannerDto.empty) BannerDto bannerDto,
+      @HiveField(13, defaultValue: false) bool exceedQty});
 
   $MaterialDtoCopyWith<$Res> get materialDto;
   $PriceDtoCopyWith<$Res> get priceDto;
@@ -262,33 +251,22 @@ abstract class _$$_PriceAggregateDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0, defaultValue: _emptyConstMaterialDto)
-          MaterialDto materialDto,
-      @HiveField(1, defaultValue: 1)
-          int quantity,
-      @HiveField(2, defaultValue: _emptyPriceDto)
-          PriceDto priceDto,
+      MaterialDto materialDto,
+      @HiveField(1, defaultValue: 1) int quantity,
+      @HiveField(2, defaultValue: _emptyPriceDto) PriceDto priceDto,
       @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
-          SalesOrganisationConfigsDto salesOrganisationConfigsDto,
-      @HiveField(4, defaultValue: 0)
-          int zmgMaterialCountOnCart,
-      @HiveField(5, defaultValue: _emptyBundleDto)
-          BundleDto bundleDto,
-      @HiveField(6, defaultValue: [])
-          List<MaterialItemBonusDto> bonusItem,
-      @HiveField(7, defaultValue: _emptyStockInfoDto)
-          StockInfoDto stockInfoDto,
+      SalesOrganisationConfigsDto salesOrganisationConfigsDto,
+      @HiveField(4, defaultValue: 0) int zmgMaterialCountOnCart,
+      @HiveField(5, defaultValue: _emptyBundleDto) BundleDto bundleDto,
+      @HiveField(6, defaultValue: []) List<MaterialItemBonusDto> bonusItem,
+      @HiveField(7, defaultValue: _emptyStockInfoDto) StockInfoDto stockInfoDto,
       @HiveField(8, defaultValue: _emptyTenderContractDto)
-          TenderContractDto tenderContractDto,
-      @HiveField(9, defaultValue: ComboDealDto.empty)
-          ComboDealDto comboDealDto,
-      @HiveField(10, defaultValue: false)
-          bool isSpecialOrderType,
-      @HiveField(11, defaultValue: [])
-          List<StockInfoDto> stockInfoDtoList,
-      @HiveField(12, defaultValue: BannerDto.empty)
-          BannerDto bannerDto,
-      @HiveField(13, defaultValue: false)
-          bool exceedQty});
+      TenderContractDto tenderContractDto,
+      @HiveField(9, defaultValue: ComboDealDto.empty) ComboDealDto comboDealDto,
+      @HiveField(10, defaultValue: false) bool isSpecialOrderType,
+      @HiveField(11, defaultValue: []) List<StockInfoDto> stockInfoDtoList,
+      @HiveField(12, defaultValue: BannerDto.empty) BannerDto bannerDto,
+      @HiveField(13, defaultValue: false) bool exceedQty});
 
   @override
   $MaterialDtoCopyWith<$Res> get materialDto;
@@ -401,33 +379,26 @@ class __$$_PriceAggregateDtoCopyWithImpl<$Res>
 class _$_PriceAggregateDto extends _PriceAggregateDto {
   const _$_PriceAggregateDto(
       {@HiveField(0, defaultValue: _emptyConstMaterialDto)
-          required this.materialDto,
-      @HiveField(1, defaultValue: 1)
-          required this.quantity,
-      @HiveField(2, defaultValue: _emptyPriceDto)
-          required this.priceDto,
+      required this.materialDto,
+      @HiveField(1, defaultValue: 1) required this.quantity,
+      @HiveField(2, defaultValue: _emptyPriceDto) required this.priceDto,
       @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
-          required this.salesOrganisationConfigsDto,
-      @HiveField(4, defaultValue: 0)
-          required this.zmgMaterialCountOnCart,
-      @HiveField(5, defaultValue: _emptyBundleDto)
-          required this.bundleDto,
+      required this.salesOrganisationConfigsDto,
+      @HiveField(4, defaultValue: 0) required this.zmgMaterialCountOnCart,
+      @HiveField(5, defaultValue: _emptyBundleDto) required this.bundleDto,
       @HiveField(6, defaultValue: [])
-          required final List<MaterialItemBonusDto> bonusItem,
+      required final List<MaterialItemBonusDto> bonusItem,
       @HiveField(7, defaultValue: _emptyStockInfoDto)
-          required this.stockInfoDto,
+      required this.stockInfoDto,
       @HiveField(8, defaultValue: _emptyTenderContractDto)
-          required this.tenderContractDto,
+      required this.tenderContractDto,
       @HiveField(9, defaultValue: ComboDealDto.empty)
-          required this.comboDealDto,
-      @HiveField(10, defaultValue: false)
-          required this.isSpecialOrderType,
+      required this.comboDealDto,
+      @HiveField(10, defaultValue: false) required this.isSpecialOrderType,
       @HiveField(11, defaultValue: [])
-          required final List<StockInfoDto> stockInfoDtoList,
-      @HiveField(12, defaultValue: BannerDto.empty)
-          required this.bannerDto,
-      @HiveField(13, defaultValue: false)
-          required this.exceedQty})
+      required final List<StockInfoDto> stockInfoDtoList,
+      @HiveField(12, defaultValue: BannerDto.empty) required this.bannerDto,
+      @HiveField(13, defaultValue: false) required this.exceedQty})
       : _bonusItem = bonusItem,
         _stockInfoDtoList = stockInfoDtoList,
         super._();
@@ -559,34 +530,31 @@ class _$_PriceAggregateDto extends _PriceAggregateDto {
 abstract class _PriceAggregateDto extends PriceAggregateDto {
   const factory _PriceAggregateDto(
       {@HiveField(0, defaultValue: _emptyConstMaterialDto)
-          required final MaterialDto materialDto,
-      @HiveField(1, defaultValue: 1)
-          required final int quantity,
+      required final MaterialDto materialDto,
+      @HiveField(1, defaultValue: 1) required final int quantity,
       @HiveField(2, defaultValue: _emptyPriceDto)
-          required final PriceDto priceDto,
+      required final PriceDto priceDto,
       @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
-          required final SalesOrganisationConfigsDto
-              salesOrganisationConfigsDto,
-      @HiveField(4, defaultValue: 0)
-          required final int zmgMaterialCountOnCart,
+      required final SalesOrganisationConfigsDto salesOrganisationConfigsDto,
+      @HiveField(4, defaultValue: 0) required final int zmgMaterialCountOnCart,
       @HiveField(5, defaultValue: _emptyBundleDto)
-          required final BundleDto bundleDto,
+      required final BundleDto bundleDto,
       @HiveField(6, defaultValue: [])
-          required final List<MaterialItemBonusDto> bonusItem,
+      required final List<MaterialItemBonusDto> bonusItem,
       @HiveField(7, defaultValue: _emptyStockInfoDto)
-          required final StockInfoDto stockInfoDto,
+      required final StockInfoDto stockInfoDto,
       @HiveField(8, defaultValue: _emptyTenderContractDto)
-          required final TenderContractDto tenderContractDto,
+      required final TenderContractDto tenderContractDto,
       @HiveField(9, defaultValue: ComboDealDto.empty)
-          required final ComboDealDto comboDealDto,
+      required final ComboDealDto comboDealDto,
       @HiveField(10, defaultValue: false)
-          required final bool isSpecialOrderType,
+      required final bool isSpecialOrderType,
       @HiveField(11, defaultValue: [])
-          required final List<StockInfoDto> stockInfoDtoList,
+      required final List<StockInfoDto> stockInfoDtoList,
       @HiveField(12, defaultValue: BannerDto.empty)
-          required final BannerDto bannerDto,
+      required final BannerDto bannerDto,
       @HiveField(13, defaultValue: false)
-          required final bool exceedQty}) = _$_PriceAggregateDto;
+      required final bool exceedQty}) = _$_PriceAggregateDto;
   const _PriceAggregateDto._() : super._();
 
   @override

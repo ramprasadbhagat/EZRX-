@@ -2,19 +2,56 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_item.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/request_delivery_date.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-class CheckoutPage extends StatelessWidget {
+class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
+
+  @override
+  State<CheckoutPage> createState() => _CheckoutPageState();
+}
+
+class _CheckoutPageState extends State<CheckoutPage> {
+  final Map<DeliveryInfoLabel, FocusNode> _focusNodes = {
+    DeliveryInfoLabel.poReference: FocusNode(),
+    DeliveryInfoLabel.contactPerson: FocusNode(),
+    DeliveryInfoLabel.referenceNote: FocusNode(),
+    DeliveryInfoLabel.deliveryInstruction: FocusNode(),
+    DeliveryInfoLabel.mobileNumber: FocusNode(),
+    DeliveryInfoLabel.paymentTerm: FocusNode(),
+  };
+
+  @override
+  void dispose() {
+    for (final element in _focusNodes.entries) {
+      element.value.dispose();
+    }
+    super.dispose();
+  }
+
+  void _scrollToFocusedObject() {
+    _focusNodes[DeliveryInfoLabel.paymentTerm]?.requestFocus();
+    Scrollable.ensureVisible(
+      _focusNodes[DeliveryInfoLabel.paymentTerm]!.context!,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +73,21 @@ class CheckoutPage extends StatelessWidget {
           },
         ),
       ),
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
-          _SummaryInfo(),
-          SliverToBoxAdapter(
+          const _SummaryInfo(),
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 32.0,
             ),
           ),
-          _DeliveryInfo(),
-          SliverToBoxAdapter(
+          DeliveryInfo(focusNodes: _focusNodes),
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 24.0,
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Divider(
               indent: 0,
               thickness: 1,
@@ -59,34 +96,13 @@ class CheckoutPage extends StatelessWidget {
               color: ZPColors.extraLightGrey2,
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 32.0,
             ),
           ),
-          _TitleScrollList(),
-          _ManufactureScrollList(),
-          SliverToBoxAdapter(
-            child: Divider(
-              indent: 0,
-              thickness: 1,
-              endIndent: 0,
-              height: 1,
-              color: ZPColors.extraLightGrey2,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 32.0,
-            ),
-          ),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverToBoxAdapter(
-              child: _OrderSummary(),
-            ),
-          ),
-          SliverToBoxAdapter(
+          const _ManufactureScrollList(),
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 8.0,
             ),
@@ -121,33 +137,23 @@ class CheckoutPage extends StatelessWidget {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                        text: 'Grand total: ',
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.extraLightGrey4,
-                            ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'MYR ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: ZPColors.primary,
-                                ),
-                          ),
-                          TextSpan(
-                            text: (state.totalPrice + state.totalPrice * 0.07).toStringAsFixed(2),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: ZPColors.primary,
-                                ),
-                          ),
-                        ],
-                      ),
+                    PriceComponent(
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      price: state.totalPriceWithTax.toString(),
+                      title: 'Grand Total: '.tr(),
+                      priceLabelStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.extraLightGrey4,
+                              ),
+                      currencyCodeTextStyle:
+                          Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: ZPColors.primary,
+                              ),
+                      priceTextStyle:
+                          Theme.of(context).textTheme.labelMedium?.copyWith(
+                                color: ZPColors.primary,
+                              ),
                     ),
                     const SizedBox(
                       width: 8,
@@ -166,12 +172,98 @@ class CheckoutPage extends StatelessWidget {
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: ElevatedButton(
-                key: WidgetKeys.checkoutButton,
-                onPressed: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
+              child:
+                  BlocListener<AdditionalDetailsBloc, AdditionalDetailsState>(
+                listenWhen: (previous, current) =>
+                    previous.isValidated != current.isValidated ||
+                    previous.focusTo != current.focusTo,
+                listener: (context, state) {
+                  if (state.isValidated) {
+                    context.read<OrderSummaryBloc>().add(
+                          OrderSummaryEvent.submitOrder(
+                            shipToInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .shipToInfo,
+                            user: context.read<UserBloc>().state.user,
+                            // cartItems: cartItems,
+                            cartProducts:
+                                context.read<CartBloc>().state.cartProducts,
+                            grandTotal:
+                                context.read<CartBloc>().state.grandTotal(
+                                      isMYMarketSalesRep: false,
+                                    ),
+                            orderValue: context
+                                .read<CartBloc>()
+                                .state
+                                .totalPriceWithTax,
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            data: context
+                                .read<AdditionalDetailsBloc>()
+                                .state
+                                .deliveryInfoData,
+                            orderDocumentType: context
+                                .read<OrderDocumentTypeBloc>()
+                                .state
+                                .selectedOrderType,
+                            config: context.read<SalesOrgBloc>().state.configs,
+                          ),
+                        );
+                  } else {
+                    if (state.focusTo == DeliveryInfoLabel.paymentTerm) {
+                      _scrollToFocusedObject();
+                    }
+                    _focusNodes[state.focusTo]?.requestFocus();
+                  }
                 },
-                child: const Text('Place order').tr(),
+                child: BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
+                  listenWhen: (previous, current) =>
+                      previous.isSubmitting != current.isSubmitting,
+                  listener: (context, state) {
+                    state.apiFailureOrSuccessOption.fold(
+                      () {
+                        if (!state.isSubmitting) {
+                          context
+                              .read<CartBloc>()
+                              .add(const CartEvent.clearCart());
+                          Navigator.pop(context);
+                          showTopSnackBar(
+                            context: context,
+                            message: 'Order submitted'.tr(),
+                          );
+                        }
+                      },
+                      (either) => {},
+                    );
+                  },
+                  builder: (context, state) => ElevatedButton(
+                    key: WidgetKeys.checkoutButton,
+                    onPressed: state.isSubmitting
+                        ? null
+                        : () {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            context.read<AdditionalDetailsBloc>().add(
+                                  AdditionalDetailsEvent.validateForm(
+                                    config: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .configs,
+                                  ),
+                                );
+                          },
+                    child: LoadingShimmer.withChild(
+                      enabled: state.isSubmitting,
+                      child: const Text('Place order').tr(),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -187,13 +279,18 @@ class CheckoutPage extends StatelessWidget {
       enableDrag: false,
       useSafeArea: true,
       builder: (_) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.5,
-          child: Padding(
-              padding: const EdgeInsets.all(20,), child: Column(
+        return Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(
+                20,
+              ),
+              child: Column(
                 children: [
                   const _OrderSummary(),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -202,14 +299,17 @@ class CheckoutPage extends StatelessWidget {
                       },
                       child: Text(
                         'Close'.tr(),
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.white,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.white,
+                                ),
                       ),
                     ),
                   ),
                 ],
-              ),),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -230,7 +330,7 @@ class _SummaryInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'RSD Hospitals SDN BHD',
+              '${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -239,7 +339,8 @@ class _SummaryInfo extends StatelessWidget {
               height: 16.0,
             ),
             Text(
-              'Customer code: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}',
+              'Customer Code: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}'
+                  .tr(),
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -282,238 +383,6 @@ class _SummaryInfo extends StatelessWidget {
   }
 }
 
-class _DeliveryInfo extends StatelessWidget {
-  const _DeliveryInfo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      sliver: BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          return SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Delivery information'.tr(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge
-                          ?.copyWith(color: ZPColors.neutralsBlack),
-                    ),
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.expand_less_outlined,
-                        ),
-                        splashRadius: 24,),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                TextFieldWithLabel(
-                  fieldKey: WidgetKeys.showDeliveryInfo,
-                  labelText: 'PO reference'.tr(),
-                  controller: TextEditingController(),
-                  validator: (value) {},
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    hintText: 'Enter your PO reference'.tr(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                RequestDeliveryDate(
-                  futureDeliveryDay: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .configs
-                      .futureDeliveryDay
-                      .validatedFutureDeliveryDate,
-                  deliveryInfoData: state.deliveryInfoData,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFieldWithLabel(
-                  fieldKey: WidgetKeys.showDeliveryInfo,
-                  labelText: 'Reference note'.tr(),
-                  controller: TextEditingController(),
-                  validator: (value) {},
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    hintText: 'Enter reference note'.tr(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFieldWithLabel(
-                  fieldKey: WidgetKeys.showDeliveryInfo,
-                  labelText: 'Payment term'.tr(),
-                  controller: TextEditingController(),
-                  validator: (value) {},
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    hintText: 'Select one'.tr(),
-                    suffixIconConstraints:
-                        const BoxConstraints(maxHeight: 22, minHeight: 22),
-                    suffixIcon: IconButton(
-                      splashRadius: 22,
-                      padding: EdgeInsets.zero,
-                      key: WidgetKeys.loginPasswordFieldSuffixIcon,
-                      icon: const Icon(
-                        Icons.expand_more_outlined,
-                        size: 22,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFieldWithLabel(
-                  fieldKey: WidgetKeys.showDeliveryInfo,
-                  labelText: 'Contact person'.tr(),
-                  controller: TextEditingController(),
-                  validator: (value) {},
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    hintText: 'Enter contact person name'.tr(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                // TextFieldWithLabel(
-                //   fieldKey: WidgetKeys.showDeliveryInfo,
-                //   labelText: 'Mobile number'.tr(),
-                //   controller: TextEditingController(),
-                //   validator: (value) {},
-                //   onChanged: (value) {},
-                //   decoration: InputDecoration(
-                //     hintText: 'Enter contact person number'.tr(),
-                //     prefixIconConstraints: const BoxConstraints(
-                //       maxWidth: 100,
-                //     ),
-                //     prefixIcon: InkWell(
-                //       onTap: () {},
-                //       child: Container(
-                //         decoration: const BoxDecoration(
-                //           color: ZPColors.inputBorderColor,
-                //           borderRadius: BorderRadius.horizontal(
-                //             left: Radius.circular(8),
-                //           ),
-                //         ),
-                //         padding: const EdgeInsets.symmetric(vertical: 12),
-                //         child: Row(
-                //           children: [
-                //             Text('+65'),
-                //             Icon(
-                //               Icons.expand_more_outlined,
-                //             )
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Mobile number'.tr(), style: Theme.of(context).textTheme.labelSmall,),
-                    const SizedBox(height: 8,),
-                    InternationalPhoneNumberInput(
-                      countries: const ['MY'],
-                      initialValue: PhoneNumber(isoCode: 'MY'),
-                      onInputValidated: (bool value) {},
-                      autoValidateMode: AutovalidateMode.disabled,
-                      ignoreBlank: false,
-                      onInputChanged: (value) {},
-                      cursorColor: Colors.black,
-                      formatInput: false,
-                      selectorConfig: const SelectorConfig(
-                        selectorType: PhoneInputSelectorType.DROPDOWN,
-                        showFlags: true,
-                      ),
-                      inputDecoration: InputDecoration(
-                        hintText: 'Enter contact person number'.tr(),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFieldWithLabel(
-                  fieldKey: WidgetKeys.showDeliveryInfo,
-                  labelText: 'Delivery instructions'.tr(),
-                  controller: TextEditingController(),
-                  maxLines: 3,
-                  validator: (value) {},
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    hintText: 'Enter delivery instructions'.tr(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: Theme.of(context)
-                        .elevatedButtonTheme
-                        .style
-                        ?.copyWith(
-                          backgroundColor:
-                              const MaterialStatePropertyAll(ZPColors.white),
-                          shape: const MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8),
-                              ),
-                              side: BorderSide(color: ZPColors.primary),
-                            ),
-                          ),
-                        ),
-                    child: Text(
-                      'Upload Attachment'.tr(),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Attachments:',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: ZPColors.neutralsBlack),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
 class _ManufactureScrollList extends StatelessWidget {
   const _ManufactureScrollList({Key? key}) : super(key: key);
 
@@ -524,7 +393,28 @@ class _ManufactureScrollList extends StatelessWidget {
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              return CheckoutProductItem(cartItem: state.cartProducts[index]);
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  index == 0 ||
+                          state.cartProducts[index].materialInfo.principalData
+                                  .principalName
+                                  .getValue() !=
+                              state.cartProducts[index - 1].materialInfo
+                                  .principalData.principalName
+                                  .getValue()
+                      ? _TitleScrollList(
+                          cartProduct: state.cartProducts[index].materialInfo,
+                        )
+                      : const SizedBox.shrink(),
+                  CheckoutProductItem(cartItem: state.cartProducts[index]),
+                  state.cartProducts[index].addedBonusList.isNotEmpty
+                      ? CheckoutProductBonusItem(
+                          cartItem: state.cartProducts[index],
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              );
             },
             childCount: state.cartProducts.length, // 1000 list items
           ),
@@ -535,19 +425,19 @@ class _ManufactureScrollList extends StatelessWidget {
 }
 
 class _TitleScrollList extends StatelessWidget {
-  const _TitleScrollList({Key? key}) : super(key: key);
+  final MaterialInfo cartProduct;
+  const _TitleScrollList({Key? key, required this.cartProduct})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      sliver: SliverToBoxAdapter(
-        child: Text(
-          'Manufacturer name'.tr(),
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
+      child: Text(
+        cartProduct.principalData.principalName.getValue(),
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: ZPColors.neutralsBlack,
+            ),
       ),
     );
   }
@@ -560,8 +450,6 @@ class _OrderSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
-        final tax = state.totalPrice * 0.07;
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -597,13 +485,13 @@ class _OrderSummary extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Tax at 7%'.tr(),
+                      '${'Tax at'.tr()}${context.read<SalesOrgBloc>().state.configs.vatValue}%',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: ZPColors.neutralsBlack,
                           ),
                     ),
                     Text(
-                      'MYR ${tax.toStringAsFixed(2)}',
+                      'MYR ${state.tax.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: ZPColors.neutralsBlack,
                           ),
@@ -650,6 +538,7 @@ class _OrderSummary extends StatelessWidget {
                             color: ZPColors.neutralsBlack,
                           ),
                     ),
+
                     ///ToDo: hard code
                     Text(
                       'MYR 0',
@@ -680,7 +569,7 @@ class _OrderSummary extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Grand total: ',
+                  'Grand Total: '.tr(),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.neutralsBlack,
                       ),
@@ -696,7 +585,7 @@ class _OrderSummary extends StatelessWidget {
                                 ),
                       ),
                       TextSpan(
-                        text: (state.totalPrice + tax).toStringAsFixed(2),
+                        text: (state.totalPriceWithTax).toStringAsFixed(2),
                         style:
                             Theme.of(context).textTheme.labelMedium?.copyWith(
                                   color: ZPColors.neutralsBlack,

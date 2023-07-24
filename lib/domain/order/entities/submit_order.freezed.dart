@@ -20,22 +20,19 @@ mixin _$SubmitOrder {
   CompanyName get companyName => throw _privateConstructorUsedError;
   SubmitOrderCustomer get customer => throw _privateConstructorUsedError;
   String get poReference => throw _privateConstructorUsedError;
-  List<SubmitMaterialInfo> get materials => throw _privateConstructorUsedError;
+  List<SubmitMaterialInfo> get products => throw _privateConstructorUsedError;
   String get poDate => throw _privateConstructorUsedError;
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
   String get specialInstructions => throw _privateConstructorUsedError;
-  String get purchaseOrderType => throw _privateConstructorUsedError;
-  String get orderType => throw _privateConstructorUsedError;
-  String get orderReason => throw _privateConstructorUsedError;
-  ShippingCondition get shippingCondition => throw _privateConstructorUsedError;
+  double get orderValue => throw _privateConstructorUsedError;
   String get telephone => throw _privateConstructorUsedError;
   String get referenceNotes => throw _privateConstructorUsedError;
   String get paymentTerms => throw _privateConstructorUsedError;
   String get collectiveNumber => throw _privateConstructorUsedError;
-  bool get subscribeStatusChange => throw _privateConstructorUsedError;
-  String get trackingLevel => throw _privateConstructorUsedError;
   bool get blockOrder => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
+  String get paymentMethod => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitOrderCopyWith<SubmitOrder> get copyWith =>
@@ -53,22 +50,19 @@ abstract class $SubmitOrderCopyWith<$Res> {
       CompanyName companyName,
       SubmitOrderCustomer customer,
       String poReference,
-      List<SubmitMaterialInfo> materials,
+      List<SubmitMaterialInfo> products,
       String poDate,
       String requestedDeliveryDate,
       String specialInstructions,
-      String purchaseOrderType,
-      String orderType,
-      String orderReason,
-      ShippingCondition shippingCondition,
+      double orderValue,
       String telephone,
       String referenceNotes,
       String paymentTerms,
       String collectiveNumber,
-      bool subscribeStatusChange,
-      String trackingLevel,
       bool blockOrder,
-      List<PoDocuments> poDocuments});
+      List<PoDocuments> poDocuments,
+      String language,
+      String paymentMethod});
 
   $SubmitOrderCustomerCopyWith<$Res> get customer;
 }
@@ -90,22 +84,19 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? companyName = null,
     Object? customer = null,
     Object? poReference = null,
-    Object? materials = null,
+    Object? products = null,
     Object? poDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
-    Object? purchaseOrderType = null,
-    Object? orderType = null,
-    Object? orderReason = null,
-    Object? shippingCondition = null,
+    Object? orderValue = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
     Object? collectiveNumber = null,
-    Object? subscribeStatusChange = null,
-    Object? trackingLevel = null,
     Object? blockOrder = null,
     Object? poDocuments = null,
+    Object? language = null,
+    Object? paymentMethod = null,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -124,9 +115,9 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
               as String,
-      materials: null == materials
-          ? _value.materials
-          : materials // ignore: cast_nullable_to_non_nullable
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
               as List<SubmitMaterialInfo>,
       poDate: null == poDate
           ? _value.poDate
@@ -140,22 +131,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
-          ? _value.purchaseOrderType
-          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderReason: null == orderReason
-          ? _value.orderReason
-          : orderReason // ignore: cast_nullable_to_non_nullable
-              as String,
-      shippingCondition: null == shippingCondition
-          ? _value.shippingCondition
-          : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as ShippingCondition,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -172,14 +151,6 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.collectiveNumber
           : collectiveNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      subscribeStatusChange: null == subscribeStatusChange
-          ? _value.subscribeStatusChange
-          : subscribeStatusChange // ignore: cast_nullable_to_non_nullable
-              as bool,
-      trackingLevel: null == trackingLevel
-          ? _value.trackingLevel
-          : trackingLevel // ignore: cast_nullable_to_non_nullable
-              as String,
       blockOrder: null == blockOrder
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
@@ -188,6 +159,14 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentMethod: null == paymentMethod
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -213,22 +192,19 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
       CompanyName companyName,
       SubmitOrderCustomer customer,
       String poReference,
-      List<SubmitMaterialInfo> materials,
+      List<SubmitMaterialInfo> products,
       String poDate,
       String requestedDeliveryDate,
       String specialInstructions,
-      String purchaseOrderType,
-      String orderType,
-      String orderReason,
-      ShippingCondition shippingCondition,
+      double orderValue,
       String telephone,
       String referenceNotes,
       String paymentTerms,
       String collectiveNumber,
-      bool subscribeStatusChange,
-      String trackingLevel,
       bool blockOrder,
-      List<PoDocuments> poDocuments});
+      List<PoDocuments> poDocuments,
+      String language,
+      String paymentMethod});
 
   @override
   $SubmitOrderCustomerCopyWith<$Res> get customer;
@@ -249,22 +225,19 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
     Object? companyName = null,
     Object? customer = null,
     Object? poReference = null,
-    Object? materials = null,
+    Object? products = null,
     Object? poDate = null,
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
-    Object? purchaseOrderType = null,
-    Object? orderType = null,
-    Object? orderReason = null,
-    Object? shippingCondition = null,
+    Object? orderValue = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
     Object? collectiveNumber = null,
-    Object? subscribeStatusChange = null,
-    Object? trackingLevel = null,
     Object? blockOrder = null,
     Object? poDocuments = null,
+    Object? language = null,
+    Object? paymentMethod = null,
   }) {
     return _then(_$_SubmitOrderCustomer(
       userName: null == userName
@@ -283,9 +256,9 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
               as String,
-      materials: null == materials
-          ? _value._materials
-          : materials // ignore: cast_nullable_to_non_nullable
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
               as List<SubmitMaterialInfo>,
       poDate: null == poDate
           ? _value.poDate
@@ -299,22 +272,10 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
-          ? _value.purchaseOrderType
-          : purchaseOrderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderReason: null == orderReason
-          ? _value.orderReason
-          : orderReason // ignore: cast_nullable_to_non_nullable
-              as String,
-      shippingCondition: null == shippingCondition
-          ? _value.shippingCondition
-          : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as ShippingCondition,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -331,14 +292,6 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value.collectiveNumber
           : collectiveNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      subscribeStatusChange: null == subscribeStatusChange
-          ? _value.subscribeStatusChange
-          : subscribeStatusChange // ignore: cast_nullable_to_non_nullable
-              as bool,
-      trackingLevel: null == trackingLevel
-          ? _value.trackingLevel
-          : trackingLevel // ignore: cast_nullable_to_non_nullable
-              as String,
       blockOrder: null == blockOrder
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
@@ -347,6 +300,14 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentMethod: null == paymentMethod
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -359,23 +320,20 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
       required this.companyName,
       required this.customer,
       required this.poReference,
-      required final List<SubmitMaterialInfo> materials,
+      required final List<SubmitMaterialInfo> products,
       required this.poDate,
       required this.requestedDeliveryDate,
       required this.specialInstructions,
-      required this.purchaseOrderType,
-      required this.orderType,
-      required this.orderReason,
-      required this.shippingCondition,
+      required this.orderValue,
       required this.telephone,
       required this.referenceNotes,
       required this.paymentTerms,
       required this.collectiveNumber,
-      required this.subscribeStatusChange,
-      required this.trackingLevel,
       required this.blockOrder,
-      required final List<PoDocuments> poDocuments})
-      : _materials = materials,
+      required final List<PoDocuments> poDocuments,
+      required this.language,
+      required this.paymentMethod})
+      : _products = products,
         _poDocuments = poDocuments,
         super._();
 
@@ -387,12 +345,12 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   final SubmitOrderCustomer customer;
   @override
   final String poReference;
-  final List<SubmitMaterialInfo> _materials;
+  final List<SubmitMaterialInfo> _products;
   @override
-  List<SubmitMaterialInfo> get materials {
-    if (_materials is EqualUnmodifiableListView) return _materials;
+  List<SubmitMaterialInfo> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_materials);
+    return EqualUnmodifiableListView(_products);
   }
 
   @override
@@ -402,13 +360,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   @override
   final String specialInstructions;
   @override
-  final String purchaseOrderType;
-  @override
-  final String orderType;
-  @override
-  final String orderReason;
-  @override
-  final ShippingCondition shippingCondition;
+  final double orderValue;
   @override
   final String telephone;
   @override
@@ -417,10 +369,6 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   final String paymentTerms;
   @override
   final String collectiveNumber;
-  @override
-  final bool subscribeStatusChange;
-  @override
-  final String trackingLevel;
   @override
   final bool blockOrder;
   final List<PoDocuments> _poDocuments;
@@ -432,8 +380,13 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   }
 
   @override
+  final String language;
+  @override
+  final String paymentMethod;
+
+  @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, purchaseOrderType: $purchaseOrderType, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, subscribeStatusChange: $subscribeStatusChange, trackingLevel: $trackingLevel, blockOrder: $blockOrder, poDocuments: $poDocuments)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod)';
   }
 
   @override
@@ -449,21 +402,14 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
                 other.customer == customer) &&
             (identical(other.poReference, poReference) ||
                 other.poReference == poReference) &&
-            const DeepCollectionEquality()
-                .equals(other._materials, _materials) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.poDate, poDate) || other.poDate == poDate) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.specialInstructions, specialInstructions) ||
                 other.specialInstructions == specialInstructions) &&
-            (identical(other.purchaseOrderType, purchaseOrderType) ||
-                other.purchaseOrderType == purchaseOrderType) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
-            (identical(other.orderReason, orderReason) ||
-                other.orderReason == orderReason) &&
-            (identical(other.shippingCondition, shippingCondition) ||
-                other.shippingCondition == shippingCondition) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
             (identical(other.telephone, telephone) ||
                 other.telephone == telephone) &&
             (identical(other.referenceNotes, referenceNotes) ||
@@ -472,40 +418,36 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
                 other.paymentTerms == paymentTerms) &&
             (identical(other.collectiveNumber, collectiveNumber) ||
                 other.collectiveNumber == collectiveNumber) &&
-            (identical(other.subscribeStatusChange, subscribeStatusChange) ||
-                other.subscribeStatusChange == subscribeStatusChange) &&
-            (identical(other.trackingLevel, trackingLevel) ||
-                other.trackingLevel == trackingLevel) &&
             (identical(other.blockOrder, blockOrder) ||
                 other.blockOrder == blockOrder) &&
             const DeepCollectionEquality()
-                .equals(other._poDocuments, _poDocuments));
+                .equals(other._poDocuments, _poDocuments) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.paymentMethod, paymentMethod) ||
+                other.paymentMethod == paymentMethod));
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        userName,
-        companyName,
-        customer,
-        poReference,
-        const DeepCollectionEquality().hash(_materials),
-        poDate,
-        requestedDeliveryDate,
-        specialInstructions,
-        purchaseOrderType,
-        orderType,
-        orderReason,
-        shippingCondition,
-        telephone,
-        referenceNotes,
-        paymentTerms,
-        collectiveNumber,
-        subscribeStatusChange,
-        trackingLevel,
-        blockOrder,
-        const DeepCollectionEquality().hash(_poDocuments)
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      userName,
+      companyName,
+      customer,
+      poReference,
+      const DeepCollectionEquality().hash(_products),
+      poDate,
+      requestedDeliveryDate,
+      specialInstructions,
+      orderValue,
+      telephone,
+      referenceNotes,
+      paymentTerms,
+      collectiveNumber,
+      blockOrder,
+      const DeepCollectionEquality().hash(_poDocuments),
+      language,
+      paymentMethod);
 
   @JsonKey(ignore: true)
   @override
@@ -521,22 +463,19 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
       required final CompanyName companyName,
       required final SubmitOrderCustomer customer,
       required final String poReference,
-      required final List<SubmitMaterialInfo> materials,
+      required final List<SubmitMaterialInfo> products,
       required final String poDate,
       required final String requestedDeliveryDate,
       required final String specialInstructions,
-      required final String purchaseOrderType,
-      required final String orderType,
-      required final String orderReason,
-      required final ShippingCondition shippingCondition,
+      required final double orderValue,
       required final String telephone,
       required final String referenceNotes,
       required final String paymentTerms,
       required final String collectiveNumber,
-      required final bool subscribeStatusChange,
-      required final String trackingLevel,
       required final bool blockOrder,
-      required final List<PoDocuments> poDocuments}) = _$_SubmitOrderCustomer;
+      required final List<PoDocuments> poDocuments,
+      required final String language,
+      required final String paymentMethod}) = _$_SubmitOrderCustomer;
   const _SubmitOrderCustomer._() : super._();
 
   @override
@@ -548,7 +487,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   @override
   String get poReference;
   @override
-  List<SubmitMaterialInfo> get materials;
+  List<SubmitMaterialInfo> get products;
   @override
   String get poDate;
   @override
@@ -556,13 +495,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   @override
   String get specialInstructions;
   @override
-  String get purchaseOrderType;
-  @override
-  String get orderType;
-  @override
-  String get orderReason;
-  @override
-  ShippingCondition get shippingCondition;
+  double get orderValue;
   @override
   String get telephone;
   @override
@@ -572,13 +505,13 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   @override
   String get collectiveNumber;
   @override
-  bool get subscribeStatusChange;
-  @override
-  String get trackingLevel;
-  @override
   bool get blockOrder;
   @override
   List<PoDocuments> get poDocuments;
+  @override
+  String get language;
+  @override
+  String get paymentMethod;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitOrderCustomerCopyWith<_$_SubmitOrderCustomer> get copyWith =>

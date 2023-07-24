@@ -366,6 +366,10 @@ class _FooterState extends State<_Footer> {
                                                           .materialInfo
                                                           .materialNumber] ??
                                                   Price.empty(),
+                                              salesOrgConfig: context
+                                                  .read<SalesOrgBloc>()
+                                                  .state
+                                                  .configs,
                                             ),
                                             quantity:
                                                 stateCart.getQuantityOfProduct(

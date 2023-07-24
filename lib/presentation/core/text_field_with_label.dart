@@ -18,6 +18,8 @@ class TextFieldWithLabel extends StatelessWidget {
     this.onDone,
     this.maxLines = 1,
     this.mandatory = false,
+    this.readOnly = false,
+    this.focusNode,
   }) : super(key: key);
   final Key fieldKey;
   final String labelText;
@@ -33,6 +35,8 @@ class TextFieldWithLabel extends StatelessWidget {
   final Function(String)? onDone;
   final int maxLines;
   final bool mandatory;
+  final bool readOnly;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +61,7 @@ class TextFieldWithLabel extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         TextFormField(
+          focusNode: focusNode,
           key: fieldKey,
           style: Theme.of(context).textTheme.titleMedium,
           autocorrect: autoCorrect,
@@ -70,6 +75,7 @@ class TextFieldWithLabel extends StatelessWidget {
           initialValue: initValue,
           onFieldSubmitted: onDone,
           maxLines: maxLines,
+          readOnly: readOnly,
         ),
       ],
     );

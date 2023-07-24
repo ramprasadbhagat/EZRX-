@@ -47,7 +47,9 @@ abstract class $ViewByOrderDtoCopyWith<$Res> {
           int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
           List<String> creatingOrderIds,
-      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      @JsonKey(
+          name: 'orderHeaders', defaultValue: <
+              OrderHistoryDetailsOrderHeadersDto>[])
           List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
 }
 
@@ -98,7 +100,9 @@ abstract class _$$_ViewByOrderDtoCopyWith<$Res>
           int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
           List<String> creatingOrderIds,
-      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      @JsonKey(
+          name: 'orderHeaders', defaultValue: <
+              OrderHistoryDetailsOrderHeadersDto>[])
           List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
 }
 
@@ -142,7 +146,9 @@ class _$_ViewByOrderDto extends _ViewByOrderDto {
           required this.orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
           required final List<String> creatingOrderIds,
-      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      @JsonKey(
+          name: 'orderHeaders', defaultValue: <
+              OrderHistoryDetailsOrderHeadersDto>[])
           required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders})
       : _creatingOrderIds = creatingOrderIds,
         _orderHeaders = orderHeaders,
@@ -221,8 +227,11 @@ abstract class _ViewByOrderDto extends ViewByOrderDto {
           required final int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
           required final List<String> creatingOrderIds,
-      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-          required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders}) = _$_ViewByOrderDto;
+      @JsonKey(
+          name: 'orderHeaders', defaultValue: <
+              OrderHistoryDetailsOrderHeadersDto>[])
+          required final List<OrderHistoryDetailsOrderHeadersDto>
+              orderHeaders}) = _$_ViewByOrderDto;
   const _ViewByOrderDto._() : super._();
 
   factory _ViewByOrderDto.fromJson(Map<String, dynamic> json) =

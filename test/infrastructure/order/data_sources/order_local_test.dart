@@ -77,7 +77,7 @@ void main() {
 
           expect(
             result,
-            SubmitOrderResponseDto.fromJson(res['data']['submitOrderTwo'])
+            SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
                 .toDomain(),
           );
         },

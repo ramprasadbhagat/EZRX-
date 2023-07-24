@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/order_encryption.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/error/order_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_response_dto.dart';
 
 class OrderRemoteDataSource {
@@ -126,27 +126,30 @@ class OrderRemoteDataSource {
   }
 
   Future<SubmitOrderResponse> submitOrder({
-    required SubmitOrderDto submitOrder,
+    required OrderEncryption orderEncryption,
   }) async {
     return await exceptionHandler.handle(() async {
       final variables = {
-        'order': submitOrder.toJson(),
+        'NewOrderInput': {
+          'data': orderEncryption.data,
+          'hash': orderEncryption.hash,
+        },
       };
-
       final res = await httpService.request(
         method: 'POST',
-        url: '/api/orderMutation',
+        url: '/api/order',
         data: jsonEncode({
           'query': queryMutation.submitOrder(),
           'variables': variables,
         }),
+        apiEndpoint: 'submitOrderMutation',
       );
       _orderExceptionChecker(res: res);
-      if (res.data['data']['submitOrderTwo'] == null) {
+      if (res.data['data']['submitOrder'] == null) {
         throw const OrderException.submitOrderDataIsEmpty();
       }
       final submitOrderResponse =
-          SubmitOrderResponseDto.fromJson(res.data['data']['submitOrderTwo']);
+          SubmitOrderResponseDto.fromJson(res.data['data']['submitOrder']);
       _submitOrderExceptionChecker(submitOrderResponse: submitOrderResponse);
 
       return submitOrderResponse.toDomain();

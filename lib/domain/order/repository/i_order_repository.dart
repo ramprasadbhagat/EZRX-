@@ -40,8 +40,9 @@ abstract class IOrderRepository {
   Future<Either<ApiFailure, SubmitOrderResponse>> submitOrder({
     required ShipToInfo shipToInfo,
     required User user,
-    required List<PriceAggregate> cartItems,
+    required List<PriceAggregate> cartProducts,
     required double grandTotal,
+    required double orderValue,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required DeliveryInfoData data,
