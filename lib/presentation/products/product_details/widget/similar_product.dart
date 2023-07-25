@@ -14,24 +14,7 @@ class SimilarProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductDetailBloc, ProductDetailState>(
-      listenWhen: (previous, current) =>
-          previous.productDetailAggregate.similarProduct !=
-          current.productDetailAggregate.similarProduct,
-      listener: (context, state) {
-        final eligibilityBlocState = context.read<EligibilityBloc>().state;
-        context.read<MaterialPriceBloc>().add(
-              MaterialPriceEvent.fetch(
-                salesOrganisation:
-                    eligibilityBlocState.salesOrganisation,
-                salesConfigs: eligibilityBlocState.salesOrgConfigs,
-                customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-                shipToInfo: eligibilityBlocState.shipToInfo,
-                comboDealEligible: eligibilityBlocState.comboDealEligible,
-                materials: state.productDetailAggregate.similarProduct,
-              ),
-            );
-      },
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.similarProduct !=
           current.productDetailAggregate.similarProduct,

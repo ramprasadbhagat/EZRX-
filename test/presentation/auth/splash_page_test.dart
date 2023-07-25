@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -191,6 +192,9 @@ class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
 class ViewByItemDetailsMockBloc
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
+class ProductDetailMockBloc
+    extends MockBloc<ProductDetailEvent, ProductDetailState>
+    implements ProductDetailBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -220,6 +224,7 @@ void main() {
 
   late MaterialFilterBloc materialFilterBlocMock;
   late RecentOrderBloc recentOrderBloc;
+  late ProductDetailBloc productDetailBloc;
 
   late OrderDocumentTypeBloc orderDocumentTypeMock;
   late ReturnApproverBloc returnApproverBlocMock;
@@ -309,6 +314,7 @@ void main() {
       returnListByItemBlocMock = ReturnListByItemMockBloc();
       recentOrderBloc = RecentOrderMockBloc();
       viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
+      productDetailBloc = ProductDetailMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -371,6 +377,10 @@ void main() {
       when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
       when(() => viewByItemDetailsBlocMock.state)
           .thenReturn(ViewByItemDetailsState.initial());
+      when(() => recentOrderBloc.state)
+          .thenReturn(RecentOrderState.initial());
+      when(() => productDetailBloc.state)
+        .thenReturn(ProductDetailState.initial());
     });
 
     Future getWidget(tester) async {
@@ -446,6 +456,10 @@ void main() {
             BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
             BlocProvider<ViewByItemDetailsBloc>(
                 create: (context) => viewByItemDetailsBlocMock),
+            BlocProvider<RecentOrderBloc>(
+                  create: (context) => recentOrderBloc),
+            BlocProvider<ProductDetailBloc>(
+                  create: (context) => productDetailBloc),
           ],
           child: const SplashPage(),
         ),

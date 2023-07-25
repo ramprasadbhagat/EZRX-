@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
@@ -22,12 +21,10 @@ part 'product_detail_bloc.freezed.dart';
 
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final IProductDetailRepository productDetailRepository;
-  final IProductImagesRepository productImagesRepository;
   final IFavouriteRepository favouriteRepository;
 
   ProductDetailBloc({
     required this.productDetailRepository,
-    required this.productImagesRepository,
     required this.favouriteRepository,
   }) : super(ProductDetailState.initial()) {
     on<ProductDetailEvent>(_onEvent);
@@ -191,43 +188,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   similarProduct: products,
                 ),
-              ),
-            );
-            add(
-              _FetchProductImage(
-                materialNumbers: state.productDetailAggregate.similarProduct
-                    .map((e) => e.materialNumber)
-                    .toList(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
           },
-        );
-      },
-      fetchProductImage: (_FetchProductImage e) async {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            failureOrSuccessOption: none(),
-          ),
-        );
-        final failureOrSuccess = await productImagesRepository.getProductImages(
-          list: state.productDetailAggregate.similarProduct,
-        );
-        failureOrSuccess.fold(
-          (failure) => emit(
-            state.copyWith(
-              isFetching: false,
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (products) => emit(
-            state.copyWith(
-              isFetching: false,
-              productDetailAggregate: state.productDetailAggregate.copyWith(
-                similarProduct: products.map((e) => e as MaterialInfo).toList(),
-              ),
-            ),
-          ),
         );
       },
       changeImage: (_ChangeImage e) async => emit(

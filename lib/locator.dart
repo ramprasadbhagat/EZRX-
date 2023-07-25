@@ -1065,7 +1065,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ProductDetailBloc(
       productDetailRepository: locator<ProductDetailRepository>(),
-      productImagesRepository: locator<ProductImagesRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),
     ),
   );

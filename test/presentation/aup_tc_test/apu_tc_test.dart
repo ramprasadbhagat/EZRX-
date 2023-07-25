@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -101,8 +102,7 @@ class ReturnListByItemMockBloc
     extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
     implements ReturnListByItemBloc {}
 
-class RecentOrderMockBloc
-    extends MockBloc<RecentOrderEvent, RecentOrderState>
+class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
     implements RecentOrderBloc {}
 
 class ViewByItemDetailsMockBloc
@@ -112,6 +112,9 @@ class ViewByItemDetailsMockBloc
 class ViewByOrderDetailsMockBloc
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
+class ProductDetailMockBloc
+    extends MockBloc<ProductDetailEvent, ProductDetailState>
+    implements ProductDetailBloc {}
 
 void main() {
   late GetIt locator;
@@ -137,6 +140,7 @@ void main() {
   late RecentOrderBloc recentOrderBloc;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
+  late ProductDetailBloc productDetailBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -154,6 +158,7 @@ void main() {
     viewByItemsBloc = ViewByItemsMockBloc();
     returnListByItemBloc = ReturnListByItemMockBloc();
     recentOrderBloc = RecentOrderMockBloc();
+    productDetailBloc = ProductDetailMockBloc();
     locator = GetIt.instance;
     locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
@@ -213,6 +218,8 @@ void main() {
         .thenReturn(ViewByItemDetailsState.initial());
     when(() => viewByOrderDetailsBlocMock.state)
         .thenReturn(ViewByOrderDetailsState.initial());
+    when(() => productDetailBloc.state)
+        .thenReturn(ProductDetailState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
@@ -252,6 +259,8 @@ void main() {
                 create: (context) => viewByItemDetailsBlocMock),
               BlocProvider<ViewByOrderDetailsBloc>(
                 create: (context) => viewByOrderDetailsBlocMock),
+              BlocProvider<ProductDetailBloc>(
+                  create: (context) => productDetailBloc),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -357,6 +366,8 @@ void main() {
                 create: (context) => viewByItemDetailsBlocMock),
             BlocProvider<ViewByOrderDetailsBloc>(
                 create: (context) => viewByOrderDetailsBlocMock),
+            BlocProvider<ProductDetailBloc>(
+                create: (context) => productDetailBloc),
           ],
           child: const SplashPage(),
         ),

@@ -14,7 +14,6 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
@@ -26,21 +25,16 @@ import 'package:mocktail/mocktail.dart';
 class ProductDetailRepositoryMock extends Mock
     implements ProductDetailRepository {}
 
-class ProductImagesRepositoryMock extends Mock
-    implements ProductImagesRepository {}
-
 class FavouriteRepositoryMock extends Mock implements FavouriteRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ProductDetailRepository productDetailMockRepository;
-  late ProductImagesRepository productImagesMockRepository;
   late FavouriteRepository favouriteMockRepository;
   late MaterialInfo mockMaterialInfo;
   late StockInfo mockStockInfo;
   late ProductMetaData mockProductMetaData;
   late List<MaterialInfo> mockSimilarProducts;
-  late List mockProductImages;
   const locale = Locale('en');
   final salesOrg = SalesOrg('2001');
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
@@ -55,15 +49,12 @@ void main() {
 
   setUpAll(() async {
     productDetailMockRepository = ProductDetailRepositoryMock();
-    productImagesMockRepository = ProductImagesRepositoryMock();
     favouriteMockRepository = FavouriteRepositoryMock();
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     mockStockInfo = await StockInfoLocalDataSource().getStockInfo();
     mockProductMetaData =
         await ProductDetailLocalDataSource().getItemProductMetaData();
     mockSimilarProducts =
-        await ProductDetailLocalDataSource().getSimilarProduct();
-    mockProductImages =
         await ProductDetailLocalDataSource().getSimilarProduct();
   });
 
@@ -74,7 +65,6 @@ void main() {
         'Product Detail Initialized',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         act: (ProductDetailBloc bloc) => bloc.add(
@@ -89,7 +79,6 @@ void main() {
         'Fetch Product Detail Success',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -139,11 +128,6 @@ void main() {
               locale: locale,
             ),
           ).thenAnswer((invocation) async => Right(mockSimilarProducts));
-          when(
-            () => productImagesMockRepository.getProductImages(
-              list: mockSimilarProducts,
-            ),
-          ).thenAnswer((invocation) async => Right(mockProductImages));
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -222,29 +206,7 @@ void main() {
               productItem: mockProductMetaData.items.first,
               similarProduct: mockSimilarProducts,
             ),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-              similarProduct: mockSimilarProducts,
-            ),
-            failureOrSuccessOption: none(),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: false,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-              similarProduct: mockSimilarProducts,
-            ),
+            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
         ],
       );
@@ -253,7 +215,6 @@ void main() {
         'Fetch Product Detail failure',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -300,7 +261,6 @@ void main() {
         'Failed To Fetch Stock Info',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -339,11 +299,6 @@ void main() {
               locale: locale,
             ),
           ).thenAnswer((invocation) async => Right(mockSimilarProducts));
-          when(
-            () => productImagesMockRepository.getProductImages(
-              list: mockSimilarProducts,
-            ),
-          ).thenAnswer((invocation) async => Right(mockProductImages));
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -417,29 +372,7 @@ void main() {
               productItem: mockProductMetaData.items.first,
               similarProduct: mockSimilarProducts,
             ),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: StockInfo.empty(),
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-              similarProduct: mockSimilarProducts,
-            ),
-            failureOrSuccessOption: none(),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: false,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: StockInfo.empty(),
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-              similarProduct: mockSimilarProducts,
-            ),
+            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
         ],
       );
@@ -448,7 +381,6 @@ void main() {
         'Failed to Fetch Meta Data',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -470,11 +402,6 @@ void main() {
               locale: locale,
             ),
           ).thenAnswer((invocation) async => Right(mockSimilarProducts));
-          when(
-            () => productImagesMockRepository.getProductImages(
-              list: mockSimilarProducts,
-            ),
-          ).thenAnswer((invocation) async => Right(mockProductImages));
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -527,23 +454,7 @@ void main() {
               materialInfo: mockMaterialInfo,
               similarProduct: mockSimilarProducts,
             ),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo,
-              similarProduct: mockSimilarProducts,
-            ),
-            failureOrSuccessOption: none(),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: false,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo,
-              similarProduct: mockSimilarProducts,
-            ),
+            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
         ],
       );
@@ -552,7 +463,6 @@ void main() {
         'Failed To Fetch Similar Products',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -616,72 +526,9 @@ void main() {
       );
 
       blocTest<ProductDetailBloc, ProductDetailState>(
-        'Failed To Fetch Product Image',
-        build: () => ProductDetailBloc(
-          productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
-          favouriteRepository: favouriteMockRepository,
-        ),
-        setUp: () {
-          when(
-            () => productImagesMockRepository.getProductImages(
-              list: mockSimilarProducts,
-            ),
-          ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
-        },
-        act: (ProductDetailBloc bloc) {
-          bloc.add(
-            ProductDetailEvent.fetchProductImage(
-              materialNumbers:
-                  mockSimilarProducts.map((e) => e.materialNumber).toList(),
-            ),
-          );
-        },
-        seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
-          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-            stockInfo: mockStockInfo,
-            materialInfo: mockMaterialInfo.copyWith(
-              productImages: mockProductMetaData.productImages.first,
-            ),
-            productItem: mockProductMetaData.items.first,
-            similarProduct: mockSimilarProducts,
-          ),
-        ),
-        expect: () => [
-          ProductDetailState.initial().copyWith(
-            isFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo.copyWith(
-                productImages: mockProductMetaData.productImages.first,
-              ),
-              productItem: mockProductMetaData.items.first,
-              similarProduct: mockSimilarProducts,
-            ),
-            failureOrSuccessOption: none(),
-          ),
-          ProductDetailState.initial().copyWith(
-              isFetching: false,
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                stockInfo: mockStockInfo,
-                materialInfo: mockMaterialInfo.copyWith(
-                  productImages: mockProductMetaData.productImages.first,
-                ),
-                productItem: mockProductMetaData.items.first,
-                similarProduct: mockSimilarProducts,
-              ),
-              failureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other('Fake-Error')))),
-        ],
-      );
-
-      blocTest<ProductDetailBloc, ProductDetailState>(
         'Product Details Change Image',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         act: (ProductDetailBloc bloc) {
@@ -720,7 +567,6 @@ void main() {
         'Add Favourite Success Not For Similar Products',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -782,7 +628,6 @@ void main() {
         'Add Favourite Success For Similar Products',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -846,7 +691,6 @@ void main() {
         'Add Favourite Failure',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -900,7 +744,6 @@ void main() {
         'Delete Favourite Success Not For Similar Products',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -964,7 +807,6 @@ void main() {
         'Delete Favourite Success For Similar Products',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {
@@ -1037,7 +879,6 @@ void main() {
         'Delete Favourite Failure',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
-          productImagesRepository: productImagesMockRepository,
           favouriteRepository: favouriteMockRepository,
         ),
         setUp: () {

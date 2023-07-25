@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
@@ -118,28 +117,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               ),
             )
           : const SizedBox.shrink(),
-      body: BlocListener<ProductDetailBloc, ProductDetailState>(
-        listenWhen: (previous, current) =>
-            previous.failureOrSuccessOption != current.failureOrSuccessOption,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
-        child: ListView(
-          controller: _scrollController,
-          children: const [
-            ProductDetailImage(),
-            _BodyContent(),
-            SimilarProduct(),
-          ],
-        ),
+      body: ListView(
+        controller: _scrollController,
+        children: const [
+          ProductDetailImage(),
+          _BodyContent(),
+          SimilarProduct(),
+        ],
       ),
       bottomNavigationBar: const _Footer(),
     );

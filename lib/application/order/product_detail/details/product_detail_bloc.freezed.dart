@@ -39,8 +39,6 @@ mixin _$ProductDetailEvent {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -80,7 +78,6 @@ mixin _$ProductDetailEvent {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -118,7 +115,6 @@ mixin _$ProductDetailEvent {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -140,7 +136,6 @@ mixin _$ProductDetailEvent {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -153,7 +148,6 @@ mixin _$ProductDetailEvent {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -166,7 +160,6 @@ mixin _$ProductDetailEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -253,8 +246,6 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -297,7 +288,6 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -338,7 +328,6 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -366,7 +355,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -382,7 +370,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -398,7 +385,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -584,8 +570,6 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -629,7 +613,6 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -671,7 +654,6 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -700,7 +682,6 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -716,7 +697,6 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -732,7 +712,6 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -916,8 +895,6 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -961,7 +938,6 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1003,7 +979,6 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1032,7 +1007,6 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1048,7 +1022,6 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1064,7 +1037,6 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -1243,8 +1215,6 @@ class _$_FetchMetaData implements _FetchMetaData {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1288,7 +1258,6 @@ class _$_FetchMetaData implements _FetchMetaData {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1330,7 +1299,6 @@ class _$_FetchMetaData implements _FetchMetaData {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1359,7 +1327,6 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1375,7 +1342,6 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1391,7 +1357,6 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -1418,270 +1383,6 @@ abstract class _FetchMetaData implements ProductDetailEvent {
   Locale get locale;
   @JsonKey(ignore: true)
   _$$_FetchMetaDataCopyWith<_$_FetchMetaData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_FetchProductImageCopyWith<$Res> {
-  factory _$$_FetchProductImageCopyWith(_$_FetchProductImage value,
-          $Res Function(_$_FetchProductImage) then) =
-      __$$_FetchProductImageCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<MaterialNumber> materialNumbers});
-}
-
-/// @nodoc
-class __$$_FetchProductImageCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_FetchProductImage>
-    implements _$$_FetchProductImageCopyWith<$Res> {
-  __$$_FetchProductImageCopyWithImpl(
-      _$_FetchProductImage _value, $Res Function(_$_FetchProductImage) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? materialNumbers = null,
-  }) {
-    return _then(_$_FetchProductImage(
-      materialNumbers: null == materialNumbers
-          ? _value._materialNumbers
-          : materialNumbers // ignore: cast_nullable_to_non_nullable
-              as List<MaterialNumber>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_FetchProductImage implements _FetchProductImage {
-  _$_FetchProductImage({required final List<MaterialNumber> materialNumbers})
-      : _materialNumbers = materialNumbers;
-
-  final List<MaterialNumber> _materialNumbers;
-  @override
-  List<MaterialNumber> get materialNumbers {
-    if (_materialNumbers is EqualUnmodifiableListView) return _materialNumbers;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_materialNumbers);
-  }
-
-  @override
-  String toString() {
-    return 'ProductDetailEvent.fetchProductImage(materialNumbers: $materialNumbers)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_FetchProductImage &&
-            const DeepCollectionEquality()
-                .equals(other._materialNumbers, _materialNumbers));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_materialNumbers));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchProductImageCopyWith<_$_FetchProductImage> get copyWith =>
-      __$$_FetchProductImageCopyWithImpl<_$_FetchProductImage>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            MaterialNumber materialNumber,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale,
-            MaterialInfoType type)
-        fetch,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)
-        fetchSimilarProduct,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)
-        fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
-    required TResult Function(
-            MaterialNumber materialNumber,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)
-        fetchStock,
-    required TResult Function(int index) changeImage,
-    required TResult Function(
-            bool isForSimilarProduct, MaterialNumber materialNumber)
-        addFavourite,
-    required TResult Function(
-            bool isForSimilarProduct, MaterialNumber materialNumber)
-        deleteFavourite,
-  }) {
-    return fetchProductImage(materialNumbers);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            MaterialNumber materialNumber,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale,
-            MaterialInfoType type)?
-        fetch,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)?
-        fetchSimilarProduct,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)?
-        fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
-    TResult? Function(
-            MaterialNumber materialNumber,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)?
-        fetchStock,
-    TResult? Function(int index)? changeImage,
-    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
-        addFavourite,
-    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
-        deleteFavourite,
-  }) {
-    return fetchProductImage?.call(materialNumbers);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            MaterialNumber materialNumber,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale,
-            MaterialInfoType type)?
-        fetch,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)?
-        fetchSimilarProduct,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)?
-        fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
-    TResult Function(
-            MaterialNumber materialNumber,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            Locale locale)?
-        fetchStock,
-    TResult Function(int index)? changeImage,
-    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
-        addFavourite,
-    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
-        deleteFavourite,
-    required TResult orElse(),
-  }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage(materialNumbers);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
-    required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
-    required TResult Function(_FetchStock value) fetchStock,
-    required TResult Function(_ChangeImage value) changeImage,
-    required TResult Function(_AddFavourite value) addFavourite,
-    required TResult Function(_DeleteFavourite value) deleteFavourite,
-  }) {
-    return fetchProductImage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
-    TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
-    TResult? Function(_FetchStock value)? fetchStock,
-    TResult? Function(_ChangeImage value)? changeImage,
-    TResult? Function(_AddFavourite value)? addFavourite,
-    TResult? Function(_DeleteFavourite value)? deleteFavourite,
-  }) {
-    return fetchProductImage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
-    TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
-    TResult Function(_FetchStock value)? fetchStock,
-    TResult Function(_ChangeImage value)? changeImage,
-    TResult Function(_AddFavourite value)? addFavourite,
-    TResult Function(_DeleteFavourite value)? deleteFavourite,
-    required TResult orElse(),
-  }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchProductImage implements ProductDetailEvent {
-  factory _FetchProductImage(
-          {required final List<MaterialNumber> materialNumbers}) =
-      _$_FetchProductImage;
-
-  List<MaterialNumber> get materialNumbers;
-  @JsonKey(ignore: true)
-  _$$_FetchProductImageCopyWith<_$_FetchProductImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1845,8 +1546,6 @@ class _$_FetchStock implements _FetchStock {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1890,7 +1589,6 @@ class _$_FetchStock implements _FetchStock {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1932,7 +1630,6 @@ class _$_FetchStock implements _FetchStock {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -1961,7 +1658,6 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1977,7 +1673,6 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1993,7 +1688,6 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -2110,8 +1804,6 @@ class _$_ChangeImage implements _ChangeImage {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2154,7 +1846,6 @@ class _$_ChangeImage implements _ChangeImage {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2195,7 +1886,6 @@ class _$_ChangeImage implements _ChangeImage {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2223,7 +1913,6 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -2239,7 +1928,6 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -2255,7 +1943,6 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -2375,8 +2062,6 @@ class _$_AddFavourite implements _AddFavourite {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2419,7 +2104,6 @@ class _$_AddFavourite implements _AddFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2460,7 +2144,6 @@ class _$_AddFavourite implements _AddFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2488,7 +2171,6 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -2504,7 +2186,6 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -2520,7 +2201,6 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -2643,8 +2323,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchMetaData,
-    required TResult Function(List<MaterialNumber> materialNumbers)
-        fetchProductImage,
     required TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2687,7 +2365,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult? Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult? Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2728,7 +2405,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchMetaData,
-    TResult Function(List<MaterialNumber> materialNumbers)? fetchProductImage,
     TResult Function(
             MaterialNumber materialNumber,
             SalesOrganisation salesOrganisation,
@@ -2756,7 +2432,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
     required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -2772,7 +2447,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
     TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -2788,7 +2462,6 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,

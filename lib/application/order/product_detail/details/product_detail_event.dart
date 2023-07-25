@@ -26,10 +26,6 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required Locale locale,
   }) = _FetchMetaData;
 
-  factory ProductDetailEvent.fetchProductImage({
-    required List<MaterialNumber> materialNumbers,
-  }) = _FetchProductImage;
-
   factory ProductDetailEvent.fetchStock({
     required MaterialNumber materialNumber,
     required SalesOrganisation salesOrganisation,

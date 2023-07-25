@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -109,6 +110,9 @@ class ViewByItemDetailsMockBloc
 class ViewByOrderDetailsMockBloc
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
+class ProductDetailMockBloc
+    extends MockBloc<ProductDetailEvent, ProductDetailState>
+    implements ProductDetailBloc {}
 
 void main() {
   late GetIt locator;
@@ -133,6 +137,9 @@ void main() {
   late RecentOrderBloc recentOrderBloc;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
+  late ProductDetailBloc productDetailBloc;
+
+
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -159,6 +166,7 @@ void main() {
       recentOrderBloc = RecentOrderMockBloc();
       viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
       viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
+      productDetailBloc = ProductDetailMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -190,6 +198,10 @@ void main() {
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => viewByOrderDetailsBlocMock.state)
           .thenReturn(ViewByOrderDetailsState.initial());
+      when(() => recentOrderBloc.state)
+          .thenReturn(RecentOrderState.initial());
+      when(() => productDetailBloc.state)
+        .thenReturn(ProductDetailState.initial());
     });
 
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
@@ -235,6 +247,8 @@ void main() {
                   create: (context) => viewByItemDetailsBlocMock),
               BlocProvider<ViewByOrderDetailsBloc>(
                   create: (context) => viewByOrderDetailsBlocMock),
+              BlocProvider<ProductDetailBloc>(
+                  create: (context) => productDetailBloc),
             ],
             child: const LoginPage(),
           ),
@@ -350,6 +364,8 @@ void main() {
                 create: (context) => viewByItemDetailsBlocMock),
             BlocProvider<ViewByOrderDetailsBloc>(
                   create: (context) => viewByOrderDetailsBlocMock),
+            BlocProvider<ProductDetailBloc>(
+                  create: (context) => productDetailBloc),
           ],
           child: const SplashPage(),
         ),

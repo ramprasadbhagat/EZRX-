@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -35,6 +36,7 @@ import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.da
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
@@ -292,24 +294,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.nextPageIndex != current.nextPageIndex,
           listener: (context, state) {
             if (state.materialList.isNotEmpty) {
-              context.read<MaterialPriceBloc>().add(
-                    MaterialPriceEvent.fetch(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      salesConfigs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      comboDealEligible: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .comboDealEligible,
-                      materials: state.materialList,
-                    ),
-                  );
+              _fetchMaterialPrice(
+                context,
+                state.materialList,
+              );
               _fetchMaterialListProductImage(state, context);
             }
           },
@@ -326,35 +314,40 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 },
                 (_) {
                   if (state.recentlyOrderedProducts.isNotEmpty) {
-                    context.read<MaterialPriceBloc>().add(
-                          MaterialPriceEvent.fetch(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            salesConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
-                            comboDealEligible: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .comboDealEligible,
-                            materials: state.toMaterialInfo,
-                          ),
-                        );
+                    _fetchMaterialPrice(context, state.toMaterialInfo);
                     _fetchProductImage(context, state.recentlyOrderedProducts);
                   }
                 },
               ),
             );
           },
+        ),
+        BlocListener<ProductDetailBloc, ProductDetailState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption ||
+              previous.productDetailAggregate.similarProduct !=
+                  current.productDetailAggregate.similarProduct,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {
+                if (state.productDetailAggregate.similarProduct.isNotEmpty) {
+                  _fetchMaterialPrice(
+                    context,
+                    state.productDetailAggregate.similarProduct,
+                  );
+                  _fetchProductImage(
+                    context,
+                    state.productDetailAggregate.similarProduct,
+                  );
+                }
+              },
+            ),
+          ),
         ),
         BlocListener<ReturnListByItemBloc, ReturnListByItemState>(
           listenWhen: (previous, current) =>
@@ -735,13 +728,30 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     );
   }
 
+  void _fetchMaterialPrice(BuildContext context, List<MaterialInfo> list) =>
+    context.read<MaterialPriceBloc>().add(
+          MaterialPriceEvent.fetch(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            salesConfigs: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            comboDealEligible:
+                context.read<EligibilityBloc>().state.comboDealEligible,
+            materials: list,
+          ),
+        );
+
   void _fetchProductImage(BuildContext context, List list) =>
       context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
             list: list,
           ));
 
   void _fetchMaterialListProductImage(
-      MaterialListState state, BuildContext context,) {
+    MaterialListState state,
+    BuildContext context,
+  ) {
     if (state.selectedMaterialFilter.bundleOffers) {
       for (final materialData in state.materialList) {
         _fetchProductImage(

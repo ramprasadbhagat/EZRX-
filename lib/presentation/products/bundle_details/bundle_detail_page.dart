@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -79,39 +78,24 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
               ),
             )
           : const SizedBox.shrink(),
-      body: BlocListener<ProductDetailBloc, ProductDetailState>(
-        listenWhen: (previous, current) =>
-            previous.failureOrSuccessOption != current.failureOrSuccessOption,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
-        child: ListView(
-          controller: _scrollController,
-          children: const [
-            ProductDetailImage(),
-            Align(
-              alignment: Alignment.topLeft,
-              child: _BundleOfferTag(),
-            ),
-            _BundleDetails(),
-            SizedBox(height: 10),
-            Divider(
-              indent: 0,
-              endIndent: 0,
-              height: 15,
-              color: ZPColors.lightGray2,
-            ),
-            _BundleOfferDetails(),
-          ],
-        ),
+      body: ListView(
+        controller: _scrollController,
+        children: const [
+          ProductDetailImage(),
+          Align(
+            alignment: Alignment.topLeft,
+            child: _BundleOfferTag(),
+          ),
+          _BundleDetails(),
+          SizedBox(height: 10),
+          Divider(
+            indent: 0,
+            endIndent: 0,
+            height: 15,
+            color: ZPColors.lightGray2,
+          ),
+          _BundleOfferDetails(),
+        ],
       ),
       bottomNavigationBar: const _AddToCartButton(),
     );
