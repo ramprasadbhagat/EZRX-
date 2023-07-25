@@ -20,7 +20,7 @@ class SearchBar extends StatefulWidget {
     this.border,
     this.isAutoSearch = true,
     this.inputFormatters = const <TextInputFormatter>[],
-    this.keyboardType = TextInputType.multiline,
+    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   final TextEditingController controller;
