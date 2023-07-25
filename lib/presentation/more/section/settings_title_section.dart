@@ -7,7 +7,7 @@ class SettingsTile extends StatelessWidget {
   const SettingsTile({Key? key}) : super(key: key);
 
   List<MoreDetailsTile> get moreSettingTiles => [
-        MoreDetailsTile.account(),
+        MoreDetailsTile.profile(),
         MoreDetailsTile.security(),
         MoreDetailsTile.notifications(),
         MoreDetailsTile.privacy(),
@@ -23,7 +23,7 @@ class SettingsTile extends StatelessWidget {
       subtitle: GridView.count(
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 4,
-        childAspectRatio: 1.5,
+        childAspectRatio: 1.45,
         padding: const EdgeInsets.only(
           top: 18.0,
         ),
@@ -36,14 +36,14 @@ class SettingsTile extends StatelessWidget {
                 item.icon,
                 const SizedBox(height: 8),
                 Text(
-                  item.label,
+                  item.label.tr(),
                   style: item.onTap == null
                       ? Theme.of(context)
                           .textTheme
                           .bodySmall!
                           .copyWith(color: ZPColors.lightGray)
                       : Theme.of(context).textTheme.bodySmall,
-                ).tr(),
+                ),
               ],
             ),
           );

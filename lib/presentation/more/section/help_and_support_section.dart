@@ -13,6 +13,7 @@ class HelpAndSupportTile extends StatelessWidget {
         MoreDetailsTile.chatSupport(context),
         MoreDetailsTile.termsOfUse(context),
         MoreDetailsTile.privacyPolicy(context),
+        MoreDetailsTile.contactUs(),
       ];
 
   @override
@@ -25,27 +26,27 @@ class HelpAndSupportTile extends StatelessWidget {
       subtitle: GridView.count(
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 4,
-        childAspectRatio: 1.5,
+        childAspectRatio: 1.45,
         padding: const EdgeInsets.only(
           top: 18.0,
         ),
         shrinkWrap: true,
         children: moreHelpAndSupportTiles(context).map((item) {
-          return InkWell(
+          return GestureDetector(
             onTap: item.onTap,
             child: Column(
               children: [
                 item.icon,
                 const SizedBox(height: 8),
                 Text(
-                  item.label,
+                  item.label.tr(),
                   style: item.onTap == null
                       ? Theme.of(context)
                           .textTheme
                           .bodySmall!
                           .copyWith(color: ZPColors.lightGray)
                       : Theme.of(context).textTheme.bodySmall,
-                ).tr(),
+                ),
               ],
             ),
           );

@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'full_name.freezed.dart';
 
 @freezed
@@ -27,4 +27,16 @@ class FullName with _$FullName {
   }
 
   String get displayFullName => '$firstName $lastName';
+
+  String get toTitleCase {
+    if (displayFullName.isEmpty) return '';
+
+    return displayFullName
+        .trim()
+        .split(' ')
+        .map((word) =>
+            word[0].toUpperCase() +
+            word.characters.getRange(1).string.toLowerCase())
+        .join(' ');
+  }
 }
