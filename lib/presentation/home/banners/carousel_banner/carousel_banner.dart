@@ -36,7 +36,9 @@ class _CarouselBannerState extends State<CarouselBanner> {
       create: (context) => locator<BannerBloc>(),
       child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
         listenWhen: (previous, current) =>
-            previous.customerCodeInfo != current.customerCodeInfo,
+            current != CustomerCodeState.initial() &&
+            previous.customerCodeInfo.customerCodeSoldTo !=
+                current.customerCodeInfo.customerCodeSoldTo,
         listener: (context, state) {
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(

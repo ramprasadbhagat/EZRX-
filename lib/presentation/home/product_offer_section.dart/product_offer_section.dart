@@ -55,6 +55,7 @@ class ProductsOnOffer extends StatelessWidget {
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
             listenWhen: (previous, current) =>
+                current != EligibilityState.initial() &&
                 previous.shipToInfo != current.shipToInfo,
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
