@@ -9,6 +9,7 @@ class WidgetKeys {
   static const Key filterResetButton = Key('filterResetButton');
   static const Key filterApplyButton = Key('filterApplyButton');
   static const Key productImage = Key('productImage');
+  static const Key customSnackBar = Key('customSnackBar');
 
   //============================================================
   //  LOGIN
@@ -356,5 +357,4 @@ class WidgetKeys {
   static const Key paymentSummaryMenu = Key('paymentSummary');
   static const Key statementOfAccountsMenu = Key('statementOfAccounts');
   static const Key claimsMenu = Key('claims');
-
 }
