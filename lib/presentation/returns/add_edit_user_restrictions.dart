@@ -537,18 +537,6 @@ class _TextFormFieldState extends State<_TextFormField> {
       },
       decoration: InputDecoration(
         labelText: _getLabelText(widget.label),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-        ),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
         filled: !_isEnabled,
         fillColor: ZPColors.extraLightGray,
       ),

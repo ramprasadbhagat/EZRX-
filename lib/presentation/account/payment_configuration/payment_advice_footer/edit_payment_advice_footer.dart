@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
@@ -84,9 +85,10 @@ class _SalesOrgSelection extends StatelessWidget {
         .paymentAdviceFooterData
         .salesOrg;
 
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField2<String>(
       decoration: const InputDecoration(
         enabled: false,
+        contentPadding: EdgeInsets.fromLTRB(0, 8, 12, 8),
       ),
       items: context.read<UserBloc>().state.salesOrgValue.map(
         (String val) {
@@ -133,19 +135,25 @@ class _SalesDistrictSelection extends StatelessWidget {
           orElse: () => state.paymentAdviceFooterData.salesDistrict,
         );
 
-        return DropdownButtonFormField<SalesDistrictInfo>(
+        return DropdownButtonFormField2<SalesDistrictInfo>(
           isExpanded: true,
           decoration: InputDecoration(
             labelText: 'Please Select Sales District.'.tr(),
             enabled: salesDistrictList.isNotEmpty,
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
           ),
-          icon: state.isSubmitting
-              ? const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : null,
+          iconStyleData: IconStyleData(
+            icon: state.isSubmitting
+                ? const SizedBox(
+                    height: 15,
+                    width: 15,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: ZPColors.black,
+                  ),
+          ),
           items: salesDistrictList
               .map(
                 (district) => DropdownMenuItem<SalesDistrictInfo>(

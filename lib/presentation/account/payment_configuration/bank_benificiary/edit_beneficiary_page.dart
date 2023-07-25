@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
@@ -76,12 +77,13 @@ class _SalesOrgDropdown extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField2<String>(
       key: const Key('salesOrgDropdownKey'),
       isExpanded: true,
       decoration: InputDecoration(
         labelText: 'Select Sales Org'.tr(),
         enabled: false,
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
       ),
       items: [
         DropdownMenuItem(
@@ -111,12 +113,13 @@ class _SalesDistrictDropdown extends StatelessWidget {
         final salesDistrictLabel =
             !state.isFetching ? state.salesDistrictLabel : '';
 
-        return DropdownButtonFormField<String>(
+        return DropdownButtonFormField2<String>(
           key: const Key('salesDistrictDropdownKey'),
           isExpanded: true,
           decoration: InputDecoration(
             labelText: 'Select Sales District'.tr(),
             enabled: false,
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
           ),
           items: !state.isFetching
               ? [

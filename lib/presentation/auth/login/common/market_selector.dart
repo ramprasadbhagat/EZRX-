@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -41,19 +42,16 @@ class _MarketSelectorState extends State<MarketSelector> {
         const SizedBox(height: 8),
         BlocBuilder<LoginFormBloc, LoginFormState>(
           builder: (context, state) {
-            return DropdownButtonFormField<AppMarket>(
+            return DropdownButtonFormField2<AppMarket>(
               key: WidgetKeys.appMarketSelector,
               decoration: const InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                ),
+                contentPadding: EdgeInsets.fromLTRB(0, 10, 12, 10),
               ),
-              icon: const Icon(
-                Icons.keyboard_arrow_down_outlined,
-                color: ZPColors.black,
+              iconStyleData: const IconStyleData(
+                icon: Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  color: ZPColors.black,
+                ),
               ),
               items:
                   markets.map((e) => AppMarket(e)).toList().map((marketType) {

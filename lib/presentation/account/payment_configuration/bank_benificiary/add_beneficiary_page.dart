@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -76,19 +78,25 @@ class _SalesOrgDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
 
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField2<String>(
       key: const Key('salesOrgDropdownKey'),
       isExpanded: true,
       decoration: InputDecoration(
         labelText: 'Select Sales Org'.tr(),
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
       ),
-      icon: state.isSubmitting
-          ? const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : null,
+      iconStyleData: IconStyleData(
+        icon: state.isSubmitting
+            ? const SizedBox(
+                height: 15,
+                width: 15,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(
+                Icons.keyboard_arrow_down_outlined,
+                color: ZPColors.black,
+              ),
+      ),
       items: salesOrgs.map(
         (String val) {
           return DropdownMenuItem<String>(
@@ -148,12 +156,13 @@ class _SalesDistrictDropdown extends StatelessWidget {
             ? 'No Data Available'.tr()
             : 'Select Sales District'.tr();
 
-        return DropdownButtonFormField<String>(
+        return DropdownButtonFormField2<String>(
           key: const Key('salesDistrictDropdownKey'),
           isExpanded: true,
           decoration: InputDecoration(
             labelText: labelText,
             enabled: district.isNotEmpty,
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
           ),
           value: district.isEmpty ? null : district,
           items: !state.isFetching && state.salesDistrict.isNotEmpty

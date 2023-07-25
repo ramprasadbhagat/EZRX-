@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
@@ -108,7 +109,7 @@ class _SalesOrgSelection extends StatelessWidget {
       builder: (context, state) {
         final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
 
-        return DropdownButtonFormField<String>(
+        return DropdownButtonFormField2<String>(
           key: ValueKey(
             'salesOrg${state.paymentAdviceFooterData.salesOrg.getOrDefaultValue('')}',
           ),
@@ -116,14 +117,20 @@ class _SalesOrgSelection extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Please Select Sales Org.'.tr(),
             enabled: salesOrgs.isNotEmpty,
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
           ),
-          icon: state.isSubmitting
-              ? const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : null,
+          iconStyleData: IconStyleData(
+            icon: state.isSubmitting
+                ? const SizedBox(
+                    height: 15,
+                    width: 15,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: ZPColors.black,
+                  ),
+          ),
           items: salesOrgs.map(
             (String val) {
               return DropdownMenuItem<String>(
@@ -189,19 +196,25 @@ class _SalesDistrictSelection extends StatelessWidget {
             )
             .salesDistrictInfo;
 
-        return DropdownButtonFormField<SalesDistrictInfo>(
+        return DropdownButtonFormField2<SalesDistrictInfo>(
           isExpanded: true,
           decoration: InputDecoration(
             labelText: 'Please Select Sales District.'.tr(),
             enabled: salesDistrictList.isNotEmpty,
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
           ),
-          icon: state.isSubmitting
-              ? const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : null,
+          iconStyleData: IconStyleData(
+            icon: state.isSubmitting
+                ? const SizedBox(
+                    height: 15,
+                    width: 15,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: ZPColors.black,
+                  ),
+          ),
           items: salesDistrictList
               .map(
                 (district) => DropdownMenuItem<SalesDistrictInfo>(

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
@@ -112,49 +113,25 @@ class _SalesOrgDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
 
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField2<String>(
       key: const Key('salesOrgDropdownKey'),
       isExpanded: true,
       decoration: InputDecoration(
         labelText: 'Select Sales Org'.tr(),
-        disabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red, width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red, width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
       ),
-      icon: state.isSubmitting
-          ? const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : null,
+      iconStyleData: IconStyleData(
+        icon: state.isSubmitting
+            ? const SizedBox(
+                height: 15,
+                width: 15,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(
+                Icons.keyboard_arrow_down_outlined,
+                color: ZPColors.black,
+              ),
+      ),
       items: salesOrgs.map(
         (String val) {
           return DropdownMenuItem<String>(

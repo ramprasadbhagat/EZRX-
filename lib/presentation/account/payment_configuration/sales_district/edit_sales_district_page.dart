@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -82,14 +83,13 @@ class _SalesDistrictHeaderField extends StatelessWidget {
                   value: value,
                 ),
               ),
-          validator: (text) =>
-              StringValue(text ?? '').value.fold(
-            (f) => f.maybeMap(
-              empty: (_) => 'Sales District cannot be empty.'.tr(),
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
+          validator: (text) => StringValue(text ?? '').value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Sales District cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
         );
       },
     );
@@ -116,14 +116,13 @@ class _SalesDistrictLabelField extends StatelessWidget {
                   value: value,
                 ),
               ),
-          validator: (text) =>
-              StringValue(text ?? '').value.fold(
-            (f) => f.maybeMap(
-              empty: (_) => 'Sales District Label cannot be empty.'.tr(),
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
+          validator: (text) => StringValue(text ?? '').value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Sales District Label cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
         );
       },
     );
@@ -133,10 +132,11 @@ class _SalesDistrictLabelField extends StatelessWidget {
 class _SalesOrgDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField(
+    return DropdownButtonFormField2(
       key: const Key('salesOrgDropdownKey'),
       isExpanded: true,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
         labelText: context
             .read<SalesDistrictBloc>()
             .state

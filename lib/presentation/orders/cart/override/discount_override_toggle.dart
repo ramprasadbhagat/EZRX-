@@ -248,18 +248,6 @@ class DiscountOverrideForm extends StatelessWidget {
                 ),
               ],
               decoration: const InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.0),
-                  ),
-                ),
                 suffixIcon: Icon(
                   Icons.percent,
                   color: ZPColors.black,
