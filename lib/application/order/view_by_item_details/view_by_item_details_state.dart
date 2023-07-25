@@ -6,8 +6,6 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
   const factory ViewByItemDetailsState({
     required OrderHistory viewByItemDetails,
     required bool isLoading,
-    required bool showErrorMessage,
-    required bool isImageLoading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _ViewByItemDetailsState;
 
@@ -15,7 +13,5 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         viewByItemDetails: OrderHistory.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
-        showErrorMessage: false,
-        isImageLoading: false,
       );
 }

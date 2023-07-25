@@ -63,9 +63,6 @@ class OrderHistoryDetailsBonusAggregate
           contractReference: TenderContractInfo.tenderContractReference(
             tenderContractDetails.tenderContractReference,
           ),
-          tenderPackageDescription: TenderContractInfo.packageDescription(
-            tenderContractDetails.tenderPackageDescription,
-          ),
         ),
       );
 OrderHistoryDetailsBonusAggregate copyWithTaxCal({

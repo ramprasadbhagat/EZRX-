@@ -57,9 +57,8 @@ class ViewByOrderDetailsQueryMutation {
       }
       IsTenderContractMaterial
       TenderContractDetails {
-        TenderContractNumber
-        TenderContractReference
-        TenderPackageDescription
+        ContractNumber
+        ContractReference
       }
     }
     PaymentTerm {
@@ -147,9 +146,8 @@ class ViewByOrderDetailsQueryMutation {
       }
       IsTenderContractMaterial
       TenderContractDetails {
-        TenderContractNumber
-        TenderContractReference
-        TenderPackageDescription
+        ContractNumber
+        ContractReference
       }
     }
     PaymentTerm {

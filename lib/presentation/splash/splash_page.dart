@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
@@ -369,6 +370,42 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   _fetchProductImage(
                     context,
                     state.returnItemList,
+                  );
+                }
+              },
+            ),
+          ),
+        ),
+        BlocListener<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) => _fetchProductImage(
+                context,
+                state.viewByItemDetails.orderHistoryItems,
+              ),
+            ),
+          ),
+        ),
+        BlocListener<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {
+                if (!state.isLoading) {
+                  _fetchProductImage(
+                    context,
+                    state.orderHistoryDetails.orderHistoryDetailsOrderItem,
                   );
                 }
               },

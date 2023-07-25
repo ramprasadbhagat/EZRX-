@@ -414,7 +414,6 @@ void main() {
           orderHistoryDetails: orderHistoryDetails,
           failureOrSuccessOption: none(),
           isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(
@@ -442,7 +441,6 @@ void main() {
           orderHistoryDetails: orderHistoryDetails,
           failureOrSuccessOption: none(),
           isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -503,7 +501,6 @@ void main() {
           orderHistoryDetails: orderHistoryDetails,
           failureOrSuccessOption: none(),
           isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -616,7 +613,6 @@ void main() {
           orderHistoryDetails: OrderHistoryDetails.empty(),
           failureOrSuccessOption: none(),
           isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => materialPriceDetailBlocMock.state).thenReturn(
@@ -1066,7 +1062,6 @@ void main() {
           orderHistoryDetails: orderHistoryDetails,
           failureOrSuccessOption: none(),
           isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => mockSalesOrgBloc.state).thenReturn(

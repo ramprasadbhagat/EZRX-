@@ -8,9 +8,8 @@ void main() {
   group('Test order history details order items tender contract details ', () {
     setUp(() async {
       data = {
-        'TenderContractNumber': '7615757',
-        'TenderContractReference': 'fake-referencenumber',
-        'TenderPackageDescription': 'fake-ref-desc',
+        'ContractNumber': '7615757',
+        'ContractReference': 'fake-referencenumber',
       };
     });
     test('Test toDomain', () {
@@ -36,7 +35,7 @@ void main() {
               OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
                       data)
                   .toDomain()).toJson();
-      expect(configsDto['TenderContractNumber'], '7615757');
+      expect(configsDto['ContractNumber'], '7615757');
     });
   });
 }

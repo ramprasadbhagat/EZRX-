@@ -24,6 +24,7 @@ import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -187,6 +188,10 @@ class ReturnListByItemMockBloc
 class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
     implements RecentOrderBloc {}
 
+class ViewByItemDetailsMockBloc
+    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
+    implements ViewByItemDetailsBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -211,6 +216,7 @@ void main() {
   late SettingBloc settingBlocMock;
   late IntroBloc introBlocMock;
   late ReturnListByItemBloc returnListByItemBlocMock;
+  late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
 
   late MaterialFilterBloc materialFilterBlocMock;
   late RecentOrderBloc recentOrderBloc;
@@ -302,6 +308,7 @@ void main() {
       introBlocMock = IntroBlocMock();
       returnListByItemBlocMock = ReturnListByItemMockBloc();
       recentOrderBloc = RecentOrderMockBloc();
+      viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -361,8 +368,9 @@ void main() {
       when(() => introBlocMock.state).thenReturn(IntroState.initial());
       when(() => returnListByItemBlocMock.state)
           .thenReturn(ReturnListByItemState.initial());
-      when(() => recentOrderBloc.state)
-          .thenReturn(RecentOrderState.initial());
+      when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
+      when(() => viewByItemDetailsBlocMock.state)
+          .thenReturn(ViewByItemDetailsState.initial());
     });
 
     Future getWidget(tester) async {
@@ -435,8 +443,9 @@ void main() {
             BlocProvider<IntroBloc>(create: (context) => introBlocMock),
             BlocProvider<ReturnListByItemBloc>(
                 create: (context) => returnListByItemBlocMock),
-            BlocProvider<RecentOrderBloc>(
-                  create: (context) => recentOrderBloc),
+            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
+            BlocProvider<ViewByItemDetailsBloc>(
+                create: (context) => viewByItemDetailsBlocMock),
           ],
           child: const SplashPage(),
         ),

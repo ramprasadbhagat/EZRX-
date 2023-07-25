@@ -16,6 +16,8 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -97,9 +99,16 @@ class ReturnListByItemMockBloc
     extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
     implements ReturnListByItemBloc {}
 
-class RecentOrderMockBloc
-    extends MockBloc<RecentOrderEvent, RecentOrderState>
+class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
     implements RecentOrderBloc {}
+
+class ViewByItemDetailsMockBloc
+    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
+    implements ViewByItemDetailsBloc {}
+
+class ViewByOrderDetailsMockBloc
+    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
+    implements ViewByOrderDetailsBloc {}
 
 void main() {
   late GetIt locator;
@@ -122,7 +131,8 @@ void main() {
   late ViewByItemsBloc viewByItemsBloc;
   late ReturnListByItemBloc returnListByItemBloc;
   late RecentOrderBloc recentOrderBloc;
-
+  late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
+  late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -147,6 +157,8 @@ void main() {
       viewByItemsBloc = ViewByItemsMockBloc();
       returnListByItemBloc = ReturnListByItemMockBloc();
       recentOrderBloc = RecentOrderMockBloc();
+      viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
+      viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -173,8 +185,11 @@ void main() {
       when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
       when(() => returnListByItemBloc.state)
           .thenReturn(ReturnListByItemState.initial());
-      when(() => recentOrderBloc.state)
-          .thenReturn(RecentOrderState.initial());
+      when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
+      when(() => viewByItemDetailsBlocMock.state)
+          .thenReturn(ViewByItemDetailsState.initial());
+      when(() => viewByOrderDetailsBlocMock.state)
+          .thenReturn(ViewByOrderDetailsState.initial());
     });
 
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
@@ -216,6 +231,10 @@ void main() {
                   create: (context) => returnListByItemBloc),
               BlocProvider<RecentOrderBloc>(
                   create: (context) => recentOrderBloc),
+              BlocProvider<ViewByItemDetailsBloc>(
+                  create: (context) => viewByItemDetailsBlocMock),
+              BlocProvider<ViewByOrderDetailsBloc>(
+                  create: (context) => viewByOrderDetailsBlocMock),
             ],
             child: const LoginPage(),
           ),
@@ -325,9 +344,12 @@ void main() {
                 create: (context) => materialPriceBloc),
             BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
             BlocProvider<ReturnListByItemBloc>(
-                  create: (context) => returnListByItemBloc),
-            BlocProvider<RecentOrderBloc>(
-                  create: (context) => recentOrderBloc),
+                create: (context) => returnListByItemBloc),
+            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
+            BlocProvider<ViewByItemDetailsBloc>(
+                create: (context) => viewByItemDetailsBlocMock),
+            BlocProvider<ViewByOrderDetailsBloc>(
+                  create: (context) => viewByOrderDetailsBlocMock),
           ],
           child: const SplashPage(),
         ),

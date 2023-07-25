@@ -61,9 +61,6 @@ class TenderContract with _$TenderContract {
         contractReference: TenderContractInfo.tenderContractReference(
           tenderContact.tenderContractReference,
         ),
-        tenderPackageDescription: TenderContractInfo.packageDescription(
-          tenderContact.tenderPackageDescription,
-        ),
       );
 }
 

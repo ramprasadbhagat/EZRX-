@@ -8,5 +8,4 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
     required OrderHistoryItem orderHistoryItem,
     required CustomerCodeInfo soldTo,
   }) = _Fetch;
-  const factory ViewByItemDetailsEvent.fetchProductImage() = _FetchProductImage;
 }

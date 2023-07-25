@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryDetailsOrderItemTenderContractDetails {
   String get tenderContractNumber => throw _privateConstructorUsedError;
   String get tenderContractReference => throw _privateConstructorUsedError;
-  String get tenderPackageDescription => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<
@@ -36,10 +35,7 @@ abstract class $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<
       _$OrderHistoryDetailsOrderItemTenderContractDetailsCopyWithImpl<$Res,
           OrderHistoryDetailsOrderItemTenderContractDetails>;
   @useResult
-  $Res call(
-      {String tenderContractNumber,
-      String tenderContractReference,
-      String tenderPackageDescription});
+  $Res call({String tenderContractNumber, String tenderContractReference});
 }
 
 /// @nodoc
@@ -60,7 +56,6 @@ class _$OrderHistoryDetailsOrderItemTenderContractDetailsCopyWithImpl<$Res,
   $Res call({
     Object? tenderContractNumber = null,
     Object? tenderContractReference = null,
-    Object? tenderPackageDescription = null,
   }) {
     return _then(_value.copyWith(
       tenderContractNumber: null == tenderContractNumber
@@ -70,10 +65,6 @@ class _$OrderHistoryDetailsOrderItemTenderContractDetailsCopyWithImpl<$Res,
       tenderContractReference: null == tenderContractReference
           ? _value.tenderContractReference
           : tenderContractReference // ignore: cast_nullable_to_non_nullable
-              as String,
-      tenderPackageDescription: null == tenderPackageDescription
-          ? _value.tenderPackageDescription
-          : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -91,10 +82,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<
       __$$_OrderHistoryDetailsOrderItemTenderContractDetailsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String tenderContractNumber,
-      String tenderContractReference,
-      String tenderPackageDescription});
+  $Res call({String tenderContractNumber, String tenderContractReference});
 }
 
 /// @nodoc
@@ -113,7 +101,6 @@ class __$$_OrderHistoryDetailsOrderItemTenderContractDetailsCopyWithImpl<$Res>
   $Res call({
     Object? tenderContractNumber = null,
     Object? tenderContractReference = null,
-    Object? tenderPackageDescription = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemTenderContractDetails(
       tenderContractNumber: null == tenderContractNumber
@@ -123,10 +110,6 @@ class __$$_OrderHistoryDetailsOrderItemTenderContractDetailsCopyWithImpl<$Res>
       tenderContractReference: null == tenderContractReference
           ? _value.tenderContractReference
           : tenderContractReference // ignore: cast_nullable_to_non_nullable
-              as String,
-      tenderPackageDescription: null == tenderPackageDescription
-          ? _value.tenderPackageDescription
-          : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -138,20 +121,17 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetails
     extends _OrderHistoryDetailsOrderItemTenderContractDetails {
   _$_OrderHistoryDetailsOrderItemTenderContractDetails(
       {required this.tenderContractNumber,
-      required this.tenderContractReference,
-      required this.tenderPackageDescription})
+      required this.tenderContractReference})
       : super._();
 
   @override
   final String tenderContractNumber;
   @override
   final String tenderContractReference;
-  @override
-  final String tenderPackageDescription;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemTenderContractDetails(tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPackageDescription: $tenderPackageDescription)';
+    return 'OrderHistoryDetailsOrderItemTenderContractDetails(tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference)';
   }
 
   @override
@@ -163,15 +143,12 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetails
                 other.tenderContractNumber == tenderContractNumber) &&
             (identical(
                     other.tenderContractReference, tenderContractReference) ||
-                other.tenderContractReference == tenderContractReference) &&
-            (identical(
-                    other.tenderPackageDescription, tenderPackageDescription) ||
-                other.tenderPackageDescription == tenderPackageDescription));
+                other.tenderContractReference == tenderContractReference));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tenderContractNumber,
-      tenderContractReference, tenderPackageDescription);
+  int get hashCode =>
+      Object.hash(runtimeType, tenderContractNumber, tenderContractReference);
 
   @JsonKey(ignore: true)
   @override
@@ -188,8 +165,7 @@ abstract class _OrderHistoryDetailsOrderItemTenderContractDetails
     extends OrderHistoryDetailsOrderItemTenderContractDetails {
   factory _OrderHistoryDetailsOrderItemTenderContractDetails(
           {required final String tenderContractNumber,
-          required final String tenderContractReference,
-          required final String tenderPackageDescription}) =
+          required final String tenderContractReference}) =
       _$_OrderHistoryDetailsOrderItemTenderContractDetails;
   _OrderHistoryDetailsOrderItemTenderContractDetails._() : super._();
 
@@ -197,8 +173,6 @@ abstract class _OrderHistoryDetailsOrderItemTenderContractDetails
   String get tenderContractNumber;
   @override
   String get tenderContractReference;
-  @override
-  String get tenderPackageDescription;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<

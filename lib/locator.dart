@@ -1226,7 +1226,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByOrderDetailsBloc(
       viewByOrderDetailsRepository: locator<ViewByOrderDetailsRepository>(),
-      productImagesRepository: locator<ProductImagesRepository>(),
     ),
   );
 
@@ -2959,7 +2958,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemDetailsBloc(
       viewByItemDetailsRepository: locator<ViewByItemDetailsRepository>(),
-      productImagesRepository: locator<ProductImagesRepository>(),
     ),
   );
 

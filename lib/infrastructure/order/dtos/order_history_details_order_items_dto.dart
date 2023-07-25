@@ -110,8 +110,6 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       tenderContractDetails: OrderHistoryDetailsOrderItemTenderContractDetails(
         tenderContractNumber: tenderContractDetails.tenderContractNumber,
         tenderContractReference: tenderContractDetails.tenderContractReference,
-        tenderPackageDescription:
-            tenderContractDetails.tenderPackageDescription,
       ),
       principalName: PrincipalName(principalName),
       productImages: ProductImages.empty(),

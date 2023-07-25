@@ -6,17 +6,14 @@ part 'order_history_details_order_items_tender_contract_details_dto.g.dart';
 class OrderHistoryDetailsOrderItemTenderContractDetailsDto with _$OrderHistoryDetailsOrderItemTenderContractDetailsDto {
   const OrderHistoryDetailsOrderItemTenderContractDetailsDto._();
   const factory OrderHistoryDetailsOrderItemTenderContractDetailsDto({
-    @JsonKey(name: 'TenderContractNumber',defaultValue: '') required String tenderContractNumber,
-    @JsonKey(name: 'TenderContractReference',defaultValue: '') required String tenderContractReference, 
-    @JsonKey(name: 'TenderPackageDescription',defaultValue: '') required String tenderPackageDescription,
+    @JsonKey(name: 'ContractNumber',defaultValue: '') required String tenderContractNumber,
+    @JsonKey(name: 'ContractReference',defaultValue: '') required String tenderContractReference, 
 
   }) = _OrderHistoryDetailsOrderItemTenderContractDetailsDto;
   factory OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails) {
     return OrderHistoryDetailsOrderItemTenderContractDetailsDto(
       tenderContractNumber: tenderContractDetails.tenderContractNumber,
-      tenderContractReference: tenderContractDetails.tenderContractReference,
-      tenderPackageDescription: tenderContractDetails.tenderPackageDescription,
-      
+      tenderContractReference: tenderContractDetails.tenderContractReference,      
        );
   }
 
@@ -24,7 +21,6 @@ class OrderHistoryDetailsOrderItemTenderContractDetailsDto with _$OrderHistoryDe
     return OrderHistoryDetailsOrderItemTenderContractDetails(
     tenderContractNumber: tenderContractNumber,
     tenderContractReference: tenderContractReference,
-    tenderPackageDescription: tenderPackageDescription,
     );
   }
  

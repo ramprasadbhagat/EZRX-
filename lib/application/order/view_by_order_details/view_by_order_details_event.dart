@@ -11,6 +11,5 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
     required TenderContract selectedTenderContract,
     required MaterialQueryInfo queryInfo,
   }) = _UpdateMaterialTenderContract;
-  const factory ViewByOrderDetailsEvent.fetchProductImage() = _FetchProductImage;
 
 }

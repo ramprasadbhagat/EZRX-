@@ -9,13 +9,11 @@ class OrderHistoryDetailsOrderItemTenderContractDetails
   factory OrderHistoryDetailsOrderItemTenderContractDetails({
     required String tenderContractNumber,
     required String tenderContractReference,
-    required String tenderPackageDescription,
   }) = _OrderHistoryDetailsOrderItemTenderContractDetails;
 
   factory OrderHistoryDetailsOrderItemTenderContractDetails.empty() =>
       OrderHistoryDetailsOrderItemTenderContractDetails(
         tenderContractNumber: '',
         tenderContractReference: '',
-        tenderPackageDescription: '',
       );
 }

@@ -22,12 +22,10 @@ OrderHistoryDetailsOrderItemTenderContractDetailsDto
 
 /// @nodoc
 mixin _$OrderHistoryDetailsOrderItemTenderContractDetailsDto {
-  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  @JsonKey(name: 'ContractNumber', defaultValue: '')
   String get tenderContractNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  @JsonKey(name: 'ContractReference', defaultValue: '')
   String get tenderContractReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-  String get tenderPackageDescription => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,12 +45,10 @@ abstract class $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
           OrderHistoryDetailsOrderItemTenderContractDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'TenderContractNumber', defaultValue: '')
-          String tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
-          String tenderContractReference,
-      @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-          String tenderPackageDescription});
+      {@JsonKey(name: 'ContractNumber', defaultValue: '')
+      String tenderContractNumber,
+      @JsonKey(name: 'ContractReference', defaultValue: '')
+      String tenderContractReference});
 }
 
 /// @nodoc
@@ -73,7 +69,6 @@ class _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<$Res,
   $Res call({
     Object? tenderContractNumber = null,
     Object? tenderContractReference = null,
-    Object? tenderPackageDescription = null,
   }) {
     return _then(_value.copyWith(
       tenderContractNumber: null == tenderContractNumber
@@ -83,10 +78,6 @@ class _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<$Res,
       tenderContractReference: null == tenderContractReference
           ? _value.tenderContractReference
           : tenderContractReference // ignore: cast_nullable_to_non_nullable
-              as String,
-      tenderPackageDescription: null == tenderPackageDescription
-          ? _value.tenderPackageDescription
-          : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -106,12 +97,10 @@ abstract class _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'TenderContractNumber', defaultValue: '')
-          String tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
-          String tenderContractReference,
-      @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-          String tenderPackageDescription});
+      {@JsonKey(name: 'ContractNumber', defaultValue: '')
+      String tenderContractNumber,
+      @JsonKey(name: 'ContractReference', defaultValue: '')
+      String tenderContractReference});
 }
 
 /// @nodoc
@@ -132,7 +121,6 @@ class __$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<
   $Res call({
     Object? tenderContractNumber = null,
     Object? tenderContractReference = null,
-    Object? tenderPackageDescription = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemTenderContractDetailsDto(
       tenderContractNumber: null == tenderContractNumber
@@ -143,10 +131,6 @@ class __$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<
           ? _value.tenderContractReference
           : tenderContractReference // ignore: cast_nullable_to_non_nullable
               as String,
-      tenderPackageDescription: null == tenderPackageDescription
-          ? _value.tenderPackageDescription
-          : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -156,12 +140,10 @@ class __$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<
 class _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
     extends _OrderHistoryDetailsOrderItemTenderContractDetailsDto {
   const _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto(
-      {@JsonKey(name: 'TenderContractNumber', defaultValue: '')
-          required this.tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
-          required this.tenderContractReference,
-      @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-          required this.tenderPackageDescription})
+      {@JsonKey(name: 'ContractNumber', defaultValue: '')
+      required this.tenderContractNumber,
+      @JsonKey(name: 'ContractReference', defaultValue: '')
+      required this.tenderContractReference})
       : super._();
 
   factory _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
@@ -169,18 +151,15 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
       _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  @JsonKey(name: 'ContractNumber', defaultValue: '')
   final String tenderContractNumber;
   @override
-  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  @JsonKey(name: 'ContractReference', defaultValue: '')
   final String tenderContractReference;
-  @override
-  @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-  final String tenderPackageDescription;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemTenderContractDetailsDto(tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPackageDescription: $tenderPackageDescription)';
+    return 'OrderHistoryDetailsOrderItemTenderContractDetailsDto(tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference)';
   }
 
   @override
@@ -192,16 +171,13 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
                 other.tenderContractNumber == tenderContractNumber) &&
             (identical(
                     other.tenderContractReference, tenderContractReference) ||
-                other.tenderContractReference == tenderContractReference) &&
-            (identical(
-                    other.tenderPackageDescription, tenderPackageDescription) ||
-                other.tenderPackageDescription == tenderPackageDescription));
+                other.tenderContractReference == tenderContractReference));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, tenderContractNumber,
-      tenderContractReference, tenderPackageDescription);
+  int get hashCode =>
+      Object.hash(runtimeType, tenderContractNumber, tenderContractReference);
 
   @JsonKey(ignore: true)
   @override
@@ -224,12 +200,10 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
 abstract class _OrderHistoryDetailsOrderItemTenderContractDetailsDto
     extends OrderHistoryDetailsOrderItemTenderContractDetailsDto {
   const factory _OrderHistoryDetailsOrderItemTenderContractDetailsDto(
-          {@JsonKey(name: 'TenderContractNumber', defaultValue: '')
-              required final String tenderContractNumber,
-          @JsonKey(name: 'TenderContractReference', defaultValue: '')
-              required final String tenderContractReference,
-          @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-              required final String tenderPackageDescription}) =
+          {@JsonKey(name: 'ContractNumber', defaultValue: '')
+          required final String tenderContractNumber,
+          @JsonKey(name: 'ContractReference', defaultValue: '')
+          required final String tenderContractReference}) =
       _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto;
   const _OrderHistoryDetailsOrderItemTenderContractDetailsDto._() : super._();
 
@@ -238,14 +212,11 @@ abstract class _OrderHistoryDetailsOrderItemTenderContractDetailsDto
       _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson;
 
   @override
-  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  @JsonKey(name: 'ContractNumber', defaultValue: '')
   String get tenderContractNumber;
   @override
-  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  @JsonKey(name: 'ContractReference', defaultValue: '')
   String get tenderContractReference;
-  @override
-  @JsonKey(name: 'TenderPackageDescription', defaultValue: '')
-  String get tenderPackageDescription;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<

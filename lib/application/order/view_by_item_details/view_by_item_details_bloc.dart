@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_details_repository.dart';
@@ -16,11 +15,9 @@ part 'view_by_item_details_bloc.freezed.dart';
 class ViewByItemDetailsBloc
     extends Bloc<ViewByItemDetailsEvent, ViewByItemDetailsState> {
   final IViewByItemDetailsRepository viewByItemDetailsRepository;
-  final IProductImagesRepository productImagesRepository;
 
   ViewByItemDetailsBloc({
     required this.viewByItemDetailsRepository,
-    required this.productImagesRepository,
   }) : super(ViewByItemDetailsState.initial()) {
     on<ViewByItemDetailsEvent>(_onEvent);
   }
@@ -51,7 +48,6 @@ class ViewByItemDetailsBloc
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
-                showErrorMessage: true,
               ),
             );
           },
@@ -59,42 +55,8 @@ class ViewByItemDetailsBloc
             emit(
               state.copyWith(
                 viewByItemDetails: viewByItemDetails,
-                failureOrSuccessOption: none(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
-              ),
-            );
-            add(const _FetchProductImage());
-          },
-        );
-      },
-      fetchProductImage: (e) async {
-        emit(
-          state.copyWith(
-            isImageLoading: true,
-          ),
-        );
-
-        final failureOrSuccess = await productImagesRepository.getProductImages(
-          list: state.viewByItemDetails.orderHistoryItems,
-        );
-
-        await failureOrSuccess.fold(
-          (failure) async => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-              isImageLoading: false,
-            ),
-          ),
-          (updatedListWithImages) {
-            emit(
-              state.copyWith(
-                viewByItemDetails: state.viewByItemDetails.copyWith(
-                  orderHistoryItems: updatedListWithImages
-                      .map((e) => e as OrderHistoryItem)
-                      .toList(),
-                ),
-                failureOrSuccessOption: none(),
-                isImageLoading: false,
               ),
             );
           },
