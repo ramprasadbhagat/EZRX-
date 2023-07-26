@@ -110,6 +110,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
             children: [
               BalanceTextRow(
                 keyText: 'Request date'.tr(),
+                keyFlex: 2,
                 valueText:
                     widget.requestInformation.createdDate.toValidDateString,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -121,6 +122,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
               ),
               BalanceTextRow(
                 keyText: 'Return reference'.tr(),
+                keyFlex: 2,
                 valueText: widget
                     .requestInformationHeader.returnReference.displayLabel,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -132,6 +134,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
               ),
               BalanceTextRow(
                 keyText: 'Special instructions'.tr(),
+                keyFlex: 2,
                 valueText: widget.requestInformationHeader.specialInstructions
                     .displaySpecialInstructions,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(

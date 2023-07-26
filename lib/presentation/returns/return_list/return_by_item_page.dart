@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,11 +92,13 @@ class ReturnByItemPage extends StatelessWidget {
 
                       return currentGroup != previousGroup
                           ? _ReturnItem(
+                              key: WidgetKeys.returnItem(index.toString()),
                               data: item,
                               showDivider: index != 0,
                               showHeader: true,
                             )
                           : _ReturnItem(
+                              key: WidgetKeys.returnItem(index.toString()),
                               data: item,
                               showDivider: false,
                               showHeader: false,
@@ -153,6 +157,18 @@ class _ReturnItem extends StatelessWidget {
                   ),
                 ),
               CommonTileItem(
+                key: WidgetKeys.returnItemTile,
+                onTap: () {
+                  context.read<ReturnSummaryDetailsBloc>().add(
+                        ReturnSummaryDetailsEvent.fetch(
+                          returnId: data.requestId,
+                          invoiceId: data.invoiceID,
+                        ),
+                      );
+                  context.router.push(
+                    ReturnRequestSummaryByItemDetailsRoute(returnItem: data),
+                  );
+                },
                 label: data.materialNumber.displayMatNo,
                 title: data.materialName,
                 subtitle:

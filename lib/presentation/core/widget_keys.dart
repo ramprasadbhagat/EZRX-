@@ -363,4 +363,10 @@ class WidgetKeys {
   static const Key announcementDetailsPageKey =
       Key('announcementDetailsPageKey');
   static const Key announcementListPageKey = Key('announcementListPageKey');
+
+  //============================================================
+  //  Return By Item Page
+  //============================================================
+  static Key returnItem(String index) => Key('returnItem$index');
+  static const Key returnItemTile = Key('returnItemTile');
 }
