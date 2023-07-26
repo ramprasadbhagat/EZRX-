@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/filter/available_credit_payment_filter_page.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/widgets/credit_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -170,68 +171,14 @@ class _PaymentItem extends StatelessWidget {
       child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
         builder: (context, state) {
           return EdgeCheckbox(
-            onChanged: (bool value) {
+            onChanged: (bool value) =>
               context.read<NewPaymentBloc>().add(
                     NewPaymentEvent.toggleCredit(selected: value, item: data),
-                  );
-            },
+                ),
             value: state.selectedCredits.contains(data),
             body: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ListTile(
-                onTap: () {},
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${data.postingKeyName} #${data.accountingDocument}',
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                        Text(
-                          data.netDueDate.toValidDateString,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.darkGray,
-                                  ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            data.documentReferenceID,
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                          PriceComponent(
-                            salesOrgConfig:
-                                context.read<SalesOrgBloc>().state.configs,
-                            price: data.amountInTransactionCurrency.toString(),
-                            currencyCodeTextStyle: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(
-                                  color: ZPColors.primary,
-                                ),
-                            priceTextStyle: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(
-                                  color: ZPColors.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: CreditItemCard(customerOpenItem: data),
             ),
           );
         },

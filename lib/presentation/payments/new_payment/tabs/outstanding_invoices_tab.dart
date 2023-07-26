@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -16,9 +15,9 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/filter/outstanding_invoice_payment_filter_page.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/widgets/invoice_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -179,61 +178,7 @@ class _PaymentItem extends StatelessWidget {
             value: state.selectedInvoices.contains(data),
             body: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ListTile(
-                onTap: () {},
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Invoice #${data.accountingDocument}',
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                        StatusLabel(
-                          status: StatusType(
-                            data.status.getOrDefaultValue(''),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Order #${data.documentReferenceID}',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                          Text(
-                            'Due on ${data.netDueDate.toSimpleDateString}',
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: data.status.displayDueDateColor,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    PriceComponent(
-                      salesOrgConfig:
-                          context.read<SalesOrgBloc>().state.configs,
-                      price: data.amountInTransactionCurrency.toString(),
-                      currencyCodeTextStyle:
-                          Theme.of(context).textTheme.titleSmall!.copyWith(
-                                color: ZPColors.primary,
-                              ),
-                      priceTextStyle:
-                          Theme.of(context).textTheme.titleSmall!.copyWith(
-                                color: ZPColors.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                    ),
-                  ],
-                ),
-              ),
+              child: InvoiceItemCard(customerOpenItem: data),
             ),
           );
         },

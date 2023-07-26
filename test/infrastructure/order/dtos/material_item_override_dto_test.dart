@@ -42,7 +42,7 @@ void main() {
       expect(configsDtoMap['reference'], '');
     });
 
-    test('Test fromPrice', () {
+     test('Test fromPrice', () {
       final configsDtoMap = MaterialItemOverrideDto.fromPriceAggregate(
         PriceAggregate.empty().copyWith(
           price: Price.empty().copyWith(
