@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
@@ -113,6 +114,9 @@ class ViewByOrderDetailsMockBloc
 class ProductDetailMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
+class CreditAndInvoiceDetailsMockBloc
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
 
 void main() {
   late GetIt locator;
@@ -139,6 +143,7 @@ void main() {
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ProductDetailBloc productDetailBloc;
 
+  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
 
 
   setUpAll(() async {
@@ -167,6 +172,7 @@ void main() {
       viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
       viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
       productDetailBloc = ProductDetailMockBloc();
+      creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -202,6 +208,8 @@ void main() {
           .thenReturn(RecentOrderState.initial());
       when(() => productDetailBloc.state)
         .thenReturn(ProductDetailState.initial());
+      when(() => creditAndInvoiceDetailsBloc.state)
+          .thenReturn(CreditAndInvoiceDetailsState.initial());
     });
 
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
@@ -249,6 +257,8 @@ void main() {
                   create: (context) => viewByOrderDetailsBlocMock),
               BlocProvider<ProductDetailBloc>(
                   create: (context) => productDetailBloc),
+              BlocProvider<CreditAndInvoiceDetailsBloc>(
+                  create: (context) => creditAndInvoiceDetailsBloc),
             ],
             child: const LoginPage(),
           ),
@@ -366,6 +376,8 @@ void main() {
                   create: (context) => viewByOrderDetailsBlocMock),
             BlocProvider<ProductDetailBloc>(
                   create: (context) => productDetailBloc),
+            BlocProvider<CreditAndInvoiceDetailsBloc>(
+                  create: (context) => creditAndInvoiceDetailsBloc),
           ],
           child: const SplashPage(),
         ),

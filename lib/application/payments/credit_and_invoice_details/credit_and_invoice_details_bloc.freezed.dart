@@ -24,7 +24,6 @@ mixin _$CreditAndInvoiceDetailsEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
-    required TResult Function() fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,7 +34,6 @@ mixin _$CreditAndInvoiceDetailsEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
-    TResult? Function()? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,7 +44,6 @@ mixin _$CreditAndInvoiceDetailsEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,21 +51,18 @@ mixin _$CreditAndInvoiceDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,7 +133,6 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
-    required TResult Function() fetchProductImage,
   }) {
     return initialized();
   }
@@ -153,7 +146,6 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
-    TResult? Function()? fetchProductImage,
   }) {
     return initialized?.call();
   }
@@ -167,7 +159,6 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -181,7 +172,6 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return initialized(this);
   }
@@ -191,7 +181,6 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return initialized?.call(this);
   }
@@ -201,7 +190,6 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -338,7 +326,6 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
-    required TResult Function() fetchProductImage,
   }) {
     return fetch(creditAndInvoiceItem, salesOrganisation, customerCodeInfo);
   }
@@ -352,7 +339,6 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
-    TResult? Function()? fetchProductImage,
   }) {
     return fetch?.call(
         creditAndInvoiceItem, salesOrganisation, customerCodeInfo);
@@ -367,7 +353,6 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
-    TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -381,7 +366,6 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
     return fetch(this);
   }
@@ -391,7 +375,6 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
     return fetch?.call(this);
   }
@@ -401,7 +384,6 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -426,129 +408,8 @@ abstract class _Fetch implements CreditAndInvoiceDetailsEvent {
 }
 
 /// @nodoc
-abstract class _$$_FetchProductImageCopyWith<$Res> {
-  factory _$$_FetchProductImageCopyWith(_$_FetchProductImage value,
-          $Res Function(_$_FetchProductImage) then) =
-      __$$_FetchProductImageCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_FetchProductImageCopyWithImpl<$Res>
-    extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res,
-        _$_FetchProductImage> implements _$$_FetchProductImageCopyWith<$Res> {
-  __$$_FetchProductImageCopyWithImpl(
-      _$_FetchProductImage _value, $Res Function(_$_FetchProductImage) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_FetchProductImage implements _FetchProductImage {
-  const _$_FetchProductImage();
-
-  @override
-  String toString() {
-    return 'CreditAndInvoiceDetailsEvent.fetchProductImage()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchProductImage);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            CreditAndInvoiceItem creditAndInvoiceItem,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
-    required TResult Function() fetchProductImage,
-  }) {
-    return fetchProductImage();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            CreditAndInvoiceItem creditAndInvoiceItem,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
-    TResult? Function()? fetchProductImage,
-  }) {
-    return fetchProductImage?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            CreditAndInvoiceItem creditAndInvoiceItem,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
-    TResult Function()? fetchProductImage,
-    required TResult orElse(),
-  }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
-  }) {
-    return fetchProductImage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
-  }) {
-    return fetchProductImage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
-    required TResult orElse(),
-  }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchProductImage implements CreditAndInvoiceDetailsEvent {
-  const factory _FetchProductImage() = _$_FetchProductImage;
-}
-
-/// @nodoc
 mixin _$CreditAndInvoiceDetailsState {
   bool get isLoading => throw _privateConstructorUsedError;
-  bool get imageLoading => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   List<CustomerDocumentDetail> get details =>
@@ -569,7 +430,6 @@ abstract class $CreditAndInvoiceDetailsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      bool imageLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       List<CustomerDocumentDetail> details});
 }
@@ -589,7 +449,6 @@ class _$CreditAndInvoiceDetailsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
-    Object? imageLoading = null,
     Object? failureOrSuccessOption = null,
     Object? details = null,
   }) {
@@ -597,10 +456,6 @@ class _$CreditAndInvoiceDetailsStateCopyWithImpl<$Res,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      imageLoading: null == imageLoading
-          ? _value.imageLoading
-          : imageLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -625,7 +480,6 @@ abstract class _$$_CreditAndInvoiceDetailsStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      bool imageLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       List<CustomerDocumentDetail> details});
 }
@@ -644,7 +498,6 @@ class __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? imageLoading = null,
     Object? failureOrSuccessOption = null,
     Object? details = null,
   }) {
@@ -652,10 +505,6 @@ class __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      imageLoading: null == imageLoading
-          ? _value.imageLoading
-          : imageLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -674,7 +523,6 @@ class __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>
 class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
   const _$_CreditAndInvoiceDetailsState(
       {required this.isLoading,
-      required this.imageLoading,
       required this.failureOrSuccessOption,
       required final List<CustomerDocumentDetail> details})
       : _details = details,
@@ -682,8 +530,6 @@ class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
 
   @override
   final bool isLoading;
-  @override
-  final bool imageLoading;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   final List<CustomerDocumentDetail> _details;
@@ -696,7 +542,7 @@ class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
 
   @override
   String toString() {
-    return 'CreditAndInvoiceDetailsState(isLoading: $isLoading, imageLoading: $imageLoading, failureOrSuccessOption: $failureOrSuccessOption, details: $details)';
+    return 'CreditAndInvoiceDetailsState(isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption, details: $details)';
   }
 
   @override
@@ -706,15 +552,13 @@ class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
             other is _$_CreditAndInvoiceDetailsState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.imageLoading, imageLoading) ||
-                other.imageLoading == imageLoading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             const DeepCollectionEquality().equals(other._details, _details));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, imageLoading,
+  int get hashCode => Object.hash(runtimeType, isLoading,
       failureOrSuccessOption, const DeepCollectionEquality().hash(_details));
 
   @JsonKey(ignore: true)
@@ -729,7 +573,6 @@ abstract class _CreditAndInvoiceDetailsState
     extends CreditAndInvoiceDetailsState {
   const factory _CreditAndInvoiceDetailsState(
       {required final bool isLoading,
-      required final bool imageLoading,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final List<CustomerDocumentDetail>
           details}) = _$_CreditAndInvoiceDetailsState;
@@ -737,8 +580,6 @@ abstract class _CreditAndInvoiceDetailsState
 
   @override
   bool get isLoading;
-  @override
-  bool get imageLoading;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

@@ -21,6 +21,7 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -115,6 +116,9 @@ class ViewByOrderDetailsMockBloc
 class ProductDetailMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
+class CreditAndInvoiceDetailsMockBloc
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
 
 void main() {
   late GetIt locator;
@@ -141,6 +145,7 @@ void main() {
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ProductDetailBloc productDetailBloc;
+  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -186,6 +191,7 @@ void main() {
     customerCodeBloc = CustomerCodeBlocMock();
     viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
     viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
+    creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
     when(() => customerCodeBloc.state).thenReturn(CustomerCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
 
@@ -220,6 +226,8 @@ void main() {
         .thenReturn(ViewByOrderDetailsState.initial());
     when(() => productDetailBloc.state)
         .thenReturn(ProductDetailState.initial());
+    when(() => creditAndInvoiceDetailsBloc.state)
+        .thenReturn(CreditAndInvoiceDetailsState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
@@ -261,6 +269,8 @@ void main() {
                 create: (context) => viewByOrderDetailsBlocMock),
               BlocProvider<ProductDetailBloc>(
                   create: (context) => productDetailBloc),
+              BlocProvider<CreditAndInvoiceDetailsBloc>(
+                  create: (context) => creditAndInvoiceDetailsBloc),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -368,6 +378,8 @@ void main() {
                 create: (context) => viewByOrderDetailsBlocMock),
             BlocProvider<ProductDetailBloc>(
                 create: (context) => productDetailBloc),
+            BlocProvider<CreditAndInvoiceDetailsBloc>(
+                create: (context) => creditAndInvoiceDetailsBloc),
           ],
           child: const SplashPage(),
         ),

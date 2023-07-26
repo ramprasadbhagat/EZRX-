@@ -5,7 +5,6 @@ class CreditAndInvoiceDetailsState with _$CreditAndInvoiceDetailsState {
   const CreditAndInvoiceDetailsState._();
   const factory CreditAndInvoiceDetailsState({
     required bool isLoading,
-    required bool imageLoading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required List<CustomerDocumentDetail> details,
   }) = _CreditAndInvoiceDetailsState;
@@ -13,7 +12,6 @@ class CreditAndInvoiceDetailsState with _$CreditAndInvoiceDetailsState {
   factory CreditAndInvoiceDetailsState.initial() => CreditAndInvoiceDetailsState(
         failureOrSuccessOption: none(),
         isLoading: false,
-        imageLoading: false,
         details: <CustomerDocumentDetail>[],
       );
 }

@@ -22,6 +22,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
@@ -394,14 +395,26 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               (failure) {
                 ErrorUtils.handleApiFailure(context, failure);
               },
-              (_) {
-                if (!state.isLoading) {
-                  _fetchProductImage(
-                    context,
-                    state.orderHistoryDetails.orderHistoryDetailsOrderItem,
-                  );
-                }
+              (_) => _fetchProductImage(
+                context,
+                state.orderHistoryDetails.orderHistoryDetailsOrderItem,
+              ),
+            ),
+          ),
+        ),
+        BlocListener<CreditAndInvoiceDetailsBloc, CreditAndInvoiceDetailsState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
               },
+              (_) => _fetchProductImage(
+                context,
+                state.details,
+              ),
             ),
           ),
         ),

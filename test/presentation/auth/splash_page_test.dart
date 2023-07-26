@@ -29,6 +29,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
@@ -195,6 +196,9 @@ class ViewByItemDetailsMockBloc
 class ProductDetailMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
+class CreditAndInvoiceDetailsMockBloc
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -240,6 +244,7 @@ void main() {
   late PushNotificationService pushNotificationServiceMock;
   final chatBotBloc = ChatBotMockBloc();
   late MaterialPriceBloc mockMaterialPriceBloc;
+  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -315,6 +320,7 @@ void main() {
       recentOrderBloc = RecentOrderMockBloc();
       viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
       productDetailBloc = ProductDetailMockBloc();
+      creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -381,6 +387,8 @@ void main() {
           .thenReturn(RecentOrderState.initial());
       when(() => productDetailBloc.state)
         .thenReturn(ProductDetailState.initial());
+      when(() => creditAndInvoiceDetailsBloc.state)
+          .thenReturn(CreditAndInvoiceDetailsState.initial());
     });
 
     Future getWidget(tester) async {
@@ -460,6 +468,8 @@ void main() {
                   create: (context) => recentOrderBloc),
             BlocProvider<ProductDetailBloc>(
                   create: (context) => productDetailBloc),
+            BlocProvider<CreditAndInvoiceDetailsBloc>(
+                  create: (context) => creditAndInvoiceDetailsBloc),
           ],
           child: const SplashPage(),
         ),

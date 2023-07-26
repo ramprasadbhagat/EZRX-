@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -15,24 +14,9 @@ class InvoiceItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CreditAndInvoiceDetailsBloc,
+    return BlocBuilder<CreditAndInvoiceDetailsBloc,
         CreditAndInvoiceDetailsState>(
-      listenWhen: (previous, current) =>
-          previous.failureOrSuccessOption != current.failureOrSuccessOption,
-      listener: (context, state) {
-        state.failureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
-      },
-      buildWhen: (previous, current) =>
-          previous.isLoading != current.isLoading ||
-          previous.imageLoading != current.imageLoading,
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return state.isLoading
             ? Padding(
