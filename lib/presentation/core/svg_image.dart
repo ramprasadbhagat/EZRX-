@@ -9,4 +9,5 @@ abstract class SvgImage {
   static const String searchLogo = '${_basePath}search.svg';
   static const String shoppingCart = '${_basePath}shopping_cart.svg';
   static const String notification = '${_basePath}notification.svg';
+  static const String noImageAvailable = '${_basePath}no_image_available.svg';
 }

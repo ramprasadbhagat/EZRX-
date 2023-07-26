@@ -344,4 +344,7 @@ class Config {
   String get announcementTemplate => 'EA1748E3-EF3B-4D38-B2C9-937B90864DED';
 
   String get articleTemplate => 'DA48D344-04CE-411B-B721-5D1B4F807860';
+
+  String get announcementImageBaseUrl =>
+      'https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/';
 }

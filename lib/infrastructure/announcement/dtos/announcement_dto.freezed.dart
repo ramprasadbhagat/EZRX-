@@ -59,31 +59,22 @@ abstract class $AnnouncementDtoCopyWith<$Res> {
       _$AnnouncementDtoCopyWithImpl<$Res, AnnouncementDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'active', defaultValue: false)
-          bool active,
+      {@JsonKey(name: 'active', defaultValue: false) bool active,
       @JsonKey(name: 'descriptionList', defaultValue: [])
-          List<AnnouncementMessageDto> descriptionList,
-      @JsonKey(name: 'startTime', defaultValue: '')
-          String startTime,
-      @JsonKey(name: 'endTime', defaultValue: '')
-          String endTime,
-      @JsonKey(name: 'type', defaultValue: '')
-          String type,
-      @JsonKey(name: 'day', defaultValue: '')
-          String day,
-      @JsonKey(name: 'functionLabel', defaultValue: '')
-          String functionLabel,
-      @JsonKey(name: 'id', defaultValue: '')
-          String id,
+      List<AnnouncementMessageDto> descriptionList,
+      @JsonKey(name: 'startTime', defaultValue: '') String startTime,
+      @JsonKey(name: 'endTime', defaultValue: '') String endTime,
+      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'day', defaultValue: '') String day,
+      @JsonKey(name: 'functionLabel', defaultValue: '') String functionLabel,
+      @JsonKey(name: 'id', defaultValue: '') String id,
       @JsonKey(name: 'isModuleSpecific', defaultValue: false)
-          bool isModuleSpecific,
+      bool isModuleSpecific,
       @_ModuleNameConverter()
       @JsonKey(name: 'moduleName', defaultValue: [])
-          List<String> moduleName,
-      @JsonKey(name: 'loginType', defaultValue: '')
-          String loginType,
-      @JsonKey(name: 'isCrossButton', defaultValue: false)
-          bool isCrossButton});
+      List<String> moduleName,
+      @JsonKey(name: 'loginType', defaultValue: '') String loginType,
+      @JsonKey(name: 'isCrossButton', defaultValue: false) bool isCrossButton});
 }
 
 /// @nodoc
@@ -174,31 +165,22 @@ abstract class _$$_AnnouncementDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'active', defaultValue: false)
-          bool active,
+      {@JsonKey(name: 'active', defaultValue: false) bool active,
       @JsonKey(name: 'descriptionList', defaultValue: [])
-          List<AnnouncementMessageDto> descriptionList,
-      @JsonKey(name: 'startTime', defaultValue: '')
-          String startTime,
-      @JsonKey(name: 'endTime', defaultValue: '')
-          String endTime,
-      @JsonKey(name: 'type', defaultValue: '')
-          String type,
-      @JsonKey(name: 'day', defaultValue: '')
-          String day,
-      @JsonKey(name: 'functionLabel', defaultValue: '')
-          String functionLabel,
-      @JsonKey(name: 'id', defaultValue: '')
-          String id,
+      List<AnnouncementMessageDto> descriptionList,
+      @JsonKey(name: 'startTime', defaultValue: '') String startTime,
+      @JsonKey(name: 'endTime', defaultValue: '') String endTime,
+      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'day', defaultValue: '') String day,
+      @JsonKey(name: 'functionLabel', defaultValue: '') String functionLabel,
+      @JsonKey(name: 'id', defaultValue: '') String id,
       @JsonKey(name: 'isModuleSpecific', defaultValue: false)
-          bool isModuleSpecific,
+      bool isModuleSpecific,
       @_ModuleNameConverter()
       @JsonKey(name: 'moduleName', defaultValue: [])
-          List<String> moduleName,
-      @JsonKey(name: 'loginType', defaultValue: '')
-          String loginType,
-      @JsonKey(name: 'isCrossButton', defaultValue: false)
-          bool isCrossButton});
+      List<String> moduleName,
+      @JsonKey(name: 'loginType', defaultValue: '') String loginType,
+      @JsonKey(name: 'isCrossButton', defaultValue: false) bool isCrossButton});
 }
 
 /// @nodoc
@@ -282,31 +264,24 @@ class __$$_AnnouncementDtoCopyWithImpl<$Res>
 @JsonSerializable(createToJson: false)
 class _$_AnnouncementDto extends _AnnouncementDto {
   const _$_AnnouncementDto(
-      {@JsonKey(name: 'active', defaultValue: false)
-          required this.active,
+      {@JsonKey(name: 'active', defaultValue: false) required this.active,
       @JsonKey(name: 'descriptionList', defaultValue: [])
-          required final List<AnnouncementMessageDto> descriptionList,
-      @JsonKey(name: 'startTime', defaultValue: '')
-          required this.startTime,
-      @JsonKey(name: 'endTime', defaultValue: '')
-          required this.endTime,
-      @JsonKey(name: 'type', defaultValue: '')
-          required this.type,
-      @JsonKey(name: 'day', defaultValue: '')
-          required this.day,
+      required final List<AnnouncementMessageDto> descriptionList,
+      @JsonKey(name: 'startTime', defaultValue: '') required this.startTime,
+      @JsonKey(name: 'endTime', defaultValue: '') required this.endTime,
+      @JsonKey(name: 'type', defaultValue: '') required this.type,
+      @JsonKey(name: 'day', defaultValue: '') required this.day,
       @JsonKey(name: 'functionLabel', defaultValue: '')
-          required this.functionLabel,
-      @JsonKey(name: 'id', defaultValue: '')
-          required this.id,
+      required this.functionLabel,
+      @JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'isModuleSpecific', defaultValue: false)
-          required this.isModuleSpecific,
+      required this.isModuleSpecific,
       @_ModuleNameConverter()
       @JsonKey(name: 'moduleName', defaultValue: [])
-          required final List<String> moduleName,
-      @JsonKey(name: 'loginType', defaultValue: '')
-          required this.loginType,
+      required final List<String> moduleName,
+      @JsonKey(name: 'loginType', defaultValue: '') required this.loginType,
       @JsonKey(name: 'isCrossButton', defaultValue: false)
-          required this.isCrossButton})
+      required this.isCrossButton})
       : _descriptionList = descriptionList,
         _moduleName = moduleName,
         super._();
@@ -421,31 +396,26 @@ class _$_AnnouncementDto extends _AnnouncementDto {
 
 abstract class _AnnouncementDto extends AnnouncementDto {
   const factory _AnnouncementDto(
-      {@JsonKey(name: 'active', defaultValue: false)
-          required final bool active,
+      {@JsonKey(name: 'active', defaultValue: false) required final bool active,
       @JsonKey(name: 'descriptionList', defaultValue: [])
-          required final List<AnnouncementMessageDto> descriptionList,
+      required final List<AnnouncementMessageDto> descriptionList,
       @JsonKey(name: 'startTime', defaultValue: '')
-          required final String startTime,
-      @JsonKey(name: 'endTime', defaultValue: '')
-          required final String endTime,
-      @JsonKey(name: 'type', defaultValue: '')
-          required final String type,
-      @JsonKey(name: 'day', defaultValue: '')
-          required final String day,
+      required final String startTime,
+      @JsonKey(name: 'endTime', defaultValue: '') required final String endTime,
+      @JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'day', defaultValue: '') required final String day,
       @JsonKey(name: 'functionLabel', defaultValue: '')
-          required final String functionLabel,
-      @JsonKey(name: 'id', defaultValue: '')
-          required final String id,
+      required final String functionLabel,
+      @JsonKey(name: 'id', defaultValue: '') required final String id,
       @JsonKey(name: 'isModuleSpecific', defaultValue: false)
-          required final bool isModuleSpecific,
+      required final bool isModuleSpecific,
       @_ModuleNameConverter()
       @JsonKey(name: 'moduleName', defaultValue: [])
-          required final List<String> moduleName,
+      required final List<String> moduleName,
       @JsonKey(name: 'loginType', defaultValue: '')
-          required final String loginType,
+      required final String loginType,
       @JsonKey(name: 'isCrossButton', defaultValue: false)
-          required final bool isCrossButton}) = _$_AnnouncementDto;
+      required final bool isCrossButton}) = _$_AnnouncementDto;
   const _AnnouncementDto._() : super._();
 
   factory _AnnouncementDto.fromJson(Map<String, dynamic> json) =
@@ -613,11 +583,10 @@ class __$$_AnnouncementMessageDtoCopyWithImpl<$Res>
 class _$_AnnouncementMessageDto extends _AnnouncementMessageDto {
   const _$_AnnouncementMessageDto(
       {@JsonKey(name: 'languageCode', defaultValue: '')
-          required this.languageCode,
-      @JsonKey(name: 'language', defaultValue: '')
-          required this.language,
+      required this.languageCode,
+      @JsonKey(name: 'language', defaultValue: '') required this.language,
       @JsonKey(name: 'announcement', defaultValue: '')
-          required this.announcement})
+      required this.announcement})
       : super._();
 
   factory _$_AnnouncementMessageDto.fromJson(Map<String, dynamic> json) =>
@@ -674,11 +643,11 @@ class _$_AnnouncementMessageDto extends _AnnouncementMessageDto {
 abstract class _AnnouncementMessageDto extends AnnouncementMessageDto {
   const factory _AnnouncementMessageDto(
       {@JsonKey(name: 'languageCode', defaultValue: '')
-          required final String languageCode,
+      required final String languageCode,
       @JsonKey(name: 'language', defaultValue: '')
-          required final String language,
+      required final String language,
       @JsonKey(name: 'announcement', defaultValue: '')
-          required final String announcement}) = _$_AnnouncementMessageDto;
+      required final String announcement}) = _$_AnnouncementMessageDto;
   const _AnnouncementMessageDto._() : super._();
 
   factory _AnnouncementMessageDto.fromJson(Map<String, dynamic> json) =

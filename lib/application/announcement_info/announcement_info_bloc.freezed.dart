@@ -17,36 +17,41 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AnnouncementInfoEvent {
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
-  int get pageSize => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, int pageSize) getAnnouncement,
+    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(SalesOrg salesOrg) loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, int pageSize)? getAnnouncement,
+    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(SalesOrg salesOrg)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, int pageSize)? getAnnouncement,
+    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(SalesOrg salesOrg)? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetAnnouncementInfo value) getAnnouncement,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAnnouncementInfo value)? getAnnouncement,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAnnouncementInfo value)? getAnnouncement,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +67,7 @@ abstract class $AnnouncementInfoEventCopyWith<$Res> {
           $Res Function(AnnouncementInfoEvent) then) =
       _$AnnouncementInfoEventCopyWithImpl<$Res, AnnouncementInfoEvent>;
   @useResult
-  $Res call({SalesOrg salesOrg, int pageSize});
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -80,120 +85,105 @@ class _$AnnouncementInfoEventCopyWithImpl<$Res,
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? pageSize = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      pageSize: null == pageSize
-          ? _value.pageSize
-          : pageSize // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_GetAnnouncementInfoCopyWith<$Res>
+abstract class _$$_FetchCopyWith<$Res>
     implements $AnnouncementInfoEventCopyWith<$Res> {
-  factory _$$_GetAnnouncementInfoCopyWith(_$_GetAnnouncementInfo value,
-          $Res Function(_$_GetAnnouncementInfo) then) =
-      __$$_GetAnnouncementInfoCopyWithImpl<$Res>;
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SalesOrg salesOrg, int pageSize});
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_GetAnnouncementInfoCopyWithImpl<$Res>
-    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_GetAnnouncementInfo>
-    implements _$$_GetAnnouncementInfoCopyWith<$Res> {
-  __$$_GetAnnouncementInfoCopyWithImpl(_$_GetAnnouncementInfo _value,
-      $Res Function(_$_GetAnnouncementInfo) _then)
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? pageSize = null,
   }) {
-    return _then(_$_GetAnnouncementInfo(
+    return _then(_$_Fetch(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      pageSize: null == pageSize
-          ? _value.pageSize
-          : pageSize // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_GetAnnouncementInfo implements _GetAnnouncementInfo {
-  const _$_GetAnnouncementInfo(
-      {required this.salesOrg, required this.pageSize});
+class _$_Fetch implements _Fetch {
+  const _$_Fetch({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
-  @override
-  final int pageSize;
 
   @override
   String toString() {
-    return 'AnnouncementInfoEvent.getAnnouncement(salesOrg: $salesOrg, pageSize: $pageSize)';
+    return 'AnnouncementInfoEvent.fetch(salesOrg: $salesOrg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetAnnouncementInfo &&
+            other is _$_Fetch &&
             (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.pageSize, pageSize) ||
-                other.pageSize == pageSize));
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, pageSize);
+  int get hashCode => Object.hash(runtimeType, salesOrg);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetAnnouncementInfoCopyWith<_$_GetAnnouncementInfo> get copyWith =>
-      __$$_GetAnnouncementInfoCopyWithImpl<_$_GetAnnouncementInfo>(
-          this, _$identity);
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrg salesOrg, int pageSize) getAnnouncement,
+    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(SalesOrg salesOrg) loadMore,
   }) {
-    return getAnnouncement(salesOrg, pageSize);
+    return fetch(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrg salesOrg, int pageSize)? getAnnouncement,
+    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(SalesOrg salesOrg)? loadMore,
   }) {
-    return getAnnouncement?.call(salesOrg, pageSize);
+    return fetch?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrg salesOrg, int pageSize)? getAnnouncement,
+    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(SalesOrg salesOrg)? loadMore,
     required TResult orElse(),
   }) {
-    if (getAnnouncement != null) {
-      return getAnnouncement(salesOrg, pageSize);
+    if (fetch != null) {
+      return fetch(salesOrg);
     }
     return orElse();
   }
@@ -201,44 +191,181 @@ class _$_GetAnnouncementInfo implements _GetAnnouncementInfo {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetAnnouncementInfo value) getAnnouncement,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) {
-    return getAnnouncement(this);
+    return fetch(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAnnouncementInfo value)? getAnnouncement,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
-    return getAnnouncement?.call(this);
+    return fetch?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAnnouncementInfo value)? getAnnouncement,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
-    if (getAnnouncement != null) {
-      return getAnnouncement(this);
+    if (fetch != null) {
+      return fetch(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetAnnouncementInfo implements AnnouncementInfoEvent {
-  const factory _GetAnnouncementInfo(
-      {required final SalesOrg salesOrg,
-      required final int pageSize}) = _$_GetAnnouncementInfo;
+abstract class _Fetch implements AnnouncementInfoEvent {
+  const factory _Fetch({required final SalesOrg salesOrg}) = _$_Fetch;
 
   @override
   SalesOrg get salesOrg;
   @override
-  int get pageSize;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadMoreCopyWith<$Res>
+    implements $AnnouncementInfoEventCopyWith<$Res> {
+  factory _$$_LoadMoreCopyWith(
+          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
+      __$$_LoadMoreCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({SalesOrg salesOrg});
+}
+
+/// @nodoc
+class __$$_LoadMoreCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_LoadMore>
+    implements _$$_LoadMoreCopyWith<$Res> {
+  __$$_LoadMoreCopyWithImpl(
+      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrg = null,
+  }) {
+    return _then(_$_LoadMore(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_LoadMore implements _LoadMore {
+  const _$_LoadMore({required this.salesOrg});
+
+  @override
+  final SalesOrg salesOrg;
+
+  @override
+  String toString() {
+    return 'AnnouncementInfoEvent.loadMore(salesOrg: $salesOrg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadMore &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, salesOrg);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(SalesOrg salesOrg) loadMore,
+  }) {
+    return loadMore(salesOrg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(SalesOrg salesOrg)? loadMore,
+  }) {
+    return loadMore?.call(salesOrg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(SalesOrg salesOrg)? loadMore,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(salesOrg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+  }) {
+    return loadMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+  }) {
+    return loadMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMore implements AnnouncementInfoEvent {
+  const factory _LoadMore({required final SalesOrg salesOrg}) = _$_LoadMore;
+
+  @override
+  SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
-  _$$_GetAnnouncementInfoCopyWith<_$_GetAnnouncementInfo> get copyWith =>
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -247,6 +374,9 @@ mixin _$AnnouncementInfoState {
   AnnouncementArticleInfo get announcementInfo =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get canLoadMore => throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementInfoStateCopyWith<AnnouncementInfoState> get copyWith =>
@@ -259,7 +389,11 @@ abstract class $AnnouncementInfoStateCopyWith<$Res> {
           $Res Function(AnnouncementInfoState) then) =
       _$AnnouncementInfoStateCopyWithImpl<$Res, AnnouncementInfoState>;
   @useResult
-  $Res call({AnnouncementArticleInfo announcementInfo, bool isLoading});
+  $Res call(
+      {AnnouncementArticleInfo announcementInfo,
+      bool isLoading,
+      bool canLoadMore,
+      Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   $AnnouncementArticleInfoCopyWith<$Res> get announcementInfo;
 }
@@ -280,6 +414,8 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
   $Res call({
     Object? announcementInfo = null,
     Object? isLoading = null,
+    Object? canLoadMore = null,
+    Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
       announcementInfo: null == announcementInfo
@@ -290,6 +426,14 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
+          ? _value.apiFailureOrSuccessOption
+          : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
 
@@ -311,7 +455,11 @@ abstract class _$$_AnnouncementInfoStateCopyWith<$Res>
       __$$_AnnouncementInfoStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AnnouncementArticleInfo announcementInfo, bool isLoading});
+  $Res call(
+      {AnnouncementArticleInfo announcementInfo,
+      bool isLoading,
+      bool canLoadMore,
+      Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   @override
   $AnnouncementArticleInfoCopyWith<$Res> get announcementInfo;
@@ -330,6 +478,8 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
   $Res call({
     Object? announcementInfo = null,
     Object? isLoading = null,
+    Object? canLoadMore = null,
+    Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_AnnouncementInfoState(
       announcementInfo: null == announcementInfo
@@ -340,6 +490,14 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
+          ? _value.apiFailureOrSuccessOption
+          : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -348,17 +506,24 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
 
 class _$_AnnouncementInfoState extends _AnnouncementInfoState {
   const _$_AnnouncementInfoState(
-      {required this.announcementInfo, required this.isLoading})
+      {required this.announcementInfo,
+      required this.isLoading,
+      required this.canLoadMore,
+      required this.apiFailureOrSuccessOption})
       : super._();
 
   @override
   final AnnouncementArticleInfo announcementInfo;
   @override
   final bool isLoading;
+  @override
+  final bool canLoadMore;
+  @override
+  final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AnnouncementInfoState(announcementInfo: $announcementInfo, isLoading: $isLoading)';
+    return 'AnnouncementInfoState(announcementInfo: $announcementInfo, isLoading: $isLoading, canLoadMore: $canLoadMore, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -369,11 +534,17 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
             (identical(other.announcementInfo, announcementInfo) ||
                 other.announcementInfo == announcementInfo) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, announcementInfo, isLoading);
+  int get hashCode => Object.hash(runtimeType, announcementInfo, isLoading,
+      canLoadMore, apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -386,13 +557,20 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
 abstract class _AnnouncementInfoState extends AnnouncementInfoState {
   const factory _AnnouncementInfoState(
       {required final AnnouncementArticleInfo announcementInfo,
-      required final bool isLoading}) = _$_AnnouncementInfoState;
+      required final bool isLoading,
+      required final bool canLoadMore,
+      required final Option<Either<ApiFailure, dynamic>>
+          apiFailureOrSuccessOption}) = _$_AnnouncementInfoState;
   const _AnnouncementInfoState._() : super._();
 
   @override
   AnnouncementArticleInfo get announcementInfo;
   @override
   bool get isLoading;
+  @override
+  bool get canLoadMore;
+  @override
+  Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementInfoStateCopyWith<_$_AnnouncementInfoState> get copyWith =>

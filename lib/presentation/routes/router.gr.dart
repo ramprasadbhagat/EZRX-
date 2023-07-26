@@ -11,22 +11,22 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i81;
-import 'package:flutter/material.dart' as _i82;
+import 'package:auto_route/auto_route.dart' as _i82;
+import 'package:flutter/material.dart' as _i83;
 
-import '../../domain/account/value/value_objects.dart' as _i83;
+import '../../domain/account/value/value_objects.dart' as _i84;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i92;
-import '../../domain/core/aggregate/bundle_aggregate.dart' as _i87;
-import '../../domain/core/aggregate/price_aggregate.dart' as _i88;
-import '../../domain/order/entities/cart_item.dart' as _i84;
+    as _i93;
+import '../../domain/core/aggregate/bundle_aggregate.dart' as _i88;
+import '../../domain/core/aggregate/price_aggregate.dart' as _i89;
+import '../../domain/order/entities/cart_item.dart' as _i85;
 import '../../domain/order/entities/order_history_details_order_header.dart'
-    as _i90;
-import '../../domain/order/entities/order_history_item.dart' as _i89;
-import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i86;
-import '../../domain/payments/entities/payment_summary_details.dart' as _i85;
-import '../../domain/returns/entities/return_item.dart' as _i91;
-import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i49;
+    as _i91;
+import '../../domain/order/entities/order_history_item.dart' as _i90;
+import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i87;
+import '../../domain/payments/entities/payment_summary_details.dart' as _i86;
+import '../../domain/returns/entities/return_item.dart' as _i92;
+import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i50;
 import '../account/change_password/change_password_page.dart' as _i22;
 import '../account/contact_us/contact_us_page.dart' as _i23;
 import '../account/customer_search.dart' as _i25;
@@ -45,11 +45,11 @@ import '../account/payment_configuration/deduction_code/deduction_code_list_page
 import '../account/payment_configuration/deduction_code/edit_deduction_code_page.dart'
     as _i15;
 import '../account/payment_configuration/payment_advice_footer/add_payment_advice_footer.dart'
-    as _i54;
-import '../account/payment_configuration/payment_advice_footer/edit_payment_advice_footer.dart'
     as _i55;
+import '../account/payment_configuration/payment_advice_footer/edit_payment_advice_footer.dart'
+    as _i56;
 import '../account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart'
-    as _i53;
+    as _i54;
 import '../account/payment_configuration/payment_configuration_page.dart'
     as _i6;
 import '../account/payment_configuration/payment_methods/add_payment_method_page.dart'
@@ -59,11 +59,11 @@ import '../account/payment_configuration/payment_methods/edit_payment_method_pag
 import '../account/payment_configuration/payment_methods/payment_methods_page.dart'
     as _i7;
 import '../account/payment_configuration/sales_district/add_sales_district_page.dart'
-    as _i51;
-import '../account/payment_configuration/sales_district/edit_sales_district_page.dart'
     as _i52;
+import '../account/payment_configuration/sales_district/edit_sales_district_page.dart'
+    as _i53;
 import '../account/payment_configuration/sales_district/sales_district_page.dart'
-    as _i50;
+    as _i51;
 import '../account/settings_page.dart' as _i5;
 import '../aup_tc/aup_tc.dart' as _i26;
 import '../auth/forgot_password/forgot_passoword_confirmation_page.dart' as _i4;
@@ -71,121 +71,123 @@ import '../auth/forgot_password/forgot_password_page.dart' as _i3;
 import '../auth/login/login_page.dart' as _i2;
 import '../core/static_html_viewer.dart' as _i21;
 import '../core/webview_page.dart' as _i20;
+import '../home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart'
+    as _i40;
 import '../home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart'
-    as _i80;
+    as _i81;
 import '../home/announcement_section/announcement_articles_tab/announcements_page.dart'
-    as _i62;
-import '../home/announcement_section/announcement_articles_tab/articles/article_details.dart'
     as _i63;
+import '../home/announcement_section/announcement_articles_tab/articles/article_details.dart'
+    as _i64;
 import '../home/announcement_section/announcement_articles_tab/articles/articles_tab.dart'
-    as _i79;
-import '../home/home_tab.dart' as _i67;
+    as _i80;
+import '../home/home_tab.dart' as _i68;
 import '../home_tab.dart' as _i34;
-import '../intro/intro_page.dart' as _i56;
-import '../more/more_tab.dart' as _i70;
-import '../notification/notificatoin_tab.dart' as _i71;
-import '../orders/cart/add_to_cart/add_to_cart.dart' as _i47;
-import '../orders/cart/add_to_cart/update_cart.dart' as _i48;
+import '../intro/intro_page.dart' as _i57;
+import '../more/more_tab.dart' as _i71;
+import '../notification/notificatoin_tab.dart' as _i72;
+import '../orders/cart/add_to_cart/add_to_cart.dart' as _i48;
+import '../orders/cart/add_to_cart/update_cart.dart' as _i49;
 import '../orders/cart/bonus/search_bonus_page.dart' as _i35;
 import '../orders/cart/cart_page.dart' as _i27;
 import '../orders/cart/checkout/checkout_page.dart' as _i28;
-import '../orders/create_order/bundle_item_detail_page.dart' as _i43;
+import '../orders/create_order/bundle_item_detail_page.dart' as _i44;
 import '../orders/create_order/scan_material_info.dart' as _i39;
 import '../orders/order_success/order_success_page.dart' as _i29;
-import '../orders/order_tab/orders_tab.dart' as _i69;
+import '../orders/order_tab/orders_tab.dart' as _i70;
 import '../orders/order_tab/section/view_by_item/view_by_item_section.dart'
-    as _i72;
-import '../orders/order_tab/section/view_by_order/view_by_order_section.dart'
     as _i73;
+import '../orders/order_tab/section/view_by_order/view_by_order_section.dart'
+    as _i74;
 import '../orders/order_tab/view_by_item_details/view_by_item_details.dart'
-    as _i57;
-import '../orders/order_tab/view_by_order_details/view_by_order_details.dart'
     as _i58;
+import '../orders/order_tab/view_by_order_details/view_by_order_details.dart'
+    as _i59;
 import '../payments/account_summary/account_summary_page.dart' as _i33;
-import '../payments/all_credits/all_credits.dart' as _i66;
-import '../payments/all_invoices/all_invoices.dart' as _i65;
-import '../payments/credit_details/credit_details.dart' as _i41;
-import '../payments/invoice_details/invoice_details.dart' as _i40;
-import '../payments/new_payment/new_payment.dart' as _i42;
-import '../payments/new_payment/tabs/available_credits_tab.dart' as _i77;
-import '../payments/new_payment/tabs/outstanding_invoices_tab.dart' as _i76;
-import '../payments/new_payment/tabs/payment_method_tab.dart' as _i78;
+import '../payments/all_credits/all_credits.dart' as _i67;
+import '../payments/all_invoices/all_invoices.dart' as _i66;
+import '../payments/credit_details/credit_details.dart' as _i42;
+import '../payments/invoice_details/invoice_details.dart' as _i41;
+import '../payments/new_payment/new_payment.dart' as _i43;
+import '../payments/new_payment/tabs/available_credits_tab.dart' as _i78;
+import '../payments/new_payment/tabs/outstanding_invoices_tab.dart' as _i77;
+import '../payments/new_payment/tabs/payment_method_tab.dart' as _i79;
 import '../payments/payment_page.dart' as _i31;
 import '../payments/payment_summary/payment_summary.dart' as _i32;
 import '../payments/payment_summary_details/payment_summary_details_screen.dart'
     as _i38;
-import '../products/bundle_details/bundle_detail_page.dart' as _i59;
-import '../products/product_details/product_details_page.dart' as _i60;
+import '../products/bundle_details/bundle_detail_page.dart' as _i60;
+import '../products/product_details/product_details_page.dart' as _i61;
 import '../products/product_suggestion_page.dart' as _i30;
-import '../products/products_tab.dart' as _i68;
+import '../products/products_tab.dart' as _i69;
 import '../returns/add_edit_user_restrictions.dart' as _i36;
 import '../returns/approver_actions/approver_actions.dart' as _i16;
 import '../returns/policy_configuration/add_policy_configuration.dart' as _i19;
 import '../returns/policy_configuration/policy_configuration.dart' as _i18;
-import '../returns/request_return/request_return_details.dart' as _i44;
-import '../returns/request_return/return_details_summary_page.dart' as _i45;
-import '../returns/request_return/return_request_success.dart' as _i46;
-import '../returns/return_list/return_by_item_page.dart' as _i74;
-import '../returns/return_list/return_by_request_page.dart' as _i75;
+import '../returns/request_return/request_return_details.dart' as _i45;
+import '../returns/request_return/return_details_summary_page.dart' as _i46;
+import '../returns/request_return/return_request_success.dart' as _i47;
+import '../returns/return_list/return_by_item_page.dart' as _i75;
+import '../returns/return_list/return_by_request_page.dart' as _i76;
 import '../returns/return_list/return_root.dart' as _i37;
 import '../returns/return_summary_by_item_details/return_summary_by_item_details.dart'
-    as _i61;
+    as _i62;
 import '../returns/return_summary_request_details/return_request_details.dart'
-    as _i64;
+    as _i65;
 import '../returns/user_restriction_list.dart' as _i17;
 import '../splash/splash_page.dart' as _i1;
 
-class AppRouter extends _i81.RootStackRouter {
-  AppRouter([_i82.GlobalKey<_i82.NavigatorState>? navigatorKey])
+class AppRouter extends _i82.RootStackRouter {
+  AppRouter([_i83.GlobalKey<_i83.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i81.PageFactory> pagesMap = {
+  final Map<String, _i82.PageFactory> pagesMap = {
     SplashPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.SplashPage(),
       );
     },
     LoginPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.LoginPage(),
       );
     },
     ForgetPasswordPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.ForgetPasswordPage(),
       );
     },
     ForgetPasswordConfirmationPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.ForgetPasswordConfirmationPage(),
       );
     },
     SettingsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.SettingsPage(),
       );
     },
     PaymentConfigurationPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i6.PaymentConfigurationPage(),
       );
     },
     PaymentMethodsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i7.PaymentMethodsPage(),
       );
     },
     EditPaymentMethodsPageRoute.name: (routeData) {
       final args = routeData.argsAs<EditPaymentMethodsPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.EditPaymentMethodsPage(
           key: args.key,
@@ -195,43 +197,43 @@ class AppRouter extends _i81.RootStackRouter {
       );
     },
     AddPaymentMethodsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i9.AddPaymentMethodsPage(),
       );
     },
     BankBeneficiaryPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i10.BankBeneficiaryPage(),
       );
     },
     AddBeneficiaryPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i11.AddBeneficiaryPage(),
       );
     },
     DeductionCodeListPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i12.DeductionCodeListPage(),
       );
     },
     AddDeductionCodePageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i13.AddDeductionCodePage(),
       );
     },
     EditBeneficiaryPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i14.EditBeneficiaryPage(),
       );
     },
     EditDeductionCodePageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i15.EditDeductionCodePage(),
       );
@@ -239,25 +241,25 @@ class AppRouter extends _i81.RootStackRouter {
     ApproverActionsRoute.name: (routeData) {
       final args = routeData.argsAs<ApproverActionsRouteArgs>(
           orElse: () => const ApproverActionsRouteArgs());
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i16.ApproverActions(key: args.key),
       );
     },
     UserRestrictionListPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i17.UserRestrictionListPage(),
       );
     },
     PolicyConfigurationPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i18.PolicyConfigurationPage(),
       );
     },
     AddPolicyConfigurationRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i19.AddPolicyConfiguration(),
       );
@@ -265,7 +267,7 @@ class AppRouter extends _i81.RootStackRouter {
     WebViewPageRoute.name: (routeData) {
       final args = routeData.argsAs<WebViewPageRouteArgs>(
           orElse: () => const WebViewPageRouteArgs());
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i20.WebViewPage(
           key: args.key,
@@ -277,7 +279,7 @@ class AppRouter extends _i81.RootStackRouter {
     },
     StaticHtmlViewerRoute.name: (routeData) {
       final args = routeData.argsAs<StaticHtmlViewerRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i21.StaticHtmlViewer(
           key: args.key,
@@ -288,55 +290,55 @@ class AppRouter extends _i81.RootStackRouter {
       );
     },
     ChangePasswordPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i22.ChangePasswordPage(),
       );
     },
     ContactUsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i23.ContactUsPage(),
       );
     },
     NotificationSettingsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i24.NotificationSettingsPage(),
       );
     },
     CustomerSearchPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i25.CustomerSearchPage(),
       );
     },
     AupTCDialogRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i26.AupTCDialog(),
       );
     },
     CartPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i27.CartPage(),
       );
     },
     CheckoutPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i28.CheckoutPage(),
       );
     },
     OrderSuccessPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i29.OrderSuccessPage(),
       );
     },
     ProductSuggestionPageRoute.name: (routeData) {
-      return _i81.CustomPage<dynamic>(
+      return _i82.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i30.ProductSuggestionPage(),
         durationInMilliseconds: 0,
@@ -346,7 +348,7 @@ class AppRouter extends _i81.RootStackRouter {
       );
     },
     PaymentPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i31.PaymentPage(),
       );
@@ -354,13 +356,13 @@ class AppRouter extends _i81.RootStackRouter {
     PaymentSummaryPageRoute.name: (routeData) {
       final args = routeData.argsAs<PaymentSummaryPageRouteArgs>(
           orElse: () => const PaymentSummaryPageRouteArgs());
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i32.PaymentSummaryPage(key: args.key),
       );
     },
     AccountSummaryRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i33.AccountSummary(),
       );
@@ -368,14 +370,14 @@ class AppRouter extends _i81.RootStackRouter {
     HomeNavigationTabbarRoute.name: (routeData) {
       final args = routeData.argsAs<HomeNavigationTabbarRouteArgs>(
           orElse: () => const HomeNavigationTabbarRouteArgs());
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i34.HomeNavigationTabbar(key: args.key),
       );
     },
     BonusAddPageRoute.name: (routeData) {
       final args = routeData.argsAs<BonusAddPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i35.BonusAddPage(
           key: args.key,
@@ -385,7 +387,7 @@ class AppRouter extends _i81.RootStackRouter {
     },
     AddEditUserRestrictionPageRoute.name: (routeData) {
       final args = routeData.argsAs<AddEditUserRestrictionPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i36.AddEditUserRestrictionPage(
           key: args.key,
@@ -394,14 +396,14 @@ class AppRouter extends _i81.RootStackRouter {
       );
     },
     ReturnRootRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i37.ReturnRoot(),
       );
     },
     PaymentSummaryDetailsPageRoute.name: (routeData) {
       final args = routeData.argsAs<PaymentSummaryDetailsPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i38.PaymentSummaryDetailsPage(
           key: args.key,
@@ -410,16 +412,22 @@ class AppRouter extends _i81.RootStackRouter {
       );
     },
     ScanMaterialInfoRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i39.ScanMaterialInfo(),
       );
     },
+    AnnouncementInfoDetailsPageRoute.name: (routeData) {
+      return _i82.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i40.AnnouncementInfoDetailsPage(),
+      );
+    },
     InvoiceDetailsPageRoute.name: (routeData) {
       final args = routeData.argsAs<InvoiceDetailsPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i40.InvoiceDetailsPage(
+        child: _i41.InvoiceDetailsPage(
           key: args.key,
           invoiceItem: args.invoiceItem,
         ),
@@ -427,80 +435,80 @@ class AppRouter extends _i81.RootStackRouter {
     },
     CreditDetailsPageRoute.name: (routeData) {
       final args = routeData.argsAs<CreditDetailsPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i41.CreditDetailsPage(
+        child: _i42.CreditDetailsPage(
           key: args.key,
           creditItem: args.creditItem,
         ),
       );
     },
     NewPaymentPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i42.NewPaymentPage(),
+        child: const _i43.NewPaymentPage(),
       );
     },
     BundleItemDetailPageRoute.name: (routeData) {
       final args = routeData.argsAs<BundleItemDetailPageRouteArgs>();
-      return _i81.CustomPage<dynamic>(
+      return _i82.CustomPage<dynamic>(
         routeData: routeData,
-        child: _i43.BundleItemDetailPage(
+        child: _i44.BundleItemDetailPage(
           key: args.key,
           bundleAggregate: args.bundleAggregate,
         ),
         fullscreenDialog: true,
-        transitionsBuilder: _i81.TransitionsBuilders.slideBottom,
+        transitionsBuilder: _i82.TransitionsBuilders.slideBottom,
         opaque: true,
         barrierDismissible: false,
       );
     },
     RequestReturnDetailsRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i44.RequestReturnDetails(),
+        child: const _i45.RequestReturnDetails(),
       );
     },
     RequestReturnDetailsSummaryPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i45.RequestReturnDetailsSummaryPage(),
+        child: const _i46.RequestReturnDetailsSummaryPage(),
       );
     },
     ReturnRequestSuccessPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i46.ReturnRequestSuccessPage(),
+        child: const _i47.ReturnRequestSuccessPage(),
       );
     },
     AddToCartRoute.name: (routeData) {
       final args = routeData.argsAs<AddToCartRouteArgs>();
-      return _i81.CustomPage<dynamic>(
+      return _i82.CustomPage<dynamic>(
         routeData: routeData,
-        child: _i81.WrappedRoute(
-            child: _i47.AddToCart(
+        child: _i82.WrappedRoute(
+            child: _i48.AddToCart(
           key: args.key,
           isCovid19Tab: args.isCovid19Tab,
           material: args.material,
           isShortcutAccess: args.isShortcutAccess,
         )),
         fullscreenDialog: true,
-        transitionsBuilder: _i81.TransitionsBuilders.slideBottom,
+        transitionsBuilder: _i82.TransitionsBuilders.slideBottom,
         opaque: true,
         barrierDismissible: false,
       );
     },
     UpdateCartRoute.name: (routeData) {
       final args = routeData.argsAs<UpdateCartRouteArgs>();
-      return _i81.CustomPage<dynamic>(
+      return _i82.CustomPage<dynamic>(
         routeData: routeData,
-        child: _i81.WrappedRoute(
-            child: _i48.UpdateCart(
+        child: _i82.WrappedRoute(
+            child: _i49.UpdateCart(
           key: args.key,
           material: args.material,
         )),
         fullscreenDialog: true,
-        transitionsBuilder: _i81.TransitionsBuilders.slideBottom,
+        transitionsBuilder: _i82.TransitionsBuilders.slideBottom,
         opaque: true,
         barrierDismissible: false,
       );
@@ -508,58 +516,58 @@ class AppRouter extends _i81.RootStackRouter {
     AdminPoAttachmentPageRoute.name: (routeData) {
       final args = routeData.argsAs<AdminPoAttachmentPageRouteArgs>(
           orElse: () => const AdminPoAttachmentPageRouteArgs());
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i49.AdminPoAttachmentPage(key: args.key),
+        child: _i50.AdminPoAttachmentPage(key: args.key),
       );
     },
     SalesDistrictPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i50.SalesDistrictPage(),
+        child: const _i51.SalesDistrictPage(),
       );
     },
     AddSalesDistrictPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i51.AddSalesDistrictPage(),
+        child: const _i52.AddSalesDistrictPage(),
       );
     },
     EditSalesDistrictPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i52.EditSalesDistrictPage(),
+        child: const _i53.EditSalesDistrictPage(),
       );
     },
     PaymentAdviceFooterPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i53.PaymentAdviceFooterPage(),
+        child: const _i54.PaymentAdviceFooterPage(),
       );
     },
     AddPaymentAdviceFooterPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i54.AddPaymentAdviceFooterPage(),
+        child: const _i55.AddPaymentAdviceFooterPage(),
       );
     },
     EditPaymentAdviceFooterPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i55.EditPaymentAdviceFooterPage(),
+        child: const _i56.EditPaymentAdviceFooterPage(),
       );
     },
     IntroPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i56.IntroPage(),
+        child: const _i57.IntroPage(),
       );
     },
     ViewByItemDetailsPageRoute.name: (routeData) {
       final args = routeData.argsAs<ViewByItemDetailsPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i57.ViewByItemDetailsPage(
+        child: _i58.ViewByItemDetailsPage(
           key: args.key,
           orderHistoryItem: args.orderHistoryItem,
         ),
@@ -567,48 +575,48 @@ class AppRouter extends _i81.RootStackRouter {
     },
     ViewByOrderDetailsPageRoute.name: (routeData) {
       final args = routeData.argsAs<ViewByOrderDetailsPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i58.ViewByOrderDetailsPage(
+        child: _i59.ViewByOrderDetailsPage(
           key: args.key,
           viewByOrderHistoryItem: args.viewByOrderHistoryItem,
         ),
       );
     },
     BundleDetailPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i59.BundleDetailPage(),
+        child: const _i60.BundleDetailPage(),
       );
     },
     ProductDetailsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i60.ProductDetailsPage(),
+        child: const _i61.ProductDetailsPage(),
       );
     },
     ReturnRequestSummaryByItemDetailsRoute.name: (routeData) {
       final args =
           routeData.argsAs<ReturnRequestSummaryByItemDetailsRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i61.ReturnRequestSummaryByItemDetails(
+        child: _i62.ReturnRequestSummaryByItemDetails(
           key: args.key,
           returnItem: args.returnItem,
         ),
       );
     },
     AnnouncementsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i62.AnnouncementsPage(),
+        child: const _i63.AnnouncementsPage(),
       );
     },
     ArticleDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<ArticleDetailsRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i63.ArticleDetails(
+        child: _i64.ArticleDetails(
           key: args.key,
           article: args.article,
         ),
@@ -616,476 +624,480 @@ class AppRouter extends _i81.RootStackRouter {
     },
     ReturnRequestDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<ReturnRequestDetailsRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i64.ReturnRequestDetails(
+        child: _i65.ReturnRequestDetails(
           key: args.key,
           returnItem: args.returnItem,
         ),
       );
     },
     AllInvoicesPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i65.AllInvoicesPage(),
+        child: const _i66.AllInvoicesPage(),
       );
     },
     AllCreditsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i66.AllCreditsPage(),
+        child: const _i67.AllCreditsPage(),
       );
     },
     HomeTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i67.HomeTab(),
+        child: const _i68.HomeTab(),
       );
     },
     ProductsTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i68.ProductsTab(),
+        child: const _i69.ProductsTab(),
       );
     },
     OrdersTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i69.OrdersTab(),
+        child: const _i70.OrdersTab(),
       );
     },
     MoreTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i70.MoreTab(),
+        child: const _i71.MoreTab(),
       );
     },
     NotificationTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i71.NotificationTab(),
+        child: const _i72.NotificationTab(),
       );
     },
     ViewByItemsPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i72.ViewByItemsPage(),
+        child: const _i73.ViewByItemsPage(),
       );
     },
     ViewByOrdersPageRoute.name: (routeData) {
       final args = routeData.argsAs<ViewByOrdersPageRouteArgs>();
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i73.ViewByOrdersPage(
+        child: _i74.ViewByOrdersPage(
           key: args.key,
           orderHistoryItem: args.orderHistoryItem,
         ),
       );
     },
     ReturnByItemPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i74.ReturnByItemPage(),
+        child: const _i75.ReturnByItemPage(),
       );
     },
     ReturnByRequestPageRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i75.ReturnByRequestPage(),
+        child: const _i76.ReturnByRequestPage(),
       );
     },
     OutstandingInvoicesTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i76.OutstandingInvoicesTab(),
+        child: const _i77.OutstandingInvoicesTab(),
       );
     },
     AvailableCreditsTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i77.AvailableCreditsTab(),
+        child: const _i78.AvailableCreditsTab(),
       );
     },
     PaymentMethodTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i78.PaymentMethodTab(),
+        child: const _i79.PaymentMethodTab(),
       );
     },
     ArticlesTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i79.ArticlesTab(),
+        child: const _i80.ArticlesTab(),
       );
     },
     AnnouncementsTabRoute.name: (routeData) {
-      return _i81.MaterialPageX<dynamic>(
+      return _i82.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i80.AnnouncementsTab(),
+        child: const _i81.AnnouncementsTab(),
       );
     },
   };
 
   @override
-  List<_i81.RouteConfig> get routes => [
-        _i81.RouteConfig(
+  List<_i82.RouteConfig> get routes => [
+        _i82.RouteConfig(
           '/#redirect',
           path: '/',
           redirectTo: 'splash',
           fullMatch: true,
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           SplashPageRoute.name,
           path: 'splash',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           LoginPageRoute.name,
           path: 'login',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ForgetPasswordPageRoute.name,
           path: 'forgot_password',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ForgetPasswordConfirmationPageRoute.name,
           path: 'forgot_password_confirmation',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           SettingsPageRoute.name,
           path: 'settings',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PaymentConfigurationPageRoute.name,
           path: 'payment_configuration',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PaymentMethodsPageRoute.name,
           path: 'payment_methods',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           EditPaymentMethodsPageRoute.name,
           path: 'edit_payment_methods',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddPaymentMethodsPageRoute.name,
           path: 'add_payment_methods',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           BankBeneficiaryPageRoute.name,
           path: 'payments/bank_beneficiary',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddBeneficiaryPageRoute.name,
           path: 'payments/add_beneficiary',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           DeductionCodeListPageRoute.name,
           path: 'payments/deduction_code',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddDeductionCodePageRoute.name,
           path: 'payments/add_deduction_code',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           EditBeneficiaryPageRoute.name,
           path: 'payments/edit_beneficiary',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           EditDeductionCodePageRoute.name,
           path: 'payments/edit_deduction_code',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ApproverActionsRoute.name,
           path: 'returns/approver_actions',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           UserRestrictionListPageRoute.name,
           path: 'returns/user_restrictions',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PolicyConfigurationPageRoute.name,
           path: 'returns/policy_configuration',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddPolicyConfigurationRoute.name,
           path: 'returns/add_policy_config',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           WebViewPageRoute.name,
           path: 'web_view',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           StaticHtmlViewerRoute.name,
           path: 'static_html_viewer',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ChangePasswordPageRoute.name,
           path: 'change_password',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ContactUsPageRoute.name,
           path: 'contact_us',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           NotificationSettingsPageRoute.name,
           path: 'notification_settings',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           CustomerSearchPageRoute.name,
           path: 'customer_search',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AupTCDialogRoute.name,
           path: 'terms_of_service',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           CartPageRoute.name,
           path: 'orders/cart',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           CheckoutPageRoute.name,
           path: 'orders/cart/checkout',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           OrderSuccessPageRoute.name,
           path: 'orders/order_confirmation',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ProductSuggestionPageRoute.name,
           path: 'product_suggestion_page',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PaymentPageRoute.name,
           path: 'payments',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PaymentSummaryPageRoute.name,
           path: 'payments/payment_summary',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AccountSummaryRoute.name,
           path: 'payments/invoice_credit',
           children: [
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               AllInvoicesPageRoute.name,
               path: 'all_invoices',
               parent: AccountSummaryRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               AllCreditsPageRoute.name,
               path: 'all_credits',
               parent: AccountSummaryRoute.name,
             ),
           ],
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           HomeNavigationTabbarRoute.name,
           path: 'main',
           children: [
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               HomeTabRoute.name,
               path: 'home',
               parent: HomeNavigationTabbarRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               ProductsTabRoute.name,
               path: 'products',
               parent: HomeNavigationTabbarRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               OrdersTabRoute.name,
               path: 'orders_tab',
               parent: HomeNavigationTabbarRoute.name,
               children: [
-                _i81.RouteConfig(
+                _i82.RouteConfig(
                   ViewByItemsPageRoute.name,
                   path: 'orders/view_by_items',
                   parent: OrdersTabRoute.name,
                 ),
-                _i81.RouteConfig(
+                _i82.RouteConfig(
                   ViewByOrdersPageRoute.name,
                   path: 'orders/view_by_orders',
                   parent: OrdersTabRoute.name,
                 ),
               ],
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               MoreTabRoute.name,
               path: 'more',
               parent: HomeNavigationTabbarRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               NotificationTabRoute.name,
               path: 'notification_tab',
               parent: HomeNavigationTabbarRoute.name,
             ),
           ],
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           BonusAddPageRoute.name,
           path: 'orders/add_bonus',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddEditUserRestrictionPageRoute.name,
           path: 'returns/add_edit_user_restriction',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ReturnRootRoute.name,
           path: 'return_root',
           children: [
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               '#redirect',
               path: '',
               parent: ReturnRootRoute.name,
               redirectTo: 'return_by_item',
               fullMatch: true,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               ReturnByItemPageRoute.name,
               path: 'return_by_item',
               parent: ReturnRootRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               ReturnByRequestPageRoute.name,
               path: 'return_by_request',
               parent: ReturnRootRoute.name,
             ),
           ],
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PaymentSummaryDetailsPageRoute.name,
           path: 'payments/payment_summary/payment_summary_details',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ScanMaterialInfoRoute.name,
           path: 'orders/scan_material_info',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
+          AnnouncementInfoDetailsPageRoute.name,
+          path: 'announcement_info_details',
+        ),
+        _i82.RouteConfig(
           InvoiceDetailsPageRoute.name,
           path: 'payments/invoice_details',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           CreditDetailsPageRoute.name,
           path: 'payments/credit_details',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           NewPaymentPageRoute.name,
           path: 'payments/new_payment',
           children: [
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               OutstandingInvoicesTabRoute.name,
               path: 'payments/new_payment/outstanding_invoices',
               parent: NewPaymentPageRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               AvailableCreditsTabRoute.name,
               path: 'payments/new_payment/available_credits',
               parent: NewPaymentPageRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               PaymentMethodTabRoute.name,
               path: 'payments/new_payment/payment_method',
               parent: NewPaymentPageRoute.name,
             ),
           ],
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           BundleItemDetailPageRoute.name,
           path: 'orders/bundle_item_detail',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           RequestReturnDetailsRoute.name,
           path: 'request_return_details',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           RequestReturnDetailsSummaryPageRoute.name,
           path: 'request_return_details_summary',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ReturnRequestSuccessPageRoute.name,
           path: 'request_return_success',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddToCartRoute.name,
           path: 'orders/add_to_cart',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           UpdateCartRoute.name,
           path: 'orders/update_cart',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AdminPoAttachmentPageRoute.name,
           path: 'admin_po_attachment',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           SalesDistrictPageRoute.name,
           path: 'payments/sales_district',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddSalesDistrictPageRoute.name,
           path: 'payments/sales_district/add_sales_district',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           EditSalesDistrictPageRoute.name,
           path: 'payments/sales_district/edit_sales_district',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           PaymentAdviceFooterPageRoute.name,
           path: 'payments/advice_footer',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AddPaymentAdviceFooterPageRoute.name,
           path: 'payments/advice_footer/add_advice_footer',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           EditPaymentAdviceFooterPageRoute.name,
           path: 'payments/advice_footer/edit_advice_footer',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           IntroPageRoute.name,
           path: 'intro_page',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ViewByItemDetailsPageRoute.name,
           path: 'orders/view_by_item_details_page',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ViewByOrderDetailsPageRoute.name,
           path: 'orders/view_by_order_details_page',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           BundleDetailPageRoute.name,
           path: 'orders/bundle_detail_page',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ProductDetailsPageRoute.name,
           path: 'orders/material_details',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ReturnRequestSummaryByItemDetailsRoute.name,
           path: 'returns/return_summary_details_v3',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           AnnouncementsPageRoute.name,
           path: 'announcements_page',
           children: [
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               ArticlesTabRoute.name,
               path: 'articles_tab',
               parent: AnnouncementsPageRoute.name,
             ),
-            _i81.RouteConfig(
+            _i82.RouteConfig(
               AnnouncementsTabRoute.name,
               path: 'announcements_tab',
               parent: AnnouncementsPageRoute.name,
             ),
           ],
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ArticleDetailsRoute.name,
           path: 'article_details',
         ),
-        _i81.RouteConfig(
+        _i82.RouteConfig(
           ReturnRequestDetailsRoute.name,
           path: 'returns/return_summary_details_by_request',
         ),
@@ -1094,7 +1106,7 @@ class AppRouter extends _i81.RootStackRouter {
 
 /// generated route for
 /// [_i1.SplashPage]
-class SplashPageRoute extends _i81.PageRouteInfo<void> {
+class SplashPageRoute extends _i82.PageRouteInfo<void> {
   const SplashPageRoute()
       : super(
           SplashPageRoute.name,
@@ -1106,7 +1118,7 @@ class SplashPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginPage]
-class LoginPageRoute extends _i81.PageRouteInfo<void> {
+class LoginPageRoute extends _i82.PageRouteInfo<void> {
   const LoginPageRoute()
       : super(
           LoginPageRoute.name,
@@ -1118,7 +1130,7 @@ class LoginPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ForgetPasswordPage]
-class ForgetPasswordPageRoute extends _i81.PageRouteInfo<void> {
+class ForgetPasswordPageRoute extends _i82.PageRouteInfo<void> {
   const ForgetPasswordPageRoute()
       : super(
           ForgetPasswordPageRoute.name,
@@ -1130,7 +1142,7 @@ class ForgetPasswordPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ForgetPasswordConfirmationPage]
-class ForgetPasswordConfirmationPageRoute extends _i81.PageRouteInfo<void> {
+class ForgetPasswordConfirmationPageRoute extends _i82.PageRouteInfo<void> {
   const ForgetPasswordConfirmationPageRoute()
       : super(
           ForgetPasswordConfirmationPageRoute.name,
@@ -1142,7 +1154,7 @@ class ForgetPasswordConfirmationPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.SettingsPage]
-class SettingsPageRoute extends _i81.PageRouteInfo<void> {
+class SettingsPageRoute extends _i82.PageRouteInfo<void> {
   const SettingsPageRoute()
       : super(
           SettingsPageRoute.name,
@@ -1154,7 +1166,7 @@ class SettingsPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.PaymentConfigurationPage]
-class PaymentConfigurationPageRoute extends _i81.PageRouteInfo<void> {
+class PaymentConfigurationPageRoute extends _i82.PageRouteInfo<void> {
   const PaymentConfigurationPageRoute()
       : super(
           PaymentConfigurationPageRoute.name,
@@ -1166,7 +1178,7 @@ class PaymentConfigurationPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.PaymentMethodsPage]
-class PaymentMethodsPageRoute extends _i81.PageRouteInfo<void> {
+class PaymentMethodsPageRoute extends _i82.PageRouteInfo<void> {
   const PaymentMethodsPageRoute()
       : super(
           PaymentMethodsPageRoute.name,
@@ -1179,11 +1191,11 @@ class PaymentMethodsPageRoute extends _i81.PageRouteInfo<void> {
 /// generated route for
 /// [_i8.EditPaymentMethodsPage]
 class EditPaymentMethodsPageRoute
-    extends _i81.PageRouteInfo<EditPaymentMethodsPageRouteArgs> {
+    extends _i82.PageRouteInfo<EditPaymentMethodsPageRouteArgs> {
   EditPaymentMethodsPageRoute({
-    _i82.Key? key,
-    required _i83.SalesOrg salesOrg,
-    required _i83.PaymentMethod oldPaymentMethod,
+    _i83.Key? key,
+    required _i84.SalesOrg salesOrg,
+    required _i84.PaymentMethod oldPaymentMethod,
   }) : super(
           EditPaymentMethodsPageRoute.name,
           path: 'edit_payment_methods',
@@ -1204,11 +1216,11 @@ class EditPaymentMethodsPageRouteArgs {
     required this.oldPaymentMethod,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i83.SalesOrg salesOrg;
+  final _i84.SalesOrg salesOrg;
 
-  final _i83.PaymentMethod oldPaymentMethod;
+  final _i84.PaymentMethod oldPaymentMethod;
 
   @override
   String toString() {
@@ -1218,7 +1230,7 @@ class EditPaymentMethodsPageRouteArgs {
 
 /// generated route for
 /// [_i9.AddPaymentMethodsPage]
-class AddPaymentMethodsPageRoute extends _i81.PageRouteInfo<void> {
+class AddPaymentMethodsPageRoute extends _i82.PageRouteInfo<void> {
   const AddPaymentMethodsPageRoute()
       : super(
           AddPaymentMethodsPageRoute.name,
@@ -1230,7 +1242,7 @@ class AddPaymentMethodsPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.BankBeneficiaryPage]
-class BankBeneficiaryPageRoute extends _i81.PageRouteInfo<void> {
+class BankBeneficiaryPageRoute extends _i82.PageRouteInfo<void> {
   const BankBeneficiaryPageRoute()
       : super(
           BankBeneficiaryPageRoute.name,
@@ -1242,7 +1254,7 @@ class BankBeneficiaryPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.AddBeneficiaryPage]
-class AddBeneficiaryPageRoute extends _i81.PageRouteInfo<void> {
+class AddBeneficiaryPageRoute extends _i82.PageRouteInfo<void> {
   const AddBeneficiaryPageRoute()
       : super(
           AddBeneficiaryPageRoute.name,
@@ -1254,7 +1266,7 @@ class AddBeneficiaryPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.DeductionCodeListPage]
-class DeductionCodeListPageRoute extends _i81.PageRouteInfo<void> {
+class DeductionCodeListPageRoute extends _i82.PageRouteInfo<void> {
   const DeductionCodeListPageRoute()
       : super(
           DeductionCodeListPageRoute.name,
@@ -1266,7 +1278,7 @@ class DeductionCodeListPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.AddDeductionCodePage]
-class AddDeductionCodePageRoute extends _i81.PageRouteInfo<void> {
+class AddDeductionCodePageRoute extends _i82.PageRouteInfo<void> {
   const AddDeductionCodePageRoute()
       : super(
           AddDeductionCodePageRoute.name,
@@ -1278,7 +1290,7 @@ class AddDeductionCodePageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.EditBeneficiaryPage]
-class EditBeneficiaryPageRoute extends _i81.PageRouteInfo<void> {
+class EditBeneficiaryPageRoute extends _i82.PageRouteInfo<void> {
   const EditBeneficiaryPageRoute()
       : super(
           EditBeneficiaryPageRoute.name,
@@ -1290,7 +1302,7 @@ class EditBeneficiaryPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.EditDeductionCodePage]
-class EditDeductionCodePageRoute extends _i81.PageRouteInfo<void> {
+class EditDeductionCodePageRoute extends _i82.PageRouteInfo<void> {
   const EditDeductionCodePageRoute()
       : super(
           EditDeductionCodePageRoute.name,
@@ -1303,8 +1315,8 @@ class EditDeductionCodePageRoute extends _i81.PageRouteInfo<void> {
 /// generated route for
 /// [_i16.ApproverActions]
 class ApproverActionsRoute
-    extends _i81.PageRouteInfo<ApproverActionsRouteArgs> {
-  ApproverActionsRoute({_i82.Key? key})
+    extends _i82.PageRouteInfo<ApproverActionsRouteArgs> {
+  ApproverActionsRoute({_i83.Key? key})
       : super(
           ApproverActionsRoute.name,
           path: 'returns/approver_actions',
@@ -1317,7 +1329,7 @@ class ApproverActionsRoute
 class ApproverActionsRouteArgs {
   const ApproverActionsRouteArgs({this.key});
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   @override
   String toString() {
@@ -1327,7 +1339,7 @@ class ApproverActionsRouteArgs {
 
 /// generated route for
 /// [_i17.UserRestrictionListPage]
-class UserRestrictionListPageRoute extends _i81.PageRouteInfo<void> {
+class UserRestrictionListPageRoute extends _i82.PageRouteInfo<void> {
   const UserRestrictionListPageRoute()
       : super(
           UserRestrictionListPageRoute.name,
@@ -1339,7 +1351,7 @@ class UserRestrictionListPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.PolicyConfigurationPage]
-class PolicyConfigurationPageRoute extends _i81.PageRouteInfo<void> {
+class PolicyConfigurationPageRoute extends _i82.PageRouteInfo<void> {
   const PolicyConfigurationPageRoute()
       : super(
           PolicyConfigurationPageRoute.name,
@@ -1351,7 +1363,7 @@ class PolicyConfigurationPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.AddPolicyConfiguration]
-class AddPolicyConfigurationRoute extends _i81.PageRouteInfo<void> {
+class AddPolicyConfigurationRoute extends _i82.PageRouteInfo<void> {
   const AddPolicyConfigurationRoute()
       : super(
           AddPolicyConfigurationRoute.name,
@@ -1363,9 +1375,9 @@ class AddPolicyConfigurationRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.WebViewPage]
-class WebViewPageRoute extends _i81.PageRouteInfo<WebViewPageRouteArgs> {
+class WebViewPageRoute extends _i82.PageRouteInfo<WebViewPageRouteArgs> {
   WebViewPageRoute({
-    _i82.Key? key,
+    _i83.Key? key,
     String url = '',
     String? initialFile,
     String titleText = '',
@@ -1391,7 +1403,7 @@ class WebViewPageRouteArgs {
     this.titleText = '',
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   final String url;
 
@@ -1408,9 +1420,9 @@ class WebViewPageRouteArgs {
 /// generated route for
 /// [_i21.StaticHtmlViewer]
 class StaticHtmlViewerRoute
-    extends _i81.PageRouteInfo<StaticHtmlViewerRouteArgs> {
+    extends _i82.PageRouteInfo<StaticHtmlViewerRouteArgs> {
   StaticHtmlViewerRoute({
-    _i82.Key? key,
+    _i83.Key? key,
     String title = '',
     required String htmlPath,
     String styleCss = '',
@@ -1436,7 +1448,7 @@ class StaticHtmlViewerRouteArgs {
     this.styleCss = '',
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   final String title;
 
@@ -1452,7 +1464,7 @@ class StaticHtmlViewerRouteArgs {
 
 /// generated route for
 /// [_i22.ChangePasswordPage]
-class ChangePasswordPageRoute extends _i81.PageRouteInfo<void> {
+class ChangePasswordPageRoute extends _i82.PageRouteInfo<void> {
   const ChangePasswordPageRoute()
       : super(
           ChangePasswordPageRoute.name,
@@ -1464,7 +1476,7 @@ class ChangePasswordPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i23.ContactUsPage]
-class ContactUsPageRoute extends _i81.PageRouteInfo<void> {
+class ContactUsPageRoute extends _i82.PageRouteInfo<void> {
   const ContactUsPageRoute()
       : super(
           ContactUsPageRoute.name,
@@ -1476,7 +1488,7 @@ class ContactUsPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i24.NotificationSettingsPage]
-class NotificationSettingsPageRoute extends _i81.PageRouteInfo<void> {
+class NotificationSettingsPageRoute extends _i82.PageRouteInfo<void> {
   const NotificationSettingsPageRoute()
       : super(
           NotificationSettingsPageRoute.name,
@@ -1488,7 +1500,7 @@ class NotificationSettingsPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i25.CustomerSearchPage]
-class CustomerSearchPageRoute extends _i81.PageRouteInfo<void> {
+class CustomerSearchPageRoute extends _i82.PageRouteInfo<void> {
   const CustomerSearchPageRoute()
       : super(
           CustomerSearchPageRoute.name,
@@ -1500,7 +1512,7 @@ class CustomerSearchPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i26.AupTCDialog]
-class AupTCDialogRoute extends _i81.PageRouteInfo<void> {
+class AupTCDialogRoute extends _i82.PageRouteInfo<void> {
   const AupTCDialogRoute()
       : super(
           AupTCDialogRoute.name,
@@ -1512,7 +1524,7 @@ class AupTCDialogRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i27.CartPage]
-class CartPageRoute extends _i81.PageRouteInfo<void> {
+class CartPageRoute extends _i82.PageRouteInfo<void> {
   const CartPageRoute()
       : super(
           CartPageRoute.name,
@@ -1524,7 +1536,7 @@ class CartPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i28.CheckoutPage]
-class CheckoutPageRoute extends _i81.PageRouteInfo<void> {
+class CheckoutPageRoute extends _i82.PageRouteInfo<void> {
   const CheckoutPageRoute()
       : super(
           CheckoutPageRoute.name,
@@ -1536,7 +1548,7 @@ class CheckoutPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i29.OrderSuccessPage]
-class OrderSuccessPageRoute extends _i81.PageRouteInfo<void> {
+class OrderSuccessPageRoute extends _i82.PageRouteInfo<void> {
   const OrderSuccessPageRoute()
       : super(
           OrderSuccessPageRoute.name,
@@ -1548,7 +1560,7 @@ class OrderSuccessPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i30.ProductSuggestionPage]
-class ProductSuggestionPageRoute extends _i81.PageRouteInfo<void> {
+class ProductSuggestionPageRoute extends _i82.PageRouteInfo<void> {
   const ProductSuggestionPageRoute()
       : super(
           ProductSuggestionPageRoute.name,
@@ -1560,7 +1572,7 @@ class ProductSuggestionPageRoute extends _i81.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i31.PaymentPage]
-class PaymentPageRoute extends _i81.PageRouteInfo<void> {
+class PaymentPageRoute extends _i82.PageRouteInfo<void> {
   const PaymentPageRoute()
       : super(
           PaymentPageRoute.name,
@@ -1573,8 +1585,8 @@ class PaymentPageRoute extends _i81.PageRouteInfo<void> {
 /// generated route for
 /// [_i32.PaymentSummaryPage]
 class PaymentSummaryPageRoute
-    extends _i81.PageRouteInfo<PaymentSummaryPageRouteArgs> {
-  PaymentSummaryPageRoute({_i82.Key? key})
+    extends _i82.PageRouteInfo<PaymentSummaryPageRouteArgs> {
+  PaymentSummaryPageRoute({_i83.Key? key})
       : super(
           PaymentSummaryPageRoute.name,
           path: 'payments/payment_summary',
@@ -1587,7 +1599,7 @@ class PaymentSummaryPageRoute
 class PaymentSummaryPageRouteArgs {
   const PaymentSummaryPageRouteArgs({this.key});
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   @override
   String toString() {
@@ -1597,8 +1609,8 @@ class PaymentSummaryPageRouteArgs {
 
 /// generated route for
 /// [_i33.AccountSummary]
-class AccountSummaryRoute extends _i81.PageRouteInfo<void> {
-  const AccountSummaryRoute({List<_i81.PageRouteInfo>? children})
+class AccountSummaryRoute extends _i82.PageRouteInfo<void> {
+  const AccountSummaryRoute({List<_i82.PageRouteInfo>? children})
       : super(
           AccountSummaryRoute.name,
           path: 'payments/invoice_credit',
@@ -1611,10 +1623,10 @@ class AccountSummaryRoute extends _i81.PageRouteInfo<void> {
 /// generated route for
 /// [_i34.HomeNavigationTabbar]
 class HomeNavigationTabbarRoute
-    extends _i81.PageRouteInfo<HomeNavigationTabbarRouteArgs> {
+    extends _i82.PageRouteInfo<HomeNavigationTabbarRouteArgs> {
   HomeNavigationTabbarRoute({
-    _i82.Key? key,
-    List<_i81.PageRouteInfo>? children,
+    _i83.Key? key,
+    List<_i82.PageRouteInfo>? children,
   }) : super(
           HomeNavigationTabbarRoute.name,
           path: 'main',
@@ -1628,7 +1640,7 @@ class HomeNavigationTabbarRoute
 class HomeNavigationTabbarRouteArgs {
   const HomeNavigationTabbarRouteArgs({this.key});
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   @override
   String toString() {
@@ -1638,10 +1650,10 @@ class HomeNavigationTabbarRouteArgs {
 
 /// generated route for
 /// [_i35.BonusAddPage]
-class BonusAddPageRoute extends _i81.PageRouteInfo<BonusAddPageRouteArgs> {
+class BonusAddPageRoute extends _i82.PageRouteInfo<BonusAddPageRouteArgs> {
   BonusAddPageRoute({
-    _i82.Key? key,
-    required _i84.CartItem cartItem,
+    _i83.Key? key,
+    required _i85.CartItem cartItem,
   }) : super(
           BonusAddPageRoute.name,
           path: 'orders/add_bonus',
@@ -1660,9 +1672,9 @@ class BonusAddPageRouteArgs {
     required this.cartItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i84.CartItem cartItem;
+  final _i85.CartItem cartItem;
 
   @override
   String toString() {
@@ -1673,9 +1685,9 @@ class BonusAddPageRouteArgs {
 /// generated route for
 /// [_i36.AddEditUserRestrictionPage]
 class AddEditUserRestrictionPageRoute
-    extends _i81.PageRouteInfo<AddEditUserRestrictionPageRouteArgs> {
+    extends _i82.PageRouteInfo<AddEditUserRestrictionPageRouteArgs> {
   AddEditUserRestrictionPageRoute({
-    _i82.Key? key,
+    _i83.Key? key,
     required bool isEditing,
   }) : super(
           AddEditUserRestrictionPageRoute.name,
@@ -1695,7 +1707,7 @@ class AddEditUserRestrictionPageRouteArgs {
     required this.isEditing,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   final bool isEditing;
 
@@ -1707,8 +1719,8 @@ class AddEditUserRestrictionPageRouteArgs {
 
 /// generated route for
 /// [_i37.ReturnRoot]
-class ReturnRootRoute extends _i81.PageRouteInfo<void> {
-  const ReturnRootRoute({List<_i81.PageRouteInfo>? children})
+class ReturnRootRoute extends _i82.PageRouteInfo<void> {
+  const ReturnRootRoute({List<_i82.PageRouteInfo>? children})
       : super(
           ReturnRootRoute.name,
           path: 'return_root',
@@ -1721,10 +1733,10 @@ class ReturnRootRoute extends _i81.PageRouteInfo<void> {
 /// generated route for
 /// [_i38.PaymentSummaryDetailsPage]
 class PaymentSummaryDetailsPageRoute
-    extends _i81.PageRouteInfo<PaymentSummaryDetailsPageRouteArgs> {
+    extends _i82.PageRouteInfo<PaymentSummaryDetailsPageRouteArgs> {
   PaymentSummaryDetailsPageRoute({
-    _i82.Key? key,
-    required _i85.PaymentSummaryDetails paymentSummaryDetails,
+    _i83.Key? key,
+    required _i86.PaymentSummaryDetails paymentSummaryDetails,
   }) : super(
           PaymentSummaryDetailsPageRoute.name,
           path: 'payments/payment_summary/payment_summary_details',
@@ -1743,9 +1755,9 @@ class PaymentSummaryDetailsPageRouteArgs {
     required this.paymentSummaryDetails,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i85.PaymentSummaryDetails paymentSummaryDetails;
+  final _i86.PaymentSummaryDetails paymentSummaryDetails;
 
   @override
   String toString() {
@@ -1755,7 +1767,7 @@ class PaymentSummaryDetailsPageRouteArgs {
 
 /// generated route for
 /// [_i39.ScanMaterialInfo]
-class ScanMaterialInfoRoute extends _i81.PageRouteInfo<void> {
+class ScanMaterialInfoRoute extends _i82.PageRouteInfo<void> {
   const ScanMaterialInfoRoute()
       : super(
           ScanMaterialInfoRoute.name,
@@ -1766,12 +1778,24 @@ class ScanMaterialInfoRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i40.InvoiceDetailsPage]
+/// [_i40.AnnouncementInfoDetailsPage]
+class AnnouncementInfoDetailsPageRoute extends _i82.PageRouteInfo<void> {
+  const AnnouncementInfoDetailsPageRoute()
+      : super(
+          AnnouncementInfoDetailsPageRoute.name,
+          path: 'announcement_info_details',
+        );
+
+  static const String name = 'AnnouncementInfoDetailsPageRoute';
+}
+
+/// generated route for
+/// [_i41.InvoiceDetailsPage]
 class InvoiceDetailsPageRoute
-    extends _i81.PageRouteInfo<InvoiceDetailsPageRouteArgs> {
+    extends _i82.PageRouteInfo<InvoiceDetailsPageRouteArgs> {
   InvoiceDetailsPageRoute({
-    _i82.Key? key,
-    required _i86.CreditAndInvoiceItem invoiceItem,
+    _i83.Key? key,
+    required _i87.CreditAndInvoiceItem invoiceItem,
   }) : super(
           InvoiceDetailsPageRoute.name,
           path: 'payments/invoice_details',
@@ -1790,9 +1814,9 @@ class InvoiceDetailsPageRouteArgs {
     required this.invoiceItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i86.CreditAndInvoiceItem invoiceItem;
+  final _i87.CreditAndInvoiceItem invoiceItem;
 
   @override
   String toString() {
@@ -1801,12 +1825,12 @@ class InvoiceDetailsPageRouteArgs {
 }
 
 /// generated route for
-/// [_i41.CreditDetailsPage]
+/// [_i42.CreditDetailsPage]
 class CreditDetailsPageRoute
-    extends _i81.PageRouteInfo<CreditDetailsPageRouteArgs> {
+    extends _i82.PageRouteInfo<CreditDetailsPageRouteArgs> {
   CreditDetailsPageRoute({
-    _i82.Key? key,
-    required _i86.CreditAndInvoiceItem creditItem,
+    _i83.Key? key,
+    required _i87.CreditAndInvoiceItem creditItem,
   }) : super(
           CreditDetailsPageRoute.name,
           path: 'payments/credit_details',
@@ -1825,9 +1849,9 @@ class CreditDetailsPageRouteArgs {
     required this.creditItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i86.CreditAndInvoiceItem creditItem;
+  final _i87.CreditAndInvoiceItem creditItem;
 
   @override
   String toString() {
@@ -1836,9 +1860,9 @@ class CreditDetailsPageRouteArgs {
 }
 
 /// generated route for
-/// [_i42.NewPaymentPage]
-class NewPaymentPageRoute extends _i81.PageRouteInfo<void> {
-  const NewPaymentPageRoute({List<_i81.PageRouteInfo>? children})
+/// [_i43.NewPaymentPage]
+class NewPaymentPageRoute extends _i82.PageRouteInfo<void> {
+  const NewPaymentPageRoute({List<_i82.PageRouteInfo>? children})
       : super(
           NewPaymentPageRoute.name,
           path: 'payments/new_payment',
@@ -1849,12 +1873,12 @@ class NewPaymentPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i43.BundleItemDetailPage]
+/// [_i44.BundleItemDetailPage]
 class BundleItemDetailPageRoute
-    extends _i81.PageRouteInfo<BundleItemDetailPageRouteArgs> {
+    extends _i82.PageRouteInfo<BundleItemDetailPageRouteArgs> {
   BundleItemDetailPageRoute({
-    _i82.Key? key,
-    required _i87.BundleAggregate bundleAggregate,
+    _i83.Key? key,
+    required _i88.BundleAggregate bundleAggregate,
   }) : super(
           BundleItemDetailPageRoute.name,
           path: 'orders/bundle_item_detail',
@@ -1873,9 +1897,9 @@ class BundleItemDetailPageRouteArgs {
     required this.bundleAggregate,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i87.BundleAggregate bundleAggregate;
+  final _i88.BundleAggregate bundleAggregate;
 
   @override
   String toString() {
@@ -1884,8 +1908,8 @@ class BundleItemDetailPageRouteArgs {
 }
 
 /// generated route for
-/// [_i44.RequestReturnDetails]
-class RequestReturnDetailsRoute extends _i81.PageRouteInfo<void> {
+/// [_i45.RequestReturnDetails]
+class RequestReturnDetailsRoute extends _i82.PageRouteInfo<void> {
   const RequestReturnDetailsRoute()
       : super(
           RequestReturnDetailsRoute.name,
@@ -1896,8 +1920,8 @@ class RequestReturnDetailsRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i45.RequestReturnDetailsSummaryPage]
-class RequestReturnDetailsSummaryPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i46.RequestReturnDetailsSummaryPage]
+class RequestReturnDetailsSummaryPageRoute extends _i82.PageRouteInfo<void> {
   const RequestReturnDetailsSummaryPageRoute()
       : super(
           RequestReturnDetailsSummaryPageRoute.name,
@@ -1908,8 +1932,8 @@ class RequestReturnDetailsSummaryPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i46.ReturnRequestSuccessPage]
-class ReturnRequestSuccessPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i47.ReturnRequestSuccessPage]
+class ReturnRequestSuccessPageRoute extends _i82.PageRouteInfo<void> {
   const ReturnRequestSuccessPageRoute()
       : super(
           ReturnRequestSuccessPageRoute.name,
@@ -1920,12 +1944,12 @@ class ReturnRequestSuccessPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i47.AddToCart]
-class AddToCartRoute extends _i81.PageRouteInfo<AddToCartRouteArgs> {
+/// [_i48.AddToCart]
+class AddToCartRoute extends _i82.PageRouteInfo<AddToCartRouteArgs> {
   AddToCartRoute({
-    _i82.Key? key,
+    _i83.Key? key,
     required bool isCovid19Tab,
-    required _i88.PriceAggregate material,
+    required _i89.PriceAggregate material,
     bool isShortcutAccess = false,
   }) : super(
           AddToCartRoute.name,
@@ -1949,11 +1973,11 @@ class AddToCartRouteArgs {
     this.isShortcutAccess = false,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   final bool isCovid19Tab;
 
-  final _i88.PriceAggregate material;
+  final _i89.PriceAggregate material;
 
   final bool isShortcutAccess;
 
@@ -1964,11 +1988,11 @@ class AddToCartRouteArgs {
 }
 
 /// generated route for
-/// [_i48.UpdateCart]
-class UpdateCartRoute extends _i81.PageRouteInfo<UpdateCartRouteArgs> {
+/// [_i49.UpdateCart]
+class UpdateCartRoute extends _i82.PageRouteInfo<UpdateCartRouteArgs> {
   UpdateCartRoute({
-    _i82.Key? key,
-    required _i88.PriceAggregate material,
+    _i83.Key? key,
+    required _i89.PriceAggregate material,
   }) : super(
           UpdateCartRoute.name,
           path: 'orders/update_cart',
@@ -1987,9 +2011,9 @@ class UpdateCartRouteArgs {
     required this.material,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i88.PriceAggregate material;
+  final _i89.PriceAggregate material;
 
   @override
   String toString() {
@@ -1998,10 +2022,10 @@ class UpdateCartRouteArgs {
 }
 
 /// generated route for
-/// [_i49.AdminPoAttachmentPage]
+/// [_i50.AdminPoAttachmentPage]
 class AdminPoAttachmentPageRoute
-    extends _i81.PageRouteInfo<AdminPoAttachmentPageRouteArgs> {
-  AdminPoAttachmentPageRoute({_i82.Key? key})
+    extends _i82.PageRouteInfo<AdminPoAttachmentPageRouteArgs> {
+  AdminPoAttachmentPageRoute({_i83.Key? key})
       : super(
           AdminPoAttachmentPageRoute.name,
           path: 'admin_po_attachment',
@@ -2014,7 +2038,7 @@ class AdminPoAttachmentPageRoute
 class AdminPoAttachmentPageRouteArgs {
   const AdminPoAttachmentPageRouteArgs({this.key});
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
   @override
   String toString() {
@@ -2023,8 +2047,8 @@ class AdminPoAttachmentPageRouteArgs {
 }
 
 /// generated route for
-/// [_i50.SalesDistrictPage]
-class SalesDistrictPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i51.SalesDistrictPage]
+class SalesDistrictPageRoute extends _i82.PageRouteInfo<void> {
   const SalesDistrictPageRoute()
       : super(
           SalesDistrictPageRoute.name,
@@ -2035,8 +2059,8 @@ class SalesDistrictPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i51.AddSalesDistrictPage]
-class AddSalesDistrictPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i52.AddSalesDistrictPage]
+class AddSalesDistrictPageRoute extends _i82.PageRouteInfo<void> {
   const AddSalesDistrictPageRoute()
       : super(
           AddSalesDistrictPageRoute.name,
@@ -2047,8 +2071,8 @@ class AddSalesDistrictPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i52.EditSalesDistrictPage]
-class EditSalesDistrictPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i53.EditSalesDistrictPage]
+class EditSalesDistrictPageRoute extends _i82.PageRouteInfo<void> {
   const EditSalesDistrictPageRoute()
       : super(
           EditSalesDistrictPageRoute.name,
@@ -2059,8 +2083,8 @@ class EditSalesDistrictPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i53.PaymentAdviceFooterPage]
-class PaymentAdviceFooterPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i54.PaymentAdviceFooterPage]
+class PaymentAdviceFooterPageRoute extends _i82.PageRouteInfo<void> {
   const PaymentAdviceFooterPageRoute()
       : super(
           PaymentAdviceFooterPageRoute.name,
@@ -2071,8 +2095,8 @@ class PaymentAdviceFooterPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i54.AddPaymentAdviceFooterPage]
-class AddPaymentAdviceFooterPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i55.AddPaymentAdviceFooterPage]
+class AddPaymentAdviceFooterPageRoute extends _i82.PageRouteInfo<void> {
   const AddPaymentAdviceFooterPageRoute()
       : super(
           AddPaymentAdviceFooterPageRoute.name,
@@ -2083,8 +2107,8 @@ class AddPaymentAdviceFooterPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i55.EditPaymentAdviceFooterPage]
-class EditPaymentAdviceFooterPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i56.EditPaymentAdviceFooterPage]
+class EditPaymentAdviceFooterPageRoute extends _i82.PageRouteInfo<void> {
   const EditPaymentAdviceFooterPageRoute()
       : super(
           EditPaymentAdviceFooterPageRoute.name,
@@ -2095,8 +2119,8 @@ class EditPaymentAdviceFooterPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i56.IntroPage]
-class IntroPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i57.IntroPage]
+class IntroPageRoute extends _i82.PageRouteInfo<void> {
   const IntroPageRoute()
       : super(
           IntroPageRoute.name,
@@ -2107,12 +2131,12 @@ class IntroPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i57.ViewByItemDetailsPage]
+/// [_i58.ViewByItemDetailsPage]
 class ViewByItemDetailsPageRoute
-    extends _i81.PageRouteInfo<ViewByItemDetailsPageRouteArgs> {
+    extends _i82.PageRouteInfo<ViewByItemDetailsPageRouteArgs> {
   ViewByItemDetailsPageRoute({
-    _i82.Key? key,
-    required _i89.OrderHistoryItem orderHistoryItem,
+    _i83.Key? key,
+    required _i90.OrderHistoryItem orderHistoryItem,
   }) : super(
           ViewByItemDetailsPageRoute.name,
           path: 'orders/view_by_item_details_page',
@@ -2131,9 +2155,9 @@ class ViewByItemDetailsPageRouteArgs {
     required this.orderHistoryItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i89.OrderHistoryItem orderHistoryItem;
+  final _i90.OrderHistoryItem orderHistoryItem;
 
   @override
   String toString() {
@@ -2142,12 +2166,12 @@ class ViewByItemDetailsPageRouteArgs {
 }
 
 /// generated route for
-/// [_i58.ViewByOrderDetailsPage]
+/// [_i59.ViewByOrderDetailsPage]
 class ViewByOrderDetailsPageRoute
-    extends _i81.PageRouteInfo<ViewByOrderDetailsPageRouteArgs> {
+    extends _i82.PageRouteInfo<ViewByOrderDetailsPageRouteArgs> {
   ViewByOrderDetailsPageRoute({
-    _i82.Key? key,
-    required _i90.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem,
+    _i83.Key? key,
+    required _i91.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem,
   }) : super(
           ViewByOrderDetailsPageRoute.name,
           path: 'orders/view_by_order_details_page',
@@ -2166,9 +2190,9 @@ class ViewByOrderDetailsPageRouteArgs {
     required this.viewByOrderHistoryItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i90.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final _i91.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
 
   @override
   String toString() {
@@ -2177,8 +2201,8 @@ class ViewByOrderDetailsPageRouteArgs {
 }
 
 /// generated route for
-/// [_i59.BundleDetailPage]
-class BundleDetailPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i60.BundleDetailPage]
+class BundleDetailPageRoute extends _i82.PageRouteInfo<void> {
   const BundleDetailPageRoute()
       : super(
           BundleDetailPageRoute.name,
@@ -2189,8 +2213,8 @@ class BundleDetailPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i60.ProductDetailsPage]
-class ProductDetailsPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i61.ProductDetailsPage]
+class ProductDetailsPageRoute extends _i82.PageRouteInfo<void> {
   const ProductDetailsPageRoute()
       : super(
           ProductDetailsPageRoute.name,
@@ -2201,12 +2225,12 @@ class ProductDetailsPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i61.ReturnRequestSummaryByItemDetails]
+/// [_i62.ReturnRequestSummaryByItemDetails]
 class ReturnRequestSummaryByItemDetailsRoute
-    extends _i81.PageRouteInfo<ReturnRequestSummaryByItemDetailsRouteArgs> {
+    extends _i82.PageRouteInfo<ReturnRequestSummaryByItemDetailsRouteArgs> {
   ReturnRequestSummaryByItemDetailsRoute({
-    _i82.Key? key,
-    required _i91.ReturnItem returnItem,
+    _i83.Key? key,
+    required _i92.ReturnItem returnItem,
   }) : super(
           ReturnRequestSummaryByItemDetailsRoute.name,
           path: 'returns/return_summary_details_v3',
@@ -2225,9 +2249,9 @@ class ReturnRequestSummaryByItemDetailsRouteArgs {
     required this.returnItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i91.ReturnItem returnItem;
+  final _i92.ReturnItem returnItem;
 
   @override
   String toString() {
@@ -2236,9 +2260,9 @@ class ReturnRequestSummaryByItemDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i62.AnnouncementsPage]
-class AnnouncementsPageRoute extends _i81.PageRouteInfo<void> {
-  const AnnouncementsPageRoute({List<_i81.PageRouteInfo>? children})
+/// [_i63.AnnouncementsPage]
+class AnnouncementsPageRoute extends _i82.PageRouteInfo<void> {
+  const AnnouncementsPageRoute({List<_i82.PageRouteInfo>? children})
       : super(
           AnnouncementsPageRoute.name,
           path: 'announcements_page',
@@ -2249,11 +2273,11 @@ class AnnouncementsPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i63.ArticleDetails]
-class ArticleDetailsRoute extends _i81.PageRouteInfo<ArticleDetailsRouteArgs> {
+/// [_i64.ArticleDetails]
+class ArticleDetailsRoute extends _i82.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
-    _i82.Key? key,
-    required _i92.AnnouncementArticleItem article,
+    _i83.Key? key,
+    required _i93.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2272,9 +2296,9 @@ class ArticleDetailsRouteArgs {
     required this.article,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i92.AnnouncementArticleItem article;
+  final _i93.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2283,12 +2307,12 @@ class ArticleDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i64.ReturnRequestDetails]
+/// [_i65.ReturnRequestDetails]
 class ReturnRequestDetailsRoute
-    extends _i81.PageRouteInfo<ReturnRequestDetailsRouteArgs> {
+    extends _i82.PageRouteInfo<ReturnRequestDetailsRouteArgs> {
   ReturnRequestDetailsRoute({
-    _i82.Key? key,
-    required _i91.ReturnItem returnItem,
+    _i83.Key? key,
+    required _i92.ReturnItem returnItem,
   }) : super(
           ReturnRequestDetailsRoute.name,
           path: 'returns/return_summary_details_by_request',
@@ -2307,9 +2331,9 @@ class ReturnRequestDetailsRouteArgs {
     required this.returnItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i91.ReturnItem returnItem;
+  final _i92.ReturnItem returnItem;
 
   @override
   String toString() {
@@ -2318,8 +2342,8 @@ class ReturnRequestDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i65.AllInvoicesPage]
-class AllInvoicesPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i66.AllInvoicesPage]
+class AllInvoicesPageRoute extends _i82.PageRouteInfo<void> {
   const AllInvoicesPageRoute()
       : super(
           AllInvoicesPageRoute.name,
@@ -2330,8 +2354,8 @@ class AllInvoicesPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i66.AllCreditsPage]
-class AllCreditsPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i67.AllCreditsPage]
+class AllCreditsPageRoute extends _i82.PageRouteInfo<void> {
   const AllCreditsPageRoute()
       : super(
           AllCreditsPageRoute.name,
@@ -2342,8 +2366,8 @@ class AllCreditsPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i67.HomeTab]
-class HomeTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i68.HomeTab]
+class HomeTabRoute extends _i82.PageRouteInfo<void> {
   const HomeTabRoute()
       : super(
           HomeTabRoute.name,
@@ -2354,8 +2378,8 @@ class HomeTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i68.ProductsTab]
-class ProductsTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i69.ProductsTab]
+class ProductsTabRoute extends _i82.PageRouteInfo<void> {
   const ProductsTabRoute()
       : super(
           ProductsTabRoute.name,
@@ -2366,9 +2390,9 @@ class ProductsTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i69.OrdersTab]
-class OrdersTabRoute extends _i81.PageRouteInfo<void> {
-  const OrdersTabRoute({List<_i81.PageRouteInfo>? children})
+/// [_i70.OrdersTab]
+class OrdersTabRoute extends _i82.PageRouteInfo<void> {
+  const OrdersTabRoute({List<_i82.PageRouteInfo>? children})
       : super(
           OrdersTabRoute.name,
           path: 'orders_tab',
@@ -2379,8 +2403,8 @@ class OrdersTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i70.MoreTab]
-class MoreTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i71.MoreTab]
+class MoreTabRoute extends _i82.PageRouteInfo<void> {
   const MoreTabRoute()
       : super(
           MoreTabRoute.name,
@@ -2391,8 +2415,8 @@ class MoreTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i71.NotificationTab]
-class NotificationTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i72.NotificationTab]
+class NotificationTabRoute extends _i82.PageRouteInfo<void> {
   const NotificationTabRoute()
       : super(
           NotificationTabRoute.name,
@@ -2403,8 +2427,8 @@ class NotificationTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i72.ViewByItemsPage]
-class ViewByItemsPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i73.ViewByItemsPage]
+class ViewByItemsPageRoute extends _i82.PageRouteInfo<void> {
   const ViewByItemsPageRoute()
       : super(
           ViewByItemsPageRoute.name,
@@ -2415,12 +2439,12 @@ class ViewByItemsPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i73.ViewByOrdersPage]
+/// [_i74.ViewByOrdersPage]
 class ViewByOrdersPageRoute
-    extends _i81.PageRouteInfo<ViewByOrdersPageRouteArgs> {
+    extends _i82.PageRouteInfo<ViewByOrdersPageRouteArgs> {
   ViewByOrdersPageRoute({
-    _i82.Key? key,
-    required _i89.OrderHistoryItem orderHistoryItem,
+    _i83.Key? key,
+    required _i90.OrderHistoryItem orderHistoryItem,
   }) : super(
           ViewByOrdersPageRoute.name,
           path: 'orders/view_by_orders',
@@ -2439,9 +2463,9 @@ class ViewByOrdersPageRouteArgs {
     required this.orderHistoryItem,
   });
 
-  final _i82.Key? key;
+  final _i83.Key? key;
 
-  final _i89.OrderHistoryItem orderHistoryItem;
+  final _i90.OrderHistoryItem orderHistoryItem;
 
   @override
   String toString() {
@@ -2450,8 +2474,8 @@ class ViewByOrdersPageRouteArgs {
 }
 
 /// generated route for
-/// [_i74.ReturnByItemPage]
-class ReturnByItemPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i75.ReturnByItemPage]
+class ReturnByItemPageRoute extends _i82.PageRouteInfo<void> {
   const ReturnByItemPageRoute()
       : super(
           ReturnByItemPageRoute.name,
@@ -2462,8 +2486,8 @@ class ReturnByItemPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i75.ReturnByRequestPage]
-class ReturnByRequestPageRoute extends _i81.PageRouteInfo<void> {
+/// [_i76.ReturnByRequestPage]
+class ReturnByRequestPageRoute extends _i82.PageRouteInfo<void> {
   const ReturnByRequestPageRoute()
       : super(
           ReturnByRequestPageRoute.name,
@@ -2474,8 +2498,8 @@ class ReturnByRequestPageRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i76.OutstandingInvoicesTab]
-class OutstandingInvoicesTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i77.OutstandingInvoicesTab]
+class OutstandingInvoicesTabRoute extends _i82.PageRouteInfo<void> {
   const OutstandingInvoicesTabRoute()
       : super(
           OutstandingInvoicesTabRoute.name,
@@ -2486,8 +2510,8 @@ class OutstandingInvoicesTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i77.AvailableCreditsTab]
-class AvailableCreditsTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i78.AvailableCreditsTab]
+class AvailableCreditsTabRoute extends _i82.PageRouteInfo<void> {
   const AvailableCreditsTabRoute()
       : super(
           AvailableCreditsTabRoute.name,
@@ -2498,8 +2522,8 @@ class AvailableCreditsTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i78.PaymentMethodTab]
-class PaymentMethodTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i79.PaymentMethodTab]
+class PaymentMethodTabRoute extends _i82.PageRouteInfo<void> {
   const PaymentMethodTabRoute()
       : super(
           PaymentMethodTabRoute.name,
@@ -2510,8 +2534,8 @@ class PaymentMethodTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i79.ArticlesTab]
-class ArticlesTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i80.ArticlesTab]
+class ArticlesTabRoute extends _i82.PageRouteInfo<void> {
   const ArticlesTabRoute()
       : super(
           ArticlesTabRoute.name,
@@ -2522,8 +2546,8 @@ class ArticlesTabRoute extends _i81.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i80.AnnouncementsTab]
-class AnnouncementsTabRoute extends _i81.PageRouteInfo<void> {
+/// [_i81.AnnouncementsTab]
+class AnnouncementsTabRoute extends _i82.PageRouteInfo<void> {
   const AnnouncementsTabRoute()
       : super(
           AnnouncementsTabRoute.name,

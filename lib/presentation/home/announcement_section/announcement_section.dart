@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -77,14 +79,25 @@ class _AnnouncementSectionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      width: MediaQuery.of(context).size.width * 0.5,
-      margin: const EdgeInsets.all(8),
-      clipBehavior: Clip.antiAlias,
-      child: _ItemDescription(
-        title: announcementItem.title,
-        description: announcementItem.summary,
-        publishedDate: announcementItem.publishedDate,
+    return GestureDetector(
+      onTap: () {
+        context.read<AnnouncementInfoDetailsBloc>().add(
+              AnnouncementInfoDetailsEvent.fetch(
+                itemId: announcementItem.id,
+                salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+              ),
+            );
+        context.router.pushNamed('announcement_info_details');
+      },
+      child: CustomCard(
+        width: MediaQuery.of(context).size.width * 0.5,
+        margin: const EdgeInsets.all(8),
+        clipBehavior: Clip.antiAlias,
+        child: _ItemDescription(
+          title: announcementItem.title,
+          description: announcementItem.summary,
+          publishedDate: announcementItem.publishedDate,
+        ),
       ),
     );
   }

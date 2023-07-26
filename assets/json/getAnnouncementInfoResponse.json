@@ -2,141 +2,96 @@
     "data": {
         "search": {
             "pageInfo": {
-                "endCursor": "eyJzZWFyY2hBZnRlciI6WyIyMDIzMDcxM3QwOTU3NTkiLCIzMjUxRENEN0I3MEM0ODU2OEVFODg1RDIwMkY4OTA4NiIsIjMyNTFEQ0Q3QjcwQzQ4NTY4RUU4ODVEMjAyRjg5MDg2Il0sImNvdW50IjoyOH0="
+                "endCursor": "eyJzZWFyY2hBZnRlciI6WyIyMDIzMDcxM3QwOTU3NTgiLCJFMkY4OTgwRkU1M0U0M0MzQTE3RUU0QTgxNjRBM0ZEOCIsIkUyRjg5ODBGRTUzRTQzQzNBMTdFRTRBODE2NEEzRkQ4Il0sImNvdW50IjoyNH0="
             },
-            "total": 41,
+            "total": 25,
             "results": [
+                {
+                    "id": "532E19B7CF044A1D92DA00B2A551FC34",
+                    "title": {
+                        "value": "[UAT] New announcement 18-07"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": "<p><span style=\"color: #333333; background-color: #ffffff; text-align: justify;\">Zuellig Pharma is one of the largest healthcare services groups in Asia and our purpose is to make healthcare more accessible. In Asia, we provide world-class distribution, commercial solutions, patient care, clinic reach, data analytics, pharmacy channel and payor services to support the growing healthcare needs in this region.</span></p>\n<p><strong style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\">A FOCUS ON SUSTAINABLE ENGAGEMENT</strong></p>\n<p><strong style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\"><img alt=\"IM\" src=\"/-/media/Project/ezrx/ezrx/About-Us/Media/anh-2.png?h=806.222&amp;w=972.444\" style=\"left: 428.542px; top: 650.069px; width: 972.444px; height: 806.222px; opacity: 0.8;\" /></strong></p>\n<p><strong style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\"></strong><br style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\" />\n<span style=\"color: #333333; background-color: #ffffff; text-align: justify;\">Zuellig Pharma employees are the force behind our business success. Through various focus groups and the Employee Opinion Survey results, we know that&nbsp;</span><strong style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\">our employees are here because they are passionate and believe in our mission to make healthcare more accessible.</strong><br style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\" />\n<span style=\"color: #333333; background-color: #ffffff; text-align: justify;\">By driving &ldquo;Sustainable Engagement&rdquo;, we continuously&nbsp;</span><strong style=\"color: #333333; background-color: #ffffff; margin: 0px; padding: 0px; text-align: justify;\">ENGAGE, ENABLE, ENERGIZE</strong><span style=\"color: #333333; background-color: #ffffff; text-align: justify;\">&nbsp;our colleagues to be the best of themselves at work every day, so that we only deliver the best services and solutions to our clients.</span></p>"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/genimage-1--Copy.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230719T030019"
+                    }
+                },
+                {
+                    "id": "FEF6BFC769054187880E2F2997BEF513",
+                    "title": {
+                        "value": "[[UAT] Announcement 08-07"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": "<span style=\"color: #333333; background-color: #ffffff; text-align: justify;\">Zuellig Pharma is one of the largest healthcare services groups in Asia and our purpose is to make healthcare more accessible. In Asia, we provide world-class distribution, commercial solutions, patient care, clinic reach, data analytics, pharmacy channel and payor services to support the growing healthcare needs in this region.</span><img alt=\"image\" src=\"/-/media/Project/ezrx/ezrx/71C5ueC9K-L---Copy.jpg?h=831.444&amp;w=443.667\" style=\"left: 826.319px; top: 737.431px; width: 443.667px; height: 831.444px;\" />"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/71C5ueC9K-L---Copy.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230718T091940"
+                    }
+                },
+                {
+                    "id": "FEAB1CF4291C452BA74772E3557609BA",
+                    "title": {
+                        "value": "[UAT] Announcement  Jul 11"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": "<p><span style=\"color: #333333; background-color: #ffffff; text-align: justify;\"><strong>Zuellig Pharma</strong> is one of the largest healthcare services groups in Asia and our purpose is to make healthcare more accessible. In Asia, we provide world-class distribution, commercial solutions, patient care, clinic reach, data analytics, pharmacy channel and payor services to support the growing healthcare needs in this region.</span></p>\n<p><img alt=\"IM\" src=\"/-/media/Project/ezrx/ezrx/Announcements/Media/anh-1.png?h=394.778&amp;w=704.111\" style=\"left: 207.431px; top: 97.0833px; width: 704.111px; height: 394.778px;\" /></p>"
+                    },
+                    "thumbnail": {
+                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/71C5ueC9K-L---Copy.jpg"
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230718T091033Z"
+                    }
+                },
                 {
                     "id": "086F872D092E4A70848414C1AEE60F37",
                     "title": {
                         "value": "Announcement 1"
                     },
                     "summary": null,
-                    "thumbnail": {
-                        "src": null
+                    "manufacturer": {
+                        "value": ""
                     },
-                    "publishedDate": {
-                        "isoValue": "20230626T081203"
-                    }
-                },
-                {
-                    "id": "D6AFD64D9E2B414C9770ECE65AACA5C3",
-                    "title": {
-                        "value": "new announcement 02"
+                    "source": {
+                        "value": ""
                     },
-                    "summary": {
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
                         "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230626T081203"
-                    }
-                },
-                {
-                    "id": "2891AFDCC13A4109B9849CBC2BDC0AA5",
-                    "title": {
-                        "value": "New Announcement"
-                    },
-                    "summary": {
-                        "value": ""
-                    },
-                    "thumbnail": {
-                        "src": null
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230626T081202"
-                    }
-                },
-                {
-                    "id": "5A48CAF283DE41A28053035DE30F03E4",
-                    "title": {
-                        "value": "Announcement"
-                    },
-                    "summary": {
-                        "value": ""
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230626T081202"
-                    }
-                },
-                {
-                    "id": "A37FE2476C24460E93BB45FA5D4D4410",
-                    "title": {
-                        "value": "Test announcement 01"
-                    },
-                    "summary": {
-                        "value": "1234"
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/pexels-artem-podrez-4492093.jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230626T081202"
-                    }
-                },
-                {
-                    "id": "B8AC30A119E540C994EE27CD23EDFDA4",
-                    "title": {
-                        "value": "new"
-                    },
-                    "summary": {
-                        "value": "1234"
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230626T081202"
-                    }
-                },
-                {
-                    "id": "C1B4AAFF48C94AA19253D5B9E96EB368",
-                    "title": {
-                        "value": "Announcement SG 26 Jun"
-                    },
-                    "summary": {
-                        "value": ""
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/pexels-artem-podrez-4492093.jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230626T080924"
-                    }
-                },
-                {
-                    "id": "7321BF853B3B428B8585495A82157432",
-                    "title": {
-                        "value": "Announcement24-06"
-                    },
-                    "summary": {
-                        "value": ""
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/1.jfif"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230624T082818"
-                    }
-                },
-                {
-                    "id": "DB7822F576284D86B76DB9A0AE19B01D",
-                    "title": {
-                        "value": "test 22-06 my"
-                    },
-                    "summary": {
-                        "value": ""
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Carousels/Desktop-455x455---Copy-(10).jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230622T095437"
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
@@ -144,44 +99,21 @@
                     "title": {
                         "value": "Announcement22-06"
                     },
-                    "summary": {
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/pexels-artem-podrez-4492093.jpg"
+                        "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230622T091304"
-                    }
-                },
-                {
-                    "id": "24C66CFB5A4C4D61A47558E6213CD740",
-                    "title": {
-                        "value": "Test Announcement 19 Jun - TEXT"
-                    },
-                    "summary": {
-                        "value": "Awareness & Communication\r\nZuellig Pharma provides healthcare communication and education services to promote disease prevention and management for the healthcare community. "
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230619T070436"
-                    }
-                },
-                {
-                    "id": "ECA3519AFC3D4764839C2FF31F92B314",
-                    "title": {
-                        "value": "Announcement 10 may"
-                    },
-                    "summary": {
-                        "value": "test"
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Carousels/Desktop-455x455---Copy-(10).jpg"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230617T111001"
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
@@ -189,44 +121,65 @@
                     "title": {
                         "value": "eZRx Announcement test17"
                     },
-                    "summary": {
+                    "summary": null,
+                    "manufacturer": {
                         "value": ""
                     },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Feature/JSS-Experience-Accelerator/Basic-Site/banner-image.jpg"
+                    "source": {
+                        "value": ""
                     },
-                    "publishedDate": {
-                        "isoValue": "20230612T050600"
-                    }
-                },
-                {
-                    "id": "1EB4730ED01B4F97BCB90262CDC5A45F",
-                    "title": {
-                        "value": "Announcement"
-                    },
-                    "summary": {
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
                         "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050559"
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
-                    "id": "2308FD3A86634FC299A06AD1CBD70787",
+                    "id": "24C66CFB5A4C4D61A47558E6213CD740",
                     "title": {
-                        "value": "Announcement18-05a"
+                        "value": "Test Announcement 19 Jun - TEXT"
                     },
-                    "summary": {
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
                         "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050559"
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "2891AFDCC13A4109B9849CBC2BDC0AA5",
+                    "title": {
+                        "value": "New Announcement"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
@@ -234,104 +187,197 @@
                     "title": {
                         "value": "[L'Oreal] Sep 2022 Skinceuticals Product Price Increase Notice"
                     },
-                    "summary": {
-                        "value": "We will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th.\r\nPlease refrain from using the site as much as possible, as access may not be smooth during the site."
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
                     },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    "source": {
+                        "value": ""
                     },
-                    "publishedDate": {
-                        "isoValue": "20230612T050559"
-                    }
-                },
-                {
-                    "id": "670FA57F737E4511882F096A9CB53C51",
-                    "title": {
-                        "value": "Announcement 15 MAY"
-                    },
-                    "summary": {
-                        "value": "test content mdas\r\nWe will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th. Please refrain from using the site as much as possible, as access may not be smooth during the site."
-                    },
-                    "thumbnail": {
-                        "src": null
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230612T050559"
-                    }
-                },
-                {
-                    "id": "9B0FE4893A6E4BCCAABE4A1F2410E613",
-                    "title": {
-                        "value": "Announcement18-05"
-                    },
-                    "summary": {
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
                         "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050559"
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
-                    "id": "DB8D6384FD834DF3B972F1260A3E07A7",
+                    "id": "7321BF853B3B428B8585495A82157432",
                     "title": {
-                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                        "value": "Announcement24-06"
                     },
-                    "summary": {
-                        "value": "We will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th.\r\nPlease refrain from using the site as much as possible, as access may not be smooth during the site."
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
                     },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                    "source": {
+                        "value": ""
                     },
-                    "publishedDate": {
-                        "isoValue": "20230612T050559"
-                    }
-                },
-                {
-                    "id": "E2F8980FE53E43C3A17EE4A8164A3FD8",
-                    "title": {
-                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
-                    },
-                    "summary": {
-                        "value": "Hello, customer.\r\nWe will deliver an official notice from the pharmaceutical company regarding the"
-                    },
-                    "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
-                    },
-                    "publishedDate": {
-                        "isoValue": "20230612T050559"
-                    }
-                },
-                {
-                    "id": "FAA0A308C32D49C9AC27ADB7743CC973",
-                    "title": {
-                        "value": "Announcement"
-                    },
-                    "summary": {
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/mask1---Copy-(2).png"
+                        "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050559"
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
-                    "id": "FD29494D0C5F440FB2D392F0E62E5045",
+                    "id": "AC2F0E571CFD449DACCD215EAA4F1DED",
                     "title": {
-                        "value": "Announcement 18 may !"
+                        "value": "Fiasp Flex Touch Wine Out of Stock Notice"
                     },
-                    "summary": {
+                    "summary": null,
+                    "manufacturer": {
+                        "value": "zuellig"
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
                         "value": ""
                     },
                     "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Default-Website/cover.jpg"
+                        "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050559"
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "B6B1176A4EB3440E809F531A669CB0CF",
+                    "title": {
+                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "C1B4AAFF48C94AA19253D5B9E96EB368",
+                    "title": {
+                        "value": "Announcement SG 26 Jun"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "D6AFD64D9E2B414C9770ECE65AACA5C3",
+                    "title": {
+                        "value": "new announcement 02"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "DB7822F576284D86B76DB9A0AE19B01D",
+                    "title": {
+                        "value": "test 22-06 my"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "E901604B71244AC5BBFD5F464B45EF8B",
+                    "title": {
+                        "value": "all Announcement 6"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
+                    }
+                },
+                {
+                    "id": "ECA3519AFC3D4764839C2FF31F92B314",
+                    "title": {
+                        "value": "Announcement 10 may"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095759"
                     }
                 },
                 {
@@ -339,14 +385,21 @@
                     "title": {
                         "value": "Novo Nordisk] Fiasp Flex Touch 100ML Product Resumption Schedule Notice 2"
                     },
-                    "summary": {
-                        "value": "[ Novo Nordisk ]  We will inform you when the supply of Fiasp Flex Touch  100ML  will be resumed  .     \r\nPlease check the attached file for details .     "
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
                     },
                     "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                        "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050558"
+                        "isoValue": "20230713T095758"
                     }
                 },
                 {
@@ -354,14 +407,131 @@
                     "title": {
                         "value": "[L'Oreal] Aug 2022 Skinceuticals Product Price Increase Notice"
                     },
-                    "summary": {
-                        "value": "We will be working on site security for about 2 hours starting at 10pm on Saturday, June 11th.\r\nPlease refrain from using the site as much as possible, as access may not be smooth during the site."
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
                     },
                     "thumbnail": {
-                        "src": "https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/media/Project/ezrx/ezrx/Articles/Rectangle-40202.png"
+                        "src": null
                     },
                     "publishedDate": {
-                        "isoValue": "20230612T050558"
+                        "isoValue": "20230713T095758"
+                    }
+                },
+                {
+                    "id": "557286DB5C84454593B1692236245068",
+                    "title": {
+                        "value": "[Information] June 11th site security enhancement work guidance "
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095758"
+                    }
+                },
+                {
+                    "id": "563745D6BF0B4039BA55CCB2208434FF",
+                    "title": {
+                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095758"
+                    }
+                },
+                {
+                    "id": "ADD1B474704047EA98CC2609D0195FC5",
+                    "title": {
+                        "value": "[Novo Nordisk] Fiasp Flex Touch Wine Out of Stock Notice"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095758"
+                    }
+                },
+                {
+                    "id": "DB8D6384FD834DF3B972F1260A3E07A7",
+                    "title": {
+                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095758"
+                    }
+                },
+                {
+                    "id": "E2F8980FE53E43C3A17EE4A8164A3FD8",
+                    "title": {
+                        "value": "[L'Oreal] May 2022 Skinceuticals Product Price Increase Notice"
+                    },
+                    "summary": null,
+                    "manufacturer": {
+                        "value": ""
+                    },
+                    "source": {
+                        "value": ""
+                    },
+                    "content": {
+                        "value": ""
+                    },
+                    "thumbnail": {
+                        "src": null
+                    },
+                    "publishedDate": {
+                        "isoValue": "20230713T095758"
                     }
                 }
             ]

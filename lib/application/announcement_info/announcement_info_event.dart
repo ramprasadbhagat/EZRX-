@@ -2,8 +2,10 @@ part of 'announcement_info_bloc.dart';
 
 @freezed
 class AnnouncementInfoEvent with _$AnnouncementInfoEvent {
-  const factory AnnouncementInfoEvent.getAnnouncement({
+  const factory AnnouncementInfoEvent.fetch({
     required SalesOrg salesOrg,
-    required int pageSize,
-  }) = _GetAnnouncementInfo;
+  }) = _Fetch;
+  const factory AnnouncementInfoEvent.loadMore({
+    required SalesOrg salesOrg,
+  }) = _LoadMore;
 }

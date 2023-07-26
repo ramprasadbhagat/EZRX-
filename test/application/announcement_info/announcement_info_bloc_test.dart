@@ -38,6 +38,7 @@ void main() {
           () => repository.getAnnouncement(
             salesOrg: salesOrg,
             pageSize: _pageSize,
+            after: '',
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -46,13 +47,14 @@ void main() {
         );
       },
       act: (AnnouncementInfoBloc bloc) => bloc
-        ..add(AnnouncementInfoEvent.getAnnouncement(
+        ..add(AnnouncementInfoEvent.fetch(
           salesOrg: salesOrg,
-          pageSize: _pageSize,
         )),
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
-        announcementInfoState,
+        announcementInfoState.copyWith(
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error')))),
       ],
     );
 
@@ -64,6 +66,7 @@ void main() {
           () => repository.getAnnouncement(
             salesOrg: salesOrg,
             pageSize: _pageSize,
+            after: '',
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -72,9 +75,8 @@ void main() {
         );
       },
       act: (AnnouncementInfoBloc bloc) => bloc
-        ..add(AnnouncementInfoEvent.getAnnouncement(
+        ..add(AnnouncementInfoEvent.fetch(
           salesOrg: salesOrg,
-          pageSize: _pageSize,
         )),
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),

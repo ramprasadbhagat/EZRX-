@@ -611,9 +611,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             if (state.haveSelectedSalesOrganisation &&
                 state.configs != SalesOrganisationConfigs.empty()) {
               context.read<AnnouncementInfoBloc>().add(
-                    AnnouncementInfoEvent.getAnnouncement(
+                    AnnouncementInfoEvent.fetch(
                       salesOrg: state.salesOrg,
-                      pageSize: 24,
                     ),
                   );
               context.read<ArticlesInfoBloc>().add(

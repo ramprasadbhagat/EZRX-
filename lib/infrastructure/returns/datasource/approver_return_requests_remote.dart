@@ -8,7 +8,6 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_requests_id_dto.dart';
 
-
 class ApproverReturnRequestsRemote {
   HttpService httpService;
   ApproverReturnRequestQuery approverReturnRequestQuery;
@@ -46,13 +45,12 @@ class ApproverReturnRequestsRemote {
     );
 
     _approverReturnRequestExceptionChecker(res: response);
-    
+
     return List.from(
       response.data['data']['requestsForApproverV2']['requestID'],
     )
         .map(
-          (e) =>
-              ReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
+          (e) => ReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
         )
         .toList()
       ..retainWhere((element) => element.isValidRequestId);

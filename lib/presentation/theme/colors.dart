@@ -36,6 +36,7 @@ abstract class ZPColors {
   static const Color extraLightGrey4 = Color.fromRGBO(101, 101, 101, 1);
   static const Color extraLightGrey5 = Color.fromRGBO(244, 247, 245, 1);
   static const Color neutralsGrey = Color.fromRGBO(19, 19, 19, 0.4);
+  static const Color neutralsGrey1 = Color.fromRGBO(99, 99, 99, 1);
   static const Color boxShadowColor = Color.fromRGBO(0, 0, 0, 0.18);
   static const Color shadesBlack = Color.fromRGBO(15, 21, 21, 1);
   static const Color red = Color.fromRGBO(244, 67, 54, 1);

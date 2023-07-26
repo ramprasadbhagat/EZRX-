@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_co
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/notification/notificatoin_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
@@ -265,7 +266,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       path: 'orders/scan_material_info',
       page: ScanMaterialInfo,
     ),
-
+    AutoRoute(
+      path: 'announcement_info_details',
+      page: AnnouncementInfoDetailsPage,
+    ),
     AutoRoute(
       path: 'payments/invoice_details',
       page: InvoiceDetailsPage,

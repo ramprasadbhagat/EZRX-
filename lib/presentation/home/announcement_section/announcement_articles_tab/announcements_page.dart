@@ -78,6 +78,9 @@ class AnnouncementsPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   Expanded(child: child),
                 ],
               ),

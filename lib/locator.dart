@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_b
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
@@ -3023,6 +3024,12 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => AnnouncementInfoBloc(
+      announcementInfoRepository: locator<AnnouncementInfoRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AnnouncementInfoDetailsBloc(
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
     ),
   );
