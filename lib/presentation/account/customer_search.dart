@@ -91,7 +91,7 @@ class _BodyContent extends StatelessWidget {
                 CustomerCodeEvent.fetch(
                   userInfo: userBloc.state.user,
                   selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                  hidecustomer: false,
+                  hideCustomer: false,
                 ),
               );
         },
@@ -100,7 +100,7 @@ class _BodyContent extends StatelessWidget {
                 CustomerCodeEvent.loadMore(
                   userInfo: userBloc.state.user,
                   selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                  hidecustomer: salesOrgBloc.state.configs.hideCustomer,
+                  hideCustomer: salesOrgBloc.state.configs.hideCustomer,
                 ),
               );
         },
@@ -418,7 +418,7 @@ class _DeliveryAddressSearchSectionState
                       userInfo: context.read<UserBloc>().state.user,
                       selectedSalesOrg:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
-                      hidecustomer:
+                      hideCustomer:
                           context.read<SalesOrgBloc>().state.hideCustomer,
                       searchValue: value,
                     ),
@@ -430,7 +430,7 @@ class _DeliveryAddressSearchSectionState
                       userInfo: context.read<UserBloc>().state.user,
                       selectedSalesOrg:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
-                      hidecustomer:
+                      hideCustomer:
                           context.read<SalesOrgBloc>().state.hideCustomer,
                       searchValue: value,
                     ),
@@ -447,7 +447,7 @@ class _DeliveryAddressSearchSectionState
                       userInfo: context.read<UserBloc>().state.user,
                       selectedSalesOrg:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
-                      hidecustomer:
+                      hideCustomer:
                           context.read<SalesOrgBloc>().state.hideCustomer,
                     ),
                   );

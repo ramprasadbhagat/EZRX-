@@ -92,7 +92,7 @@ void main() {
             customerCode: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
-            hidecustomer: hideCustomer,
+            hideCustomer: hideCustomer,
             offset: 0,
           );
           expect(
@@ -131,7 +131,7 @@ void main() {
             customerCode: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
-            hidecustomer: hideCustomer,
+            hideCustomer: hideCustomer,
             offset: 0,
           )
               .onError((error, _) async {
@@ -167,7 +167,7 @@ void main() {
             customerCode: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
-            hidecustomer: hideCustomer,
+            hideCustomer: hideCustomer,
             offset: 0,
           )
               .onError((error, _) async {

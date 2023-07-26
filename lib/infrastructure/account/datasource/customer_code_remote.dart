@@ -24,7 +24,7 @@ class CustomerCodeRemoteDataSource {
   Future<List<CustomerCodeInfo>> getCustomerCodeList({
     required String customerCode,
     required String salesOrg,
-    required bool hidecustomer,
+    required bool hideCustomer,
     required int pageSize,
     required int offset,
   }) async {
@@ -36,7 +36,7 @@ class CustomerCodeRemoteDataSource {
         'salesOrganisation': salesOrg,
         'first': pageSize,
         'after': offset,
-        'filterBlockCustomer': hidecustomer,
+        'filterBlockCustomer': hideCustomer,
       };
 
       final res = await httpService.request(

@@ -30,7 +30,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
   @override
   Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode({
     required SalesOrganisation salesOrganisation,
-    required String customerCode,
+    required List<String> customerCodes,
     required bool hideCustomer,
     required User user,
     required int pageSize,
@@ -48,27 +48,48 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
-    try {
-      final customerCodeInfo = user.role.type.isSalesRepRole
-          ? await remoteDataSource.getSalesRepCustomerCodeList(
-              salesOrg: salesOrg,
-              customerCode: customerCode,
-              userName: user.username.getOrCrash(),
-              pageSize: pageSize,
-              offset: offset,
-            )
-          : await remoteDataSource.getCustomerCodeList(
-              salesOrg: salesOrg,
-              customerCode: customerCode,
-              hidecustomer: hideCustomer,
-              pageSize: pageSize,
-              offset: offset,
-            );
+    final futureResults = <List<CustomerCodeInfo>>[];
+    Object? exception;
+    await Future.wait(
+      customerCodes.map(
+        (customerCode) async {
+          try {
+            final response = user.role.type.isSalesRepRole
+                ? await remoteDataSource.getSalesRepCustomerCodeList(
+                    salesOrg: salesOrg,
+                    customerCode: customerCode,
+                    userName: user.username.getOrCrash(),
+                    pageSize: pageSize,
+                    offset: offset,
+                  )
+                : await remoteDataSource.getCustomerCodeList(
+                    salesOrg: salesOrg,
+                    customerCode: customerCode,
+                    hideCustomer: hideCustomer,
+                    pageSize: pageSize,
+                    offset: offset,
+                  );
+            futureResults.add(response);
+          } catch (e) {
+            //for single calls, we will capture error
+            //for clubbed concurrent calls, we will not capture any error
+            if (customerCodes.length == 1) {
+              exception = e;
+            }
+          }
+        },
+      ),
+    );
 
-      return Right(customerCodeInfo);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
+    if (customerCodes.length == 1 && exception != null) {
+      return Left(FailureHandler.handleFailure(exception!));
     }
+
+    final customerCodeList = <CustomerCodeInfo>[
+      ...futureResults.expand((codeList) => codeList),
+    ];
+
+    return Right(customerCodeList);
   }
 
   @override

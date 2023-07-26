@@ -22,22 +22,22 @@ mixin _$CustomerCodeEvent {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) =>
@@ -47,22 +47,22 @@ mixin _$CustomerCodeEvent {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) =>
@@ -72,22 +72,22 @@ mixin _$CustomerCodeEvent {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
@@ -193,22 +193,22 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
@@ -221,22 +221,22 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
@@ -249,22 +249,22 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
@@ -427,22 +427,22 @@ class _$_Selected implements _Selected {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
@@ -455,22 +455,22 @@ class _$_Selected implements _Selected {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
@@ -483,22 +483,22 @@ class _$_Selected implements _Selected {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
@@ -579,7 +579,7 @@ abstract class _$$_FetchCopyWith<$Res> {
   @useResult
   $Res call(
       {String searchText,
-      bool hidecustomer,
+      bool hideCustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg});
 
@@ -598,7 +598,7 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchText = null,
-    Object? hidecustomer = null,
+    Object? hideCustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
   }) {
@@ -607,9 +607,9 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
-      hidecustomer: null == hidecustomer
-          ? _value.hidecustomer
-          : hidecustomer // ignore: cast_nullable_to_non_nullable
+      hideCustomer: null == hideCustomer
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -644,7 +644,7 @@ class __$$_FetchCopyWithImpl<$Res>
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {this.searchText = '',
-      required this.hidecustomer,
+      required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg});
 
@@ -652,7 +652,7 @@ class _$_Fetch implements _Fetch {
   @JsonKey()
   final String searchText;
   @override
-  final bool hidecustomer;
+  final bool hideCustomer;
   @override
   final User userInfo;
   @override
@@ -660,7 +660,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.fetch(searchText: $searchText, hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
+    return 'CustomerCodeEvent.fetch(searchText: $searchText, hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
   }
 
   @override
@@ -670,8 +670,8 @@ class _$_Fetch implements _Fetch {
             other is _$_Fetch &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText) &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
+            (identical(other.hideCustomer, hideCustomer) ||
+                other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             (identical(other.selectedSalesOrg, selectedSalesOrg) ||
@@ -680,7 +680,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, searchText, hidecustomer, userInfo, selectedSalesOrg);
+      runtimeType, searchText, hideCustomer, userInfo, selectedSalesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -695,26 +695,26 @@ class _$_Fetch implements _Fetch {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return fetch(searchText, hidecustomer, userInfo, selectedSalesOrg);
+    return fetch(searchText, hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -723,26 +723,26 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
-    return fetch?.call(searchText, hidecustomer, userInfo, selectedSalesOrg);
+    return fetch?.call(searchText, hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -751,28 +751,28 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(searchText, hidecustomer, userInfo, selectedSalesOrg);
+      return fetch(searchText, hideCustomer, userInfo, selectedSalesOrg);
     }
     return orElse();
   }
@@ -831,12 +831,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements CustomerCodeEvent {
   const factory _Fetch(
       {final String searchText,
-      required final bool hidecustomer,
+      required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg}) = _$_Fetch;
 
   String get searchText;
-  bool get hidecustomer;
+  bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)
@@ -850,7 +850,7 @@ abstract class _$$_SearchCopyWith<$Res> {
       __$$_SearchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {bool hidecustomer,
+      {bool hideCustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg,
       String searchValue});
@@ -869,15 +869,15 @@ class __$$_SearchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hidecustomer = null,
+    Object? hideCustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
     Object? searchValue = null,
   }) {
     return _then(_$_Search(
-      hidecustomer: null == hidecustomer
-          ? _value.hidecustomer
-          : hidecustomer // ignore: cast_nullable_to_non_nullable
+      hideCustomer: null == hideCustomer
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -915,13 +915,13 @@ class __$$_SearchCopyWithImpl<$Res>
 
 class _$_Search implements _Search {
   const _$_Search(
-      {required this.hidecustomer,
+      {required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg,
       required this.searchValue});
 
   @override
-  final bool hidecustomer;
+  final bool hideCustomer;
   @override
   final User userInfo;
   @override
@@ -931,7 +931,7 @@ class _$_Search implements _Search {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.search(hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, searchValue: $searchValue)';
+    return 'CustomerCodeEvent.search(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, searchValue: $searchValue)';
   }
 
   @override
@@ -939,8 +939,8 @@ class _$_Search implements _Search {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Search &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
+            (identical(other.hideCustomer, hideCustomer) ||
+                other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             (identical(other.selectedSalesOrg, selectedSalesOrg) ||
@@ -951,7 +951,7 @@ class _$_Search implements _Search {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, hidecustomer, userInfo, selectedSalesOrg, searchValue);
+      runtimeType, hideCustomer, userInfo, selectedSalesOrg, searchValue);
 
   @JsonKey(ignore: true)
   @override
@@ -966,26 +966,26 @@ class _$_Search implements _Search {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return search(hidecustomer, userInfo, selectedSalesOrg, searchValue);
+    return search(hideCustomer, userInfo, selectedSalesOrg, searchValue);
   }
 
   @override
@@ -994,26 +994,26 @@ class _$_Search implements _Search {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
-    return search?.call(hidecustomer, userInfo, selectedSalesOrg, searchValue);
+    return search?.call(hideCustomer, userInfo, selectedSalesOrg, searchValue);
   }
 
   @override
@@ -1022,28 +1022,28 @@ class _$_Search implements _Search {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
   }) {
     if (search != null) {
-      return search(hidecustomer, userInfo, selectedSalesOrg, searchValue);
+      return search(hideCustomer, userInfo, selectedSalesOrg, searchValue);
     }
     return orElse();
   }
@@ -1101,12 +1101,12 @@ class _$_Search implements _Search {
 
 abstract class _Search implements CustomerCodeEvent {
   const factory _Search(
-      {required final bool hidecustomer,
+      {required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg,
       required final String searchValue}) = _$_Search;
 
-  bool get hidecustomer;
+  bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   String get searchValue;
@@ -1122,7 +1122,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       __$$_LoadMoreCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {bool hidecustomer, User userInfo, SalesOrganisation selectedSalesOrg});
+      {bool hideCustomer, User userInfo, SalesOrganisation selectedSalesOrg});
 
   $UserCopyWith<$Res> get userInfo;
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
@@ -1139,14 +1139,14 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hidecustomer = null,
+    Object? hideCustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
   }) {
     return _then(_$_LoadMore(
-      hidecustomer: null == hidecustomer
-          ? _value.hidecustomer
-          : hidecustomer // ignore: cast_nullable_to_non_nullable
+      hideCustomer: null == hideCustomer
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -1180,12 +1180,12 @@ class __$$_LoadMoreCopyWithImpl<$Res>
 
 class _$_LoadMore implements _LoadMore {
   const _$_LoadMore(
-      {required this.hidecustomer,
+      {required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg});
 
   @override
-  final bool hidecustomer;
+  final bool hideCustomer;
   @override
   final User userInfo;
   @override
@@ -1193,7 +1193,7 @@ class _$_LoadMore implements _LoadMore {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.loadMore(hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
+    return 'CustomerCodeEvent.loadMore(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
   }
 
   @override
@@ -1201,8 +1201,8 @@ class _$_LoadMore implements _LoadMore {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadMore &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
+            (identical(other.hideCustomer, hideCustomer) ||
+                other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             (identical(other.selectedSalesOrg, selectedSalesOrg) ||
@@ -1211,7 +1211,7 @@ class _$_LoadMore implements _LoadMore {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, hidecustomer, userInfo, selectedSalesOrg);
+      Object.hash(runtimeType, hideCustomer, userInfo, selectedSalesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -1226,26 +1226,26 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return loadMore(hidecustomer, userInfo, selectedSalesOrg);
+    return loadMore(hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -1254,26 +1254,26 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
-    return loadMore?.call(hidecustomer, userInfo, selectedSalesOrg);
+    return loadMore?.call(hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -1282,28 +1282,28 @@ class _$_LoadMore implements _LoadMore {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(hidecustomer, userInfo, selectedSalesOrg);
+      return loadMore(hideCustomer, userInfo, selectedSalesOrg);
     }
     return orElse();
   }
@@ -1361,11 +1361,11 @@ class _$_LoadMore implements _LoadMore {
 
 abstract class _LoadMore implements CustomerCodeEvent {
   const factory _LoadMore(
-      {required final bool hidecustomer,
+      {required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg}) = _$_LoadMore;
 
-  bool get hidecustomer;
+  bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)
@@ -1380,7 +1380,7 @@ abstract class _$$_LoadStoredCustomerCodeCopyWith<$Res> {
       __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {bool hidecustomer, User userInfo, SalesOrganisation selectedSalesOrg});
+      {bool hideCustomer, User userInfo, SalesOrganisation selectedSalesOrg});
 
   $UserCopyWith<$Res> get userInfo;
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
@@ -1397,14 +1397,14 @@ class __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hidecustomer = null,
+    Object? hideCustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
   }) {
     return _then(_$_LoadStoredCustomerCode(
-      hidecustomer: null == hidecustomer
-          ? _value.hidecustomer
-          : hidecustomer // ignore: cast_nullable_to_non_nullable
+      hideCustomer: null == hideCustomer
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -1438,12 +1438,12 @@ class __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>
 
 class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   const _$_LoadStoredCustomerCode(
-      {required this.hidecustomer,
+      {required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg});
 
   @override
-  final bool hidecustomer;
+  final bool hideCustomer;
   @override
   final User userInfo;
   @override
@@ -1451,7 +1451,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.loadStoredCustomerCode(hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
+    return 'CustomerCodeEvent.loadStoredCustomerCode(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
   }
 
   @override
@@ -1459,8 +1459,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadStoredCustomerCode &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
+            (identical(other.hideCustomer, hideCustomer) ||
+                other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             (identical(other.selectedSalesOrg, selectedSalesOrg) ||
@@ -1469,7 +1469,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, hidecustomer, userInfo, selectedSalesOrg);
+      Object.hash(runtimeType, hideCustomer, userInfo, selectedSalesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -1485,26 +1485,26 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return loadStoredCustomerCode(hidecustomer, userInfo, selectedSalesOrg);
+    return loadStoredCustomerCode(hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -1513,27 +1513,27 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
     return loadStoredCustomerCode?.call(
-        hidecustomer, userInfo, selectedSalesOrg);
+        hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -1542,28 +1542,28 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
   }) {
     if (loadStoredCustomerCode != null) {
-      return loadStoredCustomerCode(hidecustomer, userInfo, selectedSalesOrg);
+      return loadStoredCustomerCode(hideCustomer, userInfo, selectedSalesOrg);
     }
     return orElse();
   }
@@ -1621,12 +1621,12 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
 
 abstract class _LoadStoredCustomerCode implements CustomerCodeEvent {
   const factory _LoadStoredCustomerCode(
-          {required final bool hidecustomer,
+          {required final bool hideCustomer,
           required final User userInfo,
           required final SalesOrganisation selectedSalesOrg}) =
       _$_LoadStoredCustomerCode;
 
-  bool get hidecustomer;
+  bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)
@@ -1641,7 +1641,7 @@ abstract class _$$_AutoSearchCopyWith<$Res> {
       __$$_AutoSearchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {bool hidecustomer,
+      {bool hideCustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg,
       String searchValue});
@@ -1661,15 +1661,15 @@ class __$$_AutoSearchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hidecustomer = null,
+    Object? hideCustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
     Object? searchValue = null,
   }) {
     return _then(_$_AutoSearch(
-      hidecustomer: null == hidecustomer
-          ? _value.hidecustomer
-          : hidecustomer // ignore: cast_nullable_to_non_nullable
+      hideCustomer: null == hideCustomer
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -1707,13 +1707,13 @@ class __$$_AutoSearchCopyWithImpl<$Res>
 
 class _$_AutoSearch implements _AutoSearch {
   const _$_AutoSearch(
-      {required this.hidecustomer,
+      {required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg,
       required this.searchValue});
 
   @override
-  final bool hidecustomer;
+  final bool hideCustomer;
   @override
   final User userInfo;
   @override
@@ -1723,7 +1723,7 @@ class _$_AutoSearch implements _AutoSearch {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.autoSearch(hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, searchValue: $searchValue)';
+    return 'CustomerCodeEvent.autoSearch(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, searchValue: $searchValue)';
   }
 
   @override
@@ -1731,8 +1731,8 @@ class _$_AutoSearch implements _AutoSearch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AutoSearch &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
+            (identical(other.hideCustomer, hideCustomer) ||
+                other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             (identical(other.selectedSalesOrg, selectedSalesOrg) ||
@@ -1743,7 +1743,7 @@ class _$_AutoSearch implements _AutoSearch {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, hidecustomer, userInfo, selectedSalesOrg, searchValue);
+      runtimeType, hideCustomer, userInfo, selectedSalesOrg, searchValue);
 
   @JsonKey(ignore: true)
   @override
@@ -1758,26 +1758,26 @@ class _$_AutoSearch implements _AutoSearch {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return autoSearch(hidecustomer, userInfo, selectedSalesOrg, searchValue);
+    return autoSearch(hideCustomer, userInfo, selectedSalesOrg, searchValue);
   }
 
   @override
@@ -1786,27 +1786,27 @@ class _$_AutoSearch implements _AutoSearch {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
     return autoSearch?.call(
-        hidecustomer, userInfo, selectedSalesOrg, searchValue);
+        hideCustomer, userInfo, selectedSalesOrg, searchValue);
   }
 
   @override
@@ -1815,28 +1815,28 @@ class _$_AutoSearch implements _AutoSearch {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
   }) {
     if (autoSearch != null) {
-      return autoSearch(hidecustomer, userInfo, selectedSalesOrg, searchValue);
+      return autoSearch(hideCustomer, userInfo, selectedSalesOrg, searchValue);
     }
     return orElse();
   }
@@ -1894,12 +1894,12 @@ class _$_AutoSearch implements _AutoSearch {
 
 abstract class _AutoSearch implements CustomerCodeEvent {
   const factory _AutoSearch(
-      {required final bool hidecustomer,
+      {required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg,
       required final String searchValue}) = _$_AutoSearch;
 
-  bool get hidecustomer;
+  bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   String get searchValue;
@@ -1916,7 +1916,7 @@ abstract class _$$_DeletedSearchCopyWith<$Res> {
   @useResult
   $Res call(
       {String searchText,
-      bool hidecustomer,
+      bool hideCustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg});
 
@@ -1936,7 +1936,7 @@ class __$$_DeletedSearchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchText = null,
-    Object? hidecustomer = null,
+    Object? hideCustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
   }) {
@@ -1945,9 +1945,9 @@ class __$$_DeletedSearchCopyWithImpl<$Res>
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
-      hidecustomer: null == hidecustomer
-          ? _value.hidecustomer
-          : hidecustomer // ignore: cast_nullable_to_non_nullable
+      hideCustomer: null == hideCustomer
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -1982,7 +1982,7 @@ class __$$_DeletedSearchCopyWithImpl<$Res>
 class _$_DeletedSearch implements _DeletedSearch {
   const _$_DeletedSearch(
       {this.searchText = '',
-      required this.hidecustomer,
+      required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg});
 
@@ -1990,7 +1990,7 @@ class _$_DeletedSearch implements _DeletedSearch {
   @JsonKey()
   final String searchText;
   @override
-  final bool hidecustomer;
+  final bool hideCustomer;
   @override
   final User userInfo;
   @override
@@ -1998,7 +1998,7 @@ class _$_DeletedSearch implements _DeletedSearch {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.deletedSearch(searchText: $searchText, hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
+    return 'CustomerCodeEvent.deletedSearch(searchText: $searchText, hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
   }
 
   @override
@@ -2008,8 +2008,8 @@ class _$_DeletedSearch implements _DeletedSearch {
             other is _$_DeletedSearch &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText) &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
+            (identical(other.hideCustomer, hideCustomer) ||
+                other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             (identical(other.selectedSalesOrg, selectedSalesOrg) ||
@@ -2018,7 +2018,7 @@ class _$_DeletedSearch implements _DeletedSearch {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, searchText, hidecustomer, userInfo, selectedSalesOrg);
+      runtimeType, searchText, hideCustomer, userInfo, selectedSalesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -2033,26 +2033,26 @@ class _$_DeletedSearch implements _DeletedSearch {
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selected,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         search,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
-    required TResult Function(bool hidecustomer, User userInfo,
+    required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)
         autoSearch,
-    required TResult Function(String searchText, bool hidecustomer,
+    required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
         deletedSearch,
   }) {
-    return deletedSearch(searchText, hidecustomer, userInfo, selectedSalesOrg);
+    return deletedSearch(searchText, hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -2061,27 +2061,27 @@ class _$_DeletedSearch implements _DeletedSearch {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+    TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
   }) {
     return deletedSearch?.call(
-        searchText, hidecustomer, userInfo, selectedSalesOrg);
+        searchText, hideCustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -2090,29 +2090,29 @@ class _$_DeletedSearch implements _DeletedSearch {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selected,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         search,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
-    TResult Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg, String searchValue)?
         autoSearch,
-    TResult Function(String searchText, bool hidecustomer, User userInfo,
+    TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         deletedSearch,
     required TResult orElse(),
   }) {
     if (deletedSearch != null) {
       return deletedSearch(
-          searchText, hidecustomer, userInfo, selectedSalesOrg);
+          searchText, hideCustomer, userInfo, selectedSalesOrg);
     }
     return orElse();
   }
@@ -2171,12 +2171,12 @@ class _$_DeletedSearch implements _DeletedSearch {
 abstract class _DeletedSearch implements CustomerCodeEvent {
   const factory _DeletedSearch(
       {final String searchText,
-      required final bool hidecustomer,
+      required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg}) = _$_DeletedSearch;
 
   String get searchText;
-  bool get hidecustomer;
+  bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)

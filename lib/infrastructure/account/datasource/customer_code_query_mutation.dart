@@ -61,6 +61,9 @@ query customerInformationSearch(
     ''';
   }
 
+  //TODO: Removed comboEligible and salesDeals fields so api can function properly with customer codes tagged
+  // We need to add this later when we cover combo deals for KH market
+
   // Query for fetching the customer information for Sales Rep User
   String getCustomerListForSalesRep() {
     return '''
@@ -99,8 +102,6 @@ query customerInformationSearch(
               distributionChannel
               district
               paymentTermDescription
-              comboEligible
-              salesDeals
               country
               shipTo {
                   defaultShipToAddress

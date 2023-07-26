@@ -624,7 +624,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.loadStoredCustomerCode(
-                      hidecustomer: state.hideCustomer,
+                      hideCustomer: state.hideCustomer,
                       selectedSalesOrg: state.salesOrganisation,
                       userInfo: context.read<UserBloc>().state.user,
                     ),
@@ -869,7 +869,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeInfo,
             ),
           );
-          
+
       context
           .read<SoaBloc>()
           .add(SoaEvent.fetch(customerCodeInfo: customerCodeInfo));

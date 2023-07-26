@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 abstract class ICustomerCodeRepository {
   Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode({
     required SalesOrganisation salesOrganisation,
-    required String customerCode,
+    required List<String> customerCodes,
     required bool hideCustomer,
     required int offset,
     required User user,

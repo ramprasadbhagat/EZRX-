@@ -38,7 +38,7 @@ class AdminPoAttachmentFilterDrawer extends StatelessWidget {
                   SalesOrgCustomerInfo.all(),
                 ],
               ),
-              hidecustomer: false,
+              hideCustomer: false,
             ),
           ),
         child: BlocConsumer<AdminPoAttachmentFilterBloc,
@@ -224,7 +224,7 @@ class _SalesOrgByFilter extends StatelessWidget {
                   SalesOrgCustomerInfo.all(),
                 ],
               ),
-              hidecustomer: false,
+              hideCustomer: false,
             ),
           ),
       buildWhen: (previous, current) =>
