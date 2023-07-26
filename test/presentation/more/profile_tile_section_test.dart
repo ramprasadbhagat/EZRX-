@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -17,6 +18,10 @@ import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
@@ -26,6 +31,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
+  late CustomerCodeBloc customerCodeBlocMock;
+
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
   });
@@ -33,7 +40,10 @@ void main() {
     setUp(() {
       userBlocMock = UserBlocMock();
       autoRouterMock = locator<AppRouter>();
+      customerCodeBlocMock = CustomerCodeBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -50,6 +60,8 @@ void main() {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeBlocMock),
           ],
           child: const Material(child: ProfileTile()),
         ),
@@ -105,7 +117,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final findProfileName = find.text(
-          '${'Hello'.tr()}, ${const FullName(firstName: 'test', lastName: 'test').displayFullName}',
+          '${'Hello'.tr()}, ${const FullName(firstName: 'test', lastName: 'test').toTitleCase}',
         );
         expect(findProfileName, findsOneWidget);
       },
