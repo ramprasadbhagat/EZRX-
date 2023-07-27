@@ -1,9 +1,3 @@
-//ignore_for_file: unused-code
-
-//ignore_for_file: unused-class
-
-//ignore_for_file: unused-files
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
@@ -41,6 +35,7 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
         title: Text(
           'Payment details'.tr(),
         ),
+        centerTitle: false,
       ),
       bottomNavigationBar: BlocBuilder<PaymentItemBloc, PaymentItemState>(
         builder: (context, state) {

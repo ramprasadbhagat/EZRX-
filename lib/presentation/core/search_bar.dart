@@ -21,6 +21,7 @@ class SearchBar extends StatefulWidget {
     this.isAutoSearch = true,
     this.inputFormatters = const <TextInputFormatter>[],
     this.keyboardType = TextInputType.text,
+    this.hintText = 'Search',
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -36,6 +37,7 @@ class SearchBar extends StatefulWidget {
   final bool isAutoSearch;
   final List<TextInputFormatter> inputFormatters;
   final TextInputType keyboardType;
+  final String hintText;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -82,7 +84,7 @@ class _SearchBarState extends State<SearchBar> {
                 ),
                 onPressed: () => _onClear(),
               ),
-        hintText: 'Search'.tr(),
+        hintText: widget.hintText.tr(),
         border: widget.border,
       ),
     );

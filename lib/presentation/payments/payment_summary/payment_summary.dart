@@ -41,6 +41,7 @@ class PaymentSummaryPage extends StatelessWidget {
         title: const Text(
           'Payment Summary',
         ).tr(),
+        centerTitle: false,
         actions: const [
           _PaymentSummaryActionWidget(),
         ],
@@ -76,6 +77,7 @@ class PaymentSummaryPage extends StatelessWidget {
                           clearIconKey: WidgetKeys.clearIconKey,
                           controller: TextEditingController(),
                           onClear: () {},
+                          hintText: 'Search by payment advice / voucher no.',
                         ),
                       ),
                       IconButton(
@@ -165,7 +167,7 @@ class _PaymentSummaryActionWidget extends StatelessWidget {
                               ),
                             );
                       },
-                icon: const Icon(Icons.download_outlined),
+                icon: const Icon(Icons.cloud_download_outlined),
               );
       },
     );
@@ -220,5 +222,3 @@ class _PaymentSummaryScrollList extends StatelessWidget {
     );
   }
 }
-
-

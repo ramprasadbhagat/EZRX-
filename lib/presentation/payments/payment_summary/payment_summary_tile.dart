@@ -1,13 +1,9 @@
-//ignore_for_file: unused-code
-
-//ignore_for_file: unused-class
-
-//ignore_for_file: unused-files
-
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +15,6 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 
 class PaymentSummaryGroupSection extends StatelessWidget {
   const PaymentSummaryGroupSection({
@@ -123,8 +116,8 @@ class _PaymentSummaryTiles extends StatelessWidget {
         ),
         subtitle: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 paymentSummaryDetails.status.message(paymentSummaryDetails),
@@ -133,13 +126,17 @@ class _PaymentSummaryTiles extends StatelessWidget {
                           .status.getPaymentDisplayStatusTextColor,
                     ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               PriceComponent(
                 price: paymentSummaryDetails.paymentAmount.toString(),
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 currencyCodeTextStyle:
-                    Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: ZPColors.darkGray,
+                    Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: ZPColors.primary,
                         ),
+                priceLabelStyle: Theme.of(context).textTheme.labelMedium,
               ),
             ],
           ),
