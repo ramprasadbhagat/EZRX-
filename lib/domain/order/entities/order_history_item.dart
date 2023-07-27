@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -32,6 +33,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required ProductImages productImages,
     required DateTimeStringValue requestedDeliveryDate,
     required SpecialInstructions specialInstructions,
+    required List<OrderStatusTracker> orderStatusTracker,
     required double tax,
   }) = _OrderHistoryItem;
 
@@ -57,6 +59,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         specialInstructions: SpecialInstructions(''),
         tax: 0.0,
         orderBy: '',
+        orderStatusTracker: <OrderStatusTracker>[],
       );
 
   OrderHistoryItem copyWithTaxCal({

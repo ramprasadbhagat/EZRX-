@@ -49,7 +49,7 @@ class ItemDetailsSection extends StatelessWidget {
             ),
             statusWidget: StatusLabel(
               status: StatusType(
-                orderHistoryItem.status.getOrDefaultValue(''),
+                orderHistoryItem.status.displayOrderStatus,
               ),
             ),
             quantity: orderHistoryItem.qty.toString(),

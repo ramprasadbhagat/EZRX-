@@ -74,46 +74,32 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       _$OrderHistoryItemDtoCopyWithImpl<$Res, OrderHistoryItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'DeliveryDate', defaultValue: '')
-          String deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          String orderBy,
-      @JsonKey(name: 'Batch', defaultValue: '')
-          String batch,
+      String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '') String status,
+      @JsonKey(name: 'DeliveryDate', defaultValue: '') String deliveryDate,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'Batch', defaultValue: '') String batch,
       @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
-          bool isBonusMaterial,
+      bool isBonusMaterial,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          String telephoneNumber,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          String invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
+      String telephoneNumber,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          String manufactureName,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '')
-          String expiryDate,
+      String manufactureName,
+      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          String requestedDeliveryDate,
+      String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0)
-          double tax});
+      String specialInstruction,
+      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax});
 }
 
 /// @nodoc
@@ -244,46 +230,32 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'DeliveryDate', defaultValue: '')
-          String deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          String orderBy,
-      @JsonKey(name: 'Batch', defaultValue: '')
-          String batch,
+      String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '') String status,
+      @JsonKey(name: 'DeliveryDate', defaultValue: '') String deliveryDate,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'Batch', defaultValue: '') String batch,
       @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
-          bool isBonusMaterial,
+      bool isBonusMaterial,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          String telephoneNumber,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          String invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
+      String telephoneNumber,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          String manufactureName,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '')
-          String expiryDate,
+      String manufactureName,
+      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          String requestedDeliveryDate,
+      String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0)
-          double tax});
+      String specialInstruction,
+      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax});
 }
 
 /// @nodoc
@@ -408,45 +380,34 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
 class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   const _$_OrderHistoryItemDto(
       {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required this.materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          required this.qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          required this.unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          required this.totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '')
-          required this.status,
+      required this.materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) required this.qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '') required this.status,
       @JsonKey(name: 'DeliveryDate', defaultValue: '')
-          required this.deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          required this.orderNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
-          required this.createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          required this.orderBy,
-      @JsonKey(name: 'Batch', defaultValue: '')
-          required this.batch,
+      required this.deliveryDate,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') required this.createdDate,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
+      @JsonKey(name: 'Batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
-          required this.isBonusMaterial,
+      required this.isBonusMaterial,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          required this.telephoneNumber,
+      required this.telephoneNumber,
       @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          required this.invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          required this.pOReference,
+      required this.invoiceNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') required this.pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          required this.manufactureName,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '')
-          required this.expiryDate,
+      required this.manufactureName,
+      @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          required this.requestedDeliveryDate,
+      required this.requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          required this.specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0)
-          required this.tax})
+      required this.specialInstruction,
+      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax})
       : super._();
 
   factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
@@ -604,45 +565,41 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
 abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   const factory _OrderHistoryItemDto(
       {@JsonKey(name: 'MaterialCode', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required final String materialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0)
-          required final int qty,
+      required final String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0) required final int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          required final double unitPrice,
+      required final double unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          required final double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '')
-          required final String status,
+      required final double totalPrice,
+      @JsonKey(name: 'Status', defaultValue: '') required final String status,
       @JsonKey(name: 'DeliveryDate', defaultValue: '')
-          required final String deliveryDate,
+      required final String deliveryDate,
       @JsonKey(name: 'OrderNumber', defaultValue: '')
-          required final String orderNumber,
+      required final String orderNumber,
       @JsonKey(name: 'CreatedDate', defaultValue: '')
-          required final String createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          required final String orderBy,
-      @JsonKey(name: 'Batch', defaultValue: '')
-          required final String batch,
+      required final String createdDate,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required final String orderBy,
+      @JsonKey(name: 'Batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
-          required final bool isBonusMaterial,
+      required final bool isBonusMaterial,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          required final String telephoneNumber,
+      required final String telephoneNumber,
       @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          required final String invoiceNumber,
+      required final String invoiceNumber,
       @JsonKey(name: 'POReference', defaultValue: '')
-          required final String pOReference,
+      required final String pOReference,
       @JsonKey(name: 'ManufactureName', defaultValue: '')
-          required final String manufactureName,
+      required final String manufactureName,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
-          required final String expiryDate,
+      required final String expiryDate,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          required final String requestedDeliveryDate,
+      required final String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          required final String specialInstruction,
+      required final String specialInstruction,
       @JsonKey(name: 'Tax', defaultValue: 0.0)
-          required final double tax}) = _$_OrderHistoryItemDto;
+      required final double tax}) = _$_OrderHistoryItemDto;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =

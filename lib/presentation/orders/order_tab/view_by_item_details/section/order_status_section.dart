@@ -1,13 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_status_stepper.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderStatusSection extends StatelessWidget {
   final List<CustomStep> customStep;
+  final OrderHistoryItem orderHistoryItem;
+
   const OrderStatusSection({
     Key? key,
     required this.customStep,
+    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override
@@ -22,7 +26,11 @@ class OrderStatusSection extends StatelessWidget {
               'Order Status'.tr(),
               style: Theme.of(context).textTheme.labelLarge,
             ),
-            subtitle: const Text('Expected delivery:'),
+            subtitle: orderHistoryItem.orderStatusTracker.isEmpty
+                ? Text(
+                    'Expected delivery:${orderHistoryItem.deliveryDate.toValidDateString}',
+                  )
+                : const SizedBox.shrink(),
           ),
           CustomStatusStepper(
             customStep: customStep,

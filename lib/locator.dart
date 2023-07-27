@@ -125,6 +125,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
@@ -267,6 +270,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_list_reposit
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
@@ -2957,6 +2961,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemDetailsBloc(
       viewByItemDetailsRepository: locator<ViewByItemDetailsRepository>(),
+      orderStatusTrackerRepository: locator<OrderStatusTrackerRepository>(),
     ),
   );
 
@@ -3027,10 +3032,34 @@ void setupLocator() {
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
     ),
   );
-
-  locator.registerLazySingleton(
+   locator.registerLazySingleton(
     () => AnnouncementInfoDetailsBloc(
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
+    ),
+  );
+  //============================================================
+  //  Order Status Tracker
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => OrderStatusTrackerLocalDataSource());
+
+  locator.registerLazySingleton(() => OrderStatusTrackerQuery());
+
+  locator.registerLazySingleton(
+    () => OrderStatusTrackerRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<OrderStatusTrackerQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderStatusTrackerRepository(
+      config: locator<Config>(),
+      localDataSource: locator<OrderStatusTrackerLocalDataSource>(),
+      remoteDataSource: locator<OrderStatusTrackerRemoteDataSource>(),
     ),
   );
 }

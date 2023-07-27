@@ -1,0 +1,83 @@
+{
+    "data": {
+        "zyllemStatusV2": {
+            "Entry": [
+                {
+                    "Actiom": "Close",
+                    "StepName": "Complete",
+                    "StepStape": "DONE",
+                    "State": "CLOSED",
+                    "Status": "Full delivery",
+                    "UpdateTimeStamp": "2023-02-21T10:54:22.544Z"
+                },
+                {
+                    "Actiom": "Receive Pod",
+                    "StepName": "Pod Receiving",
+                    "StepStape": "DONE",
+                    "State": "CLOSED",
+                    "Status": "Full delivery",
+                    "UpdateTimeStamp": "2023-02-21T10:54:15.526Z"
+                },
+                {
+                    "Actiom": "Handover Pod",
+                    "StepName": "Receive Pod",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "Full delivery",
+                    "UpdateTimeStamp": "2023-02-20T17:27:54.461Z"
+                },
+                {
+                    "Actiom": "Full Delivery",
+                    "StepName": "Out for Delivery",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "Full delivery",
+                    "UpdateTimeStamp": "2023-02-20T15:07:17.746Z"
+                },
+                {
+                    "Actiom": "Start Delivery",
+                    "StepName": "Transaction not started",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "Full delivery",
+                    "UpdateTimeStamp": "2023-02-20T15:07:17.283Z"
+                },
+                {
+                    "Actiom": "Pindah",
+                    "StepName": "Pindah",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "1st delivery attempt",
+                    "UpdateTimeStamp": "2023-02-20T13:21:03.024Z"
+                },
+                {
+                    "Actiom": "Arrival at Destination",
+                    "StepName": "Arrive At Destination",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "Ready For Pickup",
+                    "UpdateTimeStamp": "2023-02-20T08:46:23.85Z"
+                },
+                {
+                    "Actiom": "Truck Departed",
+                    "StepName": "Out for Delivery",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "",
+                    "UpdateTimeStamp": "2023-02-20T08:42:48.491Z"
+                },
+                {
+                    "Actiom": "Start Delivery",
+                    "StepName": "Transaction not started",
+                    "StepStape": "DONE",
+                    "State": "ONGOING",
+                    "Status": "",
+                    "UpdateTimeStamp": "2023-02-20T00:12:02.426Z"
+                }
+            ]
+        }
+    },
+    "extensions": {
+        "traceId": "9ddbb9e38d0c4db3aac8dacad04015bc"
+    }
+}

@@ -1,13 +1,10 @@
-import 'dart:ui';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/errors.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 
@@ -285,6 +282,16 @@ class StatusType extends ValueObject<String> {
       );
   String getbapiStatusType(String bapiSalesDocNumber) =>
       bapiStatusType(value.getOrElse(() => ''), bapiSalesDocNumber);
+
+  String get displayOrderStatus => getOrderStatus(value.getOrElse(() => ''));
+
+  IconData displayOrderStatusIcon(String status) => getOrderStatusIcon(status);
+
+  bool get getDisplayZyllemStatus =>
+      isEligibleStatusForZyllem(value.getOrElse(() => ''));
+
+  List<String> get displayOrderStatusDetails =>
+      getOrderStatusDetails(value.getOrElse(() => ''));
 
   const StatusType._(this.value);
 }

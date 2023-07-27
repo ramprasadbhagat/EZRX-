@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -90,6 +91,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       productImages: ProductImages.empty(),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
       specialInstructions: SpecialInstructions(specialInstruction),
+      orderStatusTracker: <OrderStatusTracker>[],
     );
   }
 

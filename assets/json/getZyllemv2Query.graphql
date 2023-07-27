@@ -1,0 +1,23 @@
+query ZyllemV2($inv: String!, $sortByUpdateTimeStamp: SORT_ORDER!) {
+  zyllemStatusV2(
+    invoiceNumber: $inv
+    sortByUpdateTimeStamp: $sortByUpdateTimeStamp
+  ) {
+    Entry {
+      Actiom
+      StepName
+      StepStape
+      State
+      Status
+      UpdateTimeStamp
+      
+    }
+    
+  }
+}
+
+variable :
+{
+  "inv": "12345",
+  "sortByUpdateTimeStamp": "DESC"
+}
