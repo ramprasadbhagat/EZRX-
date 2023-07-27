@@ -1,12 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter_html/flutter_html.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
+import 'package:flutter_html/flutter_html.dart';
+
+const offSet = 60.0;
 
 class ArticleDetails extends StatefulWidget {
   final AnnouncementArticleItem article;
@@ -19,6 +25,7 @@ class ArticleDetails extends StatefulWidget {
 class _ArticleDetailsState extends State<ArticleDetails> {
   final ScrollController _scrollController = ScrollController();
   bool _isScrollAtInitialPosition = true;
+  bool _isBackButtonEnableForAppbar = false;
 
   @override
   void initState() {
@@ -36,6 +43,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
     setState(() {
       _isScrollAtInitialPosition = _scrollController.initialScrollOffset ==
           _scrollController.position.pixels;
+      _isBackButtonEnableForAppbar = _scrollController.position.pixels > 220;
     });
   }
 
@@ -52,68 +60,111 @@ class _ArticleDetailsState extends State<ArticleDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          Stack(
-            children: [
-              CachedNetworkImage(
-                width: MediaQuery.of(context).size.width,
-                imageUrl: widget.article.thumbnail,
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) {
-                  return const SizedBox.shrink();
-                },
+      body: SafeArea(
+        child: CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              expandedHeight: 300,
+              floating: true,
+              snap: true,
+              pinned: true,
+              flexibleSpace: Stack(
+                children: [
+                  FlexibleSpaceBar(
+                    background: CachedNetworkImage(
+                      width: MediaQuery.of(context).size.width,
+                      imageUrl: widget.article.thumbnail,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => LoadingShimmer.withChild(
+                        child: Container(
+                          color: ZPColors.whiteBgCard,
+                          width: MediaQuery.of(context).size.width,
+                          height: 200,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) {
+                        return const NoRecordFound(
+                          svgImage: SvgImage.noImageAvailable,
+                          title: 'Image not available',
+                          subTitle: '',
+                        );
+                      },
+                    ),
+                  ),
+                  _isBackButtonEnableForAppbar
+                      ? const SizedBox.shrink()
+                      : IconButton(
+                          onPressed: () => context.router.pop(),
+                          icon: const CircleAvatar(
+                            maxRadius: 16,
+                            backgroundColor:
+                                ZPColors.defaultReturnSummaryStatusColor,
+                            child: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              size: 20,
+                              color: ZPColors.white,
+                            ),
+                          ),
+                        ),
+                ],
               ),
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const CircleAvatar(
-                  maxRadius: 16,
-                  backgroundColor: ZPColors.defaultReturnSummaryStatusColor,
-                  child: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    size: 20,
-                    color: ZPColors.white,
+              centerTitle: false,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(offSet),
+                child: AppBar(
+                  automaticallyImplyLeading: false,
+                  leading: _isBackButtonEnableForAppbar
+                      ? IconButton(
+                          onPressed: () => context.router.pop(),
+                          icon: const Icon(
+                            Icons.arrow_back_ios_rounded,
+                            size: 20,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                  centerTitle: false,
+                  leadingWidth: _isBackButtonEnableForAppbar ? 20 : 0,
+                  title: _TitleSection(
+                    article: widget.article,
                   ),
                 ),
               ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.article.publishedDate.getAnnouncementDateFormat,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: ZPColors.extraLightGrey4),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Text(
-                    widget.article.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge
-                        ?.copyWith(fontSize: 20),
-                  ),
-                ),
-                const Divider(
-                  color: ZPColors.accentColor,
-                  indent: 0,
-                  endIndent: 0,
-                  height: 20,
-                ),
-                Html(
-                  data: widget.article.content.getOrDefaultValue(''),
-                ),
-              ],
             ),
-          ),
-        ],
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Html(
+                          style: {
+                            'body': Style(
+                              padding: const EdgeInsets.all(0),
+                              margin: const EdgeInsets.all(0),
+                            ),
+                          },
+                          data:
+                              widget.article.content.appendedImgSrcWithBaseUrl,
+                          shrinkWrap: true,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: !_isScrollAtInitialPosition
           ? FloatingActionButton(
@@ -127,6 +178,52 @@ class _ArticleDetailsState extends State<ArticleDetails> {
               ),
             )
           : const SizedBox.shrink(),
+    );
+  }
+}
+
+class _TitleSection extends StatelessWidget {
+  const _TitleSection({
+    Key? key,
+    required this.article,
+  }) : super(key: key);
+
+  final AnnouncementArticleItem article;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          FittedBox(
+            child: Text(
+              article.publishedDate.getAnnouncementDateFormat,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: ZPColors.neutralsGrey1,
+                    fontSize: 10,
+                  ),
+            ),
+          ),
+          FittedBox(
+            child: Text(
+              article.title,
+              style: Theme.of(context).textTheme.labelSmall,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.left,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 }

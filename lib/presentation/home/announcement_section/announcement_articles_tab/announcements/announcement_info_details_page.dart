@@ -50,7 +50,7 @@ class _AnnouncementInfoDetailsPageState
     setState(() {
       _isScrollAtInitialPosition = _scrollController.initialScrollOffset ==
           _scrollController.position.pixels;
-      _isBackButtonEnableForAppbar = _scrollController.position.pixels > offSet;
+      _isBackButtonEnableForAppbar = _scrollController.position.pixels > 220;
     });
   }
 
@@ -103,11 +103,12 @@ class _AnnouncementInfoDetailsPageState
                     automaticallyImplyLeading: false,
                     expandedHeight: 300,
                     floating: true,
+                    snap: true,
                     pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Stack(
-                        children: [
-                          CachedNetworkImage(
+                    flexibleSpace: Stack(
+                      children: [
+                        FlexibleSpaceBar(
+                          background: CachedNetworkImage(
                             width: MediaQuery.of(context).size.width,
                             imageUrl: state.announcementInfoDetails.thumbnail,
                             fit: BoxFit.cover,
@@ -127,23 +128,23 @@ class _AnnouncementInfoDetailsPageState
                               );
                             },
                           ),
-                          _isBackButtonEnableForAppbar
-                              ? const SizedBox.shrink()
-                              : IconButton(
-                                  onPressed: () => context.router.pop(),
-                                  icon: const CircleAvatar(
-                                    maxRadius: 13,
-                                    backgroundColor: ZPColors
-                                        .defaultReturnSummaryStatusColor,
-                                    child: Icon(
-                                      Icons.arrow_back_ios_new_rounded,
-                                      size: 15,
-                                      color: ZPColors.white,
-                                    ),
+                        ),
+                        _isBackButtonEnableForAppbar
+                            ? const SizedBox.shrink()
+                            : IconButton(
+                                onPressed: () => context.router.pop(),
+                                icon: const CircleAvatar(
+                                  maxRadius: 13,
+                                  backgroundColor:
+                                      ZPColors.defaultReturnSummaryStatusColor,
+                                  child: Icon(
+                                    Icons.arrow_back_ios_new_rounded,
+                                    size: 15,
+                                    color: ZPColors.white,
                                   ),
                                 ),
-                        ],
-                      ),
+                              ),
+                      ],
                     ),
                     centerTitle: false,
                     bottom: PreferredSize(

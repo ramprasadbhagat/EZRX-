@@ -199,7 +199,7 @@ mixin _$AnnouncementArticleItem {
   String get title => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
-  StringValue get content => throw _privateConstructorUsedError;
+  HtmlContent get content => throw _privateConstructorUsedError;
   DateTimeStringValue get publishedDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -218,7 +218,7 @@ abstract class $AnnouncementArticleItemCopyWith<$Res> {
       String title,
       String summary,
       String thumbnail,
-      StringValue content,
+      HtmlContent content,
       DateTimeStringValue publishedDate});
 }
 
@@ -263,7 +263,7 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as HtmlContent,
       publishedDate: null == publishedDate
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
@@ -285,7 +285,7 @@ abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
       String title,
       String summary,
       String thumbnail,
-      StringValue content,
+      HtmlContent content,
       DateTimeStringValue publishedDate});
 }
 
@@ -328,7 +328,7 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as StringValue,
+              as HtmlContent,
       publishedDate: null == publishedDate
           ? _value.publishedDate
           : publishedDate // ignore: cast_nullable_to_non_nullable
@@ -358,7 +358,7 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   @override
   final String thumbnail;
   @override
-  final StringValue content;
+  final HtmlContent content;
   @override
   final DateTimeStringValue publishedDate;
 
@@ -401,7 +401,7 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
           required final String title,
           required final String summary,
           required final String thumbnail,
-          required final StringValue content,
+          required final HtmlContent content,
           required final DateTimeStringValue publishedDate}) =
       _$_AnnouncementArticleItem;
   const _AnnouncementArticleItem._() : super._();
@@ -415,7 +415,7 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   @override
   String get thumbnail;
   @override
-  StringValue get content;
+  HtmlContent get content;
   @override
   DateTimeStringValue get publishedDate;
   @override

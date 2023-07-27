@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
@@ -46,25 +47,24 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
       _$AnnouncementArticleItemDtoFromJson(json);
 
   AnnouncementArticleItem get toDomain => AnnouncementArticleItem(
-      id: id,
-      title: title,
-      content: StringValue(content),
-      summary: summary,
-      thumbnail: thumbnail,
-      publishedDate: DateTimeStringValue(publishedDate),);
+        id: id,
+        title: title,
+        content: HtmlContent(content),
+        summary: summary,
+        thumbnail: thumbnail,
+        publishedDate: DateTimeStringValue(publishedDate),
+      );
 }
 
-String getValue(Map json, String key) => json[key] != null ?
-  json[key]['value'] ?? '' : '';
+String getValue(Map json, String key) =>
+    json[key] != null ? json[key]['value'] ?? '' : '';
 
-String getSrcValue(Map json, String key) => json[key] != null ?
-  json[key]['src'] ?? '' : '';
+String getSrcValue(Map json, String key) =>
+    json[key] != null ? json[key]['src'] ?? '' : '';
 
 String getContent(Map json, String key) => json[key]?['value'] ?? '';
 
-String getDateValue(Map json, String key) => json[key] != null ?
-  json[key]['isoValue'] ?? '' : '';
-  
+String getDateValue(Map json, String key) =>
+    json[key] != null ? json[key]['isoValue'] ?? '' : '';
+
 String getEndCursorValue(Map json, String key) => json[key]?['endCursor'] ?? '';
-
-

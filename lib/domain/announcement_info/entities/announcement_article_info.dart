@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -28,7 +29,7 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
     required String title,
     required String summary,
     required String thumbnail,
-    required StringValue content,
+    required HtmlContent content,
     required DateTimeStringValue publishedDate,
   }) = _AnnouncementArticleItem;
 
@@ -37,7 +38,7 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
         title: '',
         summary: '',
         thumbnail: '',
-        content: StringValue(''),
+        content: HtmlContent(''),
         publishedDate: DateTimeStringValue(''),
       );
 }
