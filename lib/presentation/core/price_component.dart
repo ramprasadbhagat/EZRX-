@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -24,36 +23,51 @@ class PriceComponent extends StatelessWidget {
   final TextStyle? priceLabelStyle;
   final bool obscured;
 
-  @override
-  Widget build(BuildContext context) {
-    final notPriceString = price.contains(RegExp(r'[A-Za-z]'));
-
-    final priceValue = notPriceString
-        ? price.tr()
-        : StringUtils.displayPrice(salesOrgConfig, double.parse(price));
-
+  List<TextSpan> _getTextSpan(BuildContext context) {
+    final textSpans = <TextSpan>[];
+    final notPrice = price.contains(RegExp(r'[A-Za-z]'));
     final defaultStyle = Theme.of(context).textTheme.labelSmall;
 
+    final priceValue = notPrice
+        ? price.tr()
+        : StringUtils.displayPrice(salesOrgConfig, double.parse(price));
     final obscuredValue = priceValue.replaceAll(RegExp(r'[0-9]'), '*');
 
-    return EasyRichText(
-      '$title${obscured ? obscuredValue : priceValue}',
-      defaultStyle: priceTextStyle ?? defaultStyle,
+    if (title.isNotEmpty) {
+      textSpans.add(TextSpan(
+          text: title,
+          style: priceLabelStyle ?? priceTextStyle ?? defaultStyle,));
+    }
+    if (notPrice) {
+      textSpans.add(TextSpan(
+          text: obscured ? obscuredValue : priceValue,
+          style: priceTextStyle ?? defaultStyle,));
+
+      return textSpans;
+    }
+    final amount = priceValue.split(' ').last;
+    //currency
+    textSpans.add(TextSpan(
+      text: priceValue.replaceAll(amount, ''),
+      style: currencyCodeTextStyle ?? defaultStyle,
+    ));
+    //amount
+    textSpans.add(TextSpan(
+        text: obscured ? obscuredValue : amount,
+        style: priceTextStyle ?? defaultStyle,));
+
+    return textSpans;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          ..._getTextSpan(context),
+        ],
+      ),
       overflow: TextOverflow.ellipsis,
-      patternList: [
-        EasyRichTextPattern(
-          targetString: salesOrgConfig.currency.code,
-          style: currencyCodeTextStyle ?? defaultStyle,
-        ),
-        EasyRichTextPattern(
-          targetString: priceValue,
-          style: priceTextStyle ?? defaultStyle,
-        ),
-        EasyRichTextPattern(
-          targetString: title,
-          style: priceLabelStyle ?? priceTextStyle ?? defaultStyle,
-        ),
-      ],
     );
   }
 }

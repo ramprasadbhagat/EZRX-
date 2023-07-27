@@ -3,16 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StringUtils {
-  static final formatter = NumberFormat('###,###,###,###,###.##');
+  static final formatter = NumberFormat('###,###,###,###,###.00');
 
   static String displayPrice(
     SalesOrganisationConfigs salesOrgConfig,
     double price,
   ) {
-    if (salesOrgConfig.currency.isVN) {
-      return '${formatter.format(price)} ${salesOrgConfig.currency.code}';
-    }
-
     if (price.isNegative) {
       return '- ${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
     }
