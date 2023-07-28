@@ -15,8 +15,45 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AnnouncementsTab extends StatelessWidget {
+class AnnouncementsTab extends StatefulWidget {
   const AnnouncementsTab({Key? key}) : super(key: key);
+
+  @override
+  State<AnnouncementsTab> createState() => _AnnouncementsTabState();
+}
+
+class _AnnouncementsTabState extends State<AnnouncementsTab> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isScrollAtInitialPosition = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _isScrollAtInitialPosition = _scrollController.initialScrollOffset ==
+          _scrollController.position.pixels;
+    });
+  }
+
+  void _scrollToTop() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        0.0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +92,11 @@ class AnnouncementsTab extends StatelessWidget {
                       vertical: 10,
                     ),
                     child: ScrollList<AnnouncementArticleItem>(
-                      noRecordFoundWidget:
-                          const NoRecordFound(title: 'No Announcement found'),
-                      controller: ScrollController(),
+                      noRecordFoundWidget: const NoRecordFound(
+                        key: WidgetKeys.announcementNotFoundRecordKey,
+                        title: 'No Announcement found',
+                      ),
+                      controller: _scrollController,
                       onRefresh: () => context.read<AnnouncementInfoBloc>().add(
                             AnnouncementInfoEvent.fetch(
                               salesOrg:
@@ -95,6 +134,18 @@ class AnnouncementsTab extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: !_isScrollAtInitialPosition
+          ? FloatingActionButton(
+              key: WidgetKeys.scrollToTopArrowIcon,
+              onPressed: () => _scrollToTop(),
+              mini: true,
+              backgroundColor: ZPColors.secondaryMustard,
+              child: const Icon(
+                Icons.expand_less,
+                color: ZPColors.black,
+              ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 }
@@ -108,6 +159,7 @@ class _AnnouncementItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.genericKey(key: item.id),
       showBorder: false,
       showShadow: true,
       child: ListTile(

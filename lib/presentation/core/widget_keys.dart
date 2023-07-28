@@ -10,6 +10,7 @@ class WidgetKeys {
   static const Key filterApplyButton = Key('filterApplyButton');
   static const Key productImage = Key('productImage');
   static const Key customSnackBar = Key('customSnackBar');
+  static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
 
   //============================================================
   //  LOGIN
@@ -363,15 +364,22 @@ class WidgetKeys {
   static const Key announcementDetailsPageKey =
       Key('announcementDetailsPageKey');
   static const Key announcementListPageKey = Key('announcementListPageKey');
+  static const Key announcementNotFoundRecordKey =
+      Key('announcementNotFoundRecordKey');
 
   //============================================================
   //  Return By Item Page
   //============================================================
   static Key returnItem(String index) => Key('returnItem$index');
   static const Key returnItemTile = Key('returnItemTile');
-  
   //============================================================
   //  SalesOrgSelection
   //============================================================
   static const Key salesOrgSearch = Key('SalesOrgSearch');
+
+  //============================================================
+  //  Generic Key
+  //============================================================
+
+  static Key genericKey({required String key}) => Key(key);
 }
