@@ -8,8 +8,10 @@ class IconLabel extends StatelessWidget {
   final Color backgroundColor;
   final String labelText;
   final TextStyle? labelStyle;
+  final BorderRadiusGeometry? borderRadius;
 
   final EdgeInsets margin;
+  final EdgeInsets padding;
   const IconLabel({
     Key? key,
     required this.icon,
@@ -19,19 +21,21 @@ class IconLabel extends StatelessWidget {
     required this.labelText,
     this.labelStyle,
     this.margin = const EdgeInsets.only(top: 10),
+    this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+    this.borderRadius = const BorderRadius.only(
+      topRight: Radius.circular(20.0),
+      bottomRight: Radius.circular(20.0),
+    ),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        ),
+        borderRadius: borderRadius,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

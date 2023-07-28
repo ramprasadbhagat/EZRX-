@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -112,7 +114,21 @@ class ReturnByItemPage extends StatelessWidget {
       floatingActionButton: ScaleButton(
         icon: Icons.add,
         label: 'New request'.tr(),
-        onPress: () {},
+        onPress: () {
+          context.read<ReturnItemsBloc>().add(
+                ReturnItemsEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                ),
+              );
+          context.read<NewRequestBloc>().add(
+                const NewRequestEvent.initialized(),
+              );
+          context.router.pushNamed('returns/new_request');
+        },
         scrollController: _controller,
       ),
     );

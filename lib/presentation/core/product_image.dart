@@ -13,6 +13,8 @@ class ProductImage extends StatelessWidget {
   final double height;
   final double width;
   final BoxFit fit;
+  final EdgeInsetsGeometry? errorWidgetPadding;
+  final Color errorWidgetColor;
 
   const ProductImage({
     Key? key,
@@ -20,6 +22,8 @@ class ProductImage extends StatelessWidget {
     this.height = 200,
     this.width = 100,
     this.fit = BoxFit.cover,
+    this.errorWidgetPadding,
+    this.errorWidgetColor = ZPColors.extraLightGrey3,
   }) : super(key: key);
 
   @override
@@ -48,9 +52,15 @@ class ProductImage extends StatelessWidget {
             ),
           ),
           errorWidget: (context, url, error) => Container(
-            color: ZPColors.extraLightGrey3,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8.0),
+              ),
+              color: errorWidgetColor,
+            ),
             width: width,
             height: height,
+            padding: errorWidgetPadding,
             child: SvgPicture.asset(
               'assets/svg/product_default.svg',
               fit: BoxFit.contain,

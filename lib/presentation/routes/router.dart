@@ -56,6 +56,10 @@ import 'package:ezrxmobile/presentation/payments/payment_page.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/new_request.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
@@ -392,6 +396,24 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       page: SalesOrgSearch,
       path: 'salesOrg_search',
+    ),
+    AutoRoute(
+      page: NewRequestPage,
+      path: 'returns/new_request',
+      children: [
+        AutoRoute(
+          page: ReturnItemsTab,
+          path: 'returns/new_request/return_items',
+        ),
+        AutoRoute(
+          page: ReturnDetailsTab,
+          path: 'returns/new_request/return_details',
+        ),
+        AutoRoute(
+          page: ReturnReviewTab,
+          path: 'returns/new_request/return_review',
+        ),
+      ],
     ),
   ],
 )

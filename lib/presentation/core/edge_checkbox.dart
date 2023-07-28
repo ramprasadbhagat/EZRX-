@@ -15,33 +15,29 @@ class EdgeCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: value ? ZPColors.greenIconColor : ZPColors.transparent,
-              width: 2,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        onChanged(!value);
+      },
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: value ? ZPColors.greenIconColor : ZPColors.transparent,
+                width: 2,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              color: Colors.white,
             ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            color: Colors.white,
+            child: body,
           ),
-          child: body,
-        ),
-        _SelectedIcon(visible: value),
-        Positioned.fill(
-          child: Material(
-            color: ZPColors.transparent,
-            child: InkWell(
-              onTap: () {
-                onChanged(!value);
-              },
-            ),
-          ),
-        ),
-      ],
+          _SelectedIcon(visible: value),
+        ],
+      ),
     );
   }
 }

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 class WidgetKeys {
   //============================================================
+  //  Generic Key
+  //============================================================
+  static Key genericKey({required String key}) => Key(key);
+
+  //============================================================
   //  COMMON
   //============================================================
 
@@ -11,6 +16,8 @@ class WidgetKeys {
   static const Key productImage = Key('productImage');
   static const Key customSnackBar = Key('customSnackBar');
   static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
+  static const Key nextButton = Key('nextButton');
+  static const Key backButton = Key('backButton');
 
   //============================================================
   //  LOGIN
@@ -351,8 +358,6 @@ class WidgetKeys {
   //  New Payment
   //============================================================
   static const Key newPaymentPage = Key('newPaymentPage');
-  static const Key backButton = Key('backButton');
-  static const Key nextButton = Key('nextButton');
   static const Key payButton = Key('payButton');
   //============================================================
   //  Payment
@@ -375,14 +380,15 @@ class WidgetKeys {
   //============================================================
   static Key returnItem(String index) => Key('returnItem$index');
   static const Key returnItemTile = Key('returnItemTile');
+
   //============================================================
   //  SalesOrgSelection
   //============================================================
   static const Key salesOrgSearch = Key('SalesOrgSearch');
 
   //============================================================
-  //  Generic Key
+  //  New Return Request
   //============================================================
-
-  static Key genericKey({required String key}) => Key(key);
+  static const Key newRequestPage = Key('newRequestPage');
+  static const Key submitButton = Key('submitButton');
 }
