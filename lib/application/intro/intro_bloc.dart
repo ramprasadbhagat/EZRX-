@@ -14,13 +14,12 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   }) : super(IntroState.initial()) {
     on<IntroEvent>(_onEvent);
   }
-
-  void _onEvent(
+  Future<void> _onEvent(
     IntroEvent event,
     Emitter<IntroState> emit,
-  ) {
-    event.map(
-      initialIndex: (_) => emit(IntroState.initial()),
+  ) async {
+    await event.map(
+      initialIndex: (_) async => emit(IntroState.initial()),
       setIndex: (e) {
         emit(state.copyWith(index: e.index));
       },

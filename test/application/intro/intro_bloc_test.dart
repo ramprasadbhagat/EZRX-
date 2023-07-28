@@ -69,7 +69,7 @@ void main() {
       setUp: () {
         when(() => deviceRepositoryMock.setDeviceData(isAppFirstLaunch: false))
             .thenAnswer(
-          (invocation) async => const Right(unit),
+          (invocation) async => Future(() => const Right(unit)),
         );
       },
       expect: () => [
@@ -86,7 +86,8 @@ void main() {
       setUp: () {
         when(() => deviceRepositoryMock.setDeviceData(isAppFirstLaunch: false))
             .thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('Cache failed')),
+          (invocation) async =>
+              Future(() => const Left(ApiFailure.other('Cache failed'))),
         );
       },
       expect: () => [
