@@ -5,6 +5,8 @@ class ProxyLoginFormEvent with _$ProxyLoginFormEvent {
   const factory ProxyLoginFormEvent.initialized() = _Initialized;
   const factory ProxyLoginFormEvent.usernameChanged(String usernameStr) =
       _UsernameChanged;
-  const factory ProxyLoginFormEvent.loginWithADButtonPressed(User user) =
-      _LoginWithADButtonPressed;
+  const factory ProxyLoginFormEvent.loginWithADButtonPressed({
+    required User user,
+    required SalesOrg salesOrg,
+  }) = _LoginWithADButtonPressed;
 }

@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
+import 'package:ezrxmobile/presentation/more/section/login_on_behalf_sheet.dart';
 import 'package:ezrxmobile/presentation/more/section/profile_tile_section.dart';
 import 'package:ezrxmobile/presentation/more/section/version_display.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -61,6 +63,28 @@ class MoreTab extends StatelessWidget {
               icon: const Padding(
                 padding: EdgeInsets.only(left: 8.0),
                 child: Icon(
+                  Icons.login_outlined,
+                  color: ZPColors.gradient,
+                ),
+              ),
+              label: Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.start, // to align the icon to left
+                children: [
+                  Text(
+                    'Log in on behalf',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: ZPColors.gradient,
+                        ),
+                  ).tr(),
+                ],
+              ),
+              onPressed: () => _showLoginOnBehalfSheet(context),
+            ),
+            TextButton.icon(
+              icon: const Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Icon(
                   Icons.logout_outlined,
                   color: ZPColors.red,
                 ),
@@ -85,6 +109,21 @@ class MoreTab extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showLoginOnBehalfSheet(BuildContext context) {
+    context
+        .read<ProxyLoginFormBloc>()
+        .add(const ProxyLoginFormEvent.initialized());
+    showModalBottomSheet(
+      isDismissible: false,
+      useSafeArea: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (_) {
+        return const LoginOnBehalfSheet();
+      },
     );
   }
 }

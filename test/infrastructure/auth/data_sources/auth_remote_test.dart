@@ -227,12 +227,13 @@ void main() {
           );
 
           final result = await remoteDataSource.proxyLoginWithUsername(
+            salesOrg: '2001',
             username: 'username',
           );
 
           expect(
             result,
-            LoginDto.fromJson(res['data']['proxyLoginV4']).toDomain(),
+            LoginDto.fromJson(res['data']['proxyLoginV3']).toDomain(),
           );
         },
       );
@@ -259,7 +260,10 @@ void main() {
           );
 
           await remoteDataSource
-              .proxyLoginWithUsername(username: 'username')
+              .proxyLoginWithUsername(
+            username: 'username',
+            salesOrg: '2001',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(LoginMock());

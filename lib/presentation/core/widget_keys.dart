@@ -67,6 +67,9 @@ class WidgetKeys {
   //  MORE TAB BAR
   //============================================================
   static const Key profileTile = Key('profileTile');
+  static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
+  static const Key proxyLoginButton = Key('proxyLoginButton');
+  static const Key proxyLoginSheet = Key('proxyLoginSheet');
 
   //  Change Delivery Address BottomSheet
   //============================================================

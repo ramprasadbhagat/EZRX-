@@ -12,8 +12,11 @@ class JWTDto {
   @HiveField(1)
   final String refresh;
 
-  factory JWTDto.fromDomain(JWT jwtToken, JWT refresh) {
-    return JWTDto(access: jwtToken.getOrCrash(), refresh: refresh.getOrCrash());
+  factory JWTDto.fromDomain(JWT access, JWT refresh) {
+    return JWTDto(
+      access: access.getOrCrash(),
+      refresh: refresh.getOrDefaultValue(''),
+    );
   }
 
   JWT toDomain() {

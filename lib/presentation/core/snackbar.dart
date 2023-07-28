@@ -43,10 +43,11 @@ void showTopSnackBar({required BuildContext context, required String message}) {
       backgroundColor: ZPColors.backgroundTopSnackBar,
       closeIconColor: ZPColors.backgroundCloseButtonSnackBar,
       margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 200,
-          right: 20,
-          left: 20,
-          top: 0,),
+        bottom: MediaQuery.of(context).size.height - 200,
+        right: 20,
+        left: 20,
+        top: 0,
+      ),
     ),
   );
 }

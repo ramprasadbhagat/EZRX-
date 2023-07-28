@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -41,6 +42,7 @@ class ProxyLoginFormBloc
           ));
           final proxyLoginFailureOrSuccess = await authRepository.proxyLogin(
             username: state.username,
+            salesOrg: e.salesOrg,
           );
           await proxyLoginFailureOrSuccess.fold(
             (_) {
@@ -80,7 +82,6 @@ class ProxyLoginFormBloc
                   );
                   emit(
                     state.copyWith(
-                      username: Username(''),
                       isSubmitting: false,
                       showErrorMessages: false,
                       authFailureOrSuccessOption: optionOf(

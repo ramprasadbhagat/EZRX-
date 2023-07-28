@@ -326,7 +326,10 @@ void main() {
         when(() => localDataSourceMock.proxyLoginWithUsername())
             .thenAnswer((invocation) async => Login.empty());
         final userName = Username('old');
-        final result = await repository.proxyLogin(username: userName);
+        final result = await repository.proxyLogin(
+          username: userName,
+          salesOrg: SalesOrg('2001'),
+        );
         expect(result.isRight(), true);
       },
     );
@@ -355,7 +358,10 @@ void main() {
         when(() => localDataSourceMock.proxyLoginWithUsername())
             .thenThrow((invocation) async => Exception('fake-error'));
         final userName = Username('old');
-        final result = await repository.proxyLogin(username: userName);
+        final result = await repository.proxyLogin(
+          username: userName,
+          salesOrg: SalesOrg('2001'),
+        );
         expect(result.isRight(), false);
       },
     );
@@ -379,10 +385,15 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.proxyLoginWithUsername(username: 'old'))
-            .thenThrow((invocation) async => Exception('fake-error'));
+        when(() => remoteDataSourceMock.proxyLoginWithUsername(
+              username: 'old',
+              salesOrg: '2001',
+            )).thenThrow((invocation) async => Exception('fake-error'));
         final userName = Username('old');
-        final result = await repository.proxyLogin(username: userName);
+        final result = await repository.proxyLogin(
+          username: userName,
+          salesOrg: SalesOrg('2001'),
+        );
         expect(result.isRight(), false);
       },
     );
@@ -407,10 +418,15 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.proxyLoginWithUsername(username: 'old'))
-            .thenAnswer((invocation) async => Login.empty());
+        when(() => remoteDataSourceMock.proxyLoginWithUsername(
+              username: 'old',
+              salesOrg: '2001',
+            )).thenAnswer((invocation) async => Login.empty());
         final userName = Username('old');
-        final result = await repository.proxyLogin(username: userName);
+        final result = await repository.proxyLogin(
+          username: userName,
+          salesOrg: SalesOrg('2001'),
+        );
         expect(result.isRight(), true);
       },
     );

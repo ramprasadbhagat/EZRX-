@@ -88,7 +88,10 @@ class AuthRemoteDataSource {
     });
   }
 
-  Future<Login> proxyLoginWithUsername({required String username}) async {
+  Future<Login> proxyLoginWithUsername({
+    required String username,
+    required String salesOrg,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -97,16 +100,19 @@ class AuthRemoteDataSource {
           {
             'query': authQueryMutation.getProxyLoginQuery(),
             'variables': {
-              'input': {'username': username},
+              'request': {
+                'username': username,
+                'salesOrg': [salesOrg],
+              },
             },
           },
         ),
-        apiEndpoint: 'proxyLoginV4',
+        apiEndpoint: 'proxyLoginV3',
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV4');
+      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV3');
 
-      return LoginDto.fromJson(res.data['data']['proxyLoginV4']).toDomain();
+      return LoginDto.fromJson(res.data['data']['proxyLoginV3']).toDomain();
     });
   }
 

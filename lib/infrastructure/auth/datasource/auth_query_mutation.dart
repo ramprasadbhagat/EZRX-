@@ -42,32 +42,27 @@ class AuthQueryMutation {
   // By given admin access token + target username to get target access token
   String getProxyLoginQuery() {
     return '''
-      query (\$input:proxyLoginV4Input!){
-        proxyLoginV4(input:\$input){
-          authenticated
-          eZRxJWT
-          eZRxRefreshJWT
-          passwordLastReset
-          passwordExpiry
-          email
-          isAccountLocked
-          isAccountExpired
-          accountExpiryDate
-          supportedLanguages {
-            language
-            searchFilter
-          }
-          userMobileToken {
-            firstName
-            lastName
-            mobileTokens {
-              token
-              dateUpdated
-              provider
+      query proxyLogin(\$request: ProxyLoginRequestV3!) {
+        proxyLoginV3(request: \$request) {
+            userID
+            authenticated
+            eZRxJWT
+            email
+            userMobileToken {
+                firstName
+                lastName
+                mobileTokens {
+                    token
+                    dateUpdated
+                    provider
+                }
+                mobileNotifications
             }
-            mobileNotifications
-          }
-      }
+            passwordLastReset
+            passwordExpiry
+            isAccountLocked
+            isAccountExpired
+        }
     }
     ''';
   }
