@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -193,12 +194,17 @@ class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
 class ViewByItemDetailsMockBloc
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
+
 class ProductDetailMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
+
 class CreditAndInvoiceDetailsMockBloc
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
+
+class LoginFormMockBloc extends MockBloc<LoginFormEvent, LoginFormState>
+    implements LoginFormBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -229,6 +235,7 @@ void main() {
   late MaterialFilterBloc materialFilterBlocMock;
   late RecentOrderBloc recentOrderBloc;
   late ProductDetailBloc productDetailBloc;
+  late LoginFormBloc loginFormBloc;
 
   late OrderDocumentTypeBloc orderDocumentTypeMock;
   late ReturnApproverBloc returnApproverBlocMock;
@@ -321,6 +328,7 @@ void main() {
       viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
       productDetailBloc = ProductDetailMockBloc();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
+      loginFormBloc = LoginFormMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -383,12 +391,12 @@ void main() {
       when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
       when(() => viewByItemDetailsBlocMock.state)
           .thenReturn(ViewByItemDetailsState.initial());
-      when(() => recentOrderBloc.state)
-          .thenReturn(RecentOrderState.initial());
+      when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
       when(() => productDetailBloc.state)
-        .thenReturn(ProductDetailState.initial());
+          .thenReturn(ProductDetailState.initial());
       when(() => creditAndInvoiceDetailsBloc.state)
           .thenReturn(CreditAndInvoiceDetailsState.initial());
+      when(() => loginFormBloc.state).thenReturn(LoginFormState.initial());
     });
 
     Future getWidget(tester) async {
@@ -464,12 +472,13 @@ void main() {
             BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
             BlocProvider<ViewByItemDetailsBloc>(
                 create: (context) => viewByItemDetailsBlocMock),
-            BlocProvider<RecentOrderBloc>(
-                  create: (context) => recentOrderBloc),
+            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
             BlocProvider<ProductDetailBloc>(
-                  create: (context) => productDetailBloc),
+                create: (context) => productDetailBloc),
             BlocProvider<CreditAndInvoiceDetailsBloc>(
-                  create: (context) => creditAndInvoiceDetailsBloc),
+                create: (context) => creditAndInvoiceDetailsBloc),
+            BlocProvider<LoginFormBloc>(
+                create: (context) => loginFormBloc),
           ],
           child: const SplashPage(),
         ),

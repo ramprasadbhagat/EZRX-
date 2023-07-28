@@ -27,9 +27,10 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   ) async {
     await event.map(
       loadLastSavedCred: (e) async {
+        emit(state.copyWith(isSubmitting: true));
         final failureOrSuccess = await authRepository.loadCredential();
         failureOrSuccess.fold(
-          (_) {},
+          (_) => emit(state.copyWith(isSubmitting: false)),
           (cred) {
             if (cred.username.isValid() && cred.password.isValid()) {
               emit(state.copyWith(
@@ -39,6 +40,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
                 authFailureOrSuccessOption: none(),
               ));
             }
+            emit(state.copyWith(isSubmitting: false));
           },
         );
       },

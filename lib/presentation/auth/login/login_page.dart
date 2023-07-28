@@ -9,31 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    context.read<LoginFormBloc>().add(
-          const LoginFormEvent.loadLastSavedCred(),
-        );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,20 +46,14 @@ class _LoginPageState extends State<LoginPage> {
             return Responsive(
               tablet: LoginWeb(
                 key: WidgetKeys.loginWebScreen,
-                usernameController: _usernameController,
-                passwordController: _passwordController,
                 state: state,
               ),
               mobile: LoginMobile(
                 key: WidgetKeys.loginMobileScreen,
-                usernameController: _usernameController,
-                passwordController: _passwordController,
                 state: state,
               ),
               web: LoginWeb(
                 key: WidgetKeys.loginWebScreen,
-                usernameController: _usernameController,
-                passwordController: _passwordController,
                 state: state,
               ),
             );

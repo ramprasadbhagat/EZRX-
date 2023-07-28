@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_b
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 //import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -177,6 +178,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context
                     .read<EligibilityBloc>()
                     .add(const EligibilityEvent.initialized());
+
+                context.read<LoginFormBloc>().add(
+                      const LoginFormEvent.loadLastSavedCred(),
+                    );
 
                 context.router.replaceAll(
                   [

@@ -18,13 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginMobile extends StatelessWidget {
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
   final LoginFormState state;
   const LoginMobile({
     Key? key,
-    required this.usernameController,
-    required this.passwordController,
     required this.state,
   }) : super(key: key);
 
@@ -43,25 +39,21 @@ class LoginMobile extends StatelessWidget {
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  children: [
-                    const MarketSelector(),
-                    const SizedBox(height: 15),
-                    UsernameField(
-                      controller: usernameController,
-                    ),
-                    const SizedBox(height: 25),
-                    PasswordField(
-                      controller: passwordController,
-                    ),
-                    const RememberPassword(),
-                    const SizedBox(height: 15),
-                    const LoginButton(),
-                    const SizedBox(height: 25),
-                    const _OrDivider(),
-                    const SizedBox(height: 25),
-                    const _SSOLoginButton(),
-                    const SizedBox(height: 15),
-                    const _CreateAccount(),
+                  children: const [
+                    MarketSelector(),
+                    SizedBox(height: 15),
+                    UsernameField(),
+                    SizedBox(height: 25),
+                    PasswordField(),
+                    RememberPassword(),
+                    SizedBox(height: 15),
+                    LoginButton(),
+                    SizedBox(height: 25),
+                    _OrDivider(),
+                    SizedBox(height: 25),
+                    _SSOLoginButton(),
+                    SizedBox(height: 15),
+                    _CreateAccount(),
                   ],
                 ),
               ),

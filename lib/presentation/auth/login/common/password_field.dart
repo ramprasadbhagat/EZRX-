@@ -7,35 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PasswordField extends StatelessWidget {
-  final TextEditingController controller;
 
   const PasswordField({
     Key? key,
-    required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginFormBloc, LoginFormState>(
-      listenWhen: (previous, current) =>
-          previous.password != current.password && current.password.isValid(),
-      listener: (context, state) {
-        final password = state.password.getOrCrash();
-        controller.value = TextEditingValue(
-          text: password,
-          selection: TextSelection.collapsed(
-            offset: controller.selection.base.offset,
-          ),
-        );
-      },
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
       buildWhen: (previous, current) =>
           previous.passwordVisible != current.passwordVisible ||
-          previous.isSubmitting != current.isSubmitting,
+          previous.isSubmitting != current.isSubmitting ||
+          previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) {
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.loginPasswordField,
+          initValue: state.password.getOrDefaultValue(''),
           labelText: 'Password'.tr(),
-          controller: controller,
           validator: (text) => Password.login(text ?? '').value.fold(
                 (f) => f.maybeMap(
                   empty: (_) => 'Password cannot be empty.'.tr(),

@@ -13,6 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class AuthRepoMock extends Mock implements AuthRepository {}
+
 class DeviceRepoMock extends Mock implements DeviceRepository {}
 
 void main() {
@@ -28,7 +29,6 @@ void main() {
   // late Login proxyLoginWithUsername;
 
   var loginFormState = LoginFormState.initial();
-  final credMockEmpty = Cred.empty();
 
   final credMock = Cred(
     username: fakeUser,
@@ -48,42 +48,44 @@ void main() {
 
   group('Login Form Bloc', () {
     blocTest(
-      'Create bloc and load last saved cred fail',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
-      setUp: () {
-        when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
-      },
-      expect: () => [],
-    );
-
-    blocTest(
       'Create bloc and load last saved cred success',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential())
             .thenAnswer((invocation) async => Right(credMock));
-        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
-            .thenAnswer((invocation) async => const Right(false));
       },
       act: (LoginFormBloc bloc) =>
           bloc.add(const LoginFormEvent.loadLastSavedCred()),
       expect: () => [
         loginFormState.copyWith(
+          isSubmitting: true,
+        ),
+        loginFormState.copyWith(
           username: credMock.username,
           password: credMock.password,
           rememberPassword: true,
           authFailureOrSuccessOption: none(),
+          isSubmitting: true,
+        ),
+        loginFormState.copyWith(
+          username: credMock.username,
+          password: credMock.password,
+          rememberPassword: true,
+          authFailureOrSuccessOption: none(),
+          isSubmitting: false,
         )
       ],
     );
 
     blocTest(
       'Create bloc and load last saved cred failure',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
             (invocation) async => const Left(ApiFailure.accountLocked()));
@@ -98,21 +100,34 @@ void main() {
 
     blocTest(
       'Create bloc and load last saved cred fail',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential())
-            .thenAnswer((invocation) async => Right(credMockEmpty));
-        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
-            .thenAnswer((invocation) async => const Right(false));
+            .thenAnswer((invocation) async => const Left(
+                  ApiFailure.other('fake-error'),
+                ));
       },
       act: (LoginFormBloc bloc) =>
           bloc.add(const LoginFormEvent.loadLastSavedCred()),
-      expect: () => [],
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: true,
+        ),
+        loginFormState.copyWith(
+          isSubmitting: false,
+        ),
+      ],
     );
 
     blocTest(
       'Change username',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
@@ -132,7 +147,10 @@ void main() {
 
     blocTest(
       'Change password',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
@@ -152,7 +170,10 @@ void main() {
 
     blocTest(
       'Change password visible',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
@@ -172,7 +193,10 @@ void main() {
 
     blocTest(
       'Change remember password',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
@@ -192,7 +216,10 @@ void main() {
 
     blocTest(
       'Login with okta button failed',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
@@ -317,7 +344,10 @@ void main() {
 
     blocTest(
       'Login with email fail',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
@@ -358,7 +388,10 @@ void main() {
 
     blocTest(
       'Login with email success',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(
@@ -408,7 +441,10 @@ void main() {
 
     blocTest(
       'Login with email local success',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         loginFormState = LoginFormState.initial();
 
@@ -470,7 +506,10 @@ void main() {
 
     blocTest(
       'Login with email success with remember password',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(
@@ -533,7 +572,10 @@ void main() {
 
     blocTest(
       'Login with empty username input',
-      build: () => LoginFormBloc(authRepository: authRepoMock, deviceRepository: deviceRepoMock,),
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
       setUp: () {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(

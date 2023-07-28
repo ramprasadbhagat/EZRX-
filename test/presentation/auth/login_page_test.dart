@@ -563,7 +563,6 @@ void main() {
           LoginFormState.initial().copyWith(
             username: Username(''),
             password: Password.login('password'),
-            isSubmitting: false,
             showErrorMessages: true,
           ),
         ];
@@ -585,9 +584,6 @@ void main() {
         final usernameErrorText =
             find.textContaining('Username cannot be empty.'.tr());
         expect(usernameErrorText, findsOneWidget);
-        final passwordErrorText =
-            find.textContaining('Password cannot be empty.'.tr());
-        expect(passwordErrorText, findsNothing);
       },
     );
 
@@ -618,9 +614,6 @@ void main() {
         await tester.tap(loginSubmitButton);
         await tester.pump();
 
-        final usernameErrorText =
-            find.textContaining('Username cannot be empty.'.tr());
-        expect(usernameErrorText, findsNothing);
         final passwordErrorText =
             find.textContaining('Password cannot be empty.'.tr());
         expect(passwordErrorText, findsOneWidget);

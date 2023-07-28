@@ -17,15 +17,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginWeb extends StatelessWidget {
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
   final LoginFormState state;
 
   const LoginWeb({
     Key? key,
-    required this.passwordController,
     required this.state,
-    required this.usernameController,
   }) : super(key: key);
 
   @override
@@ -45,8 +41,6 @@ class LoginWeb extends StatelessWidget {
             ),
             _LoginFormWeb(
               state: state,
-              usernameController: usernameController,
-              passwordController: passwordController,
             ),
           ],
         ),
@@ -148,13 +142,9 @@ class _LoginBanner extends StatelessWidget {
 }
 
 class _LoginFormWeb extends StatelessWidget {
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
   final LoginFormState state;
   const _LoginFormWeb({
     Key? key,
-    required this.passwordController,
-    required this.usernameController,
     required this.state,
   }) : super(key: key);
 
@@ -200,13 +190,9 @@ class _LoginFormWeb extends StatelessWidget {
                         const SizedBox(
                           height: 25,
                         ),
-                        UsernameField(
-                          controller: usernameController,
-                        ),
+                        const UsernameField(),
                         const SizedBox(height: 25),
-                        PasswordField(
-                          controller: passwordController,
-                        ),
+                        const PasswordField(),
                         const SizedBox(height: 25),
                         const RememberPassword(),
                         const SizedBox(height: 15),

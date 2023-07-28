@@ -6,7 +6,7 @@ class TextFieldWithLabel extends StatelessWidget {
     Key? key,
     required this.fieldKey,
     required this.labelText,
-    required this.controller,
+    this.controller,
     required this.validator,
     required this.onChanged,
     required this.decoration,
@@ -23,7 +23,7 @@ class TextFieldWithLabel extends StatelessWidget {
   }) : super(key: key);
   final Key fieldKey;
   final String labelText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final Function(String?) validator;
   final Function(String) onChanged;
   final InputDecoration decoration;
@@ -37,6 +37,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final bool mandatory;
   final bool readOnly;
   final FocusNode? focusNode;
+
 
   @override
   Widget build(BuildContext context) {

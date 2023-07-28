@@ -7,38 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsernameField extends StatelessWidget {
-  final TextEditingController controller;
-
   const UsernameField({
     Key? key,
-    required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginFormBloc, LoginFormState>(
-      listenWhen: (previous, current) =>
-          previous.username != current.username && current.username.isValid(),
-      listener: (context, state) {
-        final username = state.username.getOrCrash();
-        controller.value = TextEditingValue(
-          text: username,
-          selection: TextSelection.collapsed(
-            offset: controller.selection.base.offset,
-          ),
-        );
-      },
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
       buildWhen: (previous, current) =>
           previous.passwordVisible != current.passwordVisible ||
-          previous.isSubmitting != current.isSubmitting,
+          previous.isSubmitting != current.isSubmitting ||
+          previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) {
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.loginUsernameField,
+          initValue: state.username.getOrDefaultValue(''),
           labelText: 'Username'.tr(),
           decoration: InputDecoration(
             hintText: 'Enter username'.tr(),
           ),
-          controller: controller,
           validator: (text) => Username(text ?? '').value.fold(
                 (f) => f.maybeMap(
                   empty: (_) => 'Username cannot be empty.'.tr(),
