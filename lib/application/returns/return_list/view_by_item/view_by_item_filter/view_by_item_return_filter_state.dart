@@ -19,6 +19,5 @@ class ViewByItemReturnFilterState with _$ViewByItemReturnFilterState {
         ],
         showErrorMessage: false,
       );
-
-  ReturnFilter get emptyViewByItemReturnFilter => ReturnFilter.empty();
+      
 }
