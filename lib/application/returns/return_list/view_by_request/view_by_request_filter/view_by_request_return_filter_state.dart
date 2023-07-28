@@ -21,5 +21,4 @@ class ViewByRequestReturnFilterState with _$ViewByRequestReturnFilterState {
         showErrorMessage: false,
       );
 
-  ReturnFilter get emptyViewByRequestReturnFilter => ReturnFilter.empty();
 }
