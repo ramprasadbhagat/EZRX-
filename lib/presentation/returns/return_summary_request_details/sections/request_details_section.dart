@@ -30,7 +30,7 @@ class RequestDetailsSection extends StatelessWidget {
         StatusTrackerSection(
           createDate: requestInformationHeader.createdDate,
           onTap: () {},
-          status: returnItem.status.getOrDefaultValue(''),
+          status: returnItem.status.displayStatusForViewByRequest,
           title: 'Return status'.tr(),
         ),
         const Divider(
@@ -72,7 +72,7 @@ class _ReturnDetailsSection extends StatelessWidget {
       minVerticalPadding: 20.0,
       title: BalanceTextRow(
         keyText: '${'Return'.tr()} #${returnItem.requestId}',
-        valueText: returnItem.status.getOrDefaultValue(''),
+        valueText: returnItem.status.displayStatusForViewByRequest,
         keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: ZPColors.white,
             ),
@@ -82,6 +82,7 @@ class _ReturnDetailsSection extends StatelessWidget {
         children: [
           BalanceTextRow(
             keyText: 'Request date'.tr(),
+            keyFlex: 2,
             valueText: requestInformationHeader.createdDate.toValidDateString,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
@@ -92,6 +93,7 @@ class _ReturnDetailsSection extends StatelessWidget {
           ),
           BalanceTextRow(
             keyText: 'Return reference'.tr(),
+            keyFlex: 2,
             valueText: requestInformationHeader.returnReference.displayLabel,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
@@ -102,6 +104,7 @@ class _ReturnDetailsSection extends StatelessWidget {
           ),
           BalanceTextRow(
             keyText: 'Special instructions'.tr(),
+            keyFlex: 2,
             valueText: requestInformationHeader
                 .specialInstructions.displaySpecialInstructions,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(

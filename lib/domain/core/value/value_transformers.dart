@@ -387,7 +387,7 @@ String getPaymentStatus(String status) {
 String getReturnByRequestStatus(String status) {
   switch (status) {
     case 'PENDING':
-      return 'Pending Approval';
+      return 'Pending Review';
     case 'REVIEWED':
       return 'Reviewed';
     case 'FAILED':
