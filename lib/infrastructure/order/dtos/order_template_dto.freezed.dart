@@ -43,15 +43,12 @@ abstract class $OrderTemplateDtoCopyWith<$Res> {
       _$OrderTemplateDtoCopyWithImpl<$Res, OrderTemplateDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id')
-          String templateId,
-      @JsonKey(name: 'name', defaultValue: '')
-          String templateName,
-      @JsonKey(name: 'user')
-          UserDto user,
+      {@JsonKey(name: 'id') String templateId,
+      @JsonKey(name: 'name', defaultValue: '') String templateName,
+      @JsonKey(name: 'user') UserDto user,
       @_CartItemListConverter()
       @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
-          List<MaterialItemDto> items});
+      List<MaterialItemDto> items});
 
   $UserDtoCopyWith<$Res> get user;
 }
@@ -112,15 +109,12 @@ abstract class _$$_OrderTemplateDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id')
-          String templateId,
-      @JsonKey(name: 'name', defaultValue: '')
-          String templateName,
-      @JsonKey(name: 'user')
-          UserDto user,
+      {@JsonKey(name: 'id') String templateId,
+      @JsonKey(name: 'name', defaultValue: '') String templateName,
+      @JsonKey(name: 'user') UserDto user,
       @_CartItemListConverter()
       @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
-          List<MaterialItemDto> items});
+      List<MaterialItemDto> items});
 
   @override
   $UserDtoCopyWith<$Res> get user;
@@ -167,15 +161,12 @@ class __$$_OrderTemplateDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrderTemplateDto extends _OrderTemplateDto {
   const _$_OrderTemplateDto(
-      {@JsonKey(name: 'id')
-          required this.templateId,
-      @JsonKey(name: 'name', defaultValue: '')
-          required this.templateName,
-      @JsonKey(name: 'user')
-          this.user = UserDto.emptyUserDto,
+      {@JsonKey(name: 'id') required this.templateId,
+      @JsonKey(name: 'name', defaultValue: '') required this.templateName,
+      @JsonKey(name: 'user') this.user = UserDto.emptyUserDto,
       @_CartItemListConverter()
       @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
-          required final List<MaterialItemDto> items})
+      required final List<MaterialItemDto> items})
       : _items = items,
         super._();
 
@@ -240,15 +231,13 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
 
 abstract class _OrderTemplateDto extends OrderTemplateDto {
   const factory _OrderTemplateDto(
-      {@JsonKey(name: 'id')
-          required final String templateId,
+      {@JsonKey(name: 'id') required final String templateId,
       @JsonKey(name: 'name', defaultValue: '')
-          required final String templateName,
-      @JsonKey(name: 'user')
-          final UserDto user,
+      required final String templateName,
+      @JsonKey(name: 'user') final UserDto user,
       @_CartItemListConverter()
       @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
-          required final List<MaterialItemDto> items}) = _$_OrderTemplateDto;
+      required final List<MaterialItemDto> items}) = _$_OrderTemplateDto;
   const _OrderTemplateDto._() : super._();
 
   factory _OrderTemplateDto.fromJson(Map<String, dynamic> json) =

@@ -157,16 +157,13 @@ class __$$_ApprovalLimitsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
   const _$_ApprovalLimitsDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'valueLowerLimit', defaultValue: 0)
-          required this.valueLowerLimit,
+      required this.valueLowerLimit,
       @JsonKey(name: 'valueUpperLimit', defaultValue: 0)
-          required this.valueUpperLimit,
-      @JsonKey(name: 'username', defaultValue: '')
-          required this.username,
-      @JsonKey(name: 'uuid', defaultValue: '')
-          required this.uuid})
+      required this.valueUpperLimit,
+      @JsonKey(name: 'username', defaultValue: '') required this.username,
+      @JsonKey(name: 'uuid', defaultValue: '') required this.uuid})
       : super._();
 
   factory _$_ApprovalLimitsDto.fromJson(Map<String, dynamic> json) =>
@@ -232,15 +229,15 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
 abstract class _ApprovalLimitsDto extends ApprovalLimitsDto {
   const factory _ApprovalLimitsDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'valueLowerLimit', defaultValue: 0)
-          required final int valueLowerLimit,
+      required final int valueLowerLimit,
       @JsonKey(name: 'valueUpperLimit', defaultValue: 0)
-          required final int valueUpperLimit,
+      required final int valueUpperLimit,
       @JsonKey(name: 'username', defaultValue: '')
-          required final String username,
+      required final String username,
       @JsonKey(name: 'uuid', defaultValue: '')
-          required final String uuid}) = _$_ApprovalLimitsDto;
+      required final String uuid}) = _$_ApprovalLimitsDto;
   const _ApprovalLimitsDto._() : super._();
 
   factory _ApprovalLimitsDto.fromJson(Map<String, dynamic> json) =

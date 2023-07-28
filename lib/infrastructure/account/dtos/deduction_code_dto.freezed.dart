@@ -44,16 +44,13 @@ abstract class $DeductionCodeDtoCopyWith<$Res> {
       _$DeductionCodeDtoCopyWithImpl<$Res, DeductionCodeDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
-          String salesDistrict,
-      @JsonKey(name: 'deductionCode', defaultValue: '')
-          String deductionCode,
+      String salesDistrict,
+      @JsonKey(name: 'deductionCode', defaultValue: '') String deductionCode,
       @JsonKey(name: 'deductionDescription', defaultValue: '')
-          String deductionDescription,
-      @JsonKey(name: 'amountType', defaultValue: '')
-          String amountType});
+      String deductionDescription,
+      @JsonKey(name: 'amountType', defaultValue: '') String amountType});
 }
 
 /// @nodoc
@@ -109,16 +106,13 @@ abstract class _$$_DeductionCodeDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
-          String salesDistrict,
-      @JsonKey(name: 'deductionCode', defaultValue: '')
-          String deductionCode,
+      String salesDistrict,
+      @JsonKey(name: 'deductionCode', defaultValue: '') String deductionCode,
       @JsonKey(name: 'deductionDescription', defaultValue: '')
-          String deductionDescription,
-      @JsonKey(name: 'amountType', defaultValue: '')
-          String amountType});
+      String deductionDescription,
+      @JsonKey(name: 'amountType', defaultValue: '') String amountType});
 }
 
 /// @nodoc
@@ -167,16 +161,14 @@ class __$$_DeductionCodeDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DeductionCodeDto extends _DeductionCodeDto {
   const _$_DeductionCodeDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
-          required this.salesDistrict,
+      required this.salesDistrict,
       @JsonKey(name: 'deductionCode', defaultValue: '')
-          required this.deductionCode,
+      required this.deductionCode,
       @JsonKey(name: 'deductionDescription', defaultValue: '')
-          required this.deductionDescription,
-      @JsonKey(name: 'amountType', defaultValue: '')
-          required this.amountType})
+      required this.deductionDescription,
+      @JsonKey(name: 'amountType', defaultValue: '') required this.amountType})
       : super._();
 
   factory _$_DeductionCodeDto.fromJson(Map<String, dynamic> json) =>
@@ -242,15 +234,15 @@ class _$_DeductionCodeDto extends _DeductionCodeDto {
 abstract class _DeductionCodeDto extends DeductionCodeDto {
   const factory _DeductionCodeDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
-          required final String salesDistrict,
+      required final String salesDistrict,
       @JsonKey(name: 'deductionCode', defaultValue: '')
-          required final String deductionCode,
+      required final String deductionCode,
       @JsonKey(name: 'deductionDescription', defaultValue: '')
-          required final String deductionDescription,
+      required final String deductionDescription,
       @JsonKey(name: 'amountType', defaultValue: '')
-          required final String amountType}) = _$_DeductionCodeDto;
+      required final String amountType}) = _$_DeductionCodeDto;
   const _DeductionCodeDto._() : super._();
 
   factory _DeductionCodeDto.fromJson(Map<String, dynamic> json) =

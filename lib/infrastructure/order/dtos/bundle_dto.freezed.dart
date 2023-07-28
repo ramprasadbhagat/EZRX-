@@ -54,22 +54,22 @@ abstract class $BundleDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'BundleName', defaultValue: '')
       @HiveField(18, defaultValue: '')
-          String bundleName,
+      String bundleName,
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(19, defaultValue: '')
-          String bundleCode,
+      String bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
       @HiveField(20, defaultValue: <BundleInfoDto>[])
-          List<BundleInfoDto> bundleInformation,
+      List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       @HiveField(21, defaultValue: <MaterialDto>[])
-          List<MaterialDto> materials,
+      List<MaterialDto> materials,
       @JsonKey(name: 'Conditions', defaultValue: '')
       @HiveField(22, defaultValue: '')
-          String conditions,
+      String conditions,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
       @HiveField(23, defaultValue: false)
-          bool bonusEligible});
+      bool bonusEligible});
 }
 
 /// @nodoc
@@ -131,22 +131,22 @@ abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'BundleName', defaultValue: '')
       @HiveField(18, defaultValue: '')
-          String bundleName,
+      String bundleName,
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(19, defaultValue: '')
-          String bundleCode,
+      String bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
       @HiveField(20, defaultValue: <BundleInfoDto>[])
-          List<BundleInfoDto> bundleInformation,
+      List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       @HiveField(21, defaultValue: <MaterialDto>[])
-          List<MaterialDto> materials,
+      List<MaterialDto> materials,
       @JsonKey(name: 'Conditions', defaultValue: '')
       @HiveField(22, defaultValue: '')
-          String conditions,
+      String conditions,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
       @HiveField(23, defaultValue: false)
-          bool bonusEligible});
+      bool bonusEligible});
 }
 
 /// @nodoc
@@ -203,22 +203,22 @@ class _$_BundleDto extends _BundleDto {
   const _$_BundleDto(
       {@JsonKey(name: 'BundleName', defaultValue: '')
       @HiveField(18, defaultValue: '')
-          required this.bundleName,
+      required this.bundleName,
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(19, defaultValue: '')
-          required this.bundleCode,
+      required this.bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
       @HiveField(20, defaultValue: <BundleInfoDto>[])
-          required final List<BundleInfoDto> bundleInformation,
+      required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       @HiveField(21, defaultValue: <MaterialDto>[])
-          required final List<MaterialDto> materials,
+      required final List<MaterialDto> materials,
       @JsonKey(name: 'Conditions', defaultValue: '')
       @HiveField(22, defaultValue: '')
-          required this.conditions,
+      required this.conditions,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
       @HiveField(23, defaultValue: false)
-          required this.bonusEligible})
+      required this.bonusEligible})
       : _bundleInformation = bundleInformation,
         _materials = materials,
         super._();
@@ -317,22 +317,22 @@ abstract class _BundleDto extends BundleDto {
   const factory _BundleDto(
       {@JsonKey(name: 'BundleName', defaultValue: '')
       @HiveField(18, defaultValue: '')
-          required final String bundleName,
+      required final String bundleName,
       @JsonKey(name: 'BundleCode', defaultValue: '')
       @HiveField(19, defaultValue: '')
-          required final String bundleCode,
+      required final String bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
       @HiveField(20, defaultValue: <BundleInfoDto>[])
-          required final List<BundleInfoDto> bundleInformation,
+      required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       @HiveField(21, defaultValue: <MaterialDto>[])
-          required final List<MaterialDto> materials,
+      required final List<MaterialDto> materials,
       @JsonKey(name: 'Conditions', defaultValue: '')
       @HiveField(22, defaultValue: '')
-          required final String conditions,
+      required final String conditions,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
       @HiveField(23, defaultValue: false)
-          required final bool bonusEligible}) = _$_BundleDto;
+      required final bool bonusEligible}) = _$_BundleDto;
   const _BundleDto._() : super._();
 
   factory _BundleDto.fromJson(Map<String, dynamic> json) =

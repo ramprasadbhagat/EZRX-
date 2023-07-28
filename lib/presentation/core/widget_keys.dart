@@ -369,4 +369,9 @@ class WidgetKeys {
   //============================================================
   static Key returnItem(String index) => Key('returnItem$index');
   static const Key returnItemTile = Key('returnItemTile');
+  
+  //============================================================
+  //  SalesOrgSelection
+  //============================================================
+  static const Key salesOrgSearch = Key('SalesOrgSearch');
 }

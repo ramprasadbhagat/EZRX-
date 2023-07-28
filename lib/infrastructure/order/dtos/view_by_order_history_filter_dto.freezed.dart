@@ -173,10 +173,9 @@ class _$_ViewByOrderHistoryFilterDto extends _ViewByOrderHistoryFilterDto {
 abstract class _ViewByOrderHistoryFilterDto
     extends ViewByOrderHistoryFilterDto {
   const factory _ViewByOrderHistoryFilterDto(
-      {@JsonKey(name: 'toDate', defaultValue: '')
-          required final String dateTo,
+      {@JsonKey(name: 'toDate', defaultValue: '') required final String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '')
-          required final String dateFrom}) = _$_ViewByOrderHistoryFilterDto;
+      required final String dateFrom}) = _$_ViewByOrderHistoryFilterDto;
   const _ViewByOrderHistoryFilterDto._() : super._();
 
   factory _ViewByOrderHistoryFilterDto.fromJson(Map<String, dynamic> json) =

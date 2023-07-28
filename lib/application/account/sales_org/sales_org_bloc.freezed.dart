@@ -22,6 +22,11 @@ mixin _$SalesOrgEvent {
     required TResult Function(SalesOrganisation salesOrganisation) selected,
     required TResult Function(List<SalesOrganisation> salesOrganisations)
         loadSavedOrganisation,
+    required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
+        fetchAvailableSalesOrg,
+    required TResult Function(
+            String keyWord, List<SalesOrganisation> salesOrgList)
+        searchSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +35,10 @@ mixin _$SalesOrgEvent {
     TResult? Function(SalesOrganisation salesOrganisation)? selected,
     TResult? Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +47,10 @@ mixin _$SalesOrgEvent {
     TResult Function(SalesOrganisation salesOrganisation)? selected,
     TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +60,9 @@ mixin _$SalesOrgEvent {
     required TResult Function(_Selected value) selected,
     required TResult Function(_LoadSavedOrganisation value)
         loadSavedOrganisation,
+    required TResult Function(_FetchAvailableSalesOrg value)
+        fetchAvailableSalesOrg,
+    required TResult Function(_SearchSalesOrg value) searchSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +70,8 @@ mixin _$SalesOrgEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Selected value)? selected,
     TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult? Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult? Function(_SearchSalesOrg value)? searchSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +79,8 @@ mixin _$SalesOrgEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
     TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult Function(_SearchSalesOrg value)? searchSalesOrg,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +146,11 @@ class _$_Initialized implements _Initialized {
     required TResult Function(SalesOrganisation salesOrganisation) selected,
     required TResult Function(List<SalesOrganisation> salesOrganisations)
         loadSavedOrganisation,
+    required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
+        fetchAvailableSalesOrg,
+    required TResult Function(
+            String keyWord, List<SalesOrganisation> salesOrgList)
+        searchSalesOrg,
   }) {
     return initialized();
   }
@@ -137,6 +162,10 @@ class _$_Initialized implements _Initialized {
     TResult? Function(SalesOrganisation salesOrganisation)? selected,
     TResult? Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
   }) {
     return initialized?.call();
   }
@@ -148,6 +177,10 @@ class _$_Initialized implements _Initialized {
     TResult Function(SalesOrganisation salesOrganisation)? selected,
     TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -163,6 +196,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Selected value) selected,
     required TResult Function(_LoadSavedOrganisation value)
         loadSavedOrganisation,
+    required TResult Function(_FetchAvailableSalesOrg value)
+        fetchAvailableSalesOrg,
+    required TResult Function(_SearchSalesOrg value) searchSalesOrg,
   }) {
     return initialized(this);
   }
@@ -173,6 +209,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Selected value)? selected,
     TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult? Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult? Function(_SearchSalesOrg value)? searchSalesOrg,
   }) {
     return initialized?.call(this);
   }
@@ -183,6 +221,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
     TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult Function(_SearchSalesOrg value)? searchSalesOrg,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -275,6 +315,11 @@ class _$_Selected implements _Selected {
     required TResult Function(SalesOrganisation salesOrganisation) selected,
     required TResult Function(List<SalesOrganisation> salesOrganisations)
         loadSavedOrganisation,
+    required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
+        fetchAvailableSalesOrg,
+    required TResult Function(
+            String keyWord, List<SalesOrganisation> salesOrgList)
+        searchSalesOrg,
   }) {
     return selected(salesOrganisation);
   }
@@ -286,6 +331,10 @@ class _$_Selected implements _Selected {
     TResult? Function(SalesOrganisation salesOrganisation)? selected,
     TResult? Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
   }) {
     return selected?.call(salesOrganisation);
   }
@@ -297,6 +346,10 @@ class _$_Selected implements _Selected {
     TResult Function(SalesOrganisation salesOrganisation)? selected,
     TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -312,6 +365,9 @@ class _$_Selected implements _Selected {
     required TResult Function(_Selected value) selected,
     required TResult Function(_LoadSavedOrganisation value)
         loadSavedOrganisation,
+    required TResult Function(_FetchAvailableSalesOrg value)
+        fetchAvailableSalesOrg,
+    required TResult Function(_SearchSalesOrg value) searchSalesOrg,
   }) {
     return selected(this);
   }
@@ -322,6 +378,8 @@ class _$_Selected implements _Selected {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Selected value)? selected,
     TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult? Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult? Function(_SearchSalesOrg value)? searchSalesOrg,
   }) {
     return selected?.call(this);
   }
@@ -332,6 +390,8 @@ class _$_Selected implements _Selected {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
     TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult Function(_SearchSalesOrg value)? searchSalesOrg,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -430,6 +490,11 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     required TResult Function(SalesOrganisation salesOrganisation) selected,
     required TResult Function(List<SalesOrganisation> salesOrganisations)
         loadSavedOrganisation,
+    required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
+        fetchAvailableSalesOrg,
+    required TResult Function(
+            String keyWord, List<SalesOrganisation> salesOrgList)
+        searchSalesOrg,
   }) {
     return loadSavedOrganisation(salesOrganisations);
   }
@@ -441,6 +506,10 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     TResult? Function(SalesOrganisation salesOrganisation)? selected,
     TResult? Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
   }) {
     return loadSavedOrganisation?.call(salesOrganisations);
   }
@@ -452,6 +521,10 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     TResult Function(SalesOrganisation salesOrganisation)? selected,
     TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
+    TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
     required TResult orElse(),
   }) {
     if (loadSavedOrganisation != null) {
@@ -467,6 +540,9 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     required TResult Function(_Selected value) selected,
     required TResult Function(_LoadSavedOrganisation value)
         loadSavedOrganisation,
+    required TResult Function(_FetchAvailableSalesOrg value)
+        fetchAvailableSalesOrg,
+    required TResult Function(_SearchSalesOrg value) searchSalesOrg,
   }) {
     return loadSavedOrganisation(this);
   }
@@ -477,6 +553,8 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Selected value)? selected,
     TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult? Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult? Function(_SearchSalesOrg value)? searchSalesOrg,
   }) {
     return loadSavedOrganisation?.call(this);
   }
@@ -487,6 +565,8 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
     TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult Function(_SearchSalesOrg value)? searchSalesOrg,
     required TResult orElse(),
   }) {
     if (loadSavedOrganisation != null) {
@@ -508,9 +588,371 @@ abstract class _LoadSavedOrganisation implements SalesOrgEvent {
 }
 
 /// @nodoc
+abstract class _$$_FetchAvailableSalesOrgCopyWith<$Res> {
+  factory _$$_FetchAvailableSalesOrgCopyWith(_$_FetchAvailableSalesOrg value,
+          $Res Function(_$_FetchAvailableSalesOrg) then) =
+      __$$_FetchAvailableSalesOrgCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SalesOrganisation> avialableSalesOrgList});
+}
+
+/// @nodoc
+class __$$_FetchAvailableSalesOrgCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$_FetchAvailableSalesOrg>
+    implements _$$_FetchAvailableSalesOrgCopyWith<$Res> {
+  __$$_FetchAvailableSalesOrgCopyWithImpl(_$_FetchAvailableSalesOrg _value,
+      $Res Function(_$_FetchAvailableSalesOrg) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? avialableSalesOrgList = null,
+  }) {
+    return _then(_$_FetchAvailableSalesOrg(
+      avialableSalesOrgList: null == avialableSalesOrgList
+          ? _value._avialableSalesOrgList
+          : avialableSalesOrgList // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrganisation>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
+  const _$_FetchAvailableSalesOrg(
+      {required final List<SalesOrganisation> avialableSalesOrgList})
+      : _avialableSalesOrgList = avialableSalesOrgList;
+
+  final List<SalesOrganisation> _avialableSalesOrgList;
+  @override
+  List<SalesOrganisation> get avialableSalesOrgList {
+    if (_avialableSalesOrgList is EqualUnmodifiableListView)
+      return _avialableSalesOrgList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_avialableSalesOrgList);
+  }
+
+  @override
+  String toString() {
+    return 'SalesOrgEvent.fetchAvailableSalesOrg(avialableSalesOrgList: $avialableSalesOrgList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchAvailableSalesOrg &&
+            const DeepCollectionEquality()
+                .equals(other._avialableSalesOrgList, _avialableSalesOrgList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_avialableSalesOrgList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchAvailableSalesOrgCopyWith<_$_FetchAvailableSalesOrg> get copyWith =>
+      __$$_FetchAvailableSalesOrgCopyWithImpl<_$_FetchAvailableSalesOrg>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation) selected,
+    required TResult Function(List<SalesOrganisation> salesOrganisations)
+        loadSavedOrganisation,
+    required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
+        fetchAvailableSalesOrg,
+    required TResult Function(
+            String keyWord, List<SalesOrganisation> salesOrgList)
+        searchSalesOrg,
+  }) {
+    return fetchAvailableSalesOrg(avialableSalesOrgList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? selected,
+    TResult? Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
+    TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
+  }) {
+    return fetchAvailableSalesOrg?.call(avialableSalesOrgList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
+    TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (fetchAvailableSalesOrg != null) {
+      return fetchAvailableSalesOrg(avialableSalesOrgList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Selected value) selected,
+    required TResult Function(_LoadSavedOrganisation value)
+        loadSavedOrganisation,
+    required TResult Function(_FetchAvailableSalesOrg value)
+        fetchAvailableSalesOrg,
+    required TResult Function(_SearchSalesOrg value) searchSalesOrg,
+  }) {
+    return fetchAvailableSalesOrg(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Selected value)? selected,
+    TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult? Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult? Function(_SearchSalesOrg value)? searchSalesOrg,
+  }) {
+    return fetchAvailableSalesOrg?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult Function(_SearchSalesOrg value)? searchSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (fetchAvailableSalesOrg != null) {
+      return fetchAvailableSalesOrg(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAvailableSalesOrg implements SalesOrgEvent {
+  const factory _FetchAvailableSalesOrg(
+          {required final List<SalesOrganisation> avialableSalesOrgList}) =
+      _$_FetchAvailableSalesOrg;
+
+  List<SalesOrganisation> get avialableSalesOrgList;
+  @JsonKey(ignore: true)
+  _$$_FetchAvailableSalesOrgCopyWith<_$_FetchAvailableSalesOrg> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SearchSalesOrgCopyWith<$Res> {
+  factory _$$_SearchSalesOrgCopyWith(
+          _$_SearchSalesOrg value, $Res Function(_$_SearchSalesOrg) then) =
+      __$$_SearchSalesOrgCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String keyWord, List<SalesOrganisation> salesOrgList});
+}
+
+/// @nodoc
+class __$$_SearchSalesOrgCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$_SearchSalesOrg>
+    implements _$$_SearchSalesOrgCopyWith<$Res> {
+  __$$_SearchSalesOrgCopyWithImpl(
+      _$_SearchSalesOrg _value, $Res Function(_$_SearchSalesOrg) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? keyWord = null,
+    Object? salesOrgList = null,
+  }) {
+    return _then(_$_SearchSalesOrg(
+      keyWord: null == keyWord
+          ? _value.keyWord
+          : keyWord // ignore: cast_nullable_to_non_nullable
+              as String,
+      salesOrgList: null == salesOrgList
+          ? _value._salesOrgList
+          : salesOrgList // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrganisation>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SearchSalesOrg implements _SearchSalesOrg {
+  const _$_SearchSalesOrg(
+      {required this.keyWord,
+      required final List<SalesOrganisation> salesOrgList})
+      : _salesOrgList = salesOrgList;
+
+  @override
+  final String keyWord;
+  final List<SalesOrganisation> _salesOrgList;
+  @override
+  List<SalesOrganisation> get salesOrgList {
+    if (_salesOrgList is EqualUnmodifiableListView) return _salesOrgList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesOrgList);
+  }
+
+  @override
+  String toString() {
+    return 'SalesOrgEvent.searchSalesOrg(keyWord: $keyWord, salesOrgList: $salesOrgList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchSalesOrg &&
+            (identical(other.keyWord, keyWord) || other.keyWord == keyWord) &&
+            const DeepCollectionEquality()
+                .equals(other._salesOrgList, _salesOrgList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, keyWord, const DeepCollectionEquality().hash(_salesOrgList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchSalesOrgCopyWith<_$_SearchSalesOrg> get copyWith =>
+      __$$_SearchSalesOrgCopyWithImpl<_$_SearchSalesOrg>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation) selected,
+    required TResult Function(List<SalesOrganisation> salesOrganisations)
+        loadSavedOrganisation,
+    required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
+        fetchAvailableSalesOrg,
+    required TResult Function(
+            String keyWord, List<SalesOrganisation> salesOrgList)
+        searchSalesOrg,
+  }) {
+    return searchSalesOrg(keyWord, salesOrgList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? selected,
+    TResult? Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
+    TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
+  }) {
+    return searchSalesOrg?.call(keyWord, salesOrgList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
+    TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
+        fetchAvailableSalesOrg,
+    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+        searchSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (searchSalesOrg != null) {
+      return searchSalesOrg(keyWord, salesOrgList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Selected value) selected,
+    required TResult Function(_LoadSavedOrganisation value)
+        loadSavedOrganisation,
+    required TResult Function(_FetchAvailableSalesOrg value)
+        fetchAvailableSalesOrg,
+    required TResult Function(_SearchSalesOrg value) searchSalesOrg,
+  }) {
+    return searchSalesOrg(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Selected value)? selected,
+    TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult? Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult? Function(_SearchSalesOrg value)? searchSalesOrg,
+  }) {
+    return searchSalesOrg?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_FetchAvailableSalesOrg value)? fetchAvailableSalesOrg,
+    TResult Function(_SearchSalesOrg value)? searchSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (searchSalesOrg != null) {
+      return searchSalesOrg(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchSalesOrg implements SalesOrgEvent {
+  const factory _SearchSalesOrg(
+      {required final String keyWord,
+      required final List<SalesOrganisation> salesOrgList}) = _$_SearchSalesOrg;
+
+  String get keyWord;
+  List<SalesOrganisation> get salesOrgList;
+  @JsonKey(ignore: true)
+  _$$_SearchSalesOrgCopyWith<_$_SearchSalesOrg> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SalesOrgState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get configs => throw _privateConstructorUsedError;
+  List<SalesOrganisation> get availableSalesOrg =>
+      throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -528,6 +970,7 @@ abstract class $SalesOrgStateCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
+      List<SalesOrganisation> availableSalesOrg,
       Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -549,6 +992,7 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
   $Res call({
     Object? salesOrganisation = null,
     Object? configs = null,
+    Object? availableSalesOrg = null,
     Object? salesOrgFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -560,6 +1004,10 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
           ? _value.configs
           : configs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      availableSalesOrg: null == availableSalesOrg
+          ? _value.availableSalesOrg
+          : availableSalesOrg // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrganisation>,
       salesOrgFailureOrSuccessOption: null == salesOrgFailureOrSuccessOption
           ? _value.salesOrgFailureOrSuccessOption
           : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -595,6 +1043,7 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
   $Res call(
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
+      List<SalesOrganisation> availableSalesOrg,
       Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption});
 
   @override
@@ -616,6 +1065,7 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? configs = null,
+    Object? availableSalesOrg = null,
     Object? salesOrgFailureOrSuccessOption = null,
   }) {
     return _then(_$_SalesOrgState(
@@ -627,6 +1077,10 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
           ? _value.configs
           : configs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      availableSalesOrg: null == availableSalesOrg
+          ? _value._availableSalesOrg
+          : availableSalesOrg // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrganisation>,
       salesOrgFailureOrSuccessOption: null == salesOrgFailureOrSuccessOption
           ? _value.salesOrgFailureOrSuccessOption
           : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -641,19 +1095,30 @@ class _$_SalesOrgState extends _SalesOrgState {
   const _$_SalesOrgState(
       {required this.salesOrganisation,
       required this.configs,
+      required final List<SalesOrganisation> availableSalesOrg,
       required this.salesOrgFailureOrSuccessOption})
-      : super._();
+      : _availableSalesOrg = availableSalesOrg,
+        super._();
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
   final SalesOrganisationConfigs configs;
+  final List<SalesOrganisation> _availableSalesOrg;
+  @override
+  List<SalesOrganisation> get availableSalesOrg {
+    if (_availableSalesOrg is EqualUnmodifiableListView)
+      return _availableSalesOrg;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableSalesOrg);
+  }
+
   @override
   final Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption)';
+    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, availableSalesOrg: $availableSalesOrg, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption)';
   }
 
   @override
@@ -664,6 +1129,8 @@ class _$_SalesOrgState extends _SalesOrgState {
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
+            const DeepCollectionEquality()
+                .equals(other._availableSalesOrg, _availableSalesOrg) &&
             (identical(other.salesOrgFailureOrSuccessOption,
                     salesOrgFailureOrSuccessOption) ||
                 other.salesOrgFailureOrSuccessOption ==
@@ -672,7 +1139,11 @@ class _$_SalesOrgState extends _SalesOrgState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, configs, salesOrgFailureOrSuccessOption);
+      runtimeType,
+      salesOrganisation,
+      configs,
+      const DeepCollectionEquality().hash(_availableSalesOrg),
+      salesOrgFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -685,6 +1156,7 @@ abstract class _SalesOrgState extends SalesOrgState {
   const factory _SalesOrgState(
       {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
+      required final List<SalesOrganisation> availableSalesOrg,
       required final Option<Either<ApiFailure, dynamic>>
           salesOrgFailureOrSuccessOption}) = _$_SalesOrgState;
   const _SalesOrgState._() : super._();
@@ -693,6 +1165,8 @@ abstract class _SalesOrgState extends SalesOrgState {
   SalesOrganisation get salesOrganisation;
   @override
   SalesOrganisationConfigs get configs;
+  @override
+  List<SalesOrganisation> get availableSalesOrg;
   @override
   Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption;
   @override

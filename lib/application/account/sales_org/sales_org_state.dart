@@ -6,12 +6,14 @@ class SalesOrgState with _$SalesOrgState {
   const factory SalesOrgState({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
+    required List<SalesOrganisation> availableSalesOrg,
     required Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
   }) = _SalesOrgState;
 
   factory SalesOrgState.initial() => SalesOrgState(
         salesOrganisation: SalesOrganisation.empty(),
         configs: SalesOrganisationConfigs.empty(),
+        availableSalesOrg: <SalesOrganisation>[],
         salesOrgFailureOrSuccessOption: none(),
       );
 

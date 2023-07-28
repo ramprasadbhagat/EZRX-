@@ -41,9 +41,8 @@ abstract class $OrderHistoryDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'OrderBasicInformation')
-          OrderHistoryBasicInfoDto orderBasicInformation,
-      @JsonKey(name: 'OrderItems')
-          List<OrderHistoryItemDto> orderItems});
+      OrderHistoryBasicInfoDto orderBasicInformation,
+      @JsonKey(name: 'OrderItems') List<OrderHistoryItemDto> orderItems});
 
   $OrderHistoryBasicInfoDtoCopyWith<$Res> get orderBasicInformation;
 }
@@ -96,9 +95,8 @@ abstract class _$$_OrderHistoryDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'OrderBasicInformation')
-          OrderHistoryBasicInfoDto orderBasicInformation,
-      @JsonKey(name: 'OrderItems')
-          List<OrderHistoryItemDto> orderItems});
+      OrderHistoryBasicInfoDto orderBasicInformation,
+      @JsonKey(name: 'OrderItems') List<OrderHistoryItemDto> orderItems});
 
   @override
   $OrderHistoryBasicInfoDtoCopyWith<$Res> get orderBasicInformation;
@@ -136,9 +134,9 @@ class __$$_OrderHistoryDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDto extends _OrderHistoryDto {
   const _$_OrderHistoryDto(
       {@JsonKey(name: 'OrderBasicInformation')
-          required this.orderBasicInformation,
+      required this.orderBasicInformation,
       @JsonKey(name: 'OrderItems')
-          required final List<OrderHistoryItemDto> orderItems})
+      required final List<OrderHistoryItemDto> orderItems})
       : _orderItems = orderItems,
         super._();
 
@@ -195,9 +193,9 @@ class _$_OrderHistoryDto extends _OrderHistoryDto {
 abstract class _OrderHistoryDto extends OrderHistoryDto {
   const factory _OrderHistoryDto(
           {@JsonKey(name: 'OrderBasicInformation')
-              required final OrderHistoryBasicInfoDto orderBasicInformation,
+          required final OrderHistoryBasicInfoDto orderBasicInformation,
           @JsonKey(name: 'OrderItems')
-              required final List<OrderHistoryItemDto> orderItems}) =
+          required final List<OrderHistoryItemDto> orderItems}) =
       _$_OrderHistoryDto;
   const _OrderHistoryDto._() : super._();
 

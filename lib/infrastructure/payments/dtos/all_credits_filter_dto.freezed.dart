@@ -47,17 +47,13 @@ abstract class $AllCreditsFilterDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          String amountValueTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String searchKey});
+      String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '') String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
@@ -119,17 +115,13 @@ abstract class _$$_AllCreditsFilterDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          String amountValueTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String searchKey});
+      String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '') String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
@@ -184,17 +176,17 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
 class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
   const _$_AllCreditsFilterDto(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required this.documentDateFrom,
+      required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required this.documentDateTo,
+      required this.documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          required this.amountValueFrom,
+      required this.amountValueFrom,
       @JsonKey(name: 'amountValueTo', defaultValue: '')
-          required this.amountValueTo,
+      required this.amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required this.filterStatuses,
+      required this.filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.searchKey})
+      required this.searchKey})
       : super._();
 
   factory _$_AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -266,17 +258,17 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
 abstract class _AllCreditsFilterDto extends AllCreditsFilterDto {
   const factory _AllCreditsFilterDto(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required final String documentDateFrom,
+      required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required final String documentDateTo,
+      required final String documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          required final String amountValueFrom,
+      required final String amountValueFrom,
       @JsonKey(name: 'amountValueTo', defaultValue: '')
-          required final String amountValueTo,
+      required final String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required final String filterStatuses,
+      required final String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required final String searchKey}) = _$_AllCreditsFilterDto;
+      required final String searchKey}) = _$_AllCreditsFilterDto;
   const _AllCreditsFilterDto._() : super._();
 
   factory _AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =

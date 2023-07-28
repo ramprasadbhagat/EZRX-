@@ -53,20 +53,16 @@ abstract class $OutstandingInvoiceFilterDtoCopyWith<$Res> {
           OutstandingInvoiceFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          String dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          String dueDateTo,
+      {@JsonKey(name: 'dueDateFrom', defaultValue: '') String dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-          String amountInTransactionCurrencyFrom,
+      String amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-          String amountInTransactionCurrencyTo,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status});
+      String amountInTransactionCurrencyTo,
+      @JsonKey(name: 'status', defaultValue: '') String status});
 }
 
 /// @nodoc
@@ -134,20 +130,16 @@ abstract class _$$_OutstandingInvoiceFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          String dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          String dueDateTo,
+      {@JsonKey(name: 'dueDateFrom', defaultValue: '') String dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-          String amountInTransactionCurrencyFrom,
+      String amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-          String amountInTransactionCurrencyTo,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status});
+      String amountInTransactionCurrencyTo,
+      @JsonKey(name: 'status', defaultValue: '') String status});
 }
 
 /// @nodoc
@@ -209,19 +201,17 @@ class __$$_OutstandingInvoiceFilterDtoCopyWithImpl<$Res>
 class _$_OutstandingInvoiceFilterDto extends _OutstandingInvoiceFilterDto {
   const _$_OutstandingInvoiceFilterDto(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          required this.dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          required this.dueDateTo,
+      required this.dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') required this.dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required this.documentDateFrom,
+      required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required this.documentDateTo,
+      required this.documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-          required this.amountInTransactionCurrencyFrom,
+      required this.amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-          required this.amountInTransactionCurrencyTo,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status})
+      required this.amountInTransactionCurrencyTo,
+      @JsonKey(name: 'status', defaultValue: '') required this.status})
       : super._();
 
   factory _$_OutstandingInvoiceFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -309,19 +299,19 @@ abstract class _OutstandingInvoiceFilterDto
     extends OutstandingInvoiceFilterDto {
   const factory _OutstandingInvoiceFilterDto(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          required final String dueDateFrom,
+      required final String dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
-          required final String dueDateTo,
+      required final String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required final String documentDateFrom,
+      required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required final String documentDateTo,
+      required final String documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-          required final String amountInTransactionCurrencyFrom,
+      required final String amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-          required final String amountInTransactionCurrencyTo,
+      required final String amountInTransactionCurrencyTo,
       @JsonKey(name: 'status', defaultValue: '')
-          required final String status}) = _$_OutstandingInvoiceFilterDto;
+      required final String status}) = _$_OutstandingInvoiceFilterDto;
   const _OutstandingInvoiceFilterDto._() : super._();
 
   factory _OutstandingInvoiceFilterDto.fromJson(Map<String, dynamic> json) =

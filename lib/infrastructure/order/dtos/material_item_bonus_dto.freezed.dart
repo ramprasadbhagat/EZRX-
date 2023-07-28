@@ -63,31 +63,31 @@ abstract class $MaterialItemBonusDtoCopyWith<$Res> {
   $Res call(
       {@HiveField(51, defaultValue: '')
       @JsonKey(name: 'MaterialNumber', defaultValue: '')
-          String materialNumber,
+      String materialNumber,
       @HiveField(52, defaultValue: 0)
       @JsonKey(name: 'freeQuantity', defaultValue: 0)
-          int qty,
+      int qty,
       @HiveField(53, defaultValue: '')
       @JsonKey(name: 'comment', defaultValue: '')
-          String comment,
+      String comment,
       @HiveField(54, defaultValue: '')
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription,
+      String materialDescription,
       @HiveField(55, defaultValue: '')
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
+      String expiryDate,
       @HiveField(56, defaultValue: '')
       @JsonKey(name: 'inStock', defaultValue: '')
-          String inStock,
+      String inStock,
       @HiveField(57, defaultValue: 0)
       @JsonKey(name: 'remainingQty', defaultValue: 0)
-          int remainingQty,
+      int remainingQty,
       @HiveField(58, defaultValue: false)
       @JsonKey(name: 'bonusOverrideFlag', defaultValue: false)
-          bool bonusOverrideFlag,
+      bool bonusOverrideFlag,
       @HiveField(59, defaultValue: false)
       @JsonKey(name: 'additionalBonusFlag', defaultValue: false)
-          bool additionalBonusFlag});
+      bool additionalBonusFlag});
 }
 
 /// @nodoc
@@ -166,31 +166,31 @@ abstract class _$$_MaterialItemBonusDtoCopyWith<$Res>
   $Res call(
       {@HiveField(51, defaultValue: '')
       @JsonKey(name: 'MaterialNumber', defaultValue: '')
-          String materialNumber,
+      String materialNumber,
       @HiveField(52, defaultValue: 0)
       @JsonKey(name: 'freeQuantity', defaultValue: 0)
-          int qty,
+      int qty,
       @HiveField(53, defaultValue: '')
       @JsonKey(name: 'comment', defaultValue: '')
-          String comment,
+      String comment,
       @HiveField(54, defaultValue: '')
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription,
+      String materialDescription,
       @HiveField(55, defaultValue: '')
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
+      String expiryDate,
       @HiveField(56, defaultValue: '')
       @JsonKey(name: 'inStock', defaultValue: '')
-          String inStock,
+      String inStock,
       @HiveField(57, defaultValue: 0)
       @JsonKey(name: 'remainingQty', defaultValue: 0)
-          int remainingQty,
+      int remainingQty,
       @HiveField(58, defaultValue: false)
       @JsonKey(name: 'bonusOverrideFlag', defaultValue: false)
-          bool bonusOverrideFlag,
+      bool bonusOverrideFlag,
       @HiveField(59, defaultValue: false)
       @JsonKey(name: 'additionalBonusFlag', defaultValue: false)
-          bool additionalBonusFlag});
+      bool additionalBonusFlag});
 }
 
 /// @nodoc
@@ -262,31 +262,31 @@ class _$_MaterialItemBonusDto extends _MaterialItemBonusDto {
   const _$_MaterialItemBonusDto(
       {@HiveField(51, defaultValue: '')
       @JsonKey(name: 'MaterialNumber', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @HiveField(52, defaultValue: 0)
       @JsonKey(name: 'freeQuantity', defaultValue: 0)
-          required this.qty,
+      required this.qty,
       @HiveField(53, defaultValue: '')
       @JsonKey(name: 'comment', defaultValue: '')
-          required this.comment,
+      required this.comment,
       @HiveField(54, defaultValue: '')
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required this.materialDescription,
+      required this.materialDescription,
       @HiveField(55, defaultValue: '')
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          required this.expiryDate,
+      required this.expiryDate,
       @HiveField(56, defaultValue: '')
       @JsonKey(name: 'inStock', defaultValue: '')
-          required this.inStock,
+      required this.inStock,
       @HiveField(57, defaultValue: 0)
       @JsonKey(name: 'remainingQty', defaultValue: 0)
-          required this.remainingQty,
+      required this.remainingQty,
       @HiveField(58, defaultValue: false)
       @JsonKey(name: 'bonusOverrideFlag', defaultValue: false)
-          required this.bonusOverrideFlag,
+      required this.bonusOverrideFlag,
       @HiveField(59, defaultValue: false)
       @JsonKey(name: 'additionalBonusFlag', defaultValue: false)
-          required this.additionalBonusFlag})
+      required this.additionalBonusFlag})
       : super._();
 
   factory _$_MaterialItemBonusDto.fromJson(Map<String, dynamic> json) =>
@@ -389,31 +389,31 @@ abstract class _MaterialItemBonusDto extends MaterialItemBonusDto {
   const factory _MaterialItemBonusDto(
       {@HiveField(51, defaultValue: '')
       @JsonKey(name: 'MaterialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @HiveField(52, defaultValue: 0)
       @JsonKey(name: 'freeQuantity', defaultValue: 0)
-          required final int qty,
+      required final int qty,
       @HiveField(53, defaultValue: '')
       @JsonKey(name: 'comment', defaultValue: '')
-          required final String comment,
+      required final String comment,
       @HiveField(54, defaultValue: '')
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required final String materialDescription,
+      required final String materialDescription,
       @HiveField(55, defaultValue: '')
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          required final String expiryDate,
+      required final String expiryDate,
       @HiveField(56, defaultValue: '')
       @JsonKey(name: 'inStock', defaultValue: '')
-          required final String inStock,
+      required final String inStock,
       @HiveField(57, defaultValue: 0)
       @JsonKey(name: 'remainingQty', defaultValue: 0)
-          required final int remainingQty,
+      required final int remainingQty,
       @HiveField(58, defaultValue: false)
       @JsonKey(name: 'bonusOverrideFlag', defaultValue: false)
-          required final bool bonusOverrideFlag,
+      required final bool bonusOverrideFlag,
       @HiveField(59, defaultValue: false)
       @JsonKey(name: 'additionalBonusFlag', defaultValue: false)
-          required final bool additionalBonusFlag}) = _$_MaterialItemBonusDto;
+      required final bool additionalBonusFlag}) = _$_MaterialItemBonusDto;
   const _MaterialItemBonusDto._() : super._();
 
   factory _MaterialItemBonusDto.fromJson(Map<String, dynamic> json) =

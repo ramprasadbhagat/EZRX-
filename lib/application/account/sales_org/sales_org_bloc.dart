@@ -71,6 +71,28 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
           ),
         );
       },
+      fetchAvailableSalesOrg: (e) {
+        emit(
+          state.copyWith(
+            availableSalesOrg: e.avialableSalesOrgList,
+            salesOrgFailureOrSuccessOption: none(),
+          ),
+        );
+      },
+      searchSalesOrg: (e) {
+        emit(
+          state.copyWith(
+            availableSalesOrg: e.salesOrgList
+                .where((element) =>
+                    element.salesOrg.buName.toLowerCase().contains(e.keyWord) ||
+                    element.salesOrg.value
+                        .getOrElse(() => '')
+                        .contains(e.keyWord))
+                .toList(),
+            salesOrgFailureOrSuccessOption: none(),
+          ),
+        );
+      },
     );
   }
 

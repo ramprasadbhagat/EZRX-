@@ -174,18 +174,14 @@ class __$$_PaymentAdviceFooterDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentAdviceFooterDto extends _PaymentAdviceFooterDto {
   _$_PaymentAdviceFooterDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          required this.salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '')
-          required this.footer,
+      required this.salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '') required this.footer,
       @JsonKey(name: 'headerLogoPath', defaultValue: '')
-          required this.headerLogoPath,
-      @JsonKey(name: 'header', defaultValue: '')
-          required this.header,
-      @JsonKey(name: 'pleaseNote', defaultValue: '')
-          required this.pleaseNote})
+      required this.headerLogoPath,
+      @JsonKey(name: 'header', defaultValue: '') required this.header,
+      @JsonKey(name: 'pleaseNote', defaultValue: '') required this.pleaseNote})
       : super._();
 
   factory _$_PaymentAdviceFooterDto.fromJson(Map<String, dynamic> json) =>
@@ -255,17 +251,15 @@ class _$_PaymentAdviceFooterDto extends _PaymentAdviceFooterDto {
 abstract class _PaymentAdviceFooterDto extends PaymentAdviceFooterDto {
   factory _PaymentAdviceFooterDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          required final String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '')
-          required final String footer,
+      required final String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '') required final String footer,
       @JsonKey(name: 'headerLogoPath', defaultValue: '')
-          required final String headerLogoPath,
-      @JsonKey(name: 'header', defaultValue: '')
-          required final String header,
+      required final String headerLogoPath,
+      @JsonKey(name: 'header', defaultValue: '') required final String header,
       @JsonKey(name: 'pleaseNote', defaultValue: '')
-          required final String pleaseNote}) = _$_PaymentAdviceFooterDto;
+      required final String pleaseNote}) = _$_PaymentAdviceFooterDto;
   _PaymentAdviceFooterDto._() : super._();
 
   factory _PaymentAdviceFooterDto.fromJson(Map<String, dynamic> json) =
@@ -457,10 +451,9 @@ class _$_PaymentAdviceLogoNetworkFileDto
 abstract class _PaymentAdviceLogoNetworkFileDto
     extends PaymentAdviceLogoNetworkFileDto {
   factory _PaymentAdviceLogoNetworkFileDto(
-      {@JsonKey(name: 'url', defaultValue: '')
-          required final String url,
+      {@JsonKey(name: 'url', defaultValue: '') required final String url,
       @JsonKey(name: 'filename', defaultValue: '')
-          required final String fileName}) = _$_PaymentAdviceLogoNetworkFileDto;
+      required final String fileName}) = _$_PaymentAdviceLogoNetworkFileDto;
   _PaymentAdviceLogoNetworkFileDto._() : super._();
 
   factory _PaymentAdviceLogoNetworkFileDto.fromJson(Map<String, dynamic> json) =

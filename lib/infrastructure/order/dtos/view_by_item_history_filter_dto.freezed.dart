@@ -43,11 +43,9 @@ abstract class $ViewByItemHistoryFilterDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          String dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          String dateFrom});
+      List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom});
 }
 
 /// @nodoc
@@ -96,11 +94,9 @@ abstract class _$$_ViewByItemHistoryFilterDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          String dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          String dateFrom});
+      List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom});
 }
 
 /// @nodoc
@@ -142,11 +138,9 @@ class __$$_ViewByItemHistoryFilterDtoCopyWithImpl<$Res>
 class _$_ViewByItemHistoryFilterDto extends _ViewByItemHistoryFilterDto {
   const _$_ViewByItemHistoryFilterDto(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          required final List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          required this.dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          required this.dateFrom})
+      required final List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') required this.dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') required this.dateFrom})
       : _orderStatus = orderStatus,
         super._();
 
@@ -209,11 +203,10 @@ class _$_ViewByItemHistoryFilterDto extends _ViewByItemHistoryFilterDto {
 abstract class _ViewByItemHistoryFilterDto extends ViewByItemHistoryFilterDto {
   const factory _ViewByItemHistoryFilterDto(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          required final List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          required final String dateTo,
+      required final List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') required final String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '')
-          required final String dateFrom}) = _$_ViewByItemHistoryFilterDto;
+      required final String dateFrom}) = _$_ViewByItemHistoryFilterDto;
   const _ViewByItemHistoryFilterDto._() : super._();
 
   factory _ViewByItemHistoryFilterDto.fromJson(Map<String, dynamic> json) =

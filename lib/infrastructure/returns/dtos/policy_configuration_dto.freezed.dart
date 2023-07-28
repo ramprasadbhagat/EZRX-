@@ -51,22 +51,16 @@ abstract class $PolicyConfigurationDtoCopyWith<$Res> {
       _$PolicyConfigurationDtoCopyWithImpl<$Res, PolicyConfigurationDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'monthsBeforeExpiry', defaultValue: '')
-          String monthsBeforeExpiry,
+      String monthsBeforeExpiry,
       @JsonKey(name: 'monthsAfterExpiry', defaultValue: '')
-          String monthsAfterExpiry,
-      @JsonKey(name: 'uuid', defaultValue: '')
-          String uuid,
-      @JsonKey(name: 'returnsAllowed', defaultValue: false)
-          bool returnsAllowed,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status});
+      String monthsAfterExpiry,
+      @JsonKey(name: 'uuid', defaultValue: '') String uuid,
+      @JsonKey(name: 'returnsAllowed', defaultValue: false) bool returnsAllowed,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'status', defaultValue: '') String status});
 }
 
 /// @nodoc
@@ -138,22 +132,16 @@ abstract class _$$_PolicyConfigurationDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'monthsBeforeExpiry', defaultValue: '')
-          String monthsBeforeExpiry,
+      String monthsBeforeExpiry,
       @JsonKey(name: 'monthsAfterExpiry', defaultValue: '')
-          String monthsAfterExpiry,
-      @JsonKey(name: 'uuid', defaultValue: '')
-          String uuid,
-      @JsonKey(name: 'returnsAllowed', defaultValue: false)
-          bool returnsAllowed,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status});
+      String monthsAfterExpiry,
+      @JsonKey(name: 'uuid', defaultValue: '') String uuid,
+      @JsonKey(name: 'returnsAllowed', defaultValue: false) bool returnsAllowed,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'status', defaultValue: '') String status});
 }
 
 /// @nodoc
@@ -218,22 +206,19 @@ class __$$_PolicyConfigurationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PolicyConfigurationDto extends _PolicyConfigurationDto {
   const _$_PolicyConfigurationDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required this.principalCode,
+      required this.principalCode,
       @JsonKey(name: 'monthsBeforeExpiry', defaultValue: '')
-          required this.monthsBeforeExpiry,
+      required this.monthsBeforeExpiry,
       @JsonKey(name: 'monthsAfterExpiry', defaultValue: '')
-          required this.monthsAfterExpiry,
-      @JsonKey(name: 'uuid', defaultValue: '')
-          required this.uuid,
+      required this.monthsAfterExpiry,
+      @JsonKey(name: 'uuid', defaultValue: '') required this.uuid,
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
-          required this.returnsAllowed,
+      required this.returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status})
+      required this.principalName,
+      @JsonKey(name: 'status', defaultValue: '') required this.status})
       : super._();
 
   factory _$_PolicyConfigurationDto.fromJson(Map<String, dynamic> json) =>
@@ -321,21 +306,20 @@ class _$_PolicyConfigurationDto extends _PolicyConfigurationDto {
 abstract class _PolicyConfigurationDto extends PolicyConfigurationDto {
   const factory _PolicyConfigurationDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required final String principalCode,
+      required final String principalCode,
       @JsonKey(name: 'monthsBeforeExpiry', defaultValue: '')
-          required final String monthsBeforeExpiry,
+      required final String monthsBeforeExpiry,
       @JsonKey(name: 'monthsAfterExpiry', defaultValue: '')
-          required final String monthsAfterExpiry,
-      @JsonKey(name: 'uuid', defaultValue: '')
-          required final String uuid,
+      required final String monthsAfterExpiry,
+      @JsonKey(name: 'uuid', defaultValue: '') required final String uuid,
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
-          required final bool returnsAllowed,
+      required final bool returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName,
+      required final String principalName,
       @JsonKey(name: 'status', defaultValue: '')
-          required final String status}) = _$_PolicyConfigurationDto;
+      required final String status}) = _$_PolicyConfigurationDto;
   const _PolicyConfigurationDto._() : super._();
 
   factory _PolicyConfigurationDto.fromJson(Map<String, dynamic> json) =

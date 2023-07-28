@@ -182,10 +182,9 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
 abstract class _PaymentCustomerInformationDto
     extends PaymentCustomerInformationDto {
   const factory _PaymentCustomerInformationDto(
-          {@JsonKey(name: 'paymentTerm')
-              required final String paymentTerm,
+          {@JsonKey(name: 'paymentTerm') required final String paymentTerm,
           @JsonKey(name: 'shipTo')
-              required final List<ShipToDto> shipToDtoList}) =
+          required final List<ShipToDto> shipToDtoList}) =
       _$_PaymentCustomerInformationDto;
   const _PaymentCustomerInformationDto._() : super._();
 

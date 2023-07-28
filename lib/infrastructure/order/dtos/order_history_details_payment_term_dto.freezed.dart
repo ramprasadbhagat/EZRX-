@@ -42,9 +42,9 @@ abstract class $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
-          String paymentTermCode,
+      String paymentTermCode,
       @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
-          String paymentTermDescription});
+      String paymentTermDescription});
 }
 
 /// @nodoc
@@ -88,9 +88,9 @@ abstract class _$$_OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
-          String paymentTermCode,
+      String paymentTermCode,
       @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
-          String paymentTermDescription});
+      String paymentTermDescription});
 }
 
 /// @nodoc
@@ -128,9 +128,9 @@ class _$_OrderHistoryDetailsPaymentTermDto
     extends _OrderHistoryDetailsPaymentTermDto {
   const _$_OrderHistoryDetailsPaymentTermDto(
       {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
-          required this.paymentTermCode,
+      required this.paymentTermCode,
       @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
-          required this.paymentTermDescription})
+      required this.paymentTermDescription})
       : super._();
 
   factory _$_OrderHistoryDetailsPaymentTermDto.fromJson(
@@ -185,9 +185,9 @@ abstract class _OrderHistoryDetailsPaymentTermDto
     extends OrderHistoryDetailsPaymentTermDto {
   const factory _OrderHistoryDetailsPaymentTermDto(
           {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
-              required final String paymentTermCode,
+          required final String paymentTermCode,
           @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
-              required final String paymentTermDescription}) =
+          required final String paymentTermDescription}) =
       _$_OrderHistoryDetailsPaymentTermDto;
   const _OrderHistoryDetailsPaymentTermDto._() : super._();
 

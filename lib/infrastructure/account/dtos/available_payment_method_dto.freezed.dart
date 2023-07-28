@@ -120,10 +120,9 @@ class __$$_AvailablePaymentMethodDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AvailablePaymentMethodDto extends _AvailablePaymentMethodDto {
   const _$_AvailablePaymentMethodDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'paymentMethods', defaultValue: '')
-          required this.paymentMethod})
+      required this.paymentMethod})
       : super._();
 
   factory _$_AvailablePaymentMethodDto.fromJson(Map<String, dynamic> json) =>
@@ -174,9 +173,9 @@ class _$_AvailablePaymentMethodDto extends _AvailablePaymentMethodDto {
 abstract class _AvailablePaymentMethodDto extends AvailablePaymentMethodDto {
   const factory _AvailablePaymentMethodDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'paymentMethods', defaultValue: '')
-          required final String paymentMethod}) = _$_AvailablePaymentMethodDto;
+      required final String paymentMethod}) = _$_AvailablePaymentMethodDto;
   const _AvailablePaymentMethodDto._() : super._();
 
   factory _AvailablePaymentMethodDto.fromJson(Map<String, dynamic> json) =

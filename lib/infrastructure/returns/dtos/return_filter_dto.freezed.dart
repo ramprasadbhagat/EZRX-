@@ -44,16 +44,13 @@ abstract class $ReturnFilterDtoCopyWith<$Res> {
       _$ReturnFilterDtoCopyWithImpl<$Res, ReturnFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dateFrom', defaultValue: '')
-          String dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          String dateTo,
+      {@JsonKey(name: 'dateFrom', defaultValue: '') String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') String dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          String refundTotalFrom,
-      @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          String refundTotalTo,
+      String refundTotalFrom,
+      @JsonKey(name: 'refundTotalTo', defaultValue: '') String refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          List<String> statusList});
+      List<String> statusList});
 }
 
 /// @nodoc
@@ -109,16 +106,13 @@ abstract class _$$_ReturnFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dateFrom', defaultValue: '')
-          String dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          String dateTo,
+      {@JsonKey(name: 'dateFrom', defaultValue: '') String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') String dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          String refundTotalFrom,
-      @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          String refundTotalTo,
+      String refundTotalFrom,
+      @JsonKey(name: 'refundTotalTo', defaultValue: '') String refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          List<String> statusList});
+      List<String> statusList});
 }
 
 /// @nodoc
@@ -167,16 +161,14 @@ class __$$_ReturnFilterDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnFilterDto extends _ReturnFilterDto {
   const _$_ReturnFilterDto(
-      {@JsonKey(name: 'dateFrom', defaultValue: '')
-          required this.dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          required this.dateTo,
+      {@JsonKey(name: 'dateFrom', defaultValue: '') required this.dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') required this.dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          required this.refundTotalFrom,
+      required this.refundTotalFrom,
       @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          required this.refundTotalTo,
+      required this.refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          required final List<String> statusList})
+      required final List<String> statusList})
       : _statusList = statusList,
         super._();
 
@@ -252,15 +244,14 @@ class _$_ReturnFilterDto extends _ReturnFilterDto {
 abstract class _ReturnFilterDto extends ReturnFilterDto {
   const factory _ReturnFilterDto(
       {@JsonKey(name: 'dateFrom', defaultValue: '')
-          required final String dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          required final String dateTo,
+      required final String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') required final String dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          required final String refundTotalFrom,
+      required final String refundTotalFrom,
       @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          required final String refundTotalTo,
+      required final String refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          required final List<String> statusList}) = _$_ReturnFilterDto;
+      required final List<String> statusList}) = _$_ReturnFilterDto;
   const _ReturnFilterDto._() : super._();
 
   factory _ReturnFilterDto.fromJson(Map<String, dynamic> json) =

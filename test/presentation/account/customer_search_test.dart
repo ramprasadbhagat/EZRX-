@@ -9,7 +9,9 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -172,6 +174,11 @@ void main() {
               ),
             ],
           ));
+          when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2501')
+            )
+          ));
       await tester.pumpWidget(getScopedWidget());
       final customerSearchPage = find.byKey(const Key('customerSearchPage'));
       expect(customerSearchPage, findsOneWidget);
@@ -235,6 +242,11 @@ void main() {
             customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2501')
+            )
+          ));    
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getScopedWidget());
@@ -273,6 +285,11 @@ void main() {
             customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2501')
+            )
+          ));    
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getScopedWidget());
@@ -642,6 +659,11 @@ void main() {
             ),
           ]),
         );
+        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2501')
+            )
+          ));
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();

@@ -60,32 +60,20 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
       _$ReturnItemDtoCopyWithImpl<$Res, ReturnItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'requestId', defaultValue: '')
-          String requestId,
-      @JsonKey(name: 'requestDate', defaultValue: '')
-          String requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '')
-          String itemQty,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'materialName', defaultValue: '')
-          String materialName,
+      {@JsonKey(name: 'requestId', defaultValue: '') String requestId,
+      @JsonKey(name: 'requestDate', defaultValue: '') String requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '') String itemQty,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'materialName', defaultValue: '') String materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'orderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'invoiceID', defaultValue: '')
-          String invoiceID,
-      @JsonKey(name: 'customerName', defaultValue: '')
-          String customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          String expiry});
+      String defaultMaterialDescription,
+      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'invoiceID', defaultValue: '') String invoiceID,
+      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
+      @JsonKey(name: 'expiry', defaultValue: '') String expiry});
 }
 
 /// @nodoc
@@ -181,32 +169,20 @@ abstract class _$$_ReturnItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'requestId', defaultValue: '')
-          String requestId,
-      @JsonKey(name: 'requestDate', defaultValue: '')
-          String requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '')
-          String itemQty,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          String totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'materialName', defaultValue: '')
-          String materialName,
+      {@JsonKey(name: 'requestId', defaultValue: '') String requestId,
+      @JsonKey(name: 'requestDate', defaultValue: '') String requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '') String itemQty,
+      @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'materialName', defaultValue: '') String materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'orderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'invoiceID', defaultValue: '')
-          String invoiceID,
-      @JsonKey(name: 'customerName', defaultValue: '')
-          String customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          String batch,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          String expiry});
+      String defaultMaterialDescription,
+      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'invoiceID', defaultValue: '') String invoiceID,
+      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
+      @JsonKey(name: 'expiry', defaultValue: '') String expiry});
 }
 
 /// @nodoc
@@ -295,32 +271,23 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnItemDto extends _ReturnItemDto {
   const _$_ReturnItemDto(
-      {@JsonKey(name: 'requestId', defaultValue: '')
-          required this.requestId,
-      @JsonKey(name: 'requestDate', defaultValue: '')
-          required this.requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '')
-          required this.itemQty,
-      @JsonKey(name: 'totalPrice', defaultValue: '')
-          required this.totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status,
+      {@JsonKey(name: 'requestId', defaultValue: '') required this.requestId,
+      @JsonKey(name: 'requestDate', defaultValue: '') required this.requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '') required this.itemQty,
+      @JsonKey(name: 'totalPrice', defaultValue: '') required this.totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') required this.status,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'materialName', defaultValue: '')
-          required this.materialName,
+      required this.materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          required this.defaultMaterialDescription,
-      @JsonKey(name: 'orderNumber', defaultValue: '')
-          required this.orderNumber,
-      @JsonKey(name: 'invoiceID', defaultValue: '')
-          required this.invoiceID,
+      required this.defaultMaterialDescription,
+      @JsonKey(name: 'orderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'invoiceID', defaultValue: '') required this.invoiceID,
       @JsonKey(name: 'customerName', defaultValue: '')
-          required this.customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required this.batch,
-      @JsonKey(name: 'expiry', defaultValue: '')
-          required this.expiry})
+      required this.customerName,
+      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
+      @JsonKey(name: 'expiry', defaultValue: '') required this.expiry})
       : super._();
 
   factory _$_ReturnItemDto.fromJson(Map<String, dynamic> json) =>
@@ -437,31 +404,28 @@ class _$_ReturnItemDto extends _ReturnItemDto {
 abstract class _ReturnItemDto extends ReturnItemDto {
   const factory _ReturnItemDto(
       {@JsonKey(name: 'requestId', defaultValue: '')
-          required final String requestId,
+      required final String requestId,
       @JsonKey(name: 'requestDate', defaultValue: '')
-          required final String requestDate,
-      @JsonKey(name: 'itemQty', defaultValue: '')
-          required final String itemQty,
+      required final String requestDate,
+      @JsonKey(name: 'itemQty', defaultValue: '') required final String itemQty,
       @JsonKey(name: 'totalPrice', defaultValue: '')
-          required final String totalPrice,
-      @JsonKey(name: 'status', defaultValue: '')
-          required final String status,
+      required final String totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') required final String status,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'materialName', defaultValue: '')
-          required final String materialName,
+      required final String materialName,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-          required final String defaultMaterialDescription,
+      required final String defaultMaterialDescription,
       @JsonKey(name: 'orderNumber', defaultValue: '')
-          required final String orderNumber,
+      required final String orderNumber,
       @JsonKey(name: 'invoiceID', defaultValue: '')
-          required final String invoiceID,
+      required final String invoiceID,
       @JsonKey(name: 'customerName', defaultValue: '')
-          required final String customerName,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required final String batch,
+      required final String customerName,
+      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'expiry', defaultValue: '')
-          required final String expiry}) = _$_ReturnItemDto;
+      required final String expiry}) = _$_ReturnItemDto;
   const _ReturnItemDto._() : super._();
 
   factory _ReturnItemDto.fromJson(Map<String, dynamic> json) =

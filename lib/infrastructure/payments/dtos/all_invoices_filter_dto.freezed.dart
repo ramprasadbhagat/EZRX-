@@ -50,22 +50,16 @@ abstract class $AllInvoicesFilterDtoCopyWith<$Res> {
       _$AllInvoicesFilterDtoCopyWithImpl<$Res, AllInvoicesFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          String dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          String dueDateTo,
+      {@JsonKey(name: 'dueDateFrom', defaultValue: '') String dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          String amountValueTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String searchKey});
+      String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '') String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
@@ -137,22 +131,16 @@ abstract class _$$_AllInvoicesFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          String dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          String dueDateTo,
+      {@JsonKey(name: 'dueDateFrom', defaultValue: '') String dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          String amountValueFrom,
-      @JsonKey(name: 'amountValueTo', defaultValue: '')
-          String amountValueTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String searchKey});
+      String amountValueFrom,
+      @JsonKey(name: 'amountValueTo', defaultValue: '') String amountValueTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
@@ -217,21 +205,20 @@ class __$$_AllInvoicesFilterDtoCopyWithImpl<$Res>
 class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
   const _$_AllInvoicesFilterDto(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          required this.dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          required this.dueDateTo,
+      required this.dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') required this.dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required this.documentDateFrom,
+      required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required this.documentDateTo,
+      required this.documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          required this.amountValueFrom,
+      required this.amountValueFrom,
       @JsonKey(name: 'amountValueTo', defaultValue: '')
-          required this.amountValueTo,
+      required this.amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required this.filterStatuses,
+      required this.filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.searchKey})
+      required this.searchKey})
       : super._();
 
   factory _$_AllInvoicesFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -321,21 +308,21 @@ class _$_AllInvoicesFilterDto extends _AllInvoicesFilterDto {
 abstract class _AllInvoicesFilterDto extends AllInvoicesFilterDto {
   const factory _AllInvoicesFilterDto(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          required final String dueDateFrom,
+      required final String dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
-          required final String dueDateTo,
+      required final String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required final String documentDateFrom,
+      required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required final String documentDateTo,
+      required final String documentDateTo,
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
-          required final String amountValueFrom,
+      required final String amountValueFrom,
       @JsonKey(name: 'amountValueTo', defaultValue: '')
-          required final String amountValueTo,
+      required final String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required final String filterStatuses,
+      required final String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required final String searchKey}) = _$_AllInvoicesFilterDto;
+      required final String searchKey}) = _$_AllInvoicesFilterDto;
   const _AllInvoicesFilterDto._() : super._();
 
   factory _AllInvoicesFilterDto.fromJson(Map<String, dynamic> json) =

@@ -33,6 +33,7 @@ import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomerSearchPage extends StatelessWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
@@ -47,6 +48,65 @@ class CustomerSearchPage extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
+        actions: [
+          BlocBuilder<SalesOrgBloc, SalesOrgState>(
+            buildWhen: (previous, current) {
+              return previous.salesOrg != current.salesOrg;
+            },
+            builder: (context, state) {
+              return GestureDetector(
+                onTap: () {
+                  if (context
+                          .read<UserBloc>()
+                          .state
+                          .userSalesOrganisations
+                          .length >
+                      1) {
+                    context.read<SalesOrgBloc>().add(
+                          SalesOrgEvent.fetchAvailableSalesOrg(
+                            avialableSalesOrgList: context
+                                .read<UserBloc>()
+                                .state
+                                .user
+                                .userSalesOrganisations,
+                          ),
+                        );
+                    context.router.push(
+                      SalesOrgSearchRoute(
+                        avialableSalesOrgList: context
+                            .read<UserBloc>()
+                            .state
+                            .user
+                            .userSalesOrganisations,
+                      ),
+                    );
+                  }
+                },
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(25.0)),
+                      child: SizedBox(
+                        height: 25.0,
+                        width: 25.0,
+                        child: SvgPicture.asset(
+                          'assets/svg/flags/${state.salesOrg.country.toLowerCase()}.svg',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ).tr(),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

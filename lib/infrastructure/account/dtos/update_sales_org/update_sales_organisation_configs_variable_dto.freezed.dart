@@ -206,10 +206,9 @@ class _$_UpdateSalesOrganisationConfigsVariableDto
 abstract class _UpdateSalesOrganisationConfigsVariableDto
     extends UpdateSalesOrganisationConfigsVariableDto {
   const factory _UpdateSalesOrganisationConfigsVariableDto(
-          {@JsonKey(name: 'where')
-              required final SalesOrgIdDto salesOrgIdDto,
+          {@JsonKey(name: 'where') required final SalesOrgIdDto salesOrgIdDto,
           @JsonKey(name: 'data')
-              required final UpdateSalesOrganisationConfigsDto data}) =
+          required final UpdateSalesOrganisationConfigsDto data}) =
       _$_UpdateSalesOrganisationConfigsVariableDto;
   const _UpdateSalesOrganisationConfigsVariableDto._() : super._();
 

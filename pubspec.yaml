@@ -148,6 +148,7 @@ flutter:
     - assets/langs/
     - assets/html/
     - assets/svg/
+    - assets/svg/flags/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

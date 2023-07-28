@@ -147,7 +147,7 @@ class _$_ManageSalesDistrictDto extends _ManageSalesDistrictDto {
 abstract class _ManageSalesDistrictDto extends ManageSalesDistrictDto {
   const factory _ManageSalesDistrictDto(
       {@JsonKey(name: 'message', defaultValue: '')
-          required final String message}) = _$_ManageSalesDistrictDto;
+      required final String message}) = _$_ManageSalesDistrictDto;
   const _ManageSalesDistrictDto._() : super._();
 
   factory _ManageSalesDistrictDto.fromJson(Map<String, dynamic> json) =

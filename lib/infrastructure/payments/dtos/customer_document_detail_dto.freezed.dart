@@ -68,37 +68,30 @@ abstract class $CustomerDocumentDetailDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'billingDocumentItem', defaultValue: '')
-          String billingDocumentItem,
+      String billingDocumentItem,
       @JsonKey(name: 'salesDocumentItemType', defaultValue: '')
-          String salesDocumentItemType,
-      @JsonKey(name: 'material', defaultValue: '')
-          String materialNumber,
+      String salesDocumentItemType,
+      @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'billingDocumentItemText', defaultValue: '')
-          String billingDocumentItemText,
+      String billingDocumentItemText,
       @JsonKey(name: 'billingQuantity', defaultValue: '')
-          String billingQuantity,
+      String billingQuantity,
       @JsonKey(name: 'billingQuantityUnit', defaultValue: '')
-          String billingQuantityUnit,
+      String billingQuantityUnit,
       @JsonKey(name: 'salesMeasureISOUnit', defaultValue: '')
-          String salesMeasureISOUnit,
+      String salesMeasureISOUnit,
       @JsonKey(name: 'referenceSDDocument', defaultValue: '')
-          String referenceSDDocument,
+      String referenceSDDocument,
       @JsonKey(name: 'referenceSDDocumentItem', defaultValue: '')
-          String referenceSDDocumentItem,
+      String referenceSDDocumentItem,
       @JsonKey(name: 'referenceSDDocumentCategory', defaultValue: '')
-          String referenceSDDocumentCategory,
-      @JsonKey(name: 'grossAmount', defaultValue: 0.0)
-          double grossAmount,
-      @JsonKey(name: 'netAmount', defaultValue: 0.0)
-          double netAmount,
-      @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          double taxAmount,
-      @JsonKey(name: 'batchNumber', defaultValue: '')
-          String batchNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName});
+      String referenceSDDocumentCategory,
+      @JsonKey(name: 'grossAmount', defaultValue: 0.0) double grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0) double netAmount,
+      @JsonKey(name: 'taxAmount', defaultValue: 0.0) double taxAmount,
+      @JsonKey(name: 'batchNumber', defaultValue: '') String batchNumber,
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName});
 }
 
 /// @nodoc
@@ -212,37 +205,30 @@ abstract class _$$_CustomerDocumentDetailDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'billingDocumentItem', defaultValue: '')
-          String billingDocumentItem,
+      String billingDocumentItem,
       @JsonKey(name: 'salesDocumentItemType', defaultValue: '')
-          String salesDocumentItemType,
-      @JsonKey(name: 'material', defaultValue: '')
-          String materialNumber,
+      String salesDocumentItemType,
+      @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'billingDocumentItemText', defaultValue: '')
-          String billingDocumentItemText,
+      String billingDocumentItemText,
       @JsonKey(name: 'billingQuantity', defaultValue: '')
-          String billingQuantity,
+      String billingQuantity,
       @JsonKey(name: 'billingQuantityUnit', defaultValue: '')
-          String billingQuantityUnit,
+      String billingQuantityUnit,
       @JsonKey(name: 'salesMeasureISOUnit', defaultValue: '')
-          String salesMeasureISOUnit,
+      String salesMeasureISOUnit,
       @JsonKey(name: 'referenceSDDocument', defaultValue: '')
-          String referenceSDDocument,
+      String referenceSDDocument,
       @JsonKey(name: 'referenceSDDocumentItem', defaultValue: '')
-          String referenceSDDocumentItem,
+      String referenceSDDocumentItem,
       @JsonKey(name: 'referenceSDDocumentCategory', defaultValue: '')
-          String referenceSDDocumentCategory,
-      @JsonKey(name: 'grossAmount', defaultValue: 0.0)
-          double grossAmount,
-      @JsonKey(name: 'netAmount', defaultValue: 0.0)
-          double netAmount,
-      @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          double taxAmount,
-      @JsonKey(name: 'batchNumber', defaultValue: '')
-          String batchNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          String expiryDate,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName});
+      String referenceSDDocumentCategory,
+      @JsonKey(name: 'grossAmount', defaultValue: 0.0) double grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0) double netAmount,
+      @JsonKey(name: 'taxAmount', defaultValue: 0.0) double taxAmount,
+      @JsonKey(name: 'batchNumber', defaultValue: '') String batchNumber,
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName});
 }
 
 /// @nodoc
@@ -349,37 +335,32 @@ class __$$_CustomerDocumentDetailDtoCopyWithImpl<$Res>
 class _$_CustomerDocumentDetailDto extends _CustomerDocumentDetailDto {
   _$_CustomerDocumentDetailDto(
       {@JsonKey(name: 'billingDocumentItem', defaultValue: '')
-          required this.billingDocumentItem,
+      required this.billingDocumentItem,
       @JsonKey(name: 'salesDocumentItemType', defaultValue: '')
-          required this.salesDocumentItemType,
-      @JsonKey(name: 'material', defaultValue: '')
-          required this.materialNumber,
+      required this.salesDocumentItemType,
+      @JsonKey(name: 'material', defaultValue: '') required this.materialNumber,
       @JsonKey(name: 'billingDocumentItemText', defaultValue: '')
-          required this.billingDocumentItemText,
+      required this.billingDocumentItemText,
       @JsonKey(name: 'billingQuantity', defaultValue: '')
-          required this.billingQuantity,
+      required this.billingQuantity,
       @JsonKey(name: 'billingQuantityUnit', defaultValue: '')
-          required this.billingQuantityUnit,
+      required this.billingQuantityUnit,
       @JsonKey(name: 'salesMeasureISOUnit', defaultValue: '')
-          required this.salesMeasureISOUnit,
+      required this.salesMeasureISOUnit,
       @JsonKey(name: 'referenceSDDocument', defaultValue: '')
-          required this.referenceSDDocument,
+      required this.referenceSDDocument,
       @JsonKey(name: 'referenceSDDocumentItem', defaultValue: '')
-          required this.referenceSDDocumentItem,
+      required this.referenceSDDocumentItem,
       @JsonKey(name: 'referenceSDDocumentCategory', defaultValue: '')
-          required this.referenceSDDocumentCategory,
+      required this.referenceSDDocumentCategory,
       @JsonKey(name: 'grossAmount', defaultValue: 0.0)
-          required this.grossAmount,
-      @JsonKey(name: 'netAmount', defaultValue: 0.0)
-          required this.netAmount,
-      @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          required this.taxAmount,
-      @JsonKey(name: 'batchNumber', defaultValue: '')
-          required this.batchNumber,
-      @JsonKey(name: 'expiryDate', defaultValue: '')
-          required this.expiryDate,
+      required this.grossAmount,
+      @JsonKey(name: 'netAmount', defaultValue: 0.0) required this.netAmount,
+      @JsonKey(name: 'taxAmount', defaultValue: 0.0) required this.taxAmount,
+      @JsonKey(name: 'batchNumber', defaultValue: '') required this.batchNumber,
+      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName})
+      required this.principalName})
       : super._();
 
   factory _$_CustomerDocumentDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -521,37 +502,37 @@ class _$_CustomerDocumentDetailDto extends _CustomerDocumentDetailDto {
 abstract class _CustomerDocumentDetailDto extends CustomerDocumentDetailDto {
   factory _CustomerDocumentDetailDto(
       {@JsonKey(name: 'billingDocumentItem', defaultValue: '')
-          required final String billingDocumentItem,
+      required final String billingDocumentItem,
       @JsonKey(name: 'salesDocumentItemType', defaultValue: '')
-          required final String salesDocumentItemType,
+      required final String salesDocumentItemType,
       @JsonKey(name: 'material', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'billingDocumentItemText', defaultValue: '')
-          required final String billingDocumentItemText,
+      required final String billingDocumentItemText,
       @JsonKey(name: 'billingQuantity', defaultValue: '')
-          required final String billingQuantity,
+      required final String billingQuantity,
       @JsonKey(name: 'billingQuantityUnit', defaultValue: '')
-          required final String billingQuantityUnit,
+      required final String billingQuantityUnit,
       @JsonKey(name: 'salesMeasureISOUnit', defaultValue: '')
-          required final String salesMeasureISOUnit,
+      required final String salesMeasureISOUnit,
       @JsonKey(name: 'referenceSDDocument', defaultValue: '')
-          required final String referenceSDDocument,
+      required final String referenceSDDocument,
       @JsonKey(name: 'referenceSDDocumentItem', defaultValue: '')
-          required final String referenceSDDocumentItem,
+      required final String referenceSDDocumentItem,
       @JsonKey(name: 'referenceSDDocumentCategory', defaultValue: '')
-          required final String referenceSDDocumentCategory,
+      required final String referenceSDDocumentCategory,
       @JsonKey(name: 'grossAmount', defaultValue: 0.0)
-          required final double grossAmount,
+      required final double grossAmount,
       @JsonKey(name: 'netAmount', defaultValue: 0.0)
-          required final double netAmount,
+      required final double netAmount,
       @JsonKey(name: 'taxAmount', defaultValue: 0.0)
-          required final double taxAmount,
+      required final double taxAmount,
       @JsonKey(name: 'batchNumber', defaultValue: '')
-          required final String batchNumber,
+      required final String batchNumber,
       @JsonKey(name: 'expiryDate', defaultValue: '')
-          required final String expiryDate,
+      required final String expiryDate,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName}) = _$_CustomerDocumentDetailDto;
+      required final String principalName}) = _$_CustomerDocumentDetailDto;
   _CustomerDocumentDetailDto._() : super._();
 
   factory _CustomerDocumentDetailDto.fromJson(Map<String, dynamic> json) =

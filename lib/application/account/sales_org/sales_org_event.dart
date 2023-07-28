@@ -9,4 +9,11 @@ class SalesOrgEvent with _$SalesOrgEvent {
   const factory SalesOrgEvent.loadSavedOrganisation({
     required List<SalesOrganisation> salesOrganisations,
   }) = _LoadSavedOrganisation;
+  const factory SalesOrgEvent.fetchAvailableSalesOrg({
+    required List<SalesOrganisation> avialableSalesOrgList,
+  }) = _FetchAvailableSalesOrg;
+  const factory SalesOrgEvent.searchSalesOrg({
+    required String keyWord,
+    required List<SalesOrganisation> salesOrgList,
+  }) = _SearchSalesOrg;
 }

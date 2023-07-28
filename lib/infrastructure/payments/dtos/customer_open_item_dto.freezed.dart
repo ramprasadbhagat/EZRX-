@@ -46,18 +46,15 @@ abstract class $CustomerOpenItemDtoCopyWith<$Res> {
       _$CustomerOpenItemDtoCopyWithImpl<$Res, CustomerOpenItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'status', defaultValue: '')
-          String status,
+      {@JsonKey(name: 'status', defaultValue: '') String status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
+      String accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          String documentReferenceID,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
+      String documentReferenceID,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          double amountInTransactionCurrency});
+      double amountInTransactionCurrency});
 }
 
 /// @nodoc
@@ -118,18 +115,15 @@ abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'status', defaultValue: '')
-          String status,
+      {@JsonKey(name: 'status', defaultValue: '') String status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
+      String accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          String documentReferenceID,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
+      String documentReferenceID,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          double amountInTransactionCurrency});
+      double amountInTransactionCurrency});
 }
 
 /// @nodoc
@@ -183,18 +177,16 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   _$_CustomerOpenItemDto(
-      {@JsonKey(name: 'status', defaultValue: '')
-          required this.status,
+      {@JsonKey(name: 'status', defaultValue: '') required this.status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.accountingDocument,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          required this.netDueDate,
+      required this.accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '') required this.netDueDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          required this.documentReferenceID,
+      required this.documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required this.postingKeyName,
+      required this.postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          required this.amountInTransactionCurrency})
+      required this.amountInTransactionCurrency})
       : super._();
 
   factory _$_CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =>
@@ -272,19 +264,18 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
 
 abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   factory _CustomerOpenItemDto(
-          {@JsonKey(name: 'status', defaultValue: '')
-              required final String status,
-          @JsonKey(name: 'accountingDocument', defaultValue: '')
-              required final String accountingDocument,
-          @JsonKey(name: 'netDueDate', defaultValue: '')
-              required final String netDueDate,
-          @JsonKey(name: 'documentReferenceID', defaultValue: '')
-              required final String documentReferenceID,
-          @JsonKey(name: 'postingKeyName', defaultValue: '')
-              required final String postingKeyName,
-          @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-              required final double amountInTransactionCurrency}) =
-      _$_CustomerOpenItemDto;
+      {@JsonKey(name: 'status', defaultValue: '') required final String status,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+      required final String accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '')
+      required final String netDueDate,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+      required final String documentReferenceID,
+      @JsonKey(name: 'postingKeyName', defaultValue: '')
+      required final String postingKeyName,
+      @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+      required final double
+          amountInTransactionCurrency}) = _$_CustomerOpenItemDto;
   _CustomerOpenItemDto._() : super._();
 
   factory _CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =

@@ -50,20 +50,16 @@ abstract class $SubmitReturnRequestDtoCopyWith<$Res> {
       _$SubmitReturnRequestDtoCopyWithImpl<$Res, SubmitReturnRequestDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'soldToCustomer', defaultValue: '')
-          String customerCode,
-      @JsonKey(name: 'username', defaultValue: '')
-          String username,
-      @JsonKey(name: 'orderSource', defaultValue: '')
-          String orderSource,
+      {@JsonKey(name: 'soldToCustomer', defaultValue: '') String customerCode,
+      @JsonKey(name: 'username', defaultValue: '') String username,
+      @JsonKey(name: 'orderSource', defaultValue: '') String orderSource,
       @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          bool subscribeStatusChange,
-      @JsonKey(name: 'specialInstruction')
-          String specialInstruction,
+      bool subscribeStatusChange,
+      @JsonKey(name: 'specialInstruction') String specialInstruction,
       @JsonKey(name: 'purchaseNumberC', defaultValue: '')
-          String purchaseNumberC,
+      String purchaseNumberC,
       @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
-          List<InvoiceDetailsDto> invoiceDetails});
+      List<InvoiceDetailsDto> invoiceDetails});
 }
 
 /// @nodoc
@@ -130,20 +126,16 @@ abstract class _$$_SubmitReturnRequestDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'soldToCustomer', defaultValue: '')
-          String customerCode,
-      @JsonKey(name: 'username', defaultValue: '')
-          String username,
-      @JsonKey(name: 'orderSource', defaultValue: '')
-          String orderSource,
+      {@JsonKey(name: 'soldToCustomer', defaultValue: '') String customerCode,
+      @JsonKey(name: 'username', defaultValue: '') String username,
+      @JsonKey(name: 'orderSource', defaultValue: '') String orderSource,
       @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          bool subscribeStatusChange,
-      @JsonKey(name: 'specialInstruction')
-          String specialInstruction,
+      bool subscribeStatusChange,
+      @JsonKey(name: 'specialInstruction') String specialInstruction,
       @JsonKey(name: 'purchaseNumberC', defaultValue: '')
-          String purchaseNumberC,
+      String purchaseNumberC,
       @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
-          List<InvoiceDetailsDto> invoiceDetails});
+      List<InvoiceDetailsDto> invoiceDetails});
 }
 
 /// @nodoc
@@ -204,19 +196,16 @@ class __$$_SubmitReturnRequestDtoCopyWithImpl<$Res>
 class _$_SubmitReturnRequestDto extends _SubmitReturnRequestDto {
   const _$_SubmitReturnRequestDto(
       {@JsonKey(name: 'soldToCustomer', defaultValue: '')
-          required this.customerCode,
-      @JsonKey(name: 'username', defaultValue: '')
-          required this.username,
-      @JsonKey(name: 'orderSource', defaultValue: '')
-          required this.orderSource,
+      required this.customerCode,
+      @JsonKey(name: 'username', defaultValue: '') required this.username,
+      @JsonKey(name: 'orderSource', defaultValue: '') required this.orderSource,
       @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-          required this.subscribeStatusChange,
-      @JsonKey(name: 'specialInstruction')
-          required this.specialInstruction,
+      required this.subscribeStatusChange,
+      @JsonKey(name: 'specialInstruction') required this.specialInstruction,
       @JsonKey(name: 'purchaseNumberC', defaultValue: '')
-          required this.purchaseNumberC,
+      required this.purchaseNumberC,
       @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
-          required final List<InvoiceDetailsDto> invoiceDetails})
+      required final List<InvoiceDetailsDto> invoiceDetails})
       : _invoiceDetails = invoiceDetails,
         super._();
 
@@ -306,19 +295,19 @@ class _$_SubmitReturnRequestDto extends _SubmitReturnRequestDto {
 abstract class _SubmitReturnRequestDto extends SubmitReturnRequestDto {
   const factory _SubmitReturnRequestDto(
           {@JsonKey(name: 'soldToCustomer', defaultValue: '')
-              required final String customerCode,
+          required final String customerCode,
           @JsonKey(name: 'username', defaultValue: '')
-              required final String username,
+          required final String username,
           @JsonKey(name: 'orderSource', defaultValue: '')
-              required final String orderSource,
+          required final String orderSource,
           @JsonKey(name: 'subscribeStatusChange', defaultValue: false)
-              required final bool subscribeStatusChange,
+          required final bool subscribeStatusChange,
           @JsonKey(name: 'specialInstruction')
-              required final String specialInstruction,
+          required final String specialInstruction,
           @JsonKey(name: 'purchaseNumberC', defaultValue: '')
-              required final String purchaseNumberC,
+          required final String purchaseNumberC,
           @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
-              required final List<InvoiceDetailsDto> invoiceDetails}) =
+          required final List<InvoiceDetailsDto> invoiceDetails}) =
       _$_SubmitReturnRequestDto;
   const _SubmitReturnRequestDto._() : super._();
 
