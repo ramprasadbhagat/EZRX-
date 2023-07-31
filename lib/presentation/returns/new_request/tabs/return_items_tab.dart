@@ -302,18 +302,26 @@ class _MaterialDetailsSection extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Principal code'.tr(),
+          keyFlex: 2,
+          valueFlex: 3,
           valueText: data.principalCode.getOrDefaultValue(''),
         ),
         BalanceTextRow(
           keyText: 'Principal name'.tr(),
+          keyFlex: 2,
+          valueFlex: 3,
           valueText: data.principalName.name.tr(),
         ),
         BalanceTextRow(
           keyText: 'Invoice number'.tr(),
+          keyFlex: 2,
+          valueFlex: 3,
           valueText: data.assignmentNumber,
         ),
         BalanceTextRow(
           keyText: 'Invoice date'.tr(),
+          keyFlex: 2,
+          valueFlex: 3,
           valueText: data.priceDate.toValidDateString,
         ),
       ],

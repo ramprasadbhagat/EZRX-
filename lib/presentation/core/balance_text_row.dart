@@ -46,6 +46,7 @@ class BalanceTextRow extends StatelessWidget {
         vertical: 2.0,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: keyFlex,
@@ -54,14 +55,14 @@ class BalanceTextRow extends StatelessWidget {
               style: keyStyle,
             ),
           ),
+          Text(
+            ': ',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
           isStatus
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      ': ',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
                     Flexible(
                       child: StatusLabel(
                         status: StatusType(valueText),
@@ -78,7 +79,7 @@ class BalanceTextRow extends StatelessWidget {
                           child: LoadingShimmer.tile(),
                         )
                       : Text(
-                          ': $valueText',
+                          valueText,
                           style: valueStyle,
                         ),
                 ),
