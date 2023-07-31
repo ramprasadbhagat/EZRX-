@@ -4,6 +4,8 @@ BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'order/client_user.dart'
 EXTERNALSALESREP := 'order/external_sales_rep.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
+LOGIN := 'login/login_screen.dart'
+FORGOTPASSWORD := 'login/forgot_password_screen.dart'
 
 clean_ios:
 	@cd ios && rm -rf Pods && rm Podfile.lock && fvm flutter pub get && pod install && cd ..
@@ -92,3 +94,7 @@ run_th_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${CLIENTUSER}
 run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
+run_login_screen_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${LOGIN}
+run_forgot_password_screen_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${FORGOTPASSWORD}  	

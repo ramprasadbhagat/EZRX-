@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:flutter/material.dart';
 
+
 class IntroStep extends StatelessWidget {
   final IntroObject introObject;
   final Function() buttonOnTap;
