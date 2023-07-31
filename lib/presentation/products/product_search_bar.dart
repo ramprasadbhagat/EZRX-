@@ -16,7 +16,7 @@ class ProductSearchBar extends StatefulWidget {
     required this.onSearchChanged,
     required this.onSearchSubmitted,
     this.isAutoSearch = true,
-    required this.controller,
+    required this.initialValue,
     this.prefixIcon,
     this.hintText,
     this.autofocus = false,
@@ -26,12 +26,12 @@ class ProductSearchBar extends StatefulWidget {
   final bool isAutoSearch;
   final Function() onClear;
   final InputBorder border;
-  final TextEditingController controller;
   final void Function(String) onSearchSubmitted;
   final bool Function() customValidator;
   final void Function(String) onSearchChanged;
   final Widget? prefixIcon;
   final String? hintText;
+  final String initialValue;
   final bool autofocus;
 
   @override
@@ -52,13 +52,13 @@ class _SearchBarState extends State<ProductSearchBar> {
     return TextFormField(
       autocorrect: false,
       autofocus: widget.autofocus,
-      controller: widget.controller,
+      initialValue: widget.initialValue,
       enabled: widget.enabled,
       onChanged: (value) => _onSearchChanged(value),
       onFieldSubmitted: (value) => _onSearch(context, value),
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.controller.text.isEmpty
+        suffixIcon: widget.initialValue.isEmpty
             ? IconButton(
                 splashRadius: 1,
                 key: WidgetKeys.productScanCameraKey,

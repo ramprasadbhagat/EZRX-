@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -53,73 +52,22 @@ class _BodyContent extends StatelessWidget {
   }
 }
 
-class _ProductSearchSection extends StatefulWidget {
+class _ProductSearchSection extends StatelessWidget {
   const _ProductSearchSection({Key? key}) : super(key: key);
 
   @override
-  State<_ProductSearchSection> createState() => _ProductSearchSectionState();
-}
-
-class _ProductSearchSectionState extends State<_ProductSearchSection> {
-  final _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    _searchController.value = TextEditingValue(
-      text: context
-          .read<ProductSearchBloc>()
-          .state
-          .searchKey
-          .getOrDefaultValue(''),
-      selection: TextSelection.collapsed(
-        offset: _searchController.selection.base.offset,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductSearchBloc, ProductSearchState>(
+    return BlocBuilder<ProductSearchBloc, ProductSearchState>(
       buildWhen: (previous, current) =>
-          previous.searchKey != current.searchKey ||
-          previous.isSearching != current.isSearching,
-      listenWhen: (previous, current) =>
-          previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption ||
-          previous.searchKey != current.searchKey,
-      listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () {
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
-        final searchText = state.searchKey.getOrDefaultValue('');
-        _searchController.value = TextEditingValue(
-          text: searchText,
-          selection: TextSelection.collapsed(
-            offset: _searchController.selection.base.offset,
-          ),
-        );
-      },
+          previous.isSearching != current.isSearching ||
+          !current.searchKey.validFilterSearchKey,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(right: 20),
           child: ProductSearchBar(
+            key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
             autofocus: true,
-            controller: _searchController,
+            initialValue: state.searchKey.getOrDefaultValue(''),
             enabled: !state.isSearching,
             onSearchChanged: (value) {
               context.read<ProductSearchBloc>().add(
@@ -154,7 +102,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                   );
             },
             customValidator: () =>
-                SearchKey.search(_searchController.text).isValid(),
+                SearchKey.search(state.searchKey.searchValueOrEmpty).isValid(),
             onClear: () {
               context.read<ProductSearchBloc>().add(
                     const ProductSearchEvent.clearSearch(),
