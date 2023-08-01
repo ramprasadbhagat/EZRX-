@@ -186,7 +186,7 @@ void main() {
       'should return the original input String when input contains atleast one lower case',
       () async {
         const input = 'APPLe';
-        final result = atleastOneLowerCharacter(
+        final result = atLeastOneLowerCharacter(
           input,
         );
         expect(result, const Right(input));
@@ -197,7 +197,7 @@ void main() {
       'should return failure when the string is empty expecting one lower case character',
       () async {
         const input = '';
-        final result = atleastOneLowerCharacter(
+        final result = atLeastOneLowerCharacter(
           input,
         );
         expect(
@@ -213,7 +213,7 @@ void main() {
       'should return failure when the string does not contain atleast one lower case character',
       () async {
         const input = 'APPLE2';
-        final result = atleastOneLowerCharacter(input);
+        final result = atLeastOneLowerCharacter(input);
         expect(
           result,
           const Left(ValueFailure.mustOneLowerCaseCharacter(
@@ -229,7 +229,7 @@ void main() {
       'should return the original input String when input contains atleast one upper case',
       () async {
         const input = 'Apple';
-        final result = atleastOneUpperCharacter(
+        final result = atLeastOneUpperCharacter(
           input,
         );
         expect(result, const Right(input));
@@ -240,7 +240,7 @@ void main() {
       'should return failure when the string is empty expecting one upper case character',
       () async {
         const input = '';
-        final result = atleastOneUpperCharacter(
+        final result = atLeastOneUpperCharacter(
           input,
         );
         expect(
@@ -256,7 +256,7 @@ void main() {
       'should return failure when the string does not contain atleast one upper case character',
       () async {
         const input = 'apple';
-        final result = atleastOneUpperCharacter(input);
+        final result = atLeastOneUpperCharacter(input);
         expect(
           result,
           const Left(ValueFailure.mustOneUpperCaseCharacter(
@@ -272,7 +272,7 @@ void main() {
       'should return the original input String when input contains atleast one numeric character',
       () async {
         const input = 'Apple@2022';
-        final result = atleastOneNumericCharacter(
+        final result = atLeastOneNumericCharacter(
           input,
         );
         expect(result, const Right(input));
@@ -283,7 +283,7 @@ void main() {
       'should return failure when the string is empty expecting one numeric character',
       () async {
         const input = '';
-        final result = atleastOneNumericCharacter(
+        final result = atLeastOneNumericCharacter(
           input,
         );
         expect(
@@ -299,7 +299,7 @@ void main() {
       'should return failure when the string does not contain atleast one numeric character',
       () async {
         const input = 'Apple@';
-        final result = atleastOneNumericCharacter(input);
+        final result = atLeastOneNumericCharacter(input);
         expect(
           result,
           const Left(ValueFailure.mustOneNumericCharacter(
@@ -315,7 +315,7 @@ void main() {
       'should return the original input String when input contains atleast one special character',
       () async {
         const input = 'Apple@2022';
-        final result = atleastOneSpecialCharacter(
+        final result = atLeastOneSpecialCharacter(
           input,
         );
         expect(result, const Right(input));
@@ -326,7 +326,7 @@ void main() {
       'should return failure when the string is empty expecting one special character',
       () async {
         const input = '';
-        final result = atleastOneSpecialCharacter(
+        final result = atLeastOneSpecialCharacter(
           input,
         );
         expect(
@@ -342,7 +342,7 @@ void main() {
       'should return failure when the string does not contain atleast one special character',
       () async {
         const input = 'Apple2';
-        final result = atleastOneSpecialCharacter(input);
+        final result = atLeastOneSpecialCharacter(input);
         expect(
           result,
           const Left(ValueFailure.mustOneSpecialCharacter(

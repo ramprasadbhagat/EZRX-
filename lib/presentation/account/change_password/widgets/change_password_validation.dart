@@ -23,34 +23,34 @@ class ResetPasswordValidation extends StatelessWidget {
               ),
             ),
             _ConditionText(
-              enableGreenTick: state.newPassword.matchMinCharacter(10),
+              enableGreenTick: state.newPassword.matchMinCharacter,
               msgText: 'Minimum length of 10 characters'.tr(),
             ),
             _ConditionText(
               enableGreenTick:
-                  state.newPassword.matchAtleastOneUpperCharacter(),
+                  state.newPassword.matchAtLeastOneUpperCharacter,
               msgText: 'Contain at least 1 Upper case character (A to Z)'.tr(),
             ),
             _ConditionText(
               enableGreenTick:
-                  state.newPassword.matchAtleastOneLowerCharacter(),
+                  state.newPassword.matchAtLeastOneLowerCharacter,
               msgText: 'Contain at least 1 Lower case character (a to z)'.tr(),
             ),
             _ConditionText(
               enableGreenTick:
-                  state.newPassword.matchAtleastOneNumericCharacter(),
+                  state.newPassword.matchAtLeastOneNumericCharacter,
               msgText: 'Contain at least a numeric character (0 to 9)'.tr(),
             ),
             _ConditionText(
               enableGreenTick:
-                  state.newPassword.matchAtleastOneSpeacialCharacter(),
+                  state.newPassword.matchAtLeastOneSpecialCharacter,
               msgText:
                   'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )'
                       .tr(),
             ),
             _ConditionText(
               enableGreenTick:
-                  state.newPassword.matchMustNotContainUserNameOrName(
+                  state.newPasswordMustNotContainUserNameOrName(
                 user: context.read<UserBloc>().state.user,
               ),
               msgText:

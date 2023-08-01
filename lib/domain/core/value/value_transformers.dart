@@ -73,22 +73,22 @@ String getTelephoneNotGreaterThan16(String text) {
 bool isMinCharacter({required String input, required int minLength}) =>
     hasLengthEqualOrGreaterThanN(input, minLength);
 
-bool isAtleastOneLowerCharacter({
+bool isAtLeastOneLowerCharacter({
   required String input,
 }) =>
     RegExp(r'[a-z]').hasMatch(input);
 
-bool isAtleastOneUpperCharacter({
+bool isAtLeastOneUpperCharacter({
   required String input,
 }) =>
     RegExp(r'[A-Z]').hasMatch(input);
 
-bool isAtleastOneNumericCharacter({
+bool isAtLeastOneNumericCharacter({
   required String input,
 }) =>
     RegExp(r'[0-9]').hasMatch(input);
 
-bool isAtleastOneSpecialCharacter({
+bool isAtLeastOneSpecialCharacter({
   required String input,
 }) =>
     RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(input);

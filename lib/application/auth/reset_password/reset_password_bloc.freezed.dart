@@ -922,7 +922,7 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPassword implements _ResetPassword {
+class _$_ResetPassword extends _ResetPassword {
   const _$_ResetPassword(
       {required this.isOldPasswordObscure,
       required this.isNewPasswordObscure,
@@ -932,7 +932,8 @@ class _$_ResetPassword implements _ResetPassword {
       required this.confirmPassword,
       required this.isSubmitting,
       required this.passwordResetFailureOrSuccessOption,
-      required this.showErrorMessages});
+      required this.showErrorMessages})
+      : super._();
 
   @override
   final bool isOldPasswordObscure;
@@ -1007,7 +1008,7 @@ class _$_ResetPassword implements _ResetPassword {
       __$$_ResetPasswordCopyWithImpl<_$_ResetPassword>(this, _$identity);
 }
 
-abstract class _ResetPassword implements ResetPasswordState {
+abstract class _ResetPassword extends ResetPasswordState {
   const factory _ResetPassword(
       {required final bool isOldPasswordObscure,
       required final bool isNewPasswordObscure,
@@ -1019,6 +1020,7 @@ abstract class _ResetPassword implements ResetPasswordState {
       required final Option<Either<ApiFailure, ResetPassword>>
           passwordResetFailureOrSuccessOption,
       required final bool showErrorMessages}) = _$_ResetPassword;
+  const _ResetPassword._() : super._();
 
   @override
   bool get isOldPasswordObscure;

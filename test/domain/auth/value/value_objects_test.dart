@@ -775,7 +775,7 @@ void main() {
       () async {
         const newPassword = 'Auron@2022';
         const confirmPassword = 'Auron@2022';
-        final password = Password.comfirm(confirmPassword, newPassword);
+        final password = Password.confirm(confirmPassword, newPassword);
         final result = password.isValid();
         expect(result, true);
       },
@@ -787,7 +787,7 @@ void main() {
         const errorMessage = 'Enter Confirm Password.';
         const newPassword = 'Auron@2022';
         const confirmPassword = '';
-        final password = Password.comfirm(confirmPassword, newPassword);
+        final password = Password.confirm(confirmPassword, newPassword);
         final result = password.value.fold(
           (f) => f.maybeMap(
             empty: (_) => errorMessage,
@@ -805,7 +805,7 @@ void main() {
         const errorMessage = 'Password mismatch';
         const newPassword = 'Auron@2022';
         const confirmPassword = 'Auron@2022!';
-        final password = Password.comfirm(confirmPassword, newPassword);
+        final password = Password.confirm(confirmPassword, newPassword);
         final result = password.value.fold(
           (f) => f.maybeMap(
             mustMatchNewPassword: (_) => errorMessage,

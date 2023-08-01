@@ -128,7 +128,7 @@ void main() {
             ResetPasswordState.initial().oldPassword.getValue(),
             user,
           ),
-          confirmPassword: Password.comfirm(
+          confirmPassword: Password.confirm(
             ResetPasswordState.initial().confirmPassword.getValue(),
             'Stays@fe2022!',
           ),
@@ -145,7 +145,7 @@ void main() {
           PasswordFieldType.confirmPassword, 'confirm', user)),
       expect: () => [
         ResetPasswordState.initial().copyWith(
-          confirmPassword: Password.comfirm(
+          confirmPassword: Password.confirm(
             'confirm',
             ResetPasswordState.initial().newPassword.getValue(),
           ),
@@ -202,14 +202,14 @@ void main() {
         ),
         resetPasswordState = resetPasswordState.copyWith(
           newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-          confirmPassword: Password.comfirm(
+          confirmPassword: Password.confirm(
             resetPasswordState.confirmPassword.getValue(),
             'Auron@2022!',
           ),
           passwordResetFailureOrSuccessOption: none(),
         ),
         resetPasswordState = resetPasswordState.copyWith(
-          confirmPassword: Password.comfirm(
+          confirmPassword: Password.confirm(
             'Auron@2022!',
             resetPasswordState.newPassword.getValue(),
           ),
@@ -266,14 +266,14 @@ void main() {
         ),
         resetPasswordState = resetPasswordState.copyWith(
           newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-          confirmPassword: Password.comfirm(
+          confirmPassword: Password.confirm(
             resetPasswordState.confirmPassword.getValue(),
             'Auron@2022!',
           ),
           passwordResetFailureOrSuccessOption: none(),
         ),
         resetPasswordState = resetPasswordState.copyWith(
-          confirmPassword: Password.comfirm(
+          confirmPassword: Password.confirm(
             'Auron@2022!',
             resetPasswordState.newPassword.getValue(),
           ),

@@ -140,7 +140,7 @@ void main() {
       'should return boolean true when input String is atleast one lower case character',
       () async {
         const input = 'ApPLE CARE';
-        final result = isAtleastOneLowerCharacter(
+        final result = isAtLeastOneLowerCharacter(
           input: input,
         );
         expect(result, true);
@@ -151,7 +151,7 @@ void main() {
       'should return boolean false when input String is empty',
       () async {
         const input = '';
-        final result = isAtleastOneLowerCharacter(
+        final result = isAtLeastOneLowerCharacter(
           input: input,
         );
         expect(result, false);
@@ -162,7 +162,7 @@ void main() {
       'should return boolean false when input String does not contain any lower case character',
       () async {
         const input = 'APPLE';
-        final result = isAtleastOneLowerCharacter(
+        final result = isAtLeastOneLowerCharacter(
           input: input,
         );
         expect(result, false);
@@ -175,7 +175,7 @@ void main() {
       'should return boolean true when input String is atleast one upper case character',
       () async {
         const input = 'Apple';
-        final result = isAtleastOneUpperCharacter(
+        final result = isAtLeastOneUpperCharacter(
           input: input,
         );
         expect(result, true);
@@ -186,7 +186,7 @@ void main() {
       'should return boolean false when input String is empty',
       () async {
         const input = '';
-        final result = isAtleastOneUpperCharacter(
+        final result = isAtLeastOneUpperCharacter(
           input: input,
         );
         expect(result, false);
@@ -197,7 +197,7 @@ void main() {
       'should return boolean false when input String does not contain any upper case character',
       () async {
         const input = 'apple';
-        final result = isAtleastOneUpperCharacter(
+        final result = isAtLeastOneUpperCharacter(
           input: input,
         );
         expect(result, false);
@@ -210,7 +210,7 @@ void main() {
       'should return boolean true when input String is atleast one numeric case character',
       () async {
         const input = 'Apple1';
-        final result = isAtleastOneNumericCharacter(
+        final result = isAtLeastOneNumericCharacter(
           input: input,
         );
         expect(result, true);
@@ -221,7 +221,7 @@ void main() {
       'should return boolean false when input String is empty',
       () async {
         const input = '';
-        final result = isAtleastOneNumericCharacter(
+        final result = isAtLeastOneNumericCharacter(
           input: input,
         );
         expect(result, false);
@@ -232,7 +232,7 @@ void main() {
       'should return boolean false when input String does not contain any numeric character',
       () async {
         const input = 'apple';
-        final result = isAtleastOneNumericCharacter(
+        final result = isAtLeastOneNumericCharacter(
           input: input,
         );
         expect(result, false);
@@ -245,7 +245,7 @@ void main() {
       'should return boolean true when input String is atleast one special character',
       () async {
         const input = 'Apple@1';
-        final result = isAtleastOneSpecialCharacter(
+        final result = isAtLeastOneSpecialCharacter(
           input: input,
         );
         expect(result, true);
@@ -256,7 +256,7 @@ void main() {
       'should return boolean false when input String is empty',
       () async {
         const input = '';
-        final result = isAtleastOneSpecialCharacter(
+        final result = isAtLeastOneSpecialCharacter(
           input: input,
         );
         expect(result, false);
@@ -267,7 +267,7 @@ void main() {
       'should return boolean false when input String does not contain any special character',
       () async {
         const input = 'apple';
-        final result = isAtleastOneSpecialCharacter(
+        final result = isAtLeastOneSpecialCharacter(
           input: input,
         );
         expect(result, false);

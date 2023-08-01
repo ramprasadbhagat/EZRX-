@@ -68,7 +68,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
                 state.oldPassword.getValue(),
                 e.user,
               ),
-              confirmPassword: Password.comfirm(
+              confirmPassword: Password.confirm(
                 state.confirmPassword.getValue(),
                 e.newValue,
               ),
@@ -77,7 +77,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             break;
           case PasswordFieldType.confirmPassword:
             emit(state.copyWith(
-              confirmPassword: Password.comfirm(
+              confirmPassword: Password.confirm(
                 e.newValue,
                 state.newPassword.getValue(),
               ),

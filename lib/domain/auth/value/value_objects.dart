@@ -69,17 +69,17 @@ class Password extends ValueObject<String> {
   factory Password.resetV2(String newPassword, String oldPassword, User user) {
     return Password._(
       validateStringNotEmpty(newPassword)
-          .flatMap(atleastOneLowerCharacter)
-          .flatMap(atleastOneUpperCharacter)
-          .flatMap(atleastOneNumericCharacter)
-          .flatMap(atleastOneSpecialCharacter)
+          .flatMap(atLeastOneLowerCharacter)
+          .flatMap(atLeastOneUpperCharacter)
+          .flatMap(atLeastOneNumericCharacter)
+          .flatMap(atLeastOneSpecialCharacter)
           .flatMap((input) => validateMinStringLength(input, 10))
           .flatMap((input) => validateContainUserNameOrName(input, user))
           .flatMap((input) => validateOldAndNewPassword(input, oldPassword)),
     );
   }
 
-  factory Password.comfirm(String confirmPassword, String newPassword) {
+  factory Password.confirm(String confirmPassword, String newPassword) {
     return Password._(
       validateStringNotEmpty(confirmPassword).flatMap(
         (input) => validateNewAndConfirmPassword(input, newPassword),
@@ -87,43 +87,28 @@ class Password extends ValueObject<String> {
     );
   }
 
-  bool matchMinCharacter(int length) {
-    return isMinCharacter(
-      input: value.fold((l) => l.failedValue, (r) => r),
-      minLength: length,
-    );
-  }
+  bool get matchMinCharacter => isMinCharacter(
+        input: getValidPassword,
+        minLength: 10,
+      );
 
-  bool matchAtleastOneUpperCharacter() {
-    return isAtleastOneUpperCharacter(
-      input: value.fold((l) => l.failedValue, (r) => r),
-    );
-  }
+  bool get matchAtLeastOneUpperCharacter => isAtLeastOneUpperCharacter(
+        input: getValidPassword,
+      );
 
-  bool matchAtleastOneLowerCharacter() {
-    return isAtleastOneLowerCharacter(
-      input: value.fold((l) => l.failedValue, (r) => r),
-    );
-  }
+  bool get matchAtLeastOneLowerCharacter => isAtLeastOneLowerCharacter(
+        input: getValidPassword,
+      );
 
-  bool matchAtleastOneNumericCharacter() {
-    return isAtleastOneNumericCharacter(
-      input: value.fold((l) => l.failedValue, (r) => r),
-    );
-  }
+  bool get matchAtLeastOneNumericCharacter => isAtLeastOneNumericCharacter(
+        input: getValidPassword,
+      );
 
-  bool matchAtleastOneSpeacialCharacter() {
-    return isAtleastOneSpecialCharacter(
-      input: value.fold((l) => l.failedValue, (r) => r),
-    );
-  }
+  bool get matchAtLeastOneSpecialCharacter => isAtLeastOneSpecialCharacter(
+        input: getValidPassword,
+      );
 
-  bool matchMustNotContainUserNameOrName({required User user}) {
-    return isMustNotContainUserNameOrName(
-      input: value.fold((l) => l.failedValue, (r) => r),
-      user: user,
-    );
-  }
+  String get getValidPassword => value.fold((l) => l.failedValue, (r) => r);
 
   const Password._(this.value);
 }

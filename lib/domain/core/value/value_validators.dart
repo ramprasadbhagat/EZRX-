@@ -63,26 +63,26 @@ Either<ValueFailure<String>, String> validateMinStringLength(
       : left(ValueFailure.subceedLength(failedValue: input, min: minLength));
 }
 
-Either<ValueFailure<String>, String> atleastOneUpperCharacter(String input) {
-  return isAtleastOneUpperCharacter(input: input)
+Either<ValueFailure<String>, String> atLeastOneUpperCharacter(String input) {
+  return isAtLeastOneUpperCharacter(input: input)
       ? right(input)
       : left(ValueFailure.mustOneUpperCaseCharacter(failedValue: input));
 }
 
-Either<ValueFailure<String>, String> atleastOneLowerCharacter(String input) {
-  return isAtleastOneLowerCharacter(input: input)
+Either<ValueFailure<String>, String> atLeastOneLowerCharacter(String input) {
+  return isAtLeastOneLowerCharacter(input: input)
       ? right(input)
       : left(ValueFailure.mustOneLowerCaseCharacter(failedValue: input));
 }
 
-Either<ValueFailure<String>, String> atleastOneNumericCharacter(String input) {
-  return isAtleastOneNumericCharacter(input: input)
+Either<ValueFailure<String>, String> atLeastOneNumericCharacter(String input) {
+  return isAtLeastOneNumericCharacter(input: input)
       ? right(input)
       : left(ValueFailure.mustOneNumericCharacter(failedValue: input));
 }
 
-Either<ValueFailure<String>, String> atleastOneSpecialCharacter(String input) {
-  return isAtleastOneSpecialCharacter(input: input)
+Either<ValueFailure<String>, String> atLeastOneSpecialCharacter(String input) {
+  return isAtLeastOneSpecialCharacter(input: input)
       ? right(input)
       : left(ValueFailure.mustOneSpecialCharacter(failedValue: input));
 }
