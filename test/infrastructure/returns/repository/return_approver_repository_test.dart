@@ -145,7 +145,7 @@ void main() {
                     'dateFrom': DateTimeStringValue(
                             getDateStringByDateTime(fakeFromDate))
                         .apiDateTimeFormat,
-                  }, offset: 0, pageSize: 11, username: 'Fake-username'))
+                  }, offset: 0, pageSize: 11, username: 'fake-username'))
               .thenAnswer(
             (invocation) async => [
               ReturnRequestsId(requestId: 'fake-requestId'),
@@ -157,7 +157,7 @@ void main() {
             offset: 0,
             pageSize: 11,
             user: User.empty().copyWith(
-              username: Username('Fake-username'),
+              username: Username('fake-username'),
             ),
           );
           expect(

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsernameField extends StatelessWidget {
@@ -26,6 +27,14 @@ class UsernameField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'Enter username'.tr(),
           ),
+          inputFormatters: [
+            TextInputFormatter.withFunction(
+              (oldValue, newValue) => TextEditingValue(
+                text: newValue.text.toLowerCase(),
+                selection: newValue.selection,
+              ),
+            ),
+          ],
           validator: (text) => Username(text ?? '').value.fold(
                 (f) => f.maybeMap(
                   empty: (_) => 'Username cannot be empty.'.tr(),

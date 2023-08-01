@@ -111,9 +111,11 @@ class ViewByItemDetailsMockBloc
 class ViewByOrderDetailsMockBloc
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
+
 class ProductDetailMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
+
 class CreditAndInvoiceDetailsMockBloc
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
@@ -144,7 +146,6 @@ void main() {
   late ProductDetailBloc productDetailBloc;
 
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
-
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -204,10 +205,9 @@ void main() {
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => viewByOrderDetailsBlocMock.state)
           .thenReturn(ViewByOrderDetailsState.initial());
-      when(() => recentOrderBloc.state)
-          .thenReturn(RecentOrderState.initial());
+      when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
       when(() => productDetailBloc.state)
-        .thenReturn(ProductDetailState.initial());
+          .thenReturn(ProductDetailState.initial());
       when(() => creditAndInvoiceDetailsBloc.state)
           .thenReturn(CreditAndInvoiceDetailsState.initial());
     });
@@ -373,11 +373,11 @@ void main() {
             BlocProvider<ViewByItemDetailsBloc>(
                 create: (context) => viewByItemDetailsBlocMock),
             BlocProvider<ViewByOrderDetailsBloc>(
-                  create: (context) => viewByOrderDetailsBlocMock),
+                create: (context) => viewByOrderDetailsBlocMock),
             BlocProvider<ProductDetailBloc>(
-                  create: (context) => productDetailBloc),
+                create: (context) => productDetailBloc),
             BlocProvider<CreditAndInvoiceDetailsBloc>(
-                  create: (context) => creditAndInvoiceDetailsBloc),
+                create: (context) => creditAndInvoiceDetailsBloc),
           ],
           child: const SplashPage(),
         ),
@@ -651,6 +651,30 @@ void main() {
       await tester.tap(createAccountButton);
       await tester.pumpAndSettle();
       expect(autoRouterMock.current.name, WebViewPageRoute.name);
+    });
+    testWidgets('Username should not contain Capital letters', (tester) async {
+      final expectedStates = [
+        LoginFormState.initial().copyWith(
+          username: Username('ezrxtest05'),
+          showErrorMessages: false,
+          isSubmitting: false,
+        ),
+      ];
+      when(() => loginBlocMock.state).thenReturn(
+        LoginFormState.initial().copyWith(
+          username: Username('ezrxtest05'),
+          showErrorMessages: true,
+          isSubmitting: true,
+        ),
+      );
+      whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+      await tester.pumpWidget(loginTestPage());
+      await tester.pumpAndSettle();
+      final usernameFinder = find.byKey(WidgetKeys.loginUsernameField);
+      expect(usernameFinder, findsOneWidget);
+      await tester.enterText(usernameFinder, 'EZRXtest05');
+      await tester.pumpAndSettle();
+      expect(find.text('ezrxtest05'), findsOneWidget);
     });
   });
 }

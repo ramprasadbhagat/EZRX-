@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TextFieldWithLabel extends StatelessWidget {
   const TextFieldWithLabel({
@@ -20,6 +21,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.mandatory = false,
     this.readOnly = false,
     this.focusNode,
+    this.inputFormatters,
   }) : super(key: key);
   final Key fieldKey;
   final String labelText;
@@ -37,7 +39,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final bool mandatory;
   final bool readOnly;
   final FocusNode? focusNode;
-
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +65,7 @@ class TextFieldWithLabel extends StatelessWidget {
         const SizedBox(height: 8),
         TextFormField(
           focusNode: focusNode,
+          inputFormatters: inputFormatters,
           key: fieldKey,
           style: Theme.of(context).textTheme.titleMedium,
           autocorrect: autoCorrect,

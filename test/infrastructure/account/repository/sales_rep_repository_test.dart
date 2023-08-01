@@ -30,7 +30,7 @@ void main() {
     salesRepLocalDataSourceMock = SalesRepLocalDataSourceMock();
     salesRepRemoteDataSourceMock = SalesRepRemoteDataSourceMock();
 
-    mockUserName = 'userName';
+    mockUserName = 'username';
     mockUser = User.empty().copyWith(
       username: Username(mockUserName),
     );
