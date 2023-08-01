@@ -14,6 +14,10 @@ class SalesOrgRepositoryMock extends Mock implements SalesOrgRepository {}
 
 void main() {
   late SalesOrgRepository salesOrgRepositoryMock;
+
+  final fakeSalesOrgList = [
+    SalesOrganisation(salesOrg: SalesOrg('fake-salesOrg'), customerInfos: [])
+  ];
   group('Sales_Org BLOC Testing', () {
     setUp(
       () {
@@ -236,6 +240,34 @@ void main() {
             .disableBundles;
         expect(isDisableBundles, true);
       },
+    );
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      '=> Test fetch available sales org',
+      build: () => SalesOrgBloc(
+        salesOrgRepository: salesOrgRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        const SalesOrgEvent.fetchAvailableSalesOrg(avialableSalesOrgList: []),
+      ),
+      expect: () => [
+        SalesOrgState.initial().copyWith(
+            availableSalesOrg: [], salesOrgFailureOrSuccessOption: none()),
+      ],
+    );
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      '=> Test search sales org',
+      build: () => SalesOrgBloc(
+        salesOrgRepository: salesOrgRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        SalesOrgEvent.searchSalesOrg(
+            keyWord: 'fake-salesOrg', salesOrgList: fakeSalesOrgList),
+      ),
+      expect: () => [
+        SalesOrgState.initial().copyWith(
+            availableSalesOrg: fakeSalesOrgList,
+            salesOrgFailureOrSuccessOption: none()),
+      ],
     );
     // blocTest<SalesOrgBloc, SalesOrgState>(
     //   'For "Stream Listener"',

@@ -70,6 +70,9 @@ class SalesOrgSearch extends StatelessWidget {
                     return _SalesOrgItem(
                       showDivider: index != 0,
                       salesOrganisation: state.availableSalesOrg[index],
+                      key: WidgetKeys.genericKey(key: state
+                          .availableSalesOrg[index].salesOrg
+                          .getOrDefaultValue('')),
                     );
                   },
                 ),
