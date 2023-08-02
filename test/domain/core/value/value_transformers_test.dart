@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -422,28 +421,4 @@ void main() {
       expect(result, '-');
     },
   );
-
-  group('getValueColor', () {
-    test(
-      'should return black color when input String is N.A.',
-      () async {
-        const input = 'N.A.';
-        final result = getValueColor(
-          input,
-        );
-        expect(result, ZPColors.black);
-      },
-    );
-
-    test(
-      'should return red color when input String is not equal N.A.',
-      () async {
-        const input = 'any-string';
-        final result = getValueColor(
-          input,
-        );
-        expect(result, ZPColors.red);
-      },
-    );
-  });
 }

@@ -124,7 +124,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                 keyText: 'Return reference'.tr(),
                 keyFlex: 2,
                 valueText: widget
-                    .requestInformationHeader.returnReference.displayLabel,
+                    .requestInformationHeader.returnReference.displayNAIfEmpty,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

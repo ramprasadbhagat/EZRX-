@@ -269,7 +269,7 @@ class _ReturnDetailsSection extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Comments'.tr(),
-          valueText: requestInformation.comment.displayStringValue,
+          valueText: requestInformation.comment.displayDashIfEmpty,
         ),
         _CustomListTile(
           imageUrlList: requestInformation.imageUrl,

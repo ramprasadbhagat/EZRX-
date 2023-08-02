@@ -208,7 +208,7 @@ class _InvoiceItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Order #${invoiceItem.orderId.displayLabel}',
+                    'Order #${invoiceItem.orderId.displayNAIfEmpty}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(

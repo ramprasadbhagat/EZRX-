@@ -263,9 +263,6 @@ String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;
 }
 
-Color getValueColor(String input) =>
-    input == 'N.A.' ? ZPColors.black : ZPColors.red;
-
 int getIntegerReturnQuantity(String quantity) =>
     quantity.isEmpty ? 0 : int.parse(quantity);
 
@@ -423,7 +420,7 @@ String getStatusMessage(
 ) {
   return isSuccessful(status)
       ? 'Payment date: ${paymentSummaryDetails.createdDate.toValidDateString}'
-      : 'Expires in ${paymentSummaryDetails.adviceExpiry.displayStringValue}';
+      : 'Expires in ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}';
 }
 
 String getPaymentDate(

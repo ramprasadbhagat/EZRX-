@@ -204,11 +204,11 @@ class _MaterialDetailsSection extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Principal code'.tr(),
-          valueText: requestInformation.principal.tr(),
+          valueText: requestInformation.principal,
         ),
         BalanceTextRow(
           keyText: 'Principal name'.tr(),
-          valueText: requestInformation.principalName.name.tr(),
+          valueText: requestInformation.principalName.name,
         ),
         BalanceTextRow(
           keyText: 'Invoice number'.tr(),
@@ -247,11 +247,11 @@ class _ReturnDetailsSection extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Reason'.tr(),
-          valueText: requestInformation.returnOrderDesc.tr(),
+          valueText: requestInformation.returnOrderDesc,
         ),
         BalanceTextRow(
           keyText: 'Comments'.tr(),
-          valueText: requestInformation.comment.displayStringValue.tr(),
+          valueText: requestInformation.comment.displayDashIfEmpty,
         ),
         _CustomListTile(
           imageUrlList: requestInformation.imageUrl,

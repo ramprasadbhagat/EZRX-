@@ -91,7 +91,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Unit of measurement'.tr(),
-            valueText: materialInfo.unitOfMeasurement.displayLabel,
+            valueText: materialInfo.unitOfMeasurement.displayNAIfEmpty,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -103,7 +103,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Country of origin'.tr(),
-            valueText: materialInfo.countryData.countryName.displayLabel,
+            valueText: materialInfo.countryData.countryName.displayNAIfEmpty,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,

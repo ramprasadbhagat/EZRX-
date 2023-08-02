@@ -76,7 +76,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'Payment #${paymentSummaryDetails.zzAdvice.displayStringValue}',
+                  'Payment #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
@@ -117,7 +117,7 @@ class _PaymentDetailsSection extends StatelessWidget {
                 keyText: 'Advice expiry'.tr(),
                 valueText: paymentSummaryDetails.status
                     .adviceExpiry(
-                      paymentSummaryDetails.adviceExpiry.displayStringValue,
+                      paymentSummaryDetails.adviceExpiry.displayDashIfEmpty,
                     )
                     .tr(),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(

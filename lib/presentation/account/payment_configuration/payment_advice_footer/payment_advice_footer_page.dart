@@ -198,7 +198,7 @@ class _PaymentAdviceFooter extends StatelessWidget {
                                         valueText: paymentAdviceFooter
                                             .salesDistrict
                                             .salesDistrictHeader
-                                            .displayLabel,
+                                            .displayNAIfEmpty,
                                         keyFlex: 3,
                                         valueFlex: 4,
                                       ),

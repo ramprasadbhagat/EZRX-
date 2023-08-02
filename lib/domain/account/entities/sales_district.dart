@@ -19,5 +19,5 @@ class SalesDistrict with _$SalesDistrict {
 
   String get emptyOrFirstElementLabel => salesDistrictInfo.isEmpty
       ? ''
-      : salesDistrictInfo.first.salesDistrictLabel.displayStringValue;
+      : salesDistrictInfo.first.salesDistrictLabel.displayDashIfEmpty;
 }

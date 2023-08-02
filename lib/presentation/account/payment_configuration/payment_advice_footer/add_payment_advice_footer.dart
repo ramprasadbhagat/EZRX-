@@ -219,7 +219,7 @@ class _SalesDistrictSelection extends StatelessWidget {
               .map(
                 (district) => DropdownMenuItem<SalesDistrictInfo>(
                   value: district,
-                  child: Text(district.salesDistrictLabel.displayLabel),
+                  child: Text(district.salesDistrictLabel.displayNAIfEmpty),
                 ),
               )
               .toList(),

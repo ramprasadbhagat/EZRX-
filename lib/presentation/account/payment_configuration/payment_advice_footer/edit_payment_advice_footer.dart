@@ -129,9 +129,9 @@ class _SalesDistrictSelection extends StatelessWidget {
         ).salesDistrictInfo;
         final salesDistrictInfo = salesDistrictList.firstWhere(
           (element) =>
-              element.salesDistrictHeader.displayLabel ==
+              element.salesDistrictHeader.displayNAIfEmpty ==
               state.paymentAdviceFooterData.salesDistrict.salesDistrictHeader
-                  .displayLabel,
+                  .displayNAIfEmpty,
           orElse: () => state.paymentAdviceFooterData.salesDistrict,
         );
 
@@ -158,7 +158,7 @@ class _SalesDistrictSelection extends StatelessWidget {
               .map(
                 (district) => DropdownMenuItem<SalesDistrictInfo>(
                   value: district,
-                  child: Text(district.salesDistrictLabel.displayLabel),
+                  child: Text(district.salesDistrictLabel.displayNAIfEmpty),
                 ),
               )
               .toList(),

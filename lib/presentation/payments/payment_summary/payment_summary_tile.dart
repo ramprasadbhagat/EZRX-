@@ -104,7 +104,7 @@ class _PaymentSummaryTiles extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                'Payment #${paymentSummaryDetails.zzAdvice.displayStringValue}',
+                'Payment #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),

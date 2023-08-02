@@ -116,7 +116,7 @@ class _ProductTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${product.materialNumber.displayMatNo} | ${product.ezrxNumber.displayLabel}',
+                      '${product.materialNumber.displayMatNo} | ${product.ezrxNumber.displayNAIfEmpty}',
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall

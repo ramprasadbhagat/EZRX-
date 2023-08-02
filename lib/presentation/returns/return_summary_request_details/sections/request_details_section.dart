@@ -94,7 +94,8 @@ class _ReturnDetailsSection extends StatelessWidget {
           BalanceTextRow(
             keyText: 'Return reference'.tr(),
             keyFlex: 2,
-            valueText: requestInformationHeader.returnReference.displayLabel,
+            valueText:
+                requestInformationHeader.returnReference.displayNAIfEmpty,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

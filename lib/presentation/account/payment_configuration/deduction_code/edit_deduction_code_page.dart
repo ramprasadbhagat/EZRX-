@@ -110,9 +110,9 @@ class EditDeductionCodePage extends StatelessWidget {
                           .map(
                             (district) => GenericDropdownData(
                               value: district
-                                  .salesDistrictLabel.displayStringValue,
+                                  .salesDistrictLabel.displayDashIfEmpty,
                               label: district
-                                  .salesDistrictLabel.displayStringValue,
+                                  .salesDistrictLabel.displayDashIfEmpty,
                             ),
                           )
                           .toList(),

@@ -184,20 +184,20 @@ class _BankBeneficiaryListItem extends StatelessWidget {
                 BalanceTextRow(
                   keyText: 'Beneficiary Name',
                   valueText:
-                      beneficiaryData.beneficiaryName.displayStringValue.tr(),
+                      beneficiaryData.beneficiaryName.displayDashIfEmpty.tr(),
                   keyFlex: 2,
                   valueFlex: 3,
                 ),
                 BalanceTextRow(
                   keyText: 'Account Number',
                   valueText:
-                      beneficiaryData.bankAccount.displayStringValue.tr(),
+                      beneficiaryData.bankAccount.displayDashIfEmpty.tr(),
                   keyFlex: 2,
                   valueFlex: 3,
                 ),
                 BalanceTextRow(
                   keyText: 'Bank Name',
-                  valueText: beneficiaryData.bankName.displayStringValue.tr(),
+                  valueText: beneficiaryData.bankName.displayDashIfEmpty.tr(),
                   keyFlex: 2,
                   valueFlex: 3,
                 ),

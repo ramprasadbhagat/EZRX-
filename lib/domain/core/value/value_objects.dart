@@ -168,17 +168,12 @@ class StringValue extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory StringValue(String input) {
-    return StringValue._(validateStringNotEmpty(input));
-  }
+  factory StringValue(String input) =>
+      StringValue._(validateStringNotEmpty(input));
 
-  String get displayStringValue {
-    return dashIfEmpty((value.getOrElse(() => '')));
-  }
+  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
 
-  String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
-
-  Color get getPaymentAdviceColor => getValueColor(value.getOrElse(() => ''));
+  String get displayNAIfEmpty => naIfEmpty(value.getOrElse(() => ''));
 
   const StringValue._(this.value);
 }
