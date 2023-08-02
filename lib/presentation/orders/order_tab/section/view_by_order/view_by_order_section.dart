@@ -194,7 +194,7 @@ class _ViewByOrder extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${viewByOrderHistoryItem.materialCount} materials',
+                        '${viewByOrderHistoryItem.materialCount} items',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       PriceComponent(
