@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -20,6 +20,8 @@ class ItemHeaderSection extends StatelessWidget {
     return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
+        final config = context.read<SalesOrgBloc>().state.configs;
+
         return Container(
           color: ZPColors.primary,
           padding: const EdgeInsets.symmetric(
@@ -67,11 +69,7 @@ class ItemHeaderSection extends StatelessWidget {
                     color: ZPColors.white,
                   ),
             ),
-            !context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrgConfigs
-                    .disableDeliveryDate
+            config.enableFutureDeliveryDay
                 ? BalanceTextRow(
                     keyText: 'Requested Delivery Date'.tr(),
                     valueText: orderHistoryItem
@@ -97,38 +95,50 @@ class ItemHeaderSection extends StatelessWidget {
             //   valueText:
             //       orderHistoryItem.,
             // ): const SizedBox.shrink(),
-            BalanceTextRow(
-              keyText: 'Contact person'.tr(),
-              valueText: orderHistoryItem.orderBy,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Contact number'.tr(),
-              valueText:
-                  orderHistoryItem.telephoneNumber.displayTelephoneNumber,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Delivery instructions'.tr(),
-              valueText: orderHistoryItem
-                  .specialInstructions.displaySpecialInstructions,
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
+            config.enableMobileNumber
+                ? BalanceTextRow(
+                    keyText: 'Contact person'.tr(),
+                    valueText: orderHistoryItem.orderBy,
+                    keyTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                    valueTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                  )
+                : const SizedBox.shrink(),
+            config.enableMobileNumber
+                ? BalanceTextRow(
+                    keyText: 'Contact number'.tr(),
+                    valueText:
+                        orderHistoryItem.telephoneNumber.displayTelephoneNumber,
+                    keyTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                    valueTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                  )
+                : const SizedBox.shrink(),
+            config.enableSpecialInstructions
+                ? BalanceTextRow(
+                    keyText: 'Delivery instructions'.tr(),
+                    valueText: orderHistoryItem
+                        .specialInstructions.displaySpecialInstructions,
+                    valueTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                    keyTextStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.white,
+                            ),
+                  )
+                : const SizedBox.shrink(),
           ]),
         );
       },

@@ -14,4 +14,7 @@ class OrderHistoryDetailsPaymentTerm with _$OrderHistoryDetailsPaymentTerm {
         paymentTermCode: PaymentTermCode(''),
         paymentTermDescription: PaymentTermDescription(''),
       );
+
+  String get displayPaymentTerm =>
+      '${paymentTermCode.displayPaymentTermCode} - ${paymentTermDescription.displayPaymentTermDescription}';
 }

@@ -76,6 +76,9 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                   ? BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
                       buildWhen: (previous, current) => previous != current,
                       builder: (context, state) {
+                        final config =
+                            context.read<SalesOrgBloc>().state.configs;
+                            
                         return Form(
                           key: WidgetKeys.additionalDetailsForm,
                           autovalidateMode: state.showErrorMessages
@@ -96,72 +99,88 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                               const SizedBox(
                                 height: 16,
                               ),
-                              RequestDeliveryDate(
-                                deliveryInfoData: state.deliveryInfoData,
-                                futureDeliveryDay: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .configs
-                                    .futureDeliveryDay
-                                    .validatedFutureDeliveryDate,
-                              ),
+                              config.enableFutureDeliveryDay
+                                  ? RequestDeliveryDate(
+                                      deliveryInfoData: state.deliveryInfoData,
+                                      futureDeliveryDay: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .configs
+                                          .futureDeliveryDay
+                                          .validatedFutureDeliveryDate,
+                                    )
+                                  : const SizedBox.shrink(),
                               const SizedBox(
                                 height: 16,
                               ),
-                              _TextFormField(
-                                labelText: 'Reference Note',
-                                keyText: 'referenceNoteKey',
-                                hintText: 'Enter reference note',
-                                label: DeliveryInfoLabel.referenceNote,
-                                deliveryInfoData: state.deliveryInfoData,
-                                focusNode: widget.focusNodes[
-                                        DeliveryInfoLabel.referenceNote] ??
-                                    FocusNode(),
-                              ),
+                              config.enableReferenceNote
+                                  ? _TextFormField(
+                                      labelText: 'Reference Note',
+                                      keyText: 'referenceNoteKey',
+                                      hintText: 'Enter reference note',
+                                      label: DeliveryInfoLabel.referenceNote,
+                                      deliveryInfoData: state.deliveryInfoData,
+                                      focusNode: widget.focusNodes[
+                                              DeliveryInfoLabel
+                                                  .referenceNote] ??
+                                          FocusNode(),
+                                    )
+                                  : const SizedBox.shrink(),
                               const SizedBox(
                                 height: 16,
                               ),
-                              _PaymentTerm(
-                                deliveryInfoData: state.deliveryInfoData,
-                                focusNode: widget.focusNodes[
-                                        DeliveryInfoLabel.paymentTerm] ??
-                                    FocusNode(),
-                              ),
+                              config.enablePaymentTerms
+                                  ? _PaymentTerm(
+                                      deliveryInfoData: state.deliveryInfoData,
+                                      focusNode: widget.focusNodes[
+                                              DeliveryInfoLabel.paymentTerm] ??
+                                          FocusNode(),
+                                    )
+                                  : const SizedBox.shrink(),
                               const SizedBox(
                                 height: 16,
                               ),
-                              _TextFormField(
-                                labelText: 'Contact Person',
-                                keyText: 'contactPersonKey',
-                                hintText: 'Enter contact person name',
-                                label: DeliveryInfoLabel.contactPerson,
-                                deliveryInfoData: state.deliveryInfoData,
-                                focusNode: widget.focusNodes[
-                                        DeliveryInfoLabel.contactPerson] ??
-                                    FocusNode(),
-                              ),
+                              config.enableMobileNumber
+                                  ? _TextFormField(
+                                      labelText: 'Contact Person',
+                                      keyText: 'contactPersonKey',
+                                      hintText: 'Enter contact person name',
+                                      label: DeliveryInfoLabel.contactPerson,
+                                      deliveryInfoData: state.deliveryInfoData,
+                                      focusNode: widget.focusNodes[
+                                              DeliveryInfoLabel
+                                                  .contactPerson] ??
+                                          FocusNode(),
+                                    )
+                                  : const SizedBox.shrink(),
                               const SizedBox(
                                 height: 16,
                               ),
-                              _MobileNumber(
-                                focusNode: widget.focusNodes[
-                                        DeliveryInfoLabel.mobileNumber] ??
-                                    FocusNode(),
-                              ),
+                              config.enableMobileNumber
+                                  ? _MobileNumber(
+                                      focusNode: widget.focusNodes[
+                                              DeliveryInfoLabel.mobileNumber] ??
+                                          FocusNode(),
+                                    )
+                                  : const SizedBox.shrink(),
                               const SizedBox(
                                 height: 16,
                               ),
-                              _TextFormField(
-                                labelText: 'Delivery instructions',
-                                keyText: 'deliveryInstructionKey',
-                                hintText: 'Enter delivery instructions',
-                                keyboardType: TextInputType.multiline,
-                                label: DeliveryInfoLabel.deliveryInstruction,
-                                deliveryInfoData: state.deliveryInfoData,
-                                focusNode: widget.focusNodes[DeliveryInfoLabel
-                                        .deliveryInstruction] ??
-                                    FocusNode(),
-                              ),
+                              config.enableSpecialInstructions
+                                  ? _TextFormField(
+                                      labelText: 'Delivery instructions',
+                                      keyText: 'deliveryInstructionKey',
+                                      hintText: 'Enter delivery instructions',
+                                      keyboardType: TextInputType.multiline,
+                                      label:
+                                          DeliveryInfoLabel.deliveryInstruction,
+                                      deliveryInfoData: state.deliveryInfoData,
+                                      focusNode: widget.focusNodes[
+                                              DeliveryInfoLabel
+                                                  .deliveryInstruction] ??
+                                          FocusNode(),
+                                    )
+                                  : const SizedBox.shrink(),
                               const SizedBox(
                                 height: 16,
                               ),

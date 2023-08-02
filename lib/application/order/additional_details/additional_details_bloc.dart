@@ -40,6 +40,7 @@ class AdditionalDetailsBloc
       ),
       validateForm: (value) async => _validateAdditionalDetails(
         emit: emit,
+        config: value.config,
       ),
       addPoDocument: (value) async => emit(
         state.copyWith(
@@ -136,6 +137,7 @@ class AdditionalDetailsBloc
 
   void _validateAdditionalDetails({
     required Emitter<AdditionalDetailsState> emit,
+    required SalesOrganisationConfigs config,
   }) {
     emit(
       state.copyWith(
@@ -145,12 +147,21 @@ class AdditionalDetailsBloc
     );
     final isCustomerPoReferenceValid =
         state.deliveryInfoData.poReference.isValid();
-    final isReferenceNoteValid = state.deliveryInfoData.referenceNote.isValid();
-    final isContactPersonValid = state.deliveryInfoData.contactPerson.isValid();
-    final isContactNumberValid = state.deliveryInfoData.mobileNumber.isValid();
-    final isPaymentTermValid = state.deliveryInfoData.paymentTerm.isValid();
-    final isDeliveryInstructionsValid =
-        state.deliveryInfoData.deliveryInstruction.isValid();
+    final isReferenceNoteValid = config.enableReferenceNote
+        ? state.deliveryInfoData.referenceNote.isValid()
+        : true;
+    final isContactPersonValid = config.enableMobileNumber
+        ? state.deliveryInfoData.contactPerson.isValid()
+        : true;
+    final isContactNumberValid = config.enableMobileNumber
+        ? state.deliveryInfoData.mobileNumber.isValid()
+        : true;
+    final isPaymentTermValid = config.enablePaymentTerms
+        ? state.deliveryInfoData.paymentTerm.isValid()
+        : true;
+    final isDeliveryInstructionsValid = config.enableSpecialInstructions
+        ? state.deliveryInfoData.deliveryInstruction.isValid()
+        : true;
     final isFormValid = isCustomerPoReferenceValid &&
         isReferenceNoteValid &&
         isContactPersonValid &&
