@@ -9,6 +9,8 @@ class PriceOverrideState with _$PriceOverrideState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
     required PriceOverrideValue priceOverrideValue,
+    required RequestCounterOfferDetails counterOfferDetails,
+    required Price overriddenMaterialPrice,
     required bool showErrorMessages,
   }) = _PriceOverrideState;
 
@@ -17,6 +19,8 @@ class PriceOverrideState with _$PriceOverrideState {
         apiFailureOrSuccessOption: none(),
         isFetching: false,
         priceOverrideValue: PriceOverrideValue(0.0),
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        overriddenMaterialPrice: Price.empty(),
         showErrorMessages: false,
       );
 }

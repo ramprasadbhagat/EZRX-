@@ -10,10 +10,12 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -29,6 +31,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
@@ -1018,6 +1021,7 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
     required String language,
     required int quantity,
+    required RequestCounterOfferDetails counterOfferDetails,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -1030,18 +1034,23 @@ class CartRepository implements ICartRepository {
     }
 
     try {
-      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
-      final customerCode = customerCodeInfo.customerCodeSoldTo;
-      final shipToCode = shipToInfo.shipToCustomerCode;
+      final upsertCartRequest = CartProductRequest(
+        salesOrg: salesOrganisation.salesOrg,
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToId: shipToInfo.shipToCustomerCode,
+        productNumber: productNumber.getOrDefaultValue(''),
+        quantity: quantity,
+        language: language,
+        parentID: '',
+        counterOfferPrice:
+            counterOfferDetails.counterOfferPrice.counterOfferValue,
+        counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
+        comment: counterOfferDetails.comment.getOrDefaultValue(''),
+      );
 
       final productList = await cartRemoteDataSource.upsertCart(
-        productId: productNumber.getOrDefaultValue(''),
-        qty: quantity,
-        customerCode: customerCode,
-        salesOrg: salesOrgCode,
-        shipToCode: shipToCode,
-        language: language,
-        parentId: '',
+        requestParams:
+            CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
       );
 
       return Right(productList);
@@ -1051,8 +1060,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Map<MaterialNumber, ProductMetaData>>>
-      getProducts({
+  Future<Either<ApiFailure, Map<MaterialNumber, ProductMetaData>>> getProducts({
     required List<MaterialNumber> materialNumbers,
   }) async {
     if (config.appFlavor == Flavor.mock) {

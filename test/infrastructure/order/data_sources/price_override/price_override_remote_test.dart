@@ -81,7 +81,8 @@ void main() {
             result,
             List.from(finalData)
                 .map((e) => PriceDto.fromJson(e).toDomain())
-                .toList());
+                .toList()
+                .first);
       });
 
       test(
@@ -114,7 +115,7 @@ void main() {
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
-            return Future.value(<PriceMock>[]);
+            return Future.value(PriceMock());
           });
         },
       );
@@ -154,7 +155,7 @@ void main() {
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
-            return Future.value(<PriceMock>[]);
+            return Future.value(PriceMock());
           });
         },
       );

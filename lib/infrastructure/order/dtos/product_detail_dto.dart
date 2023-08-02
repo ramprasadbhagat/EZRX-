@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -89,6 +90,7 @@ class ProductDetailDto with _$ProductDetailDto {
         taxes: [],
         parentID: '',
         itemType: MaterialItemType(''),
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
       );
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>

@@ -1,5 +1,8 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -28,7 +31,11 @@ class CartProductDto with _$CartProductDto {
         required String genericMaterialName,
     @JsonKey(name: 'principalName', defaultValue: '')
         required String principalName,
-    @JsonKey(name: 'Comment', defaultValue: '') required String remarks,
+    @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
+        required double counterOfferPrice,
+    @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
+        required String counterOfferCurrency,
+    @JsonKey(name: 'Comment', defaultValue: '') required String comment,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     MaterialInfo cartItemDetails,
@@ -47,7 +54,13 @@ class CartProductDto with _$CartProductDto {
       type: cartItemDetails.type.getOrCrash(),
       principalName:
           cartItemDetails.principalData.principalName.getOrDefaultValue(''),
-      remarks: cartItemDetails.remarks,
+      comment:
+          cartItemDetails.counterOfferDetails.comment.getOrDefaultValue(''),
+      counterOfferCurrency: cartItemDetails
+          .counterOfferDetails.counterOfferCurrency
+          .getOrDefaultValue(''),
+      counterOfferPrice: cartItemDetails
+          .counterOfferDetails.counterOfferPrice.counterOfferValue,
     );
   }
   MaterialInfo get toDomain {
@@ -64,7 +77,11 @@ class CartProductDto with _$CartProductDto {
         principalName: PrincipalName(principalName),
       ),
       itemType: MaterialItemType(type),
-      remarks: remarks,
+      counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+        comment: StringValue(comment),
+        counterOfferCurrency: Currency(counterOfferCurrency),
+        counterOfferPrice: CounterOfferValue(counterOfferPrice.toString()),
+      ),
     );
   }
 

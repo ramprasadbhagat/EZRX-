@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class PriceOverrideLocalDataSource {
   PriceOverrideLocalDataSource();
 
-  Future<List<Price>> getOverridePrice() async {
+  Future<Price> getOverridePrice() async {
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/getPriceOverride.json',
@@ -18,6 +18,7 @@ class PriceOverrideLocalDataSource {
 
     return List.from(finalData)
         .map((e) => PriceDto.fromJson(e).toDomain())
-        .toList();
+        .toList()
+        .first;
   }
 }

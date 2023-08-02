@@ -10,13 +10,13 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
   //TODO: evaluate which methods can be removed
-  Future<Either<ApiFailure, Map<MaterialNumber, ProductMetaData>>>
-      getProducts({
+  Future<Either<ApiFailure, Map<MaterialNumber, ProductMetaData>>> getProducts({
     required List<MaterialNumber> materialNumbers,
   });
 
@@ -156,5 +156,6 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
     required String language,
     required int quantity,
+    required RequestCounterOfferDetails counterOfferDetails,
   });
 }

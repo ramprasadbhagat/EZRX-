@@ -1,4 +1,3 @@
-
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 
 double totalPriceStringAsFixed(String value) {
@@ -93,3 +92,6 @@ bool isValueNotEmpty(String zDP5Value) => zDP5Value.isNotEmpty;
 String intToString(int value) => value == 0 ? '' : '$value';
 
 bool checkIfSuccessful(int value) => value == 1;
+
+double getDoubleParsedValue(String value) =>
+    value.isEmpty ? 0 : double.parse(value);

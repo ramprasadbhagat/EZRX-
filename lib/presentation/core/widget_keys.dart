@@ -241,6 +241,8 @@ class WidgetKeys {
   static Key cartMaterialItemTile(String cartMaterialItemTileKey) =>
       Key(cartMaterialItemTileKey);
   static const Key cartButton = Key('cartButton');
+  static const Key counterOfferPriceField = Key('counterOfferPriceField');
+  static const Key counterOfferRemarksField = Key('counterOfferRemarksField');
 
   //============================================================
   //  Checkout Page Keys

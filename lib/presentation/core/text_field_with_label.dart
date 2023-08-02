@@ -8,7 +8,7 @@ class TextFieldWithLabel extends StatelessWidget {
     required this.fieldKey,
     required this.labelText,
     this.controller,
-    required this.validator,
+    this.validator,
     required this.onChanged,
     required this.decoration,
     this.isEnabled = true,
@@ -22,11 +22,13 @@ class TextFieldWithLabel extends StatelessWidget {
     this.readOnly = false,
     this.focusNode,
     this.inputFormatters,
+    this.onTapOutside,
+    this.maxLength,
   }) : super(key: key);
   final Key fieldKey;
   final String labelText;
   final TextEditingController? controller;
-  final Function(String?) validator;
+  final Function(String?)? validator;
   final Function(String) onChanged;
   final InputDecoration decoration;
   final bool isEnabled;
@@ -40,6 +42,8 @@ class TextFieldWithLabel extends StatelessWidget {
   final bool readOnly;
   final FocusNode? focusNode;
   final List<TextInputFormatter>? inputFormatters;
+  final TapRegionCallback? onTapOutside;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +79,12 @@ class TextFieldWithLabel extends StatelessWidget {
           decoration: decoration,
           obscureText: obscureText,
           onChanged: onChanged,
-          validator: (value) => validator(value),
+          validator: (value) => validator?.call(value),
           initialValue: initValue,
           onFieldSubmitted: onDone,
+          onTapOutside: onTapOutside,
           maxLines: maxLines,
+          maxLength: maxLength,
           readOnly: readOnly,
         ),
       ],

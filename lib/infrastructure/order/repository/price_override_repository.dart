@@ -23,7 +23,7 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
     required this.remoteDataSource,
   });
   @override
-  Future<Either<ApiFailure, List<Price>>> updateItemPrice({
+  Future<Either<ApiFailure, Price>> updateItemPrice({
     required PriceAggregate item,
     required double newPrice,
     required SalesOrganisation salesOrganisation,
@@ -34,10 +34,7 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
         final price = await localDataSource.getOverridePrice();
 
         return Right(
-          price
-              .map((Price e) =>
-                  e.copyWith(materialNumber: item.getMaterialNumber))
-              .toList(),
+          price.copyWith(materialNumber: item.getMaterialNumber),
         );
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));

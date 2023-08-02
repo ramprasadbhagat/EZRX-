@@ -45,12 +45,10 @@ void main() async {
               .loadString('assets/json/getAddedToCartProductList.json'),
         );
       });
-      
 
       test(
         'Cart Remote data source Success',
         () async {
-          
           final finalData =
               getAddedToCartProductListJson['data']['cart']['EzRxItems'];
           dioAdapter.onPost(
@@ -186,13 +184,16 @@ void main() async {
           );
 
           final result = await remoteDataSource.upsertCart(
-            customerCode: '',
-            language: '',
-            parentId: '',
-            productId: '',
-            qty: 1,
-            salesOrg: '',
-            shipToCode: '',
+            requestParams: {
+              'ProductID': '',
+              'Quantity': 1,
+              'ItemSource': 'EZRX',
+              'CustomerCode': '',
+              'ShipToID': '',
+              'SalesOrg': '',
+              'ParentID': '',
+              'Language': '',
+            },
           );
 
           expect(
@@ -227,17 +228,18 @@ void main() async {
             }),
           );
 
-          await remoteDataSource
-              .upsertCart(
-            customerCode: '',
-            language: '',
-            parentId: '',
-            productId: '',
-            qty: 1,
-            salesOrg: '',
-            shipToCode: '',
-          )
-              .onError((error, _) {
+          await remoteDataSource.upsertCart(
+            requestParams: {
+              'ProductID': '',
+              'Quantity': 1,
+              'ItemSource': 'EZRX',
+              'CustomerCode': '',
+              'ShipToID': '',
+              'SalesOrg': '',
+              'ParentID': '',
+              'Language': '',
+            },
+          ).onError((error, _) {
             expect(error, isA<ServerException>());
             return Future.value(<MaterialInfo>[]);
           });
@@ -261,17 +263,18 @@ void main() async {
             }),
           );
 
-          await remoteDataSource
-              .upsertCart(
-            customerCode: '',
-            language: '',
-            parentId: '',
-            productId: '',
-            qty: 1,
-            salesOrg: '',
-            shipToCode: '',
-          )
-              .onError((error, _) {
+          await remoteDataSource.upsertCart(
+            requestParams: {
+              'ProductID': '',
+              'Quantity': 1,
+              'ItemSource': 'EZRX',
+              'CustomerCode': '',
+              'ShipToID': '',
+              'SalesOrg': '',
+              'ParentID': '',
+              'Language': '',
+            },
+          ).onError((error, _) {
             expect(error, isA<ServerException>());
             return Future.value(<MaterialInfo>[]);
           });

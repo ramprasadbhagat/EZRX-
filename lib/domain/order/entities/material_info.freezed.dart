@@ -55,6 +55,8 @@ mixin _$MaterialInfo {
   List<Bundle> get bundles => throw _privateConstructorUsedError;
   bool get isFOCMaterial => throw _privateConstructorUsedError;
   String get ean => throw _privateConstructorUsedError;
+  RequestCounterOfferDetails get counterOfferDetails =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialInfoCopyWith<MaterialInfo> get copyWith =>
@@ -104,12 +106,14 @@ abstract class $MaterialInfoCopyWith<$Res> {
       List<String> taxes,
       List<Bundle> bundles,
       bool isFOCMaterial,
-      String ean});
+      String ean,
+      RequestCounterOfferDetails counterOfferDetails});
 
   $PrincipalDataCopyWith<$Res> get principalData;
   $BundleCopyWith<$Res> get bundle;
   $ProductImagesCopyWith<$Res> get productImages;
   $CountryDataCopyWith<$Res> get countryData;
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails;
 }
 
 /// @nodoc
@@ -162,6 +166,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? bundles = null,
     Object? isFOCMaterial = null,
     Object? ean = null,
+    Object? counterOfferDetails = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -312,6 +317,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
               as String,
+      counterOfferDetails: null == counterOfferDetails
+          ? _value.counterOfferDetails
+          : counterOfferDetails // ignore: cast_nullable_to_non_nullable
+              as RequestCounterOfferDetails,
     ) as $Val);
   }
 
@@ -344,6 +353,15 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
   $CountryDataCopyWith<$Res> get countryData {
     return $CountryDataCopyWith<$Res>(_value.countryData, (value) {
       return _then(_value.copyWith(countryData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails {
+    return $RequestCounterOfferDetailsCopyWith<$Res>(_value.counterOfferDetails,
+        (value) {
+      return _then(_value.copyWith(counterOfferDetails: value) as $Val);
     });
   }
 }
@@ -393,7 +411,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       List<String> taxes,
       List<Bundle> bundles,
       bool isFOCMaterial,
-      String ean});
+      String ean,
+      RequestCounterOfferDetails counterOfferDetails});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -403,6 +422,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
   $ProductImagesCopyWith<$Res> get productImages;
   @override
   $CountryDataCopyWith<$Res> get countryData;
+  @override
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails;
 }
 
 /// @nodoc
@@ -453,6 +474,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? bundles = null,
     Object? isFOCMaterial = null,
     Object? ean = null,
+    Object? counterOfferDetails = null,
   }) {
     return _then(_$_MaterialInfo(
       name: null == name
@@ -603,6 +625,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
               as String,
+      counterOfferDetails: null == counterOfferDetails
+          ? _value.counterOfferDetails
+          : counterOfferDetails // ignore: cast_nullable_to_non_nullable
+              as RequestCounterOfferDetails,
     ));
   }
 }
@@ -647,7 +673,8 @@ class _$_MaterialInfo extends _MaterialInfo {
       required final List<String> taxes,
       required final List<Bundle> bundles,
       required this.isFOCMaterial,
-      required this.ean})
+      required this.ean,
+      required this.counterOfferDetails})
       : _data = data,
         _stockInfos = stockInfos,
         _taxes = taxes,
@@ -753,10 +780,12 @@ class _$_MaterialInfo extends _MaterialInfo {
   final bool isFOCMaterial;
   @override
   final String ean;
+  @override
+  final RequestCounterOfferDetails counterOfferDetails;
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, itemType: $itemType, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, itemType: $itemType, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
   }
 
   @override
@@ -833,7 +862,9 @@ class _$_MaterialInfo extends _MaterialInfo {
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.isFOCMaterial, isFOCMaterial) ||
                 other.isFOCMaterial == isFOCMaterial) &&
-            (identical(other.ean, ean) || other.ean == ean));
+            (identical(other.ean, ean) || other.ean == ean) &&
+            (identical(other.counterOfferDetails, counterOfferDetails) ||
+                other.counterOfferDetails == counterOfferDetails));
   }
 
   @override
@@ -875,7 +906,8 @@ class _$_MaterialInfo extends _MaterialInfo {
         const DeepCollectionEquality().hash(_taxes),
         const DeepCollectionEquality().hash(_bundles),
         isFOCMaterial,
-        ean
+        ean,
+        counterOfferDetails
       ]);
 
   @JsonKey(ignore: true)
@@ -887,43 +919,45 @@ class _$_MaterialInfo extends _MaterialInfo {
 
 abstract class _MaterialInfo extends MaterialInfo {
   const factory _MaterialInfo(
-      {required final String name,
-      required final PrincipalData principalData,
-      required final MaterialNumber materialNumber,
-      required final String materialDescription,
-      required final String manufactured,
-      required final bool isFavourite,
-      required final MaterialInfoType type,
-      required final bool hidePrice,
-      required final List<MaterialData> data,
-      required final int dataTotalCount,
-      required final DataTotalHidden dataTotalHidden,
-      required final bool isGimmick,
-      required final List<StockInfo> stockInfos,
-      required final Bundle bundle,
-      required final ProductImages productImages,
-      required final CountryData countryData,
-      required final int quantity,
-      required final String defaultMaterialDescription,
-      required final String governmentMaterialCode,
-      required final StringValue unitOfMeasurement,
-      required final String parentID,
-      required final MaterialItemType itemType,
-      required final String therapeuticClass,
-      required final MaterialTaxClassification taxClassification,
-      required final String itemRegistrationNumber,
-      required final String genericMaterialName,
-      required final String remarks,
-      required final String itemBrand,
-      required final MaterialGroup materialGroup2,
-      required final MaterialGroup materialGroup4,
-      required final bool isSampleMaterial,
-      required final bool hasValidTenderContract,
-      required final bool hasMandatoryTenderContract,
-      required final List<String> taxes,
-      required final List<Bundle> bundles,
-      required final bool isFOCMaterial,
-      required final String ean}) = _$_MaterialInfo;
+          {required final String name,
+          required final PrincipalData principalData,
+          required final MaterialNumber materialNumber,
+          required final String materialDescription,
+          required final String manufactured,
+          required final bool isFavourite,
+          required final MaterialInfoType type,
+          required final bool hidePrice,
+          required final List<MaterialData> data,
+          required final int dataTotalCount,
+          required final DataTotalHidden dataTotalHidden,
+          required final bool isGimmick,
+          required final List<StockInfo> stockInfos,
+          required final Bundle bundle,
+          required final ProductImages productImages,
+          required final CountryData countryData,
+          required final int quantity,
+          required final String defaultMaterialDescription,
+          required final String governmentMaterialCode,
+          required final StringValue unitOfMeasurement,
+          required final String parentID,
+          required final MaterialItemType itemType,
+          required final String therapeuticClass,
+          required final MaterialTaxClassification taxClassification,
+          required final String itemRegistrationNumber,
+          required final String genericMaterialName,
+          required final String remarks,
+          required final String itemBrand,
+          required final MaterialGroup materialGroup2,
+          required final MaterialGroup materialGroup4,
+          required final bool isSampleMaterial,
+          required final bool hasValidTenderContract,
+          required final bool hasMandatoryTenderContract,
+          required final List<String> taxes,
+          required final List<Bundle> bundles,
+          required final bool isFOCMaterial,
+          required final String ean,
+          required final RequestCounterOfferDetails counterOfferDetails}) =
+      _$_MaterialInfo;
   const _MaterialInfo._() : super._();
 
   @override
@@ -1000,6 +1034,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   bool get isFOCMaterial;
   @override
   String get ean;
+  @override
+  RequestCounterOfferDetails get counterOfferDetails;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialInfoCopyWith<_$_MaterialInfo> get copyWith =>

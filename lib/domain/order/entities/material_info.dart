@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/recent_order_item.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -56,6 +57,7 @@ class MaterialInfo with _$MaterialInfo {
     required List<Bundle> bundles,
     required bool isFOCMaterial,
     required String ean,
+    required RequestCounterOfferDetails counterOfferDetails,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
@@ -99,6 +101,7 @@ class MaterialInfo with _$MaterialInfo {
         countryData: CountryData.empty(),
         parentID: '',
         itemType: MaterialItemType(''),
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(
@@ -182,8 +185,7 @@ class MaterialData with _$MaterialData {
         materialDescription: materialDescription,
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
-        productImages:
-            ProductImages.empty(),
+        productImages: ProductImages.empty(),
         governmentMaterialCode: governmentMaterialCode,
       );
 }

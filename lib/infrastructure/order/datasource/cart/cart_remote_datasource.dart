@@ -65,37 +65,19 @@ class CartRemoteDataSource {
   }
 
   Future<List<MaterialInfo>> upsertCart({
-    required String productId,
-    required int qty,
-    required String shipToCode,
-    required String customerCode,
-    required String salesOrg,
-    required String parentId,
-    required String language,
+    required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.upsertCart();
-      final variables = {
-        'itemInput': {
-          'ProductID': productId,
-          'Quantity': qty,
-          'ItemSource': 'EZRX',
-          'CustomerCode': customerCode,
-          'ShipToID': shipToCode,
-          'SalesOrg': salesOrg,
-          //TODO: Ask auron/wasim, is this always empty?
-          'ParentID': parentId,
-          'Language': language,
-        },
-      };
-
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}cart',
         data: jsonEncode(
           {
             'query': query,
-            'variables': variables,
+            'variables': {
+              'itemInput': requestParams,
+            },
           },
         ),
       );

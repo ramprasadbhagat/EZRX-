@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
@@ -366,6 +367,9 @@ class _FooterState extends State<_Footer> {
                                                       _quantityEditingController
                                                           .text,
                                                     ),
+                                            counterOfferDetails:
+                                                RequestCounterOfferDetails
+                                                    .empty(),
                                           ),
                                         );
                                   },

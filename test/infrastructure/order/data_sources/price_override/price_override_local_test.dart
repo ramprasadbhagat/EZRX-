@@ -41,7 +41,8 @@ void main() {
             result,
             List.from(finalData)
                 .map((e) => PriceDto.fromJson(e).toDomain())
-                .toList(),
+                .toList()
+                .first,
           );
         },
       );

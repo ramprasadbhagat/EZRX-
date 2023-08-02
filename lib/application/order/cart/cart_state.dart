@@ -14,6 +14,7 @@ class CartState with _$CartState {
     required bool isFetchingCartProductDetail,
     required bool isUpserting,
     required bool isMappingPrice,
+    required bool isUpdatingStock,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
   }) = _CartState;
 
@@ -27,6 +28,7 @@ class CartState with _$CartState {
         isFetchingCartProductDetail: false,
         isUpserting: false,
         isMappingPrice: false,
+        isUpdatingStock: false,
         additionInfo: <MaterialNumber, ProductMetaData>{},
       );
 

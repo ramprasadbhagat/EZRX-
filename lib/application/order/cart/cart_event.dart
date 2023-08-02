@@ -114,6 +114,7 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required PriceAggregate priceAggregate,
     required int quantity,
+    required RequestCounterOfferDetails counterOfferDetails,
   }) = _UpsertCart;
 
   const factory CartEvent.getDetailsProductsAddedToCart({
@@ -122,9 +123,18 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.updatePriceProduct({
     required Map<MaterialNumber, Price> priceProducts,
+    required Price overriddenProductPrice,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
   }) = _UpdatePriceProduct;
+
+  const factory CartEvent.updateProductStock({
+    required List<PriceAggregate> products,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+  }) = _UpdateProductStock;
 }

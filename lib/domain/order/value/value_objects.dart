@@ -728,6 +728,22 @@ class PriceOverrideValue extends ValueObject<double> {
   const PriceOverrideValue._(this.value);
 }
 
+class CounterOfferValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CounterOfferValue(String input) {
+    return CounterOfferValue._(
+      validateStringNotEmpty(input).flatMap(validateStringIsBiggerThanZero),
+    );
+  }
+
+  double get counterOfferValue =>
+      getDoubleParsedValue(value.getOrElse(() => ''));
+
+  const CounterOfferValue._(this.value);
+}
+
 class MaterialItemType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -833,13 +849,11 @@ class BatchNumber extends ValueObject<String> {
   factory BatchNumber(String input) {
     return BatchNumber._(validateStringNotEmpty(input));
   }
-  
+
   String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
   String get selectOrGetBatch {
     return value.getOrElse(() => 'Select'.tr());
   }
-
-   
 
   const BatchNumber._(this.value);
 }

@@ -110,6 +110,14 @@ Either<ValueFailure<double>, double> validateNumberIsBiggerThanZero(
       : left(ValueFailure.numberMustBiggerThanZero(failedValue: input));
 }
 
+Either<ValueFailure<String>, String> validateStringIsBiggerThanZero(
+  String input,
+) {
+  return double.parse(input) > 0.0
+      ? right(input)
+      : left(ValueFailure.numberMustBiggerThanZero(failedValue: input));
+}
+
 Either<ValueFailure<String>, String> validateInputIsBiggerThanMaxValue(
   String input,
   int maxValue,

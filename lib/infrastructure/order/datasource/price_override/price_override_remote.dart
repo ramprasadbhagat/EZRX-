@@ -22,7 +22,7 @@ class PriceOverrideRemoteDataSource {
     required this.priceOverrideQueryMutation,
   });
 
-  Future<List<Price>> getOverridePrice({
+  Future<Price> getOverridePrice({
     required String custCode,
     required String salesOrg,
     required Map<String, dynamic> materialQuery,
@@ -52,7 +52,8 @@ class PriceOverrideRemoteDataSource {
 
       return List.from(finalData)
           .map((e) => PriceDto.fromJson(e).toDomain())
-          .toList();
+          .toList()
+          .first;
     });
   }
 

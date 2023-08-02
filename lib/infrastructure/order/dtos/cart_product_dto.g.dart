@@ -19,7 +19,9 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
-      remarks: json['Comment'] as String? ?? '',
+      counterOfferPrice: (json['CounterOfferPrice'] as num?)?.toDouble() ?? 0,
+      counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
+      comment: json['Comment'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -35,5 +37,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'itemRegistrationNumber': instance.itemRegistrationNumber,
       'genericMaterialName': instance.genericMaterialName,
       'principalName': instance.principalName,
-      'Comment': instance.remarks,
+      'CounterOfferPrice': instance.counterOfferPrice,
+      'CounterOfferCurrency': instance.counterOfferCurrency,
+      'Comment': instance.comment,
     };

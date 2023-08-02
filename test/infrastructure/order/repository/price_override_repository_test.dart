@@ -53,13 +53,13 @@ void main() {
     test('get priceOverrideRepository successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => priceOverrideLocalDataSource.getOverridePrice())
-          .thenAnswer((invocation) async => <Price>[]);
+          .thenAnswer((invocation) async => Price.empty());
 
       final result = await priceOverrideRepository.updateItemPrice(
           item: PriceAggregate.empty().copyWith(
               price: Price.empty()
                   .copyWith(priceOverride: PriceOverrideValue(70.0))),
-          newPrice: 0.0,
+          newPrice: 70.0,
           salesOrganisation: mockSalesOrganisation,
           customerCodeInfo: mockCustomerCodeInfo);
       expect(
@@ -93,14 +93,12 @@ void main() {
               materialNumber: MaterialNumber('123456'),
               isPriceOverride: true,
             )).priceOverrideQuery(70),
-          )).thenAnswer((invocation) async => <Price>[
-            Price.empty().copyWith(
-              priceOverride: PriceOverrideValue(70),
-              materialNumber: MaterialNumber('00000102345'),
-              zdp8Override: Zdp8OverrideValue(12.0),
-              isPriceOverride: true,
-            )
-          ]);
+          )).thenAnswer((invocation) async => Price.empty().copyWith(
+            priceOverride: PriceOverrideValue(70),
+            materialNumber: MaterialNumber('00000102345'),
+            zdp8Override: Zdp8OverrideValue(12.0),
+            isPriceOverride: true,
+          ));
 
       final result = await priceOverrideRepository.updateItemPrice(
         item: PriceAggregate.empty().copyWith(
@@ -149,15 +147,14 @@ void main() {
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => priceOverrideLocalDataSource.getOverridePrice()).thenAnswer(
-          (invocation) async => <Price>[
-                Price.empty().copyWith(materialNumber: MaterialNumber('123456'))
-              ]);
+          (invocation) async =>
+              Price.empty().copyWith(materialNumber: MaterialNumber('123456')));
 
       final result = await priceOverrideRepository.updateItemPrice(
           item: PriceAggregate.empty().copyWith(
               price: Price.empty()
                   .copyWith(priceOverride: PriceOverrideValue(70.0))),
-          newPrice: 0.0,
+          newPrice: 70.0,
           salesOrganisation: mockSalesOrganisation,
           customerCodeInfo: mockCustomerCodeInfo);
       expect(

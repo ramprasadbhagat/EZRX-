@@ -1,12 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -19,8 +24,10 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 
 class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
-  const CartProductTile({Key? key, required this.cartItem,})
-      : super(key: key);
+  const CartProductTile({
+    Key? key,
+    required this.cartItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +50,12 @@ class CartProductTile extends StatelessWidget {
                     quantity: 0,
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
+                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
+            context
+                .read<PriceOverrideBloc>()
+                .add(const PriceOverrideEvent.initialized());
           },
         ),
       ],
@@ -69,7 +80,9 @@ class CartProductTile extends StatelessWidget {
               endIndent: 0,
               color: ZPColors.accentColor,
             ),
-            const _BonusSection(),
+            _BonusSection(
+              cartItem: cartItem,
+            ),
           ],
         ),
       ),
@@ -115,7 +128,7 @@ class _ItemSubTotalSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Item subtotal:',
+            'Item subtotal:'.toLowerCase(),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
@@ -125,22 +138,18 @@ class _ItemSubTotalSection extends StatelessWidget {
           LoadingShimmer.withChild(
             enabled: context.read<CartBloc>().state.isMappingPrice ||
                 context.read<CartBloc>().state.isUpserting ||
+                context.read<CartBloc>().state.isUpdatingStock ||
                 context.read<MaterialPriceBloc>().state.isFetching,
-            child: RichText(
-              text: TextSpan(
-                text: 'MYR ',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: ZPColors.primary,
-                    ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: cartProduct.finalPriceTotal.toString(),
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.primary,
-                        ),
+            child: PriceComponent(
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              price: cartProduct.finalPriceTotal.toString(),
+              currencyCodeTextStyle:
+                  Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: ZPColors.primary,
+                      ),
+              priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: ZPColors.primary,
                   ),
-                ],
-              ),
             ),
           ),
         ],
@@ -155,60 +164,102 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
+    final isCounterOfferRequested = cartItem.price.isPriceOverride;
+
+    return BlocListener<PriceOverrideBloc, PriceOverrideState>(
+      listenWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      listener: (context, state) {
+        context.read<CartBloc>().add(
+              CartEvent.updatePriceProduct(
+                priceProducts:
+                    context.read<MaterialPriceBloc>().state.materialPrice,
+                overriddenProductPrice: state.overriddenMaterialPrice,
+                salesOrganisationConfigs:
+                    context.read<SalesOrgBloc>().state.configs,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               ),
-              const SizedBox(
-                width: 4,
-              ),
-              const _OrderTag(),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              cartItem.materialInfo.materialDescription,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-          ),
-          RichText(
-            text: TextSpan(
-              text: 'MYR 11,200.00 ',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.darkGray,
-                    decoration: TextDecoration.lineThrough,
-                  ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'MYR 11,000.00',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.extraLightGrey4,
-                        decoration: TextDecoration.none,
+            );
+      },
+      child: Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  cartItem.materialInfo.materialNumber.displayMatNo,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.darkGray,
                       ),
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                const _OrderTag(),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                cartItem.materialInfo.materialDescription,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
+            Row(
+              children: [
+                isCounterOfferRequested
+                    ? PriceComponent(
+                        salesOrgConfig:
+                            context.read<SalesOrgBloc>().state.configs,
+                        price: cartItem.price.lastPrice
+                            .getOrDefaultValue(0)
+                            .toString(),
+                        currencyCodeTextStyle:
+                            Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  color: ZPColors.darkGray,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                        priceTextStyle:
+                            Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  color: ZPColors.darkGray,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                      )
+                    : const SizedBox.shrink(),
+                PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price:
+                      cartItem.price.finalPrice.getOrDefaultValue(0).toString(),
+                  currencyCodeTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.darkGray,
+                          ),
+                  priceTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.darkGray,
+                          ),
                 ),
               ],
             ),
-          ),
-          Text(
-            'Requested counter offer',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontStyle: FontStyle.italic,
-                  color: ZPColors.extraLightGrey4,
-                ),
-          ),
-          _MaterialQuantitySection(cartItem: cartItem),
-        ],
+            isCounterOfferRequested
+                ? Text(
+                    'Requested counter offer'.tr(),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontStyle: FontStyle.italic,
+                          color: ZPColors.extraLightGrey4,
+                        ),
+                  )
+                : const SizedBox.shrink(),
+            _MaterialQuantitySection(cartItem: cartItem),
+          ],
+        ),
       ),
     );
   }
@@ -269,6 +320,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                     quantity: k,
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
+                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },
@@ -285,6 +337,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                     quantity: k,
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
+                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },
@@ -301,6 +354,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                     quantity: value,
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
+                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },
@@ -312,7 +366,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 }
 
 class _BonusSection extends StatelessWidget {
-  const _BonusSection({Key? key}) : super(key: key);
+  final PriceAggregate cartItem;
+  const _BonusSection({Key? key, required this.cartItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -328,7 +383,7 @@ class _BonusSection extends StatelessWidget {
               color: ZPColors.extraDarkGreen,
             ),
             label: Text(
-              'Bonus/sample item',
+              'Bonus/sample item'.tr(),
               style: Theme.of(context)
                   .textTheme
                   .labelSmall
@@ -336,13 +391,27 @@ class _BonusSection extends StatelessWidget {
             ),
           ),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<PriceOverrideBloc>()
+                  .add(const PriceOverrideEvent.initialized());
+              showModalBottomSheet(
+                isDismissible: false,
+                context: context,
+                isScrollControlled: true,
+                builder: (_) {
+                  return RequestCounterOfferSheet(
+                    cartItem: cartItem,
+                  );
+                },
+              );
+            },
             icon: const Icon(
               Icons.swap_horiz_sharp,
               color: ZPColors.extraDarkGreen,
             ),
             label: Text(
-              'Counter offer',
+              'Counter offer'.tr(),
               style: Theme.of(context)
                   .textTheme
                   .labelSmall
@@ -452,7 +521,7 @@ class _OrderTag extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Text(
-        'Preorder',
+        'Preorder'.tr(),
         style: Theme.of(context)
             .textTheme
             .titleSmall
