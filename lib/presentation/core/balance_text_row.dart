@@ -55,10 +55,14 @@ class BalanceTextRow extends StatelessWidget {
               style: keyStyle,
             ),
           ),
-          Text(
-            ': ',
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
+          if (!isStatus)
+            Text(
+              ': ',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: keyTextStyle?.color),
+            ),
           isStatus
               ? Row(
                   mainAxisSize: MainAxisSize.min,
