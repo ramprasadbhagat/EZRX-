@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PasswordField extends StatelessWidget {
-
   const PasswordField({
     Key? key,
   }) : super(key: key);
@@ -23,6 +22,7 @@ class PasswordField extends StatelessWidget {
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.loginPasswordField,
           initValue: state.password.getOrDefaultValue(''),
+          mandatory: true,
           labelText: 'Password'.tr(),
           validator: (text) => Password.login(text ?? '').value.fold(
                 (f) => f.maybeMap(

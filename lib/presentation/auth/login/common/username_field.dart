@@ -24,6 +24,7 @@ class UsernameField extends StatelessWidget {
           fieldKey: WidgetKeys.loginUsernameField,
           initValue: state.username.getOrDefaultValue(''),
           labelText: 'Username'.tr(),
+          mandatory: true,
           decoration: InputDecoration(
             hintText: 'Enter username'.tr(),
           ),

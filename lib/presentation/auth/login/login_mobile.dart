@@ -165,13 +165,13 @@ class _CreateAccount extends StatelessWidget {
         TextButton(
           key: WidgetKeys.createAccountButton,
           child: Text(
-            'Create an account'.tr(),
+            'Sign up'.tr(),
           ),
           onPressed: () {
             context.router.push(
               WebViewPageRoute(
                 url: locator<Config>().createAccountUrl,
-                titleText: 'Create Account',
+                titleText: 'Sign Up',
               ),
             );
           },

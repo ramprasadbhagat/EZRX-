@@ -35,9 +35,20 @@ class _MarketSelectorState extends State<MarketSelector> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Market'.tr(),
-          style: Theme.of(context).textTheme.labelSmall,
+        RichText(
+          text: TextSpan(
+            text: 'Market'.tr(),
+            style: Theme.of(context).textTheme.labelSmall,
+            children: <TextSpan>[
+              TextSpan(
+                text: ' *',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: ZPColors.red),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 8),
         BlocBuilder<LoginFormBloc, LoginFormState>(
