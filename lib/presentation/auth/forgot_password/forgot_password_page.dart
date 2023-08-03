@@ -126,9 +126,8 @@ class _UsernameField extends StatelessWidget {
             ),
             controller: controller,
             validator: (text) => Username(text ?? '').value.fold(
-                  (f) => f.maybeMap(
+                  (f) => f.mapOrNull(
                     empty: (_) => 'Username cannot be empty.'.tr(),
-                    orElse: () => null,
                   ),
                   (_) => null,
                 ),
