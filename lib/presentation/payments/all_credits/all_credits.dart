@@ -19,6 +19,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class AllCreditsPage extends StatelessWidget {
   const AllCreditsPage({Key? key}) : super(key: key);
 
@@ -51,47 +55,51 @@ class AllCreditsPage extends StatelessWidget {
                   previous.isLoading != current.isLoading,
               builder: (context, state) {
                 return Expanded(
-                  child: ScrollList<CreditAndInvoiceGroup>(
-                    noRecordFoundWidget: NoRecordFound(
-                      title: 'No credit found'.tr(),
-                    ),
-                    controller: ScrollController(),
-                    onRefresh: () {
-                      context.read<AllCreditsBloc>().add(
-                            AllCreditsEvent.fetch(
-                              appliedFilter: state.appliedFilter,
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                            ),
-                          );
-                    },
-                    onLoadingMore: () {
-                      context.read<AllCreditsBloc>().add(
-                            AllCreditsEvent.loadMore(
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                            ),
-                          );
-                    },
-                    isLoading: state.isLoading,
-                    itemBuilder: (context, index, item) => _CreditGroup(
-                      data: item,
-                      showDivider: index != 0,
-                    ),
-                    items: state.items.groupList,
-                  ),
+                  child: state.isLoading && state.items.groupList.isEmpty
+                      ? LoadingShimmer.logo(
+                          key: WidgetKeys.loaderImage,
+                        )
+                      : ScrollList<CreditAndInvoiceGroup>(
+                          noRecordFoundWidget: NoRecordFound(
+                            title: 'No credit found'.tr(),
+                          ),
+                          controller: ScrollController(),
+                          onRefresh: () {
+                            context.read<AllCreditsBloc>().add(
+                                  AllCreditsEvent.fetch(
+                                    appliedFilter: state.appliedFilter,
+                                    salesOrganisation: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .salesOrganisation,
+                                    customerCodeInfo: context
+                                        .read<CustomerCodeBloc>()
+                                        .state
+                                        .customerCodeInfo,
+                                  ),
+                                );
+                          },
+                          onLoadingMore: () {
+                            context.read<AllCreditsBloc>().add(
+                                  AllCreditsEvent.loadMore(
+                                    salesOrganisation: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .salesOrganisation,
+                                    customerCodeInfo: context
+                                        .read<CustomerCodeBloc>()
+                                        .state
+                                        .customerCodeInfo,
+                                  ),
+                                );
+                          },
+                          isLoading: state.isLoading,
+                          itemBuilder: (context, index, item) => _CreditGroup(
+                            data: item,
+                            showDivider: index != 0,
+                          ),
+                          items: state.items.groupList,
+                        ),
                 );
               },
             ),

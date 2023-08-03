@@ -10,6 +10,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class OrderItemDetailsSection extends StatelessWidget {
   const OrderItemDetailsSection({
     Key? key,
@@ -29,7 +31,9 @@ class OrderItemDetailsSection extends StatelessWidget {
             horizontal: 20.0,
           ),
           child: state.isLoading
-              ? LoadingShimmer.tile()
+              ? LoadingShimmer.logo(
+                  key: WidgetKeys.loaderImage,
+                )
               : Column(
                   children: state
                       .orderHistoryDetails
@@ -56,7 +60,8 @@ class OrderItemDetailsSection extends StatelessWidget {
                                             '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
                                         title: e.materialDescription,
                                         priceComponent: PriceComponent(
-                                          price: e.totalPrice.totalPrice //TODO: It is list price offer price should also have annotation of "Discount applied" if it was an offer material , once design team confirm and getting data will enhance
+                                          price: e.totalPrice
+                                              .totalPrice //TODO: It is list price offer price should also have annotation of "Discount applied" if it was an offer material , once design team confirm and getting data will enhance
                                               .toStringAsFixed(2),
                                           salesOrgConfig: context
                                               .read<SalesOrgBloc>()
@@ -100,7 +105,8 @@ class OrderItemDetailsSection extends StatelessWidget {
                                                   .read<SalesOrgBloc>()
                                                   .state
                                                   .configs,
-                                              price: e.totalPrice.totalPrice //TODO: It should be item subtotal, once design team confirm and getting data will enhance
+                                              price: e.totalPrice
+                                                  .totalPrice //TODO: It should be item subtotal, once design team confirm and getting data will enhance
                                                   .toStringAsFixed(2),
                                             ),
                                           ],

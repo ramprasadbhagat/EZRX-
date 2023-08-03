@@ -27,6 +27,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
 class PaymentSummaryPage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -187,36 +189,50 @@ class _PaymentSummaryScrollList extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: ScrollList<PaymentSummaryGroup>(
-            noRecordFoundWidget:
-                const NoRecordFound(title: 'No Payment Summary Found'),
-            controller: ScrollController(),
-            onRefresh: () => context.read<PaymentSummaryBloc>().add(
-                  PaymentSummaryEvent.fetchPaymentSummaryList(
-                    salesOrganization:
-                        context.read<EligibilityBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<EligibilityBloc>().state.customerCodeInfo,
-                  ),
+          child: state.isFetching &&
+                  state.paymentSummaryDetailsResponse.paymentSummaryList
+                      .getPaymentSummaryGroupList.isEmpty
+              ? LoadingShimmer.logo(
+                  key: WidgetKeys.loaderImage,
+                )
+              : ScrollList<PaymentSummaryGroup>(
+                  noRecordFoundWidget:
+                      const NoRecordFound(title: 'No Payment Summary Found'),
+                  controller: ScrollController(),
+                  onRefresh: () => context.read<PaymentSummaryBloc>().add(
+                        PaymentSummaryEvent.fetchPaymentSummaryList(
+                          salesOrganization: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrganisation,
+                          customerCodeInfo: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .customerCodeInfo,
+                        ),
+                      ),
+                  onLoadingMore: () => context.read<PaymentSummaryBloc>().add(
+                        PaymentSummaryEvent.loadMorePaymentSummary(
+                          salesOrganization: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrganisation,
+                          customerCodeInfo: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .customerCodeInfo,
+                        ),
+                      ),
+                  isLoading: state.isFetching,
+                  itemBuilder: (context, index, itemInfo) {
+                    return PaymentSummaryGroupSection(
+                      paymentSummaryGroup: itemInfo,
+                      showDivider: index != 0,
+                    );
+                  },
+                  items: state.paymentSummaryDetailsResponse.paymentSummaryList
+                      .getPaymentSummaryGroupList,
                 ),
-            onLoadingMore: () => context.read<PaymentSummaryBloc>().add(
-                  PaymentSummaryEvent.loadMorePaymentSummary(
-                    salesOrganization:
-                        context.read<EligibilityBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<EligibilityBloc>().state.customerCodeInfo,
-                  ),
-                ),
-            isLoading: state.isFetching,
-            itemBuilder: (context, index, itemInfo) {
-              return PaymentSummaryGroupSection(
-                paymentSummaryGroup: itemInfo,
-                showDivider: index != 0,
-              );
-            },
-            items: state.paymentSummaryDetailsResponse.paymentSummaryList
-                .getPaymentSummaryGroupList,
-          ),
         ),
       ],
     );

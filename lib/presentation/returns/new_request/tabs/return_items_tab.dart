@@ -21,6 +21,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
 class ReturnItemsTab extends StatelessWidget {
   const ReturnItemsTab({Key? key}) : super(key: key);
 
@@ -67,59 +69,63 @@ class ReturnItemsTab extends StatelessWidget {
               previous.isLoading != current.isLoading,
           builder: (context, state) {
             return Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ScrollList<ReturnMaterial>(
-                  noRecordFoundWidget: NoRecordFound(
-                    title: 'No record found'.tr(),
-                  ),
-                  controller: ScrollController(),
-                  onRefresh: () {
-                    context.read<ReturnItemsBloc>().add(
-                          ReturnItemsEvent.fetch(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
+              child: state.isLoading && state.items.isEmpty
+                  ? LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: ScrollList<ReturnMaterial>(
+                        noRecordFoundWidget: NoRecordFound(
+                          title: 'No record found'.tr(),
+                        ),
+                        controller: ScrollController(),
+                        onRefresh: () {
+                          context.read<ReturnItemsBloc>().add(
+                                ReturnItemsEvent.fetch(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  shipToInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .shipToInfo,
+                                ),
+                              );
+                        },
+                        onLoadingMore: () {
+                          context.read<ReturnItemsBloc>().add(
+                                ReturnItemsEvent.loadMore(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  shipToInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .shipToInfo,
+                                ),
+                              );
+                        },
+                        isLoading: state.isLoading,
+                        itemBuilder: (context, index, item) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: _ReturnMaterial(
+                            data: item,
                           ),
-                        );
-                  },
-                  onLoadingMore: () {
-                    context.read<ReturnItemsBloc>().add(
-                          ReturnItemsEvent.loadMore(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
-                          ),
-                        );
-                  },
-                  isLoading: state.isLoading,
-                  itemBuilder: (context, index, item) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: _ReturnMaterial(
-                      data: item,
+                        ),
+                        items: state.items,
+                      ),
                     ),
-                  ),
-                  items: state.items,
-                ),
-              ),
             );
           },
         ),

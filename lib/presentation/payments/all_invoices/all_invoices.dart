@@ -21,6 +21,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class AllInvoicesPage extends StatelessWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
 
@@ -53,52 +57,56 @@ class AllInvoicesPage extends StatelessWidget {
                   previous.isLoading != current.isLoading,
               builder: (context, state) {
                 return Expanded(
-                  child: ScrollList<CreditAndInvoiceGroup>(
-                    noRecordFoundWidget: NoRecordFound(
-                      title: 'No invoice found'.tr(),
-                    ),
-                    controller: ScrollController(),
-                    onRefresh: () =>
-                      context.read<AllInvoicesBloc>().add(
-                            AllInvoicesEvent.fetch(
-                            appliedFilter: AllInvoicesFilter.empty().copyWith(
-                              searchKey: context
-                                  .read<AllInvoicesBloc>()
-                                  .state
-                                  .appliedFilter
-                                  .searchKey,
-                            ),
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                .customerCodeInfo,
-                            ),
+                  child: state.isLoading && state.items.groupList.isEmpty
+                      ? LoadingShimmer.logo(
+                          key: WidgetKeys.loaderImage,
+                        )
+                      : ScrollList<CreditAndInvoiceGroup>(
+                          noRecordFoundWidget: NoRecordFound(
+                            title: 'No invoice found'.tr(),
+                          ),
+                          controller: ScrollController(),
+                          onRefresh: () => context.read<AllInvoicesBloc>().add(
+                                AllInvoicesEvent.fetch(
+                                  appliedFilter:
+                                      AllInvoicesFilter.empty().copyWith(
+                                    searchKey: context
+                                        .read<AllInvoicesBloc>()
+                                        .state
+                                        .appliedFilter
+                                        .searchKey,
+                                  ),
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                ),
+                              ),
+                          onLoadingMore: () {
+                            context.read<AllInvoicesBloc>().add(
+                                  AllInvoicesEvent.loadMore(
+                                    salesOrganisation: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .salesOrganisation,
+                                    customerCodeInfo: context
+                                        .read<CustomerCodeBloc>()
+                                        .state
+                                        .customerCodeInfo,
+                                  ),
+                                );
+                          },
+                          isLoading: state.isLoading,
+                          itemBuilder: (context, index, item) => _InvoiceGroup(
+                            data: item,
+                            showDivider: index != 0,
+                          ),
+                          items: state.items.groupList,
                         ),
-                    onLoadingMore: () {
-                      context.read<AllInvoicesBloc>().add(
-                            AllInvoicesEvent.loadMore(
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                            ),
-                          );
-                    },
-                    isLoading: state.isLoading,
-                    itemBuilder: (context, index, item) => _InvoiceGroup(
-                      data: item,
-                      showDivider: index != 0,
-                    ),
-                    items: state.items.groupList,
-                  ),
                 );
               },
             ),

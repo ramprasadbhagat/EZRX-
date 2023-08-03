@@ -17,6 +17,8 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
 class ProductSuggestionPage extends StatelessWidget {
   const ProductSuggestionPage({
     Key? key,
@@ -126,33 +128,42 @@ class _ProductSuggestionSection extends StatelessWidget {
           previous.suggestedProductList != current.suggestedProductList ||
           previous.isSearching != current.isSearching,
       builder: (context, state) {
-        return ScrollList<MaterialInfo>(
-          key: WidgetKeys.productSearchSuggestion,
-          controller: ScrollController(),
-          onRefresh: () {
-            context.read<ProductSearchBloc>().add(
-                  const ProductSearchEvent.clearSearch(),
-                );
-          },
-          onLoadingMore: () {
-            context.read<ProductSearchBloc>().add(
-                  ProductSearchEvent.loadMoreProductList(
-                    salesOrganization:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                  ),
-                );
-          },
-          isLoading: state.isSearching,
-          itemBuilder: (_, __, item) => _SuggestedProductTile(product: item),
-          items: state.suggestedProductList,
-          noRecordFoundWidget:
-              const NoRecordFound(title: 'That didn’t match anything'),
-        );
+        return state.isSearching && state.suggestedProductList.isEmpty
+            ? LoadingShimmer.logo(
+                key: WidgetKeys.loaderImage,
+              )
+            : ScrollList<MaterialInfo>(
+                key: WidgetKeys.productSearchSuggestion,
+                controller: ScrollController(),
+                onRefresh: () {
+                  context.read<ProductSearchBloc>().add(
+                        const ProductSearchEvent.clearSearch(),
+                      );
+                },
+                onLoadingMore: () {
+                  context.read<ProductSearchBloc>().add(
+                        ProductSearchEvent.loadMoreProductList(
+                          salesOrganization: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          configs: context.read<SalesOrgBloc>().state.configs,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          shipToInfo:
+                              context.read<CustomerCodeBloc>().state.shipToInfo,
+                        ),
+                      );
+                },
+                isLoading: state.isSearching,
+                itemBuilder: (_, __, item) =>
+                    _SuggestedProductTile(product: item),
+                items: state.suggestedProductList,
+                noRecordFoundWidget:
+                    const NoRecordFound(title: 'That didn’t match anything'),
+              );
       },
     );
   }

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -255,7 +256,7 @@ void main() {
       await tester.pump();
 
       final noCustomerFound = find.text('No Customer Code Found');
-      final loadIndicator = find.byKey(const Key('loadIndicator'));
+      final loadIndicator = find.byKey(WidgetKeys.loaderImage);
 
       final gesture = await tester
           .startGesture(const Offset(50, 100)); //Position of the scrollview

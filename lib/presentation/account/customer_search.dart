@@ -35,6 +35,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
 class CustomerSearchPage extends StatelessWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
 
@@ -143,38 +145,42 @@ class _BodyContent extends StatelessWidget {
     final userBloc = context.read<UserBloc>();
 
     return Expanded(
-      child: ScrollList<CustomerCodeInfo>(
-        controller: ScrollController(),
-        key: WidgetKeys.customerCodeSelect,
-        onRefresh: () {
-          context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.fetch(
-                  userInfo: userBloc.state.user,
-                  selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                  hideCustomer: false,
-                ),
-              );
-        },
-        onLoadingMore: () {
-          context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.loadMore(
-                  userInfo: userBloc.state.user,
-                  selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                  hideCustomer: salesOrgBloc.state.configs.hideCustomer,
-                ),
-              );
-        },
-        isLoading: state.isFetching,
-        itemBuilder: (_, __, item) =>
-            _DeliveryAddressItem(customerCodeInfo: item),
-        items: state.customerCodeList,
-        noRecordFoundWidget: const NoRecordFound(
-          title: 'That didn’t match anything',
-          subTitle:
-              'Check the location name or code you have entered for any errors',
-          svgImage: SvgImage.deliveryAddress,
-        ),
-      ),
+      child: state.isFetching && state.customerCodeList.isEmpty
+          ? LoadingShimmer.logo(
+              key: WidgetKeys.loaderImage,
+            )
+          : ScrollList<CustomerCodeInfo>(
+              controller: ScrollController(),
+              key: WidgetKeys.customerCodeSelect,
+              onRefresh: () {
+                context.read<CustomerCodeBloc>().add(
+                      CustomerCodeEvent.fetch(
+                        userInfo: userBloc.state.user,
+                        selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
+                        hideCustomer: false,
+                      ),
+                    );
+              },
+              onLoadingMore: () {
+                context.read<CustomerCodeBloc>().add(
+                      CustomerCodeEvent.loadMore(
+                        userInfo: userBloc.state.user,
+                        selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
+                        hideCustomer: salesOrgBloc.state.configs.hideCustomer,
+                      ),
+                    );
+              },
+              isLoading: state.isFetching,
+              itemBuilder: (_, __, item) =>
+                  _DeliveryAddressItem(customerCodeInfo: item),
+              items: state.customerCodeList,
+              noRecordFoundWidget: const NoRecordFound(
+                title: 'That didn’t match anything',
+                subTitle:
+                    'Check the location name or code you have entered for any errors',
+                svgImage: SvgImage.deliveryAddress,
+              ),
+            ),
     );
   }
 }

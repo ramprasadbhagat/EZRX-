@@ -9,7 +9,10 @@ import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/s
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class ReturnRequestSummaryByItemDetails extends StatefulWidget {
   const ReturnRequestSummaryByItemDetails({
@@ -54,16 +57,10 @@ class _ReturnRequestSummaryByItemDetails
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: state.isLoading
-                ? Container(
+                ? Align(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: LoadingAnimationWidget.discreteCircle(
-                      color: ZPColors.primary,
-                      secondRingColor: ZPColors.secondary,
-                      thirdRingColor: ZPColors.orange,
-                      size: 30,
+                    child: LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
                     ),
                   )
                 : ListView(

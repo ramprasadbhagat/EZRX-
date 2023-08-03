@@ -22,6 +22,8 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
 class ArticlesTab extends StatefulWidget {
   const ArticlesTab({Key? key}) : super(key: key);
 
@@ -69,34 +71,41 @@ class _ArticlesTabState extends State<ArticlesTab> {
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching,
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: ScrollList<AnnouncementArticleItem>(
-              controller: _scrollController,
-              noRecordFoundWidget: NoRecordFound(
-                title: 'No articles to show'.tr(),
-              ),
-              onRefresh: () {
-                context.read<ArticlesInfoBloc>().add(
-                      ArticlesInfoEvent.getArticles(
-                        salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                        user: context.read<UserBloc>().state.user,
-                      ),
-                    );
-              },
-              isLoading: state.isFetching,
-              onLoadingMore: () => context.read<ArticlesInfoBloc>().add(
-                    ArticlesInfoEvent.loadMoreArticles(
-                      salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                      user: context.read<UserBloc>().state.user,
+          return state.isFetching && state.articleInfo.announcementList.isEmpty
+              ? LoadingShimmer.logo(
+                  key: WidgetKeys.loaderImage,
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: ScrollList<AnnouncementArticleItem>(
+                    controller: _scrollController,
+                    noRecordFoundWidget: NoRecordFound(
+                      title: 'No articles to show'.tr(),
                     ),
+                    onRefresh: () {
+                      context.read<ArticlesInfoBloc>().add(
+                            ArticlesInfoEvent.getArticles(
+                              salesOrg:
+                                  context.read<SalesOrgBloc>().state.salesOrg,
+                              user: context.read<UserBloc>().state.user,
+                            ),
+                          );
+                    },
+                    isLoading: state.isFetching,
+                    onLoadingMore: () => context.read<ArticlesInfoBloc>().add(
+                          ArticlesInfoEvent.loadMoreArticles(
+                            salesOrg:
+                                context.read<SalesOrgBloc>().state.salesOrg,
+                            user: context.read<UserBloc>().state.user,
+                          ),
+                        ),
+                    itemBuilder: (context, index, item) => _ArticlesTile(
+                      article: item,
+                    ),
+                    items: state.articleInfo.announcementList,
                   ),
-              itemBuilder: (context, index, item) => _ArticlesTile(
-                article: item,
-              ),
-              items: state.articleInfo.announcementList,
-            ),
-          );
+                );
         },
       ),
       floatingActionButton: !_isScrollAtInitialPosition

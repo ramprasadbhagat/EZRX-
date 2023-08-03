@@ -15,10 +15,11 @@ import 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
-import 'package:ezrxmobile/presentation/products/widgets/shimmer_grid_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 class ProductsTab extends StatelessWidget {
   const ProductsTab({Key? key}) : super(key: key);
@@ -54,7 +55,9 @@ class ProductsTab extends StatelessWidget {
               ),
               Expanded(
                 child: state.isFetching && state.materialList.isEmpty
-                    ? const LoadingShimmerGridItem()
+                    ? LoadingShimmer.logo(
+                        key: WidgetKeys.loaderImage,
+                      )
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: ScrollableGridView<MaterialInfo>(

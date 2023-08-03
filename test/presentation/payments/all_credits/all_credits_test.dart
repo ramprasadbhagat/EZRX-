@@ -170,7 +170,7 @@ void main() {
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
 
-      final loaderImage = find.byKey(WidgetKeys.loadMoreLoader);
+      final loaderImage = find.byKey(WidgetKeys.loaderImage);
       expect(loaderImage, findsOneWidget);
       await tester.pump();
     });

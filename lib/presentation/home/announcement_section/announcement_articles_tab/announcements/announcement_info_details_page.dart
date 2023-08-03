@@ -94,118 +94,120 @@ class _AnnouncementInfoDetailsPageState
         return Scaffold(
           key: WidgetKeys.announcementDetailsPageKey,
           body: SafeArea(
-            child: LoadingShimmer.withChild(
-              enabled: state.isLoading,
-              child: CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    expandedHeight: 300,
-                    floating: true,
-                    snap: true,
-                    pinned: true,
-                    flexibleSpace: Stack(
-                      children: [
-                        FlexibleSpaceBar(
-                          background: CachedNetworkImage(
-                            width: MediaQuery.of(context).size.width,
-                            imageUrl: state.announcementInfoDetails.thumbnail,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                LoadingShimmer.withChild(
-                              child: Container(
-                                color: ZPColors.whiteBgCard,
+            child: state.isLoading
+                ? LoadingShimmer.logo(
+                    key: WidgetKeys.loaderImage,
+                  )
+                : CustomScrollView(
+                    controller: _scrollController,
+                    slivers: [
+                      SliverAppBar(
+                        automaticallyImplyLeading: false,
+                        expandedHeight: 300,
+                        floating: true,
+                        snap: true,
+                        pinned: true,
+                        flexibleSpace: Stack(
+                          children: [
+                            FlexibleSpaceBar(
+                              background: CachedNetworkImage(
                                 width: MediaQuery.of(context).size.width,
-                                height: 200,
+                                imageUrl:
+                                    state.announcementInfoDetails.thumbnail,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) =>
+                                    LoadingShimmer.withChild(
+                                  child: Container(
+                                    color: ZPColors.whiteBgCard,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 200,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) {
+                                  return const NoRecordFound(
+                                    svgImage: SvgImage.noImageAvailable,
+                                    title: 'Image not available',
+                                    subTitle: '',
+                                  );
+                                },
                               ),
                             ),
-                            errorWidget: (context, url, error) {
-                              return const NoRecordFound(
-                                svgImage: SvgImage.noImageAvailable,
-                                title: 'Image not available',
-                                subTitle: '',
-                              );
-                            },
-                          ),
-                        ),
-                        _isBackButtonEnableForAppbar
-                            ? const SizedBox.shrink()
-                            : IconButton(
-                                onPressed: () => context.router.pop(),
-                                icon: const CircleAvatar(
-                                  maxRadius: 13,
-                                  backgroundColor:
-                                      ZPColors.defaultReturnSummaryStatusColor,
-                                  child: Icon(
-                                    Icons.arrow_back_ios_new_rounded,
-                                    size: 15,
-                                    color: ZPColors.white,
+                            _isBackButtonEnableForAppbar
+                                ? const SizedBox.shrink()
+                                : IconButton(
+                                    onPressed: () => context.router.pop(),
+                                    icon: const CircleAvatar(
+                                      maxRadius: 13,
+                                      backgroundColor: ZPColors
+                                          .defaultReturnSummaryStatusColor,
+                                      child: Icon(
+                                        Icons.arrow_back_ios_new_rounded,
+                                        size: 15,
+                                        color: ZPColors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                      ],
-                    ),
-                    centerTitle: false,
-                    bottom: PreferredSize(
-                      preferredSize: const Size.fromHeight(offSet),
-                      child: AppBar(
-                        automaticallyImplyLeading: false,
-                        leading: _isBackButtonEnableForAppbar
-                            ? IconButton(
-                                onPressed: () => context.router.pop(),
-                                icon: const Icon(
-                                  Icons.arrow_back_ios_rounded,
-                                  size: 20,
-                                ),
-                              )
-                            : const SizedBox.shrink(),
+                          ],
+                        ),
                         centerTitle: false,
-                        leadingWidth: _isBackButtonEnableForAppbar ? 20 : 0,
-                        title: _TitleSection(
-                          details: state.announcementInfoDetails,
+                        bottom: PreferredSize(
+                          preferredSize: const Size.fromHeight(offSet),
+                          child: AppBar(
+                            automaticallyImplyLeading: false,
+                            leading: _isBackButtonEnableForAppbar
+                                ? IconButton(
+                                    onPressed: () => context.router.pop(),
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios_rounded,
+                                      size: 20,
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                            centerTitle: false,
+                            leadingWidth: _isBackButtonEnableForAppbar ? 20 : 0,
+                            title: _TitleSection(
+                              details: state.announcementInfoDetails,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 10,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Html(
-                                style: {
-                                  'body': Style(
-                                    padding: const EdgeInsets.all(0),
-                                    margin: const EdgeInsets.all(0),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Html(
+                                    style: {
+                                      'body': Style(
+                                        padding: const EdgeInsets.all(0),
+                                        margin: const EdgeInsets.all(0),
+                                      ),
+                                    },
+                                    data: state.announcementInfoDetails.content
+                                        .appendedImgSrcWithBaseUrl,
+                                    shrinkWrap: true,
                                   ),
-                                },
-                                data: state.announcementInfoDetails.content
-                                    .appendedImgSrcWithBaseUrl,
-                                shrinkWrap: true,
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          ),
+                            ),
+                            _BottomSheet(
+                              isLoading: state.isLoading,
+                              changeState: _changeStateOnMovingToNewDetails,
+                            ),
+                          ],
                         ),
-                        _BottomSheet(
-                          isLoading: state.isLoading,
-                          changeState: _changeStateOnMovingToNewDetails,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
           ),
           floatingActionButton: !_isScrollAtInitialPosition
               ? FloatingActionButton(

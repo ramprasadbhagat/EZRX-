@@ -10,7 +10,8 @@ import 'package:ezrxmobile/presentation/returns/return_summary_request_details/s
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 class ReturnRequestDetails extends StatelessWidget {
   const ReturnRequestDetails({
@@ -47,17 +48,10 @@ class ReturnRequestDetails extends StatelessWidget {
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: state.isLoading
-                ? Container(
+                ? Align(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: LoadingAnimationWidget.discreteCircle(
-                      key: WidgetKeys.loader,
-                      color: ZPColors.primary,
-                      secondRingColor: ZPColors.secondary,
-                      thirdRingColor: ZPColors.orange,
-                      size: 30,
+                    child: LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
                     ),
                   )
                 : ListView(

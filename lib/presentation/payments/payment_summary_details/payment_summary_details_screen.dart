@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class PaymentSummaryDetailsPage extends StatefulWidget {
   const PaymentSummaryDetailsPage({
@@ -85,16 +87,10 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: state.isFetching
-                ? Container(
+                ? Align(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: LoadingAnimationWidget.discreteCircle(
-                      color: ZPColors.primary,
-                      secondRingColor: ZPColors.secondary,
-                      thirdRingColor: ZPColors.orange,
-                      size: 30,
+                    child: LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
                     ),
                   )
                 : state.paymentItemList.isEmpty

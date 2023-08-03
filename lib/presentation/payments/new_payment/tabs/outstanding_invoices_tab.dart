@@ -22,6 +22,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
 class OutstandingInvoicesTab extends StatelessWidget {
   const OutstandingInvoicesTab({Key? key}) : super(key: key);
 
@@ -102,52 +104,57 @@ class OutstandingInvoicesTab extends StatelessWidget {
               previous.isLoading != current.isLoading,
           builder: (context, state) {
             return Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ScrollList<CustomerOpenItem>(
-                  noRecordFoundWidget: NoRecordFound(
-                    title: 'No record found'.tr(),
-                  ),
-                  controller: ScrollController(),
-                  onRefresh: () {
-                    context.read<OutstandingInvoicesBloc>().add(
-                          OutstandingInvoicesEvent.fetch(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            appliedFilter: OutstandingInvoiceFilter.empty(),
+              child: state.isLoading && state.items.isEmpty
+                  ? LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: ScrollList<CustomerOpenItem>(
+                        noRecordFoundWidget: NoRecordFound(
+                          title: 'No record found'.tr(),
+                        ),
+                        controller: ScrollController(),
+                        onRefresh: () {
+                          context.read<OutstandingInvoicesBloc>().add(
+                                OutstandingInvoicesEvent.fetch(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  appliedFilter:
+                                      OutstandingInvoiceFilter.empty(),
+                                ),
+                              );
+                        },
+                        onLoadingMore: () {
+                          context.read<OutstandingInvoicesBloc>().add(
+                                OutstandingInvoicesEvent.loadMore(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                ),
+                              );
+                        },
+                        isLoading: state.isLoading,
+                        itemBuilder: (context, index, item) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: _PaymentItem(
+                            data: item,
                           ),
-                        );
-                  },
-                  onLoadingMore: () {
-                    context.read<OutstandingInvoicesBloc>().add(
-                          OutstandingInvoicesEvent.loadMore(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                          ),
-                        );
-                  },
-                  isLoading: state.isLoading,
-                  itemBuilder: (context, index, item) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: _PaymentItem(
-                      data: item,
+                        ),
+                        items: state.items,
+                      ),
                     ),
-                  ),
-                  items: state.items,
-                ),
-              ),
             );
           },
         ),
