@@ -4,14 +4,20 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -25,8 +31,21 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
-class AllInvoicesPage extends StatelessWidget {
+class AllInvoicesPage extends StatefulWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
+
+  @override
+  State<AllInvoicesPage> createState() => _AllInvoicesPageState();
+}
+
+class _AllInvoicesPageState extends State<AllInvoicesPage> {
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +84,7 @@ class AllInvoicesPage extends StatelessWidget {
                           noRecordFoundWidget: NoRecordFound(
                             title: 'No invoice found'.tr(),
                           ),
-                          controller: ScrollController(),
+                          controller: _controller,
                           onRefresh: () => context.read<AllInvoicesBloc>().add(
                                 AllInvoicesEvent.fetch(
                                   appliedFilter:
@@ -113,7 +132,38 @@ class AllInvoicesPage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: ScaleButton(
+        icon: Icons.add,
+        label: 'New payment'.tr(),
+        onPress: () => _toNewPayment(context),
+        scrollController: _controller,
+      ),
     );
+  }
+
+  void _toNewPayment(BuildContext context) {
+    context.read<OutstandingInvoicesBloc>().add(
+          OutstandingInvoicesEvent.fetch(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            appliedFilter: OutstandingInvoiceFilter.empty(),
+          ),
+        );
+    context.read<AvailableCreditsBloc>().add(
+          AvailableCreditsEvent.fetch(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            appliedFilter: AvailableCreditFilter.empty(),
+          ),
+        );
+    context.read<NewPaymentBloc>().add(
+          const NewPaymentEvent.initialized(),
+        );
+    context.router.pushNamed('payments/new_payment');
   }
 }
 
