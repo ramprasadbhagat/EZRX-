@@ -991,7 +991,7 @@ class CartRepository implements ICartRepository {
     }
   }
 
-  Future<Either<ApiFailure, List<MaterialInfo>>>
+  Future<Either<ApiFailure, List<PriceAggregate>>>
       getAddedToCartProductList() async {
     try {
       if (config.appFlavor == Flavor.mock) {
@@ -1014,7 +1014,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<MaterialInfo>>> upsertCart({
+  Future<Either<ApiFailure, List<PriceAggregate>>> upsertCart({
     required MaterialNumber productNumber,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -1051,6 +1051,43 @@ class CartRepository implements ICartRepository {
       final productList = await cartRemoteDataSource.upsertCart(
         requestParams:
             CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+      );
+
+      return Right(productList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItems({
+    required PriceAggregate product,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final productList = await cartLocalDataSource.upsertCartItems();
+
+        return Right(productList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
+
+      final productList = await cartRemoteDataSource.upsertCartItems(
+        product: product,
+        customerCode: customerCode,
+        salesOrg: salesOrgCode,
+        shipToCode: shipToCode,
+        language: language,
       );
 
       return Right(productList);

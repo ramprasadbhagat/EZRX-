@@ -897,4 +897,219 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
   }
 }
 ''';
+
+  String upsertCartItems() => '''
+fragment ezrxItemsFields on Item {
+  ProductID
+  ItemSource
+  Quantity
+  CreatedAt
+  UpdatedAt
+  principalCode
+  principalName
+  materialNumber
+  materialDescription
+  therapeuticClass
+  itemBrand
+  governmentMaterialCode
+  defaultMaterialDescription
+  oldMaterialCode
+  materialGroup4
+  materialGroup2
+  taxClassification
+  unitOfMeasurement
+  itemRegistrationNumber
+  genericMaterialName
+  language
+  taxM1
+  taxes
+  isSampleMaterial
+  hidePrice
+  hasValidTenderContract
+  hasMandatoryTenderContract
+  isFOCMaterial
+  isFavourite
+  productCount
+  productAddedAt
+  productUpdatedAt
+  minimumQty
+  maximumQty
+  orderedQty
+  remainingQty
+  mov
+  materialType
+  suspensionStatus
+  principalCutoffStatus
+  warehouseStorageCondition
+  ParentID
+  BonusMaterials {
+    principalCode
+    principalName
+    materialNumber
+    materialDescription
+    productCount
+    ProductID
+    __typename
+  }
+  Type
+  BundleDetails {
+    BundleName
+    BundleCode
+    BundleInformation {
+      Sequence
+      Quantity
+      Type
+      Rate
+      __typename
+    }
+    __typename
+  }
+  BundleMaterials {
+    ...BundleMaterialsFields
+    __typename
+  }
+  __typename
+}
+
+fragment shipToFields on ShipTo {
+  ID
+  AddressName
+  CompanyName
+  FirstName
+  LastName
+  Street1
+  Street2
+  City
+  State
+  Zip
+  Country
+  Phone
+  __typename
+}
+
+fragment userAddressFields on CartShippingAddress {
+  name
+  street
+  city
+  addressCode
+  country
+  __typename
+}
+
+fragment materialsFields on CartMaterials {
+  principalCode
+  principalName
+  materialNumber
+  materialDescription
+  therapeuticClass
+  itemBrand
+  governmentMaterialCode
+  defaultMaterialDescription
+  oldMaterialCode
+  materialGroup4
+  materialGroup2
+  taxClassification
+  unitOfMeasurement
+  itemRegistrationNumber
+  genericMaterialName
+  language
+  taxM1
+  taxes
+  isSampleMaterial
+  hidePrice
+  hasValidTenderContract
+  hasMandatoryTenderContract
+  isFOCMaterial
+  isFavourite
+  productCount
+  productAddedAt
+  productUpdatedAt
+  minimumQty
+  maximumQty
+  orderedQty
+  remainingQty
+  mov
+  materialType
+  suspensionStatus
+  principalCutoffStatus
+  warehouseStorageCondition
+  __typename
+}
+
+fragment BundleMaterialsFields on Item {
+  Type
+  ProductID
+  ItemSource
+  Quantity
+  CreatedAt
+  UpdatedAt
+  principalCode
+  principalName
+  materialNumber
+  materialDescription
+  therapeuticClass
+  itemBrand
+  governmentMaterialCode
+  defaultMaterialDescription
+  oldMaterialCode
+  materialGroup4
+  materialGroup2
+  taxClassification
+  unitOfMeasurement
+  itemRegistrationNumber
+  genericMaterialName
+  language
+  taxM1
+  taxes
+  isSampleMaterial
+  hidePrice
+  hasValidTenderContract
+  hasMandatoryTenderContract
+  isFOCMaterial
+  isFavourite
+  productCount
+  productAddedAt
+  productUpdatedAt
+  minimumQty
+  maximumQty
+  orderedQty
+  remainingQty
+  mov
+  materialType
+  suspensionStatus
+  principalCutoffStatus
+  warehouseStorageCondition
+  ParentID
+  __typename
+}
+
+mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
+  upsertCartItems(itemInput: \$itemInput) {
+    ID
+    UserID
+    EzRxItems {
+      ...ezrxItemsFields
+      __typename
+    }
+    CustomerCode
+    ShipTo {
+      ...shipToFields
+      __typename
+    }
+    CreatedAt
+    UpdatedAt
+    OrderID
+    userAddress {
+      ...userAddressFields
+      __typename
+    }
+    materials {
+      ...materialsFields
+      __typename
+    }
+    SalesOrg
+    __typename
+  }
+}
+''';
 }

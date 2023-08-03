@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -745,8 +747,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (productAddedToCartList) {
             final priceAggregateAddedToCartList = productAddedToCartList
                 .map((e) => PriceAggregate.empty().copyWith(
-                      materialInfo: e,
-                      quantity: e.quantity,
+                      materialInfo: e.materialInfo,
+                      quantity: e.materialInfo.quantity,
                     ))
                 .toList();
             emit(
@@ -802,27 +804,32 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (cartProductList) {
             final cartProductListTemp = List<PriceAggregate>.from(
-              cartProductList.map(
-                (e) => PriceAggregate.empty()
-                    .copyWith(materialInfo: e, quantity: e.quantity),
-              ),
+              cartProductList,
             );
             for (var i = 0; i < cartProductListTemp.length; i++) {
+              final priceAggregate = state.cartProducts
+                      .where((element) =>
+                          element.materialInfo.materialNumber ==
+                          cartProductList[i].materialInfo.materialNumber)
+                      .toList()
+                      .firstOrNull ??
+                  PriceAggregate.empty();
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
-                price: state.cartProducts.elementAtOrNull(i)?.price ??
-                    Price.empty(),
-                addedBonusList:
-                    state.cartProducts.elementAtOrNull(i)?.addedBonusList ?? [],
+                price: priceAggregate.price,
+                addedBonusList: priceAggregate.addedBonusList,
+                bundle: priceAggregate.bundle,
               );
             }
             add(
               _VerifyMaterialDealBonus(
                 item: cartProductListTemp
-                    .where((element) =>
-                        element.materialInfo.materialNumber ==
-                        e.priceAggregate.materialInfo.materialNumber)
-                    .toList()
-                    .first,
+                        .where((element) {
+                          return element.materialInfo.materialNumber ==
+                              e.priceAggregate.materialInfo.materialNumber;
+                        })
+                        .toList()
+                        .firstOrNull ??
+                    PriceAggregate.empty(),
                 items: cartProductListTemp,
                 salesOrganisationConfigs: e.salesOrganisationConfigs,
                 salesOrganisation: e.salesOrganisation,
@@ -839,6 +846,77 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
+      upsertCartItems: (e) async {
+        final index = state.cartProducts.indexWhere(
+          (element) =>
+              element.materialInfo.materialNumber ==
+              e.priceAggregate.materialInfo.materialNumber,
+        );
+        if (index != -1) {
+          final cartItem = state.cartProducts.elementAt(index);
+          var noDifference = true;
+          for (final bundleItem in cartItem.bundle.materials) {
+            final item = e.priceAggregate.bundle.materials
+                .where((element) =>
+                    element.materialNumber == bundleItem.materialNumber)
+                .firstOrNull;
+            if (item != null) {
+              noDifference = item.quantity == bundleItem.quantity;
+            }
+            if (!noDifference) break;
+          }
+          if (noDifference) return;
+        }
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isUpserting: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.upsertCartItems(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          product: e.priceAggregate,
+          language: 'EN',
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isUpserting: false,
+              ),
+            );
+          },
+          (cartProductList) {
+            final cartProductListTemp =
+                List<PriceAggregate>.from(cartProductList);
+            for (var i = 0; i < cartProductListTemp.length; i++) {
+              final priceAggregate = state.cartProducts
+                      .where((element) =>
+                          element.materialInfo.materialNumber ==
+                          cartProductList[i].materialInfo.materialNumber)
+                      .toList()
+                      .firstOrNull ??
+                  PriceAggregate.empty();
+              cartProductListTemp[i] = cartProductListTemp[i].copyWith(
+                price: priceAggregate.price,
+                addedBonusList: priceAggregate.addedBonusList,
+              );
+            }
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                isUpserting: false,
+                cartProducts: cartProductListTemp,
+              ),
+            );
+          },
+        );
+      },
       getDetailsProductsAddedToCart: (e) async {
         emit(
           state.copyWith(
@@ -847,9 +925,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
+        final materialNumberList = <MaterialNumber>[
+          ...e.cartProducts
+              .where((element) => !element.materialInfo.type.typeBundle)
+              .map((e) => e.materialInfo.materialNumber)
+              .toList(),
+        ];
+
+        final bundleList = e.cartProducts
+            .where((element) => element.materialInfo.type.typeBundle)
+            .map((e) => e.bundle.materials)
+            .toList();
+        for (final element in bundleList) {
+          materialNumberList.addAll(element.map((e) => e.materialNumber));
+        }
+
         final failureOrSuccess = await repository.getProducts(
-          materialNumbers:
-              e.cartProducts.map((e) => e.materialInfo.materialNumber).toList(),
+          materialNumbers: materialNumberList,
         );
 
         failureOrSuccess.fold(

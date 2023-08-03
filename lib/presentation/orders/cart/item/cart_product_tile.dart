@@ -128,7 +128,7 @@ class _ItemSubTotalSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Item subtotal:'.toLowerCase(),
+            'Item subtotal:'.tr(),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,

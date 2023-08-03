@@ -47,7 +47,11 @@ mixin _$CartProductDto {
   @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
   String get counterOfferCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'Comment', defaultValue: '')
-  String get comment => throw _privateConstructorUsedError;
+  String get remarks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BundleDetails')
+  BundleDetailsDto get bundleDetails => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get bundleMaterials => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -82,7 +86,12 @@ abstract class $CartProductDtoCopyWith<$Res> {
       double counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
-      @JsonKey(name: 'Comment', defaultValue: '') String comment});
+      @JsonKey(name: 'Comment', defaultValue: '') String remarks,
+      @JsonKey(name: 'BundleDetails') BundleDetailsDto bundleDetails,
+      @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+      List<MaterialDto> bundleMaterials});
+
+  $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
 }
 
 /// @nodoc
@@ -111,7 +120,9 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? principalName = null,
     Object? counterOfferPrice = null,
     Object? counterOfferCurrency = null,
-    Object? comment = null,
+    Object? remarks = null,
+    Object? bundleDetails = null,
+    Object? bundleMaterials = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -166,11 +177,27 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
               as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
               as String,
+      bundleDetails: null == bundleDetails
+          ? _value.bundleDetails
+          : bundleDetails // ignore: cast_nullable_to_non_nullable
+              as BundleDetailsDto,
+      bundleMaterials: null == bundleMaterials
+          ? _value.bundleMaterials
+          : bundleMaterials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDto>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BundleDetailsDtoCopyWith<$Res> get bundleDetails {
+    return $BundleDetailsDtoCopyWith<$Res>(_value.bundleDetails, (value) {
+      return _then(_value.copyWith(bundleDetails: value) as $Val);
+    });
   }
 }
 
@@ -203,7 +230,13 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       double counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
-      @JsonKey(name: 'Comment', defaultValue: '') String comment});
+      @JsonKey(name: 'Comment', defaultValue: '') String remarks,
+      @JsonKey(name: 'BundleDetails') BundleDetailsDto bundleDetails,
+      @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+      List<MaterialDto> bundleMaterials});
+
+  @override
+  $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
 }
 
 /// @nodoc
@@ -230,7 +263,9 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? principalName = null,
     Object? counterOfferPrice = null,
     Object? counterOfferCurrency = null,
-    Object? comment = null,
+    Object? remarks = null,
+    Object? bundleDetails = null,
+    Object? bundleMaterials = null,
   }) {
     return _then(_$_CartProductDto(
       productID: null == productID
@@ -285,10 +320,18 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
               as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
               as String,
+      bundleDetails: null == bundleDetails
+          ? _value.bundleDetails
+          : bundleDetails // ignore: cast_nullable_to_non_nullable
+              as BundleDetailsDto,
+      bundleMaterials: null == bundleMaterials
+          ? _value._bundleMaterials
+          : bundleMaterials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDto>,
     ));
   }
 }
@@ -319,8 +362,13 @@ class _$_CartProductDto extends _CartProductDto {
       required this.counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       required this.counterOfferCurrency,
-      @JsonKey(name: 'Comment', defaultValue: '') required this.comment})
-      : super._();
+      @JsonKey(name: 'Comment', defaultValue: '') required this.remarks,
+      @JsonKey(name: 'BundleDetails')
+      this.bundleDetails = BundleDetailsDto.empty,
+      @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+      required final List<MaterialDto> bundleMaterials})
+      : _bundleMaterials = bundleMaterials,
+        super._();
 
   factory _$_CartProductDto.fromJson(Map<String, dynamic> json) =>
       _$$_CartProductDtoFromJson(json);
@@ -366,11 +414,22 @@ class _$_CartProductDto extends _CartProductDto {
   final String counterOfferCurrency;
   @override
   @JsonKey(name: 'Comment', defaultValue: '')
-  final String comment;
+  final String remarks;
+  @override
+  @JsonKey(name: 'BundleDetails')
+  final BundleDetailsDto bundleDetails;
+  final List<MaterialDto> _bundleMaterials;
+  @override
+  @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get bundleMaterials {
+    if (_bundleMaterials is EqualUnmodifiableListView) return _bundleMaterials;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundleMaterials);
+  }
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, counterOfferPrice: $counterOfferPrice, counterOfferCurrency: $counterOfferCurrency, comment: $comment)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, counterOfferPrice: $counterOfferPrice, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials)';
   }
 
   @override
@@ -403,7 +462,11 @@ class _$_CartProductDto extends _CartProductDto {
                 other.counterOfferPrice == counterOfferPrice) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
-            (identical(other.comment, comment) || other.comment == comment));
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.bundleDetails, bundleDetails) ||
+                other.bundleDetails == bundleDetails) &&
+            const DeepCollectionEquality()
+                .equals(other._bundleMaterials, _bundleMaterials));
   }
 
   @JsonKey(ignore: true)
@@ -423,7 +486,9 @@ class _$_CartProductDto extends _CartProductDto {
       principalName,
       counterOfferPrice,
       counterOfferCurrency,
-      comment);
+      remarks,
+      bundleDetails,
+      const DeepCollectionEquality().hash(_bundleMaterials));
 
   @JsonKey(ignore: true)
   @override
@@ -465,8 +530,10 @@ abstract class _CartProductDto extends CartProductDto {
       required final double counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       required final String counterOfferCurrency,
-      @JsonKey(name: 'Comment', defaultValue: '')
-      required final String comment}) = _$_CartProductDto;
+      @JsonKey(name: 'Comment', defaultValue: '') required final String remarks,
+      @JsonKey(name: 'BundleDetails') final BundleDetailsDto bundleDetails,
+      @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+      required final List<MaterialDto> bundleMaterials}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
@@ -513,9 +580,222 @@ abstract class _CartProductDto extends CartProductDto {
   String get counterOfferCurrency;
   @override
   @JsonKey(name: 'Comment', defaultValue: '')
-  String get comment;
+  String get remarks;
+  @override
+  @JsonKey(name: 'BundleDetails')
+  BundleDetailsDto get bundleDetails;
+  @override
+  @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get bundleMaterials;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+BundleDetailsDto _$BundleDetailsDtoFromJson(Map<String, dynamic> json) {
+  return _BundleDetailsDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BundleDetailsDto {
+  @JsonKey(name: 'BundleName', defaultValue: '')
+  String get bundleName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BundleCode', defaultValue: '')
+  String get bundleCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+  List<BundleInfoDto> get bundleInfo => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BundleDetailsDtoCopyWith<BundleDetailsDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BundleDetailsDtoCopyWith<$Res> {
+  factory $BundleDetailsDtoCopyWith(
+          BundleDetailsDto value, $Res Function(BundleDetailsDto) then) =
+      _$BundleDetailsDtoCopyWithImpl<$Res, BundleDetailsDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'BundleName', defaultValue: '') String bundleName,
+      @JsonKey(name: 'BundleCode', defaultValue: '') String bundleCode,
+      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      List<BundleInfoDto> bundleInfo});
+}
+
+/// @nodoc
+class _$BundleDetailsDtoCopyWithImpl<$Res, $Val extends BundleDetailsDto>
+    implements $BundleDetailsDtoCopyWith<$Res> {
+  _$BundleDetailsDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? bundleInfo = null,
+  }) {
+    return _then(_value.copyWith(
+      bundleName: null == bundleName
+          ? _value.bundleName
+          : bundleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleCode: null == bundleCode
+          ? _value.bundleCode
+          : bundleCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleInfo: null == bundleInfo
+          ? _value.bundleInfo
+          : bundleInfo // ignore: cast_nullable_to_non_nullable
+              as List<BundleInfoDto>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BundleDetailsDtoCopyWith<$Res>
+    implements $BundleDetailsDtoCopyWith<$Res> {
+  factory _$$_BundleDetailsDtoCopyWith(
+          _$_BundleDetailsDto value, $Res Function(_$_BundleDetailsDto) then) =
+      __$$_BundleDetailsDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'BundleName', defaultValue: '') String bundleName,
+      @JsonKey(name: 'BundleCode', defaultValue: '') String bundleCode,
+      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      List<BundleInfoDto> bundleInfo});
+}
+
+/// @nodoc
+class __$$_BundleDetailsDtoCopyWithImpl<$Res>
+    extends _$BundleDetailsDtoCopyWithImpl<$Res, _$_BundleDetailsDto>
+    implements _$$_BundleDetailsDtoCopyWith<$Res> {
+  __$$_BundleDetailsDtoCopyWithImpl(
+      _$_BundleDetailsDto _value, $Res Function(_$_BundleDetailsDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? bundleInfo = null,
+  }) {
+    return _then(_$_BundleDetailsDto(
+      bundleName: null == bundleName
+          ? _value.bundleName
+          : bundleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleCode: null == bundleCode
+          ? _value.bundleCode
+          : bundleCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleInfo: null == bundleInfo
+          ? _value._bundleInfo
+          : bundleInfo // ignore: cast_nullable_to_non_nullable
+              as List<BundleInfoDto>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_BundleDetailsDto extends _BundleDetailsDto {
+  const _$_BundleDetailsDto(
+      {@JsonKey(name: 'BundleName', defaultValue: '') required this.bundleName,
+      @JsonKey(name: 'BundleCode', defaultValue: '') required this.bundleCode,
+      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      required final List<BundleInfoDto> bundleInfo})
+      : _bundleInfo = bundleInfo,
+        super._();
+
+  factory _$_BundleDetailsDto.fromJson(Map<String, dynamic> json) =>
+      _$$_BundleDetailsDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'BundleName', defaultValue: '')
+  final String bundleName;
+  @override
+  @JsonKey(name: 'BundleCode', defaultValue: '')
+  final String bundleCode;
+  final List<BundleInfoDto> _bundleInfo;
+  @override
+  @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+  List<BundleInfoDto> get bundleInfo {
+    if (_bundleInfo is EqualUnmodifiableListView) return _bundleInfo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundleInfo);
+  }
+
+  @override
+  String toString() {
+    return 'BundleDetailsDto(bundleName: $bundleName, bundleCode: $bundleCode, bundleInfo: $bundleInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BundleDetailsDto &&
+            (identical(other.bundleName, bundleName) ||
+                other.bundleName == bundleName) &&
+            (identical(other.bundleCode, bundleCode) ||
+                other.bundleCode == bundleCode) &&
+            const DeepCollectionEquality()
+                .equals(other._bundleInfo, _bundleInfo));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, bundleName, bundleCode,
+      const DeepCollectionEquality().hash(_bundleInfo));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BundleDetailsDtoCopyWith<_$_BundleDetailsDto> get copyWith =>
+      __$$_BundleDetailsDtoCopyWithImpl<_$_BundleDetailsDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BundleDetailsDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BundleDetailsDto extends BundleDetailsDto {
+  const factory _BundleDetailsDto(
+      {@JsonKey(name: 'BundleName', defaultValue: '')
+      required final String bundleName,
+      @JsonKey(name: 'BundleCode', defaultValue: '')
+      required final String bundleCode,
+      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      required final List<BundleInfoDto> bundleInfo}) = _$_BundleDetailsDto;
+  const _BundleDetailsDto._() : super._();
+
+  factory _BundleDetailsDto.fromJson(Map<String, dynamic> json) =
+      _$_BundleDetailsDto.fromJson;
+
+  @override
+  @JsonKey(name: 'BundleName', defaultValue: '')
+  String get bundleName;
+  @override
+  @JsonKey(name: 'BundleCode', defaultValue: '')
+  String get bundleCode;
+  @override
+  @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+  List<BundleInfoDto> get bundleInfo;
+  @override
+  @JsonKey(ignore: true)
+  _$$_BundleDetailsDtoCopyWith<_$_BundleDetailsDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

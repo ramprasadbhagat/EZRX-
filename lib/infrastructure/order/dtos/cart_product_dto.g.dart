@@ -21,7 +21,15 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       principalName: json['principalName'] as String? ?? '',
       counterOfferPrice: (json['CounterOfferPrice'] as num?)?.toDouble() ?? 0,
       counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
-      comment: json['Comment'] as String? ?? '',
+      remarks: json['Comment'] as String? ?? '',
+      bundleDetails: json['BundleDetails'] == null
+          ? BundleDetailsDto.empty
+          : BundleDetailsDto.fromJson(
+              json['BundleDetails'] as Map<String, dynamic>),
+      bundleMaterials: (json['BundleMaterials'] as List<dynamic>?)
+              ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -39,5 +47,25 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'principalName': instance.principalName,
       'CounterOfferPrice': instance.counterOfferPrice,
       'CounterOfferCurrency': instance.counterOfferCurrency,
-      'Comment': instance.comment,
+      'Comment': instance.remarks,
+      'BundleDetails': instance.bundleDetails.toJson(),
+      'BundleMaterials':
+          instance.bundleMaterials.map((e) => e.toJson()).toList(),
+    };
+
+_$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
+    _$_BundleDetailsDto(
+      bundleName: json['BundleName'] as String? ?? '',
+      bundleCode: json['BundleCode'] as String? ?? '',
+      bundleInfo: (json['BundleInformation'] as List<dynamic>?)
+              ?.map((e) => BundleInfoDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$$_BundleDetailsDtoToJson(_$_BundleDetailsDto instance) =>
+    <String, dynamic>{
+      'BundleName': instance.bundleName,
+      'BundleCode': instance.bundleCode,
+      'BundleInformation': instance.bundleInfo.map((e) => e.toJson()).toList(),
     };

@@ -1,11 +1,20 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -196,9 +205,102 @@ class _BundleSheetFooter extends StatelessWidget {
                     width: 10,
                   ),
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Add to cart'.tr()),
+                    child: BlocConsumer<CartBloc, CartState>(
+                      listenWhen: (previous, current) =>
+                          previous.isUpserting != current.isUpserting,
+                      listener: (context, state) {
+                        state.apiFailureOrSuccessOption.fold(
+                          () {
+                            if (!state.isUpserting &&
+                                state.cartProducts.isNotEmpty) {
+                              Navigator.pop(context);
+                              CustomSnackBar(
+                                messageText: 'Item has been added to cart'.tr(),
+                              ).show(context);
+                            }
+                          },
+                          (either) => Navigator.pop(context),
+                        );
+                      },
+                      builder: (context, stateCart) {
+                        final materialInCart = stateCart.cartProducts
+                                .where((element) =>
+                                    element.bundle.bundleCode ==
+                                    context
+                                        .read<BundleAddToCartBloc>()
+                                        .state
+                                        .bundle
+                                        .materialNumber
+                                        .getValue())
+                                .firstOrNull ??
+                            PriceAggregate.empty();
+
+                        return ElevatedButton(
+                          onPressed: state.totalCount <
+                                      state
+                                          .bundle
+                                          .bundle
+                                          .minimumQuantityBundleMaterial
+                                          .quantity ||
+                                  stateCart.isUpserting
+                              ? null
+                              : () {
+                                  context
+                                      .read<CartBloc>()
+                                      .add(CartEvent.upsertCartItems(
+                                        salesOrganisation: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .salesOrganisation,
+                                        customerCodeInfo: context
+                                            .read<CustomerCodeBloc>()
+                                            .state
+                                            .customerCodeInfo,
+                                        shipToInfo: context
+                                            .read<CustomerCodeBloc>()
+                                            .state
+                                            .shipToInfo,
+                                        priceAggregate:
+                                            PriceAggregate.empty().copyWith(
+                                          bundle: Bundle.empty().copyWith(
+                                            materials:
+                                                state.bundleMaterialsSelected
+                                                    .map(
+                                                      (e) => e.copyWith(
+                                                        quantity: e.quantity +
+                                                            (materialInCart
+                                                                    .bundle
+                                                                    .materials
+                                                                    .where((element) =>
+                                                                        element
+                                                                            .materialNumber ==
+                                                                        e.materialNumber)
+                                                                    .firstOrNull
+                                                                    ?.quantity ??
+                                                                0),
+                                                      ),
+                                                    )
+                                                    .toList(),
+                                            bundleCode: state
+                                                .bundle.materialNumber
+                                                .getValue(),
+                                            bundleName: BundleName(
+                                              state.bundle.materialDescription,
+                                            ),
+                                          ),
+                                        ),
+                                        salesOrganisationConfigs: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .configs,
+                                      ));
+                                },
+                          child: LoadingShimmer.withChild(
+                            enabled: stateCart.isUpserting,
+                            child: const Text('Add To Cart').tr(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

@@ -9,10 +9,10 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
@@ -55,6 +55,7 @@ class _CartPageState extends State<CartPage> {
                   .read<CartBloc>()
                   .state
                   .cartProducts
+                  .where((element) => !element.materialInfo.type.typeBundle)
                   .map((e) => e.materialInfo)
                   .toList(),
             ),
@@ -238,9 +239,13 @@ class _CartScrollList extends StatelessWidget {
                         cartProduct: item.materialInfo,
                       )
                     : const SizedBox(),
-                CartProductTile(
-                  cartItem: item,
-                ),
+                item.materialInfo.type.typeBundle
+                    ? CartProductBundle(
+                        cartItem: item,
+                      )
+                    : CartProductTile(
+                        cartItem: item,
+                      ),
                 state.cartProducts[index].addedBonusList.isNotEmpty
                     ? CartProductTileBonus(
                         cartItem: item,

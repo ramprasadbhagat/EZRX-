@@ -361,14 +361,14 @@ class __$$_LoginWithADButtonPressedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? salesOrg = freezed,
+    Object? salesOrg = null,
   }) {
     return _then(_$_LoginWithADButtonPressed(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrg: freezed == salesOrg
+      salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
@@ -406,12 +406,12 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
         (other.runtimeType == runtimeType &&
             other is _$_LoginWithADButtonPressed &&
             (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality().equals(other.salesOrg, salesOrg));
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, const DeepCollectionEquality().hash(salesOrg));
+  int get hashCode => Object.hash(runtimeType, user, salesOrg);
 
   @JsonKey(ignore: true)
   @override

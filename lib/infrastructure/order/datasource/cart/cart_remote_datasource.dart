@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
@@ -22,7 +22,7 @@ class CartRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<List<MaterialInfo>> getAddedToCartProductList() async {
+  Future<List<PriceAggregate>> getAddedToCartProductList() async {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.cart();
       final variables = {};
@@ -64,7 +64,7 @@ class CartRemoteDataSource {
     });
   }
 
-  Future<List<MaterialInfo>> upsertCart({
+  Future<List<PriceAggregate>> upsertCart({
     required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -85,6 +85,53 @@ class CartRemoteDataSource {
       _exceptionChecker(res: res);
 
       final productList = res.data['data']['upsertCart']['EzRxItems'] ?? [];
+
+      return List.from(productList).map((e) {
+        return CartProductDto.fromJson(e).toDomain;
+      }).toList();
+    });
+  }
+
+  Future<List<PriceAggregate>> upsertCartItems({
+    required PriceAggregate product,
+    required String shipToCode,
+    required String customerCode,
+    required String salesOrg,
+    required String language,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final query = cartQueryMutation.upsertCartItems();
+      final variables = {
+        'itemInput': product.bundle.materials
+            .map((e) => {
+                  'ProductID': e.materialNumber.getValue(),
+                  'Quantity': e.quantity,
+                  'ItemSource': 'EZRX',
+                  'CustomerCode': customerCode,
+                  'ShipToID': shipToCode,
+                  'SalesOrg': salesOrg,
+                  'ParentID': product.bundle.bundleCode,
+                  'Language': language,
+                  'Type': 'bundle',
+                })
+            .toList(),
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}cart',
+        data: jsonEncode(
+          {
+            'query': query,
+            'variables': variables,
+          },
+        ),
+        apiEndpoint: 'UpsertCartItems',
+      );
+
+      _exceptionChecker(res: res);
+
+      final productList =
+          res.data['data']['upsertCartItems']['EzRxItems'] ?? [];
 
       return List.from(productList)
           .map((e) => CartProductDto.fromJson(e).toDomain)

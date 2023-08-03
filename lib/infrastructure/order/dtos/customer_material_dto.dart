@@ -101,7 +101,6 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         productImages: ProductImages.empty(),
         countryData: CountryData.empty(),
         parentID: '',
-        itemType: MaterialItemType(''),
         counterOfferDetails: RequestCounterOfferDetails.empty(),
       );
 

@@ -149,7 +149,7 @@ abstract class ICartRepository {
   });
 
   //TODO: evaluate which methods will be removed with addition to this
-  Future<Either<ApiFailure, List<MaterialInfo>>> upsertCart({
+  Future<Either<ApiFailure, List<PriceAggregate>>> upsertCart({
     required MaterialNumber productNumber,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -157,5 +157,13 @@ abstract class ICartRepository {
     required String language,
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
+  });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItems({
+    required PriceAggregate product,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
   });
 }

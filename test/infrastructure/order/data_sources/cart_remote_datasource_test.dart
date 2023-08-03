@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -132,7 +132,7 @@ void main() async {
               .getAddedToCartProductList()
               .onError((error, _) {
             expect(error, isA<ServerException>());
-            return Future.value(<MaterialInfo>[]);
+            return Future.value(<PriceAggregate>[]);
           });
         },
       );
@@ -241,7 +241,7 @@ void main() async {
             },
           ).onError((error, _) {
             expect(error, isA<ServerException>());
-            return Future.value(<MaterialInfo>[]);
+            return Future.value(<PriceAggregate>[]);
           });
         },
       );
@@ -276,7 +276,7 @@ void main() async {
             },
           ).onError((error, _) {
             expect(error, isA<ServerException>());
-            return Future.value(<MaterialInfo>[]);
+            return Future.value(<PriceAggregate>[]);
           });
         },
       );

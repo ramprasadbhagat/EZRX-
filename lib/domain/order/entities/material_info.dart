@@ -39,7 +39,6 @@ class MaterialInfo with _$MaterialInfo {
     required String governmentMaterialCode,
     required StringValue unitOfMeasurement,
     required String parentID,
-    required MaterialItemType itemType,
     required String therapeuticClass,
     required MaterialTaxClassification taxClassification,
     required String itemRegistrationNumber,
@@ -100,7 +99,6 @@ class MaterialInfo with _$MaterialInfo {
         productImages: ProductImages.empty(),
         countryData: CountryData.empty(),
         parentID: '',
-        itemType: MaterialItemType(''),
         counterOfferDetails: RequestCounterOfferDetails.empty(),
       );
 

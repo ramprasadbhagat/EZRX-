@@ -117,6 +117,14 @@ class CartEvent with _$CartEvent {
     required RequestCounterOfferDetails counterOfferDetails,
   }) = _UpsertCart;
 
+  const factory CartEvent.upsertCartItems({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required PriceAggregate priceAggregate,
+  }) = _UpsertCartItems;
+
   const factory CartEvent.getDetailsProductsAddedToCart({
     required List<PriceAggregate> cartProducts,
   }) = _GetDetailsProductsAddedToCart;

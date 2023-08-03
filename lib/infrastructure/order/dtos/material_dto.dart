@@ -64,7 +64,7 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
     @HiveField(19, defaultValue: false)
         required bool isFOCMaterial,
-    @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+    @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
     @HiveField(20, defaultValue: 0)
         required int quantity,
     @JsonKey(name: 'remarks', defaultValue: '')
@@ -220,7 +220,6 @@ class MaterialDto with _$MaterialDto {
           data.isNotEmpty ? data.first.toProductImage() : ProductImages.empty(),
       countryData: CountryData.empty(),
       parentID: '',
-      itemType: MaterialItemType(''),
       counterOfferDetails: RequestCounterOfferDetails.empty(),
     );
   }
@@ -303,8 +302,7 @@ class MaterialDataDto with _$MaterialDataDto {
         governmentMaterialCode: materialData.governmentMaterialCode,
       );
 
-  ProductImages toProductImage() =>
-      ProductImages.empty();
+  ProductImages toProductImage() => ProductImages.empty();
 }
 
 String materialNumberReadValue(Map json, String key) =>

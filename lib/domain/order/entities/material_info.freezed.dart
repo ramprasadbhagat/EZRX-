@@ -37,7 +37,6 @@ mixin _$MaterialInfo {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   StringValue get unitOfMeasurement => throw _privateConstructorUsedError;
   String get parentID => throw _privateConstructorUsedError;
-  MaterialItemType get itemType => throw _privateConstructorUsedError;
   String get therapeuticClass => throw _privateConstructorUsedError;
   MaterialTaxClassification get taxClassification =>
       throw _privateConstructorUsedError;
@@ -91,7 +90,6 @@ abstract class $MaterialInfoCopyWith<$Res> {
       String governmentMaterialCode,
       StringValue unitOfMeasurement,
       String parentID,
-      MaterialItemType itemType,
       String therapeuticClass,
       MaterialTaxClassification taxClassification,
       String itemRegistrationNumber,
@@ -150,7 +148,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? governmentMaterialCode = null,
     Object? unitOfMeasurement = null,
     Object? parentID = null,
-    Object? itemType = null,
     Object? therapeuticClass = null,
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
@@ -253,10 +250,6 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.parentID
           : parentID // ignore: cast_nullable_to_non_nullable
               as String,
-      itemType: null == itemType
-          ? _value.itemType
-          : itemType // ignore: cast_nullable_to_non_nullable
-              as MaterialItemType,
       therapeuticClass: null == therapeuticClass
           ? _value.therapeuticClass
           : therapeuticClass // ignore: cast_nullable_to_non_nullable
@@ -396,7 +389,6 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       String governmentMaterialCode,
       StringValue unitOfMeasurement,
       String parentID,
-      MaterialItemType itemType,
       String therapeuticClass,
       MaterialTaxClassification taxClassification,
       String itemRegistrationNumber,
@@ -458,7 +450,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? governmentMaterialCode = null,
     Object? unitOfMeasurement = null,
     Object? parentID = null,
-    Object? itemType = null,
     Object? therapeuticClass = null,
     Object? taxClassification = null,
     Object? itemRegistrationNumber = null,
@@ -561,10 +552,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.parentID
           : parentID // ignore: cast_nullable_to_non_nullable
               as String,
-      itemType: null == itemType
-          ? _value.itemType
-          : itemType // ignore: cast_nullable_to_non_nullable
-              as MaterialItemType,
       therapeuticClass: null == therapeuticClass
           ? _value.therapeuticClass
           : therapeuticClass // ignore: cast_nullable_to_non_nullable
@@ -658,7 +645,6 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.governmentMaterialCode,
       required this.unitOfMeasurement,
       required this.parentID,
-      required this.itemType,
       required this.therapeuticClass,
       required this.taxClassification,
       required this.itemRegistrationNumber,
@@ -736,8 +722,6 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final String parentID;
   @override
-  final MaterialItemType itemType;
-  @override
   final String therapeuticClass;
   @override
   final MaterialTaxClassification taxClassification;
@@ -785,7 +769,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, itemType: $itemType, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
   }
 
   @override
@@ -833,8 +817,6 @@ class _$_MaterialInfo extends _MaterialInfo {
                 other.unitOfMeasurement == unitOfMeasurement) &&
             (identical(other.parentID, parentID) ||
                 other.parentID == parentID) &&
-            (identical(other.itemType, itemType) ||
-                other.itemType == itemType) &&
             (identical(other.therapeuticClass, therapeuticClass) ||
                 other.therapeuticClass == therapeuticClass) &&
             (identical(other.taxClassification, taxClassification) ||
@@ -891,7 +873,6 @@ class _$_MaterialInfo extends _MaterialInfo {
         governmentMaterialCode,
         unitOfMeasurement,
         parentID,
-        itemType,
         therapeuticClass,
         taxClassification,
         itemRegistrationNumber,
@@ -940,7 +921,6 @@ abstract class _MaterialInfo extends MaterialInfo {
           required final String governmentMaterialCode,
           required final StringValue unitOfMeasurement,
           required final String parentID,
-          required final MaterialItemType itemType,
           required final String therapeuticClass,
           required final MaterialTaxClassification taxClassification,
           required final String itemRegistrationNumber,
@@ -1002,8 +982,6 @@ abstract class _MaterialInfo extends MaterialInfo {
   StringValue get unitOfMeasurement;
   @override
   String get parentID;
-  @override
-  MaterialItemType get itemType;
   @override
   String get therapeuticClass;
   @override

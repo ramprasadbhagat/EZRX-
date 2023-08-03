@@ -226,7 +226,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
-      quantity: _validateQantity(json, 'quantity') as int? ?? 0,
+      quantity: _validateQantity(json, 'Quantity') as int? ?? 0,
       remarks: json['remarks'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       ean: json['ean'] as String? ?? '',
@@ -273,7 +273,7 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'taxes': instance.taxes,
       'defaultMaterialDescription': instance.defaultMaterialDescription,
       'isFOCMaterial': instance.isFOCMaterial,
-      'quantity': instance.quantity,
+      'Quantity': instance.quantity,
       'remarks': instance.remarks,
       'genericMaterialName': instance.genericMaterialName,
       'ean': instance.ean,

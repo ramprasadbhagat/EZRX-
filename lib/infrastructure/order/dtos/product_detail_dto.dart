@@ -89,7 +89,6 @@ class ProductDetailDto with _$ProductDetailDto {
         productImages: ProductImages.empty(),
         taxes: [],
         parentID: '',
-        itemType: MaterialItemType(''),
         counterOfferDetails: RequestCounterOfferDetails.empty(),
       );
 

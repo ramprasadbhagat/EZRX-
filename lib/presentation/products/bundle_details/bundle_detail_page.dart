@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_add_to_cart_sheet.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_material_descriptions_sheet.dart';
 import 'package:ezrxmobile/presentation/products/widgets/product_image.dart';
@@ -59,10 +60,16 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
     return Scaffold(
       key: WidgetKeys.bundleDetailPage,
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () {},
+        actions: const [
+          Padding(
+            key: WidgetKeys.materialDetailsPageCartIcon,
+            padding: EdgeInsets.all(10),
+            child: CartButton(
+              backgroundCartColor: ZPColors.transparent,
+              cartColor: ZPColors.black,
+              iconSize: 20,
+              positionTop: -8,
+            ),
           ),
         ],
       ),
@@ -132,8 +139,8 @@ class _BundleDetails extends StatelessWidget {
                       ? SizedBox(width: 100, child: LoadingShimmer.tile())
                       : Expanded(
                           child: Text(
-                          material.name,
-                          style: Theme.of(context).textTheme.labelLarge,
+                            material.name,
+                            style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ),
                   FavouriteIcon(

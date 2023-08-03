@@ -185,7 +185,7 @@ class CartState with _$CartState {
         0;
   }
 
-  double get totalPrice => cartProducts.fold(
+  double get totalMaterialsPrice => cartProducts.fold(
         0,
         (previousValue, element) =>
             previousValue +
@@ -218,4 +218,49 @@ class CartState with _$CartState {
     return cartProductsTemp.price.finalPrice.getValue() *
         cartProductsTemp.quantity;
   }
+
+  int getTotalQuantityOfProductBundle({required String bundleCode}) {
+    return cartProducts
+            .where((element) => element.bundle.bundleCode == bundleCode)
+            .elementAtOrNull(0)
+            ?.bundle
+            .materials
+            .fold(
+              0,
+              (previousValue, element) =>
+                  (previousValue ?? 0) + element.quantity,
+            ) ??
+        0;
+  }
+
+  BundleInfo currentBundleOffer({required String bundleCode}) {
+    final bundle = cartProducts
+            .where((element) => element.bundle.bundleCode == bundleCode)
+            .elementAtOrNull(0)
+            ?.bundle ??
+        Bundle.empty();
+
+    return bundle.sortedBundleInformation.reversed.firstWhere(
+      (element) =>
+          element.quantity <=
+          getTotalQuantityOfProductBundle(bundleCode: bundleCode),
+      orElse: () =>
+          bundle.sortedBundleInformation.firstOrNull ?? BundleInfo.empty(),
+    );
+  }
+
+  double itemBundlePrice({required String bundleCode}) =>
+      currentBundleOffer(bundleCode: bundleCode).rate *
+      getTotalQuantityOfProductBundle(bundleCode: bundleCode);
+
+  double get totalBundlesPrice => cartProducts
+      .where((element) => element.materialInfo.type.typeBundle)
+      .fold(
+        0,
+        (previousValue, element) =>
+            previousValue +
+            itemBundlePrice(bundleCode: element.bundle.bundleCode),
+      );
+
+  double get totalPrice => totalMaterialsPrice + totalBundlesPrice;
 }
