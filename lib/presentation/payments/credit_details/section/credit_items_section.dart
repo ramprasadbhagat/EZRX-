@@ -73,7 +73,6 @@ class CreditItemsSection extends StatelessWidget {
                         ),
                       ],
                     ),
-                    priceComponent: const SizedBox.shrink(),
                   );
                 },
               ).toList(),

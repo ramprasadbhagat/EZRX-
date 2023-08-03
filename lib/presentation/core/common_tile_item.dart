@@ -18,7 +18,7 @@ class CommonTileItem extends StatelessWidget {
     required this.isQuantityBelowImage,
     this.tag = '',
     this.footerWidget,
-    required this.priceComponent,
+    this.priceComponent,
     this.isQuantityRequired = true,
     this.onTap,
   }) : super(key: key);
@@ -28,7 +28,7 @@ class CommonTileItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final String headerText;
-  final Widget priceComponent;
+  final Widget? priceComponent;
   final Widget statusWidget;
   final String quantity;
   final bool isQuantityBelowImage;
@@ -112,8 +112,8 @@ class CommonTileItem extends StatelessWidget {
                           isQuantityBelowImage:
                               isQuantityRequired ? isQuantityBelowImage : true,
                           quantity: quantity,
-                          isPriceComponent: true,
-                          priceComponent: priceComponent,
+                          priceComponent:
+                              priceComponent ?? const SizedBox.shrink(),
                         ),
                       ],
                     ),
@@ -137,41 +137,47 @@ class _Subtitle extends StatelessWidget {
     required this.isQuantityBelowImage,
     required this.quantity,
     required this.priceComponent,
-    required this.isPriceComponent,
   }) : super(key: key);
 
   final String tileBody3;
   final bool isQuantityBelowImage;
   final String quantity;
   final Widget priceComponent;
-  final bool isPriceComponent;
 
   @override
   Widget build(BuildContext context) {
     return isQuantityBelowImage
-        ? isPriceComponent
-            ? priceComponent
-            : Text(
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              priceComponent,
+              Text(
                 tileBody3,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: ZPColors.darkerGrey,
                     ),
-              )
+              ),
+            ],
+          )
         : Row(
             children: [
               Expanded(
-                child: isPriceComponent
-                    ? priceComponent
-                    : Text(
-                        tileBody3,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.darkGray,
-                              fontSize: 10,
-                            ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    priceComponent,
+                    Text(
+                      tileBody3,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.darkGray,
+                            fontSize: 10,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
               Text(
                 'Qty: $quantity',

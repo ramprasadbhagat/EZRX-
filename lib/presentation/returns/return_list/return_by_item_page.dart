@@ -198,7 +198,6 @@ class _ReturnItem extends StatelessWidget {
                     data.status.getOrDefaultValue(''),
                   ),
                 ),
-                priceComponent: const SizedBox(),
               ),
             ],
           ),

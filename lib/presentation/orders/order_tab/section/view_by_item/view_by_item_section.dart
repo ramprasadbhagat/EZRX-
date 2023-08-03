@@ -209,7 +209,6 @@ class _ViewByOrderItem extends StatelessWidget {
             isQuantityBelowImage: false,
             isQuantityRequired: true,
             tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
-            priceComponent: const SizedBox(),
           ),
         ],
       ),
