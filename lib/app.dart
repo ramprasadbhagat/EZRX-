@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
@@ -55,6 +56,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -190,6 +192,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
       trackAutomaticEvents: true,
     ),
   );
+  await locator<DatadogService>().init();
 
   if (!kIsWeb) {
     await Wakelock.enable();
@@ -202,36 +205,39 @@ Future<void> initialSetup({required Flavor flavor}) async {
   }
 }
 
-void runAppWithCrashlyticsAndLocalization() {
-  runZonedGuarded(
-    () => runApp(
-      EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('th'),
-          Locale('zh'),
-          Locale('my'),
-          Locale('vi'),
-          Locale('km'),
-        ],
-        path: 'assets/langs/langs.csv',
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: Sizer(
-          builder: (context, orientation, deviceType) {
-            return const App();
-          },
+Future<void> runAppWithCrashlyticsAndLocalization() async {
+  final configuration = locator<DatadogService>().configuration;
+  await DatadogSdk.runApp(configuration, () async {
+    runZonedGuarded(
+      () => runApp(
+        EasyLocalization(
+          supportedLocales: const [
+            Locale('en'),
+            Locale('th'),
+            Locale('zh'),
+            Locale('my'),
+            Locale('vi'),
+            Locale('km'),
+          ],
+          path: 'assets/langs/langs.csv',
+          fallbackLocale: const Locale('en'),
+          saveLocale: true,
+          useOnlyLangCode: true,
+          assetLoader: CsvAssetLoader(),
+          child: Sizer(
+            builder: (context, orientation, deviceType) {
+              return const App();
+            },
+          ),
         ),
       ),
-    ),
-    (error, stack) {
-      if (!kIsWeb) {
-        _crashlytics.recordError(error, stack);
-      }
-    },
-  );
+      (error, stack) {
+        if (!kIsWeb) {
+          _crashlytics.recordError(error, stack);
+        }
+      },
+    );
+  });
 }
 
 class App extends StatelessWidget {
@@ -563,6 +569,7 @@ class App extends StatelessWidget {
           navigatorObservers: () => [
             locator<FirebaseAnalyticsService>().observer,
             locator<RouterObserver>(),
+            locator<DatadogService>().navigationObserver,
           ],
         ),
         builder: (context, child) => GestureDetector(

@@ -5,5 +5,5 @@ import 'package:ezrxmobile/config.dart';
 
 Future<void> main() async {
   await initialSetup(flavor: Flavor.uat);
-  runAppWithCrashlyticsAndLocalization();
+  await runAppWithCrashlyticsAndLocalization();
 }

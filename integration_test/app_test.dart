@@ -15,7 +15,7 @@ void main() {
       tester.printToConsole('Initial setup and run as DEV flavor');
       await initialSetup(flavor: Flavor.uat);
 
-      runAppWithCrashlyticsAndLocalization();
+      await runAppWithCrashlyticsAndLocalization();
 
       // await tester.pumpWidget(const App());
       // await tester.pumpAndSettle(const Duration(seconds: 3));

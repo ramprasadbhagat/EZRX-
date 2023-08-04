@@ -104,6 +104,7 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -1978,6 +1979,11 @@ void setupLocator() {
     () => MixpanelService(),
   );
 
+  //Datadog
+  locator.registerLazySingleton(
+    () => DatadogService(),
+  );
+
   //============================================================
   //  Payment Summary
   //
@@ -3038,7 +3044,7 @@ void setupLocator() {
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
     ),
   );
-   locator.registerLazySingleton(
+  locator.registerLazySingleton(
     () => AnnouncementInfoDetailsBloc(
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
     ),

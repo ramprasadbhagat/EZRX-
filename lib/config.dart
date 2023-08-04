@@ -227,6 +227,37 @@ class Config {
   }
 
   //============================================================
+  //  datadog
+  //
+  //============================================================
+
+  String get datadogClientToken {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.mock:
+        return 'pubcedb98f41ad09c615e595924fc2af61a';
+      case Flavor.uat:
+        return 'pubc6632bc82ea01596b62d37cf9013f9f3';
+      case Flavor.prod:
+      default:
+        return 'pub2cdc211b6b697f0c8d6e05b936f102bd';
+    }
+  }
+
+  String get datadogRumConfiguration {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.mock:
+        return 'd44796b4-e2d3-49b5-8d23-74c3c184165e';
+      case Flavor.uat:
+        return '4948c424-c0a4-4931-8c38-0999214b47e1';
+      case Flavor.prod:
+      default:
+        return '2c8c15aa-704c-46eb-ad5e-1aca818e61a3';
+    }
+  }
+
+  //============================================================
   //  Scandit
   //
   //============================================================
