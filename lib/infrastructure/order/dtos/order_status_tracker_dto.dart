@@ -27,7 +27,7 @@ class OrderStatusTrackerDto with _$OrderStatusTrackerDto {
       stepStage: orderStatusTracker.stepStage,
       state: orderStatusTracker.state,
       status: orderStatusTracker.status.getOrDefaultValue(''),
-      updateTimeStamp: orderStatusTracker.updateTimeStamp.toValidDateString,
+      updateTimeStamp: orderStatusTracker.updateTimeStamp.dateString,
     );
   }
 

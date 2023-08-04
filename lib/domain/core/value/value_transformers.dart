@@ -121,62 +121,22 @@ DateTime getDeliveryDateTime(String input) {
   return deliveryDate;
 }
 
-String displayDateTimeStringOrEmpty(String text, String format) {
-  if (getDateTimeIntValue(text) <= 0 && !text.contains('-')) {
-    return '-';
-  }
+String displayDateTimeString(
+  String text,
+  String format,
+) {
   final parsedDate = tryParseDateTime(text);
   if (parsedDate == null) {
-    return '';
+    return text;
   }
 
-  return DateFormat(format).format(parsedDate);
-}
-
-String displayDateTimeStringOrReturnEmpty(String text, String format) {
-  if (getDateTimeIntValue(text) <= 0 && !text.contains('-')) {
-    return '';
-  }
-  final parsedDate = tryParseDateTime(text);
-  if (parsedDate == null) {
-    return '';
-  }
-
-  return DateFormat(format).format(parsedDate);
-}
-
-String showDateOrNAIfEmpty(String text, String format) {
-  if (getDateTimeIntValue(text) <= 0) {
-    return 'NA';
-  }
-  final parsedDate = tryParseDateTime(text);
-  if (parsedDate == null) {
-    return '';
-  }
-
-  return DateFormat(format).format(parsedDate);
+  return DateFormat(format)
+      .format(parsedDate)
+      //remove time part if time is 00:00:00
+      .replaceFirst(' 00:00:00', '');
 }
 
 bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);
-
-String formattedDateTimeForAPI(String text) {
-  final parsedDate = DateTime.tryParse(text);
-  if (parsedDate == null) {
-    return '';
-  }
-
-  return DateFormat(DateTimeFormatString.apiDateFormat).format(parsedDate);
-}
-
-String formattedDateWithDashForAPI(String text) {
-  final parsedDate = DateTime.tryParse(text);
-  if (parsedDate == null) {
-    return '';
-  }
-
-  return DateFormat(DateTimeFormatString.apiDateWithDashFormat)
-      .format(parsedDate);
-}
 
 DateTime? tryParseDateTime(String input) {
   if (isNotEmpty(input)) {
@@ -204,10 +164,14 @@ DateTime? tryParseDateTime(String input) {
         }
 
         return DateTime(year, month, day, hour, minute, second);
-      }
-      //input for invoices date string with format yyyy-MM-dd
-      else {
-        return DateTime.parse(input);
+      } else {
+        try {
+          //input for announcement date
+          return DateFormat.yMd().add_jm().parse(input);
+        } catch (_) {
+          //input for invoices date string with format yyyy-MM-dd
+          return DateTime.parse(input);
+        }
       }
     } on FormatException {
       return null;
@@ -217,19 +181,8 @@ DateTime? tryParseDateTime(String input) {
   return null;
 }
 
-DateTime? tryParseAnnouncementDateTime(String input) {
-  try {
-    return DateFormat.yMd().add_jm().parse(input);
-  } catch (_) {
-    return null;
-  }
-}
-
 DateTime getDateTimeByDateString(String value) =>
     tryParseDateTime(value) ?? DateTime.now();
-
-DateTime getDateTimeByAnnouncementDateString(String value) =>
-    tryParseAnnouncementDateTime(value) ?? DateTime.now();
 
 String getDateStringByDateTime(DateTime dateTime) =>
     DateFormat(DateTimeFormatString.apiDateFormat).format(dateTime);
@@ -419,7 +372,7 @@ String getStatusMessage(
   PaymentSummaryDetails paymentSummaryDetails,
 ) {
   return isSuccessful(status)
-      ? 'Payment date: ${paymentSummaryDetails.createdDate.toValidDateString}'
+      ? 'Payment date: ${paymentSummaryDetails.createdDate.dateString}'
       : 'Expires in ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}';
 }
 
@@ -441,15 +394,6 @@ bool isSuccessful(String status) => status == 'Successful';
 
 Color getDisplayStatusTextColor(String status) {
   return isSuccessful(status) ? ZPColors.black : ZPColors.red;
-}
-
-String displayAnnouncementDateOrEmpty(String text, String format) {
-  final parsedDate = tryParseDateTime(text);
-  if (parsedDate == null) {
-    return '-';
-  }
-
-  return DateFormat(format).format(parsedDate);
 }
 
 bool isApproved(String status) {

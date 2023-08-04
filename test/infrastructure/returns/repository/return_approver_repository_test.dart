@@ -141,10 +141,10 @@ void main() {
                     'status': 'PENDING',
                     'dateTo':
                         DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                            .apiDateTimeFormat,
+                            .apiDateTimeString,
                     'dateFrom': DateTimeStringValue(
                             getDateStringByDateTime(fakeFromDate))
-                        .apiDateTimeFormat,
+                        .apiDateTimeString,
                   }, offset: 0, pageSize: 11, username: 'fake-username'))
               .thenAnswer(
             (invocation) async => [
@@ -175,10 +175,10 @@ void main() {
                     'status': 'PENDING',
                     'dateTo':
                         DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                            .apiDateTimeFormat,
+                            .apiDateTimeString,
                     'dateFrom': DateTimeStringValue(
                             getDateStringByDateTime(fakeFromDate))
-                        .apiDateTimeFormat,
+                        .apiDateTimeString,
                   }, offset: 0, pageSize: 11, username: 'Fake-username'))
               .thenThrow(const ApiFailure.serverTimeout());
 

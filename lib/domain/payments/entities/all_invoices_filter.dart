@@ -67,13 +67,13 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
       );
 
   DateTimeRange get getDueDateFilterDateRange => DateTimeRange(
-        start: dueDateFrom.dateTimeByDateString,
-        end: dueDateTo.dateTimeByDateString,
+        start: dueDateFrom.dateTime,
+        end: dueDateTo.dateTime,
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
-        start: documentDateFrom.dateTimeByDateString,
-        end: documentDateTo.dateTimeByDateString,
+        start: documentDateFrom.dateTime,
+        end: documentDateTo.dateTime,
       );
 
   int get appliedFilterCount {

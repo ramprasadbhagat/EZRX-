@@ -32,8 +32,8 @@ class ViewByItemHistoryFilterDto with _$ViewByItemHistoryFilterDto {
       orderStatus: viewByItemHistoryFilter.orderStatusList
           .map((e) => e.getOrCrash())
           .toList(),
-      dateTo: viewByItemHistoryFilter.toDate.apiDateTimeFormat,
-      dateFrom: viewByItemHistoryFilter.fromDate.apiDateTimeFormat,
+      dateTo: viewByItemHistoryFilter.toDate.apiDateTimeString,
+      dateFrom: viewByItemHistoryFilter.fromDate.apiDateTimeString,
     );
   }
 

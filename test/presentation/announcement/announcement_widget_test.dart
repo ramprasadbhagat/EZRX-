@@ -53,14 +53,14 @@ void main() {
 
     announcementMock = announcementMock.copyWith(
       endTime:
-          DateTimeStringValue.announcement(DateFormat.yMd().add_jm().format(
+          DateTimeStringValue(DateFormat.yMd().add_jm().format(
                 DateTime.now().add(const Duration(days: 10)),
               )),
     );
 
     announcementCustomMock = announcementCustomMock.copyWith(
       endTime:
-          DateTimeStringValue.announcement(DateFormat.yMd().add_jm().format(
+          DateTimeStringValue(DateFormat.yMd().add_jm().format(
                 DateTime.now().add(const Duration(days: 10)),
               )),
     );
@@ -112,7 +112,7 @@ void main() {
           .thenReturn(AnnouncementState.initial().copyWith(
         isClosed: false,
         announcement: announcementMock.copyWith(
-          endTime: DateTimeStringValue.announcement(DateFormat.yMd()
+          endTime: DateTimeStringValue(DateFormat.yMd()
               .add_jm()
               .format(DateTime.now().subtract(const Duration(days: 10)))),
         ),

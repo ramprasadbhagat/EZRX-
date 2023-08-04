@@ -50,9 +50,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       unitPrice: orderHistoryItem.unitPrice.zpPrice,
       totalPrice: orderHistoryItem.totalPrice.totalPrice,
       status: orderHistoryItem.status.getOrCrash(),
-      deliveryDate: orderHistoryItem.deliveryDate.toValidDateString,
+      deliveryDate: orderHistoryItem.deliveryDate.dateString,
       orderNumber: orderHistoryItem.orderNumber.getOrCrash(),
-      createdDate: orderHistoryItem.createdDate.toValidDateString,
+      createdDate: orderHistoryItem.createdDate.dateString,
       tax: orderHistoryItem.tax,
       batch: orderHistoryItem.batch,
       orderBy: orderHistoryItem.orderBy,
@@ -61,9 +61,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       invoiceNumber: orderHistoryItem.invoiceNumber,
       pOReference: orderHistoryItem.pOReference.displayPOReference,
       manufactureName: orderHistoryItem.manufactureName,
-      expiryDate: orderHistoryItem.expiryDate.toValidDateString,
+      expiryDate: orderHistoryItem.expiryDate.dateString,
       requestedDeliveryDate:
-          orderHistoryItem.requestedDeliveryDate.toValidDateString,
+          orderHistoryItem.requestedDeliveryDate.dateString,
       specialInstruction:
           orderHistoryItem.specialInstructions.displaySpecialInstructions,
     );

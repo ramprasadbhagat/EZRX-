@@ -36,11 +36,11 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
       );
 
   String get getSubmittedDateFiltered =>
-      '${dateFrom.toValidDateString}  to ${dateTo.toValidDateString} ';
+      '${dateFrom.dateString}  to ${dateTo.dateString} ';
 
   DateTimeRange get getSubmittedFilterDateRange => DateTimeRange(
-        start: dateFrom.dateTimeByDateString,
-        end: dateTo.dateTimeByDateString,
+        start: dateFrom.dateTime,
+        end: dateTo.dateTime,
       );
   List<StatusType> get returnSummaryFilteredStatus =>
       returnSummaryStatus.map((e) => StatusType(e)).toList();

@@ -69,7 +69,7 @@ class StatusTrackerSection extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    createDate.toValidDateString,
+                    createDate.dateString,
                     textAlign: TextAlign.end,
                     style: Theme.of(context)
                         .textTheme

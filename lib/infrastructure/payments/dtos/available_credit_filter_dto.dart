@@ -35,9 +35,9 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
   ) {
     return AvailableCreditFilterDto(
       documentDateTo:
-          availableCreditFilter.documentDateTo.apiDateWithDashFormat,
+          availableCreditFilter.documentDateTo.apiDateWithDashString,
       documentDateFrom:
-          availableCreditFilter.documentDateFrom.apiDateWithDashFormat,
+          availableCreditFilter.documentDateFrom.apiDateWithDashString,
       amountInTransactionCurrencyFrom:
           availableCreditFilter.amountValueFrom.apiParameterValue,
       amountInTransactionCurrencyTo:

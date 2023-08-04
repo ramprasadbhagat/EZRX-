@@ -466,12 +466,12 @@ class PriceAggregate with _$PriceAggregate {
   bool get checkSalesCutOff {
     final salesOrgPrincipal = salesOrgConfig.checkIsPrincipalCodeForAllMaterial;
     if (salesOrgPrincipal != SalesOrganisationConfigsPrincipal.empty()) {
-      return salesOrgPrincipal.date.isBefore(DateTime.now());
+      return salesOrgPrincipal.date.dateTime.isBefore(DateTime.now());
     }
     for (final salesOrgPrincipal in salesOrgConfig.principalList) {
       if (materialInfo.principalData.principalCode ==
           salesOrgPrincipal.principalCode) {
-        return salesOrgPrincipal.date.isBefore(DateTime.now());
+        return salesOrgPrincipal.date.dateTime.isBefore(DateTime.now());
       }
     }
 

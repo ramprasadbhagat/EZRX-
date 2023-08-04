@@ -93,7 +93,7 @@ class _InvoiceItemDetail extends StatelessWidget {
 
     return CommonTileItem(
       headerText:
-          'Batch ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.toValidDateString})',
+          'Batch ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})',
       materialNumber: customerDocumentDetail.materialNumber,
       label: customerDocumentDetail.materialNumber.displayMatNo,
       subtitle: '',

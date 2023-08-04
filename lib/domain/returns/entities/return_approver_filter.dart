@@ -36,11 +36,11 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
       );
 
   String get getFilteredInvoiceDate =>
-      '${fromInvoiceDate.toValidDateString} to ${toInvoiceDate.toValidDateString}';
+      '${fromInvoiceDate.dateString} to ${toInvoiceDate.dateString}';
 
   DateTimeRange get getInvoiceFilterDateRange => DateTimeRange(
-        start: fromInvoiceDate.dateTimeByDateString,
-        end: toInvoiceDate.dateTimeByDateString,
+        start: fromInvoiceDate.dateTime,
+        end: toInvoiceDate.dateTime,
       );
 
   int get appliedFilterCount =>

@@ -42,7 +42,7 @@ class OrderHistoryDetailsOrderHeadersDto
     return OrderHistoryDetailsOrderHeadersDto(
       totalTax: orderHistoryDetailsOrderHeader.totalTax,
       requestedDeliveryDate: orderHistoryDetailsOrderHeader
-          .requestedDeliveryDate.toValidDateString,
+          .requestedDeliveryDate.dateString,
       type: orderHistoryDetailsOrderHeader.type,
       telephoneNumber:
           orderHistoryDetailsOrderHeader.telephoneNumber.displayTelephoneNumber,

@@ -85,7 +85,7 @@ class OrderItemDetailsSection extends StatelessWidget {
                                         isQuantityBelowImage: true,
                                         isQuantityRequired: false,
                                         headerText:
-                                            'Batch ${e.batch}\n(EXP: ${e.expiryDate.toValidDateString})',
+                                            'Batch ${e.batch}\n(EXP: ${e.expiryDate.dateString})',
                                         subtitle: '',
                                         footerWidget: Row(
                                           mainAxisAlignment:

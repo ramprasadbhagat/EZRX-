@@ -347,14 +347,14 @@ void main() {
     test('should return value when Expiry Date having valid date', () async {
       const input = '12042028';
       final tenderContractInfo = DateTimeStringValue(input);
-      final result = tenderContractInfo.naIfEmptyDateTime;
+      final result = tenderContractInfo.getValue();
       expect(result, '12042028');
     });
 
     test('should return NA when Expiry Date having empty value', () async {
       const input = '';
       final tenderContractInfo = DateTimeStringValue(input);
-      final result = tenderContractInfo.naIfEmptyDateTime;
+      final result = tenderContractInfo.dateTimeOrNaString;
       expect(result, 'NA');
     });
   });

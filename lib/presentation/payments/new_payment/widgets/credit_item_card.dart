@@ -26,7 +26,7 @@ class CreditItemCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               Text(
-                customerOpenItem.netDueDate.toValidDateString,
+                customerOpenItem.netDueDate.dateString,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.darkGray,
                     ),

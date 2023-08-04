@@ -166,7 +166,7 @@ class _ReturnItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    'Requested on ${data.requestDate.toValidDateString}',
+                    'Requested on ${data.requestDate.dateString}',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.darkerGrey,
                         ),
@@ -188,7 +188,7 @@ class _ReturnItem extends StatelessWidget {
                 label: data.materialNumber.displayMatNo,
                 title: data.materialName,
                 subtitle:
-                    'Batch ${data.batch} (Expires ${data.expiry.toValidDateString})',
+                    'Batch ${data.batch} (Expires ${data.expiry.dateString})',
                 headerText: 'Return #${data.requestId}',
                 materialNumber: data.materialNumber,
                 quantity: data.itemQty.toString(),

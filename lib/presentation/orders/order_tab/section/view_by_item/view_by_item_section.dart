@@ -122,7 +122,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  'Ordered on ${orderHistoryItem.createdDate.toValidDateString}',
+                  'Ordered on ${orderHistoryItem.createdDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),

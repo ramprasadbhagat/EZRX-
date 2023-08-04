@@ -35,11 +35,11 @@ class AdminPoAttachmentFilter with _$AdminPoAttachmentFilter {
       );
 
   String get dateFiltered =>
-      '${fromDate.toValidDateString}  to ${toDate.toValidDateString} ';
+      '${fromDate.dateString}  to ${toDate.dateString} ';
 
   DateTimeRange get filterDateRange => DateTimeRange(
-        start: fromDate.dateTimeByDateString,
-        end: toDate.dateTimeByDateString,
+        start: fromDate.dateTime,
+        end: toDate.dateTime,
       );
 
   int get appliedFilterCount =>

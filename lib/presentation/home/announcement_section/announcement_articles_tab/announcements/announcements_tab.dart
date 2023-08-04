@@ -172,7 +172,7 @@ class _AnnouncementItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    item.publishedDate.getAnnouncementDateFormatWithTime,
+                    item.publishedDate.dateOrDashString,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.neutralsGrey1,
                           fontSize: 10,

@@ -129,7 +129,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           BalanceTextRow(
                 keyText: 'Expiry'.tr(),
                 valueText: productDetailAggregate
-                .stockInfo.expiryDate.toValidDateStringNaIfEmpty,
+                .stockInfo.expiryDate.dateOrNaString,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.black,

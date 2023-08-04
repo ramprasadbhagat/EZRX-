@@ -58,8 +58,8 @@ factory AdminPoAttachmentFilterDto.fromDomain(
       exRxNo: adminPoAttachmentFilter.exRxNo.searchValueOrEmpty,
       salesOrg: adminPoAttachmentFilter.salesOrg.getOrDefaultValue(''),
       soldTo: adminPoAttachmentFilter.soldTo.customerCodeSoldTo,
-      toDate: adminPoAttachmentFilter.toDate.apiDateTimeFormat,
-      fromDate: adminPoAttachmentFilter.fromDate.apiDateTimeFormat,
+      toDate: adminPoAttachmentFilter.toDate.apiDateTimeString,
+      fromDate: adminPoAttachmentFilter.fromDate.apiDateTimeString,
     );
   }
 }

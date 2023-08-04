@@ -55,7 +55,7 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
       subtitle: '',
       isQuantityRequired: false,
       headerText:
-          'Batch ${widget.requestInformation.batch} (Expires ${widget.requestInformation.expiryDate.toValidDateString})',
+          'Batch ${widget.requestInformation.batch} (Expires ${widget.requestInformation.expiryDate.dateString})',
       quantity: widget.requestInformation.returnQuantity.toString(),
       isQuantityBelowImage: false,
       priceComponent: PriceComponent(
@@ -216,7 +216,7 @@ class _MaterialDetailsSection extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Invoice date'.tr(),
-          valueText: requestInformation.invoiceDate.toValidDateString,
+          valueText: requestInformation.invoiceDate.dateString,
         ),
       ],
     );
@@ -448,7 +448,7 @@ class _BonusItemSection extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              'Batch ${e.batch} (Expires ${e.expiryDate.toValidDateString})',
+                              'Batch ${e.batch} (Expires ${e.expiryDate.dateString})',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),

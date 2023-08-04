@@ -40,8 +40,8 @@ class ViewByItemHistoryFilter with _$ViewByItemHistoryFilter {
 
   bool isNotEqual({required ViewByItemHistoryFilter newFilter}) =>
       orderStatusList.length != newFilter.orderStatusList.length ||
-      toDate.apiDateTimeFormat != newFilter.toDate.apiDateTimeFormat ||
-      fromDate.apiDateTimeFormat != newFilter.fromDate.apiDateTimeFormat;
+      toDate.apiDateTimeString != newFilter.toDate.apiDateTimeString ||
+      fromDate.apiDateTimeString != newFilter.fromDate.apiDateTimeString;
 
   int get appliedFilterCount {
     var count = 1;

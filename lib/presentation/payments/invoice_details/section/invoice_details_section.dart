@@ -36,7 +36,7 @@ class InvoiceDetailsSection extends StatelessWidget {
             valueFlex: 3,
             isStatus: false,
             keyText: 'Document date:'.tr(),
-            valueText: invoiceItem.postingDate.toValidDateString,
+            valueText: invoiceItem.postingDate.dateString,
             valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: ZPColors.white,
               ),
@@ -49,7 +49,7 @@ class InvoiceDetailsSection extends StatelessWidget {
             keyFlex: 2,
             valueFlex: 3,
             keyText: 'Due on:'.tr(),
-            valueText: invoiceItem.netDueDate.toValidDateString,
+            valueText: invoiceItem.netDueDate.dateString,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: ZPColors.white,
               ),

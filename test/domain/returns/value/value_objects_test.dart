@@ -57,7 +57,7 @@ void main() {
       () async {
         const input = '20221011';
         final simpleDate = DateTimeStringValue(input);
-        final result = simpleDate.toValidDateString;
+        final result = simpleDate.dateString;
         expect(result, displayDate);
       },
     );
@@ -69,8 +69,8 @@ void main() {
       () async {
         final input =getDateStringByDateTime( DateTime.now());
         final simpleInvoiceDate = DateTimeStringValue(input);
-        final dateTimeByDateString = simpleInvoiceDate.apiDateTimeFormat;
-        expect(dateTimeByDateString, input);
+        final validDateTime = simpleInvoiceDate.apiDateTimeString;
+        expect(validDateTime, input);
       },
     );
 
@@ -79,7 +79,7 @@ void main() {
       () async {
         final input = DateTime.now();
         final simpleInvoiceDate = DateTimeStringValue(getDateStringByDateTime(input));
-        final apiParameterValueOrEmpty = simpleInvoiceDate.apiDateTimeFormat;
+        final apiParameterValueOrEmpty = simpleInvoiceDate.apiDateTimeString;
         expect(apiParameterValueOrEmpty,
             DateFormat(DateTimeFormatString.apiDateFormat).format(input));
       },

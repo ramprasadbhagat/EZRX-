@@ -28,7 +28,7 @@ class OrderStatusSection extends StatelessWidget {
             ),
             subtitle: orderHistoryItem.orderStatusTracker.isEmpty
                 ? Text(
-                    'Expected delivery:${orderHistoryItem.deliveryDate.toValidDateString}',
+                    'Expected delivery:${orderHistoryItem.deliveryDate.dateString}',
                   )
                 : const SizedBox.shrink(),
           ),

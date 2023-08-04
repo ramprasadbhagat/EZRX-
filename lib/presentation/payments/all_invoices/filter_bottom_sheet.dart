@@ -330,7 +330,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.documentDateFrom.toValidDateString,
+            text: state.filter.documentDateFrom.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -381,7 +381,7 @@ class _ToDocumentDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.documentDateTo.toValidDateString,
+            text: state.filter.documentDateTo.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -432,7 +432,7 @@ class _FromDueDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.dueDateFrom.toValidDateString,
+            text: state.filter.dueDateFrom.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -483,7 +483,7 @@ class _ToDueDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.dueDateTo.toValidDateString,
+            text: state.filter.dueDateTo.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(

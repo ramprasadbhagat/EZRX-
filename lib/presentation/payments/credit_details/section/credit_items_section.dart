@@ -40,7 +40,7 @@ class CreditItemsSection extends StatelessWidget {
                 (e) {
                   return CommonTileItem(
                     headerText:
-                        'Batch ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.toValidDateString})',
+                        'Batch ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
                     materialNumber: e.materialNumber,
                     label: removeLeadingZero(
                       e.materialNumber.getOrDefaultValue(''),

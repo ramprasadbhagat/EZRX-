@@ -95,7 +95,7 @@ class _PaymentItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    paymentItem.documentDate.toValidDateString,
+                    paymentItem.documentDate.dateString,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   PriceComponent(

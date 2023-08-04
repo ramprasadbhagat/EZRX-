@@ -17,8 +17,8 @@ void main() async {
       const functionLabel = 'Test';
 
       final customAnnouncement = Announcement.empty().copyWith(
-        startTime: DateTimeStringValue.announcement(startTime),
-        endTime: DateTimeStringValue.announcement(endTime),
+        startTime: DateTimeStringValue(startTime),
+        endTime: DateTimeStringValue(endTime),
         functionLabel: functionLabel,
         descriptionList: [
           AnnouncementMessage.empty().copyWith(
@@ -97,8 +97,8 @@ void main() async {
       );
 
       final customAnnouncement = Announcement.empty().copyWith(
-          startTime: DateTimeStringValue.announcement(startTime),
-          endTime: DateTimeStringValue.announcement(endTime),
+          startTime: DateTimeStringValue(startTime),
+          endTime: DateTimeStringValue(endTime),
           active: true);
 
       expect(customAnnouncement.hasValidAnnouncement, false);
@@ -117,8 +117,8 @@ void main() async {
       );
 
       final customAnnouncement = Announcement.empty().copyWith(
-          startTime: DateTimeStringValue.announcement(startTime),
-          endTime: DateTimeStringValue.announcement(endTime),
+          startTime: DateTimeStringValue(startTime),
+          endTime: DateTimeStringValue(endTime),
           active: true);
 
       expect(customAnnouncement.hasValidAnnouncement, false);
@@ -126,7 +126,7 @@ void main() async {
 
     test('Is invalid when can not parse date time', () {
       final customAnnouncement = Announcement.empty()
-          .copyWith(startTime: DateTimeStringValue.announcement('error-time'), active: true);
+          .copyWith(startTime: DateTimeStringValue('error-time'), active: true);
 
       expect(customAnnouncement.hasValidAnnouncement, false);
     });

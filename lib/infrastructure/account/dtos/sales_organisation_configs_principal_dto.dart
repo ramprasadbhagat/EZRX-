@@ -27,7 +27,7 @@ class SalesOrganisationConfigsPrincipalDto with _$SalesOrganisationConfigsPrinci
     SalesOrganisationConfigsPrincipal salesOrganisationConfigsPrincipal,
   ) {
     return SalesOrganisationConfigsPrincipalDto(
-      date: salesOrganisationConfigsPrincipal.date.dateTimeIntValue,
+      date: salesOrganisationConfigsPrincipal.date.intValue,
       principalCode: salesOrganisationConfigsPrincipal.principalCode.getOrDefaultValue(''),
     );
   }

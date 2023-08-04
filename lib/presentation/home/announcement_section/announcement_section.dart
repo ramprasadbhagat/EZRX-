@@ -122,7 +122,7 @@ class _ItemDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            publishedDate.getAnnouncementDateFormat,
+            publishedDate.dateTimeOrDashString,
             style: Theme.of(context)
                 .textTheme
                 .bodySmall

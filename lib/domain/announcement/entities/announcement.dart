@@ -26,8 +26,8 @@ class Announcement with _$Announcement {
   factory Announcement.empty() => Announcement(
         active: false,
         descriptionList: [],
-        startTime: DateTimeStringValue.announcement(''),
-        endTime: DateTimeStringValue.announcement(''),
+        startTime: DateTimeStringValue(''),
+        endTime: DateTimeStringValue(''),
         type: AnnouncementType(''),
         day: '',
         functionLabel: '',
@@ -86,8 +86,8 @@ class Announcement with _$Announcement {
 
   bool get _isExpired {
     if (startTime.isValid() && endTime.isValid()) {
-      return DateTime.now().isAfter(endTime.dateTimeByAnnouncementDateString) ||
-          DateTime.now().isBefore(startTime.dateTimeByAnnouncementDateString);
+      return DateTime.now().isAfter(endTime.dateTime) ||
+          DateTime.now().isBefore(startTime.dateTime);
     }
 
     return true;

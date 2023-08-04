@@ -67,10 +67,10 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       tax: orderHistoryDetailsOrderItem.tax,
       sAPStatus: orderHistoryDetailsOrderItem.sAPStatus.displaySAPStatus,
       plannedDeliveryDate:
-          orderHistoryDetailsOrderItem.plannedDeliveryDate.toValidDateString,
+          orderHistoryDetailsOrderItem.plannedDeliveryDate.dateString,
       pickedQuantity: orderHistoryDetailsOrderItem.pickedQuantity,
       batch: orderHistoryDetailsOrderItem.batch,
-      expiryDate: orderHistoryDetailsOrderItem.expiryDate.toValidDateString,
+      expiryDate: orderHistoryDetailsOrderItem.expiryDate.dateString,
       lineReferenceNotes:
           orderHistoryDetailsOrderItem.lineReferenceNotes.getValue(),
       isTenderContractMaterial:

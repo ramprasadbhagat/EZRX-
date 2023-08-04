@@ -185,7 +185,7 @@ class _ReturnItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    'Requested on ${data.requestDate.toValidDateString}',
+                    'Requested on ${data.requestDate.dateString}',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.darkerGrey,
                         ),

@@ -112,7 +112,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                 keyText: 'Request date'.tr(),
                 keyFlex: 2,
                 valueText:
-                    widget.requestInformation.createdDate.toValidDateString,
+                    widget.requestInformation.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

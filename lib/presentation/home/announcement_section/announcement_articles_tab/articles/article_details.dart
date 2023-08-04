@@ -203,7 +203,7 @@ class _TitleSection extends StatelessWidget {
           ),
           FittedBox(
             child: Text(
-              article.publishedDate.getAnnouncementDateFormat,
+              article.publishedDate.dateOrDashString,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ZPColors.neutralsGrey1,
                     fontSize: 10,

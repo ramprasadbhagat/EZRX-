@@ -40,7 +40,7 @@ class SoaData extends ValueObject<String> {
     return SoaData._(validateStringNotEmpty(input));
   }
 
-  String get toDate => displayDateTimeStringOrEmpty(
+  String get toDate => displayDateTimeString(
         findDate(value.getOrElse(() => '')),
         DateTimeFormatString.displaySimpleDateFormat,
       );

@@ -43,8 +43,8 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
     AllCreditsFilter tempFilter,
   ) {
     return AllCreditsFilterDto(
-      documentDateTo: tempFilter.documentDateTo.apiDateWithDashFormat,
-      documentDateFrom: tempFilter.documentDateFrom.apiDateWithDashFormat,
+      documentDateTo: tempFilter.documentDateTo.apiDateWithDashString,
+      documentDateFrom: tempFilter.documentDateFrom.apiDateWithDashString,
       amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses: tempFilter.filterStatuses.join(','),

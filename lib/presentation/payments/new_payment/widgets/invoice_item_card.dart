@@ -44,7 +44,7 @@ class InvoiceItemCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Text(
-                  'Due on ${customerOpenItem.netDueDate.toSimpleDateString}',
+                  'Due on ${customerOpenItem.netDueDate.simpleDateString}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: customerOpenItem.status.displayDueDateColor,
                       ),

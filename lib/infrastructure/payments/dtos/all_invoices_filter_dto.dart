@@ -53,10 +53,10 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
     AllInvoicesFilter tempFilter,
   ) {
     return AllInvoicesFilterDto(
-      dueDateFrom: tempFilter.dueDateFrom.apiDateWithDashFormat,
-      dueDateTo: tempFilter.dueDateTo.apiDateWithDashFormat,
-      documentDateTo: tempFilter.documentDateTo.apiDateWithDashFormat,
-      documentDateFrom: tempFilter.documentDateFrom.apiDateWithDashFormat,
+      dueDateFrom: tempFilter.dueDateFrom.apiDateWithDashString,
+      dueDateTo: tempFilter.dueDateTo.apiDateWithDashString,
+      documentDateTo: tempFilter.documentDateTo.apiDateWithDashString,
+      documentDateFrom: tempFilter.documentDateFrom.apiDateWithDashString,
       amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses: tempFilter.filterStatuses.join(','),

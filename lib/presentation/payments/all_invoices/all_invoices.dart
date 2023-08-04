@@ -195,7 +195,7 @@ class _InvoiceGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  'Documents created on ${data.dueDate.toValidDateString}',
+                  'Documents created on ${data.dueDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
@@ -270,7 +270,7 @@ class _InvoiceItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    'Due on ${invoiceItem.netDueDate.toSimpleDateString}',
+                    'Due on ${invoiceItem.netDueDate.simpleDateString}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: invoiceItem
                               .invoiceProcessingStatus.displayDueDateColor,

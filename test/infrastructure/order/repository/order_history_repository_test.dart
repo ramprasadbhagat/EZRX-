@@ -161,10 +161,10 @@ void main() {
             'materialSearch': 'fake_materialSearch',
             'principalSearch': 'fake_principalSearch',
             'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                .apiDateTimeFormat,
+                .apiDateTimeString,
             'fromDate':
                 DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
-                    .apiDateTimeFormat,
+                    .apiDateTimeString,
           },
         ),
       ).thenAnswer((invocation) async => orderHistoryMockList);
@@ -198,10 +198,10 @@ void main() {
         () => orderHistoryRemoteDataSource.getOrderHistorySalesRep(
             filterQuery: {
               'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                  .apiDateTimeFormat,
+                  .apiDateTimeString,
               'fromDate':
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
-                      .apiDateTimeFormat,
+                      .apiDateTimeString,
             },
             soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
             shipTo: mockShipToInfo.shipToCustomerCode,
@@ -233,10 +233,10 @@ void main() {
         () => orderHistoryRemoteDataSource.getOrderHistory(
           filterQuery: {
             'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                .apiDateTimeFormat,
+                .apiDateTimeString,
             'fromDate':
                 DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
-                    .apiDateTimeFormat,
+                    .apiDateTimeString,
           },
           soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
           shipTo: mockShipToInfo.shipToCustomerCode,
@@ -277,10 +277,10 @@ void main() {
         () => orderHistoryRemoteDataSource.getOrderHistory(
           filterQuery: {
             'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                .apiDateTimeFormat,
+                .apiDateTimeString,
             'fromDate':
                 DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
-                    .apiDateTimeFormat,
+                    .apiDateTimeString,
           },
           soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
           shipTo: mockShipToInfo.shipToCustomerCode,

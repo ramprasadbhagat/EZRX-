@@ -178,7 +178,7 @@ class _FromDateFilter extends StatelessWidget {
             },
             readOnly: true,
             controller: TextEditingController(
-              text: state.filter.documentDateFrom.toValidDateStringElseEmpty,
+              text: state.filter.documentDateFrom.dateString,
             ),
             decoration: InputDecoration(
               hintText: 'Date from'.tr(),
@@ -236,7 +236,7 @@ class _ToDateFilter extends StatelessWidget {
             },
             readOnly: true,
             controller: TextEditingController(
-              text: state.filter.documentDateTo.toValidDateStringElseEmpty,
+              text: state.filter.documentDateTo.dateString,
             ),
             decoration: InputDecoration(
               hintText: 'Date to'.tr(),

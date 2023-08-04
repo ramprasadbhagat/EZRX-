@@ -83,7 +83,7 @@ class _ReturnDetailsSection extends StatelessWidget {
           BalanceTextRow(
             keyText: 'Request date'.tr(),
             keyFlex: 2,
-            valueText: requestInformationHeader.createdDate.toValidDateString,
+            valueText: requestInformationHeader.createdDate.dateString,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

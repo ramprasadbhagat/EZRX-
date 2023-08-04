@@ -37,8 +37,8 @@ class AnnouncementDto with _$AnnouncementDto {
     return Announcement(
       active: active,
       descriptionList: descriptionList.map((e) => e.toDomain).toList(),
-      startTime: DateTimeStringValue.announcement(startTime),
-      endTime: DateTimeStringValue.announcement(endTime),
+      startTime: DateTimeStringValue(startTime),
+      endTime: DateTimeStringValue(endTime),
       type: AnnouncementType(type),
       day: day,
       functionLabel: functionLabel,

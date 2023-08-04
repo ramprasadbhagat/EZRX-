@@ -42,8 +42,8 @@ class ReturnFilterDto with _$ReturnFilterDto {
     return ReturnFilterDto(
       statusList:
           returnFilter.returnStatusList.map((e) => e.getOrCrash()).toList(),
-      dateTo: returnFilter.returnDateTo.apiDateTimeFormat,
-      dateFrom: returnFilter.returnDateFrom.apiDateTimeFormat,
+      dateTo: returnFilter.returnDateTo.apiDateTimeString,
+      dateFrom: returnFilter.returnDateFrom.apiDateTimeString,
       refundTotalFrom: returnFilter.amountValueFrom.apiParameterValue,
       refundTotalTo: returnFilter.amountValueTo.apiParameterValue,
     );

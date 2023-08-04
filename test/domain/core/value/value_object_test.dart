@@ -59,4 +59,121 @@ void main() {
       },
     );
   });
+
+  group('DateTimeStringValue Value Object', () {
+    test('should create a valid DateTimeStringValue', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.value.isRight(), true);
+      expect(dateTimeStringValue.value.getOrElse(() => ''), dateTimeString);
+    });
+
+    test('should create a valid DateTimeStringValue for announcement', () {
+      const dateTimeString = '7/20/2023 10:30 AM';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.value.isRight(), true);
+      expect(dateTimeStringValue.value.getOrElse(() => ''), dateTimeString);
+    });
+
+    test('should return a valid date string', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateString, '20 Jul 2023');
+    });
+
+    test('should return NA if DateTimeStringValue is empty when getting a valid date string', () {
+      final dateTimeStringValue = DateTimeStringValue('');
+
+      expect(dateTimeStringValue.dateOrNaString, 'NA');
+    });
+
+    test('should return a valid simple date time string', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.simpleDateString, 'Jul 2023');
+    });
+
+    test('should check if DateTimeStringValue is not empty', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.isNotEmpty, true);
+    });
+
+    test('should return a valid API date time format', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.apiDateTimeString, '20230720');
+    });
+
+    test('should return a valid API date with dash format', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.apiDateWithDashString, '2023-07-20');
+    });
+
+    test('should return a DateTime object from a date string', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateTime, DateTime(2023, 7, 20, 12, 0, 0));
+    });
+
+    test('should return a DateTime object from an announcement date string', () {
+      const dateTimeString = '7/20/2023 10:30 AM';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateTime, DateTime(2023, 7, 20,10,30));
+    });
+
+    test('should check if a DateTime object is before another DateTime', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateTime.isBefore(DateTime(2023, 7, 21)), true);
+    });
+
+    test('should return a valid DateTime int value', () {
+      const dateTimeString = '20230720120000';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.intValue, 20230720120000);
+    });
+
+
+
+    test('should return a valid date string', () {
+      const dateTimeString = '2023-07-20 12:00:00';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateString, '20 Jul 2023');
+    });
+
+    test('should return dash (-) if DateTimeStringValue is empty when getting a valid date string', () {
+      final dateTimeStringValue = DateTimeStringValue('');
+
+      expect(dateTimeStringValue.dateTimeOrDashString, '-');
+    });
+
+    test('should return a valid date time string', () {
+      const dateTimeString = '7/20/2023 10:30 AM';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateOrDashString, '20 Jul 2023');
+    });
+
+    test('should return a valid date time string with time part', () {
+      const dateTimeString = '7/20/2023 10:30 AM';
+      final dateTimeStringValue = DateTimeStringValue(dateTimeString);
+
+      expect(dateTimeStringValue.dateTimeOrDashString, '20 Jul 2023 10:30:00');
+    });
+    
+  });
 }

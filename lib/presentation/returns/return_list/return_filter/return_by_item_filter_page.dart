@@ -261,7 +261,7 @@ class _FromRequestDateFilter extends StatelessWidget {
             },
             readOnly: true,
             controller: TextEditingController(
-              text: state.filter.returnDateFrom.toValidDateStringElseEmpty,
+              text: state.filter.returnDateFrom.dateString,
             ),
             decoration: InputDecoration(
               hintText: 'Date from'.tr(),
@@ -317,7 +317,7 @@ class _ToRequestDateFilter extends StatelessWidget {
             },
             readOnly: true,
             controller: TextEditingController(
-              text: state.filter.returnDateTo.toValidDateStringElseEmpty,
+              text: state.filter.returnDateTo.dateString,
             ),
             decoration: InputDecoration(
               hintText: 'Date to'.tr(),

@@ -256,7 +256,7 @@ class _TitleSection extends StatelessWidget {
                   children: [
                     FittedBox(
                       child: Text(
-                        details.publishedDate.getAnnouncementDateFormatWithTime,
+                        details.publishedDate.dateOrDashString,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.neutralsGrey1,
                               fontSize: 10,
@@ -342,7 +342,7 @@ class _ItemDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            publishedDate.getAnnouncementDateFormat,
+            publishedDate.dateOrDashString,
             style: Theme.of(context)
                 .textTheme
                 .bodySmall

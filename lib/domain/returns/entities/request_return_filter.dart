@@ -50,10 +50,10 @@ class RequestReturnFilter with _$RequestReturnFilter {
       1;
 
   String get getInvoiceDateFiltered =>
-      '${fromInvoiceDate.toValidDateString}  to ${toInvoiceDate.toValidDateString} ';
+      '${fromInvoiceDate.dateString}  to ${toInvoiceDate.dateString} ';
 
   DateTimeRange get getInvoiceFilterDateRange => DateTimeRange(
-        start: fromInvoiceDate.dateTimeByDateString,
-        end: toInvoiceDate.dateTimeByDateString,
+        start: fromInvoiceDate.dateTime,
+        end: toInvoiceDate.dateTime,
       );
 }

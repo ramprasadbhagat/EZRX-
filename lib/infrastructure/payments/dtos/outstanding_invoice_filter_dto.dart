@@ -51,12 +51,12 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
     return OutstandingInvoiceFilterDto(
       status: outstandingInvoiceFilter
           .outstandingInvoiceStatus.displayPaymentStatus,
-      dueDateTo: outstandingInvoiceFilter.dueDateTo.apiDateWithDashFormat,
-      dueDateFrom: outstandingInvoiceFilter.dueDateFrom.apiDateWithDashFormat,
+      dueDateTo: outstandingInvoiceFilter.dueDateTo.apiDateWithDashString,
+      dueDateFrom: outstandingInvoiceFilter.dueDateFrom.apiDateWithDashString,
       documentDateTo:
-          outstandingInvoiceFilter.documentDateTo.apiDateWithDashFormat,
+          outstandingInvoiceFilter.documentDateTo.apiDateWithDashString,
       documentDateFrom:
-          outstandingInvoiceFilter.documentDateFrom.apiDateWithDashFormat,
+          outstandingInvoiceFilter.documentDateFrom.apiDateWithDashString,
       amountInTransactionCurrencyFrom:
           outstandingInvoiceFilter.amountValueFrom.apiParameterValue,
       amountInTransactionCurrencyTo:

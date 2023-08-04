@@ -62,8 +62,8 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
       createdBy: returnApproverFilter.createdBy.searchValueOrEmpty,
       soldTo: returnApproverFilter.soldTo.searchValueOrEmpty,
       shipTo: returnApproverFilter.shipTo.searchValueOrEmpty,
-      dateTo: returnApproverFilter.toInvoiceDate.apiDateTimeFormat,
-      dateFrom: returnApproverFilter.fromInvoiceDate.apiDateTimeFormat,
+      dateTo: returnApproverFilter.toInvoiceDate.apiDateTimeString,
+      dateFrom: returnApproverFilter.fromInvoiceDate.apiDateTimeString,
       status: returnApproverFilter.sortBy.apiSortValueOrEmpty,
     );
   }

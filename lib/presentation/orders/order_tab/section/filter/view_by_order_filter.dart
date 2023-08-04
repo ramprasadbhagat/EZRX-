@@ -123,7 +123,7 @@ class _FromOrderDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.fromDate.toValidDateString,
+            text: state.filter.fromDate.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -171,7 +171,7 @@ class _ToOrderDateFilter extends StatelessWidget {
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.toDate.toValidDateString,
+            text: state.filter.toDate.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(

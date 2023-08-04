@@ -25,8 +25,8 @@ class ReturnFilter with _$ReturnFilter {
       );
 
   DateTimeRange get getReturnDateFilterDateRange => DateTimeRange(
-        start: returnDateFrom.dateTimeByDateString,
-        end: returnDateTo.dateTimeByDateString,
+        start: returnDateFrom.dateTime,
+        end: returnDateTo.dateTime,
       );
 
   bool get isReturnAmountValueRangeValid =>

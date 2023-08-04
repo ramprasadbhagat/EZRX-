@@ -15,7 +15,7 @@ class OrderHistoryDetailsInvoicesDto with _$OrderHistoryDetailsInvoicesDto {
   factory OrderHistoryDetailsInvoicesDto.fromDomain(OrderHistoryDetailsShippingInformationInvoices invoices) {
     return OrderHistoryDetailsInvoicesDto(
       invoiceNumber: invoices.invoiceNumber,
-      invoiceDate: invoices.invoiceDate.toValidDateString,
+      invoiceDate: invoices.invoiceDate.dateString,
       invoicePrice: invoices.invoicePrice,
        );
   }

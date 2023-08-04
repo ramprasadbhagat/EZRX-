@@ -161,7 +161,7 @@ class _ArticlesTile extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      article.publishedDate.getAnnouncementDateFormat,
+                      article.publishedDate.dateTimeOrDashString,
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall

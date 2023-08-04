@@ -88,65 +88,57 @@ class DateTimeStringValue extends ValueObject<String> {
     return DateTimeStringValue._(validateDateString(input));
   }
 
-  factory DateTimeStringValue.announcement(String input) {
-    return DateTimeStringValue._(validateAnnouncementDateString(input));
-  }
+  String get _valueOrEmpty => value.getOrElse(() => '');
 
-  String get naIfEmptyDateTime => naIfEmpty(value.getOrElse(() => ''));
+  String get _valueOrDash => value.getOrElse(() => '-');
 
-  String get toValidDateString => displayDateTimeStringOrEmpty(
-        value.getOrElse(() => ''),
+  String get _valueOrNa => value.getOrElse(() => 'NA');
+
+  bool get isNotEmpty => _valueOrEmpty.isNotEmpty;
+
+  String get dateOrNaString => displayDateTimeString(
+        _valueOrNa,
         DateTimeFormatString.displayDateFormat,
       );
 
-  String get toValidDateStringElseEmpty => displayDateTimeStringOrReturnEmpty(
-        value.getOrElse(() => ''),
+  String get dateTimeOrNaString => displayDateTimeString(
+        _valueOrNa,
         DateTimeFormatString.displayDateFormat,
       );
 
-  String get toSimpleDateString => displayDateTimeStringOrEmpty(
-        value.getOrElse(() => ''),
+  String get dateOrDashString => displayDateTimeString(
+        _valueOrDash,
+        DateTimeFormatString.displayDateFormat,
+      );
+
+  String get dateTimeOrDashString => displayDateTimeString(
+        _valueOrDash,
+        DateTimeFormatString.displayDateTimeFormat,
+      );
+
+  String get dateString => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.displayDateFormat,
+      );
+
+  String get simpleDateString => displayDateTimeString(
+        _valueOrEmpty,
         DateTimeFormatString.displaySimpleDateFormat,
       );
 
-  String get toValidDateStringNaIfEmpty => showDateOrNAIfEmpty(
-        naIfEmptyDateTime,
-        DateTimeFormatString.displayDateFormat,
+  String get apiDateTimeString => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.apiDateFormat,
       );
 
-  String get toValidDateTimeString => displayDateTimeStringOrEmpty(
-        value.getOrElse(() => ''),
-        DateTimeFormatString.displayDateFormat,
+  String get apiDateWithDashString => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.apiDateWithDashFormat,
       );
 
-  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
+  int get intValue => getDateTimeIntValue(_valueOrEmpty);
 
-  String get apiDateTimeFormat =>
-      formattedDateTimeForAPI(value.getOrElse(() => ''));
-
-  String get apiDateWithDashFormat =>
-      formattedDateWithDashForAPI(value.getOrElse(() => ''));
-
-  DateTime get dateTimeByDateString =>
-      getDateTimeByDateString(value.getOrElse(() => ''));
-
-  DateTime get dateTimeByAnnouncementDateString =>
-      getDateTimeByAnnouncementDateString(value.getOrElse(() => ''));
-
-  bool isBefore(DateTime dateTime) => dateTimeByDateString.isBefore(dateTime);
-
-  int get dateTimeIntValue => getDateTimeIntValue(value.getOrElse(() => ''));
-
-  String get getAnnouncementDateFormat => displayAnnouncementDateOrEmpty(
-        value.getOrElse(() => ''),
-        DateTimeFormatString.displayDateFormat,
-      );
-
-  String get getAnnouncementDateFormatWithTime =>
-      displayAnnouncementDateOrEmpty(
-        value.getOrElse(() => ''),
-        DateTimeFormatString.displayDateTimeFormat,
-      );
+  DateTime get dateTime => getDateTimeByDateString(_valueOrEmpty);
 
   const DateTimeStringValue._(this.value);
 }

@@ -53,7 +53,7 @@ class ProductStockInfo extends StatelessWidget {
                       stockInfo.expiryDate.isValid()
                           ? TextSpan(
                               text:
-                                  '(${'EXP'.tr()}: ${stockInfo.expiryDate.toValidDateString})',
+                                  '(${'EXP'.tr()}: ${stockInfo.expiryDate.dateString})',
                             )
                           : const WidgetSpan(child: SizedBox.shrink()),
                     ],

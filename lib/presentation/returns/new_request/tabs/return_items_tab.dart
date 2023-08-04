@@ -328,7 +328,7 @@ class _MaterialDetailsSection extends StatelessWidget {
           keyText: 'Invoice date'.tr(),
           keyFlex: 2,
           valueFlex: 3,
-          valueText: data.priceDate.toValidDateString,
+          valueText: data.priceDate.dateString,
         ),
       ],
     );
@@ -413,7 +413,7 @@ class _BonusItemSection extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              'Batch ${e.batch} (Expires ${e.expiryDate.toValidDateString})',
+                              'Batch ${e.batch} (Expires ${e.expiryDate.dateString})',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
@@ -480,7 +480,7 @@ class _MaterialInfo extends StatelessWidget {
                     ),
               ),
               Text(
-                '(Expires ${data.expiryDate.toValidDateString})',
+                '(Expires ${data.expiryDate.dateString})',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.darkGray,
                       fontSize: 12,

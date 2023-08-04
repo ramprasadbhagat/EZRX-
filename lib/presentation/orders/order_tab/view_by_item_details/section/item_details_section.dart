@@ -57,7 +57,7 @@ class ItemDetailsSection extends StatelessWidget {
             isQuantityBelowImage: false,
             tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
             headerText:
-                'Batch ${orderHistoryItem.batch}\n(EXP: ${orderHistoryItem.expiryDate.toValidDateString})',
+                'Batch ${orderHistoryItem.batch}\n(EXP: ${orderHistoryItem.expiryDate.dateString})',
           ),
         ],
       ),

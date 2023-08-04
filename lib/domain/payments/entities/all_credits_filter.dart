@@ -46,8 +46,8 @@ class AllCreditsFilter with _$AllCreditsFilter {
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
-        start: documentDateFrom.dateTimeByDateString,
-        end: documentDateTo.dateTimeByDateString,
+        start: documentDateFrom.dateTime,
+        end: documentDateTo.dateTime,
       );
 
   int get appliedFilterCount {

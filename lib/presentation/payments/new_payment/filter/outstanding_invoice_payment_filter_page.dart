@@ -241,8 +241,8 @@ class _FromDateFilter extends StatelessWidget {
             readOnly: true,
             controller: TextEditingController(
               text: isDue
-                  ? state.filter.dueDateFrom.toValidDateStringElseEmpty
-                  : state.filter.documentDateFrom.toValidDateStringElseEmpty,
+                  ? state.filter.dueDateFrom.dateString
+                  : state.filter.documentDateFrom.dateString,
             ),
             decoration: InputDecoration(
               hintText: 'Date from'.tr(),
@@ -316,8 +316,8 @@ class _ToDateFilter extends StatelessWidget {
             readOnly: true,
             controller: TextEditingController(
               text: isDue
-                  ? state.filter.dueDateTo.toValidDateStringElseEmpty
-                  : state.filter.documentDateTo.toValidDateStringElseEmpty,
+                  ? state.filter.dueDateTo.dateString
+                  : state.filter.documentDateTo.dateString,
             ),
             decoration: InputDecoration(
               hintText: 'Date to'.tr(),

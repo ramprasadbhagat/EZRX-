@@ -41,7 +41,7 @@ class PaymentSummaryGroupSection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 16),
               child: Text(
-                'Created on ${paymentSummaryGroup.createdDate.toValidDateString}',
+                'Created on ${paymentSummaryGroup.createdDate.dateString}',
                 style: Theme.of(context)
                     .textTheme
                     .labelSmall

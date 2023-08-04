@@ -29,13 +29,13 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
-        start: documentDateFrom.dateTimeByDateString,
-        end: documentDateTo.dateTimeByDateString,
+        start: documentDateFrom.dateTime,
+        end: documentDateTo.dateTime,
       );
 
   DateTimeRange get getDueDateFilterDateRange => DateTimeRange(
-        start: dueDateFrom.dateTimeByDateString,
-        end: dueDateTo.dateTimeByDateString,
+        start: dueDateFrom.dateTime,
+        end: dueDateTo.dateTime,
       );
 
   bool get isOutstandingInvoiceAmountValueRangeValid =>

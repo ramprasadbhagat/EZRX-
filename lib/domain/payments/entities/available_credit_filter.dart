@@ -23,8 +23,8 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
-        start: documentDateFrom.dateTimeByDateString,
-        end: documentDateTo.dateTimeByDateString,
+        start: documentDateFrom.dateTime,
+        end: documentDateTo.dateTime,
       );
 
   bool get isAvailableCreditAmountValueRangeValid =>
