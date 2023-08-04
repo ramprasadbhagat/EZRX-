@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //TODO: After Dipankar's PR [https://zuelligpharma.atlassian.net/browse/EZRX-8464]
@@ -90,16 +91,32 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Login On Behalf'.tr(),
-                  style: Theme.of(context).textTheme.labelLarge,
+                  'Log in on behalf'.tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: ZPColors.primary),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 TextFieldWithLabel(
                   fieldKey: WidgetKeys.proxyLoginUserNameField,
+                  mandatory: true,
                   labelText: 'Username'.tr(),
                   controller: _controller,
+                  isEnabled: !state.isSubmitting,
+                  inputFormatters: [
+                    TextInputFormatter.withFunction(
+                      (oldValue, newValue) => TextEditingValue(
+                        text: newValue.text.toLowerCase(),
+                        selection: newValue.selection,
+                      ),
+                    ),
+                  ],
+                  onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
+                        ProxyLoginFormEvent.usernameChanged(value),
+                      ),
                   validator: (value) => Username(value ?? '').value.fold(
                         (f) => f.maybeMap(
                           empty: (_) => 'Username cannot be empty.'.tr(),
@@ -107,15 +124,23 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
                         ),
                         (_) => null,
                       ),
-                  onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
-                        ProxyLoginFormEvent.usernameChanged(value),
-                      ),
-                  decoration: const InputDecoration(),
+                  decoration: InputDecoration(
+                    hintText: 'Enter username'.tr(),
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                const _LoginOnBehalfButtons(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    _CancelButton(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    _LoginButton(),
+                  ],
+                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -128,8 +153,24 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
   }
 }
 
-class _LoginOnBehalfButtons extends StatelessWidget {
-  const _LoginOnBehalfButtons({Key? key}) : super(key: key);
+class _CancelButton extends StatelessWidget {
+  const _CancelButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: OutlinedButton(
+        onPressed: () {
+          context.router.pop();
+        },
+        child: Text('Cancel'.tr()),
+      ),
+    );
+  }
+}
+
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -137,41 +178,24 @@ class _LoginOnBehalfButtons extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return Row(
-          key: WidgetKeys.proxyLoginButton,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  context.router.pop();
-                },
-                child: Text('Cancel'.tr()),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  if (state.isSubmitting) return;
-                  FocusScope.of(context).unfocus();
-                  context.read<ProxyLoginFormBloc>().add(
-                        ProxyLoginFormEvent.loginWithADButtonPressed(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrg: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation
-                              .salesOrg,
-                        ),
-                      );
-                },
-                child: Text('Login'.tr()),
-              ),
-            ),
-          ],
+        return Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              if (state.isSubmitting) return;
+              FocusScope.of(context).unfocus();
+              context.read<ProxyLoginFormBloc>().add(
+                    ProxyLoginFormEvent.loginWithADButtonPressed(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrg: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation
+                          .salesOrg,
+                    ),
+                  );
+            },
+            child: Text('Login'.tr()),
+          ),
         );
       },
     );
