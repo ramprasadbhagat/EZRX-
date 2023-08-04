@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -65,6 +66,12 @@ class UserRepository implements IUserRepository {
         username: user.username.getOrDefaultValue(''),
         email: user.email.getOrDefaultValue(''),
         role: user.role.name,
+      );
+
+      DatadogSdk.instance.setUserInfo(
+        id: user.id,
+        name: user.username.getOrDefaultValue(''),
+        email: user.email.getOrDefaultValue(''),
       );
 
       if (!kIsWeb) {
