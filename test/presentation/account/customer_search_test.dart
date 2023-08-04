@@ -119,7 +119,7 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
+          .thenReturn(CustomerCodeState.initial().copyWith(isFetching: false));
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
@@ -175,11 +175,10 @@ void main() {
               ),
             ],
           ));
-          when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2501')
-            )
-          ));
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2501'))));
       await tester.pumpWidget(getScopedWidget());
       final customerSearchPage = find.byKey(const Key('customerSearchPage'));
       expect(customerSearchPage, findsOneWidget);
@@ -243,11 +242,10 @@ void main() {
             customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2501')
-            )
-          ));    
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2501'))));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getScopedWidget());
@@ -286,11 +284,10 @@ void main() {
             customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2501')
-            )
-          ));    
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2501'))));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getScopedWidget());
@@ -660,11 +657,10 @@ void main() {
             ),
           ]),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2501')
-            )
-          ));
+        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                salesOrganisation: SalesOrganisation.empty()
+                    .copyWith(salesOrg: SalesOrg('2501'))));
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();

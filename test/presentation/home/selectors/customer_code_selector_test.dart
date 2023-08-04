@@ -33,7 +33,6 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
   });
-
   final fakeCustomerInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: '00001234', shipToInfos: [
     ShipToInfo.empty().copyWith(
@@ -78,8 +77,8 @@ void main() {
 
     testWidgets('When customerCodeInfo is empty', (tester) async {
       when(() => mockCustomerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial()
-              .copyWith(customerCodeList: [CustomerCodeInfo.empty()]));
+          CustomerCodeState.initial().copyWith(
+              isFetching: false, customerCodeList: [CustomerCodeInfo.empty()]));
       await getWidget(tester);
       final selectedCustomerCodeText = find.text('NA');
       expect(selectedCustomerCodeText, findsNWidgets(2));
@@ -88,6 +87,7 @@ void main() {
     testWidgets('When customerCodeInfo is not empty', (tester) async {
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial().copyWith(
+        isFetching: false,
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeCustomerInfo.shipToInfos.first,
       ));
@@ -100,7 +100,7 @@ void main() {
 
     testWidgets('When customerCodeInfo is getting fetched', (tester) async {
       when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(isFetching: true));
+          .thenReturn(CustomerCodeState.initial());
       await getWidget(tester);
       final shimmer = find.byType(Shimmer);
       expect(shimmer, findsNWidgets(2));
@@ -108,7 +108,7 @@ void main() {
 
     testWidgets('When there is an error', (tester) async {
       final expectedCustomerCodeListStates = [
-        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeInfo: fakeCustomerInfo,
@@ -133,9 +133,7 @@ void main() {
 
     testWidgets('When customerCodeInfo got changed', (tester) async {
       final expectedCustomerCodeListStates = [
-        CustomerCodeState.initial().copyWith(
-          isFetching: true,
-        ),
+        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
             isFetching: false,
             customerCodeInfo: fakeCustomerInfo2,
@@ -160,7 +158,6 @@ void main() {
         (tester) async {
       final expectedCustomerCodeListStates = [
         CustomerCodeState.initial().copyWith(
-          isFetching: true,
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('authentication failed'),

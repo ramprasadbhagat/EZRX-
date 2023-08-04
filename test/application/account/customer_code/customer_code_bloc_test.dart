@@ -128,7 +128,6 @@ void main() {
       },
       expect: () => [
         CustomerCodeState.initial(),
-        CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           apiFailureOrSuccessOption: optionOf(
             const Left(
@@ -242,7 +241,6 @@ void main() {
       expect: () {
         return [
           CustomerCodeState.initial(),
-          CustomerCodeState.initial().copyWith(isFetching: true),
           CustomerCodeState.initial().copyWith(
             isFetching: false,
             customerCodeInfo: customerMockData.first,
@@ -300,6 +298,7 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       seed: () => CustomerCodeState.initial().copyWith(
         shipToInfo: fakeShipToInfo,
+        isFetching: false,
       ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
@@ -348,6 +347,10 @@ void main() {
       'Customer Code Search Failure',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      seed: () => CustomerCodeState.initial().copyWith(
+        shipToInfo: fakeShipToInfo,
+        isFetching: false,
+      ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
               salesOrganisation: fakeSaleOrg,
@@ -375,6 +378,7 @@ void main() {
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
             isFetching: true,
+            shipToInfo: fakeShipToInfo,
             searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
             customerCodeList: [],
@@ -384,6 +388,8 @@ void main() {
                 ApiFailure.other('fake-error'),
               ),
             ),
+            shipToInfo: fakeShipToInfo,
+            isFetching: false,
             searchKey: SearchKey('fake-customer-code'),
             canLoadMore: false,
             isSearchActive: true),
@@ -394,6 +400,10 @@ void main() {
       'Customer Code Auto-Search Success',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      seed: () => CustomerCodeState.initial().copyWith(
+        shipToInfo: fakeShipToInfo,
+        isFetching: false,
+      ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
               salesOrganisation: fakeSaleOrg,
@@ -425,6 +435,7 @@ void main() {
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
             isFetching: true,
+            shipToInfo: fakeShipToInfo,
             searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
           customerCodeList: [
@@ -432,7 +443,9 @@ void main() {
                 .copyWith(customerCodeSoldTo: 'fake-customer-code')
           ],
           searchKey: SearchKey('fake-customer-code'),
+          shipToInfo: fakeShipToInfo,
           canLoadMore: false,
+          isFetching: false,
           isSearchActive: true,
         )
       ],
@@ -442,6 +455,10 @@ void main() {
       'Customer Code Auto-Search Failure',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      seed: () => CustomerCodeState.initial().copyWith(
+        shipToInfo: fakeShipToInfo,
+        isFetching: false,
+      ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
               salesOrganisation: fakeSaleOrg,
@@ -467,6 +484,7 @@ void main() {
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
             isFetching: true,
+            shipToInfo: fakeShipToInfo,
             searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
             customerCodeList: [],
@@ -477,7 +495,9 @@ void main() {
               ),
             ),
             searchKey: SearchKey('fake-customer-code'),
+            shipToInfo: fakeShipToInfo,
             canLoadMore: false,
+            isFetching: false,
             isSearchActive: true),
       ],
     );
@@ -486,6 +506,9 @@ void main() {
       'Customer Code On Load More fail',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      seed: () => CustomerCodeState.initial().copyWith(
+        isFetching: false,
+      ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
               salesOrganisation: fakeSaleOrg,
@@ -511,10 +534,7 @@ void main() {
         ));
       },
       expect: () => [
-        CustomerCodeState.initial().copyWith(
-          isFetching: true,
-          // customerCodeList: customerMockData,
-        ),
+        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           apiFailureOrSuccessOption:
@@ -891,7 +911,6 @@ void main() {
       },
       expect: () => [
         CustomerCodeState.initial(),
-        CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeInfo: customerMockData.first,
@@ -941,7 +960,6 @@ void main() {
       },
       expect: () => [
         CustomerCodeState.initial(),
-        CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeInfo: CustomerCodeInfo.empty(),

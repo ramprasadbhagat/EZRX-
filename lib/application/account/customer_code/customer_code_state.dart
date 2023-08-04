@@ -20,7 +20,7 @@ class CustomerCodeState with _$CustomerCodeState {
         customerCodeList: [],
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
-        isFetching: false,
+        isFetching: true,
         shipToInfo: ShipToInfo.empty(),
         isSearchActive: false,
         searchKey: SearchKey(''),

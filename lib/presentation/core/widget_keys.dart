@@ -35,7 +35,7 @@ class WidgetKeys {
   static const Key ssoLoginButton = Key('ssoLoginButton');
   static const Key appMarketSelector = Key('appMarketSelector');
   static const Key createAccountButton = Key('createAccountButton');
-  
+
   //============================================================
   //  AupTCDialog
   //============================================================
@@ -216,6 +216,7 @@ class WidgetKeys {
   static const Key webview = Key('webview');
   static Key balanceTextRow(String keyText, String valueText) =>
       Key('$keyText$valueText');
+
   //============================================================
   //  Quantity Input Widget Keys
   //============================================================
