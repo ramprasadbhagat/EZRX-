@@ -1,0 +1,17 @@
+mutation contactUs($input: contactUsInput!) {
+  contactUs(input: $input) {
+    success
+  }
+}
+
+variable: {
+  "input": {
+    "name": "fgrr",
+    "contactNumber": "1234567890",
+    "email": "abc@yopmail.com",
+    "message": "dfbvgfbr\nfjejhej\n\nkefvhbkerir",
+    "customerCode": "all",
+    "clinicName": "RSD HOSPITALS SDN BHD (SJMC)",
+    "language": "EN"
+  }
+}

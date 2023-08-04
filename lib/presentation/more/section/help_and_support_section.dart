@@ -13,7 +13,7 @@ class HelpAndSupportTile extends StatelessWidget {
         MoreDetailsTile.chatSupport(context),
         MoreDetailsTile.termsOfUse(context),
         MoreDetailsTile.privacyPolicy(context),
-        MoreDetailsTile.contactUs(),
+        MoreDetailsTile.contactUs(context),
       ];
 
   @override

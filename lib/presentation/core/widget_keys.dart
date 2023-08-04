@@ -394,4 +394,13 @@ class WidgetKeys {
   //============================================================
   static const Key newRequestPage = Key('newRequestPage');
   static const Key submitButton = Key('submitButton');
+
+  //============================================================
+  //  Contact Us Page
+  //============================================================
+  static const Key userNameKey = Key('userNameKey');
+  static const Key emailKey = Key('emailKey');
+  static const Key phoneNumberKey = Key('phoneNumberKey');
+  static const Key contactMessageKey = Key('contactMessageKey');
+  static const Key sendMessageButtonKey = Key('sendMessageButtonKey');
 }

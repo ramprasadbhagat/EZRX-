@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -87,11 +88,17 @@ class MoreDetailsTile {
           ),
         ),
       );
-  factory MoreDetailsTile.contactUs() => const MoreDetailsTile(
-        icon: Icon(
+  factory MoreDetailsTile.contactUs(BuildContext context) => MoreDetailsTile(
+        icon: const Icon(
           Icons.mail_outline,
           color: ZPColors.lightGray,
         ),
+        onTap: () {
+          context.read<ContactUsBloc>().add(const ContactUsEvent.initialized());
+          context.navigateTo(
+            const ContactUsPageRoute(),
+          );
+        },
         label: 'Contact us',
       );
 
@@ -150,8 +157,7 @@ class MoreDetailsTile {
           color: ZPColors.lightGray,
         ),
         label: 'Announcements & articles',
-        labelStyle:
-            Theme.of(context)
+        labelStyle: Theme.of(context)
             .textTheme
             .bodySmall!
             .copyWith(fontSize: 10, color: ZPColors.lightGray),

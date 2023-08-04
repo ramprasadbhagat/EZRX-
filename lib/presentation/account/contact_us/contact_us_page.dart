@@ -1,11 +1,33 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+part 'widgets/contact_number_text_field.dart';
+part 'widgets/email_text_field.dart';
+part 'widgets/message_text_field.dart';
+part 'widgets/username_text_field.dart';
+part 'widgets/support_hours.dart';
+part 'widgets/send_message_button.dart';
+part 'widgets/contact_us_form.dart';
+part 'widgets/contact_details.dart';
+part 'widgets/contact_item.dart';
 
 class ContactUsPage extends StatelessWidget {
   const ContactUsPage({Key? key}) : super(key: key);
@@ -14,7 +36,8 @@ class ContactUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contact Us').tr(),
+        title: const Text('Contact us').tr(),
+        centerTitle: false,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
@@ -22,68 +45,42 @@ class ContactUsPage extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.salesOrg != current.salesOrg,
           builder: (context, state) {
-            final salesOrg = state.salesOrg;
-
             return ListView(
-              children: ListTile.divideTiles(
-                context: context,
-                tiles: [
-                  ListTile(
-                    key: const Key('nameTile'),
-                    title: Text(salesOrg.contactPersonName),
-                  ),
-                  if (salesOrg.contact.instruction.isNotEmpty)
-                    ListTile(
-                      key: const Key('instructionTile'),
-                      title: Text(salesOrg.contact.instruction).tr(),
-                    ),
-                  ...salesOrg.contact.phoneNumbers.map(
-                    (e) => ListTile(
-                      key: const Key('phoneNumberTile'),
-                      onTap: () async => e.displayTelephoneNumber != 'NA'
-                          ? await _makeCall('tel://${e.displayTelephoneNumber}')
-                          : null,
-                      title: Text(
-                        e.displayTelephoneNumber,
-                        style: const TextStyle(color: ZPColors.primary),
-                      ),
-                      leading: const Icon(Icons.call, color: ZPColors.primary),
-                    ),
-                  ),
-                  ListTile(
-                    key: const Key('emailTile'),
-                    onTap: () => _sendEmail(
-                      salesOrg.contactEmail,
-                      salesOrg.contactPersonName,
-                    ),
-                    leading: const Icon(Icons.email, color: ZPColors.primary),
-                    title: Text(
-                      salesOrg.contactEmail,
-                      style: const TextStyle(color: ZPColors.primary),
-                    ).tr(),
-                  ),
-                ],
-              ).toList(),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                SvgPicture.asset(
+                  SvgImage.contactUs,
+                  height: 120,
+                  width: 120,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                _ContactDetails(
+                  salesOrg: state.salesOrg,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                _SupportHours(),
+                const SizedBox(
+                  height: 20,
+                ),
+                _ContactUsForm(),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
             );
           },
         ),
       ),
     );
-  }
-
-  Future<void> _makeCall(String reqUrl) async {
-    await launchUrl(Uri.parse(reqUrl), mode: LaunchMode.externalApplication);
-  }
-
-  Future<void> _sendEmail(String email, String personName) async {
-    final emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: email,
-      queryParameters: {
-        'subject': 'Example Subject & Symbols are allowed!',
-        'body': 'Dear $personName',
-      },
-    );
-    await launchUrl(emailLaunchUri);
   }
 }
