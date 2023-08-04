@@ -19,11 +19,12 @@ import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class BundleItemDetailPage extends StatelessWidget {
   final BundleAggregate bundleAggregate;
@@ -159,11 +160,10 @@ class BundleItemDetailPage extends StatelessWidget {
     Map<String, TextEditingController> list,
   ) {
     if (context.read<CartBloc>().state.containCovidMaterial) {
-      showSnackBar(
-        context: context,
-        message:
+      CustomSnackBar(
+        messageText:
             'Commercial bundle cannot be combined with covid material.'.tr(),
-      );
+      ).show(context);
     } else {
       final materialPriceDetailBloc = context.read<MaterialPriceDetailBloc>();
       final priceAggregateList = bundleAggregate.materialInfos.map((material) {

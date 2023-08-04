@@ -17,7 +17,8 @@ import 'package:ezrxmobile/locator.dart';
 
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
 
 class NotificationSettingsPage extends StatelessWidget {
   const NotificationSettingsPage({Key? key}) : super(key: key);
@@ -120,10 +121,10 @@ class _OrderNotificationSection extends StatelessWidget {
           previous.user.settings.emailNotifications !=
           current.user.settings.emailNotifications,
       listener: (context, state) {
-        showSnackBar(
-          context: context,
-          message: 'Email Notification preference updated successfully'.tr(),
-        );
+        CustomSnackBar(
+          messageText:
+              'Email Notification preference updated successfully'.tr(),
+        ).show(context);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,10 +197,9 @@ class _PaymentNotificationSection extends StatelessWidget {
                       paymentNotification: state.paymentNotification,
                     ),
                   );
-              showSnackBar(
-                context: context,
-                message: 'Successfully updated payment notification'.tr(),
-              );
+              CustomSnackBar(
+                messageText: 'Successfully updated payment notification'.tr(),
+              ).show(context);
             }
           },
           (either) => either.fold(

@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class ProductSearchBar extends StatefulWidget {
   const ProductSearchBar({
@@ -81,10 +84,13 @@ class _SearchBarState extends State<ProductSearchBar> {
     );
   }
 
-  void _showSnackbar(BuildContext context) => showSnackBar(
-        context: context,
-        message: 'Please enter at least 2 characters.'.tr(),
-      );
+  void _showSnackbar(BuildContext context) => CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.checkSnackBar,
+        ),
+        messageText: 'Please enter at least 2 characters.'.tr(),
+      ).show(context);
 
   void _onSearch(BuildContext context, String value) {
     final isValid = _isValid();

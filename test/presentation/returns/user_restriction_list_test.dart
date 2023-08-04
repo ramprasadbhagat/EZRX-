@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
       await tester.pump();
 
-      final snackBar = find.byKey(const Key('snackBarMessage'));
+      final snackBar = find.byKey(WidgetKeys.customSnackBar);
       expect(snackBar, findsOneWidget);
     });
 

@@ -76,7 +76,6 @@ import 'package:ezrxmobile/application/returns/user_restriction/user_restriction
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,6 +91,8 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -1037,7 +1038,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context
           .read<SettingBloc>()
           .add(const SettingEvent.checkIfBiometricPossible());
-      showSnackBar(context: context, message: welcomeMessage);
+      CustomSnackBar(
+        messageText: welcomeMessage,
+      ).show(context);
     }
   }
 

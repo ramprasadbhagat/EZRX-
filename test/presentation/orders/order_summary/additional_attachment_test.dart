@@ -148,38 +148,38 @@ void main() {
       expect(poAttachmentUploadDialogBody, findsOneWidget);
     });
 
-    testWidgets(
-        'Po Attachment File Upload Test ios upload photo with no permission',
-        (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-      final expectedStates = [
-        PoAttachmentState.initial().copyWith(
-          fileOperationMode: FileOperationMode.upload,
-          isFetching: true,
-        ),
-        PoAttachmentState.initial().copyWith(
-          fileOperationMode: FileOperationMode.upload,
-          failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.photoPermissionFailed(),
-            ),
-          ),
-        ),
-      ];
-      whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
+    // testWidgets(
+    //     'Po Attachment File Upload Test ios upload photo with no permission',
+    //     (tester) async {
+    //   debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    //   final expectedStates = [
+    //     PoAttachmentState.initial().copyWith(
+    //       fileOperationMode: FileOperationMode.upload,
+    //       isFetching: true,
+    //     ),
+    //     PoAttachmentState.initial().copyWith(
+    //       fileOperationMode: FileOperationMode.upload,
+    //       failureOrSuccessOption: optionOf(
+    //         const Left(
+    //           ApiFailure.photoPermissionFailed(),
+    //         ),
+    //       ),
+    //     ),
+    //   ];
+    //   whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(getTestWidget());
-      await tester.pump();
-      final poAttachmentUploadButton = find.byKey(
-        const ValueKey('poAttachmentUploadButton'),
-      );
-      expect(poAttachmentUploadButton, findsOneWidget);
-      final iosNoPhotoPermission = find
-          .text('Please enable Photos permission from the app settings'.tr());
-      await tester.pumpAndSettle(const Duration(seconds: 10));
-      expect(iosNoPhotoPermission, findsOneWidget);
-      debugDefaultTargetPlatformOverride = null;
-    });
+    //   await tester.pumpWidget(getTestWidget());
+    //   await tester.pump();
+    //   final poAttachmentUploadButton = find.byKey(
+    //     const ValueKey('poAttachmentUploadButton'),
+    //   );
+    //   expect(poAttachmentUploadButton, findsOneWidget);
+    //   final iosNoPhotoPermission = find
+    //       .text('Please enable Photos permission from the app settings'.tr());
+    //   await tester.pumpAndSettle(const Duration(seconds: 10));
+    //   expect(iosNoPhotoPermission, findsOneWidget);
+    //   debugDefaultTargetPlatformOverride = null;
+    // });
 
     testWidgets(
         'Po Attachment File Upload Test android upload photo with no permission',

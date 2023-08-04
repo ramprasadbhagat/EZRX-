@@ -46,7 +46,7 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
           (failure) {
             CustomSnackBar(
               icon: const Icon(
-                Icons.cancel_rounded,
+                Icons.info,
                 color: ZPColors.error,
               ),
               backgroundColor: ZPColors.errorSnackBarColor,

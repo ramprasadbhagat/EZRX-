@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -260,7 +261,7 @@ void main() {
       expect(noPolicyConfiguration, findsOneWidget);
       expect(policyConfigurationListItem, findsNothing);
       await tester.pump();
-      final errorMessage = find.byKey(const Key('snackBarMessage'));
+      final errorMessage = find.byKey(WidgetKeys.customSnackBar);
       expect(errorMessage, findsOneWidget);
     });
   });

@@ -9,7 +9,8 @@ import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.
 
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class RequestReturnDetailsSummaryPage extends StatelessWidget {
   const RequestReturnDetailsSummaryPage({
@@ -26,10 +27,9 @@ class RequestReturnDetailsSummaryPage extends StatelessWidget {
         state.failureOrSuccessOption.fold(
           () {
             if (state.messages.isNotEmpty) {
-              showSnackBar(
-                context: context,
-                message: state.messages,
-              );
+              CustomSnackBar(
+                messageText: state.messages,
+              ).show(context);
 
               return;
             }

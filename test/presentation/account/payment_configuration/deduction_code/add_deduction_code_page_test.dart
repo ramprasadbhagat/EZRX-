@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/add_deduction_code_page.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -398,7 +399,7 @@ void main() {
               ),
             ),
           ).called(1);
-          final errorMessage = find.byKey(const Key('snackBarMessage'));
+          final errorMessage = find.byKey(WidgetKeys.customSnackBar);
           expect(errorMessage, findsOneWidget);
         },
       );
@@ -445,7 +446,7 @@ void main() {
               ),
             ),
           ).called(1);
-          final errorMessage = find.byKey(const Key('snackBarMessage'));
+          final errorMessage = find.byKey(WidgetKeys.customSnackBar);
           expect(errorMessage, findsOneWidget);
         },
       );

@@ -4,9 +4,12 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+
 
 class ResetPasswordButton extends StatelessWidget {
   final User user;
@@ -25,10 +28,10 @@ class ResetPasswordButton extends StatelessWidget {
               ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {
-              showSnackBar(
-                context: context,
-                message: 'Change Password Successfull'.tr(),
-              );
+              CustomSnackBar(
+                messageText: 'Change Password Successfull'.tr(),
+              ).show(context);
+
               context.read<AuthBloc>().add(const AuthEvent.logout());
             },
           ),

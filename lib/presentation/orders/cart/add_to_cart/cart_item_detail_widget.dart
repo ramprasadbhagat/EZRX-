@@ -13,8 +13,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class CartItemDetailWidget extends StatefulWidget {
   const CartItemDetailWidget({
@@ -60,12 +60,11 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
     final isZdp5Eligible = widget.cartItem.hasZdp5Validation(value);
 
     if (isZdp5Eligible) {
-      showSnackBar(
-        context: context,
-        message:
+      CustomSnackBar(
+        messageText:
             'You have exceeded the remaining quantity limit: ${widget.cartItem.price.zdp5RemainingQuota.getOrDefaultValue('')}'
                 .tr(),
-      );
+      ).show(context);
     }
   }
 

@@ -17,7 +17,6 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 
@@ -28,6 +27,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class PaymentSummaryPage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -134,10 +135,9 @@ class _PaymentSummaryActionWidget extends StatelessWidget {
               ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {
-              showSnackBar(
-                context: context,
-                message: 'File downloaded successfully'.tr(),
-              );
+              CustomSnackBar(
+                messageText: 'File downloaded successfully'.tr(),
+              ).show(context);
             },
           ),
         );

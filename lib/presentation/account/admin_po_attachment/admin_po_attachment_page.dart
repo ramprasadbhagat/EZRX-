@@ -10,10 +10,12 @@ import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
 
 class AdminPoAttachmentPage extends StatelessWidget {
   AdminPoAttachmentPage({Key? key}) : super(key: key);
@@ -21,7 +23,6 @@ class AdminPoAttachmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -90,10 +91,10 @@ class AdminPoAttachmentPage extends StatelessWidget {
                 listener: (context, state) => state.failureOrSuccessOption.fold(
                   () {
                     if (state.isDownloadOperation) {
-                      showSnackBar(
-                        context: context,
-                        message: 'Attachments downloaded successfully.'.tr(),
-                      );
+                      CustomSnackBar(
+                        messageText:
+                            'Attachments downloaded successfully.'.tr(),
+                      ).show(context);
                     }
                   },
                   (either) => either.fold(

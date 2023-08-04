@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
@@ -22,6 +21,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AccountSummary extends StatelessWidget {
   const AccountSummary({Key? key}) : super(key: key);
@@ -416,10 +417,9 @@ class _Export extends StatelessWidget {
               ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {
-              showSnackBar(
-                context: context,
-                message: 'File downloaded successfully'.tr(),
-              );
+              CustomSnackBar(
+                messageText: 'File downloaded successfully'.tr(),
+              ).show(context);
             },
           ),
         );

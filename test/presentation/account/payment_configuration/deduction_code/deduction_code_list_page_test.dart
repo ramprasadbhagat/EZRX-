@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_loca
 import 'package:ezrxmobile/infrastructure/account/dtos/deduction_code_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/deduction_code_list_page.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -416,7 +417,7 @@ void main() {
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
           expect(noDataError, findsOneWidget);
-          final errorMessage = find.byKey(const Key('snackBarMessage'));
+          final errorMessage = find.byKey(WidgetKeys.customSnackBar);
           expect(errorMessage, findsOneWidget);
         },
       );
@@ -447,7 +448,7 @@ void main() {
           final noDataError = find.text('No deduction code found');
           expect(appBarTitle, findsOneWidget);
           expect(noDataError, findsNothing);
-          final errorMessage = find.byKey(const Key('snackBarMessage'));
+          final errorMessage = find.byKey(WidgetKeys.customSnackBar);
           expect(errorMessage, findsOneWidget);
         },
       );

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/discount_override_toggle.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/cupertino.dart';
@@ -329,7 +330,7 @@ void main() {
             ),
           ),
         ).called(1);
-        final snackBarMessage = find.byKey(const Key('snackBarMessage'));
+        final snackBarMessage = find.byKey(WidgetKeys.customSnackBar);
         expect(snackBarMessage, findsOneWidget);
       },
     );
@@ -374,7 +375,7 @@ void main() {
             ),
           ),
         ).called(1);
-        final snackBarMessage = find.byKey(const Key('snackBarMessage'));
+        final snackBarMessage = find.byKey(WidgetKeys.customSnackBar);
         expect(snackBarMessage, findsNothing);
       },
     );

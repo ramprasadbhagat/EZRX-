@@ -11,11 +11,13 @@ import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
 
 class PaymentAdviceFooterPage extends StatelessWidget {
   const PaymentAdviceFooterPage({Key? key}) : super(key: key);
@@ -64,10 +66,9 @@ class _PaymentAdviceFooterScrollList extends StatelessWidget {
         state.failureOrSuccessOption.fold(
           () {
             if (state.isSubmitting) return;
-            showSnackBar(
-              context: context,
-              message: state.response.message.getValue().tr(),
-            );
+            CustomSnackBar(
+              messageText: state.response.message.getValue().tr(),
+            ).show(context);
           },
           (either) => either.fold(
             (failure) {

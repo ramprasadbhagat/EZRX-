@@ -11,11 +11,13 @@ import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
 
 class SalesDistrictPage extends StatelessWidget {
   const SalesDistrictPage({Key? key}) : super(key: key);
@@ -68,10 +70,9 @@ class _SalesDistrictScrollList extends StatelessWidget {
           (either) => either.fold(
             (failure) {},
             (success) {
-              showSnackBar(
-                context: context,
-                message: success.message.getOrDefaultValue(''),
-              );
+              CustomSnackBar(
+                messageText: success.message.getOrDefaultValue(''),
+              ).show(context);
             },
           ),
         );

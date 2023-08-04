@@ -295,7 +295,7 @@ void main() {
 
       await tester.pumpWidget(loginTestPage());
 
-      final errorMessage = find.byKey(const Key('snackBarMessage'));
+      final errorMessage = find.byKey(WidgetKeys.customSnackBar);
 
       expect(errorMessage, findsNothing);
       await tester.pump();

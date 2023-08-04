@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -12,6 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AupTCDialog extends StatelessWidget {
   const AupTCDialog({
@@ -225,12 +226,11 @@ class AcceptButton extends StatelessWidget {
                   key: const ValueKey('auptcAcceptButton'),
                   onPressed: () {
                     if (!state.tncConsent && !state.privacyConsent) {
-                      showSnackBar(
-                        context: context,
-                        message:
+                      CustomSnackBar(
+                        messageText:
                             'You need to read and accept full Terms of use and Privacy Policy before continue.'
                                 .tr(),
-                      );
+                      ).show(context);
                     } else {
                       context.read<UserBloc>().add(
                             const UserEvent.acceptTnc(),

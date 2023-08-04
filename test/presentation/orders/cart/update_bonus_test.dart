@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/choose_bonus_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -210,7 +211,7 @@ void main() {
         final addBonusSnackBar =
             find.textContaining('Bonus item added to the cart'.tr());
         expect(addBonusSnackBar, findsOneWidget);
-        final errorEmptyMessage = find.byKey(const Key('snackBarMessage'));
+        final errorEmptyMessage = find.byKey(WidgetKeys.customSnackBar);
         expect(errorEmptyMessage, findsOneWidget);
       },
     );

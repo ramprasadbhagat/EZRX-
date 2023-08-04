@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
@@ -25,6 +24,8 @@ import 'package:ezrxmobile/presentation/products/widgets/product_image.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -305,10 +306,10 @@ class _FooterState extends State<_Footer> {
                                   state.cartProducts.isNotEmpty &&
                                   context.router.current.path ==
                                       'orders/material_details') {
-                                showTopSnackBar(
-                                  context: context,
-                                  message: 'Item has been added to cart'.tr(),
-                                );
+                                CustomSnackBar(
+                                  messageText:
+                                      'Item has been added to cart'.tr(),
+                                ).show(context);
                               }
                             },
                             (either) => {},

@@ -254,7 +254,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(const Key('snackBarMessage')),
+        find.byKey(WidgetKeys.customSnackBar),
         findsOneWidget,
       );
     });
@@ -281,7 +281,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(const Key('snackBarMessage')),
+        find.byKey(WidgetKeys.customSnackBar),
         findsOneWidget,
       );
     });

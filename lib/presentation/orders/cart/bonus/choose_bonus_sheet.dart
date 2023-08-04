@@ -8,11 +8,12 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class UpdateBonus extends StatefulWidget {
   const UpdateBonus({
@@ -141,10 +142,9 @@ class _UpdateBonusState extends State<UpdateBonus> {
                     );
 
                 context.router.pop();
-                showSnackBar(
-                  context: context,
-                  message: 'Bonus item added to the cart'.tr(),
-                );
+                CustomSnackBar(
+                  messageText: 'Bonus item added to the cart'.tr(),
+                ).show(context);
               },
               child: const Text('Add To Bonus').tr(),
             ),

@@ -12,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AddEditUserRestrictionPage extends StatelessWidget {
   final bool isEditing;
@@ -45,10 +46,14 @@ class AddEditUserRestrictionPage extends StatelessWidget {
               () {
                 if (state.userRestrictionStatus.ifUserAdded) {
                   if (state.userRestrictionStatus.ifUserNotConfigured) {
-                    showSnackBar(
-                      context: context,
-                      message: 'No New Records Added',
-                    );
+                    CustomSnackBar(
+                      icon: const Icon(
+                        Icons.info,
+                        color: ZPColors.error,
+                      ),
+                      backgroundColor: ZPColors.errorSnackBarColor,
+                      messageText: 'No New Records Added'.tr(),
+                    ).show(context);
 
                     return;
                   }
@@ -251,10 +256,14 @@ class _AddDeleteButton extends StatelessWidget {
   void _onSubmit(BuildContext context) {
     final state = context.read<UserRestrictionDetailsBloc>().state;
     if (!state.isRestrictionAdded) {
-      showSnackBar(
-        context: context,
-        message: 'User Restriction Not Added'.tr(),
-      );
+      CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.error,
+        ),
+        backgroundColor: ZPColors.errorSnackBarColor,
+        messageText: 'User Restriction Not Added'.tr(),
+      ).show(context);
 
       return;
     }

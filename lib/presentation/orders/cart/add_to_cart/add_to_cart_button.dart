@@ -6,10 +6,11 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_blo
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AddToCartButton extends StatelessWidget {
   final bool isAddToCartAllowed;
@@ -120,38 +121,34 @@ class AddToCartButton extends StatelessWidget {
     final cartState = context.read<CartBloc>().state;
     if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
         cartState.containNonCovidMaterial) {
-      showSnackBar(
-        context: context,
-        message:
+      CustomSnackBar(
+        messageText:
             'Covid material cannot be combined with commercial material.'.tr(),
-      );
+      ).show(context);
     } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
         cartState.containCovidMaterial) {
-      showSnackBar(
-        context: context,
-        message:
+      CustomSnackBar(
+        messageText:
             'Commercial material cannot be combined with covid material.'.tr(),
-      );
+      ).show(context);
     } else if (selectedCartItem.isSpecialOrderType &&
         selectedCartItem.materialInfo.isFOCMaterial &&
         cartState.containSampleMaterial &&
         cartState.containNonFocMaterial) {
-      showSnackBar(
-        context: context,
-        message:
+      CustomSnackBar(
+        messageText:
             'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.'
                 .tr(),
-      );
+      ).show(context);
     } else if (selectedCartItem.isSpecialOrderType &&
         selectedCartItem.materialInfo.isSampleMaterial &&
         cartState.containFocMaterial &&
         cartState.containNonSampleMaterial) {
-      showSnackBar(
-        context: context,
-        message:
+      CustomSnackBar(
+        messageText:
             'You cannot add non-FOC materials to a FOC order. Please submit separate orders if you wish to proceed'
                 .tr(),
-      );
+      ).show(context);
     } else {
       context.router.pop();
     }

@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus_item.dart';
@@ -18,6 +17,8 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_ite
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -234,10 +235,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               .read<CartBloc>()
                               .add(const CartEvent.clearCart());
                           Navigator.pop(context);
-                          showTopSnackBar(
-                            context: context,
-                            message: 'Order submitted'.tr(),
-                          );
+                          CustomSnackBar(
+                            messageText: 'Order submitted'.tr(),
+                          ).show(context);
                         }
                       },
                       (either) => {},

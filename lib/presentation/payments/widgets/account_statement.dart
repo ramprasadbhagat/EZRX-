@@ -5,11 +5,12 @@ import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AccountStatement extends StatelessWidget {
   const AccountStatement({Key? key}) : super(key: key);
@@ -29,10 +30,10 @@ class AccountStatement extends StatelessWidget {
               ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {
-              showSnackBar(
-                context: context,
-                message: 'File downloaded successfully'.tr(),
-              );
+              CustomSnackBar(
+                messageText: 'File downloaded successfully'.tr(),
+              ).show(context);
+              
             },
           ),
         );

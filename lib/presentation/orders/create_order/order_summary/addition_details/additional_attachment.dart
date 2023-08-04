@@ -11,12 +11,13 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 // import 'package:ezrxmobile/presentation/core/po_attachment.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AdditionPoAttachmentUpload extends StatelessWidget {
   const AdditionPoAttachmentUpload({Key? key}) : super(key: key);
@@ -40,10 +41,9 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                   final message = state.moreThanOneUploaded
                       ? '${state.fileUrl.length} ${'files uploaded successfully'.tr()}'
                       : '${state.fileUrl.first.name} ${'file uploaded successfully'.tr()}';
-                  showSnackBar(
-                    context: context,
-                    message: message,
-                  );
+                  CustomSnackBar(
+                    messageText: message,
+                  ).show(context);
                 },
                 (either) => either.fold(
                   (failure) {

@@ -13,9 +13,11 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/generic_dropdown_field.dart';
 import 'package:ezrxmobile/presentation/core/generic_text_field.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
 
 class AddDeductionCodePage extends StatelessWidget {
   const AddDeductionCodePage({Key? key}) : super(key: key);
@@ -30,10 +32,9 @@ class AddDeductionCodePage extends StatelessWidget {
           context.router.pop();
         } else {
           if (state.response != AddDeductionCode.empty()) {
-            showSnackBar(
-              context: context,
-              message: state.response.info.tr(),
-            );
+            CustomSnackBar(
+              messageText: state.response.info.tr(),
+            ).show(context);
           } else {
             final salesDistrict = context
                 .read<SalesDistrictBloc>()

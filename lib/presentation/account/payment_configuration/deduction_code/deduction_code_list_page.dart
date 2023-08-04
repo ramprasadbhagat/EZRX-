@@ -10,10 +10,12 @@ import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
 
 class DeductionCodeListPage extends StatelessWidget {
   const DeductionCodeListPage({Key? key}) : super(key: key);
@@ -68,10 +70,9 @@ class _DeductionCodeScrollList extends StatelessWidget {
         state.failureOrSuccessOption.fold(
           () {
             if (!state.isSubmitting && state.response.success) {
-              showSnackBar(
-                context: context,
-                message: state.response.info.tr(),
-              );
+              CustomSnackBar(
+                messageText: state.response.info.tr(),
+              ).show(context);
             }
           },
           (either) => either.fold(
