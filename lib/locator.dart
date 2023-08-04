@@ -107,6 +107,7 @@ import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
+import 'package:ezrxmobile/infrastructure/core/http/interceptor/datadog_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -522,11 +523,16 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
+    () => DatadogInterceptor(),
+  );
+
+  locator.registerLazySingleton(
     () => HttpService(
       config: locator<Config>(),
       interceptors: [
         locator<AuthInterceptor>(),
         locator<PerformanceInterceptor>(),
+        locator<DatadogInterceptor>(),
       ],
     ),
   );
@@ -537,6 +543,7 @@ void setupLocator() {
       interceptors: [
         locator<AuthInterceptor>(),
         locator<PerformanceInterceptor>(),
+        locator<DatadogInterceptor>(),
       ],
     ),
     instanceName: 'eZReachHttpService',
@@ -1981,7 +1988,10 @@ void setupLocator() {
 
   //Datadog
   locator.registerLazySingleton(
-    () => DatadogService(),
+    () => DatadogService(
+      packageInfoService: locator<PackageInfoService>(),
+      config: locator<Config>(),
+    ),
   );
 
   //============================================================

@@ -60,6 +60,7 @@ import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
@@ -176,6 +177,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
     FlutterError.onError = _crashlytics.recordFlutterError;
   }
 
+  await locator<PackageInfoService>().init();
   await locator<RemoteConfigService>().init();
   await locator<TokenStorage>().init();
   await locator<CredStorage>().init();

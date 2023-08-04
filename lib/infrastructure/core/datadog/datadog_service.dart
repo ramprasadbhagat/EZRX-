@@ -1,18 +1,23 @@
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:ezrxmobile/locator.dart';
+import 'package:flutter/foundation.dart';
 
 class DatadogService {
-  late DdSdkConfiguration configuration;
+  final PackageInfoService packageInfoService;
+  final Config config;
 
+  DatadogService({
+    required this.packageInfoService,
+    required this.config,
+  });
+
+  late DdSdkConfiguration configuration;
   final navigationObserver = DatadogNavigationObserver(
     datadogSdk: DatadogSdk.instance,
   );
 
   Future<void> init() async {
-    final packageInfoService = locator<PackageInfoService>();
-    final config = locator<Config>();
     final version = await packageInfoService.getVersion();
     final buildNumber = await packageInfoService.getBuildNumber();
     final appVersion = '$version($buildNumber)';
@@ -24,7 +29,7 @@ class DatadogService {
       nativeCrashReportEnabled: true,
       loggingConfiguration: LoggingConfiguration(
         sendNetworkInfo: true,
-        printLogsToConsole: true,
+        printLogsToConsole: !kReleaseMode,
         sendLogsToDatadog: true,
       ),
       rumConfiguration: RumConfiguration(

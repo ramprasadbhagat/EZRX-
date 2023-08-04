@@ -3,10 +3,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 class PackageInfoService {
   late PackageInfo _packageInfo;
 
-  PackageInfoService() {
-    init();
-  }
-
   Future<void> init() async {
     _packageInfo = await PackageInfo.fromPlatform();
   }
