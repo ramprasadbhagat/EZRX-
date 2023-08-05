@@ -26,7 +26,7 @@ class UpdateSalesOrgRemoteDataSource {
         url: '/api/strapiEngineMutation',
         data: jsonEncode({
           'query': updateSalesOrgQueryMutation.getUpdateSalesOrgConfigsQuery(),
-          'variables': {'input' : variableData},
+          'variables': {'input': variableData},
         }),
         apiEndpoint: 'updateSalesOrgConfig',
       );

@@ -146,7 +146,6 @@ void main() {
       },
     );
   });
-  
 
   group('RoleType value object', () {
     test(

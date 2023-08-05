@@ -45,11 +45,11 @@ abstract class $PaymentSummaryDetailsResponseDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      double totalPaymentInProgress,
+          double totalPaymentInProgress,
       @JsonKey(
-          name: 'customerPaymentResponse',
-          defaultValue: <PaymentSummaryDetailsDto>[])
-      List<PaymentSummaryDetailsDto> paymentSummaryList});
+          name: 'customerPaymentResponse', defaultValue: <
+              PaymentSummaryDetailsDto>[])
+          List<PaymentSummaryDetailsDto> paymentSummaryList});
 }
 
 /// @nodoc
@@ -93,11 +93,11 @@ abstract class _$$_PaymentSummaryDetailsResponseDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      double totalPaymentInProgress,
+          double totalPaymentInProgress,
       @JsonKey(
-          name: 'customerPaymentResponse',
-          defaultValue: <PaymentSummaryDetailsDto>[])
-      List<PaymentSummaryDetailsDto> paymentSummaryList});
+          name: 'customerPaymentResponse', defaultValue: <
+              PaymentSummaryDetailsDto>[])
+          List<PaymentSummaryDetailsDto> paymentSummaryList});
 }
 
 /// @nodoc
@@ -135,11 +135,11 @@ class _$_PaymentSummaryDetailsResponseDto
     extends _PaymentSummaryDetailsResponseDto {
   _$_PaymentSummaryDetailsResponseDto(
       {@JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
-      required this.totalPaymentInProgress,
+          required this.totalPaymentInProgress,
       @JsonKey(
-          name: 'customerPaymentResponse',
-          defaultValue: <PaymentSummaryDetailsDto>[])
-      required final List<PaymentSummaryDetailsDto> paymentSummaryList})
+          name: 'customerPaymentResponse', defaultValue: <
+              PaymentSummaryDetailsDto>[])
+          required final List<PaymentSummaryDetailsDto> paymentSummaryList})
       : _paymentSummaryList = paymentSummaryList,
         super._();
 
@@ -202,13 +202,13 @@ class _$_PaymentSummaryDetailsResponseDto
 abstract class _PaymentSummaryDetailsResponseDto
     extends PaymentSummaryDetailsResponseDto {
   factory _PaymentSummaryDetailsResponseDto(
-          {@JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
+      {@JsonKey(name: 'totalPaymentInProgress', defaultValue: 0)
           required final double totalPaymentInProgress,
-          @JsonKey(
-              name: 'customerPaymentResponse',
-              defaultValue: <PaymentSummaryDetailsDto>[])
-          required final List<PaymentSummaryDetailsDto> paymentSummaryList}) =
-      _$_PaymentSummaryDetailsResponseDto;
+      @JsonKey(
+          name: 'customerPaymentResponse', defaultValue: <
+              PaymentSummaryDetailsDto>[])
+          required final List<PaymentSummaryDetailsDto>
+              paymentSummaryList}) = _$_PaymentSummaryDetailsResponseDto;
   _PaymentSummaryDetailsResponseDto._() : super._();
 
   factory _PaymentSummaryDetailsResponseDto.fromJson(

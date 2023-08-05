@@ -9,10 +9,12 @@ class ReturnRequestLocalDataSource {
 
   Future<ReturnMaterialList> searchReturnMaterials() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/searchReturnMaterialsV2Response.json'),
+      await rootBundle
+          .loadString('assets/json/searchReturnMaterialsV2Response.json'),
     );
 
-    return ReturnMaterialListDto.fromJson(data['data']['searchReturnMaterialsV2'])
-        .toDomain();
+    return ReturnMaterialListDto.fromJson(
+      data['data']['searchReturnMaterialsV2'],
+    ).toDomain();
   }
 }

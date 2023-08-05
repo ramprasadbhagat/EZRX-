@@ -79,7 +79,7 @@ class UserRestrictionMutation {
            }
           }
         ''';
-     }
+  }
 
   String addRestriction() {
     return '''

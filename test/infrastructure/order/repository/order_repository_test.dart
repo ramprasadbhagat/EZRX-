@@ -86,19 +86,24 @@ void main() {
     status: Status('fake_status'),
     city1: 'kolkata',
     shipToName: const ShipToName(
-        name1: 'test1', name2: 'test2', name3: 'test3', name4: 'test4'),
+      name1: 'test1',
+      name2: 'test2',
+      name3: 'test3',
+      name4: 'test4',
+    ),
     country: 'abc',
     postalCode: '700023',
     shipToAddress:
         ShipToAddress.empty().copyWith(street: 'new town', street2: 'new twon'),
   );
   final mockCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
-      customerCodeSoldTo: '100000345',
-      customerAttr7: CustomerAttr7('ZEV'),
-      customerGrp4: CustomerGrp4('VR'),
-      status: Status('fake_status'),
-      customerName: CustomerName.empty().copyWith(name1: 'cust1'),
-      division: 'mock_div');
+    customerCodeSoldTo: '100000345',
+    customerAttr7: CustomerAttr7('ZEV'),
+    customerGrp4: CustomerGrp4('VR'),
+    status: Status('fake_status'),
+    customerName: CustomerName.empty().copyWith(name1: 'cust1'),
+    division: 'mock_div',
+  );
   const fakeSavedOrderId = 'fake-id';
 
   final fakeUpdatedSavedOrder = SavedOrder.empty().copyWith(
@@ -149,11 +154,12 @@ void main() {
     encryption = EncryptionMock();
 
     orderRepository = OrderRepository(
-        config: mockConfig,
-        localDataSource: orderLocalDataSource,
-        remoteDataSource: orderRemoteDataSource,
-        mixpanelService: mixpanelService,
-        encryption: encryption);
+      config: mockConfig,
+      localDataSource: orderLocalDataSource,
+      remoteDataSource: orderRemoteDataSource,
+      mixpanelService: mixpanelService,
+      encryption: encryption,
+    );
   });
 
   group('OrderRepository should - ', () {
@@ -164,12 +170,13 @@ void main() {
           .thenAnswer((invocation) async => <SavedOrder>[]);
 
       final result = await orderRepository.getSavedOrder(
-          user: mockUser,
-          salesOrg: mockSalesOrganisation,
-          customerCode: mockCustomerCodeInfo,
-          shipToCode: mockShipToInfo,
-          pageSize: 10,
-          offset: 0);
+        user: mockUser,
+        salesOrg: mockSalesOrganisation,
+        customerCode: mockCustomerCodeInfo,
+        shipToCode: mockShipToInfo,
+        pageSize: 10,
+        offset: 0,
+      );
       expect(
         result.isRight(),
         true,
@@ -183,12 +190,13 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.getSavedOrder(
-          user: mockUser,
-          salesOrg: mockSalesOrganisation,
-          customerCode: mockCustomerCodeInfo,
-          shipToCode: mockShipToInfo,
-          pageSize: 10,
-          offset: 0);
+        user: mockUser,
+        salesOrg: mockSalesOrganisation,
+        customerCode: mockCustomerCodeInfo,
+        shipToCode: mockShipToInfo,
+        pageSize: 10,
+        offset: 0,
+      );
       expect(
         result.isLeft(),
         true,
@@ -285,24 +293,28 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('PHP'),
-          disablePrincipals: true,
-          principalList: [
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-                date: DateTimeStringValue('2093041107'),
-                principalCode: PrincipalCode('0000140332')),
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-                date: DateTimeStringValue('2023041107'),
-                principalCode: PrincipalCode('0000000000'))
-          ]);
+        currency: Currency('PHP'),
+        disablePrincipals: true,
+        principalList: [
+          SalesOrganisationConfigsPrincipal.empty().copyWith(
+            date: DateTimeStringValue('2093041107'),
+            principalCode: PrincipalCode('0000140332'),
+          ),
+          SalesOrganisationConfigsPrincipal.empty().copyWith(
+            date: DateTimeStringValue('2023041107'),
+            principalCode: PrincipalCode('0000000000'),
+          )
+        ],
+      );
 
       final cartMaterial = <PriceAggregate>[
         PriceAggregate.empty().copyWith(
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-              principalData: PrincipalData.empty()
-                  .copyWith(principalCode: PrincipalCode('0000140332'))),
+            materialNumber: MaterialNumber('000000000023001758'),
+            principalData: PrincipalData.empty()
+                .copyWith(principalCode: PrincipalCode('0000140332')),
+          ),
           tenderContract: TenderContract.empty().copyWith(
             contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
             tenderOrderReason: TenderContractReason('reas'),
@@ -323,12 +335,13 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       final submitOrder = SubmitOrder.empty().copyWith(
         userName: data.contactPerson.getValue().isNotEmpty
@@ -379,13 +392,16 @@ void main() {
       );
 
       when(() => orderLocalDataSource.submitOrder()).thenAnswer(
-          (invocation) async => SubmitOrderResponse.empty()
-                  .copyWith(salesDocument: 'fake-sales-document', messages: [
-                SubmitOrderResponseMessage.empty().copyWith(
-                  message: 'EZRX-b628ca8',
-                  type: 'S',
-                ),
-              ]));
+        (invocation) async => SubmitOrderResponse.empty().copyWith(
+          salesDocument: 'fake-sales-document',
+          messages: [
+            SubmitOrderResponseMessage.empty().copyWith(
+              message: 'EZRX-b628ca8',
+              type: 'S',
+            ),
+          ],
+        ),
+      );
 
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
@@ -409,23 +425,27 @@ void main() {
     test('get submit order fail locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
-          currency: Currency('PHP'),
-          disablePrincipals: true,
-          principalList: [
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-                date: DateTimeStringValue('2023041107'),
-                principalCode: PrincipalCode('0000140332')),
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-                date: DateTimeStringValue('2023041208'),
-                principalCode: PrincipalCode('0000000000'))
-          ]);
+        currency: Currency('PHP'),
+        disablePrincipals: true,
+        principalList: [
+          SalesOrganisationConfigsPrincipal.empty().copyWith(
+            date: DateTimeStringValue('2023041107'),
+            principalCode: PrincipalCode('0000140332'),
+          ),
+          SalesOrganisationConfigsPrincipal.empty().copyWith(
+            date: DateTimeStringValue('2023041208'),
+            principalCode: PrincipalCode('0000000000'),
+          )
+        ],
+      );
       final cartMaterial = <PriceAggregate>[
         PriceAggregate.empty().copyWith(
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-              principalData: PrincipalData.empty()
-                  .copyWith(principalCode: PrincipalCode('0000140332'))),
+            materialNumber: MaterialNumber('000000000023001758'),
+            principalData: PrincipalData.empty()
+                .copyWith(principalCode: PrincipalCode('0000140332')),
+          ),
         )
       ];
       final submitOrder = SubmitOrder.empty().copyWith(
@@ -437,7 +457,9 @@ void main() {
         ),
         products: [
           SubmitMaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'), quantity: 2)
+            materialNumber: MaterialNumber('000000000023001758'),
+            quantity: 2,
+          )
         ],
         blockOrder: salesOrganisationConfigs.enablePrincipalList &&
             cartMaterial.any((item) => item.checkSalesCutOff),
@@ -449,7 +471,9 @@ void main() {
       final result = await orderRepository.submitOrder(
         shipToInfo: ShipToInfo.empty(),
         user: User.empty().copyWith(
-            email: EmailAddress('awsib@gmail.com'), username: Username('user')),
+          email: EmailAddress('awsib@gmail.com'),
+          username: Username('user'),
+        ),
         cartProducts: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
@@ -651,25 +675,30 @@ void main() {
     test('get OrderRepository successfully remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => orderRemoteDataSource.getSavedOrder(
+      when(
+        () => orderRemoteDataSource.getSavedOrder(
           userId: '1',
           saleOrgName: '2601',
           shipToCode: '3487654',
           customerCode: '100000345',
           pageSize: 10,
-          offset: 0)).thenAnswer((invocation) async => <SavedOrder>[]);
+          offset: 0,
+        ),
+      ).thenAnswer((invocation) async => <SavedOrder>[]);
 
       final result = await orderRepository.getSavedOrder(
-          user: mockUser.copyWith(
-              id: '1',
-              username: Username('user'),
-              email: EmailAddress('user@gmail.com'),
-              customerCode: CustomerCode('100007654')),
-          salesOrg: mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')),
-          customerCode: mockCustomerCodeInfo,
-          shipToCode: mockShipToInfo,
-          pageSize: 10,
-          offset: 0);
+        user: mockUser.copyWith(
+          id: '1',
+          username: Username('user'),
+          email: EmailAddress('user@gmail.com'),
+          customerCode: CustomerCode('100007654'),
+        ),
+        salesOrg: mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')),
+        customerCode: mockCustomerCodeInfo,
+        shipToCode: mockShipToInfo,
+        pageSize: 10,
+        offset: 0,
+      );
       expect(
         result.isRight(),
         true,
@@ -678,22 +707,25 @@ void main() {
     test('get OrderRepository fail remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => orderRemoteDataSource.getSavedOrder(
-            userId: '1',
-            saleOrgName: '2601',
-            shipToCode: '3487654',
-            customerCode: '100000345',
-            pageSize: 1,
-            offset: 0,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => orderRemoteDataSource.getSavedOrder(
+          userId: '1',
+          saleOrgName: '2601',
+          shipToCode: '3487654',
+          customerCode: '100000345',
+          pageSize: 1,
+          offset: 0,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.getSavedOrder(
-          user: mockUser,
-          salesOrg: mockSalesOrganisation,
-          customerCode: mockCustomerCodeInfo,
-          shipToCode: mockShipToInfo,
-          pageSize: 10,
-          offset: 0);
+        user: mockUser,
+        salesOrg: mockSalesOrganisation,
+        customerCode: mockCustomerCodeInfo,
+        shipToCode: mockShipToInfo,
+        pageSize: 10,
+        offset: 0,
+      );
       expect(
         result.isLeft(),
         true,
@@ -715,11 +747,12 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       // final draftOrder = SavedOrder.empty().copyWith(
       //   requestedDeliveryDate: '01/02/2023',
@@ -785,19 +818,22 @@ void main() {
         shipToInfo: mockShipToInfo,
         user: user,
         cartItems: [
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
-                bundles: [],
-                materialNumber: MaterialNumber('234567'),
-                priceOverride: PriceOverrideValue(12.0),
-                zdp8Override: Zdp8OverrideValue(2.0),
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
+                  bundles: [],
+                  materialNumber: MaterialNumber('234567'),
+                  priceOverride: PriceOverrideValue(12.0),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
-              ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ],
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -826,11 +862,12 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       // final draftOrder = SavedOrder.empty().copyWith(
       //   requestedDeliveryDate: '01/02/2023',
@@ -876,29 +913,34 @@ void main() {
       //   ]),
       // );
 
-      when(() => orderLocalDataSource.createDraftOrder())
-          .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
-                draftorder: true,
-                isDraftOrder: false,
-                id: '12345678',
-              ));
+      when(() => orderLocalDataSource.createDraftOrder()).thenAnswer(
+        (invocation) async => SavedOrder.empty().copyWith(
+          draftorder: true,
+          isDraftOrder: false,
+          id: '12345678',
+        ),
+      );
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
         cartItems: [
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ],
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -927,11 +969,12 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       // final draftOrder = SavedOrder.empty().copyWith(
       //   requestedDeliveryDate: '01/02/2023',
@@ -977,29 +1020,34 @@ void main() {
       //   ]),
       // );
 
-      when(() => orderLocalDataSource.createDraftOrder())
-          .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
-                draftorder: true,
-                isDraftOrder: true,
-                id: '12345678',
-              ));
+      when(() => orderLocalDataSource.createDraftOrder()).thenAnswer(
+        (invocation) async => SavedOrder.empty().copyWith(
+          draftorder: true,
+          isDraftOrder: true,
+          id: '12345678',
+        ),
+      );
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
         cartItems: [
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ],
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -1022,10 +1070,11 @@ void main() {
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: mockUser.copyWith(
-            id: '1',
-            username: Username('user'),
-            email: EmailAddress('user@gmail.com'),
-            customerCode: CustomerCode('100007654')),
+          id: '1',
+          username: Username('user'),
+          email: EmailAddress('user@gmail.com'),
+          customerCode: CustomerCode('100007654'),
+        ),
         cartItems: [],
         grandTotal: 0.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -1062,11 +1111,12 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       final draftOrder = SavedOrder.empty().copyWith(
         requestedDeliveryDate: '01/02/2023',
@@ -1097,45 +1147,57 @@ void main() {
             : user.fullName.toString(),
         referenceNotes: data.referenceNote.getValue(),
         items: getItemList([
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ]),
       );
 
-      when(() => orderRemoteDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(draftOrder)))
-          .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
-                draftorder: true,
-                isDraftOrder: true,
-                id: '12345678',
-              ));
+      when(
+        () => orderRemoteDataSource.createDraftOrder(
+          draftOrder: SavedOrderDto.fromDomain(draftOrder),
+        ),
+      ).thenAnswer(
+        (invocation) async => SavedOrder.empty().copyWith(
+          draftorder: true,
+          isDraftOrder: true,
+          id: '12345678',
+        ),
+      );
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
         cartItems: [
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ],
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -1164,11 +1226,12 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       final draftOrder = SavedOrder.empty().copyWith(
         requestedDeliveryDate: '01/02/2023',
@@ -1199,45 +1262,57 @@ void main() {
             : user.fullName.toString(),
         referenceNotes: data.referenceNote.getValue(),
         items: getItemList([
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ]),
       );
 
-      when(() => orderRemoteDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(draftOrder)))
-          .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
-                draftorder: true,
-                isDraftOrder: false,
-                id: '12345678',
-              ));
+      when(
+        () => orderRemoteDataSource.createDraftOrder(
+          draftOrder: SavedOrderDto.fromDomain(draftOrder),
+        ),
+      ).thenAnswer(
+        (invocation) async => SavedOrder.empty().copyWith(
+          draftorder: true,
+          isDraftOrder: false,
+          id: '12345678',
+        ),
+      );
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
         cartItems: [
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ],
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -1266,11 +1341,12 @@ void main() {
       );
 
       final user = mockUser.copyWith(
-          id: '123456',
-          fullName: const FullName(firstName: 'john', lastName: 'doe'),
-          username: Username('mock_user'),
-          email: EmailAddress('user@gmail.com'),
-          customerCode: CustomerCode('100007654'));
+        id: '123456',
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
 
       final draftOrder = SavedOrder.empty().copyWith(
         requestedDeliveryDate: '01/02/2023',
@@ -1301,41 +1377,51 @@ void main() {
             : user.fullName.toString(),
         referenceNotes: data.referenceNote.getValue(),
         items: getItemList([
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ]),
       );
 
-      when(() => orderRemoteDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(draftOrder)))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => orderRemoteDataSource.createDraftOrder(
+          draftOrder: SavedOrderDto.fromDomain(draftOrder),
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
         cartItems: [
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ],
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
@@ -1382,8 +1468,11 @@ void main() {
       final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeSavedOrderId);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => orderRemoteDataSource.getSavedOrderDetail(
-          orderId: fakeSavedOrderId)).thenAnswer(
+      when(
+        () => orderRemoteDataSource.getSavedOrderDetail(
+          orderId: fakeSavedOrderId,
+        ),
+      ).thenAnswer(
         (invocation) async => fakeSavedOrder,
       );
 
@@ -1397,8 +1486,11 @@ void main() {
       const fakeSavedOrderId = 'fake-id';
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => orderRemoteDataSource.getSavedOrderDetail(
-          orderId: fakeSavedOrderId)).thenThrow(
+      when(
+        () => orderRemoteDataSource.getSavedOrderDetail(
+          orderId: fakeSavedOrderId,
+        ),
+      ).thenThrow(
         () => MockException(),
       );
 

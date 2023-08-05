@@ -18,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
 class AddDeductionCodePage extends StatelessWidget {
   const AddDeductionCodePage({Key? key}) : super(key: key);
 

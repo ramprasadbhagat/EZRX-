@@ -90,49 +90,56 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
       _$MaterialItemDtoCopyWithImpl<$Res, MaterialItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'bundleName', defaultValue: '') String bundleName,
-      @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          String bundleCode,
       @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
-      List<MaterialDto> materials,
-      @JsonKey(name: 'qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+          List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          bool hidePrice,
       @JsonKey(name: 'additionalBonus', defaultValue: <MaterialItemBonusDto>[])
-      List<MaterialItemBonusDto> bonuses,
-      @JsonKey(name: 'materialGroup2', defaultValue: '') String materialGroup2,
-      @JsonKey(name: 'materialGroup4', defaultValue: '') String materialGroup4,
-      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+          List<MaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          String materialGroup2,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
-      TenderContractDto tenderContractDto,
+          TenderContractDto tenderContractDto,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      bool hasValidTenderContract,
+          bool hasValidTenderContract,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
-      String tenderOrderReason,
-      @JsonKey(
-          name: 'priceOverride',
-          defaultValue: 0,
-          readValue: doubleFormatCheck,
-          includeIfNull: false,
-          toJson: overrideTojson)
-      double overridenPrice,
+          String tenderOrderReason,
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
+          double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      String unitOfMeasurement,
+          String unitOfMeasurement,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      String itemRegistrationNumber,
+          String itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
+          String defaultMaterialDescription,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'type', defaultValue: '') String type,
-      @JsonKey(name: 'comment', defaultValue: '') String comment,
-      @JsonKey(name: 'batchNumber', defaultValue: '') String batchNumber,
-      @JsonKey(
-          name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
-      double zdp8Override,
-      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+          String materialDescription,
+      @JsonKey(name: 'type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'comment', defaultValue: '')
+          String comment,
+      @JsonKey(name: 'batchNumber', defaultValue: '')
+          String batchNumber,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          double zdp8Override,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          String remarks,
       @JsonKey(name: 'bundleInformation', defaultValue: [])
-      List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'totalQuantity', defaultValue: 0) int totalQuantity,
-      @JsonKey(name: 'banner', readValue: bannerOverride) BannerDto banner});
+          List<BundleInfoDto> bundleInformation,
+      @JsonKey(name: 'totalQuantity', defaultValue: 0)
+          int totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          BannerDto banner});
 
   $TenderContractDtoCopyWith<$Res> get tenderContractDto;
   $BannerDtoCopyWith<$Res> get banner;
@@ -307,49 +314,56 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'bundleName', defaultValue: '') String bundleName,
-      @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          String bundleCode,
       @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
-      List<MaterialDto> materials,
-      @JsonKey(name: 'qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+          List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          bool hidePrice,
       @JsonKey(name: 'additionalBonus', defaultValue: <MaterialItemBonusDto>[])
-      List<MaterialItemBonusDto> bonuses,
-      @JsonKey(name: 'materialGroup2', defaultValue: '') String materialGroup2,
-      @JsonKey(name: 'materialGroup4', defaultValue: '') String materialGroup4,
-      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+          List<MaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          String materialGroup2,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
-      TenderContractDto tenderContractDto,
+          TenderContractDto tenderContractDto,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      bool hasValidTenderContract,
+          bool hasValidTenderContract,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
-      String tenderOrderReason,
-      @JsonKey(
-          name: 'priceOverride',
-          defaultValue: 0,
-          readValue: doubleFormatCheck,
-          includeIfNull: false,
-          toJson: overrideTojson)
-      double overridenPrice,
+          String tenderOrderReason,
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
+          double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      String unitOfMeasurement,
+          String unitOfMeasurement,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      String itemRegistrationNumber,
+          String itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
+          String defaultMaterialDescription,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'type', defaultValue: '') String type,
-      @JsonKey(name: 'comment', defaultValue: '') String comment,
-      @JsonKey(name: 'batchNumber', defaultValue: '') String batchNumber,
-      @JsonKey(
-          name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
-      double zdp8Override,
-      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+          String materialDescription,
+      @JsonKey(name: 'type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'comment', defaultValue: '')
+          String comment,
+      @JsonKey(name: 'batchNumber', defaultValue: '')
+          String batchNumber,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          double zdp8Override,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          String remarks,
       @JsonKey(name: 'bundleInformation', defaultValue: [])
-      List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'totalQuantity', defaultValue: 0) int totalQuantity,
-      @JsonKey(name: 'banner', readValue: bannerOverride) BannerDto banner});
+          List<BundleInfoDto> bundleInformation,
+      @JsonKey(name: 'totalQuantity', defaultValue: 0)
+          int totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          BannerDto banner});
 
   @override
   $TenderContractDtoCopyWith<$Res> get tenderContractDto;
@@ -503,53 +517,56 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialItemDto extends _MaterialItemDto {
   const _$_MaterialItemDto(
-      {@JsonKey(name: 'bundleName', defaultValue: '') required this.bundleName,
-      @JsonKey(name: 'bundleCode', defaultValue: '') required this.bundleCode,
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          required this.bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          required this.bundleCode,
       @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
-      required final List<MaterialDto> materials,
-      @JsonKey(name: 'qty', defaultValue: 0) required this.qty,
-      @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
+          required final List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
+          required this.qty,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          required this.hidePrice,
       @JsonKey(name: 'additionalBonus', defaultValue: <MaterialItemBonusDto>[])
-      required final List<MaterialItemBonusDto> bonuses,
+          required final List<MaterialItemBonusDto> bonuses,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      required this.materialGroup2,
+          required this.materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      required this.materialGroup4,
+          required this.materialGroup4,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
+          required this.materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
-      required this.tenderContractDto,
+          required this.tenderContractDto,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      required this.hasValidTenderContract,
+          required this.hasValidTenderContract,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
-      required this.tenderOrderReason,
-      @JsonKey(
-          name: 'priceOverride',
-          defaultValue: 0,
-          readValue: doubleFormatCheck,
-          includeIfNull: false,
-          toJson: overrideTojson)
-      required this.overridenPrice,
+          required this.tenderOrderReason,
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
+          required this.overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      required this.unitOfMeasurement,
+          required this.unitOfMeasurement,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      required this.itemRegistrationNumber,
+          required this.itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      required this.defaultMaterialDescription,
+          required this.defaultMaterialDescription,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required this.materialDescription,
-      @JsonKey(name: 'type', defaultValue: '') required this.type,
-      @JsonKey(name: 'comment', defaultValue: '') required this.comment,
-      @JsonKey(name: 'batchNumber', defaultValue: '') required this.batchNumber,
-      @JsonKey(
-          name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
-      required this.zdp8Override,
-      @JsonKey(name: 'remarks', defaultValue: '') required this.remarks,
+          required this.materialDescription,
+      @JsonKey(name: 'type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'comment', defaultValue: '')
+          required this.comment,
+      @JsonKey(name: 'batchNumber', defaultValue: '')
+          required this.batchNumber,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          required this.zdp8Override,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          required this.remarks,
       @JsonKey(name: 'bundleInformation', defaultValue: [])
-      required final List<BundleInfoDto> bundleInformation,
+          required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
-      required this.totalQuantity,
-      @JsonKey(name: 'banner', readValue: bannerOverride) required this.banner})
+          required this.totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          required this.banner})
       : _materials = materials,
         _bonuses = bonuses,
         _bundleInformation = bundleInformation,
@@ -764,57 +781,55 @@ class _$_MaterialItemDto extends _MaterialItemDto {
 abstract class _MaterialItemDto extends MaterialItemDto {
   const factory _MaterialItemDto(
       {@JsonKey(name: 'bundleName', defaultValue: '')
-      required final String bundleName,
+          required final String bundleName,
       @JsonKey(name: 'bundleCode', defaultValue: '')
-      required final String bundleCode,
+          required final String bundleCode,
       @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
-      required final List<MaterialDto> materials,
-      @JsonKey(name: 'qty', defaultValue: 0) required final int qty,
+          required final List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
+          required final int qty,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-      required final bool hidePrice,
+          required final bool hidePrice,
       @JsonKey(name: 'additionalBonus', defaultValue: <MaterialItemBonusDto>[])
-      required final List<MaterialItemBonusDto> bonuses,
+          required final List<MaterialItemBonusDto> bonuses,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      required final String materialGroup2,
+          required final String materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      required final String materialGroup4,
+          required final String materialGroup4,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
+          required final String materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
-      required final TenderContractDto tenderContractDto,
+          required final TenderContractDto tenderContractDto,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      required final bool hasValidTenderContract,
+          required final bool hasValidTenderContract,
       @JsonKey(name: 'tenderOrderReason', defaultValue: '')
-      required final String tenderOrderReason,
-      @JsonKey(
-          name: 'priceOverride',
-          defaultValue: 0,
-          readValue: doubleFormatCheck,
-          includeIfNull: false,
-          toJson: overrideTojson)
-      required final double overridenPrice,
+          required final String tenderOrderReason,
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
+          required final double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      required final String unitOfMeasurement,
+          required final String unitOfMeasurement,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      required final String itemRegistrationNumber,
+          required final String itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      required final String defaultMaterialDescription,
+          required final String defaultMaterialDescription,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required final String materialDescription,
-      @JsonKey(name: 'type', defaultValue: '') required final String type,
-      @JsonKey(name: 'comment', defaultValue: '') required final String comment,
+          required final String materialDescription,
+      @JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'comment', defaultValue: '')
+          required final String comment,
       @JsonKey(name: 'batchNumber', defaultValue: '')
-      required final String batchNumber,
-      @JsonKey(
-          name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
-      required final double zdp8Override,
-      @JsonKey(name: 'remarks', defaultValue: '') required final String remarks,
+          required final String batchNumber,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          required final double zdp8Override,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          required final String remarks,
       @JsonKey(name: 'bundleInformation', defaultValue: [])
-      required final List<BundleInfoDto> bundleInformation,
+          required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
-      required final int totalQuantity,
+          required final int totalQuantity,
       @JsonKey(name: 'banner', readValue: bannerOverride)
-      required final BannerDto banner}) = _$_MaterialItemDto;
+          required final BannerDto banner}) = _$_MaterialItemDto;
   const _MaterialItemDto._() : super._();
 
   factory _MaterialItemDto.fromJson(Map<String, dynamic> json) =

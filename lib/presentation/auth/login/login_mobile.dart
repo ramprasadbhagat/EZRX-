@@ -124,26 +124,28 @@ class _OrDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[
-      const Expanded(
-        child: Divider(
-          indent: 0,
-          thickness: 0.5,
+    return Row(
+      children: <Widget>[
+        const Expanded(
+          child: Divider(
+            indent: 0,
+            thickness: 0.5,
+          ),
         ),
-      ),
-      Text(
-        'or',
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: ZPColors.dividerColor,
-            ),
-      ),
-      const Expanded(
-        child: Divider(
-          endIndent: 0,
-          thickness: 0.5,
+        Text(
+          'or',
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: ZPColors.dividerColor,
+              ),
         ),
-      ),
-    ]);
+        const Expanded(
+          child: Divider(
+            endIndent: 0,
+            thickness: 0.5,
+          ),
+        ),
+      ],
+    );
   }
 }
 

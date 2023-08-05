@@ -12,10 +12,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class PaymentItemRepositoryMock extends Mock implements PaymentItedmRepository {}
+class PaymentItemRepositoryMock extends Mock
+    implements PaymentItedmRepository {}
 
-class PaymentItemBlocMock extends MockBloc<
-        PaymentItemEvent, PaymentItemState>
+class PaymentItemBlocMock extends MockBloc<PaymentItemEvent, PaymentItemState>
     implements PaymentItemBloc {}
 
 void main() {
@@ -27,11 +27,9 @@ void main() {
     salesOrg: SalesOrg('fake-1234'),
   );
 
-
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: 'fake-1234',
   );
-
 
   group('Payment Item Bloc Test', () {
     setUp(() async {
@@ -47,25 +45,29 @@ void main() {
         paymentItemRepository: paymentItemRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentItemRepositoryMock.fetchPaymentItemList(
-              customerCodeInfo: fakeCustomerCode,
-              accountingDocExternalReference: 'fake-doc',
-              paymentBatchAdditionalInfo: 'fake-info',
-              paymentID: 'fake-id',
-              salesOrganization: fakeSaleOrganisation,
-            )).thenAnswer(
+        when(
+          () => paymentItemRepositoryMock.fetchPaymentItemList(
+            customerCodeInfo: fakeCustomerCode,
+            accountingDocExternalReference: 'fake-doc',
+            paymentBatchAdditionalInfo: 'fake-info',
+            paymentID: 'fake-id',
+            salesOrganization: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) => bloc.add(PaymentItemEvent.fetchPaymentItemList(
+      act: (bloc) => bloc.add(
+        PaymentItemEvent.fetchPaymentItemList(
           accountingDocExternalReference: 'fake-doc',
           customerCodeInfo: fakeCustomerCode,
           paymentBatchAdditionalInfo: 'fake-info',
           paymentID: 'fake-id',
-          salesOrganization: fakeSaleOrganisation
-          )),
+          salesOrganization: fakeSaleOrganisation,
+        ),
+      ),
       expect: () => [
         PaymentItemState.initial().copyWith(
           isFetching: true,
@@ -87,23 +89,27 @@ void main() {
         paymentItemRepository: paymentItemRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentItemRepositoryMock.fetchPaymentItemList(
-              customerCodeInfo: fakeCustomerCode,
-              accountingDocExternalReference: 'fake-doc',
-              paymentBatchAdditionalInfo: 'fake-info',
-              paymentID: 'fake-id',
-              salesOrganization: fakeSaleOrganisation,
-            )).thenAnswer(
+        when(
+          () => paymentItemRepositoryMock.fetchPaymentItemList(
+            customerCodeInfo: fakeCustomerCode,
+            accountingDocExternalReference: 'fake-doc',
+            paymentBatchAdditionalInfo: 'fake-info',
+            paymentID: 'fake-id',
+            salesOrganization: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(paymentItemMockData),
         );
       },
-      act: (bloc) => bloc.add(PaymentItemEvent.fetchPaymentItemList(
+      act: (bloc) => bloc.add(
+        PaymentItemEvent.fetchPaymentItemList(
           accountingDocExternalReference: 'fake-doc',
           customerCodeInfo: fakeCustomerCode,
           paymentBatchAdditionalInfo: 'fake-info',
           paymentID: 'fake-id',
-          salesOrganization: fakeSaleOrganisation
-          )),
+          salesOrganization: fakeSaleOrganisation,
+        ),
+      ),
       expect: () => [
         PaymentItemState.initial().copyWith(
           isFetching: true,

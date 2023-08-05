@@ -14,7 +14,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/recent_order_reposito
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class RecentOrderRepositoryMock extends Mock implements RecentOrderRepository {}
 
 class FavoriteRepositoryMock extends Mock implements FavouriteRepository {}
@@ -60,11 +59,11 @@ void main() {
 
   final materialInfoMock = [
     MaterialInfo.empty().copyWith(
-        materialNumber:
-            updatedRecentOrderItemsWithImagesMock[0].materialNumber),
+      materialNumber: updatedRecentOrderItemsWithImagesMock[0].materialNumber,
+    ),
     MaterialInfo.empty().copyWith(
-        materialNumber:
-            updatedRecentOrderItemsWithImagesMock[1].materialNumber),
+      materialNumber: updatedRecentOrderItemsWithImagesMock[1].materialNumber,
+    ),
   ];
 
   group('Recent Order Bloc', () {
@@ -75,18 +74,22 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => recentOrderRepository.getRecentlyOrderedProducts(
-              salesOrgConfig: salesOrgConfigMock,
-              customerCodeInfo: customerCodeInfoMock,
-              shipToInfo: shipToInfoMock,
-            )).thenAnswer(
+        when(
+          () => recentOrderRepository.getRecentlyOrderedProducts(
+            salesOrgConfig: salesOrgConfigMock,
+            customerCodeInfo: customerCodeInfoMock,
+            shipToInfo: shipToInfoMock,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(recentOrderItemsMock),
         );
 
-        when(() => favoriteRepository.getFavouritesForList(
-              salesConfigs: salesOrgConfigMock,
-              list: recentOrderItemsMock,
-            )).thenAnswer(
+        when(
+          () => favoriteRepository.getFavouritesForList(
+            salesConfigs: salesOrgConfigMock,
+            list: recentOrderItemsMock,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(updatedRecentOrderItemsMock),
         );
       },
@@ -130,11 +133,13 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => recentOrderRepository.getRecentlyOrderedProducts(
-              salesOrgConfig: salesOrgConfigMock,
-              customerCodeInfo: customerCodeInfoMock,
-              shipToInfo: shipToInfoMock,
-            )).thenAnswer(
+        when(
+          () => recentOrderRepository.getRecentlyOrderedProducts(
+            salesOrgConfig: salesOrgConfigMock,
+            customerCodeInfo: customerCodeInfoMock,
+            shipToInfo: shipToInfoMock,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('mock-error'),
           ),
@@ -169,10 +174,12 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => favoriteRepository.getFavouritesForList(
-              salesConfigs: salesOrgConfigMock,
-              list: recentOrderItemsMock,
-            )).thenAnswer(
+        when(
+          () => favoriteRepository.getFavouritesForList(
+            salesConfigs: salesOrgConfigMock,
+            list: recentOrderItemsMock,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('mock-error'),
           ),
@@ -202,10 +209,12 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => favoriteRepository.addToFavourites(
-              materialNumber: mockMaterialNumber,
-              list: <RecentOrderItem>[],
-            )).thenAnswer(
+        when(
+          () => favoriteRepository.addToFavourites(
+            materialNumber: mockMaterialNumber,
+            list: <RecentOrderItem>[],
+          ),
+        ).thenAnswer(
           (invocation) async => Right(updatedRecentOrderItemsMock),
         );
       },
@@ -231,10 +240,12 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => favoriteRepository.addToFavourites(
-              materialNumber: mockMaterialNumber,
-              list: <RecentOrderItem>[],
-            )).thenAnswer(
+        when(
+          () => favoriteRepository.addToFavourites(
+            materialNumber: mockMaterialNumber,
+            list: <RecentOrderItem>[],
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('mock-error'),
           ),
@@ -263,12 +274,14 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => favoriteRepository.removeFromFavourites(
-                  materialNumber: mockMaterialNumber,
-                  list: <RecentOrderItem>[],
-                ))
-            .thenAnswer(
-                (invocation) async => Right(updatedRecentOrderItemsMock));
+        when(
+          () => favoriteRepository.removeFromFavourites(
+            materialNumber: mockMaterialNumber,
+            list: <RecentOrderItem>[],
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(updatedRecentOrderItemsMock),
+        );
       },
       act: (RecentOrderBloc bloc) => bloc.add(
         RecentOrderEvent.deleteFavourite(
@@ -294,10 +307,12 @@ void main() {
         favouriteRepository: favoriteRepository,
       ),
       setUp: () {
-        when(() => favoriteRepository.removeFromFavourites(
-              materialNumber: mockMaterialNumber,
-              list: <RecentOrderItem>[],
-            )).thenAnswer(
+        when(
+          () => favoriteRepository.removeFromFavourites(
+            materialNumber: mockMaterialNumber,
+            list: <RecentOrderItem>[],
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('mock-error'),
           ),

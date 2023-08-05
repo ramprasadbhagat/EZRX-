@@ -1,6 +1,5 @@
-class MaterialFilterQueryMutation{
-  
-String getMaterialFilterCategoryList() {
+class MaterialFilterQueryMutation {
+  String getMaterialFilterCategoryList() {
     return '''
       query (\$request: GetFilterListRequest!) {
         GetFilterList(request: \$request) {
@@ -14,7 +13,6 @@ String getMaterialFilterCategoryList() {
       }
     ''';
   }
-
 
   String getMaterialFilterCategoryListSalesRep() {
     return '''

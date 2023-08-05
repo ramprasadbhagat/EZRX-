@@ -9,7 +9,8 @@ class CreditAndInvoiceDetailsState with _$CreditAndInvoiceDetailsState {
     required List<CustomerDocumentDetail> details,
   }) = _CreditAndInvoiceDetailsState;
 
-  factory CreditAndInvoiceDetailsState.initial() => CreditAndInvoiceDetailsState(
+  factory CreditAndInvoiceDetailsState.initial() =>
+      CreditAndInvoiceDetailsState(
         failureOrSuccessOption: none(),
         isLoading: false,
         details: <CustomerDocumentDetail>[],

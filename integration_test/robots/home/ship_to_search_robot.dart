@@ -23,8 +23,7 @@ class ShipToSearchRobot {
   }
 
   Future<void> clearSearch() async {
-    final clearShipToSearch =
-        find.byKey(const Key('clearShipToSearch'));
+    final clearShipToSearch = find.byKey(const Key('clearShipToSearch'));
     expect(clearShipToSearch, findsOneWidget);
     await tester.tap(clearShipToSearch);
     await tester.pumpAndSettle();
@@ -33,12 +32,12 @@ class ShipToSearchRobot {
   Future<void> tapShipToCode({String shipToCode = ''}) async {
     //if this function call with empty ship to code, let robot to think
     //then it automatically select the default ship to code
-    if(shipToCode.isNotEmpty){
+    if (shipToCode.isNotEmpty) {
       final shipToOption = find.byKey(Key('shipToOption$shipToCode'));
       expect(shipToOption, findsOneWidget);
       await tester.tap(shipToOption);
       await tester.pumpAndSettle();
-    }else{
+    } else {
       await tester.tap(find.text('Default'.tr()));
       await tester.pumpAndSettle();
     }

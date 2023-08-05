@@ -20,5 +20,4 @@ class ViewByRequestReturnFilterState with _$ViewByRequestReturnFilterState {
         ],
         showErrorMessage: false,
       );
-
 }

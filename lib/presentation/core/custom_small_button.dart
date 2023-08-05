@@ -7,7 +7,7 @@ class CustomSmallButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
 
-   const CustomSmallButton({
+  const CustomSmallButton({
     Key? key,
     required this.onPressed,
     required this.text,

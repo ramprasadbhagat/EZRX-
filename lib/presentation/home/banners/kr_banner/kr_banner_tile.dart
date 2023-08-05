@@ -18,10 +18,10 @@ class KRBannerTile extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
         child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
-              ),
+          image,
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+        ),
       ),
     );
   }

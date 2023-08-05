@@ -69,11 +69,11 @@ class UserRestrictionListPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           final eligibilityState = context.read<EligibilityBloc>().state;
-          context
-              .read<UserRestrictionDetailsBloc>()
-              .add(UserRestrictionDetailsEvent.initialized(
-                salesOrganisation: eligibilityState.salesOrganisation,
-              ));
+          context.read<UserRestrictionDetailsBloc>().add(
+                UserRestrictionDetailsEvent.initialized(
+                  salesOrganisation: eligibilityState.salesOrganisation,
+                ),
+              );
           context.router.push(
             AddEditUserRestrictionPageRoute(
               isEditing: false,

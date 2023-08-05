@@ -78,5 +78,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .any((element) => !element.materialInfo.isSpecialOrderTypeMaterial);
 
   bool get validateRegularOrderType =>
-      orderType.contains('ZPOR') && !configs.salesOrg.isTH ? containsRegularMaterials : true;
+      orderType.contains('ZPOR') && !configs.salesOrg.isTH
+          ? containsRegularMaterials
+          : true;
 }

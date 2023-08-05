@@ -79,10 +79,12 @@ void main() async {
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<PaymentNotificationBloc>(
-                create: (context) => paymentNotificationBlocMock),
+              create: (context) => paymentNotificationBlocMock,
+            ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
+              create: (context) => announcementBlocMock,
+            ),
           ],
           child: const NotificationSettingsPage(),
         ),
@@ -95,24 +97,38 @@ void main() async {
       remoteConfigServiceMock = RemoteConfigServiceMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
-      when(() => userBloc.state).thenReturn(UserState(
-        user: User.empty().copyWith(
-          settings: User.empty().settings.copyWith(
-                languagePreference: LanguageValue(ApiLanguageCode.english),
-                emailNotifications: false,
-                paymentNotification: PaymentNotification.empty().copyWith(disablePaymentNotification: false, paymentAdviceExpiryNotificationList: [
-                  const PaymentAdviceExpiryNotification(day: '3',disabled: false),
-                  const PaymentAdviceExpiryNotification(day: '5',disabled: false),
-                  const PaymentAdviceExpiryNotification(day: '7',disabled: false),
-                ])
-              ),
+      when(() => userBloc.state).thenReturn(
+        UserState(
+          user: User.empty().copyWith(
+            settings: User.empty().settings.copyWith(
+                  languagePreference: LanguageValue(ApiLanguageCode.english),
+                  emailNotifications: false,
+                  paymentNotification: PaymentNotification.empty().copyWith(
+                    disablePaymentNotification: false,
+                    paymentAdviceExpiryNotificationList: [
+                      const PaymentAdviceExpiryNotification(
+                        day: '3',
+                        disabled: false,
+                      ),
+                      const PaymentAdviceExpiryNotification(
+                        day: '5',
+                        disabled: false,
+                      ),
+                      const PaymentAdviceExpiryNotification(
+                        day: '7',
+                        disabled: false,
+                      ),
+                    ],
+                  ),
+                ),
+          ),
+          userFailureOrSuccessOption: none(),
         ),
-        userFailureOrSuccessOption: none(),
-      ));
+      );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => paymentNotificationBlocMock.state).thenReturn(PaymentNotificationState.initial());
-      when(() => remoteConfigServiceMock.getPaymentsConfig())
-            .thenReturn(true);
+      when(() => paymentNotificationBlocMock.state)
+          .thenReturn(PaymentNotificationState.initial());
+      when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
     });
@@ -136,7 +152,7 @@ void main() async {
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
         when(() => remoteConfigServiceMock.getPaymentsConfig())
-              .thenReturn(true);
+            .thenReturn(true);
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
@@ -154,8 +170,8 @@ void main() async {
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
-         when(() => remoteConfigServiceMock.getPaymentsConfig())
-              .thenReturn(true);
+        when(() => remoteConfigServiceMock.getPaymentsConfig())
+            .thenReturn(true);
 
         // select TH
         expect(
@@ -276,8 +292,8 @@ void main() async {
       'successfully work on tapping for email notifications',
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
-         when(() => remoteConfigServiceMock.getPaymentsConfig())
-              .thenReturn(false);
+        when(() => remoteConfigServiceMock.getPaymentsConfig())
+            .thenReturn(false);
         final switchFinder = find.byKey(const Key('flutterSwitch'));
         await tester.tap(switchFinder);
         await tester.pumpAndSettle();

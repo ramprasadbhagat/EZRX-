@@ -11,10 +11,13 @@ class ReturnRequestTypeCodeDetailsDto with _$ReturnRequestTypeCodeDetailsDto {
 
   const factory ReturnRequestTypeCodeDetailsDto({
     @JsonKey(name: 'returnCode', defaultValue: '') required String returnCode,
-    @JsonKey(name: 'returnDesc', defaultValue: '') required String returnDescription,
+    @JsonKey(name: 'returnDesc', defaultValue: '')
+        required String returnDescription,
   }) = _ReturnRequestTypeCodeDetailsDto;
 
-  factory ReturnRequestTypeCodeDetailsDto.fromDomain(ReturnRequestTypeCodeDetails returnRequestTypeCode) {
+  factory ReturnRequestTypeCodeDetailsDto.fromDomain(
+    ReturnRequestTypeCodeDetails returnRequestTypeCode,
+  ) {
     return ReturnRequestTypeCodeDetailsDto(
       returnCode: returnRequestTypeCode.returnCode,
       returnDescription: returnRequestTypeCode.returnDescription,
@@ -23,8 +26,8 @@ class ReturnRequestTypeCodeDetailsDto with _$ReturnRequestTypeCodeDetailsDto {
 
   ReturnRequestTypeCodeDetails toDomain() {
     return ReturnRequestTypeCodeDetails(
-     returnCode: returnCode,
-     returnDescription: returnDescription,
+      returnCode: returnCode,
+      returnDescription: returnDescription,
     );
   }
 

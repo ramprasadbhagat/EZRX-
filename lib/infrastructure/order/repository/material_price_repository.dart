@@ -55,17 +55,19 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
 
       final priceData = <MaterialNumber, Price>{};
 
-      await Future.wait(queryMaterialNumbers.map((e) async {
-        final price = await getPrice(
-          salesOrgCode: salesOrgCode,
-          customerCode: customerCode,
-          materialNumber: e,
-        );
-        price.fold(
-          (failure) {},
-          (price) => priceData.addAll({price.materialNumber: price}),
-        );
-      }));
+      await Future.wait(
+        queryMaterialNumbers.map((e) async {
+          final price = await getPrice(
+            salesOrgCode: salesOrgCode,
+            customerCode: customerCode,
+            materialNumber: e,
+          );
+          price.fold(
+            (failure) {},
+            (price) => priceData.addAll({price.materialNumber: price}),
+          );
+        }),
+      );
 
       return Right(
         priceData,

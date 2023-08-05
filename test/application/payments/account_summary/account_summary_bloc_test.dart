@@ -88,7 +88,8 @@ void main() {
               salesOrg: salesOrg,
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (AccountSummaryBloc bloc) => bloc.add(
           AccountSummaryEvent.fetchInvoiceSummary(
@@ -152,7 +153,8 @@ void main() {
               salesOrg: salesOrg,
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (AccountSummaryBloc bloc) => bloc.add(
           AccountSummaryEvent.fetchCreditSummary(

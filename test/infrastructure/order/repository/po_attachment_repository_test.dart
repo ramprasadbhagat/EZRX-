@@ -85,7 +85,6 @@ void main() {
     );
   });
 
-
   group('PoAttachmentRepository fileDownload test  ', () {
     test('download file successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
@@ -137,7 +136,10 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => poDocumentRemoteDataSourceMock.fileDownload(
-            'fake-name', 'fake-url', AttachmentType.downloadPOAttachment),
+          'fake-name',
+          'fake-url',
+          AttachmentType.downloadPOAttachment,
+        ),
       ).thenAnswer(
         (invocation) async =>
             PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
@@ -178,7 +180,6 @@ void main() {
         true,
       );
     });
-
   });
 
   group('PoAttachmentRepository Open file test  ', () {
@@ -243,9 +244,11 @@ void main() {
     test('file open download local fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => poDocumentLocalDataSourceMock.fileDownload(
-            'fake-name',
-          )).thenThrow(MockException());
+      when(
+        () => poDocumentLocalDataSourceMock.fileDownload(
+          'fake-name',
+        ),
+      ).thenThrow(MockException());
       when(
         () => fileSystemHelperMock.openFile(
           PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
@@ -266,11 +269,13 @@ void main() {
     test('file open download remote fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => poDocumentRemoteDataSourceMock.fileDownload(
-            'fake-name',
-            'fake-url',
-            AttachmentType.downloadPOAttachment,
-          )).thenThrow(MockException());
+      when(
+        () => poDocumentRemoteDataSourceMock.fileDownload(
+          'fake-name',
+          'fake-url',
+          AttachmentType.downloadPOAttachment,
+        ),
+      ).thenThrow(MockException());
       when(
         () => fileSystemHelperMock.openFile(
           PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
@@ -320,105 +325,103 @@ void main() {
       );
     });
   });
-    group('PoAttachmentRepository getPermission test  ', () {
-      test('android 33 permission', () async {
-        when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
-            .thenAnswer((invocation) async => true);
+  group('PoAttachmentRepository getPermission test  ', () {
+    test('android 33 permission', () async {
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((invocation) async => true);
 
-        final result = await poAttachmentRepository.getPermission(
-          uploadOptionType: UploadOptionType.file,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-
-      test('ios file permission', () async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-        when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
-            .thenAnswer((invocation) async => false);
-
-        final result = await poAttachmentRepository.getPermission(
-          uploadOptionType: UploadOptionType.file,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-        debugDefaultTargetPlatformOverride = null;
-      });
-
-      test('ios photo permission denied', () async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-        when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
-            .thenAnswer((invocation) async => false);
-        when(() => permissionServiceMock.requestPhotoPermission()).thenAnswer(
-          (invocation) async => PermissionStatus.denied,
-        );
-        final result = await poAttachmentRepository.getPermission(
-          uploadOptionType: UploadOptionType.gallery,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-        debugDefaultTargetPlatformOverride = null;
-      });
-
-      test('ios photo permission granted', () async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-        when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
-            .thenAnswer((invocation) async => false);
-        when(() => permissionServiceMock.requestPhotoPermission()).thenAnswer(
-          (invocation) async => PermissionStatus.granted,
-        );
-        final result = await poAttachmentRepository.getPermission(
-          uploadOptionType: UploadOptionType.gallery,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-        debugDefaultTargetPlatformOverride = null;
-      });
-
-      test('android permission denied', () async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.android;
-        when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
-            .thenAnswer((invocation) async => false);
-        when(() => permissionServiceMock.requestStoragePermission()).thenAnswer(
-          (invocation) async => PermissionStatus.denied,
-        );
-        final result = await poAttachmentRepository.getPermission(
-          uploadOptionType: UploadOptionType.gallery,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-        debugDefaultTargetPlatformOverride = null;
-      });
-
-      test('android permission granted', () async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.android;
-        when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
-            .thenAnswer((invocation) async => false);
-        when(() => permissionServiceMock.requestStoragePermission()).thenAnswer(
-          (invocation) async => PermissionStatus.granted,
-        );
-        final result = await poAttachmentRepository.getPermission(
-          uploadOptionType: UploadOptionType.gallery,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-        debugDefaultTargetPlatformOverride = null;
-      });
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.file,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
     });
 
-  
+    test('ios file permission', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((invocation) async => false);
+
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.file,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      debugDefaultTargetPlatformOverride = null;
+    });
+
+    test('ios photo permission denied', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((invocation) async => false);
+      when(() => permissionServiceMock.requestPhotoPermission()).thenAnswer(
+        (invocation) async => PermissionStatus.denied,
+      );
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.gallery,
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+      debugDefaultTargetPlatformOverride = null;
+    });
+
+    test('ios photo permission granted', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((invocation) async => false);
+      when(() => permissionServiceMock.requestPhotoPermission()).thenAnswer(
+        (invocation) async => PermissionStatus.granted,
+      );
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.gallery,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      debugDefaultTargetPlatformOverride = null;
+    });
+
+    test('android permission denied', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((invocation) async => false);
+      when(() => permissionServiceMock.requestStoragePermission()).thenAnswer(
+        (invocation) async => PermissionStatus.denied,
+      );
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.gallery,
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+      debugDefaultTargetPlatformOverride = null;
+    });
+
+    test('android permission granted', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      when(() => deviceInfoMock.checkIfDeviceIsAndroidWithSDK33())
+          .thenAnswer((invocation) async => false);
+      when(() => permissionServiceMock.requestStoragePermission()).thenAnswer(
+        (invocation) async => PermissionStatus.granted,
+      );
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.gallery,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      debugDefaultTargetPlatformOverride = null;
+    });
+  });
 
   group('PoAttachmentRepository pickFiles test  ', () {
     test('pickFiles Error', () async {
@@ -426,10 +429,11 @@ void main() {
         (invocation) => const ApiFailure.other('fake-Error'),
       );
       final result = await poAttachmentRepository.pickFiles(
-          uploadOptionType: UploadOptionType.gallery,
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          user: user);
+        uploadOptionType: UploadOptionType.gallery,
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        shipToInfo: ShipToInfo.empty(),
+        user: user,
+      );
       expect(
         result.isLeft(),
         true,

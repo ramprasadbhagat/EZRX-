@@ -17,7 +17,6 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required RangeValue amountValueTo,
     required List<String> filterStatuses,
     required SearchKey searchKey,
-    
   }) = _AllInvoicesFilter;
 
   factory AllInvoicesFilter.fullyEmpty() => AllInvoicesFilter(
@@ -101,5 +100,4 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
       RangeValue.checkIfRangeIsValid(amountValueFrom, amountValueTo);
 
   bool get anyFilterApplied => appliedFilterCount > 0;
-
 }

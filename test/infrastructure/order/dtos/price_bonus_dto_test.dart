@@ -8,10 +8,15 @@ void main() {
   late PriceBonusDto data;
   group('Test bundleInfoDto ', () {
     setUp(() async {
-      data = const PriceBonusDto(items: [
-        PriceBonusItemDto(
-            calculation: '', qualifyingQuantity: 10, bonusMaterials: [])
-      ]);
+      data = const PriceBonusDto(
+        items: [
+          PriceBonusItemDto(
+            calculation: '',
+            qualifyingQuantity: 10,
+            bonusMaterials: [],
+          )
+        ],
+      );
     });
     test('Test fromDomain', () {
       final configsDto = PriceBonusDto.fromDomain(data.toDomain());
@@ -32,7 +37,8 @@ void main() {
         'BonusMaterial': []
       };
       final configsDtoMap = PriceBonusItemDto.fromDomain(
-          PriceBonusItemDto.fromJson(data).toDomain());
+        PriceBonusItemDto.fromJson(data).toDomain(),
+      );
       expect(configsDtoMap.qualifyingQuantity, 12);
     });
 
@@ -46,7 +52,8 @@ void main() {
         'BonusQuantity': 1
       };
       final configs = BonusMaterialDto.fromDomain(
-          BonusMaterialDto.fromJson(data).toDomain());
+        BonusMaterialDto.fromJson(data).toDomain(),
+      );
       expect(configs.bonusQuantity, 1);
     });
   });

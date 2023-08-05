@@ -32,9 +32,11 @@ void main() {
       cartBlocMock = CartBlocMock();
       locator.registerFactory(() => AppRouter());
       autoRouter = AppRouter();
-      when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
-        isFetching: false,
-      ));
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
       mockCartItemWithOutBatch = CartItem(
         materials: [
           PriceAggregate.empty().copyWith(
@@ -226,8 +228,9 @@ void main() {
         verify(
           () => cartBlocMock.add(
             CartEvent.updateBatchInCartItem(
-                item: mockCartItemWithBatch,
-                stockInfo: batchStockInfoMock.last),
+              item: mockCartItemWithBatch,
+              stockInfo: batchStockInfoMock.last,
+            ),
           ),
         ).called(1);
       },
@@ -276,8 +279,9 @@ void main() {
         verify(
           () => cartBlocMock.add(
             CartEvent.updateBatchInCartItem(
-                item: mockCartItemWithBatch,
-                stockInfo: batchStockInfoMock.last),
+              item: mockCartItemWithBatch,
+              stockInfo: batchStockInfoMock.last,
+            ),
           ),
         ).called(1);
       },

@@ -42,7 +42,7 @@ void main() async {
           );
           final finalData = data['data']['upsertCart']['EzRxItems'];
           final result = await localDataSource.upsertCart();
-          
+
           expect(
             result,
             List.from(finalData)

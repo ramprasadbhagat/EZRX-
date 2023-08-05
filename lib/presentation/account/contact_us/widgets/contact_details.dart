@@ -30,11 +30,13 @@ class _ContactDetails extends StatelessWidget {
               _sendEmail(salesOrg.contactEmail, salesOrg.contactPersonName),
         ),
         ...salesOrg.contact.phoneNumbers
-            .map((e) => _ContactItem(
-                  label: e.displayTelephoneNumber,
-                  icon: Icons.call_outlined,
-                  onTap: () => _makeCall('tel://${e.displayTelephoneNumber}'),
-                ))
+            .map(
+              (e) => _ContactItem(
+                label: e.displayTelephoneNumber,
+                icon: Icons.call_outlined,
+                onTap: () => _makeCall('tel://${e.displayTelephoneNumber}'),
+              ),
+            )
             .toList(),
       ],
     );

@@ -16,11 +16,13 @@ class PriceTier with _$PriceTier {
       );
 
   List<PriceTierItem> get getItems => List<PriceTierItem>.from(items)
-    ..sort((
-      PriceTierItem a,
-      PriceTierItem b,
-    ) =>
-        b.quantity.compareTo(a.quantity));
+    ..sort(
+      (
+        PriceTierItem a,
+        PriceTierItem b,
+      ) =>
+          b.quantity.compareTo(a.quantity),
+    );
 }
 
 @freezed

@@ -19,5 +19,4 @@ class ViewByItemReturnFilterState with _$ViewByItemReturnFilterState {
         ],
         showErrorMessage: false,
       );
-      
 }

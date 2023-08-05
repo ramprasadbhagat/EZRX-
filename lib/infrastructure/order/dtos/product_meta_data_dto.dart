@@ -59,7 +59,7 @@ class ProductItemDto with _$ProductItemDto {
       );
 
   factory ProductItemDto.fromDomain(ProductItem productItem) => ProductItemDto(
-      promotionMaterial: productItem.promotionMaterial.getOrDefaultValue(''),
+        promotionMaterial: productItem.promotionMaterial.getOrDefaultValue(''),
         xp: ProductItemXpDto.fromDomain(productItem.productItemXp),
       );
 

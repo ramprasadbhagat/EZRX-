@@ -22,32 +22,22 @@ class RecentOrderDto with _$RecentOrderDto {
         required String materialDescription,
     @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
         required String defaultMaterialDescription,
-    @JsonKey(name: 'Qty', defaultValue: 0)
-        required int qty,
-    @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-        required double unitPrice,
-    @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-        required double totalPrice,
+    @JsonKey(name: 'Qty', defaultValue: 0) required int qty,
+    @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
+    @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required double totalPrice,
     @JsonKey(name: 'ManufactureName', defaultValue: '')
         required String manufactureName,
-    @JsonKey(name: 'Seller', defaultValue: '')
-        required String seller,
+    @JsonKey(name: 'Seller', defaultValue: '') required String seller,
     @JsonKey(name: 'IsMarketplace', defaultValue: false)
         required bool isMarketplace,
-    @JsonKey(name: 'OrderNumber', defaultValue: '')
-        required String orderNumber,
-    @JsonKey(name: 'EZRXNumber', defaultValue: '')
-        required String eZRXNumber,
+    @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
+    @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'WarehouseStorageCondition', defaultValue: '')
         required String warehouseStorageCondition,
-    @JsonKey(name: 'Available', defaultValue: false)
-        required bool available,
-    @JsonKey(name: 'OrderBy', defaultValue: '')
-        required String orderBy,
-    @JsonKey(name: 'OrderType', defaultValue: '')
-        required String orderType,
-    @JsonKey(name: 'HidePrice', defaultValue: false)
-        required bool hidePrice,
+    @JsonKey(name: 'Available', defaultValue: false) required bool available,
+    @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
+    @JsonKey(name: 'OrderType', defaultValue: '') required String orderType,
+    @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
   }) = _RecentOrderDto;
 
   factory RecentOrderDto.fromJson(Map<String, dynamic> json) =>

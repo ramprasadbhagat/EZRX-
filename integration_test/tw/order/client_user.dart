@@ -128,11 +128,14 @@ void main() {
     await materialRootRobot.tapPrincipleSelector();
     materialRootRobot.verifyMaterialFilterPage();
     await materialRootRobot.enterTextAndSubmit(
-        principleSearchText: principleSearchText);
+      principleSearchText: principleSearchText,
+    );
     materialRootRobot.verifySearchResultAppears(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     await materialRootRobot.tapOnSearchResult(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     materialRootRobot.verifyApplyButton();
     await materialRootRobot.tapApplyButton();
     materialRootRobot.findPrincipleSelector();
@@ -221,11 +224,20 @@ void main() {
     orderSummaryRobot.verifyGrandTotalPrice(currency, materialGrandTotalPrice);
     orderSummaryRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
     orderSummaryRobot.verifyMaterialListPrice(
-        false, currency, materialListPrice);
+      false,
+      currency,
+      materialListPrice,
+    );
     orderSummaryRobot.verifyMaterialUnitPrice(
-        false, currency, materialUnitPrice);
+      false,
+      currency,
+      materialUnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        false, currency, materialTotalPrice);
+      false,
+      currency,
+      materialTotalPrice,
+    );
     orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
@@ -369,11 +381,20 @@ void main() {
     orderSummaryRobot.verifyGrandTotalPrice(currency, materialGrandTotalPrice);
     orderSummaryRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
     orderSummaryRobot.verifyMaterialListPrice(
-        false, currency, materialListPrice);
+      false,
+      currency,
+      materialListPrice,
+    );
     orderSummaryRobot.verifyMaterialUnitPrice(
-        false, currency, materialUnitPrice);
+      false,
+      currency,
+      materialUnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        false, currency, materialTotalPrice);
+      false,
+      currency,
+      materialTotalPrice,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //minimum order amount crosses

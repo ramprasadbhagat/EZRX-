@@ -32,7 +32,7 @@ class MaterialPriceDetailRemoteDataSource {
     required String shipToCode,
     required String language,
     required List<Map<String, dynamic>> queryString,
-    required bool listPriceOnly ,
+    required bool listPriceOnly,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getMaterialDetail();

@@ -8,7 +8,7 @@ class ComboDealListEvent with _$ComboDealListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required PriceComboDeal comboDeals,
   }) = _FetchMaterialDeal;
-   const factory ComboDealListEvent.fetchPrincipleGroupDeal({
+  const factory ComboDealListEvent.fetchPrincipleGroupDeal({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required PriceComboDeal comboDeals,

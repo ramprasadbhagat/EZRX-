@@ -13,9 +13,12 @@ void main() {
   group('Banner DTO', () {
     setUp(() async {
       data = json.decode(
-          await rootBundle.loadString('assets/json/getBannersResponse.json'));
+        await rootBundle.loadString('assets/json/getBannersResponse.json'),
+      );
       eZReachData = json.decode(
-          await rootBundle.loadString('assets/json/getEZReachBannerResponse.json'));
+        await rootBundle
+            .loadString('assets/json/getEZReachBannerResponse.json'),
+      );
     });
     test('toDomain Test', () {
       final bannerData = BannerDto.fromJson(
@@ -30,17 +33,20 @@ void main() {
     });
 
     test('fromDomain Test', () {
-      final configsDto = BannerDto.fromDomain(BannerDto.fromJson(
-        data['data']['getBanners'][0],
-      ).toDomain());
+      final configsDto = BannerDto.fromDomain(
+        BannerDto.fromJson(
+          data['data']['getBanners'][0],
+        ).toDomain(),
+      );
       expect(configsDto.salesOrg, '2601');
     });
 
     test('toJson Test', () {
-      final bannerDtoMap = BannerDto.fromDomain(BannerDto.fromJson(
-        data['data']['getBanners'][0],
-      ).toDomain())
-          .toJson();
+      final bannerDtoMap = BannerDto.fromDomain(
+        BannerDto.fromJson(
+          data['data']['getBanners'][0],
+        ).toDomain(),
+      ).toJson();
       expect(bannerDtoMap['salesOrg'], '2601');
     });
   });

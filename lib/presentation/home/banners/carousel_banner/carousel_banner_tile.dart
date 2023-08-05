@@ -26,13 +26,16 @@ class CarouselBannerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        trackMixpanelEvent(MixpanelEvents.bannerClick, props: {
-          MixpanelProps.bannerId: banner.id.toString(),
-          MixpanelProps.bannerTitle: banner.title,
-          MixpanelProps.bannerOrder: bannerPosition,
-          MixpanelProps.bannerRedirected:
-              banner.url.startsWith('https') ? 'external_web' : 'internal',
-        });
+        trackMixpanelEvent(
+          MixpanelEvents.bannerClick,
+          props: {
+            MixpanelProps.bannerId: banner.id.toString(),
+            MixpanelProps.bannerTitle: banner.title,
+            MixpanelProps.bannerOrder: bannerPosition,
+            MixpanelProps.bannerRedirected:
+                banner.url.startsWith('https') ? 'external_web' : 'internal',
+          },
+        );
         if (banner.isKeyword && banner.keyword != '') {
           if (context.mounted) {
             locator<MixpanelService>().setBannerOrderFlow(banner);

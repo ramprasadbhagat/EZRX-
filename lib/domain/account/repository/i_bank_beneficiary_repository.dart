@@ -13,7 +13,7 @@ abstract class IBankBeneficiaryRepository {
   Future<Either<ApiFailure, BankBeneficiaryResponse>> addOrUpdateBeneficiary({
     required BankBeneficiary beneficiaryData,
   });
-  
+
   Future<Either<ApiFailure, BankBeneficiaryResponse>> deleteBeneficiary({
     required SalesOrg salesOrg,
     required String salesDistrict,

@@ -39,11 +39,13 @@ void main() async {
           lastPrice: MaterialPrice(price),
         ),
         quantity: quantity,
-        comboDeal: comboDeal.copyWith(flexiQtyTier: [
-          comboDeal.flexiQtyTier.first.copyWith(
-            type: DiscountType(discountType),
-          )
-        ]),
+        comboDeal: comboDeal.copyWith(
+          flexiQtyTier: [
+            comboDeal.flexiQtyTier.first.copyWith(
+              type: DiscountType(discountType),
+            )
+          ],
+        ),
       );
 
   final percentDealMaterial =
@@ -56,13 +58,16 @@ void main() async {
   group('Cart Item K2.2 -', () {
     test('Combo not eligible when total qty is not suffice', () {
       expect(
-          CartItem.comboDeal([amountDealMaterial]).isComboDealEligible, false);
+        CartItem.comboDeal([amountDealMaterial]).isComboDealEligible,
+        false,
+      );
     });
     test('Combo not eligible when total qty is suffice', () {
       expect(
-          CartItem.comboDeal([percentDealMaterial, amountDealMaterial])
-              .isComboDealEligible,
-          true);
+        CartItem.comboDeal([percentDealMaterial, amountDealMaterial])
+            .isComboDealEligible,
+        true,
+      );
     });
 
     group('Percent deal -', () {

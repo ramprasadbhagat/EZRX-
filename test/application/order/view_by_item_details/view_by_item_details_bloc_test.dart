@@ -68,20 +68,23 @@ void main() {
           () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(),
         ).thenAnswer((invocation) async => Right(orderStatusTracker));
       },
-      act: (bloc) => bloc.add(ViewByItemDetailsEvent.fetch(
-        orderHistoryItem: OrderHistoryItem.empty(),
-        soldTo: CustomerCodeInfo.empty(),
-        user: User.empty(),
-        disableDeliveryDateForZyllemStatus: true,
-      )),
+      act: (bloc) => bloc.add(
+        ViewByItemDetailsEvent.fetch(
+          orderHistoryItem: OrderHistoryItem.empty(),
+          soldTo: CustomerCodeInfo.empty(),
+          user: User.empty(),
+          disableDeliveryDateForZyllemStatus: true,
+        ),
+      ),
       expect: () => [
         ViewByItemDetailsState.initial().copyWith(
           isLoading: true,
         ),
         ViewByItemDetailsState.initial().copyWith(
-            isLoading: false,
-            viewByItemDetails: orderHistory,
-            failureOrSuccessOption: optionOf(Right(orderHistory))),
+          isLoading: false,
+          viewByItemDetails: orderHistory,
+          failureOrSuccessOption: optionOf(Right(orderHistory)),
+        ),
       ],
     );
 
@@ -99,18 +102,22 @@ void main() {
             user: User.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
         when(
           () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
       },
-      act: (bloc) => bloc.add(ViewByItemDetailsEvent.fetch(
-        orderHistoryItem: OrderHistoryItem.empty(),
-        soldTo: CustomerCodeInfo.empty(),
-        user: User.empty(),
-        disableDeliveryDateForZyllemStatus: true,
-      )),
+      act: (bloc) => bloc.add(
+        ViewByItemDetailsEvent.fetch(
+          orderHistoryItem: OrderHistoryItem.empty(),
+          soldTo: CustomerCodeInfo.empty(),
+          user: User.empty(),
+          disableDeliveryDateForZyllemStatus: true,
+        ),
+      ),
       expect: () => [
         ViewByItemDetailsState.initial().copyWith(
           isLoading: true,

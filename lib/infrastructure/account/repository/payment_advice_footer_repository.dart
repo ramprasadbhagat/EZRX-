@@ -75,8 +75,8 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
     }
     try {
       final addPaymentAdvice = await remoteDataSource.addPaymentAdvice(
-          query: PaymentAdviceFooterDto.fromDomain(
-        paymentAdviceFooterData,
+        query: PaymentAdviceFooterDto.fromDomain(
+          paymentAdviceFooterData,
         ).toJson(),
       );
 
@@ -186,8 +186,7 @@ class PaymentAdviceFooterRepository extends IPaymentAdviceFooterRepository {
     try {
       final addPaymentAdvice = await remoteDataSource.deletePaymentAdvice(
         salesOrg: paymentAdviceFooter.salesOrg.getOrCrash(),
-        salesDistrict:
-            paymentAdviceFooter.salesDistrict.salesDistrictHeader
+        salesDistrict: paymentAdviceFooter.salesDistrict.salesDistrictHeader
             .getOrDefaultValue(''),
       );
 

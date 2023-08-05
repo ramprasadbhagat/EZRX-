@@ -47,7 +47,7 @@ class ViewByOrderRemoteDataSource {
         'orderBy': orderBy,
         'sort': sort,
         'searchKey': searchKey,
-        'creatingOrderIds':creatingOrderIds,
+        'creatingOrderIds': creatingOrderIds,
         ...filterQuery,
       };
 

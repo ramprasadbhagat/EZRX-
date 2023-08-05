@@ -49,22 +49,20 @@ class ProductDetailRepository implements IProductDetailRepository {
     required MaterialInfoType type,
   }) async =>
       type.typeBundle
-        ? await getBundleDetail(
-            customerCodeInfo: customerCodeInfo,
-            locale: locale,
-            materialNumber: materialNumber,
-            salesOrganisation: salesOrganisation,
-            shipToInfo: shipToInfo,
-          )
-        : await getMaterialDetail(
-            customerCodeInfo: customerCodeInfo,
-            locale: locale,
-            materialNumber: materialNumber,
-            salesOrganisation: salesOrganisation,
-            shipToInfo: shipToInfo,
-          );
-          
-  
+          ? await getBundleDetail(
+              customerCodeInfo: customerCodeInfo,
+              locale: locale,
+              materialNumber: materialNumber,
+              salesOrganisation: salesOrganisation,
+              shipToInfo: shipToInfo,
+            )
+          : await getMaterialDetail(
+              customerCodeInfo: customerCodeInfo,
+              locale: locale,
+              materialNumber: materialNumber,
+              salesOrganisation: salesOrganisation,
+              shipToInfo: shipToInfo,
+            );
 
   @override
   Future<Either<ApiFailure, MaterialInfo>> getMaterialDetail({

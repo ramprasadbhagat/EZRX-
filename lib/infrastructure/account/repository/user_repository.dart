@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -12,6 +11,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -27,6 +27,7 @@ class UserRepository implements IUserRepository {
   final TokenStorage tokenStorage;
   final MixpanelService mixpanelService;
   final ClevertapService clevertapService;
+  final DatadogService datadogService;
 
   UserRepository({
     required this.config,
@@ -37,6 +38,7 @@ class UserRepository implements IUserRepository {
     required this.tokenStorage,
     required this.mixpanelService,
     required this.clevertapService,
+    required this.datadogService,
   });
 
   @override
@@ -68,11 +70,7 @@ class UserRepository implements IUserRepository {
         role: user.role.name,
       );
 
-      DatadogSdk.instance.setUserInfo(
-        id: user.id,
-        name: user.username.getOrDefaultValue(''),
-        email: user.email.getOrDefaultValue(''),
-      );
+      datadogService.setUserInfo(user);
 
       if (!kIsWeb) {
         await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);

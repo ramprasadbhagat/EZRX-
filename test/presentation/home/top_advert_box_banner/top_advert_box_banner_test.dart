@@ -86,11 +86,13 @@ void main() {
       responseType: ResponseType.json,
       path: '',
     );
-    when(() => mockHTTPService.request(
-          method: 'GET',
-          url: mockUrl,
-          responseType: ResponseType.bytes,
-        )).thenAnswer(
+    when(
+      () => mockHTTPService.request(
+        method: 'GET',
+        url: mockUrl,
+        responseType: ResponseType.bytes,
+      ),
+    ).thenAnswer(
       (invocation) => Future.value(
         Response(
           statusCode: 200,
@@ -119,7 +121,8 @@ void main() {
         providers: [
           BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => mockCustomerCodeBloc),
+            create: (context) => mockCustomerCodeBloc,
+          ),
           BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),

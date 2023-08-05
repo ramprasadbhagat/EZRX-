@@ -15,7 +15,7 @@ extension SortExt on Sort {
   }
 
   String get valueRequest {
-    switch(this) {
+    switch (this) {
       case Sort.az:
         return 'asc';
       case Sort.za:

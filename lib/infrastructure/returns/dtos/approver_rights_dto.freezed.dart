@@ -42,14 +42,10 @@ abstract class $ApproverRightsDtoCopyWith<$Res> {
       _$ApproverRightsDtoCopyWithImpl<$Res, ApproverRightsDto>;
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'rawMetaData',
-          defaultValue: <String>[],
-          readValue: rawMetaDataOverride)
-      List<String> usernames,
-      @JsonKey(
-          name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
-      List<ApproverRightsDetailsDto> approverRights});
+      {@JsonKey(name: 'rawMetaData', defaultValue: <String>[], readValue: rawMetaDataOverride)
+          List<String> usernames,
+      @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
+          List<ApproverRightsDetailsDto> approverRights});
 }
 
 /// @nodoc
@@ -91,14 +87,10 @@ abstract class _$$_AddReturnApprovalLimitDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'rawMetaData',
-          defaultValue: <String>[],
-          readValue: rawMetaDataOverride)
-      List<String> usernames,
-      @JsonKey(
-          name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
-      List<ApproverRightsDetailsDto> approverRights});
+      {@JsonKey(name: 'rawMetaData', defaultValue: <String>[], readValue: rawMetaDataOverride)
+          List<String> usernames,
+      @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
+          List<ApproverRightsDetailsDto> approverRights});
 }
 
 /// @nodoc
@@ -133,14 +125,10 @@ class __$$_AddReturnApprovalLimitDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AddReturnApprovalLimitDto extends _AddReturnApprovalLimitDto {
   const _$_AddReturnApprovalLimitDto(
-      {@JsonKey(
-          name: 'rawMetaData',
-          defaultValue: <String>[],
-          readValue: rawMetaDataOverride)
-      required final List<String> usernames,
-      @JsonKey(
-          name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
-      required final List<ApproverRightsDetailsDto> approverRights})
+      {@JsonKey(name: 'rawMetaData', defaultValue: <String>[], readValue: rawMetaDataOverride)
+          required final List<String> usernames,
+      @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
+          required final List<ApproverRightsDetailsDto> approverRights})
       : _usernames = usernames,
         _approverRights = approverRights,
         super._();
@@ -209,16 +197,10 @@ class _$_AddReturnApprovalLimitDto extends _AddReturnApprovalLimitDto {
 
 abstract class _AddReturnApprovalLimitDto extends ApproverRightsDto {
   const factory _AddReturnApprovalLimitDto(
-          {@JsonKey(
-              name: 'rawMetaData',
-              defaultValue: <String>[],
-              readValue: rawMetaDataOverride)
+      {@JsonKey(name: 'rawMetaData', defaultValue: <String>[], readValue: rawMetaDataOverride)
           required final List<String> usernames,
-          @JsonKey(
-              name: 'approverRights',
-              defaultValue: <ApproverRightsDetailsDto>[])
-          required final List<ApproverRightsDetailsDto> approverRights}) =
-      _$_AddReturnApprovalLimitDto;
+      @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
+          required final List<ApproverRightsDetailsDto> approverRights}) = _$_AddReturnApprovalLimitDto;
   const _AddReturnApprovalLimitDto._() : super._();
 
   factory _AddReturnApprovalLimitDto.fromJson(Map<String, dynamic> json) =

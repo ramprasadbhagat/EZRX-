@@ -124,7 +124,8 @@ void main() {
     blocTest(
       'Initialize',
       build: () => MaterialFilterBloc(
-          materialFilterRepository: materialFilterRepositoryMock),
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
       act: (MaterialFilterBloc bloc) => bloc.add(
         const MaterialFilterEvent.initialized(),
       ),
@@ -281,17 +282,19 @@ void main() {
     //     ),
     //   ],
     // );
-    blocTest<MaterialFilterBloc, MaterialFilterState>('update searchkey',
-        build: () => MaterialFilterBloc(
-              materialFilterRepository: materialFilterRepositoryMock,
-            ),
-        act: (bloc) =>
-            bloc.add(const MaterialFilterEvent.updateSearchKey('fake-name')),
-        expect: () => [
-              MaterialFilterState.initial().copyWith(
-                searchKey: SearchKey('fake-name'),
-              )
-            ]);
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'update searchkey',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      act: (bloc) =>
+          bloc.add(const MaterialFilterEvent.updateSearchKey('fake-name')),
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          searchKey: SearchKey('fake-name'),
+        )
+      ],
+    );
 
     // blocTest<MaterialFilterBloc, MaterialFilterState>('Clear selected',
     //     build: () => MaterialFilterBloc(

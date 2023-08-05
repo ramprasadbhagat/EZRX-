@@ -2,14 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-
-
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/download_payment_attachment_dto.dart';
-
 
 class DownloadPaymentAttachmentLocalDataSource {
   DownloadPaymentAttachmentLocalDataSource();
@@ -21,8 +18,9 @@ class DownloadPaymentAttachmentLocalDataSource {
       ),
     );
 
-    return DownloadPaymentAttachmentDto.fromJson(data['data']['customerDocumentHeaderExcel'])
-        .toDomain();
+    return DownloadPaymentAttachmentDto.fromJson(
+      data['data']['customerDocumentHeaderExcel'],
+    ).toDomain();
   }
 
   Future<DownloadPaymentAttachment> getPaymentSummaryFileDownloadUrl() async {
@@ -32,8 +30,9 @@ class DownloadPaymentAttachmentLocalDataSource {
       ),
     );
 
-    return DownloadPaymentAttachmentDto.fromJson(data['data']['customerPaymentExcel'])
-        .toDomain();
+    return DownloadPaymentAttachmentDto.fromJson(
+      data['data']['customerPaymentExcel'],
+    ).toDomain();
   }
 
   Future<PoDocumentsBuffer> fileDownload() async {

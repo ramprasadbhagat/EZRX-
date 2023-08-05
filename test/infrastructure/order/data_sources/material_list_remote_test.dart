@@ -485,10 +485,11 @@ void main() {
       final finalData = res['data']['materialsWithMeta']['materials'];
 
       expect(
-          result,
-          List.from(finalData)
-              .map((e) => MaterialDto.fromJson(e).toDomain())
-              .toList());
+        result,
+        List.from(finalData)
+            .map((e) => MaterialDto.fromJson(e).toDomain())
+            .toList(),
+      );
     });
 
     test('get failure', () async {
@@ -546,7 +547,8 @@ void main() {
       };
       final res = json.decode(
         await rootBundle.loadString(
-            'assets/json/getCustomerMaterialsForSalesRepResponse.json'),
+          'assets/json/getCustomerMaterialsForSalesRepResponse.json',
+        ),
       );
 
       dioAdapter.onPost(
@@ -576,10 +578,11 @@ void main() {
           res['data']['customerMaterialsForSalesRep']['materials'];
 
       expect(
-          result,
-          List.from(finalData)
-              .map((e) => MaterialDto.fromJson(e).toDomain())
-              .toList());
+        result,
+        List.from(finalData)
+            .map((e) => MaterialDto.fromJson(e).toDomain())
+            .toList(),
+      );
     });
 
     test('get failure for salesRep', () async {

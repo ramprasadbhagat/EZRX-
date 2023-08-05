@@ -12,16 +12,20 @@ void main() {
 
   group('Approver return request information header dto ', () {
     setUp(() async {
-      data = json.decode(await rootBundle
-          .loadString('assets/json/returnRequestInformationV2Response.json'));
+      data = json.decode(
+        await rootBundle
+            .loadString('assets/json/returnRequestInformationV2Response.json'),
+      );
     });
     test('=> Approver return request information header', () {
       final approverReturnRequestInformationHeader =
           RequestInformationHeaderDto.fromJson(
-                  data['data']['requestInformationV2']['requestHeader'])
-              .toDomain();
-      expect(approverReturnRequestInformationHeader,
-          isA<ReturnRequestInformationHeader>());
+        data['data']['requestInformationV2']['requestHeader'],
+      ).toDomain();
+      expect(
+        approverReturnRequestInformationHeader,
+        isA<ReturnRequestInformationHeader>(),
+      );
     });
   });
 }

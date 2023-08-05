@@ -31,8 +31,10 @@ class MonthsAfterExpiry extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory MonthsAfterExpiry.change(String searchText) {
-    return MonthsAfterExpiry._(validateStringNotEmpty(searchText)
-        .flatMap((input) => validateInputIsBiggerThanMaxValue(input, 12)));
+    return MonthsAfterExpiry._(
+      validateStringNotEmpty(searchText)
+          .flatMap((input) => validateInputIsBiggerThanMaxValue(input, 12)),
+    );
   }
   String get displayMonthsAfterExpiry {
     return zeroIfEmpty((value.getOrElse(() => '')));
@@ -46,8 +48,10 @@ class MonthsBeforeExpiry extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory MonthsBeforeExpiry.change(String searchText) {
-    return MonthsBeforeExpiry._(validateStringNotEmpty(searchText)
-        .flatMap((input) => validateInputIsBiggerThanMaxValue(input, 36)));
+    return MonthsBeforeExpiry._(
+      validateStringNotEmpty(searchText)
+          .flatMap((input) => validateInputIsBiggerThanMaxValue(input, 36)),
+    );
   }
   String get displayMonthsBeforeExpiry {
     return zeroIfEmpty((value.getOrElse(() => '')));
@@ -113,12 +117,14 @@ class ReturnQuantity extends ValueObject<String> {
     int balanceQuantity,
     String inputValue,
   ) {
-    return ReturnQuantity._(validateStringNotEmpty(inputValue).flatMap(
-      (input) => validateInputIsBiggerThanMaxValue(
-        inputValue,
-        balanceQuantity,
+    return ReturnQuantity._(
+      validateStringNotEmpty(inputValue).flatMap(
+        (input) => validateInputIsBiggerThanMaxValue(
+          inputValue,
+          balanceQuantity,
+        ),
       ),
-    ));
+    );
   }
 
   int get getIntValue => getIntegerReturnQuantity(value.getOrElse(() => ''));

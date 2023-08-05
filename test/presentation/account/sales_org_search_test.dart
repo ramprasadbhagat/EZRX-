@@ -94,11 +94,13 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock),
+            create: (context) => customerCodeBlocMock,
+          ),
           BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: SalesOrgSearch(
           avialableSalesOrgList: availableSalesOrgList,
@@ -111,27 +113,31 @@ void main() {
       (tester) async {
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-              customerCodeList: [
-                CustomerCodeInfo.empty().copyWith(
-                  telephoneNumber: PhoneNumber('1234567890'),
-                  customerCodeSoldTo: '123456789',
-                  shipToInfos: <ShipToInfo>[
-                    ShipToInfo.empty().copyWith(
-                        shipToCustomerCode: '12345678',
-                        defaultShipToAddress: true),
-                  ],
-                  paymentTermDescription: '30 days',
-                ),
-              ],
-              shipToInfo: ShipToInfo.empty().copyWith(
-                shipToCustomerCode: '12345678',
+            customerCodeList: [
+              CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: PhoneNumber('1234567890'),
+                customerCodeSoldTo: '123456789',
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(
+                    shipToCustomerCode: '12345678',
+                    defaultShipToAddress: true,
+                  ),
+                ],
+                paymentTermDescription: '30 days',
               ),
-              searchKey: SearchKey('fake-key')),
+            ],
+            shipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: '12345678',
+            ),
+            searchKey: SearchKey('fake-key'),
+          ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2501'))));
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+          ),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
@@ -141,12 +147,14 @@ void main() {
 
         await tester.enterText(searchField, 'fake-salesOrg');
         await tester.pump(const Duration(seconds: 5));
-        verify(() => salesOrgBlocMock.add(
-              SalesOrgEvent.searchSalesOrg(
-                salesOrgList: availableSalesOrgList,
-                keyWord: 'fake-salesOrg',
-              ),
-            ));
+        verify(
+          () => salesOrgBlocMock.add(
+            SalesOrgEvent.searchSalesOrg(
+              salesOrgList: availableSalesOrgList,
+              keyWord: 'fake-salesOrg',
+            ),
+          ),
+        );
         await tester.pump();
       },
     );
@@ -156,28 +164,32 @@ void main() {
       (tester) async {
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-              customerCodeList: [
-                CustomerCodeInfo.empty().copyWith(
-                  telephoneNumber: PhoneNumber('1234567890'),
-                  customerCodeSoldTo: '123456789',
-                  shipToInfos: <ShipToInfo>[
-                    ShipToInfo.empty().copyWith(
-                        shipToCustomerCode: '12345678',
-                        defaultShipToAddress: true),
-                  ],
-                  paymentTermDescription: '30 days',
-                ),
-              ],
-              shipToInfo: ShipToInfo.empty().copyWith(
-                shipToCustomerCode: '12345678',
+            customerCodeList: [
+              CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: PhoneNumber('1234567890'),
+                customerCodeSoldTo: '123456789',
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(
+                    shipToCustomerCode: '12345678',
+                    defaultShipToAddress: true,
+                  ),
+                ],
+                paymentTermDescription: '30 days',
               ),
-              searchKey: SearchKey('fake-key')),
+            ],
+            shipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: '12345678',
+            ),
+            searchKey: SearchKey('fake-key'),
+          ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                availableSalesOrg: availableSalesOrgList,
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2501'))));
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            availableSalesOrg: availableSalesOrgList,
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+          ),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
@@ -187,14 +199,16 @@ void main() {
 
         await tester.enterText(searchField, 'fake-salesOrg');
         await tester.pump(const Duration(seconds: 5));
-        verify(() => salesOrgBlocMock.add(
-              SalesOrgEvent.searchSalesOrg(
-                salesOrgList: availableSalesOrgList,
-                keyWord: 'fake-salesOrg',
-              ),
-            ));
+        verify(
+          () => salesOrgBlocMock.add(
+            SalesOrgEvent.searchSalesOrg(
+              salesOrgList: availableSalesOrgList,
+              keyWord: 'fake-salesOrg',
+            ),
+          ),
+        );
         await tester.pump(const Duration(seconds: 5));
-        final salesOrgTile = find.byKey(WidgetKeys.genericKey(key:'2501'));
+        final salesOrgTile = find.byKey(WidgetKeys.genericKey(key: '2501'));
 
         await tester.tap(salesOrgTile);
 

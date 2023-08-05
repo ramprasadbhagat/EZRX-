@@ -40,9 +40,11 @@ void main() {
     productSearchBlocMock = ProductSearchBlocMock();
 
     when(() => productSearchBlocMock.state).thenReturn(
-        ProductSearchState.initial().copyWith(
-            productSuggestionHistory: ProductSuggestionHistory.empty()
-                .copyWith(searchKeyList: [SearchKey('test-search')])));
+      ProductSearchState.initial().copyWith(
+        productSuggestionHistory: ProductSuggestionHistory.empty()
+            .copyWith(searchKeyList: [SearchKey('test-search')]),
+      ),
+    );
   });
 
   Future getWidget(tester) async {
@@ -65,8 +67,9 @@ void main() {
         (tester) async {
       final expectedState = [
         ProductSearchState.initial().copyWith(
-            productSuggestionHistory: ProductSuggestionHistory.empty()
-                .copyWith(searchKeyList: [SearchKey('test-search')])),
+          productSuggestionHistory: ProductSuggestionHistory.empty()
+              .copyWith(searchKeyList: [SearchKey('test-search')]),
+        ),
       ];
       whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
       await getWidget(tester);
@@ -82,9 +85,7 @@ void main() {
     testWidgets(
         '=> Test to check search history when search field is empty but search history list is also empty',
         (tester) async {
-      final expectedState = [
-        ProductSearchState.initial()
-      ];
+      final expectedState = [ProductSearchState.initial()];
       whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
       await getWidget(tester);
       await tester.pump();

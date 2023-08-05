@@ -21,13 +21,14 @@ class ApproverRightsDto with _$ApproverRightsDto {
 
   ApproverRights toDomain() {
     return ApproverRights(
-        userName: Username(usernames.first),
-        approverRightsList:
-            approverRights.map((e) => e.toDomain()).toList(),);
+      userName: Username(usernames.first),
+      approverRightsList: approverRights.map((e) => e.toDomain()).toList(),
+    );
   }
 
   factory ApproverRightsDto.fromJson(Map<String, dynamic> json) =>
       _$ApproverRightsDtoFromJson(json);
 }
 
-List<dynamic> rawMetaDataOverride(Map json, String key) => json[key]['usernames'] ?? [];
+List<dynamic> rawMetaDataOverride(Map json, String key) =>
+    json[key]['usernames'] ?? [];

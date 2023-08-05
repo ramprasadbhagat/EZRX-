@@ -37,7 +37,7 @@ class ProductDetailLocalDataSource {
       ),
     );
     final finalData = data['data']['getProduct'];
-    
+
     return ProductMetaDataDto.fromJson(finalData).toDomain;
   }
 }

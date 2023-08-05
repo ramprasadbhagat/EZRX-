@@ -208,8 +208,7 @@ void main() {
           const AllInvoicesFilterEvent.validateFilters(),
         );
       },
-      expect: () => [
-      ],
+      expect: () => [],
     );
 
     blocTest(

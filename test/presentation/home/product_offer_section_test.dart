@@ -54,9 +54,11 @@ void main() {
         autoRouterMock: autoRouterMock,
         providers: [
           BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock),
+            create: (context) => eligibilityBlocMock,
+          ),
           BlocProvider<MaterialListBloc>(
-              create: (context) => materialListBlocMock),
+            create: (context) => materialListBlocMock,
+          ),
         ],
         child: const Scaffold(body: ProductsOnOffer()),
       );
@@ -67,8 +69,9 @@ void main() {
       final materialListBloc = locator<MaterialListBloc>();
       final expectedState = [
         EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty()
-                .copyWith(salesOrg: SalesOrg('2100'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(salesOrg: SalesOrg('2100')),
+        ),
         EligibilityState.initial(),
       ];
       whenListen(
@@ -81,11 +84,12 @@ void main() {
       verify(
         () => materialListBloc.add(
           MaterialListEvent.fetch(
-              salesOrganisation: SalesOrganisation.empty(),
-              configs: eligibilityBlocMock.state.salesOrgConfigs,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              selectedMaterialFilter: MaterialFilter.empty()),
+            salesOrganisation: SalesOrganisation.empty(),
+            configs: eligibilityBlocMock.state.salesOrgConfigs,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            selectedMaterialFilter: MaterialFilter.empty(),
+          ),
         ),
       ).called(1);
     });

@@ -21,7 +21,6 @@ class ApproverRightsDetails with _$ApproverRightsDetails {
     required String plant,
     required MaterialNumber materialNumber,
     required String uuid,
-    
   }) = _ApproverRightsDetails;
   factory ApproverRightsDetails.empty() => ApproverRightsDetails(
         industryCode1: '',

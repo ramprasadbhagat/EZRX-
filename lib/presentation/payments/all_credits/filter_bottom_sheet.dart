@@ -66,17 +66,19 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
-                    Row(children: [
-                      const _FromDocumentDateFilter(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          '-',
-                          style: Theme.of(context).textTheme.titleSmall,
+                    Row(
+                      children: [
+                        const _FromDocumentDateFilter(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            '-',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
                         ),
-                      ),
-                      const _ToDocumentDateFilter(),
-                    ]),
+                        const _ToDocumentDateFilter(),
+                      ],
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
                       child: Text(
@@ -84,17 +86,19 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
-                    Row(children: [
-                      const _AmountValueFromFilter(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          '-',
-                          style: Theme.of(context).textTheme.titleSmall,
+                    Row(
+                      children: [
+                        const _AmountValueFromFilter(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            '-',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
                         ),
-                      ),
-                      const _AmountValueToFilter(),
-                    ]),
+                        const _AmountValueToFilter(),
+                      ],
+                    ),
                     (state.showErrorMessages &&
                             !state.filter.isAmountValueRangeValid)
                         ? ValueRangeError(

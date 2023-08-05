@@ -226,14 +226,15 @@ void main() {
             AddToCartBloc(materialPriceDetailRepository: mockRepository),
         seed: () =>
             AddToCartState.initial().copyWith(cartItem: mockCartItemList.first),
-        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          quantity: addToCartQuantity,
-          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
-          customerCode: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToCode: ShipToInfo.empty()
-
-        )),
+        act: (bloc) => bloc.add(
+          AddToCartEvent.updateQuantity(
+            quantity: addToCartQuantity,
+            cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
+        ),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(
@@ -276,13 +277,15 @@ void main() {
             ),
           ),
         ),
-        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          quantity: addToCartQuantity,
-          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
-          customerCode: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToCode: ShipToInfo.empty()
-        )),
+        act: (bloc) => bloc.add(
+          AddToCartEvent.updateQuantity(
+            quantity: addToCartQuantity,
+            cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
+        ),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(
@@ -330,12 +333,15 @@ void main() {
             ),
           ),
         ),
-        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+        act: (bloc) => bloc.add(
+          AddToCartEvent.updateQuantity(
             quantity: addToCartQuantity,
-          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
-          customerCode: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToCode: ShipToInfo.empty())),
+            cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
+        ),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(
@@ -386,13 +392,15 @@ void main() {
         seed: () => AddToCartState.initial().copyWith(
           cartItem: mockCartItemList.first,
         ),
-        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          quantity: addToCartQuantity,
-          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
-          customerCode: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToCode: ShipToInfo.empty()
-        )),
+        act: (bloc) => bloc.add(
+          AddToCartEvent.updateQuantity(
+            quantity: addToCartQuantity,
+            cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
+        ),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(

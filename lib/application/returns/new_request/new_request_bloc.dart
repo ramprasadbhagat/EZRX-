@@ -17,21 +17,19 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
   ) async {
     await event.map(
       initialized: (_) async => emit(NewRequestState.initial()),
-       toggleReturnItem: (_ToggleReturnItem e) {
+      toggleReturnItem: (_ToggleReturnItem e) {
         if (e.selected) {
           emit(
             state.copyWith(
-              selectedItems:
-                  List<ReturnMaterial>.from(state.selectedItems)
-                    ..add(e.item),
+              selectedItems: List<ReturnMaterial>.from(state.selectedItems)
+                ..add(e.item),
             ),
           );
         } else {
           emit(
             state.copyWith(
-              selectedItems:
-                  List<ReturnMaterial>.from(state.selectedItems)
-                    ..remove(e.item),
+              selectedItems: List<ReturnMaterial>.from(state.selectedItems)
+                ..remove(e.item),
             ),
           );
         }

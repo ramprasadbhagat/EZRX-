@@ -97,7 +97,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 // class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 //   WidgetsFlutterBinding.ensureInitialized();

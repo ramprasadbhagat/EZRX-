@@ -2,23 +2,30 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_messages_dto.freezed.dart';
 part 'order_history_details_messages_dto.g.dart';
+
 @freezed
 class OrderHistoryDetailsMessagesDto with _$OrderHistoryDetailsMessagesDto {
   const OrderHistoryDetailsMessagesDto._();
   const factory OrderHistoryDetailsMessagesDto({
-    @JsonKey(name: 'Type',defaultValue: '') required String type,
-    @JsonKey(name: 'Message',defaultValue: '') required String message,
+    @JsonKey(name: 'Type', defaultValue: '') required String type,
+    @JsonKey(name: 'Message', defaultValue: '') required String message,
   }) = _OrderHistoryDetailsMessagesDto;
-  factory OrderHistoryDetailsMessagesDto.fromDomain(OrderHistoryDetailsMessages orderHistoryDetailsMessages) {
+  factory OrderHistoryDetailsMessagesDto.fromDomain(
+    OrderHistoryDetailsMessages orderHistoryDetailsMessages,
+  ) {
     return OrderHistoryDetailsMessagesDto(
-        message: orderHistoryDetailsMessages.message, type: orderHistoryDetailsMessages.type,);
+      message: orderHistoryDetailsMessages.message,
+      type: orderHistoryDetailsMessages.type,
+    );
   }
 
   OrderHistoryDetailsMessages toDomain() {
-    return OrderHistoryDetailsMessages(type: type,
-     message: message,);
+    return OrderHistoryDetailsMessages(
+      type: type,
+      message: message,
+    );
   }
- 
+
   factory OrderHistoryDetailsMessagesDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryDetailsMessagesDtoFromJson(json);
 }

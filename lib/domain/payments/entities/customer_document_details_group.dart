@@ -7,13 +7,12 @@ part 'customer_document_details_group.freezed.dart';
 @freezed
 class CustomerDocumentDetailGroup with _$CustomerDocumentDetailGroup {
   factory CustomerDocumentDetailGroup({
-  required PrincipalName principalName,
-  required List<CustomerDocumentDetail> items,
+    required PrincipalName principalName,
+    required List<CustomerDocumentDetail> items,
   }) = _CustomerDocumentDetailGroup;
 
   factory CustomerDocumentDetailGroup.empty() => CustomerDocumentDetailGroup(
         principalName: PrincipalName(''),
         items: <CustomerDocumentDetail>[],
       );
-
 }

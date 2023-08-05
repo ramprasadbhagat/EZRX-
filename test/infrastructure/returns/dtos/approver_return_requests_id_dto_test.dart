@@ -29,8 +29,7 @@ void main() {
         '=> Approver return request ApproverReturnRequestsIdDto fromJson valid requestId',
         () {
       final approverReturnRequestsId =
-          ReturnRequestsIdDto.fromJson({'requestId': 'fake-Id'})
-              .toDomain();
+          ReturnRequestsIdDto.fromJson({'requestId': 'fake-Id'}).toDomain();
       expect(
         approverReturnRequestsId,
         ReturnRequestsId(requestId: 'fake-Id'),

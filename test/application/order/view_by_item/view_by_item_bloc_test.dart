@@ -33,17 +33,20 @@ void main() {
     shipToCustomerCode: 'fake-shipto',
   );
   final user = User.empty().copyWith(
-      username: Username('fake-name'),
-      role: Role(
-          description: 'fake-desc',
-          id: 'id',
-          name: 'fake-name',
-          type: RoleType('fake-type')),
-      preferredLanguage: 'EN');
+    username: Username('fake-name'),
+    role: Role(
+      description: 'fake-desc',
+      id: 'id',
+      name: 'fake-name',
+      type: RoleType('fake-type'),
+    ),
+    preferredLanguage: 'EN',
+  );
   final searchKey = SearchKey('search-key');
   final dateTimeRange = DateTimeRange(
-      end: DateTime.parse('2023-07-14 18:34:09.177884'),
-      start: DateTime.parse('2023-07-07 18:34:09.181722'));
+    end: DateTime.parse('2023-07-14 18:34:09.177884'),
+    start: DateTime.parse('2023-07-07 18:34:09.181722'),
+  );
   final viewByItemHistoryFilter =
       ViewByItemHistoryFilter.empty().copyWith(dateRange: dateTimeRange);
 
@@ -63,28 +66,33 @@ void main() {
         viewByItemRepository: viewByItemRepository,
       ),
       setUp: () {
-        when(() => viewByItemRepository.getOrderHistory(
-              offset: offSet,
-              pageSize: pageSize,
-              salesOrgConfig: salesOrgConfig,
-              searchKey: searchKey,
-              shipTo: shipToInfo,
-              soldTo: customerCodeInfo,
-              user: user,
-              viewByItemHistoryFilter: viewByItemHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByItemRepository.getOrderHistory(
+            offset: offSet,
+            pageSize: pageSize,
+            salesOrgConfig: salesOrgConfig,
+            searchKey: searchKey,
+            shipTo: shipToInfo,
+            soldTo: customerCodeInfo,
+            user: user,
+            viewByItemHistoryFilter: viewByItemHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) => bloc.add(ViewByItemsEvent.fetch(
+      act: (bloc) => bloc.add(
+        ViewByItemsEvent.fetch(
           salesOrgConfigs: salesOrgConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
           viewByItemHistoryFilter: viewByItemHistoryFilter,
-          searchKey: searchKey)),
+          searchKey: searchKey,
+        ),
+      ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
           isFetching: true,
@@ -95,14 +103,15 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            appliedFilter: viewByItemHistoryFilter,
-            isFetching: false,
-            searchKey: searchKey)
+          ),
+          appliedFilter: viewByItemHistoryFilter,
+          isFetching: false,
+          searchKey: searchKey,
+        )
       ],
     );
 
@@ -112,28 +121,33 @@ void main() {
         viewByItemRepository: viewByItemRepository,
       ),
       setUp: () {
-        when(() => viewByItemRepository.getOrderHistory(
-              offset: offSet,
-              pageSize: pageSize,
-              salesOrgConfig: salesOrgConfig,
-              searchKey: searchKey,
-              shipTo: shipToInfo,
-              soldTo: customerCodeInfo,
-              user: user,
-              viewByItemHistoryFilter: viewByItemHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByItemRepository.getOrderHistory(
+            offset: offSet,
+            pageSize: pageSize,
+            salesOrgConfig: salesOrgConfig,
+            searchKey: searchKey,
+            shipTo: shipToInfo,
+            soldTo: customerCodeInfo,
+            user: user,
+            viewByItemHistoryFilter: viewByItemHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             orderHistoryMockData,
           ),
         );
       },
-      act: (bloc) => bloc.add(ViewByItemsEvent.fetch(
+      act: (bloc) => bloc.add(
+        ViewByItemsEvent.fetch(
           salesOrgConfigs: salesOrgConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
           viewByItemHistoryFilter: viewByItemHistoryFilter,
-          searchKey: searchKey)),
+          searchKey: searchKey,
+        ),
+      ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
           isFetching: true,
@@ -145,15 +159,18 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(Right(
+          failureOrSuccessOption: optionOf(
+            Right(
               orderHistoryMockData,
-            )),
-            appliedFilter: viewByItemHistoryFilter,
-            isFetching: false,
-            nextPageIndex: 1,
-            canLoadMore: false,
-            orderHistoryList: orderHistoryMockData,
-            searchKey: searchKey),
+            ),
+          ),
+          appliedFilter: viewByItemHistoryFilter,
+          isFetching: false,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          orderHistoryList: orderHistoryMockData,
+          searchKey: searchKey,
+        ),
       ],
     );
 
@@ -168,27 +185,31 @@ void main() {
         searchKey: searchKey,
       ),
       setUp: () {
-        when(() => viewByItemRepository.getOrderHistory(
-              offset: orderHistoryMockData.orderHistoryItems.length,
-              pageSize: pageSize,
-              salesOrgConfig: salesOrgConfig,
-              searchKey: searchKey,
-              shipTo: shipToInfo,
-              soldTo: customerCodeInfo,
-              user: user,
-              viewByItemHistoryFilter: viewByItemHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByItemRepository.getOrderHistory(
+            offset: orderHistoryMockData.orderHistoryItems.length,
+            pageSize: pageSize,
+            salesOrgConfig: salesOrgConfig,
+            searchKey: searchKey,
+            shipTo: shipToInfo,
+            soldTo: customerCodeInfo,
+            user: user,
+            viewByItemHistoryFilter: viewByItemHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             orderHistoryMockData,
           ),
         );
       },
-      act: (bloc) => bloc.add(ViewByItemsEvent.loadMore(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-      )),
+      act: (bloc) => bloc.add(
+        ViewByItemsEvent.loadMore(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+        ),
+      ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
           isFetching: true,
@@ -200,18 +221,23 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(Right(
+          failureOrSuccessOption: optionOf(
+            Right(
               orderHistoryMockData,
-            )),
-            appliedFilter: viewByItemHistoryFilter,
-            isFetching: false,
-            nextPageIndex: 1,
-            canLoadMore: false,
-            orderHistoryList: orderHistoryMockData.copyWith(orderHistoryItems: [
+            ),
+          ),
+          appliedFilter: viewByItemHistoryFilter,
+          isFetching: false,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          orderHistoryList: orderHistoryMockData.copyWith(
+            orderHistoryItems: [
               ...orderHistoryMockData.orderHistoryItems,
               ...orderHistoryMockData.orderHistoryItems
-            ]),
-            searchKey: searchKey),
+            ],
+          ),
+          searchKey: searchKey,
+        ),
       ],
     );
 
@@ -226,25 +252,29 @@ void main() {
         searchKey: searchKey,
       ),
       setUp: () {
-        when(() => viewByItemRepository.getOrderHistory(
-              offset: orderHistoryMockData.orderHistoryItems.length,
-              pageSize: pageSize,
-              salesOrgConfig: salesOrgConfig,
-              searchKey: searchKey,
-              shipTo: shipToInfo,
-              soldTo: customerCodeInfo,
-              user: user,
-              viewByItemHistoryFilter: viewByItemHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByItemRepository.getOrderHistory(
+            offset: orderHistoryMockData.orderHistoryItems.length,
+            pageSize: pageSize,
+            salesOrgConfig: salesOrgConfig,
+            searchKey: searchKey,
+            shipTo: shipToInfo,
+            soldTo: customerCodeInfo,
+            user: user,
+            viewByItemHistoryFilter: viewByItemHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
         );
       },
-      act: (bloc) => bloc.add(ViewByItemsEvent.loadMore(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-      )),
+      act: (bloc) => bloc.add(
+        ViewByItemsEvent.loadMore(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+        ),
+      ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
           isFetching: true,
@@ -256,15 +286,16 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            orderHistoryList: orderHistoryMockData,
-            appliedFilter: viewByItemHistoryFilter,
-            isFetching: false,
-            searchKey: searchKey)
+          ),
+          orderHistoryList: orderHistoryMockData,
+          appliedFilter: viewByItemHistoryFilter,
+          isFetching: false,
+          searchKey: searchKey,
+        )
       ],
     );
   });

@@ -133,11 +133,13 @@ class ManageDeductionCodeBloc
       deleteDeductionCode: (value) async {
         final modifiedList = List<DeductionCode>.from(state.deductionCodeList);
         final editedList = modifiedList
-            .map((element) => element.key == value.data.key
-                ? element.copyWith(
-                    isDeleteInProgress: true,
-                  )
-                : element)
+            .map(
+              (element) => element.key == value.data.key
+                  ? element.copyWith(
+                      isDeleteInProgress: true,
+                    )
+                  : element,
+            )
             .toList();
         emit(
           state.copyWith(
@@ -152,11 +154,13 @@ class ManageDeductionCodeBloc
         failureOrSuccess.fold(
           (failure) {
             final editedList = List<DeductionCode>.from(state.deductionCodeList)
-                .map((element) => element.key == value.data.key
-                    ? element.copyWith(
-                        isDeleteInProgress: false,
-                      )
-                    : element)
+                .map(
+                  (element) => element.key == value.data.key
+                      ? element.copyWith(
+                          isDeleteInProgress: false,
+                        )
+                      : element,
+                )
                 .toList();
             emit(
               state.copyWith(

@@ -137,16 +137,22 @@ void main() {
         'Remote Success getReturnRequests',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-          when(() => approverReturnRequestsRemoteMock.getReturns(filterQuery: {
-                    'status': 'PENDING',
-                    'dateTo':
-                        DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                            .apiDateTimeString,
-                    'dateFrom': DateTimeStringValue(
-                            getDateStringByDateTime(fakeFromDate))
+          when(
+            () => approverReturnRequestsRemoteMock.getReturns(
+              filterQuery: {
+                'status': 'PENDING',
+                'dateTo':
+                    DateTimeStringValue(getDateStringByDateTime(fakeToDate))
                         .apiDateTimeString,
-                  }, offset: 0, pageSize: 11, username: 'fake-username'))
-              .thenAnswer(
+                'dateFrom': DateTimeStringValue(
+                  getDateStringByDateTime(fakeFromDate),
+                ).apiDateTimeString,
+              },
+              offset: 0,
+              pageSize: 11,
+              username: 'fake-username',
+            ),
+          ).thenAnswer(
             (invocation) async => [
               ReturnRequestsId(requestId: 'fake-requestId'),
             ],
@@ -171,16 +177,22 @@ void main() {
         'Remote fail getReturnRequests',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-          when(() => approverReturnRequestsRemoteMock.getReturns(filterQuery: {
-                    'status': 'PENDING',
-                    'dateTo':
-                        DateTimeStringValue(getDateStringByDateTime(fakeToDate))
-                            .apiDateTimeString,
-                    'dateFrom': DateTimeStringValue(
-                            getDateStringByDateTime(fakeFromDate))
+          when(
+            () => approverReturnRequestsRemoteMock.getReturns(
+              filterQuery: {
+                'status': 'PENDING',
+                'dateTo':
+                    DateTimeStringValue(getDateStringByDateTime(fakeToDate))
                         .apiDateTimeString,
-                  }, offset: 0, pageSize: 11, username: 'Fake-username'))
-              .thenThrow(const ApiFailure.serverTimeout());
+                'dateFrom': DateTimeStringValue(
+                  getDateStringByDateTime(fakeFromDate),
+                ).apiDateTimeString,
+              },
+              offset: 0,
+              pageSize: 11,
+              username: 'Fake-username',
+            ),
+          ).thenThrow(const ApiFailure.serverTimeout());
 
           final result = await returnApproverRepository.getReturnRequests(
             approverReturnFilter: ReturnApproverFilter.empty(),
@@ -206,15 +218,18 @@ void main() {
         'Local success getReturnInformation',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-          when(() => approverReturnRequestInformationLocalMock
-              .getApproverReturnRequestInformation()).thenAnswer(
+          when(
+            () => approverReturnRequestInformationLocalMock
+                .getApproverReturnRequestInformation(),
+          ).thenAnswer(
             (invocation) async => RequestInformation.empty(),
           );
 
-          final result = await returnApproverRepository
-              .getReturnInformation(returnRequestIds: [
-            ReturnRequestsId(requestId: 'fake-requestId'),
-          ]);
+          final result = await returnApproverRepository.getReturnInformation(
+            returnRequestIds: [
+              ReturnRequestsId(requestId: 'fake-requestId'),
+            ],
+          );
           expect(
             result.isRight(),
             true,
@@ -226,14 +241,16 @@ void main() {
         'Local fail getReturnInformation',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-          when(() => approverReturnRequestInformationLocalMock
-                  .getApproverReturnRequestInformation())
-              .thenThrow(const ApiFailure.serverTimeout());
+          when(
+            () => approverReturnRequestInformationLocalMock
+                .getApproverReturnRequestInformation(),
+          ).thenThrow(const ApiFailure.serverTimeout());
 
-          final result = await returnApproverRepository
-              .getReturnInformation(returnRequestIds: [
-            ReturnRequestsId(requestId: 'fake-requestId'),
-          ]);
+          final result = await returnApproverRepository.getReturnInformation(
+            returnRequestIds: [
+              ReturnRequestsId(requestId: 'fake-requestId'),
+            ],
+          );
           expect(
             result.isLeft(),
             true,
@@ -245,16 +262,20 @@ void main() {
         'Remote success getReturnInformation',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-          when(() => approverReturnRequestInformationRemoteMock
-              .getApproverReturnRequestInformation(
-                  returnRequestId: 'fake-requestId')).thenAnswer(
+          when(
+            () => approverReturnRequestInformationRemoteMock
+                .getApproverReturnRequestInformation(
+              returnRequestId: 'fake-requestId',
+            ),
+          ).thenAnswer(
             (invocation) async => RequestInformation.empty(),
           );
 
-          final result = await returnApproverRepository
-              .getReturnInformation(returnRequestIds: [
-            ReturnRequestsId(requestId: 'fake-requestId'),
-          ]);
+          final result = await returnApproverRepository.getReturnInformation(
+            returnRequestIds: [
+              ReturnRequestsId(requestId: 'fake-requestId'),
+            ],
+          );
           expect(
             result.isRight(),
             true,
@@ -266,15 +287,18 @@ void main() {
         'Remote fail getReturnInformation',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-          when(() => approverReturnRequestInformationRemoteMock
-                  .getApproverReturnRequestInformation(
-                      returnRequestId: 'fake-requestId'))
-              .thenThrow(const ApiFailure.serverTimeout());
+          when(
+            () => approverReturnRequestInformationRemoteMock
+                .getApproverReturnRequestInformation(
+              returnRequestId: 'fake-requestId',
+            ),
+          ).thenThrow(const ApiFailure.serverTimeout());
 
-          final result = await returnApproverRepository
-              .getReturnInformation(returnRequestIds: [
-            ReturnRequestsId(requestId: 'fake-requestId'),
-          ]);
+          final result = await returnApproverRepository.getReturnInformation(
+            returnRequestIds: [
+              ReturnRequestsId(requestId: 'fake-requestId'),
+            ],
+          );
           expect(
             result.isLeft(),
             true,

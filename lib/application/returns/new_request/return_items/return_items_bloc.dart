@@ -15,8 +15,7 @@ part 'return_items_bloc.freezed.dart';
 
 const int _pageSize = 24;
 
-class ReturnItemsBloc
-    extends Bloc<ReturnItemsEvent, ReturnItemsState> {
+class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
   final IReturnRequestRepository newRequestRepository;
 
   ReturnItemsBloc({required this.newRequestRepository})

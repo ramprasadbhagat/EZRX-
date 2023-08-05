@@ -65,7 +65,6 @@ dependencies:
   upgrader: ^6.2.0
   shared_preferences: ^2.0.15
   local_auth: ^2.1.2
-  # responsive_framework: ^0.2.0
   sizer: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   shimmer: ^3.0.0
@@ -111,7 +110,6 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   dart_code_metrics: ^5.7.5
-  # dart_code_metrics_presets: ^1.0.1
   flutter_lints: ^2.0.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.2.19
@@ -150,100 +148,6 @@ flutter:
     - assets/html/
     - assets/svg/
     - assets/svg/flags/
-    
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  fonts:
-    - family: SortBy
-      fonts:
-        - asset: assets/fonts/SortBy.ttf
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/roboto/Roboto-Black.ttf
-          weight: 900
-        - asset: assets/fonts/roboto/Roboto-BlackItalic.ttf
-          style: italic
-          weight: 900
-        - asset: assets/fonts/roboto/Roboto-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/roboto/Roboto-BoldItalic.ttf
-          style: italic
-          weight: 700
-        - asset: assets/fonts/roboto/Roboto-Italic.ttf
-          style: italic
-        - asset: assets/fonts/roboto/Roboto-Light.ttf
-          weight: 300
-        - asset: assets/fonts/roboto/Roboto-LightItalic.ttf
-          style: italic
-          weight: 300
-        - asset: assets/fonts/roboto/Roboto-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/roboto/Roboto-MediumItalic.ttf
-          style: italic
-          weight: 500
-        - asset: assets/fonts/roboto/Roboto-Regular.ttf
-        - asset: assets/fonts/roboto/Roboto-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/roboto/Roboto-ThinItalic.ttf
-          style: italic
-          weight: 100
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/Poppins/Poppins-ThinItalic.ttf
-          weight: 100
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf
-          weight: 200
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Poppins/Poppins-LightItalic.ttf
-          weight: 300
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Poppins/Poppins-Italic.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Poppins/Poppins-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Poppins/Poppins-BoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf
-          weight: 800
-          style: italic
-        - asset: assets/fonts/Poppins/Poppins-Black.ttf
-          weight: 900
-        - asset: assets/fonts/Poppins/Poppins-BlackItalic.ttf
-          weight: 900
-          style: italic
 
 flutter_icons:
   image_path: assets/images/launcher_icon.png

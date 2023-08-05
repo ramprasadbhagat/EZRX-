@@ -30,8 +30,9 @@ void main() {
   final mockSalesOrganisation = SalesOrganisation.empty();
 
   final mockShipToInfo = ShipToInfo.empty().copyWith(
-      building: 'fakeBuilding',
-      shipToCustomerCode: 'fake-ship-to-customer-code');
+    building: 'fakeBuilding',
+    shipToCustomerCode: 'fake-ship-to-customer-code',
+  );
   final mockCustomerCodeInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: 'fake-customer-code');
   final mockMaterialInfo = MaterialInfo.empty();
@@ -55,10 +56,11 @@ void main() {
           .thenAnswer((invocation) async => <TenderContract>[]);
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          materialNumber: mockMaterialInfo.materialNumber,
-          customerCodeInfo: mockCustomerCodeInfo,
-          salesOrganisation: mockSalesOrganisation,
-          shipToInfo: mockShipToInfo);
+        materialNumber: mockMaterialInfo.materialNumber,
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        shipToInfo: mockShipToInfo,
+      );
       expect(
         result.isRight(),
         true,
@@ -70,10 +72,11 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          materialNumber: mockMaterialInfo.materialNumber,
-          customerCodeInfo: mockCustomerCodeInfo,
-          salesOrganisation: mockSalesOrganisation,
-          shipToInfo: mockShipToInfo);
+        materialNumber: mockMaterialInfo.materialNumber,
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        shipToInfo: mockShipToInfo,
+      );
       expect(
         result.isLeft(),
         true,
@@ -81,23 +84,26 @@ void main() {
     });
     test('get tenderContract successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => tenderContractRemoteDataSource.getTenderContractDetails(
+      when(
+        () => tenderContractRemoteDataSource.getTenderContractDetails(
           materialNumber: '',
           salesOrg: '3050',
           selectedCustomerCode: '',
-          shipTo: '')).thenAnswer((invocation) async => <TenderContract>[]);
+          shipTo: '',
+        ),
+      ).thenAnswer((invocation) async => <TenderContract>[]);
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          materialNumber: mockMaterialInfo
-              .copyWith(
-                materialNumber: MaterialNumber(''),
-              )
-              .materialNumber,
-          customerCodeInfo:
-              mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
-          salesOrganisation:
-              mockSalesOrganisation.copyWith(salesOrg: SalesOrg('3050')),
-          shipToInfo: mockShipToInfo.copyWith(shipToCustomerCode: ''));
+        materialNumber: mockMaterialInfo
+            .copyWith(
+              materialNumber: MaterialNumber(''),
+            )
+            .materialNumber,
+        customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
+        salesOrganisation:
+            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('3050')),
+        shipToInfo: mockShipToInfo.copyWith(shipToCustomerCode: ''),
+      );
       expect(
         result.isRight(),
         true,
@@ -105,17 +111,21 @@ void main() {
     });
     test('get tenderContract fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => tenderContractRemoteDataSource.getTenderContractDetails(
+      when(
+        () => tenderContractRemoteDataSource.getTenderContractDetails(
           materialNumber: '',
           salesOrg: '',
           selectedCustomerCode: '',
-          shipTo: '')).thenThrow((invocation) async => MockException());
+          shipTo: '',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          materialNumber: mockMaterialInfo.materialNumber,
-          customerCodeInfo: mockCustomerCodeInfo,
-          salesOrganisation: mockSalesOrganisation,
-          shipToInfo: mockShipToInfo);
+        materialNumber: mockMaterialInfo.materialNumber,
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        shipToInfo: mockShipToInfo,
+      );
       expect(
         result.isLeft(),
         true,

@@ -246,9 +246,12 @@ void main() {
   });
 
   test('Test Add Item To Cart - Success', () async {
-    final cartItem = fakeCartItem.copyWith(materials: [
-      fakeCartItem.materials.first.copyWith(stockInfoList: [StockInfo.empty()])
-    ]);
+    final cartItem = fakeCartItem.copyWith(
+      materials: [
+        fakeCartItem.materials.first
+            .copyWith(stockInfoList: [StockInfo.empty()])
+      ],
+    );
     when(
       () => cartStorageMock.put(
         id: cartItem.id,
@@ -272,11 +275,13 @@ void main() {
 
   test('Test Add Remark To Cart Item - Success', () async {
     final material = fakeCartItem.materials.first;
-    final itemWithRemark = fakeCartItem.copyWith(materials: [
-      material.copyWith.materialInfo(
-        remarks: 'FakeRemark',
-      ),
-    ]);
+    final itemWithRemark = fakeCartItem.copyWith(
+      materials: [
+        material.copyWith.materialInfo(
+          remarks: 'FakeRemark',
+        ),
+      ],
+    );
 
     when(
       () => cartStorageMock.put(
@@ -462,11 +467,13 @@ void main() {
 
   test('Test Add Remark To Cart Item - Failure', () async {
     final material = fakeCartItem.materials.first;
-    final itemWithRemark = fakeCartItem.copyWith(materials: [
-      material.copyWith.materialInfo(
-        remarks: 'FakeRemark',
-      ),
-    ]);
+    final itemWithRemark = fakeCartItem.copyWith(
+      materials: [
+        material.copyWith.materialInfo(
+          remarks: 'FakeRemark',
+        ),
+      ],
+    );
 
     when(
       () => cartStorageMock.get(
@@ -827,11 +834,15 @@ void main() {
     when(
       () => cartStorageMock.put(
         id: fakeCartItem.id,
-        item: CartItemDto.fromDomain(fakeCartItem.copyWith(materials: [
-          fakeCartItem.materials.first.copyWith(
-            addedBonusList: [MaterialItemBonus.empty()],
-          )
-        ])),
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                addedBonusList: [MaterialItemBonus.empty()],
+              )
+            ],
+          ),
+        ),
       ),
     ).thenThrow(
       (invocation) async => MockException(),
@@ -1010,9 +1021,10 @@ void main() {
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
         expect(
-            r.first.addedBonusList.length !=
-                fakeCartItem.materials.first.addedBonusList.length,
-            true);
+          r.first.addedBonusList.length !=
+              fakeCartItem.materials.first.addedBonusList.length,
+          true,
+        );
       });
     }
   });
@@ -1045,9 +1057,10 @@ void main() {
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
         expect(
-            r.first.addedBonusList.length !=
-                fakeCartItem.materials.first.addedBonusList.length,
-            false);
+          r.first.addedBonusList.length !=
+              fakeCartItem.materials.first.addedBonusList.length,
+          false,
+        );
       });
     }
   });

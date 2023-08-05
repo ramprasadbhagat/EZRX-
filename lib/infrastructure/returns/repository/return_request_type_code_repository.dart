@@ -7,7 +7,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type
 
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_type_code_list_repository.dart';
 
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_remote.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';

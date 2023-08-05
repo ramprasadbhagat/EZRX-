@@ -19,7 +19,7 @@ class ManageBankBeneficiaryEvent with _$ManageBankBeneficiaryEvent {
   }) = _AddOrUpdateBeneficiary;
   const factory ManageBankBeneficiaryEvent.deleteBeneficiary({
     required BankBeneficiary beneficiary,
-    }) = _DeleteBeneficiary;
+  }) = _DeleteBeneficiary;
 }
 
 enum BeneficiaryLabel {

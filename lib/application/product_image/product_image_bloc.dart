@@ -29,25 +29,32 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
             updatedMap[entry.key] = entry.value;
           }
         }
-        emit(state.copyWith(
-          isFetching: false,
-          materialUrlMap: updatedMap,
-        ));
+        emit(
+          state.copyWith(
+            isFetching: false,
+            materialUrlMap: updatedMap,
+          ),
+        );
       },
       fetch: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+          ),
+        );
 
         final materialNumbers = e.list.map((e) => e.materialNumber).toList();
         final queryMaterialNumber = List<MaterialNumber>.from(materialNumbers)
             .where((element) => !state.materialUrlMap.containsKey(element))
-            .toSet().toList();
+            .toSet()
+            .toList();
 
         if (queryMaterialNumber.isEmpty) {
-          emit(state.copyWith(
-            isFetching: false,
-          ));
+          emit(
+            state.copyWith(
+              isFetching: false,
+            ),
+          );
 
           return;
         }

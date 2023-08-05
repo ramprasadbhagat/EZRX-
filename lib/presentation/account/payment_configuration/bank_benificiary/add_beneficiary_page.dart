@@ -176,12 +176,12 @@ class _SalesDistrictDropdown extends StatelessWidget {
                 ).toList()
               : [],
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.selectSalesDistrict,
-                  newValue: value!,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.selectSalesDistrict,
+                    newValue: value!,
+                  ),
+                );
           },
         );
       },
@@ -201,12 +201,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Beneficiary Name'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.beneficiaryName,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.beneficiaryName,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -215,12 +215,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Name'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankName,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.bankName,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -229,12 +229,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Branch'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.branch,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.branch,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -243,12 +243,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Code'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankCode,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.bankCode,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -257,12 +257,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Account'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankAccount,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.bankAccount,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -271,12 +271,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'hdbc Swift Code'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.hdbcSwiftCode,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.hdbcSwiftCode,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -285,12 +285,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Bank Address'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankAddress,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.bankAddress,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),
@@ -299,12 +299,12 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           autocorrect: false,
           decoration: InputDecoration(labelText: 'Pay Now Uen'.tr()),
           onChanged: (value) {
-            context
-                .read<ManageBankBeneficiaryBloc>()
-                .add(ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.payNowUen,
-                  newValue: value,
-                ));
+            context.read<ManageBankBeneficiaryBloc>().add(
+                  ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.payNowUen,
+                    newValue: value,
+                  ),
+                );
           },
         ),
         const SizedBox(height: 20),

@@ -29,20 +29,23 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
     await event.map(
       initialized: (_) async => emit(EligibilityState.initial()),
       update: (e) async {
-        emit(state.copyWith(
-          user: e.user,
-          salesOrganisation: e.salesOrganisation,
-          salesOrgConfigs: e.salesOrgConfigs,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-          selectedOrderType: e.selectedOrderType,
-        ));
+        emit(
+          state.copyWith(
+            user: e.user,
+            salesOrganisation: e.salesOrganisation,
+            salesOrgConfigs: e.salesOrgConfigs,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+            selectedOrderType: e.selectedOrderType,
+          ),
+        );
         final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
-            salesOrganisation: state.salesOrganisation,
-            user: state.user,
-            salesOrganisationConfigs: state.salesOrgConfigs,
-            customerCodeInfo: state.customerCodeInfo,
-            shipToInfo: state.shipToInfo,);
+          salesOrganisation: state.salesOrganisation,
+          user: state.user,
+          salesOrganisationConfigs: state.salesOrgConfigs,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+        );
         failureOrSuccess.fold(
           (failure) {
             emit(

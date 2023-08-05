@@ -27,9 +27,10 @@ void main() {
     resetPasswordMockData =
         await ChangePasswordLocalDataSource().setUserPassword();
     user = User.empty().copyWith(
-        email: EmailAddress('abc@gmail.com'),
-        fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
-        username: Username('fake-username'));
+      email: EmailAddress('abc@gmail.com'),
+      fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+      username: Username('fake-username'),
+    );
     resetPasswordState = ResetPasswordState.initial();
   });
 
@@ -48,8 +49,11 @@ void main() {
         changePasswordRepository: resetPasswordRepoMock,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-          const ResetPasswordEvent.togglePasswordVisibility(
-              PasswordFieldType.oldPassword, true)),
+        const ResetPasswordEvent.togglePasswordVisibility(
+          PasswordFieldType.oldPassword,
+          true,
+        ),
+      ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
           isOldPasswordObscure: true,
@@ -64,8 +68,11 @@ void main() {
         changePasswordRepository: resetPasswordRepoMock,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-          const ResetPasswordEvent.togglePasswordVisibility(
-              PasswordFieldType.newPassword, false)),
+        const ResetPasswordEvent.togglePasswordVisibility(
+          PasswordFieldType.newPassword,
+          false,
+        ),
+      ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
           isNewPasswordObscure: false,
@@ -80,8 +87,11 @@ void main() {
         changePasswordRepository: resetPasswordRepoMock,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-          const ResetPasswordEvent.togglePasswordVisibility(
-              PasswordFieldType.confirmPassword, true)),
+        const ResetPasswordEvent.togglePasswordVisibility(
+          PasswordFieldType.confirmPassword,
+          true,
+        ),
+      ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
           isNewPasswordObscure: true,
@@ -97,7 +107,10 @@ void main() {
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
         ResetPasswordEvent.onTextChange(
-            PasswordFieldType.oldPassword, 'old', user),
+          PasswordFieldType.oldPassword,
+          'old',
+          user,
+        ),
       ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
@@ -117,8 +130,13 @@ void main() {
       build: () => ResetPasswordBloc(
         changePasswordRepository: resetPasswordRepoMock,
       ),
-      act: (ResetPasswordBloc bloc) => bloc.add(ResetPasswordEvent.onTextChange(
-          PasswordFieldType.newPassword, 'Stays@fe2022!', user)),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.onTextChange(
+          PasswordFieldType.newPassword,
+          'Stays@fe2022!',
+          user,
+        ),
+      ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
           oldPassword: Password.login(''),
@@ -141,8 +159,13 @@ void main() {
       build: () => ResetPasswordBloc(
         changePasswordRepository: resetPasswordRepoMock,
       ),
-      act: (ResetPasswordBloc bloc) => bloc.add(ResetPasswordEvent.onTextChange(
-          PasswordFieldType.confirmPassword, 'confirm', user)),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.onTextChange(
+          PasswordFieldType.confirmPassword,
+          'confirm',
+          user,
+        ),
+      ),
       expect: () => [
         ResetPasswordState.initial().copyWith(
           confirmPassword: Password.confirm(
@@ -170,11 +193,13 @@ void main() {
         changePasswordRepository: resetPasswordRepoMock,
       ),
       setUp: () {
-        when(() => resetPasswordRepoMock.setPassword(
-              newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-              oldPassword: Password.login('Auron@2022'),
-              user: user,
-            )).thenAnswer(
+        when(
+          () => resetPasswordRepoMock.setPassword(
+            newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
+            oldPassword: Password.login('Auron@2022'),
+            user: user,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -182,12 +207,27 @@ void main() {
       },
       act: (ResetPasswordBloc bloc) {
         bloc
-          ..add(ResetPasswordEvent.onTextChange(
-              PasswordFieldType.oldPassword, 'Auron@2022', user))
-          ..add(ResetPasswordEvent.onTextChange(
-              PasswordFieldType.newPassword, 'Auron@2022!', user))
-          ..add(ResetPasswordEvent.onTextChange(
-              PasswordFieldType.confirmPassword, 'Auron@2022!', user))
+          ..add(
+            ResetPasswordEvent.onTextChange(
+              PasswordFieldType.oldPassword,
+              'Auron@2022',
+              user,
+            ),
+          )
+          ..add(
+            ResetPasswordEvent.onTextChange(
+              PasswordFieldType.newPassword,
+              'Auron@2022!',
+              user,
+            ),
+          )
+          ..add(
+            ResetPasswordEvent.onTextChange(
+              PasswordFieldType.confirmPassword,
+              'Auron@2022!',
+              user,
+            ),
+          )
           ..add(ResetPasswordEvent.resetPasswordPressed(user: user));
       },
       expect: () => [
@@ -238,20 +278,37 @@ void main() {
       ),
       setUp: () {
         resetPasswordState = ResetPasswordState.initial();
-        when(() => resetPasswordRepoMock.setPassword(
-              newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-              oldPassword: Password.login('Auron@2022'),
-              user: user,
-            )).thenAnswer((invocation) async => Right(resetPasswordMockData));
+        when(
+          () => resetPasswordRepoMock.setPassword(
+            newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
+            oldPassword: Password.login('Auron@2022'),
+            user: user,
+          ),
+        ).thenAnswer((invocation) async => Right(resetPasswordMockData));
       },
       act: (ResetPasswordBloc bloc) {
         bloc
-          ..add(ResetPasswordEvent.onTextChange(
-              PasswordFieldType.oldPassword, 'Auron@2022', user))
-          ..add(ResetPasswordEvent.onTextChange(
-              PasswordFieldType.newPassword, 'Auron@2022!', user))
-          ..add(ResetPasswordEvent.onTextChange(
-              PasswordFieldType.confirmPassword, 'Auron@2022!', user))
+          ..add(
+            ResetPasswordEvent.onTextChange(
+              PasswordFieldType.oldPassword,
+              'Auron@2022',
+              user,
+            ),
+          )
+          ..add(
+            ResetPasswordEvent.onTextChange(
+              PasswordFieldType.newPassword,
+              'Auron@2022!',
+              user,
+            ),
+          )
+          ..add(
+            ResetPasswordEvent.onTextChange(
+              PasswordFieldType.confirmPassword,
+              'Auron@2022!',
+              user,
+            ),
+          )
           ..add(ResetPasswordEvent.resetPasswordPressed(user: user));
       },
       expect: () => [

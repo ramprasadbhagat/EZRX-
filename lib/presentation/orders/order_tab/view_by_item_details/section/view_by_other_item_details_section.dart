@@ -23,7 +23,7 @@ class OtherItemDetailsSection extends StatelessWidget {
     return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
       buildWhen: (previous, current) =>
           previous.viewByItemDetails.orderHistoryItems !=
-              current.viewByItemDetails.orderHistoryItems,
+          current.viewByItemDetails.orderHistoryItems,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(
@@ -104,7 +104,5 @@ class OtherItemDetailsSection extends StatelessWidget {
         );
       },
     );
-  
-  
   }
 }

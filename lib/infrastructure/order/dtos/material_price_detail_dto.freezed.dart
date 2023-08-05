@@ -40,10 +40,12 @@ abstract class $MaterialDetailDtoCopyWith<$Res> {
       _$MaterialDetailDtoCopyWithImpl<$Res, MaterialDetailDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Price') PriceDto price,
-      @JsonKey(name: 'MaterialInformation') CustomerMaterialDto info,
+      {@JsonKey(name: 'Price')
+          PriceDto price,
+      @JsonKey(name: 'MaterialInformation')
+          CustomerMaterialDto info,
       @JsonKey(name: 'ValidMaterial', defaultValue: false)
-      bool isValidMaterial});
+          bool isValidMaterial});
 
   $PriceDtoCopyWith<$Res> get price;
   $CustomerMaterialDtoCopyWith<$Res> get info;
@@ -108,10 +110,12 @@ abstract class _$$_MaterialDetailDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Price') PriceDto price,
-      @JsonKey(name: 'MaterialInformation') CustomerMaterialDto info,
+      {@JsonKey(name: 'Price')
+          PriceDto price,
+      @JsonKey(name: 'MaterialInformation')
+          CustomerMaterialDto info,
       @JsonKey(name: 'ValidMaterial', defaultValue: false)
-      bool isValidMaterial});
+          bool isValidMaterial});
 
   @override
   $PriceDtoCopyWith<$Res> get price;
@@ -155,10 +159,12 @@ class __$$_MaterialDetailDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialDetailDto extends _MaterialDetailDto {
   const _$_MaterialDetailDto(
-      {@JsonKey(name: 'Price') required this.price,
-      @JsonKey(name: 'MaterialInformation') required this.info,
+      {@JsonKey(name: 'Price')
+          required this.price,
+      @JsonKey(name: 'MaterialInformation')
+          required this.info,
       @JsonKey(name: 'ValidMaterial', defaultValue: false)
-      required this.isValidMaterial})
+          required this.isValidMaterial})
       : super._();
 
   factory _$_MaterialDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -211,11 +217,12 @@ class _$_MaterialDetailDto extends _MaterialDetailDto {
 
 abstract class _MaterialDetailDto extends MaterialDetailDto {
   const factory _MaterialDetailDto(
-      {@JsonKey(name: 'Price') required final PriceDto price,
+      {@JsonKey(name: 'Price')
+          required final PriceDto price,
       @JsonKey(name: 'MaterialInformation')
-      required final CustomerMaterialDto info,
+          required final CustomerMaterialDto info,
       @JsonKey(name: 'ValidMaterial', defaultValue: false)
-      required final bool isValidMaterial}) = _$_MaterialDetailDto;
+          required final bool isValidMaterial}) = _$_MaterialDetailDto;
   const _MaterialDetailDto._() : super._();
 
   factory _MaterialDetailDto.fromJson(Map<String, dynamic> json) =

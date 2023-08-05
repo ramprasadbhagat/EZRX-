@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'return_item_details.freezed.dart';
 
 @freezed

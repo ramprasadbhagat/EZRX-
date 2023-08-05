@@ -35,8 +35,8 @@ class ServiceTile extends StatelessWidget {
                   style: item.onTap == null
                       ? item.labelStyle ??
                           Theme.of(context)
-                          .textTheme
-                          .bodySmall!
+                              .textTheme
+                              .bodySmall!
                               .copyWith(color: ZPColors.lightGray)
                       : item.labelStyle ??
                           Theme.of(context).textTheme.bodySmall,

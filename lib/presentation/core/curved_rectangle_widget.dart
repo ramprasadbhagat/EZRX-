@@ -14,18 +14,18 @@ class CurvedRectangleWidget extends StatelessWidget {
   final double borderWidth;
   final int semiCircleCount;
   final double semiCircleRadius;
-  const CurvedRectangleWidget(
-      {Key? key,
-      required this.child,
-      required this.padding,
-      this.height,
-      required this.width,
-      this.backgroundColor = ZPColors.lightBgYellow,
-      this.borderColor = ZPColors.lightBorderYellow,
-      this.borderWidth = 1,
-      required this.semiCircleCount,
-      required this.semiCircleRadius,})
-      : super(key: key);
+  const CurvedRectangleWidget({
+    Key? key,
+    required this.child,
+    required this.padding,
+    this.height,
+    required this.width,
+    this.backgroundColor = ZPColors.lightBgYellow,
+    this.borderColor = ZPColors.lightBorderYellow,
+    this.borderWidth = 1,
+    required this.semiCircleCount,
+    required this.semiCircleRadius,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -112,8 +112,11 @@ class _CurvedRectangle extends CustomPainter {
 
     _paintSemiCircle(canvas, size, true, paint);
     _paintSemiCircle(canvas, size, false, paint);
-    canvas.drawLine(topLeftOffset, topRightOffset,
-        paint..strokeWidth = paint.strokeWidth + size.height / 200,);
+    canvas.drawLine(
+      topLeftOffset,
+      topRightOffset,
+      paint..strokeWidth = paint.strokeWidth + size.height / 200,
+    );
     canvas.drawLine(bottomLeftOffset, bottomRightOffset, paint);
   }
 

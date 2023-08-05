@@ -31,11 +31,13 @@ class TenderContractBloc
     await event.map(
       initialized: (_) async => emit(TenderContractState.initial()),
       fetch: (_Fetch e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          tenderContractList: [],
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            tenderContractList: [],
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess =
             await tenderContractRepository.getTenderContractDetails(
@@ -46,10 +48,12 @@ class TenderContractBloc
         );
 
         failureOrSuccess.fold(
-          (failure) => emit(state.copyWith(
-            apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            isFetching: false,
-          )),
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          ),
           (tenderContractList) {
             add(
               TenderContractEvent.selected(
@@ -59,11 +63,13 @@ class TenderContractBloc
               ),
             );
 
-            emit(state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-              tenderContractList: tenderContractList.withNoContractItem,
-            ));
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+                tenderContractList: tenderContractList.withNoContractItem,
+              ),
+            );
           },
         );
       },

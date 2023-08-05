@@ -37,9 +37,10 @@ abstract class $LoginDtoCopyWith<$Res> {
       _$LoginDtoCopyWithImpl<$Res, LoginDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken) String access,
+      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+          String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      String refresh});
+          String refresh});
 }
 
 /// @nodoc
@@ -79,9 +80,10 @@ abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken) String access,
+      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+          String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      String refresh});
+          String refresh});
 }
 
 /// @nodoc
@@ -116,9 +118,9 @@ class __$$_LoginDtoCopyWithImpl<$Res>
 class _$_LoginDto extends _LoginDto {
   const _$_LoginDto(
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
-      required this.access,
+          required this.access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      required this.refresh})
+          required this.refresh})
       : super._();
 
   factory _$_LoginDto.fromJson(Map<String, dynamic> json) =>
@@ -166,9 +168,9 @@ class _$_LoginDto extends _LoginDto {
 abstract class _LoginDto extends LoginDto {
   const factory _LoginDto(
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
-      required final String access,
+          required final String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
-      required final String refresh}) = _$_LoginDto;
+          required final String refresh}) = _$_LoginDto;
   const _LoginDto._() : super._();
 
   factory _LoginDto.fromJson(Map<String, dynamic> json) = _$_LoginDto.fromJson;

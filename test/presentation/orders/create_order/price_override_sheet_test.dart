@@ -79,8 +79,10 @@ void main() {
       );
     });
 
-    Widget getScopedWidget(Widget child,
-        [List<BlocProvider> additionalProviders = const []]) {
+    Widget getScopedWidget(
+      Widget child, [
+      List<BlocProvider> additionalProviders = const [],
+    ]) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
@@ -98,9 +100,13 @@ void main() {
     }
 
     testWidgets('Initialisation Test', (tester) async {
-      await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first,
+          ),
+        ),
+      );
 
       final priceSheetWidget = find.byKey(const Key('priceSheetKey'));
       final overridePriceButton =
@@ -118,11 +124,16 @@ void main() {
     });
 
     testWidgets('Change Price Test', (tester) async {
-      await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first.copyWith(
-            salesOrgConfig: SalesOrganisationConfigs.empty()
-                .copyWith(currency: Currency('vnd'))),
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first.copyWith(
+              salesOrgConfig: SalesOrganisationConfigs.empty()
+                  .copyWith(currency: Currency('vnd')),
+            ),
+          ),
+        ),
+      );
 
       final priceOverrideTextFormField =
           find.byKey(const Key('priceOverrideTextFormField'));
@@ -157,25 +168,27 @@ void main() {
       ];
 
       whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedStates));
-      await tester.pumpWidget(getScopedWidget(
-          PriceSheet(
-            item: mockPriceAggregates.first.copyWith(
-              salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-                currency: Currency('vnd'),
+      await tester.pumpWidget(
+        getScopedWidget(
+            PriceSheet(
+              item: mockPriceAggregates.first.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                  currency: Currency('vnd'),
+                ),
               ),
             ),
-          ),
-          [
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityMockBloc,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgMockBloc,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeMockBloc,
-            ),
-          ]));
+            [
+              BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityMockBloc,
+              ),
+              BlocProvider<SalesOrgBloc>(
+                create: (context) => salesOrgMockBloc,
+              ),
+              BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeMockBloc,
+              ),
+            ]),
+      );
 
       final priceOverrideTextFormField =
           find.byKey(const Key('priceOverrideTextFormField'));
@@ -190,8 +203,9 @@ void main() {
         () => priceOverrideMockBloc.add(
           PriceOverrideEvent.fetch(
             item: mockPriceAggregates.first.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(currency: Currency('vnd'))),
+              salesOrgConfig: SalesOrganisationConfigs.empty()
+                  .copyWith(currency: Currency('vnd')),
+            ),
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
           ),
@@ -263,8 +277,9 @@ void main() {
         () => priceOverrideMockBloc.add(
           PriceOverrideEvent.fetch(
             item: mockPriceAggregates.first.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(currency: Currency('vnd'))),
+              salesOrgConfig: SalesOrganisationConfigs.empty()
+                  .copyWith(currency: Currency('vnd')),
+            ),
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
           ),
@@ -297,8 +312,9 @@ void main() {
         getScopedWidget(
           PriceSheet(
             item: mockPriceAggregates.first.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(currency: Currency('vnd'))),
+              salesOrgConfig: SalesOrganisationConfigs.empty()
+                  .copyWith(currency: Currency('vnd')),
+            ),
           ),
           [
             BlocProvider<EligibilityBloc>(
@@ -351,9 +367,13 @@ void main() {
 
       whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedState));
 
-      await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first,
+          ),
+        ),
+      );
 
       await tester.pump();
 
@@ -378,9 +398,13 @@ void main() {
 
       whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedState));
 
-      await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first,
+          ),
+        ),
+      );
 
       await tester.pump();
 
@@ -399,23 +423,28 @@ void main() {
 
       final expectedState = [
         PriceOverrideState.initial().copyWith(
-            isFetching: false,
-            cartItemList: [
-              Price.empty().copyWith(
-                materialNumber: MaterialNumber('1'),
-                finalPrice: MaterialPrice(1),
-                finalTotalPrice: MaterialPrice(1),
-                lastPrice: MaterialPrice(0.5),
-              ),
-            ],
-            apiFailureOrSuccessOption: optionOf(const Right('success'))),
+          isFetching: false,
+          cartItemList: [
+            Price.empty().copyWith(
+              materialNumber: MaterialNumber('1'),
+              finalPrice: MaterialPrice(1),
+              finalTotalPrice: MaterialPrice(1),
+              lastPrice: MaterialPrice(0.5),
+            ),
+          ],
+          apiFailureOrSuccessOption: optionOf(const Right('success')),
+        ),
       ];
 
       whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedState));
 
-      await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first,
+          ),
+        ),
+      );
 
       await tester.pump();
 

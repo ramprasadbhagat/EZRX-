@@ -38,8 +38,8 @@ void main() {
       blocTest<PaymentMethodsBloc, PaymentMethodsState>(
         'For "fetch" Event with Success',
         setUp: () => when(
-                () => paymentMethodsRepositoryMock.getAvailablePaymentMethods())
-            .thenAnswer(
+          () => paymentMethodsRepositoryMock.getAvailablePaymentMethods(),
+        ).thenAnswer(
           (invocation) async => Right(availablePaymentMethods),
         ),
         build: () => PaymentMethodsBloc(
@@ -60,8 +60,8 @@ void main() {
       blocTest<PaymentMethodsBloc, PaymentMethodsState>(
         'For "fetch" Event with Failure',
         setUp: () => when(
-                () => paymentMethodsRepositoryMock.getAvailablePaymentMethods())
-            .thenAnswer(
+          () => paymentMethodsRepositoryMock.getAvailablePaymentMethods(),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake Error'),
           ),

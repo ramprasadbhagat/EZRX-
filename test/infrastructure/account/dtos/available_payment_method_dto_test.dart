@@ -13,8 +13,11 @@ void main() {
     () {
       setUp(
         () async {
-          data = json.decode(await rootBundle.loadString(
-              'assets/json/getAvailablePaymentMethodsResponse.json'));
+          data = json.decode(
+            await rootBundle.loadString(
+              'assets/json/getAvailablePaymentMethodsResponse.json',
+            ),
+          );
         },
       );
       test(

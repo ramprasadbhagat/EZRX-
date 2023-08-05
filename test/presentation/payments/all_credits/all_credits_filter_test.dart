@@ -131,17 +131,18 @@ void main() {
     });
 
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
-      when(() => allCreditsFilterBlocMock.state)
-          .thenReturn(AllCreditsFilterState.initial().copyWith(
-        filter: AllCreditsFilter.empty().copyWith(
-          documentDateFrom: DateTimeStringValue(
-            getDateStringByDateTime(fakeFromDate),
-          ),
-          documentDateTo: DateTimeStringValue(
-            getDateStringByDateTime(fakeToDate),
+      when(() => allCreditsFilterBlocMock.state).thenReturn(
+        AllCreditsFilterState.initial().copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
+            documentDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            documentDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
           ),
         ),
-      ));
+      );
 
       final expectedState = [
         AllCreditsFilterState.initial().copyWith(
@@ -171,7 +172,8 @@ void main() {
       verify(
         () => allCreditsFilterBlocMock.add(
           AllCreditsFilterEvent.setDocumentDate(
-              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+            DateTimeRange(start: fakeFromDate, end: fakeToDate),
+          ),
         ),
       ).called(1);
 
@@ -187,18 +189,20 @@ void main() {
       verify(
         () => allCreditsFilterBlocMock.add(
           AllCreditsFilterEvent.setDocumentDate(
-              DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+            DateTimeRange(start: fakeFromDate, end: fakeToDate),
+          ),
         ),
       ).called(1);
     });
     testWidgets('=> _AmountValueToFilter Test', (tester) async {
-      when(() => allCreditsFilterBlocMock.state)
-          .thenReturn(AllCreditsFilterState.initial().copyWith(
-        showErrorMessages: true,
-        filter: AllCreditsFilter.empty().copyWith(
-          amountValueTo: RangeValue('12'),
+      when(() => allCreditsFilterBlocMock.state).thenReturn(
+        AllCreditsFilterState.initial().copyWith(
+          showErrorMessages: true,
+          filter: AllCreditsFilter.empty().copyWith(
+            amountValueTo: RangeValue('12'),
+          ),
         ),
-      ));
+      );
 
       await getWidget(tester);
       await tester.pumpAndSettle();
@@ -212,19 +216,21 @@ void main() {
       verify(
         () => allCreditsFilterBlocMock.add(
           AllCreditsFilterEvent.amountValueToChanged(
-              StringUtils.formatter.format(double.parse('123456'))),
+            StringUtils.formatter.format(double.parse('123456')),
+          ),
         ),
       ).called(1);
     });
 
     testWidgets('=> _AmountValueFromFilter Test', (tester) async {
-      when(() => allCreditsFilterBlocMock.state)
-          .thenReturn(AllCreditsFilterState.initial().copyWith(
-        showErrorMessages: true,
-        filter: AllCreditsFilter.empty().copyWith(
-          amountValueFrom: RangeValue('12'),
+      when(() => allCreditsFilterBlocMock.state).thenReturn(
+        AllCreditsFilterState.initial().copyWith(
+          showErrorMessages: true,
+          filter: AllCreditsFilter.empty().copyWith(
+            amountValueFrom: RangeValue('12'),
+          ),
         ),
-      ));
+      );
 
       await getWidget(tester);
       await tester.pumpAndSettle();
@@ -238,7 +244,8 @@ void main() {
       verify(
         () => allCreditsFilterBlocMock.add(
           AllCreditsFilterEvent.amountValueFromChanged(
-              StringUtils.formatter.format(double.parse('12'))),
+            StringUtils.formatter.format(double.parse('12')),
+          ),
         ),
       ).called(1);
     });
@@ -289,14 +296,15 @@ void main() {
     testWidgets(
         '=> AmountValueError Test when amountValueTo greater than amountValueFrom',
         (tester) async {
-      when(() => allCreditsFilterBlocMock.state)
-          .thenReturn(AllCreditsFilterState.initial().copyWith(
-        showErrorMessages: true,
-        filter: AllCreditsFilter.empty().copyWith(
-          amountValueFrom: RangeValue('15'),
-          amountValueTo: RangeValue('12'),
+      when(() => allCreditsFilterBlocMock.state).thenReturn(
+        AllCreditsFilterState.initial().copyWith(
+          showErrorMessages: true,
+          filter: AllCreditsFilter.empty().copyWith(
+            amountValueFrom: RangeValue('15'),
+            amountValueTo: RangeValue('12'),
+          ),
         ),
-      ));
+      );
       await getWidget(tester);
       await tester.pumpAndSettle();
 

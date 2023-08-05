@@ -52,7 +52,8 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/deleteSavedOrderTemplateResponse.json'),
+              'assets/json/deleteSavedOrderTemplateResponse.json',
+            ),
           );
 
           final result = await localDataSource.deleteSavedOrder();

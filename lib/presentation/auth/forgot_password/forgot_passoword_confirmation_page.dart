@@ -53,11 +53,9 @@ class _EmailSendToYou extends StatelessWidget {
       children: <Widget>[
         Text(
           'Email sent to you!',
-          style: Theme.of(context)
-              .textTheme
-              .labelLarge?.copyWith(
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 color: ZPColors.neutralsBlack,
-          ),
+              ),
         ).tr(),
         const SizedBox(height: 5),
         RichText(
@@ -69,11 +67,7 @@ class _EmailSendToYou extends StatelessWidget {
             children: <TextSpan>[
               TextSpan(
                 text:
-                    ' ${context
-                    .read<ForgotPasswordBloc>()
-                    .state
-                    .resetPasswordResponse
-                    .email}',
+                    ' ${context.read<ForgotPasswordBloc>().state.resetPasswordResponse.email}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge

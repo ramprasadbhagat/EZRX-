@@ -6,9 +6,6 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
-
-
-
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_query.dart';
@@ -35,8 +32,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
     required String excelFor,
     required List<Map<String, dynamic>> queryObject,
   }) async {
-    final queryData =
-        downloadPaymentAttachmentQuery.getFileUrl();
+    final queryData = downloadPaymentAttachmentQuery.getFileUrl();
     final request = {
       'salesOrg': salesOrg,
       'customerCode': customerCode,

@@ -47,9 +47,10 @@ void main() {
               .thenAnswer((invocation) async => returnPriceResponse);
 
           final result = await returnPriceRepository.fetchReturnPrice(
-              returnItemsList: [],
-              salesOrg: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('fake-salesOrg')));
+            returnItemsList: [],
+            salesOrg: SalesOrganisation.empty()
+                .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+          );
           expect(
             result.isRight(),
             true,
@@ -74,16 +75,19 @@ void main() {
 
       test('get searchReturnRequestList successfully remotely', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-        when(() => returnPriceRemoteDataSource.getReturnPrice(
-                invoiceNumber: 'fake-number',
-                materials: {},
-                salesOrg: 'sales-org'))
-            .thenAnswer((invocation) async => returnPriceResponse);
+        when(
+          () => returnPriceRemoteDataSource.getReturnPrice(
+            invoiceNumber: 'fake-number',
+            materials: {},
+            salesOrg: 'sales-org',
+          ),
+        ).thenAnswer((invocation) async => returnPriceResponse);
 
         final result = await returnPriceRepository.fetchReturnPrice(
-            returnItemsList: [],
-            salesOrg: SalesOrganisation.empty()
-                .copyWith(salesOrg: SalesOrg('fake-salesOrg')));
+          returnItemsList: [],
+          salesOrg: SalesOrganisation.empty()
+              .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+        );
         expect(
           result.isRight(),
           true,

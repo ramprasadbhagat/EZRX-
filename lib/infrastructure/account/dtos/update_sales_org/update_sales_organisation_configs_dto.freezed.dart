@@ -131,80 +131,100 @@ abstract class $UpdateSalesOrganisationConfigsDtoCopyWith<$Res> {
           UpdateSalesOrganisationConfigsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrgCode', defaultValue: '0') String salesOrg,
-      @JsonKey(name: 'ponRequired', defaultValue: false) bool poNumberRequired,
-      @JsonKey(name: 'priceOverride', defaultValue: false) bool priceOverride,
+      {@JsonKey(name: 'salesOrgCode', defaultValue: '0')
+          String salesOrg,
+      @JsonKey(name: 'ponRequired', defaultValue: false)
+          bool poNumberRequired,
+      @JsonKey(name: 'priceOverride', defaultValue: false)
+          bool priceOverride,
       @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
-      bool expiryDateDisplay,
+          bool expiryDateDisplay,
       @JsonKey(name: 'batchNumDisplay', defaultValue: false)
-      bool batchNumDisplay,
+          bool batchNumDisplay,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-      bool enableBatchNumber,
-      @JsonKey(name: 'currency') String currency,
+          bool enableBatchNumber,
+      @JsonKey(name: 'currency')
+          String currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
-      bool netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false) bool languageFilter,
-      @JsonKey(name: 'enableVat', defaultValue: false) bool enableVat,
-      @JsonKey(name: 'enableZDP5', defaultValue: false) bool enableZDP5,
-      @JsonKey(name: 'languageValue', defaultValue: '') String languageValue,
+          bool netPriceOverride,
+      @JsonKey(name: 'languageFilter', defaultValue: false)
+          bool languageFilter,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          bool enableVat,
+      @JsonKey(name: 'enableZDP5', defaultValue: false)
+          bool enableZDP5,
+      @JsonKey(name: 'languageValue', defaultValue: '')
+          String languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-      bool materialWithoutPrice,
+          bool materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
-      bool enableZDP8Override,
+          bool enableZDP8Override,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
-      bool displayOrderDiscount,
-      @JsonKey(name: 'enableIRN', defaultValue: false) bool enableIRN,
+          bool displayOrderDiscount,
+      @JsonKey(name: 'enableIRN', defaultValue: false)
+          bool enableIRN,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-      bool enableTaxClassification,
-      @JsonKey(name: 'disableBundles', defaultValue: false) bool disableBundles,
-      @JsonKey(name: 'disableProcessingStatus') bool disableProcessingStatus,
+          bool enableTaxClassification,
+      @JsonKey(name: 'disableBundles', defaultValue: false)
+          bool disableBundles,
+      @JsonKey(name: 'disableProcessingStatus')
+          bool disableProcessingStatus,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-      bool enableCollectiveNumber,
+          bool enableCollectiveNumber,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-      bool enableGimmickMaterial,
+          bool enableGimmickMaterial,
       @JsonKey(name: 'hideStockDisplay', defaultValue: false)
-      bool hideStockDisplay,
+          bool hideStockDisplay,
       @JsonKey(name: 'showPOAttachment', defaultValue: false)
-      bool showPOAttachment,
+          bool showPOAttachment,
       @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
-      bool disableDeliveryDate,
+          bool disableDeliveryDate,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
-      bool enableTaxAtTotalLevelOnly,
+          bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
-      bool enableGreenDelivery,
+          bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
-      int greenDeliveryDelayInDays,
+          int greenDeliveryDelayInDays,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-      int greenDeliveryUserRole,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0') String minOrderAmount,
-      @JsonKey(name: 'hideCustomer', defaultValue: false) bool hideCustomer,
+          int greenDeliveryUserRole,
+      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+          String minOrderAmount,
+      @JsonKey(name: 'hideCustomer', defaultValue: false)
+          bool hideCustomer,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
-      bool disableOrderType,
-      @JsonKey(name: 'vatValue', defaultValue: 0) int vatValue,
+          bool disableOrderType,
+      @JsonKey(name: 'vatValue', defaultValue: 0)
+          int vatValue,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-      bool enableSpecialInstructions,
+          bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-      bool enableReferenceNote,
+          bool enableReferenceNote,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-      bool enableMobileNumber,
+          bool enableMobileNumber,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-      bool enablePaymentTerms,
-      @JsonKey(name: 'enableGMC', defaultValue: false) bool enableGMC,
+          bool enablePaymentTerms,
+      @JsonKey(name: 'enableGMC', defaultValue: false)
+          bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
-      bool enableListPrice,
+          bool enableListPrice,
       @JsonKey(name: 'enableDefaultMD', defaultValue: false)
-      bool enableDefaultMD,
+          bool enableDefaultMD,
       @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
-      bool disablePaymentTermsDisplay,
-      @JsonKey(name: 'enableBillTo', defaultValue: false) bool enableBillTo,
-      @JsonKey(name: 'enableOHPrice', defaultValue: true) bool enableOHPrice,
+          bool disablePaymentTermsDisplay,
+      @JsonKey(name: 'enableBillTo', defaultValue: false)
+          bool enableBillTo,
+      @JsonKey(name: 'enableOHPrice', defaultValue: true)
+          bool enableOHPrice,
       @JsonKey(name: 'addOosMaterials', defaultValue: false)
-      bool addOosMaterials,
-      @JsonKey(name: 'oosValue', defaultValue: 0) int oosValue,
-      @JsonKey(name: 'enableRemarks', defaultValue: false) bool enableRemarks,
+          bool addOosMaterials,
+      @JsonKey(name: 'oosValue', defaultValue: 0)
+          int oosValue,
+      @JsonKey(name: 'enableRemarks', defaultValue: false)
+          bool enableRemarks,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      bool enableTaxDisplay,
-      @JsonKey(name: 'enableGMN', defaultValue: false) bool enableGMN});
+          bool enableTaxDisplay,
+      @JsonKey(name: 'enableGMN', defaultValue: false)
+          bool enableGMN});
 }
 
 /// @nodoc
@@ -472,80 +492,100 @@ abstract class _$$_UpdateSalesOrganisationConfigsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrgCode', defaultValue: '0') String salesOrg,
-      @JsonKey(name: 'ponRequired', defaultValue: false) bool poNumberRequired,
-      @JsonKey(name: 'priceOverride', defaultValue: false) bool priceOverride,
+      {@JsonKey(name: 'salesOrgCode', defaultValue: '0')
+          String salesOrg,
+      @JsonKey(name: 'ponRequired', defaultValue: false)
+          bool poNumberRequired,
+      @JsonKey(name: 'priceOverride', defaultValue: false)
+          bool priceOverride,
       @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
-      bool expiryDateDisplay,
+          bool expiryDateDisplay,
       @JsonKey(name: 'batchNumDisplay', defaultValue: false)
-      bool batchNumDisplay,
+          bool batchNumDisplay,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-      bool enableBatchNumber,
-      @JsonKey(name: 'currency') String currency,
+          bool enableBatchNumber,
+      @JsonKey(name: 'currency')
+          String currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
-      bool netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false) bool languageFilter,
-      @JsonKey(name: 'enableVat', defaultValue: false) bool enableVat,
-      @JsonKey(name: 'enableZDP5', defaultValue: false) bool enableZDP5,
-      @JsonKey(name: 'languageValue', defaultValue: '') String languageValue,
+          bool netPriceOverride,
+      @JsonKey(name: 'languageFilter', defaultValue: false)
+          bool languageFilter,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          bool enableVat,
+      @JsonKey(name: 'enableZDP5', defaultValue: false)
+          bool enableZDP5,
+      @JsonKey(name: 'languageValue', defaultValue: '')
+          String languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-      bool materialWithoutPrice,
+          bool materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
-      bool enableZDP8Override,
+          bool enableZDP8Override,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
-      bool displayOrderDiscount,
-      @JsonKey(name: 'enableIRN', defaultValue: false) bool enableIRN,
+          bool displayOrderDiscount,
+      @JsonKey(name: 'enableIRN', defaultValue: false)
+          bool enableIRN,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-      bool enableTaxClassification,
-      @JsonKey(name: 'disableBundles', defaultValue: false) bool disableBundles,
-      @JsonKey(name: 'disableProcessingStatus') bool disableProcessingStatus,
+          bool enableTaxClassification,
+      @JsonKey(name: 'disableBundles', defaultValue: false)
+          bool disableBundles,
+      @JsonKey(name: 'disableProcessingStatus')
+          bool disableProcessingStatus,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-      bool enableCollectiveNumber,
+          bool enableCollectiveNumber,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-      bool enableGimmickMaterial,
+          bool enableGimmickMaterial,
       @JsonKey(name: 'hideStockDisplay', defaultValue: false)
-      bool hideStockDisplay,
+          bool hideStockDisplay,
       @JsonKey(name: 'showPOAttachment', defaultValue: false)
-      bool showPOAttachment,
+          bool showPOAttachment,
       @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
-      bool disableDeliveryDate,
+          bool disableDeliveryDate,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
-      bool enableTaxAtTotalLevelOnly,
+          bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
-      bool enableGreenDelivery,
+          bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
-      int greenDeliveryDelayInDays,
+          int greenDeliveryDelayInDays,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-      int greenDeliveryUserRole,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0') String minOrderAmount,
-      @JsonKey(name: 'hideCustomer', defaultValue: false) bool hideCustomer,
+          int greenDeliveryUserRole,
+      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+          String minOrderAmount,
+      @JsonKey(name: 'hideCustomer', defaultValue: false)
+          bool hideCustomer,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
-      bool disableOrderType,
-      @JsonKey(name: 'vatValue', defaultValue: 0) int vatValue,
+          bool disableOrderType,
+      @JsonKey(name: 'vatValue', defaultValue: 0)
+          int vatValue,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-      bool enableSpecialInstructions,
+          bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-      bool enableReferenceNote,
+          bool enableReferenceNote,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-      bool enableMobileNumber,
+          bool enableMobileNumber,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-      bool enablePaymentTerms,
-      @JsonKey(name: 'enableGMC', defaultValue: false) bool enableGMC,
+          bool enablePaymentTerms,
+      @JsonKey(name: 'enableGMC', defaultValue: false)
+          bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
-      bool enableListPrice,
+          bool enableListPrice,
       @JsonKey(name: 'enableDefaultMD', defaultValue: false)
-      bool enableDefaultMD,
+          bool enableDefaultMD,
       @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
-      bool disablePaymentTermsDisplay,
-      @JsonKey(name: 'enableBillTo', defaultValue: false) bool enableBillTo,
-      @JsonKey(name: 'enableOHPrice', defaultValue: true) bool enableOHPrice,
+          bool disablePaymentTermsDisplay,
+      @JsonKey(name: 'enableBillTo', defaultValue: false)
+          bool enableBillTo,
+      @JsonKey(name: 'enableOHPrice', defaultValue: true)
+          bool enableOHPrice,
       @JsonKey(name: 'addOosMaterials', defaultValue: false)
-      bool addOosMaterials,
-      @JsonKey(name: 'oosValue', defaultValue: 0) int oosValue,
-      @JsonKey(name: 'enableRemarks', defaultValue: false) bool enableRemarks,
+          bool addOosMaterials,
+      @JsonKey(name: 'oosValue', defaultValue: 0)
+          int oosValue,
+      @JsonKey(name: 'enableRemarks', defaultValue: false)
+          bool enableRemarks,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      bool enableTaxDisplay,
-      @JsonKey(name: 'enableGMN', defaultValue: false) bool enableGMN});
+          bool enableTaxDisplay,
+      @JsonKey(name: 'enableGMN', defaultValue: false)
+          bool enableGMN});
 }
 
 /// @nodoc
@@ -807,92 +847,100 @@ class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
 class _$_UpdateSalesOrganisationConfigsDto
     extends _UpdateSalesOrganisationConfigsDto {
   const _$_UpdateSalesOrganisationConfigsDto(
-      {@JsonKey(name: 'salesOrgCode', defaultValue: '0') required this.salesOrg,
+      {@JsonKey(name: 'salesOrgCode', defaultValue: '0')
+          required this.salesOrg,
       @JsonKey(name: 'ponRequired', defaultValue: false)
-      required this.poNumberRequired,
+          required this.poNumberRequired,
       @JsonKey(name: 'priceOverride', defaultValue: false)
-      required this.priceOverride,
+          required this.priceOverride,
       @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
-      required this.expiryDateDisplay,
+          required this.expiryDateDisplay,
       @JsonKey(name: 'batchNumDisplay', defaultValue: false)
-      required this.batchNumDisplay,
+          required this.batchNumDisplay,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-      required this.enableBatchNumber,
-      @JsonKey(name: 'currency') required this.currency,
+          required this.enableBatchNumber,
+      @JsonKey(name: 'currency')
+          required this.currency,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
-      required this.netPriceOverride,
+          required this.netPriceOverride,
       @JsonKey(name: 'languageFilter', defaultValue: false)
-      required this.languageFilter,
-      @JsonKey(name: 'enableVat', defaultValue: false) required this.enableVat,
+          required this.languageFilter,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          required this.enableVat,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
-      required this.enableZDP5,
+          required this.enableZDP5,
       @JsonKey(name: 'languageValue', defaultValue: '')
-      required this.languageValue,
+          required this.languageValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-      required this.materialWithoutPrice,
+          required this.materialWithoutPrice,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
-      required this.enableZDP8Override,
+          required this.enableZDP8Override,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
-      required this.displayOrderDiscount,
-      @JsonKey(name: 'enableIRN', defaultValue: false) required this.enableIRN,
+          required this.displayOrderDiscount,
+      @JsonKey(name: 'enableIRN', defaultValue: false)
+          required this.enableIRN,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-      required this.enableTaxClassification,
+          required this.enableTaxClassification,
       @JsonKey(name: 'disableBundles', defaultValue: false)
-      required this.disableBundles,
+          required this.disableBundles,
       @JsonKey(name: 'disableProcessingStatus')
-      required this.disableProcessingStatus,
+          required this.disableProcessingStatus,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-      required this.enableCollectiveNumber,
+          required this.enableCollectiveNumber,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-      required this.enableGimmickMaterial,
+          required this.enableGimmickMaterial,
       @JsonKey(name: 'hideStockDisplay', defaultValue: false)
-      required this.hideStockDisplay,
+          required this.hideStockDisplay,
       @JsonKey(name: 'showPOAttachment', defaultValue: false)
-      required this.showPOAttachment,
+          required this.showPOAttachment,
       @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
-      required this.disableDeliveryDate,
+          required this.disableDeliveryDate,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
-      required this.enableTaxAtTotalLevelOnly,
+          required this.enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
-      required this.enableGreenDelivery,
+          required this.enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
-      required this.greenDeliveryDelayInDays,
+          required this.greenDeliveryDelayInDays,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-      required this.greenDeliveryUserRole,
+          required this.greenDeliveryUserRole,
       @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-      required this.minOrderAmount,
+          required this.minOrderAmount,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
-      required this.hideCustomer,
+          required this.hideCustomer,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
-      required this.disableOrderType,
-      @JsonKey(name: 'vatValue', defaultValue: 0) required this.vatValue,
+          required this.disableOrderType,
+      @JsonKey(name: 'vatValue', defaultValue: 0)
+          required this.vatValue,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-      required this.enableSpecialInstructions,
+          required this.enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-      required this.enableReferenceNote,
+          required this.enableReferenceNote,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-      required this.enableMobileNumber,
+          required this.enableMobileNumber,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-      required this.enablePaymentTerms,
-      @JsonKey(name: 'enableGMC', defaultValue: false) required this.enableGMC,
+          required this.enablePaymentTerms,
+      @JsonKey(name: 'enableGMC', defaultValue: false)
+          required this.enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
-      required this.enableListPrice,
+          required this.enableListPrice,
       @JsonKey(name: 'enableDefaultMD', defaultValue: false)
-      required this.enableDefaultMD,
+          required this.enableDefaultMD,
       @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
-      required this.disablePaymentTermsDisplay,
+          required this.disablePaymentTermsDisplay,
       @JsonKey(name: 'enableBillTo', defaultValue: false)
-      required this.enableBillTo,
+          required this.enableBillTo,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
-      required this.enableOHPrice,
+          required this.enableOHPrice,
       @JsonKey(name: 'addOosMaterials', defaultValue: false)
-      required this.addOosMaterials,
-      @JsonKey(name: 'oosValue', defaultValue: 0) required this.oosValue,
+          required this.addOosMaterials,
+      @JsonKey(name: 'oosValue', defaultValue: 0)
+          required this.oosValue,
       @JsonKey(name: 'enableRemarks', defaultValue: false)
-      required this.enableRemarks,
+          required this.enableRemarks,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      required this.enableTaxDisplay,
-      @JsonKey(name: 'enableGMN', defaultValue: false) required this.enableGMN})
+          required this.enableTaxDisplay,
+      @JsonKey(name: 'enableGMN', defaultValue: false)
+          required this.enableGMN})
       : super._();
 
   factory _$_UpdateSalesOrganisationConfigsDto.fromJson(
@@ -1207,97 +1255,101 @@ class _$_UpdateSalesOrganisationConfigsDto
 abstract class _UpdateSalesOrganisationConfigsDto
     extends UpdateSalesOrganisationConfigsDto {
   const factory _UpdateSalesOrganisationConfigsDto(
-      {@JsonKey(name: 'salesOrgCode', defaultValue: '0')
-      required final String salesOrg,
-      @JsonKey(name: 'ponRequired', defaultValue: false)
-      required final bool poNumberRequired,
-      @JsonKey(name: 'priceOverride', defaultValue: false)
-      required final bool priceOverride,
-      @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
-      required final bool expiryDateDisplay,
-      @JsonKey(name: 'batchNumDisplay', defaultValue: false)
-      required final bool batchNumDisplay,
-      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-      required final bool enableBatchNumber,
-      @JsonKey(name: 'currency') required final String currency,
-      @JsonKey(name: 'netPriceOverride', defaultValue: false)
-      required final bool netPriceOverride,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-      required final bool languageFilter,
-      @JsonKey(name: 'enableVat', defaultValue: false)
-      required final bool enableVat,
-      @JsonKey(name: 'enableZDP5', defaultValue: false)
-      required final bool enableZDP5,
-      @JsonKey(name: 'languageValue', defaultValue: '')
-      required final String languageValue,
-      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-      required final bool materialWithoutPrice,
-      @JsonKey(name: 'enableZDP8Override', defaultValue: false)
-      required final bool enableZDP8Override,
-      @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
-      required final bool displayOrderDiscount,
-      @JsonKey(name: 'enableIRN', defaultValue: false)
-      required final bool enableIRN,
-      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-      required final bool enableTaxClassification,
-      @JsonKey(name: 'disableBundles', defaultValue: false)
-      required final bool disableBundles,
-      @JsonKey(name: 'disableProcessingStatus')
-      required final bool disableProcessingStatus,
-      @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-      required final bool enableCollectiveNumber,
-      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-      required final bool enableGimmickMaterial,
-      @JsonKey(name: 'hideStockDisplay', defaultValue: false)
-      required final bool hideStockDisplay,
-      @JsonKey(name: 'showPOAttachment', defaultValue: false)
-      required final bool showPOAttachment,
-      @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
-      required final bool disableDeliveryDate,
-      @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
-      required final bool enableTaxAtTotalLevelOnly,
-      @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
-      required final bool enableGreenDelivery,
-      @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
-      required final int greenDeliveryDelayInDays,
-      @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-      required final int greenDeliveryUserRole,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-      required final String minOrderAmount,
-      @JsonKey(name: 'hideCustomer', defaultValue: false)
-      required final bool hideCustomer,
-      @JsonKey(name: 'disableOrderType', defaultValue: false)
-      required final bool disableOrderType,
-      @JsonKey(name: 'vatValue', defaultValue: 0) required final int vatValue,
-      @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-      required final bool enableSpecialInstructions,
-      @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-      required final bool enableReferenceNote,
-      @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-      required final bool enableMobileNumber,
-      @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-      required final bool enablePaymentTerms,
-      @JsonKey(name: 'enableGMC', defaultValue: false)
-      required final bool enableGMC,
-      @JsonKey(name: 'enableListPrice', defaultValue: false)
-      required final bool enableListPrice,
-      @JsonKey(name: 'enableDefaultMD', defaultValue: false)
-      required final bool enableDefaultMD,
-      @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
-      required final bool disablePaymentTermsDisplay,
-      @JsonKey(name: 'enableBillTo', defaultValue: false)
-      required final bool enableBillTo,
-      @JsonKey(name: 'enableOHPrice', defaultValue: true)
-      required final bool enableOHPrice,
-      @JsonKey(name: 'addOosMaterials', defaultValue: false)
-      required final bool addOosMaterials,
-      @JsonKey(name: 'oosValue', defaultValue: 0) required final int oosValue,
-      @JsonKey(name: 'enableRemarks', defaultValue: false)
-      required final bool enableRemarks,
-      @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      required final bool enableTaxDisplay,
-      @JsonKey(name: 'enableGMN', defaultValue: false)
-      required final bool enableGMN}) = _$_UpdateSalesOrganisationConfigsDto;
+          {@JsonKey(name: 'salesOrgCode', defaultValue: '0')
+              required final String salesOrg,
+          @JsonKey(name: 'ponRequired', defaultValue: false)
+              required final bool poNumberRequired,
+          @JsonKey(name: 'priceOverride', defaultValue: false)
+              required final bool priceOverride,
+          @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
+              required final bool expiryDateDisplay,
+          @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+              required final bool batchNumDisplay,
+          @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+              required final bool enableBatchNumber,
+          @JsonKey(name: 'currency')
+              required final String currency,
+          @JsonKey(name: 'netPriceOverride', defaultValue: false)
+              required final bool netPriceOverride,
+          @JsonKey(name: 'languageFilter', defaultValue: false)
+              required final bool languageFilter,
+          @JsonKey(name: 'enableVat', defaultValue: false)
+              required final bool enableVat,
+          @JsonKey(name: 'enableZDP5', defaultValue: false)
+              required final bool enableZDP5,
+          @JsonKey(name: 'languageValue', defaultValue: '')
+              required final String languageValue,
+          @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+              required final bool materialWithoutPrice,
+          @JsonKey(name: 'enableZDP8Override', defaultValue: false)
+              required final bool enableZDP8Override,
+          @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+              required final bool displayOrderDiscount,
+          @JsonKey(name: 'enableIRN', defaultValue: false)
+              required final bool enableIRN,
+          @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+              required final bool enableTaxClassification,
+          @JsonKey(name: 'disableBundles', defaultValue: false)
+              required final bool disableBundles,
+          @JsonKey(name: 'disableProcessingStatus')
+              required final bool disableProcessingStatus,
+          @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+              required final bool enableCollectiveNumber,
+          @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+              required final bool enableGimmickMaterial,
+          @JsonKey(name: 'hideStockDisplay', defaultValue: false)
+              required final bool hideStockDisplay,
+          @JsonKey(name: 'showPOAttachment', defaultValue: false)
+              required final bool showPOAttachment,
+          @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+              required final bool disableDeliveryDate,
+          @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
+              required final bool enableTaxAtTotalLevelOnly,
+          @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
+              required final bool enableGreenDelivery,
+          @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
+              required final int greenDeliveryDelayInDays,
+          @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
+              required final int greenDeliveryUserRole,
+          @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+              required final String minOrderAmount,
+          @JsonKey(name: 'hideCustomer', defaultValue: false)
+              required final bool hideCustomer,
+          @JsonKey(name: 'disableOrderType', defaultValue: false)
+              required final bool disableOrderType,
+          @JsonKey(name: 'vatValue', defaultValue: 0)
+              required final int vatValue,
+          @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+              required final bool enableSpecialInstructions,
+          @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+              required final bool enableReferenceNote,
+          @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+              required final bool enableMobileNumber,
+          @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+              required final bool enablePaymentTerms,
+          @JsonKey(name: 'enableGMC', defaultValue: false)
+              required final bool enableGMC,
+          @JsonKey(name: 'enableListPrice', defaultValue: false)
+              required final bool enableListPrice,
+          @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+              required final bool enableDefaultMD,
+          @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+              required final bool disablePaymentTermsDisplay,
+          @JsonKey(name: 'enableBillTo', defaultValue: false)
+              required final bool enableBillTo,
+          @JsonKey(name: 'enableOHPrice', defaultValue: true)
+              required final bool enableOHPrice,
+          @JsonKey(name: 'addOosMaterials', defaultValue: false)
+              required final bool addOosMaterials,
+          @JsonKey(name: 'oosValue', defaultValue: 0)
+              required final int oosValue,
+          @JsonKey(name: 'enableRemarks', defaultValue: false)
+              required final bool enableRemarks,
+          @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
+              required final bool enableTaxDisplay,
+          @JsonKey(name: 'enableGMN', defaultValue: false)
+              required final bool enableGMN}) =
+      _$_UpdateSalesOrganisationConfigsDto;
   const _UpdateSalesOrganisationConfigsDto._() : super._();
 
   factory _UpdateSalesOrganisationConfigsDto.fromJson(

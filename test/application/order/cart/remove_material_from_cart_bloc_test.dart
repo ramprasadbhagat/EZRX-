@@ -37,8 +37,9 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(() => cartRepositoryMock.deleteFromCart(item: mockCartItem))
-            .thenAnswer((invocation) async =>
-                const Left(ApiFailure.other('Fake-Error')));
+            .thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
       },
       act: (bloc) => bloc.add(CartEvent.removeFromCart(item: mockCartItem)),
       expect: () => [

@@ -22,10 +22,12 @@ class BundleAddToCartBloc
   ) {
     event.map(
       initialized: (_) => emit(BundleAddToCartState.initial()),
-      set: (_Set e) => emit(state.copyWith(
-        bundle: e.bundle,
-        bundleMaterials: e.bundleMaterials,
-      )),
+      set: (_Set e) => emit(
+        state.copyWith(
+          bundle: e.bundle,
+          bundleMaterials: e.bundleMaterials,
+        ),
+      ),
       updateQuantity: (_UpdateQuantity e) => emit(
         state.copyWith(
           bundleMaterials: state.bundleMaterials

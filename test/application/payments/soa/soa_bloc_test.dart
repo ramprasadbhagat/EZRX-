@@ -46,8 +46,11 @@ void main() {
         repository: soaRepositoryMock,
       ),
       setUp: () {
-        when(() => soaRepositoryMock.fetchSoa(
-            customerCodeInfo: mockCustomerCodeInfo)).thenAnswer(
+        when(
+          () => soaRepositoryMock.fetchSoa(
+            customerCodeInfo: mockCustomerCodeInfo,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             mockSoaList,
           ),
@@ -74,8 +77,11 @@ void main() {
         repository: soaRepositoryMock,
       ),
       setUp: () {
-        when(() => soaRepositoryMock.fetchSoa(
-            customerCodeInfo: mockCustomerCodeInfo)).thenAnswer(
+        when(
+          () => soaRepositoryMock.fetchSoa(
+            customerCodeInfo: mockCustomerCodeInfo,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('api-failure'),
           ),

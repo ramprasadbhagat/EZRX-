@@ -131,8 +131,8 @@ class MaterialFilterBloc
           case MaterialFilterType.productOffers:
             emit(
               state.copyWith(
-                materialFilter:
-                    state.materialFilter.copyWith(isProductOffer: e.key as bool),
+                materialFilter: state.materialFilter
+                    .copyWith(isProductOffer: e.key as bool),
               ),
             );
             break;

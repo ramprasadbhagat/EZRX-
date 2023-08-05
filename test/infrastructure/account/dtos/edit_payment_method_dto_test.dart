@@ -13,16 +13,18 @@ void main() {
     () {
       setUp(
         () async {
-          data = json.decode(await rootBundle
-              .loadString('assets/json/updatePaymentMethodResponse.json'));
+          data = json.decode(
+            await rootBundle
+                .loadString('assets/json/updatePaymentMethodResponse.json'),
+          );
         },
       );
       test(
         '=> data mapping',
         () {
           final editPaymentMethod = EditPaymentMethodDto.fromJson(
-                  data['data']['updatePaymentMethods'])
-              .toDomain();
+            data['data']['updatePaymentMethods'],
+          ).toDomain();
           expect(editPaymentMethod.success, true);
           expect(editPaymentMethod.action, 'Update');
 

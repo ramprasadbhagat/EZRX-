@@ -1,7 +1,5 @@
 part of 'manage_bank_beneficiary_bloc.dart';
 
-
-
 @freezed
 class ManageBankBeneficiaryState with _$ManageBankBeneficiaryState {
   const ManageBankBeneficiaryState._();
@@ -29,11 +27,16 @@ class ManageBankBeneficiaryState with _$ManageBankBeneficiaryState {
       );
 
   String get salesDistrictLabel {
-   return salesDistrict.isNotEmpty &&
-    beneficiaryData.salesDistrict.isNotEmpty 
-      ?salesDistrict.first.salesDistrictInfo.where(
-        (element) =>
-        element.salesDistrictHeader.getValue() == beneficiaryData.salesDistrict,
-      ).first.salesDistrictLabel.getValue() : 'No Sales District';
+    return salesDistrict.isNotEmpty && beneficiaryData.salesDistrict.isNotEmpty
+        ? salesDistrict.first.salesDistrictInfo
+            .where(
+              (element) =>
+                  element.salesDistrictHeader.getValue() ==
+                  beneficiaryData.salesDistrict,
+            )
+            .first
+            .salesDistrictLabel
+            .getValue()
+        : 'No Sales District';
   }
 }

@@ -18,7 +18,6 @@ import 'package:flutter_html/flutter_html.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
 class PaymentAdviceFooterPage extends StatelessWidget {
   const PaymentAdviceFooterPage({Key? key}) : super(key: key);
 
@@ -77,19 +76,18 @@ class _PaymentAdviceFooterScrollList extends StatelessWidget {
             (_) {},
           ),
         );
-        },
-        buildWhen: (previous, current) =>
-          previous.isSubmitting != current.isSubmitting || 
+      },
+      buildWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting ||
           previous.isFetching != current.isFetching,
-        builder: (context, state) {
+      builder: (context, state) {
         return ScrollList<PaymentAdviceFooter>(
           noRecordFoundWidget:
               const NoRecordFound(title: 'No Payment Advice Footer Found'),
           controller: ScrollController(),
-          onRefresh: () =>
-              context.read<ManagePaymentAdviceFooterBloc>().add(
-                    const ManagePaymentAdviceFooterEvent.fetch(),
-                  ),
+          onRefresh: () => context.read<ManagePaymentAdviceFooterBloc>().add(
+                const ManagePaymentAdviceFooterEvent.fetch(),
+              ),
           onLoadingMore: () => {},
           isLoading: state.isFetching,
           itemBuilder: (context, index, item) =>
@@ -122,9 +120,9 @@ class _PaymentAdviceFooter extends StatelessWidget {
                 onPressed: (_) =>
                     context.read<ManagePaymentAdviceFooterBloc>().add(
                           ManagePaymentAdviceFooterEvent.delete(
-                  paymentAdviceFooter: paymentAdviceFooter,
-                ),
-              ),
+                            paymentAdviceFooter: paymentAdviceFooter,
+                          ),
+                        ),
               ),
             ],
             child: ListTile(

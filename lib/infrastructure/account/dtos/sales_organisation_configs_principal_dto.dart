@@ -8,10 +8,14 @@ part 'sales_organisation_configs_principal_dto.freezed.dart';
 part 'sales_organisation_configs_principal_dto.g.dart';
 
 @freezed
-class SalesOrganisationConfigsPrincipalDto with _$SalesOrganisationConfigsPrincipalDto {
+class SalesOrganisationConfigsPrincipalDto
+    with _$SalesOrganisationConfigsPrincipalDto {
   const SalesOrganisationConfigsPrincipalDto._();
 
-  @HiveType(typeId: 33, adapterName: 'SalesOrganisationConfigsPrincipalDtoAdapter')
+  @HiveType(
+    typeId: 33,
+    adapterName: 'SalesOrganisationConfigsPrincipalDtoAdapter',
+  )
   const factory SalesOrganisationConfigsPrincipalDto({
     //The date is not been used anywhere and
     //it is not in proper format
@@ -28,7 +32,8 @@ class SalesOrganisationConfigsPrincipalDto with _$SalesOrganisationConfigsPrinci
   ) {
     return SalesOrganisationConfigsPrincipalDto(
       date: salesOrganisationConfigsPrincipal.date.intValue,
-      principalCode: salesOrganisationConfigsPrincipal.principalCode.getOrDefaultValue(''),
+      principalCode:
+          salesOrganisationConfigsPrincipal.principalCode.getOrDefaultValue(''),
     );
   }
 
@@ -39,8 +44,8 @@ class SalesOrganisationConfigsPrincipalDto with _$SalesOrganisationConfigsPrinci
     );
   }
 
-  factory SalesOrganisationConfigsPrincipalDto.fromJson(Map<String, dynamic> json) =>
+  factory SalesOrganisationConfigsPrincipalDto.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$SalesOrganisationConfigsPrincipalDtoFromJson(json);
-
 }
-

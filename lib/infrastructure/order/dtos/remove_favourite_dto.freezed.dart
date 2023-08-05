@@ -37,7 +37,7 @@ abstract class $RemoveFavouriteDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-      int removeFavouriteMaterial});
+          int removeFavouriteMaterial});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ abstract class _$$_RemoveFavouriteDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-      int removeFavouriteMaterial});
+          int removeFavouriteMaterial});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$_RemoveFavouriteDtoCopyWithImpl<$Res>
 class _$_RemoveFavouriteDto extends _RemoveFavouriteDto {
   const _$_RemoveFavouriteDto(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-      required this.removeFavouriteMaterial})
+          required this.removeFavouriteMaterial})
       : super._();
 
   factory _$_RemoveFavouriteDto.fromJson(Map<String, dynamic> json) =>
@@ -151,7 +151,7 @@ class _$_RemoveFavouriteDto extends _RemoveFavouriteDto {
 abstract class _RemoveFavouriteDto extends RemoveFavouriteDto {
   const factory _RemoveFavouriteDto(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-      required final int removeFavouriteMaterial}) = _$_RemoveFavouriteDto;
+          required final int removeFavouriteMaterial}) = _$_RemoveFavouriteDto;
   const _RemoveFavouriteDto._() : super._();
 
   factory _RemoveFavouriteDto.fromJson(Map<String, dynamic> json) =

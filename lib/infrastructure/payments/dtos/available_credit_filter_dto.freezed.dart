@@ -46,12 +46,13 @@ abstract class $AvailableCreditFilterDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-      String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
+          String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '')
+          String documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-      String amountInTransactionCurrencyFrom,
+          String amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-      String amountInTransactionCurrencyTo});
+          String amountInTransactionCurrencyTo});
 }
 
 /// @nodoc
@@ -105,12 +106,13 @@ abstract class _$$_AvailableCreditFilterDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-      String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
+          String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '')
+          String documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-      String amountInTransactionCurrencyFrom,
+          String amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-      String amountInTransactionCurrencyTo});
+          String amountInTransactionCurrencyTo});
 }
 
 /// @nodoc
@@ -156,13 +158,13 @@ class __$$_AvailableCreditFilterDtoCopyWithImpl<$Res>
 class _$_AvailableCreditFilterDto extends _AvailableCreditFilterDto {
   const _$_AvailableCreditFilterDto(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-      required this.documentDateFrom,
+          required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-      required this.documentDateTo,
+          required this.documentDateTo,
       @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-      required this.amountInTransactionCurrencyFrom,
+          required this.amountInTransactionCurrencyFrom,
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-      required this.amountInTransactionCurrencyTo})
+          required this.amountInTransactionCurrencyTo})
       : super._();
 
   factory _$_AvailableCreditFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -228,13 +230,13 @@ class _$_AvailableCreditFilterDto extends _AvailableCreditFilterDto {
 abstract class _AvailableCreditFilterDto extends AvailableCreditFilterDto {
   const factory _AvailableCreditFilterDto(
           {@JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required final String documentDateFrom,
+              required final String documentDateFrom,
           @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required final String documentDateTo,
+              required final String documentDateTo,
           @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
-          required final String amountInTransactionCurrencyFrom,
+              required final String amountInTransactionCurrencyFrom,
           @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
-          required final String amountInTransactionCurrencyTo}) =
+              required final String amountInTransactionCurrencyTo}) =
       _$_AvailableCreditFilterDto;
   const _AvailableCreditFilterDto._() : super._();
 

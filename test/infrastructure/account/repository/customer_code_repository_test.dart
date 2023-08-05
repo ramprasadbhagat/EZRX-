@@ -163,38 +163,50 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: mockCustomerCode,
-            offset: offset,
-            userName: mockSalesRepUser.username.getOrCrash(),
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: mockCustomerCode,
+          offset: offset,
+          userName: mockSalesRepUser.username.getOrCrash(),
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}1',
-            offset: offset,
-            userName: mockSalesRepUser.username.getOrCrash(),
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}1',
+          offset: offset,
+          userName: mockSalesRepUser.username.getOrCrash(),
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}2',
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}2',
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -217,35 +229,45 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: mockCustomerCode,
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: mockCustomerCode,
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}1',
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}1',
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}2',
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}2',
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -269,29 +291,35 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: mockCustomerCode,
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: mockCustomerCode,
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}1',
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}1',
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}2',
-            userName: mockSalesRepUser.username.getOrCrash(),
-            offset: offset,
-            pageSize: pageSize,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}2',
+          userName: mockSalesRepUser.username.getOrCrash(),
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -315,38 +343,50 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => customerCodeRemoteDataSourceMock.getCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: mockCustomerCode,
-            hideCustomer: hideCustomer,
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: mockCustomerCode,
+          hideCustomer: hideCustomer,
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
-      when(() => customerCodeRemoteDataSourceMock.getCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}1',
-            hideCustomer: hideCustomer,
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}1',
+          hideCustomer: hideCustomer,
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
-      when(() => customerCodeRemoteDataSourceMock.getCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}2',
-            hideCustomer: hideCustomer,
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}2',
+          hideCustomer: hideCustomer,
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -370,35 +410,45 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => customerCodeRemoteDataSourceMock.getCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: mockCustomerCode,
-            hideCustomer: hideCustomer,
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: mockCustomerCode,
+          hideCustomer: hideCustomer,
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
-      when(() => customerCodeRemoteDataSourceMock.getCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}1',
-            hideCustomer: hideCustomer,
-            offset: offset,
-            pageSize: pageSize,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}1',
+          hideCustomer: hideCustomer,
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
-      when(() => customerCodeRemoteDataSourceMock.getCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: '${mockCustomerCode}2',
-            hideCustomer: hideCustomer,
-            offset: offset,
-            pageSize: pageSize,
-          )).thenAnswer((invocation) async => <CustomerCodeInfo>[
-            CustomerCodeInfo.empty(),
-            CustomerCodeInfo.empty(),
-          ]);
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: '${mockCustomerCode}2',
+          hideCustomer: hideCustomer,
+          offset: offset,
+          pageSize: pageSize,
+        ),
+      ).thenAnswer(
+        (invocation) async => <CustomerCodeInfo>[
+          CustomerCodeInfo.empty(),
+          CustomerCodeInfo.empty(),
+        ],
+      );
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
@@ -480,13 +530,15 @@ void main() {
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-            customerCode: mockCustomerCode,
-            offset: offset,
-            userName: mockSalesRepUser.username.getOrCrash(),
-            pageSize: pageSize,
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          customerCode: mockCustomerCode,
+          offset: offset,
+          userName: mockSalesRepUser.username.getOrCrash(),
+          pageSize: pageSize,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,

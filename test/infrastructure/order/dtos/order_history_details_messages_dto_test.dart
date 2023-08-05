@@ -14,19 +14,21 @@ void main() {
     });
 
     test('Test fromDomain', () {
-      final configs =
-          OrderHistoryDetailsMessagesDto.fromDomain(OrderHistoryDetailsMessagesDto.fromJson(
-        data,
-      ).toDomain());
+      final configs = OrderHistoryDetailsMessagesDto.fromDomain(
+        OrderHistoryDetailsMessagesDto.fromJson(
+          data,
+        ).toDomain(),
+      );
 
       expect(configs.type, 'fake-type');
     });
 
     test('Test toJson', () {
-      final configs =
-          OrderHistoryDetailsMessagesDto.fromDomain(OrderHistoryDetailsMessagesDto.fromJson(
-        data,
-      ).toDomain()).toJson();
+      final configs = OrderHistoryDetailsMessagesDto.fromDomain(
+        OrderHistoryDetailsMessagesDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
 
       expect(configs['Type'], 'fake-type');
     });

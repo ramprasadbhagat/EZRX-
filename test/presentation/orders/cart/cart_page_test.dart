@@ -151,8 +151,9 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
-    locator.registerFactory(() =>
-        DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()));
+    locator.registerFactory(
+      () => DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()),
+    );
     locator.registerFactory(() => AppRouter());
     locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
@@ -180,22 +181,25 @@ void main() {
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
-          MaterialNumber('000000000023168451'),
-          () => Price.empty().copyWith(
-                finalPrice: MaterialPrice(4.5),
-              ));
+        MaterialNumber('000000000023168451'),
+        () => Price.empty().copyWith(
+          finalPrice: MaterialPrice(4.5),
+        ),
+      );
 
       mockCartItemBundles2 = [
         PriceAggregate.empty().copyWith(
           addedBonusList: [
             MaterialItemBonus.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('0000000000111111'),
-              materialDescription: ' Mosys D',
-              principalData: PrincipalData.empty().copyWith(
-                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('0000000000111111'),
+                materialDescription: ' Mosys D',
+                principalData: PrincipalData.empty().copyWith(
+                  principalName:
+                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+                ),
               ),
-            )),
+            ),
           ],
           salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
             vatValue: 8,
@@ -258,13 +262,15 @@ void main() {
         PriceAggregate.empty().copyWith(
           addedBonusList: [
             MaterialItemBonus.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('0000000000111111'),
-              materialDescription: ' Mosys D',
-              principalData: PrincipalData.empty().copyWith(
-                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('0000000000111111'),
+                materialDescription: ' Mosys D',
+                principalData: PrincipalData.empty().copyWith(
+                  principalName:
+                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+                ),
               ),
-            )),
+            ),
           ],
           quantity: 10,
           bundle: Bundle.empty().copyWith(
@@ -318,13 +324,15 @@ void main() {
         PriceAggregate.empty().copyWith(
           addedBonusList: [
             MaterialItemBonus.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('0000000000111111'),
-              materialDescription: ' Mosys D',
-              principalData: PrincipalData.empty().copyWith(
-                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('0000000000111111'),
+                materialDescription: ' Mosys D',
+                principalData: PrincipalData.empty().copyWith(
+                  principalName:
+                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+                ),
               ),
-            )),
+            ),
           ],
           quantity: 1,
           price: Price.empty().copyWith(
@@ -443,14 +451,17 @@ void main() {
           ),
         ),
       ];
-      mockCartItemWithOutBatch = CartItem(materials: [
-        PriceAggregate.empty().copyWith(
-          quantity: 1,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
+      mockCartItemWithOutBatch = CartItem(
+        materials: [
+          PriceAggregate.empty().copyWith(
+            quantity: 1,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023168451'),
+            ),
           ),
-        ),
-      ], itemType: CartItemType.material);
+        ],
+        itemType: CartItemType.material,
+      );
 
       batchStockInfoMock = [
         StockInfo.empty().copyWith(
@@ -474,16 +485,19 @@ void main() {
         ],
         itemType: CartItemType.material,
       );
-      when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
-        apiFailureOrSuccessOption: none(),
-        cartItems: [CartItem.material(mockCartItemWithDataList.first)],
-        isFetching: false,
-      ));
-      when(() => materialPriceBloc.state)
-          .thenReturn(MaterialPriceState.initial().copyWith(
-        isFetching: false,
-        materialPrice: mockPriceList,
-      ));
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: [CartItem.material(mockCartItemWithDataList.first)],
+          isFetching: false,
+        ),
+      );
+      when(() => materialPriceBloc.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: mockPriceList,
+        ),
+      );
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => discountOverrideBlocMock.state)
@@ -494,31 +508,36 @@ void main() {
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(),
       );
-      when(() => salesOrgBloc.state)
-          .thenReturn(SalesOrgState.initial().copyWith(
-        configs: SalesOrganisationConfigs.empty().copyWith(
-          enableReferenceNote: true,
-          enableVat: true,
-          enableFutureDeliveryDay: true,
-          enableMobileNumber: true,
-          enableSpecialInstructions: true,
-          disableOrderType: false,
-          enableCollectiveNumber: true,
-          enablePaymentTerms: true,
-          enableRemarks: true,
-          priceOverride: true,
+      when(() => salesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableReferenceNote: true,
+            enableVat: true,
+            enableFutureDeliveryDay: true,
+            enableMobileNumber: true,
+            enableSpecialInstructions: true,
+            disableOrderType: false,
+            enableCollectiveNumber: true,
+            enablePaymentTerms: true,
+            enableRemarks: true,
+            priceOverride: true,
+          ),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
         ),
-        salesOrganisation: SalesOrganisation.empty().copyWith(
-          salesOrg: SalesOrg('2601'),
+      );
+      when(() => customerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: '1234',
+          ),
         ),
-      ));
-      when(() => customerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-        customerCodeSoldTo: '1234',
-      )));
-      when(() => userBloc.state).thenReturn(UserState.initial()
-          .copyWith(user: User.empty().copyWith(hasBonusOverride: false)));
+      );
+      when(() => userBloc.state).thenReturn(
+        UserState.initial()
+            .copyWith(user: User.empty().copyWith(hasBonusOverride: false)),
+      );
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
@@ -547,31 +566,42 @@ void main() {
             BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<MaterialPriceBloc>(
-                create: (context) => materialPriceBloc),
+              create: (context) => materialPriceBloc,
+            ),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBloc),
+              create: (context) => customerCodeBloc,
+            ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AddToCartBloc>(
-                create: ((context) => addToCartBlocMock)),
+              create: ((context) => addToCartBlocMock),
+            ),
             BlocProvider<MaterialListBloc>(
-                create: ((context) => materialListBlocMock)),
+              create: ((context) => materialListBlocMock),
+            ),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<TenderContractBloc>(
-                create: (context) => tenderContractBlocMock),
+              create: (context) => tenderContractBlocMock,
+            ),
             BlocProvider<OrderDocumentTypeBloc>(
-                create: (context) => orderDocumentTypeBlocMock),
+              create: (context) => orderDocumentTypeBlocMock,
+            ),
             BlocProvider<OrderEligibilityBloc>(
-                create: (context) => orderEligibilityBlocMock),
+              create: (context) => orderEligibilityBlocMock,
+            ),
             BlocProvider<PriceOverrideBloc>(
-                create: (context) => priceOverrideBloc),
+              create: (context) => priceOverrideBloc,
+            ),
             BlocProvider<OrderSummaryBloc>(
-                create: (context) => orderSummaryBlocMock),
+              create: (context) => orderSummaryBlocMock,
+            ),
             BlocProvider<AdditionalDetailsBloc>(
-                create: (context) => additionalDetailsBlocMock),
+              create: (context) => additionalDetailsBlocMock,
+            ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
+              create: (context) => announcementBlocMock,
+            ),
           ],
           child: const CartPage(),
         );
@@ -1521,7 +1551,8 @@ void main() {
         final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
         expect(accountSuspendedBanner, findsOneWidget);
         final accountSuspendedBannerTest = find.textContaining(
-            'Customer is suspended, please contact ZP Admin for support');
+          'Customer is suspended, please contact ZP Admin for support',
+        );
         expect(accountSuspendedBannerTest, findsOneWidget);
       });
 
@@ -1540,381 +1571,382 @@ void main() {
         final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
         expect(accountSuspendedBanner, findsOneWidget);
         final accountSuspendedBannerTest = find.textContaining(
-            'Customer is suspended, please contact ZP Admin for support');
+          'Customer is suspended, please contact ZP Admin for support',
+        );
         expect(accountSuspendedBannerTest, findsOneWidget);
       });
 
-  //     testWidgets('Test have cart item update cart', (tester) async {
-  //       final newList = [
-  //         mockCartItemWithDataList.first.copyWith(
-  //           materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(
-  //             hasValidTenderContract: true,
-  //           ),
-  //           tenderContract: TenderContract.empty().copyWith(
-  //             contractNumber:
-  //                 TenderContractNumber.tenderContractItemNumber('0000123'),
-  //             tenderOrderReason: TenderContractReason('750'),
-  //           ),
-  //         )
-  //       ];
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [CartItem.material(newList.first)],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => tenderContractBlocMock.state)
-  //           .thenReturn(TenderContractState.initial().copyWith(
-  //               selectedTenderContract: TenderContract.empty().copyWith(
-  //                 contractNumber:
-  //                     TenderContractNumber.tenderContractItemNumber('0000123'),
-  //                 tenderOrderReason: TenderContractReason('750'),
-  //               ),
-  //               apiFailureOrSuccessOption: optionOf(const Right('success')),
-  //               isFetching: false,
-  //               tenderContractList: [
-  //             TenderContract.empty().copyWith(
-  //               contractNumber:
-  //                   TenderContractNumber.tenderContractItemNumber('0000123'),
-  //             ),
-  //             TenderContract.empty().copyWith(
-  //                 contractNumber:
-  //                     TenderContractNumber.tenderContractItemNumber('0000125'),
-  //                 tenderOrderReason: TenderContractReason('750'))
-  //           ]));
-  //       when(() => addToCartBlocMock.state).thenReturn(
-  //         AddToCartState.initial().copyWith(
-  //           isFetching: false,
-  //           cartItem: mockCartItemBundles.first.copyWith(
-  //             materialInfo: MaterialInfo.empty().copyWith(
-  //                 hasValidTenderContract: true,
-  //                 materialNumber: MaterialNumber('0000123')),
-  //             tenderContract: TenderContract.empty().copyWith(
-  //               contractNumber:
-  //                   TenderContractNumber.tenderContractItemNumber('0000123'),
-  //               tenderOrderReason: TenderContractReason('750'),
-  //             ),
-  //           ),
-  //         ),
-  //       );
-  //       whenListen(tenderContractBlocMock,
-  //           Stream.fromIterable([tenderContractBlocMock.state]));
-  //       await tester.runAsync(() async {
-  //         await tester.pumpWidget(getWidget());
-  //       });
+      //     testWidgets('Test have cart item update cart', (tester) async {
+      //       final newList = [
+      //         mockCartItemWithDataList.first.copyWith(
+      //           materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(
+      //             hasValidTenderContract: true,
+      //           ),
+      //           tenderContract: TenderContract.empty().copyWith(
+      //             contractNumber:
+      //                 TenderContractNumber.tenderContractItemNumber('0000123'),
+      //             tenderOrderReason: TenderContractReason('750'),
+      //           ),
+      //         )
+      //       ];
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [CartItem.material(newList.first)],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => tenderContractBlocMock.state)
+      //           .thenReturn(TenderContractState.initial().copyWith(
+      //               selectedTenderContract: TenderContract.empty().copyWith(
+      //                 contractNumber:
+      //                     TenderContractNumber.tenderContractItemNumber('0000123'),
+      //                 tenderOrderReason: TenderContractReason('750'),
+      //               ),
+      //               apiFailureOrSuccessOption: optionOf(const Right('success')),
+      //               isFetching: false,
+      //               tenderContractList: [
+      //             TenderContract.empty().copyWith(
+      //               contractNumber:
+      //                   TenderContractNumber.tenderContractItemNumber('0000123'),
+      //             ),
+      //             TenderContract.empty().copyWith(
+      //                 contractNumber:
+      //                     TenderContractNumber.tenderContractItemNumber('0000125'),
+      //                 tenderOrderReason: TenderContractReason('750'))
+      //           ]));
+      //       when(() => addToCartBlocMock.state).thenReturn(
+      //         AddToCartState.initial().copyWith(
+      //           isFetching: false,
+      //           cartItem: mockCartItemBundles.first.copyWith(
+      //             materialInfo: MaterialInfo.empty().copyWith(
+      //                 hasValidTenderContract: true,
+      //                 materialNumber: MaterialNumber('0000123')),
+      //             tenderContract: TenderContract.empty().copyWith(
+      //               contractNumber:
+      //                   TenderContractNumber.tenderContractItemNumber('0000123'),
+      //               tenderOrderReason: TenderContractReason('750'),
+      //             ),
+      //           ),
+      //         ),
+      //       );
+      //       whenListen(tenderContractBlocMock,
+      //           Stream.fromIterable([tenderContractBlocMock.state]));
+      //       await tester.runAsync(() async {
+      //         await tester.pumpWidget(getWidget());
+      //       });
 
-  //       await tester.pump();
-  //       final item = find.byKey(Key(
-  //           'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
-  //       expect(item, findsOneWidget);
-  //       await tester.tap(item);
-  //       await tester.pump();
-  //       expect(autoRouter.currentPath, 'orders/update_cart');
-  //     });
+      //       await tester.pump();
+      //       final item = find.byKey(Key(
+      //           'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
+      //       expect(item, findsOneWidget);
+      //       await tester.tap(item);
+      //       await tester.pump();
+      //       expect(autoRouter.currentPath, 'orders/update_cart');
+      //     });
 
-  //     testWidgets('Test have cart item update cart button pressed',
-  //         (tester) async {
-  //       final newList = [
-  //         mockCartItemWithDataList.first.copyWith(
-  //           materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(
-  //             hasValidTenderContract: true,
-  //           ),
-  //           tenderContract: TenderContract.empty().copyWith(
-  //             contractNumber:
-  //                 TenderContractNumber.tenderContractItemNumber('0000123'),
-  //             tenderOrderReason: TenderContractReason('750'),
-  //           ),
-  //         )
-  //       ];
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [CartItem.material(newList.first)],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => tenderContractBlocMock.state)
-  //           .thenReturn(TenderContractState.initial().copyWith(
-  //               selectedTenderContract: TenderContract.empty().copyWith(
-  //                 contractNumber:
-  //                     TenderContractNumber.tenderContractItemNumber('0000123'),
-  //                 tenderOrderReason: TenderContractReason('750'),
-  //               ),
-  //               apiFailureOrSuccessOption: optionOf(const Right('success')),
-  //               isFetching: false,
-  //               tenderContractList: [
-  //             TenderContract.empty().copyWith(
-  //               contractNumber:
-  //                   TenderContractNumber.tenderContractItemNumber('0000123'),
-  //             ),
-  //             TenderContract.empty().copyWith(
-  //                 contractNumber:
-  //                     TenderContractNumber.tenderContractItemNumber('0000125'),
-  //                 tenderOrderReason: TenderContractReason('750'))
-  //           ]));
-  //       when(() => addToCartBlocMock.state).thenReturn(
-  //         AddToCartState.initial().copyWith(
-  //           isFetching: false,
-  //           cartItem: mockCartItemBundles.first.copyWith(
-  //             materialInfo: MaterialInfo.empty().copyWith(
-  //                 hasValidTenderContract: true,
-  //                 materialNumber: MaterialNumber('0000123')),
-  //             tenderContract: TenderContract.empty().copyWith(
-  //               contractNumber:
-  //                   TenderContractNumber.tenderContractItemNumber('0000123'),
-  //               tenderOrderReason: TenderContractReason('750'),
-  //             ),
-  //           ),
-  //         ),
-  //       );
-  //       whenListen(tenderContractBlocMock,
-  //           Stream.fromIterable([tenderContractBlocMock.state]));
-  //       await tester.runAsync(() async {
-  //         await tester.pumpWidget(getWidget());
-  //       });
+      //     testWidgets('Test have cart item update cart button pressed',
+      //         (tester) async {
+      //       final newList = [
+      //         mockCartItemWithDataList.first.copyWith(
+      //           materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(
+      //             hasValidTenderContract: true,
+      //           ),
+      //           tenderContract: TenderContract.empty().copyWith(
+      //             contractNumber:
+      //                 TenderContractNumber.tenderContractItemNumber('0000123'),
+      //             tenderOrderReason: TenderContractReason('750'),
+      //           ),
+      //         )
+      //       ];
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [CartItem.material(newList.first)],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => tenderContractBlocMock.state)
+      //           .thenReturn(TenderContractState.initial().copyWith(
+      //               selectedTenderContract: TenderContract.empty().copyWith(
+      //                 contractNumber:
+      //                     TenderContractNumber.tenderContractItemNumber('0000123'),
+      //                 tenderOrderReason: TenderContractReason('750'),
+      //               ),
+      //               apiFailureOrSuccessOption: optionOf(const Right('success')),
+      //               isFetching: false,
+      //               tenderContractList: [
+      //             TenderContract.empty().copyWith(
+      //               contractNumber:
+      //                   TenderContractNumber.tenderContractItemNumber('0000123'),
+      //             ),
+      //             TenderContract.empty().copyWith(
+      //                 contractNumber:
+      //                     TenderContractNumber.tenderContractItemNumber('0000125'),
+      //                 tenderOrderReason: TenderContractReason('750'))
+      //           ]));
+      //       when(() => addToCartBlocMock.state).thenReturn(
+      //         AddToCartState.initial().copyWith(
+      //           isFetching: false,
+      //           cartItem: mockCartItemBundles.first.copyWith(
+      //             materialInfo: MaterialInfo.empty().copyWith(
+      //                 hasValidTenderContract: true,
+      //                 materialNumber: MaterialNumber('0000123')),
+      //             tenderContract: TenderContract.empty().copyWith(
+      //               contractNumber:
+      //                   TenderContractNumber.tenderContractItemNumber('0000123'),
+      //               tenderOrderReason: TenderContractReason('750'),
+      //             ),
+      //           ),
+      //         ),
+      //       );
+      //       whenListen(tenderContractBlocMock,
+      //           Stream.fromIterable([tenderContractBlocMock.state]));
+      //       await tester.runAsync(() async {
+      //         await tester.pumpWidget(getWidget());
+      //       });
 
-  //       await tester.pump();
-  //       final item = find.byKey(Key(
-  //           'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
-  //       expect(item, findsOneWidget);
-  //       await tester.tap(item);
-  //       await tester.pump();
-  //       expect(autoRouter.currentPath, 'orders/update_cart');
-  //     });
+      //       await tester.pump();
+      //       final item = find.byKey(Key(
+      //           'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
+      //       expect(item, findsOneWidget);
+      //       await tester.tap(item);
+      //       await tester.pump();
+      //       expect(autoRouter.currentPath, 'orders/update_cart');
+      //     });
 
-  //     testWidgets('Test to have correct GST and totalPrice', (tester) async {
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [CartItem.bundle(mockCartItemBundles2)],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => eligibilityBloc.state).thenReturn(
-  //         EligibilityState.initial().copyWith(
-  //           salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-  //             vatValue: 8,
-  //             enableVat: true,
-  //             enableTaxClassification: true,
-  //             enableTaxAtTotalLevelOnly: true,
-  //           ),
-  //         ),
-  //       );
-  //       when(() => salesOrgBloc.state).thenReturn(
-  //         SalesOrgState.initial().copyWith(
-  //           configs: SalesOrganisationConfigs.empty().copyWith(
-  //             vatValue: 8,
-  //             enableVat: true,
-  //             enableTaxClassification: true,
-  //             enableTaxAtTotalLevelOnly: true,
-  //           ),
-  //         ),
-  //       );
-  //       await tester.runAsync(() async {
-  //         await tester.pumpWidget(getWidget());
-  //       });
+      //     testWidgets('Test to have correct GST and totalPrice', (tester) async {
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [CartItem.bundle(mockCartItemBundles2)],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => eligibilityBloc.state).thenReturn(
+      //         EligibilityState.initial().copyWith(
+      //           salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+      //             vatValue: 8,
+      //             enableVat: true,
+      //             enableTaxClassification: true,
+      //             enableTaxAtTotalLevelOnly: true,
+      //           ),
+      //         ),
+      //       );
+      //       when(() => salesOrgBloc.state).thenReturn(
+      //         SalesOrgState.initial().copyWith(
+      //           configs: SalesOrganisationConfigs.empty().copyWith(
+      //             vatValue: 8,
+      //             enableVat: true,
+      //             enableTaxClassification: true,
+      //             enableTaxAtTotalLevelOnly: true,
+      //           ),
+      //         ),
+      //       );
+      //       await tester.runAsync(() async {
+      //         await tester.pumpWidget(getWidget());
+      //       });
 
-  //       await tester.pump();
-  //       final taxCodeInPercentageKey =
-  //           find.byKey(const Key('taxCodeInPercentageKey'));
-  //       expect(taxCodeInPercentageKey, findsOneWidget);
-  //       expect(find.text('VAT in %'), findsOneWidget);
+      //       await tester.pump();
+      //       final taxCodeInPercentageKey =
+      //           find.byKey(const Key('taxCodeInPercentageKey'));
+      //       expect(taxCodeInPercentageKey, findsOneWidget);
+      //       expect(find.text('VAT in %'), findsOneWidget);
 
-  //       final totalTaxKey = find.byKey(const Key('totalTaxKey'));
-  //       expect(totalTaxKey, findsOneWidget);
-  //       expect(find.text('VAT'), findsOneWidget);
-  //       final grandTotalKey = find.byKey(const Key('grandTotalKey'));
-  //       expect(grandTotalKey, findsOneWidget);
-  //       expect(find.text('Grand Total'), findsOneWidget);
-  //       expect(
-  //           cartBloc.state.grandTotal(
-  //             isMYMarketSalesRep: false,
-  //           ),
-  //           108.0);
-  //     });
+      //       final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+      //       expect(totalTaxKey, findsOneWidget);
+      //       expect(find.text('VAT'), findsOneWidget);
+      //       final grandTotalKey = find.byKey(const Key('grandTotalKey'));
+      //       expect(grandTotalKey, findsOneWidget);
+      //       expect(find.text('Grand Total'), findsOneWidget);
+      //       expect(
+      //           cartBloc.state.grandTotal(
+      //             isMYMarketSalesRep: false,
+      //           ),
+      //           108.0);
+      //     });
 
-  //     testWidgets(
-  //         'Test to have correct price for special ordertype with market TH',
-  //         (tester) async {
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [
-  //             CartItem.material(
-  //               mockCartItemWithDataList.first.copyWith(
-  //                 price: Price.empty().copyWith(
-  //                   finalPrice: MaterialPrice(108),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => orderDocumentTypeBlocMock.state).thenReturn(
-  //         OrderDocumentTypeState.initial().copyWith(
-  //             isOrderTypeSelected: true,
-  //             selectedOrderType: OrderDocumentType.empty().copyWith(
-  //               documentType: DocumentType('ZPFB'),
-  //             )),
-  //       );
-  //       when(() => eligibilityBloc.state).thenReturn(
-  //         EligibilityState.initial().copyWith(
-  //           salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-  //             vatValue: 8,
-  //             enableVat: true,
-  //             enableTaxClassification: true,
-  //             enableTaxAtTotalLevelOnly: true,
-  //           ),
-  //           salesOrganisation: SalesOrganisation.empty().copyWith(
-  //             salesOrg: SalesOrg('2902'),
-  //           ),
-  //           selectedOrderType: OrderDocumentType.empty().copyWith(
-  //             documentType: DocumentType('ZPFB'),
-  //           ),
-  //         ),
-  //       );
-  //       when(() => salesOrgBloc.state).thenReturn(
-  //         SalesOrgState.initial().copyWith(
-  //           configs: SalesOrganisationConfigs.empty().copyWith(
-  //             vatValue: 8,
-  //             enableVat: true,
-  //             enableTaxClassification: true,
-  //             enableTaxAtTotalLevelOnly: true,
-  //           ),
-  //           salesOrganisation: SalesOrganisation.empty().copyWith(
-  //             salesOrg: SalesOrg('2902'),
-  //           ),
-  //         ),
-  //       );
-  //       await tester.runAsync(() async {
-  //         await tester.pumpWidget(getWidget());
-  //       });
+      //     testWidgets(
+      //         'Test to have correct price for special ordertype with market TH',
+      //         (tester) async {
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [
+      //             CartItem.material(
+      //               mockCartItemWithDataList.first.copyWith(
+      //                 price: Price.empty().copyWith(
+      //                   finalPrice: MaterialPrice(108),
+      //                 ),
+      //               ),
+      //             ),
+      //           ],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => orderDocumentTypeBlocMock.state).thenReturn(
+      //         OrderDocumentTypeState.initial().copyWith(
+      //             isOrderTypeSelected: true,
+      //             selectedOrderType: OrderDocumentType.empty().copyWith(
+      //               documentType: DocumentType('ZPFB'),
+      //             )),
+      //       );
+      //       when(() => eligibilityBloc.state).thenReturn(
+      //         EligibilityState.initial().copyWith(
+      //           salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+      //             vatValue: 8,
+      //             enableVat: true,
+      //             enableTaxClassification: true,
+      //             enableTaxAtTotalLevelOnly: true,
+      //           ),
+      //           salesOrganisation: SalesOrganisation.empty().copyWith(
+      //             salesOrg: SalesOrg('2902'),
+      //           ),
+      //           selectedOrderType: OrderDocumentType.empty().copyWith(
+      //             documentType: DocumentType('ZPFB'),
+      //           ),
+      //         ),
+      //       );
+      //       when(() => salesOrgBloc.state).thenReturn(
+      //         SalesOrgState.initial().copyWith(
+      //           configs: SalesOrganisationConfigs.empty().copyWith(
+      //             vatValue: 8,
+      //             enableVat: true,
+      //             enableTaxClassification: true,
+      //             enableTaxAtTotalLevelOnly: true,
+      //           ),
+      //           salesOrganisation: SalesOrganisation.empty().copyWith(
+      //             salesOrg: SalesOrg('2902'),
+      //           ),
+      //         ),
+      //       );
+      //       await tester.runAsync(() async {
+      //         await tester.pumpWidget(getWidget());
+      //       });
 
-  //       await tester.pump();
-  //       tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
-  //       tester.binding.window.devicePixelRatioTestValue = 1.0;
-  //       final taxcodeInPercentageKey =
-  //           find.byKey(const Key('taxCodeInPercentageKey'));
-  //       expect(taxcodeInPercentageKey, findsOneWidget);
-  //       expect(find.text('VAT in %'), findsOneWidget);
+      //       await tester.pump();
+      //       tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      //       tester.binding.window.devicePixelRatioTestValue = 1.0;
+      //       final taxcodeInPercentageKey =
+      //           find.byKey(const Key('taxCodeInPercentageKey'));
+      //       expect(taxcodeInPercentageKey, findsOneWidget);
+      //       expect(find.text('VAT in %'), findsOneWidget);
 
-  //       final totalTaxKey = find.byKey(const Key('totalTaxKey'));
-  //       expect(totalTaxKey, findsOneWidget);
-  //       expect(find.text('VAT'), findsOneWidget);
-  //       final grandTotalKey = find.byKey(const Key('grandTotalKey'));
-  //       expect(grandTotalKey, findsOneWidget);
-  //       expect(find.text('Grand Total'.tr()), findsOneWidget);
-  //       final txt = find.text(': NA 108');
-  //       expect(txt, findsAtLeastNWidgets(1));
-  //     });
+      //       final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+      //       expect(totalTaxKey, findsOneWidget);
+      //       expect(find.text('VAT'), findsOneWidget);
+      //       final grandTotalKey = find.byKey(const Key('grandTotalKey'));
+      //       expect(grandTotalKey, findsOneWidget);
+      //       expect(find.text('Grand Total'.tr()), findsOneWidget);
+      //       final txt = find.text(': NA 108');
+      //       expect(txt, findsAtLeastNWidgets(1));
+      //     });
 
-  //     testWidgets('Test to have correct GST and totalPrice with Bundle',
-  //         (tester) async {
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [CartItem.bundle(mockCartItemBundles2)],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => orderDocumentTypeBlocMock.state).thenReturn(
-  //         OrderDocumentTypeState.initial().copyWith(
-  //             isOrderTypeSelected: true,
-  //             selectedOrderType: OrderDocumentType.empty().copyWith(
-  //               documentType: DocumentType('ZPFB'),
-  //             )),
-  //       );
-  //       when(() => eligibilityBloc.state).thenReturn(
-  //         EligibilityState.initial().copyWith(
-  //           salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-  //             vatValue: 8,
-  //             enableVat: true,
-  //             enableTaxClassification: true,
-  //             enableTaxAtTotalLevelOnly: true,
-  //             currency: Currency('SGD'),
-  //           ),
-  //         ),
-  //       );
-  //       when(() => salesOrgBloc.state).thenReturn(
-  //         SalesOrgState.initial().copyWith(
-  //           configs: SalesOrganisationConfigs.empty().copyWith(
-  //             vatValue: 8,
-  //             enableVat: true,
-  //             enableTaxClassification: true,
-  //             enableTaxAtTotalLevelOnly: true,
-  //             currency: Currency('SGD'),
-  //           ),
-  //         ),
-  //       );
-  //       await tester.runAsync(() async {
-  //         await tester.pumpWidget(getWidget());
-  //       });
-  //       tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
-  //       tester.binding.window.devicePixelRatioTestValue = 1.0;
+      //     testWidgets('Test to have correct GST and totalPrice with Bundle',
+      //         (tester) async {
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [CartItem.bundle(mockCartItemBundles2)],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => orderDocumentTypeBlocMock.state).thenReturn(
+      //         OrderDocumentTypeState.initial().copyWith(
+      //             isOrderTypeSelected: true,
+      //             selectedOrderType: OrderDocumentType.empty().copyWith(
+      //               documentType: DocumentType('ZPFB'),
+      //             )),
+      //       );
+      //       when(() => eligibilityBloc.state).thenReturn(
+      //         EligibilityState.initial().copyWith(
+      //           salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+      //             vatValue: 8,
+      //             enableVat: true,
+      //             enableTaxClassification: true,
+      //             enableTaxAtTotalLevelOnly: true,
+      //             currency: Currency('SGD'),
+      //           ),
+      //         ),
+      //       );
+      //       when(() => salesOrgBloc.state).thenReturn(
+      //         SalesOrgState.initial().copyWith(
+      //           configs: SalesOrganisationConfigs.empty().copyWith(
+      //             vatValue: 8,
+      //             enableVat: true,
+      //             enableTaxClassification: true,
+      //             enableTaxAtTotalLevelOnly: true,
+      //             currency: Currency('SGD'),
+      //           ),
+      //         ),
+      //       );
+      //       await tester.runAsync(() async {
+      //         await tester.pumpWidget(getWidget());
+      //       });
+      //       tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      //       tester.binding.window.devicePixelRatioTestValue = 1.0;
 
-  //       await tester.pumpAndSettle(const Duration(seconds: 5));
-  //       final taxCodeInPercentageKey =
-  //           find.byKey(const Key('taxCodeInPercentageKey'));
-  //       expect(taxCodeInPercentageKey, findsOneWidget);
-  //       expect(find.text('VAT in %'), findsOneWidget);
+      //       await tester.pumpAndSettle(const Duration(seconds: 5));
+      //       final taxCodeInPercentageKey =
+      //           find.byKey(const Key('taxCodeInPercentageKey'));
+      //       expect(taxCodeInPercentageKey, findsOneWidget);
+      //       expect(find.text('VAT in %'), findsOneWidget);
 
-  //       final totalTaxKey = find.byKey(const Key('totalTaxKey'));
-  //       expect(totalTaxKey, findsOneWidget);
-  //       expect(find.text('VAT'), findsOneWidget);
-  //       final grandTotalKey = find.byKey(const Key('grandTotalKey'));
-  //       expect(grandTotalKey, findsOneWidget);
-  //       expect(find.text('Grand Total'), findsOneWidget);
-  //       final txt = find.text(': SGD 108');
-  //       expect(txt, findsAtLeastNWidgets(1));
-  //       expect(
-  //           cartBloc.state.grandTotal(
-  //             isMYMarketSalesRep: false,
-  //           ),
-  //           108.0);
-  //     });
+      //       final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+      //       expect(totalTaxKey, findsOneWidget);
+      //       expect(find.text('VAT'), findsOneWidget);
+      //       final grandTotalKey = find.byKey(const Key('grandTotalKey'));
+      //       expect(grandTotalKey, findsOneWidget);
+      //       expect(find.text('Grand Total'), findsOneWidget);
+      //       final txt = find.text(': SGD 108');
+      //       expect(txt, findsAtLeastNWidgets(1));
+      //       expect(
+      //           cartBloc.state.grandTotal(
+      //             isMYMarketSalesRep: false,
+      //           ),
+      //           108.0);
+      //     });
 
-  //     testWidgets('cart Item with no valid batch valid ', (tester) async {
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [mockCartItemWithOutBatch],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => salesOrgBloc.state).thenReturn(
-  //         SalesOrgState.initial().copyWith(
-  //           configs: SalesOrganisationConfigs.empty().copyWith(
-  //             enableBatchNumber: true,
-  //           ),
-  //         ),
-  //       );
+      //     testWidgets('cart Item with no valid batch valid ', (tester) async {
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [mockCartItemWithOutBatch],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => salesOrgBloc.state).thenReturn(
+      //         SalesOrgState.initial().copyWith(
+      //           configs: SalesOrganisationConfigs.empty().copyWith(
+      //             enableBatchNumber: true,
+      //           ),
+      //         ),
+      //       );
 
-  //       await tester.pumpWidget(getWidget());
-  //       await tester.pump();
+      //       await tester.pumpWidget(getWidget());
+      //       await tester.pump();
 
-  //       final batchNumber = find.byKey(ValueKey(
-  //           'batchNumber_${mockCartItemWithOutBatch.materials.first.materialNumberString}'));
-  //       expect(batchNumber, findsOneWidget);
-  //     });
+      //       final batchNumber = find.byKey(ValueKey(
+      //           'batchNumber_${mockCartItemWithOutBatch.materials.first.materialNumberString}'));
+      //       expect(batchNumber, findsOneWidget);
+      //     });
 
-  //     testWidgets('cart Item with valid batch valid ', (tester) async {
-  //       when(() => cartBloc.state).thenReturn(
-  //         CartState.initial().copyWith(
-  //           cartItems: [mockCartItemWithBatch],
-  //           isFetching: false,
-  //         ),
-  //       );
-  //       when(() => salesOrgBloc.state).thenReturn(
-  //         SalesOrgState.initial().copyWith(
-  //           configs: SalesOrganisationConfigs.empty().copyWith(
-  //             enableBatchNumber: true,
-  //           ),
-  //         ),
-  //       );
+      //     testWidgets('cart Item with valid batch valid ', (tester) async {
+      //       when(() => cartBloc.state).thenReturn(
+      //         CartState.initial().copyWith(
+      //           cartItems: [mockCartItemWithBatch],
+      //           isFetching: false,
+      //         ),
+      //       );
+      //       when(() => salesOrgBloc.state).thenReturn(
+      //         SalesOrgState.initial().copyWith(
+      //           configs: SalesOrganisationConfigs.empty().copyWith(
+      //             enableBatchNumber: true,
+      //           ),
+      //         ),
+      //       );
 
-  //       await tester.pumpWidget(getWidget());
-  //       await tester.pump();
+      //       await tester.pumpWidget(getWidget());
+      //       await tester.pump();
 
-  //       final batchNumber = find.byKey(ValueKey(
-  //           'batchNumber_${mockCartItemWithBatch.materials.first.materialNumberString}'));
-  //       expect(batchNumber, findsOneWidget);
-  //     });
-     },
-   );
+      //       final batchNumber = find.byKey(ValueKey(
+      //           'batchNumber_${mockCartItemWithBatch.materials.first.materialNumberString}'));
+      //       expect(batchNumber, findsOneWidget);
+      //     });
+    },
+  );
 }

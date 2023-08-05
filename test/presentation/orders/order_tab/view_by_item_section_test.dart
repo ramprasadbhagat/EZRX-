@@ -111,19 +111,21 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role(
-                description: '',
-                name: '',
-                id: '',
-                type: RoleType('client'),
-              ),
+          user: User.empty().copyWith(
+            role: Role(
+              description: '',
+              name: '',
+              id: '',
+              type: RoleType('client'),
             ),
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-                customerAttr7: CustomerAttr7('ZEV'),
-                customerGrp4: CustomerGrp4('VR'))),
+          ),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerAttr7: CustomerAttr7('ZEV'),
+            customerGrp4: CustomerGrp4('VR'),
+          ),
+        ),
       );
       when(() => mockViewByItemFilterBloc.state)
           .thenReturn(ViewByItemFilterState.initial());
@@ -146,18 +148,24 @@ void main() {
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<ViewByItemsBloc>(
-                create: (context) => mockViewByItemsBloc),
+              create: (context) => mockViewByItemsBloc,
+            ),
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBlocMock),
+              create: (context) => customerCodeBlocMock,
+            ),
             BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => mockViewByOrderDetailsBloc),
+              create: (context) => mockViewByOrderDetailsBloc,
+            ),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<EligibilityBloc>(
-                create: ((context) => eligibilityBlocMock)),
+              create: ((context) => eligibilityBlocMock),
+            ),
             BlocProvider<ViewByItemFilterBloc>(
-                create: (context) => mockViewByItemFilterBloc),
+              create: (context) => mockViewByItemFilterBloc,
+            ),
             BlocProvider<ProductImageBloc>(
-                create: (context) => mockProductImageBloc),
+              create: (context) => mockProductImageBloc,
+            ),
           ],
           child: const Material(
             child: ViewByItemsPage(),
@@ -167,11 +175,12 @@ void main() {
     }
 
     testWidgets('loaderImage  test ', (tester) async {
-      when(() => mockViewByItemsBloc.state)
-          .thenReturn(ViewByItemsState.initial().copyWith(
-        isFetching: true,
-        orderHistoryList: OrderHistory.empty(),
-      ));
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          isFetching: true,
+          orderHistoryList: OrderHistory.empty(),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final loaderImage = find.byKey(
@@ -181,12 +190,16 @@ void main() {
     });
     testWidgets('Displaying manufactureName  test ', (tester) async {
       when(() => mockViewByItemsBloc.state).thenReturn(
-          ViewByItemsState.initial().copyWith(
-              isFetching: false,
-              orderHistoryList: orderHistory.copyWith(orderHistoryItems: [
-                OrderHistoryItem.empty()
-                    .copyWith(manufactureName: 'fake_manufactureName')
-              ])));
+        ViewByItemsState.initial().copyWith(
+          isFetching: false,
+          orderHistoryList: orderHistory.copyWith(
+            orderHistoryItems: [
+              OrderHistoryItem.empty()
+                  .copyWith(manufactureName: 'fake_manufactureName')
+            ],
+          ),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final manufactureName = find.text('fake_manufactureName');

@@ -14,18 +14,22 @@ void main() {
     () {
       setUp(
         () async {
-          addData = json.decode(await rootBundle
-              .loadString('assets/json/addOrUpdateBeneficiaryResponse.json'));
-          deleteData = json.decode(await rootBundle
-              .loadString('assets/json/deleteBeneficiaryResponse.json'));
+          addData = json.decode(
+            await rootBundle
+                .loadString('assets/json/addOrUpdateBeneficiaryResponse.json'),
+          );
+          deleteData = json.decode(
+            await rootBundle
+                .loadString('assets/json/deleteBeneficiaryResponse.json'),
+          );
         },
       );
       test(
         '=> data mapping for Add Or Update',
         () {
           final bankBeneficiaryResponse = BankBeneficiaryResponseDto.fromJson(
-                  addData['data']['addBankBeneficiary'])
-              .toDomain();
+            addData['data']['addBankBeneficiary'],
+          ).toDomain();
           expect(bankBeneficiaryResponse.info, 'Data Inserted Successfully');
 
           final bankBeneficiaryResponseDto =
@@ -34,8 +38,10 @@ void main() {
 
           final bankBeneficiaryResponseDtoMap =
               bankBeneficiaryResponseDto.toJson();
-          expect(bankBeneficiaryResponseDtoMap['info'],
-              'Data Inserted Successfully');
+          expect(
+            bankBeneficiaryResponseDtoMap['info'],
+            'Data Inserted Successfully',
+          );
         },
       );
 
@@ -43,18 +49,23 @@ void main() {
         '=> data mapping for Delete',
         () {
           final bankBeneficiaryResponse = BankBeneficiaryResponseDto.fromJson(
-                  deleteData['data']['deleteBankBeneficiary'])
-              .toDomain();
+            deleteData['data']['deleteBankBeneficiary'],
+          ).toDomain();
           expect(bankBeneficiaryResponse.info, '1 data deleted Successfully');
 
           final bankBeneficiaryResponseDto =
               BankBeneficiaryResponseDto.fromDomain(bankBeneficiaryResponse);
-          expect(bankBeneficiaryResponseDto.info, '1 data deleted Successfully');
+          expect(
+            bankBeneficiaryResponseDto.info,
+            '1 data deleted Successfully',
+          );
 
           final bankBeneficiaryResponseDtoMap =
               bankBeneficiaryResponseDto.toJson();
-          expect(bankBeneficiaryResponseDtoMap['info'],
-              '1 data deleted Successfully');
+          expect(
+            bankBeneficiaryResponseDtoMap['info'],
+            '1 data deleted Successfully',
+          );
         },
       );
     },

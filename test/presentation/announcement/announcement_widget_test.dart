@@ -52,17 +52,19 @@ void main() {
             .toDomain;
 
     announcementMock = announcementMock.copyWith(
-      endTime:
-          DateTimeStringValue(DateFormat.yMd().add_jm().format(
-                DateTime.now().add(const Duration(days: 10)),
-              )),
+      endTime: DateTimeStringValue(
+        DateFormat.yMd().add_jm().format(
+              DateTime.now().add(const Duration(days: 10)),
+            ),
+      ),
     );
 
     announcementCustomMock = announcementCustomMock.copyWith(
-      endTime:
-          DateTimeStringValue(DateFormat.yMd().add_jm().format(
-                DateTime.now().add(const Duration(days: 10)),
-              )),
+      endTime: DateTimeStringValue(
+        DateFormat.yMd().add_jm().format(
+              DateTime.now().add(const Duration(days: 10)),
+            ),
+      ),
     );
   });
 
@@ -108,15 +110,18 @@ void main() {
     testWidgets('doen\'t show when endtime is passed', (tester) async {
       when(() => authBlocMock.state)
           .thenReturn(const AuthState.authenticated());
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial().copyWith(
-        isClosed: false,
-        announcement: announcementMock.copyWith(
-          endTime: DateTimeStringValue(DateFormat.yMd()
-              .add_jm()
-              .format(DateTime.now().subtract(const Duration(days: 10)))),
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock.copyWith(
+            endTime: DateTimeStringValue(
+              DateFormat.yMd()
+                  .add_jm()
+                  .format(DateTime.now().subtract(const Duration(days: 10))),
+            ),
+          ),
         ),
-      ));
+      );
       await tester.pumpWidget(announcement('core'));
 
       expect(
@@ -128,11 +133,12 @@ void main() {
     testWidgets('doen\'t show when active is false', (tester) async {
       when(() => authBlocMock.state)
           .thenReturn(const AuthState.authenticated());
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial().copyWith(
-        isClosed: false,
-        announcement: announcementMock.copyWith(active: false),
-      ));
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock.copyWith(active: false),
+        ),
+      );
       await tester.pumpWidget(announcement('core'));
 
       expect(
@@ -144,11 +150,12 @@ void main() {
     testWidgets('show when AuthState is authenticated', (tester) async {
       when(() => authBlocMock.state)
           .thenReturn(const AuthState.authenticated());
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial().copyWith(
-        isClosed: false,
-        announcement: announcementMock,
-      ));
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock,
+        ),
+      );
       await tester.pumpWidget(announcement('core'));
       final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
       final closeIcon = find.byKey(const Key('announcementCloseIcon'));
@@ -178,11 +185,12 @@ void main() {
     testWidgets('with no close icon', (tester) async {
       when(() => authBlocMock.state)
           .thenReturn(const AuthState.authenticated());
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial().copyWith(
-        isClosed: false,
-        announcement: announcementMock.copyWith(isCrossButton: false),
-      ));
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementMock.copyWith(isCrossButton: false),
+        ),
+      );
       await tester.pumpWidget(announcement('core'));
 
       final closeIcon = find.byKey(const Key('announcementCloseIcon'));
@@ -193,12 +201,13 @@ void main() {
     testWidgets('with loading icon', (tester) async {
       when(() => authBlocMock.state)
           .thenReturn(const AuthState.authenticated());
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial().copyWith(
-        isClosed: false,
-        isLoading: true,
-        announcement: announcementMock,
-      ));
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          isClosed: false,
+          isLoading: true,
+          announcement: announcementMock,
+        ),
+      );
       await tester.pumpWidget(announcement('core'));
 
       final loadingIcon = find.byKey(const Key('announcementLoadingIndicator'));
@@ -248,11 +257,12 @@ void main() {
           (tester) async {
         when(() => authBlocMock.state)
             .thenReturn(const AuthState.authenticated());
-        when(() => announcementBlocMock.state)
-            .thenReturn(AnnouncementState.initial().copyWith(
-          isClosed: false,
-          announcement: announcementCustomMock,
-        ));
+        when(() => announcementBlocMock.state).thenReturn(
+          AnnouncementState.initial().copyWith(
+            isClosed: false,
+            announcement: announcementCustomMock,
+          ),
+        );
         await tester.pumpWidget(announcement('orders'));
         final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
         final closeIcon = find.byKey(const Key('announcementCloseIcon'));
@@ -275,11 +285,12 @@ void main() {
           (tester) async {
         when(() => authBlocMock.state)
             .thenReturn(const AuthState.authenticated());
-        when(() => announcementBlocMock.state)
-            .thenReturn(AnnouncementState.initial().copyWith(
-          isClosed: false,
-          announcement: announcementCustomMock,
-        ));
+        when(() => announcementBlocMock.state).thenReturn(
+          AnnouncementState.initial().copyWith(
+            isClosed: false,
+            announcement: announcementCustomMock,
+          ),
+        );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             salesOrganisation:

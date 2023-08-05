@@ -2,13 +2,11 @@ part of 'all_invoices_filter_bloc.dart';
 
 @freezed
 class AllInvoicesFilterEvent with _$AllInvoicesFilterEvent {
-
   const factory AllInvoicesFilterEvent.initialized() = _Initialized;
 
   const factory AllInvoicesFilterEvent.openFilterBottomSheet({
     required AllInvoicesFilter appliedFilter,
-  }) =
-      _OpenFilterBottomSheet;
+  }) = _OpenFilterBottomSheet;
 
   const factory AllInvoicesFilterEvent.validateFilters() = _ValidateFilters;
 
@@ -32,5 +30,4 @@ class AllInvoicesFilterEvent with _$AllInvoicesFilterEvent {
   const factory AllInvoicesFilterEvent.setDocumentDate(
     DateTimeRange dateRange,
   ) = _SetDocumentDate;
-  
 }

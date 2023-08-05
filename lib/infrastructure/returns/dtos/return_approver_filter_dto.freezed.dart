@@ -69,38 +69,20 @@ abstract class $ReturnApproverFilterDtoCopyWith<$Res> {
       _$ReturnApproverFilterDtoCopyWithImpl<$Res, ReturnApproverFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'returnId',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String returnId,
-      @JsonKey(
-          name: 'soldTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String soldTo,
-      @JsonKey(
-          name: 'shipTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String shipTo,
-      @JsonKey(
-          name: 'createdBy',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '') String dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '') String dateFrom,
-      @JsonKey(
-          name: 'status',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String status});
+      {@JsonKey(name: 'returnId', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String returnId,
+      @JsonKey(name: 'soldTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String shipTo,
+      @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String createdBy,
+      @JsonKey(name: 'dateTo', defaultValue: '')
+          String dateTo,
+      @JsonKey(name: 'dateFrom', defaultValue: '')
+          String dateFrom,
+      @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String status});
 }
 
 /// @nodoc
@@ -167,38 +149,20 @@ abstract class _$$_ReturnApproverFilterDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'returnId',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String returnId,
-      @JsonKey(
-          name: 'soldTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String soldTo,
-      @JsonKey(
-          name: 'shipTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String shipTo,
-      @JsonKey(
-          name: 'createdBy',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '') String dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '') String dateFrom,
-      @JsonKey(
-          name: 'status',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      String status});
+      {@JsonKey(name: 'returnId', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String returnId,
+      @JsonKey(name: 'soldTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String shipTo,
+      @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String createdBy,
+      @JsonKey(name: 'dateTo', defaultValue: '')
+          String dateTo,
+      @JsonKey(name: 'dateFrom', defaultValue: '')
+          String dateFrom,
+      @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          String status});
 }
 
 /// @nodoc
@@ -258,38 +222,20 @@ class __$$_ReturnApproverFilterDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnApproverFilterDto implements _ReturnApproverFilterDto {
   _$_ReturnApproverFilterDto(
-      {@JsonKey(
-          name: 'returnId',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required this.returnId,
-      @JsonKey(
-          name: 'soldTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required this.soldTo,
-      @JsonKey(
-          name: 'shipTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required this.shipTo,
-      @JsonKey(
-          name: 'createdBy',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required this.createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '') required this.dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '') required this.dateFrom,
-      @JsonKey(
-          name: 'status',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required this.status});
+      {@JsonKey(name: 'returnId', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required this.returnId,
+      @JsonKey(name: 'soldTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required this.soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required this.shipTo,
+      @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required this.createdBy,
+      @JsonKey(name: 'dateTo', defaultValue: '')
+          required this.dateTo,
+      @JsonKey(name: 'dateFrom', defaultValue: '')
+          required this.dateFrom,
+      @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required this.status});
 
   factory _$_ReturnApproverFilterDto.fromJson(Map<String, dynamic> json) =>
       _$$_ReturnApproverFilterDtoFromJson(json);
@@ -381,39 +327,20 @@ class _$_ReturnApproverFilterDto implements _ReturnApproverFilterDto {
 
 abstract class _ReturnApproverFilterDto implements ReturnApproverFilterDto {
   factory _ReturnApproverFilterDto(
-      {@JsonKey(
-          name: 'returnId',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required final String returnId,
-      @JsonKey(
-          name: 'soldTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required final String soldTo,
-      @JsonKey(
-          name: 'shipTo',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required final String shipTo,
-      @JsonKey(
-          name: 'createdBy',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required final String createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '') required final String dateTo,
+      {@JsonKey(name: 'returnId', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required final String returnId,
+      @JsonKey(name: 'soldTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required final String soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required final String shipTo,
+      @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required final String createdBy,
+      @JsonKey(name: 'dateTo', defaultValue: '')
+          required final String dateTo,
       @JsonKey(name: 'dateFrom', defaultValue: '')
-      required final String dateFrom,
-      @JsonKey(
-          name: 'status',
-          defaultValue: '',
-          includeIfNull: false,
-          toJson: valueTojson)
-      required final String status}) = _$_ReturnApproverFilterDto;
+          required final String dateFrom,
+      @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+          required final String status}) = _$_ReturnApproverFilterDto;
 
   factory _ReturnApproverFilterDto.fromJson(Map<String, dynamic> json) =
       _$_ReturnApproverFilterDto.fromJson;

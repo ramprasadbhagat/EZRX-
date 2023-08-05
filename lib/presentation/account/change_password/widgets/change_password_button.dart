@@ -9,8 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
-
 class ResetPasswordButton extends StatelessWidget {
   final User user;
   const ResetPasswordButton({Key? key, required this.user}) : super(key: key);

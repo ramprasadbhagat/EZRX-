@@ -31,22 +31,24 @@ class OrderSummarySection extends StatelessWidget {
         horizontal: 20.0,
         vertical: 16.0,
       ),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          'Order Summary',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        BalanceTextRow(
-          keyText: 'Subtotal (excl. tax)',
-          valueText: StringUtils.displayPrice(
-            salesOrgConfigs,
-            viewByOrderHistoryItem.orderValue,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Order Summary',
+            style: Theme.of(context).textTheme.labelMedium,
           ),
-        ),
-        /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
+          const SizedBox(
+            height: 10,
+          ),
+          BalanceTextRow(
+            keyText: 'Subtotal (excl. tax)',
+            valueText: StringUtils.displayPrice(
+              salesOrgConfigs,
+              viewByOrderHistoryItem.orderValue,
+            ),
+          ),
+          /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
           keyText: 'Tax at x%',
           valueText: viewByOrderHistoryItem.totalTax.toString(),
         ),
@@ -58,27 +60,28 @@ class OrderSummarySection extends StatelessWidget {
           keyText: 'Small order fee',
           valueText: '',
         ),*/
-        const Divider(
-          indent: 0,
-          height: 20,
-          endIndent: 0,
-          thickness: 1,
-          color: ZPColors.lightGray2,
-        ),
-        BalanceTextRow(
-          keyText: 'Grand total',
-          valueText: StringUtils.displayPrice(
-            context.read<SalesOrgBloc>().state.configs,
-            taxDisplayForOrderHistoryAndDetails
-                ? orderDetails.orderHistoryDetailsOrderHeader.grandTotal
-                : orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+          const Divider(
+            indent: 0,
+            height: 20,
+            endIndent: 0,
+            thickness: 1,
+            color: ZPColors.lightGray2,
           ),
-        ),
-        // const BalanceTextRow(
-        //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web
-        //   valueText: '',
-        // ),
-      ]),
+          BalanceTextRow(
+            keyText: 'Grand total',
+            valueText: StringUtils.displayPrice(
+              context.read<SalesOrgBloc>().state.configs,
+              taxDisplayForOrderHistoryAndDetails
+                  ? orderDetails.orderHistoryDetailsOrderHeader.grandTotal
+                  : orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+            ),
+          ),
+          // const BalanceTextRow(
+          //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web
+          //   valueText: '',
+          // ),
+        ],
+      ),
     );
   }
 }

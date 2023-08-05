@@ -161,13 +161,15 @@ void main() {
         'successfully remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => deductionRemoteSource.addDeductionCode(
-                salesOrg: '3050',
-                salesDistrict: 'HNO',
-                amountType: 'Return',
-                deductionCode: 'R4',
-                deductionDescription: 'Test',
-              )).thenAnswer((invocation) async => addDeductionCodeMock);
+          when(
+            () => deductionRemoteSource.addDeductionCode(
+              salesOrg: '3050',
+              salesDistrict: 'HNO',
+              amountType: 'Return',
+              deductionCode: 'R4',
+              deductionDescription: 'Test',
+            ),
+          ).thenAnswer((invocation) async => addDeductionCodeMock);
 
           final result = await deductionCodeRepo.addDeductionCodes(
             deductionCode: DeductionCode.empty().copyWith(
@@ -189,13 +191,15 @@ void main() {
         'fails remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => deductionRemoteSource.addDeductionCode(
-                salesOrg: '3050',
-                salesDistrict: 'HNO',
-                amountType: 'Return',
-                deductionCode: 'R4',
-                deductionDescription: 'Test',
-              )).thenThrow(MockException());
+          when(
+            () => deductionRemoteSource.addDeductionCode(
+              salesOrg: '3050',
+              salesDistrict: 'HNO',
+              amountType: 'Return',
+              deductionCode: 'R4',
+              deductionDescription: 'Test',
+            ),
+          ).thenThrow(MockException());
 
           final result = await deductionCodeRepo.addDeductionCodes(
             deductionCode: DeductionCode.empty().copyWith(
@@ -268,11 +272,13 @@ void main() {
         'successfully remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => deductionRemoteSource.deleteDeductionCode(
-                deductionCode: 'R4',
-                salesDistrict: 'HNO',
-                salesOrg: '3050',
-              )).thenAnswer((invocation) async => addDeductionCodeMock);
+          when(
+            () => deductionRemoteSource.deleteDeductionCode(
+              deductionCode: 'R4',
+              salesDistrict: 'HNO',
+              salesOrg: '3050',
+            ),
+          ).thenAnswer((invocation) async => addDeductionCodeMock);
 
           final result = await deductionCodeRepo.deleteDeductionCode(
             deductionCode: DeductionCode.empty().copyWith(
@@ -294,11 +300,13 @@ void main() {
         'fails remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => deductionRemoteSource.deleteDeductionCode(
-                deductionCode: 'R4',
-                salesDistrict: 'HNO',
-                salesOrg: '3050',
-              )).thenThrow(MockException());
+          when(
+            () => deductionRemoteSource.deleteDeductionCode(
+              deductionCode: 'R4',
+              salesDistrict: 'HNO',
+              salesOrg: '3050',
+            ),
+          ).thenThrow(MockException());
 
           final result = await deductionCodeRepo.deleteDeductionCode(
             deductionCode: DeductionCode.empty().copyWith(

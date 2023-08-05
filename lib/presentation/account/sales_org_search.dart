@@ -70,9 +70,10 @@ class SalesOrgSearch extends StatelessWidget {
                     return _SalesOrgItem(
                       showDivider: index != 0,
                       salesOrganisation: state.availableSalesOrg[index],
-                      key: WidgetKeys.genericKey(key: state
-                          .availableSalesOrg[index].salesOrg
-                          .getOrDefaultValue('')),
+                      key: WidgetKeys.genericKey(
+                        key: state.availableSalesOrg[index].salesOrg
+                            .getOrDefaultValue(''),
+                      ),
                     );
                   },
                 ),
@@ -106,9 +107,11 @@ class _SalesOrgItem extends StatelessWidget {
           ),
         ListTile(
           onTap: () {
-            context.read<SalesOrgBloc>().add(SalesOrgEvent.selected(
-                  salesOrganisation: salesOrganisation,
-                ));
+            context.read<SalesOrgBloc>().add(
+                  SalesOrgEvent.selected(
+                    salesOrganisation: salesOrganisation,
+                  ),
+                );
             context.router.pop();
           },
           contentPadding: EdgeInsets.zero,

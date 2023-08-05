@@ -182,9 +182,10 @@ void main() {
 
     test('CartItem.copyWithSelectSwitched', () {
       final cartItem = CartItem(
-          materials: priceAggregateList,
-          itemType: CartItemType.material,
-          isSelected: false);
+        materials: priceAggregateList,
+        itemType: CartItemType.material,
+        isSelected: false,
+      );
 
       final copiedCartItem = cartItem.copyWithSelectSwitched;
       expect(copiedCartItem.isSelected, true);
@@ -211,67 +212,73 @@ void main() {
 
     test('unitPrice from CartItem', () {
       // Create a CartItem with a material
-      var cartItem = CartItem(materials: [
-        emptyPriceAggregate.copyWith(
-          tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('40'),
-            pricingUnit: 2,
+      var cartItem = CartItem(
+        materials: [
+          emptyPriceAggregate.copyWith(
+            tenderContract: TenderContract.empty().copyWith(
+              tenderPrice: TenderPrice('40'),
+              pricingUnit: 2,
+            ),
+            price: Price.empty().copyWith(
+              zmgDiscount: true,
+              tiers: [
+                PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              ],
+            ),
           ),
-          price: Price.empty().copyWith(
-            zmgDiscount: true,
-            tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
-            ],
+          emptyPriceAggregate.copyWith(
+            tenderContract: TenderContract.empty().copyWith(
+              tenderPrice: TenderPrice('10'),
+              pricingUnit: 3,
+            ),
+            price: Price.empty().copyWith(
+              zmgDiscount: true,
+              tiers: [
+                PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              ],
+            ),
           ),
-        ),
-        emptyPriceAggregate.copyWith(
-          tenderContract: TenderContract.empty().copyWith(
-            tenderPrice: TenderPrice('10'),
-            pricingUnit: 3,
-          ),
-          price: Price.empty().copyWith(
-            zmgDiscount: true,
-            tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
-            ],
-          ),
-        ),
-      ], itemType: CartItemType.material);
+        ],
+        itemType: CartItemType.material,
+      );
       expect(cartItem.unitPrice, 20.0);
 
       // Create a CartItem with a bundle
-      cartItem = CartItem(materials: [
-        emptyPriceAggregate.copyWith(
-          quantity: 25,
-          bundle: emptyBundle.copyWith(
-            bundleInformation: [
-              BundleInfo.empty().copyWith(
-                quantity: 10,
-                rate: 50,
-              ),
-              BundleInfo.empty().copyWith(
-                quantity: 5,
-                rate: 100,
-              ),
-            ],
+      cartItem = CartItem(
+        materials: [
+          emptyPriceAggregate.copyWith(
+            quantity: 25,
+            bundle: emptyBundle.copyWith(
+              bundleInformation: [
+                BundleInfo.empty().copyWith(
+                  quantity: 10,
+                  rate: 50,
+                ),
+                BundleInfo.empty().copyWith(
+                  quantity: 5,
+                  rate: 100,
+                ),
+              ],
+            ),
           ),
-        ),
-        emptyPriceAggregate.copyWith(
-          quantity: 30,
-          bundle: emptyBundle.copyWith(
-            bundleInformation: [
-              BundleInfo.empty().copyWith(
-                quantity: 15,
-                rate: 60,
-              ),
-              BundleInfo.empty().copyWith(
-                quantity: 10,
-                rate: 150,
-              ),
-            ],
+          emptyPriceAggregate.copyWith(
+            quantity: 30,
+            bundle: emptyBundle.copyWith(
+              bundleInformation: [
+                BundleInfo.empty().copyWith(
+                  quantity: 15,
+                  rate: 60,
+                ),
+                BundleInfo.empty().copyWith(
+                  quantity: 10,
+                  rate: 150,
+                ),
+              ],
+            ),
           ),
-        ),
-      ], itemType: CartItemType.bundle);
+        ],
+        itemType: CartItemType.bundle,
+      );
       expect(cartItem.unitPrice, 100);
 
       // Create a CartItem with empty materials
@@ -363,12 +370,18 @@ void main() {
       final savedOrderMaterial2 = cartItem2.toSavedOrderMaterial();
       expect(savedOrderMaterial2.length, 1);
       expect(savedOrderMaterial2[0].materials.length, 2);
-      expect(savedOrderMaterial2[0].bundleName,
-          emptyPriceAggregate.bundle.bundleName.getValue());
-      expect(savedOrderMaterial2[0].bundleCode,
-          emptyPriceAggregate.bundle.bundleCode);
-      expect(savedOrderMaterial2[0].bundleInformation,
-          emptyPriceAggregate.bundle.bundleInformation);
+      expect(
+        savedOrderMaterial2[0].bundleName,
+        emptyPriceAggregate.bundle.bundleName.getValue(),
+      );
+      expect(
+        savedOrderMaterial2[0].bundleCode,
+        emptyPriceAggregate.bundle.bundleCode,
+      );
+      expect(
+        savedOrderMaterial2[0].bundleInformation,
+        emptyPriceAggregate.bundle.bundleInformation,
+      );
       expect(savedOrderMaterial2[0].totalQuantity, cartItem2.totalQty);
       expect(savedOrderMaterial2[0].type, MaterialItemType('Bundle'));
     });

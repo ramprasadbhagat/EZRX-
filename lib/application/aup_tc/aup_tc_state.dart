@@ -14,7 +14,7 @@ class AupTcState with _$AupTcState {
         showTermsAndCondition: false,
         tncFile: '',
         privacyFile: '',
-        tncConsent:false,
+        tncConsent: false,
         privacyConsent: false,
       );
 }

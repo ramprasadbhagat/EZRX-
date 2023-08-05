@@ -197,8 +197,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       languageValue: configs.languageValue.getOrDefaultValue(''),
       disablePrincipals: configs.disablePrincipals,
       principalList: List.from(configs.principalList)
-              .map((e) => SalesOrganisationConfigsPrincipalDto.fromDomain(e))
-              .toList(),
+          .map((e) => SalesOrganisationConfigsPrincipalDto.fromDomain(e))
+          .toList(),
       disableOrderType: configs.disableOrderType,
       enableBatchNumber: configs.enableBatchNumber,
       disableBundles: configs.disableBundles,
@@ -241,7 +241,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccess: configs.disableReturnsAccess,
       enableComboDeals: configs.enableComboDeals,
       comboDealsUserRole: configs.comboDealsUserRole.getOrDefaultValue(0),
-      enableGMN:configs.enableGMN,
+      enableGMN: configs.enableGMN,
     );
   }
 
@@ -309,8 +309,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       _$SalesOrganisationConfigsDtoFromJson(json);
 }
 
-class _PrincipalListConverter
-    extends JsonConverter<List<SalesOrganisationConfigsPrincipalDto>, Map<String, dynamic>> {
+class _PrincipalListConverter extends JsonConverter<
+    List<SalesOrganisationConfigsPrincipalDto>, Map<String, dynamic>> {
   const _PrincipalListConverter();
 
   //======================================================================
@@ -320,14 +320,22 @@ class _PrincipalListConverter
   //======================================================================
 
   @override
-  List<SalesOrganisationConfigsPrincipalDto> fromJson(Map<String, dynamic> json) {
-    return List.from(json['value']).map((e) => SalesOrganisationConfigsPrincipalDto.fromJson(e)).toList();
+  List<SalesOrganisationConfigsPrincipalDto> fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return List.from(json['value'])
+        .map((e) => SalesOrganisationConfigsPrincipalDto.fromJson(e))
+        .toList();
   }
 
   @override
-  Map<String, dynamic> toJson(List<SalesOrganisationConfigsPrincipalDto> object) {
+  Map<String, dynamic> toJson(
+    List<SalesOrganisationConfigsPrincipalDto> object,
+  ) {
     return {
-      'value': object.map((e) => {'date': e.date , 'principal' : e.principalCode}).toList(),
+      'value': object
+          .map((e) => {'date': e.date, 'principal': e.principalCode})
+          .toList(),
     };
   }
 }

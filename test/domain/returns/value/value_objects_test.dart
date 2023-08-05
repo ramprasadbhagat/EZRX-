@@ -67,7 +67,7 @@ void main() {
     test(
       'should return DateTimeStringValue',
       () async {
-        final input =getDateStringByDateTime( DateTime.now());
+        final input = getDateStringByDateTime(DateTime.now());
         final simpleInvoiceDate = DateTimeStringValue(input);
         final validDateTime = simpleInvoiceDate.apiDateTimeString;
         expect(validDateTime, input);
@@ -78,10 +78,13 @@ void main() {
       'should return Formated Date String (yyyyMMdd)',
       () async {
         final input = DateTime.now();
-        final simpleInvoiceDate = DateTimeStringValue(getDateStringByDateTime(input));
+        final simpleInvoiceDate =
+            DateTimeStringValue(getDateStringByDateTime(input));
         final apiParameterValueOrEmpty = simpleInvoiceDate.apiDateTimeString;
-        expect(apiParameterValueOrEmpty,
-            DateFormat(DateTimeFormatString.apiDateFormat).format(input));
+        expect(
+          apiParameterValueOrEmpty,
+          DateFormat(DateTimeFormatString.apiDateFormat).format(input),
+        );
       },
     );
   });

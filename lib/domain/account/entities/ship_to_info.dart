@@ -61,5 +61,5 @@ class ShipToInfo with _$ShipToInfo {
         country: '',
       );
 
-String get deliveryAddress => '${shipToAddress.toAddress()} $postalCode';
+  String get deliveryAddress => '${shipToAddress.toAddress()} $postalCode';
 }

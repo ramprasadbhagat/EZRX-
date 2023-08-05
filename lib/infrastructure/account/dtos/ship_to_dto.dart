@@ -13,8 +13,10 @@ part 'ship_to_dto.g.dart';
 class ShipToDto with _$ShipToDto {
   const ShipToDto._();
   const factory ShipToDto({
-    @JsonKey(name: 'shipToCustomerCode', defaultValue: '') required String shipToCustomerCode,
-    @JsonKey(name: 'defaultShipToAddress', defaultValue: true) required bool defaultShipToAddress,
+    @JsonKey(name: 'shipToCustomerCode', defaultValue: '')
+        required String shipToCustomerCode,
+    @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
+        required bool defaultShipToAddress,
     @JsonKey(name: 'name1', defaultValue: '') required String name1,
     @JsonKey(name: 'name2', defaultValue: '') required String name2,
     @JsonKey(name: 'name3', defaultValue: '') required String name3,
@@ -28,8 +30,10 @@ class ShipToDto with _$ShipToDto {
     @JsonKey(name: 'postalCode', defaultValue: '') required String postalCode,
     @JsonKey(name: 'city1', defaultValue: '') required String city1,
     @JsonKey(name: 'city2', defaultValue: '') required String city2,
-    @JsonKey(name: 'telephoneNumber', defaultValue: '') required String telephoneNumber,
-    @JsonKey(name: 'houseNumber1', defaultValue: '') required String houseNumber1,
+    @JsonKey(name: 'telephoneNumber', defaultValue: '')
+        required String telephoneNumber,
+    @JsonKey(name: 'houseNumber1', defaultValue: '')
+        required String houseNumber1,
     @JsonKey(name: 'building', defaultValue: '') required String building,
     @JsonKey(name: 'region', defaultValue: '') required String region,
     @JsonKey(name: 'floor', defaultValue: '') required String floor,

@@ -56,7 +56,8 @@ void main() {
         };
         final res = json.decode(
           await rootBundle.loadString(
-              'assets/json/getCustomerMaterialPriceDetailResponse.json'),
+            'assets/json/getCustomerMaterialPriceDetailResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -84,10 +85,11 @@ void main() {
         final materialDetailData = res['data']['customerMaterialPriceDetails'];
 
         expect(
-            result,
-            List.from(materialDetailData)
-                .map((e) => MaterialDetailDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(materialDetailData)
+              .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('Get Material Detail ZDP5 Enabled', () async {
@@ -100,7 +102,8 @@ void main() {
         };
         final res = json.decode(
           await rootBundle.loadString(
-              'assets/json/getCustomerMaterialPriceDetailResponse.json'),
+            'assets/json/getCustomerMaterialPriceDetailResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -127,10 +130,11 @@ void main() {
         final materialDetailData = res['data']['customerMaterialPriceDetails'];
 
         expect(
-            result,
-            List.from(materialDetailData)
-                .map((e) => MaterialDetailDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(materialDetailData)
+              .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('status code not equal to 200', () async {

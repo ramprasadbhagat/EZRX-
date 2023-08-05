@@ -56,7 +56,8 @@ class BannerRepository implements IBannerRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final ezReachBanners = await localDataSource.getEZReachBanners(bannerType: bannerType);
+        final ezReachBanners =
+            await localDataSource.getEZReachBanners(bannerType: bannerType);
 
         return Right(ezReachBanners);
       } catch (e) {

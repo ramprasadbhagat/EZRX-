@@ -261,11 +261,12 @@ void main() {
         expect: () => [
           ManagePaymentAdviceFooterState.initial().copyWith(
             paymentAdviceFooterData: fakeValidPaymentAdviceFooter.copyWith(
-                salesDistrict: SalesDistrictInfo.empty().copyWith(
-              id: 1,
-              salesDistrictHeader: StringValue('fake-salesDistrictHeader'),
-              salesDistrictLabel: StringValue('fake-salesDistrictLabel'),
-            )),
+              salesDistrict: SalesDistrictInfo.empty().copyWith(
+                id: 1,
+                salesDistrictHeader: StringValue('fake-salesDistrictHeader'),
+                salesDistrictLabel: StringValue('fake-salesDistrictLabel'),
+              ),
+            ),
           ),
         ],
       );
@@ -296,23 +297,28 @@ void main() {
         blocTest<ManagePaymentAdviceFooterBloc, ManagePaymentAdviceFooterState>(
           ' -> For "addFile" Event with Permission fail',
           setUp: () {
-            when(() => paymentAdviceFooterRepositoryMock.pickFiles(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.pickFiles(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Left(
                 ApiFailure.storagePermissionFailed(),
               ),
             );
-            when(() => paymentAdviceFooterRepositoryMock.getPermission(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.getPermission(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Right(
                 PermissionStatus.granted,
               ),
             );
           },
           build: () => ManagePaymentAdviceFooterBloc(
-              paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock),
+            paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock,
+          ),
           act: (bloc) => bloc.add(
             const ManagePaymentAdviceFooterEvent.addFile(
               pickFrom: PickFrom.file,
@@ -332,23 +338,28 @@ void main() {
         blocTest<ManagePaymentAdviceFooterBloc, ManagePaymentAdviceFooterState>(
           ' -> For "addFile" Event with Invalid format choose',
           setUp: () {
-            when(() => paymentAdviceFooterRepositoryMock.pickFiles(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.pickFiles(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Left(
                 ApiFailure.invalidFileFormat(),
               ),
             );
-            when(() => paymentAdviceFooterRepositoryMock.getPermission(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.getPermission(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Right(
                 PermissionStatus.granted,
               ),
             );
           },
           build: () => ManagePaymentAdviceFooterBloc(
-              paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock),
+            paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock,
+          ),
           act: (bloc) => bloc.add(
             const ManagePaymentAdviceFooterEvent.addFile(
               pickFrom: PickFrom.file,
@@ -368,21 +379,26 @@ void main() {
         blocTest<ManagePaymentAdviceFooterBloc, ManagePaymentAdviceFooterState>(
           ' -> For "addFile" Event with no file selected',
           setUp: () {
-            when(() => paymentAdviceFooterRepositoryMock.pickFiles(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.pickFiles(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Right([]),
             );
-            when(() => paymentAdviceFooterRepositoryMock.getPermission(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.getPermission(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Right(
                 PermissionStatus.granted,
               ),
             );
           },
           build: () => ManagePaymentAdviceFooterBloc(
-              paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock),
+            paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock,
+          ),
           act: (bloc) => bloc.add(
             const ManagePaymentAdviceFooterEvent.addFile(
               pickFrom: PickFrom.file,
@@ -398,23 +414,28 @@ void main() {
             paymentAdviceFooterData: fakeValidPaymentAdviceFooter,
           ),
           setUp: () {
-            when(() => paymentAdviceFooterRepositoryMock.getPermission(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.getPermission(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Left(
                 ApiFailure.storagePermissionFailed(),
               ),
             );
-            when(() => paymentAdviceFooterRepositoryMock.pickFiles(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.pickFiles(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => Right(
                 fakePlatformFiles,
               ),
             );
           },
           build: () => ManagePaymentAdviceFooterBloc(
-              paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock),
+            paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock,
+          ),
           act: (bloc) => bloc.add(
             const ManagePaymentAdviceFooterEvent.addFile(
               pickFrom: PickFrom.file,
@@ -437,23 +458,28 @@ void main() {
             paymentAdviceFooterData: fakeValidPaymentAdviceFooter,
           ),
           setUp: () {
-            when(() => paymentAdviceFooterRepositoryMock.getPermission(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.getPermission(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => const Right(
                 PermissionStatus.granted,
               ),
             );
-            when(() => paymentAdviceFooterRepositoryMock.pickFiles(
-                  pickFrom: PickFrom.file,
-                )).thenAnswer(
+            when(
+              () => paymentAdviceFooterRepositoryMock.pickFiles(
+                pickFrom: PickFrom.file,
+              ),
+            ).thenAnswer(
               (invocation) async => Right(
                 fakePlatformFiles,
               ),
             );
           },
           build: () => ManagePaymentAdviceFooterBloc(
-              paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock),
+            paymentAdviceFooterRepository: paymentAdviceFooterRepositoryMock,
+          ),
           act: (bloc) => bloc.add(
             const ManagePaymentAdviceFooterEvent.addFile(
               pickFrom: PickFrom.file,
@@ -593,9 +619,10 @@ void main() {
           ' -> For "addOrUpdate" for add Event with SUCCESS',
           seed: () => ManagePaymentAdviceFooterState.initial().copyWith(
             paymentAdviceFooterData: fakeValidPaymentAdviceFooter.copyWith(
-                paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
-              logoLocalFile: fakePlatformFiles,
-            )),
+              paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
+                logoLocalFile: fakePlatformFiles,
+              ),
+            ),
             paymentAdviceFooters: fakePaymentAdviceFooters,
           ),
           setUp: () {
@@ -603,8 +630,9 @@ void main() {
               () => paymentAdviceFooterRepositoryMock.addPaymentAdvice(
                 paymentAdviceFooterData: fakeValidPaymentAdviceFooter.copyWith(
                   paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
-                      logoLocalFile: fakePlatformFiles,
-                      logoNetworkFile: fakePaymentAdviceLogoNetworkFile),
+                    logoLocalFile: fakePlatformFiles,
+                    logoNetworkFile: fakePaymentAdviceLogoNetworkFile,
+                  ),
                 ),
               ),
             ).thenAnswer(
@@ -720,19 +748,19 @@ void main() {
             ManagePaymentAdviceFooterState.initial().copyWith(
               isSubmitting: true,
               paymentAdviceFooterData: fakeValidPaymentAdviceFooter.copyWith(
-              paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
-                logoLocalFile: fakePlatformFiles,
+                paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
+                  logoLocalFile: fakePlatformFiles,
+                ),
               ),
-            ),
               paymentAdviceFooters: fakePaymentAdviceFooters,
             ),
             ManagePaymentAdviceFooterState.initial().copyWith(
               isSubmitting: false,
               paymentAdviceFooterData: fakeValidPaymentAdviceFooter.copyWith(
-              paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
-                logoLocalFile: fakePlatformFiles,
+                paymentAdviceLogo: PaymentAdviceLogo.empty().copyWith(
+                  logoLocalFile: fakePlatformFiles,
+                ),
               ),
-            ),
               paymentAdviceFooters: fakePaymentAdviceFooters,
               failureOrSuccessOption: optionOf(
                 const Left(

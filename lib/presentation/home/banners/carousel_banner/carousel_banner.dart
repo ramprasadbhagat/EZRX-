@@ -111,8 +111,10 @@ class _CarouselBannerState extends State<CarouselBanner> {
                         }
 
                         return CarouselBannerTile(
-                          key: Key(state.banner[index % state.banner.length].id
-                              .toString()),
+                          key: Key(
+                            state.banner[index % state.banner.length].id
+                                .toString(),
+                          ),
                           bannerPosition: index % state.banner.length,
                           banner: state.banner[index % state.banner.length],
                         );

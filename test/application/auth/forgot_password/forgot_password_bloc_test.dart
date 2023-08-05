@@ -24,7 +24,6 @@ void main() {
   });
 
   group('forgot password Bloc', () {
-
     blocTest(
       'Initialized forget password bloc',
       build: () => ForgotPasswordBloc(

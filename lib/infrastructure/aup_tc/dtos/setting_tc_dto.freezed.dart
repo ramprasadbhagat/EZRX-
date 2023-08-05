@@ -36,7 +36,7 @@ abstract class $SettingTcDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-      bool acceptTC});
+          bool acceptTC});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ abstract class _$$_SettingTcDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-      bool acceptTC});
+          bool acceptTC});
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ class __$$_SettingTcDtoCopyWithImpl<$Res>
 class _$_SettingTcDto extends _SettingTcDto {
   const _$_SettingTcDto(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-      required this.acceptTC})
+          required this.acceptTC})
       : super._();
 
   factory _$_SettingTcDto.fromJson(Map<String, dynamic> json) =>
@@ -141,7 +141,7 @@ class _$_SettingTcDto extends _SettingTcDto {
 abstract class _SettingTcDto extends SettingTcDto {
   const factory _SettingTcDto(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-      required final bool acceptTC}) = _$_SettingTcDto;
+          required final bool acceptTC}) = _$_SettingTcDto;
   const _SettingTcDto._() : super._();
 
   factory _SettingTcDto.fromJson(Map<String, dynamic> json) =

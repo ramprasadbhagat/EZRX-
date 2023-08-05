@@ -43,8 +43,9 @@ class UpdateSalesOrgRepository {
     }
     try {
       final variableData = UpdateSalesOrganisationConfigsVariableDto.fromDomain(
-              salesOrgId, updateSalesOrganisationConfigs,)
-          .toJson();
+        salesOrgId,
+        updateSalesOrganisationConfigs,
+      ).toJson();
       final updatedSalesOrgConfigs =
           await remoteDataSource.updateSalesOrgConfig(
         variableData: variableData,

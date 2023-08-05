@@ -494,8 +494,12 @@ List<String> getOrderStatusDetails(String status) {
         'Order Created',
       ];
       return orderStatusList
-          .skip(orderStatusList.indexWhere((item) =>
-              item.toLowerCase() == getOrderStatus(status).toLowerCase()))
+          .skip(
+            orderStatusList.indexWhere(
+              (item) =>
+                  item.toLowerCase() == getOrderStatus(status).toLowerCase(),
+            ),
+          )
           .toList();
   }
 }

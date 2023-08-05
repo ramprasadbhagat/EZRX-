@@ -37,10 +37,12 @@ class ManageBankBeneficiaryBloc
 
         failureOrSuccess.fold(
           (failure) {
-            emit(state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ));
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
           },
           (beneficiariesList) {
             emit(
@@ -157,11 +159,13 @@ class ManageBankBeneficiaryBloc
       deleteBeneficiary: (e) async {
         final beneficiaryList = state.beneficiaryList;
         final editedList = state.beneficiaryList
-            .map((element) => element.key == e.beneficiary.key
-                ? element.copyWith(
-                    isDeleteInProgress: true,
-                  )
-                : element)
+            .map(
+              (element) => element.key == e.beneficiary.key
+                  ? element.copyWith(
+                      isDeleteInProgress: true,
+                    )
+                  : element,
+            )
             .toList();
         emit(
           state.copyWith(

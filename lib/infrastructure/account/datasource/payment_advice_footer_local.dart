@@ -32,7 +32,6 @@ class PaymentAdviceFooterLocalDataSource {
     ).toDomain();
   }
 
-
   Future<PaymentAdviceLogoNetworkFile> headerLogoUpload() async {
     await Future.delayed(const Duration(seconds: 3));
     final data = json.decode(

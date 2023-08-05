@@ -5,12 +5,9 @@ import 'package:ezrxmobile/infrastructure/returns/dtos/user_restrictions_dto.dar
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_list_dto.dart';
 import 'package:flutter/services.dart';
 
-
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_status_dto.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
-
-
 
 class UserRestrictionLocalDataSource {
   Future<UserRestrictionListDto> fetch() async {
@@ -45,7 +42,8 @@ class UserRestrictionLocalDataSource {
 
   Future<UserRestrictionStatus> configureUserRestriction() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getConfigureUserRestrictionDetails.json'),
+      await rootBundle
+          .loadString('assets/json/getConfigureUserRestrictionDetails.json'),
     );
     final finalData = data['data'];
 
@@ -63,7 +61,8 @@ class UserRestrictionLocalDataSource {
 
   Future<UserRestrictionStatus> deleteApprovalLimit() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getDeleteReturnApprovalLimit.json'),
+      await rootBundle
+          .loadString('assets/json/getDeleteReturnApprovalLimit.json'),
     );
     final finalData = data['data'];
 

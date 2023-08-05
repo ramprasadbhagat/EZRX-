@@ -12,12 +12,13 @@ void main() {
         'customerNumber': '1234',
         'customerNumberShipTo': '',
         'salesOrganisation': 'fake-salesorg',
-        'division':'',
+        'division': '',
       };
     });
     test('Test fromDomain', () {
       final configsDto = SubmitOrderCustomerDto.fromDomain(
-          SubmitOrderCustomerDto.fromJson(data).toDomain());
+        SubmitOrderCustomerDto.fromJson(data).toDomain(),
+      );
 
       expect(configsDto.customerNumber, '1234');
     });

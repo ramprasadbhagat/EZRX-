@@ -36,11 +36,13 @@ class Bundle with _$Bundle {
 
   BundleInfo get minimumQuantityBundleMaterial =>
       sortedBundleInformation.isNotEmpty
-      ? sortedBundleInformation.first
-      : BundleInfo.empty();
+          ? sortedBundleInformation.first
+          : BundleInfo.empty();
 
   List<String> get bundleInfoMessage => sortedBundleInformation
-      .map((e) =>
-          '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}')
+      .map(
+        (e) =>
+            '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}',
+      )
       .toList();
 }

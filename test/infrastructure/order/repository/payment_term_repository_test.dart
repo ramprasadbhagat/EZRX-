@@ -56,11 +56,12 @@ void main() {
           .thenAnswer((invocation) async => <PaymentTerm>[]);
 
       final result = await paymentTermsRepository.getPaymentTerms(
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo,
-          paymentCustomerInfo: mockPaymentCustomerInformation,
-          salesOrgConfig: mockSalesOrganisationConfigs,
-          salesRepInfo: mockSalesRepresentativeInfo);
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        paymentCustomerInfo: mockPaymentCustomerInformation,
+        salesOrgConfig: mockSalesOrganisationConfigs,
+        salesRepInfo: mockSalesRepresentativeInfo,
+      );
       expect(
         result.isRight(),
         true,
@@ -72,11 +73,12 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await paymentTermsRepository.getPaymentTerms(
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo,
-          paymentCustomerInfo: mockPaymentCustomerInformation,
-          salesOrgConfig: mockSalesOrganisationConfigs,
-          salesRepInfo: mockSalesRepresentativeInfo);
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        paymentCustomerInfo: mockPaymentCustomerInformation,
+        salesOrgConfig: mockSalesOrganisationConfigs,
+        salesRepInfo: mockSalesRepresentativeInfo,
+      );
       expect(
         result.isLeft(),
         true,
@@ -84,35 +86,41 @@ void main() {
     });
     test('get PaymentTermsRepository successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => paymentTermsRemoteDataSource.getPaymentTerms(
-              salesOrganisation: '2601-ZPSG',
-              soldToCustomerCode: '000002510',
-              basePaymentTermCode: 'K002',
-              language: 'E',
-              principalCode: [
-                '0000101991',
-                '0000100797',
-                '0000101517',
-                '0000102272',
-              ])).thenAnswer((invocation) async => <PaymentTerm>[]);
-
-      final result = await paymentTermsRepository.getPaymentTerms(
-          salesOrganisation:
-              mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601-ZPSG')),
-          customerCodeInfo:
-              mockCustomerCodeInfo.copyWith(customerCodeSoldTo: '000002510'),
-          paymentCustomerInfo:
-              mockPaymentCustomerInformation.copyWith(paymentTerm: 'K002'),
-          salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
-              languageFilter: true,
-              languageValue: LanguageValue(ApiLanguageCode.shortEnglish)),
-          salesRepInfo:
-              mockSalesRepresentativeInfo.copyWith(uniquePrincipalNumber: [
+      when(
+        () => paymentTermsRemoteDataSource.getPaymentTerms(
+          salesOrganisation: '2601-ZPSG',
+          soldToCustomerCode: '000002510',
+          basePaymentTermCode: 'K002',
+          language: 'E',
+          principalCode: [
             '0000101991',
             '0000100797',
             '0000101517',
             '0000102272',
-          ]));
+          ],
+        ),
+      ).thenAnswer((invocation) async => <PaymentTerm>[]);
+
+      final result = await paymentTermsRepository.getPaymentTerms(
+        salesOrganisation:
+            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601-ZPSG')),
+        customerCodeInfo:
+            mockCustomerCodeInfo.copyWith(customerCodeSoldTo: '000002510'),
+        paymentCustomerInfo:
+            mockPaymentCustomerInformation.copyWith(paymentTerm: 'K002'),
+        salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
+          languageFilter: true,
+          languageValue: LanguageValue(ApiLanguageCode.shortEnglish),
+        ),
+        salesRepInfo: mockSalesRepresentativeInfo.copyWith(
+          uniquePrincipalNumber: [
+            '0000101991',
+            '0000100797',
+            '0000101517',
+            '0000102272',
+          ],
+        ),
+      );
       expect(
         result.isRight(),
         true,
@@ -120,19 +128,23 @@ void main() {
     });
     test('get PaymentTermsRepository fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => paymentTermsRemoteDataSource.getPaymentTerms(
+      when(
+        () => paymentTermsRemoteDataSource.getPaymentTerms(
           salesOrganisation: '',
           soldToCustomerCode: '',
           basePaymentTermCode: '',
           language: '',
-          principalCode: [])).thenThrow((invocation) async => MockException());
+          principalCode: [],
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await paymentTermsRepository.getPaymentTerms(
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo,
-          paymentCustomerInfo: mockPaymentCustomerInformation,
-          salesOrgConfig: mockSalesOrganisationConfigs,
-          salesRepInfo: mockSalesRepresentativeInfo);
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        paymentCustomerInfo: mockPaymentCustomerInformation,
+        salesOrgConfig: mockSalesOrganisationConfigs,
+        salesRepInfo: mockSalesRepresentativeInfo,
+      );
       expect(
         result.isLeft(),
         true,

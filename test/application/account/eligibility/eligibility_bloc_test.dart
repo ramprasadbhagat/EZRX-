@@ -26,7 +26,9 @@ void main() {
 
   final fakeSalesOrgCustomerInfos = [
     SalesOrgCustomerInfo(
-        customerCodeSoldTo: CustomerCode('fake-customer-code'), shipToInfos: [])
+      customerCodeSoldTo: CustomerCode('fake-customer-code'),
+      shipToInfos: [],
+    )
   ];
 
   final fakeShipToInfo = ShipToInfo.empty()
@@ -34,9 +36,10 @@ void main() {
   final fakeBillToInfo =
       BillToInfo.empty().copyWith(billToCustomerCode: 'customer1234');
   final fakeCustomerInfo = CustomerCodeInfo.empty().copyWith(
-      shipToInfos: [fakeShipToInfo],
-      billToInfos: [fakeBillToInfo],
-      customerCodeSoldTo: 'customer123');
+    shipToInfos: [fakeShipToInfo],
+    billToInfos: [fakeBillToInfo],
+    customerCodeSoldTo: 'customer123',
+  );
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
     role: Role.empty().copyWith(
@@ -108,24 +111,28 @@ void main() {
   final chatBotRepositoryMock = ChatBotRepositoryMock();
 
   group('Eligibility Bloc', () {
-    blocTest('Eligibility Bloc Initial',
-        build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
-        act: (EligibilityBloc bloc) {
-          bloc.add(const EligibilityEvent.initialized());
-        },
-        expect: () => [EligibilityState.initial()]);
+    blocTest(
+      'Eligibility Bloc Initial',
+      build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
+      act: (EligibilityBloc bloc) {
+        bloc.add(const EligibilityEvent.initialized());
+      },
+      expect: () => [EligibilityState.initial()],
+    );
 
     blocTest(
       'Eligibility Update fail',
       build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
       setUp: () {
-        when(() => chatBotRepositoryMock.passPayloadToChatbot(
-              customerCodeInfo: fakeCustomerInfo,
-              salesOrganisation: fakeSaleOrg,
-              salesOrganisationConfigs: fakeSaleOrgConfig,
-              shipToInfo: fakeShipToInfo,
-              user: fakeUser,
-            )).thenAnswer(
+        when(
+          () => chatBotRepositoryMock.passPayloadToChatbot(
+            customerCodeInfo: fakeCustomerInfo,
+            salesOrganisation: fakeSaleOrg,
+            salesOrganisationConfigs: fakeSaleOrgConfig,
+            shipToInfo: fakeShipToInfo,
+            user: fakeUser,
+          ),
+        ).thenAnswer(
           (invocation) async => const Right(true),
         );
       },
@@ -143,12 +150,13 @@ void main() {
       },
       expect: () => [
         EligibilityState.initial().copyWith(
-            user: fakeUser,
-            salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: fakeSaleOrgConfig,
-            customerCodeInfo: fakeCustomerInfo,
-            shipToInfo: fakeShipToInfo,
-            failureOrSuccessOption: const None()),
+          user: fakeUser,
+          salesOrganisation: fakeSaleOrg,
+          salesOrgConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeShipToInfo,
+          failureOrSuccessOption: const None(),
+        ),
       ],
     );
 
@@ -156,13 +164,15 @@ void main() {
       'Eligibility Update',
       build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
       setUp: () {
-        when(() => chatBotRepositoryMock.passPayloadToChatbot(
-              customerCodeInfo: fakeCustomerInfo,
-              salesOrganisation: fakeSaleOrg,
-              salesOrganisationConfigs: fakeSaleOrgConfig,
-              shipToInfo: fakeShipToInfo,
-              user: fakeUser,
-            )).thenAnswer(
+        when(
+          () => chatBotRepositoryMock.passPayloadToChatbot(
+            customerCodeInfo: fakeCustomerInfo,
+            salesOrganisation: fakeSaleOrg,
+            salesOrganisationConfigs: fakeSaleOrgConfig,
+            shipToInfo: fakeShipToInfo,
+            user: fakeUser,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake Error'),
           ),
@@ -205,8 +215,6 @@ void main() {
     );
   });
 
-  
-
   test(
     'Check pnpValueMaterial for eligibility state returns empty string if user role type is not SalesRep',
     () {
@@ -222,7 +230,8 @@ void main() {
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+        ),
         salesOrganisation: fakeSaleOrg.copyWith(
           salesOrg: SalesOrg('2601'),
         ),
@@ -237,7 +246,8 @@ void main() {
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+        ),
         salesOrganisation: fakeSaleOrg.copyWith(
           salesOrg: SalesOrg('2900'),
         ),
@@ -261,7 +271,8 @@ void main() {
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+        ),
         salesOrganisation: fakeSaleOrg.copyWith(
           salesOrg: SalesOrg('2900'),
         ),
@@ -285,7 +296,8 @@ void main() {
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+        ),
         salesOrganisation: fakeSaleOrg.copyWith(
           salesOrg: SalesOrg('2601'),
         ),
@@ -791,7 +803,6 @@ void main() {
       },
     );
   });
-
 
   group('showGreenDeliveryBox', () {
     test(

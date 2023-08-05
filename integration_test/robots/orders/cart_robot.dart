@@ -34,8 +34,10 @@ class CartRobot {
   Future<void> setDiscountOverrideMaterial(double discountPercentage) async {
     await tester.tap(discountOverrideToggle);
     await tester.pumpAndSettle();
-    await tester.enterText(find.byKey(const Key('discountOvverrideField')),
-        discountPercentage.toString());
+    await tester.enterText(
+      find.byKey(const Key('discountOvverrideField')),
+      discountPercentage.toString(),
+    );
     await tester.pumpAndSettle();
     await tester.tap(
       find.byKey(const Key('Submit')),
@@ -44,8 +46,10 @@ class CartRobot {
   }
 
   void verifyDiscountOverridePercentage(double discountPercentage) {
-    expect(find.byKey(Key('discountOverridePercentage$discountPercentage')),
-        findsOneWidget);
+    expect(
+      find.byKey(Key('discountOverridePercentage$discountPercentage')),
+      findsOneWidget,
+    );
   }
 
   void verifyEnableListPrice(String currency, String price) {
@@ -55,8 +59,11 @@ class CartRobot {
     expect(listPrice, findsOneWidget);
   }
 
-  void findMaterialItem(String materialNumber, int quantity,
-      [bool shouldVisible = true]) {
+  void findMaterialItem(
+    String materialNumber,
+    int quantity, [
+    bool shouldVisible = true,
+  ]) {
     final material = find.byKey(ValueKey('$materialNumber$quantity'));
     if (shouldVisible) {
       expect(material, findsOneWidget);
@@ -93,8 +100,11 @@ class CartRobot {
     verifyVatAtTotalLevel(materialNumber, percentage);
   }
 
-  void verifyVatAtTotalLevel(String materialNumber, int percentage,
-      [bool enabled = true]) {
+  void verifyVatAtTotalLevel(
+    String materialNumber,
+    int percentage, [
+    bool enabled = true,
+  ]) {
     final taxCodeInPercentageKey =
         find.byKey(const Key('taxCodeInPercentageKey'));
     final totalTaxKey = find.byKey(const Key('totalTaxKey'));
@@ -169,9 +179,14 @@ class CartRobot {
   }
 
   void verifyBonusMaterial(
-      String materialNumber, bool additionalBonusFlag, int quantity) {
-    expect(find.byKey(ValueKey('$materialNumber$additionalBonusFlag$quantity')),
-        findsOneWidget);
+    String materialNumber,
+    bool additionalBonusFlag,
+    int quantity,
+  ) {
+    expect(
+      find.byKey(ValueKey('$materialNumber$additionalBonusFlag$quantity')),
+      findsOneWidget,
+    );
   }
 
   void findAddQuantity(String materialNumber) {
@@ -189,8 +204,10 @@ class CartRobot {
   }
 
   Future<void> changePrice(double price) async {
-    await tester.enterText(find.byKey(const Key('priceOverrideTextFormField')),
-        price.toStringAsFixed(2));
+    await tester.enterText(
+      find.byKey(const Key('priceOverrideTextFormField')),
+      price.toStringAsFixed(2),
+    );
     await tester.pumpAndSettle();
   }
 
@@ -246,7 +263,9 @@ class CartRobot {
   }
 
   Future<void> deleteMaterialIfItemPresentInCart(
-      String materialNumber, int qty) async {
+    String materialNumber,
+    int qty,
+  ) async {
     final material = find.byKey(ValueKey('$materialNumber$qty'));
     if (material.evaluate().isNotEmpty) {
       await tester.tap(find.byKey(Key('deleteFromCart$materialNumber')));

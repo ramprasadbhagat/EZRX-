@@ -75,18 +75,20 @@ void main() {
         );
 
         final result = await remoteDataSource.getPaymentTerms(
-            basePaymentTermCode: 'fake-basePaymentTermCode',
-            language: 'fake-language',
-            soldToCustomerCode: 'fake-customercode',
-            principalCode: ['fake-principalcode'],
-            salesOrganisation: 'fake-salesorg');
+          basePaymentTermCode: 'fake-basePaymentTermCode',
+          language: 'fake-language',
+          soldToCustomerCode: 'fake-customercode',
+          principalCode: ['fake-principalcode'],
+          salesOrganisation: 'fake-salesorg',
+        );
         final finalData = res['data']['availablePaymentTerm'];
 
         expect(
-            result,
-            List.from(finalData)
-                .map((e) => PaymentTermDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(finalData)
+              .map((e) => PaymentTermDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('status code not equal to 200', () async {
@@ -115,11 +117,12 @@ void main() {
 
         await remoteDataSource
             .getPaymentTerms(
-                basePaymentTermCode: 'fake-basePaymentTermCode',
-                language: 'fake-language',
-                soldToCustomerCode: 'fake-customercode',
-                principalCode: ['fake-principalcode'],
-                salesOrganisation: 'fake-salesorg')
+          basePaymentTermCode: 'fake-basePaymentTermCode',
+          language: 'fake-language',
+          soldToCustomerCode: 'fake-customercode',
+          principalCode: ['fake-principalcode'],
+          salesOrganisation: 'fake-salesorg',
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(<PaymentTermMock>[]);
@@ -156,11 +159,12 @@ void main() {
 
         await remoteDataSource
             .getPaymentTerms(
-                basePaymentTermCode: 'fake-basePaymentTermCode',
-                language: 'fake-language',
-                soldToCustomerCode: 'fake-customercode',
-                principalCode: ['fake-principalcode'],
-                salesOrganisation: 'fake-salesorg')
+          basePaymentTermCode: 'fake-basePaymentTermCode',
+          language: 'fake-language',
+          soldToCustomerCode: 'fake-customercode',
+          principalCode: ['fake-principalcode'],
+          salesOrganisation: 'fake-salesorg',
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(<PaymentTermMock>[]);

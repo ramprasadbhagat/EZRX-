@@ -125,8 +125,10 @@ void main() {
             ),
           ];
 
-          whenListen(managePaymentMethodsBlocMock,
-              Stream.fromIterable(expectedStates));
+          whenListen(
+            managePaymentMethodsBlocMock,
+            Stream.fromIterable(expectedStates),
+          );
           await tester.pumpWidget(getPaymentMethodListPage());
           await tester.pump();
           final appBarTitle = find.text('Edit Payment Method');

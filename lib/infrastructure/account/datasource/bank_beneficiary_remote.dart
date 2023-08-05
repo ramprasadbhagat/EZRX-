@@ -45,8 +45,9 @@ class BankBeneficiaryRemoteDataSource {
     });
   }
 
-   Future<List<SalesDistrict>> getSalesDistrict(
-      {required String salesOrg,}) async {
+  Future<List<SalesDistrict>> getSalesDistrict({
+    required String salesOrg,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -115,8 +116,7 @@ class BankBeneficiaryRemoteDataSource {
           url: '${config.urlConstants}ezpayMutation',
           data: jsonEncode(
             {
-              'query':
-                  bankBeneficiaryQueryMutation.deleteBeneficiaryQuery(),
+              'query': bankBeneficiaryQueryMutation.deleteBeneficiaryQuery(),
               'variables': variables,
             },
           ),

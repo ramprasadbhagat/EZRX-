@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/account/entities/payment_advice_expiry_notific
 part 'payment_advice_expiry_notification_dto.freezed.dart';
 part 'payment_advice_expiry_notification_dto.g.dart';
 
-
 @freezed
-class PaymentAdviceExpiryNotificationDto with _$PaymentAdviceExpiryNotificationDto {
+class PaymentAdviceExpiryNotificationDto
+    with _$PaymentAdviceExpiryNotificationDto {
   const PaymentAdviceExpiryNotificationDto._();
 
   const factory PaymentAdviceExpiryNotificationDto({
@@ -15,10 +15,12 @@ class PaymentAdviceExpiryNotificationDto with _$PaymentAdviceExpiryNotificationD
     @JsonKey(name: 'disabled', defaultValue: false) required bool disabled,
   }) = _PaymentAdviceExpiryNotificationDto;
 
-  factory PaymentAdviceExpiryNotificationDto.fromDomain(PaymentAdviceExpiryNotification paymentAdviceExpiryNotification) {
+  factory PaymentAdviceExpiryNotificationDto.fromDomain(
+    PaymentAdviceExpiryNotification paymentAdviceExpiryNotification,
+  ) {
     return PaymentAdviceExpiryNotificationDto(
-     day: paymentAdviceExpiryNotification.day,
-     disabled: paymentAdviceExpiryNotification.disabled,
+      day: paymentAdviceExpiryNotification.day,
+      disabled: paymentAdviceExpiryNotification.disabled,
     );
   }
 
@@ -29,6 +31,8 @@ class PaymentAdviceExpiryNotificationDto with _$PaymentAdviceExpiryNotificationD
     );
   }
 
-  factory PaymentAdviceExpiryNotificationDto.fromJson(Map<String, dynamic> json) =>
+  factory PaymentAdviceExpiryNotificationDto.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$PaymentAdviceExpiryNotificationDtoFromJson(json);
 }

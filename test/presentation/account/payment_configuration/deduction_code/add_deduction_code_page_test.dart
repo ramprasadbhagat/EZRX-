@@ -155,7 +155,9 @@ void main() {
           ];
 
           whenListen(
-              deductionCodeBlocMock, Stream.fromIterable(expectedStates));
+            deductionCodeBlocMock,
+            Stream.fromIterable(expectedStates),
+          );
           await tester.pumpWidget(getAddDeductionCodePage());
           await tester.pump();
           verifyAppBarTitleAndScaffoldKey();
@@ -218,8 +220,10 @@ void main() {
           final salesDistrictDropDownField =
               find.byKey(const Key('salesDistrictDropdownKey'));
           expect(salesDistrictDropDownField.first, findsOneWidget);
-          await tester.tap(salesDistrictDropDownField.first,
-              warnIfMissed: false);
+          await tester.tap(
+            salesDistrictDropDownField.first,
+            warnIfMissed: false,
+          );
           await tester.pump(const Duration(seconds: 1));
           await tester.tap(find.text('SG').last, warnIfMissed: false);
           await tester.pump(const Duration(seconds: 1));

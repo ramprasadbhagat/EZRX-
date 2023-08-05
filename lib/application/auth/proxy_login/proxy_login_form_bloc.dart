@@ -28,18 +28,22 @@ class ProxyLoginFormBloc
     await event.map(
       initialized: (e) async => emit(ProxyLoginFormState.initial()),
       usernameChanged: (e) {
-        emit(state.copyWith(
-          username: Username(e.usernameStr),
-          authFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            username: Username(e.usernameStr),
+            authFailureOrSuccessOption: none(),
+          ),
+        );
       },
       loginWithADButtonPressed: (e) async {
         final isProxyUsernameValid = state.username.isValid();
         if (isProxyUsernameValid) {
-          emit(state.copyWith(
-            isSubmitting: true,
-            authFailureOrSuccessOption: none(),
-          ));
+          emit(
+            state.copyWith(
+              isSubmitting: true,
+              authFailureOrSuccessOption: none(),
+            ),
+          );
           final proxyLoginFailureOrSuccess = await authRepository.proxyLogin(
             username: state.username,
             salesOrg: e.salesOrg,

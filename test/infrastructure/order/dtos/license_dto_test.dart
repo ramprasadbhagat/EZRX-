@@ -17,16 +17,20 @@ void main() {
     });
 
     test('Test fromDomain', () {
-      final configsDto = LicenseDto.fromDomain(LicenseDto.fromJson(
-        data,
-      ).toDomain());
+      final configsDto = LicenseDto.fromDomain(
+        LicenseDto.fromJson(
+          data,
+        ).toDomain(),
+      );
       expect(configsDto.licenseDescription, 'fake-data');
     });
 
     test('Test toJson', () {
-      final configsDto = LicenseDto.fromDomain(LicenseDto.fromJson(
-        data,
-      ).toDomain()).toJson();
+      final configsDto = LicenseDto.fromDomain(
+        LicenseDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
       expect(configsDto['licenseDescription'], 'fake-data');
     });
   });

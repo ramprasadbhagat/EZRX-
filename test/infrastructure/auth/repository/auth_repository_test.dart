@@ -123,8 +123,10 @@ void main() {
         pushNotificationService: pushNotificationServiceMock,
         settingStorage: settingStorageMock,
       );
-      when(() => credStorageMock.get()).thenAnswer((invocation) async =>
-          CredDto(username: 'username', password: 'password'));
+      when(() => credStorageMock.get()).thenAnswer(
+        (invocation) async =>
+            CredDto(username: 'username', password: 'password'),
+      );
       when(
         () => tokenStorageMock.clear(),
       ).thenAnswer((invocation) async => null);
@@ -226,9 +228,13 @@ void main() {
             .thenAnswer((invocation) async => fakeJWT.getValue());
         // final testMock = Future<dynamic>.delayed(const Duration(seconds: 1));
 
-        when(() => remoteDataSourceMock.loginWithPassword(
-                password: 'old', username: 'old', fcmToken: fakeJWT.getValue()))
-            .thenAnswer((invocation) async => Login.empty());
+        when(
+          () => remoteDataSourceMock.loginWithPassword(
+            password: 'old',
+            username: 'old',
+            fcmToken: fakeJWT.getValue(),
+          ),
+        ).thenAnswer((invocation) async => Login.empty());
         final pass = Password.login('old');
         final userName = Username('old');
 
@@ -385,10 +391,12 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.proxyLoginWithUsername(
-              username: 'old',
-              salesOrg: '2001',
-            )).thenThrow((invocation) async => Exception('fake-error'));
+        when(
+          () => remoteDataSourceMock.proxyLoginWithUsername(
+            username: 'old',
+            salesOrg: '2001',
+          ),
+        ).thenThrow((invocation) async => Exception('fake-error'));
         final userName = Username('old');
         final result = await repository.proxyLogin(
           username: userName,
@@ -418,10 +426,12 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.proxyLoginWithUsername(
-              username: 'old',
-              salesOrg: '2001',
-            )).thenAnswer((invocation) async => Login.empty());
+        when(
+          () => remoteDataSourceMock.proxyLoginWithUsername(
+            username: 'old',
+            salesOrg: '2001',
+          ),
+        ).thenAnswer((invocation) async => Login.empty());
         final userName = Username('old');
         final result = await repository.proxyLogin(
           username: userName,
@@ -481,9 +491,13 @@ void main() {
         when(() => pushNotificationServiceMock.getFCMToken())
             .thenAnswer((invocation) async => fakeJWT.getValue());
 
-        when(() => remoteDataSourceMock.loginWithPassword(
-                password: 'od', username: 'old', fcmToken: fakeJWT.getValue()))
-            .thenThrow((invocation) async => MockException(message: 'test'));
+        when(
+          () => remoteDataSourceMock.loginWithPassword(
+            password: 'od',
+            username: 'old',
+            fcmToken: fakeJWT.getValue(),
+          ),
+        ).thenThrow((invocation) async => MockException(message: 'test'));
         final pass = Password.login('old');
         final userName = Username('old');
 
@@ -540,10 +554,12 @@ void main() {
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
         when(() => pushNotificationServiceMock.getFCMToken())
             .thenAnswer((invocation) async => fakeJWT.getValue());
-        when(() => remoteDataSourceMock.loginWithOktaToken(
-                oktaAccessToken: fakeJWT.getOrCrash(),
-                fcmToken: fakeJWT.getOrCrash()))
-            .thenThrow((invocation) async => Exception('fake-error'));
+        when(
+          () => remoteDataSourceMock.loginWithOktaToken(
+            oktaAccessToken: fakeJWT.getOrCrash(),
+            fcmToken: fakeJWT.getOrCrash(),
+          ),
+        ).thenThrow((invocation) async => Exception('fake-error'));
         final result = await repository.getEZRXJWT(fakeJWT);
         expect(result.isLeft(), true);
       },
@@ -569,10 +585,12 @@ void main() {
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
         when(() => pushNotificationServiceMock.getFCMToken())
             .thenAnswer((invocation) async => fakeJWT.getValue());
-        when(() => remoteDataSourceMock.loginWithOktaToken(
-              fcmToken: fakeJWT.getValue(),
-              oktaAccessToken: rootAdminToken,
-            )).thenAnswer((invocation) async => Login.empty());
+        when(
+          () => remoteDataSourceMock.loginWithOktaToken(
+            fcmToken: fakeJWT.getValue(),
+            oktaAccessToken: rootAdminToken,
+          ),
+        ).thenAnswer((invocation) async => Login.empty());
         final result = await repository.getEZRXJWT(fakeJWT);
         expect(result.isRight(), true);
       },
@@ -692,7 +710,9 @@ void main() {
         await repository.tokenValid();
 
         await repository.storeJWT(
-            access: JWT(rootAdminToken), refresh: JWT(refreshToken));
+          access: JWT(rootAdminToken),
+          refresh: JWT(refreshToken),
+        );
         verify(
           () => tokenStorageMock.get(),
         ).called(1);

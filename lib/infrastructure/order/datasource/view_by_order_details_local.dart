@@ -6,24 +6,23 @@ import 'package:flutter/services.dart';
 class ViewByOrderDetailsLocalDataSource {
   ViewByOrderDetailsLocalDataSource();
   Future<OrderHistoryDetails> getOrderHistoryDetails() async {
-    
     final data = json.decode(
       await rootBundle.loadString('assets/json/getOrderDetailsResponse.json'),
     );
 
     final finalData = data['data']['orderDetails'];
 
-    return OrderHistoryDetailsDto.fromJson(finalData).toDomain(); 
+    return OrderHistoryDetailsDto.fromJson(finalData).toDomain();
   }
+
   Future<OrderHistoryDetails> getOrderHistoryDetailsForSalesRep() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getorderDetailsForSalesRep.json'),
+      await rootBundle
+          .loadString('assets/json/getorderDetailsForSalesRep.json'),
     );
-    
 
     final finalData = data['data']['orderDetailsForSalesRep'];
-    
-    return OrderHistoryDetailsDto.fromJson(finalData).toDomain(); 
-  }
 
+    return OrderHistoryDetailsDto.fromJson(finalData).toDomain();
+  }
 }

@@ -98,7 +98,8 @@ void main() {
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
       principalName: PrincipalName(
-          'Ã¥ï¿½Â°Ã§ï¿½Â£Ã¦â€¹Å“Ã¨â‚¬Â³Ã¨â€šÂ¡Ã¤Â»Â½Ã¦Å“â€°Ã©â„¢ï¿½Ã¥â€¦Â¬Ã¥ï¿½Â¸'),
+        'Ã¥ï¿½Â°Ã§ï¿½Â£Ã¦â€¹Å“Ã¨â‚¬Â³Ã¨â€šÂ¡Ã¤Â»Â½Ã¦Å“â€°Ã©â„¢ï¿½Ã¥â€¦Â¬Ã¥ï¿½Â¸',
+      ),
     ),
   );
 
@@ -161,18 +162,22 @@ void main() {
       providers: [
         BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBlocMock)),
         BlocProvider<MaterialPriceBloc>(
-            create: ((context) => materialPriceBlocMock)),
+          create: ((context) => materialPriceBlocMock),
+        ),
         BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
         BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
         BlocProvider<EligibilityBloc>(create: (context) => eligibilityMockBloc),
         BlocProvider<TenderContractBloc>(
-            create: (context) => tenderContractBlocMock),
+          create: (context) => tenderContractBlocMock,
+        ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock),
+          create: (context) => announcementBlocMock,
+        ),
         BlocProvider<UserBloc>(create: (context) => userBlocMock),
         BlocProvider<OrderDocumentTypeBloc>(
-            create: (context) => orderDocumentTypeBlocMock),
+          create: (context) => orderDocumentTypeBlocMock,
+        ),
       ],
       child: child,
     );
@@ -189,13 +194,17 @@ void main() {
     });
 
     testWidgets('- Initilize with shortcut access', (tester) async {
-      await tester.pumpWidget(getScopedWidget(WrappedRoute(
-        child: AddToCart(
-          isCovid19Tab: false,
-          material: priceAggregate,
-          isShortcutAccess: true,
+      await tester.pumpWidget(
+        getScopedWidget(
+          WrappedRoute(
+            child: AddToCart(
+              isCovid19Tab: false,
+              material: priceAggregate,
+              isShortcutAccess: true,
+            ),
+          ),
         ),
-      )));
+      );
 
       verify(
         () => addToCartBloc.add(
@@ -213,12 +222,16 @@ void main() {
     });
 
     testWidgets('- Initilize with normal access', (tester) async {
-      await tester.pumpWidget(getScopedWidget(WrappedRoute(
-        child: AddToCart(
-          isCovid19Tab: false,
-          material: priceAggregate,
+      await tester.pumpWidget(
+        getScopedWidget(
+          WrappedRoute(
+            child: AddToCart(
+              isCovid19Tab: false,
+              material: priceAggregate,
+            ),
+          ),
         ),
-      )));
+      );
 
       verify(
         () => addToCartBloc.add(
@@ -229,11 +242,12 @@ void main() {
       verify(
         () => addToCartBloc.add(
           AddToCartEvent.updateQuantity(
-              quantity: 1,
-              cartZmgQtyExcludeCurrent: 0,
-              customerCode: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToCode: ShipToInfo.empty()),
+            quantity: 1,
+            cartZmgQtyExcludeCurrent: 0,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
         ),
       ).called(1);
     });
@@ -255,10 +269,14 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getScopedWidget(AddToCart(
-        isCovid19Tab: false,
-        material: priceAggregate,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          AddToCart(
+            isCovid19Tab: false,
+            material: priceAggregate,
+          ),
+        ),
+      );
 
       verify(
         () => tenderContractBlocMock.add(
@@ -290,10 +308,14 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getScopedWidget(AddToCart(
-        isCovid19Tab: false,
-        material: priceAggregate,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          AddToCart(
+            isCovid19Tab: false,
+            material: priceAggregate,
+          ),
+        ),
+      );
 
       verifyNever(
         () => tenderContractBlocMock.add(
@@ -309,10 +331,14 @@ void main() {
     });
 
     testWidgets('- did show loading shimmer when is fetching', (tester) async {
-      await tester.pumpWidget(getScopedWidget(AddToCart(
-        isCovid19Tab: false,
-        material: priceAggregate,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          AddToCart(
+            isCovid19Tab: false,
+            material: priceAggregate,
+          ),
+        ),
+      );
 
       expect(find.byType(CartBottomSheetShimmer), findsOneWidget);
       expect(find.text('Material Detail'), findsOneWidget);
@@ -326,10 +352,14 @@ void main() {
         AddToCartState.initial().copyWith(isFetching: false),
       );
 
-      await tester.pumpWidget(getScopedWidget(AddToCart(
-        isCovid19Tab: false,
-        material: priceAggregate,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          AddToCart(
+            isCovid19Tab: false,
+            material: priceAggregate,
+          ),
+        ),
+      );
 
       expect(find.byType(CartBottomSheetShimmer), findsNothing);
       expect(find.text('Material Detail'), findsOneWidget);
@@ -349,10 +379,14 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getScopedWidget(AddToCart(
-        isCovid19Tab: false,
-        material: priceAggregate,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          AddToCart(
+            isCovid19Tab: false,
+            material: priceAggregate,
+          ),
+        ),
+      );
 
       expect(find.byType(SelectContract), findsOneWidget);
     });
@@ -383,7 +417,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
 
       final addToCartButton = find.byType(AddToCartButton);
@@ -417,7 +452,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
 
       final addToCartButton = find.byType(AddToCartButton);
@@ -450,7 +486,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
       await tester.pump();
 
@@ -505,7 +542,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
       await tester.pump();
 
@@ -567,7 +605,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
       await tester.pump();
 
@@ -634,7 +673,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
       await tester.pump();
 
@@ -704,7 +744,8 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-            AddToCart(isCovid19Tab: false, material: priceAggregate)),
+          AddToCart(isCovid19Tab: false, material: priceAggregate),
+        ),
       );
       final addToCartButton = find.text('Add to Cart');
       expect(addToCartButton, findsOneWidget);

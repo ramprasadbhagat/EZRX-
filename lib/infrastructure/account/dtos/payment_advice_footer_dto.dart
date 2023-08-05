@@ -43,8 +43,7 @@ class PaymentAdviceFooterDto with _$PaymentAdviceFooterDto {
   ) =>
       PaymentAdviceFooterDto(
         salesOrg: paymentAdviceFooter.salesOrg.getOrCrash(),
-        salesDistrict:
-            paymentAdviceFooter.salesDistrict.salesDistrictHeader
+        salesDistrict: paymentAdviceFooter.salesDistrict.salesDistrictHeader
             .getOrDefaultValue(''),
         footer: paymentAdviceFooter.footer.getOrCrash(),
         header: paymentAdviceFooter.headerTextActive
@@ -59,9 +58,7 @@ class PaymentAdviceFooterDto with _$PaymentAdviceFooterDto {
 
   factory PaymentAdviceFooterDto.fromJson(Map<String, dynamic> json) =>
       _$PaymentAdviceFooterDtoFromJson(json);
-
 }
-
 
 @freezed
 class PaymentAdviceLogoNetworkFileDto with _$PaymentAdviceLogoNetworkFileDto {

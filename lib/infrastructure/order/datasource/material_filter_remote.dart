@@ -53,8 +53,7 @@ class MaterialFilterRemoteDataSource {
       );
 
       _materialFilterExceptionChecker(res: resMaterialFilters);
-      final finalData =
-          resMaterialFilters.data['data']['GetFilterList'];
+      final finalData = resMaterialFilters.data['data']['GetFilterList'];
 
       return MaterialFilterDto.fromJson(finalData).toDomain();
     });

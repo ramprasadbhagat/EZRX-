@@ -14,7 +14,7 @@ void main() {
           {
             'Type': '',
             'Sequence': 0,
-            'ApplyBonus':true,
+            'ApplyBonus': true,
             'Quantity': 10,
             'Rate': 0,
           }
@@ -29,19 +29,22 @@ void main() {
 
     test('Test tojson', () {
       final configs =
-          PriceTierDto.fromDomain(PriceTierDto.fromJson(data).toDomain()).toJson();
+          PriceTierDto.fromDomain(PriceTierDto.fromJson(data).toDomain())
+              .toJson();
       expect(configs['PriceTier'][0]['Quantity'], 10);
     });
 
     test('Test pricetieritem fromDomain', () {
-      final configs =
-          PriceTierItemDto.fromDomain(PriceTierItemDto.fromJson(data['PriceTier'][0]).toDomain());
+      final configs = PriceTierItemDto.fromDomain(
+        PriceTierItemDto.fromJson(data['PriceTier'][0]).toDomain(),
+      );
       expect(configs.quantity, 10);
     });
 
     test('Test pricetieritem tojson', () {
-      final configs =
-          PriceTierItemDto.fromDomain(PriceTierItemDto.fromJson(data['PriceTier'][0]).toDomain()).toJson();
+      final configs = PriceTierItemDto.fromDomain(
+        PriceTierItemDto.fromJson(data['PriceTier'][0]).toDomain(),
+      ).toJson();
       expect(configs['Quantity'], 10);
     });
   });

@@ -94,8 +94,11 @@ void main() {
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
         'For "fetchSalesDistrict" Event with Success from Add Beneficiary',
-        setUp: () => when(() => bankBeneficiaryRepositoryMock.getSalesDistrict(
-            salesOrg: SalesOrg('3050'))).thenAnswer(
+        setUp: () => when(
+          () => bankBeneficiaryRepositoryMock.getSalesDistrict(
+            salesOrg: SalesOrg('3050'),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(salesDistrictList),
         ),
         build: () => ManageBankBeneficiaryBloc(
@@ -115,9 +118,10 @@ void main() {
             isFetching: false,
             salesDistrict: salesDistrictList,
             beneficiaryData: BankBeneficiary.empty().copyWith(
-                salesDistrict: salesDistrictList
-                    .first.salesDistrictInfo.first.salesDistrictHeader
-                    .getValue()),
+              salesDistrict: salesDistrictList
+                  .first.salesDistrictInfo.first.salesDistrictHeader
+                  .getValue(),
+            ),
             failureOrSuccessOption: none(),
           ),
         ],
@@ -125,9 +129,11 @@ void main() {
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
         'For "fetch Sales District" Event with Failure from Add Beneficiary',
-        setUp: () => when(() => bankBeneficiaryRepositoryMock.getSalesDistrict(
-              salesOrg: SalesOrg('3050'),
-            )).thenAnswer(
+        setUp: () => when(
+          () => bankBeneficiaryRepositoryMock.getSalesDistrict(
+            salesOrg: SalesOrg('3050'),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake Error'),
           ),
@@ -135,10 +141,12 @@ void main() {
         build: () => ManageBankBeneficiaryBloc(
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
-        act: (bloc) => bloc.add(ManageBankBeneficiaryEvent.fetchSalesDistrict(
-          salesOrg: SalesOrg('3050'),
-          fromAdd: true,
-        )),
+        act: (bloc) => bloc.add(
+          ManageBankBeneficiaryEvent.fetchSalesDistrict(
+            salesOrg: SalesOrg('3050'),
+            fromAdd: true,
+          ),
+        ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
             isFetching: true,
@@ -156,8 +164,11 @@ void main() {
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
         'For "fetchSalesDistrict" Event with Success from Edit Beneficiary',
-        setUp: () => when(() => bankBeneficiaryRepositoryMock.getSalesDistrict(
-            salesOrg: SalesOrg('3050'))).thenAnswer(
+        setUp: () => when(
+          () => bankBeneficiaryRepositoryMock.getSalesDistrict(
+            salesOrg: SalesOrg('3050'),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(salesDistrictList),
         ),
         build: () => ManageBankBeneficiaryBloc(
@@ -184,9 +195,11 @@ void main() {
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
         'For "fetch Sales District" Event with Failure from Edit Beneficiary',
-        setUp: () => when(() => bankBeneficiaryRepositoryMock.getSalesDistrict(
-              salesOrg: SalesOrg('3050'),
-            )).thenAnswer(
+        setUp: () => when(
+          () => bankBeneficiaryRepositoryMock.getSalesDistrict(
+            salesOrg: SalesOrg('3050'),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake Error'),
           ),
@@ -194,10 +207,12 @@ void main() {
         build: () => ManageBankBeneficiaryBloc(
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
-        act: (bloc) => bloc.add(ManageBankBeneficiaryEvent.fetchSalesDistrict(
-          salesOrg: SalesOrg('3050'),
-          fromAdd: false,
-        )),
+        act: (bloc) => bloc.add(
+          ManageBankBeneficiaryEvent.fetchSalesDistrict(
+            salesOrg: SalesOrg('3050'),
+            fromAdd: false,
+          ),
+        ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
             isFetching: true,
@@ -214,165 +229,189 @@ void main() {
       );
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
-          'For "onValueChange" Event',
-          build: () => ManageBankBeneficiaryBloc(
-                bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
-              ),
-          act: (bloc) => bloc
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.selectSalesOrg, newValue: '3050'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.selectSalesDistrict, newValue: 'HCM'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.beneficiaryName,
-                  newValue: 'TestName'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankName, newValue: 'TestBank'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.branch, newValue: 'TestBranch'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankCode, newValue: 'TestCode'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankAccount, newValue: '123456789'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.hdbcSwiftCode,
-                  newValue: 'TestSwiftCode'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.bankAddress,
-                  newValue: 'TestBankAddress'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.payNowUen, newValue: 'PayNowTest'),
-            )
-            ..add(
-              const ManageBankBeneficiaryEvent.onValueChange(
-                  label: BeneficiaryLabel.emailId,
-                  newValue: 'testabc@gmail.com'),
+        'For "onValueChange" Event',
+        build: () => ManageBankBeneficiaryBloc(
+          bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
+        ),
+        act: (bloc) => bloc
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.selectSalesOrg,
+              newValue: '3050',
             ),
-          expect: () => [
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty()
-                      .copyWith(salesOrg: SalesOrg('3050')),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                      salesOrg: SalesOrg('3050'), salesDistrict: 'HCM'),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                  ),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                  ),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                      salesOrg: SalesOrg('3050'),
-                      salesDistrict: 'HCM',
-                      beneficiaryName: StringValue('TestName'),
-                      bankName: StringValue('TestBank'),
-                      branch: 'TestBranch'),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                    branch: 'TestBranch',
-                    bankCode: 'TestCode',
-                  ),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                    branch: 'TestBranch',
-                    bankCode: 'TestCode',
-                    bankAccount: StringValue('123456789'),
-                  ),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                      salesOrg: SalesOrg('3050'),
-                      salesDistrict: 'HCM',
-                      beneficiaryName: StringValue('TestName'),
-                      bankName: StringValue('TestBank'),
-                      branch: 'TestBranch',
-                      bankCode: 'TestCode',
-                      bankAccount: StringValue('123456789'),
-                      hdbcSwiftCode: 'TestSwiftCode'),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                    branch: 'TestBranch',
-                    bankCode: 'TestCode',
-                    bankAccount: StringValue('123456789'),
-                    hdbcSwiftCode: 'TestSwiftCode',
-                    bankAddress: 'TestBankAddress',
-                  ),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                    branch: 'TestBranch',
-                    bankCode: 'TestCode',
-                    bankAccount: StringValue('123456789'),
-                    hdbcSwiftCode: 'TestSwiftCode',
-                    bankAddress: 'TestBankAddress',
-                    payNowUen: 'PayNowTest',
-                  ),
-                ),
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                      salesOrg: SalesOrg('3050'),
-                      salesDistrict: 'HCM',
-                      beneficiaryName: StringValue('TestName'),
-                      bankName: StringValue('TestBank'),
-                      branch: 'TestBranch',
-                      bankCode: 'TestCode',
-                      bankAccount: StringValue('123456789'),
-                      hdbcSwiftCode: 'TestSwiftCode',
-                      bankAddress: 'TestBankAddress',
-                      payNowUen: 'PayNowTest',
-                      emailId: EmailAddress.optional('testabc@gmail.com')),
-                ),
-              ]);
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.selectSalesDistrict,
+              newValue: 'HCM',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.beneficiaryName,
+              newValue: 'TestName',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.bankName,
+              newValue: 'TestBank',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.branch,
+              newValue: 'TestBranch',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.bankCode,
+              newValue: 'TestCode',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.bankAccount,
+              newValue: '123456789',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.hdbcSwiftCode,
+              newValue: 'TestSwiftCode',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.bankAddress,
+              newValue: 'TestBankAddress',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.payNowUen,
+              newValue: 'PayNowTest',
+            ),
+          )
+          ..add(
+            const ManageBankBeneficiaryEvent.onValueChange(
+              label: BeneficiaryLabel.emailId,
+              newValue: 'testabc@gmail.com',
+            ),
+          ),
+        expect: () => [
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData:
+                BankBeneficiary.empty().copyWith(salesOrg: SalesOrg('3050')),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+            ),
+          ),
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+            ),
+          ),
+        ],
+      );
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
         'For "setBeneficiary" Event',
         build: () => ManageBankBeneficiaryBloc(
@@ -381,33 +420,35 @@ void main() {
         act: (bloc) => bloc.add(
           ManageBankBeneficiaryEvent.setBeneficiary(
             beneficiary: BankBeneficiary.empty().copyWith(
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('testabc@gmail.com')),
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+            ),
           ),
         ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
             beneficiaryData: BankBeneficiary.empty().copyWith(
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('testabc@gmail.com')),
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+            ),
           ),
         ],
       );
@@ -416,48 +457,52 @@ void main() {
         'For "delete Beneficiary" Event with SUCCESS',
         setUp: () => when(
           () => bankBeneficiaryRepositoryMock.deleteBeneficiary(
-              salesOrg: SalesOrg('3050'), salesDistrict: 'HCM'),
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+          ),
         ).thenAnswer(
           (invocation) async => Right(beneficiaryDeleteResponse),
         ),
         build: () => ManageBankBeneficiaryBloc(
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
-        seed: () =>
-            ManageBankBeneficiaryState.initial().copyWith(beneficiaryList: [
-          BankBeneficiary.empty().copyWith(
-            key: 12345,
-            salesOrg: SalesOrg('3050'),
-            salesDistrict: 'HCM',
-            beneficiaryName: StringValue('TestName'),
-            bankName: StringValue('TestBank'),
-            branch: 'TestBranch',
-            bankCode: 'TestCode',
-            bankAccount: StringValue('123456789'),
-            hdbcSwiftCode: 'TestSwiftCode',
-            bankAddress: 'TestBankAddress',
-            payNowUen: 'PayNowTest',
-            emailId: EmailAddress.optional('testabc@gmail.com'),
-            isDeleteInProgress: false,
-          )
-        ]),
+        seed: () => ManageBankBeneficiaryState.initial().copyWith(
+          beneficiaryList: [
+            BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            )
+          ],
+        ),
         act: (bloc) => bloc.add(
           ManageBankBeneficiaryEvent.deleteBeneficiary(
-              beneficiary: BankBeneficiary.empty().copyWith(
-            key: 12345,
-            salesOrg: SalesOrg('3050'),
-            salesDistrict: 'HCM',
-            beneficiaryName: StringValue('TestName'),
-            bankName: StringValue('TestBank'),
-            branch: 'TestBranch',
-            bankCode: 'TestCode',
-            bankAccount: StringValue('123456789'),
-            hdbcSwiftCode: 'TestSwiftCode',
-            bankAddress: 'TestBankAddress',
-            payNowUen: 'PayNowTest',
-            emailId: EmailAddress.optional('testabc@gmail.com'),
-            isDeleteInProgress: false,
-          )),
+            beneficiary: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            ),
+          ),
         ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
@@ -482,10 +527,11 @@ void main() {
             failureOrSuccessOption: none(),
           ),
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: false,
-              beneficiaryList: [],
-              response: beneficiaryDeleteResponse,
-              failureOrSuccessOption: none())
+            isSubmitting: false,
+            beneficiaryList: [],
+            response: beneficiaryDeleteResponse,
+            failureOrSuccessOption: none(),
+          )
         ],
       );
 
@@ -493,48 +539,52 @@ void main() {
         'For "delete Beneficiary" Event with FAILURE',
         setUp: () => when(
           () => bankBeneficiaryRepositoryMock.deleteBeneficiary(
-              salesOrg: SalesOrg('3050'), salesDistrict: 'HCM'),
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+          ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('FAKE-ERROR')),
         ),
         build: () => ManageBankBeneficiaryBloc(
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
-        seed: () =>
-            ManageBankBeneficiaryState.initial().copyWith(beneficiaryList: [
-          BankBeneficiary.empty().copyWith(
-            key: 12345,
-            salesOrg: SalesOrg('3050'),
-            salesDistrict: 'HCM',
-            beneficiaryName: StringValue('TestName'),
-            bankName: StringValue('TestBank'),
-            branch: 'TestBranch',
-            bankCode: 'TestCode',
-            bankAccount: StringValue('123456789'),
-            hdbcSwiftCode: 'TestSwiftCode',
-            bankAddress: 'TestBankAddress',
-            payNowUen: 'PayNowTest',
-            emailId: EmailAddress.optional('testabc@gmail.com'),
-            isDeleteInProgress: false,
-          )
-        ]),
+        seed: () => ManageBankBeneficiaryState.initial().copyWith(
+          beneficiaryList: [
+            BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            )
+          ],
+        ),
         act: (bloc) => bloc.add(
           ManageBankBeneficiaryEvent.deleteBeneficiary(
-              beneficiary: BankBeneficiary.empty().copyWith(
-            key: 12345,
-            salesOrg: SalesOrg('3050'),
-            salesDistrict: 'HCM',
-            beneficiaryName: StringValue('TestName'),
-            bankName: StringValue('TestBank'),
-            branch: 'TestBranch',
-            bankCode: 'TestCode',
-            bankAccount: StringValue('123456789'),
-            hdbcSwiftCode: 'TestSwiftCode',
-            bankAddress: 'TestBankAddress',
-            payNowUen: 'PayNowTest',
-            emailId: EmailAddress.optional('testabc@gmail.com'),
-            isDeleteInProgress: false,
-          )),
+            beneficiary: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            ),
+          ),
         ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
@@ -613,44 +663,47 @@ void main() {
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
         seed: () => ManageBankBeneficiaryState.initial().copyWith(
-            beneficiaryData: BankBeneficiary.empty().copyWith(
-          key: 12345,
-          salesOrg: SalesOrg('3050'),
-          salesDistrict: 'HCM',
-          beneficiaryName: StringValue('TestName'),
-          bankName: StringValue('TestBank'),
-          branch: 'TestBranch',
-          bankCode: 'TestCode',
-          bankAccount: StringValue('123456789'),
-          hdbcSwiftCode: 'TestSwiftCode',
-          bankAddress: 'TestBankAddress',
-          payNowUen: 'PayNowTest',
-          emailId: EmailAddress.optional('testabc@gmail.com'),
-          isDeleteInProgress: false,
-        )),
+          beneficiaryData: BankBeneficiary.empty().copyWith(
+            key: 12345,
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+            beneficiaryName: StringValue('TestName'),
+            bankName: StringValue('TestBank'),
+            branch: 'TestBranch',
+            bankCode: 'TestCode',
+            bankAccount: StringValue('123456789'),
+            hdbcSwiftCode: 'TestSwiftCode',
+            bankAddress: 'TestBankAddress',
+            payNowUen: 'PayNowTest',
+            emailId: EmailAddress.optional('testabc@gmail.com'),
+            isDeleteInProgress: false,
+          ),
+        ),
         act: (bloc) => bloc.add(
           const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-              isEdit: false),
+            isEdit: false,
+          ),
         ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: true,
-              showErrorMessages: false,
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('testabc@gmail.com'),
-                isDeleteInProgress: false,
-              )),
+            isSubmitting: true,
+            showErrorMessages: false,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            ),
+          ),
           ManageBankBeneficiaryState.initial().copyWith(
             isSubmitting: false,
             beneficiaryList: [
@@ -703,67 +756,71 @@ void main() {
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
         seed: () => ManageBankBeneficiaryState.initial().copyWith(
-            beneficiaryData: BankBeneficiary.empty().copyWith(
-          key: 12345,
-          salesOrg: SalesOrg('3050'),
-          salesDistrict: 'HCM',
-          beneficiaryName: StringValue('TestName'),
-          bankName: StringValue('TestBank'),
-          branch: 'TestBranch',
-          bankCode: 'TestCode',
-          bankAccount: StringValue('123456789'),
-          hdbcSwiftCode: 'TestSwiftCode',
-          bankAddress: 'TestBankAddress',
-          payNowUen: 'PayNowTest',
-          emailId: EmailAddress.optional('testabc@gmail.com'),
-          isDeleteInProgress: false,
-        )),
+          beneficiaryData: BankBeneficiary.empty().copyWith(
+            key: 12345,
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+            beneficiaryName: StringValue('TestName'),
+            bankName: StringValue('TestBank'),
+            branch: 'TestBranch',
+            bankCode: 'TestCode',
+            bankAccount: StringValue('123456789'),
+            hdbcSwiftCode: 'TestSwiftCode',
+            bankAddress: 'TestBankAddress',
+            payNowUen: 'PayNowTest',
+            emailId: EmailAddress.optional('testabc@gmail.com'),
+            isDeleteInProgress: false,
+          ),
+        ),
         act: (bloc) => bloc.add(
           const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-              isEdit: false),
+            isEdit: false,
+          ),
         ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: true,
-              showErrorMessages: false,
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('testabc@gmail.com'),
-                isDeleteInProgress: false,
-              )),
+            isSubmitting: true,
+            showErrorMessages: false,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            ),
+          ),
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: false,
-              beneficiaryList: [],
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('testabc@gmail.com'),
-                isDeleteInProgress: false,
+            isSubmitting: false,
+            beneficiaryList: [],
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('testabc@gmail.com'),
+              isDeleteInProgress: false,
+            ),
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('FAKE-ERROR'),
               ),
-              failureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('FAKE-ERROR'),
-                ),
-              ))
+            ),
+          )
         ],
       );
 
@@ -794,65 +851,71 @@ void main() {
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
         seed: () => ManageBankBeneficiaryState.initial().copyWith(
-            beneficiaryData: BankBeneficiary.empty().copyWith(
-          key: 12345,
-          salesOrg: SalesOrg('3050'),
-          salesDistrict: 'HCM',
-          beneficiaryName: StringValue('TestName'),
-          bankName: StringValue('TestBank'),
-          branch: 'TestBranch',
-          bankCode: 'TestCode',
-          bankAccount: StringValue('123456789'),
-          hdbcSwiftCode: 'TestSwiftCode',
-          bankAddress: 'TestBankAddress',
-          payNowUen: 'PayNowTest',
-          emailId: EmailAddress.optional('testabc@gmail.com'),
-          isDeleteInProgress: false,
-        )),
+          beneficiaryData: BankBeneficiary.empty().copyWith(
+            key: 12345,
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+            beneficiaryName: StringValue('TestName'),
+            bankName: StringValue('TestBank'),
+            branch: 'TestBranch',
+            bankCode: 'TestCode',
+            bankAccount: StringValue('123456789'),
+            hdbcSwiftCode: 'TestSwiftCode',
+            bankAddress: 'TestBankAddress',
+            payNowUen: 'PayNowTest',
+            emailId: EmailAddress.optional('testabc@gmail.com'),
+            isDeleteInProgress: false,
+          ),
+        ),
         act: (bloc) => bloc
           ..add(
             const ManageBankBeneficiaryEvent.onValueChange(
-                label: BeneficiaryLabel.emailId, newValue: 'abcVN@hotmail.com'),
+              label: BeneficiaryLabel.emailId,
+              newValue: 'abcVN@hotmail.com',
+            ),
           )
           ..add(
             const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-                isEdit: true),
+              isEdit: true,
+            ),
           ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
             beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('abcVN@hotmail.com'),
-                isDeleteInProgress: false),
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abcVN@hotmail.com'),
+              isDeleteInProgress: false,
+            ),
           ),
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: true,
-              showErrorMessages: false,
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('abcVN@hotmail.com'),
-                isDeleteInProgress: false,
-              )),
+            isSubmitting: true,
+            showErrorMessages: false,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abcVN@hotmail.com'),
+              isDeleteInProgress: false,
+            ),
+          ),
           ManageBankBeneficiaryState.initial().copyWith(
             isSubmitting: false,
             beneficiaryList: [
@@ -905,182 +968,195 @@ void main() {
           bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
         ),
         seed: () => ManageBankBeneficiaryState.initial().copyWith(
-            beneficiaryData: BankBeneficiary.empty().copyWith(
-          key: 12345,
-          salesOrg: SalesOrg('3050'),
-          salesDistrict: 'HCM',
-          beneficiaryName: StringValue('TestName'),
-          bankName: StringValue('TestBank'),
-          branch: 'TestBranch',
-          bankCode: 'TestCode',
-          bankAccount: StringValue('123456789'),
-          hdbcSwiftCode: 'TestSwiftCode',
-          bankAddress: 'TestBankAddress',
-          payNowUen: 'PayNowTest',
-          emailId: EmailAddress.optional('testabc@gmail.com'),
-          isDeleteInProgress: false,
-        )),
+          beneficiaryData: BankBeneficiary.empty().copyWith(
+            key: 12345,
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+            beneficiaryName: StringValue('TestName'),
+            bankName: StringValue('TestBank'),
+            branch: 'TestBranch',
+            bankCode: 'TestCode',
+            bankAccount: StringValue('123456789'),
+            hdbcSwiftCode: 'TestSwiftCode',
+            bankAddress: 'TestBankAddress',
+            payNowUen: 'PayNowTest',
+            emailId: EmailAddress.optional('testabc@gmail.com'),
+            isDeleteInProgress: false,
+          ),
+        ),
         act: (bloc) => bloc
           ..add(
             const ManageBankBeneficiaryEvent.onValueChange(
-                label: BeneficiaryLabel.emailId, newValue: 'abcVN@hotmail.com'),
+              label: BeneficiaryLabel.emailId,
+              newValue: 'abcVN@hotmail.com',
+            ),
           )
           ..add(
             const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-                isEdit: true),
+              isEdit: true,
+            ),
           ),
         expect: () => [
           ManageBankBeneficiaryState.initial().copyWith(
             beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('abcVN@hotmail.com'),
-                isDeleteInProgress: false),
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abcVN@hotmail.com'),
+              isDeleteInProgress: false,
+            ),
           ),
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: true,
-              showErrorMessages: false,
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('abcVN@hotmail.com'),
-                isDeleteInProgress: false,
-              )),
+            isSubmitting: true,
+            showErrorMessages: false,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abcVN@hotmail.com'),
+              isDeleteInProgress: false,
+            ),
+          ),
           ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: false,
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('abcVN@hotmail.com'),
-                isDeleteInProgress: false,
+            isSubmitting: false,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abcVN@hotmail.com'),
+              isDeleteInProgress: false,
+            ),
+            beneficiaryList: [],
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('FAKE-ERROR'),
               ),
-              beneficiaryList: [],
-              failureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('FAKE-ERROR'),
-                ),
-              ))
+            ),
+          )
         ],
       );
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
-          'For "addOrUpdateBeneficiary" for add Event with Validation ERROR',
-          build: () => ManageBankBeneficiaryBloc(
-                bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
-              ),
-          seed: () => ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg('3050'),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional('test12345'),
-                isDeleteInProgress: false,
-              )),
-          act: (bloc) => bloc.add(
-                const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-                    isEdit: false),
-              ),
-          expect: () => [
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    key: 12345,
-                    salesOrg: SalesOrg('3050'),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                    branch: 'TestBranch',
-                    bankCode: 'TestCode',
-                    bankAccount: StringValue('123456789'),
-                    hdbcSwiftCode: 'TestSwiftCode',
-                    bankAddress: 'TestBankAddress',
-                    payNowUen: 'PayNowTest',
-                    emailId: EmailAddress.optional('test12345'),
-                    isDeleteInProgress: false,
-                  ),
-                  showErrorMessages: true,
-                ),
-              ]);
+        'For "addOrUpdateBeneficiary" for add Event with Validation ERROR',
+        build: () => ManageBankBeneficiaryBloc(
+          bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
+        ),
+        seed: () => ManageBankBeneficiaryState.initial().copyWith(
+          beneficiaryData: BankBeneficiary.empty().copyWith(
+            key: 12345,
+            salesOrg: SalesOrg('3050'),
+            salesDistrict: 'HCM',
+            beneficiaryName: StringValue('TestName'),
+            bankName: StringValue('TestBank'),
+            branch: 'TestBranch',
+            bankCode: 'TestCode',
+            bankAccount: StringValue('123456789'),
+            hdbcSwiftCode: 'TestSwiftCode',
+            bankAddress: 'TestBankAddress',
+            payNowUen: 'PayNowTest',
+            emailId: EmailAddress.optional('test12345'),
+            isDeleteInProgress: false,
+          ),
+        ),
+        act: (bloc) => bloc.add(
+          const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
+            isEdit: false,
+          ),
+        ),
+        expect: () => [
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg('3050'),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('test12345'),
+              isDeleteInProgress: false,
+            ),
+            showErrorMessages: true,
+          ),
+        ],
+      );
 
       blocTest<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
-          'For "addOrUpdateBeneficiary" for Edit Event with Validation ERROR',
-          build: () => ManageBankBeneficiaryBloc(
-                bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
-              ),
-          seed: () => ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                key: 12345,
-                salesOrg: SalesOrg(''),
-                salesDistrict: 'HCM',
-                beneficiaryName: StringValue('TestName'),
-                bankName: StringValue('TestBank'),
-                branch: 'TestBranch',
-                bankCode: 'TestCode',
-                bankAccount: StringValue('123456789'),
-                hdbcSwiftCode: 'TestSwiftCode',
-                bankAddress: 'TestBankAddress',
-                payNowUen: 'PayNowTest',
-                emailId: EmailAddress.optional(''),
-                isDeleteInProgress: false,
-              )),
-          act: (bloc) => bloc.add(
-                const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-                    isEdit: true),
-              ),
-          expect: () => [
-                ManageBankBeneficiaryState.initial().copyWith(
-                  beneficiaryData: BankBeneficiary.empty().copyWith(
-                    key: 12345,
-                    salesOrg: SalesOrg(''),
-                    salesDistrict: 'HCM',
-                    beneficiaryName: StringValue('TestName'),
-                    bankName: StringValue('TestBank'),
-                    branch: 'TestBranch',
-                    bankCode: 'TestCode',
-                    bankAccount: StringValue('123456789'),
-                    hdbcSwiftCode: 'TestSwiftCode',
-                    bankAddress: 'TestBankAddress',
-                    payNowUen: 'PayNowTest',
-                    emailId: EmailAddress.optional(''),
-                    isDeleteInProgress: false,
-                  ),
-                  showErrorMessages: true,
-                ),
-              ]);
+        'For "addOrUpdateBeneficiary" for Edit Event with Validation ERROR',
+        build: () => ManageBankBeneficiaryBloc(
+          bankBeneficiaryRepository: bankBeneficiaryRepositoryMock,
+        ),
+        seed: () => ManageBankBeneficiaryState.initial().copyWith(
+          beneficiaryData: BankBeneficiary.empty().copyWith(
+            key: 12345,
+            salesOrg: SalesOrg(''),
+            salesDistrict: 'HCM',
+            beneficiaryName: StringValue('TestName'),
+            bankName: StringValue('TestBank'),
+            branch: 'TestBranch',
+            bankCode: 'TestCode',
+            bankAccount: StringValue('123456789'),
+            hdbcSwiftCode: 'TestSwiftCode',
+            bankAddress: 'TestBankAddress',
+            payNowUen: 'PayNowTest',
+            emailId: EmailAddress.optional(''),
+            isDeleteInProgress: false,
+          ),
+        ),
+        act: (bloc) => bloc.add(
+          const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
+            isEdit: true,
+          ),
+        ),
+        expect: () => [
+          ManageBankBeneficiaryState.initial().copyWith(
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              key: 12345,
+              salesOrg: SalesOrg(''),
+              salesDistrict: 'HCM',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional(''),
+              isDeleteInProgress: false,
+            ),
+            showErrorMessages: true,
+          ),
+        ],
+      );
     },
   );
 }

@@ -51,53 +51,54 @@ void main() {
 
     salesOrgId = const SalesOrgId(id: 53);
     configs = UpdateSalesOrganisationConfigs(
-        salesOrg: salesOrg,
-        poNumberRequired: true,
-        priceOverride: false,
-        expiryDateDisplay: true,
-        batchNumDisplay: true,
-        currency: Currency('usd'),
-        minOrderAmount: '20',
-        vatValue: 0,
-        netPriceOverride: false,
-        languageFilter: false,
-        languageValue: LanguageValue(''),
-        materialWithoutPrice: false,
-        enablePaymentTerms: false,
-        enableMobileNumber: true,
-        enableRemarks: true,
-        enableListPrice: true,
-        enableTaxDisplay: true,
-        addOosMaterials: false,
-        oosValue: OosValue(0),
-        enableDefaultMD: true,
-        enableZDP5: false,
-        enableZDP8Override: true,
-        enableGMC: false,
-        enableGMN: true,
-        enableBatchNumber: false,
-        enableOHPrice: true,
-        enableSpecialInstructions: true,
-        enableReferenceNote: false,
-        displayOrderDiscount: true,
-        enableIRN: false,
-        enableTaxClassification: false,
-        disableBundles: false,
-        disableProcessingStatus: true,
-        disableOrderType: true,
-        enableCollectiveNumber: false,
-        enableGimmickMaterial: false,
-        enableVat: false,
-        hideCustomer: false,
-        enableBillTo: true,
-        disablePaymentTermsDisplay: true,
-        hideStockDisplay: true,
-        showPOAttachment: false,
-        disableDeliveryDate: false,
-        enableTaxAtTotalLevelOnly: false,
-        enableGreenDelivery: false,
-        greenDeliveryUserRole: GreenDeliveryUserRole(0),
-        greenDeliveryDelayInDays: 0);
+      salesOrg: salesOrg,
+      poNumberRequired: true,
+      priceOverride: false,
+      expiryDateDisplay: true,
+      batchNumDisplay: true,
+      currency: Currency('usd'),
+      minOrderAmount: '20',
+      vatValue: 0,
+      netPriceOverride: false,
+      languageFilter: false,
+      languageValue: LanguageValue(''),
+      materialWithoutPrice: false,
+      enablePaymentTerms: false,
+      enableMobileNumber: true,
+      enableRemarks: true,
+      enableListPrice: true,
+      enableTaxDisplay: true,
+      addOosMaterials: false,
+      oosValue: OosValue(0),
+      enableDefaultMD: true,
+      enableZDP5: false,
+      enableZDP8Override: true,
+      enableGMC: false,
+      enableGMN: true,
+      enableBatchNumber: false,
+      enableOHPrice: true,
+      enableSpecialInstructions: true,
+      enableReferenceNote: false,
+      displayOrderDiscount: true,
+      enableIRN: false,
+      enableTaxClassification: false,
+      disableBundles: false,
+      disableProcessingStatus: true,
+      disableOrderType: true,
+      enableCollectiveNumber: false,
+      enableGimmickMaterial: false,
+      enableVat: false,
+      hideCustomer: false,
+      enableBillTo: true,
+      disablePaymentTermsDisplay: true,
+      hideStockDisplay: true,
+      showPOAttachment: false,
+      disableDeliveryDate: false,
+      enableTaxAtTotalLevelOnly: false,
+      enableGreenDelivery: false,
+      greenDeliveryUserRole: GreenDeliveryUserRole(0),
+      greenDeliveryDelayInDays: 0,
+    );
 
     registerFallbackValue(AccountSelectorStorageDto.empty());
   });
@@ -131,9 +132,8 @@ void main() {
         ),
       ).thenThrow((invocation) async => MockException());
 
-      final result =
-          await updateSalesOrgRepository.getUpdateSalesOrganisationConfigs(
-              mockSalesOrg, salesOrgId, configs);
+      final result = await updateSalesOrgRepository
+          .getUpdateSalesOrganisationConfigs(mockSalesOrg, salesOrgId, configs);
 
       expect(result.isLeft(), true);
     });
@@ -142,13 +142,14 @@ void main() {
         'Update Sales Organisation Config from remote data source successfully test',
         () async {
       final variableData = UpdateSalesOrganisationConfigsVariableDto.fromDomain(
-              salesOrgId, configs,)
-          .toJson();
+        salesOrgId,
+        configs,
+      ).toJson();
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
       when(
         () => updateSalesOrgRemoteDataSourceMock.updateSalesOrgConfig(
-          variableData : variableData,
+          variableData: variableData,
         ),
       ).thenAnswer((invocation) async => configs);
 
@@ -161,13 +162,14 @@ void main() {
     test('Update Sales Organisation Config from remote data source failed test',
         () async {
       final variableData = UpdateSalesOrganisationConfigsVariableDto.fromDomain(
-              salesOrgId, configs,)
-          .toJson();
+        salesOrgId,
+        configs,
+      ).toJson();
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
       when(
         () => updateSalesOrgRemoteDataSourceMock.updateSalesOrgConfig(
-          variableData : variableData,
+          variableData: variableData,
         ),
       ).thenThrow((invocation) async => Exception());
 

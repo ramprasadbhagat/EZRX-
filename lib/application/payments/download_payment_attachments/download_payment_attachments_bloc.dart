@@ -36,10 +36,12 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
   ) async {
     await event.map(
       fetchAllInvoiceUrl: (e) async {
-        emit(state.copyWith(
-          isDownloadInProgress: true,
-          failureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchAllInvoiceUrl(
           salesOrganization: e.salesOrganization,
@@ -64,10 +66,12 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
       },
       fetchAllCreditUrl: (e) async {
-        emit(state.copyWith(
-          isDownloadInProgress: true,
-          failureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchAllCreditUrl(
           salesOrganization: e.salesOrganization,
@@ -92,10 +96,12 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
       },
       fetchPaymentSummaryUrl: (e) async {
-        emit(state.copyWith(
-          isDownloadInProgress: true,
-          failureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchPaymentSummaryUrl(
           salesOrganization: e.salesOrganization,
@@ -119,7 +125,6 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
       },
       downloadPaymentAttachment: (e) async {
-
         final failureOrSuccessPermission =
             await paymentAttachmentRepository.downloadPermission();
 

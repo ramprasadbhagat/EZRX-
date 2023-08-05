@@ -33,10 +33,11 @@ void main() {
           final result = await localDataSource.submitReturnRequest();
 
           expect(
-              result,
-              SubmitReturnResponseDto.fromJson(
-                res['data']['addRequestV2'],
-              ).toDomain());
+            result,
+            SubmitReturnResponseDto.fromJson(
+              res['data']['addRequestV2'],
+            ).toDomain(),
+          );
         },
       );
     },

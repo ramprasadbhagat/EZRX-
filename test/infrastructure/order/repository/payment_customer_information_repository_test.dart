@@ -18,7 +18,6 @@ class PaymentCustomerInformationLocalDataSourceMock extends Mock
 class PaymentCustomerInformationRemoteDataSourceMock extends Mock
     implements PaymentCustomerInformationRemoteDataSource {}
 
-
 void main() {
   late PaymentCustomerInformationRepository
       paymentCustomerInformationRepository;
@@ -50,14 +49,16 @@ void main() {
   group('paymentCustomerInformation should - ', () {
     test('get paymentCustomerInformation successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => paymentCustomerInformationLocalDataSource
-              .getPaymentCustomerInformation())
-          .thenAnswer((invocation) async => PaymentCustomerInformation.empty());
+      when(
+        () => paymentCustomerInformationLocalDataSource
+            .getPaymentCustomerInformation(),
+      ).thenAnswer((invocation) async => PaymentCustomerInformation.empty());
 
       final result = await paymentCustomerInformationRepository
           .getPaymentCustomerInformation(
-              customerCodeInfo: mockCustomerCodeInfo,
-              salesOrganisation: mockSalesOrganisation);
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isRight(),
         true,
@@ -65,14 +66,16 @@ void main() {
     });
     test('get paymentCustomerInformation fail locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => paymentCustomerInformationLocalDataSource
-              .getPaymentCustomerInformation())
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => paymentCustomerInformationLocalDataSource
+            .getPaymentCustomerInformation(),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await paymentCustomerInformationRepository
           .getPaymentCustomerInformation(
-              customerCodeInfo: mockCustomerCodeInfo,
-              salesOrganisation: mockSalesOrganisation);
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isLeft(),
         true,
@@ -81,15 +84,23 @@ void main() {
 
     test('get paymentCustomerInformation successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => paymentCustomerInformationRemoteDataSource
-              .getPaymentCustomerInformation(
-                  customer: '0000002510', salesOrganisation: '2601-ZPSG'))
-          .thenAnswer((invocation) async => PaymentCustomerInformation.empty());
+      when(
+        () => paymentCustomerInformationRemoteDataSource
+            .getPaymentCustomerInformation(
+          customer: '0000002510',
+          salesOrganisation: '2601-ZPSG',
+        ),
+      ).thenAnswer((invocation) async => PaymentCustomerInformation.empty());
 
       final result = await paymentCustomerInformationRepository
           .getPaymentCustomerInformation(
-              customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: '0000002510'),
-              salesOrganisation: mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601-ZPSG')));
+        customerCodeInfo: mockCustomerCodeInfo.copyWith(
+          customerCodeSoldTo: '0000002510',
+        ),
+        salesOrganisation: mockSalesOrganisation.copyWith(
+          salesOrg: SalesOrg('2601-ZPSG'),
+        ),
+      );
       expect(
         result.isRight(),
         true,
@@ -98,15 +109,19 @@ void main() {
 
     test('get paymentCustomerInformation fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => paymentCustomerInformationRemoteDataSource
-              .getPaymentCustomerInformation(
-                  customer: '', salesOrganisation: ''))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => paymentCustomerInformationRemoteDataSource
+            .getPaymentCustomerInformation(
+          customer: '',
+          salesOrganisation: '',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await paymentCustomerInformationRepository
           .getPaymentCustomerInformation(
-              customerCodeInfo: mockCustomerCodeInfo,
-              salesOrganisation: mockSalesOrganisation);
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isLeft(),
         true,

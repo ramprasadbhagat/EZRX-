@@ -23,11 +23,14 @@ class OrderHistoryRobot {
   }
 
   Future<void> findOrderHistoryFilterByMaterialNumber(
-      String materialNumber) async {
+    String materialNumber,
+  ) async {
     await tester.tap(filterOrderHistory);
     await tester.pumpAndSettle();
     await tester.enterText(
-        find.byKey(const Key('filterMaterialSearchField')), materialNumber);
+      find.byKey(const Key('filterMaterialSearchField')),
+      materialNumber,
+    );
     await tester.pumpAndSettle();
   }
 
@@ -91,9 +94,8 @@ class OrderHistoryRobot {
     expect(filterClearButton, findsOneWidget);
   }
 
-   Future<void> tapFilterClearButton() async{
+  Future<void> tapFilterClearButton() async {
     await tester.tap(filterClearButton);
     await tester.pumpAndSettle();
   }
-
 }

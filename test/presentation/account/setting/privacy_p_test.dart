@@ -51,12 +51,13 @@ void main() {
   setUpAll(() async {
     setupLocator();
     PackageInfo.setMockInitialValues(
-        appName: '',
-        packageName: '"packageName"',
-        version: '',
-        buildNumber: '',
-        buildSignature: '',
-        installerStore: '');
+      appName: '',
+      packageName: '"packageName"',
+      version: '',
+      buildNumber: '',
+      buildSignature: '',
+      installerStore: '',
+    );
 
     locator<Config>().appFlavor = Flavor.mock;
 
@@ -70,31 +71,34 @@ void main() {
   testWidgets('Tap Privacy Policy', (tester) async {
     EasyLocalization.logger.enableBuildModes = [];
 
-    await tester.pumpWidget(WidgetUtils.getScopedWidget(
-      autoRouterMock: autoRouterMock,
-      child: EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
-            BlocProvider<SettingBloc>(
-              create: (context) => settingBlocMock,
-            ),
+    await tester.pumpWidget(
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        child: EasyLocalization(
+          supportedLocales: const [
+            Locale('en'),
           ],
-          child: const SettingsPage(),
+          path: 'assets/langs/langs.csv',
+          startLocale: const Locale('en'),
+          fallbackLocale: const Locale('en'),
+          saveLocale: true,
+          useOnlyLangCode: true,
+          assetLoader: CsvAssetLoader(),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+              BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock,
+              ),
+              BlocProvider<SettingBloc>(
+                create: (context) => settingBlocMock,
+              ),
+            ],
+            child: const SettingsPage(),
+          ),
         ),
       ),
-    ));
+    );
     await tester.pump();
     final privacyPolicyOnTap = find.byKey(const Key('Privacy_Policy'));
     expect(privacyPolicyOnTap, findsOneWidget);
@@ -110,7 +114,8 @@ void main() {
             providers: [
               BlocProvider<AuthBloc>(create: (context) => authBlocMock),
               BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock),
+                create: (context) => announcementBlocMock,
+              ),
               BlocProvider<SettingBloc>(
                 create: (context) => settingBlocMock,
               ),

@@ -85,7 +85,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const PolicyConfigurationPage(),
       ),
@@ -105,7 +106,9 @@ void main() {
         ),
       ];
       whenListen(
-          policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
+        policyConfigurationListBlocMock,
+        Stream.fromIterable(expectedState),
+      );
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final loaderImage = find.byKey(const Key('LoaderImage'));
@@ -117,10 +120,11 @@ void main() {
     });
 
     testWidgets('=> Test when policy configuration is fetched', (tester) async {
-      when(() => policyConfigurationListBlocMock.state)
-          .thenReturn(PolicyConfigurationState.initial().copyWith(
-        isLoading: true,
-      ));
+      when(() => policyConfigurationListBlocMock.state).thenReturn(
+        PolicyConfigurationState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
       final expectedState = [
         PolicyConfigurationState.initial().copyWith(
           isLoading: false,
@@ -129,7 +133,9 @@ void main() {
         )
       ];
       whenListen(
-          policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
+        policyConfigurationListBlocMock,
+        Stream.fromIterable(expectedState),
+      );
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final orderTemplateItem = find.byType(PolicyConfigurationListItem);
@@ -143,7 +149,9 @@ void main() {
       expect(findListTile, findsOneWidget);
       await tester.tap(findListTile);
       await tester.drag(
-          find.byKey(const Key('slidable')).first, const Offset(-300, 0.0));
+        find.byKey(const Key('slidable')).first,
+        const Offset(-300, 0.0),
+      );
       await tester.pump();
       final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
       await tester.tap(find.byWidget(removeWidget));
@@ -170,7 +178,9 @@ void main() {
 
       await tester.pump();
       await tester.enterText(
-          find.byKey(const Key('policyConfigurationSearch')), '2001');
+        find.byKey(const Key('policyConfigurationSearch')),
+        '2001',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       verify(
         () => policyConfigurationListBlocMock.add(
@@ -195,7 +205,9 @@ void main() {
 
       await tester.pump();
       await tester.enterText(
-          find.byKey(const Key('policyConfigurationSearch')), '2001');
+        find.byKey(const Key('policyConfigurationSearch')),
+        '2001',
+      );
       await tester.pump(const Duration(seconds: 3));
       verify(
         () => policyConfigurationListBlocMock.add(
@@ -241,17 +253,18 @@ void main() {
         ),
       );
       whenListen(
-          policyConfigurationListBlocMock,
-          Stream.fromIterable([
-            PolicyConfigurationState.initial().copyWith(
-              isLoading: false,
-              failureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('fake-error'),
-                ),
+        policyConfigurationListBlocMock,
+        Stream.fromIterable([
+          PolicyConfigurationState.initial().copyWith(
+            isLoading: false,
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
               ),
             ),
-          ]));
+          ),
+        ]),
+      );
       await tester.runAsync(() async {
         await getWidget(tester);
       });

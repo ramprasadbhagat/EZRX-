@@ -157,13 +157,16 @@ class __$$_CreditLimitDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CreditLimitDto extends _CreditLimitDto {
   const _$_CreditLimitDto(
-      {@JsonKey(name: 'partner', defaultValue: '') required this.customerCode,
-      @JsonKey(name: 'currency', defaultValue: '') required this.currency,
-      @JsonKey(name: 'creditLimit', defaultValue: '') required this.creditLimit,
+      {@JsonKey(name: 'partner', defaultValue: '')
+          required this.customerCode,
+      @JsonKey(name: 'currency', defaultValue: '')
+          required this.currency,
+      @JsonKey(name: 'creditLimit', defaultValue: '')
+          required this.creditLimit,
       @JsonKey(name: 'creditExposure', defaultValue: '')
-      required this.creditExposure,
+          required this.creditExposure,
       @JsonKey(name: 'creditBalance', defaultValue: '')
-      required this.creditBalance})
+          required this.creditBalance})
       : super._();
 
   factory _$_CreditLimitDto.fromJson(Map<String, dynamic> json) =>
@@ -229,15 +232,15 @@ class _$_CreditLimitDto extends _CreditLimitDto {
 abstract class _CreditLimitDto extends CreditLimitDto {
   const factory _CreditLimitDto(
       {@JsonKey(name: 'partner', defaultValue: '')
-      required final String customerCode,
+          required final String customerCode,
       @JsonKey(name: 'currency', defaultValue: '')
-      required final String currency,
+          required final String currency,
       @JsonKey(name: 'creditLimit', defaultValue: '')
-      required final String creditLimit,
+          required final String creditLimit,
       @JsonKey(name: 'creditExposure', defaultValue: '')
-      required final String creditExposure,
+          required final String creditExposure,
       @JsonKey(name: 'creditBalance', defaultValue: '')
-      required final String creditBalance}) = _$_CreditLimitDto;
+          required final String creditBalance}) = _$_CreditLimitDto;
   const _CreditLimitDto._() : super._();
 
   factory _CreditLimitDto.fromJson(Map<String, dynamic> json) =

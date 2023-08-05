@@ -94,9 +94,11 @@ class CartState with _$CartState {
   bool get containNonSampleMaterial => cartItems.allMaterials
       .any((element) => !element.materialInfo.isSampleMaterial);
 
-  bool get containNonRegularMaterial => cartItems.allMaterials.any((element) =>
-      !element.materialInfo.isFOCMaterial ||
-      !element.materialInfo.isSampleMaterial);
+  bool get containNonRegularMaterial => cartItems.allMaterials.any(
+        (element) =>
+            !element.materialInfo.isFOCMaterial ||
+            !element.materialInfo.isSampleMaterial,
+      );
 
   List<CartItem> get getCartItemMaterialList => cartItems
       .where((element) => element.itemType == CartItemType.material)
@@ -178,8 +180,9 @@ class CartState with _$CartState {
 
   int getQuantityOfProduct({required MaterialNumber productNumber}) {
     return cartProducts
-            .where((element) =>
-                element.materialInfo.materialNumber == productNumber)
+            .where(
+              (element) => element.materialInfo.materialNumber == productNumber,
+            )
             .elementAtOrNull(0)
             ?.quantity ??
         0;

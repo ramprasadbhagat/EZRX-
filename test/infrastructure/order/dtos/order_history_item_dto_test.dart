@@ -44,7 +44,8 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto = OrderHistoryItemDto.fromDomain(
-          OrderHistoryItemDto.fromJson(data).toDomain());
+        OrderHistoryItemDto.fromJson(data).toDomain(),
+      );
       expect(configsDto.materialNumber, 'fake-code');
     });
 

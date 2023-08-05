@@ -111,28 +111,30 @@ class CartItem with _$CartItem {
       bonusEligible: false,
     );
 
-    return CartItem.bundle(validMaterials.map(
-      (material) {
-        final priceDetail =
-            priceDetailMap[material.queryInfo] ?? MaterialPriceDetail.empty();
+    return CartItem.bundle(
+      validMaterials.map(
+        (material) {
+          final priceDetail =
+              priceDetailMap[material.queryInfo] ?? MaterialPriceDetail.empty();
 
-        return PriceAggregate(
-          banner: BannerItem.empty(),
-          price: priceDetail.price,
-          materialInfo: priceDetail.info,
-          bundle: bundle,
-          salesOrgConfig: salesConfigs,
-          quantity: material.quantity,
-          discountedMaterialCount: 0,
-          addedBonusList: savedItem.bonuses,
-          stockInfo: StockInfo.empty().copyWith(
-            materialNumber: priceDetail.info.materialNumber,
-          ),
-          tenderContract: savedItem.tenderContract,
-          comboDeal: ComboDeal.empty(),
-        );
-      },
-    ).toList());
+          return PriceAggregate(
+            banner: BannerItem.empty(),
+            price: priceDetail.price,
+            materialInfo: priceDetail.info,
+            bundle: bundle,
+            salesOrgConfig: salesConfigs,
+            quantity: material.quantity,
+            discountedMaterialCount: 0,
+            addedBonusList: savedItem.bonuses,
+            stockInfo: StockInfo.empty().copyWith(
+              materialNumber: priceDetail.info.materialNumber,
+            ),
+            tenderContract: savedItem.tenderContract,
+            comboDeal: ComboDeal.empty(),
+          );
+        },
+      ).toList(),
+    );
   }
 
   CartItem copyWithStockInfo({
@@ -179,9 +181,11 @@ class CartItem with _$CartItem {
   }) =>
       copyWith(
         materials: materials
-            .map((material) => material.copyWith(
-                  stockInfo: stockInfo,
-                ))
+            .map(
+              (material) => material.copyWith(
+                stockInfo: stockInfo,
+              ),
+            )
             .toList(),
       );
 
@@ -467,8 +471,10 @@ extension CartItemListExtension on List<CartItem> {
       where((e) => e.itemType == CartItemType.material)
           .toList()
           .allMaterials
-          .where((e) =>
-              e.price.zmgDiscount && e.materialInfo.materialGroup2 == group2)
+          .where(
+            (e) =>
+                e.price.zmgDiscount && e.materialInfo.materialGroup2 == group2,
+          )
           .fold(0, (sum, e) => sum + e.quantity);
 
   List<PriceAggregate> get allMaterials =>

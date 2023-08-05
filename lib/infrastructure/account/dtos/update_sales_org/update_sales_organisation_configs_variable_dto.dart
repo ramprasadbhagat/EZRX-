@@ -13,8 +13,7 @@ class UpdateSalesOrganisationConfigsVariableDto
   const UpdateSalesOrganisationConfigsVariableDto._();
 
   const factory UpdateSalesOrganisationConfigsVariableDto({
-    @JsonKey(name: 'where') 
-    required SalesOrgIdDto salesOrgIdDto,
+    @JsonKey(name: 'where') required SalesOrgIdDto salesOrgIdDto,
     @JsonKey(name: 'data') required UpdateSalesOrganisationConfigsDto data,
   }) = _UpdateSalesOrganisationConfigsVariableDto;
 
@@ -29,8 +28,7 @@ class UpdateSalesOrganisationConfigsVariableDto
   }
 
   factory UpdateSalesOrganisationConfigsVariableDto.fromJson(
-          Map<String, dynamic> json,) =>
+    Map<String, dynamic> json,
+  ) =>
       _$UpdateSalesOrganisationConfigsVariableDtoFromJson(json);
 }
-
-

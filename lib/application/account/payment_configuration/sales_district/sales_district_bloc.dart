@@ -30,11 +30,13 @@ class SalesDistrictBloc extends Bloc<SalesDistrictEvent, SalesDistrictState> {
       onValueChange: (e) async =>
           _onValueChanged(field: e.field, value: e.value, emit: emit),
       resetField: (_) {
-        emit(state.copyWith(
-          selectedSalesOrg: SalesOrg(''),
-          selectedSalesDistrictInfo: SalesDistrictInfo.empty(),
-          salesDistrictResponseMessage: SalesDistrictResponseMessage.empty(),
-        ));
+        emit(
+          state.copyWith(
+            selectedSalesOrg: SalesOrg(''),
+            selectedSalesDistrictInfo: SalesDistrictInfo.empty(),
+            salesDistrictResponseMessage: SalesDistrictResponseMessage.empty(),
+          ),
+        );
       },
       fetch: (e) async {
         emit(
@@ -173,14 +175,17 @@ class SalesDistrictBloc extends Bloc<SalesDistrictEvent, SalesDistrictState> {
       },
       delete: (e) async {
         final modifiedSalesDistrictList = state.salesDistrictList
-            .map((district) => district.copyWith(
-                  salesDistrictInfo: district.salesDistrictInfo
-                      .map((info) =>
-                          info.id == state.selectedSalesDistrictInfo.id
-                              ? info.copyWith(isDeleteInProgress: true)
-                              : info)
-                      .toList(),
-                ))
+            .map(
+              (district) => district.copyWith(
+                salesDistrictInfo: district.salesDistrictInfo
+                    .map(
+                      (info) => info.id == state.selectedSalesDistrictInfo.id
+                          ? info.copyWith(isDeleteInProgress: true)
+                          : info,
+                    )
+                    .toList(),
+              ),
+            )
             .toList();
 
         emit(

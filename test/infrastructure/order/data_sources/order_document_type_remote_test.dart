@@ -73,10 +73,11 @@ void main() {
             res['data']['orderDocumentType']['documentTypes'];
 
         expect(
-            result,
-            List.from(orderDocumentTypeData)
-                .map((e) => OrderDocumentTypeDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(orderDocumentTypeData)
+              .map((e) => OrderDocumentTypeDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('statuscode not equal to 200', () async {

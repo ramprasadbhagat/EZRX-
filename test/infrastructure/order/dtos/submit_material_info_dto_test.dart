@@ -52,9 +52,13 @@ void main() {
     });
 
     test('Test overridetojson', () {
-      const configDto = MaterialItemOverrideDto(reference: '', valueOverride: [
-        ValueOverrideDto(code: '', price: 10, currency: 'fake-currency')
-      ], percentageOverride: []);
+      const configDto = MaterialItemOverrideDto(
+        reference: '',
+        valueOverride: [
+          ValueOverrideDto(code: '', price: 10, currency: 'fake-currency')
+        ],
+        percentageOverride: [],
+      );
       final config = overrideTojson(configDto);
 
       expect(config, {

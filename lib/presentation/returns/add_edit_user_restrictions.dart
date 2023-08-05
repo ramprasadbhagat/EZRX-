@@ -440,9 +440,11 @@ class _TextFormFieldState extends State<_TextFormField> {
   late TextEditingController _controller;
 
   TextEditingController _getController({required String text}) {
-    return TextEditingController.fromValue(TextEditingValue(
-      text: text,
-    ));
+    return TextEditingController.fromValue(
+      TextEditingValue(
+        text: text,
+      ),
+    );
   }
 
   @override

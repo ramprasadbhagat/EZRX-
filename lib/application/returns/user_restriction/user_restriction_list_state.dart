@@ -22,8 +22,10 @@ class UserRestrictionListState with _$UserRestrictionListState {
     return searchKey.isEmpty
         ? usernames
         : usernames
-            .where((element) =>
-                element.toLowerCase().contains(searchKey.toLowerCase()))
+            .where(
+              (element) =>
+                  element.toLowerCase().contains(searchKey.toLowerCase()),
+            )
             .toList();
   }
 }

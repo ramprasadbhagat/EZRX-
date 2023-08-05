@@ -280,10 +280,12 @@ class _CustomerCodeByFilter extends StatelessWidget {
           initialValue: state.adminPoAttachmentFilter.soldTo.customerCodeSoldTo,
           onTap: () {
             if (!state.adminPoAttachmentFilter.salesOrg.isValid()) return;
-            context.router.pushWidget(BlocProvider.value(
-              value: context.read<CustomerCodeBloc>(),
-              child: const CustomerSearchPage(),
-            ));
+            context.router.pushWidget(
+              BlocProvider.value(
+                value: context.read<CustomerCodeBloc>(),
+                child: const CustomerSearchPage(),
+              ),
+            );
           },
           readOnly: true,
           decoration: InputDecoration(

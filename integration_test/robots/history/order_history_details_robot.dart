@@ -50,7 +50,6 @@ class OrderHistoryDetailsRobot {
     expect(paymentTerm, findsNothing);
   }
 
-
   Future<void> tapOrderDetails() async {
     await tester.tap(orderDetails);
     await tester.pumpAndSettle();
@@ -196,6 +195,7 @@ class OrderHistoryDetailsRobot {
     await tester.tap(backButton);
     await tester.pumpAndSettle();
   }
+
   void findTotalTax() {
     final taxDisplay = find.byKey(const ValueKey('taxDisplay'));
     expect(taxDisplay, findsOneWidget);

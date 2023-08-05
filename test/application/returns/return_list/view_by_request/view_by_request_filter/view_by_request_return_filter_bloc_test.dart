@@ -48,7 +48,8 @@ void main() {
         'Initialize Or ResetFilters',
         build: () => ViewByRequestReturnFilterBloc(),
         act: (ViewByRequestReturnFilterBloc bloc) => bloc.add(
-            const ViewByRequestReturnFilterEvent.initializeOrResetFilters()),
+          const ViewByRequestReturnFilterEvent.initializeOrResetFilters(),
+        ),
         expect: () => [
           ViewByRequestReturnFilterState.initial(),
         ],
@@ -124,7 +125,9 @@ void main() {
         act: (ViewByRequestReturnFilterBloc bloc) {
           bloc.add(
             ViewByRequestReturnFilterEvent.setReturnStatus(
-                value: true, status: StatusType('REVIEWED')),
+              value: true,
+              status: StatusType('REVIEWED'),
+            ),
           );
         },
         expect: () => [
@@ -140,7 +143,9 @@ void main() {
         act: (ViewByRequestReturnFilterBloc bloc) {
           bloc.add(
             ViewByRequestReturnFilterEvent.setReturnStatus(
-                value: false, status: StatusType('REVIEWED')),
+              value: false,
+              status: StatusType('REVIEWED'),
+            ),
           );
         },
         expect: () => [
@@ -157,7 +162,8 @@ void main() {
         act: (ViewByRequestReturnFilterBloc bloc) {
           bloc.add(
             ViewByRequestReturnFilterEvent.updateFilterToLastApplied(
-                lastAppliedFilter: returnFilter),
+              lastAppliedFilter: returnFilter,
+            ),
           );
         },
         expect: () => [

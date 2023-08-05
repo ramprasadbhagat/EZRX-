@@ -18,7 +18,7 @@ class InvoiceSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     final salesOrgConfigs =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
-        
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(

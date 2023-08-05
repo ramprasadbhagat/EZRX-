@@ -242,23 +242,32 @@ void main() {
                 create: (context) => accountSummaryMock,
               ),
               BlocProvider<MaterialListBloc>(
-                  create: (context) => materialListBloc),
+                create: (context) => materialListBloc,
+              ),
               BlocProvider<MaterialPriceBloc>(
-                  create: (context) => materialPriceBloc),
+                create: (context) => materialPriceBloc,
+              ),
               BlocProvider<ViewByItemsBloc>(
-                  create: (context) => viewByItemsBloc),
+                create: (context) => viewByItemsBloc,
+              ),
               BlocProvider<ReturnListByItemBloc>(
-                  create: (context) => returnListByItemBloc),
+                create: (context) => returnListByItemBloc,
+              ),
               BlocProvider<RecentOrderBloc>(
-                  create: (context) => recentOrderBloc),
+                create: (context) => recentOrderBloc,
+              ),
               BlocProvider<ViewByItemDetailsBloc>(
-                  create: (context) => viewByItemDetailsBlocMock),
+                create: (context) => viewByItemDetailsBlocMock,
+              ),
               BlocProvider<ViewByOrderDetailsBloc>(
-                  create: (context) => viewByOrderDetailsBlocMock),
+                create: (context) => viewByOrderDetailsBlocMock,
+              ),
               BlocProvider<ProductDetailBloc>(
-                  create: (context) => productDetailBloc),
+                create: (context) => productDetailBloc,
+              ),
               BlocProvider<CreditAndInvoiceDetailsBloc>(
-                  create: (context) => creditAndInvoiceDetailsBloc),
+                create: (context) => creditAndInvoiceDetailsBloc,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -307,8 +316,12 @@ void main() {
       final expectedStates = [
         LoginFormState.initial().copyWith(
           authFailureOrSuccessOption: optionOf(
-            Right(Login(
-                access: JWT('fake-success'), refresh: JWT('fake-refresh'))),
+            Right(
+              Login(
+                access: JWT('fake-success'),
+                refresh: JWT('fake-refresh'),
+              ),
+            ),
           ),
         ),
       ];
@@ -329,59 +342,72 @@ void main() {
       await tester.tap(rememberPasswordBox);
       await tester.pump();
 
-      await tester.pumpWidget(MaterialFrameWrapper(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => authBlocMock,
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<PaymentCustomerInformationBloc>(
-              create: (context) => paymentCustomerInformationBlocMock,
-            ),
-            BlocProvider<CartBloc>(
-              create: (context) => cartBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
-            BlocProvider<DeepLinkingBloc>(
-              create: (context) => deepLinkingBlocMock,
-            ),
-            BlocProvider<AccountSummaryBloc>(
-              create: (context) => accountSummaryMock,
-            ),
-            BlocProvider<MaterialListBloc>(
-                create: (context) => materialListBloc),
-            BlocProvider<MaterialPriceBloc>(
-                create: (context) => materialPriceBloc),
-            BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
-            BlocProvider<ReturnListByItemBloc>(
-                create: (context) => returnListByItemBloc),
-            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
-            BlocProvider<ViewByItemDetailsBloc>(
-                create: (context) => viewByItemDetailsBlocMock),
-            BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => viewByOrderDetailsBlocMock),
-            BlocProvider<ProductDetailBloc>(
-                create: (context) => productDetailBloc),
-            BlocProvider<CreditAndInvoiceDetailsBloc>(
-                create: (context) => creditAndInvoiceDetailsBloc),
-          ],
-          child: const SplashPage(),
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => authBlocMock,
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
+              ),
+              BlocProvider<SalesOrgBloc>(
+                create: (context) => salesOrgBlocMock,
+              ),
+              BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeBlocMock,
+              ),
+              BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock,
+              ),
+              BlocProvider<CartBloc>(
+                create: (context) => cartBlocMock,
+              ),
+              BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock,
+              ),
+              BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeBlocMock,
+              ),
+              BlocProvider<DeepLinkingBloc>(
+                create: (context) => deepLinkingBlocMock,
+              ),
+              BlocProvider<AccountSummaryBloc>(
+                create: (context) => accountSummaryMock,
+              ),
+              BlocProvider<MaterialListBloc>(
+                create: (context) => materialListBloc,
+              ),
+              BlocProvider<MaterialPriceBloc>(
+                create: (context) => materialPriceBloc,
+              ),
+              BlocProvider<ViewByItemsBloc>(
+                create: (context) => viewByItemsBloc,
+              ),
+              BlocProvider<ReturnListByItemBloc>(
+                create: (context) => returnListByItemBloc,
+              ),
+              BlocProvider<RecentOrderBloc>(
+                create: (context) => recentOrderBloc,
+              ),
+              BlocProvider<ViewByItemDetailsBloc>(
+                create: (context) => viewByItemDetailsBlocMock,
+              ),
+              BlocProvider<ViewByOrderDetailsBloc>(
+                create: (context) => viewByOrderDetailsBlocMock,
+              ),
+              BlocProvider<ProductDetailBloc>(
+                create: (context) => productDetailBloc,
+              ),
+              BlocProvider<CreditAndInvoiceDetailsBloc>(
+                create: (context) => creditAndInvoiceDetailsBloc,
+              ),
+            ],
+            child: const SplashPage(),
+          ),
         ),
-      ));
+      );
 
       // Create the Finders.
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
@@ -465,10 +491,14 @@ void main() {
 
       await tester.pumpWidget(loginTestPage());
       await tester.enterText(
-          find.byKey(const Key('loginUsernameField')), '1\n2');
-      await tester.pump(const Duration(
-        seconds: 2,
-      ));
+        find.byKey(const Key('loginUsernameField')),
+        '1\n2',
+      );
+      await tester.pump(
+        const Duration(
+          seconds: 2,
+        ),
+      );
       expect(find.byKey(const Key('loginUsernameField')), findsOneWidget);
     });
 
@@ -491,10 +521,14 @@ void main() {
 
       await tester.pumpWidget(loginTestPage());
       await tester.enterText(
-          find.byKey(const Key('loginPasswordField')), 'Staysafe01');
-      await tester.pump(const Duration(
-        seconds: 2,
-      ));
+        find.byKey(const Key('loginPasswordField')),
+        'Staysafe01',
+      );
+      await tester.pump(
+        const Duration(
+          seconds: 2,
+        ),
+      );
       expect(find.byKey(const Key('loginPasswordField')), findsOneWidget);
     });
 
@@ -517,10 +551,14 @@ void main() {
 
       await tester.pumpWidget(loginTestPage());
       await tester.enterText(
-          find.byKey(const Key('loginPasswordField')), 'St@ysafe01');
-      await tester.pump(const Duration(
-        seconds: 2,
-      ));
+        find.byKey(const Key('loginPasswordField')),
+        'St@ysafe01',
+      );
+      await tester.pump(
+        const Duration(
+          seconds: 2,
+        ),
+      );
       expect(find.byKey(const Key('loginPasswordField')), findsOneWidget);
     });
 

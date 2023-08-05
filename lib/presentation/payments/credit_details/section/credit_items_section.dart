@@ -47,9 +47,10 @@ class CreditItemsSection extends StatelessWidget {
                     ),
                     subtitle: StringUtils.displayPrice(
                       context.read<SalesOrgBloc>().state.configs,
-                      double.parse((e.grossAmount /
-                              e.billingQuantity.getOrDefaultValue(1))
-                          .toStringAsFixed(2)),
+                      double.parse(
+                        (e.grossAmount / e.billingQuantity.getOrDefaultValue(1))
+                            .toStringAsFixed(2),
+                      ),
                     ),
                     title: e.billingDocumentItemText,
                     quantity: '${e.billingQuantity.getOrDefaultValue(0)}',

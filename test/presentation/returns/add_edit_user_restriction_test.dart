@@ -82,7 +82,8 @@ void main() {
         ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock),
+          create: (context) => announcementBlocMock,
+        ),
       ],
       child: child,
     );
@@ -116,13 +117,15 @@ void main() {
         autoRouterMock: autoRouterMock,
         providers: [
           BlocProvider<UserRestrictionDetailsBloc>(
-              create: (context) => userRestrictionDetailsMockBloc),
+            create: (context) => userRestrictionDetailsMockBloc,
+          ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: AddEditUserRestrictionPage(isEditing: false),
       );
@@ -153,9 +156,13 @@ void main() {
         initialState: UserRestrictionDetailsState.initial(),
       );
 
-      await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-        isEditing: true,
-      )));
+      await tester.pumpWidget(
+        getScopedWidget(
+          AddEditUserRestrictionPage(
+            isEditing: true,
+          ),
+        ),
+      );
       await tester.pump();
 
       final loader = find.byKey(const Key('LoaderImage'));
@@ -224,24 +231,25 @@ void main() {
     testWidgets(
       '_ApproverRights test cases ',
       (tester) async {
-        when(() => userRestrictionDetailsMockBloc.state)
-            .thenReturn(UserRestrictionDetailsState.initial().copyWith(
-          approverRights: ApproverRights.empty().copyWith(
-            approverRightsList: [
+        when(() => userRestrictionDetailsMockBloc.state).thenReturn(
+          UserRestrictionDetailsState.initial().copyWith(
+            approverRights: ApproverRights.empty().copyWith(
+              approverRightsList: [
+                ApproverRightsDetails.empty().copyWith(
+                  salesOrg: SalesOrg('2602'),
+                ),
+              ],
+            ),
+            addedApproverRightsList: <ApproverRightsDetails>[
               ApproverRightsDetails.empty().copyWith(
                 salesOrg: SalesOrg('2602'),
               ),
+              ApproverRightsDetails.empty().copyWith(
+                salesOrg: SalesOrg('2601'),
+              ),
             ],
           ),
-          addedApproverRightsList: <ApproverRightsDetails>[
-            ApproverRightsDetails.empty().copyWith(
-              salesOrg: SalesOrg('2602'),
-            ),
-            ApproverRightsDetails.empty().copyWith(
-              salesOrg: SalesOrg('2601'),
-            ),
-          ],
-        ));
+        );
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -266,9 +274,13 @@ void main() {
     testWidgets(
       '_AddDeleteButton cancel tap',
       (tester) async {
-        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-          isEditing: true,
-        )));
+        await tester.pumpWidget(
+          getScopedWidget(
+            AddEditUserRestrictionPage(
+              isEditing: true,
+            ),
+          ),
+        );
         await tester.pump();
 
         final findOnDeletePress = find.byKey(const Key('onDeletePressed'));
@@ -278,7 +290,9 @@ void main() {
 
         expect(find.text('Confirm Delete'.tr()), findsOneWidget);
         expect(
-            find.text('User Restriction Will be deleted'.tr()), findsOneWidget);
+          find.text('User Restriction Will be deleted'.tr()),
+          findsOneWidget,
+        );
 
         final findCancelButton = find.text('Cancel');
         expect(findCancelButton, findsOneWidget);
@@ -300,9 +314,13 @@ void main() {
           initialState: CartState.initial().copyWith(isClearing: true),
         );
 
-        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-          isEditing: true,
-        )));
+        await tester.pumpWidget(
+          getScopedWidget(
+            AddEditUserRestrictionPage(
+              isEditing: true,
+            ),
+          ),
+        );
         await tester.pump();
 
         final findOnDeletePress = find.byKey(const Key('onDeletePressed'));
@@ -351,8 +369,9 @@ void main() {
               ),
             ],
             approvalLimits: ApprovalLimits.empty().copyWith(
-                valueLowerLimit: ApprovalLimit(5),
-                valueUpperLimit: ApprovalLimit(1000)),
+              valueLowerLimit: ApprovalLimit(5),
+              valueUpperLimit: ApprovalLimit(1000),
+            ),
           ),
         ];
 
@@ -362,9 +381,13 @@ void main() {
           initialState: UserRestrictionDetailsState.initial(),
         );
 
-        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-          isEditing: true,
-        )));
+        await tester.pumpWidget(
+          getScopedWidget(
+            AddEditUserRestrictionPage(
+              isEditing: true,
+            ),
+          ),
+        );
         await tester.pump();
 
         final findUserNameKey = find.byKey(const Key('userNameKey'));

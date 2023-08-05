@@ -75,7 +75,8 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                  'assets/json/customerDocumentHeaderResponse.json'),
+                'assets/json/customerDocumentHeaderResponse.json',
+              ),
             );
 
             dioAdapter.onPost(
@@ -94,16 +95,18 @@ void main() {
             );
 
             final result = await remoteDataSource.filterInvoices(
-                customerCode: 'fake-customer-code',
-                salesOrg: 'fake-sale-org',
-                filterMap: filterMap,
-                offset: 0,
-                pageSize: 20);
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              filterMap: filterMap,
+              offset: 0,
+              pageSize: 20,
+            );
 
             final expectResult = <CreditAndInvoiceItem>[];
             for (final dynamic item in res['data']['customerDocumentHeader']
                 ['documentHeaderList']) {
-              expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+              expectResult
+                  .add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
             }
             expect(
               result,
@@ -132,11 +135,12 @@ void main() {
 
             await remoteDataSource
                 .filterInvoices(
-                    customerCode: 'fake-customer-code',
-                    salesOrg: 'fake-sale-org',
-                    filterMap: filterMap,
-                    offset: 0,
-                    pageSize: 20)
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              filterMap: filterMap,
+              offset: 0,
+              pageSize: 20,
+            )
                 .onError((error, _) {
               expect(error, isA<ServerException>());
               return List<CreditAndInvoiceItem>.empty();
@@ -169,11 +173,12 @@ void main() {
 
             await remoteDataSource
                 .filterInvoices(
-                    customerCode: 'fake-customer-code',
-                    salesOrg: 'fake-sale-org',
-                    filterMap: filterMap,
-                    offset: 0,
-                    pageSize: 20)
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              filterMap: filterMap,
+              offset: 0,
+              pageSize: 20,
+            )
                 .onError((error, _) {
               expect(error, isA<ServerException>());
               return List<CreditAndInvoiceItem>.empty();

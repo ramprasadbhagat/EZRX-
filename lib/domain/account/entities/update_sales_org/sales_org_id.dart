@@ -8,8 +8,8 @@ class SalesOrgId with _$SalesOrgId {
   const factory SalesOrgId({
     required int id,
   }) = _SalesOrgId;
-  
+
   factory SalesOrgId.empty() => const SalesOrgId(
-    id: 0,
-  );
+        id: 0,
+      );
 }

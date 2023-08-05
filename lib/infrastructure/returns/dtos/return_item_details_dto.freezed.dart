@@ -187,15 +187,19 @@ class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
 class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
   const _$_ReturnItemDetailsDto(
       {@JsonKey(name: 'returnQuantity', defaultValue: 0)
-      required this.returnQuantity,
+          required this.returnQuantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
-      @JsonKey(name: 'lineNumber', defaultValue: '') required this.lineNumber,
-      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
+          required this.materialNumber,
+      @JsonKey(name: 'lineNumber', defaultValue: '')
+          required this.lineNumber,
+      @JsonKey(name: 'batch', defaultValue: '')
+          required this.batch,
       @JsonKey(name: 'returnReason', defaultValue: '')
-      required this.returnReason,
-      @JsonKey(name: 'url', defaultValue: []) required final List<String> url,
-      @JsonKey(name: 'returnType', defaultValue: '') required this.returnType})
+          required this.returnReason,
+      @JsonKey(name: 'url', defaultValue: [])
+          required final List<String> url,
+      @JsonKey(name: 'returnType', defaultValue: '')
+          required this.returnType})
       : _url = url,
         super._();
 
@@ -284,17 +288,19 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
 abstract class _ReturnItemDetailsDto extends ReturnItemDetailsDto {
   const factory _ReturnItemDetailsDto(
       {@JsonKey(name: 'returnQuantity', defaultValue: 0)
-      required final int returnQuantity,
+          required final int returnQuantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
+          required final String materialNumber,
       @JsonKey(name: 'lineNumber', defaultValue: '')
-      required final String lineNumber,
-      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
+          required final String lineNumber,
+      @JsonKey(name: 'batch', defaultValue: '')
+          required final String batch,
       @JsonKey(name: 'returnReason', defaultValue: '')
-      required final String returnReason,
-      @JsonKey(name: 'url', defaultValue: []) required final List<String> url,
+          required final String returnReason,
+      @JsonKey(name: 'url', defaultValue: [])
+          required final List<String> url,
       @JsonKey(name: 'returnType', defaultValue: '')
-      required final String returnType}) = _$_ReturnItemDetailsDto;
+          required final String returnType}) = _$_ReturnItemDetailsDto;
   const _ReturnItemDetailsDto._() : super._();
 
   factory _ReturnItemDetailsDto.fromJson(Map<String, dynamic> json) =

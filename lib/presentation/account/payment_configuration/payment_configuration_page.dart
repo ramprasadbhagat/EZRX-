@@ -41,8 +41,8 @@ class PaymentConfigurationPage extends StatelessWidget {
               ListTile(
                 key: const Key('salesDistrictTile'),
                 title: const Text('Configure Sales District').tr(),
-                onTap: () => context.router
-                    .pushNamed('payments/sales_district'),
+                onTap: () =>
+                    context.router.pushNamed('payments/sales_district'),
               ),
             ],
           ).toList(),

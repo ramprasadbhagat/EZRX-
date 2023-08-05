@@ -1,7 +1,13 @@
-import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 
 class DatadogInterceptor extends Interceptor {
+  final DatadogService datadogService;
+
+  DatadogInterceptor({
+    required this.datadogService,
+  });
+
   @override
   Future<void> onRequest(
     RequestOptions options,
@@ -9,7 +15,7 @@ class DatadogInterceptor extends Interceptor {
   ) async {
     final requestString =
         '***REQUEST***\n**URL**: ${options.uri.toString()}\n**DATA**: ${options.data.toString()}\n**HEADERS**: ${options.headers.toString()}';
-    DatadogSdk.instance.logs?.info(requestString);
+    datadogService.logs?.info(requestString);
 
     return super.onRequest(options, handler);
   }
@@ -19,7 +25,7 @@ class DatadogInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    DatadogSdk.instance.logs?.info('***RESPONSE***: ${response.toString()}');
+    datadogService.logs?.info('***RESPONSE***: ${response.toString()}');
 
     return super.onResponse(response, handler);
   }
@@ -31,7 +37,7 @@ class DatadogInterceptor extends Interceptor {
   ) async {
     final errorString =
         '***ERROR***\n**URL**: ${err.requestOptions.uri.toString()}\n**DATA**: ${err.requestOptions.data.toString()}\n**HEADERS**: ${err.requestOptions.headers.toString()}\n**MESSAGE**: ${err.message}';
-    DatadogSdk.instance.logs?.error(errorString);
+    datadogService.logs?.error(errorString);
 
     return super.onError(err, handler);
   }

@@ -113,7 +113,8 @@ void main() {
           returnSummaryFilter: returnSummaryFilter,
         ),
         act: (ReturnSummaryFilterBloc bloc) => bloc.add(
-            const ReturnSummaryFilterEvent.returnIdChanged('mock_returnId')),
+          const ReturnSummaryFilterEvent.returnIdChanged('mock_returnId'),
+        ),
         expect: () => [
           ReturnSummaryFilterState.initial().copyWith(
             returnSummaryFilter: returnSummaryFilter.copyWith(
@@ -167,7 +168,8 @@ void main() {
           returnSummaryFilter: returnSummaryFilter,
         ),
         act: (ReturnSummaryFilterBloc bloc) => bloc.add(
-            ReturnSummaryFilterEvent.sortByChanged(sortBy: StatusType('All'))),
+          ReturnSummaryFilterEvent.sortByChanged(sortBy: StatusType('All')),
+        ),
         expect: () => [
           ReturnSummaryFilterState.initial().copyWith(
             returnSummaryFilter: returnSummaryFilter.copyWith(

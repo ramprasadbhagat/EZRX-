@@ -11,8 +11,10 @@ part 'bill_to_dto.g.dart';
 class BillToDto with _$BillToDto {
   const BillToDto._();
   const factory BillToDto({
-    @JsonKey(name: 'billToCustomerCode', defaultValue: '') required String billToCustomerCode,
-    @JsonKey(name: 'defaulBillToAddress', defaultValue: true) required bool defaulBillToAddress,
+    @JsonKey(name: 'billToCustomerCode', defaultValue: '')
+        required String billToCustomerCode,
+    @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
+        required bool defaulBillToAddress,
     @JsonKey(name: 'name1', defaultValue: '') required String name1,
     @JsonKey(name: 'name2', defaultValue: '') required String name2,
     @JsonKey(name: 'name3', defaultValue: '') required String name3,
@@ -31,13 +33,18 @@ class BillToDto with _$BillToDto {
     @JsonKey(name: 'postalCode2', defaultValue: '') required String postalCode2,
     @JsonKey(name: 'city1', defaultValue: '') required String city1,
     @JsonKey(name: 'city2', defaultValue: '') required String city2,
-    @JsonKey(name: 'telephoneNumber', defaultValue: '') required String telephoneNumber,
-    @JsonKey(name: 'telephoneExtension', defaultValue: '') required String telephoneExtension,
+    @JsonKey(name: 'telephoneNumber', defaultValue: '')
+        required String telephoneNumber,
+    @JsonKey(name: 'telephoneExtension', defaultValue: '')
+        required String telephoneExtension,
     @JsonKey(name: 'faxNumber', defaultValue: '') required String faxNumber,
-    @JsonKey(name: 'faxExtension', defaultValue: '') required String faxExtension,
+    @JsonKey(name: 'faxExtension', defaultValue: '')
+        required String faxExtension,
     @JsonKey(name: 'taxNumber', defaultValue: '') required String taxNumber,
-    @JsonKey(name: 'houseNumber1', defaultValue: '') required String houseNumber1,
-    @JsonKey(name: 'houseNumber2', defaultValue: '') required String houseNumber2,
+    @JsonKey(name: 'houseNumber1', defaultValue: '')
+        required String houseNumber1,
+    @JsonKey(name: 'houseNumber2', defaultValue: '')
+        required String houseNumber2,
     @JsonKey(name: 'building', defaultValue: '') required String building,
     @JsonKey(name: 'region', defaultValue: '') required String region,
     @JsonKey(name: 'country', defaultValue: '') required String country,
@@ -49,8 +56,10 @@ class BillToDto with _$BillToDto {
         required bool taxIncludedBySalesOrganization,
     @JsonKey(name: 'customerClassification', defaultValue: '')
         required String customerClassification,
-    @JsonKey(name: 'customerLocalGroup', defaultValue: '') required String customerLocalGroup,
-    @JsonKey(name: 'emailAddresses', defaultValue: <String>[]) required List<String> emailAddresses,
+    @JsonKey(name: 'customerLocalGroup', defaultValue: '')
+        required String customerLocalGroup,
+    @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+        required List<String> emailAddresses,
   }) = _BillToDto;
 
   BillToInfo toDomain() {

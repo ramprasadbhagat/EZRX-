@@ -33,7 +33,7 @@ class ArticleInfoRepository extends IArticleInfoRepository {
     required String after,
   }) async {
     final preferredLanguage = user.settings.languagePreference.getOrCrash();
-    
+
     if (config.appFlavor == Flavor.mock) {
       try {
         final announcementInfo = await localDataSource.getArticles();

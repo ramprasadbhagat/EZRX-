@@ -83,7 +83,7 @@ class LoginRobot {
     expect(marketSelector, findsOneWidget);
   }
 
-  Future<void> tapToMarketSelector() async{
+  Future<void> tapToMarketSelector() async {
     await tester.tap(marketSelector);
     await tester.pumpAndSettle();
   }

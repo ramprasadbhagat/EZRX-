@@ -126,207 +126,207 @@ void main() {
   // }
 
   // group('Invoice Details Screen Test', () {
-    // testWidgets('=> AppBar Test', (tester) async {
-    //   when(() => creditAndInvoiceDetailsBlocMock.state)
-    //       .thenReturn(CreditAndInvoiceDetailsState.initial().copyWith(
-    //     isLoading: true,
-    //   ));
+  // testWidgets('=> AppBar Test', (tester) async {
+  //   when(() => creditAndInvoiceDetailsBlocMock.state)
+  //       .thenReturn(CreditAndInvoiceDetailsState.initial().copyWith(
+  //     isLoading: true,
+  //   ));
 
-    //   await getWidget(tester);
+  //   await getWidget(tester);
 
-    //   await tester.pump(const Duration(milliseconds: 100));
+  //   await tester.pump(const Duration(milliseconds: 100));
 
-    //   final accountingDocumentText =
-    //       find.text('#${fakeInvoice.accountingDocument}');
-    //   expect(accountingDocumentText, findsOneWidget);
-    // });
+  //   final accountingDocumentText =
+  //       find.text('#${fakeInvoice.accountingDocument}');
+  //   expect(accountingDocumentText, findsOneWidget);
+  // });
 
-    // testWidgets('=> BasicInformationSection test', (tester) async {
-    //   final expectedState = [
-    //     CreditAndInvoiceDetailsState.initial().copyWith(
-    //       failureOrSuccessOption: none(),
-    //       isLoading: true,
-    //     ),
-    //     CreditAndInvoiceDetailsState.initial().copyWith(
-    //       isLoading: false,
-    //       failureOrSuccessOption: optionOf(const Right('')),
-    //       details: fakeCreditAndInvoiceDetails,
-    //     ),
-    //   ];
-    //   whenListen(
-    //       creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+  // testWidgets('=> BasicInformationSection test', (tester) async {
+  //   final expectedState = [
+  //     CreditAndInvoiceDetailsState.initial().copyWith(
+  //       failureOrSuccessOption: none(),
+  //       isLoading: true,
+  //     ),
+  //     CreditAndInvoiceDetailsState.initial().copyWith(
+  //       isLoading: false,
+  //       failureOrSuccessOption: optionOf(const Right('')),
+  //       details: fakeCreditAndInvoiceDetails,
+  //     ),
+  //   ];
+  //   whenListen(
+  //       creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
-    //   await getWidget(tester);
+  //   await getWidget(tester);
 
-    //   await tester.pump(const Duration(milliseconds: 100));
+  //   await tester.pump(const Duration(milliseconds: 100));
 
-    //   expect(find.byType(BasicInformationSection), findsOneWidget);
+  //   expect(find.byType(BasicInformationSection), findsOneWidget);
 
-    //   final findBasicInformationText = find.text('Basic Information'.tr());
-    //   expect(findBasicInformationText, findsOneWidget);
+  //   final findBasicInformationText = find.text('Basic Information'.tr());
+  //   expect(findBasicInformationText, findsOneWidget);
 
-    //   final findCustomerNameText = find.text('Customer Name'.tr());
-    //   expect(findCustomerNameText, findsOneWidget);
+  //   final findCustomerNameText = find.text('Customer Name'.tr());
+  //   expect(findCustomerNameText, findsOneWidget);
 
-    //   final findPayerText = find.text('Payer'.tr());
-    //   expect(findPayerText, findsOneWidget);
+  //   final findPayerText = find.text('Payer'.tr());
+  //   expect(findPayerText, findsOneWidget);
 
-    //   final findShipToText = find.text('Ship To'.tr());
-    //   expect(findShipToText, findsOneWidget);
-    // });
+  //   final findShipToText = find.text('Ship To'.tr());
+  //   expect(findShipToText, findsOneWidget);
+  // });
 
-    // testWidgets('=> CreditAndInvoiceDetailsSection test', (tester) async {
-    //   final expectedState = [
-    //     CreditAndInvoiceDetailsState.initial().copyWith(
-    //       failureOrSuccessOption: none(),
-    //       isLoading: true,
-    //     ),
-    //     CreditAndInvoiceDetailsState.initial().copyWith(
-    //       isLoading: false,
-    //       failureOrSuccessOption: optionOf(const Right('')),
-    //       details: fakeCreditAndInvoiceDetails,
-    //     ),
-    //   ];
-    //   whenListen(
-    //       creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+  // testWidgets('=> CreditAndInvoiceDetailsSection test', (tester) async {
+  //   final expectedState = [
+  //     CreditAndInvoiceDetailsState.initial().copyWith(
+  //       failureOrSuccessOption: none(),
+  //       isLoading: true,
+  //     ),
+  //     CreditAndInvoiceDetailsState.initial().copyWith(
+  //       isLoading: false,
+  //       failureOrSuccessOption: optionOf(const Right('')),
+  //       details: fakeCreditAndInvoiceDetails,
+  //     ),
+  //   ];
+  //   whenListen(
+  //       creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
-    //   await getWidget(tester);
+  //   await getWidget(tester);
 
-    //   await tester.pump(const Duration(milliseconds: 100));
+  //   await tester.pump(const Duration(milliseconds: 100));
 
-    //   expect(find.byType(InvoiceDetailsSection), findsOneWidget);
+  //   expect(find.byType(InvoiceDetailsSection), findsOneWidget);
 
-    //   final findBasicInformationText = find.text('Invoice Details'.tr());
-    //   expect(findBasicInformationText, findsOneWidget);
+  //   final findBasicInformationText = find.text('Invoice Details'.tr());
+  //   expect(findBasicInformationText, findsOneWidget);
 
-    //   final findDueDateText = find.text('Due Date'.tr());
-    //   expect(findDueDateText, findsOneWidget);
+  //   final findDueDateText = find.text('Due Date'.tr());
+  //   expect(findDueDateText, findsOneWidget);
 
-    //   final findInvoiceNumberText = find.text('Invoice Number'.tr());
-    //   expect(findInvoiceNumberText, findsOneWidget);
+  //   final findInvoiceNumberText = find.text('Invoice Number'.tr());
+  //   expect(findInvoiceNumberText, findsOneWidget);
 
-    //   final findInvoiceDateText = find.text('Invoice Date'.tr());
-    //   expect(findInvoiceDateText, findsOneWidget);
+  //   final findInvoiceDateText = find.text('Invoice Date'.tr());
+  //   expect(findInvoiceDateText, findsOneWidget);
 
-    //   final findInvoiceAmountText = find.text('Invoice Amount'.tr());
-    //   expect(findInvoiceAmountText, findsOneWidget);
+  //   final findInvoiceAmountText = find.text('Invoice Amount'.tr());
+  //   expect(findInvoiceAmountText, findsOneWidget);
 
-    //   final findOrderIDText = find.text('Order ID'.tr());
-    //   expect(findOrderIDText, findsOneWidget);
+  //   final findOrderIDText = find.text('Order ID'.tr());
+  //   expect(findOrderIDText, findsOneWidget);
 
-    //   final findStatusText = find.text('Status'.tr());
-    //   expect(findStatusText, findsOneWidget);
-    // });
+  //   final findStatusText = find.text('Status'.tr());
+  //   expect(findStatusText, findsOneWidget);
+  // });
 
-    // group('=> InvoiceItemsSection test', () {
-    //   testWidgets('=> InvoiceItemsSection loading test', (tester) async {
-    //     final expectedState = [
-    //       CreditAndInvoiceDetailsState.initial().copyWith(
-    //         failureOrSuccessOption: none(),
-    //         isLoading: true,
-    //       ),
-    //     ];
-    //     whenListen(creditAndInvoiceDetailsBlocMock,
-    //         Stream.fromIterable(expectedState));
+  // group('=> InvoiceItemsSection test', () {
+  //   testWidgets('=> InvoiceItemsSection loading test', (tester) async {
+  //     final expectedState = [
+  //       CreditAndInvoiceDetailsState.initial().copyWith(
+  //         failureOrSuccessOption: none(),
+  //         isLoading: true,
+  //       ),
+  //     ];
+  //     whenListen(creditAndInvoiceDetailsBlocMock,
+  //         Stream.fromIterable(expectedState));
 
-    //     await getWidget(tester);
+  //     await getWidget(tester);
 
-    //     await tester.pump(const Duration(milliseconds: 100));
+  //     await tester.pump(const Duration(milliseconds: 100));
 
-    //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
+  //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
 
-    //     expect(find.byType(LoadingShimmer), findsOneWidget);
-    //   });
-    //   testWidgets('=> Invoice Items empty', (tester) async {
-    //     final expectedState = [
-    //       CreditAndInvoiceDetailsState.initial().copyWith(
-    //         failureOrSuccessOption: none(),
-    //         isLoading: true,
-    //       ),
-    //       CreditAndInvoiceDetailsState.initial().copyWith(
-    //         isLoading: false,
-    //         failureOrSuccessOption: optionOf(const Right('')),
-    //         details: <CustomerDocumentDetail>[],
-    //       ),
-    //     ];
-    //     whenListen(creditAndInvoiceDetailsBlocMock,
-    //         Stream.fromIterable(expectedState));
+  //     expect(find.byType(LoadingShimmer), findsOneWidget);
+  //   });
+  //   testWidgets('=> Invoice Items empty', (tester) async {
+  //     final expectedState = [
+  //       CreditAndInvoiceDetailsState.initial().copyWith(
+  //         failureOrSuccessOption: none(),
+  //         isLoading: true,
+  //       ),
+  //       CreditAndInvoiceDetailsState.initial().copyWith(
+  //         isLoading: false,
+  //         failureOrSuccessOption: optionOf(const Right('')),
+  //         details: <CustomerDocumentDetail>[],
+  //       ),
+  //     ];
+  //     whenListen(creditAndInvoiceDetailsBlocMock,
+  //         Stream.fromIterable(expectedState));
 
-    //     await getWidget(tester);
-    //     await tester.pumpAndSettle();
+  //     await getWidget(tester);
+  //     await tester.pumpAndSettle();
 
-    //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
+  //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
 
-    //     expect(find.text('No files found'.tr()), findsOneWidget);
-    //   });
+  //     expect(find.text('No files found'.tr()), findsOneWidget);
+  //   });
 
-    //   testWidgets('=> Invoice Items not empty', (tester) async {
-    //     final expectedState = [
-    //       CreditAndInvoiceDetailsState.initial().copyWith(
-    //         failureOrSuccessOption: none(),
-    //         isLoading: true,
-    //       ),
-    //       CreditAndInvoiceDetailsState.initial().copyWith(
-    //         isLoading: false,
-    //         failureOrSuccessOption: optionOf(const Right('')),
-    //         details: fakeCreditAndInvoiceDetails,
-    //       ),
-    //     ];
-    //     whenListen(creditAndInvoiceDetailsBlocMock,
-    //         Stream.fromIterable(expectedState));
+  //   testWidgets('=> Invoice Items not empty', (tester) async {
+  //     final expectedState = [
+  //       CreditAndInvoiceDetailsState.initial().copyWith(
+  //         failureOrSuccessOption: none(),
+  //         isLoading: true,
+  //       ),
+  //       CreditAndInvoiceDetailsState.initial().copyWith(
+  //         isLoading: false,
+  //         failureOrSuccessOption: optionOf(const Right('')),
+  //         details: fakeCreditAndInvoiceDetails,
+  //       ),
+  //     ];
+  //     whenListen(creditAndInvoiceDetailsBlocMock,
+  //         Stream.fromIterable(expectedState));
 
-    //     await getWidget(tester);
-    //     await tester.pumpAndSettle();
+  //     await getWidget(tester);
+  //     await tester.pumpAndSettle();
 
-    //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
+  //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
 
-    //     final findInvoiceItemDetailsText =
-    //         find.text('Invoice Item Details'.tr());
-    //     expect(findInvoiceItemDetailsText, findsOneWidget);
+  //     final findInvoiceItemDetailsText =
+  //         find.text('Invoice Item Details'.tr());
+  //     expect(findInvoiceItemDetailsText, findsOneWidget);
 
-    //     final findTypeText = find.text('Type'.tr());
-    //     expect(findTypeText, findsAtLeastNWidgets(1));
+  //     final findTypeText = find.text('Type'.tr());
+  //     expect(findTypeText, findsAtLeastNWidgets(1));
 
-    //     final findNumberText = find.text('Number'.tr());
-    //     expect(findNumberText, findsAtLeastNWidgets(1));
+  //     final findNumberText = find.text('Number'.tr());
+  //     expect(findNumberText, findsAtLeastNWidgets(1));
 
-    //     final findDescriptionText = find.text('Description'.tr());
-    //     expect(findDescriptionText, findsAtLeastNWidgets(1));
+  //     final findDescriptionText = find.text('Description'.tr());
+  //     expect(findDescriptionText, findsAtLeastNWidgets(1));
 
-    //     final findUnitOfMeasureText = find.text('Unit of Measure'.tr());
-    //     expect(findUnitOfMeasureText, findsAtLeastNWidgets(1));
+  //     final findUnitOfMeasureText = find.text('Unit of Measure'.tr());
+  //     expect(findUnitOfMeasureText, findsAtLeastNWidgets(1));
 
-    //     final findQuantityText = find.text('Quantity'.tr());
-    //     expect(findQuantityText, findsAtLeastNWidgets(1));
+  //     final findQuantityText = find.text('Quantity'.tr());
+  //     expect(findQuantityText, findsAtLeastNWidgets(1));
 
-    //     final findUnitPriceText = find.text('Unit Price'.tr());
-    //     expect(findUnitPriceText, findsAtLeastNWidgets(1));
+  //     final findUnitPriceText = find.text('Unit Price'.tr());
+  //     expect(findUnitPriceText, findsAtLeastNWidgets(1));
 
-    //     final findTotalPriceText = find.text('Total Price'.tr());
-    //     expect(findTotalPriceText, findsAtLeastNWidgets(1));
+  //     final findTotalPriceText = find.text('Total Price'.tr());
+  //     expect(findTotalPriceText, findsAtLeastNWidgets(1));
 
-    //     final findMaterialText = find.text('Material'.tr());
-    //     expect(findMaterialText, findsAtLeastNWidgets(1));
+  //     final findMaterialText = find.text('Material'.tr());
+  //     expect(findMaterialText, findsAtLeastNWidgets(1));
 
-    //     final findReferenceSDSDocumentText =
-    //         find.text('Reference SDS Document'.tr());
-    //     expect(findReferenceSDSDocumentText, findsAtLeastNWidgets(1));
+  //     final findReferenceSDSDocumentText =
+  //         find.text('Reference SDS Document'.tr());
+  //     expect(findReferenceSDSDocumentText, findsAtLeastNWidgets(1));
 
-    //     final findReferenceSDSDocumentCategoryText =
-    //         find.text('Reference SDS Document Category'.tr());
-    //     expect(findReferenceSDSDocumentCategoryText, findsAtLeastNWidgets(1));
+  //     final findReferenceSDSDocumentCategoryText =
+  //         find.text('Reference SDS Document Category'.tr());
+  //     expect(findReferenceSDSDocumentCategoryText, findsAtLeastNWidgets(1));
 
-    //     final findReferenceSDSDocumentItemText =
-    //         find.text('Reference SDS Document Item'.tr());
-    //     expect(findReferenceSDSDocumentItemText, findsAtLeastNWidgets(1));
+  //     final findReferenceSDSDocumentItemText =
+  //         find.text('Reference SDS Document Item'.tr());
+  //     expect(findReferenceSDSDocumentItemText, findsAtLeastNWidgets(1));
 
-    //     final findSalesMeasureISOUnitText =
-    //         find.text('Sales Measure ISO Unit'.tr());
-    //     expect(findSalesMeasureISOUnitText, findsAtLeastNWidgets(1));
+  //     final findSalesMeasureISOUnitText =
+  //         find.text('Sales Measure ISO Unit'.tr());
+  //     expect(findSalesMeasureISOUnitText, findsAtLeastNWidgets(1));
 
-    //     final findTaxAmountText = find.text('Tax Amount'.tr());
-    //     expect(findTaxAmountText, findsAtLeastNWidgets(1));
-    //   });
-    // });
+  //     final findTaxAmountText = find.text('Tax Amount'.tr());
+  //     expect(findTaxAmountText, findsAtLeastNWidgets(1));
+  //   });
+  // });
   // });
 }

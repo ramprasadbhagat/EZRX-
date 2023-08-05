@@ -41,8 +41,10 @@ void main() {
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
     tokenStorage = MockTokenStorage();
-    when(() => tokenStorage.get()).thenAnswer((invocation) async =>
-        JWTDto(access: rootAdminToken, refresh: refreshToken));
+    when(() => tokenStorage.get()).thenAnswer(
+      (invocation) async =>
+          JWTDto(access: rootAdminToken, refresh: refreshToken),
+    );
     user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
     await UserLocalDataSource(tokenStorage: tokenStorage)
         .updateUserNotificationAndLanguagePreference();
@@ -71,8 +73,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(user.copyWith(acceptPrivacyPolicy: false),
-              salesOrganisation.salesOrg));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: false),
+              salesOrganisation.salesOrg,
+            ),
+          );
         },
         expect: () => [
           AupTcState(
@@ -92,8 +98,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(user.copyWith(acceptPrivacyPolicy: true),
-              salesOrganisation.salesOrg));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: true),
+              salesOrganisation.salesOrg,
+            ),
+          );
         },
         expect: () => [
           AupTcState(
@@ -114,8 +124,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('3070')));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: false),
+              SalesOrg('3070'),
+            ),
+          );
         },
         expect: () => [
           AupTcState(
@@ -136,8 +150,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('2800')));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: false),
+              SalesOrg('2800'),
+            ),
+          );
         },
         expect: () => [
           AupTcState(
@@ -158,8 +176,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('2902')));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: false),
+              SalesOrg('2902'),
+            ),
+          );
         },
         expect: () => [
           AupTcState(
@@ -180,8 +202,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('2201')));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: false),
+              SalesOrg('2201'),
+            ),
+          );
         },
         expect: () => [
           AupTcState(
@@ -202,8 +228,12 @@ void main() {
           config: config,
         ),
         act: (AupTcBloc bloc) {
-          bloc.add(AupTcEvent.show(
-              user.copyWith(acceptPrivacyPolicy: false), SalesOrg('1500')));
+          bloc.add(
+            AupTcEvent.show(
+              user.copyWith(acceptPrivacyPolicy: false),
+              SalesOrg('1500'),
+            ),
+          );
         },
         expect: () => [
           AupTcState(

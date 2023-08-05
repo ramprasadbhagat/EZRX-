@@ -62,15 +62,15 @@ class SettingsPage extends StatelessWidget {
                     title: Text('ToS'.tr()),
                     onTap: () async {
                       if (kIsWeb) {
-                        final privacyUrl = context.read<AupTcBloc>().state.privacyFile;
+                        final privacyUrl =
+                            context.read<AupTcBloc>().state.privacyFile;
                         if (await canLaunchUrl(
                           Uri.tryParse(privacyUrl) ?? Uri(path: ''),
                         )) {
                           await launchUrl(Uri.parse(privacyUrl));
                         }
                       } else {
-                        await context.router
-                            .push(const AupTCDialogRoute());
+                        await context.router.push(const AupTCDialogRoute());
                       }
                     },
                   ),

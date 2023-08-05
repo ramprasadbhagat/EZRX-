@@ -51,19 +51,12 @@ abstract class $MaterialItemOverrideDtoCopyWith<$Res> {
       _$MaterialItemOverrideDtoCopyWithImpl<$Res, MaterialItemOverrideDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'reference', defaultValue: '') String reference,
-      @JsonKey(
-          name: 'valueOverride',
-          defaultValue: <ValueOverrideDto>[],
-          includeIfNull: false,
-          toJson: valueOverrideTojson)
-      List<ValueOverrideDto> valueOverride,
-      @JsonKey(
-          name: 'percentageOverride',
-          defaultValue: <PercentageOverrideDto>[],
-          includeIfNull: false,
-          toJson: percentageOverrideTojson)
-      List<PercentageOverrideDto> percentageOverride});
+      {@JsonKey(name: 'reference', defaultValue: '')
+          String reference,
+      @JsonKey(name: 'valueOverride', defaultValue: <ValueOverrideDto>[], includeIfNull: false, toJson: valueOverrideTojson)
+          List<ValueOverrideDto> valueOverride,
+      @JsonKey(name: 'percentageOverride', defaultValue: <PercentageOverrideDto>[], includeIfNull: false, toJson: percentageOverrideTojson)
+          List<PercentageOverrideDto> percentageOverride});
 }
 
 /// @nodoc
@@ -110,19 +103,12 @@ abstract class _$$_MaterialItemOverrideDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'reference', defaultValue: '') String reference,
-      @JsonKey(
-          name: 'valueOverride',
-          defaultValue: <ValueOverrideDto>[],
-          includeIfNull: false,
-          toJson: valueOverrideTojson)
-      List<ValueOverrideDto> valueOverride,
-      @JsonKey(
-          name: 'percentageOverride',
-          defaultValue: <PercentageOverrideDto>[],
-          includeIfNull: false,
-          toJson: percentageOverrideTojson)
-      List<PercentageOverrideDto> percentageOverride});
+      {@JsonKey(name: 'reference', defaultValue: '')
+          String reference,
+      @JsonKey(name: 'valueOverride', defaultValue: <ValueOverrideDto>[], includeIfNull: false, toJson: valueOverrideTojson)
+          List<ValueOverrideDto> valueOverride,
+      @JsonKey(name: 'percentageOverride', defaultValue: <PercentageOverrideDto>[], includeIfNull: false, toJson: percentageOverrideTojson)
+          List<PercentageOverrideDto> percentageOverride});
 }
 
 /// @nodoc
@@ -162,19 +148,12 @@ class __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
   const _$_MaterialItemOverrideDto(
-      {@JsonKey(name: 'reference', defaultValue: '') required this.reference,
-      @JsonKey(
-          name: 'valueOverride',
-          defaultValue: <ValueOverrideDto>[],
-          includeIfNull: false,
-          toJson: valueOverrideTojson)
-      required final List<ValueOverrideDto> valueOverride,
-      @JsonKey(
-          name: 'percentageOverride',
-          defaultValue: <PercentageOverrideDto>[],
-          includeIfNull: false,
-          toJson: percentageOverrideTojson)
-      required final List<PercentageOverrideDto> percentageOverride})
+      {@JsonKey(name: 'reference', defaultValue: '')
+          required this.reference,
+      @JsonKey(name: 'valueOverride', defaultValue: <ValueOverrideDto>[], includeIfNull: false, toJson: valueOverrideTojson)
+          required final List<ValueOverrideDto> valueOverride,
+      @JsonKey(name: 'percentageOverride', defaultValue: <PercentageOverrideDto>[], includeIfNull: false, toJson: percentageOverrideTojson)
+          required final List<PercentageOverrideDto> percentageOverride})
       : _valueOverride = valueOverride,
         _percentageOverride = percentageOverride,
         super._();
@@ -256,21 +235,12 @@ class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
 
 abstract class _MaterialItemOverrideDto extends MaterialItemOverrideDto {
   const factory _MaterialItemOverrideDto(
-          {@JsonKey(name: 'reference', defaultValue: '')
+      {@JsonKey(name: 'reference', defaultValue: '')
           required final String reference,
-          @JsonKey(
-              name: 'valueOverride',
-              defaultValue: <ValueOverrideDto>[],
-              includeIfNull: false,
-              toJson: valueOverrideTojson)
+      @JsonKey(name: 'valueOverride', defaultValue: <ValueOverrideDto>[], includeIfNull: false, toJson: valueOverrideTojson)
           required final List<ValueOverrideDto> valueOverride,
-          @JsonKey(
-              name: 'percentageOverride',
-              defaultValue: <PercentageOverrideDto>[],
-              includeIfNull: false,
-              toJson: percentageOverrideTojson)
-          required final List<PercentageOverrideDto> percentageOverride}) =
-      _$_MaterialItemOverrideDto;
+      @JsonKey(name: 'percentageOverride', defaultValue: <PercentageOverrideDto>[], includeIfNull: false, toJson: percentageOverrideTojson)
+          required final List<PercentageOverrideDto> percentageOverride}) = _$_MaterialItemOverrideDto;
   const _MaterialItemOverrideDto._() : super._();
 
   factory _MaterialItemOverrideDto.fromJson(Map<String, dynamic> json) =
@@ -468,10 +438,12 @@ class _$_ValueOverrideDto extends _ValueOverrideDto {
 
 abstract class _ValueOverrideDto extends ValueOverrideDto {
   const factory _ValueOverrideDto(
-      {@JsonKey(name: 'code', defaultValue: '') required final String code,
-      @JsonKey(name: 'price', defaultValue: 0) required final double price,
+      {@JsonKey(name: 'code', defaultValue: '')
+          required final String code,
+      @JsonKey(name: 'price', defaultValue: 0)
+          required final double price,
       @JsonKey(name: 'currency', defaultValue: '')
-      required final String currency}) = _$_ValueOverrideDto;
+          required final String currency}) = _$_ValueOverrideDto;
   const _ValueOverrideDto._() : super._();
 
   factory _ValueOverrideDto.fromJson(Map<String, dynamic> json) =
@@ -645,7 +617,7 @@ abstract class _PercentageOverrideDto extends PercentageOverrideDto {
   const factory _PercentageOverrideDto(
       {required final String code,
       @JsonKey(name: 'percentage', defaultValue: 0)
-      required final double percentage}) = _$_PercentageOverrideDto;
+          required final double percentage}) = _$_PercentageOverrideDto;
   const _PercentageOverrideDto._() : super._();
 
   factory _PercentageOverrideDto.fromJson(Map<String, dynamic> json) =

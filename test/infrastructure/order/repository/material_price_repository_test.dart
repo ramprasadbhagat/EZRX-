@@ -93,12 +93,14 @@ void main() {
     });
     test('get materialPrice successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialPriceRemoteDataSource.getMaterialPriceList(
-            salesOrgCode: 'fake-name',
-            customerCode: 'fake-customer-code',
-            // shipToCode: 'fake-ship-code',
-            materialNumbers: [],
-          )).thenAnswer((invocation) async => <Price>[]);
+      when(
+        () => materialPriceRemoteDataSource.getMaterialPriceList(
+          salesOrgCode: 'fake-name',
+          customerCode: 'fake-customer-code',
+          // shipToCode: 'fake-ship-code',
+          materialNumbers: [],
+        ),
+      ).thenAnswer((invocation) async => <Price>[]);
 
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo,
@@ -115,12 +117,14 @@ void main() {
     });
     test('get materialPrice fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialPriceRemoteDataSource.getMaterialPriceList(
-            salesOrgCode: '23456700',
-            customerCode: '',
-            materialNumbers: [],
-            // shipToCode: 'fake-ship-code',
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => materialPriceRemoteDataSource.getMaterialPriceList(
+          salesOrgCode: '23456700',
+          customerCode: '',
+          materialNumbers: [],
+          // shipToCode: 'fake-ship-code',
+        ),
+      ).thenThrow((invocation) async => MockException());
       final result = await materialPriceRepository.getMaterialPrice(
         customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
         salesOrganisation:
@@ -137,29 +141,32 @@ void main() {
     });
   });
 
-
   test('get materialPrice successfully', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialPriceRemoteDataSource.getMaterialPrice(
-            salesOrgCode: 'fake-name',
-            customerCode: 'fake-customer-code',
-            // shipToCode: 'fake-ship-code',
-            materialNumber: 'fake-number',
-          )).thenAnswer((invocation) async => Price.empty().copyWith(
-            finalPrice: MaterialPrice(123),
-          ));
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+    when(
+      () => materialPriceRemoteDataSource.getMaterialPrice(
+        salesOrgCode: 'fake-name',
+        customerCode: 'fake-customer-code',
+        // shipToCode: 'fake-ship-code',
+        materialNumber: 'fake-number',
+      ),
+    ).thenAnswer(
+      (invocation) async => Price.empty().copyWith(
+        finalPrice: MaterialPrice(123),
+      ),
+    );
 
-      final result = await materialPriceRepository.getMaterialPrice(
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganisation: mockSalesOrganisation,
-        materialNumberList: [MaterialNumber('fake-number')],
-        salesConfigs: mockSalesConfigs,
-        shipToInfo: mockShipToInfo,
-        comboDealEligible: false,
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
+    final result = await materialPriceRepository.getMaterialPrice(
+      customerCodeInfo: mockCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      materialNumberList: [MaterialNumber('fake-number')],
+      salesConfigs: mockSalesConfigs,
+      shipToInfo: mockShipToInfo,
+      comboDealEligible: false,
+    );
+    expect(
+      result.isRight(),
+      true,
+    );
+  });
 }

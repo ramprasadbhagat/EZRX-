@@ -51,7 +51,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
     @JsonKey(name: 'PrincipalName', defaultValue: '')
         required String principalName,
-          @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+    @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
         required String governmentMaterialCode,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
@@ -86,7 +86,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       ),
       principalName:
           orderHistoryDetailsOrderItem.principalName.getOrDefaultValue(''),
-          governmentMaterialCode: orderHistoryDetailsOrderItem.governmentMaterialCode,
+      governmentMaterialCode:
+          orderHistoryDetailsOrderItem.governmentMaterialCode,
     );
   }
 
@@ -113,7 +114,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       ),
       principalName: PrincipalName(principalName),
       productImages: ProductImages.empty(),
-      governmentMaterialCode:governmentMaterialCode,
+      governmentMaterialCode: governmentMaterialCode,
     );
   }
 

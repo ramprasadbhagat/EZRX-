@@ -44,16 +44,24 @@ void main() {
       fetUserRestrictionDetails =
           await UserRestrictionLocalDataSource().getUserRestrictions();
       userRestrictionStatusApprovalLimit = const UserRestrictionStatus(
-          approverRightsStatus: 'fake-status', approvalLimitStatus: true);
+        approverRightsStatus: 'fake-status',
+        approvalLimitStatus: true,
+      );
       userRestrictionStatusApproverRights = const UserRestrictionStatus(
-          approverRightsStatus: 'fake-status', approvalLimitStatus: false);
+        approverRightsStatus: 'fake-status',
+        approvalLimitStatus: false,
+      );
     });
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'User Restriction Initialized',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
-      act: (bloc) => bloc.add(UserRestrictionDetailsEvent.initialized(
-          salesOrganisation: fakeSaleOrganisation)),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        UserRestrictionDetailsEvent.initialized(
+          salesOrganisation: fakeSaleOrganisation,
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           addedApproverRightsList: [
@@ -70,17 +78,22 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'Fetch User restriction Details',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       setUp: () {
-        when(() => userRestrictionRepositoryMock.getUserRestrictions(
-                userName: Username('fake-user'),
-                salesOrganisation: fakeSaleOrganisation))
-            .thenAnswer((invocation) async => Right(fetUserRestrictionDetails));
+        when(
+          () => userRestrictionRepositoryMock.getUserRestrictions(
+            userName: Username('fake-user'),
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer((invocation) async => Right(fetUserRestrictionDetails));
       },
       act: (bloc) => bloc.add(
-          UserRestrictionDetailsEvent.fetchUserRestrictionDetails(
-              salesOrganisation: fakeSaleOrganisation,
-              userName: Username('fake-user'))),
+        UserRestrictionDetailsEvent.fetchUserRestrictionDetails(
+          salesOrganisation: fakeSaleOrganisation,
+          userName: Username('fake-user'),
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(isFetching: true),
         UserRestrictionDetailsState.initial().copyWith(
@@ -96,16 +109,24 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'Add user restriction',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       setUp: () {
-        when(() => userRestrictionRepositoryMock.addApprovalLimit(
-            approverLimits: UserRestrictionDetailsState.initial()
-                .approvalLimits)).thenAnswer(
-            (invocation) async => Right(userRestrictionStatusApprovalLimit));
-        when(() =>
-            userRestrictionRepositoryMock.configureUserRestriction(
-                approverRights: ApproverRights.empty())).thenAnswer(
-            (invocation) async => Right(userRestrictionStatusApproverRights));
+        when(
+          () => userRestrictionRepositoryMock.addApprovalLimit(
+            approverLimits:
+                UserRestrictionDetailsState.initial().approvalLimits,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(userRestrictionStatusApprovalLimit),
+        );
+        when(
+          () => userRestrictionRepositoryMock.configureUserRestriction(
+            approverRights: ApproverRights.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(userRestrictionStatusApproverRights),
+        );
       },
       act: (bloc) =>
           bloc.add(const UserRestrictionDetailsEvent.addUserRestriction()),
@@ -124,12 +145,16 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'Configure User restriction',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       setUp: () {
-        when(() =>
-            userRestrictionRepositoryMock.configureUserRestriction(
-                approverRights: ApproverRights.empty())).thenAnswer(
-            (invocation) async => Right(userRestrictionStatusApproverRights));
+        when(
+          () => userRestrictionRepositoryMock.configureUserRestriction(
+            approverRights: ApproverRights.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(userRestrictionStatusApproverRights),
+        );
       },
       act: (bloc) => bloc
           .add(const UserRestrictionDetailsEvent.configureUserRestriction()),
@@ -148,10 +173,14 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'Configure User restriction Fail',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       setUp: () {
-        when(() => userRestrictionRepositoryMock.configureUserRestriction(
-            approverRights: ApproverRights.empty())).thenAnswer(
+        when(
+          () => userRestrictionRepositoryMock.configureUserRestriction(
+            approverRights: ApproverRights.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -178,11 +207,14 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'Delete User restriction',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       setUp: () {
-        when(() => userRestrictionRepositoryMock.deleteApprovalRights(
-                approverRights: ApproverRights.empty()))
-            .thenAnswer((invocation) async => const Right(true));
+        when(
+          () => userRestrictionRepositoryMock.deleteApprovalRights(
+            approverRights: ApproverRights.empty(),
+          ),
+        ).thenAnswer((invocation) async => const Right(true));
       },
       act: (bloc) =>
           bloc.add(const UserRestrictionDetailsEvent.deleteUserRestriction()),
@@ -203,14 +235,18 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'add approver rights',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
-      act: (bloc) => bloc.add(UserRestrictionDetailsEvent.addApproverRights(
-          salesOrg: fakeSaleOrganisation.salesOrg)),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        UserRestrictionDetailsEvent.addApproverRights(
+          salesOrg: fakeSaleOrganisation.salesOrg,
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           addedApproverRightsList: List.from(
-              UserRestrictionDetailsState.initial().addedApproverRightsList)
-            ..add(
+            UserRestrictionDetailsState.initial().addedApproverRightsList,
+          )..add(
               ApproverRightsDetails.empty()
                   .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
             ),
@@ -221,14 +257,18 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'delete approver rights',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
-      act: (bloc) => bloc.add(UserRestrictionDetailsEvent.deleteApproverRights(
-          approverRightsDetails: ApproverRightsDetails.empty())),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        UserRestrictionDetailsEvent.deleteApproverRights(
+          approverRightsDetails: ApproverRightsDetails.empty(),
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           addedApproverRightsList: List.from(
-              UserRestrictionDetailsState.initial().addedApproverRightsList)
-            ..remove(
+            UserRestrictionDetailsState.initial().addedApproverRightsList,
+          )..remove(
               ApproverRightsDetails.empty(),
             ),
         ),
@@ -238,38 +278,50 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'Delete User restriction with valid approval rights',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          approvalLimits: ApprovalLimits.empty().copyWith(
+        approvalLimits: ApprovalLimits.empty().copyWith(
+          salesOrg: fakeSaleOrganisation.salesOrg,
+          userName: Username('fake-username'),
+          uuid: '',
+          valueLowerLimit: ApprovalLimit(0),
+          valueUpperLimit: ApprovalLimit(10),
+        ),
+      ),
+      setUp: () {
+        when(
+          () => userRestrictionRepositoryMock.deleteApprovalRights(
+            approverRights: ApproverRights.empty(),
+          ),
+        ).thenAnswer((invocation) async => const Right(true));
+        when(
+          () => userRestrictionRepositoryMock.deleteApprovalLimit(
+            approverLimits: ApprovalLimits.empty().copyWith(
               salesOrg: fakeSaleOrganisation.salesOrg,
               userName: Username('fake-username'),
               uuid: '',
               valueLowerLimit: ApprovalLimit(0),
-              valueUpperLimit: ApprovalLimit(10))),
-      setUp: () {
-        when(() => userRestrictionRepositoryMock.deleteApprovalRights(
-                approverRights: ApproverRights.empty()))
-            .thenAnswer((invocation) async => const Right(true));
-        when(() => userRestrictionRepositoryMock.deleteApprovalLimit(
-            approverLimits: ApprovalLimits.empty().copyWith(
-                salesOrg: fakeSaleOrganisation.salesOrg,
-                userName: Username('fake-username'),
-                uuid: '',
-                valueLowerLimit: ApprovalLimit(0),
-                valueUpperLimit:
-                    ApprovalLimit(10)))).thenAnswer((invocation) async => Right(
-            UserRestrictionStatus.empty().copyWith(approvalLimitStatus: true)));
+              valueUpperLimit: ApprovalLimit(10),
+            ),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            UserRestrictionStatus.empty().copyWith(approvalLimitStatus: true),
+          ),
+        );
       },
       act: (bloc) =>
           bloc.add(const UserRestrictionDetailsEvent.deleteUserRestriction()),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           approvalLimits: ApprovalLimits.empty().copyWith(
-              salesOrg: fakeSaleOrganisation.salesOrg,
-              userName: Username('fake-username'),
-              uuid: '',
-              valueLowerLimit: ApprovalLimit(0),
-              valueUpperLimit: ApprovalLimit(10)),
+            salesOrg: fakeSaleOrganisation.salesOrg,
+            userName: Username('fake-username'),
+            uuid: '',
+            valueLowerLimit: ApprovalLimit(0),
+            valueUpperLimit: ApprovalLimit(10),
+          ),
           userRestrictionStatus: UserRestrictionStatus.empty().copyWith(
             approvalLimitStatus: true,
           ),
@@ -281,9 +333,15 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
-          index: 0, label: UserRestrictionLabel.userName, value: 'fake-name')),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
+          index: 0,
+          label: UserRestrictionLabel.userName,
+          value: 'fake-name',
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           approvalLimits: ApprovalLimits.empty().copyWith(
@@ -296,9 +354,15 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields lower limit',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
-          index: 0, label: UserRestrictionLabel.returnLowerLimit, value: '0')),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
+          index: 0,
+          label: UserRestrictionLabel.returnLowerLimit,
+          value: '0',
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           approvalLimits: ApprovalLimits.empty().copyWith(
@@ -311,9 +375,15 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields upper limit',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
-          index: 0, label: UserRestrictionLabel.returnUpperLimit, value: '10')),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
+          index: 0,
+          label: UserRestrictionLabel.returnUpperLimit,
+          value: '10',
+        ),
+      ),
       expect: () => [
         UserRestrictionDetailsState.initial().copyWith(
           approvalLimits: ApprovalLimits.empty().copyWith(
@@ -326,179 +396,240 @@ void main() {
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields principal',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
           index: 0,
           label: UserRestrictionLabel.principal,
-          value: 'fake-principal')),
+          value: 'fake-principal',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               principal: 'fake-principal',
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields industrial code 1',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
           index: 0,
           label: UserRestrictionLabel.industryCode1,
-          value: 'fake-industrialcode1')),
+          value: 'fake-industrialcode1',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               industryCode1: 'fake-industrialcode1',
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields industrial code 2',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
           index: 0,
           label: UserRestrictionLabel.industryCode2,
-          value: 'fake-industrialcode2')),
+          value: 'fake-industrialcode2',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               industryCode2: 'fake-industrialcode2',
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields industrial code 3',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
           index: 0,
           label: UserRestrictionLabel.industryCode3,
-          value: 'fake-industrialcode3')),
+          value: 'fake-industrialcode3',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               industryCode3: 'fake-industrialcode3',
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields industrial code 4',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
           index: 0,
           label: UserRestrictionLabel.industryCode4,
-          value: 'fake-industrialcode4')),
+          value: 'fake-industrialcode4',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               industryCode4: 'fake-industrialcode4',
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields industrial code 5',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
           index: 0,
           label: UserRestrictionLabel.industryCode5,
-          value: 'fake-industrialcode5')),
+          value: 'fake-industrialcode5',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               industryCode5: 'fake-industrialcode5',
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields plant',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
-          index: 0, label: UserRestrictionLabel.plant, value: 'fake-plant')),
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
+          index: 0,
+          label: UserRestrictionLabel.plant,
+          value: 'fake-plant',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
-              plant: 'fake-plant', salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
+              plant: 'fake-plant',
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
 
     blocTest<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
       'update text fields material number',
       build: () => UserRestrictionDetailsBloc(
-          userRestrictionRepository: userRestrictionRepositoryMock),
+        userRestrictionRepository: userRestrictionRepositoryMock,
+      ),
       seed: () => UserRestrictionDetailsState.initial().copyWith(
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty()
-                .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
-          ]),
-      act: (bloc) => bloc.add(const UserRestrictionDetailsEvent.updateTextField(
-          index: 0, label: UserRestrictionLabel.materialNumber, value: '1234')),
+        addedApproverRightsList: [
+          ApproverRightsDetails.empty()
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+        ],
+      ),
+      act: (bloc) => bloc.add(
+        const UserRestrictionDetailsEvent.updateTextField(
+          index: 0,
+          label: UserRestrictionLabel.materialNumber,
+          value: '1234',
+        ),
+      ),
       expect: () => [
-        UserRestrictionDetailsState.initial()
-            .copyWith(addedApproverRightsList: [
-          ApproverRightsDetails.empty().copyWith(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty().copyWith(
               materialNumber: MaterialNumber('1234'),
-              salesOrg: fakeSaleOrganisation.salesOrg)
-        ]),
+              salesOrg: fakeSaleOrganisation.salesOrg,
+            )
+          ],
+        ),
       ],
     );
   });

@@ -54,7 +54,8 @@ class DeliveryInfoData with _$DeliveryInfoData {
   }) {
     return DeliveryInfoData.empty().copyWith(
       poReference: PoReference(
-        orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference.displayPOReference,
+        orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference
+            .displayPOReference,
       ),
       contactPerson: ContactPerson(
         orderHistoryDetails.orderHistoryDetailsOrderHeader.orderBy,

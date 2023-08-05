@@ -33,27 +33,32 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
   });
-  final fakeCustomerInfo = CustomerCodeInfo.empty()
-      .copyWith(customerCodeSoldTo: '00001234', shipToInfos: [
-    ShipToInfo.empty().copyWith(
-      shipToCustomerCode: '00001234',
-    )
-  ]);
+  final fakeCustomerInfo = CustomerCodeInfo.empty().copyWith(
+    customerCodeSoldTo: '00001234',
+    shipToInfos: [
+      ShipToInfo.empty().copyWith(
+        shipToCustomerCode: '00001234',
+      )
+    ],
+  );
 
-  final fakeCustomerInfo2 = CustomerCodeInfo.empty()
-      .copyWith(customerCodeSoldTo: '00001235', shipToInfos: [
-    ShipToInfo.empty().copyWith(
-      shipToCustomerCode: '00001235',
-    )
-  ]);
+  final fakeCustomerInfo2 = CustomerCodeInfo.empty().copyWith(
+    customerCodeSoldTo: '00001235',
+    shipToInfos: [
+      ShipToInfo.empty().copyWith(
+        shipToCustomerCode: '00001235',
+      )
+    ],
+  );
 
   group('Customer Code Selector Test ', () {
     setUp(() {
       mockCustomerCodeBloc = CustomerCodeBlocMock();
 
       when(() => mockCustomerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial()
-              .copyWith(customerCodeList: [fakeCustomerInfo]));
+        CustomerCodeState.initial()
+            .copyWith(customerCodeList: [fakeCustomerInfo]),
+      );
     });
 
     Future getWidget(tester) async {
@@ -63,7 +68,8 @@ void main() {
           child: MultiBlocProvider(
             providers: [
               BlocProvider<CustomerCodeBloc>(
-                  create: (context) => mockCustomerCodeBloc),
+                create: (context) => mockCustomerCodeBloc,
+              ),
             ],
             child: const Material(
               child: Scaffold(
@@ -77,20 +83,24 @@ void main() {
 
     testWidgets('When customerCodeInfo is empty', (tester) async {
       when(() => mockCustomerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-              isFetching: false, customerCodeList: [CustomerCodeInfo.empty()]));
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [CustomerCodeInfo.empty()],
+        ),
+      );
       await getWidget(tester);
       final selectedCustomerCodeText = find.text('NA');
       expect(selectedCustomerCodeText, findsNWidgets(2));
     });
 
     testWidgets('When customerCodeInfo is not empty', (tester) async {
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-        isFetching: false,
-        customerCodeInfo: fakeCustomerInfo,
-        shipToInfo: fakeCustomerInfo.shipToInfos.first,
-      ));
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeCustomerInfo.shipToInfos.first,
+        ),
+      );
 
       await getWidget(tester);
       final selectedCustomerCodeText =
@@ -123,8 +133,10 @@ void main() {
           ),
         ),
       ];
-      whenListen(mockCustomerCodeBloc,
-          Stream.fromIterable(expectedCustomerCodeListStates));
+      whenListen(
+        mockCustomerCodeBloc,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+      );
 
       await getWidget(tester);
       final selectedCustomerCodeText = find.text('00001234');
@@ -135,16 +147,19 @@ void main() {
       final expectedCustomerCodeListStates = [
         CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
-            isFetching: false,
-            customerCodeInfo: fakeCustomerInfo2,
-            customerCodeList: [
-              fakeCustomerInfo2,
-            ],
-            shipToInfo: fakeCustomerInfo2.shipToInfos.first,
-            apiFailureOrSuccessOption: optionOf(const Right(null))),
+          isFetching: false,
+          customerCodeInfo: fakeCustomerInfo2,
+          customerCodeList: [
+            fakeCustomerInfo2,
+          ],
+          shipToInfo: fakeCustomerInfo2.shipToInfos.first,
+          apiFailureOrSuccessOption: optionOf(const Right(null)),
+        ),
       ];
-      whenListen(mockCustomerCodeBloc,
-          Stream.fromIterable(expectedCustomerCodeListStates));
+      whenListen(
+        mockCustomerCodeBloc,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+      );
 
       await getWidget(tester);
 
@@ -165,16 +180,19 @@ void main() {
           ),
         ),
         CustomerCodeState.initial().copyWith(
-            isFetching: false,
-            customerCodeInfo: fakeCustomerInfo2,
-            customerCodeList: [
-              CustomerCodeInfo.empty(),
-            ],
-            shipToInfo: fakeCustomerInfo2.shipToInfos.first,
-            apiFailureOrSuccessOption: none()),
+          isFetching: false,
+          customerCodeInfo: fakeCustomerInfo2,
+          customerCodeList: [
+            CustomerCodeInfo.empty(),
+          ],
+          shipToInfo: fakeCustomerInfo2.shipToInfos.first,
+          apiFailureOrSuccessOption: none(),
+        ),
       ];
-      whenListen(mockCustomerCodeBloc,
-          Stream.fromIterable(expectedCustomerCodeListStates));
+      whenListen(
+        mockCustomerCodeBloc,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+      );
 
       await getWidget(tester);
 

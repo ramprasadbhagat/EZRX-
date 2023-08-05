@@ -143,10 +143,11 @@ void main() {
 
       // Scroll until the item to be found appears
       await tester.dragUntilVisible(
-          itemFinder,
-          listFinder, // widget you want to scroll
-          const Offset(0, -500), // delta to move
-          duration: const Duration(seconds: 5));
+        itemFinder,
+        listFinder, // widget you want to scroll
+        const Offset(0, -500), // delta to move
+        duration: const Duration(seconds: 5),
+      );
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       await tester.ensureVisible(itemFinder);

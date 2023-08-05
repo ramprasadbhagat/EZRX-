@@ -32,9 +32,10 @@ void main() {
           final result = await localDataSource.fetchReturnPrice();
 
           expect(
-              result,
-              ReturnPriceDto.fromJson(res['data']['getReturnPrice'][0])
-                  .toDomain());
+            result,
+            ReturnPriceDto.fromJson(res['data']['getReturnPrice'][0])
+                .toDomain(),
+          );
         },
       );
     },

@@ -24,7 +24,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 
-
 class RecentOrdersSection extends StatelessWidget {
   const RecentOrdersSection({Key? key}) : super(key: key);
 

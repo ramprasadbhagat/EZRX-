@@ -21,7 +21,7 @@ class AdminPoAttachmentRemoteDataSource {
     required this.adminPoAttachmentQueryMutation,
     required this.dataSourceExceptionHandler,
   });
-  
+
   Future<List<AdminPoAttachment>> getAdminPoAttachment({
     required int pageSize,
     required int offset,
@@ -46,7 +46,7 @@ class AdminPoAttachmentRemoteDataSource {
       );
       _getPoAttachmentExceptionChecker(res: res);
       final finalData = res.data['data']['getPOAttachment'];
-      
+
       return List.from(finalData)
           .map((e) => AdminPoAttachmentDto.fromJson(e).toDomain())
           .toList();

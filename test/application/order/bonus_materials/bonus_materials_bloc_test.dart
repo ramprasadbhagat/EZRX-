@@ -64,7 +64,8 @@ void main() {
         'Init Bonus Material Bloc',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         act: (BonusMaterialBloc bloc) =>
             bloc.add(const BonusMaterialEvent.initialized()),
@@ -75,7 +76,8 @@ void main() {
         'No BonusMaterial items found',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         act: (BonusMaterialBloc bloc) => bloc.add(
           BonusMaterialEvent.fetch(
@@ -88,15 +90,17 @@ void main() {
             shipInfo: ShipToInfo.empty(),
           ),
         ),
-        setUp: () => when(() => mockBonusMaterialRepository.getMaterialBonus(
-              user: mockUser,
-              configs: SalesOrganisationConfigs.empty(),
-              customerInfo: CustomerCodeInfo.empty(),
-              pickAndPack: 'include',
-              salesOrganisation: SalesOrganisation.empty(),
-              searchKey: '',
-              shipInfo: ShipToInfo.empty(),
-            )).thenAnswer(
+        setUp: () => when(
+          () => mockBonusMaterialRepository.getMaterialBonus(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => const Right([]),
         ),
         expect: () => [
@@ -118,7 +122,8 @@ void main() {
         'Bonus Material items found',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         act: (BonusMaterialBloc bloc) => bloc.add(
           BonusMaterialEvent.fetch(
@@ -131,15 +136,17 @@ void main() {
             shipInfo: ShipToInfo.empty(),
           ),
         ),
-        setUp: () => when(() => mockBonusMaterialRepository.getMaterialBonus(
-              user: mockUser,
-              configs: SalesOrganisationConfigs.empty(),
-              customerInfo: CustomerCodeInfo.empty(),
-              pickAndPack: 'include',
-              salesOrganisation: SalesOrganisation.empty(),
-              searchKey: '',
-              shipInfo: ShipToInfo.empty(),
-            )).thenAnswer(
+        setUp: () => when(
+          () => mockBonusMaterialRepository.getMaterialBonus(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => Right([MaterialInfo.empty()]),
         ),
         expect: () => [
@@ -162,7 +169,8 @@ void main() {
         'Bonus Material items errors',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         setUp: () {
           when(
@@ -216,7 +224,8 @@ void main() {
         'Bonus Material items auto-fetch',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         act: (BonusMaterialBloc bloc) => bloc.add(
           BonusMaterialEvent.autoSearch(
@@ -229,15 +238,17 @@ void main() {
             shipInfo: ShipToInfo.empty(),
           ),
         ),
-        setUp: () => when(() => mockBonusMaterialRepository.getMaterialBonus(
-              user: mockUser,
-              configs: SalesOrganisationConfigs.empty(),
-              customerInfo: CustomerCodeInfo.empty(),
-              pickAndPack: 'include',
-              salesOrganisation: SalesOrganisation.empty(),
-              searchKey: '314',
-              shipInfo: ShipToInfo.empty(),
-            )).thenAnswer(
+        setUp: () => when(
+          () => mockBonusMaterialRepository.getMaterialBonus(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '314',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => Right([MaterialInfo.empty()]),
         ),
         wait: const Duration(milliseconds: 3000),
@@ -262,7 +273,8 @@ void main() {
         'Bonus Material items auto-fetch error',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         setUp: () {
           when(
@@ -318,7 +330,8 @@ void main() {
         'reset bloc',
         build: () {
           return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
+            bonusMaterialRepository: mockBonusMaterialRepository,
+          );
         },
         setUp: () {},
         act: (BonusMaterialBloc bloc) => bloc.add(

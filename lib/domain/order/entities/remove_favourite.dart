@@ -10,5 +10,4 @@ class RemoveFavourite with _$RemoveFavourite {
   const factory RemoveFavourite({
     required FavouriteResponse removeFavouriteMaterial,
   }) = _RemoveFavourite;
-
 }

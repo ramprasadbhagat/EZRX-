@@ -135,7 +135,10 @@ void main() {
       );
 
       await tester.pumpWidget(
-          MaterialApp(home: CarouselBannerTile(banner: banner, bannerPosition: 1)));
+        MaterialApp(
+          home: CarouselBannerTile(banner: banner, bannerPosition: 1),
+        ),
+      );
 
       expect(find.text('Test Banner'), findsNothing);
       expect(find.byType(CachedNetworkImage), findsOneWidget);

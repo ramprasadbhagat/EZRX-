@@ -45,9 +45,11 @@ class MaterialBundleListRemoteDataSource {
       );
       _materialBundleListExceptionChecker(res: res);
 
-      return List.from(makeResponseCamelCase(
-        jsonEncode(res.data['data']['GetBundles']),
-      )).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
+      return List.from(
+        makeResponseCamelCase(
+          jsonEncode(res.data['data']['GetBundles']),
+        ),
+      ).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
     });
   }
 
@@ -74,9 +76,11 @@ class MaterialBundleListRemoteDataSource {
       );
       _materialBundleListExceptionChecker(res: res);
 
-      return List.from(makeResponseCamelCase(
-        jsonEncode(res.data['data']['GetBundlesForSalesRep']),
-      )).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
+      return List.from(
+        makeResponseCamelCase(
+          jsonEncode(res.data['data']['GetBundlesForSalesRep']),
+        ),
+      ).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
     });
   }
 

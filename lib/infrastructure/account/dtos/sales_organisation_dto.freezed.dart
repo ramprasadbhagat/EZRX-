@@ -194,10 +194,12 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
 
 abstract class _SalesOrganisationDto extends SalesOrganisationDto {
   const factory _SalesOrganisationDto(
-      {@JsonKey(name: 'SalesOrg') required final String salesOrg,
-      @JsonKey(name: 'CustomerCode') required final String customerCode,
+      {@JsonKey(name: 'SalesOrg')
+          required final String salesOrg,
+      @JsonKey(name: 'CustomerCode')
+          required final String customerCode,
       @JsonKey(name: 'ShipToCode')
-      required final List<String> shipToCodes}) = _$_SalesOrganisationDto;
+          required final List<String> shipToCodes}) = _$_SalesOrganisationDto;
   const _SalesOrganisationDto._() : super._();
 
   factory _SalesOrganisationDto.fromJson(Map<String, dynamic> json) =

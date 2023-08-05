@@ -41,12 +41,14 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     on<_AutoSearch>(
       (event, emit) {
         if (event.searchValue != state.searchKey.getValue()) {
-          add(_Search(
-            hideCustomer: event.hideCustomer,
-            userInfo: event.userInfo,
-            selectedSalesOrg: event.selectedSalesOrg,
-            searchValue: event.searchValue,
-          ));
+          add(
+            _Search(
+              hideCustomer: event.hideCustomer,
+              userInfo: event.userInfo,
+              selectedSalesOrg: event.selectedSalesOrg,
+              searchValue: event.searchValue,
+            ),
+          );
         }
       },
     );
@@ -56,13 +58,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         final previousSearchKey = SearchKey(e.searchValue);
         final previousCustomerCodeState = state.customerCodeInfo;
         final previousShipToInfo = state.shipToInfo;
-        emit(CustomerCodeState.initial().copyWith(
-          searchKey: previousSearchKey,
-          customerCodeInfo: previousCustomerCodeState,
-          shipToInfo: previousShipToInfo,
-          isSearchActive: true,
-          isFetching: true,
-        ));
+        emit(
+          CustomerCodeState.initial().copyWith(
+            searchKey: previousSearchKey,
+            customerCodeInfo: previousCustomerCodeState,
+            shipToInfo: previousShipToInfo,
+            isSearchActive: true,
+            isFetching: true,
+          ),
+        );
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
           salesOrganisation: e.selectedSalesOrg,
           customerCodes: [previousSearchKey.getValue()],
@@ -100,9 +104,11 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       transformer: restartable(),
     );
     on<_LoadStoredCustomerCode>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-      ));
+      emit(
+        state.copyWith(
+          isFetching: true,
+        ),
+      );
 
       final customerStorageSuccessOrFailure =
           await customerCodeRepository.getCustomerCodeStorage();
@@ -161,17 +167,19 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         );
       }
 
-      emit(state.copyWith(
-        customerCodeList: customerCodeInfoList,
-        isFetching: false,
-        isSearchActive: true,
-        searchKey:
-            SearchKey.search(customerCodeInfoList.first.customerCodeSoldTo),
-        customerCodeInfo: customerCodeInfoList.first,
-        shipToInfo: shipToInfo == ShipToInfo.empty()
-            ? customerCodeInfoList.first.shipToInfos.first
-            : shipToInfo,
-      ));
+      emit(
+        state.copyWith(
+          customerCodeList: customerCodeInfoList,
+          isFetching: false,
+          isSearchActive: true,
+          searchKey:
+              SearchKey.search(customerCodeInfoList.first.customerCodeSoldTo),
+          customerCodeInfo: customerCodeInfoList.first,
+          shipToInfo: shipToInfo == ShipToInfo.empty()
+              ? customerCodeInfoList.first.shipToInfos.first
+              : shipToInfo,
+        ),
+      );
     });
     on<_Fetch>(
       (e, emit) async {
@@ -194,8 +202,10 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
           salesOrganisation: e.selectedSalesOrg,
           customerCodes: finalCustomerCodeInfo
-              .map((customerItem) =>
-                  customerItem.customerCodeSoldTo.checkAllOrCustomerCode)
+              .map(
+                (customerItem) =>
+                    customerItem.customerCodeSoldTo.checkAllOrCustomerCode,
+              )
               .toList(),
           hideCustomer: e.hideCustomer,
           user: e.userInfo,
@@ -288,12 +298,14 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     on<_DeletedSearch>(
       (event, emit) {
         if (event.searchText != state.searchKey.getValue()) {
-          add(_Fetch(
-            hideCustomer: event.hideCustomer,
-            userInfo: event.userInfo,
-            selectedSalesOrg: event.selectedSalesOrg,
-            searchText: event.searchText,
-          ));
+          add(
+            _Fetch(
+              hideCustomer: event.hideCustomer,
+              userInfo: event.userInfo,
+              selectedSalesOrg: event.selectedSalesOrg,
+              searchText: event.searchText,
+            ),
+          );
         }
       },
     );

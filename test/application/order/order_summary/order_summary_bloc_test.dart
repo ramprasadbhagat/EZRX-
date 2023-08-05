@@ -23,13 +23,15 @@ class OrderRepositoryMock extends Mock implements OrderRepository {}
 
 void main() {
   late OrderRepository orderRepositoryMock;
-  final submitOrderResponse = SubmitOrderResponse.empty()
-      .copyWith(salesDocument: 'fake-sales-document', messages: [
-    SubmitOrderResponseMessage.empty().copyWith(
-      message: 'NO MSG',
-      type: 'D',
-    ),
-  ]);
+  final submitOrderResponse = SubmitOrderResponse.empty().copyWith(
+    salesDocument: 'fake-sales-document',
+    messages: [
+      SubmitOrderResponseMessage.empty().copyWith(
+        message: 'NO MSG',
+        type: 'D',
+      ),
+    ],
+  );
 
   group('Test Order Summary Bloc', () {
     setUp(
@@ -42,9 +44,11 @@ void main() {
       'Order Summary Bloc Initial',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (OrderSummaryBloc bloc) {
-        bloc.add(OrderSummaryEvent.initialized(
-          config: SalesOrganisationConfigs.empty(),
-        ));
+        bloc.add(
+          OrderSummaryEvent.initialized(
+            config: SalesOrganisationConfigs.empty(),
+          ),
+        );
       },
       expect: () => [OrderSummaryState.initial()],
     );
@@ -52,27 +56,28 @@ void main() {
     blocTest(
       'Order Summary submit order success',
       setUp: () {
-        when(() => orderRepositoryMock.submitOrder(
-              shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
-              user:
-                  User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
-              cartProducts: <PriceAggregate>[
-                PriceAggregate.empty().copyWith(
-                  quantity: 2,
-                )
-              ],
-              grandTotal: 100.0,
-              customerCodeInfo:
-                  CustomerCodeInfo.empty().copyWith(division: 'div'),
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2601')),
-              data: DeliveryInfoData.empty(),
-              orderDocumentType: OrderDocumentType.empty()
-                  .copyWith(documentType: DocumentType(''), orderReason: ''),
-              configs: SalesOrganisationConfigs.empty()
-                  .copyWith(currency: Currency('PHP')),
-              orderValue: 100.0,
-            )).thenAnswer((value) async => Right(submitOrderResponse));
+        when(
+          () => orderRepositoryMock.submitOrder(
+            shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
+            user: User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+              )
+            ],
+            grandTotal: 100.0,
+            customerCodeInfo:
+                CustomerCodeInfo.empty().copyWith(division: 'div'),
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+            data: DeliveryInfoData.empty(),
+            orderDocumentType: OrderDocumentType.empty()
+                .copyWith(documentType: DocumentType(''), orderReason: ''),
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(currency: Currency('PHP')),
+            orderValue: 100.0,
+          ),
+        ).thenAnswer((value) async => Right(submitOrderResponse));
       },
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (OrderSummaryBloc bloc) {
@@ -115,29 +120,32 @@ void main() {
     blocTest(
       'Order Summary submit order failure',
       setUp: () {
-        when(() => orderRepositoryMock.submitOrder(
-                  shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
-                  user: User.empty()
-                      .copyWith(email: EmailAddress('awsib@gmail.com')),
-                  cartProducts: <PriceAggregate>[
-                    PriceAggregate.empty().copyWith(
-                      quantity: 2,
-                    )
-                  ],
-                  grandTotal: 100.0,
-                  customerCodeInfo:
-                      CustomerCodeInfo.empty().copyWith(division: 'div'),
-                  salesOrganisation: SalesOrganisation.empty()
-                      .copyWith(salesOrg: SalesOrg('2601')),
-                  data: DeliveryInfoData.empty(),
-                  orderDocumentType: OrderDocumentType.empty().copyWith(
-                      documentType: DocumentType(''), orderReason: ''),
-                  configs: SalesOrganisationConfigs.empty()
-                      .copyWith(currency: Currency('PHP')),
-                  orderValue: 100.0,
-                ))
-            .thenAnswer(
-                (value) async => const Left(ApiFailure.other('Some Error')));
+        when(
+          () => orderRepositoryMock.submitOrder(
+            shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
+            user: User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+              )
+            ],
+            grandTotal: 100.0,
+            customerCodeInfo:
+                CustomerCodeInfo.empty().copyWith(division: 'div'),
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+            data: DeliveryInfoData.empty(),
+            orderDocumentType: OrderDocumentType.empty().copyWith(
+              documentType: DocumentType(''),
+              orderReason: '',
+            ),
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(currency: Currency('PHP')),
+            orderValue: 100.0,
+          ),
+        ).thenAnswer(
+          (value) async => const Left(ApiFailure.other('Some Error')),
+        );
       },
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (OrderSummaryBloc bloc) {

@@ -15,8 +15,7 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
 
   const factory ResetPasswordEvent.resetPasswordPressed({
     required User user,
-  }) =
-      _ResetPasswordPressed;
+  }) = _ResetPasswordPressed;
 
   const factory ResetPasswordEvent.onRestart() = _OnRestart;
 }

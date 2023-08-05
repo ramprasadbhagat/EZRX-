@@ -38,11 +38,11 @@ class InvoiceDetailsSection extends StatelessWidget {
             keyText: 'Document date:'.tr(),
             valueText: invoiceItem.postingDate.dateString,
             valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.white,
-              ),
+                  color: ZPColors.white,
+                ),
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.white,
-              ),
+                  color: ZPColors.white,
+                ),
           ),
           const SizedBox(height: 8),
           BalanceTextRow(
@@ -51,12 +51,11 @@ class InvoiceDetailsSection extends StatelessWidget {
             keyText: 'Due on:'.tr(),
             valueText: invoiceItem.netDueDate.dateString,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.white,
-              ),
+                  color: ZPColors.white,
+                ),
             valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.white,
-              ),
-            
+                  color: ZPColors.white,
+                ),
           ),
           const SizedBox(height: 8),
           BalanceTextRow(
@@ -65,11 +64,11 @@ class InvoiceDetailsSection extends StatelessWidget {
             keyText: 'Order number:'.tr(),
             valueText: invoiceItem.orderId.displayNAIfEmpty,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.white,
-              ),
+                  color: ZPColors.white,
+                ),
             valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.white,
-              ),
+                  color: ZPColors.white,
+                ),
           ),
         ],
       ),

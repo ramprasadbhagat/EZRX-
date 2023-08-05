@@ -48,11 +48,13 @@ void main() {
   group(
     'Approver Return Bloc Initialize',
     () {
-      blocTest('Initialize',
-          build: () => ReturnApproverBloc(returnApproverRepository: repository),
-          act: (ReturnApproverBloc bloc) =>
-              bloc.add(const ReturnApproverEvent.initialized()),
-          expect: () => [ReturnApproverState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () => ReturnApproverBloc(returnApproverRepository: repository),
+        act: (ReturnApproverBloc bloc) =>
+            bloc.add(const ReturnApproverEvent.initialized()),
+        expect: () => [ReturnApproverState.initial()],
+      );
     },
   );
 
@@ -232,23 +234,25 @@ void main() {
         ),
         expect: () => [
           ReturnApproverState.initial().copyWith(
-              approverReturnRequestList: List.filled(
-                _pageSize,
-                RequestInformation.empty(),
-              ),
-              isFetching: true,
-              nextPageIndex: 1),
+            approverReturnRequestList: List.filled(
+              _pageSize,
+              RequestInformation.empty(),
+            ),
+            isFetching: true,
+            nextPageIndex: 1,
+          ),
           ReturnApproverState.initial().copyWith(
-              approverReturnRequestList: List.filled(
-                _pageSize,
-                RequestInformation.empty(),
+            approverReturnRequestList: List.filled(
+              _pageSize,
+              RequestInformation.empty(),
+            ),
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
               ),
-              failureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('fake-error'),
-                ),
-              ),
-              nextPageIndex: 1),
+            ),
+            nextPageIndex: 1,
+          ),
         ],
       );
 
@@ -302,12 +306,13 @@ void main() {
         ),
         expect: () => [
           ReturnApproverState.initial().copyWith(
-              approverReturnRequestList: List.filled(
-                _pageSize,
-                RequestInformation.empty(),
-              ),
-              isFetching: true,
-              nextPageIndex: 1),
+            approverReturnRequestList: List.filled(
+              _pageSize,
+              RequestInformation.empty(),
+            ),
+            isFetching: true,
+            nextPageIndex: 1,
+          ),
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
               _pageSize,

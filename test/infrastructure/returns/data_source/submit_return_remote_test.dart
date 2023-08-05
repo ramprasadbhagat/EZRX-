@@ -74,10 +74,11 @@ void main() {
             await remoteDataSource.submitReturnRequest(returnInput: {});
 
         expect(
-            result,
-            SubmitReturnResponseDto.fromJson(
-              res['data']['addRequestV2'],
-            ).toDomain());
+          result,
+          SubmitReturnResponseDto.fromJson(
+            res['data']['addRequestV2'],
+          ).toDomain(),
+        );
       });
 
       test(

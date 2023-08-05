@@ -34,12 +34,14 @@ void main() {
   group(
     'All Credits Bloc Initialize',
     () {
-      blocTest('Initialize',
-          build: () =>
-              AllCreditsBloc(allCreditsAndInvoicesRepository: repository),
-          act: (AllCreditsBloc bloc) =>
-              bloc.add(const AllCreditsEvent.initialized()),
-          expect: () => [AllCreditsState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () =>
+            AllCreditsBloc(allCreditsAndInvoicesRepository: repository),
+        act: (AllCreditsBloc bloc) =>
+            bloc.add(const AllCreditsEvent.initialized()),
+        expect: () => [AllCreditsState.initial()],
+      );
     },
   );
 

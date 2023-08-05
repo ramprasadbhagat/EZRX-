@@ -10,10 +10,8 @@ class SubmitReturnResponseDto with _$SubmitReturnResponseDto {
   const SubmitReturnResponseDto._();
 
   const factory SubmitReturnResponseDto({
-    @JsonKey(name: 'requestID',defaultValue: '')
-        required String requestID,
-    @JsonKey(name: 'messages', defaultValue: '')
-        required String messages,
+    @JsonKey(name: 'requestID', defaultValue: '') required String requestID,
+    @JsonKey(name: 'messages', defaultValue: '') required String messages,
   }) = _SubmitReturnResponseDto;
 
   SubmitReturnResponse toDomain() {

@@ -6,9 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
-
-
-abstract class IChatBotRepository{
+abstract class IChatBotRepository {
   Future<Either<ApiFailure, bool>> startChatbot();
   Future<Either<ApiFailure, bool>> passPayloadToChatbot({
     required SalesOrganisation salesOrganisation,
@@ -18,5 +16,4 @@ abstract class IChatBotRepository{
     required ShipToInfo shipToInfo,
   });
   Future<Either<ApiFailure, bool>> resetChatbot();
-
 }

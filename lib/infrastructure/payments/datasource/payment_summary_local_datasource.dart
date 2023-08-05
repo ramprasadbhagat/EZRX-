@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_resp
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_response_dto.dart';
 import 'package:flutter/services.dart';
 
-
 class PaymentSummaryLocalDataSource {
   PaymentSummaryLocalDataSource();
 

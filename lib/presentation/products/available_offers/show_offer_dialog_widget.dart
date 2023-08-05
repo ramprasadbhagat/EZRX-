@@ -16,7 +16,6 @@ class ShowOfferDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -26,7 +25,9 @@ class ShowOfferDialogWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const _AvailableOfferHeader(),
-            _AvailableOfferList(bonusMaterialList: bonusMaterialList,),
+            _AvailableOfferList(
+              bonusMaterialList: bonusMaterialList,
+            ),
             const _CloseButton(),
           ],
         ),

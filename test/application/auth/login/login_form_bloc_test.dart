@@ -88,7 +88,8 @@ void main() {
       ),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-            (invocation) async => const Left(ApiFailure.accountLocked()));
+          (invocation) async => const Left(ApiFailure.accountLocked()),
+        );
         when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
             .thenAnswer((invocation) async => const Right(false));
       },
@@ -105,10 +106,11 @@ void main() {
         deviceRepository: deviceRepoMock,
       ),
       setUp: () {
-        when(() => authRepoMock.loadCredential())
-            .thenAnswer((invocation) async => const Left(
-                  ApiFailure.other('fake-error'),
-                ));
+        when(() => authRepoMock.loadCredential()).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
       },
       act: (LoginFormBloc bloc) =>
           bloc.add(const LoginFormEvent.loadLastSavedCred()),
@@ -355,9 +357,9 @@ void main() {
           ),
         );
 
-        when(() =>
-                authRepoMock.login(username: fakeUser, password: fakePassword))
-            .thenAnswer(
+        when(
+          () => authRepoMock.login(username: fakeUser, password: fakePassword),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -400,9 +402,9 @@ void main() {
           ),
         );
 
-        when(() =>
-                authRepoMock.login(username: fakeUser, password: fakePassword))
-            .thenAnswer(
+        when(
+          () => authRepoMock.login(username: fakeUser, password: fakePassword),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
@@ -497,8 +499,12 @@ void main() {
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
-            Right(Login(
-                access: loginMockData.access, refresh: loginMockData.refresh)),
+            Right(
+              Login(
+                access: loginMockData.access,
+                refresh: loginMockData.refresh,
+              ),
+            ),
           ),
         ),
       ],
@@ -518,9 +524,9 @@ void main() {
           ),
         );
 
-        when(() =>
-                authRepoMock.login(username: fakeUser, password: fakePassword))
-            .thenAnswer(
+        when(
+          () => authRepoMock.login(username: fakeUser, password: fakePassword),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
@@ -534,8 +540,12 @@ void main() {
           (invocation) async => const Right(unit),
         );
 
-        when(() => authRepoMock.storeCredential(
-            username: fakeUser, password: fakePassword)).thenAnswer(
+        when(
+          () => authRepoMock.storeCredential(
+            username: fakeUser,
+            password: fakePassword,
+          ),
+        ).thenAnswer(
           (invocation) async => const Right(unit),
         );
       },
@@ -584,8 +594,12 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.login(
-            username: Username(''), password: fakePassword)).thenAnswer(
+        when(
+          () => authRepoMock.login(
+            username: Username(''),
+            password: fakePassword,
+          ),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );

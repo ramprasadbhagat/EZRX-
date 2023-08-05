@@ -8,32 +8,47 @@ void main() {
   final fakestatusName = <StatusType>[];
 
   group(' Order History Filter Bloc', () {
-    blocTest('Intial',
-        build: () => OrderHistoryFilterByStatusBloc(),
-        act: (OrderHistoryFilterByStatusBloc bloc) async {
-          bloc.add(const OrderHistoryFilterByStatusEvent.initialized());
-        },
-        expect: () => [OrderHistoryFilterByStatusState.initial()]);
-    blocTest('checkedStatusFilter failed',
-        build: () => OrderHistoryFilterByStatusBloc(),
-        act: (OrderHistoryFilterByStatusBloc bloc) async {
-          bloc.add(OrderHistoryFilterByStatusEvent.checkedStatusFilter(
-              statusName: StatusType(''), isChecked: false));
-        },
-        expect: () => [
-              OrderHistoryFilterByStatusState.initial().copyWith(
-                filterByStatusName: [],
-              )
-            ]);
-    blocTest('checkedStatusFilter succeed',
-        build: () => OrderHistoryFilterByStatusBloc(),
-        act: (OrderHistoryFilterByStatusBloc bloc) async {
-          bloc.add(OrderHistoryFilterByStatusEvent.checkedStatusFilter(
-              statusName: StatusType(''), isChecked: true));
-        },
-        expect: () => [
-              OrderHistoryFilterByStatusState.initial().copyWith(
-                  filterByStatusName: [...fakestatusName, StatusType('')])
-            ]);
+    blocTest(
+      'Intial',
+      build: () => OrderHistoryFilterByStatusBloc(),
+      act: (OrderHistoryFilterByStatusBloc bloc) async {
+        bloc.add(const OrderHistoryFilterByStatusEvent.initialized());
+      },
+      expect: () => [OrderHistoryFilterByStatusState.initial()],
+    );
+    blocTest(
+      'checkedStatusFilter failed',
+      build: () => OrderHistoryFilterByStatusBloc(),
+      act: (OrderHistoryFilterByStatusBloc bloc) async {
+        bloc.add(
+          OrderHistoryFilterByStatusEvent.checkedStatusFilter(
+            statusName: StatusType(''),
+            isChecked: false,
+          ),
+        );
+      },
+      expect: () => [
+        OrderHistoryFilterByStatusState.initial().copyWith(
+          filterByStatusName: [],
+        )
+      ],
+    );
+    blocTest(
+      'checkedStatusFilter succeed',
+      build: () => OrderHistoryFilterByStatusBloc(),
+      act: (OrderHistoryFilterByStatusBloc bloc) async {
+        bloc.add(
+          OrderHistoryFilterByStatusEvent.checkedStatusFilter(
+            statusName: StatusType(''),
+            isChecked: true,
+          ),
+        );
+      },
+      expect: () => [
+        OrderHistoryFilterByStatusState.initial().copyWith(
+          filterByStatusName: [...fakestatusName, StatusType('')],
+        )
+      ],
+    );
   });
 }

@@ -73,10 +73,12 @@ void main() {
           providers: [
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBlocMock),
+              create: (context) => customerCodeBlocMock,
+            ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
+              create: (context) => announcementBlocMock,
+            ),
           ],
         );
       }

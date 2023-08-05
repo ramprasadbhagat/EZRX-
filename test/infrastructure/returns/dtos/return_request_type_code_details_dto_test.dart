@@ -24,9 +24,10 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto = ReturnRequestTypeCodeDetailsDto.fromDomain(
-          ReturnRequestTypeCodeDetailsDto.fromJson(
-        data['data']['typeOfRequest'][0],
-      ).toDomain());
+        ReturnRequestTypeCodeDetailsDto.fromJson(
+          data['data']['typeOfRequest'][0],
+        ).toDomain(),
+      );
       expect(configsDto.returnCode, '500');
     });
   });

@@ -56,12 +56,14 @@ void main() {
           .thenAnswer((invocation) async => Price.empty());
 
       final result = await priceOverrideRepository.updateItemPrice(
-          item: PriceAggregate.empty().copyWith(
-              price: Price.empty()
-                  .copyWith(priceOverride: PriceOverrideValue(70.0))),
-          newPrice: 70.0,
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo);
+        item: PriceAggregate.empty().copyWith(
+          price:
+              Price.empty().copyWith(priceOverride: PriceOverrideValue(70.0)),
+        ),
+        newPrice: 70.0,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      );
       expect(
         result.isRight(),
         true,
@@ -73,10 +75,11 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await priceOverrideRepository.updateItemPrice(
-          item: PriceAggregate.empty(),
-          newPrice: 0.0,
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo);
+        item: PriceAggregate.empty(),
+        newPrice: 0.0,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      );
       expect(
         result.isLeft(),
         true,
@@ -84,32 +87,39 @@ void main() {
     });
     test('get priceOverrideRepository successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => priceOverrideRemoteDataSource.getOverridePrice(
-            custCode: '100000345',
-            salesOrg: '2601',
-            materialQuery: PriceDto.fromDomain(Price.empty().copyWith(
+      when(
+        () => priceOverrideRemoteDataSource.getOverridePrice(
+          custCode: '100000345',
+          salesOrg: '2601',
+          materialQuery: PriceDto.fromDomain(
+            Price.empty().copyWith(
               priceOverride: PriceOverrideValue(70.0),
               zdp8Override: Zdp8OverrideValue(12.0),
               materialNumber: MaterialNumber('123456'),
               isPriceOverride: true,
-            )).priceOverrideQuery(70),
-          )).thenAnswer((invocation) async => Price.empty().copyWith(
-            priceOverride: PriceOverrideValue(70),
-            materialNumber: MaterialNumber('00000102345'),
-            zdp8Override: Zdp8OverrideValue(12.0),
-            isPriceOverride: true,
-          ));
+            ),
+          ).priceOverrideQuery(70),
+        ),
+      ).thenAnswer(
+        (invocation) async => Price.empty().copyWith(
+          priceOverride: PriceOverrideValue(70),
+          materialNumber: MaterialNumber('00000102345'),
+          zdp8Override: Zdp8OverrideValue(12.0),
+          isPriceOverride: true,
+        ),
+      );
 
       final result = await priceOverrideRepository.updateItemPrice(
         item: PriceAggregate.empty().copyWith(
-            discountedMaterialCount: 1,
-            materialInfo: MaterialInfo.empty()
-                .copyWith(materialNumber: MaterialNumber('123456')),
-            price: Price.empty().copyWith(
-              priceOverride: PriceOverrideValue(70),
-              materialNumber: MaterialNumber('123456'),
-              zdp8Override: Zdp8OverrideValue(12.0),
-            )),
+          discountedMaterialCount: 1,
+          materialInfo: MaterialInfo.empty()
+              .copyWith(materialNumber: MaterialNumber('123456')),
+          price: Price.empty().copyWith(
+            priceOverride: PriceOverrideValue(70),
+            materialNumber: MaterialNumber('123456'),
+            zdp8Override: Zdp8OverrideValue(12.0),
+          ),
+        ),
         newPrice: 70.0,
         salesOrganisation:
             mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')),
@@ -124,18 +134,21 @@ void main() {
     });
     test('get priceOverrideRepository fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => priceOverrideRemoteDataSource.getOverridePrice(
-              custCode: '',
-              salesOrg: '',
-              materialQuery: PriceDto.fromDomain(PriceAggregate.empty().price)
-                  .priceOverrideQuery(0.0)))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => priceOverrideRemoteDataSource.getOverridePrice(
+          custCode: '',
+          salesOrg: '',
+          materialQuery: PriceDto.fromDomain(PriceAggregate.empty().price)
+              .priceOverrideQuery(0.0),
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await priceOverrideRepository.updateItemPrice(
-          item: PriceAggregate.empty(),
-          newPrice: 0.0,
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo);
+        item: PriceAggregate.empty(),
+        newPrice: 0.0,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      );
       expect(
         result.isLeft(),
         true,
@@ -147,16 +160,19 @@ void main() {
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => priceOverrideLocalDataSource.getOverridePrice()).thenAnswer(
-          (invocation) async =>
-              Price.empty().copyWith(materialNumber: MaterialNumber('123456')));
+        (invocation) async =>
+            Price.empty().copyWith(materialNumber: MaterialNumber('123456')),
+      );
 
       final result = await priceOverrideRepository.updateItemPrice(
-          item: PriceAggregate.empty().copyWith(
-              price: Price.empty()
-                  .copyWith(priceOverride: PriceOverrideValue(70.0))),
-          newPrice: 70.0,
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo);
+        item: PriceAggregate.empty().copyWith(
+          price:
+              Price.empty().copyWith(priceOverride: PriceOverrideValue(70.0)),
+        ),
+        newPrice: 70.0,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      );
       expect(
         result.isRight(),
         true,

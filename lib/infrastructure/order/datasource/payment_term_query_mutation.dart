@@ -1,5 +1,4 @@
 class PaymentTermsQueryMutation {
-
   /* Query for fetching the Available Payment Terms  */
 
   String getAvailablePaymentTerm() {

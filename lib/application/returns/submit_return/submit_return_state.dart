@@ -10,10 +10,9 @@ class SubmitReturnState with _$SubmitReturnState {
   }) = _SubmitReturnState;
 
   factory SubmitReturnState.initial() => SubmitReturnState(
-     messages: '',
-     requestID: '',
-     isSubmitting: false,
-     failureOrSuccessOption: none(),
-     );
-
+        messages: '',
+        requestID: '',
+        isSubmitting: false,
+        failureOrSuccessOption: none(),
+      );
 }

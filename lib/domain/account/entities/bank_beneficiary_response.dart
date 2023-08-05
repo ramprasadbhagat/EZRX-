@@ -1,4 +1,3 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bank_beneficiary_response.freezed.dart';
@@ -13,5 +12,5 @@ class BankBeneficiaryResponse with _$BankBeneficiaryResponse {
 
   factory BankBeneficiaryResponse.empty() => const BankBeneficiaryResponse(
         info: '',
-  );
+      );
 }

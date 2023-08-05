@@ -48,11 +48,11 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             ),
           ),
           (_) async {
-        final failureOrSuccess = await poAttachmentRepository.downloadFiles(
+            final failureOrSuccess = await poAttachmentRepository.downloadFiles(
               files: e.files,
               attachmentType: e.attachmentType,
-        );
-        failureOrSuccess.fold(
+            );
+            failureOrSuccess.fold(
               (failure) => emit(
                 state.copyWith(
                   failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -195,7 +195,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             );
           },
         );
-      }, 
+      },
     );
   }
 }

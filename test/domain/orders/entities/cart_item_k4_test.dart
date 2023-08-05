@@ -54,7 +54,9 @@ void main() async {
     });
     test('Combo eligible when when total qty is suffice', () {
       expect(
-          CartItem.comboDeal([material1, material2]).isComboDealEligible, true);
+        CartItem.comboDeal([material1, material2]).isComboDealEligible,
+        true,
+      );
     });
 
     group('Percent deal -', () {

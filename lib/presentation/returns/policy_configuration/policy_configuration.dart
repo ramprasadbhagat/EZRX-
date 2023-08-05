@@ -232,36 +232,38 @@ class _PolicyConfigurationSearchState
 
         return SearchBar(
           controller: _policyConfigSearchController,
-          key: WidgetKeys.policyConfigurationSearch(state.searchKey.getOrDefaultValue('')),
+          key: WidgetKeys.policyConfigurationSearch(
+            state.searchKey.getOrDefaultValue(''),
+          ),
           onSearchChanged: (value) {
             final salesOrganisation =
                 context.read<SalesOrgBloc>().state.salesOrganisation;
-            context
-                .read<PolicyConfigurationBloc>()
-                .add(PolicyConfigurationEvent.search(
-                  salesOrganisation: salesOrganisation,
-                  searchKey: value,
-                ));
+            context.read<PolicyConfigurationBloc>().add(
+                  PolicyConfigurationEvent.search(
+                    salesOrganisation: salesOrganisation,
+                    searchKey: value,
+                  ),
+                );
           },
           onSearchSubmitted: (value) {
-            context
-                .read<PolicyConfigurationBloc>()
-                .add(PolicyConfigurationEvent.search(
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  searchKey: value,
-                ));
+            context.read<PolicyConfigurationBloc>().add(
+                  PolicyConfigurationEvent.search(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    searchKey: value,
+                  ),
+                );
           },
           onClear: () {
             if (_policyConfigSearchController.text.isEmpty) return;
             _policyConfigSearchController.clear();
-            context
-                .read<PolicyConfigurationBloc>()
-                .add(PolicyConfigurationEvent.search(
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  searchKey: '',
-                ));
+            context.read<PolicyConfigurationBloc>().add(
+                  PolicyConfigurationEvent.search(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    searchKey: '',
+                  ),
+                );
           },
           isDense: true,
           border: InputBorder.none,

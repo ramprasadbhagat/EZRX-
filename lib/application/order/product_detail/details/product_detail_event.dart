@@ -9,7 +9,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
-    required MaterialInfoType type, 
+    required MaterialInfoType type,
   }) = _Fetch;
 
   factory ProductDetailEvent.fetchSimilarProduct({
@@ -45,5 +45,4 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required bool isForSimilarProduct,
     required MaterialNumber materialNumber,
   }) = _DeleteFavourite;
-
 }

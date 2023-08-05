@@ -51,7 +51,8 @@ void main() {
           .thenAnswer((invocation) async => <OrderDocumentType>[]);
 
       final result = await orderDocumentTypeRepository.getOrderDocumentTypList(
-          salesOrganisation: mockSalesOrganisation);
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isRight(),
         true,
@@ -63,7 +64,8 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderDocumentTypeRepository.getOrderDocumentTypList(
-          salesOrganisation: mockSalesOrganisation);
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isLeft(),
         true,
@@ -71,13 +73,16 @@ void main() {
     });
     test('get orderDocumentType successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderDocumentTypeRemoteDataSource.getOrderDocumentTypList(
-              salesOrgCode: '2601'))
-          .thenAnswer((invocation) async => <OrderDocumentType>[]);
+      when(
+        () => orderDocumentTypeRemoteDataSource.getOrderDocumentTypList(
+          salesOrgCode: '2601',
+        ),
+      ).thenAnswer((invocation) async => <OrderDocumentType>[]);
 
       final result = await orderDocumentTypeRepository.getOrderDocumentTypList(
-          salesOrganisation:
-              mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')));
+        salesOrganisation:
+            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')),
+      );
       expect(
         result.isRight(),
         true,
@@ -85,12 +90,16 @@ void main() {
     });
     test('get orderDocumentType fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderDocumentTypeRemoteDataSource.getOrderDocumentTypList(
-          salesOrgCode: '')).thenThrow((invocation) async => MockException());
+      when(
+        () => orderDocumentTypeRemoteDataSource.getOrderDocumentTypList(
+          salesOrgCode: '',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await orderDocumentTypeRepository.getOrderDocumentTypList(
-          salesOrganisation:
-              mockSalesOrganisation.copyWith(salesOrg: SalesOrg('')));
+        salesOrganisation:
+            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('')),
+      );
       expect(
         result.isLeft(),
         true,
@@ -124,8 +133,12 @@ void main() {
     test('Get ordertype from storage Success', () {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() => orderStorageMock.getOrderType()).thenReturn(
-          OrderDocumentTypeDto.fromDomain(OrderDocumentType.defaultSelected(
-              salesOrg: SalesOrg('fake-salesorg'))));
+        OrderDocumentTypeDto.fromDomain(
+          OrderDocumentType.defaultSelected(
+            salesOrg: SalesOrg('fake-salesorg'),
+          ),
+        ),
+      );
 
       final result = orderDocumentTypeRepository.getOrderTypeFromCartStorage();
       expect(
@@ -146,16 +159,22 @@ void main() {
     });
     test('Put ordertype to storage Success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderStorageMock.putOrderType(
-              orderType: OrderDocumentTypeDto.fromDomain(
-                  OrderDocumentType.defaultSelected(
-                      salesOrg: SalesOrg('fake-salesorg')))))
-          .thenAnswer((invocation) => Future.value());
+      when(
+        () => orderStorageMock.putOrderType(
+          orderType: OrderDocumentTypeDto.fromDomain(
+            OrderDocumentType.defaultSelected(
+              salesOrg: SalesOrg('fake-salesorg'),
+            ),
+          ),
+        ),
+      ).thenAnswer((invocation) => Future.value());
 
       final result =
           await orderDocumentTypeRepository.putOrderTypeToCartStorage(
-              orderType: OrderDocumentType.defaultSelected(
-                  salesOrg: SalesOrg('fake-salesorg')));
+        orderType: OrderDocumentType.defaultSelected(
+          salesOrg: SalesOrg('fake-salesorg'),
+        ),
+      );
       expect(
         result.isRight(),
         true,
@@ -163,16 +182,22 @@ void main() {
     });
     test('Put ordertype to storage Failure', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderStorageMock.putOrderType(
-              orderType: OrderDocumentTypeDto.fromDomain(
-                  OrderDocumentType.defaultSelected(
-                      salesOrg: SalesOrg('fake-salesorg')))))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => orderStorageMock.putOrderType(
+          orderType: OrderDocumentTypeDto.fromDomain(
+            OrderDocumentType.defaultSelected(
+              salesOrg: SalesOrg('fake-salesorg'),
+            ),
+          ),
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result =
           await orderDocumentTypeRepository.putOrderTypeToCartStorage(
-              orderType: OrderDocumentType.defaultSelected(
-                  salesOrg: SalesOrg('fake-salesorg')));
+        orderType: OrderDocumentType.defaultSelected(
+          salesOrg: SalesOrg('fake-salesorg'),
+        ),
+      );
       expect(
         result.isLeft(),
         true,

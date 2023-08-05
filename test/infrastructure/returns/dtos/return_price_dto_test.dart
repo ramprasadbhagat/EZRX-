@@ -14,7 +14,8 @@ void main() {
     () {
       setUp(() async {
         data = json.decode(
-            await rootBundle.loadString('assets/json/getReturnPrice.json'));
+          await rootBundle.loadString('assets/json/getReturnPrice.json'),
+        );
       });
       test('=> return price to domain', () {
         final returnRequest =

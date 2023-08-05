@@ -19,12 +19,10 @@ class PolicyConfigurationRepository implements IPolicyConfigurationRepository {
   final Config config;
   final PolicyConfigurationLocalDataSource localDataSource;
   final PolicyConfigurationRemoteDataSource remoteDataSource;
-  
 
   PolicyConfigurationRepository({
     required this.config,
     required this.localDataSource,
-    
     required this.remoteDataSource,
   });
 

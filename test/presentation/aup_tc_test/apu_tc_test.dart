@@ -113,9 +113,11 @@ class ViewByItemDetailsMockBloc
 class ViewByOrderDetailsMockBloc
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
+
 class ProductDetailMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
+
 class CreditAndInvoiceDetailsMockBloc
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
@@ -171,12 +173,13 @@ void main() {
     locator<Config>().packageName;
     autoRouterMock = locator<AppRouter>();
     PackageInfo.setMockInitialValues(
-        appName: '',
-        packageName: '"packageName"',
-        version: '',
-        buildNumber: '',
-        buildSignature: '',
-        installerStore: '');
+      appName: '',
+      packageName: '"packageName"',
+      version: '',
+      buildNumber: '',
+      buildSignature: '',
+      installerStore: '',
+    );
   });
 
   setUp(() {
@@ -237,9 +240,10 @@ void main() {
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
-            showTermsAndCondition: true,
-            privacyConsent: true,
-            tncConsent: true),
+          showTermsAndCondition: true,
+          privacyConsent: true,
+          tncConsent: true,
+        ),
       );
       await tester.pumpWidget(
         WidgetUtils.getScopedWidget(
@@ -252,25 +256,35 @@ void main() {
               ),
               BlocProvider<AuthBloc>(create: (context) => authBlocMock),
               BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock),
+                create: (context) => announcementBlocMock,
+              ),
               BlocProvider<MaterialListBloc>(
-                  create: (context) => materialListBloc),
+                create: (context) => materialListBloc,
+              ),
               BlocProvider<MaterialPriceBloc>(
-                  create: (context) => materialPriceBloc),
+                create: (context) => materialPriceBloc,
+              ),
               BlocProvider<ViewByItemsBloc>(
-                  create: (context) => viewByItemsBloc),
+                create: (context) => viewByItemsBloc,
+              ),
               BlocProvider<ReturnListByItemBloc>(
-                  create: (context) => returnListByItemBloc),
+                create: (context) => returnListByItemBloc,
+              ),
               BlocProvider<RecentOrderBloc>(
-                  create: (context) => recentOrderBloc),
+                create: (context) => recentOrderBloc,
+              ),
               BlocProvider<ViewByItemDetailsBloc>(
-                create: (context) => viewByItemDetailsBlocMock),
+                create: (context) => viewByItemDetailsBlocMock,
+              ),
               BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => viewByOrderDetailsBlocMock),
+                create: (context) => viewByOrderDetailsBlocMock,
+              ),
               BlocProvider<ProductDetailBloc>(
-                  create: (context) => productDetailBloc),
+                create: (context) => productDetailBloc,
+              ),
               BlocProvider<CreditAndInvoiceDetailsBloc>(
-                  create: (context) => creditAndInvoiceDetailsBloc),
+                create: (context) => creditAndInvoiceDetailsBloc,
+              ),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -364,22 +378,28 @@ void main() {
               create: (context) => accountSummaryMock,
             ),
             BlocProvider<MaterialListBloc>(
-                create: (context) => materialListBloc),
+              create: (context) => materialListBloc,
+            ),
             BlocProvider<MaterialPriceBloc>(
-                create: (context) => materialPriceBloc),
+              create: (context) => materialPriceBloc,
+            ),
             BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
             BlocProvider<ReturnListByItemBloc>(
-                  create: (context) => returnListByItemBloc),
-            BlocProvider<RecentOrderBloc>(
-                  create: (context) => recentOrderBloc),
+              create: (context) => returnListByItemBloc,
+            ),
+            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
             BlocProvider<ViewByItemDetailsBloc>(
-                create: (context) => viewByItemDetailsBlocMock),
+              create: (context) => viewByItemDetailsBlocMock,
+            ),
             BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => viewByOrderDetailsBlocMock),
+              create: (context) => viewByOrderDetailsBlocMock,
+            ),
             BlocProvider<ProductDetailBloc>(
-                create: (context) => productDetailBloc),
+              create: (context) => productDetailBloc,
+            ),
             BlocProvider<CreditAndInvoiceDetailsBloc>(
-                create: (context) => creditAndInvoiceDetailsBloc),
+              create: (context) => creditAndInvoiceDetailsBloc,
+            ),
           ],
           child: const SplashPage(),
         ),
@@ -393,9 +413,10 @@ void main() {
   testWidgets('Test - AupTc Widget localization test', (tester) async {
     when(() => mockAupTcBloc.state).thenReturn(
       AupTcState.initial().copyWith(
-          showTermsAndCondition: true,
-          privacyConsent: false,
-          tncConsent: false),
+        showTermsAndCondition: true,
+        privacyConsent: false,
+        tncConsent: false,
+      ),
     );
     await tester.pumpWidget(
       WidgetUtils.getScopedWidget(
@@ -404,7 +425,8 @@ void main() {
           providers: [
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
+              create: (context) => announcementBlocMock,
+            ),
             BlocProvider<AupTcBloc>(
               create: (context) => mockAupTcBloc,
             ),
@@ -436,8 +458,9 @@ void main() {
     await tester.tap(aupTcAcceptButton);
     await tester.pumpAndSettle();
     final snackBarMsgFinder = find.text(
-        'You need to read and accept full Terms of use and Privacy Policy before continue.'
-            .tr());
+      'You need to read and accept full Terms of use and Privacy Policy before continue.'
+          .tr(),
+    );
     expect(snackBarMsgFinder, findsOneWidget);
   });
 

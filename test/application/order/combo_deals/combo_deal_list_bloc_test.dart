@@ -136,9 +136,11 @@ void main() {
       blocTest<ComboDealListBloc, ComboDealListState>(
         'Fetch stop when already stayed in state',
         build: () => ComboDealListBloc(repository: repository),
-        seed: () => ComboDealListState.initial().copyWith(comboDeals: {
-          fakeComboDealQuery.id: comboDeals,
-        }),
+        seed: () => ComboDealListState.initial().copyWith(
+          comboDeals: {
+            fakeComboDealQuery.id: comboDeals,
+          },
+        ),
         act: (bloc) => bloc.add(
           ComboDealListEvent.fetchMaterialDeal(
             salesOrganisation: fakeSalesOrg,
@@ -248,9 +250,11 @@ void main() {
     blocTest<ComboDealListBloc, ComboDealListState>(
       'Fetch stop when already stayed in state',
       build: () => ComboDealListBloc(repository: repository),
-      seed: () => ComboDealListState.initial().copyWith(comboDeals: {
-        fakeComboDealQuery.id: [principleComboDeal],
-      }),
+      seed: () => ComboDealListState.initial().copyWith(
+        comboDeals: {
+          fakeComboDealQuery.id: [principleComboDeal],
+        },
+      ),
       act: (bloc) => bloc.add(
         ComboDealListEvent.fetchPrincipleGroupDeal(
           salesOrganisation: fakeSalesOrg,

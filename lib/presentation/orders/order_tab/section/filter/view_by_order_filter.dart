@@ -67,17 +67,19 @@ class _ViewByOrderFilterBottomSheetState
                     style: Theme.of(context).textTheme.labelSmall,
                   ).tr(),
                 ),
-                Row(children: [
-                  const _FromOrderDateFilter(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '-',
-                      style: Theme.of(context).textTheme.titleSmall,
+                Row(
+                  children: [
+                    const _FromOrderDateFilter(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        '-',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
                     ),
-                  ),
-                  const _ToOrderDateFilter(),
-                ]),
+                    const _ToOrderDateFilter(),
+                  ],
+                ),
                 const SizedBox(height: 20),
                 Row(
                   children: const [

@@ -12,8 +12,10 @@ class SubmitReturnRequestDto with _$SubmitReturnRequestDto {
   const SubmitReturnRequestDto._();
 
   const factory SubmitReturnRequestDto({
-     @JsonKey(
-      name: 'soldToCustomer',defaultValue: '',)
+    @JsonKey(
+      name: 'soldToCustomer',
+      defaultValue: '',
+    )
         required String customerCode,
     @JsonKey(name: 'username', defaultValue: '')
         required String username,
@@ -27,10 +29,11 @@ class SubmitReturnRequestDto with _$SubmitReturnRequestDto {
         required String purchaseNumberC,
     @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
         required List<InvoiceDetailsDto> invoiceDetails,
-    
   }) = _SubmitReturnRequestDto;
 
-  factory SubmitReturnRequestDto.fromDomain(SubmitReturnsRequest submitReturnRequest) {
+  factory SubmitReturnRequestDto.fromDomain(
+    SubmitReturnsRequest submitReturnRequest,
+  ) {
     return SubmitReturnRequestDto(
       orderSource: submitReturnRequest.orderSource,
       purchaseNumberC: submitReturnRequest.purchaseNumberC,
@@ -38,10 +41,11 @@ class SubmitReturnRequestDto with _$SubmitReturnRequestDto {
       specialInstruction: submitReturnRequest.specialInstruction,
       subscribeStatusChange: submitReturnRequest.subscribeStatusChange,
       username: submitReturnRequest.username.getOrCrash(),
-      invoiceDetails: submitReturnRequest.invoiceDetails.map((e) => InvoiceDetailsDto.fromDomain(e)).toList(),
+      invoiceDetails: submitReturnRequest.invoiceDetails
+          .map((e) => InvoiceDetailsDto.fromDomain(e))
+          .toList(),
     );
   }
-
 
   factory SubmitReturnRequestDto.fromJson(Map<String, dynamic> json) =>
       _$SubmitReturnRequestDtoFromJson(json);

@@ -21,14 +21,15 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto = OrderHistoryDetailsPaymentTermDto.fromDomain(
-          OrderHistoryDetailsPaymentTermDto.fromJson(data).toDomain());
+        OrderHistoryDetailsPaymentTermDto.fromJson(data).toDomain(),
+      );
       expect(configsDto.paymentTermCode, '7615757');
     });
 
     test('Test tojson', () {
       final configsDto = OrderHistoryDetailsPaymentTermDto.fromDomain(
-              OrderHistoryDetailsPaymentTermDto.fromJson(data).toDomain())
-          .toJson();
+        OrderHistoryDetailsPaymentTermDto.fromJson(data).toDomain(),
+      ).toJson();
       expect(configsDto['PaymentTermCode'], '7615757');
     });
   });

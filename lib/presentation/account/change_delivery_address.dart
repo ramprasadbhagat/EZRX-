@@ -117,10 +117,13 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
                 context.read<CartBloc>().add(
                       const CartEvent.clearCart(),
                     );
-                trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
-                  MixpanelProps.customerCode:
-                      customerCodeInfo.customerCodeSoldTo,
-                });
+                trackMixpanelEvent(
+                  MixpanelEvents.customerCodeSave,
+                  props: {
+                    MixpanelProps.customerCode:
+                        customerCodeInfo.customerCodeSoldTo,
+                  },
+                );
               },
               child: Text(
                 'Change address'.tr(),

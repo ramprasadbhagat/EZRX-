@@ -78,7 +78,7 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                       builder: (context, state) {
                         final config =
                             context.read<SalesOrgBloc>().state.configs;
-                            
+
                         return Form(
                           key: WidgetKeys.additionalDetailsForm,
                           autovalidateMode: state.showErrorMessages

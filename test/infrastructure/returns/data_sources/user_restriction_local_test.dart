@@ -24,9 +24,11 @@ void main() {
 
     test('getUserRestrictionDetails', () async {
       final jsonResult = json.decode(
-        await rootBundle.loadString('assets/json/getReturnApprovalAndApproverRights.json'),
+        await rootBundle
+            .loadString('assets/json/getReturnApprovalAndApproverRights.json'),
       )['data'];
-      final expectedResult = UserRestrictionsDto.fromJson(jsonResult).toDomain();
+      final expectedResult =
+          UserRestrictionsDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
           await UserRestrictionLocalDataSource().getUserRestrictions();
@@ -36,9 +38,11 @@ void main() {
 
     test('add approval limit', () async {
       final jsonResult = json.decode(
-        await rootBundle.loadString('assets/json/getAddUserRestrictionDetails.json'),
+        await rootBundle
+            .loadString('assets/json/getAddUserRestrictionDetails.json'),
       )['data'];
-      final expectedResult = UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
+      final expectedResult =
+          UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
           await UserRestrictionLocalDataSource().addApprovalLimit();
@@ -48,9 +52,11 @@ void main() {
 
     test('configure User Restriction', () async {
       final jsonResult = json.decode(
-        await rootBundle.loadString('assets/json/getConfigureUserRestrictionDetails.json'),
+        await rootBundle
+            .loadString('assets/json/getConfigureUserRestrictionDetails.json'),
       )['data'];
-      final expectedResult = UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
+      final expectedResult =
+          UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
           await UserRestrictionLocalDataSource().configureUserRestriction();
@@ -60,9 +66,11 @@ void main() {
 
     test('delete User Restriction', () async {
       final jsonResult = json.decode(
-        await rootBundle.loadString('assets/json/getDeleteUserRestriction.json'),
+        await rootBundle
+            .loadString('assets/json/getDeleteUserRestriction.json'),
       )['data'];
-      final expectedResult = UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
+      final expectedResult =
+          UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
           await UserRestrictionLocalDataSource().deleteApprovalRights();
@@ -72,9 +80,11 @@ void main() {
 
     test('delete approval limit', () async {
       final jsonResult = json.decode(
-        await rootBundle.loadString('assets/json/getDeleteReturnApprovalLimit.json'),
+        await rootBundle
+            .loadString('assets/json/getDeleteReturnApprovalLimit.json'),
       )['data'];
-      final expectedResult = UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
+      final expectedResult =
+          UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
           await UserRestrictionLocalDataSource().deleteApprovalLimit();

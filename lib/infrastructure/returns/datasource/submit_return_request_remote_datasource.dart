@@ -25,7 +25,7 @@ class SubmitReturnRequestRemoteDataSource {
   });
 
   Future<SubmitReturnResponse> submitReturnRequest({
-    required Map<String,dynamic> returnInput,
+    required Map<String, dynamic> returnInput,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = returnRequestMutation.getReturnRequestMutation();

@@ -474,14 +474,18 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => PerformanceMonitorService());
   locator.registerLazySingleton(() => ProductSuggestionHistoryStorage());
-  locator.registerLazySingleton(() => FirebaseAnalyticsService(
-        analytics: FirebaseAnalytics.instance,
-        observer:
-            FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-      ));
-  locator.registerLazySingleton(() => FirebaseCrashlyticsService(
-        crashlytics: FirebaseCrashlytics.instance,
-      ));
+  locator.registerLazySingleton(
+    () => FirebaseAnalyticsService(
+      analytics: FirebaseAnalytics.instance,
+      observer:
+          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => FirebaseCrashlyticsService(
+      crashlytics: FirebaseCrashlytics.instance,
+    ),
+  );
   locator.registerLazySingleton(
     () => RemoteConfigService(),
   );
@@ -528,7 +532,7 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => DatadogInterceptor(),
+    () => DatadogInterceptor(datadogService: locator<DatadogService>()),
   );
 
   locator.registerLazySingleton(
@@ -706,6 +710,7 @@ void setupLocator() {
       firebaseCrashlyticsService: locator<FirebaseCrashlyticsService>(),
       tokenStorage: locator<TokenStorage>(),
       mixpanelService: locator<MixpanelService>(),
+      datadogService: locator<DatadogService>(),
     ),
   );
 
@@ -1111,12 +1116,14 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => OrderTemplateLocalDataSource());
 
-  locator.registerLazySingleton(() => OrderTemplateRemoteDataSource(
-        httpService: locator<HttpService>(),
-        orderTemplateQueries: locator<OrderTemplateQueries>(),
-        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-        config: locator<Config>(),
-      ));
+  locator.registerLazySingleton(
+    () => OrderTemplateRemoteDataSource(
+      httpService: locator<HttpService>(),
+      orderTemplateQueries: locator<OrderTemplateQueries>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
 
   locator.registerLazySingleton(
     () => OrderTemplateRepository(
@@ -2494,18 +2501,22 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => BankBeneficiaryQueryMutation());
 
-  locator.registerLazySingleton(() => BankBeneficiaryRemoteDataSource(
-        httpService: locator<HttpService>(),
-        config: locator<Config>(),
-        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-        bankBeneficiaryQueryMutation: locator<BankBeneficiaryQueryMutation>(),
-      ));
+  locator.registerLazySingleton(
+    () => BankBeneficiaryRemoteDataSource(
+      httpService: locator<HttpService>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      bankBeneficiaryQueryMutation: locator<BankBeneficiaryQueryMutation>(),
+    ),
+  );
 
-  locator.registerLazySingleton(() => BankBeneficiaryRepository(
-        config: locator<Config>(),
-        localDataSource: locator<BankBeneficiaryLocalDataSource>(),
-        remoteDataSource: locator<BankBeneficiaryRemoteDataSource>(),
-      ));
+  locator.registerLazySingleton(
+    () => BankBeneficiaryRepository(
+      config: locator<Config>(),
+      localDataSource: locator<BankBeneficiaryLocalDataSource>(),
+      remoteDataSource: locator<BankBeneficiaryRemoteDataSource>(),
+    ),
+  );
 
   locator.registerLazySingleton(
     () => ManageBankBeneficiaryBloc(
@@ -2969,12 +2980,14 @@ void setupLocator() {
   locator.registerLazySingleton(() => ProductImageLocalDataSource());
   locator.registerLazySingleton(() => ProductImageQuery());
 
-  locator.registerLazySingleton(() => ProductImageRemoteDataSource(
-        config: locator<Config>(),
-        httpService: locator<HttpService>(),
-        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-        productImageQuery: locator<ProductImageQuery>(),
-      ));
+  locator.registerLazySingleton(
+    () => ProductImageRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      productImageQuery: locator<ProductImageQuery>(),
+    ),
+  );
 
   locator.registerLazySingleton(
     () => ViewByItemDetailsRepository(
@@ -3009,11 +3022,13 @@ void setupLocator() {
   locator.registerLazySingleton(() => ArticleInfoQueryMutation());
   locator.registerLazySingleton(() => ArticleInfoLocalDataSource());
 
-  locator.registerLazySingleton(() => ArticleInfoRemoteDataSource(
-        httpService: locator<HttpService>(),
-        exceptionHandler: locator<DataSourceExceptionHandler>(),
-        queryMutation: locator<ArticleInfoQueryMutation>(),
-      ));
+  locator.registerLazySingleton(
+    () => ArticleInfoRemoteDataSource(
+      httpService: locator<HttpService>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+      queryMutation: locator<ArticleInfoQueryMutation>(),
+    ),
+  );
 
   locator.registerLazySingleton(
     () => ArticleInfoRepository(

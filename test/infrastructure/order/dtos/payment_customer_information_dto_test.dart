@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -13,23 +12,35 @@ void main() {
   late dynamic data;
   group('Test payment customer information ', () {
     setUp(() async {
-      data =json.decode(
-      await rootBundle
-          .loadString('assets/json/getPaymentCustomerInfoResponse.json'),
-    );
+      data = json.decode(
+        await rootBundle
+            .loadString('assets/json/getPaymentCustomerInfoResponse.json'),
+      );
     });
 
     test('Test fromDomain', () {
       final configsDto = PaymentCustomerInformationDto.fromDomain(
-          PaymentCustomerInformationDto.fromJson(data['data']['customerInformation'])
-              .toDomain().copyWith(shipToInfoList: [ShipToInfo.empty().copyWith(status: Status('fake-status'))]));
+        PaymentCustomerInformationDto.fromJson(
+          data['data']['customerInformation'],
+        ).toDomain().copyWith(
+          shipToInfoList: [
+            ShipToInfo.empty().copyWith(status: Status('fake-status'))
+          ],
+        ),
+      );
       expect(configsDto.paymentTerm, 'K002');
     });
 
     test('Test toJson', () {
       final configsDto = PaymentCustomerInformationDto.fromDomain(
-          PaymentCustomerInformationDto.fromJson(data['data']['customerInformation'])
-              .toDomain().copyWith(shipToInfoList: [ShipToInfo.empty().copyWith(status: Status('fake-status'))])).toJson();
+        PaymentCustomerInformationDto.fromJson(
+          data['data']['customerInformation'],
+        ).toDomain().copyWith(
+          shipToInfoList: [
+            ShipToInfo.empty().copyWith(status: Status('fake-status'))
+          ],
+        ),
+      ).toJson();
       expect(configsDto['paymentTerm'], 'K002');
     });
   });

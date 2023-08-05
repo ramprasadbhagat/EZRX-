@@ -77,11 +77,13 @@ void main() {
         );
 
         expect(
-            result,
-            List.from(res['data']['typeOfRequest'])
-                .map((e) =>
-                    ReturnRequestTypeCodeDetailsDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(res['data']['typeOfRequest'])
+              .map(
+                (e) => ReturnRequestTypeCodeDetailsDto.fromJson(e).toDomain(),
+              )
+              .toList(),
+        );
       });
 
       test(

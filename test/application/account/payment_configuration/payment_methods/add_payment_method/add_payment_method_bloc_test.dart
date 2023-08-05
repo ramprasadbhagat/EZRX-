@@ -45,7 +45,8 @@ void main() {
         ),
         act: (bloc) => bloc.add(
           const AddPaymentMethodEvent.paymentMethodChanged(
-              paymentMethod: 'payment method'),
+            paymentMethod: 'payment method',
+          ),
         ),
         expect: () => [
           AddPaymentMethodState.initial().copyWith(

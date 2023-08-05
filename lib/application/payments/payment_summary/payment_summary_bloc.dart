@@ -31,12 +31,15 @@ class PaymentSummaryBloc
   ) async {
     await event.map(
       fetchPaymentSummaryList: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          canLoadMorePaymentSummary: true,
-          paymentSummaryDetailsResponse: PaymentSummaryDetailsResponse.empty(),
-          failureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            canLoadMorePaymentSummary: true,
+            paymentSummaryDetailsResponse:
+                PaymentSummaryDetailsResponse.empty(),
+            failureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess =
             await paymentSummaryRepository.fetchPaymentSummaryList(
@@ -48,8 +51,8 @@ class PaymentSummaryBloc
         );
 
         failureOrSuccess.fold(
-          (failure) =>
-            emit(state.copyWith(
+          (failure) => emit(
+            state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
             ),
@@ -57,8 +60,8 @@ class PaymentSummaryBloc
           (paymentSummaryDetailsResponse) => emit(
             state.copyWith(
               paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
-            isFetching: false,
-            failureOrSuccessOption: none(),
+              isFetching: false,
+              failureOrSuccessOption: none(),
             ),
           ),
         );
@@ -66,10 +69,12 @@ class PaymentSummaryBloc
       loadMorePaymentSummary: (e) async {
         if (state.isFetching || !state.canLoadMorePaymentSummary) return;
 
-        emit(state.copyWith(
-          isFetching: true,
-          failureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess =
             await paymentSummaryRepository.fetchPaymentSummaryList(
@@ -81,14 +86,14 @@ class PaymentSummaryBloc
         );
 
         failureOrSuccess.fold(
-          (failure) =>
-            emit(state.copyWith(
+          (failure) => emit(
+            state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
             ),
           ),
-          (paymentSummaryDetailsResponse) =>
-            emit(state.copyWith(
+          (paymentSummaryDetailsResponse) => emit(
+            state.copyWith(
               paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
               isFetching: false,
               canLoadMorePaymentSummary:

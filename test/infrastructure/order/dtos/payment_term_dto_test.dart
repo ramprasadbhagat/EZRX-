@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_term_dto.dart';
@@ -11,22 +10,24 @@ void main() {
   late dynamic data;
   group('Test payment term ', () {
     setUp(() async {
-      data =json.decode(
-      await rootBundle.loadString('assets/json/getPaymentTermsResponse.json'),
-    );
+      data = json.decode(
+        await rootBundle.loadString('assets/json/getPaymentTermsResponse.json'),
+      );
     });
 
     test('Test fromDomain', () {
       final configsDto = PaymentTermDto.fromDomain(
-          PaymentTermDto.fromJson(data['data']['availablePaymentTerm'][0])
-              .toDomain());
+        PaymentTermDto.fromJson(data['data']['availablePaymentTerm'][0])
+            .toDomain(),
+      );
       expect(configsDto.paymentTermCode, '0001');
     });
 
     test('Test toJson', () {
       final configsDto = PaymentTermDto.fromDomain(
-          PaymentTermDto.fromJson(data['data']['availablePaymentTerm'][0])
-              .toDomain()).toJson();
+        PaymentTermDto.fromJson(data['data']['availablePaymentTerm'][0])
+            .toDomain(),
+      ).toJson();
       expect(configsDto['paymentTermCode'], '0001');
     });
   });

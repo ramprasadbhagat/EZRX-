@@ -34,15 +34,17 @@ void main() {
       config = MockConfig();
       remoteConfigService = MockRemoteConfigService();
       aupRepo = AupTcRepository(
-          config: config,
-          localDataSource: aupLocal,
-          remoteConfigService: remoteConfigService,
-          remoteDataSource: aupRemote);
+        config: config,
+        localDataSource: aupLocal,
+        remoteConfigService: remoteConfigService,
+        remoteDataSource: aupRemote,
+      );
     });
     test('get tncDate local successfully', () async {
       when(() => config.appFlavor).thenAnswer((_) => Flavor.mock);
       when(() => aupLocal.getAcceptanceDate()).thenAnswer(
-          (invocation) async => TncDate(date: DateTime(2021, 07, 14)));
+        (invocation) async => TncDate(date: DateTime(2021, 07, 14)),
+      );
 
       final apiFailureOrSuccess = await aupRepo.getTncDate();
 
@@ -61,7 +63,8 @@ void main() {
     test('get tncDate remote successfully', () async {
       when(() => config.appFlavor).thenAnswer((_) => Flavor.uat);
       when(() => aupRemote.getAcceptanceDate()).thenAnswer(
-          (invocation) async => TncDate(date: DateTime(2021, 07, 14)));
+        (invocation) async => TncDate(date: DateTime(2021, 07, 14)),
+      );
 
       final apiFailureOrSuccess = await aupRepo.getTncDate();
 

@@ -94,7 +94,8 @@ void main() {
             create: (context) => orderDocumentTypeBloc,
           ),
           BlocProvider<TenderContractBloc>(
-              create: (context) => tenderContractBloc),
+            create: (context) => tenderContractBloc,
+          ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBloc,
           ),
@@ -107,10 +108,11 @@ void main() {
 
   PriceAggregate newPriceAggregate(String materialNumber) =>
       PriceAggregate.empty().copyWith(
-          isSpecialOrderType: false,
-          materialInfo: MaterialInfo.empty().copyWith(
-            hasValidTenderContract: true,
-          ));
+        isSpecialOrderType: false,
+        materialInfo: MaterialInfo.empty().copyWith(
+          hasValidTenderContract: true,
+        ),
+      );
 
   testWidgets('Initalize page', (tester) async {
     locator.registerSingleton<AddToCartBloc>(MockAddToCartBloc());
@@ -136,12 +138,13 @@ void main() {
     verify(
       () => addToCartB.add(
         AddToCartEvent.updateQuantity(
-            quantity: initialItems.quantity,
-            cartZmgQtyExcludeCurrent:
-                cartBloc.state.zmgMaterialWithoutMaterial(initialItems),
-            customerCode: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            shipToCode: ShipToInfo.empty()),
+          quantity: initialItems.quantity,
+          cartZmgQtyExcludeCurrent:
+              cartBloc.state.zmgMaterialWithoutMaterial(initialItems),
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty(),
+        ),
       ),
     ).called(1);
   });
@@ -152,9 +155,13 @@ void main() {
       Stream.fromIterable(
         [
           AddToCartState.initial().copyWith(
-              isFetching: true, cartItem: newPriceAggregate('fake-1')),
+            isFetching: true,
+            cartItem: newPriceAggregate('fake-1'),
+          ),
           AddToCartState.initial().copyWith(
-              isFetching: false, cartItem: newPriceAggregate('fake-1')),
+            isFetching: false,
+            cartItem: newPriceAggregate('fake-1'),
+          ),
         ],
       ),
     );

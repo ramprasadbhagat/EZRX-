@@ -63,20 +63,25 @@ void main() {
             paymentCustomerInformationRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentCustomerInformationRepositoryMock
-            .getPaymentCustomerInformation(
-                customerCodeInfo: fakeCustomerCodeInfo,
-                salesOrganisation: fakeSaleOrganisation)).thenAnswer(
+        when(
+          () => paymentCustomerInformationRepositoryMock
+              .getPaymentCustomerInformation(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-        customeCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSaleOrganisation,
-        selectedShipToCode: fakeshipToCustomerCode,
-      )),
+      act: (bloc) => bloc.add(
+        PaymentCustomerInformationEvent.fetch(
+          customeCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrganisation,
+          selectedShipToCode: fakeshipToCustomerCode,
+        ),
+      ),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation: const PaymentCustomerInformation(
@@ -99,18 +104,23 @@ void main() {
             paymentCustomerInformationRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentCustomerInformationRepositoryMock
-            .getPaymentCustomerInformation(
-                customerCodeInfo: fakeCustomerCodeInfo,
-                salesOrganisation: fakeSaleOrganisation)).thenAnswer(
+        when(
+          () => paymentCustomerInformationRepositoryMock
+              .getPaymentCustomerInformation(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(paymentCustomerInformationMockData),
         );
       },
-      act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-        customeCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSaleOrganisation,
-        selectedShipToCode: fakeshipToCustomerCode,
-      )),
+      act: (bloc) => bloc.add(
+        PaymentCustomerInformationEvent.fetch(
+          customeCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrganisation,
+          selectedShipToCode: fakeshipToCustomerCode,
+        ),
+      ),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation: paymentCustomerInformationMockData,
@@ -126,18 +136,23 @@ void main() {
             paymentCustomerInformationRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentCustomerInformationRepositoryMock
-            .getPaymentCustomerInformation(
-                customerCodeInfo: fakeCustomerCodeInfo,
-                salesOrganisation: fakeSaleOrganisation)).thenAnswer(
+        when(
+          () => paymentCustomerInformationRepositoryMock
+              .getPaymentCustomerInformation(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(paymentCustomerInformationMockData),
         );
       },
-      act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-        customeCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSaleOrganisation,
-        selectedShipToCode: '0070149863',
-      )),
+      act: (bloc) => bloc.add(
+        PaymentCustomerInformationEvent.fetch(
+          customeCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrganisation,
+          selectedShipToCode: '0070149863',
+        ),
+      ),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation: paymentCustomerInformationMockData,
@@ -157,7 +172,8 @@ void main() {
             .copyWith(
               licenses: paymentCustomerInformationMockData.shipToInfoList
                   .where(
-                      (element) => element.shipToCustomerCode == '0070149863')
+                    (element) => element.shipToCustomerCode == '0070149863',
+                  )
                   .first
                   .licenses,
             )

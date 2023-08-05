@@ -105,9 +105,10 @@ void main() {
 
           await remoteDataSource
               .loginWithPassword(
-                  username: 'username',
-                  password: 'password',
-                  fcmToken: 'fcmToken')
+            username: 'username',
+            password: 'password',
+            fcmToken: 'fcmToken',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(LoginMock());
@@ -133,9 +134,10 @@ void main() {
 
           await remoteDataSource
               .loginWithPassword(
-                  username: 'username',
-                  password: 'password',
-                  fcmToken: 'fcmToken')
+            username: 'username',
+            password: 'password',
+            fcmToken: 'fcmToken',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(LoginMock());
@@ -198,7 +200,9 @@ void main() {
 
           await remoteDataSource
               .loginWithOktaToken(
-                  oktaAccessToken: 'oktaAccessToken', fcmToken: 'fcmToken')
+            oktaAccessToken: 'oktaAccessToken',
+            fcmToken: 'fcmToken',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(LoginMock());

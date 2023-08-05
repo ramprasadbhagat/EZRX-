@@ -5,7 +5,8 @@ class ReturnItemsState with _$ReturnItemsState {
   const ReturnItemsState._();
   const factory ReturnItemsState({
     required List<ReturnMaterial> items,
-    required Option<Either<ApiFailure, ReturnMaterialList>> failureOrSuccessOption,
+    required Option<Either<ApiFailure, ReturnMaterialList>>
+        failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
   }) = _ReturnItemsState;

@@ -10,7 +10,8 @@ class ReturnRequestTypeCodeDetails with _$ReturnRequestTypeCodeDetails {
     required String returnCode,
     required String returnDescription,
   }) = _ReturnRequestTypeCodeDetails;
-  factory ReturnRequestTypeCodeDetails.empty() => const ReturnRequestTypeCodeDetails(
+  factory ReturnRequestTypeCodeDetails.empty() =>
+      const ReturnRequestTypeCodeDetails(
         returnCode: '',
         returnDescription: '',
       );

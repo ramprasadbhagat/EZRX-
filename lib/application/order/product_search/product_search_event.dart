@@ -2,7 +2,6 @@ part of 'product_search_bloc.dart';
 
 @freezed
 class ProductSearchEvent with _$ProductSearchEvent {
-  
   const factory ProductSearchEvent.autoSearchProduct({
     required SalesOrganisation salesOrganization,
     required SalesOrganisationConfigs configs,
@@ -28,7 +27,9 @@ class ProductSearchEvent with _$ProductSearchEvent {
 
   const factory ProductSearchEvent.clearSearch() = _ClearSearch;
 
-  const factory ProductSearchEvent.fetchProductSearchSuggestionHistory() = _FetchProductSearchSuggestionHistory;
+  const factory ProductSearchEvent.fetchProductSearchSuggestionHistory() =
+      _FetchProductSearchSuggestionHistory;
 
-  const factory ProductSearchEvent.clearProductSearchSuggestionHistory() = _ClearProductSearchSuggestionHistory;
+  const factory ProductSearchEvent.clearProductSearchSuggestionHistory() =
+      _ClearProductSearchSuggestionHistory;
 }

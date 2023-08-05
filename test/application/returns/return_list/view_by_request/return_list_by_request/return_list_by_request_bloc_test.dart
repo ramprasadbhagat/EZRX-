@@ -62,16 +62,18 @@ void main() {
         returnListRepository: returnListRepositoryMock,
       ),
       setUp: () {
-        when(() => returnListRepositoryMock.fetchReturnListByRequest(
-              appliedFilter: mockAppliedFilter,
-              customerCode: mockCustomerCodeInfo,
-              offset: 0,
-              pageSize: pageSize,
-              salesOrg: mockSalesOrg,
-              searchKey: mockSearchKey,
-              shipToInfo: mockShipInfo,
-              user: mockUser,
-            )).thenAnswer(
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: mockAppliedFilter,
+            customerCode: mockCustomerCodeInfo,
+            offset: 0,
+            pageSize: pageSize,
+            salesOrg: mockSalesOrg,
+            searchKey: mockSearchKey,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             mockReturnItemList,
           ),
@@ -114,16 +116,18 @@ void main() {
         returnListRepository: returnListRepositoryMock,
       ),
       setUp: () {
-        when(() => returnListRepositoryMock.fetchReturnListByRequest(
-              appliedFilter: mockAppliedFilter,
-              customerCode: mockCustomerCodeInfo,
-              offset: 0,
-              pageSize: pageSize,
-              salesOrg: mockSalesOrg,
-              searchKey: mockSearchKey,
-              shipToInfo: mockShipInfo,
-              user: mockUser,
-            )).thenAnswer(
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: mockAppliedFilter,
+            customerCode: mockCustomerCodeInfo,
+            offset: 0,
+            pageSize: pageSize,
+            salesOrg: mockSalesOrg,
+            searchKey: mockSearchKey,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('api-failure'),
           ),
@@ -168,16 +172,18 @@ void main() {
         returnListRepository: returnListRepositoryMock,
       ),
       setUp: () {
-        when(() => returnListRepositoryMock.fetchReturnListByRequest(
-              appliedFilter: ReturnFilter.empty(),
-              customerCode: mockCustomerCodeInfo,
-              offset: 0,
-              pageSize: pageSize,
-              salesOrg: mockSalesOrg,
-              searchKey: SearchKey(''),
-              shipToInfo: mockShipInfo,
-              user: mockUser,
-            )).thenAnswer(
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: ReturnFilter.empty(),
+            customerCode: mockCustomerCodeInfo,
+            offset: 0,
+            pageSize: pageSize,
+            salesOrg: mockSalesOrg,
+            searchKey: SearchKey(''),
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             mockReturnItemList,
           ),
@@ -214,16 +220,18 @@ void main() {
         returnListRepository: returnListRepositoryMock,
       ),
       setUp: () {
-        when(() => returnListRepositoryMock.fetchReturnListByRequest(
-              appliedFilter: ReturnFilter.empty(),
-              customerCode: mockCustomerCodeInfo,
-              offset: 0,
-              pageSize: pageSize,
-              salesOrg: mockSalesOrg,
-              searchKey: SearchKey(''),
-              shipToInfo: mockShipInfo,
-              user: mockUser,
-            )).thenAnswer(
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: ReturnFilter.empty(),
+            customerCode: mockCustomerCodeInfo,
+            offset: 0,
+            pageSize: pageSize,
+            salesOrg: mockSalesOrg,
+            searchKey: SearchKey(''),
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('api-failure'),
           ),
@@ -262,16 +270,18 @@ void main() {
         returnListRepository: returnListRepositoryMock,
       ),
       setUp: () {
-        when(() => returnListRepositoryMock.fetchReturnListByRequest(
-              appliedFilter: mockAppliedFilter,
-              customerCode: mockCustomerCodeInfo,
-              offset: 24,
-              pageSize: pageSize,
-              salesOrg: mockSalesOrg,
-              searchKey: mockSearchKey,
-              shipToInfo: mockShipInfo,
-              user: mockUser,
-            )).thenAnswer(
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: mockAppliedFilter,
+            customerCode: mockCustomerCodeInfo,
+            offset: 24,
+            pageSize: pageSize,
+            salesOrg: mockSalesOrg,
+            searchKey: mockSearchKey,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             List.generate(24, (index) => mockReturnItemList.first),
           ),
@@ -320,16 +330,18 @@ void main() {
         returnListRepository: returnListRepositoryMock,
       ),
       setUp: () {
-        when(() => returnListRepositoryMock.fetchReturnListByRequest(
-              appliedFilter: mockAppliedFilter,
-              customerCode: mockCustomerCodeInfo,
-              offset: 24,
-              pageSize: pageSize,
-              salesOrg: mockSalesOrg,
-              searchKey: mockSearchKey,
-              shipToInfo: mockShipInfo,
-              user: mockUser,
-            )).thenAnswer(
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: mockAppliedFilter,
+            customerCode: mockCustomerCodeInfo,
+            offset: 24,
+            pageSize: pageSize,
+            salesOrg: mockSalesOrg,
+            searchKey: mockSearchKey,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('api-failure'),
           ),

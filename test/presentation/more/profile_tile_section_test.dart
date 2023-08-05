@@ -61,7 +61,8 @@ void main() {
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBlocMock),
+              create: (context) => customerCodeBlocMock,
+            ),
           ],
           child: const Material(child: ProfileTile()),
         ),

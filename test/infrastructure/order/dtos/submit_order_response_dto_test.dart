@@ -12,21 +12,26 @@ void main() {
   group('Test bundleInfoDto ', () {
     setUp(() async {
       data = json.decode(
-      await rootBundle.loadString('assets/json/submitOrderResponse.json'),
-    );
+        await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+      );
     });
     test('Test fromDomain', () {
       final configsDto = SubmitOrderResponseDto.fromDomain(
-          SubmitOrderResponseDto.fromJson(data['data']['submitOrder']).toDomain());
+        SubmitOrderResponseDto.fromJson(data['data']['submitOrder']).toDomain(),
+      );
 
       expect(configsDto.salesDocument, '27faf203-62e6-43cf-a9cc-9edd3e22d032');
     });
 
     test('Test toJson', () {
       final configsDto = SubmitOrderResponseDto.fromDomain(
-          SubmitOrderResponseDto.fromJson(data['data']['submitOrder']).toDomain()).toJson();
+        SubmitOrderResponseDto.fromJson(data['data']['submitOrder']).toDomain(),
+      ).toJson();
 
-      expect(configsDto['SalesDocument'], '27faf203-62e6-43cf-a9cc-9edd3e22d032');
+      expect(
+        configsDto['SalesDocument'],
+        '27faf203-62e6-43cf-a9cc-9edd3e22d032',
+      );
     });
   });
 }

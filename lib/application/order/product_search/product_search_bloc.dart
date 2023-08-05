@@ -48,13 +48,15 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
 
     on<_SearchProduct>(
       (e, emit) async {
-        emit(state.copyWith(
-          searchKey: SearchKey(e.searchKey),
-          suggestedProductList: <MaterialInfo>[],
-          isSearching: true,
-          canLoadMore: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            searchKey: SearchKey(e.searchKey),
+            suggestedProductList: <MaterialInfo>[],
+            isSearching: true,
+            canLoadMore: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess =
             await productSearchRepository.searchProductList(
@@ -95,9 +97,11 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     on<_LoadMoreProductList>(
       (e, emit) async {
         if (state.isSearching || !state.canLoadMore) return;
-        emit(state.copyWith(
-          isSearching: true,
-        ));
+        emit(
+          state.copyWith(
+            isSearching: true,
+          ),
+        );
 
         final failureOrSuccess =
             await productSearchRepository.searchProductList(

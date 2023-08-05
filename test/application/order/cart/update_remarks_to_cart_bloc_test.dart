@@ -16,13 +16,20 @@ void main() {
         cartItems: mockMaterialCartItemList,
       ),
       setUp: () {
-        when(() => cartRepositoryMock.addRemarkToCartItem(
-                item: mockCartItemWithRemarks, remarkMessage: remarkText))
-            .thenAnswer((invocation) async => Right([mockCartItemWithRemarks]));
+        when(
+          () => cartRepositoryMock.addRemarkToCartItem(
+            item: mockCartItemWithRemarks,
+            remarkMessage: remarkText,
+          ),
+        ).thenAnswer((invocation) async => Right([mockCartItemWithRemarks]));
       },
       act: (bloc) {
-        bloc.add(CartEvent.addRemarkToCartItem(
-            item: mockCartItemWithRemarks, message: remarkText));
+        bloc.add(
+          CartEvent.addRemarkToCartItem(
+            item: mockCartItemWithRemarks,
+            message: remarkText,
+          ),
+        );
       },
       expect: () => [
         CartState.initial().copyWith(

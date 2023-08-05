@@ -123,7 +123,8 @@ void main() {
         filter: returnFilter,
       ),
       act: (ViewByItemReturnFilterBloc bloc) => bloc.add(
-          const ViewByItemReturnFilterEvent.setAmountFrom(amountFrom: '1000')),
+        const ViewByItemReturnFilterEvent.setAmountFrom(amountFrom: '1000'),
+      ),
       expect: () => [
         ViewByItemReturnFilterState.initial().copyWith(
           filter: returnFilter.copyWith(

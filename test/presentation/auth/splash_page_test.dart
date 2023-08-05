@@ -257,18 +257,19 @@ void main() {
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
   final fakeUser = User.empty().copyWith(
+    id: 'fake-id',
+    username: Username('fake-username'),
+    fullName: const FullName(firstName: 'first name', lastName: 'last name'),
+    userSalesOrganisations: [fakeSalesOrganisation],
+    customerCode: CustomerCode('130046'),
+    email: EmailAddress('a@abc.com'),
+    role: Role.empty().copyWith(
+      type: RoleType('internal_sales_rep'),
       id: 'fake-id',
-      username: Username('fake-username'),
-      fullName: const FullName(firstName: 'first name', lastName: 'last name'),
-      userSalesOrganisations: [fakeSalesOrganisation],
-      customerCode: CustomerCode('130046'),
-      email: EmailAddress('a@abc.com'),
-      role: Role.empty().copyWith(
-        type: RoleType('internal_sales_rep'),
-        id: 'fake-id',
-        name: 'fake-name',
-        description: 'fake-description',
-      ));
+      name: 'fake-name',
+      description: 'fake-description',
+    ),
+  );
 
   // late AppRouter router;
   setUpAll(() async {
@@ -279,13 +280,16 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
-    locator.registerLazySingleton(() => ChatBotService(
-          config: locator<Config>(),
-          pushNotificationService: pushNotificationServiceMock,
-        ));
+    locator.registerLazySingleton(
+      () => ChatBotService(
+        config: locator<Config>(),
+        pushNotificationService: pushNotificationServiceMock,
+      ),
+    );
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton<RemoteConfigService>(
-        () => remoteConfigServiceMock);
+      () => remoteConfigServiceMock,
+    );
 
     locator.registerLazySingleton(() => mockViewByItemsBloc);
     locator.registerLazySingleton(() => mockMaterialPriceBloc);
@@ -405,7 +409,8 @@ void main() {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBlocMock),
+              create: (context) => customerCodeBlocMock,
+            ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
@@ -416,37 +421,51 @@ void main() {
             BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),
             BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock),
+              create: (context) => paymentCustomerInformationBlocMock,
+            ),
             BlocProvider<PaymentTermBloc>(
-                create: (context) => paymentTermBlocMock),
+              create: (context) => paymentTermBlocMock,
+            ),
             BlocProvider<EligibilityBloc>(
-                create: (context) => eligibilityBlocMock),
+              create: (context) => eligibilityBlocMock,
+            ),
             BlocProvider<OrderDocumentTypeBloc>(
-                create: (context) => orderDocumentTypeMock),
+              create: (context) => orderDocumentTypeMock,
+            ),
             BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
             BlocProvider<ReturnRequestTypeCodeBloc>(
-                create: (context) => returnRequestTypeCodeBlocMock),
+              create: (context) => returnRequestTypeCodeBlocMock,
+            ),
             BlocProvider<PolicyConfigurationBloc>(
-                create: (context) => policyConfigurationListBlocMock),
+              create: (context) => policyConfigurationListBlocMock,
+            ),
             BlocProvider<MaterialListBloc>(
-                create: (context) => materialListBlocMock),
+              create: (context) => materialListBlocMock,
+            ),
             BlocProvider<MaterialFilterBloc>(
-                create: (context) => materialFilterBlocMock),
+              create: (context) => materialFilterBlocMock,
+            ),
             BlocProvider<ReturnApproverBloc>(
-                create: (context) => returnApproverBlocMock),
+              create: (context) => returnApproverBlocMock,
+            ),
             BlocProvider<ReturnApproverFilterBloc>(
-                create: (context) => returnApproverFilterBlocMock),
+              create: (context) => returnApproverFilterBlocMock,
+            ),
             BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock),
+              create: (context) => announcementBlocMock,
+            ),
             BlocProvider<DeepLinkingBloc>(
               create: (context) => deepLinkingBlocMock,
             ),
             BlocProvider<ViewByItemsBloc>(
-                create: (context) => mockViewByItemsBloc),
+              create: (context) => mockViewByItemsBloc,
+            ),
             BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => mockOrderHistoryDetailsBloc),
+              create: (context) => mockOrderHistoryDetailsBloc,
+            ),
             BlocProvider<ScanMaterialInfoBloc>(
-                create: (context) => scanMaterialInfoMockBloc),
+              create: (context) => scanMaterialInfoMockBloc,
+            ),
             BlocProvider<SettingBloc>(
               create: (context) => settingBlocMock,
             ),
@@ -463,22 +482,27 @@ void main() {
               create: (context) => chatBotBloc,
             ),
             BlocProvider<AnnouncementInfoBloc>(
-                create: (context) => announcementInfoBlocMock),
+              create: (context) => announcementInfoBlocMock,
+            ),
             BlocProvider<MaterialPriceBloc>(
-                create: (context) => mockMaterialPriceBloc),
+              create: (context) => mockMaterialPriceBloc,
+            ),
             BlocProvider<IntroBloc>(create: (context) => introBlocMock),
             BlocProvider<ReturnListByItemBloc>(
-                create: (context) => returnListByItemBlocMock),
+              create: (context) => returnListByItemBlocMock,
+            ),
             BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
             BlocProvider<ViewByItemDetailsBloc>(
-                create: (context) => viewByItemDetailsBlocMock),
+              create: (context) => viewByItemDetailsBlocMock,
+            ),
             BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
             BlocProvider<ProductDetailBloc>(
-                create: (context) => productDetailBloc),
+              create: (context) => productDetailBloc,
+            ),
             BlocProvider<CreditAndInvoiceDetailsBloc>(
-                create: (context) => creditAndInvoiceDetailsBloc),
-            BlocProvider<LoginFormBloc>(
-                create: (context) => loginFormBloc),
+              create: (context) => creditAndInvoiceDetailsBloc,
+            ),
+            BlocProvider<LoginFormBloc>(create: (context) => loginFormBloc),
           ],
           child: const SplashPage(),
         ),
@@ -544,7 +568,9 @@ void main() {
         Stream.fromIterable(expectedPaymentStates),
       );
 
-      verify(() => paymentTermBlocMock.add(PaymentTermEvent.fetch(
+      verify(
+        () => paymentTermBlocMock.add(
+          PaymentTermEvent.fetch(
             customeCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
             salesOrganisationConfigs: salesOrgBlocMock.state.configs,
@@ -554,7 +580,9 @@ void main() {
               paymentTerm: 'paymentTerm',
               shipToInfoList: <ShipToInfo>[],
             ),
-          ))).called(1);
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('When cart bloc has error', (tester) async {
@@ -631,10 +659,11 @@ void main() {
     testWidgets('When user role has return admin access ', (tester) async {
       final expectedEligibilityStates = [
         EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrgConfigs: SalesOrganisationConfigs.empty(),
-            user: fakeUser),
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrgConfigs: SalesOrganisationConfigs.empty(),
+          user: fakeUser,
+        ),
         EligibilityState.initial().copyWith(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
@@ -651,7 +680,9 @@ void main() {
       ];
 
       whenListen(
-          eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
+        eligibilityBlocMock,
+        Stream.fromIterable(expectedEligibilityStates),
+      );
 
       final expectedUserListStates = [
         UserState.initial(),
@@ -665,39 +696,53 @@ void main() {
       await tester.pump();
       final salesOrganisation = eligibilityBlocMock.state.salesOrganisation;
       verify(
-          () => userRestrictionListBlocMock.add(UserRestrictionListEvent.fetch(
-                salesOrg: salesOrganisation.salesOrg,
-              ))).called(1);
+        () => userRestrictionListBlocMock.add(
+          UserRestrictionListEvent.fetch(
+            salesOrg: salesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
 
-      verify(() =>
-          policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
+      verify(
+        () => policyConfigurationListBlocMock.add(
+          PolicyConfigurationEvent.fetch(
             salesOrganisation: salesOrganisation,
             searchKey: '',
-          ))).called(1);
+          ),
+        ),
+      ).called(1);
       // expect(find.byType(UpgradeAlert), findsOneWidget);
     });
 
     test('testing UpgraderLocalizationMessage valid', () async {
       expect(UpgraderLocalizationMessage(), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.body),
-          isNotNull);
       expect(
-          () => UpgraderLocalizationMessage()
-              .message(UpgraderMessage.buttonTitleIgnore),
-          isNotNull);
+        () => UpgraderLocalizationMessage().message(UpgraderMessage.body),
+        isNotNull,
+      );
       expect(
-          () => UpgraderLocalizationMessage()
-              .message(UpgraderMessage.buttonTitleLater),
-          isNotNull);
+        () => UpgraderLocalizationMessage()
+            .message(UpgraderMessage.buttonTitleIgnore),
+        isNotNull,
+      );
       expect(
-          () => UpgraderLocalizationMessage().message(UpgraderMessage.prompt),
-          isNotNull);
+        () => UpgraderLocalizationMessage()
+            .message(UpgraderMessage.buttonTitleLater),
+        isNotNull,
+      );
       expect(
-          () => UpgraderLocalizationMessage()
-              .message(UpgraderMessage.releaseNotes),
-          isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.title),
-          isNotNull);
+        () => UpgraderLocalizationMessage().message(UpgraderMessage.prompt),
+        isNotNull,
+      );
+      expect(
+        () =>
+            UpgraderLocalizationMessage().message(UpgraderMessage.releaseNotes),
+        isNotNull,
+      );
+      expect(
+        () => UpgraderLocalizationMessage().message(UpgraderMessage.title),
+        isNotNull,
+      );
     });
 
     testWidgets('OrderDocumentType change triggers MaterialList Fetch',
@@ -774,13 +819,15 @@ void main() {
         (WidgetTester tester) async {
       when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(false);
       whenListen(
-          eligibilityBlocMock,
-          Stream.fromIterable([
-            EligibilityState.initial(),
-            EligibilityState.initial().copyWith(
-                shipToInfo: ShipToInfo.empty()
-                    .copyWith(shipToCustomerCode: 'fake-code')),
-          ]));
+        eligibilityBlocMock,
+        Stream.fromIterable([
+          EligibilityState.initial(),
+          EligibilityState.initial().copyWith(
+            shipToInfo:
+                ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
+          ),
+        ]),
+      );
       await getWidget(tester);
       await tester.pump();
 
@@ -797,14 +844,20 @@ void main() {
         const DeepLinkingState.redirectHistoryDetail('fake-order-history'),
       ];
       whenListen(
-          deepLinkingBlocMock, Stream.fromIterable(expectedDeeplinkStates));
+        deepLinkingBlocMock,
+        Stream.fromIterable(expectedDeeplinkStates),
+      );
       await getWidget(tester);
       await tester.pump();
-      verify(() => deepLinkingBlocMock.add(DeepLinkingEvent.consumePendingLink(
+      verify(
+        () => deepLinkingBlocMock.add(
+          DeepLinkingEvent.consumePendingLink(
             selectedCustomerCode: CustomerCodeInfo.empty(),
             selectedSalesOrganisation: SalesOrganisation.empty(),
             selectedShipTo: ShipToInfo.empty(),
-          ))).called(1);
+          ),
+        ),
+      ).called(1);
     });
     testWidgets('When Redirecting History page -failure ', (tester) async {
       final expectedDeeplinkStates = [
@@ -813,11 +866,15 @@ void main() {
         )
       ];
       whenListen(
-          deepLinkingBlocMock, Stream.fromIterable(expectedDeeplinkStates));
+        deepLinkingBlocMock,
+        Stream.fromIterable(expectedDeeplinkStates),
+      );
       await getWidget(tester);
       await tester.pump();
-      expect(find.text('This order history is not available on your account'),
-          findsOneWidget);
+      expect(
+        find.text('This order history is not available on your account'),
+        findsOneWidget,
+      );
     });
   });
 }

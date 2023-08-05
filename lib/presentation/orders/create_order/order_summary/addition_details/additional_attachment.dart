@@ -74,15 +74,15 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                   //         horizontal: 10.0,
                   //         vertical: 10.0,
                   //       ),
-                        // child: PoAttachment(
-                        //   key: const ValueKey(
-                        //     'orderSummaryAdditionalPoAttachment',
-                        //   ),
-                        //   poDocuments: state.deliveryInfoData.poDocuments,
-                        //   poAttachMentRenderMode: PoAttachMentRenderMode.edit,
-                        //   uploadingPocDocument:
-                        //       poAttachmentState.uploadInProgressPoDocument,
-                        // ),
+                  // child: PoAttachment(
+                  //   key: const ValueKey(
+                  //     'orderSummaryAdditionalPoAttachment',
+                  //   ),
+                  //   poDocuments: state.deliveryInfoData.poDocuments,
+                  //   poAttachMentRenderMode: PoAttachMentRenderMode.edit,
+                  //   uploadingPocDocument:
+                  //       poAttachmentState.uploadInProgressPoDocument,
+                  // ),
                   //     ),
                   //     const Divider(
                   //       color: ZPColors.lightGray,

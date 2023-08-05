@@ -23,7 +23,7 @@ class MaterialPriceDetailEvent with _$MaterialPriceDetailEvent {
     required String pickAndPack,
     @Default(false) bool skipFOCCheck,
   }) = _Fetch;
-   const factory MaterialPriceDetailEvent.comboDealFetch({
+  const factory MaterialPriceDetailEvent.comboDealFetch({
     required User user,
     required CustomerCodeInfo customerCode,
     required SalesOrganisation salesOrganisation,

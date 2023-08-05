@@ -49,10 +49,10 @@ abstract class $SalesOrganisationConfigsPrincipalDtoCopyWith<$Res> {
   $Res call(
       {@HiveField(1, defaultValue: 0)
       @JsonKey(name: 'date', defaultValue: 0)
-      int date,
+          int date,
       @HiveField(2, defaultValue: '')
       @JsonKey(name: 'principal')
-      String principalCode});
+          String principalCode});
 }
 
 /// @nodoc
@@ -97,10 +97,10 @@ abstract class _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<$Res>
   $Res call(
       {@HiveField(1, defaultValue: 0)
       @JsonKey(name: 'date', defaultValue: 0)
-      int date,
+          int date,
       @HiveField(2, defaultValue: '')
       @JsonKey(name: 'principal')
-      String principalCode});
+          String principalCode});
 }
 
 /// @nodoc
@@ -141,10 +141,10 @@ class _$_SalesOrganisationConfigsPrincipalDto
   const _$_SalesOrganisationConfigsPrincipalDto(
       {@HiveField(1, defaultValue: 0)
       @JsonKey(name: 'date', defaultValue: 0)
-      required this.date,
+          required this.date,
       @HiveField(2, defaultValue: '')
       @JsonKey(name: 'principal')
-      required this.principalCode})
+          required this.principalCode})
       : super._();
 
   factory _$_SalesOrganisationConfigsPrincipalDto.fromJson(
@@ -203,10 +203,10 @@ abstract class _SalesOrganisationConfigsPrincipalDto
   const factory _SalesOrganisationConfigsPrincipalDto(
           {@HiveField(1, defaultValue: 0)
           @JsonKey(name: 'date', defaultValue: 0)
-          required final int date,
+              required final int date,
           @HiveField(2, defaultValue: '')
           @JsonKey(name: 'principal')
-          required final String principalCode}) =
+              required final String principalCode}) =
       _$_SalesOrganisationConfigsPrincipalDto;
   const _SalesOrganisationConfigsPrincipalDto._() : super._();
 

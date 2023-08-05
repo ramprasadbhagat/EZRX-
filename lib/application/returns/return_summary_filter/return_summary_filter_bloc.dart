@@ -22,17 +22,23 @@ class ReturnSummaryFilterBloc
     event.map(
       initialized: (_) => emit(ReturnSummaryFilterState.initial()),
       applyFilters: (_) {
-        emit(state.copyWith(
-          isSubmitting: false,
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+          ),
+        );
         if (state.returnSummaryFilter.areFiltersValid) {
-          emit(state.copyWith(
-            isSubmitting: true,
-          ));
+          emit(
+            state.copyWith(
+              isSubmitting: true,
+            ),
+          );
         } else {
-          emit(state.copyWith(
-            showErrorMessages: true,
-          ));
+          emit(
+            state.copyWith(
+              showErrorMessages: true,
+            ),
+          );
         }
       },
       returnIdChanged: (e) => emit(

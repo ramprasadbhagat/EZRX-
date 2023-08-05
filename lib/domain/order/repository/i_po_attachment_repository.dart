@@ -42,5 +42,4 @@ abstract class IpoAttachmentRepository {
   });
 
   Future<Either<ApiFailure, PermissionStatus>> downloadPermission();
-
 }

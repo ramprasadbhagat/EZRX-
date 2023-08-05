@@ -19,35 +19,37 @@ class WidgetUtils {
     EasyLocalization.logger.enableBuildModes = [];
 
     return RouteDataScope(
-        routeData: RouteData(
-          router: autoRouterMock,
-          route: RouteMatch(
-            name: routeName ?? 'MaterialRootRoute',
-            segments: const [''],
-            path: '',
-            stringMatch: '',
-            key: ValueKey(routeName ?? 'MaterialRootRoute'),
-          ),
-          pendingChildren: [],
+      routeData: RouteData(
+        router: autoRouterMock,
+        route: RouteMatch(
+          name: routeName ?? 'MaterialRootRoute',
+          segments: const [''],
+          path: '',
+          stringMatch: '',
+          key: ValueKey(routeName ?? 'MaterialRootRoute'),
         ),
-        child: RouterScope(
-            controller: autoRouterMock,
-            inheritableObserversBuilder: () => [],
-            navigatorObservers: const [],
-            stateHash: 0,
-            child: StackRouterScope(
-              controller: autoRouterMock,
-              stateHash: 0,
-              child: providers.isNotEmpty
-                  ? MultiBlocProviderFrameWrapper(
-                      useMediaQuery: useMediaQuery,
-                      providers: providers,
-                      child: child,
-                    )
-                  : MaterialFrameWrapper(
-                      useMediaQuery: useMediaQuery,
-                      child: child,
-                    ),
-            )));
+        pendingChildren: [],
+      ),
+      child: RouterScope(
+        controller: autoRouterMock,
+        inheritableObserversBuilder: () => [],
+        navigatorObservers: const [],
+        stateHash: 0,
+        child: StackRouterScope(
+          controller: autoRouterMock,
+          stateHash: 0,
+          child: providers.isNotEmpty
+              ? MultiBlocProviderFrameWrapper(
+                  useMediaQuery: useMediaQuery,
+                  providers: providers,
+                  child: child,
+                )
+              : MaterialFrameWrapper(
+                  useMediaQuery: useMediaQuery,
+                  child: child,
+                ),
+        ),
+      ),
+    );
   }
 }

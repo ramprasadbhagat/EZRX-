@@ -10,7 +10,6 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_qu
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_response_dto.dart';
 
-
 class PaymentSummaryRemoteDataSource {
   HttpService httpService;
   PaymentSummaryQuery paymentSummaryQuery;

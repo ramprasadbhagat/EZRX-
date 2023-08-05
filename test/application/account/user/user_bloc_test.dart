@@ -70,16 +70,16 @@ void main() {
         userRepository: userRepoMock,
       ),
       setUp: () {
-        when(() => userRepoMock.updateUserTc())
-            .thenAnswer(
+        when(() => userRepoMock.updateUserTc()).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('tnc failed')),
         );
       },
       act: (UserBloc bloc) => bloc.add(const UserEvent.acceptTnc()),
       expect: () => [
         UserState.initial().copyWith(
-            userFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('tnc failed'))))
+          userFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('tnc failed'))),
+        )
       ],
     );
 
@@ -140,17 +140,25 @@ void main() {
             User.empty(),
           ),
         );
-        when(() => userRepoMock.updateNotificationSettings(User.empty()
-            .copyWith(
-                settings: Settings.empty().copyWith(
-                    languagePreference: LanguageValue(ApiLanguageCode.english),
-                    emailNotifications: true)))).thenAnswer(
+        when(
+          () => userRepoMock.updateNotificationSettings(
+            User.empty().copyWith(
+              settings: Settings.empty().copyWith(
+                languagePreference: LanguageValue(ApiLanguageCode.english),
+                emailNotifications: true,
+              ),
+            ),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(User.empty()),
         );
       },
-      act: (UserBloc bloc) => bloc.add(UserEvent.updateNotificationSettings(
+      act: (UserBloc bloc) => bloc.add(
+        UserEvent.updateNotificationSettings(
           languagePreference: LanguageValue(ApiLanguageCode.english),
-          emailNotifications: true)),
+          emailNotifications: true,
+        ),
+      ),
       expect: () => [UserState.initial()],
     );
 
@@ -165,23 +173,32 @@ void main() {
             User.empty(),
           ),
         );
-        when(() => userRepoMock.updateNotificationSettings(User.empty()
-            .copyWith(
-                settings: Settings.empty().copyWith(
-                    languagePreference: LanguageValue(ApiLanguageCode.english),
-                    emailNotifications: true)))).thenAnswer(
+        when(
+          () => userRepoMock.updateNotificationSettings(
+            User.empty().copyWith(
+              settings: Settings.empty().copyWith(
+                languagePreference: LanguageValue(ApiLanguageCode.english),
+                emailNotifications: true,
+              ),
+            ),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake Error'),
           ),
         );
       },
-      act: (UserBloc bloc) => bloc.add(UserEvent.updateNotificationSettings(
+      act: (UserBloc bloc) => bloc.add(
+        UserEvent.updateNotificationSettings(
           languagePreference: LanguageValue(ApiLanguageCode.english),
-          emailNotifications: true)),
+          emailNotifications: true,
+        ),
+      ),
       expect: () => [
         UserState.initial().copyWith(
-            userFailureOrSuccessOption:
-                some(const Left(ApiFailure.other('Fake Error'))))
+          userFailureOrSuccessOption:
+              some(const Left(ApiFailure.other('Fake Error'))),
+        )
       ],
     );
   });

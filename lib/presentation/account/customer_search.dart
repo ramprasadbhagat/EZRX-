@@ -310,9 +310,12 @@ class _ShipToAddressSection extends StatelessWidget {
           MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
         },
       );
-      trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
-        MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
-      });
+      trackMixpanelEvent(
+        MixpanelEvents.customerCodeSave,
+        props: {
+          MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
+        },
+      );
     }
   }
 

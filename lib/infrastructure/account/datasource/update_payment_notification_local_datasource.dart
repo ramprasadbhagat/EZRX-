@@ -11,7 +11,8 @@ class UpdatePaymentNotificationLocalDataSource {
 
   Future<UpdatePaymentNotificationResponse> updatePaymentNotification() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/updatePaymentNotificationResponse.json'),
+      await rootBundle
+          .loadString('assets/json/updatePaymentNotificationResponse.json'),
     );
 
     return UpdatePaymentNotificationResponseDto.fromJson(

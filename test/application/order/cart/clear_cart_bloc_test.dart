@@ -44,9 +44,10 @@ void main() {
       expect: () => [
         CartState.initial().copyWith(isClearing: true),
         CartState.initial().copyWith(
-            isClearing: false,
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake-Error')))),
+          isClearing: false,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-Error'))),
+        ),
       ],
     );
   });
@@ -81,19 +82,25 @@ void main() {
     blocTest<CartBloc, CartState>(
       'Clear Selected Item from cart Success',
       build: () => CartBloc(cartRepositoryMock),
-      seed: () => CartState.initial().copyWith(cartItems: [
-        cartItem1,
-        cartItem2,
-      ]),
+      seed: () => CartState.initial().copyWith(
+        cartItems: [
+          cartItem1,
+          cartItem2,
+        ],
+      ),
       setUp: () {
-        when(() => cartRepositoryMock.clearCartOnlySelectedItems(
-            selectedItemIds: ['0000012345678'])).thenAnswer(
+        when(
+          () => cartRepositoryMock.clearCartOnlySelectedItems(
+            selectedItemIds: ['0000012345678'],
+          ),
+        ).thenAnswer(
           (invocation) async => Right([cartItem2]),
         );
       },
       act: (bloc) => bloc.add(
         const CartEvent.clearSelectedItemsFromCart(
-            selectedItemIds: ['0000012345678']),
+          selectedItemIds: ['0000012345678'],
+        ),
       ),
       expect: () => [
         CartState.initial().copyWith(
@@ -131,14 +138,18 @@ void main() {
         ],
       ),
       setUp: () {
-        when(() => cartRepositoryMock.clearCartOnlySelectedItems(
-            selectedItemIds: ['0000012345678'])).thenAnswer(
+        when(
+          () => cartRepositoryMock.clearCartOnlySelectedItems(
+            selectedItemIds: ['0000012345678'],
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-Error')),
         );
       },
       act: (bloc) => bloc.add(
         const CartEvent.clearSelectedItemsFromCart(
-            selectedItemIds: ['0000012345678']),
+          selectedItemIds: ['0000012345678'],
+        ),
       ),
       expect: () => [
         CartState.initial().copyWith(
@@ -149,13 +160,14 @@ void main() {
           ],
         ),
         CartState.initial().copyWith(
-            isClearing: false,
-            cartItems: [
-              cartItem1,
-              cartItem2,
-            ],
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake-Error')))),
+          isClearing: false,
+          cartItems: [
+            cartItem1,
+            cartItem2,
+          ],
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-Error'))),
+        ),
       ],
     );
   });

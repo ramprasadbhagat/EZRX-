@@ -27,8 +27,7 @@ class ForgotPasswordRepository implements IForgotPasswordRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final response =
-            await localDataSource.requestResetPassword();
+        final response = await localDataSource.requestResetPassword();
 
         return Right(response);
       } catch (e) {
@@ -36,8 +35,7 @@ class ForgotPasswordRepository implements IForgotPasswordRepository {
       }
     }
     try {
-      final response =
-          await remoteDataSource.requestResetPassword(
+      final response = await remoteDataSource.requestResetPassword(
         username: username.getOrCrash(),
         language: locale.languageCode,
       );

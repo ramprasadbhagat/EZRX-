@@ -10,7 +10,9 @@ class SelectableExpansionTileList extends StatefulWidget {
     Key? key,
     required this.expansionTileList,
   })  : assert(
-            expansionTileList.isNotEmpty, 'expansionTileList cannot be empty'),
+          expansionTileList.isNotEmpty,
+          'expansionTileList cannot be empty',
+        ),
         assert(
           expansionTileList.where((element) => element.expanded).length < 2,
           'single SelectableExpansionTile can Be selected initially',

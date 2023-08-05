@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'user_restriction_status.freezed.dart';
 
 @freezed
@@ -12,8 +11,7 @@ class UserRestrictionStatus with _$UserRestrictionStatus {
     required bool approvalLimitStatus,
   }) = _UserRestrictionStatus;
 
-  factory UserRestrictionStatus.empty() =>
-      const UserRestrictionStatus(
+  factory UserRestrictionStatus.empty() => const UserRestrictionStatus(
         approverRightsStatus: '',
         approvalLimitStatus: false,
       );
@@ -21,5 +19,4 @@ class UserRestrictionStatus with _$UserRestrictionStatus {
   bool get ifUserAdded =>
       approverRightsStatus.isNotEmpty || approvalLimitStatus;
   bool get ifUserNotConfigured => approverRightsStatus == '0 rows inserted';
-
 }

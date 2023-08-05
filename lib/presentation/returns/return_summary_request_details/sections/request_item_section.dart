@@ -96,26 +96,29 @@ class _ReturnItemSectionState extends State<_ReturnItemSection> {
       ),
       footerWidget: Column(
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              '${'Qty:'.tr()} ${widget.returnRequestinformation.returnQuantity.toString()}',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.black,
-                  ),
-            ),
-            PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              price: widget.returnRequestinformation.totalPrice.toString(),
-              priceLabelStyle: Theme.of(context)
-                  .textTheme
-                  .labelSmall
-                  ?.copyWith(color: ZPColors.primary),
-              currencyCodeTextStyle: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: ZPColors.primary),
-            ),
-          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${'Qty:'.tr()} ${widget.returnRequestinformation.returnQuantity.toString()}',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.black,
+                    ),
+              ),
+              PriceComponent(
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: widget.returnRequestinformation.totalPrice.toString(),
+                priceLabelStyle: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: ZPColors.primary),
+                currencyCodeTextStyle: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: ZPColors.primary),
+              ),
+            ],
+          ),
           InkWell(
             onTap: () {
               setState(() {

@@ -22,7 +22,6 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
     await event.map(
       initialized: (e) async => emit(BannerState.initial()),
       fetch: (e) async {
-
         //Fetch eZReach Banner
         final eZReachFailureOrSuccess = await bannerRepository.getEZReachBanner(
           salesOrganisation: e.salesOrganisation,
@@ -39,7 +38,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
 
         eZReachFailureOrSuccess.fold(
           //eZReach Banner failed
-          (failure) {            
+          (failure) {
             eZRxFailureOrSuccess.fold(
               (failure) => emit(
                 state.copyWith(
@@ -56,7 +55,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
             );
           },
 
-           //eZReach Banner success
+          //eZReach Banner success
           (eZReachBannerList) {
             eZRxFailureOrSuccess.fold(
               (failure) => emit(
@@ -67,7 +66,8 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
               ),
               (eZRxBannerList) => emit(
                 state.copyWith(
-                  banner: eZReachBannerList + eZRxBannerList, // Both banner success
+                  banner:
+                      eZReachBannerList + eZRxBannerList, // Both banner success
                   bannerFailureOrSuccessOption: none(),
                 ),
               ),

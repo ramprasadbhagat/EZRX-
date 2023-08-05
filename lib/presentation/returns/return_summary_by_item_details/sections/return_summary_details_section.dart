@@ -111,8 +111,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
               BalanceTextRow(
                 keyText: 'Request date'.tr(),
                 keyFlex: 2,
-                valueText:
-                    widget.requestInformation.createdDate.dateString,
+                valueText: widget.requestInformation.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

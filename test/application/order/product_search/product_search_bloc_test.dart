@@ -76,15 +76,17 @@ void main() {
           searchKey: searchKey,
         ),
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: SearchKey('diff-search-key'),
-                pageSize: 24,
-                offset: 0,
-              )).thenAnswer((_) async => Right(materialResponse));
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: SearchKey('diff-search-key'),
+              pageSize: 24,
+              offset: 0,
+            ),
+          ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
@@ -116,15 +118,17 @@ void main() {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Emits correct states and responses',
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: searchKey,
-                pageSize: 24,
-                offset: 0,
-              )).thenAnswer((_) async => Right(materialResponse));
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: searchKey,
+              pageSize: 24,
+              offset: 0,
+            ),
+          ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
@@ -145,26 +149,29 @@ void main() {
             apiFailureOrSuccessOption: none(),
           ),
           ProductSearchState.initial().copyWith(
-              apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
-              suggestedProductList: materialResponse.products,
-              isSearching: false,
-              canLoadMore: true,
-              searchKey: searchKey),
+            apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
+            suggestedProductList: materialResponse.products,
+            isSearching: false,
+            canLoadMore: true,
+            searchKey: searchKey,
+          ),
         ],
       );
 
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Emits failure state when repository returns a failure',
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: searchKey,
-                pageSize: 24,
-                offset: 0,
-              )).thenAnswer(
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: searchKey,
+              pageSize: 24,
+              offset: 0,
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
           return productSearchBloc;
@@ -207,15 +214,17 @@ void main() {
           searchKey: searchKey,
         ),
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: SearchKey('diff-search-key'),
-                pageSize: 24,
-                offset: 0,
-              )).thenAnswer((_) async => Right(materialResponse));
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: SearchKey('diff-search-key'),
+              pageSize: 24,
+              offset: 0,
+            ),
+          ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
@@ -257,15 +266,17 @@ void main() {
           searchKey: searchKey,
         ),
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: searchKey,
-                pageSize: 24,
-                offset: 24,
-              )).thenAnswer((_) async => Right(fakeResponse2));
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: searchKey,
+              pageSize: 24,
+              offset: 24,
+            ),
+          ).thenAnswer((_) async => Right(fakeResponse2));
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
@@ -299,15 +310,17 @@ void main() {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Does not call repository when already searching or no more results',
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: searchKey,
-                pageSize: 24,
-                offset: 0,
-              )).thenAnswer((_) async => Right(materialResponse));
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: searchKey,
+              pageSize: 24,
+              offset: 0,
+            ),
+          ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
         },
         seed: () => ProductSearchState.initial().copyWith(
@@ -338,17 +351,21 @@ void main() {
           searchKey: searchKey,
         ),
         build: () {
-          when(() => productSearchRepository.searchProductList(
-                salesOrganization: salesOrganization,
-                salesOrgConfig: salesOrgConfigs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                searchKey: searchKey,
-                pageSize: 24,
-                offset: 24,
-              )).thenAnswer((_) async => const Left(
-                ApiFailure.other('fake-error'),
-              ));
+          when(
+            () => productSearchRepository.searchProductList(
+              salesOrganization: salesOrganization,
+              salesOrgConfig: salesOrgConfigs,
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+              searchKey: searchKey,
+              pageSize: 24,
+              offset: 24,
+            ),
+          ).thenAnswer(
+            (_) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
@@ -427,7 +444,8 @@ void main() {
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-            const ProductSearchEvent.fetchProductSearchSuggestionHistory()),
+          const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
+        ),
         expect: () => [
           ProductSearchState.initial().copyWith(
             productSuggestionHistory: searchKeys,
@@ -438,14 +456,16 @@ void main() {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> FetchProductSuggestionHistory with error',
         build: () {
-          when(() => productSearchRepository.getSearchKeys())
-              .thenAnswer((_) async => const Left(
-                    ApiFailure.other('fake-error'),
-                  ));
+          when(() => productSearchRepository.getSearchKeys()).thenAnswer(
+            (_) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-            const ProductSearchEvent.fetchProductSearchSuggestionHistory()),
+          const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
+        ),
         expect: () => [
           ProductSearchState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(
@@ -467,7 +487,8 @@ void main() {
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-            const ProductSearchEvent.clearProductSearchSuggestionHistory()),
+          const ProductSearchEvent.clearProductSearchSuggestionHistory(),
+        ),
         expect: () => [
           ProductSearchState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
@@ -479,14 +500,16 @@ void main() {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Clear search history with error',
         build: () {
-          when(() => productSearchRepository.clearSearchHistory())
-              .thenAnswer((_) async => const Left(
-                    ApiFailure.other('fake-error'),
-                  ));
+          when(() => productSearchRepository.clearSearchHistory()).thenAnswer(
+            (_) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-            const ProductSearchEvent.clearProductSearchSuggestionHistory()),
+          const ProductSearchEvent.clearProductSearchSuggestionHistory(),
+        ),
         expect: () => [
           ProductSearchState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(

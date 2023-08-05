@@ -17,8 +17,8 @@ class MaterialFilterDto with _$MaterialFilterDto {
 
   MaterialFilter toDomain() {
     return MaterialFilter(
-      manufactureMapOptions: { for (var e in manufactureList) e : false },
-      countryMapOptions: { for (var e in countryList) e.toDomain(): false },
+      manufactureMapOptions: {for (var e in manufactureList) e: false},
+      countryMapOptions: {for (var e in countryList) e.toDomain(): false},
       brandList: brandList,
     );
   }
@@ -37,7 +37,9 @@ class MaterialFilterCountryDto with _$MaterialFilterCountryDto {
 
   MaterialFilterCountry toDomain() {
     return MaterialFilterCountry(
-        code: code, name: name,);
+      code: code,
+      name: name,
+    );
   }
 
   factory MaterialFilterCountryDto.fromJson(Map<String, dynamic> json) =>

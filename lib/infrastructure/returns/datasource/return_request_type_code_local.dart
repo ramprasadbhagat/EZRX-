@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 class ReturnRequestTypeCodeLocalDataSource {
   ReturnRequestTypeCodeLocalDataSource();
 
-  Future<List<ReturnRequestTypeCodeDetails>> getReturnRequestTypeCodeList() async {
+  Future<List<ReturnRequestTypeCodeDetails>>
+      getReturnRequestTypeCodeList() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getReturnRequestTypeCode.json'),
+      await rootBundle.loadString('assets/json/getReturnRequestTypeCode.json'),
     );
 
     return List.from(data['data']['typeOfRequest'])

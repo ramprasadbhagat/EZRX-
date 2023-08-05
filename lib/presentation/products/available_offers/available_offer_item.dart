@@ -39,21 +39,19 @@ class AvailableOfferItem extends StatelessWidget {
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.textButtonColor,
                 ),
-            overflow:TextOverflow.ellipsis,
+            overflow: TextOverflow.ellipsis,
           ),
           Text(
             bonusMaterial.materialNumber.displayMatNo,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: ZPColors.extraLightGrey4,),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.extraLightGrey4,
+                ),
           ),
           Text(
             '${'Purchase quantity'.tr()}: ${bonusMaterial.qualifyingQuantity}',
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: ZPColors.black,),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.black,
+                ),
           ),
         ],
       ),

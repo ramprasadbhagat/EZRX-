@@ -5,9 +5,8 @@ class AupTcEvent with _$AupTcEvent {
   const factory AupTcEvent.show(User user, SalesOrg salesOrg) = _Show;
   const factory AupTcEvent.termsOfUseConsent({
     required bool newValue,
-  })= _TermsOfUseConsent;
+  }) = _TermsOfUseConsent;
   const factory AupTcEvent.privacyPolicyConsent({
     required bool newValue,
-  })= _PrivacyPolicyConsent;
+  }) = _PrivacyPolicyConsent;
 }
-

@@ -84,42 +84,54 @@ abstract class $PaymentSummaryDetailsDtoCopyWith<$Res> {
       _$PaymentSummaryDetailsDtoCopyWithImpl<$Res, PaymentSummaryDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
+      {@JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
       @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
-      String valueDate,
-      @JsonKey(name: 'paymentAmount', defaultValue: 0.0) double paymentAmount,
+          String valueDate,
+      @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
+          double paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      String transactionCurrency,
+          String transactionCurrency,
       @JsonKey(name: 'paymentDocument', defaultValue: '')
-      String paymentDocument,
-      @JsonKey(name: 'status', defaultValue: '') String status,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
-      @JsonKey(name: 'iban', defaultValue: '') String iban,
-      @JsonKey(name: 'bankKey', defaultValue: '') String bankKey,
-      @JsonKey(name: 'bankCountryKey', defaultValue: '') String bankCountryKey,
+          String paymentDocument,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
+      @JsonKey(name: 'iban', defaultValue: '')
+          String iban,
+      @JsonKey(name: 'bankKey', defaultValue: '')
+          String bankKey,
+      @JsonKey(name: 'bankCountryKey', defaultValue: '')
+          String bankCountryKey,
       @JsonKey(name: 'bankAccountNumber', defaultValue: '')
-      String bankAccountNumber,
-      @JsonKey(name: 'bankName', defaultValue: '') String bankName,
-      @JsonKey(name: 'paymentCardID', defaultValue: '') String paymentCardID,
+          String bankAccountNumber,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          String bankName,
+      @JsonKey(name: 'paymentCardID', defaultValue: '')
+          String paymentCardID,
       @JsonKey(name: 'paymentCardNumber', defaultValue: '')
-      String paymentCardNumber,
+          String paymentCardNumber,
       @JsonKey(name: 'paymentCardHolderName', defaultValue: '')
-      String paymentCardHolderName,
+          String paymentCardHolderName,
       @JsonKey(name: 'paymentCardMaskedNumber', defaultValue: '')
-      String paymentCardMaskedNumber,
+          String paymentCardMaskedNumber,
       @JsonKey(name: 'paymentCardTypeName', defaultValue: '')
-      String paymentCardTypeName,
-      @JsonKey(name: 'customId', defaultValue: '') String customId,
+          String paymentCardTypeName,
+      @JsonKey(name: 'customId', defaultValue: '')
+          String customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
-      String bankIdentification,
+          String bankIdentification,
       @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
-      String createdDate,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
+          String createdDate,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'adviceExpiry', defaultValue: '')
+          String adviceExpiry,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      String accountingDocExternalReference,
+          String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo});
+          String paymentBatchAdditionalInfo});
 }
 
 /// @nodoc
@@ -272,42 +284,54 @@ abstract class _$$_PaymentSummaryDetailsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
+      {@JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
       @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
-      String valueDate,
-      @JsonKey(name: 'paymentAmount', defaultValue: 0.0) double paymentAmount,
+          String valueDate,
+      @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
+          double paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      String transactionCurrency,
+          String transactionCurrency,
       @JsonKey(name: 'paymentDocument', defaultValue: '')
-      String paymentDocument,
-      @JsonKey(name: 'status', defaultValue: '') String status,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
-      @JsonKey(name: 'iban', defaultValue: '') String iban,
-      @JsonKey(name: 'bankKey', defaultValue: '') String bankKey,
-      @JsonKey(name: 'bankCountryKey', defaultValue: '') String bankCountryKey,
+          String paymentDocument,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
+      @JsonKey(name: 'iban', defaultValue: '')
+          String iban,
+      @JsonKey(name: 'bankKey', defaultValue: '')
+          String bankKey,
+      @JsonKey(name: 'bankCountryKey', defaultValue: '')
+          String bankCountryKey,
       @JsonKey(name: 'bankAccountNumber', defaultValue: '')
-      String bankAccountNumber,
-      @JsonKey(name: 'bankName', defaultValue: '') String bankName,
-      @JsonKey(name: 'paymentCardID', defaultValue: '') String paymentCardID,
+          String bankAccountNumber,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          String bankName,
+      @JsonKey(name: 'paymentCardID', defaultValue: '')
+          String paymentCardID,
       @JsonKey(name: 'paymentCardNumber', defaultValue: '')
-      String paymentCardNumber,
+          String paymentCardNumber,
       @JsonKey(name: 'paymentCardHolderName', defaultValue: '')
-      String paymentCardHolderName,
+          String paymentCardHolderName,
       @JsonKey(name: 'paymentCardMaskedNumber', defaultValue: '')
-      String paymentCardMaskedNumber,
+          String paymentCardMaskedNumber,
       @JsonKey(name: 'paymentCardTypeName', defaultValue: '')
-      String paymentCardTypeName,
-      @JsonKey(name: 'customId', defaultValue: '') String customId,
+          String paymentCardTypeName,
+      @JsonKey(name: 'customId', defaultValue: '')
+          String customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
-      String bankIdentification,
+          String bankIdentification,
       @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
-      String createdDate,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
+          String createdDate,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'adviceExpiry', defaultValue: '')
+          String adviceExpiry,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      String accountingDocExternalReference,
+          String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo});
+          String paymentBatchAdditionalInfo});
 }
 
 /// @nodoc
@@ -452,47 +476,54 @@ class __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
   const _$_PaymentSummaryDetailsDto(
-      {@JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
+      {@JsonKey(name: 'paymentID', defaultValue: '')
+          required this.paymentID,
       @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
-      required this.valueDate,
+          required this.valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
-      required this.paymentAmount,
+          required this.paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      required this.transactionCurrency,
+          required this.transactionCurrency,
       @JsonKey(name: 'paymentDocument', defaultValue: '')
-      required this.paymentDocument,
-      @JsonKey(name: 'status', defaultValue: '') required this.status,
+          required this.paymentDocument,
+      @JsonKey(name: 'status', defaultValue: '')
+          required this.status,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required this.paymentMethod,
-      @JsonKey(name: 'iban', defaultValue: '') required this.iban,
-      @JsonKey(name: 'bankKey', defaultValue: '') required this.bankKey,
+          required this.paymentMethod,
+      @JsonKey(name: 'iban', defaultValue: '')
+          required this.iban,
+      @JsonKey(name: 'bankKey', defaultValue: '')
+          required this.bankKey,
       @JsonKey(name: 'bankCountryKey', defaultValue: '')
-      required this.bankCountryKey,
+          required this.bankCountryKey,
       @JsonKey(name: 'bankAccountNumber', defaultValue: '')
-      required this.bankAccountNumber,
-      @JsonKey(name: 'bankName', defaultValue: '') required this.bankName,
+          required this.bankAccountNumber,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          required this.bankName,
       @JsonKey(name: 'paymentCardID', defaultValue: '')
-      required this.paymentCardID,
+          required this.paymentCardID,
       @JsonKey(name: 'paymentCardNumber', defaultValue: '')
-      required this.paymentCardNumber,
+          required this.paymentCardNumber,
       @JsonKey(name: 'paymentCardHolderName', defaultValue: '')
-      required this.paymentCardHolderName,
+          required this.paymentCardHolderName,
       @JsonKey(name: 'paymentCardMaskedNumber', defaultValue: '')
-      required this.paymentCardMaskedNumber,
+          required this.paymentCardMaskedNumber,
       @JsonKey(name: 'paymentCardTypeName', defaultValue: '')
-      required this.paymentCardTypeName,
-      @JsonKey(name: 'customId', defaultValue: '') required this.customId,
+          required this.paymentCardTypeName,
+      @JsonKey(name: 'customId', defaultValue: '')
+          required this.customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
-      required this.bankIdentification,
+          required this.bankIdentification,
       @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
-      required this.createdDate,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') required this.zzAdvice,
+          required this.createdDate,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          required this.zzAdvice,
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
-      required this.adviceExpiry,
+          required this.adviceExpiry,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      required this.accountingDocExternalReference,
+          required this.accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required this.paymentBatchAdditionalInfo})
+          required this.paymentBatchAdditionalInfo})
       : super._();
 
   factory _$_PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =>
@@ -681,51 +712,54 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
 abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
   const factory _PaymentSummaryDetailsDto(
       {@JsonKey(name: 'paymentID', defaultValue: '')
-      required final String paymentID,
+          required final String paymentID,
       @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
-      required final String valueDate,
+          required final String valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
-      required final double paymentAmount,
+          required final double paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
-      required final String transactionCurrency,
+          required final String transactionCurrency,
       @JsonKey(name: 'paymentDocument', defaultValue: '')
-      required final String paymentDocument,
-      @JsonKey(name: 'status', defaultValue: '') required final String status,
+          required final String paymentDocument,
+      @JsonKey(name: 'status', defaultValue: '')
+          required final String status,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required final String paymentMethod,
-      @JsonKey(name: 'iban', defaultValue: '') required final String iban,
-      @JsonKey(name: 'bankKey', defaultValue: '') required final String bankKey,
+          required final String paymentMethod,
+      @JsonKey(name: 'iban', defaultValue: '')
+          required final String iban,
+      @JsonKey(name: 'bankKey', defaultValue: '')
+          required final String bankKey,
       @JsonKey(name: 'bankCountryKey', defaultValue: '')
-      required final String bankCountryKey,
+          required final String bankCountryKey,
       @JsonKey(name: 'bankAccountNumber', defaultValue: '')
-      required final String bankAccountNumber,
+          required final String bankAccountNumber,
       @JsonKey(name: 'bankName', defaultValue: '')
-      required final String bankName,
+          required final String bankName,
       @JsonKey(name: 'paymentCardID', defaultValue: '')
-      required final String paymentCardID,
+          required final String paymentCardID,
       @JsonKey(name: 'paymentCardNumber', defaultValue: '')
-      required final String paymentCardNumber,
+          required final String paymentCardNumber,
       @JsonKey(name: 'paymentCardHolderName', defaultValue: '')
-      required final String paymentCardHolderName,
+          required final String paymentCardHolderName,
       @JsonKey(name: 'paymentCardMaskedNumber', defaultValue: '')
-      required final String paymentCardMaskedNumber,
+          required final String paymentCardMaskedNumber,
       @JsonKey(name: 'paymentCardTypeName', defaultValue: '')
-      required final String paymentCardTypeName,
+          required final String paymentCardTypeName,
       @JsonKey(name: 'customId', defaultValue: '')
-      required final String customId,
+          required final String customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
-      required final String bankIdentification,
+          required final String bankIdentification,
       @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
-      required final String createdDate,
+          required final String createdDate,
       @JsonKey(name: 'zzAdvice', defaultValue: '')
-      required final String zzAdvice,
+          required final String zzAdvice,
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
-      required final String adviceExpiry,
+          required final String adviceExpiry,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-      required final String accountingDocExternalReference,
+          required final String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required final String
-          paymentBatchAdditionalInfo}) = _$_PaymentSummaryDetailsDto;
+          required final String
+              paymentBatchAdditionalInfo}) = _$_PaymentSummaryDetailsDto;
   const _PaymentSummaryDetailsDto._() : super._();
 
   factory _PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =

@@ -30,9 +30,7 @@ void main() {
     BankBeneficiary.empty(),
   ];
 
-  final salesDistrictMockList = [
-    SalesDistrict.empty()
-  ];
+  final salesDistrictMockList = [SalesDistrict.empty()];
 
   final bankBeneficiaryResponseMock = BankBeneficiaryResponse.empty();
 
@@ -90,24 +88,25 @@ void main() {
     });
   });
 
-    group('BankBeneficiaryRepository => getSalesDistrict', () {
+  group('BankBeneficiaryRepository => getSalesDistrict', () {
     test('successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => localDataSource.getSalesDistrict())
           .thenAnswer((invocation) async => salesDistrictMockList);
 
-      final result = await bankBeneficiaryRepo
-          .getSalesDistrict(salesOrg: SalesOrg('3050'));
+      final result = await bankBeneficiaryRepo.getSalesDistrict(
+        salesOrg: SalesOrg('3050'),
+      );
       expect(result.isRight(), true);
     });
 
     test('fails locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => localDataSource.getSalesDistrict())
-          .thenThrow(MockException());
+      when(() => localDataSource.getSalesDistrict()).thenThrow(MockException());
 
-      final result = await bankBeneficiaryRepo
-          .getSalesDistrict(salesOrg: SalesOrg('3050'));
+      final result = await bankBeneficiaryRepo.getSalesDistrict(
+        salesOrg: SalesOrg('3050'),
+      );
       expect(result.isLeft(), true);
     });
 
@@ -116,18 +115,20 @@ void main() {
       when(() => remoteDataSource.getSalesDistrict(salesOrg: '3050'))
           .thenAnswer((invocation) async => salesDistrictMockList);
 
-      final result = await bankBeneficiaryRepo
-          .getSalesDistrict(salesOrg: SalesOrg('3050'));
+      final result = await bankBeneficiaryRepo.getSalesDistrict(
+        salesOrg: SalesOrg('3050'),
+      );
       expect(result.isRight(), true);
     });
 
     test('fails remotely', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(() => remoteDataSource.getSalesDistrict(salesOrg: '3050'))
-            .thenThrow(Error());
+          .thenThrow(Error());
 
-      final result = await bankBeneficiaryRepo 
-            .getSalesDistrict(salesOrg: SalesOrg('3050'));
+      final result = await bankBeneficiaryRepo.getSalesDistrict(
+        salesOrg: SalesOrg('3050'),
+      );
       expect(result.isLeft(), true);
     });
   });
@@ -138,8 +139,9 @@ void main() {
       when(() => localDataSource.addOrUpdateBeneficiary())
           .thenAnswer((invocation) async => bankBeneficiaryResponseMock);
 
-      final result = await bankBeneficiaryRepo
-          .addOrUpdateBeneficiary(beneficiaryData: beneficiaryDataMock);
+      final result = await bankBeneficiaryRepo.addOrUpdateBeneficiary(
+        beneficiaryData: beneficiaryDataMock,
+      );
       expect(result.isRight(), true);
     });
 
@@ -148,32 +150,39 @@ void main() {
       when(() => localDataSource.addOrUpdateBeneficiary())
           .thenThrow(MockException());
 
-      final result = await bankBeneficiaryRepo
-          .addOrUpdateBeneficiary(beneficiaryData: beneficiaryDataMock);
+      final result = await bankBeneficiaryRepo.addOrUpdateBeneficiary(
+        beneficiaryData: beneficiaryDataMock,
+      );
       expect(result.isLeft(), true);
     });
 
     test('successfully remotely', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => remoteDataSource.addOrUpdateBeneficiary(
-          beneficiaryData: BankBeneficiaryDto.
-          fromDomain(beneficiaryDataMock).toJson()))
-          .thenAnswer((invocation) async => bankBeneficiaryResponseMock);
+      when(
+        () => remoteDataSource.addOrUpdateBeneficiary(
+          beneficiaryData:
+              BankBeneficiaryDto.fromDomain(beneficiaryDataMock).toJson(),
+        ),
+      ).thenAnswer((invocation) async => bankBeneficiaryResponseMock);
 
-      final result = await bankBeneficiaryRepo
-           .addOrUpdateBeneficiary(beneficiaryData: beneficiaryDataMock);
+      final result = await bankBeneficiaryRepo.addOrUpdateBeneficiary(
+        beneficiaryData: beneficiaryDataMock,
+      );
       expect(result.isRight(), true);
     });
 
     test('fails remotely', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => remoteDataSource.addOrUpdateBeneficiary(
-          beneficiaryData: BankBeneficiaryDto.
-          fromDomain(beneficiaryDataMock).toJson()))
-            .thenThrow(Error());
-            
-      final result = await bankBeneficiaryRepo 
-             .addOrUpdateBeneficiary(beneficiaryData: beneficiaryDataMock);
+      when(
+        () => remoteDataSource.addOrUpdateBeneficiary(
+          beneficiaryData:
+              BankBeneficiaryDto.fromDomain(beneficiaryDataMock).toJson(),
+        ),
+      ).thenThrow(Error());
+
+      final result = await bankBeneficiaryRepo.addOrUpdateBeneficiary(
+        beneficiaryData: beneficiaryDataMock,
+      );
       expect(result.isLeft(), true);
     });
   });
@@ -184,11 +193,10 @@ void main() {
       when(() => localDataSource.deleteBeneficiary())
           .thenAnswer((invocation) async => bankBeneficiaryResponseMock);
 
-      final result = await bankBeneficiaryRepo
-          .deleteBeneficiary(
-            salesOrg: beneficiaryDataMock.salesOrg,
-            salesDistrict: beneficiaryDataMock.salesDistrict,
-          );
+      final result = await bankBeneficiaryRepo.deleteBeneficiary(
+        salesOrg: beneficiaryDataMock.salesOrg,
+        salesDistrict: beneficiaryDataMock.salesDistrict,
+      );
       expect(result.isRight(), true);
     });
 
@@ -197,41 +205,42 @@ void main() {
       when(() => localDataSource.deleteBeneficiary())
           .thenThrow(MockException());
 
-      final result = await bankBeneficiaryRepo
-          .deleteBeneficiary(
-            salesOrg: beneficiaryDataMock.salesOrg,
-            salesDistrict: beneficiaryDataMock.salesDistrict,
-          );
+      final result = await bankBeneficiaryRepo.deleteBeneficiary(
+        salesOrg: beneficiaryDataMock.salesOrg,
+        salesDistrict: beneficiaryDataMock.salesDistrict,
+      );
       expect(result.isLeft(), true);
     });
 
     test('successfully remotely', () async {
-       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-       when(() => remoteDataSource.deleteBeneficiary(
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => remoteDataSource.deleteBeneficiary(
           salesOrg: '3050',
           salesDistrict: 'HCM',
-        )).thenAnswer((invocation) async => bankBeneficiaryResponseMock);
+        ),
+      ).thenAnswer((invocation) async => bankBeneficiaryResponseMock);
 
-      final result = await bankBeneficiaryRepo
-          .deleteBeneficiary(
-            salesOrg: beneficiaryDataMock.salesOrg,
-            salesDistrict: beneficiaryDataMock.salesDistrict,
-          );
+      final result = await bankBeneficiaryRepo.deleteBeneficiary(
+        salesOrg: beneficiaryDataMock.salesOrg,
+        salesDistrict: beneficiaryDataMock.salesDistrict,
+      );
       expect(result.isRight(), true);
     });
 
     test('fails remotely', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-       when(() => remoteDataSource.deleteBeneficiary(
+      when(
+        () => remoteDataSource.deleteBeneficiary(
           salesOrg: '3050',
           salesDistrict: 'HCM',
-        )).thenThrow(Error());
+        ),
+      ).thenThrow(Error());
 
-      final result = await bankBeneficiaryRepo
-          .deleteBeneficiary(
-            salesOrg: beneficiaryDataMock.salesOrg,
-            salesDistrict: beneficiaryDataMock.salesDistrict,
-          );
+      final result = await bankBeneficiaryRepo.deleteBeneficiary(
+        salesOrg: beneficiaryDataMock.salesOrg,
+        salesDistrict: beneficiaryDataMock.salesDistrict,
+      );
       expect(result.isLeft(), true);
     });
   });

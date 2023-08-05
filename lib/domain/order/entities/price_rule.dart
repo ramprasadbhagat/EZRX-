@@ -39,9 +39,9 @@ class TieredRules with _$TieredRules {
   }) = _TieredRules;
 
   factory TieredRules.empty() => const TieredRules(
-    tier: '',
-    ruleTier: [],
-  );
+        tier: '',
+        ruleTier: [],
+      );
 }
 
 @freezed
@@ -53,7 +53,7 @@ class RuleTier with _$RuleTier {
   }) = _RuleTier;
 
   factory RuleTier.empty() => const RuleTier(
-    rate: 0,
-    quantity: 0,
-  );
+        rate: 0,
+        quantity: 0,
+      );
 }

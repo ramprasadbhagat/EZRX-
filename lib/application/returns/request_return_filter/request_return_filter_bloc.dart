@@ -22,18 +22,24 @@ class RequestReturnFilterBloc
     event.map(
       initialized: (value) => emit(RequestReturnFilterState.initial()),
       filterRequestReturn: (value) {
-        emit(state.copyWith(
-          isSubmitting: false,
-        ));
-        if (state.requestReturnFilter.areFiltersValid) {
-          emit(state.copyWith(
-            isSubmitting: true,
-          ));
-        } else {
-          emit(state.copyWith(
-            showErrorMessages: true,
+        emit(
+          state.copyWith(
             isSubmitting: false,
-          ));
+          ),
+        );
+        if (state.requestReturnFilter.areFiltersValid) {
+          emit(
+            state.copyWith(
+              isSubmitting: true,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              showErrorMessages: true,
+              isSubmitting: false,
+            ),
+          );
         }
       },
       assignmentNumberChanged: (value) => emit(

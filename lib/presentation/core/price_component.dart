@@ -34,27 +34,38 @@ class PriceComponent extends StatelessWidget {
     final obscuredValue = priceValue.replaceAll(RegExp(r'[0-9]'), '*');
 
     if (title.isNotEmpty) {
-      textSpans.add(TextSpan(
+      textSpans.add(
+        TextSpan(
           text: title,
-          style: priceLabelStyle ?? priceTextStyle ?? defaultStyle,));
+          style: priceLabelStyle ?? priceTextStyle ?? defaultStyle,
+        ),
+      );
     }
     if (notPrice) {
-      textSpans.add(TextSpan(
+      textSpans.add(
+        TextSpan(
           text: obscured ? obscuredValue : priceValue,
-          style: priceTextStyle ?? defaultStyle,));
+          style: priceTextStyle ?? defaultStyle,
+        ),
+      );
 
       return textSpans;
     }
     final amount = priceValue.split(' ').last;
     //currency
-    textSpans.add(TextSpan(
-      text: priceValue.replaceAll(amount, ''),
-      style: currencyCodeTextStyle ?? defaultStyle,
-    ));
+    textSpans.add(
+      TextSpan(
+        text: priceValue.replaceAll(amount, ''),
+        style: currencyCodeTextStyle ?? defaultStyle,
+      ),
+    );
     //amount
-    textSpans.add(TextSpan(
+    textSpans.add(
+      TextSpan(
         text: obscured ? obscuredValue : amount,
-        style: priceTextStyle ?? defaultStyle,));
+        style: priceTextStyle ?? defaultStyle,
+      ),
+    );
 
     return textSpans;
   }

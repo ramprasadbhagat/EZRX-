@@ -102,45 +102,46 @@ void main() {
         ],
       );
       blocTest<ComboDealMaterialDetailBloc, ComboDealMaterialDetailState>(
-          'Init items from cart items (edit mode)',
-          build: () => ComboDealMaterialDetailBloc(),
-          act: (bloc) => bloc.add(
-                ComboDealMaterialDetailEvent.initFromCartComboDealItems(
-                  items: [
-                    fakeFirstQueryItem.copyWith(
-                      comboDeal: fakeComboDealDetail,
-                    )
-                  ],
-                  salesConfigs: SalesOrganisationConfigs.empty(),
-                ),
-              ),
-          expect: () => [
-                ComboDealMaterialDetailState(
-                  isFetchingComboInfo: false,
-                  isFetchingPrice: true,
-                  items: {
-                    fakeFirstMaterialNumber: fakeFirstQueryItem.copyWith(
-                      comboDeal: fakeComboDealDetail,
-                    ),
-                    fakeSecondMaterialNumber: fakeSecondQueryItem.copyWith(
-                      comboDeal: fakeComboDealDetail,
-                      quantity: 4,
-                    ),
-                  },
-                  selectedItems: {
-                    fakeFirstMaterialNumber: true,
-                    fakeSecondMaterialNumber: false,
-                  },
-                ),
-              ],
-          verify: (bloc) {
-            expect(bloc.state.currentDeal, fakeComboDealDetail);
-            expect(bloc.state.allSelectedItems, [
+        'Init items from cart items (edit mode)',
+        build: () => ComboDealMaterialDetailBloc(),
+        act: (bloc) => bloc.add(
+          ComboDealMaterialDetailEvent.initFromCartComboDealItems(
+            items: [
               fakeFirstQueryItem.copyWith(
                 comboDeal: fakeComboDealDetail,
+              )
+            ],
+            salesConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ),
+        expect: () => [
+          ComboDealMaterialDetailState(
+            isFetchingComboInfo: false,
+            isFetchingPrice: true,
+            items: {
+              fakeFirstMaterialNumber: fakeFirstQueryItem.copyWith(
+                comboDeal: fakeComboDealDetail,
               ),
-            ]);
-          });
+              fakeSecondMaterialNumber: fakeSecondQueryItem.copyWith(
+                comboDeal: fakeComboDealDetail,
+                quantity: 4,
+              ),
+            },
+            selectedItems: {
+              fakeFirstMaterialNumber: true,
+              fakeSecondMaterialNumber: false,
+            },
+          ),
+        ],
+        verify: (bloc) {
+          expect(bloc.state.currentDeal, fakeComboDealDetail);
+          expect(bloc.state.allSelectedItems, [
+            fakeFirstQueryItem.copyWith(
+              comboDeal: fakeComboDealDetail,
+            ),
+          ]);
+        },
+      );
 
       blocTest<ComboDealMaterialDetailBloc, ComboDealMaterialDetailState>(
         'Update Item quantity',

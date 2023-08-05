@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/returns/repository/i_return_price_repository.d
 
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 
-
 part 'return_price_event.dart';
 part 'return_price_state.dart';
 part 'return_price_bloc.freezed.dart';

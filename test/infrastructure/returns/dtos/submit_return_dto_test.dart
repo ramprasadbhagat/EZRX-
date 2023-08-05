@@ -13,8 +13,10 @@ void main() {
     'Test Submit Return => ',
     () {
       setUp(() async {
-        data = json.decode(await rootBundle
-            .loadString('assets/json/getSubmitReturnRequestResponse.json'));
+        data = json.decode(
+          await rootBundle
+              .loadString('assets/json/getSubmitReturnRequestResponse.json'),
+        );
       });
 
       test('=> submit return to domain', () {

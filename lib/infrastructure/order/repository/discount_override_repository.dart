@@ -29,7 +29,6 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
     required SalesOrganisation salesOrganisation,
     required Price price,
     required ShipToInfo shipToInfo,
-    
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -79,12 +78,12 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
     required ShipToInfo shipToInfo,
     required Price price,
     required bool exceedQuantity,
-  }) async{
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final priceData = await localDataSource.getPriceList();
 
-        return  Right(priceData.first);
+        return Right(priceData.first);
       } catch (e) {
         return Left(
           FailureHandler.handleFailure(e),
@@ -100,13 +99,13 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
         salesOrgCode: salesOrgCode,
         customerCode: customerCode,
         shipToCode: shipToCode,
-        materialQuery: PriceDto.fromDomain(price).materialQueryWithExceedQty(exceedQuantity),
+        materialQuery: PriceDto.fromDomain(price)
+            .materialQueryWithExceedQty(exceedQuantity),
       );
 
       return Right(priceData.first);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
-
   }
 }

@@ -130,9 +130,11 @@ void main() {
     await materialDetailRobot.tapAddToCart();
     materialListRobot.verify();
     materialListRobot.verifyDefaultMaterialDescription(
-        materialNumber: material);
+      materialNumber: material,
+    );
     materialListRobot.verifyGenericMaterialDescription(
-        materialNumber: material);
+      materialNumber: material,
+    );
     materialListRobot.verifyEnableListPrice(material);
     materialListRobot.findCartButton();
     await materialListRobot.tapCartButton();
@@ -229,11 +231,14 @@ void main() {
     await materialRootRobot.tapPrincipleSelector();
     materialRootRobot.verifyMaterialFilterPage();
     await materialRootRobot.enterTextAndSubmit(
-        principleSearchText: principleSearchText);
+      principleSearchText: principleSearchText,
+    );
     materialRootRobot.verifySearchResultAppears(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     await materialRootRobot.tapOnSearchResult(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     materialRootRobot.verifyApplyButton();
     await materialRootRobot.tapApplyButton();
     materialRootRobot.findPrincipleSelector();

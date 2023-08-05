@@ -57,8 +57,10 @@ void main() {
     group('filterInvoices Test', () {
       test('=> filterInvoices locally success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-        when(() => allCreditsAndInvoicesLocalDataSourceMock
-            .getDocumentHeaderList()).thenAnswer(
+        when(
+          () =>
+              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
+        ).thenAnswer(
           (invocation) async => mockList,
         );
 
@@ -74,9 +76,10 @@ void main() {
 
       test('=> filterInvoices locally failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-        when(() => allCreditsAndInvoicesLocalDataSourceMock
-                .getDocumentHeaderList())
-            .thenThrow((invocation) async => MockException());
+        when(
+          () =>
+              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
+        ).thenThrow((invocation) async => MockException());
 
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
           customerCodeInfo: CustomerCodeInfo.empty(),
@@ -90,13 +93,15 @@ void main() {
       });
       test('=> filterInvoices remote success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-        when(() => allCreditsAndInvoicesRemoteDataSourceMock.filterInvoices(
-              customerCode: 'mock_soldTo',
-              salesOrg: 'mock_salesOrg',
-              filterMap: filterMap,
-              pageSize: 1,
-              offset: 0,
-            )).thenAnswer(
+        when(
+          () => allCreditsAndInvoicesRemoteDataSourceMock.filterInvoices(
+            customerCode: 'mock_soldTo',
+            salesOrg: 'mock_salesOrg',
+            filterMap: filterMap,
+            pageSize: 1,
+            offset: 0,
+          ),
+        ).thenAnswer(
           (invocation) async => mockList,
         );
 
@@ -119,13 +124,15 @@ void main() {
 
       test('=> filterInvoices remote failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-        when(() => allCreditsAndInvoicesRemoteDataSourceMock.filterInvoices(
-              customerCode: 'mock_soldTo',
-              salesOrg: 'mock_salesOrg',
-              filterMap: filterMap,
-              pageSize: 1,
-              offset: 0,
-            )).thenThrow((invocation) async => MockException());
+        when(
+          () => allCreditsAndInvoicesRemoteDataSourceMock.filterInvoices(
+            customerCode: 'mock_soldTo',
+            salesOrg: 'mock_salesOrg',
+            filterMap: filterMap,
+            pageSize: 1,
+            offset: 0,
+          ),
+        ).thenThrow((invocation) async => MockException());
 
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
           customerCodeInfo: CustomerCodeInfo.empty(),

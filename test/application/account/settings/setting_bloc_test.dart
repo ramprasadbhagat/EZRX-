@@ -6,7 +6,6 @@ import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class AuthRepositoryMock extends Mock implements AuthRepository {}
 
 void main() {
@@ -62,16 +61,20 @@ void main() {
       setUp: () {
         when(() => authRepositoryMock.doBiometricAuthentication())
             .thenAnswer((invocation) async => const Right(true));
-        when(() => authRepositoryMock.putBiometricEnabledState(
-              isBiometricEnable: true,
-            )).thenAnswer((invocation) async => const Right(unit));
+        when(
+          () => authRepositoryMock.putBiometricEnabledState(
+            isBiometricEnable: true,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
         when(() => authRepositoryMock.isBiometricEnabled())
             .thenReturn(const Right(true));
       },
       build: () => SettingBloc(authRepository: authRepositoryMock),
-      act: (bloc) => bloc.add(const SettingEvent.toggleBiometric(
-        isBiometricEnabled: true,
-      )),
+      act: (bloc) => bloc.add(
+        const SettingEvent.toggleBiometric(
+          isBiometricEnabled: true,
+        ),
+      ),
       expect: () => [
         SettingState.initial(),
         SettingState.initial().copyWith(
@@ -86,16 +89,20 @@ void main() {
       setUp: () {
         when(() => authRepositoryMock.doBiometricAuthentication())
             .thenAnswer((invocation) async => const Right(true));
-        when(() => authRepositoryMock.putBiometricEnabledState(
-              isBiometricEnable: false,
-            )).thenAnswer((invocation) async => const Right(unit));
+        when(
+          () => authRepositoryMock.putBiometricEnabledState(
+            isBiometricEnable: false,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
         when(() => authRepositoryMock.isBiometricEnabled())
             .thenReturn(const Right(false));
       },
       build: () => SettingBloc(authRepository: authRepositoryMock),
-      act: (bloc) => bloc.add(const SettingEvent.toggleBiometric(
-        isBiometricEnabled: false,
-      )),
+      act: (bloc) => bloc.add(
+        const SettingEvent.toggleBiometric(
+          isBiometricEnabled: false,
+        ),
+      ),
       expect: () => [
         SettingState.initial(),
         SettingState.initial().copyWith(
@@ -114,7 +121,8 @@ void main() {
             .thenAnswer((invocation) => const Right(true));
         when(() => authRepositoryMock.canBeAuthenticatedAndBioAvailable())
             .thenAnswer(
-                (invocation) async => const Left(ApiFailure.other('Error')));
+          (invocation) async => const Left(ApiFailure.other('Error')),
+        );
       },
       build: () => SettingBloc(authRepository: authRepositoryMock),
       act: (bloc) => bloc.add(const SettingEvent.checkIfBiometricPossible()),

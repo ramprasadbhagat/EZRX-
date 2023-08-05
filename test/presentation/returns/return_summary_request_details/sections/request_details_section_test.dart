@@ -127,7 +127,8 @@ void main() {
             create: (context) => mockAnnouncementBloc,
           ),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => mockCustomerCodeBloc),
+            create: (context) => mockCustomerCodeBloc,
+          ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<ReturnListByRequestBloc>(
@@ -141,25 +142,29 @@ void main() {
           )
         ],
         child: Scaffold(
-            body: ReturnRequestDetails(
-          returnItem:
-              ReturnItem.empty().copyWith(status: StatusType('PENDING')),
-        )),
+          body: ReturnRequestDetails(
+            returnItem:
+                ReturnItem.empty().copyWith(status: StatusType('PENDING')),
+          ),
+        ),
       );
     }
 
     testWidgets('Return Request Details Body Test - loading', (tester) async {
-      when(() => mockReturnDetailsByRequestBloc.state)
-          .thenReturn(ReturnDetailsByRequestState.initial().copyWith(
-        isLoading: true,
-      ));
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
       final expectedStates = [
         ReturnDetailsByRequestState.initial().copyWith(
           isLoading: true,
         ),
       ];
       whenListen(
-          mockReturnDetailsByRequestBloc, Stream.fromIterable(expectedStates));
+        mockReturnDetailsByRequestBloc,
+        Stream.fromIterable(expectedStates),
+      );
 
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -172,21 +177,25 @@ void main() {
       await tester.pump();
     });
     testWidgets('Return Request Details Body Test - Sucess', (tester) async {
-      when(() => mockReturnDetailsByRequestBloc.state)
-          .thenReturn(ReturnDetailsByRequestState.initial().copyWith(
-        isLoading: true,
-      ));
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
       final expectedStates = [
         ReturnDetailsByRequestState.initial().copyWith(
-            isLoading: false,
-            requestInformation: [
-              ReturnRequestInformation.empty()
-                  .copyWith(returnQuantity: '1', status: StatusType('PENDING'))
-            ],
-            requestInformationHeader: ReturnRequestInformationHeader.empty()),
+          isLoading: false,
+          requestInformation: [
+            ReturnRequestInformation.empty()
+                .copyWith(returnQuantity: '1', status: StatusType('PENDING'))
+          ],
+          requestInformationHeader: ReturnRequestInformationHeader.empty(),
+        ),
       ];
       whenListen(
-          mockReturnDetailsByRequestBloc, Stream.fromIterable(expectedStates));
+        mockReturnDetailsByRequestBloc,
+        Stream.fromIterable(expectedStates),
+      );
 
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -206,8 +215,10 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.textContaining(mockReturnDetailsByRequestBloc.state
-            .requestInformation.first.status.displayStatusForViewByRequest),
+        find.textContaining(
+          mockReturnDetailsByRequestBloc.state.requestInformation.first.status
+              .displayStatusForViewByRequest,
+        ),
         findsNWidgets(2),
       );
       await tester.pump();

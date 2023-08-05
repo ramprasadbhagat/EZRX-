@@ -87,20 +87,22 @@ void main() {
 
       test('get searchReturnRequestList successfully remotely', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-        when(() => requestReturnRemoteDatasource.searchReturnMaterials(
-              batch: '',
-              dateFrom: '',
-              dateTo: '',
-              invoiceNo: '',
-              materialDescription: '',
-              materialNumber: '',
-              principalSearch: '',
-              salesOrg: 'salesOrg',
-              shipTo: 'shipTo',
-              soldTo: 'soldTo',
-              pageSize: 10,
-              offset: 0,
-            )).thenAnswer((invocation) async => requestReturnResponse);
+        when(
+          () => requestReturnRemoteDatasource.searchReturnMaterials(
+            batch: '',
+            dateFrom: '',
+            dateTo: '',
+            invoiceNo: '',
+            materialDescription: '',
+            materialNumber: '',
+            principalSearch: '',
+            salesOrg: 'salesOrg',
+            shipTo: 'shipTo',
+            soldTo: 'soldTo',
+            pageSize: 10,
+            offset: 0,
+          ),
+        ).thenAnswer((invocation) async => requestReturnResponse);
 
         final result = await requestReturnRepository.searchReturnRequestList(
           requestReturnFilter: RequestReturnFilter.empty(),
@@ -121,25 +123,28 @@ void main() {
       test('get searchReturnRequestList successfully remotely with DateFilter',
           () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-        when(() => requestReturnRemoteDatasource.searchReturnMaterials(
-              batch: '',
-              dateFrom: '20221011',
-              dateTo: '20221022',
-              invoiceNo: '',
-              materialDescription: '',
-              materialNumber: '',
-              principalSearch: '',
-              salesOrg: 'salesOrg',
-              shipTo: 'shipTo',
-              soldTo: 'soldTo',
-              pageSize: 10,
-              offset: 0,
-            )).thenAnswer((invocation) async => requestReturnResponse);
+        when(
+          () => requestReturnRemoteDatasource.searchReturnMaterials(
+            batch: '',
+            dateFrom: '20221011',
+            dateTo: '20221022',
+            invoiceNo: '',
+            materialDescription: '',
+            materialNumber: '',
+            principalSearch: '',
+            salesOrg: 'salesOrg',
+            shipTo: 'shipTo',
+            soldTo: 'soldTo',
+            pageSize: 10,
+            offset: 0,
+          ),
+        ).thenAnswer((invocation) async => requestReturnResponse);
 
         final result = await requestReturnRepository.searchReturnRequestList(
           requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: DateTimeStringValue('20221011'),
-              toInvoiceDate: DateTimeStringValue('20221022')),
+            fromInvoiceDate: DateTimeStringValue('20221011'),
+            toInvoiceDate: DateTimeStringValue('20221022'),
+          ),
           salesOrganisation: SalesOrganisation.empty()
               .copyWith(salesOrg: SalesOrg('salesOrg')),
           shipToInfo: ShipToInfo.empty().copyWith(shipToCustomerCode: 'shipTo'),

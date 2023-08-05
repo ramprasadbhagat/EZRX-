@@ -121,12 +121,14 @@ void main() {
       },
     ),
     expect: () => [
-      ComboDealPrincipleDetailState.initial().copyWith(items: {
-        MaterialNumber('fake-1'): newPriceAggregate('fake-1'),
-        MaterialNumber('fake-2'): newPriceAggregate('fake-2').copyWith(
-          quantity: 3,
-        ),
-      }),
+      ComboDealPrincipleDetailState.initial().copyWith(
+        items: {
+          MaterialNumber('fake-1'): newPriceAggregate('fake-1'),
+          MaterialNumber('fake-2'): newPriceAggregate('fake-2').copyWith(
+            quantity: 3,
+          ),
+        },
+      ),
     ],
   );
 
@@ -171,15 +173,17 @@ void main() {
       },
     ),
     expect: () => [
-      ComboDealPrincipleDetailState.initial().copyWith(items: {
-        MaterialNumber('fake-1'): newPriceAggregate('fake-1').copyWith(
-          comboDeal: fakeComboDeal,
-        ),
-        MaterialNumber('fake-2'): newPriceAggregate('fake-2').copyWith(
-          comboDeal: fakeComboDeal,
-          quantity: 3,
-        ),
-      }),
+      ComboDealPrincipleDetailState.initial().copyWith(
+        items: {
+          MaterialNumber('fake-1'): newPriceAggregate('fake-1').copyWith(
+            comboDeal: fakeComboDeal,
+          ),
+          MaterialNumber('fake-2'): newPriceAggregate('fake-2').copyWith(
+            comboDeal: fakeComboDeal,
+            quantity: 3,
+          ),
+        },
+      ),
     ],
   );
 
@@ -205,24 +209,26 @@ void main() {
       },
     ),
     expect: () => [
-      ComboDealPrincipleDetailState.initial().copyWith(items: {
-        MaterialNumber('fake-1'): newPriceAggregate('fake-1').copyWith(
-          price: Price.empty().copyWith(
-            finalPrice: MaterialPrice(10),
-            comboDeal: fakePriceComboDeal,
+      ComboDealPrincipleDetailState.initial().copyWith(
+        items: {
+          MaterialNumber('fake-1'): newPriceAggregate('fake-1').copyWith(
+            price: Price.empty().copyWith(
+              finalPrice: MaterialPrice(10),
+              comboDeal: fakePriceComboDeal,
+            ),
+            materialInfo: MaterialInfo.empty(),
           ),
-          materialInfo: MaterialInfo.empty(),
-        ),
-        MaterialNumber('fake-2'): newPriceAggregate('fake-2').copyWith(
-          price: Price.empty().copyWith(
-            materialNumber: MaterialNumber('fake-2'),
-            comboDeal: fakePriceComboDeal,
+          MaterialNumber('fake-2'): newPriceAggregate('fake-2').copyWith(
+            price: Price.empty().copyWith(
+              materialNumber: MaterialNumber('fake-2'),
+              comboDeal: fakePriceComboDeal,
+            ),
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-2'),
+            ),
           ),
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('fake-2'),
-          ),
-        ),
-      }),
+        },
+      ),
     ],
   );
 
@@ -230,15 +236,17 @@ void main() {
     'Fetch success',
     build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
     setUp: () {
-      when(() => mockRepository.getComboDealMaterials(
-            user: User.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            pageSize: 20,
-            offset: 0,
-            principles: ['fake-principle'],
-          )).thenAnswer(
+      when(
+        () => mockRepository.getComboDealMaterials(
+          user: User.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          pageSize: 20,
+          offset: 0,
+          principles: ['fake-principle'],
+        ),
+      ).thenAnswer(
         (invocation) async => Right(
           [
             MaterialInfo.empty().copyWith(
@@ -290,15 +298,17 @@ void main() {
     'Fetch failure',
     build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
     setUp: () {
-      when(() => mockRepository.getComboDealMaterials(
-            user: User.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            pageSize: 20,
-            offset: 0,
-            principles: ['fake-principle'],
-          )).thenAnswer(
+      when(
+        () => mockRepository.getComboDealMaterials(
+          user: User.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          pageSize: 20,
+          offset: 0,
+          principles: ['fake-principle'],
+        ),
+      ).thenAnswer(
         (invocation) async => const Left(ApiFailure.other('fake-message')),
       );
     },
@@ -346,15 +356,17 @@ void main() {
     'Fetch success when init from cart',
     build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
     setUp: () {
-      when(() => mockRepository.getComboDealMaterials(
-            user: User.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            pageSize: 20,
-            offset: 0,
-            principles: ['fake-principle'],
-          )).thenAnswer(
+      when(
+        () => mockRepository.getComboDealMaterials(
+          user: User.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          pageSize: 20,
+          offset: 0,
+          principles: ['fake-principle'],
+        ),
+      ).thenAnswer(
         (invocation) async => Right(
           [
             MaterialInfo.empty().copyWith(
@@ -449,15 +461,17 @@ void main() {
     'Loadmore success',
     build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
     setUp: () {
-      when(() => mockRepository.getComboDealMaterials(
-            user: User.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            pageSize: 20,
-            offset: 20,
-            principles: ['fake-principle'],
-          )).thenAnswer(
+      when(
+        () => mockRepository.getComboDealMaterials(
+          user: User.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          pageSize: 20,
+          offset: 20,
+          principles: ['fake-principle'],
+        ),
+      ).thenAnswer(
         (invocation) async => Right(
           [
             MaterialInfo.empty().copyWith(
@@ -517,15 +531,17 @@ void main() {
     'Loadmore failure',
     build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
     setUp: () {
-      when(() => mockRepository.getComboDealMaterials(
-            user: User.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            pageSize: 20,
-            offset: 20,
-            principles: ['fake-principle'],
-          )).thenAnswer(
+      when(
+        () => mockRepository.getComboDealMaterials(
+          user: User.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          pageSize: 20,
+          offset: 20,
+          principles: ['fake-principle'],
+        ),
+      ).thenAnswer(
         (invocation) async => const Left(ApiFailure.other('fake-message')),
       );
     },

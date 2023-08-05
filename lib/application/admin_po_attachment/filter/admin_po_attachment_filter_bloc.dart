@@ -20,7 +20,8 @@ class AdminPoAttachmentFilterBloc
     on<AdminPoAttachmentFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(AdminPoAttachmentFilterEvent event,
+  Future<void> _onEvent(
+    AdminPoAttachmentFilterEvent event,
     Emitter<AdminPoAttachmentFilterState> emit,
   ) async {
     event.map(
@@ -28,17 +29,23 @@ class AdminPoAttachmentFilterBloc
         AdminPoAttachmentFilterState.initial(),
       ),
       applyFilters: (_ApplyFilters value) {
-        emit(state.copyWith(
-          isSubmitting: false,
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+          ),
+        );
         if (state.adminPoAttachmentFilter.areFiltersValid) {
-          emit(state.copyWith(
-            isSubmitting: true,
-          ));
+          emit(
+            state.copyWith(
+              isSubmitting: true,
+            ),
+          );
         } else {
-          emit(state.copyWith(
-            showErrorMessages: true,
-          ));
+          emit(
+            state.copyWith(
+              showErrorMessages: true,
+            ),
+          );
         }
       },
       orderNoChanged: (_OrderNoChanged e) => emit(

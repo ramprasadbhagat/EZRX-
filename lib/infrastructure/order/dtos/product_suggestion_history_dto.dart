@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 
-
 part 'product_suggestion_history_dto.freezed.dart';
 part 'product_suggestion_history_dto.g.dart';
 
@@ -18,7 +17,9 @@ class ProductSuggestionHistoryDto with _$ProductSuggestionHistoryDto {
         required List<String> searchKeyList,
   }) = _ProductSuggestionHistoryDto;
 
-  factory ProductSuggestionHistoryDto.fromDomain(ProductSuggestionHistory domain) {
+  factory ProductSuggestionHistoryDto.fromDomain(
+    ProductSuggestionHistory domain,
+  ) {
     return ProductSuggestionHistoryDto(
       searchKeyList: domain.searchKeyList.map((e) => e.getOrCrash()).toList(),
     );

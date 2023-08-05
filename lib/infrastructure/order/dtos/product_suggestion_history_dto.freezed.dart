@@ -42,7 +42,7 @@ abstract class $ProductSuggestionHistoryDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'searchKeyList')
       @HiveField(0, defaultValue: <String>[])
-      List<String> searchKeyList});
+          List<String> searchKeyList});
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ abstract class _$$_ProductSuggestionHistoryDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'searchKeyList')
       @HiveField(0, defaultValue: <String>[])
-      List<String> searchKeyList});
+          List<String> searchKeyList});
 }
 
 /// @nodoc
@@ -116,7 +116,7 @@ class _$_ProductSuggestionHistoryDto extends _ProductSuggestionHistoryDto {
   _$_ProductSuggestionHistoryDto(
       {@JsonKey(name: 'searchKeyList')
       @HiveField(0, defaultValue: <String>[])
-      required final List<String> searchKeyList})
+          required final List<String> searchKeyList})
       : _searchKeyList = searchKeyList,
         super._();
 
@@ -172,7 +172,7 @@ abstract class _ProductSuggestionHistoryDto
   factory _ProductSuggestionHistoryDto(
           {@JsonKey(name: 'searchKeyList')
           @HiveField(0, defaultValue: <String>[])
-          required final List<String> searchKeyList}) =
+              required final List<String> searchKeyList}) =
       _$_ProductSuggestionHistoryDto;
   _ProductSuggestionHistoryDto._() : super._();
 

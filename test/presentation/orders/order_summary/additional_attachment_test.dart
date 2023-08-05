@@ -41,8 +41,6 @@ class PoAttachmentBlocMock
 
 class FilePickerServiceMock extends Mock implements FilePickerService {}
 
-
-
 void main() {
   late AppRouter autoRouterMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
@@ -95,18 +93,22 @@ void main() {
   group('PoAttachment Upload Widget Tests', () {
     Widget getTestWidget() {
       return WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<AdditionalDetailsBloc>(
-                create: (context) => additionalDetailsBlocMock),
-            BlocProvider<PoAttachmentBloc>(
-                create: (context) => poAttachmentBlocMock),
-            BlocProvider<EligibilityBloc>(
-                create: (context) => eligibilityBlocMock),
-          ],
-          child: const Scaffold(
-            body: AdditionPoAttachmentUpload(),
-          ));
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AdditionalDetailsBloc>(
+            create: (context) => additionalDetailsBlocMock,
+          ),
+          BlocProvider<PoAttachmentBloc>(
+            create: (context) => poAttachmentBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+        ],
+        child: const Scaffold(
+          body: AdditionPoAttachmentUpload(),
+        ),
+      );
     }
 
     testWidgets('Po Attachment Upload Dialog Test', (tester) async {
@@ -193,8 +195,7 @@ void main() {
         ),
         PoAttachmentState.initial().copyWith(
           fileOperationMode: FileOperationMode.upload,
-            failureOrSuccessOption:
-              optionOf(
+          failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.storagePermissionFailed(),
             ),
@@ -242,8 +243,9 @@ void main() {
       );
       expect(poAttachmentUploadButton, findsOneWidget);
       final filePickerError = find.text(
-          'Unable to upload file as either file format not supported or something wrong with the file'
-              .tr());
+        'Unable to upload file as either file format not supported or something wrong with the file'
+            .tr(),
+      );
       expect(filePickerError, findsOneWidget);
       debugDefaultTargetPlatformOverride = null;
     });
@@ -280,8 +282,12 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(() => filePickerService.pickFiles(
-          allowMultiple: true, fileType: FileType.image)).thenAnswer(
+      when(
+        () => filePickerService.pickFiles(
+          allowMultiple: true,
+          fileType: FileType.image,
+        ),
+      ).thenAnswer(
         (invocation) async => null,
       );
       await tester.tap(poAttachmentFileUploadButton);
@@ -308,7 +314,8 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(() => filePickerService.pickFiles(
+      when(
+        () => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
           allowedExtensions: locator<Config>().allowedExtensions,
@@ -339,10 +346,13 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(() => filePickerService.pickFiles(
+      when(
+        () => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
-          allowedExtensions: locator<Config>().allowedExtensions)).thenAnswer(
+          allowedExtensions: locator<Config>().allowedExtensions,
+        ),
+      ).thenAnswer(
         (invocation) async => FilePickerResult([
           PlatformFile(
             name: 'fake-name',

@@ -11,24 +11,27 @@ void main() {
   group('Test OrderHistoryDetailsDto ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle
-            .loadString('assets/json/getOrderDetailsResponse.json'),
+        await rootBundle.loadString('assets/json/getOrderDetailsResponse.json'),
       );
     });
 
     test('Test fromDomain', () {
-      final configs =OrderHistoryDetailsDto.fromDomain( OrderHistoryDetailsDto.fromJson(
-        data['data']['orderDetails'],
-      ).toDomain());
-      
+      final configs = OrderHistoryDetailsDto.fromDomain(
+        OrderHistoryDetailsDto.fromJson(
+          data['data']['orderDetails'],
+        ).toDomain(),
+      );
+
       expect(configs.orderHistoryDetailsOrderHeader.type, 'ZPOR');
     });
 
-     test('Test tojson', () {
-      final configs =OrderHistoryDetailsDto.fromDomain( OrderHistoryDetailsDto.fromJson(
-        data['data']['orderDetails'],
-      ).toDomain()).toJson();
-      
+    test('Test tojson', () {
+      final configs = OrderHistoryDetailsDto.fromDomain(
+        OrderHistoryDetailsDto.fromJson(
+          data['data']['orderDetails'],
+        ).toDomain(),
+      ).toJson();
+
       expect(configs['OrderHeader']['EZRXNumber'], 'EZRX-dc70b03');
     });
   });

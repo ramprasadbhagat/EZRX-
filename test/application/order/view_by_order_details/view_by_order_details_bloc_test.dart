@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class ViewByOrderDetailsRepositoryMock extends Mock
     implements ViewByOrderDetailsRepository {}
 
@@ -112,7 +111,6 @@ void main() {
         ],
       );
 
-
       blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
         'For Fetch Event Failure',
         build: () => ViewByOrderDetailsBloc(
@@ -125,7 +123,8 @@ void main() {
               orderHeader: OrderHistoryDetailsOrderHeader.empty(),
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetch(

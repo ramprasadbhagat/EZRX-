@@ -47,14 +47,17 @@ void main() {
         );
       },
       act: (AnnouncementInfoBloc bloc) => bloc
-        ..add(AnnouncementInfoEvent.fetch(
-          salesOrg: salesOrg,
-        )),
+        ..add(
+          AnnouncementInfoEvent.fetch(
+            salesOrg: salesOrg,
+          ),
+        ),
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
         announcementInfoState.copyWith(
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake-error')))),
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+        ),
       ],
     );
 
@@ -75,9 +78,11 @@ void main() {
         );
       },
       act: (AnnouncementInfoBloc bloc) => bloc
-        ..add(AnnouncementInfoEvent.fetch(
-          salesOrg: salesOrg,
-        )),
+        ..add(
+          AnnouncementInfoEvent.fetch(
+            salesOrg: salesOrg,
+          ),
+        ),
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
         announcementInfoState.copyWith(

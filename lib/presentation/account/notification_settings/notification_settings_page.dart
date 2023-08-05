@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
 class NotificationSettingsPage extends StatelessWidget {
   const NotificationSettingsPage({Key? key}) : super(key: key);
 

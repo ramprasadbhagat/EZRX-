@@ -183,8 +183,10 @@ void main() {
       () {
         const input = '911';
         final valObj = BonusMaterialCalculation(input);
-        expect(valObj.getCalculationEnum,
-            BonusMaterialCalculationEnum.calculation911);
+        expect(
+          valObj.getCalculationEnum,
+          BonusMaterialCalculationEnum.calculation911,
+        );
       },
     );
 
@@ -193,8 +195,10 @@ void main() {
       () {
         const input = '912';
         final valObj = BonusMaterialCalculation(input);
-        expect(valObj.getCalculationEnum,
-            BonusMaterialCalculationEnum.calculation912);
+        expect(
+          valObj.getCalculationEnum,
+          BonusMaterialCalculationEnum.calculation912,
+        );
       },
     );
     test(
@@ -202,8 +206,10 @@ void main() {
       () {
         const input = '913';
         final valObj = BonusMaterialCalculation(input);
-        expect(valObj.getCalculationEnum,
-            BonusMaterialCalculationEnum.calculation913);
+        expect(
+          valObj.getCalculationEnum,
+          BonusMaterialCalculationEnum.calculation913,
+        );
       },
     );
     test(
@@ -211,8 +217,10 @@ void main() {
       () {
         const input = '914';
         final valObj = BonusMaterialCalculation(input);
-        expect(valObj.getCalculationEnum,
-            BonusMaterialCalculationEnum.calculation914);
+        expect(
+          valObj.getCalculationEnum,
+          BonusMaterialCalculationEnum.calculation914,
+        );
       },
     );
 
@@ -221,8 +229,10 @@ void main() {
       () {
         const input = '915';
         final valObj = BonusMaterialCalculation(input);
-        expect(valObj.getCalculationEnum,
-            BonusMaterialCalculationEnum.calculation915);
+        expect(
+          valObj.getCalculationEnum,
+          BonusMaterialCalculationEnum.calculation915,
+        );
       },
     );
   });

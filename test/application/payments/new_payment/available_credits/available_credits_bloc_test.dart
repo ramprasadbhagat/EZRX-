@@ -51,7 +51,8 @@ void main() {
               appliedFilter: AvailableCreditFilter.empty(),
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
@@ -124,7 +125,8 @@ void main() {
               appliedFilter: AvailableCreditFilter.empty(),
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.loadMore(

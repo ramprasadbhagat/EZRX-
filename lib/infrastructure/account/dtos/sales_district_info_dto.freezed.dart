@@ -40,11 +40,12 @@ abstract class $SalesDistrictInfoDtoCopyWith<$Res> {
       _$SalesDistrictInfoDtoCopyWithImpl<$Res, SalesDistrictInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: 0) int id,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          int id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      String salesDistrictHeader,
+          String salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
-      String salesDistrictLabel});
+          String salesDistrictLabel});
 }
 
 /// @nodoc
@@ -91,11 +92,12 @@ abstract class _$$_SalesDistrictInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: 0) int id,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          int id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      String salesDistrictHeader,
+          String salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
-      String salesDistrictLabel});
+          String salesDistrictLabel});
 }
 
 /// @nodoc
@@ -134,11 +136,12 @@ class __$$_SalesDistrictInfoDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
   const _$_SalesDistrictInfoDto(
-      {@JsonKey(name: 'id', defaultValue: 0) required this.id,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required this.id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      required this.salesDistrictHeader,
+          required this.salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
-      required this.salesDistrictLabel})
+          required this.salesDistrictLabel})
       : super._();
 
   factory _$_SalesDistrictInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -193,11 +196,12 @@ class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
 
 abstract class _SalesDistrictInfoDto extends SalesDistrictInfoDto {
   const factory _SalesDistrictInfoDto(
-      {@JsonKey(name: 'id', defaultValue: 0) required final int id,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required final int id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      required final String salesDistrictHeader,
+          required final String salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
-      required final String salesDistrictLabel}) = _$_SalesDistrictInfoDto;
+          required final String salesDistrictLabel}) = _$_SalesDistrictInfoDto;
   const _SalesDistrictInfoDto._() : super._();
 
   factory _SalesDistrictInfoDto.fromJson(Map<String, dynamic> json) =

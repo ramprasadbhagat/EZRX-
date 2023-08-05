@@ -85,10 +85,10 @@ void main() {
       getAddOrUpdateBeneficiaryVariable =
           BankBeneficiaryDto.fromDomain(bankBeneficiary).toJson();
       getDeleteBeneficiaryVariable = {
-          'input': {
-            'salesOrg': salesOrg,
-            'salesDistrict': 'HCM',
-          },
+        'input': {
+          'salesOrg': salesOrg,
+          'salesDistrict': 'HCM',
+        },
       };
     },
   );
@@ -177,13 +177,14 @@ void main() {
           }),
         );
 
-        final result = await remoteDataSource.
-              getSalesDistrict(salesOrg: salesOrg);
+        final result =
+            await remoteDataSource.getSalesDistrict(salesOrg: salesOrg);
         expect(
           result.length,
           List.from(res['data']['salesDistrict'])
-            .map((e) => SalesDistrictDto.fromJson(e).toDomain())
-            .toList().length,
+              .map((e) => SalesDistrictDto.fromJson(e).toDomain())
+              .toList()
+              .length,
         );
       },
     );
@@ -206,7 +207,8 @@ void main() {
           }),
         );
 
-        await remoteDataSource.getSalesDistrict(salesOrg: salesOrg)
+        await remoteDataSource
+            .getSalesDistrict(salesOrg: salesOrg)
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(<SalesDistrictMock>[]);
@@ -239,12 +241,14 @@ void main() {
           }),
         );
 
-        final result = await remoteDataSource.
-          addOrUpdateBeneficiary(beneficiaryData: getAddOrUpdateBeneficiaryVariable);
+        final result = await remoteDataSource.addOrUpdateBeneficiary(
+          beneficiaryData: getAddOrUpdateBeneficiaryVariable,
+        );
         expect(
           result.info,
           BankBeneficiaryResponseDto.fromJson(
-          res['data']['addBankBeneficiary'],).toDomain().info,
+            res['data']['addBankBeneficiary'],
+          ).toDomain().info,
         );
       },
     );
@@ -267,9 +271,11 @@ void main() {
           }),
         );
 
-        await remoteDataSource. addOrUpdateBeneficiary(
-          beneficiaryData:getAddOrUpdateBeneficiaryVariable
-          ).onError((error, _) async {
+        await remoteDataSource
+            .addOrUpdateBeneficiary(
+          beneficiaryData: getAddOrUpdateBeneficiaryVariable,
+        )
+            .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(BankBeneficiaryResponseMock());
         });
@@ -301,12 +307,15 @@ void main() {
           }),
         );
 
-        final result = await remoteDataSource.
-          deleteBeneficiary(salesOrg: salesOrg,salesDistrict: 'HCM');
+        final result = await remoteDataSource.deleteBeneficiary(
+          salesOrg: salesOrg,
+          salesDistrict: 'HCM',
+        );
         expect(
           result.info,
           BankBeneficiaryResponseDto.fromJson(
-          res['data']['deleteBankBeneficiary'],).toDomain().info,
+            res['data']['deleteBankBeneficiary'],
+          ).toDomain().info,
         );
       },
     );
@@ -329,9 +338,9 @@ void main() {
           }),
         );
 
-        await remoteDataSource.
-          deleteBeneficiary(salesOrg: salesOrg,salesDistrict: 'HCM')
-          .onError((error, _) async {
+        await remoteDataSource
+            .deleteBeneficiary(salesOrg: salesOrg, salesDistrict: 'HCM')
+            .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(BankBeneficiaryResponseMock());
         });

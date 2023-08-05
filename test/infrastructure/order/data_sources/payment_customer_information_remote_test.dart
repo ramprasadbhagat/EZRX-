@@ -73,11 +73,15 @@ void main() {
         );
 
         final result = await remoteDataSource.getPaymentCustomerInformation(
-            customer: 'fake-customer-code', salesOrganisation: 'fake-salesorg');
+          customer: 'fake-customer-code',
+          salesOrganisation: 'fake-salesorg',
+        );
         final finalData = res['data']['customerInformation'];
 
-        expect(result,
-            PaymentCustomerInformationDto.fromJson(finalData).toDomain());
+        expect(
+          result,
+          PaymentCustomerInformationDto.fromJson(finalData).toDomain(),
+        );
       });
 
       test('statuscode not equal to 200', () async {
@@ -103,8 +107,9 @@ void main() {
 
         await remoteDataSource
             .getPaymentCustomerInformation(
-                customer: 'fake-customer-code',
-                salesOrganisation: 'fake-salesorg')
+          customer: 'fake-customer-code',
+          salesOrganisation: 'fake-salesorg',
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(PaymentCustomerInformationMock());
@@ -139,8 +144,9 @@ void main() {
 
         await remoteDataSource
             .getPaymentCustomerInformation(
-                customer: 'fake-customer-code',
-                salesOrganisation: 'fake-salesorg')
+          customer: 'fake-customer-code',
+          salesOrganisation: 'fake-salesorg',
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(PaymentCustomerInformationMock());

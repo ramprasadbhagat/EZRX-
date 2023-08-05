@@ -17,7 +17,8 @@ class ManageSalesDistrictDto with _$ManageSalesDistrictDto {
     SalesDistrictResponseMessage addSalesDistrict,
   ) {
     return ManageSalesDistrictDto(
-        message: addSalesDistrict.message.getOrDefaultValue(''),);
+      message: addSalesDistrict.message.getOrDefaultValue(''),
+    );
   }
 
   SalesDistrictResponseMessage toDomain() {

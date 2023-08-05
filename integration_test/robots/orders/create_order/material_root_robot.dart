@@ -73,8 +73,10 @@ class MaterialRootRobot {
   void verifySearchResultAppears({
     required String principleFullText,
   }) {
-    expect(_getPrincipleItemKey(principleFullText: principleFullText),
-        findsOneWidget);
+    expect(
+      _getPrincipleItemKey(principleFullText: principleFullText),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapOnSearchResult({

@@ -138,10 +138,11 @@ class _$_OrderHistoryDetailsInvoicesDto
     extends _OrderHistoryDetailsInvoicesDto {
   const _$_OrderHistoryDetailsInvoicesDto(
       {@JsonKey(name: 'InvoiceNumber', defaultValue: '')
-      required this.invoiceNumber,
-      @JsonKey(name: 'InvoiceDate', defaultValue: '') required this.invoiceDate,
+          required this.invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '')
+          required this.invoiceDate,
       @JsonKey(name: 'InvoicePrice', defaultValue: '')
-      required this.invoicePrice})
+          required this.invoicePrice})
       : super._();
 
   factory _$_OrderHistoryDetailsInvoicesDto.fromJson(
@@ -199,12 +200,13 @@ class _$_OrderHistoryDetailsInvoicesDto
 abstract class _OrderHistoryDetailsInvoicesDto
     extends OrderHistoryDetailsInvoicesDto {
   const factory _OrderHistoryDetailsInvoicesDto(
-      {@JsonKey(name: 'InvoiceNumber', defaultValue: '')
-      required final String invoiceNumber,
-      @JsonKey(name: 'InvoiceDate', defaultValue: '')
-      required final String invoiceDate,
-      @JsonKey(name: 'InvoicePrice', defaultValue: '')
-      required final String invoicePrice}) = _$_OrderHistoryDetailsInvoicesDto;
+          {@JsonKey(name: 'InvoiceNumber', defaultValue: '')
+              required final String invoiceNumber,
+          @JsonKey(name: 'InvoiceDate', defaultValue: '')
+              required final String invoiceDate,
+          @JsonKey(name: 'InvoicePrice', defaultValue: '')
+              required final String invoicePrice}) =
+      _$_OrderHistoryDetailsInvoicesDto;
   const _OrderHistoryDetailsInvoicesDto._() : super._();
 
   factory _OrderHistoryDetailsInvoicesDto.fromJson(Map<String, dynamic> json) =

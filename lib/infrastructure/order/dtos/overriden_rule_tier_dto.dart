@@ -25,15 +25,15 @@ class OverridenRuleTierDto with _$OverridenRuleTierDto {
     @JsonKey(name: 'Overrider', defaultValue: '')
     @HiveField(23, defaultValue: '')
         required String overrider,
-}) = _OverridenRuleTierDto;
+  }) = _OverridenRuleTierDto;
 
   OverridenRuleTier toDomain() => OverridenRuleTier(
-    rate: rate,
-    quantity: quantity,
-    conditions: conditions,
-    tier: tier,
-    overrider: overrider,
-  );
+        rate: rate,
+        quantity: quantity,
+        conditions: conditions,
+        tier: tier,
+        overrider: overrider,
+      );
 
   factory OverridenRuleTierDto.fromDomain(OverridenRuleTier overridenRuleTier) {
     return OverridenRuleTierDto(

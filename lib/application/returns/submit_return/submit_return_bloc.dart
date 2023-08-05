@@ -30,41 +30,45 @@ class SubmitReturnBloc extends Bloc<SubmitReturnEvent, SubmitReturnState> {
     SubmitReturnEvent event,
     Emitter<SubmitReturnState> emit,
   ) async {
-    await event.map(submitReturnRequest: (value) async {
-      emit(state.copyWith(
-        isSubmitting: true,
-        failureOrSuccessOption: none(),
-      ));
-      final failureOrSuccess =
-          await submitRequestRepository.submitRequestReturn(
-        customerCodeInfo: value.customerCodeInfo,
-        returnItemsList: value.returnItemsList,
-        returnReferenceNumber: value.returnReferenceNumber,
-        salesOrg: value.salesOrg,
-        specialInstructions: value.specialInstructions,
-        user: value.user,
-      );
+    await event.map(
+      submitReturnRequest: (value) async {
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess =
+            await submitRequestRepository.submitRequestReturn(
+          customerCodeInfo: value.customerCodeInfo,
+          returnItemsList: value.returnItemsList,
+          returnReferenceNumber: value.returnReferenceNumber,
+          salesOrg: value.salesOrg,
+          specialInstructions: value.specialInstructions,
+          user: value.user,
+        );
 
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              isSubmitting: false,
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        (submitReturn) {
-          emit(
-            state.copyWith(
-              messages: submitReturn.message,
-              requestID: submitReturn.requestID,
-              failureOrSuccessOption: none(),
-              isSubmitting: false,
-            ),
-          );
-        },
-      );
-    });
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (submitReturn) {
+            emit(
+              state.copyWith(
+                messages: submitReturn.message,
+                requestID: submitReturn.requestID,
+                failureOrSuccessOption: none(),
+                isSubmitting: false,
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

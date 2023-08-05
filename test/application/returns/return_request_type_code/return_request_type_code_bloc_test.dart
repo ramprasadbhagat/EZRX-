@@ -16,8 +16,7 @@ class ReturnRequestTypeCodeRepoMock extends Mock
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late ReturnRequestTypeCodeRepository
-      returnRequestTypeCodeRepositoryMock;
+  late ReturnRequestTypeCodeRepository returnRequestTypeCodeRepositoryMock;
   late List<ReturnRequestTypeCodeDetails> returnRequestTypeCodeDetailsMockData;
 
   late SalesOrganisation fakeSaleOrganisation;
@@ -29,7 +28,6 @@ void main() {
     fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
       salesOrg: SalesOrg('fake-1234'),
     );
-
   });
 
   group('Return Request Type Code', () {
@@ -40,9 +38,10 @@ void main() {
     });
     blocTest<ReturnRequestTypeCodeBloc, ReturnRequestTypeCodeState>(
       'For Return Request Code Initialized Event',
-      build: () => ReturnRequestTypeCodeBloc(returnRequestTypeCodeRepository: returnRequestTypeCodeRepositoryMock),
-      act: (bloc) =>
-          bloc.add(const ReturnRequestTypeCodeEvent.initialized()),
+      build: () => ReturnRequestTypeCodeBloc(
+        returnRequestTypeCodeRepository: returnRequestTypeCodeRepositoryMock,
+      ),
+      act: (bloc) => bloc.add(const ReturnRequestTypeCodeEvent.initialized()),
       expect: () => [ReturnRequestTypeCodeState.initial()],
     );
 
@@ -52,25 +51,30 @@ void main() {
         returnRequestTypeCodeRepository: returnRequestTypeCodeRepositoryMock,
       ),
       setUp: () {
-        when(() => returnRequestTypeCodeRepositoryMock
-            .getReturnRequestTypeCodeList(
-                salesOrganisation: fakeSaleOrganisation)).thenAnswer(
+        when(
+          () =>
+              returnRequestTypeCodeRepositoryMock.getReturnRequestTypeCodeList(
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) => bloc.add(ReturnRequestTypeCodeEvent.fetch(
-        salesOrganisation: fakeSaleOrganisation,
-      )),
+      act: (bloc) => bloc.add(
+        ReturnRequestTypeCodeEvent.fetch(
+          salesOrganisation: fakeSaleOrganisation,
+        ),
+      ),
       expect: () => [
         ReturnRequestTypeCodeState.initial().copyWith(
-          returnRequestTypeCodeDetailsList:<ReturnRequestTypeCodeDetails>[],
+          returnRequestTypeCodeDetailsList: <ReturnRequestTypeCodeDetails>[],
           returnRequestTypeCodeDetailsFailureOrSuccessOption: none(),
           isFetching: true,
         ),
         ReturnRequestTypeCodeState.initial().copyWith(
-          returnRequestTypeCodeDetailsList:<ReturnRequestTypeCodeDetails>[],
+          returnRequestTypeCodeDetailsList: <ReturnRequestTypeCodeDetails>[],
           isFetching: false,
           returnRequestTypeCodeDetailsFailureOrSuccessOption: optionOf(
             const Left(
@@ -87,23 +91,29 @@ void main() {
         returnRequestTypeCodeRepository: returnRequestTypeCodeRepositoryMock,
       ),
       setUp: () {
-        when(() => returnRequestTypeCodeRepositoryMock
-            .getReturnRequestTypeCodeList(
-                salesOrganisation: fakeSaleOrganisation)).thenAnswer(
-          (invocation) async => Right(returnRequestTypeCodeDetailsMockData)
+        when(
+          () =>
+              returnRequestTypeCodeRepositoryMock.getReturnRequestTypeCodeList(
+            salesOrganisation: fakeSaleOrganisation,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(returnRequestTypeCodeDetailsMockData),
         );
       },
-      act: (bloc) => bloc.add(ReturnRequestTypeCodeEvent.fetch(
-        salesOrganisation: fakeSaleOrganisation,
-      )),
+      act: (bloc) => bloc.add(
+        ReturnRequestTypeCodeEvent.fetch(
+          salesOrganisation: fakeSaleOrganisation,
+        ),
+      ),
       expect: () => [
         ReturnRequestTypeCodeState.initial().copyWith(
-          returnRequestTypeCodeDetailsList:<ReturnRequestTypeCodeDetails>[],
+          returnRequestTypeCodeDetailsList: <ReturnRequestTypeCodeDetails>[],
           returnRequestTypeCodeDetailsFailureOrSuccessOption: none(),
           isFetching: true,
         ),
         ReturnRequestTypeCodeState.initial().copyWith(
-          returnRequestTypeCodeDetailsList:returnRequestTypeCodeDetailsMockData,
+          returnRequestTypeCodeDetailsList:
+              returnRequestTypeCodeDetailsMockData,
           isFetching: false,
           returnRequestTypeCodeDetailsFailureOrSuccessOption: none(),
         )

@@ -43,11 +43,12 @@ class UpdateCart extends StatelessWidget implements AutoRouteWrapper {
             )
             ..add(
               AddToCartEvent.updateQuantity(
-               quantity:  material.quantity,
-               cartZmgQtyExcludeCurrent:  cartState.zmgMaterialWithoutMaterial(updateCartItem),
-               customerCode: eligibilityState.customerCodeInfo,
-               salesOrganisation: eligibilityState.salesOrganisation,
-               shipToCode: eligibilityState.shipToInfo,
+                quantity: material.quantity,
+                cartZmgQtyExcludeCurrent:
+                    cartState.zmgMaterialWithoutMaterial(updateCartItem),
+                customerCode: eligibilityState.customerCodeInfo,
+                salesOrganisation: eligibilityState.salesOrganisation,
+                shipToCode: eligibilityState.shipToInfo,
               ),
             ),
         ),
@@ -114,18 +115,22 @@ class UpdateCart extends StatelessWidget implements AutoRouteWrapper {
                         CartItemDetailWidget(
                           cartItem: state.cartItem,
                           onQuantityChanged: (int value) {
-                            final eligibilityState = context.read<EligibilityBloc>().state;
+                            final eligibilityState =
+                                context.read<EligibilityBloc>().state;
                             final discountedMaterialCount =
                                 cartBloc.state.zmgMaterialWithoutMaterial(
                               state.cartItem,
                             );
                             context.read<AddToCartBloc>().add(
                                   AddToCartEvent.updateQuantity(
-                                   quantity:  value,
-                                   cartZmgQtyExcludeCurrent:  discountedMaterialCount,
-                                   customerCode: eligibilityState.customerCodeInfo,
-                                   salesOrganisation: eligibilityState.salesOrganisation,
-                                   shipToCode: eligibilityState.shipToInfo,
+                                    quantity: value,
+                                    cartZmgQtyExcludeCurrent:
+                                        discountedMaterialCount,
+                                    customerCode:
+                                        eligibilityState.customerCodeInfo,
+                                    salesOrganisation:
+                                        eligibilityState.salesOrganisation,
+                                    shipToCode: eligibilityState.shipToInfo,
                                   ),
                                 );
                           },

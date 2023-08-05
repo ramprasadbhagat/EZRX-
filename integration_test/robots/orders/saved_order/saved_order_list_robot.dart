@@ -24,9 +24,9 @@ class SavedOrderListRobot {
   }
 
   Future<void> tapSavedOrderItemDelete() async {
-    if(deleteIcon.evaluate().length>1){
+    if (deleteIcon.evaluate().length > 1) {
       await tester.tap(deleteIcon.first);
-    }else{
+    } else {
       await tester.tap(deleteIcon);
     }
     await tester.pumpAndSettle();

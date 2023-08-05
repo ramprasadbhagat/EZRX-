@@ -86,14 +86,15 @@ class TieredRulesDto with _$TieredRulesDto {
   factory TieredRulesDto.fromDomain(TieredRules tieredRules) {
     return TieredRulesDto(
       tier: tieredRules.tier,
-      ruleTier: tieredRules.ruleTier.map((e) => RuleTierDto.fromDomain(e)).toList(),
+      ruleTier:
+          tieredRules.ruleTier.map((e) => RuleTierDto.fromDomain(e)).toList(),
     );
   }
 
   TieredRules toDomain() => TieredRules(
-    tier: tier,
-    ruleTier: ruleTier.map((e) => e.toDomain()).toList(),
-  );
+        tier: tier,
+        ruleTier: ruleTier.map((e) => e.toDomain()).toList(),
+      );
 
   static const empty = TieredRulesDto(
     tier: '',
@@ -125,9 +126,9 @@ class RuleTierDto with _$RuleTierDto {
   }
 
   RuleTier toDomain() => RuleTier(
-    rate: rate,
-    quantity: quantity,
-  );
+        rate: rate,
+        quantity: quantity,
+      );
 
   factory RuleTierDto.fromJson(Map<String, dynamic> json) =>
       _$RuleTierDtoFromJson(json);

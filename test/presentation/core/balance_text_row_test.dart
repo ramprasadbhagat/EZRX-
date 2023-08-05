@@ -40,12 +40,13 @@ void main() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           child: BalanceTextRow(
-              isStatus: isStatus,
-              valueTextLoading: valueTextLoading,
-              keyText: keyText,
-              valueText: valueText,
-              keyTextStyle: textStyle,
-              valueTextStyle: textStyle),
+            isStatus: isStatus,
+            valueTextLoading: valueTextLoading,
+            keyText: keyText,
+            valueText: valueText,
+            keyTextStyle: textStyle,
+            valueTextStyle: textStyle,
+          ),
         );
       }
 
@@ -87,7 +88,9 @@ void main() {
             ': ',
           );
           expect(
-              (tester.widget(semicolon) as Text).style?.color, ZPColors.white);
+            (tester.widget(semicolon) as Text).style?.color,
+            ZPColors.white,
+          );
         },
       );
       testWidgets(

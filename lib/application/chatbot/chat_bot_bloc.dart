@@ -23,30 +23,31 @@ class ChatBotBloc extends Bloc<ChatBotEvent, ChatBotState> {
     Emitter<ChatBotState> emit,
   ) async {
     await event.map(
-        initialize: (_) async => emit(const ChatBotState.initialized()),
-        startChatbot: (_) async {
-          emit(const ChatBotState.loading());
-          final failureOrSuccess = await repository.startChatbot();
-          failureOrSuccess.fold(
-            (error) => emit(
-              ChatBotState.error(error),
-            ),
-            (_) => emit(
-              const ChatBotState.start(),
-            ),
-          );
-        },
-        resetChatbot: (_) async {
-          emit(const ChatBotState.loading());
-          final failureOrSuccess = await repository.resetChatbot();
-          failureOrSuccess.fold(
-            (error) => emit(
-              ChatBotState.error(error),
-            ),
-            (_) => emit(
-              const ChatBotState.reset(),
-            ),
-          );
-        },);
+      initialize: (_) async => emit(const ChatBotState.initialized()),
+      startChatbot: (_) async {
+        emit(const ChatBotState.loading());
+        final failureOrSuccess = await repository.startChatbot();
+        failureOrSuccess.fold(
+          (error) => emit(
+            ChatBotState.error(error),
+          ),
+          (_) => emit(
+            const ChatBotState.start(),
+          ),
+        );
+      },
+      resetChatbot: (_) async {
+        emit(const ChatBotState.loading());
+        final failureOrSuccess = await repository.resetChatbot();
+        failureOrSuccess.fold(
+          (error) => emit(
+            ChatBotState.error(error),
+          ),
+          (_) => emit(
+            const ChatBotState.reset(),
+          ),
+        );
+      },
+    );
   }
 }

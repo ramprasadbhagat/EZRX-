@@ -38,9 +38,11 @@ class ChatBotWidget extends StatelessWidget {
           builder: (context, state) {
             return BlocListener<ChatBotBloc, ChatBotState>(
               listener: (context, state) {
-                state.whenOrNull(error: (e) {
-                  ErrorUtils.handleApiFailure(context, e);
-                });
+                state.whenOrNull(
+                  error: (e) {
+                    ErrorUtils.handleApiFailure(context, e);
+                  },
+                );
               },
               child: DraggableFloatingActionButton(
                 parentKey: _parentKey,

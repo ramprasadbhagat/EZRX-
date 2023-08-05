@@ -78,11 +78,12 @@ void main() {
         final finalData = res['data']['price'];
 
         expect(
-            result,
-            List.from(finalData)
-                .map((e) => PriceDto.fromJson(e).toDomain())
-                .toList()
-                .first);
+          result,
+          List.from(finalData)
+              .map((e) => PriceDto.fromJson(e).toDomain())
+              .toList()
+              .first,
+        );
       });
 
       test(

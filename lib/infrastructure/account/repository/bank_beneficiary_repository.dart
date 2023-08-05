@@ -45,8 +45,9 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<SalesDistrict>>> getSalesDistrict(
-      {required SalesOrg salesOrg,}) async {
+  Future<Either<ApiFailure, List<SalesDistrict>>> getSalesDistrict({
+    required SalesOrg salesOrg,
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final salesDistrict = await localDataSource.getSalesDistrict();
@@ -57,8 +58,9 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
       }
     }
     try {
-      final salesDistrict =
-          await remoteDataSource.getSalesDistrict(salesOrg: salesOrg.getOrCrash());
+      final salesDistrict = await remoteDataSource.getSalesDistrict(
+        salesOrg: salesOrg.getOrCrash(),
+      );
 
       return Right(salesDistrict);
     } catch (e) {
@@ -67,8 +69,9 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
   }
 
   @override
-  Future<Either<ApiFailure, BankBeneficiaryResponse>> addOrUpdateBeneficiary(
-      {required BankBeneficiary beneficiaryData,}) async {
+  Future<Either<ApiFailure, BankBeneficiaryResponse>> addOrUpdateBeneficiary({
+    required BankBeneficiary beneficiaryData,
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.addOrUpdateBeneficiary();
@@ -80,7 +83,8 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
     }
     try {
       final response = await remoteDataSource.addOrUpdateBeneficiary(
-          beneficiaryData: BankBeneficiaryDto.fromDomain(beneficiaryData).toJson(),
+        beneficiaryData:
+            BankBeneficiaryDto.fromDomain(beneficiaryData).toJson(),
       );
 
       return Right(response);
@@ -90,13 +94,11 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
   }
 
   @override
-  Future<Either<ApiFailure, BankBeneficiaryResponse>> deleteBeneficiary(
-    {
-      required SalesOrg salesOrg, 
-      required String salesDistrict,
-    }
-    )async {
-   if (config.appFlavor == Flavor.mock) {
+  Future<Either<ApiFailure, BankBeneficiaryResponse>> deleteBeneficiary({
+    required SalesOrg salesOrg,
+    required String salesDistrict,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.deleteBeneficiary();
 
@@ -107,8 +109,8 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
     }
     try {
       final response = await remoteDataSource.deleteBeneficiary(
-         salesOrg: salesOrg.getOrCrash(),
-         salesDistrict: salesDistrict,
+        salesOrg: salesOrg.getOrCrash(),
+        salesDistrict: salesDistrict,
       );
 
       return Right(response);

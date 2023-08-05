@@ -24,8 +24,10 @@ void main() {
       );
     });
     test('getUser with rootAdminToken', () async {
-      when(() => tokenStorage.get()).thenAnswer((invocation) async =>
-          JWTDto(access: rootAdminToken, refresh: refreshToken));
+      when(() => tokenStorage.get()).thenAnswer(
+        (invocation) async =>
+            JWTDto(access: rootAdminToken, refresh: refreshToken),
+      );
 
       final user = await userLocal.getUser();
       expect(user.id, '3860');
@@ -41,7 +43,8 @@ void main() {
 
     test('getUser with other token', () async {
       when(() => tokenStorage.get()).thenAnswer(
-          (invocation) async => JWTDto(access: '1234', refresh: '1234'));
+        (invocation) async => JWTDto(access: '1234', refresh: '1234'),
+      );
 
       final user = await userLocal.getUser();
       expect(user.id, '7725');

@@ -17,7 +17,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class UserRestrictionListDtoMock extends Mock
     implements UserRestrictionListDto {}
 
@@ -181,7 +180,9 @@ void main() {
     );
 
     final result = await remoteDataSource.getUserRestrictions(
-        salesOrg: salesOrg, userName: 'fake-username');
+      salesOrg: salesOrg,
+      userName: 'fake-username',
+    );
 
     expect(
       result,
@@ -219,10 +220,11 @@ void main() {
     );
 
     final result = await remoteDataSource.addApprovalLimit(
-        salesOrg: salesOrg,
-        userName: 'fake-username',
-        valueLowerLimit: 0,
-        valueUpperLimit: 10);
+      salesOrg: salesOrg,
+      userName: 'fake-username',
+      valueLowerLimit: 0,
+      valueUpperLimit: 10,
+    );
 
     expect(
       result,
@@ -256,7 +258,9 @@ void main() {
     );
 
     final result = await remoteDataSource.configureUserRestriction(
-        userName: 'fake-username', approverRightsList: []);
+      userName: 'fake-username',
+      approverRightsList: [],
+    );
 
     expect(
       result,
@@ -289,7 +293,9 @@ void main() {
     );
 
     final result = await remoteDataSource.deleteApprovalRight(
-        salesOrg: salesOrg, uuid: 'uuid');
+      salesOrg: salesOrg,
+      uuid: 'uuid',
+    );
 
     expect(
       result,

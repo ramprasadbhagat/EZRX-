@@ -11,7 +11,7 @@ class UserRestrictionListDto with _$UserRestrictionListDto {
 
   factory UserRestrictionListDto({
     @JsonKey(name: 'rawMetaData')
-    required UserRestrictionListRawMetaDataDto rawMetaData,
+        required UserRestrictionListRawMetaDataDto rawMetaData,
   }) = _UserRestrictionListDto;
 
   factory UserRestrictionListDto.fromJson(Map<String, dynamic> json) =>

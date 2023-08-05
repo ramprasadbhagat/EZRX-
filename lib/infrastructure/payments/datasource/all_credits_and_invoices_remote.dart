@@ -34,8 +34,8 @@ class AllCreditsAndInvoicesRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': allCreditsAndInvoicesQueryMutation
-              .getDocumentHeaderListQuery(),
+          'query':
+              allCreditsAndInvoicesQueryMutation.getDocumentHeaderListQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -56,8 +56,9 @@ class AllCreditsAndInvoicesRemoteDataSource {
       ),
     );
     _exceptionChecker(property: 'customerDocumentHeader', res: res);
-    final data = res.data['data']['customerDocumentHeader']['documentHeaderList'];
-    
+    final data =
+        res.data['data']['customerDocumentHeader']['documentHeaderList'];
+
     final result = <CreditAndInvoiceItem>[];
     for (final dynamic item in data) {
       result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
@@ -79,8 +80,8 @@ class AllCreditsAndInvoicesRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': allCreditsAndInvoicesQueryMutation
-              .getDocumentHeaderListQuery(),
+          'query':
+              allCreditsAndInvoicesQueryMutation.getDocumentHeaderListQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -101,8 +102,9 @@ class AllCreditsAndInvoicesRemoteDataSource {
       ),
     );
     _exceptionChecker(property: 'customerDocumentHeader', res: res);
-    final data = res.data['data']['customerDocumentHeader']['documentHeaderList'];
-    
+    final data =
+        res.data['data']['customerDocumentHeader']['documentHeaderList'];
+
     final result = <CreditAndInvoiceItem>[];
     for (final dynamic item in data) {
       result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());

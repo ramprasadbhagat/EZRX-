@@ -137,7 +137,7 @@ class _$_SoaDto extends _SoaDto {
 abstract class _SoaDto extends SoaDto {
   factory _SoaDto(
       {@JsonKey(name: 'name', defaultValue: '')
-      required final String name}) = _$_SoaDto;
+          required final String name}) = _$_SoaDto;
   _SoaDto._() : super._();
 
   factory _SoaDto.fromJson(Map<String, dynamic> json) = _$_SoaDto.fromJson;

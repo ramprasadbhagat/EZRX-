@@ -82,7 +82,8 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/getAvailablePaymentMethodsResponse.json'),
+              'assets/json/getAvailablePaymentMethodsResponse.json',
+            ),
           );
 
           dioAdapter.onPost(

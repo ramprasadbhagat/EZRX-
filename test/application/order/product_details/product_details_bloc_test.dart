@@ -40,12 +40,16 @@ void main() {
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockShipToInfo = ShipToInfo.empty();
   final mockSalesOrganisation = SalesOrganisation(
-      salesOrg: salesOrg, customerInfos: <SalesOrgCustomerInfo>[]);
+    salesOrg: salesOrg,
+    customerInfos: <SalesOrgCustomerInfo>[],
+  );
 
   final materialInfoType = MaterialInfoType('material');
-  final productImage = ProductImages.empty().copyWith(image: [
-    'https://ezrxdev.blob.core.windows.net/assets/21041773/21041773.png'
-  ]);
+  final productImage = ProductImages.empty().copyWith(
+    image: [
+      'https://ezrxdev.blob.core.windows.net/assets/21041773/21041773.png'
+    ],
+  );
 
   setUpAll(() async {
     productDetailMockRepository = ProductDetailRepositoryMock();
@@ -103,10 +107,11 @@ void main() {
           ).thenAnswer((invocation) async => Right(mockStockInfo));
           when(
             () => productDetailMockRepository.getItemProductMetaData(
-                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo,
-            )),
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                stockInfo: mockStockInfo,
+                materialInfo: mockMaterialInfo,
+              ),
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               ProductDetailAggregate.empty().copyWith(
@@ -271,13 +276,15 @@ void main() {
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
           when(
             () => productDetailMockRepository.getItemProductMetaData(
-                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: StockInfo.empty(),
-              materialInfo: mockMaterialInfo,
-            )),
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                stockInfo: StockInfo.empty(),
+                materialInfo: mockMaterialInfo,
+              ),
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               ProductDetailAggregate.empty().copyWith(
@@ -386,12 +393,14 @@ void main() {
         setUp: () {
           when(
             () => productDetailMockRepository.getItemProductMetaData(
-                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: mockStockInfo,
-              materialInfo: mockMaterialInfo,
-            )),
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                stockInfo: mockStockInfo,
+                materialInfo: mockMaterialInfo,
+              ),
+            ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
           when(
             () => productDetailMockRepository.getSimilarProduct(
               salesOrganisation: mockSalesOrganisation,
@@ -476,7 +485,8 @@ void main() {
               locale: locale,
             ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -572,12 +582,13 @@ void main() {
         setUp: () {
           when(
             () => favouriteMockRepository.addToFavourites(
-                materialNumber: mockMaterialInfo.materialNumber,
-                list: [
-                  mockMaterialInfo.copyWith(
-                    productImages: mockProductMetaData.productImages.first,
-                  )
-                ]),
+              materialNumber: mockMaterialInfo.materialNumber,
+              list: [
+                mockMaterialInfo.copyWith(
+                  productImages: mockProductMetaData.productImages.first,
+                )
+              ],
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               [
@@ -639,10 +650,11 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(
               mockSimilarProducts
-                  .map((e) =>
-                      e.materialNumber == mockMaterialInfo.materialNumber
-                          ? e.copyWith(isFavourite: true)
-                          : e)
+                  .map(
+                    (e) => e.materialNumber == mockMaterialInfo.materialNumber
+                        ? e.copyWith(isFavourite: true)
+                        : e,
+                  )
                   .toList(),
             ),
           );
@@ -677,10 +689,11 @@ void main() {
               ),
               productItem: mockProductMetaData.items.first,
               similarProduct: mockSimilarProducts
-                  .map((e) =>
-                      e.materialNumber == mockMaterialInfo.materialNumber
-                          ? e.copyWith(isFavourite: true)
-                          : e)
+                  .map(
+                    (e) => e.materialNumber == mockMaterialInfo.materialNumber
+                        ? e.copyWith(isFavourite: true)
+                        : e,
+                  )
                   .toList(),
             ),
           ),
@@ -696,14 +709,16 @@ void main() {
         setUp: () {
           when(
             () => favouriteMockRepository.addToFavourites(
-                materialNumber: mockMaterialInfo.materialNumber,
-                list: [
-                  mockMaterialInfo.copyWith(
-                    productImages: mockProductMetaData.productImages.first,
-                  )
-                ]),
+              materialNumber: mockMaterialInfo.materialNumber,
+              list: [
+                mockMaterialInfo.copyWith(
+                  productImages: mockProductMetaData.productImages.first,
+                )
+              ],
+            ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -726,17 +741,18 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                stockInfo: mockStockInfo,
-                materialInfo: mockMaterialInfo.copyWith(
-                  productImages: mockProductMetaData.productImages.first,
-                  isFavourite: false,
-                ),
-                productItem: mockProductMetaData.items.first,
-                similarProduct: mockSimilarProducts,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              stockInfo: mockStockInfo,
+              materialInfo: mockMaterialInfo.copyWith(
+                productImages: mockProductMetaData.productImages.first,
+                isFavourite: false,
               ),
-              failureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other('Fake-Error')))),
+              productItem: mockProductMetaData.items.first,
+              similarProduct: mockSimilarProducts,
+            ),
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          ),
         ],
       );
 
@@ -749,13 +765,14 @@ void main() {
         setUp: () {
           when(
             () => favouriteMockRepository.removeFromFavourites(
-                materialNumber: mockMaterialInfo.materialNumber,
-                list: [
-                  mockMaterialInfo.copyWith(
-                    isFavourite: true,
-                    productImages: mockProductMetaData.productImages.first,
-                  )
-                ]),
+              materialNumber: mockMaterialInfo.materialNumber,
+              list: [
+                mockMaterialInfo.copyWith(
+                  isFavourite: true,
+                  productImages: mockProductMetaData.productImages.first,
+                )
+              ],
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               [
@@ -814,19 +831,21 @@ void main() {
             () => favouriteMockRepository.removeFromFavourites(
               materialNumber: mockMaterialInfo.materialNumber,
               list: mockSimilarProducts
-                  .map((e) =>
-                      e.materialNumber == mockMaterialInfo.materialNumber
-                          ? e.copyWith(isFavourite: true)
-                          : e)
+                  .map(
+                    (e) => e.materialNumber == mockMaterialInfo.materialNumber
+                        ? e.copyWith(isFavourite: true)
+                        : e,
+                  )
                   .toList(),
             ),
           ).thenAnswer(
             (invocation) async => Right(
               mockSimilarProducts
-                  .map((e) =>
-                      e.materialNumber == mockMaterialInfo.materialNumber
-                          ? e.copyWith(isFavourite: false)
-                          : e)
+                  .map(
+                    (e) => e.materialNumber == mockMaterialInfo.materialNumber
+                        ? e.copyWith(isFavourite: false)
+                        : e,
+                  )
                   .toList(),
             ),
           );
@@ -848,9 +867,11 @@ void main() {
             ),
             productItem: mockProductMetaData.items.first,
             similarProduct: mockSimilarProducts
-                .map((e) => e.materialNumber == mockMaterialInfo.materialNumber
-                    ? e.copyWith(isFavourite: true)
-                    : e)
+                .map(
+                  (e) => e.materialNumber == mockMaterialInfo.materialNumber
+                      ? e.copyWith(isFavourite: true)
+                      : e,
+                )
                 .toList(),
           ),
         ),
@@ -865,10 +886,11 @@ void main() {
               ),
               productItem: mockProductMetaData.items.first,
               similarProduct: mockSimilarProducts
-                  .map((e) =>
-                      e.materialNumber == mockMaterialInfo.materialNumber
-                          ? e.copyWith(isFavourite: false)
-                          : e)
+                  .map(
+                    (e) => e.materialNumber == mockMaterialInfo.materialNumber
+                        ? e.copyWith(isFavourite: false)
+                        : e,
+                  )
                   .toList(),
             ),
           ),
@@ -884,15 +906,17 @@ void main() {
         setUp: () {
           when(
             () => favouriteMockRepository.removeFromFavourites(
-                materialNumber: mockMaterialInfo.materialNumber,
-                list: [
-                  mockMaterialInfo.copyWith(
-                    isFavourite: true,
-                    productImages: mockProductMetaData.productImages.first,
-                  )
-                ]),
+              materialNumber: mockMaterialInfo.materialNumber,
+              list: [
+                mockMaterialInfo.copyWith(
+                  isFavourite: true,
+                  productImages: mockProductMetaData.productImages.first,
+                )
+              ],
+            ),
           ).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -937,9 +961,10 @@ void main() {
         'Check SelectedImage value for Product Details Bloc If Product Image Is Empty',
         () {
           final productDetailState = ProductDetailState.initial().copyWith(
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-            materialInfo: mockMaterialInfo,
-          ));
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          );
           final selectedImage = productDetailState.selectedImage;
           expect(selectedImage, StringValue(''));
         },
@@ -949,11 +974,12 @@ void main() {
         'Check SelectedImage value for Product Details Bloc If Product Image Is Not Empty',
         () {
           final productDetailState = ProductDetailState.initial().copyWith(
-              selectedImageIndex: 0,
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo:
-                    mockMaterialInfo.copyWith(productImages: productImage),
-              ));
+            selectedImageIndex: 0,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo:
+                  mockMaterialInfo.copyWith(productImages: productImage),
+            ),
+          );
           final selectedIndex = productDetailState.selectedImageIndex;
           final images =
               productDetailState.productDetailAggregate.materialInfo.images;

@@ -70,9 +70,11 @@ class BundleSection extends StatelessWidget {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList
-                                    .map((e) => _BundleSectionItem(
-                                          materialInfo: e,
-                                        ))
+                                    .map(
+                                      (e) => _BundleSectionItem(
+                                        materialInfo: e,
+                                      ),
+                                    )
                                     .toList(),
                               ),
                             ),
@@ -86,18 +88,20 @@ class BundleSection extends StatelessWidget {
   }
 
   void _navigateForMoreBundle(BuildContext context) {
-    context.read<MaterialListBloc>().add(MaterialListEvent.fetch(
-          salesOrganisation:
-              context.read<EligibilityBloc>().state.salesOrganisation,
-          configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-          customerCodeInfo:
-              context.read<EligibilityBloc>().state.customerCodeInfo,
-          shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-          selectedMaterialFilter: MaterialFilter.empty().copyWith(
-            bundleOffers: true,
-            isProductOffer: true,
+    context.read<MaterialListBloc>().add(
+          MaterialListEvent.fetch(
+            salesOrganisation:
+                context.read<EligibilityBloc>().state.salesOrganisation,
+            configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
+            customerCodeInfo:
+                context.read<EligibilityBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+              bundleOffers: true,
+              isProductOffer: true,
+            ),
           ),
-        ));
+        );
     context.navigateTo(const ProductsTabRoute());
   }
 }

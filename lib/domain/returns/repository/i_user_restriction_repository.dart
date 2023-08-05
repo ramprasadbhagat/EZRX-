@@ -16,29 +16,24 @@ abstract class IUserRestrictionRepository {
     SalesOrg salesOrg,
   );
 
-  Future<Either<ApiFailure, UserRestrictions>>
-      getUserRestrictions({
+  Future<Either<ApiFailure, UserRestrictions>> getUserRestrictions({
     required SalesOrganisation salesOrganisation,
     required Username userName,
   });
 
-  Future<Either<ApiFailure, UserRestrictionStatus>>
-      addApprovalLimit({
+  Future<Either<ApiFailure, UserRestrictionStatus>> addApprovalLimit({
     required ApprovalLimits approverLimits,
   });
 
-  Future<Either<ApiFailure, UserRestrictionStatus>>
-      configureUserRestriction({
+  Future<Either<ApiFailure, UserRestrictionStatus>> configureUserRestriction({
     required ApproverRights approverRights,
   });
 
-  Future<Either<ApiFailure, bool>>
-      deleteApprovalRights({
+  Future<Either<ApiFailure, bool>> deleteApprovalRights({
     required ApproverRights approverRights,
   });
 
-  Future<Either<ApiFailure, UserRestrictionStatus>>
-      deleteApprovalLimit({
+  Future<Either<ApiFailure, UserRestrictionStatus>> deleteApprovalLimit({
     required ApprovalLimits approverLimits,
   });
 }

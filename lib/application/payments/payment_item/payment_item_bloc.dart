@@ -21,10 +21,12 @@ class PaymentItemBloc extends Bloc<PaymentItemEvent, PaymentItemState> {
     PaymentItemEvent event,
     Emitter<PaymentItemState> emit,
   ) async {
-    emit(state.copyWith(
-      isFetching: true,
-      failureOrSuccessOption: none(),
-    ));
+    emit(
+      state.copyWith(
+        isFetching: true,
+        failureOrSuccessOption: none(),
+      ),
+    );
 
     final failureOrSuccess = await paymentItemRepository.fetchPaymentItemList(
       customerCodeInfo: event.customerCodeInfo,
@@ -35,16 +37,20 @@ class PaymentItemBloc extends Bloc<PaymentItemEvent, PaymentItemState> {
     );
     failureOrSuccess.fold(
       (failure) {
-        emit(state.copyWith(
-          failureOrSuccessOption: optionOf(failureOrSuccess),
-          isFetching: false,
-        ));
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: optionOf(failureOrSuccess),
+            isFetching: false,
+          ),
+        );
       },
-      (paymentItemList) => emit(state.copyWith(
-        paymentItemList: paymentItemList,
-        isFetching: false,
-        failureOrSuccessOption: none(),
-      )),
+      (paymentItemList) => emit(
+        state.copyWith(
+          paymentItemList: paymentItemList,
+          isFetching: false,
+          failureOrSuccessOption: none(),
+        ),
+      ),
     );
   }
 }

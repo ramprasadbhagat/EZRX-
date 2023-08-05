@@ -34,8 +34,7 @@ class AdminPoAttachmentFilter with _$AdminPoAttachmentFilter {
         ),
       );
 
-  String get dateFiltered =>
-      '${fromDate.dateString}  to ${toDate.dateString} ';
+  String get dateFiltered => '${fromDate.dateString}  to ${toDate.dateString} ';
 
   DateTimeRange get filterDateRange => DateTimeRange(
         start: fromDate.dateTime,

@@ -65,7 +65,7 @@ class OrderHistoryDetailsBonusAggregate
           ),
         ),
       );
-OrderHistoryDetailsBonusAggregate copyWithTaxCal({
+  OrderHistoryDetailsBonusAggregate copyWithTaxCal({
     required SalesOrganisationConfigs salesOrganisationConfigs,
   }) =>
       copyWith(
@@ -73,5 +73,4 @@ OrderHistoryDetailsBonusAggregate copyWithTaxCal({
           salesOrganisationConfigs: salesOrganisationConfigs,
         ),
       );
-  
 }

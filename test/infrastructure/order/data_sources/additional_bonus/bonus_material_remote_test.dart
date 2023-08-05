@@ -71,20 +71,22 @@ void main() {
         );
 
         final result = await remoteDataSource.getadditionalBonus(
-            customerCodeSoldTo: 'fake-customercode',
-            salesOrganisation: 'fake-salesorg',
-            searchKey: '',
-            shipToCode: 'fake-shipto');
+          customerCodeSoldTo: 'fake-customercode',
+          salesOrganisation: 'fake-salesorg',
+          searchKey: '',
+          shipToCode: 'fake-shipto',
+        );
 
         expect(
-            result,
-            List.from(
-              res['data']['additionalBonusMaterial']['materials'],
-            )
-                .map(
-                  (e) => MaterialDto.fromJson(e).toDomain(),
-                )
-                .toList());
+          result,
+          List.from(
+            res['data']['additionalBonusMaterial']['materials'],
+          )
+              .map(
+                (e) => MaterialDto.fromJson(e).toDomain(),
+              )
+              .toList(),
+        );
       });
 
       test('Customer Materials For SalesRep', () async {
@@ -127,14 +129,15 @@ void main() {
         );
 
         expect(
-            result,
-            List.from(
-              res['data']['customerMaterialsForSalesRep']['materials'],
-            )
-                .map(
-                  (e) => MaterialDto.fromJson(e).toDomain(),
-                )
-                .toList());
+          result,
+          List.from(
+            res['data']['customerMaterialsForSalesRep']['materials'],
+          )
+              .map(
+                (e) => MaterialDto.fromJson(e).toDomain(),
+              )
+              .toList(),
+        );
       });
 
       test(
@@ -161,10 +164,11 @@ void main() {
 
           await remoteDataSource
               .getadditionalBonus(
-                  customerCodeSoldTo: 'fake-customercode',
-                  salesOrganisation: 'fake-salesorg',
-                  searchKey: '',
-                  shipToCode: 'fake-shipto')
+            customerCodeSoldTo: 'fake-customercode',
+            salesOrganisation: 'fake-salesorg',
+            searchKey: '',
+            shipToCode: 'fake-shipto',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<MaterialInfoMock>[]);
@@ -201,10 +205,11 @@ void main() {
 
           await remoteDataSource
               .getadditionalBonus(
-                  customerCodeSoldTo: 'fake-customercode',
-                  salesOrganisation: 'fake-salesorg',
-                  searchKey: '',
-                  shipToCode: 'fake-shipto')
+            customerCodeSoldTo: 'fake-customercode',
+            salesOrganisation: 'fake-salesorg',
+            searchKey: '',
+            shipToCode: 'fake-shipto',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<MaterialInfoMock>[]);

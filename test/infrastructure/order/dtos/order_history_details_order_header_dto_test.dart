@@ -22,9 +22,10 @@ void main() {
 
     test('Test fromDomain', () {
       final configs = OrderHistoryDetailsOrderHeadersDto.fromDomain(
-          OrderHistoryDetailsOrderHeadersDto.fromJson(
-        data,
-      ).toDomain());
+        OrderHistoryDetailsOrderHeadersDto.fromJson(
+          data,
+        ).toDomain(),
+      );
 
       expect(configs.totalTax, 10.0);
     });
@@ -39,9 +40,10 @@ void main() {
 
     test('Test toJson', () {
       final configs = OrderHistoryDetailsOrderHeadersDto.fromDomain(
-          OrderHistoryDetailsOrderHeadersDto.fromJson(
-        data,
-      ).toDomain()).toJson();
+        OrderHistoryDetailsOrderHeadersDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
 
       expect(configs['TotalTax'], 10.0);
     });

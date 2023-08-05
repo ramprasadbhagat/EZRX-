@@ -73,54 +73,54 @@ class QuantityInput extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               border:
                   isEnabled ? const UnderlineInputBorder() : InputBorder.none,
-                suffixIcon: isLoading
-                    ? const QuantityIconShimmer()
-                    : isEnabled
-                        ? QuantityIcon(
-                            key: quantityAddKey,
-                            pressed: () {
-                              FocusScope.of(context).unfocus();
-                              final value =
-                                  (int.tryParse(controller.text) ?? 0) + 1;
+              suffixIcon: isLoading
+                  ? const QuantityIconShimmer()
+                  : isEnabled
+                      ? QuantityIcon(
+                          key: quantityAddKey,
+                          pressed: () {
+                            FocusScope.of(context).unfocus();
+                            final value =
+                                (int.tryParse(controller.text) ?? 0) + 1;
 
-                              if (value < maximumQty) {
-                                final text = value.toString();
-                                controller.value = TextEditingValue(
-                                  text: text,
-                                  selection: TextSelection.collapsed(
-                                    offset: controller.selection.base.offset,
-                                  ),
-                                );
-                                addPressed.call(value);
-                              }
-                            },
-                            icon: Icons.add,
-                            isEnabled: isEnabled,
-                          )
-                        : const SizedBox.shrink(),
-                prefixIcon: isLoading
-                    ? const QuantityIconShimmer()
-                    : isEnabled
-                        ? QuantityIcon(
-                            key: quantityDeleteKey,
-                            pressed: () {
-                              FocusScope.of(context).unfocus();
-                              final value =
-                                  (int.tryParse(controller.text) ?? 0) - 1;
-                              if (value >= minimumQty) {
-                                final text = value.toString();
-                                controller.value = TextEditingValue(
-                                  text: text,
-                                  selection: TextSelection.collapsed(
-                                    offset: controller.selection.base.offset,
-                                  ),
-                                );
-                                minusPressed.call(value);
-                              }
-                            },
-                            icon: Icons.remove,
-                            isEnabled: isEnabled,
-                          )
+                            if (value < maximumQty) {
+                              final text = value.toString();
+                              controller.value = TextEditingValue(
+                                text: text,
+                                selection: TextSelection.collapsed(
+                                  offset: controller.selection.base.offset,
+                                ),
+                              );
+                              addPressed.call(value);
+                            }
+                          },
+                          icon: Icons.add,
+                          isEnabled: isEnabled,
+                        )
+                      : const SizedBox.shrink(),
+              prefixIcon: isLoading
+                  ? const QuantityIconShimmer()
+                  : isEnabled
+                      ? QuantityIcon(
+                          key: quantityDeleteKey,
+                          pressed: () {
+                            FocusScope.of(context).unfocus();
+                            final value =
+                                (int.tryParse(controller.text) ?? 0) - 1;
+                            if (value >= minimumQty) {
+                              final text = value.toString();
+                              controller.value = TextEditingValue(
+                                text: text,
+                                selection: TextSelection.collapsed(
+                                  offset: controller.selection.base.offset,
+                                ),
+                              );
+                              minusPressed.call(value);
+                            }
+                          },
+                          icon: Icons.remove,
+                          isEnabled: isEnabled,
+                        )
                       : const SizedBox.shrink(),
             ),
             style: Theme.of(context).textTheme.titleLarge,

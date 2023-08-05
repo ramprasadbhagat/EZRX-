@@ -16,7 +16,8 @@ void main() {
       seed: () => CartState.initial().copyWith(
         cartItems: [
           mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)])
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          )
         ],
         isFetching: true,
       ),
@@ -24,14 +25,18 @@ void main() {
         when(
           () => cartRepositoryMock.updateSelectionInCart(
             updatedItem: mockMaterialCartItemFirst.copyWith(
-                materials: [mockMaterialList.first.copyWith(quantity: 1)]),
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
           ),
         ).thenAnswer((invocation) async => Right([mockMaterialCartItemFirst]));
       },
-      act: (bloc) => bloc.add(CartEvent.selectButtonTapped(
-        cartItem: mockMaterialCartItemFirst.copyWith(
-            materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.selectButtonTapped(
+          cartItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [mockMaterialCartItemFirst],
@@ -46,7 +51,8 @@ void main() {
       seed: () => CartState.initial().copyWith(
         cartItems: [
           mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)])
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          )
         ],
         isFetching: true,
       ),
@@ -54,20 +60,26 @@ void main() {
         when(
           () => cartRepositoryMock.updateSelectionInCart(
             updatedItem: mockMaterialCartItemFirst.copyWith(
-                materials: [mockMaterialList.first.copyWith(quantity: 1)]),
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('fake-Error')),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.selectButtonTapped(
-        cartItem: mockMaterialCartItemFirst.copyWith(
-            materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.selectButtonTapped(
+          cartItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
             mockMaterialCartItemFirst.copyWith(
-                materials: [mockMaterialList.first.copyWith(quantity: 1)])
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            )
           ],
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-Error'))),
@@ -94,9 +106,11 @@ void main() {
           () => cartRepositoryMock.updateAllSelectionInCart(
             currentCart: [
               mockMaterialCartItemFirst.copyWith(
-                  materials: [mockMaterialList.first.copyWith(quantity: 1)]),
+                materials: [mockMaterialList.first.copyWith(quantity: 1)],
+              ),
               mockMaterialCartItemFirst.copyWith(
-                  materials: [mockMaterialList.last.copyWith(quantity: 1)]),
+                materials: [mockMaterialList.last.copyWith(quantity: 1)],
+              ),
             ],
           ),
         ).thenAnswer((invocation) async => Right([mockMaterialCartItemFirst]));
@@ -130,13 +144,16 @@ void main() {
           () => cartRepositoryMock.updateAllSelectionInCart(
             currentCart: [
               mockMaterialCartItemFirst.copyWith(
-                  materials: [mockMaterialList.first.copyWith(quantity: 1)]),
+                materials: [mockMaterialList.first.copyWith(quantity: 1)],
+              ),
               mockMaterialCartItemFirst.copyWith(
-                  materials: [mockMaterialList.last.copyWith(quantity: 1)]),
+                materials: [mockMaterialList.last.copyWith(quantity: 1)],
+              ),
             ],
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('fake-Error')),
+        );
       },
       act: (bloc) => bloc.add(
         const CartEvent.selectAllButtonTapped(),

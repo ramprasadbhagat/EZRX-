@@ -16,7 +16,8 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto = OrderHistoryDetailsInvoicesDto.fromDomain(
-          OrderHistoryDetailsInvoicesDto.fromJson(data).toDomain());
+        OrderHistoryDetailsInvoicesDto.fromJson(data).toDomain(),
+      );
       expect(configsDto.invoiceNumber, '1234');
     });
   });

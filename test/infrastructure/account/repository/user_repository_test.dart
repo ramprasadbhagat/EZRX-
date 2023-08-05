@@ -7,6 +7,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -35,6 +36,8 @@ class FirebaseAnalyticsObserverMock extends Mock
 
 class FirebaseCrashlyticsMock extends Mock implements FirebaseCrashlytics {}
 
+class DatadogServiceMock extends Mock implements DatadogService {}
+
 void main() {
   late UserRepository repository;
   late Config configMock;
@@ -52,6 +55,7 @@ void main() {
   const refreshToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
   late MockClevertapService mockClevertapService;
+  late DatadogService datadogServiceMock;
 
   setUpAll(
     () async {
@@ -72,6 +76,7 @@ void main() {
         crashlytics: firebaseCrashlyticsMock,
       );
       mockClevertapService = MockClevertapService();
+      datadogServiceMock = DatadogServiceMock();
       repository = UserRepository(
         clevertapService: mockClevertapService,
         firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
@@ -81,6 +86,7 @@ void main() {
         localDataSource: localDataSourceMock,
         tokenStorage: tokenStorageMock,
         mixpanelService: mixpanelService,
+        datadogService: datadogServiceMock,
       );
     },
   );
@@ -97,14 +103,16 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock
-                .updateUserNotificationAndLanguagePreference())
-            .thenAnswer((invocation) async => User.empty());
+        when(
+          () =>
+              localDataSourceMock.updateUserNotificationAndLanguagePreference(),
+        ).thenAnswer((invocation) async => User.empty());
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -124,14 +132,16 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock
-                .updateUserNotificationAndLanguagePreference())
-            .thenThrow(MockException(message: 'mockException'));
+        when(
+          () =>
+              localDataSourceMock.updateUserNotificationAndLanguagePreference(),
+        ).thenThrow(MockException(message: 'mockException'));
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -151,16 +161,19 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() =>
-            remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
-              languagePreference: '',
-              emailNotification: false,
-              userId: '',
-            )).thenAnswer((invocation) async => User.empty());
+        when(
+          () =>
+              remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
+            languagePreference: '',
+            emailNotification: false,
+            userId: '',
+          ),
+        ).thenAnswer((invocation) async => User.empty());
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -180,16 +193,19 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() =>
-            remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
-              languagePreference: '',
-              emailNotification: false,
-              userId: '',
-            )).thenThrow(Error());
+        when(
+          () =>
+              remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
+            languagePreference: '',
+            emailNotification: false,
+            userId: '',
+          ),
+        ).thenThrow(Error());
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -301,6 +317,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor)
@@ -326,6 +343,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor)
@@ -351,6 +369,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -375,6 +394,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -398,6 +418,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor)
@@ -423,6 +444,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor)
@@ -448,21 +470,26 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-        when(() => tokenStorageMock.get()).thenAnswer((invocation) async =>
-            JWTDto(access: rootAdminToken, refresh: refreshToken));
+        when(() => tokenStorageMock.get()).thenAnswer(
+          (invocation) async =>
+              JWTDto(access: rootAdminToken, refresh: refreshToken),
+        );
         when(() => remoteDataSourceMock.getUser(userId: '11461'))
             .thenAnswer((invocation) async => User.empty());
 
-        when(() => firebaseAnalyticsServiceMock.analytics
-                .setUserId(id: User.empty().id))
-            .thenAnswer((invocation) async => User.empty());
+        when(
+          () => firebaseAnalyticsServiceMock.analytics
+              .setUserId(id: User.empty().id),
+        ).thenAnswer((invocation) async => User.empty());
 
-        when(() => firebaseCrashlyticsServiceMock.crashlytics
-                .setUserIdentifier(User.empty().id))
-            .thenAnswer((invocation) async => User.empty());
+        when(
+          () => firebaseCrashlyticsServiceMock.crashlytics
+              .setUserIdentifier(User.empty().id),
+        ).thenAnswer((invocation) async => User.empty());
         final mockUser = User.empty();
         when(
           () => mockClevertapService.setUser(
@@ -490,6 +517,7 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
+          datadogService: datadogServiceMock,
         );
         when(() => tokenStorageMock.get())
             .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));

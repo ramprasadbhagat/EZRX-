@@ -59,15 +59,17 @@ void main() async {
   group('Cart Item KWithSuffix -', () {
     test('Combo not eligible when total qty is not suffice', () {
       expect(
-          CartItem.comboDeal([amountDealMaterial]).isComboDealEligible, false);
+        CartItem.comboDeal([amountDealMaterial]).isComboDealEligible,
+        false,
+      );
     });
     test('Combo eligible when when total qty is suffice', () {
       expect(
-          CartItem.comboDeal([
-            percentDealMaterial,
-            amountDealMaterial.copyWith(quantity: 5)
-          ]).isComboDealEligible,
-          true);
+        CartItem.comboDeal(
+          [percentDealMaterial, amountDealMaterial.copyWith(quantity: 5)],
+        ).isComboDealEligible,
+        true,
+      );
     });
 
     test('Eligible tier', () {

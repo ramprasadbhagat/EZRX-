@@ -313,16 +313,18 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get refreshAddedBonus =>
       calculateMaterialItemBonus.length != addedDealBonusMaterial.length ||
-      calculateMaterialItemBonus.any((BonusMaterial calculatedBonus) =>
-          calculatedBonus.bonusQuantity !=
-          addedDealBonusMaterial
-              .firstWhere(
-                (MaterialItemBonus availableBonus) =>
-                    availableBonus.materialNumber ==
-                    calculatedBonus.materialNumber,
-                orElse: () => MaterialItemBonus.empty(),
-              )
-              .qty);
+      calculateMaterialItemBonus.any(
+        (BonusMaterial calculatedBonus) =>
+            calculatedBonus.bonusQuantity !=
+            addedDealBonusMaterial
+                .firstWhere(
+                  (MaterialItemBonus availableBonus) =>
+                      availableBonus.materialNumber ==
+                      calculatedBonus.materialNumber,
+                  orElse: () => MaterialItemBonus.empty(),
+                )
+                .qty,
+      );
 
   PriceBonusItem get _bonusItem => price.priceBonusItem.firstWhere(
         (PriceBonusItem element) => quantity >= element.qualifyingQuantity,

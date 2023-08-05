@@ -57,8 +57,10 @@ void main() {
     group('getCreditAndInvoiceDetails Test', () {
       test('=> getCreditAndInvoiceDetails locally success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-        when(() => allCreditsAndInvoicesLocalDataSourceMock
-            .getCreditAndInvoiceDetails()).thenAnswer(
+        when(
+          () => allCreditsAndInvoicesLocalDataSourceMock
+              .getCreditAndInvoiceDetails(),
+        ).thenAnswer(
           (invocation) async => fakeCreditAndInvoiceDetails,
         );
 
@@ -73,9 +75,10 @@ void main() {
 
       test('=> getCreditAndInvoiceDetails locally failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-        when(() => allCreditsAndInvoicesLocalDataSourceMock
-                .getCreditAndInvoiceDetails())
-            .thenThrow((invocation) async => MockException());
+        when(
+          () => allCreditsAndInvoicesLocalDataSourceMock
+              .getCreditAndInvoiceDetails(),
+        ).thenThrow((invocation) async => MockException());
 
         final result =
             await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(
@@ -87,15 +90,17 @@ void main() {
       });
       test('=> getCreditAndInvoiceDetails remote success', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-        when(() => allCreditsAndInvoicesRemoteDataSourceMock
-                .getCreditAndInvoiceDetails(
-              customerCode: 'mock_soldTo',
-              salesOrg: 'mock_salesOrg',
-              bpCustomerNumber: fakeInvoice.bpCustomerNumber,
-              fiscalYear: fakeInvoice.fiscalYear,
-              searchKey: fakeInvoice.searchKey,
-              accountingDocumentItem: fakeInvoice.accountingDocumentItem,
-            )).thenAnswer(
+        when(
+          () => allCreditsAndInvoicesRemoteDataSourceMock
+              .getCreditAndInvoiceDetails(
+            customerCode: 'mock_soldTo',
+            salesOrg: 'mock_salesOrg',
+            bpCustomerNumber: fakeInvoice.bpCustomerNumber,
+            fiscalYear: fakeInvoice.fiscalYear,
+            searchKey: fakeInvoice.searchKey,
+            accountingDocumentItem: fakeInvoice.accountingDocumentItem,
+          ),
+        ).thenAnswer(
           (invocation) async => fakeCreditAndInvoiceDetails,
         );
 
@@ -112,15 +117,17 @@ void main() {
 
       test('=> getCreditAndInvoiceDetails remote failed', () async {
         when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-        when(() => allCreditsAndInvoicesRemoteDataSourceMock
-                .getCreditAndInvoiceDetails(
-              customerCode: 'mock_soldTo',
-              salesOrg: 'mock_salesOrg',
-              bpCustomerNumber: fakeInvoice.bpCustomerNumber,
-              fiscalYear: fakeInvoice.fiscalYear,
-              searchKey: fakeInvoice.searchKey,
-              accountingDocumentItem: fakeInvoice.accountingDocumentItem,
-            )).thenThrow((invocation) async => MockException());
+        when(
+          () => allCreditsAndInvoicesRemoteDataSourceMock
+              .getCreditAndInvoiceDetails(
+            customerCode: 'mock_soldTo',
+            salesOrg: 'mock_salesOrg',
+            bpCustomerNumber: fakeInvoice.bpCustomerNumber,
+            fiscalYear: fakeInvoice.fiscalYear,
+            searchKey: fakeInvoice.searchKey,
+            accountingDocumentItem: fakeInvoice.accountingDocumentItem,
+          ),
+        ).thenThrow((invocation) async => MockException());
 
         final result =
             await allCreditsAndInvoicesRepository.getCreditAndInvoiceDetails(

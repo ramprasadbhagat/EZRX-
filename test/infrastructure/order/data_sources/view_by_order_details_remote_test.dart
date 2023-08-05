@@ -71,13 +71,16 @@ void main() {
         );
 
         final result = await remoteDataSource.getOrderHistoryDetails(
-            language: 'fake-language', orderId: 'fake-order');
+          language: 'fake-language',
+          orderId: 'fake-order',
+        );
 
         expect(
-            result,
-            OrderHistoryDetailsDto.fromJson(
-              res['data']['orderDetails'],
-            ).toDomain());
+          result,
+          OrderHistoryDetailsDto.fromJson(
+            res['data']['orderDetails'],
+          ).toDomain(),
+        );
       });
 
       test('Get OrderHistory Details For SalesRep', () async {
@@ -115,10 +118,11 @@ void main() {
         );
 
         expect(
-            result,
-            OrderHistoryDetailsDto.fromJson(
-              res['data']['orderDetailsForSalesRep'],
-            ).toDomain());
+          result,
+          OrderHistoryDetailsDto.fromJson(
+            res['data']['orderDetailsForSalesRep'],
+          ).toDomain(),
+        );
       });
 
       test('status code not equal to 200', () async {

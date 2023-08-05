@@ -13,11 +13,10 @@ class AllInvoicesState with _$AllInvoicesState {
   }) = _AllInvoicesState;
 
   factory AllInvoicesState.initial() => AllInvoicesState(
-      failureOrSuccessOption: none(),
-      isLoading: false,
-      canLoadMore: true,
-      appliedFilter: AllInvoicesFilter.empty(),
+        failureOrSuccessOption: none(),
+        isLoading: false,
+        canLoadMore: true,
+        appliedFilter: AllInvoicesFilter.empty(),
         items: <CreditAndInvoiceItem>[],
       );
-      
 }

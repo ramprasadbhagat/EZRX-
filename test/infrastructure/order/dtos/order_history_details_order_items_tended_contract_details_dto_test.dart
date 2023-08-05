@@ -23,18 +23,20 @@ void main() {
     test('Test fromDomain', () {
       final configsDto =
           OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(
-              OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
-                      data)
-                  .toDomain());
+        OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
+          data,
+        ).toDomain(),
+      );
       expect(configsDto.tenderContractNumber, '7615757');
     });
 
     test('Test tojson', () {
       final configsDto =
           OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(
-              OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
-                      data)
-                  .toDomain()).toJson();
+        OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
       expect(configsDto['ContractNumber'], '7615757');
     });
   });

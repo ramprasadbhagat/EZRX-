@@ -19,7 +19,6 @@ class ReturnApproverFilterState with _$ReturnApproverFilterState {
       approverReturnFilter.fromInvoiceDate.isValid() &&
       approverReturnFilter.toInvoiceDate.isValid();
 
-
   bool get areFiltersValid {
     return approverReturnFilter.returnId.isValid() &&
         approverReturnFilter.createdBy.isValid() &&

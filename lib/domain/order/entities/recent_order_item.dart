@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 
-
 part 'recent_order_item.freezed.dart';
 
 @freezed
@@ -30,7 +29,6 @@ class RecentOrderItem with _$RecentOrderItem {
     required ProductImages productImages,
     @Default(false) bool isFavourite,
   }) = _OrderHistoryItem;
-
 
   factory RecentOrderItem.empty() => RecentOrderItem(
         materialNumber: MaterialNumber(''),

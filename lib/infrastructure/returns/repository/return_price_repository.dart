@@ -46,16 +46,18 @@ class ReturnPriceRepository extends IReturnPriceRepository {
       }
     }
     try {
-      await Future.wait(returnItemsList.map((e) async {
-        final returnPrice = await getPrice(
-          returnItem: e,
-          salesOrgCode: salesOrganisation,
-        );
-        returnPrice.fold(
-          (failure) {},
-          (price) => null,
-        );
-      }));
+      await Future.wait(
+        returnItemsList.map((e) async {
+          final returnPrice = await getPrice(
+            returnItem: e,
+            salesOrgCode: salesOrganisation,
+          );
+          returnPrice.fold(
+            (failure) {},
+            (price) => null,
+          );
+        }),
+      );
 
       return Right(returnPriceObject);
     } catch (e) {

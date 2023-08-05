@@ -21,9 +21,11 @@ class OrderHistoryFilterByStatusBloc extends Bloc<
       ),
       checkedStatusFilter: (e) {
         if (e.isChecked) {
-          emit(state.copyWith(
-            filterByStatusName: [...state.filterByStatusName, e.statusName],
-          ));
+          emit(
+            state.copyWith(
+              filterByStatusName: [...state.filterByStatusName, e.statusName],
+            ),
+          );
         } else {
           emit(
             state.copyWith(

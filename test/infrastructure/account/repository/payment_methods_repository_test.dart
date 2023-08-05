@@ -154,11 +154,13 @@ void main() {
         'successfully remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => paymentRemoteSource.updatePaymentMethods(
-                salesOrg: 'fake-salesorg',
-                oldPaymentMethod: 'old',
-                newPaymentMethod: 'new',
-              )).thenAnswer((invocation) async => updatePaymentMethodsMock);
+          when(
+            () => paymentRemoteSource.updatePaymentMethods(
+              salesOrg: 'fake-salesorg',
+              oldPaymentMethod: 'old',
+              newPaymentMethod: 'new',
+            ),
+          ).thenAnswer((invocation) async => updatePaymentMethodsMock);
 
           final result = await paymentRepo.updatePaymentMethods(
             salesOrg: SalesOrg('fake-salesorg'),
@@ -176,11 +178,13 @@ void main() {
         'fails remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => paymentRemoteSource.updatePaymentMethods(
-                salesOrg: 'fake-salesorg',
-                oldPaymentMethod: 'old',
-                newPaymentMethod: 'new',
-              )).thenThrow(MockException());
+          when(
+            () => paymentRemoteSource.updatePaymentMethods(
+              salesOrg: 'fake-salesorg',
+              oldPaymentMethod: 'old',
+              newPaymentMethod: 'new',
+            ),
+          ).thenThrow(MockException());
 
           final result = await paymentRepo.updatePaymentMethods(
             salesOrg: SalesOrg('fake-salesorg'),
@@ -239,10 +243,12 @@ void main() {
         'successfully remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => paymentRemoteSource.deletePaymentMethods(
-                salesOrg: 'fake-salesorg',
-                paymentMethod: 'payment-method',
-              )).thenAnswer((invocation) async => deletePaymentMethodsMock);
+          when(
+            () => paymentRemoteSource.deletePaymentMethods(
+              salesOrg: 'fake-salesorg',
+              paymentMethod: 'payment-method',
+            ),
+          ).thenAnswer((invocation) async => deletePaymentMethodsMock);
 
           final result = await paymentRepo.deletePaymentMethods(
             salesOrg: SalesOrg('fake-salesorg'),
@@ -259,10 +265,12 @@ void main() {
         'fails remotely',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-          when(() => paymentRemoteSource.deletePaymentMethods(
-                salesOrg: 'fake-salesorg',
-                paymentMethod: 'payment-method',
-              )).thenThrow(MockException());
+          when(
+            () => paymentRemoteSource.deletePaymentMethods(
+              salesOrg: 'fake-salesorg',
+              paymentMethod: 'payment-method',
+            ),
+          ).thenThrow(MockException());
 
           final result = await paymentRepo.deletePaymentMethods(
             salesOrg: SalesOrg('fake-salesorg'),

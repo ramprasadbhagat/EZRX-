@@ -14,7 +14,8 @@ class PaymentNotification with _$PaymentNotification {
   }) = _PaymentNotification;
 
   factory PaymentNotification.empty() => const PaymentNotification(
-        paymentAdviceExpiryNotificationList: <PaymentAdviceExpiryNotification>[],
+        paymentAdviceExpiryNotificationList: <
+            PaymentAdviceExpiryNotification>[],
         disablePaymentNotification: true,
       );
 

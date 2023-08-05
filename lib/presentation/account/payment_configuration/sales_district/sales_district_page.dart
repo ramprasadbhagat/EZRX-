@@ -18,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
 class SalesDistrictPage extends StatelessWidget {
   const SalesDistrictPage({Key? key}) : super(key: key);
 
@@ -91,10 +90,12 @@ class _SalesDistrictScrollList extends StatelessWidget {
           itemBuilder: (context, index, item) {
             return Column(
               children: item.salesDistrictInfo
-                  .map((e) => _SalesDistrictListItem(
-                        salesDistrictInfo: e,
-                        salesOrg: item.salesOrg,
-                      ))
+                  .map(
+                    (e) => _SalesDistrictListItem(
+                      salesDistrictInfo: e,
+                      salesOrg: item.salesOrg,
+                    ),
+                  )
                   .toList(),
             );
           },

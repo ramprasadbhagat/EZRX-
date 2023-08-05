@@ -20,27 +20,31 @@ void main() {
       'Replace with orderItems Success',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.replaceCartWithItems(
-              items: mockCartBundleList,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              doNotAllowOutOfStockMaterials: true,
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            )).thenAnswer((invocation) async => Right(mockCartBundleList));
+        when(
+          () => cartRepositoryMock.replaceCartWithItems(
+            items: mockCartBundleList,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer((invocation) async => Right(mockCartBundleList));
 
-        when(() =>
-                cartRepositoryMock.updateDiscountQty(items: mockCartBundleList))
-            .thenAnswer((invocation) => mockCartBundleList);
+        when(
+          () => cartRepositoryMock.updateDiscountQty(items: mockCartBundleList),
+        ).thenAnswer((invocation) => mockCartBundleList);
       },
-      act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
-        items: mockCartBundleList,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.replaceWithOrderItems(
+          items: mockCartBundleList,
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
@@ -58,25 +62,29 @@ void main() {
       'Replace with orderItems Fail',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.replaceCartWithItems(
-                  items: mockCartBundleList,
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                  doNotAllowOutOfStockMaterials: true,
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                ))
-            .thenAnswer((invocation) async =>
-                const Left(ApiFailure.other('fake-Error')));
+        when(
+          () => cartRepositoryMock.replaceCartWithItems(
+            items: mockCartBundleList,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('fake-Error')),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
-        items: mockCartBundleList,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.replaceWithOrderItems(
+          items: mockCartBundleList,
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
@@ -93,30 +101,35 @@ void main() {
       'Replace with orderItems no Stock',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.replaceCartWithItems(
-                  items: [
-                    mockCartBundleList.first
-                        .copyWith(materials: [PriceAggregate.empty()])
-                  ],
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                  doNotAllowOutOfStockMaterials: true,
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                ))
-            .thenAnswer((invocation) async =>
-                const Left(ApiFailure.productOutOfStock()));
+        when(
+          () => cartRepositoryMock.replaceCartWithItems(
+            items: [
+              mockCartBundleList.first
+                  .copyWith(materials: [PriceAggregate.empty()])
+            ],
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(ApiFailure.productOutOfStock()),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
-        items: [
-          mockCartBundleList.first.copyWith(materials: [PriceAggregate.empty()])
-        ],
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.replaceWithOrderItems(
+          items: [
+            mockCartBundleList.first
+                .copyWith(materials: [PriceAggregate.empty()])
+          ],
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
@@ -135,41 +148,53 @@ void main() {
       'Replace with orderItems with bonus',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.replaceCartWithItems(
-              items: cartItemListWithBonus,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              doNotAllowOutOfStockMaterials: true,
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            )).thenAnswer((invocation) async => Right(cartItemListWithBonus));
-        when(() => cartRepositoryMock
-                .updateDiscountQty(items: cartItemListWithBonus))
-            .thenAnswer((invocation) => [
-                  CartItem(
-                      itemType: CartItemType.material,
-                      materials: cartItemListWithBonus.first.materials)
-                ]);
-        when(() => cartRepositoryMock.updateMaterialDealBonus(
-                  materials: cartItemListWithBonus.first.materials,
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                ))
-            .thenAnswer((invocation) async => Right([
-                  mockMaterialCartItemList.first.materials.first
-                      .copyWith(quantity: 10)
-                ]));
+        when(
+          () => cartRepositoryMock.replaceCartWithItems(
+            items: cartItemListWithBonus,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer((invocation) async => Right(cartItemListWithBonus));
+        when(
+          () => cartRepositoryMock.updateDiscountQty(
+            items: cartItemListWithBonus,
+          ),
+        ).thenAnswer(
+          (invocation) => [
+            CartItem(
+              itemType: CartItemType.material,
+              materials: cartItemListWithBonus.first.materials,
+            )
+          ],
+        );
+        when(
+          () => cartRepositoryMock.updateMaterialDealBonus(
+            materials: cartItemListWithBonus.first.materials,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([
+            mockMaterialCartItemList.first.materials.first
+                .copyWith(quantity: 10)
+          ]),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
-        items: cartItemListWithBonus,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.replaceWithOrderItems(
+          items: cartItemListWithBonus,
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
@@ -179,18 +204,23 @@ void main() {
           apiFailureOrSuccessOption: none(),
           cartItems: [
             CartItem(
-                itemType: CartItemType.material,
-                materials: cartItemListWithBonus.first.materials)
+              itemType: CartItemType.material,
+              materials: cartItemListWithBonus.first.materials,
+            )
           ],
           isFetching: false,
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           cartItems: [
-            CartItem(materials: [
-              mockMaterialCartItemList.first.materials.first.copyWith(
-                  price: cartItemListWithBonus.first.materials.first.price)
-            ], itemType: CartItemType.material)
+            CartItem(
+              materials: [
+                mockMaterialCartItemList.first.materials.first.copyWith(
+                  price: cartItemListWithBonus.first.materials.first.price,
+                )
+              ],
+              itemType: CartItemType.material,
+            )
           ],
           cartProducts: [
             mockMaterialCartItemList.first.materials.first

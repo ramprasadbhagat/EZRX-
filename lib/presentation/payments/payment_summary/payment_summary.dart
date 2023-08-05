@@ -17,7 +17,6 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
-
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 
 import 'package:ezrxmobile/presentation/core/search_bar.dart';

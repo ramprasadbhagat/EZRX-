@@ -22,7 +22,6 @@ class MaterialPriceRemoteDataSource {
     required this.config,
   });
 
-
   //TODO: Will revisit once BE apis are enhanced
   Future<List<Price>> getMaterialPriceList({
     required String salesOrgCode,

@@ -51,11 +51,12 @@ void main() async {
   group('Cart Item K3 -', () {
     test('Combo not eligible when self deal min qty is not suffice', () {
       expect(
-          CartItem.comboDeal([
-            material2,
-            material1.copyWith(quantity: 1),
-          ]).isComboDealEligible,
-          false);
+        CartItem.comboDeal([
+          material2,
+          material1.copyWith(quantity: 1),
+        ]).isComboDealEligible,
+        false,
+      );
     });
     test('Combo not eligible when unique material qty is not suffice', () {
       expect(CartItem.comboDeal([material2]).isComboDealEligible, false);
@@ -64,7 +65,9 @@ void main() async {
         'Combo eligible when unique material qty is suffice and min qty is suffice',
         () {
       expect(
-          CartItem.comboDeal([material1, material2]).isComboDealEligible, true);
+        CartItem.comboDeal([material1, material2]).isComboDealEligible,
+        true,
+      );
     });
 
     group('Percent deal -', () {

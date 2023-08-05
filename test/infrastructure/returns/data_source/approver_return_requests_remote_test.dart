@@ -54,7 +54,8 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/returnRequestsForApproverV2Response.json'),
+              'assets/json/returnRequestsForApproverV2Response.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -80,14 +81,15 @@ void main() {
           );
 
           expect(
-              result,
-              List.from(res['data']['requestsForApproverV2']['requestID'])
-                  .map(
-                    (e) => ReturnRequestsIdDto.fromJson({'requestId': e})
-                        .toDomain(),
-                  )
-                  .toList()
-                ..retainWhere((element) => element.isValidRequestId));
+            result,
+            List.from(res['data']['requestsForApproverV2']['requestID'])
+                .map(
+                  (e) =>
+                      ReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
+                )
+                .toList()
+              ..retainWhere((element) => element.isValidRequestId),
+          );
         },
       );
 

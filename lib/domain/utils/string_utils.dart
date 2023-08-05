@@ -37,8 +37,10 @@ class StringUtils {
   static String changeToCamelCase({required String sentence}) {
     final semiCamel = sentence
         .split(' ')
-        .map((e) =>
-            '${e.characters.getRange(0, 1).toUpperCase()}${e.characters.getRange(1).toLowerCase()}')
+        .map(
+          (e) =>
+              '${e.characters.getRange(0, 1).toUpperCase()}${e.characters.getRange(1).toLowerCase()}',
+        )
         .toList()
         .join();
 

@@ -9,8 +9,15 @@
         "editor.formatOnSave": true,
     },
     // https://dartcode.org/docs/recommended-settings/
+    "debug.openDebug": "openOnDebugBreak",
+	"debug.internalConsoleOptions": "openOnSessionStart",
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "dart.previewFlutterUiGuides": true,
+    "dart.devToolsLocation": "external",
+    "dart.runPubGetOnPubspecChanges": "prompt",
     "[dart]": {
         "editor.formatOnType": true,
+        "editor.formatOnSave": true,
         "editor.rulers": [
             80
         ],
@@ -18,7 +25,9 @@
         "editor.suggest.snippetsPreventQuickSuggestions": false,
         "editor.suggestSelection": "first",
         "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": false
+        "editor.wordBasedSuggestions": false,
+        "editor.guides.indentation": true,
+        "editor.defaultFormatter": "Dart-Code.dart-code",
     },
     "dart.flutterSdkPath": ".fvm/flutter_sdk",
     "dart.sdkPath": ".fvm/flutter_sdk/bin/dart",
@@ -44,6 +53,5 @@
         "cov.xml",
         "coverage.xml",
         "jacoco.xml"
-    ],
-    "terminal.integrated.fontWeight": "normal"
+    ]
 }

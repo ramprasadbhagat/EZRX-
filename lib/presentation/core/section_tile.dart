@@ -6,8 +6,11 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 class SectionTitle extends StatelessWidget {
   final String title;
   final VoidCallback onTapIconButton;
-  const SectionTitle({Key? key, required this.title, required this.onTapIconButton})
-      : super(key: key);
+  const SectionTitle({
+    Key? key,
+    required this.title,
+    required this.onTapIconButton,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +19,8 @@ class SectionTitle extends StatelessWidget {
         Text(
           title.tr(),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
-            color: ZPColors.neutralsBlack,
-          ),
+                color: ZPColors.neutralsBlack,
+              ),
         ),
         IconButton(
           onPressed: onTapIconButton,
@@ -35,4 +38,3 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
-

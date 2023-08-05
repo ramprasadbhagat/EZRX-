@@ -115,10 +115,11 @@ void main() {
 
           await remoteDataSource
               .getMaterialOverridePriceList(
-                  customerCode: '',
-                  materialQuery: {},
-                  salesOrgCode: '',
-                  shipToCode: '')
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PriceMock>[]);
@@ -155,10 +156,11 @@ void main() {
 
           await remoteDataSource
               .getMaterialOverridePriceList(
-                  customerCode: '',
-                  materialQuery: {},
-                  salesOrgCode: '',
-                  shipToCode: '')
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PriceMock>[]);
@@ -192,10 +194,11 @@ void main() {
 
           await remoteDataSource
               .getMaterialOverridePriceList(
-                  customerCode: '',
-                  materialQuery: {},
-                  salesOrgCode: '',
-                  shipToCode: '')
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PriceMock>[]);

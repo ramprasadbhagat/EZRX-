@@ -19,8 +19,7 @@ void main() {
       final configs = MaterialFilterDto.fromJson(
         data['data']['GetFilterList'],
       ).toDomain();
-      expect(configs.brandList,
-          data['data']['GetFilterList']['BrandList']);
+      expect(configs.brandList, data['data']['GetFilterList']['BrandList']);
     });
   });
 }

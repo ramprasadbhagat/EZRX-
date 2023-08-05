@@ -71,9 +71,11 @@ void main() {
 
     test('=> getUsageCode Remote SUCCESS', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => usageCodeRemoteDataSource.getUsages(
-              salesOrg: mockSalesOrg.getOrCrash()))
-          .thenAnswer((invocation) async => usageCode);
+      when(
+        () => usageCodeRemoteDataSource.getUsages(
+          salesOrg: mockSalesOrg.getOrCrash(),
+        ),
+      ).thenAnswer((invocation) async => usageCode);
 
       final result = await usageRepository.getUsages(
         salesOrg: mockSalesOrg,
@@ -88,7 +90,8 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
         () => usageCodeRemoteDataSource.getUsages(
-            salesOrg: mockSalesOrg.getOrDefaultValue('')),
+          salesOrg: mockSalesOrg.getOrDefaultValue(''),
+        ),
       ).thenThrow(const ApiFailure.serverTimeout());
 
       final result = await usageRepository.getUsages(

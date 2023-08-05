@@ -161,7 +161,8 @@ void main() {
         'Create Draft Order',
         () async {
           Map<String, dynamic> removeUnnecessaryElement(
-              Map<String, dynamic> input) {
+            Map<String, dynamic> input,
+          ) {
             input.remove('id');
 
             return input;
@@ -195,9 +196,9 @@ void main() {
               await remoteDataSource.createDraftOrder(draftOrder: draftOrder);
 
           expect(
-              result,
-              SavedOrderDto.fromJson(res['data']['createDraftOrder'])
-                  .toDomain());
+            result,
+            SavedOrderDto.fromJson(res['data']['createDraftOrder']).toDomain(),
+          );
         },
       );
 
@@ -206,27 +207,29 @@ void main() {
         'Submit Order',
         () async {
           const submitOrder = SubmitOrderDto(
-              userName: '',
-              companyName: '',
-              customer: SubmitOrderCustomerDto(
-                  customerNumber: '',
-                  customerNumberShipTo: '',
-                  division: '',
-                  salesOrganisation: ''),
-              poReference: '',
-              materials: [],
-              poDate: '',
-              requestedDeliveryDate: '',
-              specialInstructions: '',
-              telephone: '',
-              referenceNotes: '',
-              paymentTerms: '',
-              collectiveNumber: '',
-              blockOrder: false,
-              poDocuments: [],
-              orderValue: 0,
-              language: '',
-              paymentMethod: '');
+            userName: '',
+            companyName: '',
+            customer: SubmitOrderCustomerDto(
+              customerNumber: '',
+              customerNumberShipTo: '',
+              division: '',
+              salesOrganisation: '',
+            ),
+            poReference: '',
+            materials: [],
+            poDate: '',
+            requestedDeliveryDate: '',
+            specialInstructions: '',
+            telephone: '',
+            referenceNotes: '',
+            paymentTerms: '',
+            collectiveNumber: '',
+            blockOrder: false,
+            poDocuments: [],
+            orderValue: 0,
+            language: '',
+            paymentMethod: '',
+          );
           final encryptedData =
               encryption.encryptionData(data: submitOrder.toJson());
           final variables = {
@@ -254,12 +257,14 @@ void main() {
             }),
           );
           final result = await remoteDataSource.submitOrder(
-              orderEncryption: encryptedData);
+            orderEncryption: encryptedData,
+          );
 
           expect(
-              result,
-              SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
-                  .toDomain());
+            result,
+            SubmitOrderResponseDto.fromJson(res['data']['submitOrder'])
+                .toDomain(),
+          );
         },
       );
 
@@ -268,7 +273,8 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/deleteSavedOrderTemplateResponse.json'),
+              'assets/json/deleteSavedOrderTemplateResponse.json',
+            ),
           );
 
           dioAdapter.onPost(
@@ -295,10 +301,11 @@ void main() {
               await remoteDataSource.deleteSavedOrder(itemId: '1234');
 
           expect(
-              result,
-              SavedOrderDto.fromJson(
-                res['data']['deleteDraftOrder']['draftOrder'],
-              ).toDomain());
+            result,
+            SavedOrderDto.fromJson(
+              res['data']['deleteDraftOrder']['draftOrder'],
+            ).toDomain(),
+          );
         },
       );
 
@@ -482,7 +489,8 @@ void main() {
           );
 
           final result = await remoteDataSource.updateDraftOrder(
-              updatedOrder: SavedOrderDto.fromDomain(fakeResponse));
+            updatedOrder: SavedOrderDto.fromDomain(fakeResponse),
+          );
 
           expect(
             result,

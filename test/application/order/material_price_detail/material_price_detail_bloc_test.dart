@@ -150,173 +150,185 @@ void main() {
     //   expect: () => [],
     // );
 
-    blocTest('Fetch stop when valid material API is failure',
-        build: () => MaterialPriceDetailBloc(
-              validateRepository: validRepository,
-              priceRepository: priceRepository,
-            ),
-        setUp: () {
-          when(() => validRepository.getValidMaterialList(
-                user: fakeUser,
-                salesOrganisation: fakeSaleOrg,
-                customerCodeInfo: fakeCustomerCodeInfo,
-                shipToInfo: fakeShipToInfo,
-                materialList: fakeQueryMaterialNumbers,
-                focMaterialList: [],
-                pickAndPack: '',
-              )).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('fake-error')),
-          );
-        },
-        act: (MaterialPriceDetailBloc bloc) => bloc.add(
-              MaterialPriceDetailEvent.fetch(
-                customerCode: fakeCustomerCodeInfo,
-                salesOrganisation: fakeSaleOrg,
-                salesOrganisationConfigs: fakeSaleOrgConfig,
-                shipToCode: fakeShipToInfo,
-                user: fakeUser,
-                materialInfoList: fakeQuery,
-                pickAndPack: '',
+    blocTest(
+      'Fetch stop when valid material API is failure',
+      build: () => MaterialPriceDetailBloc(
+        validateRepository: validRepository,
+        priceRepository: priceRepository,
+      ),
+      setUp: () {
+        when(
+          () => validRepository.getValidMaterialList(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            materialList: fakeQueryMaterialNumbers,
+            focMaterialList: [],
+            pickAndPack: '',
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('fake-error')),
+        );
+      },
+      act: (MaterialPriceDetailBloc bloc) => bloc.add(
+        MaterialPriceDetailEvent.fetch(
+          customerCode: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          shipToCode: fakeShipToInfo,
+          user: fakeUser,
+          materialInfoList: fakeQuery,
+          pickAndPack: '',
+        ),
+      ),
+      expect: () => [
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: true,
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: true,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: false,
+                  isFOC: false,
+                ),
               ),
-            ),
-        expect: () => [
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: true,
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: true,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: false,
+                  isFOC: false,
+                ),
               ),
-              MaterialPriceDetailState.initial()
-                  .copyWith(isValidating: true, materialDetails: {
-                for (final material in fakeQuery)
-                  material: MaterialPriceDetail.defaultWithPrice(
-                    query: material,
-                    price: Price.empty().copyWith(
-                      isValidMaterial: false,
-                      isFOC: false,
-                    ),
-                  ),
-              }),
-              MaterialPriceDetailState.initial().copyWith(
-                  isValidating: false,
-                  isFetching: true,
-                  materialDetails: {
-                    for (final material in fakeQuery)
-                      material: MaterialPriceDetail.defaultWithPrice(
-                        query: material,
-                        price: Price.empty().copyWith(
-                          isValidMaterial: false,
-                          isFOC: false,
-                        ),
-                      ),
-                  }),
-              MaterialPriceDetailState.initial().copyWith(
-                  isValidating: false,
-                  isFetching: false,
-                  materialDetails: {
-                    for (final material in fakeQuery)
-                      material: MaterialPriceDetail.defaultWithPrice(
-                        query: material,
-                        price: Price.empty().copyWith(
-                          isValidMaterial: false,
-                          isFOC: false,
-                        ),
-                      ),
-                  }),
-            ],
-        verify: (MaterialPriceDetailBloc bloc) {
-          expect(bloc.state.isValidMaterial(query: fakeQuery.first), false);
-        });
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: false,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: false,
+                  isFOC: false,
+                ),
+              ),
+          },
+        ),
+      ],
+      verify: (MaterialPriceDetailBloc bloc) {
+        expect(bloc.state.isValidMaterial(query: fakeQuery.first), false);
+      },
+    );
 
-    blocTest('Fetch stop when all material is FOC',
-        build: () => MaterialPriceDetailBloc(
-              validateRepository: validRepository,
-              priceRepository: priceRepository,
-            ),
-        setUp: () {
-          when(() => validRepository.getValidMaterialList(
-                user: fakeUser,
-                salesOrganisation: fakeSaleOrg,
-                customerCodeInfo: fakeCustomerCodeInfo,
-                shipToInfo: fakeShipToInfo,
-                materialList: [],
-                focMaterialList: fakeQueryMaterialNumbers,
-                pickAndPack: '',
-              )).thenAnswer(
-            (invocation) async => Right(fakeQueryMaterialNumbers),
-          );
-        },
-        act: (MaterialPriceDetailBloc bloc) => bloc.add(
-              MaterialPriceDetailEvent.fetch(
-                customerCode: fakeCustomerCodeInfo,
-                salesOrganisation: fakeSaleOrg,
-                salesOrganisationConfigs: fakeSaleOrgConfig,
-                shipToCode: fakeShipToInfo,
-                user: fakeUser,
-                materialInfoList: fakeQueryFOC,
-                pickAndPack: '',
+    blocTest(
+      'Fetch stop when all material is FOC',
+      build: () => MaterialPriceDetailBloc(
+        validateRepository: validRepository,
+        priceRepository: priceRepository,
+      ),
+      setUp: () {
+        when(
+          () => validRepository.getValidMaterialList(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            materialList: [],
+            focMaterialList: fakeQueryMaterialNumbers,
+            pickAndPack: '',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(fakeQueryMaterialNumbers),
+        );
+      },
+      act: (MaterialPriceDetailBloc bloc) => bloc.add(
+        MaterialPriceDetailEvent.fetch(
+          customerCode: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          shipToCode: fakeShipToInfo,
+          user: fakeUser,
+          materialInfoList: fakeQueryFOC,
+          pickAndPack: '',
+        ),
+      ),
+      expect: () => [
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: true,
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: true,
+          materialDetails: {
+            for (final material in fakeQueryFOC)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                ),
               ),
-            ),
-        expect: () => [
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: true,
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: true,
+          materialDetails: {
+            for (final material in fakeQueryFOC)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                ),
               ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: true,
-                materialDetails: {
-                  for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: false,
-                      ),
-                    ),
-                },
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: true,
+          materialDetails: {
+            for (final material in fakeQueryFOC)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: true,
+                ),
               ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: false,
-                isFetching: true,
-                materialDetails: {
-                  for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: false,
-                      ),
-                    ),
-                },
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: false,
+          materialDetails: {
+            for (final material in fakeQueryFOC)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: true,
+                ),
               ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: false,
-                isFetching: true,
-                materialDetails: {
-                  for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: true,
-                      ),
-                    ),
-                },
-              ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: false,
-                isFetching: false,
-                materialDetails: {
-                  for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: true,
-                      ),
-                    ),
-                },
-              ),
-            ],
-        verify: (MaterialPriceDetailBloc bloc) {
-          expect(bloc.state.isValidMaterial(query: fakeQueryFOC.first), true);
-        });
+          },
+        ),
+      ],
+      verify: (MaterialPriceDetailBloc bloc) {
+        expect(bloc.state.isValidMaterial(query: fakeQueryFOC.first), true);
+      },
+    );
 
     blocTest(
       'Fetch material detail failure',
@@ -336,15 +348,17 @@ void main() {
         ).thenAnswer(
           (_) async => const Left(ApiFailure.other('fake-error')),
         );
-        when(() => validRepository.getValidMaterialList(
-              user: fakeUser,
-              salesOrganisation: fakeSaleOrg,
-              customerCodeInfo: fakeCustomerCodeInfo,
-              shipToInfo: fakeShipToInfo,
-              materialList: fakeQueryMaterialNumbers,
-              focMaterialList: [],
-              pickAndPack: '',
-            )).thenAnswer(
+        when(
+          () => validRepository.getValidMaterialList(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            materialList: fakeQueryMaterialNumbers,
+            focMaterialList: [],
+            pickAndPack: '',
+          ),
+        ).thenAnswer(
           (invocation) async => Right(fakeQueryMaterialNumbers),
         );
       },
@@ -423,111 +437,115 @@ void main() {
       ],
     );
 
-    blocTest('Fetch material detail success',
-        build: () => MaterialPriceDetailBloc(
-              validateRepository: validRepository,
-              priceRepository: priceRepository,
-            ),
-        setUp: () {
-          when(
-            () => priceRepository.getMaterialDetailList(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSaleOrg,
-              salesOrganisationConfigs: fakeSaleOrgConfig,
-              shipToCodeInfo: fakeShipToInfo,
-              materialQueryList: fakeQuery,
-            ),
-          ).thenAnswer(
-            (_) async => Right(mockDetails),
-          );
-          when(() => validRepository.getValidMaterialList(
-                user: fakeUser,
-                salesOrganisation: fakeSaleOrg,
-                customerCodeInfo: fakeCustomerCodeInfo,
-                shipToInfo: fakeShipToInfo,
-                materialList: fakeQueryMaterialNumbers,
-                focMaterialList: [],
-                pickAndPack: '',
-              )).thenAnswer(
-            (invocation) async => Right(fakeQueryMaterialNumbers),
-          );
-        },
-        act: (MaterialPriceDetailBloc bloc) => bloc.add(
-              MaterialPriceDetailEvent.fetch(
-                customerCode: fakeCustomerCodeInfo,
-                salesOrganisation: fakeSaleOrg,
-                salesOrganisationConfigs: fakeSaleOrgConfig,
-                shipToCode: fakeShipToInfo,
-                user: fakeUser,
-                materialInfoList: fakeQuery,
-                pickAndPack: '',
+    blocTest(
+      'Fetch material detail success',
+      build: () => MaterialPriceDetailBloc(
+        validateRepository: validRepository,
+        priceRepository: priceRepository,
+      ),
+      setUp: () {
+        when(
+          () => priceRepository.getMaterialDetailList(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSaleOrg,
+            salesOrganisationConfigs: fakeSaleOrgConfig,
+            shipToCodeInfo: fakeShipToInfo,
+            materialQueryList: fakeQuery,
+          ),
+        ).thenAnswer(
+          (_) async => Right(mockDetails),
+        );
+        when(
+          () => validRepository.getValidMaterialList(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            materialList: fakeQueryMaterialNumbers,
+            focMaterialList: [],
+            pickAndPack: '',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(fakeQueryMaterialNumbers),
+        );
+      },
+      act: (MaterialPriceDetailBloc bloc) => bloc.add(
+        MaterialPriceDetailEvent.fetch(
+          customerCode: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          shipToCode: fakeShipToInfo,
+          user: fakeUser,
+          materialInfoList: fakeQuery,
+          pickAndPack: '',
+        ),
+      ),
+      expect: () => [
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: true,
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: true,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                ),
               ),
-            ),
-        expect: () => [
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: true,
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: true,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                ),
               ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: true,
-                materialDetails: {
-                  for (final material in fakeQuery)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: false,
-                      ),
-                    ),
-                },
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: true,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                  finalPrice: MaterialPrice.unavailable(),
+                ),
               ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: false,
-                isFetching: true,
-                materialDetails: {
-                  for (final material in fakeQuery)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: false,
-                      ),
-                    ),
-                },
+          },
+        ),
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: false,
+          materialDetails: {
+            for (final material in fakeQuery)
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                  finalPrice: MaterialPrice.unavailable(),
+                ),
               ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: false,
-                isFetching: true,
-                materialDetails: {
-                  for (final material in fakeQuery)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: false,
-                        finalPrice: MaterialPrice.unavailable(),
-                      ),
-                    ),
-                },
-              ),
-              MaterialPriceDetailState.initial().copyWith(
-                isValidating: false,
-                isFetching: false,
-                materialDetails: {
-                  for (final material in fakeQuery)
-                    material: MaterialPriceDetail.defaultWithPrice(
-                      query: material,
-                      price: Price.empty().copyWith(
-                        isValidMaterial: true,
-                        isFOC: false,
-                        finalPrice: MaterialPrice.unavailable(),
-                      ),
-                    ),
-                }..addAll(mockDetails),
-              ),
-            ],
-        verify: (MaterialPriceDetailBloc bloc) {
-          expect(bloc.state.isValidMaterial(query: fakeQuery.first), true);
-        });
+          }..addAll(mockDetails),
+        ),
+      ],
+      verify: (MaterialPriceDetailBloc bloc) {
+        expect(bloc.state.isValidMaterial(query: fakeQuery.first), true);
+      },
+    );
 
     blocTest(
       'Refresh price and got these material is invalid',
@@ -536,15 +554,17 @@ void main() {
         priceRepository: priceRepository,
       ),
       setUp: () {
-        when(() => validRepository.getValidMaterialList(
-              user: fakeUser,
-              salesOrganisation: fakeSaleOrg,
-              customerCodeInfo: fakeCustomerCodeInfo,
-              shipToInfo: fakeShipToInfo,
-              materialList: fakeQueryMaterialNumbers,
-              focMaterialList: [],
-              pickAndPack: '',
-            )).thenAnswer(
+        when(
+          () => validRepository.getValidMaterialList(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            materialList: fakeQueryMaterialNumbers,
+            focMaterialList: [],
+            pickAndPack: '',
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
         );
       },

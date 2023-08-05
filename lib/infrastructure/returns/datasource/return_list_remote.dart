@@ -46,12 +46,16 @@ class ReturnListRemoteDataSource {
       return List<Map<String, dynamic>>.from(
         res.data['data']['requestsByItems']['returnRequestsByItems'],
       )
-          .map((returnRequestsByItem) => List<Map<String, dynamic>>.from(
-                returnRequestsByItem['requestByItems'],
-              )
-                  .map((requestByItem) =>
-                      ReturnItemDto.fromJson(requestByItem).toDomain())
-                  .toList())
+          .map(
+            (returnRequestsByItem) => List<Map<String, dynamic>>.from(
+              returnRequestsByItem['requestByItems'],
+            )
+                .map(
+                  (requestByItem) =>
+                      ReturnItemDto.fromJson(requestByItem).toDomain(),
+                )
+                .toList(),
+          )
           .toList()
           .expand((element) => element)
           .toList();

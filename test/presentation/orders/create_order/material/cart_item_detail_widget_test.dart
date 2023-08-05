@@ -56,7 +56,8 @@ void main() {
         providers: [
           BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBlocMock)),
           BlocProvider<TenderContractBloc>(
-              create: (context) => tenderContractBlocMock),
+            create: (context) => tenderContractBlocMock,
+          ),
         ],
         child: Material(
           child: CartItemDetailWidget(
@@ -70,16 +71,19 @@ void main() {
 
   group('Cart Item Detail Widget', () {
     testWidgets('- layout children widgets', (tester) async {
-      await tester.pumpWidget(testWidget(
-        cartItem: PriceAggregate.empty().copyWith(
+      await tester.pumpWidget(
+        testWidget(
+          cartItem: PriceAggregate.empty().copyWith(
             materialInfo: MaterialInfo.empty().copyWith(
-          materialDescription: 'fake-material-description',
-          principalData: PrincipalData.empty().copyWith(
-            principalName: PrincipalName('fake-principle-name'),
+              materialDescription: 'fake-material-description',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: PrincipalName('fake-principle-name'),
+              ),
+              materialNumber: MaterialNumber('fake-material-number'),
+            ),
           ),
-          materialNumber: MaterialNumber('fake-material-number'),
-        )),
-      ));
+        ),
+      );
 
       expect(find.text('fake-material-description'), findsOneWidget);
       expect(find.text('fake-principle-name'), findsOneWidget);
@@ -91,18 +95,27 @@ void main() {
     });
 
     testWidgets('- show tier discount label', (tester) async {
-      await tester.pumpWidget(testWidget(
-        cartItem: PriceAggregate.empty().copyWith(
-            price: Price.empty().copyWith(tiers: [
-          PriceTier.empty().copyWith(items: [
-            PriceTierItem.empty(),
-            PriceTierItem.empty(),
-          ]),
-          PriceTier.empty().copyWith(items: [
-            PriceTierItem.empty(),
-          ]),
-        ])),
-      ));
+      await tester.pumpWidget(
+        testWidget(
+          cartItem: PriceAggregate.empty().copyWith(
+            price: Price.empty().copyWith(
+              tiers: [
+                PriceTier.empty().copyWith(
+                  items: [
+                    PriceTierItem.empty(),
+                    PriceTierItem.empty(),
+                  ],
+                ),
+                PriceTier.empty().copyWith(
+                  items: [
+                    PriceTierItem.empty(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 
       expect(find.byKey(const Key('tieredPricing')), findsOneWidget);
       expect(find.byType(PriceTierLabel), findsNWidgets(2));
@@ -111,13 +124,16 @@ void main() {
     testWidgets('- show price before tax code', (tester) async {
       when(() => salesOrgBlocMock.state).thenReturn(
         SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-          enableVat: true,
-        )),
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableVat: true,
+          ),
+        ),
       );
-      await tester.pumpWidget(testWidget(
-        cartItem: PriceAggregate.empty(),
-      ));
+      await tester.pumpWidget(
+        testWidget(
+          cartItem: PriceAggregate.empty(),
+        ),
+      );
 
       // expect(
       //     find.byKey(const Key('Unit price before VATNA 0')), findsOneWidget);
@@ -135,13 +151,16 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(testWidget(
-        cartItem: PriceAggregate.empty().copyWith(quantity: 4),
-      ));
+      await tester.pumpWidget(
+        testWidget(
+          cartItem: PriceAggregate.empty().copyWith(quantity: 4),
+        ),
+      );
 
       expect(
         find.text(
-            'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract'),
+          'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract',
+        ),
         findsOneWidget,
       );
     });

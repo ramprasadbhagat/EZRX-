@@ -43,13 +43,11 @@ class BankBeneficiaryLocalDataSource {
 
   Future<BankBeneficiaryResponse> deleteBeneficiary() async {
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/deleteBeneficiaryResponse.json'),
+      await rootBundle.loadString('assets/json/deleteBeneficiaryResponse.json'),
     );
 
     return BankBeneficiaryResponseDto.fromJson(
       data['data']['deleteBankBeneficiary'],
     ).toDomain();
   }
-  
 }

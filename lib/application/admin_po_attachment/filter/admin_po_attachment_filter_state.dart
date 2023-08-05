@@ -7,7 +7,7 @@ class AdminPoAttachmentFilterState with _$AdminPoAttachmentFilterState {
     required bool isSubmitting,
     required bool showErrorMessages,
   }) = _AdminPoAttachmentFilterState;
-  
+
   factory AdminPoAttachmentFilterState.initial() =>
       AdminPoAttachmentFilterState(
         isSubmitting: false,

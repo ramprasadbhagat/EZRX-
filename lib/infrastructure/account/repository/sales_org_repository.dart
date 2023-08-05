@@ -13,20 +13,17 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.da
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 
-
 class SalesOrgRepository implements ISalesOrgRepository {
   final Config config;
   final SalesOrgRemoteDataSource remoteDataSource;
   final SalesOrgLocalDataSource localDataSource;
   final AccountSelectorStorage accountSelectorStorage;
-  
 
   SalesOrgRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localDataSource,
     required this.accountSelectorStorage,
-    
   });
 
   @override

@@ -41,7 +41,8 @@ class SalesDistrictLocalDataSource {
 
   Future<SalesDistrictResponseMessage> deleteSalesDistrict() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/deleteSalesDistrictResponse.json'),
+      await rootBundle
+          .loadString('assets/json/deleteSalesDistrictResponse.json'),
     );
 
     return ManageSalesDistrictDto.fromJson(

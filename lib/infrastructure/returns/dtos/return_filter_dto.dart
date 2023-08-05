@@ -63,6 +63,9 @@ class ReturnFilterDto with _$ReturnFilterDto {
       _$ReturnFilterDtoFromJson(json);
 
   Map<String, dynamic> toMap() => toJson()
-    ..removeWhere((key, value) =>
-        (value is String && value.isEmpty) || (value is List && value.isEmpty));
+    ..removeWhere(
+      (key, value) =>
+          (value is String && value.isEmpty) ||
+          (value is List && value.isEmpty),
+    );
 }

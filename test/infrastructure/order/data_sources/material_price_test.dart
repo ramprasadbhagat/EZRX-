@@ -78,10 +78,11 @@ void main() {
         final priceData = res['data']['price'];
 
         expect(
-            result,
-            List.from(priceData)
-                .map((e) => PriceDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(priceData)
+              .map((e) => PriceDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('Get Material Price test', () async {

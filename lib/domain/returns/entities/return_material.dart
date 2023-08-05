@@ -39,8 +39,9 @@ class ReturnMaterial with _$ReturnMaterial {
       );
 }
 
-
 extension ReturnMaterialListExtension on List<ReturnMaterial> {
-  double get amountTotal =>
-      fold<double>(0, (sum, item) => sum + item.totalPrice.getOrDefaultValue(0));
+  double get amountTotal => fold<double>(
+        0,
+        (sum, item) => sum + item.totalPrice.getOrDefaultValue(0),
+      );
 }

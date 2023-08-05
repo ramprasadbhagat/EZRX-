@@ -11,11 +11,12 @@ class SubmitReturnRequestLocalDataSource {
 
   Future<SubmitReturnResponse> submitReturnRequest() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getSubmitReturnRequestResponse.json'),
+      await rootBundle
+          .loadString('assets/json/getSubmitReturnRequestResponse.json'),
     );
 
     return SubmitReturnResponseDto.fromJson(
-            data['data']['addRequestV2'],)
-        .toDomain();
+      data['data']['addRequestV2'],
+    ).toDomain();
   }
 }

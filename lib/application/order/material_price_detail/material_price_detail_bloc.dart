@@ -270,7 +270,8 @@ class MaterialPriceDetailBloc
       (validMaterialNumbers) => materials
           .where(
             (material) => validMaterialNumbers.contains(material.value),
-          ).toList(),
+          )
+          .toList(),
     );
   }
 

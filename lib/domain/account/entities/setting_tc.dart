@@ -7,10 +7,10 @@ class SettingTc with _$SettingTc {
   const SettingTc._();
 
   const factory SettingTc({
-   required bool acceptTC,
+    required bool acceptTC,
   }) = _SettingTc;
 
   factory SettingTc.empty() => const SettingTc(
         acceptTC: false,
-  );
+      );
 }

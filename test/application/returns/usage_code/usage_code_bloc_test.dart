@@ -27,11 +27,13 @@ void main() {
   group(
     'Usage Code Bloc',
     () {
-      blocTest('Initialize',
-          build: () => UsageCodeBloc(usageRepository: mockUsageCodeRepository),
-          act: (UsageCodeBloc bloc) =>
-              bloc.add(const UsageCodeEvent.initialized()),
-          expect: () => [UsageCodeState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () => UsageCodeBloc(usageRepository: mockUsageCodeRepository),
+        act: (UsageCodeBloc bloc) =>
+            bloc.add(const UsageCodeEvent.initialized()),
+        expect: () => [UsageCodeState.initial()],
+      );
 
       blocTest(
         'Get usage code failure',

@@ -58,7 +58,7 @@ class SalesDistrictRemoteDataSource {
             'input': {
               'salesOrg': salesOrg,
               'salesDistrict': salesDistrict,
-              'salesDistrictLabel' : salesDistrictLabel,
+              'salesDistrictLabel': salesDistrictLabel,
             },
           },
         }),
@@ -89,7 +89,7 @@ class SalesDistrictRemoteDataSource {
               'id': id,
               'salesOrg': salesOrg,
               'salesDistrict': salesDistrict,
-              'salesDistrictLabel' : salesDistrictLabel,
+              'salesDistrictLabel': salesDistrictLabel,
             },
           },
         }),
@@ -112,7 +112,9 @@ class SalesDistrictRemoteDataSource {
         url: '${config.urlConstants}ezpayMutation',
         data: jsonEncode({
           'query': salesDistrictQueryMutation.deleteSalesDistrictQuery(),
-          'variables': {'id': id,},
+          'variables': {
+            'id': id,
+          },
         }),
         apiEndpoint: 'deleteSalesDistrict',
       );

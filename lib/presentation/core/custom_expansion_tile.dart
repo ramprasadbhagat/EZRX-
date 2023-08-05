@@ -38,9 +38,8 @@ class ExpansionTile extends StatefulWidget {
     this.trailing,
     this.trailingWidgetPadding = 0.0,
     this.initiallyExpanded = false,
-    this.keepHeaderBorder =  false,
+    this.keepHeaderBorder = false,
     this.threeLineTitle = false,
-
   }) : super(key: key);
 
   /// A widget to display before the title.
@@ -181,9 +180,11 @@ class ExpansionTileState extends State<ExpansionTile>
                 height: widget.threeLineTitle ? null : 40,
                 margin: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
-                  border: widget.keepHeaderBorder?const Border(
-                    bottom: BorderSide(width: 1, color: ZPColors.black),
-                  ):null,
+                  border: widget.keepHeaderBorder
+                      ? const Border(
+                          bottom: BorderSide(width: 1, color: ZPColors.black),
+                        )
+                      : null,
                 ),
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(0),
@@ -197,7 +198,8 @@ class ExpansionTileState extends State<ExpansionTile>
                     child: widget.title,
                   ),
                   trailing: Padding(
-                    padding: EdgeInsets.only(right: widget.trailingWidgetPadding),
+                    padding:
+                        EdgeInsets.only(right: widget.trailingWidgetPadding),
                     child: widget.trailing ??
                         RotationTransition(
                           turns: _iconTurns,

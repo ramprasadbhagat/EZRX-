@@ -167,8 +167,7 @@ class _ShowProduct extends StatelessWidget {
                 onChanged: (value) {
                   if (!state.materialFilter.isProductOffer) {
                     context.read<MaterialFilterBloc>().add(
-                           MaterialFilterEvent
-                              .updateSelectedMaterialFilter(
+                          MaterialFilterEvent.updateSelectedMaterialFilter(
                             MaterialFilterType.productOffers,
                             !state.materialFilter.isProductOffer,
                           ),
@@ -219,32 +218,33 @@ class _SortBy extends StatelessWidget {
           height: 16.0,
         ),
         ...Sort.values
-            .map((e) => BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
-                  builder: (context, state) {
-                    return RadioListTile(
-                      title: Text(
-                        e.title,
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: ZPColors.neutralsBlack,
-                                ),
-                      ),
-                      visualDensity:
-                          const VisualDensity(horizontal: -4.0, vertical: -4.0),
-                      contentPadding: EdgeInsets.zero,
-                      value: e,
-                      groupValue: state.materialFilter.sortBy,
-                      onChanged: (Sort? value) {
-                        context.read<MaterialFilterBloc>().add(
-                              MaterialFilterEvent.updateSelectedMaterialFilter(
-                                MaterialFilterType.sortBy,
-                                value ?? Sort.az,
-                              ),
-                            );
-                      },
-                    );
-                  },
-                ))
+            .map(
+              (e) => BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
+                builder: (context, state) {
+                  return RadioListTile(
+                    title: Text(
+                      e.title,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: ZPColors.neutralsBlack,
+                          ),
+                    ),
+                    visualDensity:
+                        const VisualDensity(horizontal: -4.0, vertical: -4.0),
+                    contentPadding: EdgeInsets.zero,
+                    value: e,
+                    groupValue: state.materialFilter.sortBy,
+                    onChanged: (Sort? value) {
+                      context.read<MaterialFilterBloc>().add(
+                            MaterialFilterEvent.updateSelectedMaterialFilter(
+                              MaterialFilterType.sortBy,
+                              value ?? Sort.az,
+                            ),
+                          );
+                    },
+                  );
+                },
+              ),
+            )
             .toList(),
       ],
     );
@@ -492,10 +492,9 @@ class _ButtonBottom extends StatelessWidget {
                 context.read<MaterialFilterBloc>().add(
                       const MaterialFilterEvent.resetFilter(),
                     );
-                Navigator.of(context).pop(context
-                    .read<MaterialFilterBloc>()
-                    .state
-                    .emptyMaterialFilter);
+                Navigator.of(context).pop(
+                  context.read<MaterialFilterBloc>().state.emptyMaterialFilter,
+                );
               },
               style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                     backgroundColor: const MaterialStatePropertyAll(

@@ -108,19 +108,21 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role(
-                description: '',
-                name: '',
-                id: '',
-                type: RoleType('client'),
-              ),
+          user: User.empty().copyWith(
+            role: Role(
+              description: '',
+              name: '',
+              id: '',
+              type: RoleType('client'),
             ),
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-                customerAttr7: CustomerAttr7('ZEV'),
-                customerGrp4: CustomerGrp4('VR'))),
+          ),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerAttr7: CustomerAttr7('ZEV'),
+            customerGrp4: CustomerGrp4('VR'),
+          ),
+        ),
       );
     });
 
@@ -140,14 +142,18 @@ void main() {
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<ViewByOrderBloc>(
-                create: (context) => mockViewByOrderBloc),
+              create: (context) => mockViewByOrderBloc,
+            ),
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBlocMock),
+              create: (context) => customerCodeBlocMock,
+            ),
             BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => mockViewByOrderDetailsBloc),
+              create: (context) => mockViewByOrderDetailsBloc,
+            ),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<EligibilityBloc>(
-                create: ((context) => eligibilityBlocMock)),
+              create: ((context) => eligibilityBlocMock),
+            ),
           ],
           child: Material(
             child: ViewByOrdersPage(
@@ -160,8 +166,9 @@ void main() {
 
     testWidgets('loaderImage  test ', (tester) async {
       when(() => mockViewByOrderBloc.state).thenReturn(
-          ViewByOrderState.initial()
-              .copyWith(isFetching: true, viewByOrderList: viewByOrder));
+        ViewByOrderState.initial()
+            .copyWith(isFetching: true, viewByOrderList: viewByOrder),
+      );
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
@@ -173,12 +180,15 @@ void main() {
     });
     testWidgets("Displaying 'items' text test ", (tester) async {
       when(() => mockViewByOrderBloc.state).thenReturn(
-          ViewByOrderState.initial().copyWith(
-              isFetching: false,
-              viewByOrderList: viewByOrder.copyWith(orderHeaders: [
-                OrderHistoryDetailsOrderHeader.empty()
-                    .copyWith(materialCount: 2)
-              ])));
+        ViewByOrderState.initial().copyWith(
+          isFetching: false,
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [
+              OrderHistoryDetailsOrderHeader.empty().copyWith(materialCount: 2)
+            ],
+          ),
+        ),
+      );
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();

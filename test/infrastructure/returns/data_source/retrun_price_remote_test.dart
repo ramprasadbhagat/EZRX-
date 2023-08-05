@@ -73,14 +73,15 @@ void main() {
         );
 
         final result = await remoteDataSource.getReturnPrice(
-            invoiceNumber: 'invoiceNumber',
-            materials: {},
-            salesOrg: 'salesOrg');
+          invoiceNumber: 'invoiceNumber',
+          materials: {},
+          salesOrg: 'salesOrg',
+        );
 
         expect(
-            result,
-            ReturnPriceDto.fromJson(res['data']['getReturnPrice'][0])
-                .toDomain());
+          result,
+          ReturnPriceDto.fromJson(res['data']['getReturnPrice'][0]).toDomain(),
+        );
       });
 
       test(
@@ -102,9 +103,10 @@ void main() {
 
           await remoteDataSource
               .getReturnPrice(
-                  invoiceNumber: 'invoiceNumber',
-                  materials: {},
-                  salesOrg: 'salesOrg')
+            invoiceNumber: 'invoiceNumber',
+            materials: {},
+            salesOrg: 'salesOrg',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(ReturnPriceMock());
@@ -136,9 +138,10 @@ void main() {
 
           await remoteDataSource
               .getReturnPrice(
-                  invoiceNumber: 'invoiceNumber',
-                  materials: {},
-                  salesOrg: 'salesOrg')
+            invoiceNumber: 'invoiceNumber',
+            materials: {},
+            salesOrg: 'salesOrg',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(ReturnPriceMock());

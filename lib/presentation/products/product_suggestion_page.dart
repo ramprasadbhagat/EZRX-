@@ -280,9 +280,11 @@ class _ProductSearchHistorySuggestionSection extends StatelessWidget {
                         .productSuggestionHistory
                         .searchKeyList
                         .reversed
-                        .map((e) => _HistoryTile(
-                              productSearchObject: e,
-                            ))
+                        .map(
+                          (e) => _HistoryTile(
+                            productSearchObject: e,
+                          ),
+                        )
                         .toList(),
                   ),
                 ],

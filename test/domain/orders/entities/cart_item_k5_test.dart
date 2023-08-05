@@ -16,8 +16,10 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final data = json.decode(await rootBundle
-      .loadString('assets/json/getComboDealForPrincipleGroupResponseK5.json'));
+  final data = json.decode(
+    await rootBundle
+        .loadString('assets/json/getComboDealForPrincipleGroupResponseK5.json'),
+  );
 
   final comboDeal =
       ComboDealDto.fromJson(data['data']['comboDealForPrincMatGrp']).toDomain;
@@ -53,9 +55,10 @@ void main() async {
     });
     test('Combo eligible when when total amount is suffice', () {
       expect(
-          CartItem.comboDeal([material1, material2.copyWith(quantity: 2)])
-              .isComboDealEligible,
-          true);
+        CartItem.comboDeal([material1, material2.copyWith(quantity: 2)])
+            .isComboDealEligible,
+        true,
+      );
     });
 
     group('Percent deal -', () {

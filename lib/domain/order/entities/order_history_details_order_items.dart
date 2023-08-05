@@ -66,9 +66,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
       );
 
   String get batchAndExpiryDate => '$batch:${expiryDate.dateString}';
-  String get deliveryDate => plannedDeliveryDate.isNotEmpty
-      ? plannedDeliveryDate.dateString
-      : '-';
+  String get deliveryDate =>
+      plannedDeliveryDate.isNotEmpty ? plannedDeliveryDate.dateString : '-';
   OrderHistoryDetailsOrderItem copyWithTaxCal({
     required SalesOrganisationConfigs salesOrganisationConfigs,
   }) =>

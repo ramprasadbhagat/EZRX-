@@ -249,18 +249,21 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-            deliveryInfoData: DeliveryInfoData.empty().copyWith(
-          poReference: PoReference('CO REF'),
-          contactPerson: ContactPerson('PERSON'),
-          mobileNumber: MobileNumber('123456'),
-          paymentTerm: PaymentTerm('0001-TEST'),
-          referenceNote: ReferenceNote('Reference Note Test'),
-          deliveryInstruction: DeliveryInstruction('Instruction Test'),
-        )),
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
+            contactPerson: ContactPerson('PERSON'),
+            mobileNumber: MobileNumber('123456'),
+            paymentTerm: PaymentTerm('0001-TEST'),
+            referenceNote: ReferenceNote('Reference Note Test'),
+            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+          ),
+        ),
         act: (AdditionalDetailsBloc bloc) {
-          bloc.add(AdditionalDetailsEvent.validateForm(
-            config: config,
-          ));
+          bloc.add(
+            AdditionalDetailsEvent.validateForm(
+              config: config,
+            ),
+          );
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
@@ -284,18 +287,21 @@ void main() {
           savedOrderRepository: repository,
         ),
         seed: () => AdditionalDetailsState.initial().copyWith(
-            deliveryInfoData: DeliveryInfoData.empty().copyWith(
-          poReference: PoReference('CO REF'),
-          contactPerson: ContactPerson(''),
-          mobileNumber: MobileNumber('123456'),
-          paymentTerm: PaymentTerm('0001-TEST'),
-          referenceNote: ReferenceNote('Reference Note Test'),
-          deliveryInstruction: DeliveryInstruction('Instruction Test'),
-        )),
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
+            contactPerson: ContactPerson(''),
+            mobileNumber: MobileNumber('123456'),
+            paymentTerm: PaymentTerm('0001-TEST'),
+            referenceNote: ReferenceNote('Reference Note Test'),
+            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+          ),
+        ),
         act: (AdditionalDetailsBloc bloc) {
-          bloc.add(AdditionalDetailsEvent.validateForm(
-            config: config,
-          ));
+          bloc.add(
+            AdditionalDetailsEvent.validateForm(
+              config: config,
+            ),
+          );
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(

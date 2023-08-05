@@ -29,7 +29,7 @@ class CustomerSearchRobot {
     await tester.pumpAndSettle();
     final customerCodeDialogChange =
         find.byKey(const Key('customerCodeDialogChange'));
-    if(customerCodeDialogChange.evaluate().isNotEmpty){
+    if (customerCodeDialogChange.evaluate().isNotEmpty) {
       await tester.tap(find.byKey(const Key('Change')));
       await tester.pumpAndSettle();
     }

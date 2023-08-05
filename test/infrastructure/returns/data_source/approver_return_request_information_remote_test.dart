@@ -53,7 +53,8 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/returnRequestInformationV2Response.json'),
+              'assets/json/returnRequestInformationV2Response.json',
+            ),
           );
 
           dioAdapter.onPost(

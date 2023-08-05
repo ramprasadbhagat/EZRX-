@@ -36,8 +36,6 @@ class OrderTemplateLocalDataSourceMock extends Mock
 class OrderTemplateRemoteDataSourceMock extends Mock
     implements OrderTemplateRemoteDataSource {}
 
-
-
 void main() {
   late OrderTemplateRepository orderTemplateRepository;
   late Config mockConfig;
@@ -50,11 +48,12 @@ void main() {
     templateId: '1231',
     templateName: 'fake-name',
     user: mockUser.copyWith(
-        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-        id: '1',
-        username: Username('user'),
-        email: EmailAddress('user@gmail.com'),
-        customerCode: CustomerCode('100007654')),
+      role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+      id: '1',
+      username: Username('user'),
+      email: EmailAddress('user@gmail.com'),
+      customerCode: CustomerCode('100007654'),
+    ),
   );
 
   // final cartList = [
@@ -88,24 +87,25 @@ void main() {
     templateName: 'fake-name',
     items: <MaterialItem>[],
     user: mockUser.copyWith(
-        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-        id: '1',
-        username: Username('user'),
-        email: EmailAddress('user@gmail.com'),
-        customerCode: CustomerCode('100007654')),
+      role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+      id: '1',
+      username: Username('user'),
+      email: EmailAddress('user@gmail.com'),
+      customerCode: CustomerCode('100007654'),
+    ),
   );
   final saveTemplateListMock = [tempObj];
 
   setUpAll(() async {
-
     mockConfig = MockConfig();
     orderTemplateLocalDataSource = OrderTemplateLocalDataSourceMock();
     orderTemplateRemoteDataSource = OrderTemplateRemoteDataSourceMock();
 
     orderTemplateRepository = OrderTemplateRepository(
-        config: mockConfig,
-        orderTemplateLocalDataSource: orderTemplateLocalDataSource,
-        orderTemplateRemoteDataSource: orderTemplateRemoteDataSource);
+      config: mockConfig,
+      orderTemplateLocalDataSource: orderTemplateLocalDataSource,
+      orderTemplateRemoteDataSource: orderTemplateRemoteDataSource,
+    );
   });
 
   group('orderTemplateRepository should - ', () {
@@ -135,9 +135,11 @@ void main() {
     });
     test('get orderTemplate successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderTemplateRemoteDataSource.getOrderTemplates(
-              userId: mockUser.id))
-          .thenAnswer((invocation) async => <OrderTemplate>[]);
+      when(
+        () => orderTemplateRemoteDataSource.getOrderTemplates(
+          userId: mockUser.id,
+        ),
+      ).thenAnswer((invocation) async => <OrderTemplate>[]);
 
       final result =
           await orderTemplateRepository.getOrderTemplateList(user: mockUser);
@@ -148,12 +150,15 @@ void main() {
     });
     test('get orderTemplate fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderTemplateRemoteDataSource.getOrderTemplates(
-              userId: mockUser.id))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => orderTemplateRemoteDataSource.getOrderTemplates(
+          userId: mockUser.id,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await orderTemplateRepository.getOrderTemplateList(
-          user: mockUser.copyWith(id: '2345677'));
+        user: mockUser.copyWith(id: '2345677'),
+      );
       expect(
         result.isLeft(),
         true,
@@ -167,10 +172,11 @@ void main() {
           .thenAnswer((invocation) async => mockOrderTemplate);
 
       final result = await orderTemplateRepository.saveOrderTemplate(
-          templateList: <OrderTemplate>[],
-          userID: mockUser.id,
-          cartList: <CartItem>[],
-          templateName: '');
+        templateList: <OrderTemplate>[],
+        userID: mockUser.id,
+        cartList: <CartItem>[],
+        templateName: '',
+      );
       expect(
         result.isRight(),
         true,
@@ -182,10 +188,11 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderTemplateRepository.saveOrderTemplate(
-          templateList: <OrderTemplate>[],
-          userID: mockUser.id,
-          cartList: <CartItem>[],
-          templateName: '');
+        templateList: <OrderTemplate>[],
+        userID: mockUser.id,
+        cartList: <CartItem>[],
+        templateName: '',
+      );
       expect(
         result.isLeft(),
         true,
@@ -227,10 +234,13 @@ void main() {
     });
     test('get save orderTemplate fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderTemplateRemoteDataSource.saveOrderTemplate(
+      when(
+        () => orderTemplateRemoteDataSource.saveOrderTemplate(
           templateName: 'fake-saved-template',
           userID: '',
-          cartList: [])).thenThrow((invocation) async => MockException());
+          cartList: [],
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await orderTemplateRepository.saveOrderTemplate(
         userID: mockUser.id,
@@ -247,8 +257,11 @@ void main() {
     test('get delete orderTemplate successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => orderTemplateRemoteDataSource.deleteOrderTemplate(
-          templateId: '1231')).thenAnswer((invocation) async {
+      when(
+        () => orderTemplateRemoteDataSource.deleteOrderTemplate(
+          templateId: '1231',
+        ),
+      ).thenAnswer((invocation) async {
         final isItemPresent = <OrderTemplate>[].contains(tempObj);
         assert(isItemPresent == false);
         return mockOrderTemplate;
@@ -259,10 +272,11 @@ void main() {
       final result = await orderTemplateRepository.deleteOrderTemplate(
         templateList: [
           OrderTemplate(
-              templateId: '1298jjh',
-              templateName: '',
-              items: [],
-              user: User.empty())
+            templateId: '1298jjh',
+            templateName: '',
+            items: [],
+            user: User.empty(),
+          )
         ],
         templateItem: tempObj,
       );
@@ -292,10 +306,11 @@ void main() {
       final result = await orderTemplateRepository.deleteOrderTemplate(
         templateList: [
           OrderTemplate(
-              templateId: '1298',
-              templateName: '',
-              items: [],
-              user: User.empty()),
+            templateId: '1298',
+            templateName: '',
+            items: [],
+            user: User.empty(),
+          ),
         ],
         templateItem: mockOrderTemplate.copyWith(templateId: '1298jjh'),
       );
@@ -307,9 +322,9 @@ void main() {
     });
     test('get delete orderTemplate fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() =>
-              orderTemplateRemoteDataSource.deleteOrderTemplate(templateId: ''))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => orderTemplateRemoteDataSource.deleteOrderTemplate(templateId: ''),
+      ).thenThrow((invocation) async => MockException());
       final result = await orderTemplateRepository.deleteOrderTemplate(
         templateItem: mockOrderTemplate.copyWith(templateId: '1298jjh'),
         templateList: [],

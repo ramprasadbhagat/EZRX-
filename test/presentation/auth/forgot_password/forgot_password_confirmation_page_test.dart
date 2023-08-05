@@ -59,7 +59,8 @@ void main() {
           routeName: ForgetPasswordConfirmationPageRoute.name,
           providers: [
             BlocProvider<ForgotPasswordBloc>(
-                create: (context) => forgotPasswordBlocMock),
+              create: (context) => forgotPasswordBlocMock,
+            ),
           ],
           child: const ForgetPasswordConfirmationPage(),
         ),
@@ -76,23 +77,26 @@ void main() {
       expect(find.byType(BackToLogin), findsOneWidget);
     });
 
-    testWidgets(' -> displays correct email address', (WidgetTester tester) async {
-      when(() => forgotPasswordBlocMock.state)
-          .thenReturn(ForgotPasswordState.initial().copyWith(
-        username: Username('fake.username'),
-        resetPasswordResponse: ForgotPassword.empty().copyWith(
-          email: 'fake.username@email.com',
-          success: true,
+    testWidgets(' -> displays correct email address',
+        (WidgetTester tester) async {
+      when(() => forgotPasswordBlocMock.state).thenReturn(
+        ForgotPasswordState.initial().copyWith(
+          username: Username('fake.username'),
+          resetPasswordResponse: ForgotPassword.empty().copyWith(
+            email: 'fake.username@email.com',
+            success: true,
+          ),
         ),
-      ));
+      );
       await tester.pumpWidget(getWidget());
 
       expect(
-          find.textContaining(
-            'fake.username@email.com',
-            findRichText: true,
-          ),
-          findsOneWidget);
+        find.textContaining(
+          'fake.username@email.com',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

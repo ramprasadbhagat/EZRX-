@@ -34,12 +34,14 @@ void main() {
   group(
     'All Invoices Bloc Initialize',
     () {
-      blocTest('Initialize',
-          build: () =>
-              AllInvoicesBloc(allCreditsAndInvoicesRepository: repository),
-          act: (AllInvoicesBloc bloc) =>
-              bloc.add(const AllInvoicesEvent.initialized()),
-          expect: () => [AllInvoicesState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () =>
+            AllInvoicesBloc(allCreditsAndInvoicesRepository: repository),
+        act: (AllInvoicesBloc bloc) =>
+            bloc.add(const AllInvoicesEvent.initialized()),
+        expect: () => [AllInvoicesState.initial()],
+      );
     },
   );
 
@@ -86,7 +88,7 @@ void main() {
           ),
         ],
       );
-      
+
       blocTest(
         'fetch -> invoices fetch success',
         build: () => AllInvoicesBloc(

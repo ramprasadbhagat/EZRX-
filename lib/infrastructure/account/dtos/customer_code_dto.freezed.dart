@@ -95,43 +95,65 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
-      String customerCodeSoldTo,
-      @JsonKey(name: 'name1', defaultValue: '') String name1,
-      @JsonKey(name: 'name2', defaultValue: '') String name2,
-      @JsonKey(name: 'name3', defaultValue: '') String name3,
-      @JsonKey(name: 'name4', defaultValue: '') String name4,
-      @JsonKey(name: 'status', defaultValue: '') String status,
-      @JsonKey(name: 'street1', defaultValue: '') String street1,
-      @JsonKey(name: 'street2', defaultValue: '') String street2,
-      @JsonKey(name: 'street3', defaultValue: '') String street3,
-      @JsonKey(name: 'street4', defaultValue: '') String street4,
-      @JsonKey(name: 'street5', defaultValue: '') String street5,
-      @JsonKey(name: 'city1', defaultValue: '') String city1,
-      @JsonKey(name: 'city2', defaultValue: '') String city2,
+          String customerCodeSoldTo,
+      @JsonKey(name: 'name1', defaultValue: '')
+          String name1,
+      @JsonKey(name: 'name2', defaultValue: '')
+          String name2,
+      @JsonKey(name: 'name3', defaultValue: '')
+          String name3,
+      @JsonKey(name: 'name4', defaultValue: '')
+          String name4,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'street1', defaultValue: '')
+          String street1,
+      @JsonKey(name: 'street2', defaultValue: '')
+          String street2,
+      @JsonKey(name: 'street3', defaultValue: '')
+          String street3,
+      @JsonKey(name: 'street4', defaultValue: '')
+          String street4,
+      @JsonKey(name: 'street5', defaultValue: '')
+          String street5,
+      @JsonKey(name: 'city1', defaultValue: '')
+          String city1,
+      @JsonKey(name: 'city2', defaultValue: '')
+          String city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-      String telephoneNumber,
-      @JsonKey(name: 'postalCode', defaultValue: '') String postalCode,
-      @JsonKey(name: 'division', defaultValue: '') String division,
+          String telephoneNumber,
+      @JsonKey(name: 'postalCode', defaultValue: '')
+          String postalCode,
+      @JsonKey(name: 'division', defaultValue: '')
+          String division,
       @JsonKey(name: 'customerClassification', defaultValue: '')
-      String customerClassification,
+          String customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
-      String customerLocalGroup,
+          String customerLocalGroup,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
-      String paymentTermDescription,
+          String paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
-      List<ShipToDto> shipToInfos,
+          List<ShipToDto> shipToInfos,
       @JsonKey(name: 'billTo', defaultValue: <BillToDto>[])
-      List<BillToDto> billToInfos,
-      @JsonKey(name: 'customerAttr7', defaultValue: '') String customerAttr7,
-      @JsonKey(name: 'customerGrp4', defaultValue: '') String customerGrp4,
-      @JsonKey(name: 'region', defaultValue: '') String region,
+          List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7', defaultValue: '')
+          String customerAttr7,
+      @JsonKey(name: 'customerGrp4', defaultValue: '')
+          String customerGrp4,
+      @JsonKey(name: 'region', defaultValue: '')
+          String region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-      List<String> emailAddresses,
-      @JsonKey(name: 'comboEligible', defaultValue: false) bool comboEligible,
-      @JsonKey(name: 'salesDeals', defaultValue: []) List<String> salesDeals,
-      @JsonKey(name: 'country', defaultValue: '') String country,
-      @JsonKey(name: 'floor', defaultValue: '') String floor,
-      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1});
+          List<String> emailAddresses,
+      @JsonKey(name: 'comboEligible', defaultValue: false)
+          bool comboEligible,
+      @JsonKey(name: 'salesDeals', defaultValue: [])
+          List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'floor', defaultValue: '')
+          String floor,
+      @JsonKey(name: 'houseNumber1', defaultValue: '')
+          String houseNumber1});
 }
 
 /// @nodoc
@@ -313,43 +335,65 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
-      String customerCodeSoldTo,
-      @JsonKey(name: 'name1', defaultValue: '') String name1,
-      @JsonKey(name: 'name2', defaultValue: '') String name2,
-      @JsonKey(name: 'name3', defaultValue: '') String name3,
-      @JsonKey(name: 'name4', defaultValue: '') String name4,
-      @JsonKey(name: 'status', defaultValue: '') String status,
-      @JsonKey(name: 'street1', defaultValue: '') String street1,
-      @JsonKey(name: 'street2', defaultValue: '') String street2,
-      @JsonKey(name: 'street3', defaultValue: '') String street3,
-      @JsonKey(name: 'street4', defaultValue: '') String street4,
-      @JsonKey(name: 'street5', defaultValue: '') String street5,
-      @JsonKey(name: 'city1', defaultValue: '') String city1,
-      @JsonKey(name: 'city2', defaultValue: '') String city2,
+          String customerCodeSoldTo,
+      @JsonKey(name: 'name1', defaultValue: '')
+          String name1,
+      @JsonKey(name: 'name2', defaultValue: '')
+          String name2,
+      @JsonKey(name: 'name3', defaultValue: '')
+          String name3,
+      @JsonKey(name: 'name4', defaultValue: '')
+          String name4,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'street1', defaultValue: '')
+          String street1,
+      @JsonKey(name: 'street2', defaultValue: '')
+          String street2,
+      @JsonKey(name: 'street3', defaultValue: '')
+          String street3,
+      @JsonKey(name: 'street4', defaultValue: '')
+          String street4,
+      @JsonKey(name: 'street5', defaultValue: '')
+          String street5,
+      @JsonKey(name: 'city1', defaultValue: '')
+          String city1,
+      @JsonKey(name: 'city2', defaultValue: '')
+          String city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-      String telephoneNumber,
-      @JsonKey(name: 'postalCode', defaultValue: '') String postalCode,
-      @JsonKey(name: 'division', defaultValue: '') String division,
+          String telephoneNumber,
+      @JsonKey(name: 'postalCode', defaultValue: '')
+          String postalCode,
+      @JsonKey(name: 'division', defaultValue: '')
+          String division,
       @JsonKey(name: 'customerClassification', defaultValue: '')
-      String customerClassification,
+          String customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
-      String customerLocalGroup,
+          String customerLocalGroup,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
-      String paymentTermDescription,
+          String paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
-      List<ShipToDto> shipToInfos,
+          List<ShipToDto> shipToInfos,
       @JsonKey(name: 'billTo', defaultValue: <BillToDto>[])
-      List<BillToDto> billToInfos,
-      @JsonKey(name: 'customerAttr7', defaultValue: '') String customerAttr7,
-      @JsonKey(name: 'customerGrp4', defaultValue: '') String customerGrp4,
-      @JsonKey(name: 'region', defaultValue: '') String region,
+          List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7', defaultValue: '')
+          String customerAttr7,
+      @JsonKey(name: 'customerGrp4', defaultValue: '')
+          String customerGrp4,
+      @JsonKey(name: 'region', defaultValue: '')
+          String region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-      List<String> emailAddresses,
-      @JsonKey(name: 'comboEligible', defaultValue: false) bool comboEligible,
-      @JsonKey(name: 'salesDeals', defaultValue: []) List<String> salesDeals,
-      @JsonKey(name: 'country', defaultValue: '') String country,
-      @JsonKey(name: 'floor', defaultValue: '') String floor,
-      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1});
+          List<String> emailAddresses,
+      @JsonKey(name: 'comboEligible', defaultValue: false)
+          bool comboEligible,
+      @JsonKey(name: 'salesDeals', defaultValue: [])
+          List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'floor', defaultValue: '')
+          String floor,
+      @JsonKey(name: 'houseNumber1', defaultValue: '')
+          String houseNumber1});
 }
 
 /// @nodoc
@@ -524,48 +568,65 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
 class _$_CustomerCodeDto extends _CustomerCodeDto {
   const _$_CustomerCodeDto(
       {@JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
-      required this.customerCodeSoldTo,
-      @JsonKey(name: 'name1', defaultValue: '') required this.name1,
-      @JsonKey(name: 'name2', defaultValue: '') required this.name2,
-      @JsonKey(name: 'name3', defaultValue: '') required this.name3,
-      @JsonKey(name: 'name4', defaultValue: '') required this.name4,
-      @JsonKey(name: 'status', defaultValue: '') required this.status,
-      @JsonKey(name: 'street1', defaultValue: '') required this.street1,
-      @JsonKey(name: 'street2', defaultValue: '') required this.street2,
-      @JsonKey(name: 'street3', defaultValue: '') required this.street3,
-      @JsonKey(name: 'street4', defaultValue: '') required this.street4,
-      @JsonKey(name: 'street5', defaultValue: '') required this.street5,
-      @JsonKey(name: 'city1', defaultValue: '') required this.city1,
-      @JsonKey(name: 'city2', defaultValue: '') required this.city2,
+          required this.customerCodeSoldTo,
+      @JsonKey(name: 'name1', defaultValue: '')
+          required this.name1,
+      @JsonKey(name: 'name2', defaultValue: '')
+          required this.name2,
+      @JsonKey(name: 'name3', defaultValue: '')
+          required this.name3,
+      @JsonKey(name: 'name4', defaultValue: '')
+          required this.name4,
+      @JsonKey(name: 'status', defaultValue: '')
+          required this.status,
+      @JsonKey(name: 'street1', defaultValue: '')
+          required this.street1,
+      @JsonKey(name: 'street2', defaultValue: '')
+          required this.street2,
+      @JsonKey(name: 'street3', defaultValue: '')
+          required this.street3,
+      @JsonKey(name: 'street4', defaultValue: '')
+          required this.street4,
+      @JsonKey(name: 'street5', defaultValue: '')
+          required this.street5,
+      @JsonKey(name: 'city1', defaultValue: '')
+          required this.city1,
+      @JsonKey(name: 'city2', defaultValue: '')
+          required this.city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-      required this.telephoneNumber,
-      @JsonKey(name: 'postalCode', defaultValue: '') required this.postalCode,
-      @JsonKey(name: 'division', defaultValue: '') required this.division,
+          required this.telephoneNumber,
+      @JsonKey(name: 'postalCode', defaultValue: '')
+          required this.postalCode,
+      @JsonKey(name: 'division', defaultValue: '')
+          required this.division,
       @JsonKey(name: 'customerClassification', defaultValue: '')
-      required this.customerClassification,
+          required this.customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
-      required this.customerLocalGroup,
+          required this.customerLocalGroup,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
-      required this.paymentTermDescription,
+          required this.paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
-      required final List<ShipToDto> shipToInfos,
+          required final List<ShipToDto> shipToInfos,
       @JsonKey(name: 'billTo', defaultValue: <BillToDto>[])
-      required final List<BillToDto> billToInfos,
+          required final List<BillToDto> billToInfos,
       @JsonKey(name: 'customerAttr7', defaultValue: '')
-      required this.customerAttr7,
+          required this.customerAttr7,
       @JsonKey(name: 'customerGrp4', defaultValue: '')
-      required this.customerGrp4,
-      @JsonKey(name: 'region', defaultValue: '') required this.region,
+          required this.customerGrp4,
+      @JsonKey(name: 'region', defaultValue: '')
+          required this.region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-      required final List<String> emailAddresses,
+          required final List<String> emailAddresses,
       @JsonKey(name: 'comboEligible', defaultValue: false)
-      required this.comboEligible,
+          required this.comboEligible,
       @JsonKey(name: 'salesDeals', defaultValue: [])
-      required final List<String> salesDeals,
-      @JsonKey(name: 'country', defaultValue: '') required this.country,
-      @JsonKey(name: 'floor', defaultValue: '') required this.floor,
+          required final List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          required this.country,
+      @JsonKey(name: 'floor', defaultValue: '')
+          required this.floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
-      required this.houseNumber1})
+          required this.houseNumber1})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
@@ -800,50 +861,65 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
 abstract class _CustomerCodeDto extends CustomerCodeDto {
   const factory _CustomerCodeDto(
       {@JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
-      required final String customerCodeSoldTo,
-      @JsonKey(name: 'name1', defaultValue: '') required final String name1,
-      @JsonKey(name: 'name2', defaultValue: '') required final String name2,
-      @JsonKey(name: 'name3', defaultValue: '') required final String name3,
-      @JsonKey(name: 'name4', defaultValue: '') required final String name4,
-      @JsonKey(name: 'status', defaultValue: '') required final String status,
-      @JsonKey(name: 'street1', defaultValue: '') required final String street1,
-      @JsonKey(name: 'street2', defaultValue: '') required final String street2,
-      @JsonKey(name: 'street3', defaultValue: '') required final String street3,
-      @JsonKey(name: 'street4', defaultValue: '') required final String street4,
-      @JsonKey(name: 'street5', defaultValue: '') required final String street5,
-      @JsonKey(name: 'city1', defaultValue: '') required final String city1,
-      @JsonKey(name: 'city2', defaultValue: '') required final String city2,
+          required final String customerCodeSoldTo,
+      @JsonKey(name: 'name1', defaultValue: '')
+          required final String name1,
+      @JsonKey(name: 'name2', defaultValue: '')
+          required final String name2,
+      @JsonKey(name: 'name3', defaultValue: '')
+          required final String name3,
+      @JsonKey(name: 'name4', defaultValue: '')
+          required final String name4,
+      @JsonKey(name: 'status', defaultValue: '')
+          required final String status,
+      @JsonKey(name: 'street1', defaultValue: '')
+          required final String street1,
+      @JsonKey(name: 'street2', defaultValue: '')
+          required final String street2,
+      @JsonKey(name: 'street3', defaultValue: '')
+          required final String street3,
+      @JsonKey(name: 'street4', defaultValue: '')
+          required final String street4,
+      @JsonKey(name: 'street5', defaultValue: '')
+          required final String street5,
+      @JsonKey(name: 'city1', defaultValue: '')
+          required final String city1,
+      @JsonKey(name: 'city2', defaultValue: '')
+          required final String city2,
       @JsonKey(name: 'telephoneNumber', defaultValue: '')
-      required final String telephoneNumber,
+          required final String telephoneNumber,
       @JsonKey(name: 'postalCode', defaultValue: '')
-      required final String postalCode,
+          required final String postalCode,
       @JsonKey(name: 'division', defaultValue: '')
-      required final String division,
+          required final String division,
       @JsonKey(name: 'customerClassification', defaultValue: '')
-      required final String customerClassification,
+          required final String customerClassification,
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
-      required final String customerLocalGroup,
+          required final String customerLocalGroup,
       @JsonKey(name: 'paymentTermDescription', defaultValue: '')
-      required final String paymentTermDescription,
+          required final String paymentTermDescription,
       @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
-      required final List<ShipToDto> shipToInfos,
+          required final List<ShipToDto> shipToInfos,
       @JsonKey(name: 'billTo', defaultValue: <BillToDto>[])
-      required final List<BillToDto> billToInfos,
+          required final List<BillToDto> billToInfos,
       @JsonKey(name: 'customerAttr7', defaultValue: '')
-      required final String customerAttr7,
+          required final String customerAttr7,
       @JsonKey(name: 'customerGrp4', defaultValue: '')
-      required final String customerGrp4,
-      @JsonKey(name: 'region', defaultValue: '') required final String region,
+          required final String customerGrp4,
+      @JsonKey(name: 'region', defaultValue: '')
+          required final String region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-      required final List<String> emailAddresses,
+          required final List<String> emailAddresses,
       @JsonKey(name: 'comboEligible', defaultValue: false)
-      required final bool comboEligible,
+          required final bool comboEligible,
       @JsonKey(name: 'salesDeals', defaultValue: [])
-      required final List<String> salesDeals,
-      @JsonKey(name: 'country', defaultValue: '') required final String country,
-      @JsonKey(name: 'floor', defaultValue: '') required final String floor,
+          required final List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          required final String country,
+      @JsonKey(name: 'floor', defaultValue: '')
+          required final String floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
-      required final String houseNumber1}) = _$_CustomerCodeDto;
+          required final String houseNumber1}) = _$_CustomerCodeDto;
   const _CustomerCodeDto._() : super._();
 
   factory _CustomerCodeDto.fromJson(Map<String, dynamic> json) =

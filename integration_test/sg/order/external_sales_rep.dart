@@ -250,15 +250,27 @@ void main() {
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(materialForEdi, 20);
     orderSummaryRobot.verifyMaterialUnitPrice(
-        true, currency, materialUnitPrice);
+      true,
+      currency,
+      materialUnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        true, currency, materialTotalPrice);
+      true,
+      currency,
+      materialTotalPrice,
+    );
     orderSummaryRobot.findBundleItem(bundleCode);
     orderSummaryRobot.findBundleMaterialItem(bundleMaterial1, 10);
     orderSummaryRobot.verifyBundleMaterialUnitPrice(
-        true, '- $currency', bundleMaterialUnitPrice);
+      true,
+      '- $currency',
+      bundleMaterialUnitPrice,
+    );
     orderSummaryRobot.verifyBundleMaterialTotalDiscount(
-        true, '- $currency', bundleMaterialTotalDiscount);
+      true,
+      '- $currency',
+      bundleMaterialTotalDiscount,
+    );
     orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
@@ -286,11 +298,14 @@ void main() {
     await materialRootRobot.tapPrincipleSelector();
     materialRootRobot.verifyMaterialFilterPage();
     await materialRootRobot.enterTextAndSubmit(
-        principleSearchText: principleSearchText);
+      principleSearchText: principleSearchText,
+    );
     materialRootRobot.verifySearchResultAppears(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     await materialRootRobot.tapOnSearchResult(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     materialRootRobot.verifyApplyButton();
     await materialRootRobot.tapApplyButton();
     materialRootRobot.findPrincipleSelector();
@@ -331,9 +346,15 @@ void main() {
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(materialWithoutPrice, 1);
     orderSummaryRobot.verifyMaterialUnitPrice(
-        false, currency, material1UnitPrice);
+      false,
+      currency,
+      material1UnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        false, currency, material1TotalPrice);
+      false,
+      currency,
+      material1TotalPrice,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //could not able to place an order as it does not cross
@@ -441,9 +462,15 @@ void main() {
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(material, 20);
     orderSummaryRobot.verifyMaterialUnitPrice(
-        true, currency, material2UnitPrice);
+      true,
+      currency,
+      material2UnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        true, currency, material2TotalPrice);
+      true,
+      currency,
+      material2TotalPrice,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //minimum order amount crosses

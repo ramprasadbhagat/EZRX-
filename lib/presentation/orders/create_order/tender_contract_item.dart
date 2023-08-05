@@ -21,7 +21,9 @@ class TenderContractItem extends StatelessWidget {
       leading: BlocBuilder<TenderContractBloc, TenderContractState>(
         builder: (context, state) {
           return GestureDetector(
-            key: Key('tenderContractIcon${tenderContract.contractNumber.displayTenderContractNumber}'),
+            key: Key(
+              'tenderContractIcon${tenderContract.contractNumber.displayTenderContractNumber}',
+            ),
             onTap: () => selectTenderContract(context),
             child: Container(
               height: 35,
@@ -30,16 +32,12 @@ class TenderContractItem extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(color: ZPColors.lightGray),
                 borderRadius: BorderRadius.circular(10),
-                color: _isSelected(state)
-                    ? ZPColors.primary
-                    : ZPColors.white,
+                color: _isSelected(state) ? ZPColors.primary : ZPColors.white,
               ),
               child: Icon(
                 Icons.check_rounded,
                 size: 17,
-                color: _isSelected(state)
-                    ? ZPColors.white
-                    : ZPColors.lightGray,
+                color: _isSelected(state) ? ZPColors.white : ZPColors.lightGray,
               ),
             ),
           );
@@ -52,7 +50,9 @@ class TenderContractItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: TenderContractBody(
             tenderContract: tenderContract,
-            key: Key('tenderContractBody${tenderContract.contractNumber.displayTenderContractNumber}'),
+            key: Key(
+              'tenderContractBody${tenderContract.contractNumber.displayTenderContractNumber}',
+            ),
           ),
         ),
       ],
@@ -124,11 +124,13 @@ class TenderContractBody extends StatelessWidget {
             children: [
               TenderInfoText(
                 title: 'Contract Reference',
-                info: tenderContract.contractReference.displayContractReference.tr(),
+                info: tenderContract.contractReference.displayContractReference
+                    .tr(),
               ),
               TenderInfoText(
                 title: 'Material Visa Number',
-                info: tenderContract.tenderVisaNumber.displayTenderVisaNumber.tr(),
+                info: tenderContract.tenderVisaNumber.displayTenderVisaNumber
+                    .tr(),
               ),
               TenderInfoText(
                 title: 'Sales District',
@@ -137,7 +139,8 @@ class TenderContractBody extends StatelessWidget {
               TenderInfoText(
                 title: 'Announcement Letter Number',
                 info: tenderContract
-                    .announcementLetterNumber.displayAnnouncementLetterNumber.tr(),
+                    .announcementLetterNumber.displayAnnouncementLetterNumber
+                    .tr(),
               ),
             ],
           ),
@@ -156,8 +159,9 @@ class TenderContractBody extends StatelessWidget {
               ),
               TenderInfoText(
                 title: 'Contract Expiry Date',
-                info:
-                    tenderContract.contractExpiryDate.displayContractExpiryDate.tr(),
+                info: tenderContract
+                    .contractExpiryDate.displayContractExpiryDate
+                    .tr(),
               ),
             ],
           ),

@@ -39,28 +39,34 @@ void main() {
       blocTest(
         'Submit re4turn failure',
         build: () => SubmitReturnBloc(
-            submitRequestRepository: mockSubmitRequestReturnRepository),
+          submitRequestRepository: mockSubmitRequestReturnRepository,
+        ),
         setUp: () {
-          when(() => mockSubmitRequestReturnRepository.submitRequestReturn(
+          when(
+            () => mockSubmitRequestReturnRepository.submitRequestReturn(
               customerCodeInfo: CustomerCodeInfo.empty(),
               returnReferenceNumber: refNumber,
               specialInstructions: specialInstructions,
               user: User.empty(),
               returnItemsList: [ReturnItem.empty()],
-              salesOrg: SalesOrganisation.empty())).thenAnswer(
+              salesOrg: SalesOrganisation.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('mock-error'),
             ),
           );
         },
         act: (SubmitReturnBloc bloc) => bloc.add(
-            SubmitReturnEvent.submitReturnRequest(
-                user: User.empty(),
-                returnItemsList: [ReturnItem.empty()],
-                returnReferenceNumber: refNumber,
-                specialInstructions: specialInstructions,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                salesOrg: SalesOrganisation.empty())),
+          SubmitReturnEvent.submitReturnRequest(
+            user: User.empty(),
+            returnItemsList: [ReturnItem.empty()],
+            returnReferenceNumber: refNumber,
+            specialInstructions: specialInstructions,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrganisation.empty(),
+          ),
+        ),
         expect: () => [
           SubmitReturnState.initial()
               .copyWith(failureOrSuccessOption: none(), isSubmitting: true),
@@ -75,29 +81,37 @@ void main() {
       blocTest(
         'Submit return request success',
         build: () => SubmitReturnBloc(
-            submitRequestRepository: mockSubmitRequestReturnRepository),
+          submitRequestRepository: mockSubmitRequestReturnRepository,
+        ),
         setUp: () {
-          when(() => mockSubmitRequestReturnRepository.submitRequestReturn(
+          when(
+            () => mockSubmitRequestReturnRepository.submitRequestReturn(
               user: User.empty(),
               returnItemsList: [ReturnItem.empty()],
               returnReferenceNumber: refNumber,
               specialInstructions: specialInstructions,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrg: SalesOrganisation.empty())).thenAnswer(
-            (invocation) async => Right(SubmitReturnResponse.empty().copyWith(
-              message: message,
-              requestID: reqId,
-            )),
+              salesOrg: SalesOrganisation.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              SubmitReturnResponse.empty().copyWith(
+                message: message,
+                requestID: reqId,
+              ),
+            ),
           );
         },
         act: (SubmitReturnBloc bloc) => bloc.add(
-            SubmitReturnEvent.submitReturnRequest(
-                user: User.empty(),
-                returnItemsList: [ReturnItem.empty()],
-                returnReferenceNumber: refNumber,
-                specialInstructions: specialInstructions,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                salesOrg: SalesOrganisation.empty())),
+          SubmitReturnEvent.submitReturnRequest(
+            user: User.empty(),
+            returnItemsList: [ReturnItem.empty()],
+            returnReferenceNumber: refNumber,
+            specialInstructions: specialInstructions,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrganisation.empty(),
+          ),
+        ),
         expect: () => [
           SubmitReturnState.initial()
               .copyWith(failureOrSuccessOption: none(), isSubmitting: true),

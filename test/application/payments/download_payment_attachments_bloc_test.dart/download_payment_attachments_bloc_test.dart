@@ -44,220 +44,270 @@ void main() {
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download all invoice url fail',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllInvoicesFilter.empty())).thenAnswer(
+            queryObject: AllInvoicesFilter.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) => bloc.add(DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-        customerCodeInfo: customerCodeInfo,
-        queryObject: AllInvoicesFilter.empty(),
-        salesOrganization: salesOrganization,
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
+          customerCodeInfo: customerCodeInfo,
+          queryObject: AllInvoicesFilter.empty(),
+          salesOrganization: salesOrganization,
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            isDownloadInProgress: false)
+          ),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download all invoice url success',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllInvoicesFilter.empty())).thenAnswer(
+            queryObject: AllInvoicesFilter.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
         );
         when(() => downloadPaymentAttachmentRepository.downloadPermission())
             .thenAnswer(
           (invocation) async => const Right(PermissionStatus.granted),
         );
-        when(() => downloadPaymentAttachmentRepository.downloadFiles(
-            files: downloadPaymentAttachmentMockData)).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.downloadFiles(
+            files: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(file),
         );
       },
-      act: (bloc) => bloc.add(DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-        queryObject: AllInvoicesFilter.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          queryObject: AllInvoicesFilter.empty(),
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(Right(file)),
-            isDownloadInProgress: false)
+          failureOrSuccessOption: optionOf(Right(file)),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download credit url fail',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllCreditsFilter.empty())).thenAnswer(
+            queryObject: AllCreditsFilter.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
         );
       },
-      act: (bloc) => bloc.add(DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-        queryObject: AllCreditsFilter.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          queryObject: AllCreditsFilter.empty(),
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            isDownloadInProgress: false)
+          ),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download credit url success',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllCreditsFilter.empty())).thenAnswer(
+            queryObject: AllCreditsFilter.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
         );
         when(() => downloadPaymentAttachmentRepository.downloadPermission())
             .thenAnswer(
           (invocation) async => const Right(PermissionStatus.granted),
         );
-        when(() => downloadPaymentAttachmentRepository.downloadFiles(
-            files: downloadPaymentAttachmentMockData)).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.downloadFiles(
+            files: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(file),
         );
       },
-      act: (bloc) => bloc.add(DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-        queryObject: AllCreditsFilter.empty(),
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          queryObject: AllCreditsFilter.empty(),
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(Right(file)),
-            isDownloadInProgress: false)
+          failureOrSuccessOption: optionOf(Right(file)),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download paymentSummary url fail',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
-              customerCodeInfo: customerCodeInfo,
-              salesOrganization: salesOrganization,
-            )).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) =>
-          bloc.add(DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            isDownloadInProgress: false)
+          ),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download paymentSummary url success',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
-              customerCodeInfo: customerCodeInfo,
-              salesOrganization: salesOrganization,
-            )).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
         );
         when(() => downloadPaymentAttachmentRepository.downloadPermission())
             .thenAnswer(
           (invocation) async => const Right(PermissionStatus.granted),
         );
-        when(() => downloadPaymentAttachmentRepository.downloadFiles(
-            files: downloadPaymentAttachmentMockData)).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.downloadFiles(
+            files: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(file),
         );
       },
-      act: (bloc) =>
-          bloc.add(DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(Right(file)),
-            isDownloadInProgress: false)
+          failureOrSuccessOption: optionOf(Right(file)),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download permission failed',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
-              customerCodeInfo: customerCodeInfo,
-              salesOrganization: salesOrganization,
-            )).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
         );
         when(() => downloadPaymentAttachmentRepository.downloadPermission())
@@ -267,65 +317,75 @@ void main() {
           ),
         );
       },
-      act: (bloc) =>
-          bloc.add(DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            isDownloadInProgress: false)
+          ),
+          isDownloadInProgress: false,
+        )
       ],
     );
 
     blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
       'Download file failed',
       build: () => DownloadPaymentAttachmentsBloc(
-          paymentAttachmentRepository: downloadPaymentAttachmentRepository),
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
       setUp: () {
-        when(() => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
-              customerCodeInfo: customerCodeInfo,
-              salesOrganization: salesOrganization,
-            )).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
         );
         when(() => downloadPaymentAttachmentRepository.downloadPermission())
             .thenAnswer(
           (invocation) async => const Right(PermissionStatus.granted),
         );
-        when(() => downloadPaymentAttachmentRepository.downloadFiles(
-            files: downloadPaymentAttachmentMockData)).thenAnswer(
+        when(
+          () => downloadPaymentAttachmentRepository.downloadFiles(
+            files: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) =>
-          bloc.add(DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-        customerCodeInfo: customerCodeInfo,
-        salesOrganization: salesOrganization,
-      )),
+      act: (bloc) => bloc.add(
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+      ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
             ),
-            isDownloadInProgress: false)
+          ),
+          isDownloadInProgress: false,
+        )
       ],
     );
   });

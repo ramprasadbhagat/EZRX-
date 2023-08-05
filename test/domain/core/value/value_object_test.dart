@@ -84,7 +84,9 @@ void main() {
       expect(dateTimeStringValue.dateString, '20 Jul 2023');
     });
 
-    test('should return NA if DateTimeStringValue is empty when getting a valid date string', () {
+    test(
+        'should return NA if DateTimeStringValue is empty when getting a valid date string',
+        () {
       final dateTimeStringValue = DateTimeStringValue('');
 
       expect(dateTimeStringValue.dateOrNaString, 'NA');
@@ -125,18 +127,22 @@ void main() {
       expect(dateTimeStringValue.dateTime, DateTime(2023, 7, 20, 12, 0, 0));
     });
 
-    test('should return a DateTime object from an announcement date string', () {
+    test('should return a DateTime object from an announcement date string',
+        () {
       const dateTimeString = '7/20/2023 10:30 AM';
       final dateTimeStringValue = DateTimeStringValue(dateTimeString);
 
-      expect(dateTimeStringValue.dateTime, DateTime(2023, 7, 20,10,30));
+      expect(dateTimeStringValue.dateTime, DateTime(2023, 7, 20, 10, 30));
     });
 
     test('should check if a DateTime object is before another DateTime', () {
       const dateTimeString = '2023-07-20 12:00:00';
       final dateTimeStringValue = DateTimeStringValue(dateTimeString);
 
-      expect(dateTimeStringValue.dateTime.isBefore(DateTime(2023, 7, 21)), true);
+      expect(
+        dateTimeStringValue.dateTime.isBefore(DateTime(2023, 7, 21)),
+        true,
+      );
     });
 
     test('should return a valid DateTime int value', () {
@@ -146,8 +152,6 @@ void main() {
       expect(dateTimeStringValue.intValue, 20230720120000);
     });
 
-
-
     test('should return a valid date string', () {
       const dateTimeString = '2023-07-20 12:00:00';
       final dateTimeStringValue = DateTimeStringValue(dateTimeString);
@@ -155,7 +159,9 @@ void main() {
       expect(dateTimeStringValue.dateString, '20 Jul 2023');
     });
 
-    test('should return dash (-) if DateTimeStringValue is empty when getting a valid date string', () {
+    test(
+        'should return dash (-) if DateTimeStringValue is empty when getting a valid date string',
+        () {
       final dateTimeStringValue = DateTimeStringValue('');
 
       expect(dateTimeStringValue.dateTimeOrDashString, '-');
@@ -174,6 +180,5 @@ void main() {
 
       expect(dateTimeStringValue.dateTimeOrDashString, '20 Jul 2023 10:30:00');
     });
-    
   });
 }

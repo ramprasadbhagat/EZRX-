@@ -15,17 +15,14 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto =
-          PoDocumentsDto.fromDomain(PoDocumentsDto.fromJson(
-                      data)
-                  .toDomain());
+          PoDocumentsDto.fromDomain(PoDocumentsDto.fromJson(data).toDomain());
       expect(configsDto.url, 'fake-url');
     });
 
     test('Test fromDomain', () {
       final configsDto =
-          PoDocumentsDto.fromDomain(PoDocumentsDto.fromJson(
-                      data)
-                  .toDomain()).toJson();
+          PoDocumentsDto.fromDomain(PoDocumentsDto.fromJson(data).toDomain())
+              .toJson();
       expect(configsDto['url'], 'fake-url');
     });
   });

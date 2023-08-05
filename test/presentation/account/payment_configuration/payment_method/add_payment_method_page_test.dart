@@ -142,7 +142,9 @@ void main() {
           ];
 
           whenListen(
-              addPaymentMethodBlocMock, Stream.fromIterable(expectedStates));
+            addPaymentMethodBlocMock,
+            Stream.fromIterable(expectedStates),
+          );
           await tester.pumpWidget(getAddPaymentMethodPage());
           await tester.pump();
           final appBarTitle = find.text('Add Payment Method');

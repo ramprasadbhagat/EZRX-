@@ -74,7 +74,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const AddPolicyConfiguration(),
       ),
@@ -83,12 +84,13 @@ void main() {
 
   group('Add Policy Configuration Test', () {
     testWidgets('=> Test Add Policy Configuration screen', (tester) async {
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial().copyWith(
-        salesOrganisation: SalesOrganisation.empty().copyWith(
-          salesOrg: SalesOrg('2601'),
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
         ),
-      ));
+      );
 
       when(() => policyConfigurationListBlocMock.state).thenReturn(
         PolicyConfigurationState.initial().copyWith(
@@ -103,7 +105,9 @@ void main() {
       ];
 
       whenListen(
-          policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
+        policyConfigurationListBlocMock,
+        Stream.fromIterable(expectedState),
+      );
 
       await getWidget(tester);
 
@@ -115,8 +119,9 @@ void main() {
       await tester.pump();
 
       final findSalesPrincipalCode = find.ancestor(
-          of: find.text('Please assign a valid sales principal code'.tr()),
-          matching: find.byType(TextFormField));
+        of: find.text('Please assign a valid sales principal code'.tr()),
+        matching: find.byType(TextFormField),
+      );
       expect(findSalesPrincipalCode, findsOneWidget);
       await tester.enterText(findSalesPrincipalCode, 'test');
       await tester.pump();
@@ -126,21 +131,25 @@ void main() {
       await tester.pump();
 
       final findMonthsBeforeExpiry = find.ancestor(
-          of: find.text('Months Before Expiry'.tr()),
-          matching: find.byType(TextFormField));
+        of: find.text('Months Before Expiry'.tr()),
+        matching: find.byType(TextFormField),
+      );
       expect(findMonthsBeforeExpiry, findsOneWidget);
       await tester.enterText(findMonthsBeforeExpiry, '123');
       await tester.pump();
 
       final findMonthsAfterExpiry = find.ancestor(
-          of: find.text('Months After Expiry'.tr()),
-          matching: find.byType(TextFormField));
+        of: find.text('Months After Expiry'.tr()),
+        matching: find.byType(TextFormField),
+      );
       expect(findMonthsAfterExpiry, findsOneWidget);
       await tester.enterText(findMonthsAfterExpiry, '123');
       await tester.pump();
 
       final findSubmitButton = find.ancestor(
-          of: find.text('Submit'.tr()), matching: find.byType(ElevatedButton));
+        of: find.text('Submit'.tr()),
+        matching: find.byType(ElevatedButton),
+      );
       expect(findSubmitButton, findsOneWidget);
       await tester.tap(findSubmitButton);
       await tester.pump();

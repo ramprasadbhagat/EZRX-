@@ -35,7 +35,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
     required int offset,
     required int pageSize,
   }) async {
-    
     if (config.appFlavor == Flavor.mock) {
       try {
         final paymentSummaryDetailsResponse =

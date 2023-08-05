@@ -228,19 +228,21 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role(
-                description: '',
-                name: '',
-                id: '',
-                type: RoleType('client'),
-              ),
+          user: User.empty().copyWith(
+            role: Role(
+              description: '',
+              name: '',
+              id: '',
+              type: RoleType('client'),
             ),
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-                customerAttr7: CustomerAttr7('ZEV'),
-                customerGrp4: CustomerGrp4('VR'))),
+          ),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerAttr7: CustomerAttr7('ZEV'),
+            customerGrp4: CustomerGrp4('VR'),
+          ),
+        ),
       );
       when(() => materialPriceDetailBlocMock.state)
           .thenReturn(MaterialPriceDetailState.initial());
@@ -267,17 +269,22 @@ void main() {
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<ViewByItemsBloc>(
-              create: (context) => mockViewByItemsBloc),
+            create: (context) => mockViewByItemsBloc,
+          ),
           BlocProvider<ViewByItemFilterBloc>(
-              create: (context) => mockOrderHistoryFilterBloc),
+            create: (context) => mockOrderHistoryFilterBloc,
+          ),
           BlocProvider<CartBloc>(create: (context) => mockCartBloc),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock),
+            create: (context) => customerCodeBlocMock,
+          ),
           BlocProvider<ViewByOrderDetailsBloc>(
-              create: (context) => mockViewByOrderDetailsBloc),
+            create: (context) => mockViewByOrderDetailsBloc,
+          ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(
-              create: ((context) => eligibilityBlocMock)),
+            create: ((context) => eligibilityBlocMock),
+          ),
           BlocProvider<MaterialPriceDetailBloc>(
             create: (context) => materialPriceDetailBlocMock,
           ),
@@ -301,7 +308,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const Material(),
       );
@@ -419,9 +427,10 @@ void main() {
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[
-                OrderHistoryDetailsMessages.empty().copyWith(message: '')
-              ]),
+            orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[
+              OrderHistoryDetailsMessages.empty().copyWith(message: '')
+            ],
+          ),
         ),
       );
       await tester.pumpWidget(getWUT());
@@ -606,8 +615,10 @@ void main() {
     // });
 
     testWidgets('Disable Reorder button ', (tester) async {
-      when(() => userBlocMock.state).thenReturn(UserState.initial()
-          .copyWith(user: User.empty().copyWith(disableCreateOrder: true)));
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial()
+            .copyWith(user: User.empty().copyWith(disableCreateOrder: true)),
+      );
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty(),
@@ -1066,8 +1077,9 @@ void main() {
       );
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty()
-                .copyWith(currency: Currency('vnd'))),
+          configs: SalesOrganisationConfigs.empty()
+              .copyWith(currency: Currency('vnd')),
+        ),
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();

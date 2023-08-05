@@ -55,8 +55,10 @@ void main() {
           ),
         ),
       );
-      expect(() async => tncRemote.getAcceptanceDate(),
-          throwsA(isA<OtherException>()));
+      expect(
+        () async => tncRemote.getAcceptanceDate(),
+        throwsA(isA<OtherException>()),
+      );
     });
 
     test('handle invalid remote data 2', () async {
@@ -76,8 +78,10 @@ void main() {
           ),
         ),
       );
-      expect(() async => tncRemote.getAcceptanceDate(),
-          throwsA(isA<ServerException>()));
+      expect(
+        () async => tncRemote.getAcceptanceDate(),
+        throwsA(isA<ServerException>()),
+      );
     });
 
     test('handle invalid remote data 3', () async {
@@ -94,8 +98,10 @@ void main() {
           ),
         ),
       );
-      expect(() async => tncRemote.getAcceptanceDate(),
-          throwsA(isA<ServerException>()));
+      expect(
+        () async => tncRemote.getAcceptanceDate(),
+        throwsA(isA<ServerException>()),
+      );
     });
   });
 }

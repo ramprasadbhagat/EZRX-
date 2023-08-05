@@ -28,8 +28,6 @@ class BonusMaterialLocalDataSourceMock extends Mock
 class BonusMaterialRemoteDataSourceMock extends Mock
     implements BonusMaterialRemoteDataSource {}
 
-
-
 void main() {
   late BonusMaterialRepository bonusMaterialRepository;
   late Config mockConfig;
@@ -40,23 +38,21 @@ void main() {
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
   final mockUser = User.empty();
-  final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty()
-      .copyWith(
-          languageFilter: true,
-          languageValue: LanguageValue(ApiLanguageCode.english),
-          disablePrincipals: true,
-          enableGimmickMaterial: true,
-          principalList: [
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-              principalCode: PrincipalCode('123')
-            ),
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-              principalCode: PrincipalCode('234')
-            ),
-            SalesOrganisationConfigsPrincipal.empty().copyWith(
-              principalCode: PrincipalCode('345')
-            ),
-          ]);
+  final mockSalesOrganisationConfigs =
+      SalesOrganisationConfigs.empty().copyWith(
+    languageFilter: true,
+    languageValue: LanguageValue(ApiLanguageCode.english),
+    disablePrincipals: true,
+    enableGimmickMaterial: true,
+    principalList: [
+      SalesOrganisationConfigsPrincipal.empty()
+          .copyWith(principalCode: PrincipalCode('123')),
+      SalesOrganisationConfigsPrincipal.empty()
+          .copyWith(principalCode: PrincipalCode('234')),
+      SalesOrganisationConfigsPrincipal.empty()
+          .copyWith(principalCode: PrincipalCode('345')),
+    ],
+  );
   final mockShipToInfo = ShipToInfo.empty()
       .copyWith(shipToCustomerCode: '1234567', status: Status('fake_status'));
   final mockCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
@@ -72,9 +68,10 @@ void main() {
     bonusMaterialRemoteDataSource = BonusMaterialRemoteDataSourceMock();
 
     bonusMaterialRepository = BonusMaterialRepository(
-        config: mockConfig,
-        localDataSource: bonusMaterialLocalDataSource,
-        remoteDataSource: bonusMaterialRemoteDataSource);
+      config: mockConfig,
+      localDataSource: bonusMaterialLocalDataSource,
+      remoteDataSource: bonusMaterialRemoteDataSource,
+    );
   });
 
   group('bonusMaterialRepository should - ', () {
@@ -84,13 +81,14 @@ void main() {
           .thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser,
-          configs: mockSalesOrganisationConfigs,
-          searchKey: '',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser,
+        configs: mockSalesOrganisationConfigs,
+        searchKey: '',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isRight(),
         true,
@@ -102,15 +100,16 @@ void main() {
           .thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser.copyWith(
-              role:
-                  Role.empty().copyWith(type: RoleType('external_sales_rep'))),
-          configs: mockSalesOrganisationConfigs,
-          searchKey: '',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+        ),
+        configs: mockSalesOrganisationConfigs,
+        searchKey: '',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isRight(),
         true,
@@ -122,13 +121,14 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser,
-          configs: mockSalesOrganisationConfigs,
-          searchKey: '',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser,
+        configs: mockSalesOrganisationConfigs,
+        searchKey: '',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isLeft(),
         true,
@@ -136,28 +136,33 @@ void main() {
     });
     test('get bonusMaterial successfully remote  for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => bonusMaterialRemoteDataSource.customerMaterialsForSalesRep(
+      when(
+        () => bonusMaterialRemoteDataSource.customerMaterialsForSalesRep(
           username: 'user',
           soldTo: '10007654',
           shipTo: '1234567',
           salesOrganisation: '2601',
           gimmickMaterial: true,
           pickandpack: '',
-          searchKey: 'uk')).thenAnswer((invocation) async => <MaterialInfo>[]);
+          searchKey: 'uk',
+        ),
+      ).thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-              id: '1',
-              username: Username('user'),
-              email: EmailAddress('user@gmail.com'),
-              customerCode: CustomerCode('10007654')),
-          configs: mockSalesOrganisationConfigs,
-          searchKey: 'uk',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          id: '1',
+          username: Username('user'),
+          email: EmailAddress('user@gmail.com'),
+          customerCode: CustomerCode('10007654'),
+        ),
+        configs: mockSalesOrganisationConfigs,
+        searchKey: 'uk',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isRight(),
         true,
@@ -165,25 +170,29 @@ void main() {
     });
     test('get bonusMaterial successfully remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => bonusMaterialRemoteDataSource.getadditionalBonus(
-              searchKey: 'uk',
-              salesOrganisation: '2601',
-              customerCodeSoldTo: '10007654',
-              shipToCode: '1234567'))
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
+      when(
+        () => bonusMaterialRemoteDataSource.getadditionalBonus(
+          searchKey: 'uk',
+          salesOrganisation: '2601',
+          customerCodeSoldTo: '10007654',
+          shipToCode: '1234567',
+        ),
+      ).thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser.copyWith(
-              id: '1',
-              username: Username('user'),
-              email: EmailAddress('user@gmail.com'),
-              customerCode: CustomerCode('10007654')),
-          configs: mockSalesOrganisationConfigs,
-          searchKey: 'uk',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser.copyWith(
+          id: '1',
+          username: Username('user'),
+          email: EmailAddress('user@gmail.com'),
+          customerCode: CustomerCode('10007654'),
+        ),
+        configs: mockSalesOrganisationConfigs,
+        searchKey: 'uk',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isRight(),
         true,
@@ -191,28 +200,33 @@ void main() {
     });
     test('get bonusMaterial fail remote  for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => bonusMaterialRemoteDataSource.customerMaterialsForSalesRep(
+      when(
+        () => bonusMaterialRemoteDataSource.customerMaterialsForSalesRep(
           username: 'user',
           soldTo: '10007654',
           shipTo: '1234567',
           salesOrganisation: '2601',
           gimmickMaterial: true,
           pickandpack: '',
-          searchKey: 'uk')).thenThrow((invocation) async => MockException());
+          searchKey: 'uk',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-              id: '1',
-              username: Username('user'),
-              email: EmailAddress('user@gmail.com'),
-              customerCode: CustomerCode('10007654')),
-          configs: mockSalesOrganisationConfigs,
-          searchKey: 'uk',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          id: '1',
+          username: Username('user'),
+          email: EmailAddress('user@gmail.com'),
+          customerCode: CustomerCode('10007654'),
+        ),
+        configs: mockSalesOrganisationConfigs,
+        searchKey: 'uk',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isLeft(),
         true,
@@ -220,26 +234,30 @@ void main() {
     });
     test('get bonusMaterial fail remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => bonusMaterialRemoteDataSource.getadditionalBonus(
-              searchKey: 'uk',
-              salesOrganisation: '2601',
-              customerCodeSoldTo: '10007654',
-              shipToCode: '1234567'))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => bonusMaterialRemoteDataSource.getadditionalBonus(
+          searchKey: 'uk',
+          salesOrganisation: '2601',
+          customerCodeSoldTo: '10007654',
+          shipToCode: '1234567',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await bonusMaterialRepository.getMaterialBonus(
-          user: mockUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
-              id: '1',
-              username: Username('user'),
-              email: EmailAddress('user@gmail.com'),
-              customerCode: CustomerCode('10007654')),
-          configs: mockSalesOrganisationConfigs,
-          searchKey: 'uk',
-          customerInfo: mockCustomerCodeInfo,
-          shipInfo: mockShipToInfo,
-          salesOrganisation: fakeSaleOrg,
-          pickAndPack: '');
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+          id: '1',
+          username: Username('user'),
+          email: EmailAddress('user@gmail.com'),
+          customerCode: CustomerCode('10007654'),
+        ),
+        configs: mockSalesOrganisationConfigs,
+        searchKey: 'uk',
+        customerInfo: mockCustomerCodeInfo,
+        shipInfo: mockShipToInfo,
+        salesOrganisation: fakeSaleOrg,
+        pickAndPack: '',
+      );
       expect(
         result.isLeft(),
         true,

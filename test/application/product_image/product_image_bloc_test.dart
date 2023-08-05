@@ -29,7 +29,8 @@ void main() {
   ];
 
   final fakeMaterialInfoList1 = [
-    MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('000000000021041790')),
+    MaterialInfo.empty()
+        .copyWith(materialNumber: MaterialNumber('000000000021041790')),
     MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('2')),
   ];
 
@@ -59,26 +60,27 @@ void main() {
     );
 
     blocTest<ProductImageBloc, ProductImageState>(
-        'Fetch Product Image when all materials already present on state',
-        build: () => ProductImageBloc(productImagesRepository: repository),
-        seed: () => ProductImageState.initial().copyWith(
-              materialUrlMap: fakeMaterialImageUrl,
-            ),
-        act: (ProductImageBloc bloc) => bloc.add(
-              ProductImageEvent.fetch(list: fakeMaterialInfoList),
-            ),
-        expect: () {
-          return [
-            ProductImageState.initial().copyWith(
-              isFetching: true,
-              materialUrlMap: fakeMaterialImageUrl,
-            ),
-            ProductImageState.initial().copyWith(
-              isFetching: false,
-              materialUrlMap: fakeMaterialImageUrl,
-            ),
-          ];
-        });
+      'Fetch Product Image when all materials already present on state',
+      build: () => ProductImageBloc(productImagesRepository: repository),
+      seed: () => ProductImageState.initial().copyWith(
+        materialUrlMap: fakeMaterialImageUrl,
+      ),
+      act: (ProductImageBloc bloc) => bloc.add(
+        ProductImageEvent.fetch(list: fakeMaterialInfoList),
+      ),
+      expect: () {
+        return [
+          ProductImageState.initial().copyWith(
+            isFetching: true,
+            materialUrlMap: fakeMaterialImageUrl,
+          ),
+          ProductImageState.initial().copyWith(
+            isFetching: false,
+            materialUrlMap: fakeMaterialImageUrl,
+          ),
+        ];
+      },
+    );
 
     blocTest<ProductImageBloc, ProductImageState>(
       'Fetch material image success',
@@ -93,9 +95,7 @@ void main() {
         );
       },
       act: (ProductImageBloc bloc) => bloc.add(
-        ProductImageEvent.fetch(
-          list: fakeMaterialInfoList1
-        ),
+        ProductImageEvent.fetch(list: fakeMaterialInfoList1),
       ),
       expect: () => [
         ProductImageState.initial().copyWith(
@@ -121,9 +121,7 @@ void main() {
         );
       },
       act: (ProductImageBloc bloc) => bloc.add(
-        ProductImageEvent.fetch(
-          list: fakeMaterialInfoList1
-        ),
+        ProductImageEvent.fetch(list: fakeMaterialInfoList1),
       ),
       expect: () => [
         ProductImageState.initial().copyWith(

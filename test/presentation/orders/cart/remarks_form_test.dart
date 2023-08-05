@@ -13,9 +13,11 @@ void main() {
     () {
       WidgetsFlutterBinding.ensureInitialized();
       cartBloc = CartBlocMock();
-      when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
-        isFetching: false,
-      ));
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
     },
   );
   // group('Remarks Form Test', () {

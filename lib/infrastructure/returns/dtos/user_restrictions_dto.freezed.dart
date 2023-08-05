@@ -39,9 +39,10 @@ abstract class $UserRestrictionsDtoCopyWith<$Res> {
       _$UserRestrictionsDtoCopyWithImpl<$Res, UserRestrictionsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'approverRights') ApproverRightsDto approverRights,
+      {@JsonKey(name: 'approverRights')
+          ApproverRightsDto approverRights,
       @JsonKey(name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
-      List<ApprovalLimitsDto> approverLimits});
+          List<ApprovalLimitsDto> approverLimits});
 
   $ApproverRightsDtoCopyWith<$Res> get approverRights;
 }
@@ -92,9 +93,10 @@ abstract class _$$_UserRestrictionsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'approverRights') ApproverRightsDto approverRights,
+      {@JsonKey(name: 'approverRights')
+          ApproverRightsDto approverRights,
       @JsonKey(name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
-      List<ApprovalLimitsDto> approverLimits});
+          List<ApprovalLimitsDto> approverLimits});
 
   @override
   $ApproverRightsDtoCopyWith<$Res> get approverRights;
@@ -131,9 +133,10 @@ class __$$_UserRestrictionsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserRestrictionsDto extends _UserRestrictionsDto {
   const _$_UserRestrictionsDto(
-      {@JsonKey(name: 'approverRights') required this.approverRights,
+      {@JsonKey(name: 'approverRights')
+          required this.approverRights,
       @JsonKey(name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
-      required final List<ApprovalLimitsDto> approverLimits})
+          required final List<ApprovalLimitsDto> approverLimits})
       : _approverLimits = approverLimits,
         super._();
 
@@ -190,12 +193,11 @@ class _$_UserRestrictionsDto extends _UserRestrictionsDto {
 
 abstract class _UserRestrictionsDto extends UserRestrictionsDto {
   const factory _UserRestrictionsDto(
-          {@JsonKey(name: 'approverRights')
+      {@JsonKey(name: 'approverRights')
           required final ApproverRightsDto approverRights,
-          @JsonKey(
-              name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
-          required final List<ApprovalLimitsDto> approverLimits}) =
-      _$_UserRestrictionsDto;
+      @JsonKey(name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
+          required final List<ApprovalLimitsDto>
+              approverLimits}) = _$_UserRestrictionsDto;
   const _UserRestrictionsDto._() : super._();
 
   factory _UserRestrictionsDto.fromJson(Map<String, dynamic> json) =

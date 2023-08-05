@@ -58,14 +58,15 @@ void main() {
       };
       uuid = 'cfe3d45d-9812-49d7-8b83-ad028b9ae383';
       policyConfiguration = PolicyConfiguration(
-          salesOrg: SalesOrg('2601'),
-          principalCode: PrincipalCode('2601'),
-          monthsBeforeExpiry: MonthsBeforeExpiry.change('0'),
-          monthsAfterExpiry: MonthsAfterExpiry.change('0'),
-          uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
-          returnsAllowed: ReturnsAllowed(true),
-          principalName: PrincipalName(''),
-          status: '');
+        salesOrg: SalesOrg('2601'),
+        principalCode: PrincipalCode('2601'),
+        monthsBeforeExpiry: MonthsBeforeExpiry.change('0'),
+        monthsAfterExpiry: MonthsAfterExpiry.change('0'),
+        uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
+        returnsAllowed: ReturnsAllowed(true),
+        principalName: PrincipalName(''),
+        status: '',
+      );
       getPolicyConfigurationDeleteVariables = {
         'variables': {
           'input': {'uuid': uuid},
@@ -290,7 +291,8 @@ void main() {
 
           await remoteDataSource
               .getDeletePolicyConfiguration(
-                  policyConfiguration: policyConfiguration)
+            policyConfiguration: policyConfiguration,
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(policyConfiguration);
@@ -332,7 +334,8 @@ void main() {
 
           await remoteDataSource
               .getDeletePolicyConfiguration(
-                  policyConfiguration: policyConfiguration)
+            policyConfiguration: policyConfiguration,
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(policyConfiguration);
@@ -429,7 +432,8 @@ void main() {
 
           await remoteDataSource
               .geAddPolicyConfiguration(
-                  policyConfiguration: policyConfiguration)
+            policyConfiguration: policyConfiguration,
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(policyConfiguration);
@@ -471,7 +475,8 @@ void main() {
 
           await remoteDataSource
               .geAddPolicyConfiguration(
-                  policyConfiguration: policyConfiguration)
+            policyConfiguration: policyConfiguration,
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(policyConfiguration);

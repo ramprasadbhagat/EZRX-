@@ -285,7 +285,6 @@ void main() {
           expect(eligibilityState.isMinOrderValuePassed, false);
         },
       );
-
     },
   );
 }

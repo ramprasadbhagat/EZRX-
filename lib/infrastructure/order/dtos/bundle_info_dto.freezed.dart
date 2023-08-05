@@ -150,16 +150,16 @@ class _$_BundleInfoDto extends _BundleInfoDto {
   const _$_BundleInfoDto(
       {@JsonKey(name: 'Sequence')
       @HiveField(21, defaultValue: 1)
-      required this.sequence,
+          required this.sequence,
       @JsonKey(name: 'Quantity')
       @HiveField(22, defaultValue: 1)
-      required this.quantity,
+          required this.quantity,
       @JsonKey(name: 'Type')
       @HiveField(23, defaultValue: '%')
-      required this.type,
+          required this.type,
       @JsonKey(name: 'Rate')
       @HiveField(24, defaultValue: -10)
-      required this.rate})
+          required this.rate})
       : super._();
 
   factory _$_BundleInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -222,16 +222,16 @@ abstract class _BundleInfoDto extends BundleInfoDto {
   const factory _BundleInfoDto(
       {@JsonKey(name: 'Sequence')
       @HiveField(21, defaultValue: 1)
-      required final int sequence,
+          required final int sequence,
       @JsonKey(name: 'Quantity')
       @HiveField(22, defaultValue: 1)
-      required final int quantity,
+          required final int quantity,
       @JsonKey(name: 'Type')
       @HiveField(23, defaultValue: '%')
-      required final String type,
+          required final String type,
       @JsonKey(name: 'Rate')
       @HiveField(24, defaultValue: -10)
-      required final double rate}) = _$_BundleInfoDto;
+          required final double rate}) = _$_BundleInfoDto;
   const _BundleInfoDto._() : super._();
 
   factory _BundleInfoDto.fromJson(Map<String, dynamic> json) =

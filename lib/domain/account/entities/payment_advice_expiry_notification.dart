@@ -11,7 +11,8 @@ class PaymentAdviceExpiryNotification with _$PaymentAdviceExpiryNotification {
     required bool disabled,
   }) = _PaymentAdviceExpiryNotification;
 
-  factory PaymentAdviceExpiryNotification.empty() => const PaymentAdviceExpiryNotification(
+  factory PaymentAdviceExpiryNotification.empty() =>
+      const PaymentAdviceExpiryNotification(
         day: '',
         disabled: true,
       );

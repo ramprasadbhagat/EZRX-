@@ -2,13 +2,11 @@ part of 'all_credits_filter_bloc.dart';
 
 @freezed
 class AllCreditsFilterEvent with _$AllCreditsFilterEvent {
-
   const factory AllCreditsFilterEvent.initialized() = _Initialized;
 
   const factory AllCreditsFilterEvent.openFilterBottomSheet({
     required AllCreditsFilter appliedFilter,
-  }) =
-      _OpenFilterBottomSheet;
+  }) = _OpenFilterBottomSheet;
 
   const factory AllCreditsFilterEvent.validateFilters() = _ValidateFilters;
 
@@ -28,5 +26,4 @@ class AllCreditsFilterEvent with _$AllCreditsFilterEvent {
   const factory AllCreditsFilterEvent.setDocumentDate(
     DateTimeRange dateRange,
   ) = _SetDocumentDate;
-  
 }

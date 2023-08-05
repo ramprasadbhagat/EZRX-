@@ -40,10 +40,11 @@ void main() {
   final fakeSaleOrg =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
   final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
-      customerCodeSoldTo: '100000345',
-      customerAttr7: CustomerAttr7('ZEV'),
-      customerGrp4: CustomerGrp4('VR'),
-      status: Status('fake_status'));
+    customerCodeSoldTo: '100000345',
+    customerAttr7: CustomerAttr7('ZEV'),
+    customerGrp4: CustomerGrp4('VR'),
+    status: Status('fake_status'),
+  );
   final fakeShipToInfo = ShipToInfo.empty()
       .copyWith(shipToCustomerCode: '1234567', status: Status('fake_status'));
   final mockUser = User.empty();

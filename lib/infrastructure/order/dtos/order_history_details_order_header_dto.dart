@@ -41,8 +41,8 @@ class OrderHistoryDetailsOrderHeadersDto
   ) {
     return OrderHistoryDetailsOrderHeadersDto(
       totalTax: orderHistoryDetailsOrderHeader.totalTax,
-      requestedDeliveryDate: orderHistoryDetailsOrderHeader
-          .requestedDeliveryDate.dateString,
+      requestedDeliveryDate:
+          orderHistoryDetailsOrderHeader.requestedDeliveryDate.dateString,
       type: orderHistoryDetailsOrderHeader.type,
       telephoneNumber:
           orderHistoryDetailsOrderHeader.telephoneNumber.displayTelephoneNumber,
@@ -60,7 +60,8 @@ class OrderHistoryDetailsOrderHeadersDto
       materialCount: orderHistoryDetailsOrderHeader.materialCount,
       orderNumber:
           orderHistoryDetailsOrderHeader.orderNumber.getOrDefaultValue(''),
-      pOReference: orderHistoryDetailsOrderHeader.pOReference.displayPOReference,
+      pOReference:
+          orderHistoryDetailsOrderHeader.pOReference.displayPOReference,
       shipTo: orderHistoryDetailsOrderHeader.shipTo,
       soldTo: orderHistoryDetailsOrderHeader.soldTo,
     );

@@ -59,7 +59,8 @@ void main() {
         'For "setAmountFrom" Event',
         build: () => AvailableCreditFilterBloc(),
         act: (bloc) => bloc.add(
-            const AvailableCreditFilterEvent.setAmountFrom(amountFrom: '10')),
+          const AvailableCreditFilterEvent.setAmountFrom(amountFrom: '10'),
+        ),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
             filter: AvailableCreditFilter.empty().copyWith(

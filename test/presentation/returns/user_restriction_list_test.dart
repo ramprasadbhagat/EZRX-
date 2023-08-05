@@ -85,10 +85,12 @@ void main() {
         ),
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
         BlocProvider<UserRestrictionDetailsBloc>(
-            create: (context) => userRestrictiondetailsBlocMock),
+          create: (context) => userRestrictiondetailsBlocMock,
+        ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock),
+          create: (context) => announcementBlocMock,
+        ),
       ],
       child: child,
     );
@@ -127,7 +129,9 @@ void main() {
       when(() => userRestrictionListBlocMock.state)
           .thenReturn(UserRestrictionListState.initial());
       whenListen(
-          userRestrictionListBlocMock, Stream.fromIterable(expectedState));
+        userRestrictionListBlocMock,
+        Stream.fromIterable(expectedState),
+      );
 
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
       await tester.pump();
@@ -199,14 +203,19 @@ void main() {
       await tester
           .pump(const Duration(seconds: 1)); // finish the scroll animation
       await tester.pump(
-          const Duration(seconds: 1)); // finish the indicator settle animation
+        const Duration(seconds: 1),
+      ); // finish the indicator settle animation
       await tester.pump(
-          const Duration(seconds: 1)); // finish the indicator hide animation
+        const Duration(seconds: 1),
+      ); // finish the indicator hide animation
 
       handle.dispose();
 
-      verify(() => userRestrictionListBlocMock.add(
-          UserRestrictionListEvent.fetch(salesOrg: mockSalesOrg))).called(1);
+      verify(
+        () => userRestrictionListBlocMock.add(
+          UserRestrictionListEvent.fetch(salesOrg: mockSalesOrg),
+        ),
+      ).called(1);
     });
 
     testWidgets(
@@ -286,9 +295,11 @@ void main() {
       await tester.enterText(textField, mockSearchKey);
       await tester.pump(const Duration(milliseconds: 3000));
 
-      verify(() => userRestrictionListBlocMock.add(
-            UserRestrictionListEvent.updateSearchKey(mockSearchKey),
-          )).called(1);
+      verify(
+        () => userRestrictionListBlocMock.add(
+          UserRestrictionListEvent.updateSearchKey(mockSearchKey),
+        ),
+      ).called(1);
     });
   });
 }

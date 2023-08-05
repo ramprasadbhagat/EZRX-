@@ -29,7 +29,7 @@ class OrderTemplateListRobot {
     await tester.pumpAndSettle();
   }
 
-   void findTemplateItemDelete() {
+  void findTemplateItemDelete() {
     if (deleteIcon.evaluate().length > 1) {
       expect(deleteIcon.first, findsOneWidget);
     } else {

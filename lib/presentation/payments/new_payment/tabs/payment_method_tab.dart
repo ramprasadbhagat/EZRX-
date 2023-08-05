@@ -103,8 +103,9 @@ class _PaymentMethodSelectorState extends State<_PaymentMethodSelector> {
                   ),
                 ),
                 body: const _PaymentGateWayDescription(),
-                onPress: () => setState(() =>
-                    selectedPaymentMethod = _PaymentMethod.paymentGateway),
+                onPress: () => setState(
+                  () => selectedPaymentMethod = _PaymentMethod.paymentGateway,
+                ),
                 expanded: true,
               ),
               SelectableExpansionTile(

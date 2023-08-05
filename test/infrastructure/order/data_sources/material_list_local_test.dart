@@ -52,7 +52,8 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/getCustomerMaterialsForSalesRepResponse.json'),
+              'assets/json/getCustomerMaterialsForSalesRepResponse.json',
+            ),
           );
 
           final result = await localDataSource.getMaterialListSalesRep();
@@ -90,17 +91,19 @@ void main() {
         'search material list for sales rep',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getCustomerMaterialsForSalesRepResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/getCustomerMaterialsForSalesRepResponse.json',
+            ),
           );
 
           final result = await localDataSource.searchMaterialListSalesRep();
-          final finalData = res['data']['customerMaterialsForSalesRep']['materials'];
+          final finalData =
+              res['data']['customerMaterialsForSalesRep']['materials'];
           expect(
             result,
             List.from(finalData)
-        .map((e) => MaterialDto.fromJson(e).toDomain())
-        .toList(),
+                .map((e) => MaterialDto.fromJson(e).toDomain())
+                .toList(),
           );
         },
       );

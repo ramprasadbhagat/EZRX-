@@ -8,6 +8,4 @@ class NewRequestEvent with _$NewRequestEvent {
     required ReturnMaterial item,
     required bool selected,
   }) = _ToggleReturnItem;
-
-     
 }

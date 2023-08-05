@@ -33,7 +33,9 @@ class BundleDetailRobot {
   }
 
   Future<void> changeBundleMaterialQuantity(
-      String bundleMaterial, int quantity) async {
+    String bundleMaterial,
+    int quantity,
+  ) async {
     final changeBundleMaterial = find.byKey(Key('bundleText$bundleMaterial'));
     expect(changeBundleMaterial, findsOneWidget);
     await tester.enterText(changeBundleMaterial, quantity.toString());
@@ -44,7 +46,6 @@ class BundleDetailRobot {
     final addBundlesToCart = find.byKey(const Key('addBundlesToCart'));
     await tester.tap(addBundlesToCart);
     await tester.pumpAndSettle();
-
   }
 
   Future<void> findAndCloseAnnouncementIcon() async {

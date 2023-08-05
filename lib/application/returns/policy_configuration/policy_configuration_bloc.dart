@@ -26,19 +26,26 @@ class PolicyConfigurationBloc
         PolicyConfigurationState.initial(),
       ),
     );
-    on<_Search> (
-          (e, emit) {
+    on<_Search>(
+      (e, emit) {
         if (e.searchKey != state.searchKey.getValue()) {
-          add(_Fetch(searchKey: e.searchKey, salesOrganisation: e.salesOrganisation));
+          add(
+            _Fetch(
+              searchKey: e.searchKey,
+              salesOrganisation: e.salesOrganisation,
+            ),
+          );
         }
       },
     );
     on<_Fetch>(
       (e, emit) async {
-        emit(PolicyConfigurationState.initial().copyWith(
-          isLoading: true,
-          searchKey: SearchKey(e.searchKey),
-        ));
+        emit(
+          PolicyConfigurationState.initial().copyWith(
+            isLoading: true,
+            searchKey: SearchKey(e.searchKey),
+          ),
+        );
 
         final failureOrSuccess =
             await policyConfigurationRepository.getPolicyConfiguration(
@@ -118,9 +125,11 @@ class PolicyConfigurationBloc
     );
     on<_Delete>(
       (e, emit) async {
-        emit(state.copyWith(
-          failureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess =
             await policyConfigurationRepository.getDeletePolicy(

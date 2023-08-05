@@ -1,9 +1,7 @@
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-
 
 part 'invoice_details.freezed.dart';
 

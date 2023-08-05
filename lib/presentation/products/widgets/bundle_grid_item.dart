@@ -117,7 +117,7 @@ class _BundleMaterial extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
           showShadow: false,
           showBorder: true,
-            child: ProductImage(
+          child: ProductImage(
             materialNumber: materialData.materialNumber,
             height: MediaQuery.of(context).size.height * 0.03,
             width: MediaQuery.of(context).size.height * 0.03,

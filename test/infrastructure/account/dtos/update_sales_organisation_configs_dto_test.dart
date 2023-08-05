@@ -24,17 +24,18 @@ void main() {
     });
     test('Test fromDomain', () {
       final configsDto = UpdateSalesOrganisationConfigsDto.fromDomain(
-          UpdateSalesOrganisationConfigsDto.fromJson(
-        data['data']['updateSalesOrgConfig']['salesOrgConfig'],
-      ).toDomain());
+        UpdateSalesOrganisationConfigsDto.fromJson(
+          data['data']['updateSalesOrgConfig']['salesOrgConfig'],
+        ).toDomain(),
+      );
       expect(configsDto.currency, 'sgd');
     });
     test('Test toJson', () {
       final configsDtoMap = UpdateSalesOrganisationConfigsDto.fromDomain(
-              UpdateSalesOrganisationConfigsDto.fromJson(
-        data['data']['updateSalesOrgConfig']['salesOrgConfig'],
-      ).toDomain())
-          .toJson();
+        UpdateSalesOrganisationConfigsDto.fromJson(
+          data['data']['updateSalesOrgConfig']['salesOrgConfig'],
+        ).toDomain(),
+      ).toJson();
       expect(configsDtoMap['currency'], 'sgd');
     });
   });

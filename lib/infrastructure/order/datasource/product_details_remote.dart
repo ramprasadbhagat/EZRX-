@@ -93,8 +93,6 @@ class ProductDetailRemoteDataSource {
     });
   }
 
-  
-
   Future<ProductMetaData> getItemProductMetaData({
     required List<String> materialIDs,
   }) async {

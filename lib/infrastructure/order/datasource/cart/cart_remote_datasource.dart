@@ -103,17 +103,19 @@ class CartRemoteDataSource {
       final query = cartQueryMutation.upsertCartItems();
       final variables = {
         'itemInput': product.bundle.materials
-            .map((e) => {
-                  'ProductID': e.materialNumber.getValue(),
-                  'Quantity': e.quantity,
-                  'ItemSource': 'EZRX',
-                  'CustomerCode': customerCode,
-                  'ShipToID': shipToCode,
-                  'SalesOrg': salesOrg,
-                  'ParentID': product.bundle.bundleCode,
-                  'Language': language,
-                  'Type': 'bundle',
-                })
+            .map(
+              (e) => {
+                'ProductID': e.materialNumber.getValue(),
+                'Quantity': e.quantity,
+                'ItemSource': 'EZRX',
+                'CustomerCode': customerCode,
+                'ShipToID': shipToCode,
+                'SalesOrg': salesOrg,
+                'ParentID': product.bundle.bundleCode,
+                'Language': language,
+                'Type': 'bundle',
+              },
+            )
             .toList(),
       };
       final res = await httpService.request(

@@ -22,5 +22,4 @@ class AccountSettingsRobot {
     final loginOnBehalfTile = find.byKey(const Key('loginOnBehalfTile'));
     expect(loginOnBehalfTile, findsNothing);
   }
-
 }

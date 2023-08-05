@@ -27,21 +27,26 @@ class ReturnRequestTypeCodeBloc
     await event.map(
       initialized: (e) async => emit(ReturnRequestTypeCodeState.initial()),
       fetch: (e) async {
-        emit(state.copyWith(
-          returnRequestTypeCodeDetailsFailureOrSuccessOption: none(),
-          isFetching: true,
-          returnRequestTypeCodeDetailsList: <ReturnRequestTypeCodeDetails>[],
-        ));
+        emit(
+          state.copyWith(
+            returnRequestTypeCodeDetailsFailureOrSuccessOption: none(),
+            isFetching: true,
+            returnRequestTypeCodeDetailsList: <ReturnRequestTypeCodeDetails>[],
+          ),
+        );
 
         final failureOrSuccess =
             await returnRequestTypeCodeRepository.getReturnRequestTypeCodeList(
           salesOrganisation: e.salesOrganisation,
         );
         failureOrSuccess.fold(
-          (faliure) => emit(state.copyWith(
+          (faliure) => emit(
+            state.copyWith(
               isFetching: false,
               returnRequestTypeCodeDetailsFailureOrSuccessOption:
-                  optionOf(failureOrSuccess),)),
+                  optionOf(failureOrSuccess),
+            ),
+          ),
           (returnRequestTypeCodeList) {
             emit(
               state.copyWith(

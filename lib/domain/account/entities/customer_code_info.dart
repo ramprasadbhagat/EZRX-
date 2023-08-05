@@ -70,12 +70,11 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         salesDeals: [],
         telephoneNumber: PhoneNumber(''),
         country: '',
-        floor:'',
-        houseNumber1:'',
+        floor: '',
+        houseNumber1: '',
       );
 
   bool get hasBillToInfo {
-
     return getBillToInfo.billToCustomerCode.isNotEmpty &&
         getBillToInfo.billToCustomerCode != customerCodeSoldTo;
   }
@@ -91,5 +90,6 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
   BillToInfo get getBillToInfo =>
       billToInfos.isNotEmpty ? billToInfos.first : BillToInfo.empty();
 
-  String get fullCustomerAddress => '${customerAddress.toAddress()} $postalCode';
+  String get fullCustomerAddress =>
+      '${customerAddress.toAddress()} $postalCode';
 }

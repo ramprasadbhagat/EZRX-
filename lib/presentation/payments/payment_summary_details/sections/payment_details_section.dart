@@ -104,8 +104,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'PA created date'.tr(),
-                valueText:
-                    paymentSummaryDetails.createdDate.dateString.tr(),
+                valueText: paymentSummaryDetails.createdDate.dateString.tr(),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

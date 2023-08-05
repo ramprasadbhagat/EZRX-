@@ -32,8 +32,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       final eligibilityBlocState = context.read<EligibilityBloc>().state;
-      scanMaterialInfoBloc
-          .add(
+      scanMaterialInfoBloc.add(
         ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
           customerCodeInfo: eligibilityBlocState.customerCodeInfo,
           salesOrganisation: eligibilityBlocState.salesOrganisation,

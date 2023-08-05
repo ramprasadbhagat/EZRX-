@@ -50,12 +50,14 @@ class ScanMaterialInfoBloc
         emit(ScanMaterialInfoState.initial());
       },
       scanMaterialNumberFromCamera: (e) async {
-        emit(ScanMaterialInfoState.initial().copyWith(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-          user: e.user,
-        ));
+        emit(
+          ScanMaterialInfoState.initial().copyWith(
+            salesOrganisation: e.salesOrganisation,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+            user: e.user,
+          ),
+        );
         final permissionsResult = await Permission.camera.request();
         if (permissionsResult.isGranted) {
           final failureOrSuccess =

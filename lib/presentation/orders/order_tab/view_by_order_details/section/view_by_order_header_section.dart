@@ -30,130 +30,134 @@ class OrderHeaderSection extends StatelessWidget {
             horizontal: 20.0,
             vertical: 16.0,
           ),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            BalanceTextRow(
-              keyText: 'Order date'.tr(),
-              valueText: viewByOrderHistoryItem.createdDate.dateString,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'PO reference'.tr(),
-              valueText: orderDetails.orderHistoryDetailsOrderHeader.pOReference
-                  .displayPOReference,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            config.enableFutureDeliveryDay
-                ? BalanceTextRow(
-                    keyText: 'Requested Delivery Date'.tr(),
-                    valueText: orderDetails.orderHistoryDetailsOrderHeader
-                        .requestedDeliveryDate.dateString,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enableReferenceNote
-                ? BalanceTextRow(
-                    keyText: 'Reference Note'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsOrderHeader.referenceNotes,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enablePaymentTerms
-                ? BalanceTextRow(
-                    keyText: 'Payment Term'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enableMobileNumber
-                ? BalanceTextRow(
-                    keyText: 'Contact person'.tr(),
-                    valueText:
-                        orderDetails.orderHistoryDetailsOrderHeader.orderBy,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enableMobileNumber
-                ? BalanceTextRow(
-                    keyText: 'Contact number'.tr(),
-                    valueText: orderDetails.orderHistoryDetailsOrderHeader
-                        .telephoneNumber.displayTelephoneNumber,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enableSpecialInstructions
-                ? BalanceTextRow(
-                    keyText: 'Delivery instructions'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsSpecialInstructions
-                        .displaySpecialInstructions,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-          ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.white,
+                    ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              BalanceTextRow(
+                keyText: 'Order date'.tr(),
+                valueText: viewByOrderHistoryItem.createdDate.dateString,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              BalanceTextRow(
+                keyText: 'PO reference'.tr(),
+                valueText: orderDetails.orderHistoryDetailsOrderHeader
+                    .pOReference.displayPOReference,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              config.enableFutureDeliveryDay
+                  ? BalanceTextRow(
+                      keyText: 'Requested Delivery Date'.tr(),
+                      valueText: orderDetails.orderHistoryDetailsOrderHeader
+                          .requestedDeliveryDate.dateString,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enableReferenceNote
+                  ? BalanceTextRow(
+                      keyText: 'Reference Note'.tr(),
+                      valueText: orderDetails
+                          .orderHistoryDetailsOrderHeader.referenceNotes,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enablePaymentTerms
+                  ? BalanceTextRow(
+                      keyText: 'Payment Term'.tr(),
+                      valueText: orderDetails
+                          .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enableMobileNumber
+                  ? BalanceTextRow(
+                      keyText: 'Contact person'.tr(),
+                      valueText:
+                          orderDetails.orderHistoryDetailsOrderHeader.orderBy,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enableMobileNumber
+                  ? BalanceTextRow(
+                      keyText: 'Contact number'.tr(),
+                      valueText: orderDetails.orderHistoryDetailsOrderHeader
+                          .telephoneNumber.displayTelephoneNumber,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enableSpecialInstructions
+                  ? BalanceTextRow(
+                      keyText: 'Delivery instructions'.tr(),
+                      valueText: orderDetails
+                          .orderHistoryDetailsSpecialInstructions
+                          .displaySpecialInstructions,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          ),
         );
       },
     );

@@ -16,7 +16,6 @@ class ItemHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
@@ -28,118 +27,123 @@ class ItemHeaderSection extends StatelessWidget {
             horizontal: 20.0,
             vertical: 16.0,
           ),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            BalanceTextRow(
-              keyText: 'Order date'.tr(),
-              valueText: orderHistoryItem.createdDate.dateString,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Invoice number'.tr(),
-              valueText: orderHistoryItem.invoiceNumber,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'PO reference'.tr(),
-              valueText: orderHistoryItem.pOReference.displayPOReference,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            config.enableFutureDeliveryDay
-                ? BalanceTextRow(
-                    keyText: 'Requested Delivery Date'.tr(),
-                    valueText: orderHistoryItem
-                        .requestedDeliveryDate.dateString,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            //TODO:will add value after getting data  from orderHistoryv2 api for these fields
-            //       BalanceTextRow(
-            //   keyText: 'Reference Note',
-            //   valueText: orderHistoryItem.,
-            // ),
-            // paymentTermDisplay
-            // ? BalanceTextRow(
-            //   keyText: 'Payment Term',
-            //   valueText:
-            //       orderHistoryItem.,
-            // ): const SizedBox.shrink(),
-            config.enableMobileNumber
-                ? BalanceTextRow(
-                    keyText: 'Contact person'.tr(),
-                    valueText: orderHistoryItem.orderBy,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enableMobileNumber
-                ? BalanceTextRow(
-                    keyText: 'Contact number'.tr(),
-                    valueText:
-                        orderHistoryItem.telephoneNumber.displayTelephoneNumber,
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-            config.enableSpecialInstructions
-                ? BalanceTextRow(
-                    keyText: 'Delivery instructions'.tr(),
-                    valueText: orderHistoryItem
-                        .specialInstructions.displaySpecialInstructions,
-                    valueTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                    keyTextStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.white,
-                            ),
-                  )
-                : const SizedBox.shrink(),
-          ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.white,
+                    ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              BalanceTextRow(
+                keyText: 'Order date'.tr(),
+                valueText: orderHistoryItem.createdDate.dateString,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              BalanceTextRow(
+                keyText: 'Invoice number'.tr(),
+                valueText: orderHistoryItem.invoiceNumber,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              BalanceTextRow(
+                keyText: 'PO reference'.tr(),
+                valueText: orderHistoryItem.pOReference.displayPOReference,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              config.enableFutureDeliveryDay
+                  ? BalanceTextRow(
+                      keyText: 'Requested Delivery Date'.tr(),
+                      valueText:
+                          orderHistoryItem.requestedDeliveryDate.dateString,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              //TODO:will add value after getting data  from orderHistoryv2 api for these fields
+              //       BalanceTextRow(
+              //   keyText: 'Reference Note',
+              //   valueText: orderHistoryItem.,
+              // ),
+              // paymentTermDisplay
+              // ? BalanceTextRow(
+              //   keyText: 'Payment Term',
+              //   valueText:
+              //       orderHistoryItem.,
+              // ): const SizedBox.shrink(),
+              config.enableMobileNumber
+                  ? BalanceTextRow(
+                      keyText: 'Contact person'.tr(),
+                      valueText: orderHistoryItem.orderBy,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enableMobileNumber
+                  ? BalanceTextRow(
+                      keyText: 'Contact number'.tr(),
+                      valueText: orderHistoryItem
+                          .telephoneNumber.displayTelephoneNumber,
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+              config.enableSpecialInstructions
+                  ? BalanceTextRow(
+                      keyText: 'Delivery instructions'.tr(),
+                      valueText: orderHistoryItem
+                          .specialInstructions.displaySpecialInstructions,
+                      valueTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                      keyTextStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: ZPColors.white,
+                              ),
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          ),
         );
       },
     );

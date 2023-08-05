@@ -170,9 +170,11 @@ class CartRepository implements ICartRepository {
             materials: inCartItem.materials.map(
               (material) {
                 final qty = cartItemWithStock.materials
-                        .firstWhereOrNull((item) =>
-                            item.getMaterialNumber ==
-                            material.getMaterialNumber)
+                        .firstWhereOrNull(
+                          (item) =>
+                              item.getMaterialNumber ==
+                              material.getMaterialNumber,
+                        )
                         ?.quantity ??
                     0;
 
@@ -337,11 +339,13 @@ class CartRepository implements ICartRepository {
         switch (inCartItem.itemType) {
           case CartItemType.material:
             final material = inCartItem.materials.first;
-            final itemWithRemark = inCartItem.copyWith(materials: [
-              material.copyWith.materialInfo(
-                remarks: remarkMessage,
-              ),
-            ]);
+            final itemWithRemark = inCartItem.copyWith(
+              materials: [
+                material.copyWith.materialInfo(
+                  remarks: remarkMessage,
+                ),
+              ],
+            );
             await cartStorage.put(
               id: itemWithRemark.id,
               item: CartItemDto.fromDomain(itemWithRemark),
@@ -735,10 +739,12 @@ class CartRepository implements ICartRepository {
               .toList();
 
           try {
-            await cartStorage.putAll(items: {
-              for (final item in cartItemWithStockInfo)
-                item.id: CartItemDto.fromDomain(item),
-            });
+            await cartStorage.putAll(
+              items: {
+                for (final item in cartItemWithStockInfo)
+                  item.id: CartItemDto.fromDomain(item),
+              },
+            );
           } catch (e) {
             return Left(FailureHandler.handleFailure(e));
           }
@@ -1119,16 +1125,18 @@ class CartRepository implements ICartRepository {
       final queryMaterialNumbers =
           materialNumbers.map((e) => e.getOrCrash()).toList();
       final additionInfoData = <MaterialNumber, ProductMetaData>{};
-      await Future.wait(queryMaterialNumbers.map((e) async {
-        final products =
-            await orderHistoryRemoteDataSource.getItemProductDetails(
-          materialIDs: [e],
-        );
+      await Future.wait(
+        queryMaterialNumbers.map((e) async {
+          final products =
+              await orderHistoryRemoteDataSource.getItemProductDetails(
+            materialIDs: [e],
+          );
 
-        for (final product in products.productImages) {
-          additionInfoData.addAll({product.materialNumber: products});
-        }
-      }));
+          for (final product in products.productImages) {
+            additionInfoData.addAll({product.materialNumber: products});
+          }
+        }),
+      );
 
       return Right(additionInfoData);
     } catch (e) {

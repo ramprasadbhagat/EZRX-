@@ -79,9 +79,7 @@ void main() {
   group(
     'Test Bank Beneficiary Test =>',
     () {
-      testWidgets(
-        'Load Bank Beneficiary with no data', 
-        (tester) async {
+      testWidgets('Load Bank Beneficiary with no data', (tester) async {
         await tester.pumpWidget(getBankBeneficiaryPage());
         await tester.pump();
         final appBarTitle = find.text('Bank Beneficiary Management');
@@ -181,8 +179,11 @@ void main() {
 
           await tester
               .pump(const Duration(seconds: 1)); // finish the scroll animation
-          await tester.pump(const Duration(
-              seconds: 1)); // finish the indicator settle animation
+          await tester.pump(
+            const Duration(
+              seconds: 1,
+            ),
+          ); // finish the indicator settle animation
           await tester.pump(const Duration(seconds: 1));
           verify(
             () => manageBankBeneficiaryBlocMock.add(
@@ -250,13 +251,13 @@ void main() {
           verify(
             () => manageBankBeneficiaryBlocMock.add(
               ManageBankBeneficiaryEvent.deleteBeneficiary(
-                beneficiary: bankBeneficiaryList.first
+                beneficiary: bankBeneficiaryList.first,
               ),
             ),
           ).called(1);
         },
       );
-      
+
       testWidgets(
         'Load Bank Beneficiary add button clicked',
         (tester) async {
@@ -271,8 +272,7 @@ void main() {
           final noDataError = find.text('No Beneficiary found');
           expect(appBarTitle, findsOneWidget);
           expect(noDataError, findsNothing);
-          final addBeneficiaryKey =
-              find.byKey(const Key('addBeneficiaryKey'));
+          final addBeneficiaryKey = find.byKey(const Key('addBeneficiaryKey'));
           expect(addBeneficiaryKey, findsOneWidget);
           await tester.tap(addBeneficiaryKey);
           await tester.pump();
@@ -283,7 +283,7 @@ void main() {
         },
       );
 
-       testWidgets(
+      testWidgets(
         'Load Bank Beneficiary add tap tile',
         (tester) async {
           when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
@@ -297,7 +297,8 @@ void main() {
           final noDataError = find.text('No Beneficiary found');
           expect(appBarTitle, findsOneWidget);
           expect(noDataError, findsNothing);
-          final paymentMethodTileKey = find.byKey(const Key('bankBeneficiary0'));
+          final paymentMethodTileKey =
+              find.byKey(const Key('bankBeneficiary0'));
           expect(paymentMethodTileKey, findsOneWidget);
           await tester.tap(paymentMethodTileKey);
           await tester.pump();
@@ -327,7 +328,9 @@ void main() {
           expect(item, findsOneWidget);
 
           await tester.drag(
-              find.byKey(const Key('bankBeneficiary0')), const Offset(-300, 0.0));
+            find.byKey(const Key('bankBeneficiary0')),
+            const Offset(-300, 0.0),
+          );
           await tester.pump();
           final deleteIcon = find.byIcon(Icons.delete_outline);
           expect(deleteIcon, findsOneWidget);
@@ -336,7 +339,7 @@ void main() {
           verify(
             () => manageBankBeneficiaryBlocMock.add(
               ManageBankBeneficiaryEvent.deleteBeneficiary(
-                beneficiary: bankBeneficiaryList.first
+                beneficiary: bankBeneficiaryList.first,
               ),
             ),
           ).called(1);
@@ -430,4 +433,3 @@ void main() {
     },
   );
 }
-

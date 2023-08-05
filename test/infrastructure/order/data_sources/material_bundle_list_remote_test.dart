@@ -88,10 +88,13 @@ void main() {
         }
 
         expect(
-            result,
-            List.from(makeResponseCamelCase(
+          result,
+          List.from(
+            makeResponseCamelCase(
               jsonEncode(res['data']['GetBundles']),
-            )).map((e) => MaterialDto.fromJson(e).toDomain()).toList());
+            ),
+          ).map((e) => MaterialDto.fromJson(e).toDomain()).toList(),
+        );
       });
 
       test('Get Material Bundle List For sales rep', () async {
@@ -103,7 +106,8 @@ void main() {
         };
         final res = json.decode(
           await rootBundle.loadString(
-              'assets/json/getMaterialBundleListForSalesRepResponse.json'),
+            'assets/json/getMaterialBundleListForSalesRepResponse.json',
+          ),
         );
 
         dioAdapter.onPost(
@@ -141,10 +145,13 @@ void main() {
         }
 
         expect(
-            result,
-            List.from(makeResponseCamelCase(
+          result,
+          List.from(
+            makeResponseCamelCase(
               jsonEncode(res['data']['GetBundlesForSalesRep']),
-            )).map((e) => MaterialDto.fromJson(e).toDomain()).toList());
+            ),
+          ).map((e) => MaterialDto.fromJson(e).toDomain()).toList(),
+        );
       });
 
       test('with status code not eqal to 200', () async {

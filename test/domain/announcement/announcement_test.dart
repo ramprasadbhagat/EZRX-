@@ -97,9 +97,10 @@ void main() async {
       );
 
       final customAnnouncement = Announcement.empty().copyWith(
-          startTime: DateTimeStringValue(startTime),
-          endTime: DateTimeStringValue(endTime),
-          active: true);
+        startTime: DateTimeStringValue(startTime),
+        endTime: DateTimeStringValue(endTime),
+        active: true,
+      );
 
       expect(customAnnouncement.hasValidAnnouncement, false);
     });
@@ -117,9 +118,10 @@ void main() async {
       );
 
       final customAnnouncement = Announcement.empty().copyWith(
-          startTime: DateTimeStringValue(startTime),
-          endTime: DateTimeStringValue(endTime),
-          active: true);
+        startTime: DateTimeStringValue(startTime),
+        endTime: DateTimeStringValue(endTime),
+        active: true,
+      );
 
       expect(customAnnouncement.hasValidAnnouncement, false);
     });
@@ -136,7 +138,9 @@ void main() async {
           Announcement.empty().copyWith(isModuleSpecific: false);
 
       expect(
-          customAnnouncement.isValidModuleToDisplay(currentPath: 'fake'), true);
+        customAnnouncement.isValidModuleToDisplay(currentPath: 'fake'),
+        true,
+      );
     });
 
     test('Display when module specific is return', () {
@@ -147,7 +151,8 @@ void main() async {
 
       expect(
         customAnnouncement.isValidModuleToDisplay(
-            currentPath: 'returns/fake-page'),
+          currentPath: 'returns/fake-page',
+        ),
         true,
       );
     });
@@ -163,7 +168,8 @@ void main() async {
 
       expect(
         customAnnouncement.isValidModuleToDisplay(
-            currentPath: 'orders/fake-page'),
+          currentPath: 'orders/fake-page',
+        ),
         true,
       );
     });
@@ -178,7 +184,8 @@ void main() async {
 
       expect(
         customAnnouncement.isValidModuleToDisplay(
-            currentPath: 'payments/fake-page'),
+          currentPath: 'payments/fake-page',
+        ),
         true,
       );
     });

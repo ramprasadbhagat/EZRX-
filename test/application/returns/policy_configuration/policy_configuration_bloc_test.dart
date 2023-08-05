@@ -19,7 +19,6 @@ class PolicyConfigurationRepositoryMock extends Mock
 
 const _pageSize = 20;
 
-
 void main() {
   final repository = PolicyConfigurationRepositoryMock();
   final mockSalesOrg = SalesOrganisation.empty();
@@ -58,30 +57,40 @@ void main() {
   group(
     'Policy Configuration Bloc',
     () {
-      blocTest('Initialize',
-          build: () => PolicyConfigurationBloc(
-              policyConfigurationRepository: repository),
-          act: (PolicyConfigurationBloc bloc) =>
-              bloc.add(const PolicyConfigurationEvent.initialized()),
-          expect: () => [PolicyConfigurationState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+        ),
+        act: (PolicyConfigurationBloc bloc) =>
+            bloc.add(const PolicyConfigurationEvent.initialized()),
+        expect: () => [PolicyConfigurationState.initial()],
+      );
 
       blocTest(
         'Get policy configuration list failure',
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getPolicyConfiguration(
+          when(
+            () => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offset: 0,
               pageSize: _pageSize,
-              searchKey: SearchKey(''))).thenAnswer(
+              searchKey: SearchKey(''),
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
         },
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg,searchKey: '',)),
+          PolicyConfigurationEvent.fetch(
+            salesOrganisation: mockSalesOrg,
+            searchKey: '',
+          ),
+        ),
         expect: () => [
           PolicyConfigurationState.initial().copyWith(
             isLoading: true,
@@ -101,16 +110,23 @@ void main() {
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getPolicyConfiguration(
+          when(
+            () => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offset: 0,
-                pageSize: _pageSize,
-              searchKey: SearchKey(''),)).thenAnswer(
+              pageSize: _pageSize,
+              searchKey: SearchKey(''),
+            ),
+          ).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
           );
         },
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg, searchKey: '',)),
+          PolicyConfigurationEvent.fetch(
+            salesOrganisation: mockSalesOrg,
+            searchKey: '',
+          ),
+        ),
         expect: () => [
           PolicyConfigurationState.initial().copyWith(
             isLoading: true,
@@ -128,11 +144,14 @@ void main() {
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getPolicyConfiguration(
+          when(
+            () => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offset: 0,
               pageSize: 10,
-              searchKey: SearchKey(''),)).thenAnswer(
+              searchKey: SearchKey(''),
+            ),
+          ).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
           );
         },
@@ -148,24 +167,31 @@ void main() {
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getAddPolicy(
+          when(
+            () => repository.getAddPolicy(
               policyConfigurationItems: fakePolicyConfigurationOne,
-              policyConfigurationList: fakepolicyConfigurationList)).thenAnswer(
+              policyConfigurationList: fakepolicyConfigurationList,
+            ),
+          ).thenAnswer(
             (invocation) async => Right([fakePolicyConfigurationTwo]),
           );
         },
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.add(
-                policyConfigurationItems: fakePolicyConfigurationOne)),
+          PolicyConfigurationEvent.add(
+            policyConfigurationItems: fakePolicyConfigurationOne,
+          ),
+        ),
         seed: () => PolicyConfigurationState.initial()
             .copyWith(policyConfigurationList: fakepolicyConfigurationList),
         expect: () => [
           PolicyConfigurationState.initial().copyWith(
-              isLoading: true,
-              policyConfigurationList: fakepolicyConfigurationList),
+            isLoading: true,
+            policyConfigurationList: fakepolicyConfigurationList,
+          ),
           PolicyConfigurationState.initial().copyWith(
-              isLoading: false,
-              policyConfigurationList: [fakePolicyConfigurationTwo]),
+            isLoading: false,
+            policyConfigurationList: [fakePolicyConfigurationTwo],
+          ),
         ],
       );
       blocTest(
@@ -173,23 +199,29 @@ void main() {
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getAddPolicy(
+          when(
+            () => repository.getAddPolicy(
               policyConfigurationItems: fakePolicyConfigurationOne,
-              policyConfigurationList: fakepolicyConfigurationList)).thenAnswer(
+              policyConfigurationList: fakepolicyConfigurationList,
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
         },
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.add(
-                policyConfigurationItems: fakePolicyConfigurationOne)),
+          PolicyConfigurationEvent.add(
+            policyConfigurationItems: fakePolicyConfigurationOne,
+          ),
+        ),
         seed: () => PolicyConfigurationState.initial()
             .copyWith(policyConfigurationList: fakepolicyConfigurationList),
         expect: () => [
           PolicyConfigurationState.initial().copyWith(
-              isLoading: true,
-              policyConfigurationList: fakepolicyConfigurationList),
+            isLoading: true,
+            policyConfigurationList: fakepolicyConfigurationList,
+          ),
           PolicyConfigurationState.initial().copyWith(
             isLoading: false,
             policyConfigurationList: fakepolicyConfigurationList,
@@ -207,14 +239,19 @@ void main() {
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.delete(
-                policyConfigurationItem: fakePolicyConfigurationOne)),
+          PolicyConfigurationEvent.delete(
+            policyConfigurationItem: fakePolicyConfigurationOne,
+          ),
+        ),
         seed: () => PolicyConfigurationState.initial()
             .copyWith(policyConfigurationList: fakepolicyConfigurationList),
         setUp: () {
-          when(() => repository.getDeletePolicy(
+          when(
+            () => repository.getDeletePolicy(
               policyConfigurationList: fakepolicyConfigurationList,
-              policyConfigurationItem: fakePolicyConfigurationOne)).thenAnswer(
+              policyConfigurationItem: fakePolicyConfigurationOne,
+            ),
+          ).thenAnswer(
             (invocation) async => Right([fakePolicyConfigurationTwo]),
           );
         },
@@ -228,14 +265,19 @@ void main() {
         build: () =>
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.delete(
-                policyConfigurationItem: fakePolicyConfigurationOne)),
+          PolicyConfigurationEvent.delete(
+            policyConfigurationItem: fakePolicyConfigurationOne,
+          ),
+        ),
         seed: () => PolicyConfigurationState.initial()
             .copyWith(policyConfigurationList: fakepolicyConfigurationList),
         setUp: () {
-          when(() => repository.getDeletePolicy(
+          when(
+            () => repository.getDeletePolicy(
               policyConfigurationList: fakepolicyConfigurationList,
-              policyConfigurationItem: fakePolicyConfigurationOne)).thenAnswer(
+              policyConfigurationItem: fakePolicyConfigurationOne,
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),

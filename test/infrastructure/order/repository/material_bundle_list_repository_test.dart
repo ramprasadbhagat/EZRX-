@@ -36,8 +36,6 @@ void main() {
   final mockSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
-  
-
   setUpAll(() {
     mockConfig = MockConfig();
     materialBundleListLocalDatasource = MaterialBundleListLocalDatasourceMock();
@@ -54,16 +52,18 @@ void main() {
     test('get materialBundleList successfully locally for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => materialBundleListLocalDatasource
-              .getMaterialBundleListForSalesRep())
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
+      when(
+        () => materialBundleListLocalDatasource
+            .getMaterialBundleListForSalesRep(),
+      ).thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await materialBundleListRepository.getMaterialBundleList(
         customerCode: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         shipToCode: mockShipToInfo,
         user: mockUser.copyWith(
-            role: Role.empty().copyWith(type: RoleType('external_sales_rep'))),
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+        ),
       );
       expect(
         result.isRight(),
@@ -107,23 +107,26 @@ void main() {
     test('get materialBundleList successfully remote for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => materialBundleListRemoteDataSource
-              .getMaterialBundleListForSalesRep(
-                  userName: 'user',
-                  customerCode: '123456777',
-                  shipToCode: '875433',
-                  salesOrganisation: '2601'))
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
+      when(
+        () =>
+            materialBundleListRemoteDataSource.getMaterialBundleListForSalesRep(
+          userName: 'user',
+          customerCode: '123456777',
+          shipToCode: '875433',
+          salesOrganisation: '2601',
+        ),
+      ).thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await materialBundleListRepository.getMaterialBundleList(
         customerCode: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         shipToCode: mockShipToInfo,
         user: mockUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('external_sales_rep'),
-            ),
-            username: Username('user')),
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+          username: Username('user'),
+        ),
       );
       expect(
         result.isRight(),
@@ -133,10 +136,12 @@ void main() {
     test('get materialBundleList successfully remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => materialBundleListRemoteDataSource.getMaterialBundleList(
-        customerCode: '123456777',
-              salesOrganisation: '2601'))
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
+      when(
+        () => materialBundleListRemoteDataSource.getMaterialBundleList(
+          customerCode: '123456777',
+          salesOrganisation: '2601',
+        ),
+      ).thenAnswer((invocation) async => <MaterialInfo>[]);
 
       final result = await materialBundleListRepository.getMaterialBundleList(
         customerCode: mockCustomerCodeInfo,
@@ -149,26 +154,29 @@ void main() {
         true,
       );
     });
-     test('get materialBundleList fail remote for salesrep', () async {
+    test('get materialBundleList fail remote for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => materialBundleListRemoteDataSource
-              .getMaterialBundleListForSalesRep(
-                  userName: 'user',
-                  customerCode: '123456777',
-                  shipToCode: '875433',
-                  salesOrganisation: '2601'))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () =>
+            materialBundleListRemoteDataSource.getMaterialBundleListForSalesRep(
+          userName: 'user',
+          customerCode: '123456777',
+          shipToCode: '875433',
+          salesOrganisation: '2601',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await materialBundleListRepository.getMaterialBundleList(
         customerCode: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         shipToCode: mockShipToInfo,
         user: mockUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('external_sales_rep'),
-            ),
-            username: Username('user')),
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+          username: Username('user'),
+        ),
       );
       expect(
         result.isLeft(),
@@ -178,10 +186,12 @@ void main() {
     test('get materialBundleList fail remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => materialBundleListRemoteDataSource.getMaterialBundleList(
-              customerCode: '123456777',
-              salesOrganisation: '2601'))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => materialBundleListRemoteDataSource.getMaterialBundleList(
+          customerCode: '123456777',
+          salesOrganisation: '2601',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await materialBundleListRepository.getMaterialBundleList(
         customerCode: mockCustomerCodeInfo,

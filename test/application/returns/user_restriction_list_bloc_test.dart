@@ -52,9 +52,10 @@ void main() {
         userRestrictionRepository: userRestrictionRepositoryMock,
       ),
       setUp: () {
-        when(() => userRestrictionRepositoryMock
-                .getUserRestrictionsList(mockSalesOrg))
-            .thenAnswer((invocation) async => Right(mockUserNamesList));
+        when(
+          () => userRestrictionRepositoryMock
+              .getUserRestrictionsList(mockSalesOrg),
+        ).thenAnswer((invocation) async => Right(mockUserNamesList));
       },
       act: (UserRestrictionListBloc bloc) {
         bloc.add(UserRestrictionListEvent.fetch(salesOrg: mockSalesOrg));
@@ -71,8 +72,10 @@ void main() {
         userRestrictionRepository: userRestrictionRepositoryMock,
       ),
       setUp: () {
-        when(() => userRestrictionRepositoryMock
-            .getUserRestrictionsList(mockSalesOrg)).thenAnswer(
+        when(
+          () => userRestrictionRepositoryMock
+              .getUserRestrictionsList(mockSalesOrg),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('mockError'),
           ),

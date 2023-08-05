@@ -1,5 +1,6 @@
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:flutter/foundation.dart';
 
@@ -39,4 +40,14 @@ class DatadogService {
       flavor: config.appFlavor.name,
     );
   }
+
+  void setUserInfo(User user) {
+    DatadogSdk.instance.setUserInfo(
+      id: user.id,
+      name: user.username.getOrDefaultValue(''),
+      email: user.email.getOrDefaultValue(''),
+    );
+  }
+
+  DdLogs? get logs => DatadogSdk.instance.logs;
 }

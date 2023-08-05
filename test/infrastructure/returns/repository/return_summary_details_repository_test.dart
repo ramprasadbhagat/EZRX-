@@ -43,8 +43,10 @@ void main() {
   group('Return Summary Details Repository Test', () {
     test('=> getReturnInformation locally success', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnSummaryDetailsRequestInformationLocal
-          .getRequestInformation()).thenAnswer(
+      when(
+        () =>
+            returnSummaryDetailsRequestInformationLocal.getRequestInformation(),
+      ).thenAnswer(
         (invocation) async => RequestInformation.empty(),
       );
 
@@ -57,9 +59,10 @@ void main() {
 
     test('=> getReturnInformation locally failed', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnSummaryDetailsRequestInformationLocal
-              .getRequestInformation())
-          .thenThrow((invocation) async => MockException());
+      when(
+        () =>
+            returnSummaryDetailsRequestInformationLocal.getRequestInformation(),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
         returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
@@ -70,11 +73,13 @@ void main() {
 
     test('=> getReturnInformation remote success', () async {
       when(() => config.appFlavor).thenReturn(Flavor.uat);
-      when(() =>
-          returnSummaryDetailsRequestInformationRemote.getRequestInformation(
-            returnRequestId: 'mock_id',
-            invoiceId: 'mock_id',
-          )).thenAnswer(
+      when(
+        () =>
+            returnSummaryDetailsRequestInformationRemote.getRequestInformation(
+          returnRequestId: 'mock_id',
+          invoiceId: 'mock_id',
+        ),
+      ).thenAnswer(
         (invocation) async => RequestInformation.empty(),
       );
 
@@ -87,11 +92,13 @@ void main() {
 
     test('=> getReturnInformation remote failure', () async {
       when(() => config.appFlavor).thenReturn(Flavor.uat);
-      when(() =>
-          returnSummaryDetailsRequestInformationRemote.getRequestInformation(
-            returnRequestId: 'mock_id',
-            invoiceId: 'mock_id',
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () =>
+            returnSummaryDetailsRequestInformationRemote.getRequestInformation(
+          returnRequestId: 'mock_id',
+          invoiceId: 'mock_id',
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
         returnRequestId: ReturnRequestsId(requestId: 'mock_id'),

@@ -39,8 +39,8 @@ void main() {
           expect(
             result,
             List.from(res['data']['additionalBonusMaterial']['materials'])
-        .map((e) => MaterialDto.fromJson(e).toDomain())
-        .toList(),
+                .map((e) => MaterialDto.fromJson(e).toDomain())
+                .toList(),
           );
         },
       );
@@ -58,8 +58,8 @@ void main() {
           expect(
             result,
             List.from(res['data']['customerMaterialsForSalesRep']['materials'])
-        .map((e) => MaterialDto.fromJson(e).toDomain())
-        .toList(),
+                .map((e) => MaterialDto.fromJson(e).toDomain())
+                .toList(),
           );
         },
       );

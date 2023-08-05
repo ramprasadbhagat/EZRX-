@@ -21,7 +21,7 @@ class _Tile extends StatelessWidget {
           children: List<Widget>.filled(
             line,
             Container(
-              margin:  const EdgeInsets.symmetric(vertical: 2.0),
+              margin: const EdgeInsets.symmetric(vertical: 2.0),
               width: double.infinity,
               height: 8.0,
               color: ZPColors.white,

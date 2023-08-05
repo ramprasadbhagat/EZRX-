@@ -18,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
 class BankBeneficiaryPage extends StatelessWidget {
   const BankBeneficiaryPage({Key? key}) : super(key: key);
 
@@ -169,11 +168,11 @@ class _BankBeneficiaryListItem extends StatelessWidget {
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.0,
                               ),
-                          )
+                            )
                           : Icon(
-                            Icons.delete,
-                            key: Key('deleteKey$index'),
-                          ),
+                              Icons.delete,
+                              key: Key('deleteKey$index'),
+                            ),
                       onPressed: () => beneficiaryData.isDeleteInProgress
                           ? null
                           : _deleteBeneficiaryDialog(
@@ -216,17 +215,17 @@ class _BankBeneficiaryListItem extends StatelessWidget {
   }) {
     if (!beneficiaryData.isDeleteInProgress) {
       context.read<ManageBankBeneficiaryBloc>().add(
-          ManageBankBeneficiaryEvent.setBeneficiary(
-            beneficiary: beneficiaryData,
-          ),
-        );
-    context.read<ManageBankBeneficiaryBloc>().add(
-          ManageBankBeneficiaryEvent.fetchSalesDistrict(
-            fromAdd: false,
-            salesOrg: beneficiaryData.salesOrg,
-          ),
-        );
-    context.router.pushNamed('payments/edit_beneficiary');
+            ManageBankBeneficiaryEvent.setBeneficiary(
+              beneficiary: beneficiaryData,
+            ),
+          );
+      context.read<ManageBankBeneficiaryBloc>().add(
+            ManageBankBeneficiaryEvent.fetchSalesDistrict(
+              fromAdd: false,
+              salesOrg: beneficiaryData.salesOrg,
+            ),
+          );
+      context.router.pushNamed('payments/edit_beneficiary');
     }
   }
 

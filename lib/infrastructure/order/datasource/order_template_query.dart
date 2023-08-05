@@ -1,6 +1,5 @@
 class OrderTemplateQueries {
-  
-String getOrderTemplates() {
+  String getOrderTemplates() {
     return '''
      query (\$userId: String!){
          orderTemplates(filter:{user:{id:\$userId}}

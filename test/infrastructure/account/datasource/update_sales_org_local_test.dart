@@ -31,9 +31,12 @@ void main() {
                 .loadString('assets/json/updateSalesOrgConfigSGResponse.json'),
           );
 
-          final result = await localDataSource.updateSalesOrgConfig(salesOrg: SalesOrg('2601').country);
+          final result = await localDataSource.updateSalesOrgConfig(
+            salesOrg: SalesOrg('2601').country,
+          );
 
-          final finalData = res['data']['updateSalesOrgConfig']['salesOrgConfig'];
+          final finalData =
+              res['data']['updateSalesOrgConfig']['salesOrgConfig'];
 
           expect(
             result,

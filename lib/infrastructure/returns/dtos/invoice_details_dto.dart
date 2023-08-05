@@ -11,7 +11,10 @@ class InvoiceDetailsDto with _$InvoiceDetailsDto {
   const InvoiceDetailsDto._();
 
   const factory InvoiceDetailsDto({
-    @JsonKey(name: 'invoiceNumber',defaultValue: '',)
+    @JsonKey(
+      name: 'invoiceNumber',
+      defaultValue: '',
+    )
         required String invoiceNumber,
     @JsonKey(name: 'salesOrg', defaultValue: '')
         required String salesOrg,

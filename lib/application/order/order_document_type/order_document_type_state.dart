@@ -25,9 +25,11 @@ class OrderDocumentTypeState with _$OrderDocumentTypeState {
       );
 
   List<OrderDocumentType> get reasonList => orderDocumentTypeList
-      .where((el) =>
-          el.documentType == selectedOrderType.documentType &&
-          el.orderReason.isNotEmpty)
+      .where(
+        (el) =>
+            el.documentType == selectedOrderType.documentType &&
+            el.orderReason.isNotEmpty,
+      )
       .toList();
 
   List<OrderDocumentType> get uniqueOrderTypeList {

@@ -200,8 +200,11 @@ void main() {
 
           await tester
               .pump(const Duration(seconds: 1)); // finish the scroll animation
-          await tester.pump(const Duration(
-              seconds: 1)); // finish the indicator settle animation
+          await tester.pump(
+            const Duration(
+              seconds: 1,
+            ),
+          ); // finish the indicator settle animation
           await tester.pump(const Duration(seconds: 1));
           verify(
             () => paymentMethodsMock.add(
@@ -423,7 +426,9 @@ void main() {
           expect(item, findsOneWidget);
 
           await tester.drag(
-              find.byKey(const Key('paymentMethod0')), const Offset(-300, 0.0));
+            find.byKey(const Key('paymentMethod0')),
+            const Offset(-300, 0.0),
+          );
           await tester.pump();
           final deleteIcon = find.byIcon(Icons.delete_outline);
           expect(deleteIcon, findsOneWidget);

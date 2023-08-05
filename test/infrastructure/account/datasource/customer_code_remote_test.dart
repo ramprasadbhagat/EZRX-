@@ -96,9 +96,10 @@ void main() {
             offset: 0,
           );
           expect(
-              result.length,
-              res['data']['customerInformationSearch']['SoldToInformation']
-                  .length);
+            result.length,
+            res['data']['customerInformationSearch']['SoldToInformation']
+                .length,
+          );
         },
       );
 

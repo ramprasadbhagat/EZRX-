@@ -134,18 +134,20 @@ class OrderSummaryRobot {
 
   void findBundleItem(String bundleCode) {
     expect(
-        find.byKey(
-          Key('bundleCartItem$bundleCode'),
-        ),
-        findsOneWidget);
+      find.byKey(
+        Key('bundleCartItem$bundleCode'),
+      ),
+      findsOneWidget,
+    );
   }
 
   void findBundleMaterialItem(String materialNumber, int quantity) {
     expect(
-        find.byKey(
-          Key('bundleMaterial$materialNumber$quantity'),
-        ),
-        findsOneWidget);
+      find.byKey(
+        Key('bundleMaterial$materialNumber$quantity'),
+      ),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapPaymentTerm() async {
@@ -193,7 +195,10 @@ class OrderSummaryRobot {
   }
 
   void verifyMaterialListPrice(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var listPrice = find.text('List Price: NA');
     if (isConfigPriceEnabled) {
       listPrice = find.text('List Price: $currency $price');
@@ -202,7 +207,10 @@ class OrderSummaryRobot {
   }
 
   void verifyMaterialUnitPrice(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var unitPrice = find.text('Unit Price: NA');
     if (isConfigPriceEnabled) {
       unitPrice = find.text('Unit Price: $currency $price');
@@ -211,21 +219,22 @@ class OrderSummaryRobot {
   }
 
   void verifyMaterialUnitPriceForVN(String currency, String price) {
-
-     final unitPrice = find.text('Unit Price: $price $currency');
+    final unitPrice = find.text('Unit Price: $price $currency');
 
     expect(unitPrice, findsOneWidget);
   }
 
-   void verifyMaterialTotalPriceVN(String currency, String price) {
-
+  void verifyMaterialTotalPriceVN(String currency, String price) {
     final totalPrice = find.text('Total Price: $price $currency');
 
     expect(totalPrice, findsOneWidget);
   }
 
   void verifyMaterialTotalPrice(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var totalPrice = find.text('Total Price: NA');
     if (isConfigPriceEnabled) {
       totalPrice = find.text('Total Price: $currency $price');
@@ -244,13 +253,16 @@ class OrderSummaryRobot {
   void verifyGrandTotalPrice(String currency, String price) {
     if (currency.contains('VND')) {
       expect(find.byKey(Key('Grand Total$price $currency')), findsOneWidget);
-    }else {
+    } else {
       expect(find.byKey(Key('Grand Total$currency $price')), findsOneWidget);
     }
   }
 
   void verifyBundleMaterialListPrice(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var listPrice = find.text(
       'List Price: NA',
     );
@@ -263,7 +275,10 @@ class OrderSummaryRobot {
   }
 
   void verifyBundleMaterialUnitPrice(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var unitPrice = find.text(
       'Unit Price: NA',
     );
@@ -276,7 +291,10 @@ class OrderSummaryRobot {
   }
 
   void verifyBundleMaterialTotalDiscount(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var totalPrice = find.text(
       'Total Discount: NA',
     );
@@ -289,7 +307,10 @@ class OrderSummaryRobot {
   }
 
   void verifyBundleMaterialTotalAmount(
-      bool isConfigPriceEnabled, String currency, String price) {
+    bool isConfigPriceEnabled,
+    String currency,
+    String price,
+  ) {
     var totalPrice = find.text(
       'Total Amount: NA',
     );

@@ -37,31 +37,33 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.addBonusToCartItem(
-              newBonus: MaterialItemBonus.empty().copyWith(
-                qty: 2,
-                materialInfo: mockMaterialList.first.materialInfo,
-              ),
-              item: mockMaterialCartItemFirst.copyWith(
-                materials: [
-                  mockMaterialList.first.copyWith(
-                    materialInfo: mockMaterialList.first.materialInfo,
-                    addedBonusList: [
-                      MaterialItemBonus.empty().copyWith(
-                        materialInfo: mockMaterialList.first.materialInfo,
-                        qty: 1,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              overrideQty: true,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              doNotAllowOutOfStockMaterials: true,
-              salesOrganisation: SalesOrganisation.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer(
+        when(
+          () => cartRepositoryMock.addBonusToCartItem(
+            newBonus: MaterialItemBonus.empty().copyWith(
+              qty: 2,
+              materialInfo: mockMaterialList.first.materialInfo,
+            ),
+            item: mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  materialInfo: mockMaterialList.first.materialInfo,
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: mockMaterialList.first.materialInfo,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+            ),
+            overrideQty: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             [
               mockMaterialCartItemFirst.copyWith(
@@ -111,30 +113,37 @@ void main() {
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
-            mockMaterialCartItemFirst.copyWith(materials: [
-              mockMaterialList.first.copyWith(
-                addedBonusList: [
-                  MaterialItemBonus.empty().copyWith(
-                    qty: 1,
-                    materialInfo: mockMaterialList.first.materialInfo,
-                  )
-                ],
-              )
-            ]),
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      qty: 1,
+                      materialInfo: mockMaterialList.first.materialInfo,
+                    )
+                  ],
+                )
+              ],
+            ),
           ],
           isFetchingBonus: true,
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           cartItems: [
-            mockMaterialCartItemFirst.copyWith(materials: [
-              mockMaterialList.first.copyWith(addedBonusList: [
-                MaterialItemBonus.empty().copyWith(
-                    qty: 2,
-                    bonusOverrideFlag: false,
-                    materialInfo: mockMaterialList.first.materialInfo)
-              ])
-            ])
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      qty: 2,
+                      bonusOverrideFlag: false,
+                      materialInfo: mockMaterialList.first.materialInfo,
+                    )
+                  ],
+                )
+              ],
+            )
           ],
           isFetchingBonus: false,
         ),
@@ -162,33 +171,35 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.addBonusToCartItem(
-                  newBonus: MaterialItemBonus.empty().copyWith(
-                    qty: 2,
-                    materialInfo: mockMaterialList.first.materialInfo,
-                  ),
-                  item: mockMaterialCartItemFirst.copyWith(
-                    materials: [
-                      mockMaterialList.first.copyWith(
-                        materialInfo: mockMaterialList.first.materialInfo,
-                        addedBonusList: [
-                          MaterialItemBonus.empty().copyWith(
-                            materialInfo: mockMaterialList.first.materialInfo,
-                            qty: 1,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  overrideQty: true,
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  doNotAllowOutOfStockMaterials: true,
-                  salesOrganisation: SalesOrganisation.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                ))
-            .thenAnswer((invocation) async =>
-                const Left(ApiFailure.other('fake-Error')));
+        when(
+          () => cartRepositoryMock.addBonusToCartItem(
+            newBonus: MaterialItemBonus.empty().copyWith(
+              qty: 2,
+              materialInfo: mockMaterialList.first.materialInfo,
+            ),
+            item: mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  materialInfo: mockMaterialList.first.materialInfo,
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: mockMaterialList.first.materialInfo,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+            ),
+            overrideQty: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('fake-Error')),
+        );
       },
       act: (bloc) => bloc.add(
         CartEvent.addBonusToCartItem(
@@ -220,16 +231,18 @@ void main() {
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
-            mockMaterialCartItemFirst.copyWith(materials: [
-              mockMaterialList.first.copyWith(
-                addedBonusList: [
-                  MaterialItemBonus.empty().copyWith(
-                    qty: 1,
-                    materialInfo: mockMaterialList.first.materialInfo,
-                  )
-                ],
-              )
-            ]),
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      qty: 1,
+                      materialInfo: mockMaterialList.first.materialInfo,
+                    )
+                  ],
+                )
+              ],
+            ),
           ],
           isFetchingBonus: true,
         ),
@@ -237,12 +250,18 @@ void main() {
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-Error'))),
           cartItems: [
-            mockMaterialCartItemFirst.copyWith(materials: [
-              mockMaterialList.first.copyWith(addedBonusList: [
-                MaterialItemBonus.empty().copyWith(
-                    qty: 1, materialInfo: mockMaterialList.first.materialInfo)
-              ])
-            ])
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      qty: 1,
+                      materialInfo: mockMaterialList.first.materialInfo,
+                    )
+                  ],
+                )
+              ],
+            )
           ],
           isFetchingBonus: false,
         ),
@@ -272,19 +291,21 @@ void main() {
             shipToInfo: ShipToInfo.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.productOutOfStock()));
+          (invocation) async => const Left(ApiFailure.productOutOfStock()),
+        );
       },
       act: (bloc) => bloc.add(
         CartEvent.addBonusToCartItem(
-            bonusItem: MaterialItemBonus.empty(),
-            item: mockMaterialCartItemFirst
-                .copyWith(materials: [PriceAggregate.empty()]),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            doNotallowOutOfStockMaterial: true,
-            salesOrganisation: SalesOrganisation.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            overrideQty: true),
+          bonusItem: MaterialItemBonus.empty(),
+          item: mockMaterialCartItemFirst
+              .copyWith(materials: [PriceAggregate.empty()]),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          overrideQty: true,
+        ),
       ),
       expect: () => [
         CartState.initial().copyWith(
@@ -296,9 +317,11 @@ void main() {
           isFetchingBonus: true,
         ),
         CartState.initial().copyWith(
-          apiFailureOrSuccessOption: optionOf(const Left(
-            ApiFailure.productOutOfStock(),
-          )),
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.productOutOfStock(),
+            ),
+          ),
           cartItems: [
             mockMaterialCartItemFirst
                 .copyWith(materials: [PriceAggregate.empty()])

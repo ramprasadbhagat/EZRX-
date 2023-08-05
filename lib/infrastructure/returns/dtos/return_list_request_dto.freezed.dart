@@ -50,15 +50,22 @@ abstract class $ReturnListRequestDtoCopyWith<$Res> {
       _$ReturnListRequestDtoCopyWithImpl<$Res, ReturnListRequestDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '') String soldTo,
-      @JsonKey(name: 'shipTo', defaultValue: '') String shipTo,
-      @JsonKey(name: 'username', defaultValue: '') String username,
-      @JsonKey(name: 'first', defaultValue: 0) int first,
-      @JsonKey(name: 'after', defaultValue: 0) int after,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
+      @JsonKey(name: 'soldTo', defaultValue: '')
+          String soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '')
+          String shipTo,
+      @JsonKey(name: 'username', defaultValue: '')
+          String username,
+      @JsonKey(name: 'first', defaultValue: 0)
+          int first,
+      @JsonKey(name: 'after', defaultValue: 0)
+          int after,
       @JsonKey(name: 'filterQuery', defaultValue: null, includeToJson: false)
-      ReturnFilterDto filterQuery,
-      @JsonKey(name: 'searchFilter', defaultValue: '') String searchKey});
+          ReturnFilterDto filterQuery,
+      @JsonKey(name: 'searchFilter', defaultValue: '')
+          String searchKey});
 
   $ReturnFilterDtoCopyWith<$Res> get filterQuery;
 }
@@ -140,15 +147,22 @@ abstract class _$$_ReturnListRequestDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '') String soldTo,
-      @JsonKey(name: 'shipTo', defaultValue: '') String shipTo,
-      @JsonKey(name: 'username', defaultValue: '') String username,
-      @JsonKey(name: 'first', defaultValue: 0) int first,
-      @JsonKey(name: 'after', defaultValue: 0) int after,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
+      @JsonKey(name: 'soldTo', defaultValue: '')
+          String soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '')
+          String shipTo,
+      @JsonKey(name: 'username', defaultValue: '')
+          String username,
+      @JsonKey(name: 'first', defaultValue: 0)
+          int first,
+      @JsonKey(name: 'after', defaultValue: 0)
+          int after,
       @JsonKey(name: 'filterQuery', defaultValue: null, includeToJson: false)
-      ReturnFilterDto filterQuery,
-      @JsonKey(name: 'searchFilter', defaultValue: '') String searchKey});
+          ReturnFilterDto filterQuery,
+      @JsonKey(name: 'searchFilter', defaultValue: '')
+          String searchKey});
 
   @override
   $ReturnFilterDtoCopyWith<$Res> get filterQuery;
@@ -215,15 +229,22 @@ class __$$_ReturnListRequestDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnListRequestDto extends _ReturnListRequestDto {
   const _$_ReturnListRequestDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '') required this.soldTo,
-      @JsonKey(name: 'shipTo', defaultValue: '') required this.shipTo,
-      @JsonKey(name: 'username', defaultValue: '') required this.username,
-      @JsonKey(name: 'first', defaultValue: 0) required this.first,
-      @JsonKey(name: 'after', defaultValue: 0) required this.after,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          required this.salesOrg,
+      @JsonKey(name: 'soldTo', defaultValue: '')
+          required this.soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '')
+          required this.shipTo,
+      @JsonKey(name: 'username', defaultValue: '')
+          required this.username,
+      @JsonKey(name: 'first', defaultValue: 0)
+          required this.first,
+      @JsonKey(name: 'after', defaultValue: 0)
+          required this.after,
       @JsonKey(name: 'filterQuery', defaultValue: null, includeToJson: false)
-      required this.filterQuery,
-      @JsonKey(name: 'searchFilter', defaultValue: '') required this.searchKey})
+          required this.filterQuery,
+      @JsonKey(name: 'searchFilter', defaultValue: '')
+          required this.searchKey})
       : super._();
 
   factory _$_ReturnListRequestDto.fromJson(Map<String, dynamic> json) =>
@@ -301,17 +322,21 @@ class _$_ReturnListRequestDto extends _ReturnListRequestDto {
 abstract class _ReturnListRequestDto extends ReturnListRequestDto {
   const factory _ReturnListRequestDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-      required final String salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '') required final String soldTo,
-      @JsonKey(name: 'shipTo', defaultValue: '') required final String shipTo,
+          required final String salesOrg,
+      @JsonKey(name: 'soldTo', defaultValue: '')
+          required final String soldTo,
+      @JsonKey(name: 'shipTo', defaultValue: '')
+          required final String shipTo,
       @JsonKey(name: 'username', defaultValue: '')
-      required final String username,
-      @JsonKey(name: 'first', defaultValue: 0) required final int first,
-      @JsonKey(name: 'after', defaultValue: 0) required final int after,
+          required final String username,
+      @JsonKey(name: 'first', defaultValue: 0)
+          required final int first,
+      @JsonKey(name: 'after', defaultValue: 0)
+          required final int after,
       @JsonKey(name: 'filterQuery', defaultValue: null, includeToJson: false)
-      required final ReturnFilterDto filterQuery,
+          required final ReturnFilterDto filterQuery,
       @JsonKey(name: 'searchFilter', defaultValue: '')
-      required final String searchKey}) = _$_ReturnListRequestDto;
+          required final String searchKey}) = _$_ReturnListRequestDto;
   const _ReturnListRequestDto._() : super._();
 
   factory _ReturnListRequestDto.fromJson(Map<String, dynamic> json) =

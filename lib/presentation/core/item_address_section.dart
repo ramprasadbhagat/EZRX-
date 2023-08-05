@@ -17,54 +17,56 @@ class ItemAddressSection extends StatelessWidget {
             horizontal: 20.0,
             vertical: 16.0,
           ),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              state.shipToInfo.shipToName.name1,
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Sold To: '.tr(),
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            const SizedBox(
-              height: 3,
-            ),
-            Text(
-              state.customerCodeInfo.customerCodeSoldTo,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 5.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                state.shipToInfo.shipToName.name1,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
-              child: Text(
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Sold To: '.tr(),
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              const SizedBox(
+                height: 3,
+              ),
+              Text(
+                state.customerCodeInfo.customerCodeSoldTo,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5.0,
+                ),
+                child: Text(
+                  '${state.customerCodeInfo.customerName.name1}, ${state.customerCodeInfo.customerAddress.street1} ${state.customerCodeInfo.customerAddress.street2}, ${state.customerCodeInfo.postalCode}',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+              Text(
+                'Delivery to:'.tr(),
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              const SizedBox(
+                height: 3,
+              ),
+              Text(
+                state.shipToInfo.shipToCustomerCode,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
                 '${state.customerCodeInfo.customerName.name1}, ${state.customerCodeInfo.customerAddress.street1} ${state.customerCodeInfo.customerAddress.street2}, ${state.customerCodeInfo.postalCode}',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-            ),
-            Text(
-              'Delivery to:'.tr(),
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            const SizedBox(
-              height: 3,
-            ),
-            Text(
-              state.shipToInfo.shipToCustomerCode,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              '${state.customerCodeInfo.customerName.name1}, ${state.customerCodeInfo.customerAddress.street1} ${state.customerCodeInfo.customerAddress.street2}, ${state.customerCodeInfo.postalCode}',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ]),
+            ],
+          ),
         );
       },
     );

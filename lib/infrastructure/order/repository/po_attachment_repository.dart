@@ -55,14 +55,15 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final localFile = Future.wait(files.map(
-          (e) async {
-            final downloadedFile =
-                await localDataSource.fileDownload(e.name);
+        final localFile = Future.wait(
+          files.map(
+            (e) async {
+              final downloadedFile = await localDataSource.fileDownload(e.name);
 
-            return await fileSystemHelper.getDownloadedFile(downloadedFile);
-          },
-        ).toList());
+              return await fileSystemHelper.getDownloadedFile(downloadedFile);
+            },
+          ).toList(),
+        );
 
         return Right(await localFile);
       } catch (e) {
@@ -70,17 +71,19 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       }
     }
     try {
-      final localFile = Future.wait(files.map(
-        (e) async {
-          final downloadedFile = await remoteDataSource.fileDownload(
-            e.name,
-            e.url,
-            attachmentType,
-          );
+      final localFile = Future.wait(
+        files.map(
+          (e) async {
+            final downloadedFile = await remoteDataSource.fileDownload(
+              e.name,
+              e.url,
+              attachmentType,
+            );
 
-          return await fileSystemHelper.getDownloadedFile(downloadedFile);
-        },
-      ).toList());
+            return await fileSystemHelper.getDownloadedFile(downloadedFile);
+          },
+        ).toList(),
+      );
 
       return Right(await localFile);
     } catch (e) {
@@ -159,9 +162,11 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
             element.size > (_fileSizeLimitMB * pow(1024, 2)),
       );
       if (biggerFile.isNotEmpty) {
-        return Left(ApiFailure.other(
-          'The file ${biggerFile.first.name} uploaded is greater than 5 MB',
-        ));
+        return Left(
+          ApiFailure.other(
+            'The file ${biggerFile.first.name} uploaded is greater than 5 MB',
+          ),
+        );
       }
       final upLoadedFiles = Future.wait(
         files.map(
@@ -281,7 +286,4 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       );
     }
   }
-
 }
-
-

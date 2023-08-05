@@ -54,11 +54,10 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               bundleOffers: e.selectedMaterialFilter.bundleOffers,
               isProductOffer: e.selectedMaterialFilter.isProductOffer,
               sortBy: e.selectedMaterialFilter.sortBy,
-              countryListSelected:
-              e.selectedMaterialFilter.countryListSelected,
+              countryListSelected: e.selectedMaterialFilter.countryListSelected,
               brandList: e.selectedMaterialFilter.brandList,
               manufactureListSelected:
-              e.selectedMaterialFilter.manufactureListSelected,
+                  e.selectedMaterialFilter.manufactureListSelected,
             ),
           ),
         );

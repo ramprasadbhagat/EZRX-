@@ -23,7 +23,7 @@ class UserRestrictionDetailsState with _$UserRestrictionDetailsState {
 
   List<ApproverRightsDetails> get approverRightsList =>
       approverRights.approverRightsList;
-      
+
   List<ApproverRightsDetails> get configurableApproverRightsList {
     if (approverRightsList.isEmpty) return addedApproverRightsList;
 

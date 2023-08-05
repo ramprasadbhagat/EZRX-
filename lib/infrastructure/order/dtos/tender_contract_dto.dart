@@ -13,52 +13,50 @@ class TenderContractDto with _$TenderContractDto {
   @HiveType(typeId: 20, adapterName: 'TenderContractDtoAdapter')
   const factory TenderContractDto({
     @HiveField(0, defaultValue: '')
-    @JsonKey(name: 'contractNumber') required String contractNumber,
-
+    @JsonKey(name: 'contractNumber')
+        required String contractNumber,
     @HiveField(1, defaultValue: '')
-    @JsonKey(name: 'contractItemNumber') required String contractItemNumber,
-
+    @JsonKey(name: 'contractItemNumber')
+        required String contractItemNumber,
     @HiveField(2, defaultValue: '')
-    @JsonKey(name: 'contractReference') required String contractReference,
-
+    @JsonKey(name: 'contractReference')
+        required String contractReference,
     @HiveField(3, defaultValue: '')
-    @JsonKey(name: 'tenderOrderReason') required String tenderOrderReason,
-
+    @JsonKey(name: 'tenderOrderReason')
+        required String tenderOrderReason,
     @HiveField(4, defaultValue: '')
-    @JsonKey(name: 'tenderVisaNumber') required String tenderVisaNumber,
-
+    @JsonKey(name: 'tenderVisaNumber')
+        required String tenderVisaNumber,
     @HiveField(5, defaultValue: '')
-    @JsonKey(name: 'salesDistrict') required String salesDistrict,
-
+    @JsonKey(name: 'salesDistrict')
+        required String salesDistrict,
     @HiveField(6, defaultValue: '')
     @JsonKey(name: 'tenderPackageDescription')
         required String tenderPackageDescription,
-
     @HiveField(7, defaultValue: '')
-    @JsonKey(name: 'tenderPrice') required String tenderPrice,
-
+    @JsonKey(name: 'tenderPrice')
+        required String tenderPrice,
     @HiveField(8, defaultValue: 0)
-    @JsonKey(name: 'pricingUnit') required int pricingUnit,
-
+    @JsonKey(name: 'pricingUnit')
+        required int pricingUnit,
     @HiveField(9, defaultValue: 0)
     @JsonKey(name: 'remainingTenderQuantity')
         required int remainingTenderQuantity,
-
     @HiveField(10, defaultValue: 0)
-    @JsonKey(name: 'contractQuantity') required int contractQuantity,
-
+    @JsonKey(name: 'contractQuantity')
+        required int contractQuantity,
     @HiveField(11, defaultValue: '')
-    @JsonKey(name: 'contractExpiryDate') required String contractExpiryDate,
-
+    @JsonKey(name: 'contractExpiryDate')
+        required String contractExpiryDate,
     @HiveField(12, defaultValue: '')
     @JsonKey(name: 'announcementLetterNumber')
         required String announcementLetterNumber,
-
     @HiveField(13, defaultValue: false)
-    @JsonKey(name: 'isNearToExpire') required bool isNearToExpire,
-
+    @JsonKey(name: 'isNearToExpire')
+        required bool isNearToExpire,
     @HiveField(14, defaultValue: '')
-    @JsonKey(name: 'contractPaymentTerm') required String contractPaymentTerm,
+    @JsonKey(name: 'contractPaymentTerm')
+        required String contractPaymentTerm,
   }) = _TenderContractDto;
 
   factory TenderContractDto.fromDomain(TenderContract tenderContract) {

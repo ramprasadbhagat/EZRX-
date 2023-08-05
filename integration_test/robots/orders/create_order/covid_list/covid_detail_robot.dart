@@ -43,7 +43,7 @@ class CovidDetailRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyCovidMaterialCannotAddSnackBar(){
+  void verifyCovidMaterialCannotAddSnackBar() {
     final covidMaterialCannotAddSnackBar = find.text(
       'Covid material cannot be combined with commercial material.'.tr(),
     );

@@ -127,12 +127,14 @@ void main() {
         ];
 
         whenListen(
-            manageBankBeneficiaryBlocMock, Stream.fromIterable(expectedStates));
+          manageBankBeneficiaryBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getAddBeneficiaryPage());
         await tester.pump();
         verifyAppBarTitleAndScaffoldKey();
         //final addBeneficiaryButton =
-          //  find.byKey(const Key('addBeneficiaryButton'), skipOffstage: false);
+        //  find.byKey(const Key('addBeneficiaryButton'), skipOffstage: false);
         //expect(addBeneficiaryButton, findsOneWidget);
         //await tester.tap(addBeneficiaryButton);
         //await tester.pump();
@@ -148,30 +150,30 @@ void main() {
       (tester) async {
         when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
           ManageBankBeneficiaryState.initial().copyWith(
-              salesDistrict: [
-                SalesDistrict.empty().copyWith(
-                  salesOrg: SalesOrg('2601'),
-                  salesDistrictInfo: [
-                    SalesDistrictInfo.empty().copyWith(
-                      salesDistrictHeader: StringValue('Singapore'),
-                      salesDistrictLabel: StringValue('SG')
-                    )
-                  ]
-                )
-              ],
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-                  salesOrg: SalesOrg('2601'),
-                  salesDistrict: 'Singapore',
-                  beneficiaryName: StringValue('TestName'),
-                  bankName: StringValue('TestBank'),
-                  branch: 'TestBranch',
-                  bankCode: 'TestCode',
-                  bankAccount: StringValue('123456789'),
-                  hdbcSwiftCode: 'TestSwiftCode',
-                  bankAddress: 'TestBankAddress',
-                  payNowUen: 'PayNowTest',
-                  emailId: EmailAddress.optional('abc@hotmail.com'),
+            salesDistrict: [
+              SalesDistrict.empty().copyWith(
+                salesOrg: SalesOrg('2601'),
+                salesDistrictInfo: [
+                  SalesDistrictInfo.empty().copyWith(
+                    salesDistrictHeader: StringValue('Singapore'),
+                    salesDistrictLabel: StringValue('SG'),
+                  )
+                ],
               )
+            ],
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+              salesDistrict: 'Singapore',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abc@hotmail.com'),
+            ),
           ),
         );
         await tester.pumpWidget(getAddBeneficiaryPage());
@@ -200,24 +202,25 @@ void main() {
         //saleDistrict
 
         //beneficiaryNameField
-          final beneficiaryNameField = find.byKey(const Key('beneficiaryNameField'));
-          expect(beneficiaryNameField, findsOneWidget);
-          await tester.enterText(beneficiaryNameField, 'TestName');
-          await tester.pump();
+        final beneficiaryNameField =
+            find.byKey(const Key('beneficiaryNameField'));
+        expect(beneficiaryNameField, findsOneWidget);
+        await tester.enterText(beneficiaryNameField, 'TestName');
+        await tester.pump();
         //beneficiaryNameField
 
         //bankNameField
-          final bankNameField = find.byKey(const Key('bankNameField'));
-          expect(bankNameField, findsOneWidget);
-          await tester.enterText(bankNameField, 'TestBank');
-          await tester.pump();
+        final bankNameField = find.byKey(const Key('bankNameField'));
+        expect(bankNameField, findsOneWidget);
+        await tester.enterText(bankNameField, 'TestBank');
+        await tester.pump();
         //bankNameField
 
         //branchField
-          final branchField = find.byKey(const Key('branchField'));
-          expect(branchField, findsOneWidget);
-          await tester.enterText(branchField, 'TestBranch');
-          await tester.pump();
+        final branchField = find.byKey(const Key('branchField'));
+        expect(branchField, findsOneWidget);
+        await tester.enterText(branchField, 'TestBranch');
+        await tester.pump();
         //branchField
         await tester.drag(
           branchField,
@@ -225,63 +228,62 @@ void main() {
         );
         await tester.pumpAndSettle(const Duration(seconds: 1));
         //bankCodeField
-          final bankCodeField = find.byKey(const Key('bankCodeField'));
-          expect(bankCodeField, findsOneWidget);
-          await tester.enterText(bankCodeField, 'TestCode');
-          await tester.pump();
+        final bankCodeField = find.byKey(const Key('bankCodeField'));
+        expect(bankCodeField, findsOneWidget);
+        await tester.enterText(bankCodeField, 'TestCode');
+        await tester.pump();
         //bankCodeField
 
         //bankAccountField
-          final bankAccountField = find.byKey(const Key('bankAccountField'));
-          expect(bankAccountField, findsOneWidget);
-          await tester.enterText(bankAccountField, '123456789');
-          await tester.pump();
+        final bankAccountField = find.byKey(const Key('bankAccountField'));
+        expect(bankAccountField, findsOneWidget);
+        await tester.enterText(bankAccountField, '123456789');
+        await tester.pump();
         //bankAccountField
 
         //hdbcSwiftCodeField
-          final hdbcSwiftCodeField = find.byKey(const Key('hdbcSwiftCodeField'));
-          expect(hdbcSwiftCodeField, findsOneWidget);
-          await tester.enterText(hdbcSwiftCodeField, 'TestSwiftCode');
-          await tester.pump();
+        final hdbcSwiftCodeField = find.byKey(const Key('hdbcSwiftCodeField'));
+        expect(hdbcSwiftCodeField, findsOneWidget);
+        await tester.enterText(hdbcSwiftCodeField, 'TestSwiftCode');
+        await tester.pump();
         //hdbcSwiftCodeField
 
         //bankAddressField
-          final bankAddressField = find.byKey(const Key('bankAddressField'));
-          expect(bankAddressField, findsOneWidget);
-          await tester.enterText(bankAddressField, 'TestBankAddress');
-          await tester.pump();
+        final bankAddressField = find.byKey(const Key('bankAddressField'));
+        expect(bankAddressField, findsOneWidget);
+        await tester.enterText(bankAddressField, 'TestBankAddress');
+        await tester.pump();
         //bankAddressField
 
         //payNowUenField
-          final payNowUenField = find.byKey(const Key('payNowUenField'));
-          expect(payNowUenField, findsOneWidget);
-          await tester.enterText(payNowUenField, 'PayNowTest');
-          await tester.pump();
+        final payNowUenField = find.byKey(const Key('payNowUenField'));
+        expect(payNowUenField, findsOneWidget);
+        await tester.enterText(payNowUenField, 'PayNowTest');
+        await tester.pump();
         //payNowUenField
 
         //emailIdField
-          final emailIdField = find.byKey(const Key('emailIdField'));
-          expect(emailIdField, findsOneWidget);
-          await tester.enterText(emailIdField, 'abc@hotmail.com');
-          await tester.pump();
+        final emailIdField = find.byKey(const Key('emailIdField'));
+        expect(emailIdField, findsOneWidget);
+        await tester.enterText(emailIdField, 'abc@hotmail.com');
+        await tester.pump();
         //emailIdField
 
-
-        verify(() =>
-          manageBankBeneficiaryBlocMock.add(
+        verify(
+          () => manageBankBeneficiaryBlocMock.add(
             const ManageBankBeneficiaryEvent.onValueChange(
               label: BeneficiaryLabel.selectSalesOrg,
               newValue: '2601',
             ),
-          )
+          ),
         ).called(1);
-        verify(() =>
-          manageBankBeneficiaryBlocMock.add(
+        verify(
+          () => manageBankBeneficiaryBlocMock.add(
             ManageBankBeneficiaryEvent.fetchSalesDistrict(
               salesOrg: SalesOrg('2601'),
               fromAdd: true,
             ),
-          )
+          ),
         ).called(1);
         verify(
           () => manageBankBeneficiaryBlocMock.add(
@@ -364,7 +366,7 @@ void main() {
           ),
         ).called(1);
 
-         final addBeneficiaryButton = find.byKey(
+        final addBeneficiaryButton = find.byKey(
           const Key('addBeneficiaryButton'),
         );
         expect(addBeneficiaryButton, findsOneWidget);
@@ -389,20 +391,21 @@ void main() {
         final expectedState = Stream.fromIterable(
           [
             ManageBankBeneficiaryState.initial().copyWith(
-                isSubmitting: true,
-                beneficiaryData: BankBeneficiary.empty().copyWith(
-                  salesOrg: SalesOrg('2601'),
-                  salesDistrict: 'SG',
-                  beneficiaryName: StringValue('TestName'),
-                  bankAccount: StringValue('123456789'),
-                  bankName: StringValue('TestBank'),
-                  branch: 'TestBranch',
-                  bankCode: 'TestCode',
-                  hdbcSwiftCode: 'TestSwiftCode',
-                  bankAddress: 'TestBankAddress',
-                  payNowUen: 'PayNowTest',
-                  emailId: EmailAddress.optional(''),
-                )),
+              isSubmitting: true,
+              beneficiaryData: BankBeneficiary.empty().copyWith(
+                salesOrg: SalesOrg('2601'),
+                salesDistrict: 'SG',
+                beneficiaryName: StringValue('TestName'),
+                bankAccount: StringValue('123456789'),
+                bankName: StringValue('TestBank'),
+                branch: 'TestBranch',
+                bankCode: 'TestCode',
+                hdbcSwiftCode: 'TestSwiftCode',
+                bankAddress: 'TestBankAddress',
+                payNowUen: 'PayNowTest',
+                emailId: EmailAddress.optional(''),
+              ),
+            ),
             ManageBankBeneficiaryState.initial().copyWith(
               isSubmitting: false,
               response: BankBeneficiaryResponse.empty().copyWith(
@@ -444,24 +447,26 @@ void main() {
         final expectedState = Stream.fromIterable(
           [
             ManageBankBeneficiaryState.initial().copyWith(
-                isSubmitting: true,
-                beneficiaryData: BankBeneficiary.empty().copyWith(
-                  salesOrg: SalesOrg('2601'),
-                  salesDistrict: 'SG',
-                  beneficiaryName: StringValue('TestName'),
-                  bankAccount: StringValue('123456789'),
-                  bankName: StringValue('TestBank'),
-                  branch: 'TestBranch',
-                  bankCode: 'TestCode',
-                  hdbcSwiftCode: 'TestSwiftCode',
-                  bankAddress: 'TestBankAddress',
-                  payNowUen: 'PayNowTest',
-                  emailId: EmailAddress.optional(''),
-                )),
+              isSubmitting: true,
+              beneficiaryData: BankBeneficiary.empty().copyWith(
+                salesOrg: SalesOrg('2601'),
+                salesDistrict: 'SG',
+                beneficiaryName: StringValue('TestName'),
+                bankAccount: StringValue('123456789'),
+                bankName: StringValue('TestBank'),
+                branch: 'TestBranch',
+                bankCode: 'TestCode',
+                hdbcSwiftCode: 'TestSwiftCode',
+                bankAddress: 'TestBankAddress',
+                payNowUen: 'PayNowTest',
+                emailId: EmailAddress.optional(''),
+              ),
+            ),
             ManageBankBeneficiaryState.initial().copyWith(
-                isSubmitting: false,
-                failureOrSuccessOption:
-                    optionOf(const Left(ApiFailure.other('Some Error')))),
+              isSubmitting: false,
+              failureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('Some Error'))),
+            ),
           ],
         );
         whenListen(manageBankBeneficiaryBlocMock, expectedState);

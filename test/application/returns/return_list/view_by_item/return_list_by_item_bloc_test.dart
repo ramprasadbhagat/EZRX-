@@ -15,7 +15,6 @@ import 'package:mocktail/mocktail.dart';
 
 class ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ReturnListRepository returnListRepositoryMock;
@@ -52,7 +51,8 @@ void main() {
             pageSize: 24,
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
       },
       act: (bloc) => bloc.add(
         ReturnListByItemEvent.fetch(
@@ -95,7 +95,8 @@ void main() {
             pageSize: 24,
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
       },
       act: (bloc) => bloc.add(
         ReturnListByItemEvent.loadMore(

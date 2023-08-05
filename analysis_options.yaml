@@ -79,6 +79,8 @@ linter:
     - prefer_final_in_for_each
     - prefer_final_locals
     - avoid_multiple_declarations_per_line
+    - require_trailing_commas
+    - non_constant_identifier_names
 
 dart_code_metrics:
   # extends:
@@ -94,7 +96,7 @@ dart_code_metrics:
     cyclomatic-complexity: 30
     maximum-nesting-level: 6
     number-of-parameters: 20
-    source-lines-of-code: 62
+    source-lines-of-code: 65
   metrics-exclude:
     - lib/locator.dart
     - lib/presentation/splash/splash_page.dart

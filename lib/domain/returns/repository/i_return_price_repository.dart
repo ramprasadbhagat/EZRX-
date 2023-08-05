@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/returns/entities/return_price.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 
-
 abstract class IReturnPriceRepository {
   Future<Either<ApiFailure, Map<String, ReturnPrice>>> fetchReturnPrice({
     required SalesOrganisation salesOrg,

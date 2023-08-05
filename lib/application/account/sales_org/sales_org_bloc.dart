@@ -83,11 +83,15 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
         emit(
           state.copyWith(
             availableSalesOrg: e.salesOrgList
-                .where((element) =>
-                    element.salesOrg.buName.toLowerCase().contains(e.keyWord) ||
-                    element.salesOrg.value
-                        .getOrElse(() => '')
-                        .contains(e.keyWord))
+                .where(
+                  (element) =>
+                      element.salesOrg.buName
+                          .toLowerCase()
+                          .contains(e.keyWord) ||
+                      element.salesOrg.value
+                          .getOrElse(() => '')
+                          .contains(e.keyWord),
+                )
                 .toList(),
             salesOrgFailureOrSuccessOption: none(),
           ),

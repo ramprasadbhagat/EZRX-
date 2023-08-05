@@ -49,7 +49,6 @@ class HomeRobot {
     await tester.tap(salesOrgOption);
     await tester.pumpAndSettle();
   }
-  
 
   Future<void> findAndCloseAnnouncementIcon() async {
     if (announcementCloseIcon.evaluate().isNotEmpty &&
@@ -107,8 +106,6 @@ class HomeRobot {
     await tester.tap(createOrder);
     await tester.pumpAndSettle();
   }
-
- 
 
   void findFavoriteTab() {
     expect(favoriteTabbar, findsOneWidget);

@@ -22,7 +22,6 @@ void main() {
       ).toDomain();
 
       expect(creditAndInvoiceItemDto.searchKey, '0340000002');
-      
     });
   });
 }

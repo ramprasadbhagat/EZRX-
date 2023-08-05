@@ -122,7 +122,8 @@ void main() {
             create: (context) => mockAnnouncementBloc,
           ),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => mockCustomerCodeBloc),
+            create: (context) => mockCustomerCodeBloc,
+          ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<ReturnListByItemBloc>(
@@ -137,16 +138,18 @@ void main() {
     }
 
     testWidgets('Return Item page Body Test - loading', (tester) async {
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-          customerCodeSoldTo: 'mock-customerCodeSoldTo',
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'mock-customerCodeSoldTo',
+          ),
         ),
-      ));
-      when(() => mockReturnListByItemBloc.state)
-          .thenReturn(ReturnListByItemState.initial().copyWith(
-        isFetching: true,
-      ));
+      );
+      when(() => mockReturnListByItemBloc.state).thenReturn(
+        ReturnListByItemState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
       final expectedStates = [
         ReturnListByItemState.initial()
             .copyWith(isFetching: true, returnItemList: []),
@@ -165,16 +168,18 @@ void main() {
     });
 
     testWidgets('Return Item page Body Test - Success', (tester) async {
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-          customerCodeSoldTo: 'mock-customerCodeSoldTo',
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'mock-customerCodeSoldTo',
+          ),
         ),
-      ));
-      when(() => mockReturnListByItemBloc.state)
-          .thenReturn(ReturnListByItemState.initial().copyWith(
-        isFetching: true,
-      ));
+      );
+      when(() => mockReturnListByItemBloc.state).thenReturn(
+        ReturnListByItemState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
       final expectedStates = [
         ReturnListByItemState.initial()
             .copyWith(isFetching: false, returnItemList: fakeReturhItemList),

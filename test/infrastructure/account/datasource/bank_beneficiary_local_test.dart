@@ -12,51 +12,51 @@ void main() {
 
   group('Bank Beneficiary Local DataSource Test', () {
     test(
-        '=> getBankBeneficiaries',
-        () async {
-          final result = await localDataSource.getBankBeneficiaries();
+      '=> getBankBeneficiaries',
+      () async {
+        final result = await localDataSource.getBankBeneficiaries();
 
-          expect(
-            result.length,
-            18,
-          );
-        },
-      );
+        expect(
+          result.length,
+          18,
+        );
+      },
+    );
 
-      test(
-        '=> addOrUpdateBeneficiary',
-        () async {
-          final result = await localDataSource.addOrUpdateBeneficiary();
+    test(
+      '=> addOrUpdateBeneficiary',
+      () async {
+        final result = await localDataSource.addOrUpdateBeneficiary();
 
-          expect(
-            result.info,
-            'Data Inserted Successfully',
-          );
-        },
-      );
+        expect(
+          result.info,
+          'Data Inserted Successfully',
+        );
+      },
+    );
 
-      test(
-        '=> fetchSalesDistrict',
-        () async {
-          final result = await localDataSource.getSalesDistrict();
+    test(
+      '=> fetchSalesDistrict',
+      () async {
+        final result = await localDataSource.getSalesDistrict();
 
-          expect(
-            result.length,
-            1,
-          );
-        },
-      );
+        expect(
+          result.length,
+          1,
+        );
+      },
+    );
 
-      test(
-        '=> DeleteBeneficiary',
-        () async {
-          final result = await localDataSource.deleteBeneficiary();
+    test(
+      '=> DeleteBeneficiary',
+      () async {
+        final result = await localDataSource.deleteBeneficiary();
 
-          expect(
-            result.info,
-            '1 data deleted Successfully',
-          );
-        },
-      );
+        expect(
+          result.info,
+          '1 data deleted Successfully',
+        );
+      },
+    );
   });
 }

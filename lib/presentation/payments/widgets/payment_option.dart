@@ -27,10 +27,12 @@ class PaymentOptionMenu extends StatelessWidget {
       runSpacing: MediaQuery.of(context).size.height * 0.02,
       spacing: Responsive.isMobile(context) ? 0 : 10,
       children: paymentOptionData
-          .map((paymentOptionData) => _PaymentOption(
-                paymentOptionData: paymentOptionData,
-                isClaimActive: isClaimActive,
-              ))
+          .map(
+            (paymentOptionData) => _PaymentOption(
+              paymentOptionData: paymentOptionData,
+              isClaimActive: isClaimActive,
+            ),
+          )
           .toList(),
     );
   }
@@ -50,7 +52,7 @@ class _PaymentOption extends StatelessWidget {
     return SizedBox(
       width: Responsive.isMobile(context)
           ? isClaimActive
-          ? MediaQuery.of(context).size.width * 0.45
+              ? MediaQuery.of(context).size.width * 0.45
               : MediaQuery.of(context).size.width * 0.28
           : MediaQuery.of(context).size.width * 0.22,
       child: GestureDetector(

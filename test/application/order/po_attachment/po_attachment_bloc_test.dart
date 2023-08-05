@@ -24,12 +24,11 @@ class MockFile extends Mock implements File {}
 void main() {
   late PoAttachmentRepository poAttachmentRepository;
   final poDocumentsList = <PoDocuments>[
-        PoDocuments(
-          name: 'fake-file-1',
-          url: 'fake-url-1',
-        )
-      ];
-
+    PoDocuments(
+      name: 'fake-file-1',
+      url: 'fake-url-1',
+    )
+  ];
 
   group(
     'PoAttachmentBloc Bloc Download Test',
@@ -77,10 +76,12 @@ void main() {
               PermissionStatus.granted,
             ),
           );
-          when(() => poAttachmentRepository.downloadFiles(
-                files: poDocumentsList,
-                attachmentType: AttachmentType.downloadPOAttachment,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.downloadFiles(
+              files: poDocumentsList,
+              attachmentType: AttachmentType.downloadPOAttachment,
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
@@ -88,19 +89,22 @@ void main() {
         },
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
-        act: (bloc) => bloc.add(PoAttachmentEvent.downloadFile(
-          files: poDocumentsList,
-        )),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.downloadFile(
+            files: poDocumentsList,
+          ),
+        ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
             isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
-              fileOperationMode: FileOperationMode.download,
-              isFetching: false,
-              failureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other('fake-error')))),
+            fileOperationMode: FileOperationMode.download,
+            isFetching: false,
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
+          ),
         ],
       );
 
@@ -112,10 +116,12 @@ void main() {
               PermissionStatus.granted,
             ),
           );
-          when(() => poAttachmentRepository.downloadFiles(
+          when(
+            () => poAttachmentRepository.downloadFiles(
               files: poDocumentsList,
               attachmentType: AttachmentType.downloadPOAttachment,
-              )).thenAnswer(
+            ),
+          ).thenAnswer(
             (invocation) async => const Right(
               [],
             ),
@@ -123,16 +129,18 @@ void main() {
         },
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
-        act: (bloc) => bloc.add(PoAttachmentEvent.downloadFile(
-          files: poDocumentsList,
-        )),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.downloadFile(
+            files: poDocumentsList,
+          ),
+        ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
             isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
-              fileOperationMode: FileOperationMode.download,
+            fileOperationMode: FileOperationMode.download,
             isFetching: false,
           ),
         ],
@@ -186,10 +194,12 @@ void main() {
               PermissionStatus.granted,
             ),
           );
-          when(() => poAttachmentRepository.openFile(
-                files: poDocumentsList.first,
-                attachmentType: AttachmentType.downloadPOAttachment,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.openFile(
+              files: poDocumentsList.first,
+              attachmentType: AttachmentType.downloadPOAttachment,
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
@@ -197,19 +207,22 @@ void main() {
         },
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
-        act: (bloc) => bloc.add(PoAttachmentEvent.openFile(
-          files: poDocumentsList.first,
-        )),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.openFile(
+            files: poDocumentsList.first,
+          ),
+        ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.view,
             isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
-              fileOperationMode: FileOperationMode.view,
-              isFetching: false,
-              failureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other('fake-error')))),
+            fileOperationMode: FileOperationMode.view,
+            isFetching: false,
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
+          ),
         ],
       );
 
@@ -221,10 +234,12 @@ void main() {
               PermissionStatus.granted,
             ),
           );
-          when(() => poAttachmentRepository.openFile(
-                files: poDocumentsList.first,
-                attachmentType: AttachmentType.downloadPOAttachment,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.openFile(
+              files: poDocumentsList.first,
+              attachmentType: AttachmentType.downloadPOAttachment,
+            ),
+          ).thenAnswer(
             (invocation) async => Right(
               OpenResult(),
             ),
@@ -232,9 +247,11 @@ void main() {
         },
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
-        act: (bloc) => bloc.add(PoAttachmentEvent.openFile(
-          files: poDocumentsList.first,
-        )),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.openFile(
+            files: poDocumentsList.first,
+          ),
+        ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.view,
@@ -246,11 +263,8 @@ void main() {
           ),
         ],
       );
-
     },
   );
-
-  
 
   group(
     'PoAttachmentBloc Bloc Upload Test',
@@ -262,9 +276,11 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload Permission fail',
         setUp: () {
-          when(() => poAttachmentRepository.getPermission(
-                uploadOptionType: UploadOptionType.file,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.storagePermissionFailed(),
             ),
@@ -301,19 +317,23 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload Invalid format choose',
         setUp: () {
-          when(() => poAttachmentRepository.pickFiles(
-                uploadOptionType: UploadOptionType.file,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
-                user: User.empty(),
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.pickFiles(
+              uploadOptionType: UploadOptionType.file,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              user: User.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.invalidFileFormat(),
             ),
           );
-          when(() => poAttachmentRepository.getPermission(
-                uploadOptionType: UploadOptionType.file,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
             (invocation) async => const Right(
               PermissionStatus.granted,
             ),
@@ -350,17 +370,21 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload no file selected',
         setUp: () {
-          when(() => poAttachmentRepository.pickFiles(
-                uploadOptionType: UploadOptionType.file,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
-                user: User.empty(),
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.pickFiles(
+              uploadOptionType: UploadOptionType.file,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              user: User.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => const Right([]),
           );
-          when(() => poAttachmentRepository.getPermission(
-                uploadOptionType: UploadOptionType.file,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
             (invocation) async => const Right(
               PermissionStatus.granted,
             ),
@@ -392,29 +416,33 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload file upload fail',
         setUp: () {
-          when(() => poAttachmentRepository.uploadFiles(
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                files: [
-                  PlatformFile(
-                    name: 'fake-file',
-                    size: 0,
-                  ),
-                ],
-                salesOrg: SalesOrg(''),
-                shipToInfo: ShipToInfo.empty(),
-                uploadedPODocument: [],
-                user: User.empty(),
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.uploadFiles(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              files: [
+                PlatformFile(
+                  name: 'fake-file',
+                  size: 0,
+                ),
+              ],
+              salesOrg: SalesOrg(''),
+              shipToInfo: ShipToInfo.empty(),
+              uploadedPODocument: [],
+              user: User.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('Fake-error'),
             ),
           );
-          when(() => poAttachmentRepository.pickFiles(
-                uploadOptionType: UploadOptionType.file,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
-                user: User.empty(),
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.pickFiles(
+              uploadOptionType: UploadOptionType.file,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              user: User.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => Right(
               [
                 PlatformFile(
@@ -424,9 +452,11 @@ void main() {
               ],
             ),
           );
-          when(() => poAttachmentRepository.getPermission(
-                uploadOptionType: UploadOptionType.file,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
             (invocation) async => const Right(
               PermissionStatus.granted,
             ),
@@ -470,19 +500,21 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Upload file upload success',
         setUp: () {
-          when(() => poAttachmentRepository.uploadFiles(
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                files: [
-                  PlatformFile(
-                    name: 'fake-file',
-                    size: 0,
-                  ),
-                ],
-                salesOrg: SalesOrg(''),
-                shipToInfo: ShipToInfo.empty(),
-                uploadedPODocument: [],
-                user: User.empty(),
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.uploadFiles(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              files: [
+                PlatformFile(
+                  name: 'fake-file',
+                  size: 0,
+                ),
+              ],
+              salesOrg: SalesOrg(''),
+              shipToInfo: ShipToInfo.empty(),
+              uploadedPODocument: [],
+              user: User.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => Right(
               [
                 PoDocuments.empty().copyWith(
@@ -492,12 +524,14 @@ void main() {
               ],
             ),
           );
-          when(() => poAttachmentRepository.pickFiles(
-                uploadOptionType: UploadOptionType.file,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
-                user: User.empty(),
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.pickFiles(
+              uploadOptionType: UploadOptionType.file,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              user: User.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => Right(
               [
                 PlatformFile(
@@ -507,9 +541,11 @@ void main() {
               ],
             ),
           );
-          when(() => poAttachmentRepository.getPermission(
-                uploadOptionType: UploadOptionType.file,
-              )).thenAnswer(
+          when(
+            () => poAttachmentRepository.getPermission(
+              uploadOptionType: UploadOptionType.file,
+            ),
+          ).thenAnswer(
             (invocation) async => const Right(
               PermissionStatus.granted,
             ),

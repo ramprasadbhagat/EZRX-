@@ -6,7 +6,7 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.linkPending(Uri link) = _LinkPending;
   const factory DeepLinkingState.redirectMaterialDetail(String materialNumber) =
       _RedirectMaterialDetail;
-       const factory DeepLinkingState.redirectHistoryDetail(String history) =
+  const factory DeepLinkingState.redirectHistoryDetail(String history) =
       _RedirectHistoryDetail;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
 }

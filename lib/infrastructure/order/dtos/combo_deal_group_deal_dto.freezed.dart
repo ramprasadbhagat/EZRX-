@@ -60,25 +60,25 @@ abstract class $ComboDealGroupDealDtoCopyWith<$Res> {
       {@StringToDoubleConverter()
       @JsonKey(name: 'minTotalAmount', defaultValue: 0)
       @HiveField(0, defaultValue: 0)
-      double minTotalAmount,
+          double minTotalAmount,
       @StringToDoubleConverter()
       @JsonKey(name: 'maxTotalAmount', defaultValue: 0)
       @HiveField(1, defaultValue: 0)
-      double maxTotalAmount,
+          double maxTotalAmount,
       @StringToIntConverter()
       @JsonKey(name: 'minTotalQuantity', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-      int minTotalQuantity,
+          int minTotalQuantity,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-      double rate,
+          double rate,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      String type,
+          String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(5, defaultValue: '')
-      String conditionNumber});
+          String conditionNumber});
 }
 
 /// @nodoc
@@ -143,25 +143,25 @@ abstract class _$$_ComboDealGroupDealDtoCopyWith<$Res>
       {@StringToDoubleConverter()
       @JsonKey(name: 'minTotalAmount', defaultValue: 0)
       @HiveField(0, defaultValue: 0)
-      double minTotalAmount,
+          double minTotalAmount,
       @StringToDoubleConverter()
       @JsonKey(name: 'maxTotalAmount', defaultValue: 0)
       @HiveField(1, defaultValue: 0)
-      double maxTotalAmount,
+          double maxTotalAmount,
       @StringToIntConverter()
       @JsonKey(name: 'minTotalQuantity', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-      int minTotalQuantity,
+          int minTotalQuantity,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-      double rate,
+          double rate,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      String type,
+          String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(5, defaultValue: '')
-      String conditionNumber});
+          String conditionNumber});
 }
 
 /// @nodoc
@@ -219,25 +219,25 @@ class _$_ComboDealGroupDealDto extends _ComboDealGroupDealDto {
       {@StringToDoubleConverter()
       @JsonKey(name: 'minTotalAmount', defaultValue: 0)
       @HiveField(0, defaultValue: 0)
-      required this.minTotalAmount,
+          required this.minTotalAmount,
       @StringToDoubleConverter()
       @JsonKey(name: 'maxTotalAmount', defaultValue: 0)
       @HiveField(1, defaultValue: 0)
-      required this.maxTotalAmount,
+          required this.maxTotalAmount,
       @StringToIntConverter()
       @JsonKey(name: 'minTotalQuantity', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-      required this.minTotalQuantity,
+          required this.minTotalQuantity,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-      required this.rate,
+          required this.rate,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      required this.type,
+          required this.type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(5, defaultValue: '')
-      required this.conditionNumber})
+          required this.conditionNumber})
       : super._();
 
   factory _$_ComboDealGroupDealDto.fromJson(Map<String, dynamic> json) =>
@@ -319,25 +319,25 @@ abstract class _ComboDealGroupDealDto extends ComboDealGroupDealDto {
       {@StringToDoubleConverter()
       @JsonKey(name: 'minTotalAmount', defaultValue: 0)
       @HiveField(0, defaultValue: 0)
-      required final double minTotalAmount,
+          required final double minTotalAmount,
       @StringToDoubleConverter()
       @JsonKey(name: 'maxTotalAmount', defaultValue: 0)
       @HiveField(1, defaultValue: 0)
-      required final double maxTotalAmount,
+          required final double maxTotalAmount,
       @StringToIntConverter()
       @JsonKey(name: 'minTotalQuantity', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-      required final int minTotalQuantity,
+          required final int minTotalQuantity,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-      required final double rate,
+          required final double rate,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(4, defaultValue: '')
-      required final String type,
+          required final String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(5, defaultValue: '')
-      required final String conditionNumber}) = _$_ComboDealGroupDealDto;
+          required final String conditionNumber}) = _$_ComboDealGroupDealDto;
   const _ComboDealGroupDealDto._() : super._();
 
   factory _ComboDealGroupDealDto.fromJson(Map<String, dynamic> json) =

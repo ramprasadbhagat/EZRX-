@@ -12,7 +12,6 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_a
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 
-
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_local_datasource.dart';
@@ -34,7 +33,8 @@ import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 
 import 'package:ezrxmobile/domain/payments/repository/i_download_payment_attachment_repository.dart';
 
-class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepository {
+class DownloadPaymentAttachmentRepository
+    extends IDownloadPaymentAttachmentRepository {
   final Config config;
   final DeviceInfo deviceInfo;
   final PermissionService permissionService;
@@ -106,8 +106,7 @@ class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepo
         salesOrg: salesOrgCode,
         customerCode: customerCode,
         excelFor: 'Credit',
-        queryObject:
-            AllCreditsFilterDto.fromDomain(queryObject).toMapList,
+        queryObject: AllCreditsFilterDto.fromDomain(queryObject).toMapList,
       );
 
       return Right(paymentSummaryStatus);
@@ -177,7 +176,8 @@ class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepo
     if (config.appFlavor == Flavor.mock) {
       try {
         final localFile = await localDataSource.fileDownload();
-        final downloadedFile = await fileSystemHelper.getDownloadedFile(localFile);
+        final downloadedFile =
+            await fileSystemHelper.getDownloadedFile(localFile);
 
         return Right(downloadedFile);
       } catch (e) {
@@ -186,7 +186,8 @@ class DownloadPaymentAttachmentRepository extends IDownloadPaymentAttachmentRepo
     }
     try {
       final localFile = await remoteDataSource.fileDownload(files.url);
-      final downloadedFile = await fileSystemHelper.getDownloadedFile(localFile);
+      final downloadedFile =
+          await fileSystemHelper.getDownloadedFile(localFile);
 
       return Right(downloadedFile);
     } catch (e) {

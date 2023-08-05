@@ -14,7 +14,7 @@ class AllCreditsAndInvoicesLocalDataSource {
       ),
     );
     final res = data['data']['customerDocumentHeader']['documentHeaderList'];
-    
+
     final result = <CreditAndInvoiceItem>[];
     for (final dynamic item in res) {
       result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());

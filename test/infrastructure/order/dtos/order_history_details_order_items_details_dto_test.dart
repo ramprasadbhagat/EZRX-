@@ -16,18 +16,20 @@ void main() {
 
     test('Test fromDomain', () {
       final configs = OrderHistoryDetailsOrderItemDetailsDto.fromDomain(
-          OrderHistoryDetailsOrderItemDetailsDto.fromJson(
-        data,
-      ).toDomain());
+        OrderHistoryDetailsOrderItemDetailsDto.fromJson(
+          data,
+        ).toDomain(),
+      );
 
       expect(configs.rate, 'fake-rate');
     });
 
     test('Test tojson', () {
       final configs = OrderHistoryDetailsOrderItemDetailsDto.fromDomain(
-          OrderHistoryDetailsOrderItemDetailsDto.fromJson(
-        data,
-      ).toDomain()).toJson();
+        OrderHistoryDetailsOrderItemDetailsDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
 
       expect(configs['Rate'], 'fake-rate');
     });

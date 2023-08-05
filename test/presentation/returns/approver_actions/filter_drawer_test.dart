@@ -64,7 +64,8 @@ void main() {
       autoRouterMock: autoRouterMock,
       providers: [
         BlocProvider<ReturnApproverBloc>(
-            create: (context) => returnApproverBlocMock),
+          create: (context) => returnApproverBlocMock,
+        ),
         BlocProvider<ReturnApproverFilterBloc>(
           create: (context) => returnApproverFilterBlocMock,
         ),
@@ -106,9 +107,13 @@ void main() {
         expect(find.byKey(const Key('shipToSearchField')), findsOneWidget);
         expect(find.byKey(const Key('soldToSearchField')), findsOneWidget);
         expect(
-            find.byKey(Key(
-                'filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}')),
-            findsOneWidget);
+          find.byKey(
+            Key(
+              'filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}',
+            ),
+          ),
+          findsOneWidget,
+        );
         expect(find.byKey(const Key('filterApplyButton')), findsOneWidget);
         expect(find.byKey(const Key('filterClearButton')), findsOneWidget);
       },
@@ -183,8 +188,10 @@ void main() {
         await tester.enterText(filterReturnIdField, '2');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsOneWidget);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsOneWidget,
+        );
       },
     );
 
@@ -206,8 +213,10 @@ void main() {
         await tester.enterText(filterReturnIdField, '1');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsNothing);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsNothing,
+        );
       },
     );
   });
@@ -242,8 +251,10 @@ void main() {
         await tester.enterText(filterCreatedBy, '2');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsOneWidget);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsOneWidget,
+        );
       },
     );
 
@@ -264,8 +275,10 @@ void main() {
         await tester.enterText(filterCreatedBy, '1');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsNothing);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsNothing,
+        );
       },
     );
   });
@@ -299,8 +312,10 @@ void main() {
         await tester.enterText(shipToSearchField, '2');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsOneWidget);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsOneWidget,
+        );
       },
     );
 
@@ -321,8 +336,10 @@ void main() {
         await tester.enterText(shipToSearchField, '1');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsNothing);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsNothing,
+        );
       },
     );
   });
@@ -356,8 +373,10 @@ void main() {
         await tester.enterText(soldToSearchField, '2');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsOneWidget);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsOneWidget,
+        );
       },
     );
 
@@ -378,8 +397,10 @@ void main() {
         await tester.enterText(soldToSearchField, '1');
         await tester.pump();
 
-        expect(find.text('Please enter at least 2 characters.'.tr()),
-            findsNothing);
+        expect(
+          find.text('Please enter at least 2 characters.'.tr()),
+          findsNothing,
+        );
       },
     );
   });
@@ -395,10 +416,11 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-                fromInvoiceDate:
-                    DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
-                toInvoiceDate:
-                    DateTimeStringValue(getDateStringByDateTime(fakeToDate))),
+              fromInvoiceDate:
+                  DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+              toInvoiceDate:
+                  DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
+            ),
           ),
         ];
         whenListen(
@@ -409,8 +431,11 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final filterFromDateField = find.byKey(Key(
-            'filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}'));
+        final filterFromDateField = find.byKey(
+          Key(
+            'filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}',
+          ),
+        );
         expect(filterFromDateField, findsOneWidget);
         await tester.tap(filterFromDateField);
         await tester.pumpAndSettle();
@@ -423,7 +448,8 @@ void main() {
         verify(
           () => returnApproverFilterBlocMock.add(
             ReturnApproverFilterEvent.setInvoiceDate(
-                DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+              DateTimeRange(start: fakeFromDate, end: fakeToDate),
+            ),
           ),
         ).called(1);
       },

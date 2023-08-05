@@ -28,18 +28,20 @@ void main() {
 
     test('Test fromDomain', () {
       final configs = OrderHistoryDetailsOrderItemDto.fromDomain(
-          OrderHistoryDetailsOrderItemDto.fromJson(
-        data,
-      ).toDomain());
+        OrderHistoryDetailsOrderItemDto.fromJson(
+          data,
+        ).toDomain(),
+      );
 
       expect(configs.batch, 'fake-batch');
     });
 
     test('Test tojson', () {
       final configs = OrderHistoryDetailsOrderItemDto.fromDomain(
-          OrderHistoryDetailsOrderItemDto.fromJson(
-        data,
-      ).toDomain()).toJson();
+        OrderHistoryDetailsOrderItemDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
 
       expect(configs['Batch'], 'fake-batch');
     });

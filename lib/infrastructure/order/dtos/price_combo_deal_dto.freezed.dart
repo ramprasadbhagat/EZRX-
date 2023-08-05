@@ -48,16 +48,16 @@ abstract class $PriceComboDealDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'Eligible', defaultValue: false)
       @HiveField(0, defaultValue: false)
-      bool isEligible,
+          bool isEligible,
       @JsonKey(name: 'FlexibleGroup', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      String flexibleGroup,
+          String flexibleGroup,
       @JsonKey(name: 'SalesDeal', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      String salesDeal,
+          String salesDeal,
       @JsonKey(name: 'Category')
       @HiveField(3, defaultValue: PriceComboDealCategoryDto.empty)
-      PriceComboDealCategoryDto category});
+          PriceComboDealCategoryDto category});
 
   $PriceComboDealCategoryDtoCopyWith<$Res> get category;
 }
@@ -120,16 +120,16 @@ abstract class _$$_PriceComboDealDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'Eligible', defaultValue: false)
       @HiveField(0, defaultValue: false)
-      bool isEligible,
+          bool isEligible,
       @JsonKey(name: 'FlexibleGroup', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      String flexibleGroup,
+          String flexibleGroup,
       @JsonKey(name: 'SalesDeal', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      String salesDeal,
+          String salesDeal,
       @JsonKey(name: 'Category')
       @HiveField(3, defaultValue: PriceComboDealCategoryDto.empty)
-      PriceComboDealCategoryDto category});
+          PriceComboDealCategoryDto category});
 
   @override
   $PriceComboDealCategoryDtoCopyWith<$Res> get category;
@@ -179,16 +179,16 @@ class _$_PriceComboDealDto extends _PriceComboDealDto {
   const _$_PriceComboDealDto(
       {@JsonKey(name: 'Eligible', defaultValue: false)
       @HiveField(0, defaultValue: false)
-      required this.isEligible,
+          required this.isEligible,
       @JsonKey(name: 'FlexibleGroup', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      required this.flexibleGroup,
+          required this.flexibleGroup,
       @JsonKey(name: 'SalesDeal', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      required this.salesDeal,
+          required this.salesDeal,
       @JsonKey(name: 'Category')
       @HiveField(3, defaultValue: PriceComboDealCategoryDto.empty)
-      this.category = PriceComboDealCategoryDto.empty})
+          this.category = PriceComboDealCategoryDto.empty})
       : super._();
 
   factory _$_PriceComboDealDto.fromJson(Map<String, dynamic> json) =>
@@ -255,16 +255,16 @@ abstract class _PriceComboDealDto extends PriceComboDealDto {
   const factory _PriceComboDealDto(
       {@JsonKey(name: 'Eligible', defaultValue: false)
       @HiveField(0, defaultValue: false)
-      required final bool isEligible,
+          required final bool isEligible,
       @JsonKey(name: 'FlexibleGroup', defaultValue: '')
       @HiveField(1, defaultValue: '')
-      required final String flexibleGroup,
+          required final String flexibleGroup,
       @JsonKey(name: 'SalesDeal', defaultValue: '')
       @HiveField(2, defaultValue: '')
-      required final String salesDeal,
+          required final String salesDeal,
       @JsonKey(name: 'Category')
       @HiveField(3, defaultValue: PriceComboDealCategoryDto.empty)
-      final PriceComboDealCategoryDto category}) = _$_PriceComboDealDto;
+          final PriceComboDealCategoryDto category}) = _$_PriceComboDealDto;
   const _PriceComboDealDto._() : super._();
 
   factory _PriceComboDealDto.fromJson(Map<String, dynamic> json) =
@@ -321,10 +321,10 @@ abstract class $PriceComboDealCategoryDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      String type,
+          String type,
       @JsonKey(name: 'Value', defaultValue: [])
       @HiveField(1, defaultValue: [])
-      List<String> value});
+          List<String> value});
 }
 
 /// @nodoc
@@ -369,10 +369,10 @@ abstract class _$$_PriceComboDealCategoryDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      String type,
+          String type,
       @JsonKey(name: 'Value', defaultValue: [])
       @HiveField(1, defaultValue: [])
-      List<String> value});
+          List<String> value});
 }
 
 /// @nodoc
@@ -411,10 +411,10 @@ class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
   const _$_PriceComboDealCategoryDto(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      required this.type,
+          required this.type,
       @JsonKey(name: 'Value', defaultValue: [])
       @HiveField(1, defaultValue: [])
-      required final List<String> value})
+          required final List<String> value})
       : _value = value,
         super._();
 
@@ -473,10 +473,10 @@ abstract class _PriceComboDealCategoryDto extends PriceComboDealCategoryDto {
   const factory _PriceComboDealCategoryDto(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(0, defaultValue: '')
-      required final String type,
+          required final String type,
       @JsonKey(name: 'Value', defaultValue: [])
       @HiveField(1, defaultValue: [])
-      required final List<String> value}) = _$_PriceComboDealCategoryDto;
+          required final List<String> value}) = _$_PriceComboDealCategoryDto;
   const _PriceComboDealCategoryDto._() : super._();
 
   factory _PriceComboDealCategoryDto.fromJson(Map<String, dynamic> json) =

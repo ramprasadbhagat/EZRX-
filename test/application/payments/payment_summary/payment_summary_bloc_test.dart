@@ -43,12 +43,14 @@ void main() {
             paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => Right(paymentSummaryDetailsResponse));
+          (invocation) async => Right(paymentSummaryDetailsResponse),
+        );
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetchPaymentSummaryList(
-            salesOrganization: mockSalesOrganisation,
-            customerCodeInfo: mockCustomerCodeInfo),
+          salesOrganization: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
       ),
       expect: () => [
         PaymentSummaryState.initial().copyWith(
@@ -76,12 +78,14 @@ void main() {
             paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetchPaymentSummaryList(
-            salesOrganization: mockSalesOrganisation,
-            customerCodeInfo: mockCustomerCodeInfo),
+          salesOrganization: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
       ),
       expect: () => [
         PaymentSummaryState.initial().copyWith(
@@ -110,12 +114,14 @@ void main() {
             paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => Right(paymentSummaryDetailsResponse));
+          (invocation) async => Right(paymentSummaryDetailsResponse),
+        );
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.loadMorePaymentSummary(
-            salesOrganization: mockSalesOrganisation,
-            customerCodeInfo: mockCustomerCodeInfo),
+          salesOrganization: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
       ),
       expect: () => [
         PaymentSummaryState.initial().copyWith(
@@ -128,11 +134,12 @@ void main() {
           failureOrSuccessOption: none(),
           isFetching: false,
           canLoadMorePaymentSummary: false,
-          paymentSummaryDetailsResponse:
-              paymentSummaryDetailsResponse.copyWith(paymentSummaryList: [
-            ...paymentSummaryDetailsResponse.paymentSummaryList,
-            ...paymentSummaryDetailsResponse.paymentSummaryList
-          ]),
+          paymentSummaryDetailsResponse: paymentSummaryDetailsResponse.copyWith(
+            paymentSummaryList: [
+              ...paymentSummaryDetailsResponse.paymentSummaryList,
+              ...paymentSummaryDetailsResponse.paymentSummaryList
+            ],
+          ),
         ),
       ],
     );
@@ -151,12 +158,14 @@ void main() {
             paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+        );
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.loadMorePaymentSummary(
-            salesOrganization: mockSalesOrganisation,
-            customerCodeInfo: mockCustomerCodeInfo),
+          salesOrganization: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
       ),
       expect: () => [
         PaymentSummaryState.initial().copyWith(

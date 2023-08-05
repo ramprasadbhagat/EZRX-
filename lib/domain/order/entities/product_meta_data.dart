@@ -16,9 +16,7 @@ class ProductMetaData with _$ProductMetaData {
         productImages: <ProductImages>[],
         items: <ProductItem>[],
       );
-
 }
-
 
 @freezed
 class ProductItem with _$ProductItem {
@@ -51,4 +49,3 @@ class ProductItemXp with _$ProductItemXp {
         howToUse: StringValue(''),
       );
 }
-

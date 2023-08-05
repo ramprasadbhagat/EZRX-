@@ -13,8 +13,10 @@ void main() {
     () {
       setUp(
         () async {
-          data = json.decode(await rootBundle
-              .loadString('assets/json/getDeductionCodesResponse.json'));
+          data = json.decode(
+            await rootBundle
+                .loadString('assets/json/getDeductionCodesResponse.json'),
+          );
         },
       );
       test(

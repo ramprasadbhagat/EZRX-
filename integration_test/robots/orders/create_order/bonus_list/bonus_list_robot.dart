@@ -10,7 +10,7 @@ class BonusListRobot {
     expect(find.byKey(const Key('addBonus')), findsOneWidget);
   }
 
-  Future<void> searchBonus(String materialNumber) async{
+  Future<void> searchBonus(String materialNumber) async {
     final addBonusTextField = find.byKey(const Key('addBonusTextField'));
     await tester.enterText(addBonusTextField, materialNumber);
     await tester.pumpAndSettle();
@@ -25,23 +25,25 @@ class BonusListRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> addBonusMaterialQuantity() async{
+  Future<void> addBonusMaterialQuantity() async {
     await tester.tap(find.byKey(const Key('bounsAdd')));
     await tester.pumpAndSettle();
   }
 
-  Future<void> deductBonusMaterialQuantity() async{
+  Future<void> deductBonusMaterialQuantity() async {
     await tester.tap(find.byKey(const Key('bonusDelete')));
     await tester.pumpAndSettle();
   }
 
-  Future<void> changeBonusMaterialQuantity(int quantity) async{
+  Future<void> changeBonusMaterialQuantity(int quantity) async {
     await tester.enterText(
-        find.byKey(const Key('bonusItem')), quantity.toString());
+      find.byKey(const Key('bonusItem')),
+      quantity.toString(),
+    );
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapAddToBonusButton() async{
+  Future<void> tapAddToBonusButton() async {
     await tester.tap(find.byKey(const Key('addButton')));
     await tester.pumpAndSettle();
   }

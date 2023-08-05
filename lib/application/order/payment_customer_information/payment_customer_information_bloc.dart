@@ -46,9 +46,11 @@ class PaymentCustomerInformationBloc extends Bloc<
             );
           },
           (paymentCustomerInformation) {
-            final licencenseList = paymentCustomerInformation.shipToInfoList
-                .where((shipToInfo) =>
-                    shipToInfo.shipToCustomerCode == e.selectedShipToCode);
+            final licencenseList =
+                paymentCustomerInformation.shipToInfoList.where(
+              (shipToInfo) =>
+                  shipToInfo.shipToCustomerCode == e.selectedShipToCode,
+            );
             final finalLicencenseList = licencenseList.isEmpty
                 ? <LicenseInfo>[]
                 : licencenseList.first.licenses;

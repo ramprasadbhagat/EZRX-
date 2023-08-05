@@ -64,9 +64,11 @@ class ViewByItemDetailsBloc
             );
             if (!e.disableDeliveryDateForZyllemStatus &&
                 e.orderHistoryItem.status.getDisplayZyllemStatus) {
-              add(_FetchZyllemStatus(
-                status: e.orderHistoryItem.status,
-              ));
+              add(
+                _FetchZyllemStatus(
+                  status: e.orderHistoryItem.status,
+                ),
+              );
             }
           },
         );

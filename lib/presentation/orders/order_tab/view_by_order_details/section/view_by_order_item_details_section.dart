@@ -55,63 +55,64 @@ class OrderItemDetailsSection extends StatelessWidget {
                             ),
                             Column(
                               children: e.viewByOrderItem
-                                  .map((e) => CommonTileItem(
-                                        label:
-                                            '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
-                                        title: e.materialDescription,
-                                        priceComponent: PriceComponent(
-                                          price: e.totalPrice
-                                              .totalPrice //TODO: It is list price offer price should also have annotation of "Discount applied" if it was an offer material , once design team confirm and getting data will enhance
-                                              .toStringAsFixed(2),
-                                          salesOrgConfig: context
-                                              .read<SalesOrgBloc>()
-                                              .state
-                                              .configs,
-                                          currencyCodeTextStyle:
-                                              Theme.of(context)
-                                                  .textTheme
-                                                  .labelSmall
-                                                  ?.copyWith(
-                                                    color: ZPColors.darkGray,
-                                                  ),
+                                  .map(
+                                    (e) => CommonTileItem(
+                                      label:
+                                          '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
+                                      title: e.materialDescription,
+                                      priceComponent: PriceComponent(
+                                        price: e.totalPrice
+                                            .totalPrice //TODO: It is list price offer price should also have annotation of "Discount applied" if it was an offer material , once design team confirm and getting data will enhance
+                                            .toStringAsFixed(2),
+                                        salesOrgConfig: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .configs,
+                                        currencyCodeTextStyle: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall
+                                            ?.copyWith(
+                                              color: ZPColors.darkGray,
+                                            ),
+                                      ),
+                                      statusWidget: StatusLabel(
+                                        status: StatusType(
+                                          e.sAPStatus.getOrDefaultValue(''),
                                         ),
-                                        statusWidget: StatusLabel(
-                                          status: StatusType(
-                                            e.sAPStatus.getOrDefaultValue(''),
+                                      ),
+                                      quantity: '',
+                                      materialNumber: e.materialNumber,
+                                      isQuantityBelowImage: true,
+                                      isQuantityRequired: false,
+                                      headerText:
+                                          'Batch ${e.batch}\n(EXP: ${e.expiryDate.dateString})',
+                                      subtitle: '',
+                                      footerWidget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Qty: ${e.qty}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                  color: ZPColors.black,
+                                                ),
                                           ),
-                                        ),
-                                        quantity: '',
-                                        materialNumber: e.materialNumber,
-                                        isQuantityBelowImage: true,
-                                        isQuantityRequired: false,
-                                        headerText:
-                                            'Batch ${e.batch}\n(EXP: ${e.expiryDate.dateString})',
-                                        subtitle: '',
-                                        footerWidget: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Qty: ${e.qty}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(
-                                                    color: ZPColors.black,
-                                                  ),
-                                            ),
-                                            PriceComponent(
-                                              salesOrgConfig: context
-                                                  .read<SalesOrgBloc>()
-                                                  .state
-                                                  .configs,
-                                              price: e.totalPrice
-                                                  .totalPrice //TODO: It should be item subtotal, once design team confirm and getting data will enhance
-                                                  .toStringAsFixed(2),
-                                            ),
-                                          ],
-                                        ),
-                                      ))
+                                          PriceComponent(
+                                            salesOrgConfig: context
+                                                .read<SalesOrgBloc>()
+                                                .state
+                                                .configs,
+                                            price: e.totalPrice
+                                                .totalPrice //TODO: It should be item subtotal, once design team confirm and getting data will enhance
+                                                .toStringAsFixed(2),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
                                   .toList(),
                             ),
                           ],

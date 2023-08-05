@@ -136,9 +136,11 @@ class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
 class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
   _$_SubmitMaterialItemBonusDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0) required this.qty,
-      @JsonKey(name: 'comment', defaultValue: '') required this.comment})
+          required this.materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0)
+          required this.qty,
+      @JsonKey(name: 'comment', defaultValue: '')
+          required this.comment})
       : super._();
 
   factory _$_SubmitMaterialItemBonusDto.fromJson(Map<String, dynamic> json) =>
@@ -192,10 +194,11 @@ class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
 abstract class _SubmitMaterialItemBonusDto extends SubmitMaterialItemBonusDto {
   factory _SubmitMaterialItemBonusDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0) required final int qty,
+          required final String materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0)
+          required final int qty,
       @JsonKey(name: 'comment', defaultValue: '')
-      required final String comment}) = _$_SubmitMaterialItemBonusDto;
+          required final String comment}) = _$_SubmitMaterialItemBonusDto;
   _SubmitMaterialItemBonusDto._() : super._();
 
   factory _SubmitMaterialItemBonusDto.fromJson(Map<String, dynamic> json) =

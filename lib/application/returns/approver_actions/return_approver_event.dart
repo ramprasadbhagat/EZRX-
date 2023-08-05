@@ -2,7 +2,6 @@ part of 'return_approver_bloc.dart';
 
 @freezed
 class ReturnApproverEvent with _$ReturnApproverEvent {
-
   const factory ReturnApproverEvent.initialized() = _Initialized;
 
   const factory ReturnApproverEvent.fetch({

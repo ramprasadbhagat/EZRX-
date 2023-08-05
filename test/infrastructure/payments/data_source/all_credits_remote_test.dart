@@ -123,11 +123,12 @@ void main() {
         );
 
         await remoteDataSource.filterCredits(
-            customerCode: 'mock_soldTo',
-            salesOrg: 'mock_salesOrg',
-            pageSize: 1,
-            offset: 0,
-            filterMap: []).onError((error, stackTrace) async {
+          customerCode: 'mock_soldTo',
+          salesOrg: 'mock_salesOrg',
+          pageSize: 1,
+          offset: 0,
+          filterMap: [],
+        ).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(List<CreditAndInvoiceItem>.empty());
         });

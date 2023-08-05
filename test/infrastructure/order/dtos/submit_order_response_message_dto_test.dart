@@ -15,16 +15,16 @@ void main() {
     });
     test('Test fromDomain', () {
       final configsDto = SubmitOrderResponseMessageDto.fromDomain(
-          SubmitOrderResponseMessageDto.fromJson(data)
-              .toDomain());
+        SubmitOrderResponseMessageDto.fromJson(data).toDomain(),
+      );
 
       expect(configsDto.type, 'fake-type');
     });
 
     test('Test toJson', () {
       final configsDto = SubmitOrderResponseMessageDto.fromDomain(
-          SubmitOrderResponseMessageDto.fromJson(data)
-              .toDomain()).toJson();
+        SubmitOrderResponseMessageDto.fromJson(data).toDomain(),
+      ).toJson();
 
       expect(configsDto['Type'], 'fake-type');
     });

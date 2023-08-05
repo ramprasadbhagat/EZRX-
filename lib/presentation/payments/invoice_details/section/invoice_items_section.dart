@@ -131,7 +131,6 @@ class _InvoiceItemDetail extends StatelessWidget {
             .textTheme
             .bodySmall
             ?.copyWith(color: ZPColors.darkGray),
-                          
       ),
     );
   }

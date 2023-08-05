@@ -10,7 +10,6 @@ class ForgotPasswordDto with _$ForgotPasswordDto {
   factory ForgotPasswordDto({
     @JsonKey(name: 'success', defaultValue: false) required bool success,
     @JsonKey(name: 'email', defaultValue: '') required String email,
-
   }) = _ForgotPasswordDto;
 
   factory ForgotPasswordDto.fromJson(Map<String, dynamic> json) =>

@@ -116,7 +116,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const AllInvoicesPage(),
       ),
@@ -144,22 +145,25 @@ void main() {
     // });
 
     testWidgets('=> Body Test when loading', (tester) async {
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-          customerCodeSoldTo: 'mock-customerCodeSoldTo',
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'mock-customerCodeSoldTo',
+          ),
         ),
-      ));
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-        shipToInfo: ShipToInfo.empty().copyWith(
-          shipToCustomerCode: 'mock-shipToCustomerCode',
+      );
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'mock-shipToCustomerCode',
+          ),
         ),
-      ));
-      when(() => allInvoicesBlocMock.state)
-          .thenReturn(AllInvoicesState.initial().copyWith(
-        isLoading: true,
-      ));
+      );
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
 
       final expectedState = [
         AllInvoicesFilterState.initial(),
@@ -178,9 +182,9 @@ void main() {
     testWidgets('=> Body Test onRefresh', (tester) async {
       when(() => allInvoicesBlocMock.state)
           .thenReturn(AllInvoicesState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial().copyWith(
-        shipToInfo: ShipToInfo(
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          shipToInfo: ShipToInfo(
             defaultShipToAddress: true,
             shipToCustomerCode: '',
             shipToName: ShipToName.empty(),
@@ -196,8 +200,10 @@ void main() {
             floor: '',
             plant: '',
             licenses: [],
-            country: ''),
-      ));
+            country: '',
+          ),
+        ),
+      );
 
       final expectedState = [
         AllInvoicesState.initial().copyWith(
@@ -247,9 +253,11 @@ void main() {
       await tester
           .pump(const Duration(seconds: 1)); // finish the scroll animation
       await tester.pump(
-          const Duration(seconds: 1)); // finish the indicator settle animation
+        const Duration(seconds: 1),
+      ); // finish the indicator settle animation
       await tester.pump(
-          const Duration(seconds: 1)); // finish the indicator hide animation
+        const Duration(seconds: 1),
+      ); // finish the indicator hide animation
 
       handle.dispose();
       await tester.pump();
@@ -318,9 +326,11 @@ void main() {
       // await tester
       //     .pump(const Duration(seconds: 1)); // finish the scroll animation
       await tester.pump(
-          const Duration(seconds: 1)); // finish the indicator settle animation
+        const Duration(seconds: 1),
+      ); // finish the indicator settle animation
       await tester.pump(
-          const Duration(seconds: 1)); // finish the indicator hide animation
+        const Duration(seconds: 1),
+      ); // finish the indicator hide animation
       await tester.pump();
     });
   });

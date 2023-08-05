@@ -116,9 +116,11 @@ void main() {
     materialListRobot.verify();
 
     materialListRobot.verifyDefaultMaterialDescription(
-        materialNumber: materialNumber);
+      materialNumber: materialNumber,
+    );
     materialListRobot.verifyGenericMaterialDescription(
-        materialNumber: materialNumber);
+      materialNumber: materialNumber,
+    );
     onChangeQuantity(qty: 1);
   }
 
@@ -355,11 +357,14 @@ void main() {
     await materialRootRobot.tapPrincipleSelector();
     materialRootRobot.verifyMaterialFilterPage();
     await materialRootRobot.enterTextAndSubmit(
-        principleSearchText: principleSearchText);
+      principleSearchText: principleSearchText,
+    );
     materialRootRobot.verifySearchResultAppears(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     await materialRootRobot.tapOnSearchResult(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     materialRootRobot.verifyApplyButton();
     await materialRootRobot.tapApplyButton();
     materialRootRobot.findPrincipleSelector();
@@ -380,7 +385,9 @@ void main() {
     cartRobot.findAddQuantity(materialLessMinNumber);
     cartRobot.verifyExpiryMaterial(materialLessMinNumber);
     cartRobot.verifyConcreteTotal(
-        currency, (unitPriceLessMin * 1).toStringAsFixed(2));
+      currency,
+      (unitPriceLessMin * 1).toStringAsFixed(2),
+    );
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
     await verifyOrderSummaryCustomerDetailsAndProceed();

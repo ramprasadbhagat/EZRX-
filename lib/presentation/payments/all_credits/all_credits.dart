@@ -225,15 +225,15 @@ class _CreditsItem extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          context
-              .read<CreditAndInvoiceDetailsBloc>()
-              .add(CreditAndInvoiceDetailsEvent.fetch(
-                creditAndInvoiceItem: creditItem,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              ));
+          context.read<CreditAndInvoiceDetailsBloc>().add(
+                CreditAndInvoiceDetailsEvent.fetch(
+                  creditAndInvoiceItem: creditItem,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                ),
+              );
           context.router.push(CreditDetailsPageRoute(creditItem: creditItem));
         },
         title: Row(

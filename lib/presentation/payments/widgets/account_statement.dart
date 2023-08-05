@@ -33,7 +33,6 @@ class AccountStatement extends StatelessWidget {
               CustomSnackBar(
                 messageText: 'File downloaded successfully'.tr(),
               ).show(context);
-              
             },
           ),
         );
@@ -101,8 +100,7 @@ class _SoaCard extends StatelessWidget {
                       thirdRingColor: ZPColors.orange,
                       size: 24,
                     )
-                  :
-              IconButton(
+                  : IconButton(
                       padding: const EdgeInsets.all(0),
                       constraints: const BoxConstraints(),
                       alignment: Alignment.centerRight,

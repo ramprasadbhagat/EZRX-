@@ -33,14 +33,15 @@ void main() {
     shipToCustomerCode: 'fake-shipto',
   );
   final user = User.empty().copyWith(
-      username: Username('fake-name'),
-      role: Role(
-        description: 'fake-desc',
-        id: 'id',
-        name: 'fake-name',
-        type: RoleType('fake-type'),
-      ),
-      preferredLanguage: 'EN');
+    username: Username('fake-name'),
+    role: Role(
+      description: 'fake-desc',
+      id: 'id',
+      name: 'fake-name',
+      type: RoleType('fake-type'),
+    ),
+    preferredLanguage: 'EN',
+  );
   final searchKey = SearchKey('fake-key');
   final fakeFromDate = DateTime.parse('2023-07-12 15:56:56.01');
   final fakeToDate = DateTime.parse('2023-07-19 15:56:56.02');
@@ -75,20 +76,22 @@ void main() {
         viewByOrderRepository: viewByOrderRepository,
       ),
       setUp: () {
-        when(() => viewByOrderRepository.getViewByOrderHistory(
-              orderBy: 'datetime',
-              salesOrgConfig: salesOrgConfig,
-              soldTo: customerCodeInfo,
-              shipTo: shipToInfo,
-              user: user,
-              pageSize: pageSize,
-              offset: offSet,
-              sort: 'desc',
-              searchKey: searchKey,
-              creatingOrderIds: <String>[],
-              viewByOrder: ViewByOrder.empty(),
-              viewByOrderHistoryFilter: viewByOrderHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByOrderRepository.getViewByOrderHistory(
+            orderBy: 'datetime',
+            salesOrgConfig: salesOrgConfig,
+            soldTo: customerCodeInfo,
+            shipTo: shipToInfo,
+            user: user,
+            pageSize: pageSize,
+            offset: offSet,
+            sort: 'desc',
+            searchKey: searchKey,
+            creatingOrderIds: <String>[],
+            viewByOrder: ViewByOrder.empty(),
+            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -130,34 +133,38 @@ void main() {
         viewByOrderRepository: viewByOrderRepository,
       ),
       setUp: () {
-        when(() => viewByOrderRepository.getViewByOrderHistory(
-              orderBy: 'datetime',
-              salesOrgConfig: salesOrgConfig,
-              soldTo: customerCodeInfo,
-              shipTo: shipToInfo,
-              user: user,
-              pageSize: pageSize,
-              offset: offSet,
-              sort: 'desc',
-              searchKey: searchKey,
-              creatingOrderIds: <String>[],
-              viewByOrder: ViewByOrder.empty(),
-              viewByOrderHistoryFilter: viewByOrderHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByOrderRepository.getViewByOrderHistory(
+            orderBy: 'datetime',
+            salesOrgConfig: salesOrgConfig,
+            soldTo: customerCodeInfo,
+            shipTo: shipToInfo,
+            user: user,
+            pageSize: pageSize,
+            offset: offSet,
+            sort: 'desc',
+            searchKey: searchKey,
+            creatingOrderIds: <String>[],
+            viewByOrder: ViewByOrder.empty(),
+            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             viewByOrderMockData,
           ),
         );
       },
-      act: (bloc) => bloc.add(ViewByOrderEvent.fetch(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-        filter: viewByOrderHistoryFilter,
-        searchKey: 'fake-key',
-      )),
+      act: (bloc) => bloc.add(
+        ViewByOrderEvent.fetch(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
+          filter: viewByOrderHistoryFilter,
+          searchKey: 'fake-key',
+        ),
+      ),
       expect: () => [
         ViewByOrderState.initial().copyWith(
           isFetching: true,
@@ -165,11 +172,12 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
-            appliedFilter: viewByOrderHistoryFilter,
-            isFetching: false,
-            nextPageIndex: 0,
-            viewByOrderList: viewByOrderMockData,
-            searchKey: searchKey),
+          appliedFilter: viewByOrderHistoryFilter,
+          isFetching: false,
+          nextPageIndex: 0,
+          viewByOrderList: viewByOrderMockData,
+          searchKey: searchKey,
+        ),
       ],
     );
 
@@ -184,32 +192,36 @@ void main() {
         searchKey: searchKey,
       ),
       setUp: () {
-        when(() => viewByOrderRepository.getViewByOrderHistory(
-              orderBy: 'datetime',
-              salesOrgConfig: salesOrgConfig,
-              soldTo: customerCodeInfo,
-              shipTo: shipToInfo,
-              user: user,
-              pageSize: pageSize,
-              offset: offSet,
-              sort: 'desc',
-              searchKey: searchKey,
-              creatingOrderIds: <String>[],
-              viewByOrder: ViewByOrder.empty(),
-              viewByOrderHistoryFilter: viewByOrderHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByOrderRepository.getViewByOrderHistory(
+            orderBy: 'datetime',
+            salesOrgConfig: salesOrgConfig,
+            soldTo: customerCodeInfo,
+            shipTo: shipToInfo,
+            user: user,
+            pageSize: pageSize,
+            offset: offSet,
+            sort: 'desc',
+            searchKey: searchKey,
+            creatingOrderIds: <String>[],
+            viewByOrder: ViewByOrder.empty(),
+            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             viewByOrderMockData,
           ),
         );
       },
-      act: (bloc) => bloc.add(ViewByOrderEvent.loadMore(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-      )),
+      act: (bloc) => bloc.add(
+        ViewByOrderEvent.loadMore(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
+        ),
+      ),
       expect: () => [
         ViewByOrderState.initial().copyWith(
           isFetching: true,
@@ -220,14 +232,17 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
-            appliedFilter: viewByOrderHistoryFilter,
-            nextPageIndex: 1,
-            canLoadMore: false,
-            viewByOrderList: viewByOrderMockData.copyWith(orderHeaders: [
+          appliedFilter: viewByOrderHistoryFilter,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          viewByOrderList: viewByOrderMockData.copyWith(
+            orderHeaders: [
               ...viewByOrderMockData.orderHeaders,
               ...viewByOrderMockData.orderHeaders
-            ]),
-            searchKey: searchKey),
+            ],
+          ),
+          searchKey: searchKey,
+        ),
       ],
     );
 
@@ -242,30 +257,34 @@ void main() {
         searchKey: searchKey,
       ),
       setUp: () {
-        when(() => viewByOrderRepository.getViewByOrderHistory(
-              orderBy: 'datetime',
-              salesOrgConfig: salesOrgConfig,
-              soldTo: customerCodeInfo,
-              shipTo: shipToInfo,
-              user: user,
-              pageSize: pageSize,
-              offset: offSet,
-              sort: 'desc',
-              searchKey: searchKey,
-              creatingOrderIds: <String>[],
-              viewByOrder: ViewByOrder.empty(),
-              viewByOrderHistoryFilter: viewByOrderHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByOrderRepository.getViewByOrderHistory(
+            orderBy: 'datetime',
+            salesOrgConfig: salesOrgConfig,
+            soldTo: customerCodeInfo,
+            shipTo: shipToInfo,
+            user: user,
+            pageSize: pageSize,
+            offset: offSet,
+            sort: 'desc',
+            searchKey: searchKey,
+            creatingOrderIds: <String>[],
+            viewByOrder: ViewByOrder.empty(),
+            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
         );
       },
-      act: (bloc) => bloc.add(ViewByOrderEvent.loadMore(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-      )),
+      act: (bloc) => bloc.add(
+        ViewByOrderEvent.loadMore(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
+        ),
+      ),
       expect: () => [
         ViewByOrderState.initial().copyWith(
           isFetching: true,
@@ -295,20 +314,22 @@ void main() {
         viewByOrderRepository: viewByOrderRepository,
       ),
       setUp: () {
-        when(() => viewByOrderRepository.getViewByOrderHistory(
-              orderBy: 'datetime',
-              salesOrgConfig: salesOrgConfig,
-              soldTo: customerCodeInfo,
-              shipTo: shipToInfo,
-              user: user,
-              pageSize: pageSize,
-              offset: offSet,
-              sort: 'desc',
-              searchKey: SearchKey('diff-search-key'),
-              creatingOrderIds: <String>[],
-              viewByOrder: ViewByOrder.empty(),
-              viewByOrderHistoryFilter: viewByOrderHistoryFilter,
-            )).thenAnswer(
+        when(
+          () => viewByOrderRepository.getViewByOrderHistory(
+            orderBy: 'datetime',
+            salesOrgConfig: salesOrgConfig,
+            soldTo: customerCodeInfo,
+            shipTo: shipToInfo,
+            user: user,
+            pageSize: pageSize,
+            offset: offSet,
+            sort: 'desc',
+            searchKey: SearchKey('diff-search-key'),
+            creatingOrderIds: <String>[],
+            viewByOrder: ViewByOrder.empty(),
+            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             viewByOrderMockData,
           ),

@@ -8,32 +8,31 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Admin Po Attachment Filter Bloc', () {
-
-    blocTest('Initialize',
+    blocTest(
+      'Initialize',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(const AdminPoAttachmentFilterEvent.initialized()),
+      act: (AdminPoAttachmentFilterBloc bloc) =>
+          bloc.add(const AdminPoAttachmentFilterEvent.initialized()),
       expect: () => [AdminPoAttachmentFilterState.initial()],
     );
 
-    blocTest('applyFilters when filter is valid',
+    blocTest(
+      'applyFilters when filter is valid',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(const AdminPoAttachmentFilterEvent.applyFilters()),
+      act: (AdminPoAttachmentFilterBloc bloc) =>
+          bloc.add(const AdminPoAttachmentFilterEvent.applyFilters()),
       expect: () => [
-        AdminPoAttachmentFilterState.initial().copyWith(
-            isSubmitting: false
-        ),
-        AdminPoAttachmentFilterState.initial().copyWith(
-          isSubmitting: true
-        ),
+        AdminPoAttachmentFilterState.initial().copyWith(isSubmitting: false),
+        AdminPoAttachmentFilterState.initial().copyWith(isSubmitting: true),
       ],
     );
 
-    blocTest('applyFilters when filter is not valid',
+    blocTest(
+      'applyFilters when filter is not valid',
       build: () => AdminPoAttachmentFilterBloc(),
       seed: () => AdminPoAttachmentFilterState.initial().copyWith(
         adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
@@ -41,7 +40,8 @@ void main() {
           exRxNo: SearchKey.searchFilter(' '),
         ),
       ),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(const AdminPoAttachmentFilterEvent.applyFilters()),
+      act: (AdminPoAttachmentFilterBloc bloc) =>
+          bloc.add(const AdminPoAttachmentFilterEvent.applyFilters()),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           isSubmitting: false,
@@ -54,9 +54,11 @@ void main() {
       ],
     );
 
-    blocTest('orderNoChanged',
+    blocTest(
+      'orderNoChanged',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(const AdminPoAttachmentFilterEvent.orderNoChanged('12345')),
+      act: (AdminPoAttachmentFilterBloc bloc) =>
+          bloc.add(const AdminPoAttachmentFilterEvent.orderNoChanged('12345')),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           showErrorMessages: false,
@@ -67,9 +69,11 @@ void main() {
       ],
     );
 
-    blocTest('ezrxNoChanged',
+    blocTest(
+      'ezrxNoChanged',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(const AdminPoAttachmentFilterEvent.ezrxNoChanged('12345')),
+      act: (AdminPoAttachmentFilterBloc bloc) =>
+          bloc.add(const AdminPoAttachmentFilterEvent.ezrxNoChanged('12345')),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           showErrorMessages: false,
@@ -80,9 +84,11 @@ void main() {
       ],
     );
 
-    blocTest('salesOrgChanged',
+    blocTest(
+      'salesOrgChanged',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(AdminPoAttachmentFilterEvent.salesOrgChanged(SalesOrg('12345'))),
+      act: (AdminPoAttachmentFilterBloc bloc) => bloc
+          .add(AdminPoAttachmentFilterEvent.salesOrgChanged(SalesOrg('12345'))),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           showErrorMessages: false,
@@ -94,9 +100,12 @@ void main() {
       ],
     );
 
-    blocTest('soldToChanged',
+    blocTest(
+      'soldToChanged',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(AdminPoAttachmentFilterEvent.soldToChanged(CustomerCodeInfo.empty())),
+      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(
+        AdminPoAttachmentFilterEvent.soldToChanged(CustomerCodeInfo.empty()),
+      ),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           showErrorMessages: false,
@@ -107,13 +116,17 @@ void main() {
       ],
     );
 
-    blocTest('setOrderDate',
+    blocTest(
+      'setOrderDate',
       build: () => AdminPoAttachmentFilterBloc(),
       act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(
-          AdminPoAttachmentFilterEvent.setOrderDate(
-              orderDateRange: DateTimeRange(
-                  start: DateTime.now().subtract(const Duration(days: 28)),
-                  end: DateTime.now()))),
+        AdminPoAttachmentFilterEvent.setOrderDate(
+          orderDateRange: DateTimeRange(
+            start: DateTime.now().subtract(const Duration(days: 28)),
+            end: DateTime.now(),
+          ),
+        ),
+      ),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           showErrorMessages: false,
@@ -132,7 +145,5 @@ void main() {
         ),
       ],
     );
-
   });
-
 }

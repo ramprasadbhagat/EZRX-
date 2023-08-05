@@ -30,13 +30,15 @@ void main() {
         repository: discountOverrideRepositoryMock,
       ),
       setUp: () {
-        when(() => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
+        when(
+          () => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             price: Price.empty(),
-            shipToInfo: ShipToInfo.empty().copyWith(
-            shipToCustomerCode: 'fake-code'
-          ),)).thenAnswer(
+            shipToInfo:
+                ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             Price.empty(),
           ),
@@ -69,13 +71,15 @@ void main() {
         repository: discountOverrideRepositoryMock,
       ),
       setUp: () {
-        when(() => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              price: Price.empty(),
-              shipToInfo:
-                  ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
-            )).thenAnswer(
+        when(
+          () => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            price: Price.empty(),
+            shipToInfo:
+                ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             Price.empty(),
           ),
@@ -89,9 +93,10 @@ void main() {
       ),
       expect: () => [
         DiscountOverrideState.initial().copyWith(
-            materialPrice: Price.empty().copyWith(),
-            showErrorMessages: true,
-            apiFailureOrSuccessOption: none()),
+          materialPrice: Price.empty().copyWith(),
+          showErrorMessages: true,
+          apiFailureOrSuccessOption: none(),
+        ),
       ],
     );
     blocTest<DiscountOverrideBloc, DiscountOverrideState>(
@@ -100,13 +105,15 @@ void main() {
         repository: discountOverrideRepositoryMock,
       ),
       setUp: () {
-        when(() => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
+        when(
+          () => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             price: Price.empty(),
-            shipToInfo: ShipToInfo.empty().copyWith(
-            shipToCustomerCode: 'fake-code'
-          ),)).thenAnswer(
+            shipToInfo:
+                ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.priceOverrideNotFound(),
           ),
@@ -119,9 +126,8 @@ void main() {
           material: MaterialInfo.empty(),
           materialNumber: MaterialNumber(''),
           price: Price.empty(),
-          shipToInfo: ShipToInfo.empty().copyWith(
-            shipToCustomerCode: 'fake-code'
-          ),
+          shipToInfo:
+              ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
         ),
       ),
       expect: () => [

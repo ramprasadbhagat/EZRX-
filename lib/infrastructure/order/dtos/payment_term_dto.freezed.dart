@@ -143,12 +143,14 @@ class __$$_PaymentTermDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentTermDto extends _PaymentTermDto {
   const _$_PaymentTermDto(
-      {@JsonKey(name: 'paymentTermCode') required this.paymentTermCode,
-      @JsonKey(name: 'paymentTermRanking') required this.paymentTermRanking,
+      {@JsonKey(name: 'paymentTermCode')
+          required this.paymentTermCode,
+      @JsonKey(name: 'paymentTermRanking')
+          required this.paymentTermRanking,
       @JsonKey(name: 'paymentTermDescription')
-      required this.paymentTermDescription,
+          required this.paymentTermDescription,
       @JsonKey(name: 'paymentTermSubranking')
-      required this.paymentTermSubranking})
+          required this.paymentTermSubranking})
       : super._();
 
   factory _$_PaymentTermDto.fromJson(Map<String, dynamic> json) =>
@@ -208,13 +210,14 @@ class _$_PaymentTermDto extends _PaymentTermDto {
 
 abstract class _PaymentTermDto extends PaymentTermDto {
   const factory _PaymentTermDto(
-      {@JsonKey(name: 'paymentTermCode') required final String paymentTermCode,
+      {@JsonKey(name: 'paymentTermCode')
+          required final String paymentTermCode,
       @JsonKey(name: 'paymentTermRanking')
-      required final int paymentTermRanking,
+          required final int paymentTermRanking,
       @JsonKey(name: 'paymentTermDescription')
-      required final String paymentTermDescription,
+          required final String paymentTermDescription,
       @JsonKey(name: 'paymentTermSubranking')
-      required final int paymentTermSubranking}) = _$_PaymentTermDto;
+          required final int paymentTermSubranking}) = _$_PaymentTermDto;
   const _PaymentTermDto._() : super._();
 
   factory _PaymentTermDto.fromJson(Map<String, dynamic> json) =

@@ -123,7 +123,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableComboDeals: false,
         greenDeliveryUserRole: GreenDeliveryUserRole(0),
         comboDealsUserRole: ComboDealUserRole(0),
-        enableGMN:false,
+        enableGMN: false,
       );
 
   String get getConfigLanguage {
@@ -151,44 +151,51 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     const bullet = '\u2022';
     switch (salesOrg.country) {
       case 'VN':
-        message.writeAll({
-          '$bullet $exclusivetaxtext',
-          '$bullet $minordertext $minOrderAmount ${currency.code}',
-        },
-        '\n',);
+        message.writeAll(
+          {
+            '$bullet $exclusivetaxtext',
+            '$bullet $minordertext $minOrderAmount ${currency.code}',
+          },
+          '\n',
+        );
         return message.toString();
       case 'TW':
-        message.writeAll({
-          '$bullet $inclusivetaxtext',
-          '$bullet 本網站價格及搭贈資訊係以前日資料為基礎揭示，本公司仍須以今日之授權生效的價格為最終銷售發票開立之根據',
-          '$bullet 金額 ${currency.code} 0 以上即可送出訂單，當日最低訂單配送金額須滿 ${currency.code} 2500',
-        },
-        '\n',);
+        message.writeAll(
+          {
+            '$bullet $inclusivetaxtext',
+            '$bullet 本網站價格及搭贈資訊係以前日資料為基礎揭示，本公司仍須以今日之授權生效的價格為最終銷售發票開立之根據',
+            '$bullet 金額 ${currency.code} 0 以上即可送出訂單，當日最低訂單配送金額須滿 ${currency.code} 2500',
+          },
+          '\n',
+        );
         return message.toString();
       case 'PH':
-        message.writeAll({
-          '$bullet $inclusivetaxtext',
-          '$bullet $minordertext ${currency.code} $minOrderAmount',
-        }, 
-        '\n',);
+        message.writeAll(
+          {
+            '$bullet $inclusivetaxtext',
+            '$bullet $minordertext ${currency.code} $minOrderAmount',
+          },
+          '\n',
+        );
         return message.toString();
       default:
-        message.writeAll({
-          '$bullet $exclusivetaxtext',
-          '$bullet $minordertext ${currency.code} $minOrderAmount',
-        },
-        '\n',);
+        message.writeAll(
+          {
+            '$bullet $exclusivetaxtext',
+            '$bullet $minordertext ${currency.code} $minOrderAmount',
+          },
+          '\n',
+        );
         return message.toString();
     }
   }
-
 
   bool get shouldShowTax =>
       (enableVat && enableTaxClassification) || enableTaxAtTotalLevelOnly;
 
   bool get taxDisplayForOrderHistoryAndDetails =>
       enableTaxDisplay || enableTaxAtTotalLevelOnly;
-  
+
   bool get taxDisplayForOrderHistoryMaterial =>
       !enableTaxAtTotalLevelOnly && enableTaxDisplay;
 
@@ -196,10 +203,11 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   bool get enablePrincipalList => disablePrincipals && principalList.isNotEmpty;
 
-  bool get isZdp5DiscountEligible  => salesOrg.isVN && enableZDP5;
+  bool get isZdp5DiscountEligible => salesOrg.isVN && enableZDP5;
 
   SalesOrganisationConfigsPrincipal get checkIsPrincipalCodeForAllMaterial =>
       principalList.firstWhere(
-          (principal) => principal.principalCode.checkIsPrincipalCodeForAll,
-          orElse: () => SalesOrganisationConfigsPrincipal.empty(),);
+        (principal) => principal.principalCode.checkIsPrincipalCodeForAll,
+        orElse: () => SalesOrganisationConfigsPrincipal.empty(),
+      );
 }

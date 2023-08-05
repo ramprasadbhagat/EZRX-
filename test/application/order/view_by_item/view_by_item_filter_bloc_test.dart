@@ -85,18 +85,20 @@ void main() {
         },
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty()
-                .copyWith(orderStatusList: <StatusType>[
-              StatusType('Order created'),
-            ]),
+            filter: ViewByItemHistoryFilter.empty().copyWith(
+              orderStatusList: <StatusType>[
+                StatusType('Order created'),
+              ],
+            ),
             statusList: statusList,
           ),
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty()
-                .copyWith(orderStatusList: <StatusType>[
-              StatusType('Order created'),
-              StatusType('Picking in progress'),
-            ]),
+            filter: ViewByItemHistoryFilter.empty().copyWith(
+              orderStatusList: <StatusType>[
+                StatusType('Order created'),
+                StatusType('Picking in progress'),
+              ],
+            ),
             statusList: statusList,
           ),
         ],
@@ -114,19 +116,21 @@ void main() {
           );
         },
         seed: () => ViewByItemFilterState.initial().copyWith(
-          filter: ViewByItemHistoryFilter.empty()
-              .copyWith(orderStatusList: <StatusType>[
-            StatusType('Order created'),
-            StatusType('Picking in progress'),
-          ]),
+          filter: ViewByItemHistoryFilter.empty().copyWith(
+            orderStatusList: <StatusType>[
+              StatusType('Order created'),
+              StatusType('Picking in progress'),
+            ],
+          ),
           statusList: statusList,
         ),
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty()
-                .copyWith(orderStatusList: <StatusType>[
-              StatusType('Order created'),
-            ]),
+            filter: ViewByItemHistoryFilter.empty().copyWith(
+              orderStatusList: <StatusType>[
+                StatusType('Order created'),
+              ],
+            ),
             statusList: statusList,
           ),
         ],
@@ -175,7 +179,9 @@ void main() {
           final getemptyViewByItemHistoryFilter =
               viewByItemFilterState.emptyViewByItemHistoryFilter;
           expect(
-              getemptyViewByItemHistoryFilter, ViewByItemHistoryFilter.empty());
+            getemptyViewByItemHistoryFilter,
+            ViewByItemHistoryFilter.empty(),
+          );
         },
       );
     },

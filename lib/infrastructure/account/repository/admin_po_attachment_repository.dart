@@ -43,7 +43,7 @@ class AdminPoAttachmentRepository implements IAdminPoAttachmentRepository {
             AdminPoAttachmentFilterDto.fromDomain(adminPoAttachmentFilter)
                 .toJson(),
       );
-      
+
       return Right(poAttachments);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

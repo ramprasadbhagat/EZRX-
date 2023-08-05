@@ -36,12 +36,14 @@ class ReturnApproverRepository implements IReturnApproverRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final returnRequestInformation = await Future.wait(returnRequestIds
-            .map(
-              (e) async => await returnRequestInformationLocalDataSource
-                  .getApproverReturnRequestInformation(),
-            )
-            .toList());
+        final returnRequestInformation = await Future.wait(
+          returnRequestIds
+              .map(
+                (e) async => await returnRequestInformationLocalDataSource
+                    .getApproverReturnRequestInformation(),
+              )
+              .toList(),
+        );
 
         return Right(returnRequestInformation);
       } catch (e) {
@@ -49,14 +51,16 @@ class ReturnApproverRepository implements IReturnApproverRepository {
       }
     }
     try {
-      final returnRequestInformation = await Future.wait(returnRequestIds
-          .map(
-            (e) async => await returnRequestInformationRemoteDataSource
-                .getApproverReturnRequestInformation(
-              returnRequestId: e.requestId,
-            ),
-          )
-          .toList());
+      final returnRequestInformation = await Future.wait(
+        returnRequestIds
+            .map(
+              (e) async => await returnRequestInformationRemoteDataSource
+                  .getApproverReturnRequestInformation(
+                returnRequestId: e.requestId,
+              ),
+            )
+            .toList(),
+      );
 
       return Right(returnRequestInformation);
     } catch (e) {

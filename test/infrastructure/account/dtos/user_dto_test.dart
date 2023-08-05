@@ -32,7 +32,8 @@ void main() {
     // });
     test('For Empty Sale Organisation DTO', () async {
       final newUser = User.empty().copyWith(
-          userSalesOrganisations: [SalesOrganisationDto.empty().toDomain()]);
+        userSalesOrganisations: [SalesOrganisationDto.empty().toDomain()],
+      );
       SalesOrganisationDto.empty().toJson();
       expect(newUser.userSalesOrganisations.length, 1);
     });

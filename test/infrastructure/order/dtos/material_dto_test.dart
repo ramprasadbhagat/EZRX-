@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,10 +6,10 @@ void main() {
   // late dynamic data;
   group('Test bundleInfoDto ', () {
     setUp(() async {
-    //   data = json.decode(
-    //     await rootBundle
-    //         .loadString('assets/json/getMaterialsWithMetaResponse.json'),
-    //   );
+      //   data = json.decode(
+      //     await rootBundle
+      //         .loadString('assets/json/getMaterialsWithMetaResponse.json'),
+      //   );
     });
     // test('Test toDomain', () {
     //   final configs = MaterialDto.fromJson(
@@ -27,7 +26,6 @@ void main() {
     // });
 
     // test('Test toJson', () {
-      
 
     //   final configsDtoMap = MaterialDto.fromDomain(MaterialDto.fromJson(
     //     data['data']['materialsWithMeta']['materials'][0],

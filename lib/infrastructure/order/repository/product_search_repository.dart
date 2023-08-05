@@ -89,11 +89,12 @@ class ProductSearchRepository implements IProductSearchRepository {
     }
   }
 
-  Future<Either<ApiFailure, Unit>> _putSearchKeys(List<String> searchKeyList) async {
+  Future<Either<ApiFailure, Unit>> _putSearchKeys(
+    List<String> searchKeyList,
+  ) async {
     try {
       final updatedObject = ProductSuggestionHistory(
         searchKeyList: searchKeyList.map((e) => SearchKey(e)).toList(),
-
       );
       await productSuggestionHistoryStorage.putSearchKey(
         searchKeyList: ProductSuggestionHistoryDto.fromDomain(updatedObject),

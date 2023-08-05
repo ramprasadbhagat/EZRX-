@@ -138,13 +138,16 @@ void main() {
       expect(submitMaterialInfo.batch, emptyPriceAggregate.stockInfo.batch);
       expect(submitMaterialInfo.bonuses, <MaterialItemBonus>[]);
       expect(submitMaterialInfo.comment, '');
-      expect(submitMaterialInfo.materialNumber,
-          emptyPriceAggregate.materialInfo.materialNumber);
+      expect(
+        submitMaterialInfo.materialNumber,
+        emptyPriceAggregate.materialInfo.materialNumber,
+      );
       expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
       expect(
-          submitMaterialInfo.materialItemOverride,
-          MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
-              .toDomain());
+        submitMaterialInfo.materialItemOverride,
+        MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
+            .toDomain(),
+      );
     });
 
     test(
@@ -158,13 +161,16 @@ void main() {
       expect(submitMaterialInfo.batch, BatchNumber(''));
       expect(submitMaterialInfo.bonuses, <MaterialItemBonus>[]);
       expect(submitMaterialInfo.comment, '');
-      expect(submitMaterialInfo.materialNumber,
-          emptyPriceAggregate.materialInfo.materialNumber);
+      expect(
+        submitMaterialInfo.materialNumber,
+        emptyPriceAggregate.materialInfo.materialNumber,
+      );
       expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
       expect(
-          submitMaterialInfo.materialItemOverride,
-          MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
-              .toDomain());
+        submitMaterialInfo.materialItemOverride,
+        MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
+            .toDomain(),
+      );
     });
 
     test(
@@ -271,7 +277,9 @@ void main() {
       'listPrice from PriceAggregate',
       () {
         expect(
-            emptyPriceAggregate.listPrice, emptyPrice.lastPrice.getOrCrash());
+          emptyPriceAggregate.listPrice,
+          emptyPrice.lastPrice.getOrCrash(),
+        );
       },
     );
 
@@ -506,15 +514,16 @@ void main() {
       'discountedListPrice from PriceAggregate',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-            price: emptyPrice.copyWith(
-          tiers: [
-            PriceTier.empty().copyWith(
-              items: [
-                PriceTierItem.empty(),
-              ],
-            ),
-          ],
-        ));
+          price: emptyPrice.copyWith(
+            tiers: [
+              PriceTier.empty().copyWith(
+                items: [
+                  PriceTierItem.empty(),
+                ],
+              ),
+            ],
+          ),
+        );
         expect(
           customPriceAggregate.discountedListPrice,
           customPriceAggregate.price.priceTireItem.first.rate,
@@ -1472,18 +1481,21 @@ void main() {
         submitMaterialInfo.bonuses,
         <SubmitMaterialItemBonus>[
           SubmitMaterialItemBonusDto.fromMaterialItemBonus(
-                  MaterialItemBonus.empty())
-              .toDomain()
+            MaterialItemBonus.empty(),
+          ).toDomain()
         ],
       );
       expect(submitMaterialInfo.comment, '');
-      expect(submitMaterialInfo.materialNumber,
-          emptyPriceAggregate.materialInfo.materialNumber);
+      expect(
+        submitMaterialInfo.materialNumber,
+        emptyPriceAggregate.materialInfo.materialNumber,
+      );
       expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
       expect(
-          submitMaterialInfo.materialItemOverride,
-          MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
-              .toDomain());
+        submitMaterialInfo.materialItemOverride,
+        MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
+            .toDomain(),
+      );
     });
   });
 

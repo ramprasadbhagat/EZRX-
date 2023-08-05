@@ -62,7 +62,6 @@ class PaymentAdviceFooterRemoteDataSource {
   Future<ManagePaymentAdviceFooterResponse> addPaymentAdvice({
     required Map<String, dynamic> query,
   }) async {
-
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -101,8 +100,6 @@ class PaymentAdviceFooterRemoteDataSource {
     });
   }
 
- 
-
   Future<ManagePaymentAdviceFooterResponse> deletePaymentAdvice({
     required String salesOrg,
     required String salesDistrict,
@@ -131,8 +128,7 @@ class PaymentAdviceFooterRemoteDataSource {
     });
   }
 
-  void _managePaymentAdviceFooterExceptionChecker(
-      {
+  void _managePaymentAdviceFooterExceptionChecker({
     required Response<dynamic> res,
   }) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {

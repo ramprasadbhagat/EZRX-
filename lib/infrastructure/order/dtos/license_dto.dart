@@ -10,8 +10,10 @@ class LicenseDto with _$LicenseDto {
   const LicenseDto._();
   const factory LicenseDto({
     @JsonKey(name: 'licenceType', defaultValue: '') required String licenceType,
-    @JsonKey(name: 'licenseDescription', defaultValue: '') required String licenseDescription,
-    @JsonKey(name: 'licenseNumber', defaultValue: '') required String licenseNumber,
+    @JsonKey(name: 'licenseDescription', defaultValue: '')
+        required String licenseDescription,
+    @JsonKey(name: 'licenseNumber', defaultValue: '')
+        required String licenseNumber,
     @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
         required String validFrom,
     @JsonKey(name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)

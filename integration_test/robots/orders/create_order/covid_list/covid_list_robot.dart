@@ -11,7 +11,9 @@ class CovidListRobot {
 
   void findCovidMaterial(String materialNumber) {
     expect(
-        find.byKey(Key('covidMaterialOption$materialNumber')), findsOneWidget);
+      find.byKey(Key('covidMaterialOption$materialNumber')),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapCovidMaterial(String materialNumber) async {

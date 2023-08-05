@@ -41,16 +41,17 @@ class UserRestrictionDetailsBloc
     Emitter<UserRestrictionDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async =>
-          emit(UserRestrictionDetailsState.initial().copyWith(
-        addedApproverRightsList: [
-          ApproverRightsDetails.empty()
-              .copyWith(salesOrg: e.salesOrganisation.salesOrg),
-        ],
-        approvalLimits: ApprovalLimits.empty().copyWith(
-          salesOrg: e.salesOrganisation.salesOrg,
+      initialized: (e) async => emit(
+        UserRestrictionDetailsState.initial().copyWith(
+          addedApproverRightsList: [
+            ApproverRightsDetails.empty()
+                .copyWith(salesOrg: e.salesOrganisation.salesOrg),
+          ],
+          approvalLimits: ApprovalLimits.empty().copyWith(
+            salesOrg: e.salesOrganisation.salesOrg,
+          ),
         ),
-      )),
+      ),
       fetchUserRestrictionDetails: (e) async {
         emit(
           UserRestrictionDetailsState.initial().copyWith(isFetching: true),
@@ -63,10 +64,12 @@ class UserRestrictionDetailsBloc
         );
         approverRights.fold(
           (failure) {
-            emit(state.copyWith(
-              isFetching: false,
-              apiFailureOrSuccessOption: optionOf(approverRights),
-            ));
+            emit(
+              state.copyWith(
+                isFetching: false,
+                apiFailureOrSuccessOption: optionOf(approverRights),
+              ),
+            );
 
             return;
           },
@@ -148,10 +151,12 @@ class UserRestrictionDetailsBloc
             );
           },
           (configureRestrictions) {
-            emit(state.copyWith(
-              userRestrictionStatus: configureRestrictions,
-              apiFailureOrSuccessOption: none(),
-            ));
+            emit(
+              state.copyWith(
+                userRestrictionStatus: configureRestrictions,
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
           },
         );
       },
@@ -207,10 +212,12 @@ class UserRestrictionDetailsBloc
                 );
               },
               (deleteApprovalLimit) {
-                emit(state.copyWith(
-                  userRestrictionStatus: deleteApprovalLimit,
-                  apiFailureOrSuccessOption: none(),
-                ));
+                emit(
+                  state.copyWith(
+                    userRestrictionStatus: deleteApprovalLimit,
+                    apiFailureOrSuccessOption: none(),
+                  ),
+                );
               },
             );
           },

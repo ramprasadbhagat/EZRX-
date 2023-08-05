@@ -16,7 +16,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-
 class AdminPoAttachmentPage extends StatelessWidget {
   AdminPoAttachmentPage({Key? key}) : super(key: key);
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -35,7 +34,9 @@ class AdminPoAttachmentPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocBuilder<AdminPoAttachmentBloc, AdminPoAttachmentState>(
-                builder: (context, state) => _DownloadButton(state: state,),
+                builder: (context, state) => _DownloadButton(
+                  state: state,
+                ),
               ),
               BlocBuilder<AdminPoAttachmentFilterBloc,
                   AdminPoAttachmentFilterState>(

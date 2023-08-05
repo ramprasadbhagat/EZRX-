@@ -19,8 +19,9 @@ void main() {
   final fakeJWT = JWT('fake-porxy_success');
   final fakeRefresh = JWT('');
   final fakeUser = User.empty().copyWith(
-      username: Username('fake-user'),
-      role: Role.empty().copyWith(type: RoleType('root_admin')));
+    username: Username('fake-user'),
+    role: Role.empty().copyWith(type: RoleType('root_admin')),
+  );
 
   var proxyloginFormState = ProxyLoginFormState.initial();
 
@@ -55,10 +56,12 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: fakeUserName,
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: fakeUserName,
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -66,10 +69,12 @@ void main() {
       },
       act: (ProxyLoginFormBloc bloc) => bloc
         ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
-        ..add(ProxyLoginFormEvent.loginWithADButtonPressed(
-          salesOrg: SalesOrg('2001'),
-          user: fakeUser,
-        )),
+        ..add(
+          ProxyLoginFormEvent.loginWithADButtonPressed(
+            salesOrg: SalesOrg('2001'),
+            user: fakeUser,
+          ),
+        ),
       expect: () => [
         proxyloginFormState =
             proxyloginFormState.copyWith(username: fakeUserName),
@@ -99,20 +104,24 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: Username(''),
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: Username(''),
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
       act: (ProxyLoginFormBloc bloc) => bloc
-        ..add(ProxyLoginFormEvent.loginWithADButtonPressed(
-          salesOrg: SalesOrg(''),
-          user: fakeUser,
-        )),
+        ..add(
+          ProxyLoginFormEvent.loginWithADButtonPressed(
+            salesOrg: SalesOrg(''),
+            user: fakeUser,
+          ),
+        ),
       expect: () => [
         proxyloginFormState.copyWith(
           username: Username(''),
@@ -133,18 +142,22 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: fakeUserName,
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: fakeUserName,
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
-        when(() => authRepoMock.isEligibleProxyLogin(
-              user: fakeUser,
-              jwt: fakeJWT,
-            )).thenAnswer(
+        when(
+          () => authRepoMock.isEligibleProxyLogin(
+            user: fakeUser,
+            jwt: fakeJWT,
+          ),
+        ).thenAnswer(
           (invocation) async => const Right(unit),
         );
 
@@ -159,10 +172,12 @@ void main() {
       },
       act: (ProxyLoginFormBloc bloc) => bloc
         ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
-        ..add(ProxyLoginFormEvent.loginWithADButtonPressed(
-          salesOrg: SalesOrg('2001'),
-          user: fakeUser,
-        )),
+        ..add(
+          ProxyLoginFormEvent.loginWithADButtonPressed(
+            salesOrg: SalesOrg('2001'),
+            user: fakeUser,
+          ),
+        ),
       expect: () => [
         proxyloginFormState =
             proxyloginFormState.copyWith(username: fakeUserName),
@@ -189,35 +204,40 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: fakeUserName,
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: fakeUserName,
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
-        when(() => authRepoMock.isEligibleProxyLogin(
-              user: User.empty().copyWith(
-                username: Username('fake-user'),
-                role:
-                    Role.empty().copyWith(type: RoleType('internal_sales_rep')),
-              ),
-              jwt: fakeJWT,
-            )).thenAnswer(
+        when(
+          () => authRepoMock.isEligibleProxyLogin(
+            user: User.empty().copyWith(
+              username: Username('fake-user'),
+              role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+            ),
+            jwt: fakeJWT,
+          ),
+        ).thenAnswer(
           (invocation) async =>
               const Left(ApiFailure.proxyLoginRolePermissionNotMatch()),
         );
       },
       act: (ProxyLoginFormBloc bloc) => bloc
         ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
-        ..add(ProxyLoginFormEvent.loginWithADButtonPressed(
-          user: User.empty().copyWith(
-            username: Username('fake-user'),
-            role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+        ..add(
+          ProxyLoginFormEvent.loginWithADButtonPressed(
+            user: User.empty().copyWith(
+              username: Username('fake-user'),
+              role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+            ),
+            salesOrg: SalesOrg('2001'),
           ),
-          salesOrg: SalesOrg('2001'),
-        )),
+        ),
       expect: () => [
         proxyloginFormState =
             proxyloginFormState.copyWith(username: fakeUserName),
@@ -229,7 +249,8 @@ void main() {
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccessOption: optionOf(
-              const Left(ApiFailure.proxyLoginRolePermissionNotMatch())),
+            const Left(ApiFailure.proxyLoginRolePermissionNotMatch()),
+          ),
         ),
       ],
     );
@@ -244,20 +265,24 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: fakeUserName,
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: fakeUserName,
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
-        when(() => authRepoMock.isEligibleProxyLogin(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(type: RoleType('zp_admin')),
-              ),
-              jwt: fakeJWT,
-            )).thenAnswer(
+        when(
+          () => authRepoMock.isEligibleProxyLogin(
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(type: RoleType('zp_admin')),
+            ),
+            jwt: fakeJWT,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.proxyLoginZPSalesOrgNotMatch(),
           ),
@@ -283,9 +308,11 @@ void main() {
         proxyloginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(const Left(
-            ApiFailure.proxyLoginZPSalesOrgNotMatch(),
-          )),
+          authFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.proxyLoginZPSalesOrgNotMatch(),
+            ),
+          ),
         ),
       ],
     );
@@ -300,20 +327,24 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: fakeUserName,
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: fakeUserName,
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async =>
               Right(Login(access: fakeJWT, refresh: fakeRefresh)),
         );
 
-        when(() => authRepoMock.isEligibleProxyLogin(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(type: RoleType('zp_admin')),
-              ),
-              jwt: fakeJWT,
-            )).thenAnswer(
+        when(
+          () => authRepoMock.isEligibleProxyLogin(
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(type: RoleType('zp_admin')),
+            ),
+            jwt: fakeJWT,
+          ),
+        ).thenAnswer(
           (invocation) async => const Right(
             unit,
           ),
@@ -349,9 +380,11 @@ void main() {
           isSubmitting: false,
           username: fakeUserName,
           showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(const Right(
-            unit,
-          )),
+          authFailureOrSuccessOption: optionOf(
+            const Right(
+              unit,
+            ),
+          ),
         ),
       ],
     );
@@ -366,20 +399,25 @@ void main() {
           ),
         );
 
-        when(() => authRepoMock.proxyLogin(
-              username: fakeUserName,
-              salesOrg: SalesOrg('2001'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.proxyLogin(
+            username: fakeUserName,
+            salesOrg: SalesOrg('2001'),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
-              Login(access: JWT('fake-JWT-client'), refresh: fakeRefresh)),
+            Login(access: JWT('fake-JWT-client'), refresh: fakeRefresh),
+          ),
         );
 
-        when(() => authRepoMock.isEligibleProxyLogin(
-              user: fakeUser.copyWith(
-                role: Role.empty().copyWith(type: RoleType('zp_admin')),
-              ),
-              jwt: JWT('fake-JWT-client'),
-            )).thenAnswer(
+        when(
+          () => authRepoMock.isEligibleProxyLogin(
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(type: RoleType('zp_admin')),
+            ),
+            jwt: JWT('fake-JWT-client'),
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.proxyLoginZPTargetRoleNotMatch(),
           ),
@@ -405,9 +443,11 @@ void main() {
         proxyloginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(const Left(
-            ApiFailure.proxyLoginZPTargetRoleNotMatch(),
-          )),
+          authFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.proxyLoginZPTargetRoleNotMatch(),
+            ),
+          ),
         ),
       ],
     );

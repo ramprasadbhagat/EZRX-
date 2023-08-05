@@ -15,9 +15,11 @@ class MaterialBundleListLocalDatasource {
       ),
     );
 
-    return List.from(makeResponseCamelCase(
-      jsonEncode(data['data']['GetBundles']),
-    )).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
+    return List.from(
+      makeResponseCamelCase(
+        jsonEncode(data['data']['GetBundles']),
+      ),
+    ).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
   }
 
   Future<List<MaterialInfo>> getMaterialBundleListForSalesRep() async {
@@ -27,9 +29,11 @@ class MaterialBundleListLocalDatasource {
       ),
     );
 
-    return List.from(makeResponseCamelCase(
-      jsonEncode(data['data']['GetBundlesForSalesRep']),
-    )).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
+    return List.from(
+      makeResponseCamelCase(
+        jsonEncode(data['data']['GetBundlesForSalesRep']),
+      ),
+    ).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
   }
 
   dynamic makeResponseCamelCase(String resp) {

@@ -46,9 +46,9 @@ abstract class $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
   @useResult
   $Res call(
       {@JsonKey(name: 'ContractNumber', defaultValue: '')
-      String tenderContractNumber,
+          String tenderContractNumber,
       @JsonKey(name: 'ContractReference', defaultValue: '')
-      String tenderContractReference});
+          String tenderContractReference});
 }
 
 /// @nodoc
@@ -98,9 +98,9 @@ abstract class _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
   @useResult
   $Res call(
       {@JsonKey(name: 'ContractNumber', defaultValue: '')
-      String tenderContractNumber,
+          String tenderContractNumber,
       @JsonKey(name: 'ContractReference', defaultValue: '')
-      String tenderContractReference});
+          String tenderContractReference});
 }
 
 /// @nodoc
@@ -141,9 +141,9 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
     extends _OrderHistoryDetailsOrderItemTenderContractDetailsDto {
   const _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto(
       {@JsonKey(name: 'ContractNumber', defaultValue: '')
-      required this.tenderContractNumber,
+          required this.tenderContractNumber,
       @JsonKey(name: 'ContractReference', defaultValue: '')
-      required this.tenderContractReference})
+          required this.tenderContractReference})
       : super._();
 
   factory _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
@@ -201,9 +201,9 @@ abstract class _OrderHistoryDetailsOrderItemTenderContractDetailsDto
     extends OrderHistoryDetailsOrderItemTenderContractDetailsDto {
   const factory _OrderHistoryDetailsOrderItemTenderContractDetailsDto(
           {@JsonKey(name: 'ContractNumber', defaultValue: '')
-          required final String tenderContractNumber,
+              required final String tenderContractNumber,
           @JsonKey(name: 'ContractReference', defaultValue: '')
-          required final String tenderContractReference}) =
+              required final String tenderContractReference}) =
       _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto;
   const _OrderHistoryDetailsOrderItemTenderContractDetailsDto._() : super._();
 

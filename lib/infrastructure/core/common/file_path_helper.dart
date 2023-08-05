@@ -33,7 +33,7 @@ class FileSystemHelper {
     final appStorage = await getApplicationDocumentsDirectory();
     final openFile = File('${appStorage.path}/${file.name}');
     await openFile.writeAsBytes(file.buffer);
-    
+
     return await OpenFile.open(openFile.path);
   }
 }

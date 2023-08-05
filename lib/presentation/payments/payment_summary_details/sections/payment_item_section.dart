@@ -25,10 +25,12 @@ class PaymentItemSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...paymentItemState.paymentItemList.map((e) => _PaymentItem(
-              paymentItem: e,
-              showDivider: paymentItemState.paymentItemList.indexOf(e) != 0,
-            )),
+        ...paymentItemState.paymentItemList.map(
+          (e) => _PaymentItem(
+            paymentItem: e,
+            showDivider: paymentItemState.paymentItemList.indexOf(e) != 0,
+          ),
+        ),
         isSuccessful
             ? const SizedBox.shrink()
             : Padding(

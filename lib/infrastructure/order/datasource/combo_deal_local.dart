@@ -20,11 +20,12 @@ class ComboDealLocalDataSource {
         .toList();
   }
 
-    Future<ComboDeal> getComboDeal() async {
+  Future<ComboDeal> getComboDeal() async {
     await Future.delayed(const Duration(seconds: 4));
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getComboDealForPrincipleGroupResponseK5.json'),
+      await rootBundle.loadString(
+        'assets/json/getComboDealForPrincipleGroupResponseK5.json',
+      ),
     );
     final finalData = data['data']['comboDealForPrincMatGrp'];
 

@@ -26,23 +26,24 @@ void main() {
     });
 
     test('Test fromDomain', () {
-      final configsDto =
-          MaterialItemOverrideDto.fromDomain(MaterialItemOverrideDto.fromJson(
-        data,
-      ).toDomain());
+      final configsDto = MaterialItemOverrideDto.fromDomain(
+        MaterialItemOverrideDto.fromJson(
+          data,
+        ).toDomain(),
+      );
       expect(configsDto.reference, '');
     });
 
     test('Test toJson', () {
-      final configsDtoMap =
-          MaterialItemOverrideDto.fromDomain(MaterialItemOverrideDto.fromJson(
-        data,
-      ).toDomain())
-              .toJson();
+      final configsDtoMap = MaterialItemOverrideDto.fromDomain(
+        MaterialItemOverrideDto.fromJson(
+          data,
+        ).toDomain(),
+      ).toJson();
       expect(configsDtoMap['reference'], '');
     });
 
-     test('Test fromPrice', () {
+    test('Test fromPrice', () {
       final configsDtoMap = MaterialItemOverrideDto.fromPriceAggregate(
         PriceAggregate.empty().copyWith(
           price: Price.empty().copyWith(
@@ -51,9 +52,9 @@ void main() {
             finalPrice: MaterialPrice(1),
             zdp8Override: Zdp8OverrideValue(1),
           ),
-            salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-              currency: Currency('myr'),
-            )
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('myr'),
+          ),
         ),
       );
       expect(configsDtoMap.valueOverride[0].price, 1);
@@ -67,7 +68,9 @@ void main() {
 
     test('Test valueOverride toJson', () {
       const data = {'code': '', 'price': 1, 'currency': 'fake-currency'};
-      final configs =ValueOverrideDto.fromDomain( ValueOverrideDto.fromJson(data).toDomain()).toJson();
+      final configs = ValueOverrideDto.fromDomain(
+        ValueOverrideDto.fromJson(data).toDomain(),
+      ).toJson();
       expect(configs['currency'], 'fake-currency');
     });
 
@@ -79,18 +82,28 @@ void main() {
 
     test('Test percentageOverride toJson', () {
       const data = {'code': '', 'percentage': 10.0};
-      final configs =PercentageOverrideDto.fromDomain(PercentageOverrideDto.fromJson(data).toDomain()).toJson();
+      final configs = PercentageOverrideDto.fromDomain(
+        PercentageOverrideDto.fromJson(data).toDomain(),
+      ).toJson();
       expect(configs['percentage'], 10.0);
     });
 
-     test('Test valueOverrideTojson', () {
-      final configs = valueOverrideTojson([const ValueOverrideDto(code: '', price: 1, currency: 'fake-currency')]);
-      expect(configs, [{'code':'','price':1,'currency':'fake-currency'}]);
+    test('Test valueOverrideTojson', () {
+      final configs = valueOverrideTojson([
+        const ValueOverrideDto(code: '', price: 1, currency: 'fake-currency')
+      ]);
+      expect(configs, [
+        {'code': '', 'price': 1, 'currency': 'fake-currency'}
+      ]);
     });
 
     test('Test percentageoverridetoJson', () {
-      final configs = percentageOverrideTojson([const PercentageOverrideDto(code: '', percentage: 10)]);
-      expect(configs, [{'code':'','percentage':10}]);
+      final configs = percentageOverrideTojson(
+        [const PercentageOverrideDto(code: '', percentage: 10)],
+      );
+      expect(configs, [
+        {'code': '', 'percentage': 10}
+      ]);
     });
   });
 }

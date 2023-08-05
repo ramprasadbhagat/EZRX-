@@ -156,8 +156,10 @@ class AuthRepository implements IAuthRepository {
       return const Left(ApiFailure.proxyLoginZPTargetRoleNotMatch());
     }
 
-    final salesOrgMatches = user.userSalesOrganisations.any((element) =>
-        jwt.salesOrgs.contains(element.salesOrg.value.getOrElse(() => '')));
+    final salesOrgMatches = user.userSalesOrganisations.any(
+      (element) =>
+          jwt.salesOrgs.contains(element.salesOrg.value.getOrElse(() => '')),
+    );
 
     if (!salesOrgMatches) {
       return const Left(ApiFailure.proxyLoginZPSalesOrgNotMatch());

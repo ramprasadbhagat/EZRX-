@@ -28,13 +28,15 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto = OrderHistoryDetailsShippingInformationDto.fromDomain(
-          OrderHistoryDetailsShippingInformationDto.fromJson(data).toDomain());
+        OrderHistoryDetailsShippingInformationDto.fromJson(data).toDomain(),
+      );
       expect(configsDto.address, 'fake-address');
     });
 
-     test('Test tojson', () {
+    test('Test tojson', () {
       final configsDto = OrderHistoryDetailsShippingInformationDto.fromDomain(
-          OrderHistoryDetailsShippingInformationDto.fromJson(data).toDomain()).toJson();
+        OrderHistoryDetailsShippingInformationDto.fromJson(data).toDomain(),
+      ).toJson();
       expect(configsDto['Address'], 'fake-address');
     });
   });

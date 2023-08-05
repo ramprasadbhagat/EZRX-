@@ -143,11 +143,14 @@ class __$$_ContactUsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ContactUsDto extends _ContactUsDto {
   const _$_ContactUsDto(
-      {@JsonKey(name: 'name', defaultValue: '') required this.name,
+      {@JsonKey(name: 'name', defaultValue: '')
+          required this.name,
       @JsonKey(name: 'contactNumber', defaultValue: '')
-      required this.contactNumber,
-      @JsonKey(name: 'email', defaultValue: '') required this.email,
-      @JsonKey(name: 'message', defaultValue: '') required this.message})
+          required this.contactNumber,
+      @JsonKey(name: 'email', defaultValue: '')
+          required this.email,
+      @JsonKey(name: 'message', defaultValue: '')
+          required this.message})
       : super._();
 
   factory _$_ContactUsDto.fromJson(Map<String, dynamic> json) =>
@@ -204,12 +207,14 @@ class _$_ContactUsDto extends _ContactUsDto {
 
 abstract class _ContactUsDto extends ContactUsDto {
   const factory _ContactUsDto(
-      {@JsonKey(name: 'name', defaultValue: '') required final String name,
+      {@JsonKey(name: 'name', defaultValue: '')
+          required final String name,
       @JsonKey(name: 'contactNumber', defaultValue: '')
-      required final String contactNumber,
-      @JsonKey(name: 'email', defaultValue: '') required final String email,
+          required final String contactNumber,
+      @JsonKey(name: 'email', defaultValue: '')
+          required final String email,
       @JsonKey(name: 'message', defaultValue: '')
-      required final String message}) = _$_ContactUsDto;
+          required final String message}) = _$_ContactUsDto;
   const _ContactUsDto._() : super._();
 
   factory _ContactUsDto.fromJson(Map<String, dynamic> json) =

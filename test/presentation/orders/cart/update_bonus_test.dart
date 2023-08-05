@@ -86,12 +86,13 @@ void main() {
       cartItem = PriceAggregate.empty().copyWith(
         quantity: 2,
         materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: PrincipalName('台灣拜耳股份有限公司'),
-            ),
-            quantity: 2),
+          materialNumber: MaterialNumber('000000000023168451'),
+          materialDescription: ' Triglyceride Mosys D',
+          principalData: PrincipalData.empty().copyWith(
+            principalName: PrincipalName('台灣拜耳股份有限公司'),
+          ),
+          quantity: 2,
+        ),
       );
       mockbonusItemWithDataList = [
         MaterialInfo.empty().copyWith(
@@ -102,13 +103,14 @@ void main() {
           ),
         ),
       ];
-      when(() => bonusMaterialBloc.state)
-          .thenReturn(BonusMaterialState.initial().copyWith(
-        failureOrSuccessOption: none(),
-        bonus: mockbonusItemWithDataList,
-        isFetching: false,
-        isStarting: true,
-      ));
+      when(() => bonusMaterialBloc.state).thenReturn(
+        BonusMaterialState.initial().copyWith(
+          failureOrSuccessOption: none(),
+          bonus: mockbonusItemWithDataList,
+          isFetching: false,
+          isStarting: true,
+        ),
+      );
       when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
@@ -131,7 +133,8 @@ void main() {
             create: (context) => bonusMaterialBloc,
           ),
           BlocProvider<TenderContractBloc>(
-              create: (context) => tenderContractBlocMock),
+            create: (context) => tenderContractBlocMock,
+          ),
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
           BlocProvider<UserBloc>(create: (context) => userBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),

@@ -136,11 +136,13 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock),
+            create: (context) => customerCodeBlocMock,
+          ),
           BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const CustomerSearchPage(),
       );
@@ -148,37 +150,40 @@ void main() {
 
     testWidgets('Load customer Search Widget', (tester) async {
       whenListen(
-          customerCodeBlocMock,
-          Stream.fromIterable(
-            [
-              CustomerCodeState.initial().copyWith(
-                searchKey: SearchKey(''),
-                isSearchActive: false,
-                isFetching: false,
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: '123456'),
-                apiFailureOrSuccessOption: none(),
-                customerCodeList: [
-                  CustomerCodeInfo.empty(),
-                ],
-              ),
-              CustomerCodeState.initial().copyWith(
-                searchKey: SearchKey('GSK'),
-                isSearchActive: true,
-                isFetching: true,
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: 'fake-123456'),
-                apiFailureOrSuccessOption: none(),
-                customerCodeList: [
-                  CustomerCodeInfo.empty(),
-                ],
-              ),
-            ],
-          ));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2501'))));
+        customerCodeBlocMock,
+        Stream.fromIterable(
+          [
+            CustomerCodeState.initial().copyWith(
+              searchKey: SearchKey(''),
+              isSearchActive: false,
+              isFetching: false,
+              customerCodeInfo: CustomerCodeInfo.empty()
+                  .copyWith(customerCodeSoldTo: '123456'),
+              apiFailureOrSuccessOption: none(),
+              customerCodeList: [
+                CustomerCodeInfo.empty(),
+              ],
+            ),
+            CustomerCodeState.initial().copyWith(
+              searchKey: SearchKey('GSK'),
+              isSearchActive: true,
+              isFetching: true,
+              customerCodeInfo: CustomerCodeInfo.empty()
+                  .copyWith(customerCodeSoldTo: 'fake-123456'),
+              apiFailureOrSuccessOption: none(),
+              customerCodeList: [
+                CustomerCodeInfo.empty(),
+              ],
+            ),
+          ],
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       final customerSearchPage = find.byKey(const Key('customerSearchPage'));
       expect(customerSearchPage, findsOneWidget);
@@ -234,18 +239,22 @@ void main() {
         ),
       ];
 
-      whenListen(customerCodeBlocMock,
-          Stream.fromIterable(expectedCustomerCodeListStates),
-          initialState: customerCodeBlocMock.state.copyWith(
-            isFetching: false,
-            canLoadMore: true,
-            customerCodeInfo: customerCodeListMock.first,
-            customerCodeList: customerCodeListMock,
-          ));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2501'))));
+      whenListen(
+        customerCodeBlocMock,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+        initialState: customerCodeBlocMock.state.copyWith(
+          isFetching: false,
+          canLoadMore: true,
+          customerCodeInfo: customerCodeListMock.first,
+          customerCodeList: customerCodeListMock,
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+        ),
+      );
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getScopedWidget());
@@ -276,18 +285,22 @@ void main() {
         ),
       ];
 
-      whenListen(customerCodeBlocMock,
-          Stream.fromIterable(expectedCustomerCodeListStates),
-          initialState: customerCodeBlocMock.state.copyWith(
-            isFetching: true,
-            canLoadMore: true,
-            customerCodeInfo: customerCodeListMock.first,
-            customerCodeList: customerCodeListMock,
-          ));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2501'))));
+      whenListen(
+        customerCodeBlocMock,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+        initialState: customerCodeBlocMock.state.copyWith(
+          isFetching: true,
+          canLoadMore: true,
+          customerCodeInfo: customerCodeListMock.first,
+          customerCodeList: customerCodeListMock,
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+        ),
+      );
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getScopedWidget());
@@ -584,11 +597,13 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock),
+            create: (context) => customerCodeBlocMock,
+          ),
           BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const CustomerSearchPage(),
       );
@@ -644,23 +659,27 @@ void main() {
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
 
         when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(customerCodeList: [
-            CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: PhoneNumber('1234567890'),
-              customerCodeSoldTo: '123456789',
-              shipToInfos: <ShipToInfo>[
-                ShipToInfo.empty().copyWith(
-                  shipToCustomerCode: '12345678',
-                ),
-              ],
-              paymentTermDescription: '30 days',
-            ),
-          ]),
+          CustomerCodeState.initial().copyWith(
+            customerCodeList: [
+              CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: PhoneNumber('1234567890'),
+                customerCodeSoldTo: '123456789',
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(
+                    shipToCustomerCode: '12345678',
+                  ),
+                ],
+                paymentTermDescription: '30 days',
+              ),
+            ],
+          ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                salesOrganisation: SalesOrganisation.empty()
-                    .copyWith(salesOrg: SalesOrg('2501'))));
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+          ),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();

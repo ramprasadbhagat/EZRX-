@@ -15,13 +15,16 @@ void main() {
       };
     });
     test('Test fromDomain', () {
-      final configsDto = PriceBundleDto.fromDomain(PriceBundleDto.fromJson(data).toDomain());
+      final configsDto =
+          PriceBundleDto.fromDomain(PriceBundleDto.fromJson(data).toDomain());
 
       expect(configsDto.code, 'fake-code');
     });
 
     test('Test toJson', () {
-      final configsDto = PriceBundleDto.fromDomain(PriceBundleDto.fromJson(data).toDomain()).toJson();
+      final configsDto =
+          PriceBundleDto.fromDomain(PriceBundleDto.fromJson(data).toDomain())
+              .toJson();
 
       expect(configsDto['BundleCode'], 'fake-code');
     });
@@ -31,10 +34,11 @@ void main() {
         'Type': 'fake-type',
         'Sequence': 12,
         'Quantity': 1,
-        'Rate':10,
+        'Rate': 10,
       };
       final configsDtoMap = PriceBundleItemDto.fromDomain(
-          PriceBundleItemDto.fromJson(data).toDomain());
+        PriceBundleItemDto.fromJson(data).toDomain(),
+      );
       expect(configsDtoMap.sequence, 12);
     });
 
@@ -43,10 +47,11 @@ void main() {
         'Type': 'fake-type',
         'Sequence': 12,
         'Quantity': 1,
-        'Rate':10,
+        'Rate': 10,
       };
       final configsDtoMap = PriceBundleItemDto.fromDomain(
-          PriceBundleItemDto.fromJson(data).toDomain()).toJson();
+        PriceBundleItemDto.fromJson(data).toDomain(),
+      ).toJson();
       expect(configsDtoMap['Sequence'], 12);
     });
   });

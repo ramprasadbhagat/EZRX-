@@ -166,53 +166,58 @@ class _ViewByOrder extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return SingleChildScrollView(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        CustomCard(
-          child: ListTile(
-            onTap: () {
-              context.read<ViewByOrderDetailsBloc>().add(
-                    ViewByOrderDetailsEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      orderHeader: viewByOrderHistoryItem,
-                    ),
-                  );
-              context.router.push(ViewByOrderDetailsPageRoute(
-                viewByOrderHistoryItem: viewByOrderHistoryItem,
-              ));
-            },
-            contentPadding: const EdgeInsets.all(10),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${viewByOrderHistoryItem.materialCount} items',
-                        style: Theme.of(context).textTheme.titleSmall,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomCard(
+            child: ListTile(
+              onTap: () {
+                context.read<ViewByOrderDetailsBloc>().add(
+                      ViewByOrderDetailsEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        orderHeader: viewByOrderHistoryItem,
                       ),
-                      PriceComponent(
-                        salesOrgConfig: salesOrgConfigs,
-                        price: viewByOrderHistoryItem.orderValue.toString(),
-                        currencyCodeTextStyle:
-                            Theme.of(context).textTheme.titleSmall,
-                        title: 'Order total : ',
-                      ),
-                    ],
+                    );
+                context.router.push(
+                  ViewByOrderDetailsPageRoute(
+                    viewByOrderHistoryItem: viewByOrderHistoryItem,
                   ),
-                ),
-                const _BuyAgainButton(),
-              ],
+                );
+              },
+              contentPadding: const EdgeInsets.all(10),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${viewByOrderHistoryItem.materialCount} items',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        PriceComponent(
+                          salesOrgConfig: salesOrgConfigs,
+                          price: viewByOrderHistoryItem.orderValue.toString(),
+                          currencyCodeTextStyle:
+                              Theme.of(context).textTheme.titleSmall,
+                          title: 'Order total : ',
+                        ),
+                      ],
+                    ),
+                  ),
+                  const _BuyAgainButton(),
+                ],
+              ),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

@@ -38,19 +38,23 @@ class OrderDocumentTypeBloc
         );
       },
       fetch: (e) async {
-        emit(OrderDocumentTypeState.initial().copyWith(
-          isSubmitting: true,
-        ));
+        emit(
+          OrderDocumentTypeState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
         final failureOrSuccess =
             await orderDocumentTypeRepository.getOrderDocumentTypList(
           salesOrganisation: e.salesOrganisation,
         );
         failureOrSuccess.fold(
-          (failure) => emit(state.copyWith(
-            orderDocumentTypeListFailureOrSuccessOption:
-                optionOf(failureOrSuccess),
-            isSubmitting: false,
-          )),
+          (failure) => emit(
+            state.copyWith(
+              orderDocumentTypeListFailureOrSuccessOption:
+                  optionOf(failureOrSuccess),
+              isSubmitting: false,
+            ),
+          ),
           (orderDocumentTypeList) {
             if (e.isEDI) {
               orderDocumentTypeList
@@ -69,12 +73,14 @@ class OrderDocumentTypeBloc
                 isReasonSelected: false,
               ),
             );
-            emit(state.copyWith(
-              orderDocumentTypeListFailureOrSuccessOption:
-                  optionOf(failureOrSuccess),
-              isSubmitting: false,
-              orderDocumentTypeList: orderDocumentTypeList,
-            ));
+            emit(
+              state.copyWith(
+                orderDocumentTypeListFailureOrSuccessOption:
+                    optionOf(failureOrSuccess),
+                isSubmitting: false,
+                orderDocumentTypeList: orderDocumentTypeList,
+              ),
+            );
           },
         );
       },
@@ -103,15 +109,19 @@ class OrderDocumentTypeBloc
     required Emitter<OrderDocumentTypeState> emit,
   }) {
     if (isReasonSelected) {
-      emit(state.copyWith(
-        isReasonSelected: true,
-        selectedReason: selectedOrderType,
-      ));
+      emit(
+        state.copyWith(
+          isReasonSelected: true,
+          selectedReason: selectedOrderType,
+        ),
+      );
     } else {
-      emit(state.copyWith(
-        isOrderTypeSelected: true,
-        selectedOrderType: selectedOrderType,
-      ));
+      emit(
+        state.copyWith(
+          isOrderTypeSelected: true,
+          selectedOrderType: selectedOrderType,
+        ),
+      );
     }
   }
 

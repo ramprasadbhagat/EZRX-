@@ -65,10 +65,11 @@ class _ClearDeliveryAddressSection extends StatelessWidget {
             child: ElevatedButton(
               key: WidgetKeys.confirmButton,
               onPressed: () {
-                context
-                    .read<ProductSearchBloc>()
-                    .add(const ProductSearchEvent.clearProductSearchSuggestionHistory());
-              context.router.pop();
+                context.read<ProductSearchBloc>().add(
+                      const ProductSearchEvent
+                          .clearProductSearchSuggestionHistory(),
+                    );
+                context.router.pop();
               },
               child: Text(
                 'Clear'.tr(),

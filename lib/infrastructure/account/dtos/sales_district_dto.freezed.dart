@@ -39,9 +39,10 @@ abstract class $SalesDistrictDtoCopyWith<$Res> {
       _$SalesDistrictDtoCopyWithImpl<$Res, SalesDistrictDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
       @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
-      List<SalesDistrictInfoDto> salesDistrictInfo});
+          List<SalesDistrictInfoDto> salesDistrictInfo});
 }
 
 /// @nodoc
@@ -82,9 +83,10 @@ abstract class _$$_SalesDistrictDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
       @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
-      List<SalesDistrictInfoDto> salesDistrictInfo});
+          List<SalesDistrictInfoDto> salesDistrictInfo});
 }
 
 /// @nodoc
@@ -118,9 +120,10 @@ class __$$_SalesDistrictDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesDistrictDto extends _SalesDistrictDto {
   const _$_SalesDistrictDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          required this.salesOrg,
       @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
-      required final List<SalesDistrictInfoDto> salesDistrictInfo})
+          required final List<SalesDistrictInfoDto> salesDistrictInfo})
       : _salesDistrictInfo = salesDistrictInfo,
         super._();
 
@@ -177,12 +180,11 @@ class _$_SalesDistrictDto extends _SalesDistrictDto {
 
 abstract class _SalesDistrictDto extends SalesDistrictDto {
   const factory _SalesDistrictDto(
-          {@JsonKey(name: 'salesOrg', defaultValue: '')
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
           required final String salesOrg,
-          @JsonKey(
-              name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
-          required final List<SalesDistrictInfoDto> salesDistrictInfo}) =
-      _$_SalesDistrictDto;
+      @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+          required final List<SalesDistrictInfoDto>
+              salesDistrictInfo}) = _$_SalesDistrictDto;
   const _SalesDistrictDto._() : super._();
 
   factory _SalesDistrictDto.fromJson(Map<String, dynamic> json) =

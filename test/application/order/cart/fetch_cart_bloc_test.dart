@@ -21,27 +21,32 @@ void main() {
       setUp: () {
         when(() => cartRepositoryMock.fetchCart())
             .thenAnswer((invocation) => Right(mockMaterialCartItemList));
-        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
-                  cartItem: mockMaterialCartItemList,
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                ))
-            .thenAnswer((invocation) async => Right(mockMaterialCartItemList));
-        when(() => cartRepositoryMock.updateDiscountQty(
-                items: mockMaterialCartItemList))
-            .thenAnswer((invocation) => mockMaterialCartItemList);
+        when(
+          () => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+            cartItem: mockMaterialCartItemList,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer((invocation) async => Right(mockMaterialCartItemList));
+        when(
+          () => cartRepositoryMock.updateDiscountQty(
+            items: mockMaterialCartItemList,
+          ),
+        ).thenAnswer((invocation) => mockMaterialCartItemList);
       },
       act: (bloc) => bloc
-        ..add(CartEvent.fetch(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          doNotAllowOutOfStockMaterials: true,
-          salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          comboDealEligible: true,
-        )),
+        ..add(
+          CartEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            comboDealEligible: true,
+          ),
+        ),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
         CartState.initial().copyWith(
@@ -61,23 +66,27 @@ void main() {
         when(() => cartRepositoryMock.clearCart()).thenAnswer(
           (invocation) async => const Right(unit),
         );
-        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
-              cartItem: <CartItem>[],
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => const Right(<CartItem>[]));
+        when(
+          () => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+            cartItem: <CartItem>[],
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer((invocation) async => const Right(<CartItem>[]));
       },
       act: (bloc) => bloc
-        ..add(CartEvent.fetch(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          doNotAllowOutOfStockMaterials: true,
-          salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          comboDealEligible: true,
-        )),
+        ..add(
+          CartEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            comboDealEligible: true,
+          ),
+        ),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
         CartState.initial().copyWith(
@@ -104,19 +113,22 @@ void main() {
       '=> Initialize CartBloc and fetch Stock Fail',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.fetchCart())
-            .thenAnswer((invocation) => const Left(
-                  ApiFailure.other('Fake-Error'),
-                ));
+        when(() => cartRepositoryMock.fetchCart()).thenAnswer(
+          (invocation) => const Left(
+            ApiFailure.other('Fake-Error'),
+          ),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.fetch(
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotAllowOutOfStockMaterials: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        comboDealEligible: false,
-      )),
+      act: (bloc) => bloc.add(
+        CartEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotAllowOutOfStockMaterials: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          comboDealEligible: false,
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
         CartState.initial().copyWith(
@@ -134,27 +146,32 @@ void main() {
       setUp: () {
         when(() => cartRepositoryMock.fetchCart())
             .thenAnswer((invocation) => Right(mockMaterialCartItemList));
-        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
-                  cartItem: mockMaterialCartItemList,
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                ))
-            .thenAnswer((invocation) async => Right(mockMaterialCartItemList));
-        when(() => cartRepositoryMock.updateDiscountQty(
-                items: mockMaterialCartItemList))
-            .thenAnswer((invocation) => mockMaterialCartItemList);
+        when(
+          () => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+            cartItem: mockMaterialCartItemList,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer((invocation) async => Right(mockMaterialCartItemList));
+        when(
+          () => cartRepositoryMock.updateDiscountQty(
+            items: mockMaterialCartItemList,
+          ),
+        ).thenAnswer((invocation) => mockMaterialCartItemList);
       },
       act: (bloc) => bloc
-        ..add(CartEvent.fetch(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          doNotAllowOutOfStockMaterials: true,
-          salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          comboDealEligible: true,
-        )),
+        ..add(
+          CartEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            comboDealEligible: true,
+          ),
+        ),
       expect: () => [
         CartState.initial().copyWith(isFetching: true, cartItems: <CartItem>[]),
         CartState.initial().copyWith(
@@ -176,13 +193,15 @@ void main() {
         when(() => cartRepositoryMock.fetchCart()).thenAnswer(
           (invocation) => Right(mockCartItems),
         );
-        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
-              cartItem: mockCartItems,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer(
+        when(
+          () => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+            cartItem: mockCartItems,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
           (invocation) async => Right(mockCartItems),
         );
         when(
@@ -194,21 +213,24 @@ void main() {
         );
       },
       act: (bloc) => bloc
-        ..add(CartEvent.fetch(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          doNotAllowOutOfStockMaterials: true,
-          salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          comboDealEligible: false,
-        )),
+        ..add(
+          CartEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            comboDealEligible: false,
+          ),
+        ),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
         CartState.initial().copyWith(isFetching: false),
         CartState.initial().copyWith(isClearing: true),
         CartState.initial().copyWith(
-            isClearing: false,
-            cartItems: [CartItem.material(mockMaterialList.first)]),
+          isClearing: false,
+          cartItems: [CartItem.material(mockMaterialList.first)],
+        ),
       ],
     );
   });

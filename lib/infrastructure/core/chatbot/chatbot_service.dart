@@ -21,5 +21,6 @@ class ChatBotService {
 
   Future<bool> passPayloadToBot({
     required Map<String, Object> payload,
-  }) async => await YmChat.setPayload(payload);
+  }) async =>
+      await YmChat.setPayload(payload);
 }

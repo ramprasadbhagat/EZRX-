@@ -36,7 +36,7 @@ class ArticleInfoRemoteDataSource {
       'lang': lang,
       'after': after,
     };
-    
+
     return await exceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -52,7 +52,8 @@ class ArticleInfoRemoteDataSource {
         throw OtherException();
       }
 
-      return AnnouncementArticleInfoDto.fromJson(res.data['data']['search']).toDomain;
+      return AnnouncementArticleInfoDto.fromJson(res.data['data']['search'])
+          .toDomain;
     });
   }
 

@@ -41,10 +41,12 @@ abstract class $InvoiceDetailsDtoCopyWith<$Res> {
       _$InvoiceDetailsDtoCopyWithImpl<$Res, InvoiceDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'invoiceNumber', defaultValue: '') String invoiceNumber,
-      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      {@JsonKey(name: 'invoiceNumber', defaultValue: '')
+          String invoiceNumber,
+      @JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
       @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-      List<ReturnItemDetailsDto> materials});
+          List<ReturnItemDetailsDto> materials});
 }
 
 /// @nodoc
@@ -90,10 +92,12 @@ abstract class _$$_InvoiceDetailsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'invoiceNumber', defaultValue: '') String invoiceNumber,
-      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      {@JsonKey(name: 'invoiceNumber', defaultValue: '')
+          String invoiceNumber,
+      @JsonKey(name: 'salesOrg', defaultValue: '')
+          String salesOrg,
       @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-      List<ReturnItemDetailsDto> materials});
+          List<ReturnItemDetailsDto> materials});
 }
 
 /// @nodoc
@@ -133,10 +137,11 @@ class __$$_InvoiceDetailsDtoCopyWithImpl<$Res>
 class _$_InvoiceDetailsDto extends _InvoiceDetailsDto {
   const _$_InvoiceDetailsDto(
       {@JsonKey(name: 'invoiceNumber', defaultValue: '')
-      required this.invoiceNumber,
-      @JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
+          required this.invoiceNumber,
+      @JsonKey(name: 'salesOrg', defaultValue: '')
+          required this.salesOrg,
       @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-      required final List<ReturnItemDetailsDto> materials})
+          required final List<ReturnItemDetailsDto> materials})
       : _materials = materials,
         super._();
 
@@ -199,11 +204,11 @@ class _$_InvoiceDetailsDto extends _InvoiceDetailsDto {
 abstract class _InvoiceDetailsDto extends InvoiceDetailsDto {
   const factory _InvoiceDetailsDto(
           {@JsonKey(name: 'invoiceNumber', defaultValue: '')
-          required final String invoiceNumber,
+              required final String invoiceNumber,
           @JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+              required final String salesOrg,
           @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-          required final List<ReturnItemDetailsDto> materials}) =
+              required final List<ReturnItemDetailsDto> materials}) =
       _$_InvoiceDetailsDto;
   const _InvoiceDetailsDto._() : super._();
 

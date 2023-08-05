@@ -87,9 +87,7 @@ class ComboDeal with _$ComboDeal {
       flexiQtyTier.isNotEmpty &&
       flexiQtyTier.every((tier) => tier.suffix.isValid());
 
-
   ComboDealScheme get scheme {
-
     if (_allMaterialWithSuffix && _allFlexiQtyTierWithSuffix) {
       return ComboDealScheme.kWithSuffix;
     }

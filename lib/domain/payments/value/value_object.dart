@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';

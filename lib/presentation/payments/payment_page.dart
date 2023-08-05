@@ -183,8 +183,6 @@ class _Credit extends StatelessWidget {
       ];
 }
 
-
-
 class _PaymentSummary extends StatelessWidget {
   const _PaymentSummary({Key? key}) : super(key: key);
 
@@ -198,8 +196,8 @@ class _PaymentSummary extends StatelessWidget {
         return Column(
           children: [
             SectionTitle(
-                title: 'Payment summary',
-                onTapIconButton: () =>
+              title: 'Payment summary',
+              onTapIconButton: () =>
                   context.router.pushNamed('payments/payment_summary'),
             ),
             _ItemCard(

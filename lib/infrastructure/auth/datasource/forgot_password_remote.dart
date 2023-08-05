@@ -44,7 +44,7 @@ class ForgotPasswordRemoteDataSource {
 
       _exceptionChecker(res: res);
       final data = res.data['data']['requestResetPassword'];
-      
+
       return ForgotPasswordDto.fromJson(data).toDomain();
     });
   }

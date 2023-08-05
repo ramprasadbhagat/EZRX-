@@ -5,7 +5,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 
 abstract class IPaymentCustomerInformationRepository {
-  Future<Either<ApiFailure, PaymentCustomerInformation>> getPaymentCustomerInformation({
+  Future<Either<ApiFailure, PaymentCustomerInformation>>
+      getPaymentCustomerInformation({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   });

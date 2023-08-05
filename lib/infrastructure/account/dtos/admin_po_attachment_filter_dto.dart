@@ -1,4 +1,3 @@
-
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -46,11 +45,11 @@ class AdminPoAttachmentFilterDto with _$AdminPoAttachmentFilterDto {
     )
         required String fromDate,
   }) = _AdminPoAttachmentFilterDto;
-	
-  factory AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =>
-			_$AdminPoAttachmentFilterDtoFromJson(json);
 
-factory AdminPoAttachmentFilterDto.fromDomain(
+  factory AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =>
+      _$AdminPoAttachmentFilterDtoFromJson(json);
+
+  factory AdminPoAttachmentFilterDto.fromDomain(
     AdminPoAttachmentFilter adminPoAttachmentFilter,
   ) {
     return AdminPoAttachmentFilterDto(
@@ -63,6 +62,5 @@ factory AdminPoAttachmentFilterDto.fromDomain(
     );
   }
 }
-
 
 dynamic overrideToJson(String value) => value.isNotEmpty ? value : null;

@@ -49,7 +49,7 @@ class _MaterialInfoDialog extends StatelessWidget {
     final productDetailAggregate =
         context.read<ProductDetailBloc>().state.productDetailAggregate;
     final materialInfo = productDetailAggregate.materialInfo;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
       child: Column(
@@ -77,9 +77,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Manufacturer'.tr(),
-            valueText:
-                materialInfo.principalData.principalName
-                .name,
+            valueText: materialInfo.principalData.principalName.name,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -115,8 +113,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           const SizedBox(height: 7),
           BalanceTextRow(
             keyText: 'Batch'.tr(),
-            valueText:
-                productDetailAggregate.stockInfo.batch.displayLabel,
+            valueText: productDetailAggregate.stockInfo.batch.displayLabel,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.black,
@@ -127,18 +124,17 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
-                keyText: 'Expiry'.tr(),
-                valueText: productDetailAggregate
-                .stockInfo.expiryDate.dateOrNaString,
-                valueFlex: 1,
-                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.black,
-                    ),
-                valueTextStyle:
-                    Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.darkGray,
-                        ),
-              ),
+            keyText: 'Expiry'.tr(),
+            valueText:
+                productDetailAggregate.stockInfo.expiryDate.dateOrNaString,
+            valueFlex: 1,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
+          ),
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(

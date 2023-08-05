@@ -39,5 +39,5 @@ class MaterialFilterState with _$MaterialFilterState {
         brandList: <String>[],
       );
 
-    MaterialFilter get emptyMaterialFilter => MaterialFilter.empty();
+  MaterialFilter get emptyMaterialFilter => MaterialFilter.empty();
 }

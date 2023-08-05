@@ -128,11 +128,14 @@ void main() {
     await materialRootRobot.tapPrincipleSelector();
     materialRootRobot.verifyMaterialFilterPage();
     await materialRootRobot.enterTextAndSubmit(
-        principleSearchText: principleSearchText);
+      principleSearchText: principleSearchText,
+    );
     materialRootRobot.verifySearchResultAppears(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     await materialRootRobot.tapOnSearchResult(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     materialRootRobot.verifyApplyButton();
     await materialRootRobot.tapApplyButton();
     materialRootRobot.findPrincipleSelector();
@@ -252,11 +255,20 @@ void main() {
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(material, materialQuantity);
     orderSummaryRobot.verifyMaterialListPrice(
-        true, currency, materialListPrice);
+      true,
+      currency,
+      materialListPrice,
+    );
     orderSummaryRobot.verifyMaterialUnitPrice(
-        true, currency, materialUnitPrice);
+      true,
+      currency,
+      materialUnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        true, currency, materialTotalPrice);
+      true,
+      currency,
+      materialTotalPrice,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //minimum order amount crosses

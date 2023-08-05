@@ -42,8 +42,6 @@ class PushNotificationServiceMock extends Mock
 
 class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
-
-
 void main() {
   late ChangePasswordRemoteDataSourceMock remoteDataSourceMock;
   late ChangePasswordLocalDataSourceMock localDataSourceMock;
@@ -83,9 +81,10 @@ void main() {
 
         final newPassword = Password.login('new');
         final result = await repository.setPassword(
-            oldPassword: oldPassword,
-            newPassword: newPassword,
-            user: User.empty());
+          oldPassword: oldPassword,
+          newPassword: newPassword,
+          user: User.empty(),
+        );
         expect(result.isRight(), true);
       },
     );
@@ -127,11 +126,13 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.setUserPassword(
-              'test',
-              'old',
-              'new',
-            )).thenThrow((invocation) async => Exception('fake-error'));
+        when(
+          () => remoteDataSourceMock.setUserPassword(
+            'test',
+            'old',
+            'new',
+          ),
+        ).thenThrow((invocation) async => Exception('fake-error'));
         final oldPassword = Password.login('old');
 
         final newPassword = Password.login('old');
@@ -155,11 +156,13 @@ void main() {
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.setUserPassword(
-              'test',
-              'old',
-              'new',
-            )).thenAnswer((invocation) async => ResetPassword.empty());
+        when(
+          () => remoteDataSourceMock.setUserPassword(
+            'test',
+            'old',
+            'new',
+          ),
+        ).thenAnswer((invocation) async => ResetPassword.empty());
         final oldPassword = Password.login('old');
 
         final newPassword = Password.login('new');

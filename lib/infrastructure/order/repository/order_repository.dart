@@ -426,22 +426,29 @@ class OrderRepository implements IOrderRepository {
           .map((e) => e.getMaterialNumber.getOrDefaultValue(''))
           .toList(),
       MixpanelProps.productManufacturer: cartItems
-          .map((e) =>
-              e.materialInfo.principalData.principalName.getOrDefaultValue(''))
+          .map(
+            (e) => e.materialInfo.principalData.principalName
+                .getOrDefaultValue(''),
+          )
           .toList(),
       MixpanelProps.productCategory: cartItems
           .map((e) => e.materialInfo.materialGroup4.getMaterialGroup4Type)
           .toList(),
       MixpanelProps.productQty: cartItems.map((e) => e.quantity).toList(),
       MixpanelProps.bonusName: cartItems
-          .map((e) =>
-              e.addedBonusList.map((e) => e.materialDescription).toList())
+          .map(
+            (e) => e.addedBonusList.map((e) => e.materialDescription).toList(),
+          )
           .toList(),
       MixpanelProps.bonusManufacturer: cartItems
-          .map((e) => e.addedBonusList
-              .map((e) => e.materialInfo.principalData.principalName
-                  .getOrDefaultValue(''))
-              .toList())
+          .map(
+            (e) => e.addedBonusList
+                .map(
+                  (e) => e.materialInfo.principalData.principalName
+                      .getOrDefaultValue(''),
+                )
+                .toList(),
+          )
           .toList(),
       MixpanelProps.bannerClicked: isBannerClicked,
       MixpanelProps.bannerId:

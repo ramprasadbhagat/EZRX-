@@ -34,9 +34,11 @@ class FullName with _$FullName {
     return displayFullName
         .trim()
         .split(' ')
-        .map((word) =>
-            word[0].toUpperCase() +
-            word.characters.getRange(1).string.toLowerCase())
+        .map(
+          (word) =>
+              word[0].toUpperCase() +
+              word.characters.getRange(1).string.toLowerCase(),
+        )
         .join(' ');
   }
 }

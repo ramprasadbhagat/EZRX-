@@ -72,7 +72,9 @@ void main() {
         const input = 'zzzcccc.com';
         final result = validateEmailAddress(input);
         expect(
-            result, const Left(ValueFailure.invalidEmail(failedValue: input)));
+          result,
+          const Left(ValueFailure.invalidEmail(failedValue: input)),
+        );
       },
     );
 
@@ -82,7 +84,9 @@ void main() {
         const input = 'asdhjjahwd@ccc';
         final result = validateEmailAddress(input);
         expect(
-            result, const Left(ValueFailure.invalidEmail(failedValue: input)));
+          result,
+          const Left(ValueFailure.invalidEmail(failedValue: input)),
+        );
       },
     );
   });
@@ -202,9 +206,11 @@ void main() {
         );
         expect(
           result,
-          const Left(ValueFailure.mustOneLowerCaseCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneLowerCaseCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -216,9 +222,11 @@ void main() {
         final result = atLeastOneLowerCharacter(input);
         expect(
           result,
-          const Left(ValueFailure.mustOneLowerCaseCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneLowerCaseCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -245,9 +253,11 @@ void main() {
         );
         expect(
           result,
-          const Left(ValueFailure.mustOneUpperCaseCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneUpperCaseCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -259,9 +269,11 @@ void main() {
         final result = atLeastOneUpperCharacter(input);
         expect(
           result,
-          const Left(ValueFailure.mustOneUpperCaseCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneUpperCaseCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -288,9 +300,11 @@ void main() {
         );
         expect(
           result,
-          const Left(ValueFailure.mustOneNumericCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneNumericCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -302,9 +316,11 @@ void main() {
         final result = atLeastOneNumericCharacter(input);
         expect(
           result,
-          const Left(ValueFailure.mustOneNumericCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneNumericCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -331,9 +347,11 @@ void main() {
         );
         expect(
           result,
-          const Left(ValueFailure.mustOneSpecialCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneSpecialCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -345,9 +363,11 @@ void main() {
         final result = atLeastOneSpecialCharacter(input);
         expect(
           result,
-          const Left(ValueFailure.mustOneSpecialCharacter(
-            failedValue: input,
-          )),
+          const Left(
+            ValueFailure.mustOneSpecialCharacter(
+              failedValue: input,
+            ),
+          ),
         );
       },
     );
@@ -365,10 +385,11 @@ void main() {
           accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
-              id: '2',
-              description: 'Developer',
-              name: 'abc',
-              type: RoleType('Developer')),
+            id: '2',
+            description: 'Developer',
+            name: 'abc',
+            type: RoleType('Developer'),
+          ),
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
@@ -396,10 +417,11 @@ void main() {
           accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
-              id: '2',
-              description: 'Developer',
-              name: 'abc',
-              type: RoleType('Developer')),
+            id: '2',
+            description: 'Developer',
+            name: 'abc',
+            type: RoleType('Developer'),
+          ),
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
@@ -413,9 +435,11 @@ void main() {
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
-            result,
-            const Left(
-                ValueFailure.mustNotContainUserName(failedValue: input)));
+          result,
+          const Left(
+            ValueFailure.mustNotContainUserName(failedValue: input),
+          ),
+        );
       },
     );
 
@@ -430,10 +454,11 @@ void main() {
           accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
-              id: '2',
-              description: 'Developer',
-              name: 'abc',
-              type: RoleType('Developer')),
+            id: '2',
+            description: 'Developer',
+            name: 'abc',
+            type: RoleType('Developer'),
+          ),
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
@@ -447,9 +472,11 @@ void main() {
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
-            result,
-            const Left(
-                ValueFailure.mustNotContainUserName(failedValue: input)));
+          result,
+          const Left(
+            ValueFailure.mustNotContainUserName(failedValue: input),
+          ),
+        );
       },
     );
 
@@ -464,10 +491,11 @@ void main() {
           accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
-              id: '2',
-              description: 'Developer',
-              name: 'abc',
-              type: RoleType('Developer')),
+            id: '2',
+            description: 'Developer',
+            name: 'abc',
+            type: RoleType('Developer'),
+          ),
           customerCode: CustomerCode('2606'),
           userSalesOrganisations: [],
           settings: Settings.empty(),
@@ -481,9 +509,11 @@ void main() {
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
-            result,
-            const Left(
-                ValueFailure.mustNotContainUserName(failedValue: input)));
+          result,
+          const Left(
+            ValueFailure.mustNotContainUserName(failedValue: input),
+          ),
+        );
       },
     );
   });
@@ -517,9 +547,11 @@ void main() {
         final result = validateIntegerValue(input);
         expect(
           result,
-          const Left(ValueFailure.invalidIntegerValue(
-            failedValue: 0,
-          )),
+          const Left(
+            ValueFailure.invalidIntegerValue(
+              failedValue: 0,
+            ),
+          ),
         );
       },
     );

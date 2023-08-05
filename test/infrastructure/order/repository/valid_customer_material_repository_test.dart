@@ -63,13 +63,14 @@ void main() {
           .thenAnswer((invocation) async => <MaterialNumber>[]);
 
       final result = await validCustomerMaterialRepository.getValidMaterialList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          focMaterialList: fakeQueryMaterialNumbers,
-          materialList: [],
-          pickAndPack: '',
-          salesOrganisation: fakeSaleOrg,
-          shipToInfo: fakeShipToInfo,
-          user: fakeUser);
+        customerCodeInfo: fakeCustomerCodeInfo,
+        focMaterialList: fakeQueryMaterialNumbers,
+        materialList: [],
+        pickAndPack: '',
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: fakeUser,
+      );
       expect(
         result.isRight(),
         true,
@@ -80,13 +81,14 @@ void main() {
       when(() => validCustomerMaterialLocalDataSource.getValidMaterialList())
           .thenThrow((invocation) async => MockException());
       final result = await validCustomerMaterialRepository.getValidMaterialList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          focMaterialList: fakeQueryMaterialNumbers,
-          materialList: [],
-          pickAndPack: 'include',
-          salesOrganisation: fakeSaleOrg,
-          shipToInfo: fakeShipToInfo,
-          user: fakeUser);
+        customerCodeInfo: fakeCustomerCodeInfo,
+        focMaterialList: fakeQueryMaterialNumbers,
+        materialList: [],
+        pickAndPack: 'include',
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: fakeUser,
+      );
       expect(
         result.isLeft(),
         true,
@@ -94,25 +96,29 @@ void main() {
     });
     test('get validCustomerMaterial successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => validCustomerMaterialRemoteDataSource.getValidMaterialList(
-              salesOrganisation: '2601',
-              customerCode: '0030031512',
-              shipToCode: 'fake-ship-to-code',
-              pickAndPackValue: '',
-              materialList: [],
-              focMaterialList: [
-                '000000000023210571',
-                '000000000023245612',
-              ])).thenAnswer((invocation) async => <MaterialNumber>[]);
+      when(
+        () => validCustomerMaterialRemoteDataSource.getValidMaterialList(
+          salesOrganisation: '2601',
+          customerCode: '0030031512',
+          shipToCode: 'fake-ship-to-code',
+          pickAndPackValue: '',
+          materialList: [],
+          focMaterialList: [
+            '000000000023210571',
+            '000000000023245612',
+          ],
+        ),
+      ).thenAnswer((invocation) async => <MaterialNumber>[]);
 
       final result = await validCustomerMaterialRepository.getValidMaterialList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          focMaterialList: fakeQueryMaterialNumbers,
-          materialList: [],
-          pickAndPack: '',
-          salesOrganisation: fakeSaleOrg,
-          shipToInfo: fakeShipToInfo,
-          user: fakeUser);
+        customerCodeInfo: fakeCustomerCodeInfo,
+        focMaterialList: fakeQueryMaterialNumbers,
+        materialList: [],
+        pickAndPack: '',
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: fakeUser,
+      );
       expect(
         result.isRight(),
         true,
@@ -120,22 +126,25 @@ void main() {
     });
     test('get validCustomerMaterial fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => validCustomerMaterialRemoteDataSource.getValidMaterialList(
-              salesOrganisation: '',
-              customerCode: '',
-              shipToCode: '',
-              pickAndPackValue: '',
-              materialList: [],
-              focMaterialList: []))
-          .thenThrow((invocation) async => MockException());
-      final result = await validCustomerMaterialRepository.getValidMaterialList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          focMaterialList: fakeQueryMaterialNumbers,
+      when(
+        () => validCustomerMaterialRemoteDataSource.getValidMaterialList(
+          salesOrganisation: '',
+          customerCode: '',
+          shipToCode: '',
+          pickAndPackValue: '',
           materialList: [],
-          pickAndPack: '',
-          salesOrganisation: fakeSaleOrg,
-          shipToInfo: fakeShipToInfo,
-          user: fakeUser.copyWith(username: Username('')));
+          focMaterialList: [],
+        ),
+      ).thenThrow((invocation) async => MockException());
+      final result = await validCustomerMaterialRepository.getValidMaterialList(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        focMaterialList: fakeQueryMaterialNumbers,
+        materialList: [],
+        pickAndPack: '',
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: fakeUser.copyWith(username: Username('')),
+      );
       expect(
         result.isLeft(),
         false,

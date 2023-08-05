@@ -28,7 +28,7 @@ class ProductStockInfo extends StatelessWidget {
             child: LoadingShimmer.tile(),
           );
         }
-        
+
         return stockInfo.batchExpiryDateAvailable
             ? Padding(
                 key: WidgetKeys.materialDetailsStock,

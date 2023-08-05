@@ -8,7 +8,8 @@ class DownloadPaymentAttachmentsState with _$DownloadPaymentAttachmentsState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _DownloadPaymentAttachmentsState;
 
-  factory DownloadPaymentAttachmentsState.initial() => DownloadPaymentAttachmentsState(
+  factory DownloadPaymentAttachmentsState.initial() =>
+      DownloadPaymentAttachmentsState(
         failureOrSuccessOption: none(),
         isDownloadInProgress: false,
         fileUrl: DownloadPaymentAttachment.empty(),

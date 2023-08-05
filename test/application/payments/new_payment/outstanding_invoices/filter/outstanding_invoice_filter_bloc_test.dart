@@ -58,19 +58,21 @@ void main() {
       act: (OutstandingInvoiceFilterBloc bloc) {
         bloc.add(
           OutstandingInvoiceFilterEvent.setDocumentDate(
-              documentDateRange: dateTimeRange),
+            documentDateRange: dateTimeRange,
+          ),
         );
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-            filter: outstandingInvoiceFilter.copyWith(
-          documentDateFrom: DateTimeStringValue(
-            getDateStringByDateTime(dateTimeRange.start),
+          filter: outstandingInvoiceFilter.copyWith(
+            documentDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(dateTimeRange.start),
+            ),
+            documentDateTo: DateTimeStringValue(
+              getDateStringByDateTime(dateTimeRange.end),
+            ),
           ),
-          documentDateTo: DateTimeStringValue(
-            getDateStringByDateTime(dateTimeRange.end),
-          ),
-        )),
+        ),
       ],
     );
 
@@ -84,14 +86,15 @@ void main() {
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-            filter: outstandingInvoiceFilter.copyWith(
-          dueDateFrom: DateTimeStringValue(
-            getDateStringByDateTime(dateTimeRange.start),
+          filter: outstandingInvoiceFilter.copyWith(
+            dueDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(dateTimeRange.start),
+            ),
+            dueDateTo: DateTimeStringValue(
+              getDateStringByDateTime(dateTimeRange.end),
+            ),
           ),
-          dueDateTo: DateTimeStringValue(
-            getDateStringByDateTime(dateTimeRange.end),
-          ),
-        )),
+        ),
       ],
     );
 
@@ -101,7 +104,8 @@ void main() {
       act: (OutstandingInvoiceFilterBloc bloc) {
         bloc.add(
           OutstandingInvoiceFilterEvent.setAmountFrom(
-              amountFrom: getDateStringByDateTime(dateTimeRange.start)),
+            amountFrom: getDateStringByDateTime(dateTimeRange.start),
+          ),
         );
       },
       expect: () => [
@@ -119,7 +123,8 @@ void main() {
       act: (OutstandingInvoiceFilterBloc bloc) {
         bloc.add(
           OutstandingInvoiceFilterEvent.setAmountTo(
-              amountTo: getDateStringByDateTime(dateTimeRange.end)),
+            amountTo: getDateStringByDateTime(dateTimeRange.end),
+          ),
         );
       },
       expect: () => [
@@ -138,13 +143,17 @@ void main() {
       act: (OutstandingInvoiceFilterBloc bloc) {
         bloc.add(
           OutstandingInvoiceFilterEvent.setOutstandingInvoiceStatus(
-              status: selectedState, value: false),
+            status: selectedState,
+            value: false,
+          ),
         );
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-            filter: outstandingInvoiceFilter.copyWith(
-                outstandingInvoiceStatus: selectedState)),
+          filter: outstandingInvoiceFilter.copyWith(
+            outstandingInvoiceStatus: selectedState,
+          ),
+        ),
       ],
     );
 
@@ -168,12 +177,15 @@ void main() {
       act: (OutstandingInvoiceFilterBloc bloc) {
         bloc.add(
           OutstandingInvoiceFilterEvent.updateFilterToLastApplied(
-              lastAppliedFilter: outstandingInvoiceFilter),
+            lastAppliedFilter: outstandingInvoiceFilter,
+          ),
         );
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-            filter: outstandingInvoiceFilter, showErrorMessage: false),
+          filter: outstandingInvoiceFilter,
+          showErrorMessage: false,
+        ),
       ],
     );
   });

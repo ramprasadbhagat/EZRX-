@@ -19,7 +19,8 @@ void main() {
       seed: () => CartState.initial().copyWith(
         cartItems: [
           mockZmgMaterialCartItemFirst.copyWith(
-              materials: [mockZmgCartItemList.last.copyWith(quantity: 1)])
+            materials: [mockZmgCartItemList.last.copyWith(quantity: 1)],
+          )
         ],
         isFetching: false,
       ),
@@ -40,38 +41,45 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right([
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.last
-                  .copyWith(quantity: 5, discountedMaterialCount: 5),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.last
+                    .copyWith(quantity: 5, discountedMaterialCount: 5),
+              ],
+            )
           ]),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockZmgMaterialCartItemFirst.copyWith(
-          materials: [mockZmgCartItemList.last.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockZmgMaterialCartItemFirst.copyWith(
+            materials: [mockZmgCartItemList.last.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 5),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 5),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
             mockZmgMaterialCartItemFirst.copyWith(
-                materials: [mockZmgCartItemList.last.copyWith(quantity: 1)])
+              materials: [mockZmgCartItemList.last.copyWith(quantity: 1)],
+            )
           ],
           isFetching: true,
         ),
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.last
-                  .copyWith(quantity: 5, discountedMaterialCount: 5)
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.last
+                    .copyWith(quantity: 5, discountedMaterialCount: 5)
+              ],
+            )
           ],
           isFetching: false,
         ),
@@ -90,9 +98,10 @@ void main() {
           5,
         );
         expect(
-            bloc.state
-                .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
-            5);
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          5,
+        );
       },
     );
 
@@ -101,7 +110,8 @@ void main() {
       seed: () => CartState.initial().copyWith(
         cartItems: [
           mockZmgMaterialCartItemFirst.copyWith(
-              materials: [mockZmgCartItemList.last.copyWith(quantity: 5)])
+            materials: [mockZmgCartItemList.last.copyWith(quantity: 5)],
+          )
         ],
         isFetching: false,
       ),
@@ -122,38 +132,45 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right([
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.last
-                  .copyWith(quantity: 2, discountedMaterialCount: 2),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.last
+                    .copyWith(quantity: 2, discountedMaterialCount: 2),
+              ],
+            )
           ]),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockZmgMaterialCartItemFirst.copyWith(
-          materials: [mockZmgCartItemList.last.copyWith(quantity: 5)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockZmgMaterialCartItemFirst.copyWith(
+            materials: [mockZmgCartItemList.last.copyWith(quantity: 5)],
+          ),
+          updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 2),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 2),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
             mockZmgMaterialCartItemFirst.copyWith(
-                materials: [mockZmgCartItemList.last.copyWith(quantity: 5)])
+              materials: [mockZmgCartItemList.last.copyWith(quantity: 5)],
+            )
           ],
           isFetching: true,
         ),
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.last
-                  .copyWith(quantity: 2, discountedMaterialCount: 2)
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.last
+                    .copyWith(quantity: 2, discountedMaterialCount: 2)
+              ],
+            )
           ],
           isFetching: false,
         ),
@@ -172,9 +189,10 @@ void main() {
           2,
         );
         expect(
-            bloc.state
-                .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
-            2);
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          2,
+        );
       },
     );
   });

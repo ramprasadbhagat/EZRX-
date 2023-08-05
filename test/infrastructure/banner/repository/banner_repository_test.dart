@@ -57,7 +57,9 @@ void main() {
       });
 
       when(
-        () => localDataSourceMock.getEZReachBanners(bannerType: 'banner_carousel'),
+        () => localDataSourceMock.getEZReachBanners(
+          bannerType: 'banner_carousel',
+        ),
       ).thenAnswer((invocation) async {
         final res = json.decode(
           await rootBundle
@@ -83,7 +85,9 @@ void main() {
     test('Get banner from remote success', () async {
       bannerListMock = await localDataSourceMock.getBanners();
 
-      eZReachBannerListMock = await localDataSourceMock.getEZReachBanners(bannerType: 'banner_carousel');
+      eZReachBannerListMock = await localDataSourceMock.getEZReachBanners(
+        bannerType: 'banner_carousel',
+      );
 
       when(
         () => localDataSourceMock.getBanners(),

@@ -50,9 +50,11 @@ void main() {
 
           expect(
             result,
-            List.from(makeResponseCamelCase(
-              jsonEncode(res['data']['GetBundles']),
-            )).map((e) => MaterialDto.fromJson(e).toDomain()).toList(),
+            List.from(
+              makeResponseCamelCase(
+                jsonEncode(res['data']['GetBundles']),
+              ),
+            ).map((e) => MaterialDto.fromJson(e).toDomain()).toList(),
           );
         },
       );
@@ -61,8 +63,9 @@ void main() {
         'Get material bundle list for sales rep',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getMaterialBundleListForSalesRepResponse.json'),
+            await rootBundle.loadString(
+              'assets/json/getMaterialBundleListForSalesRepResponse.json',
+            ),
           );
           dynamic makeResponseCamelCase(String resp) {
             final camelCaseJsonKeys = resp.replaceAllMapped(
@@ -77,13 +80,16 @@ void main() {
             return jsonDecode(camelCaseJsonKeys);
           }
 
-          final result = await localDataSource.getMaterialBundleListForSalesRep();
+          final result =
+              await localDataSource.getMaterialBundleListForSalesRep();
 
           expect(
             result,
-            List.from(makeResponseCamelCase(
-      jsonEncode(res['data']['GetBundlesForSalesRep']),
-    )).map((e) => MaterialDto.fromJson(e).toDomain()).toList(),
+            List.from(
+              makeResponseCamelCase(
+                jsonEncode(res['data']['GetBundlesForSalesRep']),
+              ),
+            ).map((e) => MaterialDto.fromJson(e).toDomain()).toList(),
           );
         },
       );

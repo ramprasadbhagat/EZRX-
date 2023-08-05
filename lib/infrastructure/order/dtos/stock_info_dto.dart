@@ -27,7 +27,6 @@ class MaterialStockInfoDto with _$MaterialStockInfoDto {
       );
 }
 
-
 @freezed
 class StockInfoDto with _$StockInfoDto {
   const StockInfoDto._();

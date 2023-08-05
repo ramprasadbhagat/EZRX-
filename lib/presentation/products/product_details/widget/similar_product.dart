@@ -54,7 +54,6 @@ class SimilarProduct extends StatelessWidget {
   }
 }
 
-
 class _SimilarProductCard extends StatelessWidget {
   final MaterialInfo material;
   const _SimilarProductCard({
@@ -76,7 +75,6 @@ class _SimilarProductCard extends StatelessWidget {
                   ? ProductDetailEvent.deleteFavourite(
                       materialNumber: material.materialNumber,
                       isForSimilarProduct: true,
-
                     )
                   : ProductDetailEvent.addFavourite(
                       materialNumber: material.materialNumber,

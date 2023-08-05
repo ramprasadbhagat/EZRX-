@@ -32,16 +32,20 @@ void main() {
       'should return list of first element of bonus material item based on sorted price bonus item',
       () async {
         final input = <PriceBonusItem>[
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 1, bonusMaterials: [
-            BonusMaterial.empty().copyWith(bonusQuantity: 2),
-            BonusMaterial.empty().copyWith(bonusQuantity: 4),
-          ]),
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 2, bonusMaterials: [
-            BonusMaterial.empty().copyWith(bonusQuantity: 2),
-            BonusMaterial.empty().copyWith(bonusQuantity: 4),
-          ])
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 1,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(bonusQuantity: 2),
+              BonusMaterial.empty().copyWith(bonusQuantity: 4),
+            ],
+          ),
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 2,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(bonusQuantity: 2),
+              BonusMaterial.empty().copyWith(bonusQuantity: 4),
+            ],
+          )
         ];
         final companyName = PriceBonus(items: input);
         final result = companyName.getItems;
@@ -58,16 +62,20 @@ void main() {
       'should return list of sorted price bonus item based on higher qualifyingQuantity',
       () async {
         final priceBonusItemList = <PriceBonusItem>[
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 1, bonusMaterials: [
-            BonusMaterial.empty().copyWith(bonusQuantity: 2),
-            BonusMaterial.empty().copyWith(bonusQuantity: 4),
-          ]),
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 2, bonusMaterials: [
-            BonusMaterial.empty().copyWith(bonusQuantity: 2),
-            BonusMaterial.empty().copyWith(bonusQuantity: 4),
-          ])
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 1,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(bonusQuantity: 2),
+              BonusMaterial.empty().copyWith(bonusQuantity: 4),
+            ],
+          ),
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 2,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(bonusQuantity: 2),
+              BonusMaterial.empty().copyWith(bonusQuantity: 4),
+            ],
+          )
         ];
 
         final bonuses = <PriceBonus>[
@@ -87,18 +95,23 @@ void main() {
       'should return list of material number of bonus material item which is same as price material number',
       () async {
         final priceBonusItemList = <PriceBonusItem>[
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 1, bonusMaterials: [
-            BonusMaterial.empty().copyWith(
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 1,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(
                 bonusQuantity: 2,
-                materialNumber: MaterialNumber('00000001234')),
-            BonusMaterial.empty().copyWith(bonusQuantity: 4),
-          ]),
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 2, bonusMaterials: [
-            BonusMaterial.empty().copyWith(bonusQuantity: 2),
-            BonusMaterial.empty().copyWith(bonusQuantity: 4),
-          ])
+                materialNumber: MaterialNumber('00000001234'),
+              ),
+              BonusMaterial.empty().copyWith(bonusQuantity: 4),
+            ],
+          ),
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 2,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(bonusQuantity: 2),
+              BonusMaterial.empty().copyWith(bonusQuantity: 4),
+            ],
+          )
         ];
 
         final bonuses = <PriceBonus>[
@@ -107,7 +120,9 @@ void main() {
           ),
         ];
         final price = Price.empty().copyWith(
-            bonuses: bonuses, materialNumber: MaterialNumber('00000001234'));
+          bonuses: bonuses,
+          materialNumber: MaterialNumber('00000001234'),
+        );
 
         final result = price.sameMaterialBonus;
         expect(result, [priceBonusItemList.first.bonusMaterials.first]);
@@ -118,24 +133,32 @@ void main() {
       'should return list of material number of bonus material item which is different as price material number',
       () async {
         final priceBonusItemList = <PriceBonusItem>[
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 1, bonusMaterials: [
-            BonusMaterial.empty().copyWith(
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 1,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(
                 bonusQuantity: 2,
-                materialNumber: MaterialNumber('00000001234')),
-            BonusMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('00000001234'),
+              ),
+              BonusMaterial.empty().copyWith(
                 bonusQuantity: 4,
-                materialNumber: MaterialNumber('00000001236')),
-          ]),
-          PriceBonusItem.empty()
-              .copyWith(qualifyingQuantity: 2, bonusMaterials: [
-            BonusMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('00000001236'),
+              ),
+            ],
+          ),
+          PriceBonusItem.empty().copyWith(
+            qualifyingQuantity: 2,
+            bonusMaterials: [
+              BonusMaterial.empty().copyWith(
                 bonusQuantity: 2,
-                materialNumber: MaterialNumber('00000001235')),
-            BonusMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('00000001235'),
+              ),
+              BonusMaterial.empty().copyWith(
                 bonusQuantity: 4,
-                materialNumber: MaterialNumber('00000001234')),
-          ])
+                materialNumber: MaterialNumber('00000001234'),
+              ),
+            ],
+          )
         ];
 
         final bonuses = <PriceBonus>[
@@ -144,7 +167,9 @@ void main() {
           ),
         ];
         final price = Price.empty().copyWith(
-            bonuses: bonuses, materialNumber: MaterialNumber('00000001234'));
+          bonuses: bonuses,
+          materialNumber: MaterialNumber('00000001234'),
+        );
 
         final result = price.otherMaterialBonus;
         expect(result, [
@@ -160,9 +185,10 @@ void main() {
       'check bonus quanity, material number and material description for bonus material',
       () async {
         final bonusMaterial = BonusMaterial.empty().copyWith(
-            bonusQuantity: 2,
-            materialNumber: MaterialNumber('00000001234'),
-            materialDescription: 'It is a good material');
+          bonusQuantity: 2,
+          materialNumber: MaterialNumber('00000001234'),
+          materialDescription: 'It is a good material',
+        );
 
         final materialItemBonus =
             MaterialItemBonus.fromBonusMaterial(bonusMaterial);
@@ -180,8 +206,9 @@ void main() {
       'get material number when bonus material is not empty',
       () async {
         final bonusMaterial = MaterialItemBonus.empty().copyWith(
-            materialInfo: MaterialInfo.empty()
-                .copyWith(materialNumber: MaterialNumber('00000001234')));
+          materialInfo: MaterialInfo.empty()
+              .copyWith(materialNumber: MaterialNumber('00000001234')),
+        );
         final result = bonusMaterial.materialNumber;
         expect(result, MaterialNumber('00000001234'));
       },

@@ -48,7 +48,8 @@ void main() {
         httpService: service,
         config: Config(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
-        creditAndInvoiceDetailsQueryMutation: CreditAndInvoiceDetailsQueryMutation(),
+        creditAndInvoiceDetailsQueryMutation:
+            CreditAndInvoiceDetailsQueryMutation(),
       );
     },
   );
@@ -62,7 +63,8 @@ void main() {
           () async {
             final res = json.decode(
               await rootBundle.loadString(
-                  'assets/json/customerDocumentDetailsResponse.json'),
+                'assets/json/customerDocumentDetailsResponse.json',
+              ),
             );
 
             dioAdapter.onPost(

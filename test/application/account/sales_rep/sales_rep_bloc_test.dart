@@ -35,8 +35,9 @@ void main() {
       build: () => SalesRepBloc(salesRepRepository: salesRepRepositoryMock),
       setUp: () {
         when(() => salesRepRepositoryMock.getSalesRepInfo(user: userData))
-            .thenAnswer((invocation) async =>
-                const Left(ApiFailure.other('Fake Error')));
+            .thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('Fake Error')),
+        );
       },
       act: (bloc) => bloc.add(SalesRepEvent.fetch(user: userData)),
       expect: () => [
@@ -72,11 +73,13 @@ void main() {
       'For "Stream Listener"',
       build: () => SalesRepBloc(salesRepRepository: salesRepRepositoryMock),
       setUp: () {
-        userData=userData.copyWith(
-            role: Role.empty().copyWith(type: RoleType('internal_sales_rep')));
+        userData = userData.copyWith(
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
+        );
         when(() => salesRepRepositoryMock.getSalesRepInfo(user: userData))
             .thenAnswer(
-                (invocation) async => Right(SalesRepresentativeInfo.empty()));
+          (invocation) async => Right(SalesRepresentativeInfo.empty()),
+        );
       },
       act: (bloc) => bloc.add(SalesRepEvent.fetch(user: userData)),
       expect: () => [

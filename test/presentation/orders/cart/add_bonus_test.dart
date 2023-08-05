@@ -128,13 +128,14 @@ void main() {
           ),
         ),
       ];
-      when(() => bonusMaterialBloc.state)
-          .thenReturn(BonusMaterialState.initial().copyWith(
-        failureOrSuccessOption: none(),
-        bonus: mockbonusItemWithDataList,
-        isFetching: false,
-        isStarting: true,
-      ));
+      when(() => bonusMaterialBloc.state).thenReturn(
+        BonusMaterialState.initial().copyWith(
+          failureOrSuccessOption: none(),
+          bonus: mockbonusItemWithDataList,
+          isFetching: false,
+          isStarting: true,
+        ),
+      );
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state)
@@ -156,7 +157,8 @@ void main() {
             create: (context) => bonusMaterialBloc,
           ),
           BlocProvider<TenderContractBloc>(
-              create: (context) => tenderContractBlocMock),
+            create: (context) => tenderContractBlocMock,
+          ),
           BlocProvider<UserBloc>(
             create: (context) => userBlocMock,
           ),
@@ -183,7 +185,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: BonusAddPage(
           cartItem: CartItem.material(cartItem),
@@ -276,13 +279,14 @@ void main() {
     testWidgets(
         'Test have bonus item list fetched when search text is initially valid.',
         (tester) async {
-      when(() => bonusMaterialBloc.state)
-          .thenReturn(BonusMaterialState.initial().copyWith(
-        isFetching: false,
-        isStarting: false,
-        searchKey: SearchKey('000'),
-        bonus: mockbonusItemWithDataList,
-      ));
+      when(() => bonusMaterialBloc.state).thenReturn(
+        BonusMaterialState.initial().copyWith(
+          isFetching: false,
+          isStarting: false,
+          searchKey: SearchKey('000'),
+          bonus: mockbonusItemWithDataList,
+        ),
+      );
       await tester.runAsync(() async {
         await tester.pumpWidget(getWidget());
       });
@@ -352,11 +356,19 @@ void main() {
       expect(addBonusTextField, findsOneWidget);
       final bonusItemList = find.byKey(const Key('bonusItemList'));
       expect(bonusItemList, findsOneWidget);
-      final add = find.byKey(Key(
-          'addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}'));
+      final add = find.byKey(
+        Key(
+          'addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}',
+        ),
+      );
       expect(add, findsOneWidget);
-      final addItem = tester.widget(find.byKey(Key(
-          'addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}')));
+      final addItem = tester.widget(
+        find.byKey(
+          Key(
+            'addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}',
+          ),
+        ),
+      );
       await tester.tap(find.byWidget(addItem));
       await tester.pump();
 
@@ -398,10 +410,11 @@ void main() {
       await tester.pump();
 
       expect(
-          find.text(
-            'Please enter at least 2 characters.'.tr(),
-          ),
-          findsOneWidget);
+        find.text(
+          'Please enter at least 2 characters.'.tr(),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Test add bonus search field clear', (tester) async {
@@ -415,8 +428,10 @@ void main() {
           isFetching: false,
         ),
       ];
-      whenListen(bonusMaterialBloc,
-          Stream.fromIterable(expectedCustomerCodeListStates));
+      whenListen(
+        bonusMaterialBloc,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+      );
       await tester.pumpWidget(getWidget());
       // final addBonusTextFieldClear =
       //     find.byKey(const Key('addBonusTextFieldClear'));
@@ -494,16 +509,19 @@ void main() {
           isFetching: true,
         ),
         BonusMaterialState.initial().copyWith(
-            searchKey: SearchKey('Test'),
-            isFetching: false,
-            failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Fake-Error'),
-              ),
-            )),
+          searchKey: SearchKey('Test'),
+          isFetching: false,
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('Fake-Error'),
+            ),
+          ),
+        ),
       ];
-      whenListen(bonusMaterialBloc,
-          Stream.fromIterable(expectedCustomerCodeListStates));
+      whenListen(
+        bonusMaterialBloc,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+      );
       await tester.pumpWidget(getWidget());
       await tester.pump();
       final addBonusSearchField =
@@ -525,14 +543,17 @@ void main() {
           isFetching: true,
         ),
         BonusMaterialState.initial().copyWith(
-            searchKey: SearchKey('Test'),
-            isFetching: false,
-            failureOrSuccessOption: optionOf(
-              const Right(null),
-            )),
+          searchKey: SearchKey('Test'),
+          isFetching: false,
+          failureOrSuccessOption: optionOf(
+            const Right(null),
+          ),
+        ),
       ];
-      whenListen(bonusMaterialBloc,
-          Stream.fromIterable(expectedCustomerCodeListStates));
+      whenListen(
+        bonusMaterialBloc,
+        Stream.fromIterable(expectedCustomerCodeListStates),
+      );
       await tester.pumpWidget(getWidget());
       await tester.pump();
       final addBonusSearchField =

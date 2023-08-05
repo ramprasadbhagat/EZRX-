@@ -231,22 +231,26 @@ class __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
   const _$_ApproverRightsDetailsDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
-      @JsonKey(name: 'principal', defaultValue: '') required this.principal,
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+          required this.salesOrg,
+      @JsonKey(name: 'principal', defaultValue: '')
+          required this.principal,
       @JsonKey(name: 'industryCode1', defaultValue: '')
-      required this.industryCode1,
+          required this.industryCode1,
       @JsonKey(name: 'industryCode2', defaultValue: '')
-      required this.industryCode2,
+          required this.industryCode2,
       @JsonKey(name: 'industryCode3', defaultValue: '')
-      required this.industryCode3,
+          required this.industryCode3,
       @JsonKey(name: 'industryCode4', defaultValue: '')
-      required this.industryCode4,
+          required this.industryCode4,
       @JsonKey(name: 'industryCode5', defaultValue: '')
-      required this.industryCode5,
-      @JsonKey(name: 'plant', defaultValue: '') required this.plant,
+          required this.industryCode5,
+      @JsonKey(name: 'plant', defaultValue: '')
+          required this.plant,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
-      @JsonKey(name: 'uuid', defaultValue: '') required this.uuid})
+          required this.materialNumber,
+      @JsonKey(name: 'uuid', defaultValue: '')
+          required this.uuid})
       : super._();
 
   factory _$_ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =>
@@ -346,24 +350,25 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
 abstract class _ApproverRightsDetailsDto extends ApproverRightsDetailsDto {
   const factory _ApproverRightsDetailsDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-      required final String salesOrg,
+          required final String salesOrg,
       @JsonKey(name: 'principal', defaultValue: '')
-      required final String principal,
+          required final String principal,
       @JsonKey(name: 'industryCode1', defaultValue: '')
-      required final String industryCode1,
+          required final String industryCode1,
       @JsonKey(name: 'industryCode2', defaultValue: '')
-      required final String industryCode2,
+          required final String industryCode2,
       @JsonKey(name: 'industryCode3', defaultValue: '')
-      required final String industryCode3,
+          required final String industryCode3,
       @JsonKey(name: 'industryCode4', defaultValue: '')
-      required final String industryCode4,
+          required final String industryCode4,
       @JsonKey(name: 'industryCode5', defaultValue: '')
-      required final String industryCode5,
-      @JsonKey(name: 'plant', defaultValue: '') required final String plant,
+          required final String industryCode5,
+      @JsonKey(name: 'plant', defaultValue: '')
+          required final String plant,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
+          required final String materialNumber,
       @JsonKey(name: 'uuid', defaultValue: '')
-      required final String uuid}) = _$_ApproverRightsDetailsDto;
+          required final String uuid}) = _$_ApproverRightsDetailsDto;
   const _ApproverRightsDetailsDto._() : super._();
 
   factory _ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =

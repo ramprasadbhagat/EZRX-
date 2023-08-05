@@ -9,7 +9,7 @@ class DownloadPaymentAttachment with _$DownloadPaymentAttachment {
   const factory DownloadPaymentAttachment({
     required String url,
   }) = _DownloadPaymentAttachment;
-  
+
   factory DownloadPaymentAttachment.empty() => const DownloadPaymentAttachment(
         url: '',
       );

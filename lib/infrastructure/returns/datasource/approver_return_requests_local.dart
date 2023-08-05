@@ -11,11 +11,10 @@ class ApproverReturnRequestsLocal {
       await rootBundle
           .loadString('assets/json/returnRequestsForApproverV2Response.json'),
     );
-    
+
     return List.from(data['data']['requestsForApproverV2']['requestID'])
         .map(
-          (e) =>
-              ReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
+          (e) => ReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
         )
         .toList()
       ..retainWhere((element) => element.isValidRequestId);

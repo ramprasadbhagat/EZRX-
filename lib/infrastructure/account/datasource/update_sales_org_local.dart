@@ -11,7 +11,8 @@ class UpdateSalesOrgLocalDataSource {
   }) async {
     final data = json.decode(
       await rootBundle.loadString(
-          'assets/json/updateSalesOrgConfig${salesOrg}Response.json',),
+        'assets/json/updateSalesOrgConfig${salesOrg}Response.json',
+      ),
     );
 
     return UpdateSalesOrganisationConfigsDto.fromJson(

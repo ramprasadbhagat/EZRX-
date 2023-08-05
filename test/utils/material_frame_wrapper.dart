@@ -17,20 +17,22 @@ class MaterialFrameWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return usingLocalization
-          ? MaterialApp(
-              theme: appThemeData[AppTheme.light],
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              home: _buildHome(),
-            )
-          : MaterialApp(
-              theme: appThemeData[AppTheme.light],
-              home: useMediaQuery ? _buildHome() : child,
-            );
-    });
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return usingLocalization
+            ? MaterialApp(
+                theme: appThemeData[AppTheme.light],
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                home: _buildHome(),
+              )
+            : MaterialApp(
+                theme: appThemeData[AppTheme.light],
+                home: useMediaQuery ? _buildHome() : child,
+              );
+      },
+    );
   }
 
   Widget _buildHome() {

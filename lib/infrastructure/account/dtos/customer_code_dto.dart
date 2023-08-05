@@ -15,7 +15,8 @@ part 'customer_code_dto.g.dart';
 class CustomerCodeDto with _$CustomerCodeDto {
   const CustomerCodeDto._();
   const factory CustomerCodeDto({
-    @JsonKey(name: 'customerCodeSoldTo', defaultValue: '') required String customerCodeSoldTo,
+    @JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
+        required String customerCodeSoldTo,
     @JsonKey(name: 'name1', defaultValue: '') required String name1,
     @JsonKey(name: 'name2', defaultValue: '') required String name2,
     @JsonKey(name: 'name3', defaultValue: '') required String name3,
@@ -28,18 +29,24 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'street5', defaultValue: '') required String street5,
     @JsonKey(name: 'city1', defaultValue: '') required String city1,
     @JsonKey(name: 'city2', defaultValue: '') required String city2,
-    @JsonKey(name: 'telephoneNumber', defaultValue: '') required String telephoneNumber,
+    @JsonKey(name: 'telephoneNumber', defaultValue: '')
+        required String telephoneNumber,
     @JsonKey(name: 'postalCode', defaultValue: '') required String postalCode,
     @JsonKey(name: 'division', defaultValue: '') required String division,
     @JsonKey(name: 'customerClassification', defaultValue: '')
         required String customerClassification,
-    @JsonKey(name: 'customerLocalGroup', defaultValue: '') required String customerLocalGroup,
+    @JsonKey(name: 'customerLocalGroup', defaultValue: '')
+        required String customerLocalGroup,
     @JsonKey(name: 'paymentTermDescription', defaultValue: '')
         required String paymentTermDescription,
-    @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[]) required List<ShipToDto> shipToInfos,
-    @JsonKey(name: 'billTo', defaultValue: <BillToDto>[]) required List<BillToDto> billToInfos,
-    @JsonKey(name: 'customerAttr7', defaultValue: '') required String customerAttr7,
-    @JsonKey(name: 'customerGrp4', defaultValue: '') required String customerGrp4,
+    @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
+        required List<ShipToDto> shipToInfos,
+    @JsonKey(name: 'billTo', defaultValue: <BillToDto>[])
+        required List<BillToDto> billToInfos,
+    @JsonKey(name: 'customerAttr7', defaultValue: '')
+        required String customerAttr7,
+    @JsonKey(name: 'customerGrp4', defaultValue: '')
+        required String customerGrp4,
     @JsonKey(name: 'region', defaultValue: '') required String region,
     @JsonKey(name: 'emailAddresses', defaultValue: [])
         required List<String> emailAddresses,
@@ -49,7 +56,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
         required List<String> salesDeals,
     @JsonKey(name: 'country', defaultValue: '') required String country,
     @JsonKey(name: 'floor', defaultValue: '') required String floor,
-    @JsonKey(name: 'houseNumber1', defaultValue: '') required String houseNumber1,
+    @JsonKey(name: 'houseNumber1', defaultValue: '')
+        required String houseNumber1,
   }) = _CustomerCodeDto;
 
   CustomerCodeInfo toDomain() {
@@ -86,8 +94,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       salesDeals: salesDeals.map((e) => SalesDealNumber(e)).toList(),
       telephoneNumber: PhoneNumber(telephoneNumber),
       country: country,
-      floor:floor,
-      houseNumber1:houseNumber1,
+      floor: floor,
+      houseNumber1: houseNumber1,
     );
   }
 

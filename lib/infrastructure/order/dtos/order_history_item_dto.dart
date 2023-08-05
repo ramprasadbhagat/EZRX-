@@ -62,8 +62,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       pOReference: orderHistoryItem.pOReference.displayPOReference,
       manufactureName: orderHistoryItem.manufactureName,
       expiryDate: orderHistoryItem.expiryDate.dateString,
-      requestedDeliveryDate:
-          orderHistoryItem.requestedDeliveryDate.dateString,
+      requestedDeliveryDate: orderHistoryItem.requestedDeliveryDate.dateString,
       specialInstruction:
           orderHistoryItem.specialInstructions.displaySpecialInstructions,
     );

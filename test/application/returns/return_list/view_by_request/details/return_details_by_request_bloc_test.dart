@@ -26,20 +26,23 @@ void main() {
   setUp(() {
     fakeReturnRequestsId = ReturnRequestsId(requestId: '12345');
     fakeRequestInformation = RequestInformation.empty().copyWith(
-        requestInformationHeader: ReturnRequestInformationHeader.empty(),
-        returnRequestInformationList: <ReturnRequestInformation>[]);
+      requestInformationHeader: ReturnRequestInformationHeader.empty(),
+      returnRequestInformationList: <ReturnRequestInformation>[],
+    );
   });
 
   group(
     'Return Details By Request Bloc Initialize',
     () {
-      blocTest('Initialize',
-          build: () => ReturnDetailsByRequestBloc(
-              returnDetailsByRequestRepository:
-                  returnDetailsByRequestRepository),
-          act: (ReturnDetailsByRequestBloc bloc) =>
-              bloc.add(const ReturnDetailsByRequestEvent.initialized()),
-          expect: () => [ReturnDetailsByRequestState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () => ReturnDetailsByRequestBloc(
+          returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        ),
+        act: (ReturnDetailsByRequestBloc bloc) =>
+            bloc.add(const ReturnDetailsByRequestEvent.initialized()),
+        expect: () => [ReturnDetailsByRequestState.initial()],
+      );
     },
   );
 
@@ -47,12 +50,14 @@ void main() {
     blocTest(
       'fetch -> Return Details By Request Bloc fail',
       build: () => ReturnDetailsByRequestBloc(
-          returnDetailsByRequestRepository: returnDetailsByRequestRepository),
+        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+      ),
       setUp: () {
         when(
           () =>
               returnDetailsByRequestRepository.getReturnSummaryDetailsByRequest(
-                  returnRequestId: fakeReturnRequestsId),
+            returnRequestId: fakeReturnRequestsId,
+          ),
         ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -61,7 +66,8 @@ void main() {
       },
       act: (ReturnDetailsByRequestBloc bloc) => bloc.add(
         ReturnDetailsByRequestEvent.fetch(
-            returnId: fakeReturnRequestsId.requestId),
+          returnId: fakeReturnRequestsId.requestId,
+        ),
       ),
       expect: () => [
         ReturnDetailsByRequestState.initial().copyWith(
@@ -79,12 +85,14 @@ void main() {
     blocTest(
       'fetch -> Return Details By Request Bloc Success',
       build: () => ReturnDetailsByRequestBloc(
-          returnDetailsByRequestRepository: returnDetailsByRequestRepository),
+        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+      ),
       setUp: () {
         when(
           () =>
               returnDetailsByRequestRepository.getReturnSummaryDetailsByRequest(
-                  returnRequestId: fakeReturnRequestsId),
+            returnRequestId: fakeReturnRequestsId,
+          ),
         ).thenAnswer(
           (invocation) async => Right(
             fakeRequestInformation,
@@ -93,17 +101,19 @@ void main() {
       },
       act: (ReturnDetailsByRequestBloc bloc) => bloc.add(
         ReturnDetailsByRequestEvent.fetch(
-            returnId: fakeReturnRequestsId.requestId),
+          returnId: fakeReturnRequestsId.requestId,
+        ),
       ),
       expect: () => [
         ReturnDetailsByRequestState.initial().copyWith(
           isLoading: true,
         ),
         ReturnDetailsByRequestState.initial().copyWith(
-            requestInformation:
-                fakeRequestInformation.returnRequestInformationList,
-            requestInformationHeader:
-                fakeRequestInformation.requestInformationHeader),
+          requestInformation:
+              fakeRequestInformation.returnRequestInformationList,
+          requestInformationHeader:
+              fakeRequestInformation.requestInformationHeader,
+        ),
       ],
     );
   });

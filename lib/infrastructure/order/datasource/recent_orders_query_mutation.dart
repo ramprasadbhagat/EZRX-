@@ -1,5 +1,4 @@
 class RecentOrdersQueryMutation {
-
   /* Query for fetching Recent Orders */
 
   String getRecentOrderedProducts() {

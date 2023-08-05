@@ -1,5 +1,4 @@
 class StockInfoQueryMutation {
-  
   String getStockInfo() {
     return '''
       query stockInformation(
@@ -64,4 +63,3 @@ class StockInfoQueryMutation {
     ''';
   }
 }
-

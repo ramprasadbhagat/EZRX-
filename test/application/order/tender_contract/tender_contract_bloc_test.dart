@@ -24,7 +24,9 @@ void main() {
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockShipToInfo = ShipToInfo.empty();
   final mockSalesOrganisation = SalesOrganisation(
-      salesOrg: salesOrg3050, customerInfos: <SalesOrgCustomerInfo>[]);
+    salesOrg: salesOrg3050,
+    customerInfos: <SalesOrgCustomerInfo>[],
+  );
   final mockMaterialInfo = MaterialInfo.empty();
   final mockTenderContract = TenderContract.empty();
   late final List<TenderContract> mockTenderContractList;
@@ -51,25 +53,30 @@ void main() {
     blocTest(
       'Fetch tender contracts success',
       build: () => TenderContractBloc(
-          tenderContractRepository: tenderContractMockRepository),
+        tenderContractRepository: tenderContractMockRepository,
+      ),
       setUp: () {
-        when(() => tenderContractMockRepository.getTenderContractDetails(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              materialNumber: mockMaterialInfo.materialNumber,
-            )).thenAnswer(
+        when(
+          () => tenderContractMockRepository.getTenderContractDetails(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialNumber: mockMaterialInfo.materialNumber,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
       },
       act: (TenderContractBloc bloc) {
-        bloc.add(TenderContractEvent.fetch(
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo,
-          materialInfo: mockMaterialInfo,
-          defaultSelectedTenderContract: TenderContract.empty(),
-        ));
+        bloc.add(
+          TenderContractEvent.fetch(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialInfo: mockMaterialInfo,
+            defaultSelectedTenderContract: TenderContract.empty(),
+          ),
+        );
       },
       expect: () => [
         materialState.copyWith(
@@ -93,25 +100,30 @@ void main() {
     blocTest(
       'Fetch tender contracts success with defaultSelectedTenderContract',
       build: () => TenderContractBloc(
-          tenderContractRepository: tenderContractMockRepository),
+        tenderContractRepository: tenderContractMockRepository,
+      ),
       setUp: () {
-        when(() => tenderContractMockRepository.getTenderContractDetails(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              materialNumber: mockMaterialInfo.materialNumber,
-            )).thenAnswer(
+        when(
+          () => tenderContractMockRepository.getTenderContractDetails(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialNumber: mockMaterialInfo.materialNumber,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
       },
       act: (TenderContractBloc bloc) {
-        bloc.add(TenderContractEvent.fetch(
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo,
-          materialInfo: mockMaterialInfo,
-          defaultSelectedTenderContract: mockTenderContractList.first,
-        ));
+        bloc.add(
+          TenderContractEvent.fetch(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialInfo: mockMaterialInfo,
+            defaultSelectedTenderContract: mockTenderContractList.first,
+          ),
+        );
       },
       expect: () => [
         materialState.copyWith(
@@ -135,27 +147,32 @@ void main() {
     blocTest(
       'Fetch tender contracts fail',
       build: () => TenderContractBloc(
-          tenderContractRepository: tenderContractMockRepository),
+        tenderContractRepository: tenderContractMockRepository,
+      ),
       setUp: () {
-        when(() => tenderContractMockRepository.getTenderContractDetails(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              materialNumber: mockMaterialInfo.materialNumber,
-            )).thenAnswer(
+        when(
+          () => tenderContractMockRepository.getTenderContractDetails(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialNumber: mockMaterialInfo.materialNumber,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
       act: (TenderContractBloc bloc) {
-        bloc.add(TenderContractEvent.fetch(
-          salesOrganisation: mockSalesOrganisation,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo,
-          materialInfo: mockMaterialInfo,
-          defaultSelectedTenderContract: TenderContract.empty(),
-        ));
+        bloc.add(
+          TenderContractEvent.fetch(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialInfo: mockMaterialInfo,
+            defaultSelectedTenderContract: TenderContract.empty(),
+          ),
+        );
       },
       expect: () => [
         materialState.copyWith(
@@ -175,21 +192,26 @@ void main() {
     blocTest(
       'Tender contract selected',
       build: () => TenderContractBloc(
-          tenderContractRepository: tenderContractMockRepository),
+        tenderContractRepository: tenderContractMockRepository,
+      ),
       setUp: () {
-        when(() => tenderContractMockRepository.getTenderContractDetails(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              materialNumber: mockMaterialInfo.materialNumber,
-            )).thenAnswer(
+        when(
+          () => tenderContractMockRepository.getTenderContractDetails(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialNumber: mockMaterialInfo.materialNumber,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
       },
       act: (TenderContractBloc bloc) {
-        bloc.add(TenderContractEvent.selected(
-          tenderContract: mockTenderContract,
-        ));
+        bloc.add(
+          TenderContractEvent.selected(
+            tenderContract: mockTenderContract,
+          ),
+        );
       },
       expect: () => [
         TenderContractState.initial().copyWith(
@@ -202,14 +224,17 @@ void main() {
     blocTest(
       'Tender contract unselected',
       build: () => TenderContractBloc(
-          tenderContractRepository: tenderContractMockRepository),
+        tenderContractRepository: tenderContractMockRepository,
+      ),
       setUp: () {
-        when(() => tenderContractMockRepository.getTenderContractDetails(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              materialNumber: mockMaterialInfo.materialNumber,
-            )).thenAnswer(
+        when(
+          () => tenderContractMockRepository.getTenderContractDetails(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            materialNumber: mockMaterialInfo.materialNumber,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
       },

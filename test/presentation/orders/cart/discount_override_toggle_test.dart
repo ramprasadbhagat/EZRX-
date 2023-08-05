@@ -77,12 +77,13 @@ void main() {
       cartItem = PriceAggregate.empty().copyWith(
         quantity: 2,
         materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: PrincipalName('台灣拜耳股份有限公司'),
-            ),
-            quantity: 2),
+          materialNumber: MaterialNumber('000000000023168451'),
+          materialDescription: ' Triglyceride Mosys D',
+          principalData: PrincipalData.empty().copyWith(
+            principalName: PrincipalName('台灣拜耳股份有限公司'),
+          ),
+          quantity: 2,
+        ),
       );
       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
@@ -156,7 +157,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final discountOverride = find.byKey(const Key('discountOverride'));
@@ -192,7 +195,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -227,7 +232,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -255,7 +262,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -301,7 +310,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -346,7 +357,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -391,7 +404,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -433,7 +448,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final discountOverride = find.byKey(const Key('discountOverride'));
@@ -452,13 +469,14 @@ void main() {
     testWidgets(
       'DiscountOverride switch toggle false',
       (tester) async {
-        when(() => discountOverrideBlocMock.state)
-            .thenReturn(DiscountOverrideState.initial().copyWith(
-          apiFailureOrSuccessOption: optionOf(
-            const Right(null),
+        when(() => discountOverrideBlocMock.state).thenReturn(
+          DiscountOverrideState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Right(null),
+            ),
+            materialPrice: price.copyWith(zdp8Override: Zdp8OverrideValue(10)),
           ),
-          materialPrice: price.copyWith(zdp8Override: Zdp8OverrideValue(10)),
-        ));
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final discountOverride = find.byKey(const Key('discountOverride'));
@@ -497,7 +515,9 @@ void main() {
           ),
         ];
         whenListen(
-            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+          discountOverrideBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
 
         await tester.pumpWidget(getDiscountOverrideFormWidget());
         await tester.pump();

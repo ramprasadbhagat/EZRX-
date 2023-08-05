@@ -11,5 +11,4 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
     required TenderContract selectedTenderContract,
     required MaterialQueryInfo queryInfo,
   }) = _UpdateMaterialTenderContract;
-
 }

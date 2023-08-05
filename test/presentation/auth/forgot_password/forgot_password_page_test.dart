@@ -66,7 +66,8 @@ void main() {
           routeName: ForgetPasswordPageRoute.name,
           providers: [
             BlocProvider<ForgotPasswordBloc>(
-                create: (context) => forgotPasswordBlocMock),
+              create: (context) => forgotPasswordBlocMock,
+            ),
           ],
           child: const ForgetPasswordPage(),
         ),
@@ -81,9 +82,11 @@ void main() {
         expect(find.byType(ListView), findsOneWidget);
         expect(find.text('Forgot password?'), findsOneWidget);
         expect(
-            find.text(
-                'Let us know your Zuellig Pharma username and we`ll send you a verification email.'),
-            findsOneWidget);
+          find.text(
+            'Let us know your Zuellig Pharma username and we`ll send you a verification email.',
+          ),
+          findsOneWidget,
+        );
         expect(find.byType(TextFormField), findsOneWidget);
         expect(find.text('Next'), findsOneWidget);
         expect(find.byType(BackToLogin), findsOneWidget);
@@ -148,7 +151,9 @@ void main() {
         await tester.pumpWidget(getWidget());
 
         await tester.enterText(
-            find.byKey(WidgetKeys.forgotUsernameField), 'fake.username');
+          find.byKey(WidgetKeys.forgotUsernameField),
+          'fake.username',
+        );
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pumpAndSettle();
 
@@ -186,7 +191,8 @@ void main() {
         await tester.pumpAndSettle();
 
         verifyNever(
-            () => autoRouterMock.pushNamed('forgot_password_confirmation'));
+          () => autoRouterMock.pushNamed('forgot_password_confirmation'),
+        );
       });
 
       testWidgets(
@@ -213,7 +219,8 @@ void main() {
         await tester.pumpAndSettle();
 
         verifyNever(
-            () => autoRouterMock.pushNamed('forgot_password_confirmation'));
+          () => autoRouterMock.pushNamed('forgot_password_confirmation'),
+        );
       });
 
       testWidgets(
@@ -235,10 +242,12 @@ void main() {
               success: true,
             ),
             resetPasswordFailureOrSuccessOption: optionOf(
-              Right(ForgotPassword.empty().copyWith(
-                email: 'fake.username@email.com',
-                success: true,
-              )),
+              Right(
+                ForgotPassword.empty().copyWith(
+                  email: 'fake.username@email.com',
+                  success: true,
+                ),
+              ),
             ),
           ),
         ];
@@ -259,9 +268,9 @@ void main() {
           await tester.tap(find.byKey(WidgetKeys.loginSubmitButton));
           await tester.pumpAndSettle();
 
-          verify(() =>
-                  autoRouterMock.popUntilRouteWithName(LoginPageRoute.name))
-              .called(1);
+          verify(
+            () => autoRouterMock.popUntilRouteWithName(LoginPageRoute.name),
+          ).called(1);
         });
       });
     });

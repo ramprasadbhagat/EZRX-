@@ -223,21 +223,23 @@ class _BundleOfferDetails extends StatelessWidget {
                       child: Column(
                         children: state.productDetailAggregate.materialInfo
                             .bundle.bundleInformation
-                            .map((e) => BalanceTextRow(
-                                  keyFlex: 3,
-                                  keyText: 'MYR ${e.rate} per item',
-                                  keyTextStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(fontWeight: FontWeight.w600),
-                                  valueFlex: 4,
-                                  valueText:
-                                      'Total purchase quantity:${e.quantity} or more',
-                                  valueTextStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: ZPColors.darkGray),
-                                ))
+                            .map(
+                              (e) => BalanceTextRow(
+                                keyFlex: 3,
+                                keyText: 'MYR ${e.rate} per item',
+                                keyTextStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                                valueFlex: 4,
+                                valueText:
+                                    'Total purchase quantity:${e.quantity} or more',
+                                valueTextStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: ZPColors.darkGray),
+                              ),
+                            )
                             .toList(),
                       ),
                     )

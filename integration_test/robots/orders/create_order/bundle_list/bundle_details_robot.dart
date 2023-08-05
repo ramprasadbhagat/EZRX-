@@ -31,7 +31,9 @@ class BundleDetailRobot {
   }
 
   Future<void> changeBundleMaterialQuantity(
-      String bundleMaterial, int quantity) async {
+    String bundleMaterial,
+    int quantity,
+  ) async {
     final changeBundleMaterial = find.byKey(Key('bundleText$bundleMaterial'));
     expect(changeBundleMaterial, findsOneWidget);
     await tester.enterText(changeBundleMaterial, quantity.toString());

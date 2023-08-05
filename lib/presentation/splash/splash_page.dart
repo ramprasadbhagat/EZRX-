@@ -747,24 +747,26 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   }
 
   void _fetchMaterialPrice(BuildContext context, List<MaterialInfo> list) =>
-    context.read<MaterialPriceBloc>().add(
-          MaterialPriceEvent.fetch(
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            salesConfigs: context.read<SalesOrgBloc>().state.configs,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-            comboDealEligible:
-                context.read<EligibilityBloc>().state.comboDealEligible,
-            materials: list,
-          ),
-        );
+      context.read<MaterialPriceBloc>().add(
+            MaterialPriceEvent.fetch(
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              salesConfigs: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              comboDealEligible:
+                  context.read<EligibilityBloc>().state.comboDealEligible,
+              materials: list,
+            ),
+          );
 
   void _fetchProductImage(BuildContext context, List list) =>
-      context.read<ProductImageBloc>().add(ProductImageEvent.fetch(
-            list: list,
-          ));
+      context.read<ProductImageBloc>().add(
+            ProductImageEvent.fetch(
+              list: list,
+            ),
+          );
 
   void _fetchMaterialListProductImage(
     MaterialListState state,
@@ -846,17 +848,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             );
       }
 
-      context
-          .read<PaymentCustomerInformationBloc>()
-          .add(PaymentCustomerInformationEvent.fetch(
-            customeCodeInfo: customerCodeInfo,
-            salesOrganisation: salesOrgState.salesOrganisation,
-            selectedShipToCode: context
-                .read<CustomerCodeBloc>()
-                .state
-                .shipToInfo
-                .shipToCustomerCode,
-          ));
+      context.read<PaymentCustomerInformationBloc>().add(
+            PaymentCustomerInformationEvent.fetch(
+              customeCodeInfo: customerCodeInfo,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              selectedShipToCode: context
+                  .read<CustomerCodeBloc>()
+                  .state
+                  .shipToInfo
+                  .shipToCustomerCode,
+            ),
+          );
 
       if (user.role.type.hasReturnsAdminAccess) {
         context.read<RequestReturnBloc>().add(

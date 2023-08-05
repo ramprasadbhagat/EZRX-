@@ -267,10 +267,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       removeFromCart: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.deleteFromCart(
           item: e.item,
@@ -297,10 +299,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       addRemarkToCartItem: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.addRemarkToCartItem(
           remarkMessage: e.message,
@@ -367,10 +371,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       removeBonusFromCartItem: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.deleteBonusFromCartItem(
           item: e.item,
@@ -398,10 +404,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       addRemarkToBonusItem: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.addRemarkToBonusItem(
           remarkMessage: e.message,
@@ -430,10 +438,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       overrideCartItemPrice: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.overrideCartItemPrice(
           item: e.cartItem,
@@ -461,10 +471,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       selectButtonTapped: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.updateSelectionInCart(
           updatedItem: e.cartItem,
@@ -491,10 +503,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       selectAllButtonTapped: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.updateAllSelectionInCart(
           currentCart: state.cartItems,
@@ -697,10 +711,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       updateBatchInCartItem: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.updatedBatchInCartItem(
           item: e.item,
@@ -728,10 +744,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       fetchProductsAddedToCart: (e) async {
-        emit(state.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
         final failureOrSuccess = await repository.getAddedToCartProductList();
 
@@ -746,10 +764,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (productAddedToCartList) {
             final priceAggregateAddedToCartList = productAddedToCartList
-                .map((e) => PriceAggregate.empty().copyWith(
-                      materialInfo: e.materialInfo,
-                      quantity: e.materialInfo.quantity,
-                    ))
+                .map(
+                  (e) => PriceAggregate.empty().copyWith(
+                    materialInfo: e.materialInfo,
+                    quantity: e.materialInfo.quantity,
+                  ),
+                )
                 .toList();
             emit(
               state.copyWith(
@@ -808,9 +828,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
             for (var i = 0; i < cartProductListTemp.length; i++) {
               final priceAggregate = state.cartProducts
-                      .where((element) =>
-                          element.materialInfo.materialNumber ==
-                          cartProductList[i].materialInfo.materialNumber)
+                      .where(
+                        (element) =>
+                            element.materialInfo.materialNumber ==
+                            cartProductList[i].materialInfo.materialNumber,
+                      )
                       .toList()
                       .firstOrNull ??
                   PriceAggregate.empty();
@@ -857,8 +879,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           var noDifference = true;
           for (final bundleItem in cartItem.bundle.materials) {
             final item = e.priceAggregate.bundle.materials
-                .where((element) =>
-                    element.materialNumber == bundleItem.materialNumber)
+                .where(
+                  (element) =>
+                      element.materialNumber == bundleItem.materialNumber,
+                )
                 .firstOrNull;
             if (item != null) {
               noDifference = item.quantity == bundleItem.quantity;
@@ -896,9 +920,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 List<PriceAggregate>.from(cartProductList);
             for (var i = 0; i < cartProductListTemp.length; i++) {
               final priceAggregate = state.cartProducts
-                      .where((element) =>
-                          element.materialInfo.materialNumber ==
-                          cartProductList[i].materialInfo.materialNumber)
+                      .where(
+                        (element) =>
+                            element.materialInfo.materialNumber ==
+                            cartProductList[i].materialInfo.materialNumber,
+                      )
                       .toList()
                       .firstOrNull ??
                   PriceAggregate.empty();
@@ -968,9 +994,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       updatePriceProduct: (e) {
-        emit(state.copyWith(
-          isMappingPrice: true,
-        ));
+        emit(
+          state.copyWith(
+            isMappingPrice: true,
+          ),
+        );
         final cartProductList = List<PriceAggregate>.from(state.cartProducts);
         for (var i = 0; i < cartProductList.length; i++) {
           if (!cartProductList[i].price.isPriceOverride) {

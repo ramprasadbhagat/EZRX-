@@ -77,9 +77,10 @@ void main() {
           finalPrice: MaterialPrice(1),
         ),
     MaterialPriceDetail.empty().copyWith.price(
-        materialNumber: MaterialNumber('fake-material-2'),
-        finalPrice: MaterialPrice(4),
-        zdp5MaxQuota: ZDP5Info('3')),
+          materialNumber: MaterialNumber('fake-material-2'),
+          finalPrice: MaterialPrice(4),
+          zdp5MaxQuota: ZDP5Info('3'),
+        ),
     MaterialPriceDetail.empty().copyWith.price(
           materialNumber: MaterialNumber('fake-material-3'),
           finalPrice: MaterialPrice(6),
@@ -88,9 +89,10 @@ void main() {
   ];
   final fakeQueryResponseWhenEnableZDP5 = [
     MaterialPriceDetail.empty().copyWith.price(
-        materialNumber: MaterialNumber('fake-material-2'),
-        finalPrice: MaterialPrice(6),
-        zdp5MaxQuota: ZDP5Info('3')),
+          materialNumber: MaterialNumber('fake-material-2'),
+          finalPrice: MaterialPrice(6),
+          zdp5MaxQuota: ZDP5Info('3'),
+        ),
     MaterialPriceDetail.empty().copyWith.price(
           materialNumber: MaterialNumber('fake-material-3'),
           finalPrice: MaterialPrice(9),
@@ -99,11 +101,12 @@ void main() {
   ];
   final fakeQueryResponseWhenEnableZDP5WithOverride = [
     MaterialPriceDetail.empty().copyWith.price(
-        materialNumber: MaterialNumber('fake-material-1'),
-        finalPrice: MaterialPrice(1),
-        zdp8Override: Zdp8OverrideValue(1),
-        priceOverride: PriceOverrideValue(1),
-        zdp5MaxQuota: ZDP5Info('3')),
+          materialNumber: MaterialNumber('fake-material-1'),
+          finalPrice: MaterialPrice(1),
+          zdp8Override: Zdp8OverrideValue(1),
+          priceOverride: PriceOverrideValue(1),
+          zdp5MaxQuota: ZDP5Info('3'),
+        ),
   ];
   final fakeQueryWithOverride = [
     MaterialQueryInfo.empty().copyWith(
@@ -315,15 +318,18 @@ void main() {
       ).thenAnswer(
         (invocation) async => fakeQueryResponseToEnableZDP5,
       );
-      when(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-              salesOrgCode: 'fake-saleOrg',
-              customerCode: 'fake-customer-code',
-              shipToCode: 'fake-ship-to-code',
-              language: '',
-              materialNumbers: {
-                'fake-material-2': false,
-                'fake-material-3': true,
-              })).thenAnswer(
+      when(
+        () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
+          salesOrgCode: 'fake-saleOrg',
+          customerCode: 'fake-customer-code',
+          shipToCode: 'fake-ship-to-code',
+          language: '',
+          materialNumbers: {
+            'fake-material-2': false,
+            'fake-material-3': true,
+          },
+        ),
+      ).thenAnswer(
         (invocation) async => fakeQueryResponseWhenEnableZDP5,
       );
 
@@ -335,15 +341,18 @@ void main() {
         materialQueryList: fakeQuery,
       );
 
-      verify(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-              salesOrgCode: 'fake-saleOrg',
-              customerCode: 'fake-customer-code',
-              shipToCode: 'fake-ship-to-code',
-              language: '',
-              materialNumbers: {
-                'fake-material-2': false,
-                'fake-material-3': true,
-              })).called(1);
+      verify(
+        () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
+          salesOrgCode: 'fake-saleOrg',
+          customerCode: 'fake-customer-code',
+          shipToCode: 'fake-ship-to-code',
+          language: '',
+          materialNumbers: {
+            'fake-material-2': false,
+            'fake-material-3': true,
+          },
+        ),
+      ).called(1);
 
       expect(result.isRight(), true);
 
@@ -385,15 +394,18 @@ void main() {
       ).thenAnswer(
         (invocation) async => fakeQueryResponseToEnableZDP5,
       );
-      when(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-              salesOrgCode: 'fake-saleOrg',
-              customerCode: 'fake-customer-code',
-              shipToCode: 'fake-ship-to-code',
-              language: '',
-              materialNumbers: {
-                'fake-material-2': false,
-                'fake-material-3': true,
-              })).thenThrow((invocation) async => MockException());
+      when(
+        () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
+          salesOrgCode: 'fake-saleOrg',
+          customerCode: 'fake-customer-code',
+          shipToCode: 'fake-ship-to-code',
+          language: '',
+          materialNumbers: {
+            'fake-material-2': false,
+            'fake-material-3': true,
+          },
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
@@ -403,15 +415,18 @@ void main() {
         materialQueryList: fakeQuery,
       );
 
-      verify(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
-              salesOrgCode: 'fake-saleOrg',
-              customerCode: 'fake-customer-code',
-              shipToCode: 'fake-ship-to-code',
-              language: '',
-              materialNumbers: {
-                'fake-material-2': false,
-                'fake-material-3': true,
-              })).called(1);
+      verify(
+        () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
+          salesOrgCode: 'fake-saleOrg',
+          customerCode: 'fake-customer-code',
+          shipToCode: 'fake-ship-to-code',
+          language: '',
+          materialNumbers: {
+            'fake-material-2': false,
+            'fake-material-3': true,
+          },
+        ),
+      ).called(1);
 
       expect(result.isRight(), true);
     });
@@ -461,12 +476,15 @@ void main() {
     test('Get MaterialDetails from remote fail ZDP8 override', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.dev);
 
-      when(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
+      when(
+        () => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
           salesOrgCode: '',
           customerCode: '',
           shipToCode: '',
           language: ApiLanguageCode.english,
-          materialNumbers: {})).thenThrow(
+          materialNumbers: {},
+        ),
+      ).thenThrow(
         (invocation) async => MockException(),
       );
 

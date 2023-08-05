@@ -11,21 +11,25 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late dynamic data;
-  final invoiceDetailsDto =
-      InvoiceDetailsDto.fromDomain(InvoiceDetails.empty().copyWith(
-    invoiceNumber: 'fake-number',
-    returnItemDetailsList: [
-      ReturnItemDetails.empty().copyWith(
+  final invoiceDetailsDto = InvoiceDetailsDto.fromDomain(
+    InvoiceDetails.empty().copyWith(
+      invoiceNumber: 'fake-number',
+      returnItemDetailsList: [
+        ReturnItemDetails.empty().copyWith(
           batch: '',
           itemNumber: '',
           materialNumber: MaterialNumber('123'),
           poDocuments: [],
           returnQuantity: ReturnQuantity('1'),
           usage: const Usage(
-              usageCode: 'fake-reason', usageDescription: 'fake-description'))
-    ],
-    salesOrg: SalesOrg('fake-salesOrg'),
-  ));
+            usageCode: 'fake-reason',
+            usageDescription: 'fake-description',
+          ),
+        )
+      ],
+      salesOrg: SalesOrg('fake-salesOrg'),
+    ),
+  );
 
   group('Invoice Details dto test', () {
     setUp(() async {

@@ -93,9 +93,11 @@ void main() {
     test('Fetch restriction list from remote data source successfully',
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-      when(() => userRestrictionRemoteDataSource.fetch(
-            salesOrg: salesOrg.getOrCrash(),
-          )).thenAnswer((invocation) async => mockUserRestrictionListDto);
+      when(
+        () => userRestrictionRemoteDataSource.fetch(
+          salesOrg: salesOrg.getOrCrash(),
+        ),
+      ).thenAnswer((invocation) async => mockUserRestrictionListDto);
 
       final result =
           await userRestrictionRepository.getUserRestrictionsList(salesOrg);
@@ -105,9 +107,11 @@ void main() {
 
     test('Fetch restriction list from remote data source failed', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-      when(() => userRestrictionRemoteDataSource.fetch(
-            salesOrg: salesOrg.getOrCrash(),
-          )).thenThrow((invocation) async => MockException());
+      when(
+        () => userRestrictionRemoteDataSource.fetch(
+          salesOrg: salesOrg.getOrCrash(),
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result =
           await userRestrictionRepository.getUserRestrictionsList(salesOrg);
@@ -119,30 +123,34 @@ void main() {
   test('Fetch restriction Details from remote data source successfully',
       () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.getUserRestrictions(
-          userName: 'fake-username',
-          salesOrg: salesOrg.getOrCrash(),
-        )).thenAnswer((invocation) async => mockUserRestrictions);
+    when(
+      () => userRestrictionRemoteDataSource.getUserRestrictions(
+        userName: 'fake-username',
+        salesOrg: salesOrg.getOrCrash(),
+      ),
+    ).thenAnswer((invocation) async => mockUserRestrictions);
 
     final result = await userRestrictionRepository.getUserRestrictions(
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
-        userName: Username('fake-username'));
+      salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
+      userName: Username('fake-username'),
+    );
 
     expect(result.isRight(), true);
   });
 
   test('Fetch restriction Details from remote data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.getUserRestrictions(
-          userName: 'fake-username',
-          salesOrg: salesOrg.getOrCrash(),
-        )).thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionRemoteDataSource.getUserRestrictions(
+        userName: 'fake-username',
+        salesOrg: salesOrg.getOrCrash(),
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.getUserRestrictions(
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
-        userName: Username('fake-username'));
+      salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
+      userName: Username('fake-username'),
+    );
 
     expect(result.isLeft(), true);
   });
@@ -152,13 +160,15 @@ void main() {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
     when(() => userRestrictionLocalDataSource.getUserRestrictions()).thenAnswer(
       (invocation) async => UserRestrictions(
-          approverLimits: [], approverRights: ApproverRights.empty()),
+        approverLimits: [],
+        approverRights: ApproverRights.empty(),
+      ),
     );
 
     final result = await userRestrictionRepository.getUserRestrictions(
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
-        userName: Username('fake-username'));
+      salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
+      userName: Username('fake-username'),
+    );
 
     expect(result.isRight(), true);
   });
@@ -170,53 +180,61 @@ void main() {
     );
 
     final result = await userRestrictionRepository.getUserRestrictions(
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
-        userName: Username('fake-username'));
+      salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: salesOrg),
+      userName: Username('fake-username'),
+    );
 
     expect(result.isLeft(), true);
   });
 
   test('addApprovalLimit remote data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.addApprovalLimit(
-            userName: 'fake-username',
-            salesOrg: salesOrg.getOrCrash(),
-            valueLowerLimit: 0,
-            valueUpperLimit: 10))
-        .thenAnswer(
-            (invocation) async => UserRestrictionStatus.empty().copyWith(
-                  approvalLimitStatus: true,
-                ));
+    when(
+      () => userRestrictionRemoteDataSource.addApprovalLimit(
+        userName: 'fake-username',
+        salesOrg: salesOrg.getOrCrash(),
+        valueLowerLimit: 0,
+        valueUpperLimit: 10,
+      ),
+    ).thenAnswer(
+      (invocation) async => UserRestrictionStatus.empty().copyWith(
+        approvalLimitStatus: true,
+      ),
+    );
 
     final result = await userRestrictionRepository.addApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: '',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: '',
+      ),
+    );
 
     expect(result.isRight(), true);
   });
 
   test('addApprovalLimit remote data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.addApprovalLimit(
+    when(
+      () => userRestrictionRemoteDataSource.addApprovalLimit(
         userName: 'fake-username',
         salesOrg: salesOrg.getOrCrash(),
         valueLowerLimit: 0,
-        valueUpperLimit: 10)).thenThrow((invocation) async => MockException());
+        valueUpperLimit: 10,
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.addApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: '',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: '',
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
@@ -224,18 +242,20 @@ void main() {
   test('addApprovalLimit local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
     when(() => userRestrictionLocalDataSource.addApprovalLimit()).thenAnswer(
-        (invocation) async => UserRestrictionStatus.empty().copyWith(
-              approvalLimitStatus: true,
-            ));
+      (invocation) async => UserRestrictionStatus.empty().copyWith(
+        approvalLimitStatus: true,
+      ),
+    );
 
     final result = await userRestrictionRepository.addApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: '',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: '',
+      ),
+    );
 
     expect(result.isRight(), true);
   });
@@ -246,90 +266,105 @@ void main() {
         .thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.addApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: '',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: '',
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
 
   test('addApproverRights remote data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.configureUserRestriction(
-            approverRightsList: <Map<String, dynamic>>[
-              {
-                'salesOrg': salesOrg.getOrCrash(),
-                'principal': 'principal',
-                'industryCode1': 'industryCode1',
-                'industryCode2': 'industryCode2',
-                'industryCode3': 'industryCode3',
-                'industryCode4': 'industryCode4',
-                'industryCode5': 'industryCode5',
-                'plant': 'plant',
-                'materialNumber': 'materialNumber',
-              }
-            ],
-            userName: 'fake-username')).thenAnswer((invocation) async =>
-        UserRestrictionStatus.empty()
-            .copyWith(approverRightsStatus: 'fake-status'));
+    when(
+      () => userRestrictionRemoteDataSource.configureUserRestriction(
+        approverRightsList: <Map<String, dynamic>>[
+          {
+            'salesOrg': salesOrg.getOrCrash(),
+            'principal': 'principal',
+            'industryCode1': 'industryCode1',
+            'industryCode2': 'industryCode2',
+            'industryCode3': 'industryCode3',
+            'industryCode4': 'industryCode4',
+            'industryCode5': 'industryCode5',
+            'plant': 'plant',
+            'materialNumber': 'materialNumber',
+          }
+        ],
+        userName: 'fake-username',
+      ),
+    ).thenAnswer(
+      (invocation) async => UserRestrictionStatus.empty()
+          .copyWith(approverRightsStatus: 'fake-status'),
+    );
 
     final result = await userRestrictionRepository.configureUserRestriction(
-        approverRights: ApproverRights.empty()
-            .copyWith(userName: Username('fake-username'), approverRightsList: [
-      ApproverRightsDetails(
-          salesOrg: salesOrg,
-          principal: 'principal',
-          industryCode1: 'industryCode1',
-          industryCode2: 'industryCode2',
-          industryCode3: 'industryCode3',
-          industryCode4: 'industryCode4',
-          industryCode5: 'industryCode5',
-          plant: 'plant',
-          materialNumber: MaterialNumber('materialNumber'),
-          uuid: 'uuid')
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        userName: Username('fake-username'),
+        approverRightsList: [
+          ApproverRightsDetails(
+            salesOrg: salesOrg,
+            principal: 'principal',
+            industryCode1: 'industryCode1',
+            industryCode2: 'industryCode2',
+            industryCode3: 'industryCode3',
+            industryCode4: 'industryCode4',
+            industryCode5: 'industryCode5',
+            plant: 'plant',
+            materialNumber: MaterialNumber('materialNumber'),
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isRight(), true);
   });
 
   test('addApproverRights remote data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.configureUserRestriction(
-                approverRightsList: <Map<String, dynamic>>[
-                  {
-                    'salesOrg': salesOrg.getOrCrash(),
-                    'principal': 'principal',
-                    'industryCode1': 'industryCode1',
-                    'industryCode2': 'industryCode2',
-                    'industryCode3': 'industryCode3',
-                    'industryCode4': 'industryCode4',
-                    'industryCode5': 'industryCode5',
-                    'plant': 'plant',
-                    'materialNumber': 'materialNumber',
-                  }
-                ],
-                userName: 'fake-username'))
-        .thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionRemoteDataSource.configureUserRestriction(
+        approverRightsList: <Map<String, dynamic>>[
+          {
+            'salesOrg': salesOrg.getOrCrash(),
+            'principal': 'principal',
+            'industryCode1': 'industryCode1',
+            'industryCode2': 'industryCode2',
+            'industryCode3': 'industryCode3',
+            'industryCode4': 'industryCode4',
+            'industryCode5': 'industryCode5',
+            'plant': 'plant',
+            'materialNumber': 'materialNumber',
+          }
+        ],
+        userName: 'fake-username',
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.configureUserRestriction(
-        approverRights: ApproverRights.empty()
-            .copyWith(userName: Username('fake-username'), approverRightsList: [
-      ApproverRightsDetails(
-          salesOrg: salesOrg,
-          principal: 'principal',
-          industryCode1: 'industryCode1',
-          industryCode2: 'industryCode2',
-          industryCode3: 'industryCode3',
-          industryCode4: 'industryCode4',
-          industryCode5: 'industryCode5',
-          plant: 'plant',
-          materialNumber: MaterialNumber('materialNumber'),
-          uuid: 'uuid')
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        userName: Username('fake-username'),
+        approverRightsList: [
+          ApproverRightsDetails(
+            salesOrg: salesOrg,
+            principal: 'principal',
+            industryCode1: 'industryCode1',
+            industryCode2: 'industryCode2',
+            industryCode3: 'industryCode3',
+            industryCode4: 'industryCode4',
+            industryCode5: 'industryCode5',
+            plant: 'plant',
+            materialNumber: MaterialNumber('materialNumber'),
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
@@ -337,24 +372,30 @@ void main() {
   test('addApproverRights local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
     when(() => userRestrictionLocalDataSource.configureUserRestriction())
-        .thenAnswer((invocation) async => UserRestrictionStatus.empty()
-            .copyWith(approverRightsStatus: 'fake-status'));
+        .thenAnswer(
+      (invocation) async => UserRestrictionStatus.empty()
+          .copyWith(approverRightsStatus: 'fake-status'),
+    );
 
     final result = await userRestrictionRepository.configureUserRestriction(
-        approverRights: ApproverRights.empty()
-            .copyWith(userName: Username('fake-username'), approverRightsList: [
-      ApproverRightsDetails(
-          salesOrg: salesOrg,
-          principal: 'principal',
-          industryCode1: 'industryCode1',
-          industryCode2: 'industryCode2',
-          industryCode3: 'industryCode3',
-          industryCode4: 'industryCode4',
-          industryCode5: 'industryCode5',
-          plant: 'plant',
-          materialNumber: MaterialNumber('materialNumber'),
-          uuid: 'uuid')
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        userName: Username('fake-username'),
+        approverRightsList: [
+          ApproverRightsDetails(
+            salesOrg: salesOrg,
+            principal: 'principal',
+            industryCode1: 'industryCode1',
+            industryCode2: 'industryCode2',
+            industryCode3: 'industryCode3',
+            industryCode4: 'industryCode4',
+            industryCode5: 'industryCode5',
+            plant: 'plant',
+            materialNumber: MaterialNumber('materialNumber'),
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isRight(), true);
   });
@@ -365,59 +406,66 @@ void main() {
         .thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.configureUserRestriction(
-        approverRights: ApproverRights.empty()
-            .copyWith(userName: Username('fake-username'), approverRightsList: [
-      ApproverRightsDetails(
-          salesOrg: salesOrg,
-          principal: 'principal',
-          industryCode1: 'industryCode1',
-          industryCode2: 'industryCode2',
-          industryCode3: 'industryCode3',
-          industryCode4: 'industryCode4',
-          industryCode5: 'industryCode5',
-          plant: 'plant',
-          materialNumber: MaterialNumber('materialNumber'),
-          uuid: 'uuid')
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        userName: Username('fake-username'),
+        approverRightsList: [
+          ApproverRightsDetails(
+            salesOrg: salesOrg,
+            principal: 'principal',
+            industryCode1: 'industryCode1',
+            industryCode2: 'industryCode2',
+            industryCode3: 'industryCode3',
+            industryCode4: 'industryCode4',
+            industryCode5: 'industryCode5',
+            plant: 'plant',
+            materialNumber: MaterialNumber('materialNumber'),
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
 
   test('deleteApprovalLimit remote data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() =>
-            userRestrictionRemoteDataSource.deleteApprovalLimit(uuid: 'uuid'))
-        .thenAnswer(
-            (invocation) async => UserRestrictionStatus.empty().copyWith(
-                  approvalLimitStatus: true,
-                ));
+    when(
+      () => userRestrictionRemoteDataSource.deleteApprovalLimit(uuid: 'uuid'),
+    ).thenAnswer(
+      (invocation) async => UserRestrictionStatus.empty().copyWith(
+        approvalLimitStatus: true,
+      ),
+    );
 
     final result = await userRestrictionRepository.deleteApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: 'uuid',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: 'uuid',
+      ),
+    );
 
     expect(result.isRight(), true);
   });
 
   test('deleteApprovalLimit remote data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() =>
-            userRestrictionRemoteDataSource.deleteApprovalLimit(uuid: 'uuid'))
-        .thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionRemoteDataSource.deleteApprovalLimit(uuid: 'uuid'),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.deleteApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: 'uuid',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: 'uuid',
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
@@ -425,18 +473,20 @@ void main() {
   test('deleteApprovalLimit local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
     when(() => userRestrictionLocalDataSource.deleteApprovalLimit()).thenAnswer(
-        (invocation) async => UserRestrictionStatus.empty().copyWith(
-              approvalLimitStatus: true,
-            ));
+      (invocation) async => UserRestrictionStatus.empty().copyWith(
+        approvalLimitStatus: true,
+      ),
+    );
 
     final result = await userRestrictionRepository.deleteApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: 'uuid',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: 'uuid',
+      ),
+    );
 
     expect(result.isRight(), true);
   });
@@ -447,48 +497,63 @@ void main() {
         .thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.deleteApprovalLimit(
-        approverLimits: ApprovalLimits(
-      userName: Username('fake-username'),
-      salesOrg: salesOrg,
-      valueLowerLimit: ApprovalLimit(0),
-      valueUpperLimit: ApprovalLimit(10),
-      uuid: 'uuid',
-    ));
+      approverLimits: ApprovalLimits(
+        userName: Username('fake-username'),
+        salesOrg: salesOrg,
+        valueLowerLimit: ApprovalLimit(0),
+        valueUpperLimit: ApprovalLimit(10),
+        uuid: 'uuid',
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
 
   test('deleteApproverRights remote data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.deleteApprovalRight(
-            salesOrg: salesOrg.getOrCrash(), uuid: 'uuid'))
-        .thenAnswer((invocation) async => UserRestrictionStatus.empty()
-            .copyWith(approverRightsStatus: 'fake-status'));
+    when(
+      () => userRestrictionRemoteDataSource.deleteApprovalRight(
+        salesOrg: salesOrg.getOrCrash(),
+        uuid: 'uuid',
+      ),
+    ).thenAnswer(
+      (invocation) async => UserRestrictionStatus.empty()
+          .copyWith(approverRightsStatus: 'fake-status'),
+    );
 
     final result = await userRestrictionRepository.deleteApprovalRights(
-        approverRights: ApproverRights.empty().copyWith(approverRightsList: [
-      ApproverRightsDetails.empty().copyWith(
-        salesOrg: salesOrg,
-        uuid: 'uuid',
-      )
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        approverRightsList: [
+          ApproverRightsDetails.empty().copyWith(
+            salesOrg: salesOrg,
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isRight(), true);
   });
 
   test('deleteApproverRights remote data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionRemoteDataSource.deleteApprovalRight(
+    when(
+      () => userRestrictionRemoteDataSource.deleteApprovalRight(
         salesOrg: salesOrg.getOrCrash(),
-        uuid: 'uuid')).thenThrow((invocation) async => MockException());
+        uuid: 'uuid',
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.deleteApprovalRights(
-        approverRights: ApproverRights.empty().copyWith(approverRightsList: [
-      ApproverRightsDetails.empty().copyWith(
-        salesOrg: salesOrg,
-        uuid: 'uuid',
-      )
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        approverRightsList: [
+          ApproverRightsDetails.empty().copyWith(
+            salesOrg: salesOrg,
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isLeft(), true);
   });
@@ -496,16 +561,21 @@ void main() {
   test('deleteApproverRights local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
     when(() => userRestrictionLocalDataSource.deleteApprovalRights())
-        .thenAnswer((invocation) async => UserRestrictionStatus.empty()
-            .copyWith(approverRightsStatus: 'fake-status'));
+        .thenAnswer(
+      (invocation) async => UserRestrictionStatus.empty()
+          .copyWith(approverRightsStatus: 'fake-status'),
+    );
 
     final result = await userRestrictionRepository.deleteApprovalRights(
-        approverRights: ApproverRights.empty().copyWith(approverRightsList: [
-      ApproverRightsDetails.empty().copyWith(
-        salesOrg: salesOrg,
-        uuid: 'uuid',
-      )
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        approverRightsList: [
+          ApproverRightsDetails.empty().copyWith(
+            salesOrg: salesOrg,
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isRight(), true);
   });
@@ -516,12 +586,15 @@ void main() {
         .thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.deleteApprovalRights(
-        approverRights: ApproverRights.empty().copyWith(approverRightsList: [
-      ApproverRightsDetails.empty().copyWith(
-        salesOrg: salesOrg,
-        uuid: 'uuid',
-      )
-    ]));
+      approverRights: ApproverRights.empty().copyWith(
+        approverRightsList: [
+          ApproverRightsDetails.empty().copyWith(
+            salesOrg: salesOrg,
+            uuid: 'uuid',
+          )
+        ],
+      ),
+    );
 
     expect(result.isLeft(), true);
   });

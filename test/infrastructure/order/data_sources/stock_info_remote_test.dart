@@ -75,8 +75,10 @@ void main() {
           selectedCustomerCode: 'fake-customercode',
         );
 
-        expect(result,
-            StockInfoDto.fromJson(res['data']['stockInformation']).toDomain());
+        expect(
+          result,
+          StockInfoDto.fromJson(res['data']['stockInformation']).toDomain(),
+        );
       });
 
       test('Get StockInfoList', () async {
@@ -112,10 +114,11 @@ void main() {
         );
 
         expect(
-            result,
-            List.from(res['data']['stockInformationList'])
-                .map((e) => StockInfoDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(res['data']['stockInformationList'])
+              .map((e) => StockInfoDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('statuscode not equal to 200', () async {

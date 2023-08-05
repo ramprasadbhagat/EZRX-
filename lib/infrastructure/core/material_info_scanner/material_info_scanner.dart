@@ -81,18 +81,22 @@ class MaterialInfoScanner {
     _overlay.shouldShowScanAreaGuides = true;
   }
 
-  Future<void> scanMaterialNumberfromDeviceStorage(ImageFrameSource source) async {
+  Future<void> scanMaterialNumberfromDeviceStorage(
+    ImageFrameSource source,
+  ) async {
     _dataCaptureContext =
         DataCaptureContext.forLicenseKey(config.scanditLicenseKey);
     await _dataCaptureContext.setFrameSource(source);
 
     final imageFrameSourceSettings = BarcodeCaptureSettings();
 
-    imageFrameSourceSettings.enableSymbologies(config.enabledSymbologies.toSet());
+    imageFrameSourceSettings
+        .enableSymbologies(config.enabledSymbologies.toSet());
 
-
-    _barcodeCapture =
-        BarcodeCapture.forContext(_dataCaptureContext, imageFrameSourceSettings);
+    _barcodeCapture = BarcodeCapture.forContext(
+      _dataCaptureContext,
+      imageFrameSourceSettings,
+    );
 
     _dataCaptureView = DataCaptureView.forContext(dataCaptureContext);
 

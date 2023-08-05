@@ -40,53 +40,59 @@ class CreditDetailsSection extends StatelessWidget {
               ),
             ],
           ),
-          subtitle: Column(children: [
-            BalanceTextRow(
-              keyText: 'Document date',
-              valueText: creditItem.documentDate.dateString,
-              valueFlex: 1,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Document type',
-              valueText: creditItem.accountingDocumentType,
-              valueFlex: 1,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Return number',
-              valueText:
-                  '#${creditItem.invoiceReference.getOrDefaultValue('')}',
-              valueFlex: 1,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            BalanceTextRow(
-              keyText: 'Details',
-              valueText: creditItem.postingKeyName,
-              valueFlex: 1,
-              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-          ]),
+          subtitle: Column(
+            children: [
+              BalanceTextRow(
+                keyText: 'Document date',
+                valueText: creditItem.documentDate.dateString,
+                valueFlex: 1,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              BalanceTextRow(
+                keyText: 'Document type',
+                valueText: creditItem.accountingDocumentType,
+                valueFlex: 1,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              BalanceTextRow(
+                keyText: 'Return number',
+                valueText:
+                    '#${creditItem.invoiceReference.getOrDefaultValue('')}',
+                valueFlex: 1,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+              BalanceTextRow(
+                keyText: 'Details',
+                valueText: creditItem.postingKeyName,
+                valueFlex: 1,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                valueTextStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.white,
+                        ),
+              ),
+            ],
+          ),
         ),
         const ItemAddressSection(),
         const Divider(

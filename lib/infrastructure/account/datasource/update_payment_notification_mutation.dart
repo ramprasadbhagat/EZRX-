@@ -1,5 +1,4 @@
 class UpdatePaymentNotificationMutation {
-  
   String updatePaymentNotificationMutation() {
     return '''
       mutation updatePaymentConfigMutation(\$input: updatePaymentConfigInput!) {

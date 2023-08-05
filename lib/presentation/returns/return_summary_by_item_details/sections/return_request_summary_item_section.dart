@@ -77,27 +77,30 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
       ),
       footerWidget: Column(
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              'Qty: ${widget.requestInformation.returnQuantity.toString()}'
-                  .tr(),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.black,
-                  ),
-            ),
-            PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              price: widget.requestInformation.totalPrice.toString(),
-              priceLabelStyle: Theme.of(context)
-                  .textTheme
-                  .labelSmall
-                  ?.copyWith(color: ZPColors.primary),
-              currencyCodeTextStyle: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: ZPColors.primary),
-            ),
-          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Qty: ${widget.requestInformation.returnQuantity.toString()}'
+                    .tr(),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.black,
+                    ),
+              ),
+              PriceComponent(
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: widget.requestInformation.totalPrice.toString(),
+                priceLabelStyle: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: ZPColors.primary),
+                currencyCodeTextStyle: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: ZPColors.primary),
+              ),
+            ],
+          ),
           InkWell(
             onTap: () {
               setState(() {

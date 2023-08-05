@@ -19,7 +19,8 @@ void main() {
           mockMaterialCartItemFirst.copyWith(
             materials: [
               mockMaterialList.first.copyWith(
-                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)))
+                price: Price.empty().copyWith(finalPrice: MaterialPrice(200)),
+              )
             ],
           ),
         ],
@@ -29,42 +30,60 @@ void main() {
       setUp: () {
         when(
           () => cartRepositoryMock.overrideCartItemPrice(
-              item: mockMaterialCartItemFirst
-                  .copyWith(materials: [mockMaterialList.first]),
-              overridePriceList: [
-                Price.empty().copyWith(finalPrice: MaterialPrice(300))
-              ]),
-        ).thenAnswer((invocation) async => Right([
-              mockMaterialCartItemFirst.copyWith(materials: [
+            item: mockMaterialCartItemFirst
+                .copyWith(materials: [mockMaterialList.first]),
+            overridePriceList: [
+              Price.empty().copyWith(finalPrice: MaterialPrice(300))
+            ],
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
                 mockMaterialList.first.copyWith(
-                    price:
-                        Price.empty().copyWith(finalPrice: MaterialPrice(300)))
-              ]),
-            ]));
+                  price: Price.empty().copyWith(finalPrice: MaterialPrice(300)),
+                )
+              ],
+            ),
+          ]),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.overrideCartItemPrice(
+      act: (bloc) => bloc.add(
+        CartEvent.overrideCartItemPrice(
           cartItem: mockMaterialCartItemFirst
               .copyWith(materials: [mockMaterialList.first]),
           overridenPrice: [
             Price.empty().copyWith(finalPrice: MaterialPrice(300))
-          ])),
+          ],
+        ),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-            materials: [
-              mockMaterialList.first.copyWith(
-                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)))
-            ],
-          ),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-            materials: [
-              mockMaterialList.first.copyWith(
-                  price: Price.empty().copyWith(finalPrice: MaterialPrice(300)))
-            ],
-          ),
-        ], isFetching: false, apiFailureOrSuccessOption: none()),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)),
+                )
+              ],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  price: Price.empty().copyWith(finalPrice: MaterialPrice(300)),
+                )
+              ],
+            ),
+          ],
+          isFetching: false,
+          apiFailureOrSuccessOption: none(),
+        ),
       ],
     );
     blocTest<CartBloc, CartState>(
@@ -74,7 +93,8 @@ void main() {
           mockMaterialCartItemFirst.copyWith(
             materials: [
               mockMaterialList.first.copyWith(
-                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)))
+                price: Price.empty().copyWith(finalPrice: MaterialPrice(200)),
+              )
             ],
           ),
         ],
@@ -84,42 +104,53 @@ void main() {
       setUp: () {
         when(
           () => cartRepositoryMock.overrideCartItemPrice(
-              item: mockMaterialCartItemFirst
-                  .copyWith(materials: [mockMaterialList.first]),
-              overridePriceList: [
-                Price.empty().copyWith(finalPrice: MaterialPrice(300))
-              ]),
+            item: mockMaterialCartItemFirst
+                .copyWith(materials: [mockMaterialList.first]),
+            overridePriceList: [
+              Price.empty().copyWith(finalPrice: MaterialPrice(300))
+            ],
+          ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('fake-Error')),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.overrideCartItemPrice(
+      act: (bloc) => bloc.add(
+        CartEvent.overrideCartItemPrice(
           cartItem: mockMaterialCartItemFirst
               .copyWith(materials: [mockMaterialList.first]),
           overridenPrice: [
             Price.empty().copyWith(finalPrice: MaterialPrice(300))
-          ])),
+          ],
+        ),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-            materials: [
-              mockMaterialList.first.copyWith(
-                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)))
-            ],
-          ),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
         CartState.initial().copyWith(
-            cartItems: [
-              mockMaterialCartItemFirst.copyWith(
-                materials: [
-                  mockMaterialList.first.copyWith(
-                      price: Price.empty()
-                          .copyWith(finalPrice: MaterialPrice(200)))
-                ],
-              ),
-            ],
-            isFetching: false,
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake-Error')))),
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)),
+                )
+              ],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  price: Price.empty().copyWith(finalPrice: MaterialPrice(200)),
+                )
+              ],
+            ),
+          ],
+          isFetching: false,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-Error'))),
+        ),
       ],
     );
   });

@@ -30,7 +30,6 @@ class CustomerDocumentDetail with _$CustomerDocumentDetail {
     required DateTimeStringValue expiryDate,
     required PrincipalData principalData,
     required ProductImages productImages,
-
   }) = _CustomerDocumentDetail;
 
   factory CustomerDocumentDetail.empty() => CustomerDocumentDetail(

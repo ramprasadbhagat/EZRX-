@@ -22,4 +22,3 @@ class DownloadPaymentAttachmentDto with _$DownloadPaymentAttachmentDto {
   factory DownloadPaymentAttachmentDto.fromJson(Map<String, dynamic> json) =>
       _$DownloadPaymentAttachmentDtoFromJson(json);
 }
-

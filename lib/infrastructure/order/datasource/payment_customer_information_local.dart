@@ -5,8 +5,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/payment_customer_informatio
 import 'package:flutter/services.dart';
 
 class PaymentCustomerInformationLocalDataSource {
-  Future<PaymentCustomerInformation>
-      getPaymentCustomerInformation() async {
+  Future<PaymentCustomerInformation> getPaymentCustomerInformation() async {
     final res = json.decode(
       await rootBundle
           .loadString('assets/json/getPaymentCustomerInfoResponse.json'),

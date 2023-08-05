@@ -31,7 +31,7 @@ class CreditAndInvoiceDetailsRepository
     if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.getCreditAndInvoiceDetails();
-        
+
         return Right(response);
       } catch (e) {
         return Left(

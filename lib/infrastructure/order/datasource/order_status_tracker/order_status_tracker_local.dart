@@ -10,8 +10,7 @@ class OrderStatusTrackerLocalDataSource {
   Future<List<OrderStatusTracker>> getOrderStatusTracker() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getZyllemv2Response.json'),
+      await rootBundle.loadString('assets/json/getZyllemv2Response.json'),
     );
     final finalData = data['data']['zyllemStatusV2']['Entry'];
 

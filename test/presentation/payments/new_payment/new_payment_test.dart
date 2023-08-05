@@ -226,7 +226,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: const NewPaymentPage(),
       ),
@@ -243,8 +244,10 @@ void main() {
         when(() => newPaymentBlocMock.state).thenReturn(
           NewPaymentState.initial(),
         );
-        whenListen(newPaymentBlocMock,
-            Stream.fromIterable([NewPaymentState.initial()]));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([NewPaymentState.initial()]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -263,10 +266,11 @@ void main() {
           NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices),
         );
         whenListen(
-            newPaymentBlocMock,
-            Stream.fromIterable([
-              NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices)
-            ]));
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices)
+          ]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -283,8 +287,10 @@ void main() {
         );
         when(() => newPaymentBlocMock.state)
             .thenReturn(NewPaymentState.initial());
-        whenListen(newPaymentBlocMock,
-            Stream.fromIterable([NewPaymentState.initial()]));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([NewPaymentState.initial()]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -305,12 +311,13 @@ void main() {
           ),
         );
         whenListen(
-            newPaymentBlocMock,
-            Stream.fromIterable([
-              NewPaymentState.initial().copyWith(
-                selectedInvoices: [fakeInvoices.first],
-              )
-            ]));
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: [fakeInvoices.first],
+            )
+          ]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -334,8 +341,10 @@ void main() {
         when(() => newPaymentBlocMock.state).thenReturn(
           NewPaymentState.initial(),
         );
-        whenListen(newPaymentBlocMock,
-            Stream.fromIterable([NewPaymentState.initial()]));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([NewPaymentState.initial()]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -365,13 +374,14 @@ void main() {
           ),
         );
         whenListen(
-            newPaymentBlocMock,
-            Stream.fromIterable([
-              NewPaymentState.initial().copyWith(
-                selectedInvoices: fakeInvoices,
-                selectedCredits: fakeCredits,
-              )
-            ]));
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: fakeInvoices,
+              selectedCredits: fakeCredits,
+            )
+          ]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -396,8 +406,10 @@ void main() {
         );
         when(() => newPaymentBlocMock.state)
             .thenReturn(NewPaymentState.initial());
-        whenListen(newPaymentBlocMock,
-            Stream.fromIterable([NewPaymentState.initial()]));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([NewPaymentState.initial()]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
@@ -427,13 +439,14 @@ void main() {
           ),
         );
         whenListen(
-            newPaymentBlocMock,
-            Stream.fromIterable([
-              NewPaymentState.initial().copyWith(
-            selectedInvoices: [fakeInvoices.first],
-            selectedCredits: [fakeCredits.first],
-              )
-            ]));
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              selectedInvoices: [fakeInvoices.first],
+              selectedCredits: [fakeCredits.first],
+            )
+          ]),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 

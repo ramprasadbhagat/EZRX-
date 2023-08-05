@@ -138,24 +138,29 @@ void main() {
         paymentTermRepository: paymentTermsRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentTermsRepositoryMock.getPaymentTerms(
-              customerCodeInfo: fakeCustomerCode,
-              salesOrganisation: fakeSaleOrganisation,
-              salesOrgConfig: fakeSaleOrgConfig,
-              paymentCustomerInfo: fakepaymentCustomerInformation,
-              salesRepInfo: fakesalesRepInfo,
-            )).thenAnswer(
+        when(
+          () => paymentTermsRepositoryMock.getPaymentTerms(
+            customerCodeInfo: fakeCustomerCode,
+            salesOrganisation: fakeSaleOrganisation,
+            salesOrgConfig: fakeSaleOrgConfig,
+            paymentCustomerInfo: fakepaymentCustomerInformation,
+            salesRepInfo: fakesalesRepInfo,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (bloc) => bloc.add(PaymentTermEvent.fetch(
+      act: (bloc) => bloc.add(
+        PaymentTermEvent.fetch(
           customeCodeInfo: fakeCustomerCode,
           salesOrganisation: fakeSaleOrganisation,
           paymentCustomerInformation: fakepaymentCustomerInformation,
           salesOrganisationConfigs: fakeSaleOrgConfig,
-          salesRepresentativeInfo: fakesalesRepInfo)),
+          salesRepresentativeInfo: fakesalesRepInfo,
+        ),
+      ),
       expect: () => [
         PaymentTermState.initial().copyWith(
           paymentTermsFailureOrSuccessOption: optionOf(
@@ -173,25 +178,30 @@ void main() {
         paymentTermRepository: paymentTermsRepositoryMock,
       ),
       setUp: () {
-        when(() => paymentTermsRepositoryMock.getPaymentTerms(
-              customerCodeInfo: fakeCustomerCode,
-              salesOrganisation: fakeSaleOrganisation,
-              salesOrgConfig:
-                  fakeSaleOrgConfig, //.copyWith(languageFilter: true),
-              paymentCustomerInfo: fakepaymentCustomerInformation,
-              salesRepInfo: fakesalesRepInfo,
-            )).thenAnswer(
+        when(
+          () => paymentTermsRepositoryMock.getPaymentTerms(
+            customerCodeInfo: fakeCustomerCode,
+            salesOrganisation: fakeSaleOrganisation,
+            salesOrgConfig:
+                fakeSaleOrgConfig, //.copyWith(languageFilter: true),
+            paymentCustomerInfo: fakepaymentCustomerInformation,
+            salesRepInfo: fakesalesRepInfo,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(
             paymentTermMockData,
           ),
         );
       },
-      act: (bloc) => bloc.add(PaymentTermEvent.fetch(
+      act: (bloc) => bloc.add(
+        PaymentTermEvent.fetch(
           customeCodeInfo: fakeCustomerCode,
           salesOrganisation: fakeSaleOrganisation,
           paymentCustomerInformation: fakepaymentCustomerInformation,
           salesOrganisationConfigs: fakeSaleOrgConfig,
-          salesRepresentativeInfo: fakesalesRepInfo)),
+          salesRepresentativeInfo: fakesalesRepInfo,
+        ),
+      ),
       expect: () => [
         PaymentTermState.initial().copyWith(
           paymentTerms: paymentTermMockData,
@@ -220,7 +230,8 @@ void main() {
         );
         expect(
           bloc.state.paymentTerms.displaySelected(
-              value_object.PaymentTerm('0001-Pay immediately (Standard SAP)')),
+            value_object.PaymentTerm('0001-Pay immediately (Standard SAP)'),
+          ),
           '0001-Pay immediately (Standard SAP)',
         );
         expect(

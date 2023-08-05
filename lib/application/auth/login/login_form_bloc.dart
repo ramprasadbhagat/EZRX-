@@ -33,28 +33,34 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           (_) => emit(state.copyWith(isSubmitting: false)),
           (cred) {
             if (cred.username.isValid() && cred.password.isValid()) {
-              emit(state.copyWith(
-                username: cred.username,
-                password: cred.password,
-                rememberPassword: true,
-                authFailureOrSuccessOption: none(),
-              ));
+              emit(
+                state.copyWith(
+                  username: cred.username,
+                  password: cred.password,
+                  rememberPassword: true,
+                  authFailureOrSuccessOption: none(),
+                ),
+              );
             }
             emit(state.copyWith(isSubmitting: false));
           },
         );
       },
       usernameChanged: (e) {
-        emit(state.copyWith(
-          username: Username(e.usernameStr),
-          authFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            username: Username(e.usernameStr),
+            authFailureOrSuccessOption: none(),
+          ),
+        );
       },
       passwordChanged: (e) {
-        emit(state.copyWith(
-          password: Password.login(e.passwordStr),
-          authFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            password: Password.login(e.passwordStr),
+            authFailureOrSuccessOption: none(),
+          ),
+        );
       },
       passwordVisibilityChanged: (e) {
         emit(state.copyWith(passwordVisible: !state.passwordVisible));
@@ -67,10 +73,12 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         final isPasswordValid = state.password.isValid();
 
         if (isUsernameValid && isPasswordValid) {
-          emit(state.copyWith(
-            isSubmitting: true,
-            authFailureOrSuccessOption: none(),
-          ));
+          emit(
+            state.copyWith(
+              isSubmitting: true,
+              authFailureOrSuccessOption: none(),
+            ),
+          );
           final failureOrSuccess = await authRepository.login(
             username: state.username,
             password: state.password,
@@ -78,11 +86,13 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
           await failureOrSuccess.fold(
             (_) {
-              emit(state.copyWith(
-                isSubmitting: false,
-                showErrorMessages: true,
-                authFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ));
+              emit(
+                state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: true,
+                  authFailureOrSuccessOption: optionOf(failureOrSuccess),
+                ),
+              );
             },
             (login) async {
               await authRepository.storeJWT(
@@ -98,13 +108,15 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
                 await authRepository.deleteCredential();
               }
 
-              emit(state.copyWith(
-                isSubmitting: false,
-                showErrorMessages: false,
-                username: Username(''),
-                password: Password.login(''),
-                authFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ));
+              emit(
+                state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: false,
+                  username: Username(''),
+                  password: Password.login(''),
+                  authFailureOrSuccessOption: optionOf(failureOrSuccess),
+                ),
+              );
             },
           );
         } else {
@@ -112,18 +124,22 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         }
       },
       loginWithOktaButtonPressed: (e) async {
-        emit(state.copyWith(
-          isSubmitting: true,
-          authFailureOrSuccessOption: none(),
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            authFailureOrSuccessOption: none(),
+          ),
+        );
         final oktaLoginResult = await authRepository.loginWithOkta();
         await oktaLoginResult.fold(
           (failure) {
-            emit(state.copyWith(
-              isSubmitting: false,
-              showErrorMessages: true,
-              authFailureOrSuccessOption: optionOf(oktaLoginResult),
-            ));
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption: optionOf(oktaLoginResult),
+              ),
+            );
           },
           (success) async => add(const LoginFormEvent.refreshOktaToken()),
         );
@@ -132,11 +148,13 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         final oktaAccessResult = await authRepository.getOktaAccessToken();
         await oktaAccessResult.fold(
           (failure) {
-            emit(state.copyWith(
-              isSubmitting: false,
-              showErrorMessages: true,
-              authFailureOrSuccessOption: optionOf(oktaAccessResult),
-            ));
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption: optionOf(oktaAccessResult),
+              ),
+            );
           },
           (oktaAccessToken) async => add(
             LoginFormEvent.exchanhgeEZRXToken(oktaAccessToken),
@@ -158,11 +176,13 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               access: login.access,
               refresh: login.refresh,
             );
-            emit(state.copyWith(
-              isSubmitting: false,
-              showErrorMessages: false,
-              authFailureOrSuccessOption: optionOf(ezrxResult),
-            ));
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: false,
+                authFailureOrSuccessOption: optionOf(ezrxResult),
+              ),
+            );
           },
         );
       },

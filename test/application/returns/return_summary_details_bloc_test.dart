@@ -27,7 +27,8 @@ void main() {
     blocTest(
       'Initialize',
       build: () => ReturnSummaryDetailsBloc(
-          returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository),
+        returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
+      ),
       act: (ReturnSummaryDetailsBloc bloc) =>
           bloc.add(const ReturnSummaryDetailsEvent.initialized()),
       expect: () => [ReturnSummaryDetailsState.initial()],
@@ -36,21 +37,26 @@ void main() {
     blocTest(
       'Fetch success',
       build: () => ReturnSummaryDetailsBloc(
-          returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository),
+        returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
+      ),
       setUp: () {
-        when(() => mockReturnSummaryDetailsRepository.getReturnInformation(
-                  returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-                  invoiceId: 'mock_id',
-                ))
-            .thenAnswer(
-                (invocation) async => Right(RequestInformation.empty()));
+        when(
+          () => mockReturnSummaryDetailsRepository.getReturnInformation(
+            returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+            invoiceId: 'mock_id',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(RequestInformation.empty()),
+        );
       },
-      act: (ReturnSummaryDetailsBloc bloc) =>
-          bloc.add(ReturnSummaryDetailsEvent.fetch(
-        returnId:
-            ReturnSummaryRequest.empty().copyWith(returnId: 'mock_id').returnId,
-        invoiceId: 'mock_id',
-      )),
+      act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
+        ReturnSummaryDetailsEvent.fetch(
+          returnId: ReturnSummaryRequest.empty()
+              .copyWith(returnId: 'mock_id')
+              .returnId,
+          invoiceId: 'mock_id',
+        ),
+      ),
       expect: () => [
         ReturnSummaryDetailsState.initial().copyWith(
           isLoading: true,
@@ -66,21 +72,28 @@ void main() {
     blocTest(
       'Fetch failure',
       build: () => ReturnSummaryDetailsBloc(
-          returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository),
+        returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
+      ),
       setUp: () {
-        when(() => mockReturnSummaryDetailsRepository.getReturnInformation(
-              returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-              invoiceId: 'mock_id',
-            )).thenAnswer((invocation) async => const Left(
-              ApiFailure.other('mock-error'),
-            ));
+        when(
+          () => mockReturnSummaryDetailsRepository.getReturnInformation(
+            returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+            invoiceId: 'mock_id',
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('mock-error'),
+          ),
+        );
       },
-      act: (ReturnSummaryDetailsBloc bloc) =>
-          bloc.add(ReturnSummaryDetailsEvent.fetch(
-        returnId:
-            ReturnSummaryRequest.empty().copyWith(returnId: 'mock_id').returnId,
-        invoiceId: 'mock_id',
-      )),
+      act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
+        ReturnSummaryDetailsEvent.fetch(
+          returnId: ReturnSummaryRequest.empty()
+              .copyWith(returnId: 'mock_id')
+              .returnId,
+          invoiceId: 'mock_id',
+        ),
+      ),
       expect: () => [
         ReturnSummaryDetailsState.initial().copyWith(
           isLoading: true,

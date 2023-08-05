@@ -31,11 +31,12 @@ void main() {
   setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
     remoteDataSource = BannerRemoteDataSource(
-        config: Config(),
-        httpService: service,
-        eZReachHttpService: service,
-        bannerQueryMutation: BannerQueryMutation(),
-        dataSourceExceptionHandler: DataSourceExceptionHandler());
+      config: Config(),
+      httpService: service,
+      eZReachHttpService: service,
+      bannerQueryMutation: BannerQueryMutation(),
+      dataSourceExceptionHandler: DataSourceExceptionHandler(),
+    );
 
     saleOrgName = '2601';
     isPreSalesOrg = false;
@@ -69,7 +70,9 @@ void main() {
       );
 
       final result = await remoteDataSource.getBanners(
-          isPreSalesOrg: false, salesOrg: saleOrgName);
+        isPreSalesOrg: false,
+        salesOrg: saleOrgName,
+      );
 
       expect(result.length, List.from(res['data']['getBanners']).length);
     });

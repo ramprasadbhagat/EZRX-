@@ -14,7 +14,7 @@ Map<String, dynamic> getJWTPayload(String token) {
     // Decode payload, the result is a String
     final payloadString = utf8.decode(base64.decode(normalizedPayload));
     // Parse the String to a Map<String, dynamic>
-    
+
     return jsonDecode(payloadString);
   } catch (error) {
     throw const FormatException('Invalid payload');

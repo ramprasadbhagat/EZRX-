@@ -62,8 +62,7 @@ class UserRestrictionRemoteDataSource {
     required String userName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData =
-          userRestrictionMutation.getUserRestrictions();
+      final queryData = userRestrictionMutation.getUserRestrictions();
 
       final request = {
         'request': {

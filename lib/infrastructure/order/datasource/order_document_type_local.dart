@@ -10,7 +10,7 @@ class OrderDocumentTypeLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString('assets/json/orderDocumentTypeResponse.json'),
     );
-    
+
     return List.from(data['data']['orderDocumentType']['documentTypes'])
         .map((e) => OrderDocumentTypeDto.fromJson(e).toDomain())
         .toList();

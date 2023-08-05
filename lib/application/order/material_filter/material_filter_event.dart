@@ -16,12 +16,11 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
     Object key,
   ) = _updateSelectedMaterialFilter;
   const factory MaterialFilterEvent.initSelectedMaterialFilter(
-      MaterialFilter selectedMaterialFilter,
-      ) = _initSelectedMaterialFilter;
+    MaterialFilter selectedMaterialFilter,
+  ) = _initSelectedMaterialFilter;
   const factory MaterialFilterEvent.updateSearchKey(String searchkey) =
       _updateSearchKey;
-  const factory MaterialFilterEvent.search() =
-      _search;
+  const factory MaterialFilterEvent.search() = _search;
   const factory MaterialFilterEvent.resetFilter() = _resetFilter;
 }
 

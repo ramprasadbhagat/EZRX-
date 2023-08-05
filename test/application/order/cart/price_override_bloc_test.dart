@@ -30,7 +30,8 @@ void main() {
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Price Override Bloc Initial',
         build: () => PriceOverrideBloc(
-            priceOverrideRepository: priceOverrideRepositoryMock),
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
         act: (bloc) => bloc.add(
           const PriceOverrideEvent.initialized(),
         ),
@@ -40,7 +41,8 @@ void main() {
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Price Override Bloc onPriceValueChange',
         build: () => PriceOverrideBloc(
-            priceOverrideRepository: priceOverrideRepositoryMock),
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
         act: (bloc) => bloc.add(
           const PriceOverrideEvent.onPriceValueChange(newPrice: '20'),
         ),
@@ -56,7 +58,8 @@ void main() {
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Price Override Bloc onRemarksValueChange',
         build: () => PriceOverrideBloc(
-            priceOverrideRepository: priceOverrideRepositoryMock),
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
         act: (bloc) => bloc.add(
           const PriceOverrideEvent.onRemarksValueChange(
             newRemarks: 'fake-test',
@@ -74,7 +77,8 @@ void main() {
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Fetch the overrided price',
         build: () => PriceOverrideBloc(
-            priceOverrideRepository: priceOverrideRepositoryMock),
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
         setUp: () {
           when(
             () => priceOverrideRepositoryMock.updateItemPrice(
@@ -132,7 +136,8 @@ void main() {
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'failed to Fetch the overrided price',
         build: () => PriceOverrideBloc(
-            priceOverrideRepository: priceOverrideRepositoryMock),
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
         setUp: () {
           when(
             () => priceOverrideRepositoryMock.updateItemPrice(

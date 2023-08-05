@@ -224,14 +224,16 @@ class _BundleSheetFooter extends StatelessWidget {
                       },
                       builder: (context, stateCart) {
                         final materialInCart = stateCart.cartProducts
-                                .where((element) =>
-                                    element.bundle.bundleCode ==
-                                    context
-                                        .read<BundleAddToCartBloc>()
-                                        .state
-                                        .bundle
-                                        .materialNumber
-                                        .getValue())
+                                .where(
+                                  (element) =>
+                                      element.bundle.bundleCode ==
+                                      context
+                                          .read<BundleAddToCartBloc>()
+                                          .state
+                                          .bundle
+                                          .materialNumber
+                                          .getValue(),
+                                )
                                 .firstOrNull ??
                             PriceAggregate.empty();
 
@@ -245,55 +247,57 @@ class _BundleSheetFooter extends StatelessWidget {
                                   stateCart.isUpserting
                               ? null
                               : () {
-                                  context
-                                      .read<CartBloc>()
-                                      .add(CartEvent.upsertCartItems(
-                                        salesOrganisation: context
-                                            .read<SalesOrgBloc>()
-                                            .state
-                                            .salesOrganisation,
-                                        customerCodeInfo: context
-                                            .read<CustomerCodeBloc>()
-                                            .state
-                                            .customerCodeInfo,
-                                        shipToInfo: context
-                                            .read<CustomerCodeBloc>()
-                                            .state
-                                            .shipToInfo,
-                                        priceAggregate:
-                                            PriceAggregate.empty().copyWith(
-                                          bundle: Bundle.empty().copyWith(
-                                            materials:
-                                                state.bundleMaterialsSelected
-                                                    .map(
-                                                      (e) => e.copyWith(
-                                                        quantity: e.quantity +
-                                                            (materialInCart
-                                                                    .bundle
-                                                                    .materials
-                                                                    .where((element) =>
-                                                                        element
-                                                                            .materialNumber ==
-                                                                        e.materialNumber)
-                                                                    .firstOrNull
-                                                                    ?.quantity ??
-                                                                0),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                            bundleCode: state
-                                                .bundle.materialNumber
-                                                .getValue(),
-                                            bundleName: BundleName(
-                                              state.bundle.materialDescription,
+                                  context.read<CartBloc>().add(
+                                        CartEvent.upsertCartItems(
+                                          salesOrganisation: context
+                                              .read<SalesOrgBloc>()
+                                              .state
+                                              .salesOrganisation,
+                                          customerCodeInfo: context
+                                              .read<CustomerCodeBloc>()
+                                              .state
+                                              .customerCodeInfo,
+                                          shipToInfo: context
+                                              .read<CustomerCodeBloc>()
+                                              .state
+                                              .shipToInfo,
+                                          priceAggregate:
+                                              PriceAggregate.empty().copyWith(
+                                            bundle: Bundle.empty().copyWith(
+                                              materials:
+                                                  state.bundleMaterialsSelected
+                                                      .map(
+                                                        (e) => e.copyWith(
+                                                          quantity: e.quantity +
+                                                              (materialInCart
+                                                                      .bundle
+                                                                      .materials
+                                                                      .where(
+                                                                        (element) =>
+                                                                            element.materialNumber ==
+                                                                            e.materialNumber,
+                                                                      )
+                                                                      .firstOrNull
+                                                                      ?.quantity ??
+                                                                  0),
+                                                        ),
+                                                      )
+                                                      .toList(),
+                                              bundleCode: state
+                                                  .bundle.materialNumber
+                                                  .getValue(),
+                                              bundleName: BundleName(
+                                                state
+                                                    .bundle.materialDescription,
+                                              ),
                                             ),
                                           ),
+                                          salesOrganisationConfigs: context
+                                              .read<SalesOrgBloc>()
+                                              .state
+                                              .configs,
                                         ),
-                                        salesOrganisationConfigs: context
-                                            .read<SalesOrgBloc>()
-                                            .state
-                                            .configs,
-                                      ));
+                                      );
                                 },
                           child: LoadingShimmer.withChild(
                             enabled: stateCart.isUpserting,

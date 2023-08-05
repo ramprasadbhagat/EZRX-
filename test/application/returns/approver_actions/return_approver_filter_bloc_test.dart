@@ -46,7 +46,7 @@ void main() {
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
           toInvoiceDate: DateTimeStringValue(
-           getDateStringByDateTime(fakeToDate),
+            getDateStringByDateTime(fakeToDate),
           ),
           fromInvoiceDate: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
@@ -204,7 +204,6 @@ void main() {
         ),
       ],
     );
-
 
     blocTest(
       'sortby Changed',

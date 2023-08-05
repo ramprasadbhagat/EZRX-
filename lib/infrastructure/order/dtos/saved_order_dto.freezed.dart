@@ -106,52 +106,78 @@ abstract class $SavedOrderDtoCopyWith<$Res> {
       _$SavedOrderDtoCopyWithImpl<$Res, SavedOrderDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
       @_OrderProductItemListConverter()
       @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
-      List<MaterialItemDto> items,
-      @JsonKey(name: 'draftorder', defaultValue: false) bool isDraftOrder,
+          List<MaterialItemDto> items,
+      @JsonKey(name: 'draftorder', defaultValue: false)
+          bool isDraftOrder,
       @JsonKey(name: 'BillingDocument', defaultValue: '')
-      String billingDocument,
-      @JsonKey(name: 'eZRxNumber', defaultValue: '') String eZRxNumber,
-      @JsonKey(name: 'SoldToParty', defaultValue: '') String soldToParty,
-      @JsonKey(name: 'ShipToParty', defaultValue: '') String shipToParty,
-      @JsonKey(name: 'CompanyName', defaultValue: '') String companyName,
-      @JsonKey(name: 'TotalOrderValue', defaultValue: 0) double totalOrderValue,
+          String billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          String eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          String soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          String shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+          double totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
-      String requestedDeliveryDate,
+          String requestedDeliveryDate,
       @JsonKey(name: 'DeliveryDocument', defaultValue: '')
-      String deliveryDocument,
+          String deliveryDocument,
       @JsonKey(name: 'SalesOrganization', defaultValue: '')
-      String salesOrganization,
-      @JsonKey(name: 'Principal', defaultValue: '') String principal,
+          String salesOrganization,
+      @JsonKey(name: 'Principal', defaultValue: '')
+          String principal,
       @JsonKey(name: 'ProcessingStatus', defaultValue: '')
-      String processingStatus,
-      @JsonKey(name: 'country', defaultValue: '') String country,
-      @JsonKey(name: 'post_code1', defaultValue: '') String postCode1,
+          String processingStatus,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'post_code1', defaultValue: '')
+          String postCode1,
       @JsonKey(name: 'orderRequest', defaultValue: '')
-      String specialInstructions,
-      @JsonKey(name: 'POReference', defaultValue: '') String poReference,
-      @JsonKey(name: 'paymentTerm', defaultValue: '') String payTerm,
-      @JsonKey(name: 'collectiveNumber', defaultValue: '') String collectiveNo,
-      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'address1', defaultValue: '') String address1,
-      @JsonKey(name: 'address2', defaultValue: '') String address2,
-      @JsonKey(name: 'city', defaultValue: '') String city,
-      @JsonKey(name: 'fax', defaultValue: '') String fax,
-      @JsonKey(name: 'phonenumber', defaultValue: '') String phonenumber,
-      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '') String orderReason,
+          String specialInstructions,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String poReference,
+      @JsonKey(name: 'paymentTerm', defaultValue: '')
+          String payTerm,
+      @JsonKey(name: 'collectiveNumber', defaultValue: '')
+          String collectiveNo,
+      @JsonKey(name: 'Quantity', defaultValue: 0)
+          int quantity,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'address1', defaultValue: '')
+          String address1,
+      @JsonKey(name: 'address2', defaultValue: '')
+          String address2,
+      @JsonKey(name: 'city', defaultValue: '')
+          String city,
+      @JsonKey(name: 'fax', defaultValue: '')
+          String fax,
+      @JsonKey(name: 'phonenumber', defaultValue: '')
+          String phonenumber,
+      @JsonKey(name: 'orderType', defaultValue: '')
+          String orderType,
+      @JsonKey(name: 'orderReason', defaultValue: '')
+          String orderReason,
       @JsonKey(name: 'shippingCondition', defaultValue: '')
-      String shippingCondition,
-      @JsonKey(name: 'user', defaultValue: '') String user,
-      @JsonKey(name: 'contactPerson', defaultValue: '') String contactPerson,
-      @JsonKey(name: 'referenceNote', defaultValue: '') String referenceNotes,
+          String shippingCondition,
+      @JsonKey(name: 'user', defaultValue: '')
+          String user,
+      @JsonKey(name: 'contactPerson', defaultValue: '')
+          String contactPerson,
+      @JsonKey(name: 'referenceNote', defaultValue: '')
+          String referenceNotes,
       @_PoDocumentsListConverter()
       @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> poAttachent});
+          List<PoDocumentsDto> poAttachent});
 }
 
 /// @nodoc
@@ -357,52 +383,78 @@ abstract class _$$_SavedOrderDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
       @_OrderProductItemListConverter()
       @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
-      List<MaterialItemDto> items,
-      @JsonKey(name: 'draftorder', defaultValue: false) bool isDraftOrder,
+          List<MaterialItemDto> items,
+      @JsonKey(name: 'draftorder', defaultValue: false)
+          bool isDraftOrder,
       @JsonKey(name: 'BillingDocument', defaultValue: '')
-      String billingDocument,
-      @JsonKey(name: 'eZRxNumber', defaultValue: '') String eZRxNumber,
-      @JsonKey(name: 'SoldToParty', defaultValue: '') String soldToParty,
-      @JsonKey(name: 'ShipToParty', defaultValue: '') String shipToParty,
-      @JsonKey(name: 'CompanyName', defaultValue: '') String companyName,
-      @JsonKey(name: 'TotalOrderValue', defaultValue: 0) double totalOrderValue,
+          String billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          String eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          String soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          String shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+          double totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
-      String requestedDeliveryDate,
+          String requestedDeliveryDate,
       @JsonKey(name: 'DeliveryDocument', defaultValue: '')
-      String deliveryDocument,
+          String deliveryDocument,
       @JsonKey(name: 'SalesOrganization', defaultValue: '')
-      String salesOrganization,
-      @JsonKey(name: 'Principal', defaultValue: '') String principal,
+          String salesOrganization,
+      @JsonKey(name: 'Principal', defaultValue: '')
+          String principal,
       @JsonKey(name: 'ProcessingStatus', defaultValue: '')
-      String processingStatus,
-      @JsonKey(name: 'country', defaultValue: '') String country,
-      @JsonKey(name: 'post_code1', defaultValue: '') String postCode1,
+          String processingStatus,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'post_code1', defaultValue: '')
+          String postCode1,
       @JsonKey(name: 'orderRequest', defaultValue: '')
-      String specialInstructions,
-      @JsonKey(name: 'POReference', defaultValue: '') String poReference,
-      @JsonKey(name: 'paymentTerm', defaultValue: '') String payTerm,
-      @JsonKey(name: 'collectiveNumber', defaultValue: '') String collectiveNo,
-      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'address1', defaultValue: '') String address1,
-      @JsonKey(name: 'address2', defaultValue: '') String address2,
-      @JsonKey(name: 'city', defaultValue: '') String city,
-      @JsonKey(name: 'fax', defaultValue: '') String fax,
-      @JsonKey(name: 'phonenumber', defaultValue: '') String phonenumber,
-      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '') String orderReason,
+          String specialInstructions,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String poReference,
+      @JsonKey(name: 'paymentTerm', defaultValue: '')
+          String payTerm,
+      @JsonKey(name: 'collectiveNumber', defaultValue: '')
+          String collectiveNo,
+      @JsonKey(name: 'Quantity', defaultValue: 0)
+          int quantity,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'address1', defaultValue: '')
+          String address1,
+      @JsonKey(name: 'address2', defaultValue: '')
+          String address2,
+      @JsonKey(name: 'city', defaultValue: '')
+          String city,
+      @JsonKey(name: 'fax', defaultValue: '')
+          String fax,
+      @JsonKey(name: 'phonenumber', defaultValue: '')
+          String phonenumber,
+      @JsonKey(name: 'orderType', defaultValue: '')
+          String orderType,
+      @JsonKey(name: 'orderReason', defaultValue: '')
+          String orderReason,
       @JsonKey(name: 'shippingCondition', defaultValue: '')
-      String shippingCondition,
-      @JsonKey(name: 'user', defaultValue: '') String user,
-      @JsonKey(name: 'contactPerson', defaultValue: '') String contactPerson,
-      @JsonKey(name: 'referenceNote', defaultValue: '') String referenceNotes,
+          String shippingCondition,
+      @JsonKey(name: 'user', defaultValue: '')
+          String user,
+      @JsonKey(name: 'contactPerson', defaultValue: '')
+          String contactPerson,
+      @JsonKey(name: 'referenceNote', defaultValue: '')
+          String referenceNotes,
       @_PoDocumentsListConverter()
       @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> poAttachent});
+          List<PoDocumentsDto> poAttachent});
 }
 
 /// @nodoc
@@ -601,57 +653,78 @@ class __$$_SavedOrderDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SavedOrderDto extends _SavedOrderDto {
   const _$_SavedOrderDto(
-      {@JsonKey(name: 'id', defaultValue: '') required this.id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required this.id,
       @_OrderProductItemListConverter()
       @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
-      required final List<MaterialItemDto> items,
+          required final List<MaterialItemDto> items,
       @JsonKey(name: 'draftorder', defaultValue: false)
-      required this.isDraftOrder,
+          required this.isDraftOrder,
       @JsonKey(name: 'BillingDocument', defaultValue: '')
-      required this.billingDocument,
-      @JsonKey(name: 'eZRxNumber', defaultValue: '') required this.eZRxNumber,
-      @JsonKey(name: 'SoldToParty', defaultValue: '') required this.soldToParty,
-      @JsonKey(name: 'ShipToParty', defaultValue: '') required this.shipToParty,
-      @JsonKey(name: 'CompanyName', defaultValue: '') required this.companyName,
+          required this.billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          required this.eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          required this.soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          required this.shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          required this.companyName,
       @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-      required this.totalOrderValue,
+          required this.totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
-      required this.requestedDeliveryDate,
+          required this.requestedDeliveryDate,
       @JsonKey(name: 'DeliveryDocument', defaultValue: '')
-      required this.deliveryDocument,
+          required this.deliveryDocument,
       @JsonKey(name: 'SalesOrganization', defaultValue: '')
-      required this.salesOrganization,
-      @JsonKey(name: 'Principal', defaultValue: '') required this.principal,
+          required this.salesOrganization,
+      @JsonKey(name: 'Principal', defaultValue: '')
+          required this.principal,
       @JsonKey(name: 'ProcessingStatus', defaultValue: '')
-      required this.processingStatus,
-      @JsonKey(name: 'country', defaultValue: '') required this.country,
-      @JsonKey(name: 'post_code1', defaultValue: '') required this.postCode1,
+          required this.processingStatus,
+      @JsonKey(name: 'country', defaultValue: '')
+          required this.country,
+      @JsonKey(name: 'post_code1', defaultValue: '')
+          required this.postCode1,
       @JsonKey(name: 'orderRequest', defaultValue: '')
-      required this.specialInstructions,
-      @JsonKey(name: 'POReference', defaultValue: '') required this.poReference,
-      @JsonKey(name: 'paymentTerm', defaultValue: '') required this.payTerm,
+          required this.specialInstructions,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          required this.poReference,
+      @JsonKey(name: 'paymentTerm', defaultValue: '')
+          required this.payTerm,
       @JsonKey(name: 'collectiveNumber', defaultValue: '')
-      required this.collectiveNo,
-      @JsonKey(name: 'Quantity', defaultValue: 0) required this.quantity,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
-      @JsonKey(name: 'address1', defaultValue: '') required this.address1,
-      @JsonKey(name: 'address2', defaultValue: '') required this.address2,
-      @JsonKey(name: 'city', defaultValue: '') required this.city,
-      @JsonKey(name: 'fax', defaultValue: '') required this.fax,
-      @JsonKey(name: 'phonenumber', defaultValue: '') required this.phonenumber,
-      @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
-      @JsonKey(name: 'orderReason', defaultValue: '') required this.orderReason,
+          required this.collectiveNo,
+      @JsonKey(name: 'Quantity', defaultValue: 0)
+          required this.quantity,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          required this.unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          required this.totalPrice,
+      @JsonKey(name: 'address1', defaultValue: '')
+          required this.address1,
+      @JsonKey(name: 'address2', defaultValue: '')
+          required this.address2,
+      @JsonKey(name: 'city', defaultValue: '')
+          required this.city,
+      @JsonKey(name: 'fax', defaultValue: '')
+          required this.fax,
+      @JsonKey(name: 'phonenumber', defaultValue: '')
+          required this.phonenumber,
+      @JsonKey(name: 'orderType', defaultValue: '')
+          required this.orderType,
+      @JsonKey(name: 'orderReason', defaultValue: '')
+          required this.orderReason,
       @JsonKey(name: 'shippingCondition', defaultValue: '')
-      required this.shippingCondition,
-      @JsonKey(name: 'user', defaultValue: '') required this.user,
+          required this.shippingCondition,
+      @JsonKey(name: 'user', defaultValue: '')
+          required this.user,
       @JsonKey(name: 'contactPerson', defaultValue: '')
-      required this.contactPerson,
+          required this.contactPerson,
       @JsonKey(name: 'referenceNote', defaultValue: '')
-      required this.referenceNotes,
+          required this.referenceNotes,
       @_PoDocumentsListConverter()
       @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> poAttachent})
+          required final List<PoDocumentsDto> poAttachent})
       : _items = items,
         _poAttachent = poAttachent,
         super._();
@@ -910,72 +983,78 @@ class _$_SavedOrderDto extends _SavedOrderDto {
 
 abstract class _SavedOrderDto extends SavedOrderDto {
   const factory _SavedOrderDto(
-      {@JsonKey(name: 'id', defaultValue: '') required final String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required final String id,
       @_OrderProductItemListConverter()
       @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
-      required final List<MaterialItemDto> items,
+          required final List<MaterialItemDto> items,
       @JsonKey(name: 'draftorder', defaultValue: false)
-      required final bool isDraftOrder,
+          required final bool isDraftOrder,
       @JsonKey(name: 'BillingDocument', defaultValue: '')
-      required final String billingDocument,
+          required final String billingDocument,
       @JsonKey(name: 'eZRxNumber', defaultValue: '')
-      required final String eZRxNumber,
+          required final String eZRxNumber,
       @JsonKey(name: 'SoldToParty', defaultValue: '')
-      required final String soldToParty,
+          required final String soldToParty,
       @JsonKey(name: 'ShipToParty', defaultValue: '')
-      required final String shipToParty,
+          required final String shipToParty,
       @JsonKey(name: 'CompanyName', defaultValue: '')
-      required final String companyName,
+          required final String companyName,
       @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-      required final double totalOrderValue,
+          required final double totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
-      required final String requestedDeliveryDate,
+          required final String requestedDeliveryDate,
       @JsonKey(name: 'DeliveryDocument', defaultValue: '')
-      required final String deliveryDocument,
+          required final String deliveryDocument,
       @JsonKey(name: 'SalesOrganization', defaultValue: '')
-      required final String salesOrganization,
+          required final String salesOrganization,
       @JsonKey(name: 'Principal', defaultValue: '')
-      required final String principal,
+          required final String principal,
       @JsonKey(name: 'ProcessingStatus', defaultValue: '')
-      required final String processingStatus,
-      @JsonKey(name: 'country', defaultValue: '') required final String country,
+          required final String processingStatus,
+      @JsonKey(name: 'country', defaultValue: '')
+          required final String country,
       @JsonKey(name: 'post_code1', defaultValue: '')
-      required final String postCode1,
+          required final String postCode1,
       @JsonKey(name: 'orderRequest', defaultValue: '')
-      required final String specialInstructions,
+          required final String specialInstructions,
       @JsonKey(name: 'POReference', defaultValue: '')
-      required final String poReference,
+          required final String poReference,
       @JsonKey(name: 'paymentTerm', defaultValue: '')
-      required final String payTerm,
+          required final String payTerm,
       @JsonKey(name: 'collectiveNumber', defaultValue: '')
-      required final String collectiveNo,
-      @JsonKey(name: 'Quantity', defaultValue: 0) required final int quantity,
+          required final String collectiveNo,
+      @JsonKey(name: 'Quantity', defaultValue: 0)
+          required final int quantity,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-      required final double unitPrice,
+          required final double unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-      required final double totalPrice,
+          required final double totalPrice,
       @JsonKey(name: 'address1', defaultValue: '')
-      required final String address1,
+          required final String address1,
       @JsonKey(name: 'address2', defaultValue: '')
-      required final String address2,
-      @JsonKey(name: 'city', defaultValue: '') required final String city,
-      @JsonKey(name: 'fax', defaultValue: '') required final String fax,
+          required final String address2,
+      @JsonKey(name: 'city', defaultValue: '')
+          required final String city,
+      @JsonKey(name: 'fax', defaultValue: '')
+          required final String fax,
       @JsonKey(name: 'phonenumber', defaultValue: '')
-      required final String phonenumber,
+          required final String phonenumber,
       @JsonKey(name: 'orderType', defaultValue: '')
-      required final String orderType,
+          required final String orderType,
       @JsonKey(name: 'orderReason', defaultValue: '')
-      required final String orderReason,
+          required final String orderReason,
       @JsonKey(name: 'shippingCondition', defaultValue: '')
-      required final String shippingCondition,
-      @JsonKey(name: 'user', defaultValue: '') required final String user,
+          required final String shippingCondition,
+      @JsonKey(name: 'user', defaultValue: '')
+          required final String user,
       @JsonKey(name: 'contactPerson', defaultValue: '')
-      required final String contactPerson,
+          required final String contactPerson,
       @JsonKey(name: 'referenceNote', defaultValue: '')
-      required final String referenceNotes,
+          required final String referenceNotes,
       @_PoDocumentsListConverter()
       @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> poAttachent}) = _$_SavedOrderDto;
+          required final List<PoDocumentsDto> poAttachent}) = _$_SavedOrderDto;
   const _SavedOrderDto._() : super._();
 
   factory _SavedOrderDto.fromJson(Map<String, dynamic> json) =

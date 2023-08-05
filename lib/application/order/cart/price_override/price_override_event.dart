@@ -14,8 +14,8 @@ class PriceOverrideEvent with _$PriceOverrideEvent {
 
   const factory PriceOverrideEvent.onPriceValueChange({
     required String newPrice,
-  }) =_OnPriceValueChange;
-  
+  }) = _OnPriceValueChange;
+
   const factory PriceOverrideEvent.onRemarksValueChange({
     required String newRemarks,
   }) = OnRemarksValueChange;

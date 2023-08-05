@@ -81,11 +81,14 @@ void main() {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<AdminPoAttachmentBloc>(
-                create: (context) => mockAdminPoAttachmentBloc),
+              create: (context) => mockAdminPoAttachmentBloc,
+            ),
             BlocProvider<AdminPoAttachmentFilterBloc>(
-                create: (context) => mockAdminPoAttachmentFilterBloc),
+              create: (context) => mockAdminPoAttachmentFilterBloc,
+            ),
             BlocProvider<PoAttachmentBloc>(
-                create: (context) => mockPoAttachmentBloc),
+              create: (context) => mockPoAttachmentBloc,
+            ),
           ],
           child: Material(child: AdminPoAttachmentPage()),
         ),
@@ -134,7 +137,9 @@ void main() {
         ),
       ];
       whenListen(
-          mockAdminPoAttachmentFilterBloc, Stream.fromIterable(expectedStates));
+        mockAdminPoAttachmentFilterBloc,
+        Stream.fromIterable(expectedStates),
+      );
 
       final expectedStates1 = [
         AdminPoAttachmentState.initial().copyWith(
@@ -168,7 +173,9 @@ void main() {
       ];
 
       whenListen(
-          mockAdminPoAttachmentBloc, Stream.fromIterable(expectedStates1));
+        mockAdminPoAttachmentBloc,
+        Stream.fromIterable(expectedStates1),
+      );
 
       final expectedStates2 = [
         PoAttachmentState.initial().copyWith(
@@ -313,7 +320,7 @@ void main() {
       await tester.pump(
         const Duration(seconds: 1),
       );
-      await tester.pump(const Duration(seconds: 1)); 
+      await tester.pump(const Duration(seconds: 1));
 
       await tester.pump();
     });
@@ -412,18 +419,20 @@ void main() {
       );
       await tester.pump(
         const Duration(seconds: 1),
-      ); 
+      );
 
-      verify(() => mockAdminPoAttachmentBloc.add(
-            AdminPoAttachmentEvent.loadMore(
-              adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
-                orderNumber: SearchKey(''),
-                exRxNo: SearchKey(''),
-                salesOrg: SalesOrg(''),
-                soldTo: CustomerCodeInfo.empty(),
-              ),
+      verify(
+        () => mockAdminPoAttachmentBloc.add(
+          AdminPoAttachmentEvent.loadMore(
+            adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
+              orderNumber: SearchKey(''),
+              exRxNo: SearchKey(''),
+              salesOrg: SalesOrg(''),
+              soldTo: CustomerCodeInfo.empty(),
             ),
-          )).called(1);
+          ),
+        ),
+      ).called(1);
       await tester.pump();
     });
   });

@@ -1,5 +1,4 @@
 class NewPaymentQuery {
-
   String getCustomerOpenItemsQuery() {
     return '''
     query customerOpenItems(\$request: customerOpenItemsRequest!) {

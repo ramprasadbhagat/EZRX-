@@ -32,12 +32,15 @@ void main() {
   group(
     'Outstanding Invoices Bloc Initialize',
     () {
-      blocTest('Initialize',
-          build: () => OutstandingInvoicesBloc(
-              newPaymentRepository: newPaymentRepository),
-          act: (OutstandingInvoicesBloc bloc) =>
-              bloc.add(const OutstandingInvoicesEvent.initialized()),
-          expect: () => [OutstandingInvoicesState.initial()]);
+      blocTest(
+        'Initialize',
+        build: () => OutstandingInvoicesBloc(
+          newPaymentRepository: newPaymentRepository,
+        ),
+        act: (OutstandingInvoicesBloc bloc) =>
+            bloc.add(const OutstandingInvoicesEvent.initialized()),
+        expect: () => [OutstandingInvoicesState.initial()],
+      );
     },
   );
 

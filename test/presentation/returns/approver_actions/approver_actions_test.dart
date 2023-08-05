@@ -137,7 +137,8 @@ void main() {
         autoRouterMock: autoRouterMock,
         providers: [
           BlocProvider<ReturnApproverBloc>(
-              create: (context) => returnApproverBlocMock),
+            create: (context) => returnApproverBlocMock,
+          ),
           BlocProvider<ReturnApproverFilterBloc>(
             create: (context) => returnApproverFilterBlocMock,
           ),
@@ -152,7 +153,8 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock),
+            create: (context) => announcementBlocMock,
+          ),
         ],
         child: ApproverActions(),
       );
@@ -186,8 +188,10 @@ void main() {
         expect(statusFilterButton, findsOneWidget);
         await tester.tap(statusFilterButton);
         await tester.pump();
-        expect(find.byKey(const Key('return_approver_filter_by_status')),
-            findsOneWidget);
+        expect(
+          find.byKey(const Key('return_approver_filter_by_status')),
+          findsOneWidget,
+        );
       },
     );
 
@@ -253,8 +257,10 @@ void main() {
         await tester.tap(statusFilterButton);
         await tester.pumpAndSettle();
 
-        expect(find.byKey(const Key('return_approver_filter_by_status')),
-            findsOneWidget);
+        expect(
+          find.byKey(const Key('return_approver_filter_by_status')),
+          findsOneWidget,
+        );
         expect(find.text('Select Status'.tr()), findsOneWidget);
         expect(find.byKey(const Key('closeButton')), findsOneWidget);
         expect(find.text('Select Status'.tr()), findsOneWidget);
@@ -382,10 +388,11 @@ void main() {
         );
         final expectedreturnApproverFilterState = [
           ReturnApproverFilterState.initial().copyWith(
-              approverReturnFilter: returnApproverFilter.copyWith(
-                returnId: SearchKey.searchFilter('test'),
-              ),
-              isSubmitting: true),
+            approverReturnFilter: returnApproverFilter.copyWith(
+              returnId: SearchKey.searchFilter('test'),
+            ),
+            isSubmitting: true,
+          ),
         ];
         whenListen(
           returnApproverFilterBlocMock,
@@ -455,8 +462,10 @@ void main() {
         await tester.tap(statusFilterButton);
         await tester.pumpAndSettle();
 
-        expect(find.byKey(const Key('return_approver_filter_by_status')),
-            findsOneWidget);
+        expect(
+          find.byKey(const Key('return_approver_filter_by_status')),
+          findsOneWidget,
+        );
         expect(find.text('Select Status'.tr()), findsOneWidget);
         expect(find.byKey(const Key('closeButton')), findsOneWidget);
         expect(find.text('Select Status'.tr()), findsOneWidget);

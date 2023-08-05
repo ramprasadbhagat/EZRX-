@@ -54,19 +54,23 @@ void main() async {
   group('Cart Item K2.1 -', () {
     test('Combo not eligible when set 1 unselected', () {
       expect(
-          CartItem.comboDeal([amountDealMaterial, invalidDealMaterial])
-              .isComboDealEligible,
-          false);
+        CartItem.comboDeal([amountDealMaterial, invalidDealMaterial])
+            .isComboDealEligible,
+        false,
+      );
     });
     test('Combo not eligible when set 2 unselected', () {
       expect(
-          CartItem.comboDeal([percentDealMaterial]).isComboDealEligible, false);
+        CartItem.comboDeal([percentDealMaterial]).isComboDealEligible,
+        false,
+      );
     });
     test('Combo is eligible when both sets are unselected', () {
       expect(
-          CartItem.comboDeal([percentDealMaterial, amountDealMaterial])
-              .isComboDealEligible,
-          true);
+        CartItem.comboDeal([percentDealMaterial, amountDealMaterial])
+            .isComboDealEligible,
+        true,
+      );
     });
     group('Percent deal -', () {
       final cartItem = CartItem.comboDeal([

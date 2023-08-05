@@ -43,12 +43,12 @@ abstract class $AnnouncementArticleInfoDtoCopyWith<$Res> {
           AnnouncementArticleInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
-      String endCursor,
-      @JsonKey(name: 'total', defaultValue: 0) int total,
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          String endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
+          int total,
       @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
-      List<AnnouncementArticleItemDto> announcementList});
+          List<AnnouncementArticleItemDto> announcementList});
 }
 
 /// @nodoc
@@ -96,12 +96,12 @@ abstract class _$$_AnnouncementArticleInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
-      String endCursor,
-      @JsonKey(name: 'total', defaultValue: 0) int total,
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          String endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
+          int total,
       @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
-      List<AnnouncementArticleItemDto> announcementList});
+          List<AnnouncementArticleItemDto> announcementList});
 }
 
 /// @nodoc
@@ -142,12 +142,12 @@ class __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
   const _$_AnnouncementArticleInfoDto(
-      {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
-      required this.endCursor,
-      @JsonKey(name: 'total', defaultValue: 0) required this.total,
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          required this.endCursor,
+      @JsonKey(name: 'total', defaultValue: 0)
+          required this.total,
       @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
-      required final List<AnnouncementArticleItemDto> announcementList})
+          required final List<AnnouncementArticleItemDto> announcementList})
       : _announcementList = announcementList,
         super._();
 
@@ -209,14 +209,13 @@ class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
 
 abstract class _AnnouncementArticleInfoDto extends AnnouncementArticleInfoDto {
   const factory _AnnouncementArticleInfoDto(
-          {@JsonKey(
-              name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+      {@JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
           required final String endCursor,
-          @JsonKey(name: 'total', defaultValue: 0) required final int total,
-          @JsonKey(
-              name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
-          required final List<AnnouncementArticleItemDto> announcementList}) =
-      _$_AnnouncementArticleInfoDto;
+      @JsonKey(name: 'total', defaultValue: 0)
+          required final int total,
+      @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
+          required final List<AnnouncementArticleItemDto>
+              announcementList}) = _$_AnnouncementArticleInfoDto;
   const _AnnouncementArticleInfoDto._() : super._();
 
   factory _AnnouncementArticleInfoDto.fromJson(Map<String, dynamic> json) =
@@ -271,13 +270,18 @@ abstract class $AnnouncementArticleItemDtoCopyWith<$Res> {
           AnnouncementArticleItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
-      @JsonKey(name: 'title', readValue: getValue) String title,
-      @JsonKey(name: 'summary', readValue: getValue) String summary,
-      @JsonKey(name: 'thumbnail', readValue: getSrcValue) String thumbnail,
-      @JsonKey(name: 'content', readValue: getContent) String content,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @JsonKey(name: 'title', readValue: getValue)
+          String title,
+      @JsonKey(name: 'summary', readValue: getValue)
+          String summary,
+      @JsonKey(name: 'thumbnail', readValue: getSrcValue)
+          String thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
-      String publishedDate});
+          String publishedDate});
 }
 
 /// @nodoc
@@ -340,13 +344,18 @@ abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
-      @JsonKey(name: 'title', readValue: getValue) String title,
-      @JsonKey(name: 'summary', readValue: getValue) String summary,
-      @JsonKey(name: 'thumbnail', readValue: getSrcValue) String thumbnail,
-      @JsonKey(name: 'content', readValue: getContent) String content,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @JsonKey(name: 'title', readValue: getValue)
+          String title,
+      @JsonKey(name: 'summary', readValue: getValue)
+          String summary,
+      @JsonKey(name: 'thumbnail', readValue: getSrcValue)
+          String thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
-      String publishedDate});
+          String publishedDate});
 }
 
 /// @nodoc
@@ -402,14 +411,18 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
   const _$_AnnouncementArticleItemDto(
-      {@JsonKey(name: 'id', defaultValue: '') required this.id,
-      @JsonKey(name: 'title', readValue: getValue) required this.title,
-      @JsonKey(name: 'summary', readValue: getValue) required this.summary,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required this.id,
+      @JsonKey(name: 'title', readValue: getValue)
+          required this.title,
+      @JsonKey(name: 'summary', readValue: getValue)
+          required this.summary,
       @JsonKey(name: 'thumbnail', readValue: getSrcValue)
-      required this.thumbnail,
-      @JsonKey(name: 'content', readValue: getContent) required this.content,
+          required this.thumbnail,
+      @JsonKey(name: 'content', readValue: getContent)
+          required this.content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
-      required this.publishedDate})
+          required this.publishedDate})
       : super._();
 
   factory _$_AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -476,16 +489,18 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
 
 abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
   const factory _AnnouncementArticleItemDto(
-      {@JsonKey(name: 'id', defaultValue: '') required final String id,
-      @JsonKey(name: 'title', readValue: getValue) required final String title,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required final String id,
+      @JsonKey(name: 'title', readValue: getValue)
+          required final String title,
       @JsonKey(name: 'summary', readValue: getValue)
-      required final String summary,
+          required final String summary,
       @JsonKey(name: 'thumbnail', readValue: getSrcValue)
-      required final String thumbnail,
+          required final String thumbnail,
       @JsonKey(name: 'content', readValue: getContent)
-      required final String content,
+          required final String content,
       @JsonKey(name: 'publishedDate', readValue: getDateValue)
-      required final String publishedDate}) = _$_AnnouncementArticleItemDto;
+          required final String publishedDate}) = _$_AnnouncementArticleItemDto;
   const _AnnouncementArticleItemDto._() : super._();
 
   factory _AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =

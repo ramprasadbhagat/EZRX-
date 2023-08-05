@@ -7,7 +7,7 @@ part 'sales_org_id_dto.g.dart';
 class SalesOrgIdDto with _$SalesOrgIdDto {
   const SalesOrgIdDto._();
   const factory SalesOrgIdDto({
-  @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'id') required int id,
   }) = _SalesOrgIdDto;
 
   factory SalesOrgIdDto.fromDomain(
@@ -26,5 +26,4 @@ class SalesOrgIdDto with _$SalesOrgIdDto {
 
   factory SalesOrgIdDto.fromJson(Map<String, dynamic> json) =>
       _$SalesOrgIdDtoFromJson(json);
-
 }

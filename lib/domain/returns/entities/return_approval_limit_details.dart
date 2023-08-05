@@ -32,5 +32,4 @@ class ApprovalLimits with _$ApprovalLimits {
   }
 
   bool get isNotValidApprovalLimit => !salesOrg.isValid();
-  
 }

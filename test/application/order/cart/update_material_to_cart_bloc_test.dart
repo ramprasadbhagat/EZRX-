@@ -47,29 +47,38 @@ void main() {
           (invocation) async => const Left(ApiFailure.productOutOfStock()),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockMaterialCartItemFirst.copyWith(
-          materials: [mockMaterialList.first.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: false,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: false,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
         CartState.initial().copyWith(
           cartItems: [
-            mockMaterialCartItemFirst.copyWith(materials: [
-              mockMaterialList.first.copyWith(
-                quantity: 1,
-              )
-            ]),
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  quantity: 1,
+                )
+              ],
+            ),
           ],
           isFetching: false,
           apiFailureOrSuccessOption:
@@ -114,29 +123,42 @@ void main() {
           ]),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockMaterialCartItemFirst.copyWith(
-          materials: [mockMaterialList.first.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(materials: [
-            mockMaterialList.first.copyWith(
-              quantity: 4,
-            )
-          ]),
-        ], isFetching: false, apiFailureOrSuccessOption: none()),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
+                mockMaterialList.first.copyWith(
+                  quantity: 4,
+                )
+              ],
+            ),
+          ],
+          isFetching: false,
+          apiFailureOrSuccessOption: none(),
+        ),
       ],
     );
     blocTest<CartBloc, CartState>(
@@ -169,35 +191,46 @@ void main() {
             shipToInfo: ShipToInfo.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('fake-Error')));
+          (invocation) async => const Left(ApiFailure.other('fake-Error')),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockMaterialCartItemFirst.copyWith(
-          materials: [mockMaterialList.first.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
         CartState.initial().copyWith(
-            cartItems: [
-              mockMaterialCartItemFirst.copyWith(materials: [
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [
                 mockMaterialList.first.copyWith(
                   quantity: 1,
                 )
-              ]),
-            ],
-            isFetching: false,
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake-Error')))),
+              ],
+            ),
+          ],
+          isFetching: false,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-Error'))),
+        ),
       ],
     );
     blocTest<CartBloc, CartState>(
@@ -230,32 +263,42 @@ void main() {
             shipToInfo: ShipToInfo.empty(),
           ),
         ).thenAnswer(
-            (invocation) async => const Left(ApiFailure.productOutOfStock()));
+          (invocation) async => const Left(ApiFailure.productOutOfStock()),
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockMaterialCartItemFirst.copyWith(
-          materials: [mockMaterialList.first.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: false,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: false,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
         CartState.initial().copyWith(
-            cartItems: [
-              mockMaterialCartItemFirst.copyWith(
-                  materials: [mockMaterialList.first.copyWith(quantity: 1)])
-            ],
-            isFetching: false,
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.productOutOfStock()))),
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            )
+          ],
+          isFetching: false,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.productOutOfStock())),
+        ),
       ],
     );
 
@@ -263,11 +306,13 @@ void main() {
       'zmgMaterial cart Item update failure',
       seed: () => CartState.initial().copyWith(
         cartItems: [
-          mockZmgMaterialCartItemFirst.copyWith(materials: [
-            mockZmgCartItemList.first.copyWith(
-              quantity: 1,
-            ),
-          ])
+          mockZmgMaterialCartItemFirst.copyWith(
+            materials: [
+              mockZmgCartItemList.first.copyWith(
+                quantity: 1,
+              ),
+            ],
+          )
         ],
         isFetching: false,
       ),
@@ -290,31 +335,37 @@ void main() {
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockZmgMaterialCartItemFirst.copyWith(
-          materials: [mockZmgCartItemList.first.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockZmgMaterialCartItemFirst.copyWith(
+            materials: [mockZmgCartItemList.first.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockZmgCartItemList.first.copyWith(quantity: 4),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockZmgCartItemList.first.copyWith(quantity: 4),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(quantity: 1),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first.copyWith(quantity: 1),
+              ],
+            )
           ],
           isFetching: true,
         ),
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(quantity: 1),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first.copyWith(quantity: 1),
+              ],
+            )
           ],
           apiFailureOrSuccessOption: optionOf(
             const Left(
@@ -335,16 +386,18 @@ void main() {
       'Tire update Tire material in cart',
       seed: () => CartState.initial().copyWith(
         cartItems: [
-          mockZmgMaterialCartItemFirst.copyWith(materials: [
-            mockZmgCartItemList.first.copyWith(
-              price:
-                  mockZmgCartItemList.first.price.copyWith(zmgDiscount: false),
-            ),
-            mockZmgCartItemList.last.copyWith(
-              price:
-                  mockZmgCartItemList.last.price.copyWith(zmgDiscount: false),
-            ),
-          ])
+          mockZmgMaterialCartItemFirst.copyWith(
+            materials: [
+              mockZmgCartItemList.first.copyWith(
+                price: mockZmgCartItemList.first.price
+                    .copyWith(zmgDiscount: false),
+              ),
+              mockZmgCartItemList.last.copyWith(
+                price:
+                    mockZmgCartItemList.last.price.copyWith(zmgDiscount: false),
+              ),
+            ],
+          )
         ],
         isFetching: false,
       ),
@@ -352,13 +405,15 @@ void main() {
       setUp: () {
         when(
           () => cartRepositoryMock.updateMaterialQtyInCartItem(
-            cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                quantity: 1,
-                price: mockZmgCartItemList.first.price
-                    .copyWith(zmgDiscount: false),
-              ),
-            ]),
+            cartItem: mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first.copyWith(
+                  quantity: 1,
+                  price: mockZmgCartItemList.first.price
+                      .copyWith(zmgDiscount: false),
+                ),
+              ],
+            ),
             updatedQtyItem: mockZmgCartItemList.first.copyWith(
               quantity: 4,
               price:
@@ -374,32 +429,36 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(
             [
-              mockZmgMaterialCartItemFirst.copyWith(materials: [
-                mockZmgCartItemList.first.copyWith(
-                  quantity: 5,
-                  discountedMaterialCount: 5,
-                  price: mockZmgCartItemList.first.price
-                      .copyWith(zmgDiscount: false),
-                ),
-                mockZmgCartItemList.last.copyWith(
-                  discountedMaterialCount: 1,
-                  price: mockZmgCartItemList.last.price
-                      .copyWith(zmgDiscount: false),
-                ),
-              ])
+              mockZmgMaterialCartItemFirst.copyWith(
+                materials: [
+                  mockZmgCartItemList.first.copyWith(
+                    quantity: 5,
+                    discountedMaterialCount: 5,
+                    price: mockZmgCartItemList.first.price
+                        .copyWith(zmgDiscount: false),
+                  ),
+                  mockZmgCartItemList.last.copyWith(
+                    discountedMaterialCount: 1,
+                    price: mockZmgCartItemList.last.price
+                        .copyWith(zmgDiscount: false),
+                  ),
+                ],
+              )
             ],
           ),
         );
       },
       act: (bloc) => bloc.add(
         CartEvent.updateMaterialQtyInCartItem(
-          currentItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-            mockZmgCartItemList.first.copyWith(
-              quantity: 1,
-              price:
-                  mockZmgCartItemList.first.price.copyWith(zmgDiscount: false),
-            ),
-          ]),
+          currentItem: mockZmgMaterialCartItemFirst.copyWith(
+            materials: [
+              mockZmgCartItemList.first.copyWith(
+                quantity: 1,
+                price: mockZmgCartItemList.first.price
+                    .copyWith(zmgDiscount: false),
+              ),
+            ],
+          ),
           updatedQtyItem: mockZmgCartItemList.first.copyWith(
             quantity: 4,
             price: mockZmgCartItemList.first.price.copyWith(zmgDiscount: false),
@@ -414,34 +473,38 @@ void main() {
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                price: mockZmgCartItemList.first.price
-                    .copyWith(zmgDiscount: false),
-              ),
-              mockZmgCartItemList.last.copyWith(
-                price:
-                    mockZmgCartItemList.last.price.copyWith(zmgDiscount: false),
-              ),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first.copyWith(
+                  price: mockZmgCartItemList.first.price
+                      .copyWith(zmgDiscount: false),
+                ),
+                mockZmgCartItemList.last.copyWith(
+                  price: mockZmgCartItemList.last.price
+                      .copyWith(zmgDiscount: false),
+                ),
+              ],
+            )
           ],
           isFetching: true,
         ),
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                quantity: 5,
-                price: mockZmgCartItemList.first.price
-                    .copyWith(zmgDiscount: false),
-                discountedMaterialCount: 5,
-              ),
-              mockZmgCartItemList.last.copyWith(
-                price:
-                    mockZmgCartItemList.last.price.copyWith(zmgDiscount: false),
-                discountedMaterialCount: 1,
-              ),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first.copyWith(
+                  quantity: 5,
+                  price: mockZmgCartItemList.first.price
+                      .copyWith(zmgDiscount: false),
+                  discountedMaterialCount: 5,
+                ),
+                mockZmgCartItemList.last.copyWith(
+                  price: mockZmgCartItemList.last.price
+                      .copyWith(zmgDiscount: false),
+                  discountedMaterialCount: 1,
+                ),
+              ],
+            )
           ],
           isFetching: false,
         ),
@@ -490,30 +553,39 @@ void main() {
           (invocation) async => const Left(ApiFailure.productOutOfStock()),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
-        currentItem: mockMaterialCartItemFirst.copyWith(
-          materials: [mockMaterialList.first.copyWith(quantity: 1)],
+      act: (bloc) => bloc.add(
+        CartEvent.updateMaterialQtyInCartItem(
+          currentItem: mockMaterialCartItemFirst.copyWith(
+            materials: [mockMaterialList.first.copyWith(quantity: 1)],
+          ),
+          updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
         ),
-        updatedQtyItem: mockMaterialList.first.copyWith(quantity: 4),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        shipToInfo: ShipToInfo.empty(),
-      )),
+      ),
       expect: () => [
-        CartState.initial().copyWith(cartItems: [
-          mockMaterialCartItemFirst.copyWith(
-              materials: [mockMaterialList.first.copyWith(quantity: 1)]),
-        ], isFetching: true, apiFailureOrSuccessOption: none()),
         CartState.initial().copyWith(
-            cartItems: [
-              mockMaterialCartItemFirst.copyWith(
-                  materials: [mockMaterialList.first.copyWith(quantity: 1)])
-            ],
-            isFetching: false,
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.productOutOfStock()))),
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            ),
+          ],
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        CartState.initial().copyWith(
+          cartItems: [
+            mockMaterialCartItemFirst.copyWith(
+              materials: [mockMaterialList.first.copyWith(quantity: 1)],
+            )
+          ],
+          isFetching: false,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.productOutOfStock())),
+        ),
       ],
     );
   });

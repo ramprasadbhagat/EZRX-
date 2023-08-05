@@ -77,8 +77,10 @@ void main() {
           final resTest = SalesRepresentativeInfoDto.fromJson(
             res['data']['salesRepresentativeInfo']['rawMetaData'],
           ).toDomain();
-          expect(result.uniquePrincipalNumber.length,
-              resTest.uniquePrincipalNumber.length);
+          expect(
+            result.uniquePrincipalNumber.length,
+            resTest.uniquePrincipalNumber.length,
+          );
         },
       );
     },

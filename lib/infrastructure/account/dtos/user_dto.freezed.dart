@@ -78,41 +78,48 @@ abstract class $UserDtoCopyWith<$Res> {
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
-      @JsonKey(name: 'username', defaultValue: '') String username,
-      @JsonKey(name: 'email', defaultValue: '') String email,
-      @JsonKey(name: 'firstName', defaultValue: '') String firstName,
-      @JsonKey(name: 'lastName', defaultValue: '') String lastName,
-      @JsonKey(name: 'role') RoleDto role,
-      @JsonKey(name: 'customerCode', defaultValue: '') String customerCode,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @JsonKey(name: 'username', defaultValue: '')
+          String username,
+      @JsonKey(name: 'email', defaultValue: '')
+          String email,
+      @JsonKey(name: 'firstName', defaultValue: '')
+          String firstName,
+      @JsonKey(name: 'lastName', defaultValue: '')
+          String lastName,
+      @JsonKey(name: 'role')
+          RoleDto role,
+      @JsonKey(name: 'customerCode', defaultValue: '')
+          String customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
-      List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'accessRight') AccessRightDto accessRight,
+          List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
-      bool emailNotifications,
+          bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
-      bool mobileNotifications,
-      @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
-      String languagePreference,
+          bool mobileNotifications,
+      @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
-      bool enableOrderType,
-      @JsonKey(name: 'acceptTC', defaultValue: true) bool acceptPrivacyPolicy,
+          bool enableOrderType,
+      @JsonKey(name: 'acceptTC', defaultValue: true)
+          bool acceptPrivacyPolicy,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
-      bool hasBonusOverride,
+          bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-      bool disableCreateOrder,
-      @JsonKey(name: 'disableReturns', defaultValue: false) bool disableReturns,
+          bool disableCreateOrder,
+      @JsonKey(name: 'disableReturns', defaultValue: false)
+          bool disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-      bool hasPriceOverride,
+          bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
-      bool disablePaymentNotification,
-      @JsonKey(
-          name: 'paymentNotification',
-          defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-      List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+          bool disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
+          List<PaymentAdviceExpiryNotificationDto> paymentNotification,
       @JsonKey(name: 'preferredLanguage', defaultValue: '')
-      String preferredLanguage});
+          String preferredLanguage});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
@@ -266,41 +273,48 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: '') String id,
-      @JsonKey(name: 'username', defaultValue: '') String username,
-      @JsonKey(name: 'email', defaultValue: '') String email,
-      @JsonKey(name: 'firstName', defaultValue: '') String firstName,
-      @JsonKey(name: 'lastName', defaultValue: '') String lastName,
-      @JsonKey(name: 'role') RoleDto role,
-      @JsonKey(name: 'customerCode', defaultValue: '') String customerCode,
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @JsonKey(name: 'username', defaultValue: '')
+          String username,
+      @JsonKey(name: 'email', defaultValue: '')
+          String email,
+      @JsonKey(name: 'firstName', defaultValue: '')
+          String firstName,
+      @JsonKey(name: 'lastName', defaultValue: '')
+          String lastName,
+      @JsonKey(name: 'role')
+          RoleDto role,
+      @JsonKey(name: 'customerCode', defaultValue: '')
+          String customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
-      List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'accessRight') AccessRightDto accessRight,
+          List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
-      bool emailNotifications,
+          bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
-      bool mobileNotifications,
-      @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
-      String languagePreference,
+          bool mobileNotifications,
+      @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
-      bool enableOrderType,
-      @JsonKey(name: 'acceptTC', defaultValue: true) bool acceptPrivacyPolicy,
+          bool enableOrderType,
+      @JsonKey(name: 'acceptTC', defaultValue: true)
+          bool acceptPrivacyPolicy,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
-      bool hasBonusOverride,
+          bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-      bool disableCreateOrder,
-      @JsonKey(name: 'disableReturns', defaultValue: false) bool disableReturns,
+          bool disableCreateOrder,
+      @JsonKey(name: 'disableReturns', defaultValue: false)
+          bool disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-      bool hasPriceOverride,
+          bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
-      bool disablePaymentNotification,
-      @JsonKey(
-          name: 'paymentNotification',
-          defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-      List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+          bool disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
+          List<PaymentAdviceExpiryNotificationDto> paymentNotification,
       @JsonKey(name: 'preferredLanguage', defaultValue: '')
-      String preferredLanguage});
+          String preferredLanguage});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -433,46 +447,48 @@ class __$$_UserDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserDto extends _UserDto {
   const _$_UserDto(
-      {@JsonKey(name: 'id', defaultValue: '') required this.id,
-      @JsonKey(name: 'username', defaultValue: '') required this.username,
-      @JsonKey(name: 'email', defaultValue: '') required this.email,
-      @JsonKey(name: 'firstName', defaultValue: '') required this.firstName,
-      @JsonKey(name: 'lastName', defaultValue: '') required this.lastName,
-      @JsonKey(name: 'role') this.role = RoleDto.emptyRoleDto,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required this.id,
+      @JsonKey(name: 'username', defaultValue: '')
+          required this.username,
+      @JsonKey(name: 'email', defaultValue: '')
+          required this.email,
+      @JsonKey(name: 'firstName', defaultValue: '')
+          required this.firstName,
+      @JsonKey(name: 'lastName', defaultValue: '')
+          required this.lastName,
+      @JsonKey(name: 'role')
+          this.role = RoleDto.emptyRoleDto,
       @JsonKey(name: 'customerCode', defaultValue: '')
-      required this.customerCode,
+          required this.customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
-      required final List<SalesOrganisationDto> userSalesOrganisations,
+          required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
-      this.accessRight = AccessRightDto.emptyAccessRightDto,
+          this.accessRight = AccessRightDto.emptyAccessRightDto,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
-      required this.emailNotifications,
+          required this.emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
-      required this.mobileNotifications,
-      @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
-      required this.languagePreference,
+          required this.mobileNotifications,
+      @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          required this.languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
-      required this.enableOrderType,
+          required this.enableOrderType,
       @JsonKey(name: 'acceptTC', defaultValue: true)
-      required this.acceptPrivacyPolicy,
+          required this.acceptPrivacyPolicy,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
-      required this.hasBonusOverride,
+          required this.hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-      required this.disableCreateOrder,
+          required this.disableCreateOrder,
       @JsonKey(name: 'disableReturns', defaultValue: false)
-      required this.disableReturns,
+          required this.disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-      required this.hasPriceOverride,
+          required this.hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
-      required this.disablePaymentNotification,
-      @JsonKey(
-          name: 'paymentNotification',
-          defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-      required final List<PaymentAdviceExpiryNotificationDto>
-          paymentNotification,
+          required this.disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
+          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification,
       @JsonKey(name: 'preferredLanguage', defaultValue: '')
-      required this.preferredLanguage})
+          required this.preferredLanguage})
       : _userSalesOrganisations = userSalesOrganisations,
         _paymentNotification = paymentNotification,
         super._();
@@ -656,48 +672,48 @@ class _$_UserDto extends _UserDto {
 
 abstract class _UserDto extends UserDto {
   const factory _UserDto(
-      {@JsonKey(name: 'id', defaultValue: '') required final String id,
+      {@JsonKey(name: 'id', defaultValue: '')
+          required final String id,
       @JsonKey(name: 'username', defaultValue: '')
-      required final String username,
-      @JsonKey(name: 'email', defaultValue: '') required final String email,
+          required final String username,
+      @JsonKey(name: 'email', defaultValue: '')
+          required final String email,
       @JsonKey(name: 'firstName', defaultValue: '')
-      required final String firstName,
+          required final String firstName,
       @JsonKey(name: 'lastName', defaultValue: '')
-      required final String lastName,
-      @JsonKey(name: 'role') final RoleDto role,
+          required final String lastName,
+      @JsonKey(name: 'role')
+          final RoleDto role,
       @JsonKey(name: 'customerCode', defaultValue: '')
-      required final String customerCode,
+          required final String customerCode,
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
-      required final List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'accessRight') final AccessRightDto accessRight,
+          required final List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          final AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
-      required final bool emailNotifications,
+          required final bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
-      required final bool mobileNotifications,
-      @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
-      required final String languagePreference,
+          required final bool mobileNotifications,
+      @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          required final String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
-      required final bool enableOrderType,
+          required final bool enableOrderType,
       @JsonKey(name: 'acceptTC', defaultValue: true)
-      required final bool acceptPrivacyPolicy,
+          required final bool acceptPrivacyPolicy,
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
-      required final bool hasBonusOverride,
+          required final bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-      required final bool disableCreateOrder,
+          required final bool disableCreateOrder,
       @JsonKey(name: 'disableReturns', defaultValue: false)
-      required final bool disableReturns,
+          required final bool disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-      required final bool hasPriceOverride,
+          required final bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
-      required final bool disablePaymentNotification,
-      @JsonKey(
-          name: 'paymentNotification',
-          defaultValue: <PaymentAdviceExpiryNotificationDto>[])
-      required final List<PaymentAdviceExpiryNotificationDto>
-          paymentNotification,
+          required final bool disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
+          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification,
       @JsonKey(name: 'preferredLanguage', defaultValue: '')
-      required final String preferredLanguage}) = _$_UserDto;
+          required final String preferredLanguage}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;

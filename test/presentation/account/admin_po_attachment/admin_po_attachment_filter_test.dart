@@ -68,7 +68,8 @@ void main() {
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
     locator.registerLazySingleton(() => mockUserBloc);
     locator.registerSingleton<Config>(
-        Config()..dateRangePickerDuration = fakeFromDate);
+      Config()..dateRangePickerDuration = fakeFromDate,
+    );
   });
 
   group('admin po attachment filter', () {
@@ -103,11 +104,14 @@ void main() {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<CustomerCodeBloc>(
-                create: (context) => mockCustomerCodeBloc),
+              create: (context) => mockCustomerCodeBloc,
+            ),
             BlocProvider<AdminPoAttachmentFilterBloc>(
-                create: (context) => mockAdminPoAttachmentFilterBloc),
+              create: (context) => mockAdminPoAttachmentFilterBloc,
+            ),
             BlocProvider<EligibilityBloc>(
-                create: (context) => mockEligibilityBlocMock),
+              create: (context) => mockEligibilityBlocMock,
+            ),
             BlocProvider<UserBloc>(create: (context) => mockUserBloc),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           ],
@@ -158,20 +162,25 @@ void main() {
             exRxNo: SearchKey(''),
             salesOrg: SalesOrg(''),
             soldTo: CustomerCodeInfo.empty(),
-            fromDate:
-                DateTimeStringValue(getDateStringByDateTime(DateTime.parse(
-              DateFormat('yyyyMMdd').format(
-                DateTime.now().subtract(
-                  fakeFromDate,
+            fromDate: DateTimeStringValue(
+              getDateStringByDateTime(
+                DateTime.parse(
+                  DateFormat('yyyyMMdd').format(
+                    DateTime.now().subtract(
+                      fakeFromDate,
+                    ),
+                  ),
                 ),
               ),
-            ))),
+            ),
             toDate: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
           ),
         ),
       ];
       whenListen(
-          mockAdminPoAttachmentFilterBloc, Stream.fromIterable(expectedStates));
+        mockAdminPoAttachmentFilterBloc,
+        Stream.fromIterable(expectedStates),
+      );
 
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -203,8 +212,9 @@ void main() {
       await tester.tap(filterClearButtonKey);
 
       final filterAdminPoAttachmentDateFieldKey = find.ancestor(
-          of: find.text('Order Date'.tr()),
-          matching: find.byType(TextFormField));
+        of: find.text('Order Date'.tr()),
+        matching: find.byType(TextFormField),
+      );
       expect(filterAdminPoAttachmentDateFieldKey, findsOneWidget);
       await tester.tap(filterAdminPoAttachmentDateFieldKey);
       await tester.pumpAndSettle(const Duration(seconds: 4));

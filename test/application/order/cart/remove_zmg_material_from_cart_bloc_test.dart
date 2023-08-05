@@ -14,10 +14,12 @@ void main() {
       'zmgMaterial remove from cart',
       seed: () => CartState.initial().copyWith(
         cartItems: [
-          mockZmgMaterialCartItemFirst.copyWith(materials: [
-            mockZmgCartItemList.first.copyWith(quantity: 1),
-            mockZmgCartItemList.last.copyWith(quantity: 5)
-          ])
+          mockZmgMaterialCartItemFirst.copyWith(
+            materials: [
+              mockZmgCartItemList.first.copyWith(quantity: 1),
+              mockZmgCartItemList.last.copyWith(quantity: 5)
+            ],
+          )
         ],
         isFetching: false,
       ),
@@ -31,42 +33,62 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(
             [
-              mockZmgMaterialCartItemFirst.copyWith(materials: [
-                mockZmgCartItemList.first.copyWith(quantity: 1),
-              ])
+              mockZmgMaterialCartItemFirst.copyWith(
+                materials: [
+                  mockZmgCartItemList.first.copyWith(quantity: 1),
+                ],
+              )
             ],
           ),
         );
-        when(() => cartRepositoryMock.updateDiscountQty(items: [
-              mockZmgMaterialCartItemFirst.copyWith(materials: [
-                mockZmgCartItemList.first.copyWith(quantity: 1),
-              ], itemType: CartItemType.material)
-            ])).thenAnswer((invocation) => [
-              mockZmgMaterialCartItemFirst.copyWith(materials: [
+        when(
+          () => cartRepositoryMock.updateDiscountQty(
+            items: [
+              mockZmgMaterialCartItemFirst.copyWith(
+                materials: [
+                  mockZmgCartItemList.first.copyWith(quantity: 1),
+                ],
+                itemType: CartItemType.material,
+              )
+            ],
+          ),
+        ).thenAnswer(
+          (invocation) => [
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
                 mockZmgCartItemList.first
                     .copyWith(quantity: 1, discountedMaterialCount: 1),
-              ])
-            ]);
+              ],
+            )
+          ],
+        );
       },
-      act: (bloc) => bloc.add(CartEvent.removeFromCart(
+      act: (bloc) => bloc.add(
+        CartEvent.removeFromCart(
           item: mockZmgMaterialCartItemFirst
-              .copyWith(materials: [mockZmgCartItemList.last]))),
+              .copyWith(materials: [mockZmgCartItemList.last]),
+        ),
+      ),
       expect: () => [
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(quantity: 1),
-              mockZmgCartItemList.last.copyWith(quantity: 5),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first.copyWith(quantity: 1),
+                mockZmgCartItemList.last.copyWith(quantity: 5),
+              ],
+            )
           ],
           isFetching: true,
         ),
         CartState.initial().copyWith(
           cartItems: [
-            mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first
-                  .copyWith(quantity: 1, discountedMaterialCount: 1),
-            ])
+            mockZmgMaterialCartItemFirst.copyWith(
+              materials: [
+                mockZmgCartItemList.first
+                    .copyWith(quantity: 1, discountedMaterialCount: 1),
+              ],
+            )
           ],
           isFetching: false,
         ),

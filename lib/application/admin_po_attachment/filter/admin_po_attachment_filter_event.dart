@@ -8,8 +8,7 @@ class AdminPoAttachmentFilterEvent with _$AdminPoAttachmentFilterEvent {
 
   const factory AdminPoAttachmentFilterEvent.orderNoChanged(
     String orderNumber,
-  ) =
-      _OrderNoChanged;
+  ) = _OrderNoChanged;
 
   const factory AdminPoAttachmentFilterEvent.ezrxNoChanged(
     String exRxNo,

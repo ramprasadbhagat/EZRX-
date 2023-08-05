@@ -2,7 +2,7 @@ part of 'download_payment_attachments_bloc.dart';
 
 @freezed
 class DownloadPaymentAttachmentEvent with _$DownloadPaymentAttachmentEvent {
-   const factory DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl({
+  const factory DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter queryObject,

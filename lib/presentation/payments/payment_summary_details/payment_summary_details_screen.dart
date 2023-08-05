@@ -97,17 +97,19 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
                     ? NoRecordFound(
                         title: 'No Payment Details Found'.tr(),
                       )
-                    : ListView(children: [
-                        PaymentDetails(
-                          paymentItemState: state,
-                          paymentSummaryDetails: widget.paymentSummaryDetails,
-                        ),
-                        PaymentItemSection(
-                          paymentItemState: state,
-                          isSuccessful: widget
-                              .paymentSummaryDetails.status.getIsSuccessful,
-                        ),
-                      ]),
+                    : ListView(
+                        children: [
+                          PaymentDetails(
+                            paymentItemState: state,
+                            paymentSummaryDetails: widget.paymentSummaryDetails,
+                          ),
+                          PaymentItemSection(
+                            paymentItemState: state,
+                            isSuccessful: widget
+                                .paymentSummaryDetails.status.getIsSuccessful,
+                          ),
+                        ],
+                      ),
           );
         },
       ),

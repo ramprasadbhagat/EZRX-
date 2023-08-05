@@ -177,8 +177,7 @@ void main() {
           const AllCreditsFilterEvent.validateFilters(),
         );
       },
-      expect: () => [
-      ],
+      expect: () => [],
     );
 
     blocTest(

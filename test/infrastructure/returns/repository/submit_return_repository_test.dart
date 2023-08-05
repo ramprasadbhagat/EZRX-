@@ -53,13 +53,14 @@ void main() {
               .thenAnswer((invocation) async => submitReturnResponse);
 
           final result = await submitReturnRepository.submitRequestReturn(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              returnReferenceNumber: '',
-              specialInstructions: '',
-              user: User.empty(),
-              returnItemsList: [],
-              salesOrg: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('fake-salesOrg')));
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            returnReferenceNumber: '',
+            specialInstructions: '',
+            user: User.empty(),
+            returnItemsList: [],
+            salesOrg: SalesOrganisation.empty()
+                .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+          );
           expect(
             result.isRight(),
             true,
@@ -73,13 +74,14 @@ void main() {
             .thenThrow(const ApiFailure.serverTimeout());
 
         final result = await submitReturnRepository.submitRequestReturn(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            returnReferenceNumber: '',
-            specialInstructions: '',
-            user: User.empty(),
-            returnItemsList: [],
-            salesOrg: SalesOrganisation.empty()
-                .copyWith(salesOrg: SalesOrg('fake-salesOrg')));
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          returnReferenceNumber: '',
+          specialInstructions: '',
+          user: User.empty(),
+          returnItemsList: [],
+          salesOrg: SalesOrganisation.empty()
+              .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+        );
         expect(
           result.isLeft(),
           true,
@@ -88,8 +90,9 @@ void main() {
 
       test('submit return success remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-        when(() => submitReturnRequestRemoteDataSource
-                .submitReturnRequest(returnInput: {
+        when(
+          () => submitReturnRequestRemoteDataSource.submitReturnRequest(
+            returnInput: {
               'soldToCustomer': 'fake-sold-to',
               'username': 'fake-name',
               'orderSource': '',
@@ -97,17 +100,20 @@ void main() {
               'specialInstruction': '',
               'purchaseNumberC': '',
               'invoiceDetails': []
-            })).thenAnswer((invocation) async => submitReturnResponse);
+            },
+          ),
+        ).thenAnswer((invocation) async => submitReturnResponse);
 
         final result = await submitReturnRepository.submitRequestReturn(
-            returnReferenceNumber: '',
-            specialInstructions: '',
-            user: User.empty().copyWith(username: Username('fake-name')),
-            customerCodeInfo: CustomerCodeInfo.empty()
-                .copyWith(customerCodeSoldTo: 'fake-sold-to'),
-            returnItemsList: [],
-            salesOrg: SalesOrganisation.empty()
-                .copyWith(salesOrg: SalesOrg('fake-salesOrg')));
+          returnReferenceNumber: '',
+          specialInstructions: '',
+          user: User.empty().copyWith(username: Username('fake-name')),
+          customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(customerCodeSoldTo: 'fake-sold-to'),
+          returnItemsList: [],
+          salesOrg: SalesOrganisation.empty()
+              .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+        );
         expect(
           result.isRight(),
           true,

@@ -99,23 +99,26 @@ void main() {
         final expectedStates = [
           ManageBankBeneficiaryState.initial(),
           ManageBankBeneficiaryState.initial().copyWith(
-              beneficiaryData: BankBeneficiary.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-            salesDistrict: 'Singapore',
-            beneficiaryName: StringValue('TestName'),
-            bankName: StringValue('TestBank'),
-            branch: 'TestBranch',
-            bankCode: 'TestCode',
-            bankAccount: StringValue('123456789'),
-            hdbcSwiftCode: 'TestSwiftCode',
-            bankAddress: 'TestBankAddress',
-            payNowUen: 'PayNowTest',
-            emailId: EmailAddress.optional('abc@hotmail.com'),
-          )),
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+              salesDistrict: 'Singapore',
+              beneficiaryName: StringValue('TestName'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              bankAccount: StringValue('123456789'),
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional('abc@hotmail.com'),
+            ),
+          ),
         ];
 
         whenListen(
-            manageBankBeneficiaryBlocMock, Stream.fromIterable(expectedStates));
+          manageBankBeneficiaryBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
         await tester.pumpWidget(getEditBeneficiaryPage());
         await tester.pump();
         verifyAppBarTitleAndScaffoldKey();
@@ -145,27 +148,31 @@ void main() {
       (tester) async {
         when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
           ManageBankBeneficiaryState.initial().copyWith(
-              salesDistrict: [
-                SalesDistrict.empty()
-                    .copyWith(salesOrg: SalesOrg('2601'), salesDistrictInfo: [
-                  SalesDistrictInfo.empty().copyWith(
-                      salesDistrictHeader: StringValue('Singapore'),
-                      salesDistrictLabel: StringValue('SG'))
-                ])
-              ],
-              beneficiaryData: BankBeneficiary.empty().copyWith(
+            salesDistrict: [
+              SalesDistrict.empty().copyWith(
                 salesOrg: SalesOrg('2601'),
-                salesDistrict: 'Singapore',
-                beneficiaryName: StringValue('Name'),
-                bankName: StringValue('Bank'),
-                branch: 'Branch',
-                bankCode: 'Code',
-                bankAccount: StringValue('987654321'),
-                hdbcSwiftCode: 'SwiftCode',
-                bankAddress: 'BankAddress',
-                payNowUen: 'PayNow',
-                emailId: EmailAddress.optional('SG@hotmail.com'),
-              )),
+                salesDistrictInfo: [
+                  SalesDistrictInfo.empty().copyWith(
+                    salesDistrictHeader: StringValue('Singapore'),
+                    salesDistrictLabel: StringValue('SG'),
+                  )
+                ],
+              )
+            ],
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+              salesDistrict: 'Singapore',
+              beneficiaryName: StringValue('Name'),
+              bankName: StringValue('Bank'),
+              branch: 'Branch',
+              bankCode: 'Code',
+              bankAccount: StringValue('987654321'),
+              hdbcSwiftCode: 'SwiftCode',
+              bankAddress: 'BankAddress',
+              payNowUen: 'PayNow',
+              emailId: EmailAddress.optional('SG@hotmail.com'),
+            ),
+          ),
         );
         await tester.pumpWidget(getEditBeneficiaryPage());
         await tester.pump();
@@ -225,7 +232,8 @@ void main() {
         //bankAccountField
 
         //hdbcSwiftCodeField
-        final hdbcSwiftCodeField = find.byKey(const Key('editHdbcSwiftCodeField'));
+        final hdbcSwiftCodeField =
+            find.byKey(const Key('editHdbcSwiftCodeField'));
         expect(hdbcSwiftCodeField, findsOneWidget);
         await tester.enterText(hdbcSwiftCodeField, 'TestSwiftCode');
         await tester.pump();
@@ -341,117 +349,120 @@ void main() {
     );
   });
 
-    testWidgets(
-      'Load Edit beneficiary Code and Submit with success',
-      (tester) async {
-        final expectedState = Stream.fromIterable(
-          [
-            ManageBankBeneficiaryState.initial().copyWith(
-                isSubmitting: true,
-                beneficiaryData: BankBeneficiary.empty().copyWith(
-                  salesOrg: SalesOrg('2601'),
-                  salesDistrict: 'SG',
-                  beneficiaryName: StringValue('TestName'),
-                  bankAccount: StringValue('123456789'),
-                  bankName: StringValue('TestBank'),
-                  branch: 'TestBranch',
-                  bankCode: 'TestCode',
-                  hdbcSwiftCode: 'TestSwiftCode',
-                  bankAddress: 'TestBankAddress',
-                  payNowUen: 'PayNowTest',
-                  emailId: EmailAddress.optional(''),
-                )),
-            ManageBankBeneficiaryState.initial().copyWith(
-              isSubmitting: false,
-              response: BankBeneficiaryResponse.empty().copyWith(
-                info: '1 data edited.',
-              ),
-            ),
-          ],
-        );
-        whenListen(manageBankBeneficiaryBlocMock, expectedState);
-        await tester.pumpWidget(getEditBeneficiaryPage());
-        await tester.pump();
-        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
-        tester.binding.window.devicePixelRatioTestValue = 1.0;
-        verifyAppBarTitleAndScaffoldKey();
-        final card = find.byKey(const Key('editBeneficiaryNameField'));
-        expect(card, findsOneWidget);
-        await tester.drag(
-          card,
-          const Offset(0.0, -1000.0),
-        );
-        await tester.pump(const Duration(seconds: 1));
-        final editBeneficiaryButton = find.byKey(
-          const Key('editBeneficiaryButton'),
-        );
-        expect(editBeneficiaryButton, findsOneWidget);
-        await tester.tap(editBeneficiaryButton);
-        await tester.pump();
-        verify(
-          () => manageBankBeneficiaryBlocMock.add(
-            const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-              isEdit: true,
+  testWidgets(
+    'Load Edit beneficiary Code and Submit with success',
+    (tester) async {
+      final expectedState = Stream.fromIterable(
+        [
+          ManageBankBeneficiaryState.initial().copyWith(
+            isSubmitting: true,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+              salesDistrict: 'SG',
+              beneficiaryName: StringValue('TestName'),
+              bankAccount: StringValue('123456789'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional(''),
             ),
           ),
-        ).called(1);
-      },
-    );
+          ManageBankBeneficiaryState.initial().copyWith(
+            isSubmitting: false,
+            response: BankBeneficiaryResponse.empty().copyWith(
+              info: '1 data edited.',
+            ),
+          ),
+        ],
+      );
+      whenListen(manageBankBeneficiaryBlocMock, expectedState);
+      await tester.pumpWidget(getEditBeneficiaryPage());
+      await tester.pump();
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      verifyAppBarTitleAndScaffoldKey();
+      final card = find.byKey(const Key('editBeneficiaryNameField'));
+      expect(card, findsOneWidget);
+      await tester.drag(
+        card,
+        const Offset(0.0, -1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+      final editBeneficiaryButton = find.byKey(
+        const Key('editBeneficiaryButton'),
+      );
+      expect(editBeneficiaryButton, findsOneWidget);
+      await tester.tap(editBeneficiaryButton);
+      await tester.pump();
+      verify(
+        () => manageBankBeneficiaryBlocMock.add(
+          const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
+            isEdit: true,
+          ),
+        ),
+      ).called(1);
+    },
+  );
 
   testWidgets(
-      'Load Edit beneficiary and Submit with failure',
-      (tester) async {
-        final expectedState = Stream.fromIterable(
-          [
-            ManageBankBeneficiaryState.initial().copyWith(
-                isSubmitting: true,
-                beneficiaryData: BankBeneficiary.empty().copyWith(
-                  salesOrg: SalesOrg('2601'),
-                  salesDistrict: 'SG',
-                  beneficiaryName: StringValue('TestName'),
-                  bankAccount: StringValue('123456789'),
-                  bankName: StringValue('TestBank'),
-                  branch: 'TestBranch',
-                  bankCode: 'TestCode',
-                  hdbcSwiftCode: 'TestSwiftCode',
-                  bankAddress: 'TestBankAddress',
-                  payNowUen: 'PayNowTest',
-                  emailId: EmailAddress.optional(''),
-                )),
-            ManageBankBeneficiaryState.initial().copyWith(
-                isSubmitting: false,
-                failureOrSuccessOption:
-                    optionOf(const Left(ApiFailure.other('Some Error')))),
-          ],
-        );
-        whenListen(manageBankBeneficiaryBlocMock, expectedState);
-        await tester.pumpWidget(getEditBeneficiaryPage());
-        await tester.pump();
-        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
-        tester.binding.window.devicePixelRatioTestValue = 1.0;
-        verifyAppBarTitleAndScaffoldKey();
-        final card = find.byKey(const Key('editBeneficiaryNameField'));
-        expect(card, findsOneWidget);
-        await tester.drag(
-          card,
-          const Offset(0.0, -1000.0),
-        );
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-        final editBeneficiaryButton = find.byKey(
-          const Key('editBeneficiaryButton'),
-        );
-        expect(editBeneficiaryButton, findsOneWidget);
-        await tester.tap(editBeneficiaryButton);
-        await tester.pump();
-        verify(
-          () => manageBankBeneficiaryBlocMock.add(
-            const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
-              isEdit: true,
+    'Load Edit beneficiary and Submit with failure',
+    (tester) async {
+      final expectedState = Stream.fromIterable(
+        [
+          ManageBankBeneficiaryState.initial().copyWith(
+            isSubmitting: true,
+            beneficiaryData: BankBeneficiary.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+              salesDistrict: 'SG',
+              beneficiaryName: StringValue('TestName'),
+              bankAccount: StringValue('123456789'),
+              bankName: StringValue('TestBank'),
+              branch: 'TestBranch',
+              bankCode: 'TestCode',
+              hdbcSwiftCode: 'TestSwiftCode',
+              bankAddress: 'TestBankAddress',
+              payNowUen: 'PayNowTest',
+              emailId: EmailAddress.optional(''),
             ),
           ),
-        ).called(1);
-        final errorMessage = find.byKey(WidgetKeys.customSnackBar);
-        expect(errorMessage, findsOneWidget);
-      },
-    );
+          ManageBankBeneficiaryState.initial().copyWith(
+            isSubmitting: false,
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Some Error'))),
+          ),
+        ],
+      );
+      whenListen(manageBankBeneficiaryBlocMock, expectedState);
+      await tester.pumpWidget(getEditBeneficiaryPage());
+      await tester.pump();
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      verifyAppBarTitleAndScaffoldKey();
+      final card = find.byKey(const Key('editBeneficiaryNameField'));
+      expect(card, findsOneWidget);
+      await tester.drag(
+        card,
+        const Offset(0.0, -1000.0),
+      );
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final editBeneficiaryButton = find.byKey(
+        const Key('editBeneficiaryButton'),
+      );
+      expect(editBeneficiaryButton, findsOneWidget);
+      await tester.tap(editBeneficiaryButton);
+      await tester.pump();
+      verify(
+        () => manageBankBeneficiaryBlocMock.add(
+          const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
+            isEdit: true,
+          ),
+        ),
+      ).called(1);
+      final errorMessage = find.byKey(WidgetKeys.customSnackBar);
+      expect(errorMessage, findsOneWidget);
+    },
+  );
 }

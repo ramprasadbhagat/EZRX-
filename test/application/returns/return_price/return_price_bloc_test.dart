@@ -15,7 +15,7 @@ class MockReturnPriceRepository extends Mock implements ReturnPriceRepository {}
 
 void main() {
   late MockReturnPriceRepository mockReturnPriceRepository;
-  
+
   late final ReturnPrice returnPrice;
   late final Map<String, ReturnPrice> returnPriceMap;
 
@@ -34,18 +34,23 @@ void main() {
         build: () =>
             ReturnPriceBloc(returnPriceRepository: mockReturnPriceRepository),
         setUp: () {
-          when(() => mockReturnPriceRepository.fetchReturnPrice(
+          when(
+            () => mockReturnPriceRepository.fetchReturnPrice(
               returnItemsList: [ReturnItem.empty()],
-              salesOrg: SalesOrganisation.empty())).thenAnswer(
+              salesOrg: SalesOrganisation.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('mock-error'),
             ),
           );
         },
         act: (ReturnPriceBloc bloc) => bloc.add(
-            ReturnPriceEvent.fetchReturnPrice(
-                returnItemList: [ReturnItem.empty()],
-                salesOrg: SalesOrganisation.empty())),
+          ReturnPriceEvent.fetchReturnPrice(
+            returnItemList: [ReturnItem.empty()],
+            salesOrg: SalesOrganisation.empty(),
+          ),
+        ),
         expect: () => [
           ReturnPriceState.initial().copyWith(
             failureOrSuccessOption: none(),
@@ -64,16 +69,21 @@ void main() {
         build: () =>
             ReturnPriceBloc(returnPriceRepository: mockReturnPriceRepository),
         setUp: () {
-          when(() => mockReturnPriceRepository.fetchReturnPrice(
+          when(
+            () => mockReturnPriceRepository.fetchReturnPrice(
               returnItemsList: [ReturnItem.empty()],
-              salesOrg: SalesOrganisation.empty())).thenAnswer(
+              salesOrg: SalesOrganisation.empty(),
+            ),
+          ).thenAnswer(
             (invocation) async => Right(returnPriceMap),
           );
         },
         act: (ReturnPriceBloc bloc) => bloc.add(
-            ReturnPriceEvent.fetchReturnPrice(
-                returnItemList: [ReturnItem.empty()],
-                salesOrg: SalesOrganisation.empty())),
+          ReturnPriceEvent.fetchReturnPrice(
+            returnItemList: [ReturnItem.empty()],
+            salesOrg: SalesOrganisation.empty(),
+          ),
+        ),
         expect: () => [
           ReturnPriceState.initial().copyWith(
             failureOrSuccessOption: none(),

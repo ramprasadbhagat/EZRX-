@@ -12,14 +12,14 @@ void main() {
   group('Test bundleInfoDto ', () {
     setUp(() async {
       data = json.decode(
-        await rootBundle
-            .loadString('assets/json/getCustomerMaterialPriceDetailResponse.json'),
+        await rootBundle.loadString(
+          'assets/json/getCustomerMaterialPriceDetailResponse.json',
+        ),
       );
     });
     test('Test toDomain', () {
-      
       final configs = MaterialDetailDto.fromJson(
-        data['data']['customerMaterialPriceDetails'][0]
+        data['data']['customerMaterialPriceDetails'][0],
       ).toDomain();
       expect(configs.price.materialNumber.getOrCrash(), '000000000021038305');
     });

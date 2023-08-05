@@ -139,11 +139,14 @@ class __$$_RoleDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RoleDto extends _RoleDto {
   const _$_RoleDto(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'name', defaultValue: '') required this.name,
-      @JsonKey(name: 'type', defaultValue: '') required this.type,
+      {@JsonKey(name: 'id')
+          required this.id,
+      @JsonKey(name: 'name', defaultValue: '')
+          required this.name,
+      @JsonKey(name: 'type', defaultValue: '')
+          required this.type,
       @JsonKey(name: 'description', defaultValue: '')
-      required this.description})
+          required this.description})
       : super._();
 
   factory _$_RoleDto.fromJson(Map<String, dynamic> json) =>
@@ -199,11 +202,14 @@ class _$_RoleDto extends _RoleDto {
 
 abstract class _RoleDto extends RoleDto {
   const factory _RoleDto(
-      {@JsonKey(name: 'id') required final String id,
-      @JsonKey(name: 'name', defaultValue: '') required final String name,
-      @JsonKey(name: 'type', defaultValue: '') required final String type,
+      {@JsonKey(name: 'id')
+          required final String id,
+      @JsonKey(name: 'name', defaultValue: '')
+          required final String name,
+      @JsonKey(name: 'type', defaultValue: '')
+          required final String type,
       @JsonKey(name: 'description', defaultValue: '')
-      required final String description}) = _$_RoleDto;
+          required final String description}) = _$_RoleDto;
   const _RoleDto._() : super._();
 
   factory _RoleDto.fromJson(Map<String, dynamic> json) = _$_RoleDto.fromJson;

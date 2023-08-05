@@ -46,13 +46,15 @@ void main() {
   group('Return Request Type Code', () {
     test('get ReturnRequestType successfully locally', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnRequestTypeCodeLocalDataSource
-              .getReturnRequestTypeCodeList())
-          .thenAnswer((invocation) async => <ReturnRequestTypeCodeDetails>[]);
+      when(
+        () =>
+            returnRequestTypeCodeLocalDataSource.getReturnRequestTypeCodeList(),
+      ).thenAnswer((invocation) async => <ReturnRequestTypeCodeDetails>[]);
 
       final result =
           await returnRequestTypeCodeRepository.getReturnRequestTypeCodeList(
-              salesOrganisation: mockSalesOrganisation);
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isRight(),
         true,
@@ -60,13 +62,15 @@ void main() {
     });
     test('Return Request Type fail Local', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => returnRequestTypeCodeLocalDataSource
-              .getReturnRequestTypeCodeList())
-          .thenThrow((invocation) async => MockException());
+      when(
+        () =>
+            returnRequestTypeCodeLocalDataSource.getReturnRequestTypeCodeList(),
+      ).thenThrow((invocation) async => MockException());
 
       final result =
           await returnRequestTypeCodeRepository.getReturnRequestTypeCodeList(
-              salesOrganisation: mockSalesOrganisation);
+        salesOrganisation: mockSalesOrganisation,
+      );
       expect(
         result.isLeft(),
         true,
@@ -74,14 +78,16 @@ void main() {
     });
     test('get return request type code successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => returnRequestTypeCodeRemoteDataSource
-              .getReturnRequestTypeCodeList(salesOrg: '2601'))
-          .thenAnswer((invocation) async => <ReturnRequestTypeCodeDetails>[]);
+      when(
+        () => returnRequestTypeCodeRemoteDataSource
+            .getReturnRequestTypeCodeList(salesOrg: '2601'),
+      ).thenAnswer((invocation) async => <ReturnRequestTypeCodeDetails>[]);
 
       final result =
           await returnRequestTypeCodeRepository.getReturnRequestTypeCodeList(
-              salesOrganisation:
-                  mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')));
+        salesOrganisation:
+            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')),
+      );
       expect(
         result.isRight(),
         true,
@@ -89,14 +95,16 @@ void main() {
     });
     test('get return request type code fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => returnRequestTypeCodeRemoteDataSource
-              .getReturnRequestTypeCodeList(salesOrg: '2500'))
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => returnRequestTypeCodeRemoteDataSource
+            .getReturnRequestTypeCodeList(salesOrg: '2500'),
+      ).thenThrow((invocation) async => MockException());
 
       final result =
           await returnRequestTypeCodeRepository.getReturnRequestTypeCodeList(
-              salesOrganisation:
-                  mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2500')));
+        salesOrganisation:
+            mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2500')),
+      );
       expect(
         result.isLeft(),
         true,

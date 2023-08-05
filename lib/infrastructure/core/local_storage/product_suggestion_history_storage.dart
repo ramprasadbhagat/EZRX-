@@ -24,7 +24,9 @@ class ProductSuggestionHistoryStorage {
     }
   }
 
-  Future<void> putSearchKey({required ProductSuggestionHistoryDto searchKeyList}) async {
+  Future<void> putSearchKey({
+    required ProductSuggestionHistoryDto searchKeyList,
+  }) async {
     try {
       await _searchHistoryBox.put(_id, searchKeyList);
     } catch (e) {

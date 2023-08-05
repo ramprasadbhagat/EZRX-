@@ -84,10 +84,11 @@ void main() {
             res['data']['tenderContractDetails']['tenderContractDetails'];
 
         expect(
-            result,
-            List.from(finalData)
-                .map((e) => TenderContractDto.fromJson(e).toDomain())
-                .toList());
+          result,
+          List.from(finalData)
+              .map((e) => TenderContractDto.fromJson(e).toDomain())
+              .toList(),
+        );
       });
 
       test('status not equal to 200', () async {

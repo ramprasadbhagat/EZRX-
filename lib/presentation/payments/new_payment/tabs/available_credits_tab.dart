@@ -177,9 +177,8 @@ class _PaymentItem extends StatelessWidget {
       child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
         builder: (context, state) {
           return EdgeCheckbox(
-            onChanged: (bool value) =>
-              context.read<NewPaymentBloc>().add(
-                    NewPaymentEvent.toggleCredit(selected: value, item: data),
+            onChanged: (bool value) => context.read<NewPaymentBloc>().add(
+                  NewPaymentEvent.toggleCredit(selected: value, item: data),
                 ),
             value: state.selectedCredits.contains(data),
             body: Padding(

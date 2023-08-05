@@ -143,11 +143,14 @@ class __$$_ReturnPriceDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnPriceDto extends _ReturnPriceDto {
   const _$_ReturnPriceDto(
-      {@JsonKey(name: 'unitPrice', defaultValue: 0.0) required this.unitPrice,
-      @JsonKey(name: 'totalPrice', defaultValue: 0.0) required this.totalPrice,
+      {@JsonKey(name: 'unitPrice', defaultValue: 0.0)
+          required this.unitPrice,
+      @JsonKey(name: 'totalPrice', defaultValue: 0.0)
+          required this.totalPrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
-      @JsonKey(name: 'itemNumber', defaultValue: '') required this.itemNumber})
+          required this.materialNumber,
+      @JsonKey(name: 'itemNumber', defaultValue: '')
+          required this.itemNumber})
       : super._();
 
   factory _$_ReturnPriceDto.fromJson(Map<String, dynamic> json) =>
@@ -208,13 +211,13 @@ class _$_ReturnPriceDto extends _ReturnPriceDto {
 abstract class _ReturnPriceDto extends ReturnPriceDto {
   const factory _ReturnPriceDto(
       {@JsonKey(name: 'unitPrice', defaultValue: 0.0)
-      required final double unitPrice,
+          required final double unitPrice,
       @JsonKey(name: 'totalPrice', defaultValue: 0.0)
-      required final double totalPrice,
+          required final double totalPrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
+          required final String materialNumber,
       @JsonKey(name: 'itemNumber', defaultValue: '')
-      required final String itemNumber}) = _$_ReturnPriceDto;
+          required final String itemNumber}) = _$_ReturnPriceDto;
   const _ReturnPriceDto._() : super._();
 
   factory _ReturnPriceDto.fromJson(Map<String, dynamic> json) =

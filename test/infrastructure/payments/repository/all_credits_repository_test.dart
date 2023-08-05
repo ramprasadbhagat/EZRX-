@@ -65,9 +65,9 @@ void main() {
   group('All Credits Repository Test', () {
     test('=> filterCredits locally success', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-      when(() =>
-              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList())
-          .thenAnswer(
+      when(
+        () => allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
+      ).thenAnswer(
         (invocation) async => mockList,
       );
 
@@ -83,9 +83,9 @@ void main() {
 
     test('=> filterCredits locally failed', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-      when(() =>
-              allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList())
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => allCreditsAndInvoicesLocalDataSourceMock.getDocumentHeaderList(),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(
         customerCodeInfo: CustomerCodeInfo.empty(),
@@ -99,21 +99,24 @@ void main() {
     });
     test('=> filterCredits remote success', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-      when(() => allCreditsAndInvoicesRemoteDataSourceMock.filterCredits(
-            customerCode: 'mock_soldTo',
-            salesOrg: 'mock_salesOrg',
-            pageSize: 1,
-            offset: 0,
-            filterMap: AllCreditsFilterDto.fromDomain(
-                AllCreditsFilter.empty().copyWith(
+      when(
+        () => allCreditsAndInvoicesRemoteDataSourceMock.filterCredits(
+          customerCode: 'mock_soldTo',
+          salesOrg: 'mock_salesOrg',
+          pageSize: 1,
+          offset: 0,
+          filterMap: AllCreditsFilterDto.fromDomain(
+            AllCreditsFilter.empty().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:
                   DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
               amountValueTo: RangeValue('100'),
               amountValueFrom: RangeValue('1000'),
-            )).toMapList,
-          )).thenAnswer(
+            ),
+          ).toMapList,
+        ),
+      ).thenAnswer(
         (invocation) async => mockList,
       );
 
@@ -131,21 +134,24 @@ void main() {
 
     test('=> filterCredits remote failed', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-      when(() => allCreditsAndInvoicesRemoteDataSourceMock.filterCredits(
-            customerCode: 'mock_soldTo',
-            salesOrg: 'mock_salesOrg',
-            pageSize: 1,
-            offset: 0,
-            filterMap: AllCreditsFilterDto.fromDomain(
-                AllCreditsFilter.empty().copyWith(
+      when(
+        () => allCreditsAndInvoicesRemoteDataSourceMock.filterCredits(
+          customerCode: 'mock_soldTo',
+          salesOrg: 'mock_salesOrg',
+          pageSize: 1,
+          offset: 0,
+          filterMap: AllCreditsFilterDto.fromDomain(
+            AllCreditsFilter.empty().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:
                   DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
               amountValueTo: RangeValue('100'),
               amountValueFrom: RangeValue('1000'),
-            )).toMapList,
-          )).thenThrow((invocation) async => MockException());
+            ),
+          ).toMapList,
+        ),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await allCreditsAndInvoicesRepository.filterCredits(
         customerCodeInfo: CustomerCodeInfo.empty(),

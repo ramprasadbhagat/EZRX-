@@ -51,15 +51,18 @@ void main() {
     test('get OrderHistoryDetails successfully locally for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => orderHistoryDetailsLocalDataSource
-              .getOrderHistoryDetailsForSalesRep())
-          .thenAnswer((invocation) async => orderHistoryDetailsMockList);
+      when(
+        () => orderHistoryDetailsLocalDataSource
+            .getOrderHistoryDetailsForSalesRep(),
+      ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem,
-          user: mockUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-              username: Username('mock_user')));
+        orderHeader: mockOrderHistoryItem,
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          username: Username('mock_user'),
+        ),
+      );
       expect(
         result.isRight(),
         true,
@@ -67,15 +70,18 @@ void main() {
     });
     test('get OrderHistory Details fail locally for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => orderHistoryDetailsLocalDataSource
-              .getOrderHistoryDetailsForSalesRep())
-          .thenThrow((invocation) async => MockException());
+      when(
+        () => orderHistoryDetailsLocalDataSource
+            .getOrderHistoryDetailsForSalesRep(),
+      ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem,
-          user: mockUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-              username: Username('mock_user')));
+        orderHeader: mockOrderHistoryItem,
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          username: Username('mock_user'),
+        ),
+      );
       expect(
         result.isLeft(),
         true,
@@ -88,7 +94,9 @@ void main() {
           .thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem, user: mockUser);
+        orderHeader: mockOrderHistoryItem,
+        user: mockUser,
+      );
       expect(
         result.isRight(),
         true,
@@ -101,7 +109,9 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem, user: mockUser);
+        orderHeader: mockOrderHistoryItem,
+        user: mockUser,
+      );
 
       expect(
         result.isLeft(),
@@ -111,23 +121,27 @@ void main() {
     test('get OrderHistoryDetails successfully remotely for salesrep',
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderHistoryDetailsRemoteDataSource
-              .getOrderHistoryDetailsForSalesRep(
-                  companyName: '',
-                  orderId: '02001949952333',
-                  language: '',
-                  userName: 'user_test'))
-          .thenAnswer((invocation) async => orderHistoryDetailsMockList);
+      when(
+        () => orderHistoryDetailsRemoteDataSource
+            .getOrderHistoryDetailsForSalesRep(
+          companyName: '',
+          orderId: '02001949952333',
+          language: '',
+          userName: 'user_test',
+        ),
+      ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem.copyWith(
-              orderNumber: OrderNumber('02001949952333')),
-          user: mockUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('external_sales_rep'),
-            ),
-            username: Username('user_test'),
-          ));
+        orderHeader: mockOrderHistoryItem.copyWith(
+          orderNumber: OrderNumber('02001949952333'),
+        ),
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+          username: Username('user_test'),
+        ),
+      );
       expect(
         result.isRight(),
         true,
@@ -138,14 +152,20 @@ void main() {
       when(
         () => orderHistoryDetailsRemoteDataSource
             .getOrderHistoryDetailsForSalesRep(
-                userName: '', orderId: '', language: '', companyName: ''),
+          userName: '',
+          orderId: '',
+          language: '',
+          companyName: '',
+        ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem,
-          user: mockUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-              username: Username('mock_user')));
+        orderHeader: mockOrderHistoryItem,
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          username: Username('mock_user'),
+        ),
+      );
       expect(
         result.isLeft(),
         true,
@@ -155,13 +175,16 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            orderId: '200012', language: ''),
+          orderId: '200012',
+          language: '',
+        ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader:
-              mockOrderHistoryItem.copyWith(orderNumber: OrderNumber('200012')),
-          user: mockUser);
+        orderHeader:
+            mockOrderHistoryItem.copyWith(orderNumber: OrderNumber('200012')),
+        user: mockUser,
+      );
       expect(
         result.isRight(),
         true,
@@ -171,12 +194,15 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            orderId: mockOrderHistoryItem.orderNumber.getOrDefaultValue(''),
-            language: ''),
+          orderId: mockOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+          language: '',
+        ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-          orderHeader: mockOrderHistoryItem, user: mockUser);
+        orderHeader: mockOrderHistoryItem,
+        user: mockUser,
+      );
       expect(
         result.isLeft(),
         true,

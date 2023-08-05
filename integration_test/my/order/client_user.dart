@@ -172,11 +172,14 @@ void main() {
     await materialRootRobot.tapPrincipleSelector();
     materialRootRobot.verifyMaterialFilterPage();
     await materialRootRobot.enterTextAndSubmit(
-        principleSearchText: principleSearchText);
+      principleSearchText: principleSearchText,
+    );
     materialRootRobot.verifySearchResultAppears(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     await materialRootRobot.tapOnSearchResult(
-        principleFullText: principleFullText);
+      principleFullText: principleFullText,
+    );
     materialRootRobot.verifyApplyButton();
     await materialRootRobot.tapApplyButton();
     materialRootRobot.findPrincipleSelector();
@@ -324,9 +327,15 @@ void main() {
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(material, 2);
     orderSummaryRobot.verifyMaterialUnitPrice(
-        true, currency, overridenUnitPrice);
+      true,
+      currency,
+      overridenUnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        true, currency, overridenTotalPrice);
+      true,
+      currency,
+      overridenTotalPrice,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     orderSummaryRobot.verify();
@@ -424,9 +433,15 @@ void main() {
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(material, 10);
     orderSummaryRobot.verifyMaterialUnitPrice(
-        true, currency, materialUnitPrice);
+      true,
+      currency,
+      materialUnitPrice,
+    );
     orderSummaryRobot.verifyMaterialTotalPrice(
-        true, currency, materialTotalPrice);
+      true,
+      currency,
+      materialTotalPrice,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //minimum order amount crosses
@@ -563,16 +578,26 @@ void main() {
     //Minimum Order Amount
     orderSummaryRobot.allowMinimumOrderAmount(minimumOrderAmount);
     orderSummaryRobot.verifySubTotalPrice(
-        currency, bundleMaterialSubTotalPrice);
+      currency,
+      bundleMaterialSubTotalPrice,
+    );
     orderSummaryRobot.verifyGrandTotalPrice(
-        currency, bundleMaterialGrandTotalPrice);
+      currency,
+      bundleMaterialGrandTotalPrice,
+    );
     //verify orders with currency check
     orderSummaryRobot.findBundleItem(bundleCode);
     orderSummaryRobot.findBundleMaterialItem(bundleMaterial, 30);
     orderSummaryRobot.verifyBundleMaterialUnitPrice(
-        true, currency, bundleMaterialUnitPrice);
+      true,
+      currency,
+      bundleMaterialUnitPrice,
+    );
     orderSummaryRobot.verifyBundleMaterialTotalAmount(
-        true, currency, bundleMaterialTotalAmount);
+      true,
+      currency,
+      bundleMaterialTotalAmount,
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //minimum order amount crosses

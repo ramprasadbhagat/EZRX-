@@ -9,7 +9,7 @@ class SettingTcDto with _$SettingTcDto {
   const SettingTcDto._();
 
   const factory SettingTcDto({
-    @JsonKey(name: 'updateAcceptanceStatus',defaultValue: false)
+    @JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
         required bool acceptTC,
   }) = _SettingTcDto;
 
