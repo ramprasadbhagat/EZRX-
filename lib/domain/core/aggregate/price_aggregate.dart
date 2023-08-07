@@ -499,6 +499,10 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get isPriceUpdateAvailable =>
       isZdp5DiscountEligible && hasRemainingQuotaReached;
+
+  bool get isPreOrder => stockInfoList.any(
+        (e) => !e.inStock.isMaterialInStock,
+      );
 }
 
 enum PriceType {

@@ -150,8 +150,9 @@ abstract class ICartRepository {
 
   //TODO: evaluate which methods will be removed with addition to this
   Future<Either<ApiFailure, List<PriceAggregate>>> upsertCart({
-    required MaterialNumber productNumber,
+    required MaterialInfo materialInfo,
     required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required String language,

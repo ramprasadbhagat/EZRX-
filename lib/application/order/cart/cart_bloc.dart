@@ -806,8 +806,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final failureOrSuccess = await repository.upsertCart(
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfig: e.salesOrganisationConfigs,
           shipToInfo: e.shipToInfo,
-          productNumber: e.priceAggregate.materialInfo.materialNumber,
+          materialInfo: e.priceAggregate.materialInfo,
           quantity: e.quantity,
           language: 'EN',
           counterOfferDetails: e.counterOfferDetails,

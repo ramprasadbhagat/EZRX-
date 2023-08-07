@@ -1021,8 +1021,9 @@ class CartRepository implements ICartRepository {
 
   @override
   Future<Either<ApiFailure, List<PriceAggregate>>> upsertCart({
-    required MaterialNumber productNumber,
+    required MaterialInfo materialInfo,
     required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required String language,
@@ -1044,7 +1045,7 @@ class CartRepository implements ICartRepository {
         salesOrg: salesOrganisation.salesOrg,
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToId: shipToInfo.shipToCustomerCode,
-        productNumber: productNumber.getOrDefaultValue(''),
+        productNumber: materialInfo.materialNumber.getOrDefaultValue(''),
         quantity: quantity,
         language: language,
         parentID: '',
@@ -1059,7 +1060,28 @@ class CartRepository implements ICartRepository {
             CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
       );
 
-      return Right(productList);
+      final response = await getStockInfo(
+        customerCodeInfo: customerCodeInfo,
+        material: materialInfo,
+        salesOrganisation: salesOrganisation,
+        salesOrganisationConfigs: salesOrganisationConfig,
+        shipToInfo: shipToInfo,
+      );
+      final stockInfo = response.fold(
+        (failure) => <StockInfo>[],
+        (stockInfo) => stockInfo,
+      );
+
+      final updatedProductList = productList
+          .map(
+            (element) =>
+                element.getMaterialNumber == materialInfo.materialNumber
+                    ? element.copyWith(stockInfoList: stockInfo)
+                    : element,
+          )
+          .toList();
+
+      return Right(updatedProductList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

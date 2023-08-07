@@ -20,6 +20,13 @@ class WidgetKeys {
   static const Key backButton = Key('backButton');
 
   //============================================================
+  //  PRE-ORDER-MODAL
+  //============================================================
+
+  static const Key preOrderModalCancelButton = Key('cancelButton');
+  static const Key preOrderModalContinueButton = Key('continueButton');
+
+  //============================================================
   //  LOGIN
   //============================================================
 

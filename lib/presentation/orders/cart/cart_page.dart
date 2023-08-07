@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
+import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -290,7 +291,9 @@ class _CheckoutSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
-          previous.cartProducts != current.cartProducts,
+          previous.cartProducts != current.cartProducts ||
+          previous.isUpdatingStock != current.isUpdatingStock ||
+          previous.isUpserting != current.isUpserting,
       builder: (context, state) {
         return Column(
           children: [
@@ -352,16 +355,52 @@ class _CheckoutSection extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: ElevatedButton(
                   key: WidgetKeys.checkoutButton,
-                  onPressed: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    context.router.pushNamed('orders/cart/checkout');
-                  },
+                  onPressed: state.isUpdatingStock || state.isUpserting
+                      ? null
+                      : () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          state.cartProducts.preOrderItemPresentOnCart
+                              ? _showPreOrderModal(context: context)
+                              : context.router
+                                  .pushNamed('orders/cart/checkout');
+                        },
                   child: const Text('Check out').tr(),
                 ),
               ),
             ),
           ],
         );
+      },
+    );
+  }
+
+  void _showPreOrderModal({required BuildContext context}) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: context
+              .read<CartBloc>()
+              .state
+              .cartProducts
+              .where((e) => e.isPreOrder)
+              .toList()
+              .length >
+          1,
+      enableDrag: false,
+      isDismissible: false,
+      useSafeArea: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return const PreOrderModal();
+      },
+    ).then(
+      (value) {
+        if (value == null) return;
+        context.router.pushNamed('orders/cart/checkout');
       },
     );
   }

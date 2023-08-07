@@ -1,0 +1,53 @@
+part of '../pre_order_modal.dart';
+
+class _MaterialDetails extends StatelessWidget {
+  final PriceAggregate cartItem;
+  const _MaterialDetails({Key? key, required this.cartItem}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+          color: ZPColors.extraLightGrey4,
+          decoration: TextDecoration.none,
+        );
+
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                cartItem.materialInfo.materialNumber.displayMatNo,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.darkGray,
+                    ),
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              StatusLabel(
+                status: StatusType('Preorder'.tr()),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Text(
+              cartItem.materialInfo.materialDescription,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+          ),
+          PriceComponent(
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            price: cartItem.finalPrice.toStringAsFixed(2),
+            currencyCodeTextStyle: textStyle,
+            priceTextStyle: textStyle,
+          ),
+        ],
+      ),
+    );
+  }
+}

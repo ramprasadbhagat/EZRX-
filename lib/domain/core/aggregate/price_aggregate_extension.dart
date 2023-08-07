@@ -62,4 +62,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
   PriceComboDeal get firstPriceComboDeal =>
       isEmpty ? PriceComboDeal.empty() : first.price.comboDeal;
+
+  bool get preOrderItemPresentOnCart => any(
+        (element) => element.isPreOrder,
+      );
 }
