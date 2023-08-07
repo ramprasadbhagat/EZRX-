@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 
@@ -31,7 +32,7 @@ class PriceComponent extends StatelessWidget {
     final priceValue = notPrice
         ? price.tr()
         : StringUtils.displayPrice(salesOrgConfig, double.parse(price));
-    final obscuredValue = priceValue.replaceAll(RegExp(r'[0-9]'), '*');
+    final obscuredValue = price.replaceAll(RegExp(r'[0-9]'), '*');
 
     if (title.isNotEmpty) {
       textSpans.add(
@@ -73,6 +74,7 @@ class PriceComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
+      key: WidgetKeys.priceComponent,
       text: TextSpan(
         children: [
           ..._getTextSpan(context),

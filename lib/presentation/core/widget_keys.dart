@@ -216,6 +216,7 @@ class WidgetKeys {
   static const Key webview = Key('webview');
   static Key balanceTextRow(String keyText, String valueText) =>
       Key('$keyText$valueText');
+  static const Key priceComponent = Key('priceComponent');
 
   //============================================================
   //  Quantity Input Widget Keys
