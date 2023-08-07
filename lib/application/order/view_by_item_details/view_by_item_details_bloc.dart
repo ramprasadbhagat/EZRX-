@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_details_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_status_tracker_repository.dart';
@@ -42,7 +43,7 @@ class ViewByItemDetailsBloc
             await viewByItemDetailsRepository.getViewByItemDetails(
           soldTo: e.soldTo,
           user: e.user,
-          orderHistoryItem: e.orderHistoryItem,
+          orderNumber: e.orderNumber,
         );
 
         failureOrSuccess.fold(
@@ -55,18 +56,28 @@ class ViewByItemDetailsBloc
             );
           },
           (viewByItemDetails) {
+            final orderHistoryItem =
+                viewByItemDetails.orderHistoryItems.isNotEmpty
+                    ? viewByItemDetails.orderHistoryItems
+                        .where(
+                          (element) =>
+                              element.materialNumber == e.materialNumber,
+                        )
+                        .first
+                    : OrderHistoryItem.empty();
             emit(
               state.copyWith(
                 viewByItemDetails: viewByItemDetails,
+                orderHistoryItem: orderHistoryItem,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
               ),
             );
             if (!e.disableDeliveryDateForZyllemStatus &&
-                e.orderHistoryItem.status.getDisplayZyllemStatus) {
+                orderHistoryItem.status.getDisplayZyllemStatus) {
               add(
                 _FetchZyllemStatus(
-                  status: e.orderHistoryItem.status,
+                  status: orderHistoryItem.status,
                 ),
               );
             }

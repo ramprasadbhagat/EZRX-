@@ -169,7 +169,8 @@ class _ViewByOrderItem extends StatelessWidget {
         context.read<ViewByItemDetailsBloc>().add(
               ViewByItemDetailsEvent.fetch(
                 user: context.read<UserBloc>().state.user,
-                orderHistoryItem: orderHistoryItem,
+                orderNumber: orderHistoryItem.orderNumber,
+                materialNumber: orderHistoryItem.materialNumber,
                 soldTo: customerCodeInfo,
                 disableDeliveryDateForZyllemStatus: context
                     .read<EligibilityBloc>()
@@ -180,9 +181,7 @@ class _ViewByOrderItem extends StatelessWidget {
             );
 
         context.router.push(
-          ViewByItemDetailsPageRoute(
-            orderHistoryItem: orderHistoryItem,
-          ),
+          const ViewByItemDetailsPageRoute(),
         );
       },
       child: Column(

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -20,11 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewByItemDetailsPage extends StatelessWidget {
-  final OrderHistoryItem orderHistoryItem;
-
   const ViewByItemDetailsPage({
     Key? key,
-    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override
@@ -56,16 +52,16 @@ class ViewByItemDetailsPage extends StatelessWidget {
                   child: ListView(
                     children: <Widget>[
                       ItemHeaderSection(
-                        orderHistoryItem: orderHistoryItem,
+                        orderHistoryItem: state.orderHistoryItem,
                       ),
                       StatusTrackerSection(
-                        createDate: orderHistoryItem.createdDate,
+                        createDate: state.orderHistoryItem.createdDate,
                         title: 'Order status'.tr(),
-                        status: orderHistoryItem.status.displayOrderStatus,
+                        status:
+                            state.orderHistoryItem.status.displayOrderStatus,
                         onTap: () {
                           _showDEtailsPagePage(
                             context: context,
-                            orderHistoryItem: orderHistoryItem,
                           );
                         },
                       ),
@@ -78,7 +74,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                         color: ZPColors.lightGray2,
                       ),
                       ItemDetailsSection(
-                        orderHistoryItem: orderHistoryItem,
+                        orderHistoryItem: state.orderHistoryItem,
                       ),
                       const OtherItemDetailsSection(),
                     ],
@@ -92,7 +88,6 @@ class ViewByItemDetailsPage extends StatelessWidget {
 
 void _showDEtailsPagePage({
   required BuildContext context,
-  required OrderHistoryItem orderHistoryItem,
 }) {
   showModalBottomSheet(
     context: context,
@@ -107,21 +102,21 @@ void _showDEtailsPagePage({
             current.viewByItemDetails.orderHistoryItems,
         builder: (context, state) {
           return OrderStatusSection(
-            orderHistoryItem: orderHistoryItem,
-            customStep: orderHistoryItem.status.displayOrderStatusDetails
+            orderHistoryItem: state.orderHistoryItem,
+            customStep: state.orderHistoryItem.status.displayOrderStatusDetails
                 .mapIndexed((index, e) {
               return CustomStep(
                 status: e,
                 subtitle: '10.00am MYR',
                 title: '16 Mar',
-                icon: orderHistoryItem.status.displayOrderStatusIcon(
+                icon: state.orderHistoryItem.status.displayOrderStatusIcon(
                   e,
                 ),
                 state: index == 0
                     ? CustomStepState.active
                     : CustomStepState.disabled,
-                subSection:
-                    orderHistoryItem.orderStatusTracker.orderStatusDisplay,
+                subSection: state
+                    .orderHistoryItem.orderStatusTracker.orderStatusDisplay,
               );
             }).toList(),
           );

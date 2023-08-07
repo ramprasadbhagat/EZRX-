@@ -14,19 +14,19 @@
 import 'package:auto_route/auto_route.dart' as _i87;
 import 'package:flutter/material.dart' as _i88;
 
-import '../../domain/account/entities/sales_organisation.dart' as _i99;
+import '../../domain/account/entities/sales_organisation.dart' as _i98;
 import '../../domain/account/value/value_objects.dart' as _i89;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i98;
+    as _i97;
 import '../../domain/core/aggregate/bundle_aggregate.dart' as _i93;
 import '../../domain/core/aggregate/price_aggregate.dart' as _i94;
 import '../../domain/order/entities/cart_item.dart' as _i90;
 import '../../domain/order/entities/order_history_details_order_header.dart'
-    as _i96;
-import '../../domain/order/entities/order_history_item.dart' as _i95;
+    as _i95;
+import '../../domain/order/entities/order_history_item.dart' as _i99;
 import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i92;
 import '../../domain/payments/entities/payment_summary_details.dart' as _i91;
-import '../../domain/returns/entities/return_item.dart' as _i97;
+import '../../domain/returns/entities/return_item.dart' as _i96;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i50;
 import '../account/change_password/change_password_page.dart' as _i22;
 import '../account/contact_us/contact_us_page.dart' as _i23;
@@ -570,13 +570,9 @@ class AppRouter extends _i87.RootStackRouter {
       );
     },
     ViewByItemDetailsPageRoute.name: (routeData) {
-      final args = routeData.argsAs<ViewByItemDetailsPageRouteArgs>();
       return _i87.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i58.ViewByItemDetailsPage(
-          key: args.key,
-          orderHistoryItem: args.orderHistoryItem,
-        ),
+        child: const _i58.ViewByItemDetailsPage(),
       );
     },
     ViewByOrderDetailsPageRoute.name: (routeData) {
@@ -2197,37 +2193,14 @@ class IntroPageRoute extends _i87.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i58.ViewByItemDetailsPage]
-class ViewByItemDetailsPageRoute
-    extends _i87.PageRouteInfo<ViewByItemDetailsPageRouteArgs> {
-  ViewByItemDetailsPageRoute({
-    _i88.Key? key,
-    required _i95.OrderHistoryItem orderHistoryItem,
-  }) : super(
+class ViewByItemDetailsPageRoute extends _i87.PageRouteInfo<void> {
+  const ViewByItemDetailsPageRoute()
+      : super(
           ViewByItemDetailsPageRoute.name,
           path: 'orders/view_by_item_details_page',
-          args: ViewByItemDetailsPageRouteArgs(
-            key: key,
-            orderHistoryItem: orderHistoryItem,
-          ),
         );
 
   static const String name = 'ViewByItemDetailsPageRoute';
-}
-
-class ViewByItemDetailsPageRouteArgs {
-  const ViewByItemDetailsPageRouteArgs({
-    this.key,
-    required this.orderHistoryItem,
-  });
-
-  final _i88.Key? key;
-
-  final _i95.OrderHistoryItem orderHistoryItem;
-
-  @override
-  String toString() {
-    return 'ViewByItemDetailsPageRouteArgs{key: $key, orderHistoryItem: $orderHistoryItem}';
-  }
 }
 
 /// generated route for
@@ -2236,7 +2209,7 @@ class ViewByOrderDetailsPageRoute
     extends _i87.PageRouteInfo<ViewByOrderDetailsPageRouteArgs> {
   ViewByOrderDetailsPageRoute({
     _i88.Key? key,
-    required _i96.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem,
+    required _i95.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem,
   }) : super(
           ViewByOrderDetailsPageRoute.name,
           path: 'orders/view_by_order_details_page',
@@ -2257,7 +2230,7 @@ class ViewByOrderDetailsPageRouteArgs {
 
   final _i88.Key? key;
 
-  final _i96.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final _i95.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
 
   @override
   String toString() {
@@ -2295,7 +2268,7 @@ class ReturnRequestSummaryByItemDetailsRoute
     extends _i87.PageRouteInfo<ReturnRequestSummaryByItemDetailsRouteArgs> {
   ReturnRequestSummaryByItemDetailsRoute({
     _i88.Key? key,
-    required _i97.ReturnItem returnItem,
+    required _i96.ReturnItem returnItem,
   }) : super(
           ReturnRequestSummaryByItemDetailsRoute.name,
           path: 'returns/return_summary_details_v3',
@@ -2316,7 +2289,7 @@ class ReturnRequestSummaryByItemDetailsRouteArgs {
 
   final _i88.Key? key;
 
-  final _i97.ReturnItem returnItem;
+  final _i96.ReturnItem returnItem;
 
   @override
   String toString() {
@@ -2342,7 +2315,7 @@ class AnnouncementsPageRoute extends _i87.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i87.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i88.Key? key,
-    required _i98.AnnouncementArticleItem article,
+    required _i97.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2363,7 +2336,7 @@ class ArticleDetailsRouteArgs {
 
   final _i88.Key? key;
 
-  final _i98.AnnouncementArticleItem article;
+  final _i97.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2377,7 +2350,7 @@ class ReturnRequestDetailsRoute
     extends _i87.PageRouteInfo<ReturnRequestDetailsRouteArgs> {
   ReturnRequestDetailsRoute({
     _i88.Key? key,
-    required _i97.ReturnItem returnItem,
+    required _i96.ReturnItem returnItem,
   }) : super(
           ReturnRequestDetailsRoute.name,
           path: 'returns/return_summary_details_by_request',
@@ -2398,7 +2371,7 @@ class ReturnRequestDetailsRouteArgs {
 
   final _i88.Key? key;
 
-  final _i97.ReturnItem returnItem;
+  final _i96.ReturnItem returnItem;
 
   @override
   String toString() {
@@ -2411,7 +2384,7 @@ class ReturnRequestDetailsRouteArgs {
 class SalesOrgSearchRoute extends _i87.PageRouteInfo<SalesOrgSearchRouteArgs> {
   SalesOrgSearchRoute({
     _i88.Key? key,
-    required List<_i99.SalesOrganisation> avialableSalesOrgList,
+    required List<_i98.SalesOrganisation> avialableSalesOrgList,
   }) : super(
           SalesOrgSearchRoute.name,
           path: 'salesOrg_search',
@@ -2432,7 +2405,7 @@ class SalesOrgSearchRouteArgs {
 
   final _i88.Key? key;
 
-  final List<_i99.SalesOrganisation> avialableSalesOrgList;
+  final List<_i98.SalesOrganisation> avialableSalesOrgList;
 
   @override
   String toString() {
@@ -2556,7 +2529,7 @@ class ViewByOrdersPageRoute
     extends _i87.PageRouteInfo<ViewByOrdersPageRouteArgs> {
   ViewByOrdersPageRoute({
     _i88.Key? key,
-    required _i95.OrderHistoryItem orderHistoryItem,
+    required _i99.OrderHistoryItem orderHistoryItem,
   }) : super(
           ViewByOrdersPageRoute.name,
           path: 'orders/view_by_orders',
@@ -2577,7 +2550,7 @@ class ViewByOrdersPageRouteArgs {
 
   final _i88.Key? key;
 
-  final _i95.OrderHistoryItem orderHistoryItem;
+  final _i99.OrderHistoryItem orderHistoryItem;
 
   @override
   String toString() {

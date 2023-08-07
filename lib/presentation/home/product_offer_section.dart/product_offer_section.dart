@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
@@ -201,107 +202,135 @@ class _ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Responsive.isMobile(context)
-          ? MediaQuery.of(context).size.width * 0.9
-          : MediaQuery.of(context).size.width * 0.45,
-      child: Stack(
-        children: [
-          CustomCard(
-            margin: const EdgeInsets.all(10.0),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(8),
-              title: Row(
-                children: [
-                  CustomCard(
-                    showBorder: true,
-                    showShadow: false,
-                    padding: const EdgeInsets.all(
-                      10,
+    return InkWell(
+      onTap: () => _navigateToDetails(context, materialInfo),
+      child: SizedBox(
+        width: Responsive.isMobile(context)
+            ? MediaQuery.of(context).size.width * 0.9
+            : MediaQuery.of(context).size.width * 0.45,
+        child: Stack(
+          children: [
+            CustomCard(
+              margin: const EdgeInsets.all(10.0),
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(8),
+                title: Row(
+                  children: [
+                    CustomCard(
+                      showBorder: true,
+                      showShadow: false,
+                      padding: const EdgeInsets.all(
+                        10,
+                      ),
+                      child: ProductImage(
+                        width: MediaQuery.of(context).size.height * 0.06,
+                        height: 50,
+                        materialNumber: materialInfo.materialNumber,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
-                    child: ProductImage(
-                      width: MediaQuery.of(context).size.height * 0.06,
-                      height: 50,
-                      materialNumber: materialInfo.materialNumber,
-                      fit: BoxFit.fitHeight,
+                    const SizedBox(
+                      width: 8,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          materialInfo.materialNumber.displayMatNo,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: ZPColors.extraLightGrey4),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0),
-                          child: Text(
-                            materialInfo.name,
-                            style: Theme.of(context).textTheme.labelSmall,
-                            maxLines: 2,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            materialInfo.materialNumber.displayMatNo,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: ZPColors.extraLightGrey4),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Text(
+                              materialInfo.name,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Text(
+                            materialInfo.getManufactured,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: ZPColors.extraLightGrey4,
+                                      fontSize: 10,
+                                    ),
                             overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        Text(
-                          materialInfo.getManufactured,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.extraLightGrey4,
-                                    fontSize: 10,
-                                  ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _PriceLabel(product: materialInfo),
-                            FavouriteIcon(
-                              isFavourite: materialInfo.isFavourite,
-                              visualDensity: const VisualDensity(
-                                horizontal: -4,
-                                vertical: -4,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _PriceLabel(product: materialInfo),
+                              FavouriteIcon(
+                                isFavourite: materialInfo.isFavourite,
+                                visualDensity: const VisualDensity(
+                                  horizontal: -4,
+                                  vertical: -4,
+                                ),
+                                onTap: () {
+                                  materialInfo.isFavourite
+                                      ? context.read<MaterialListBloc>().add(
+                                            MaterialListEvent.deleteFavourite(
+                                              item: materialInfo,
+                                            ),
+                                          )
+                                      : context.read<MaterialListBloc>().add(
+                                            MaterialListEvent.addFavourite(
+                                              item: materialInfo,
+                                            ),
+                                          );
+                                },
                               ),
-                              onTap: () {
-                                materialInfo.isFavourite
-                                    ? context.read<MaterialListBloc>().add(
-                                          MaterialListEvent.deleteFavourite(
-                                            item: materialInfo,
-                                          ),
-                                        )
-                                    : context.read<MaterialListBloc>().add(
-                                          MaterialListEvent.addFavourite(
-                                            item: materialInfo,
-                                          ),
-                                        );
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          const IconLabel(
-            icon: Icons.local_offer_outlined,
-            backgroundColor: ZPColors.darkYellow,
-            iconSize: 23,
-            labelText: '',
-            margin: EdgeInsets.only(left: 10, top: 10),
-          ),
-        ],
+            const IconLabel(
+              icon: Icons.local_offer_outlined,
+              backgroundColor: ZPColors.darkYellow,
+              iconSize: 23,
+              labelText: '',
+              margin: EdgeInsets.only(left: 10, top: 10),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void _navigateToDetails(BuildContext context, MaterialInfo materialInfo) {
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+    context.read<ProductDetailBloc>().add(
+          ProductDetailEvent.fetch(
+            materialNumber: materialInfo.materialNumber,
+            salesOrganisation: eligibilityBlocState.salesOrganisation,
+            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+            shipToInfo: eligibilityBlocState.shipToInfo,
+            locale: context.locale,
+            type: materialInfo.type,
+          ),
+        );
+    context.router.pushNamed('orders/material_details');
+    context.read<MaterialPriceBloc>().add(
+          MaterialPriceEvent.fetch(
+            salesOrganisation: eligibilityBlocState.salesOrganisation,
+            salesConfigs: eligibilityBlocState.salesOrgConfigs,
+            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+            shipToInfo: eligibilityBlocState.shipToInfo,
+            comboDealEligible: eligibilityBlocState.comboDealEligible,
+            materials: [materialInfo],
+          ),
+        );
   }
 }
 

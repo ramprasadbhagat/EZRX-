@@ -19,8 +19,12 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)
+    required TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) =>
@@ -28,8 +32,12 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult? Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) =>
@@ -37,8 +45,12 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
@@ -126,8 +138,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)
+    required TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) {
@@ -138,8 +154,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult? Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) {
@@ -150,8 +170,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
@@ -208,12 +232,12 @@ abstract class _$$_FetchCopyWith<$Res> {
   @useResult
   $Res call(
       {User user,
-      OrderHistoryItem orderHistoryItem,
+      OrderNumber orderNumber,
+      MaterialNumber materialNumber,
       CustomerCodeInfo soldTo,
       bool disableDeliveryDateForZyllemStatus});
 
   $UserCopyWith<$Res> get user;
-  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
   $CustomerCodeInfoCopyWith<$Res> get soldTo;
 }
 
@@ -228,7 +252,8 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? orderHistoryItem = null,
+    Object? orderNumber = null,
+    Object? materialNumber = null,
     Object? soldTo = null,
     Object? disableDeliveryDateForZyllemStatus = null,
   }) {
@@ -237,10 +262,14 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      orderHistoryItem: null == orderHistoryItem
-          ? _value.orderHistoryItem
-          : orderHistoryItem // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryItem,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -263,14 +292,6 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem {
-    return $OrderHistoryItemCopyWith<$Res>(_value.orderHistoryItem, (value) {
-      return _then(_value.copyWith(orderHistoryItem: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get soldTo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.soldTo, (value) {
       return _then(_value.copyWith(soldTo: value));
@@ -283,14 +304,17 @@ class __$$_FetchCopyWithImpl<$Res>
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.user,
-      required this.orderHistoryItem,
+      required this.orderNumber,
+      required this.materialNumber,
       required this.soldTo,
       required this.disableDeliveryDateForZyllemStatus});
 
   @override
   final User user;
   @override
-  final OrderHistoryItem orderHistoryItem;
+  final OrderNumber orderNumber;
+  @override
+  final MaterialNumber materialNumber;
   @override
   final CustomerCodeInfo soldTo;
   @override
@@ -298,7 +322,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'ViewByItemDetailsEvent.fetch(user: $user, orderHistoryItem: $orderHistoryItem, soldTo: $soldTo, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus)';
+    return 'ViewByItemDetailsEvent.fetch(user: $user, orderNumber: $orderNumber, materialNumber: $materialNumber, soldTo: $soldTo, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus)';
   }
 
   @override
@@ -307,8 +331,10 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.orderHistoryItem, orderHistoryItem) ||
-                other.orderHistoryItem == orderHistoryItem) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.disableDeliveryDateForZyllemStatus,
                     disableDeliveryDateForZyllemStatus) ||
@@ -317,8 +343,8 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, orderHistoryItem, soldTo,
-      disableDeliveryDateForZyllemStatus);
+  int get hashCode => Object.hash(runtimeType, user, orderNumber,
+      materialNumber, soldTo, disableDeliveryDateForZyllemStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -330,41 +356,53 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)
+    required TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) {
-    return fetch(
-        user, orderHistoryItem, soldTo, disableDeliveryDateForZyllemStatus);
+    return fetch(user, orderNumber, materialNumber, soldTo,
+        disableDeliveryDateForZyllemStatus);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult? Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) {
-    return fetch?.call(
-        user, orderHistoryItem, soldTo, disableDeliveryDateForZyllemStatus);
+    return fetch?.call(user, orderNumber, materialNumber, soldTo,
+        disableDeliveryDateForZyllemStatus);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(
-          user, orderHistoryItem, soldTo, disableDeliveryDateForZyllemStatus);
+      return fetch(user, orderNumber, materialNumber, soldTo,
+          disableDeliveryDateForZyllemStatus);
     }
     return orElse();
   }
@@ -407,12 +445,14 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ViewByItemDetailsEvent {
   const factory _Fetch(
       {required final User user,
-      required final OrderHistoryItem orderHistoryItem,
+      required final OrderNumber orderNumber,
+      required final MaterialNumber materialNumber,
       required final CustomerCodeInfo soldTo,
       required final bool disableDeliveryDateForZyllemStatus}) = _$_Fetch;
 
   User get user;
-  OrderHistoryItem get orderHistoryItem;
+  OrderNumber get orderNumber;
+  MaterialNumber get materialNumber;
   CustomerCodeInfo get soldTo;
   bool get disableDeliveryDateForZyllemStatus;
   @JsonKey(ignore: true)
@@ -486,8 +526,12 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)
+    required TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) {
@@ -498,8 +542,12 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult? Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) {
@@ -510,8 +558,12 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem,
-            CustomerCodeInfo soldTo, bool disableDeliveryDateForZyllemStatus)?
+    TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
@@ -570,6 +622,7 @@ abstract class _FetchZyllemStatus implements ViewByItemDetailsEvent {
 /// @nodoc
 mixin _$ViewByItemDetailsState {
   OrderHistory get viewByItemDetails => throw _privateConstructorUsedError;
+  OrderHistoryItem get orderHistoryItem => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -587,10 +640,12 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {OrderHistory viewByItemDetails,
+      OrderHistoryItem orderHistoryItem,
       bool isLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $OrderHistoryCopyWith<$Res> get viewByItemDetails;
+  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
 }
 
 /// @nodoc
@@ -608,6 +663,7 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? viewByItemDetails = null,
+    Object? orderHistoryItem = null,
     Object? isLoading = null,
     Object? failureOrSuccessOption = null,
   }) {
@@ -616,6 +672,10 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
           ? _value.viewByItemDetails
           : viewByItemDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
+      orderHistoryItem: null == orderHistoryItem
+          ? _value.orderHistoryItem
+          : orderHistoryItem // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryItem,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -634,6 +694,14 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(viewByItemDetails: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem {
+    return $OrderHistoryItemCopyWith<$Res>(_value.orderHistoryItem, (value) {
+      return _then(_value.copyWith(orderHistoryItem: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -646,11 +714,14 @@ abstract class _$$_ViewByItemDetailsStateCopyWith<$Res>
   @useResult
   $Res call(
       {OrderHistory viewByItemDetails,
+      OrderHistoryItem orderHistoryItem,
       bool isLoading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
   $OrderHistoryCopyWith<$Res> get viewByItemDetails;
+  @override
+  $OrderHistoryItemCopyWith<$Res> get orderHistoryItem;
 }
 
 /// @nodoc
@@ -666,6 +737,7 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? viewByItemDetails = null,
+    Object? orderHistoryItem = null,
     Object? isLoading = null,
     Object? failureOrSuccessOption = null,
   }) {
@@ -674,6 +746,10 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
           ? _value.viewByItemDetails
           : viewByItemDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistory,
+      orderHistoryItem: null == orderHistoryItem
+          ? _value.orderHistoryItem
+          : orderHistoryItem // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryItem,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -691,6 +767,7 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
 class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   const _$_ViewByItemDetailsState(
       {required this.viewByItemDetails,
+      required this.orderHistoryItem,
       required this.isLoading,
       required this.failureOrSuccessOption})
       : super._();
@@ -698,13 +775,15 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   @override
   final OrderHistory viewByItemDetails;
   @override
+  final OrderHistoryItem orderHistoryItem;
+  @override
   final bool isLoading;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ViewByItemDetailsState(viewByItemDetails: $viewByItemDetails, isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemDetailsState(viewByItemDetails: $viewByItemDetails, orderHistoryItem: $orderHistoryItem, isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -714,6 +793,8 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
             other is _$_ViewByItemDetailsState &&
             (identical(other.viewByItemDetails, viewByItemDetails) ||
                 other.viewByItemDetails == viewByItemDetails) &&
+            (identical(other.orderHistoryItem, orderHistoryItem) ||
+                other.orderHistoryItem == orderHistoryItem) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -721,8 +802,8 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, viewByItemDetails, isLoading, failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, viewByItemDetails,
+      orderHistoryItem, isLoading, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -735,6 +816,7 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
 abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   const factory _ViewByItemDetailsState(
       {required final OrderHistory viewByItemDetails,
+      required final OrderHistoryItem orderHistoryItem,
       required final bool isLoading,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_ViewByItemDetailsState;
@@ -742,6 +824,8 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
 
   @override
   OrderHistory get viewByItemDetails;
+  @override
+  OrderHistoryItem get orderHistoryItem;
   @override
   bool get isLoading;
   @override

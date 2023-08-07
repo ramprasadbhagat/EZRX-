@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -84,99 +88,122 @@ class _ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: CustomCard(
-        margin: const EdgeInsets.all(10.0),
-        child: ListTile(
-          contentPadding: const EdgeInsets.all(8),
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomCard(
-                showBorder: true,
-                showShadow: false,
-                padding: const EdgeInsets.all(
-                  10,
+    return InkWell(
+      onTap: () => _navigateToOrderDetails(context),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: CustomCard(
+          margin: const EdgeInsets.all(10.0),
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(8),
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomCard(
+                  showBorder: true,
+                  showShadow: false,
+                  padding: const EdgeInsets.all(
+                    10,
+                  ),
+                  child: ProductImage(
+                    width: 80,
+                    height: 120,
+                    materialNumber: product.materialNumber,
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
-                child: ProductImage(
-                  width: 80,
-                  height: 120,
-                  materialNumber: product.materialNumber,
-                  fit: BoxFit.fitHeight,
+                const SizedBox(
+                  width: 8,
                 ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '${product.materialNumber.displayMatNo} | ${product.ezrxNumber.displayNAIfEmpty}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: ZPColors.extraLightGrey4),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
-                      child: Text(
-                        product.materialDescription,
-                        style: Theme.of(context).textTheme.labelSmall,
-                        maxLines: 2,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${product.materialNumber.displayMatNo} | ${product.ezrxNumber.displayNAIfEmpty}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: ZPColors.extraLightGrey4),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Text(
+                          product.materialDescription,
+                          style: Theme.of(context).textTheme.labelSmall,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        product.manufactureName,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: ZPColors.extraLightGrey4,
+                              fontSize: 10,
+                            ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    Text(
-                      product.manufactureName,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.extraLightGrey4,
-                            fontSize: 10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _PriceLabel(product: product),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            visualDensity: const VisualDensity(
+                              horizontal: -4,
+                              vertical: -4,
+                            ),
+                            onPressed: () {
+                              product.isFavourite
+                                  ? context.read<RecentOrderBloc>().add(
+                                        RecentOrderEvent.deleteFavourite(
+                                          materialCode: product.materialNumber,
+                                        ),
+                                      )
+                                  : context.read<RecentOrderBloc>().add(
+                                        RecentOrderEvent.addFavourite(
+                                          materialCode: product.materialNumber,
+                                        ),
+                                      );
+                            },
+                            icon: Icon(
+                              product.isFavourite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined,
+                              color: ZPColors.darkYellow,
+                            ),
                           ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _PriceLabel(product: product),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          visualDensity: const VisualDensity(
-                            horizontal: -4,
-                            vertical: -4,
-                          ),
-                          onPressed: () {
-                            product.isFavourite
-                                ? context.read<RecentOrderBloc>().add(
-                                      RecentOrderEvent.deleteFavourite(
-                                        materialCode: product.materialNumber,
-                                      ),
-                                    )
-                                : context.read<RecentOrderBloc>().add(
-                                      RecentOrderEvent.addFavourite(
-                                        materialCode: product.materialNumber,
-                                      ),
-                                    );
-                          },
-                          icon: Icon(
-                            product.isFavourite
-                                ? Icons.favorite
-                                : Icons.favorite_border_outlined,
-                            color: ZPColors.darkYellow,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  void _navigateToOrderDetails(BuildContext context) {
+    context.read<ViewByItemDetailsBloc>().add(
+          ViewByItemDetailsEvent.fetch(
+            user: context.read<UserBloc>().state.user,
+            orderNumber: product.orderNumber,
+            materialNumber: product.materialNumber,
+            soldTo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            disableDeliveryDateForZyllemStatus: context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrgConfigs
+                .disableDeliveryDate,
+          ),
+        );
+
+    context.router.push(
+      const ViewByItemDetailsPageRoute(),
     );
   }
 }

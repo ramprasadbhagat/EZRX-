@@ -5,7 +5,8 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
   const factory ViewByItemDetailsEvent.initialized() = _Initialized;
   const factory ViewByItemDetailsEvent.fetch({
     required User user,
-    required OrderHistoryItem orderHistoryItem,
+    required OrderNumber orderNumber,
+    required MaterialNumber materialNumber,
     required CustomerCodeInfo soldTo,
     required bool disableDeliveryDateForZyllemStatus,
   }) = _Fetch;
