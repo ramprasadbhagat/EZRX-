@@ -62,12 +62,12 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
             context
                 .read<MaterialListBloc>()
                 .add(const MaterialListEvent.initialized());
-            context.read<UserBloc>().add(const UserEvent.fetch());
+            context.read<UserBloc>().add(
+                  const UserEvent.fetch(
+                    isLoginOnBehalf: true,
+                  ),
+                );
             context.router.popForced();
-            CustomSnackBar(
-              messageText:
-                  '${'Logged in on behalf of'.tr()} ${state.username.getOrDefaultValue('')}.',
-            ).show(context);
           },
         ),
       ),

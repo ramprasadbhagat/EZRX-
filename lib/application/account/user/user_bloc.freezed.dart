@@ -19,7 +19,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
@@ -31,7 +31,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
@@ -43,7 +43,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -144,7 +144,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
@@ -159,7 +159,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
@@ -174,7 +174,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -243,6 +243,8 @@ abstract class _Initialized implements UserEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isLoginOnBehalf});
 }
 
 /// @nodoc
@@ -251,32 +253,58 @@ class __$$_FetchCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoginOnBehalf = null,
+  }) {
+    return _then(_$_Fetch(
+      isLoginOnBehalf: null == isLoginOnBehalf
+          ? _value.isLoginOnBehalf
+          : isLoginOnBehalf // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+  const _$_Fetch({this.isLoginOnBehalf = false});
+
+  @override
+  @JsonKey()
+  final bool isLoginOnBehalf;
 
   @override
   String toString() {
-    return 'UserEvent.fetch()';
+    return 'UserEvent.fetch(isLoginOnBehalf: $isLoginOnBehalf)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            (identical(other.isLoginOnBehalf, isLoginOnBehalf) ||
+                other.isLoginOnBehalf == isLoginOnBehalf));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isLoginOnBehalf);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
@@ -284,14 +312,14 @@ class _$_Fetch implements _Fetch {
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
   }) {
-    return fetch();
+    return fetch(isLoginOnBehalf);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
@@ -299,14 +327,14 @@ class _$_Fetch implements _Fetch {
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
   }) {
-    return fetch?.call();
+    return fetch?.call(isLoginOnBehalf);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -315,7 +343,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(isLoginOnBehalf);
     }
     return orElse();
   }
@@ -368,7 +396,12 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements UserEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch({final bool isLoginOnBehalf}) = _$_Fetch;
+
+  bool get isLoginOnBehalf;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -410,7 +443,7 @@ class _$_AcceptTnc implements _AcceptTnc {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
@@ -425,7 +458,7 @@ class _$_AcceptTnc implements _AcceptTnc {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
@@ -440,7 +473,7 @@ class _$_AcceptTnc implements _AcceptTnc {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -585,7 +618,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
@@ -600,7 +633,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
@@ -616,7 +649,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -772,7 +805,7 @@ class _$_UpdatePaymentNotificationSettings
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
             LanguageValue languagePreference, bool emailNotifications)
@@ -787,7 +820,7 @@ class _$_UpdatePaymentNotificationSettings
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
     TResult? Function(
             LanguageValue languagePreference, bool emailNotifications)?
@@ -802,7 +835,7 @@ class _$_UpdatePaymentNotificationSettings
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
     TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
@@ -878,6 +911,7 @@ abstract class _UpdatePaymentNotificationSettings implements UserEvent {
 /// @nodoc
 mixin _$UserState {
   User get user => throw _privateConstructorUsedError;
+  bool get isLoginOnBehalf => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get userFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -893,6 +927,7 @@ abstract class $UserStateCopyWith<$Res> {
   @useResult
   $Res call(
       {User user,
+      bool isLoginOnBehalf,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption});
 
   $UserCopyWith<$Res> get user;
@@ -912,6 +947,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   @override
   $Res call({
     Object? user = null,
+    Object? isLoginOnBehalf = null,
     Object? userFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -919,6 +955,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      isLoginOnBehalf: null == isLoginOnBehalf
+          ? _value.isLoginOnBehalf
+          : isLoginOnBehalf // ignore: cast_nullable_to_non_nullable
+              as bool,
       userFailureOrSuccessOption: null == userFailureOrSuccessOption
           ? _value.userFailureOrSuccessOption
           : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -944,6 +984,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
   @useResult
   $Res call(
       {User user,
+      bool isLoginOnBehalf,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption});
 
   @override
@@ -962,6 +1003,7 @@ class __$$_UserStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? isLoginOnBehalf = null,
     Object? userFailureOrSuccessOption = null,
   }) {
     return _then(_$_UserState(
@@ -969,6 +1011,10 @@ class __$$_UserStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      isLoginOnBehalf: null == isLoginOnBehalf
+          ? _value.isLoginOnBehalf
+          : isLoginOnBehalf // ignore: cast_nullable_to_non_nullable
+              as bool,
       userFailureOrSuccessOption: null == userFailureOrSuccessOption
           ? _value.userFailureOrSuccessOption
           : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -981,17 +1027,21 @@ class __$$_UserStateCopyWithImpl<$Res>
 
 class _$_UserState extends _UserState {
   const _$_UserState(
-      {required this.user, required this.userFailureOrSuccessOption})
+      {required this.user,
+      required this.isLoginOnBehalf,
+      required this.userFailureOrSuccessOption})
       : super._();
 
   @override
   final User user;
   @override
+  final bool isLoginOnBehalf;
+  @override
   final Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'UserState(user: $user, userFailureOrSuccessOption: $userFailureOrSuccessOption)';
+    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption)';
   }
 
   @override
@@ -1000,6 +1050,8 @@ class _$_UserState extends _UserState {
         (other.runtimeType == runtimeType &&
             other is _$_UserState &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.isLoginOnBehalf, isLoginOnBehalf) ||
+                other.isLoginOnBehalf == isLoginOnBehalf) &&
             (identical(other.userFailureOrSuccessOption,
                     userFailureOrSuccessOption) ||
                 other.userFailureOrSuccessOption ==
@@ -1007,8 +1059,8 @@ class _$_UserState extends _UserState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, user, userFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType, user, isLoginOnBehalf, userFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -1020,12 +1072,15 @@ class _$_UserState extends _UserState {
 abstract class _UserState extends UserState {
   const factory _UserState(
       {required final User user,
+      required final bool isLoginOnBehalf,
       required final Option<Either<ApiFailure, dynamic>>
           userFailureOrSuccessOption}) = _$_UserState;
   const _UserState._() : super._();
 
   @override
   User get user;
+  @override
+  bool get isLoginOnBehalf;
   @override
   Option<Either<ApiFailure, dynamic>> get userFailureOrSuccessOption;
   @override

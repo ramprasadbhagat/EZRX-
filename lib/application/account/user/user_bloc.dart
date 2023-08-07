@@ -38,6 +38,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           (user) => emit(
             state.copyWith(
               user: user,
+              isLoginOnBehalf: e.isLoginOnBehalf,
               userFailureOrSuccessOption: none(),
             ),
           ),

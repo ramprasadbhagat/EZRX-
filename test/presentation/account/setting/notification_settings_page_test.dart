@@ -99,6 +99,7 @@ void main() async {
       announcementBlocMock = AnnouncementBlocMock();
       when(() => userBloc.state).thenReturn(
         UserState(
+          isLoginOnBehalf: false,
           user: User.empty().copyWith(
             settings: User.empty().settings.copyWith(
                   languagePreference: LanguageValue(ApiLanguageCode.english),

@@ -1037,11 +1037,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     if (userState.user.username.isValid()) {
       final welcomeMessage =
           '${'Welcome back'.tr()}, ${userState.user.username.getOrCrash()}';
+      final loginOnBehalfMessage =
+          '${'Logged in on behalf of'.tr()} ${userState.user.username.getOrCrash()}.';
+      final message =
+          userState.isLoginOnBehalf ? loginOnBehalfMessage : welcomeMessage;
       context
           .read<SettingBloc>()
           .add(const SettingEvent.checkIfBiometricPossible());
       CustomSnackBar(
-        messageText: welcomeMessage,
+        messageText: message,
       ).show(context);
     }
   }

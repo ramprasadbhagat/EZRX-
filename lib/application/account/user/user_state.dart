@@ -6,11 +6,13 @@ class UserState with _$UserState {
 
   const factory UserState({
     required User user,
+    required bool isLoginOnBehalf,
     required Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
   }) = _UserState;
 
   factory UserState.initial() => UserState(
         user: User.empty(),
+        isLoginOnBehalf: false,
         userFailureOrSuccessOption: none(),
       );
 
