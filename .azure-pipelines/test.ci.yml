@@ -20,7 +20,7 @@ stages:
 
   - job: INTEGRATION_TESTs
     pool: 
-      name: devops-flutter3
+      name: devops-flutter33
     displayName: INTEGRATION_TESTs
     steps: 
 
