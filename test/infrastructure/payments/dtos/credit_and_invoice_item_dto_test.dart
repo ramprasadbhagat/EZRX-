@@ -12,16 +12,17 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/customerDocumentHeaderResponse.json'),
+            .loadString('assets/json/customerDocumentHeaderV2Response.json'),
       );
     });
 
     test('=> CreditAndInvoiceItemDto fromJson and toDomain', () {
       final creditAndInvoiceItemDto = CreditAndInvoiceItemDto.fromJson(
-        data['data']['customerDocumentHeader']['documentHeaderList'][0],
+        data['data']['customerDocumentHeaderV2']['documentHeaderList'][0],
       ).toDomain();
 
-      expect(creditAndInvoiceItemDto.searchKey, '0340000002');
+      expect(creditAndInvoiceItemDto.searchKey, '1100001228');
+      
     });
   });
 }

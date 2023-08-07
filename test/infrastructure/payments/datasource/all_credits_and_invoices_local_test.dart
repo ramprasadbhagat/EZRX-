@@ -28,13 +28,13 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-              'assets/json/customerDocumentHeaderResponse.json',
+              'assets/json/customerDocumentHeaderV2Response.json',
             ),
           );
           final result = await localDataSource.getDocumentHeaderList();
 
           final expectResult = <CreditAndInvoiceItem>[];
-          for (final dynamic item in res['data']['customerDocumentHeader']
+          for (final dynamic item in res['data']['customerDocumentHeaderV2']
               ['documentHeaderList']) {
             expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
           }

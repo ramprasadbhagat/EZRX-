@@ -11,8 +11,8 @@ class AllCreditsAndInvoicesQueryMutation {
 
   String getDocumentHeaderListQuery() {
     return '''
-    query customerDocumentHeader(\$input: customerDocumentHeaderRequest!) {
-      customerDocumentHeader(request: \$input) {
+    query customerDocumentHeaderV2(\$input: customerDocumentHeaderRequest!) {
+      customerDocumentHeaderV2(request: \$input) {
           documentHeaderList {
           bpCustomerNumber
           fiscalYear

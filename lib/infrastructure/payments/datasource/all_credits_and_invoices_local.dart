@@ -10,11 +10,11 @@ class AllCreditsAndInvoicesLocalDataSource {
   Future<List<CreditAndInvoiceItem>> getDocumentHeaderList() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/customerDocumentHeaderResponse.json',
+        'assets/json/customerDocumentHeaderV2Response.json',
       ),
     );
-    final res = data['data']['customerDocumentHeader']['documentHeaderList'];
-
+    final res = data['data']['customerDocumentHeaderV2']['documentHeaderList'];
+    
     final result = <CreditAndInvoiceItem>[];
     for (final dynamic item in res) {
       result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());

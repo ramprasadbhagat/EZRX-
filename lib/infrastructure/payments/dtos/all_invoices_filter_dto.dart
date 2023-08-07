@@ -69,21 +69,9 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
 
   List<Map<String, String>> get toMapList => <Map<String, String>>[
         {
-          'field': 'debitCreditCode',
-          'value': 'S',
+          'field': 'accountingDocumentType',
+          'value': 'Invoice',
         },
-        if (dueDateFrom.isNotEmpty)
-          {
-            'field': 'netDueDate',
-            'value': dueDateFrom,
-            'type': 'ge',
-          },
-        if (dueDateTo.isNotEmpty)
-          {
-            'field': 'netDueDate',
-            'value': dueDateTo,
-            'type': 'le',
-          },
         if (documentDateFrom.isNotEmpty)
           {
             'field': 'documentDate',
@@ -96,6 +84,19 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
             'value': documentDateTo,
             'type': 'le',
           },
+        if (dueDateFrom.isNotEmpty)
+          {
+            'field': 'netDueDate',
+            'value': dueDateFrom,
+            'type': 'ge',
+          },
+        if (dueDateTo.isNotEmpty)
+          {
+            'field': 'netDueDate',
+            'value': dueDateTo,
+            'type': 'le',
+          },
+        
         if (amountValueFrom.isNotEmpty)
           {
             'field': 'amountInTransactionCurrency',

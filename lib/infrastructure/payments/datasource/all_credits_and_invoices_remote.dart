@@ -55,10 +55,10 @@ class AllCreditsAndInvoicesRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'customerDocumentHeader', res: res);
+    _exceptionChecker(property: 'customerDocumentHeaderV2', res: res);
     final data =
-        res.data['data']['customerDocumentHeader']['documentHeaderList'];
-
+        res.data['data']['customerDocumentHeaderV2']['documentHeaderList'];
+    
     final result = <CreditAndInvoiceItem>[];
     for (final dynamic item in data) {
       result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
@@ -101,10 +101,10 @@ class AllCreditsAndInvoicesRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'customerDocumentHeader', res: res);
+    _exceptionChecker(property: 'customerDocumentHeaderV2', res: res);
     final data =
-        res.data['data']['customerDocumentHeader']['documentHeaderList'];
-
+        res.data['data']['customerDocumentHeaderV2']['documentHeaderList'];
+    
     final result = <CreditAndInvoiceItem>[];
     for (final dynamic item in data) {
       result.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());

@@ -13,19 +13,19 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/customerDocumentHeaderResponse.json'),
+            .loadString('assets/json/customerDocumentHeaderV2Response.json'),
       );
     });
 
     test('=> Customer DocumentHeader fromDomain', () {
       final expectResult = <CreditAndInvoiceItem>[];
-      for (final dynamic item in data['data']['customerDocumentHeader']
+      for (final dynamic item in data['data']['customerDocumentHeaderV2']
           ['documentHeaderList']) {
         expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
       }
       expect(
         expectResult.length,
-        3,
+        10,
       );
     });
   });
