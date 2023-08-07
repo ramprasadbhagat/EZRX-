@@ -195,7 +195,7 @@ class _ReturnItem extends StatelessWidget {
                 isQuantityBelowImage: true,
                 statusWidget: StatusLabel(
                   status: StatusType(
-                    data.status.getOrDefaultValue(''),
+                    data.status.displayStatus,
                   ),
                 ),
               ),

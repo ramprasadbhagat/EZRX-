@@ -10,7 +10,9 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -87,147 +89,180 @@ void main() {
       ReturnItem.empty().copyWith(
         requestId: '1234567',
         invoiceID: '1234567',
+        status: StatusType('PENDING'),
       )
     ];
   });
 
-  group('Return By Item Page', () {
-    setUp(() {
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-      when(() => mockUserBloc.state).thenReturn(UserState.initial());
-      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial());
-      when(() => mockReturnListByItemBloc.state)
-          .thenReturn(ReturnListByItemState.initial());
-      when(() => mockAnnouncementBloc.state)
-          .thenReturn(AnnouncementState.initial());
-      when(() => mockProductImageBloc.state)
-          .thenReturn(ProductImageState.initial());
-      when(() => mockReturnSummaryDetailsBloc.state)
-          .thenReturn(ReturnSummaryDetailsState.initial());
-    });
+  group(
+    'Return By Item Page',
+    () {
+      setUp(() {
+        when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+        when(() => mockCustomerCodeBloc.state)
+            .thenReturn(CustomerCodeState.initial());
+        when(() => mockReturnListByItemBloc.state)
+            .thenReturn(ReturnListByItemState.initial());
+        when(() => mockAnnouncementBloc.state)
+            .thenReturn(AnnouncementState.initial());
+        when(() => mockProductImageBloc.state)
+            .thenReturn(ProductImageState.initial());
+        when(() => mockReturnSummaryDetailsBloc.state)
+            .thenReturn(ReturnSummaryDetailsState.initial());
+      });
 
-    RouteDataScope getWUT() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
+      RouteDataScope getWUT() {
+        return WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => mockAuthBloc,
+            ),
+            BlocProvider<ProductImageBloc>(
+              create: (context) => mockProductImageBloc,
+            ),
+            BlocProvider<AnnouncementBloc>(
+              create: (context) => mockAnnouncementBloc,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => mockCustomerCodeBloc,
+            ),
+            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+            BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+            BlocProvider<ReturnListByItemBloc>(
+              create: (context) => mockReturnListByItemBloc,
+            ),
+            BlocProvider<ReturnSummaryDetailsBloc>(
+              create: (context) => mockReturnSummaryDetailsBloc,
+            )
+          ],
+          child: const Scaffold(body: ReturnByItemPage()),
+        );
+      }
+
+      testWidgets('Return Item page Body Test - loading', (tester) async {
+        when(() => mockCustomerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'mock-customerCodeSoldTo',
+            ),
           ),
-          BlocProvider<ProductImageBloc>(
-            create: (context) => mockProductImageBloc,
+        );
+        when(() => mockReturnListByItemBloc.state).thenReturn(
+          ReturnListByItemState.initial().copyWith(
+            isFetching: true,
           ),
-          BlocProvider<AnnouncementBloc>(
-            create: (context) => mockAnnouncementBloc,
+        );
+        final expectedStates = [
+          ReturnListByItemState.initial()
+              .copyWith(isFetching: true, returnItemList: []),
+        ];
+        whenListen(
+          mockReturnListByItemBloc,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        await tester.pump(const Duration(seconds: 2));
+        expect(
+          find.byKey(WidgetKeys.loaderImage),
+          findsOneWidget,
+        );
+        await tester.pump();
+      });
+
+      testWidgets('Return Item page Body Test - Success', (tester) async {
+        when(() => mockCustomerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'mock-customerCodeSoldTo',
+            ),
           ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => mockCustomerCodeBloc,
+        );
+        when(() => mockReturnListByItemBloc.state).thenReturn(
+          ReturnListByItemState.initial().copyWith(
+            isFetching: true,
           ),
-          BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-          BlocProvider<UserBloc>(create: (context) => mockUserBloc),
-          BlocProvider<ReturnListByItemBloc>(
-            create: (context) => mockReturnListByItemBloc,
+        );
+        final expectedStates = [
+          ReturnListByItemState.initial()
+              .copyWith(isFetching: false, returnItemList: fakeReturhItemList),
+        ];
+        whenListen(
+          mockReturnListByItemBloc,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        await tester.pump(const Duration(seconds: 2));
+        expect(
+          find.byKey(WidgetKeys.returnItem('0')),
+          findsOneWidget,
+        );
+        expect(
+          find.byType(StatusLabel),
+          findsOneWidget,
+        );
+        expect(
+          find.textContaining(
+            mockReturnListByItemBloc
+                .state.returnItemList.first.status.displayStatus,
           ),
-          BlocProvider<ReturnSummaryDetailsBloc>(
-            create: (context) => mockReturnSummaryDetailsBloc,
-          )
-        ],
-        child: const Scaffold(body: ReturnByItemPage()),
-      );
-    }
+          findsOneWidget,
+        );
+        await tester.pump();
+      });
+      testWidgets(
+        'Return Item page Body Test - Return Item Tap',
+        (tester) async {
+          when(() => mockReturnListByItemBloc.state).thenReturn(
+            ReturnListByItemState.initial(),
+          );
+          final expectedStates = [
+            ReturnListByItemState.initial().copyWith(
+              isFetching: true,
+            ),
+            ReturnListByItemState.initial().copyWith(
+              isFetching: false,
+              returnItemList: fakeReturhItemList,
+            )
+          ];
+          whenListen(
+            mockReturnListByItemBloc,
+            Stream.fromIterable(expectedStates),
+          );
 
-    testWidgets('Return Item page Body Test - loading', (tester) async {
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            customerCodeSoldTo: 'mock-customerCodeSoldTo',
-          ),
-        ),
-      );
-      when(() => mockReturnListByItemBloc.state).thenReturn(
-        ReturnListByItemState.initial().copyWith(
-          isFetching: true,
-        ),
-      );
-      final expectedStates = [
-        ReturnListByItemState.initial()
-            .copyWith(isFetching: true, returnItemList: []),
-      ];
-      whenListen(mockReturnListByItemBloc, Stream.fromIterable(expectedStates));
+          await tester.pumpWidget(getWUT());
+          await tester.pump();
 
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-
-      await tester.pump(const Duration(seconds: 2));
-      expect(
-        find.byKey(WidgetKeys.loaderImage),
-        findsOneWidget,
+          await tester.pump(
+            const Duration(seconds: 2),
+          );
+          expect(
+            find.byKey(WidgetKeys.returnItem('0')),
+            findsOneWidget,
+          );
+          final findReturnItemTile = find.byKey(WidgetKeys.returnItemTile);
+          expect(
+            findReturnItemTile,
+            findsOneWidget,
+          );
+          await tester.tap(findReturnItemTile);
+          await tester.pump();
+          expect(
+            autoRouterMock.current.name ==
+                'ReturnRequestSummaryByItemDetailsRoute',
+            true,
+          );
+          await tester.pump();
+        },
       );
-      await tester.pump();
-    });
-
-    testWidgets('Return Item page Body Test - Success', (tester) async {
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            customerCodeSoldTo: 'mock-customerCodeSoldTo',
-          ),
-        ),
-      );
-      when(() => mockReturnListByItemBloc.state).thenReturn(
-        ReturnListByItemState.initial().copyWith(
-          isFetching: true,
-        ),
-      );
-      final expectedStates = [
-        ReturnListByItemState.initial()
-            .copyWith(isFetching: false, returnItemList: fakeReturhItemList),
-      ];
-      whenListen(mockReturnListByItemBloc, Stream.fromIterable(expectedStates));
-
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-
-      await tester.pump(const Duration(seconds: 2));
-      expect(
-        find.byKey(WidgetKeys.returnItem('0')),
-        findsOneWidget,
-      );
-      await tester.pump();
-    });
-    testWidgets('Return Item page Body Test - Return Item Tap', (tester) async {
-      when(() => mockReturnListByItemBloc.state)
-          .thenReturn(ReturnListByItemState.initial());
-      final expectedStates = [
-        ReturnListByItemState.initial().copyWith(
-          isFetching: true,
-        ),
-        ReturnListByItemState.initial()
-            .copyWith(isFetching: false, returnItemList: fakeReturhItemList)
-      ];
-      whenListen(mockReturnListByItemBloc, Stream.fromIterable(expectedStates));
-
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-
-      await tester.pump(const Duration(seconds: 2));
-      expect(
-        find.byKey(WidgetKeys.returnItem('0')),
-        findsOneWidget,
-      );
-      final findReturnItemTile = find.byKey(WidgetKeys.returnItemTile);
-      expect(
-        findReturnItemTile,
-        findsOneWidget,
-      );
-      await tester.tap(findReturnItemTile);
-      await tester.pump();
-      expect(
-        autoRouterMock.current.name == 'ReturnRequestSummaryByItemDetailsRoute',
-        true,
-      );
-      await tester.pump();
-    });
-  });
+    },
+  );
 }

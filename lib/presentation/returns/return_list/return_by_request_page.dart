@@ -113,6 +113,7 @@ class ReturnByRequestPage extends StatelessWidget {
 
                       return currentGroup != previousGroup
                           ? _ReturnItem(
+                              key: WidgetKeys.returnRequest(index.toString()),
                               data: item,
                               showDivider: index != 0,
                               showHeader: true,
@@ -222,7 +223,7 @@ class _ReturnItem extends StatelessWidget {
                           ),
                           StatusLabel(
                             status: StatusType(
-                              data.status.getOrDefaultValue(''),
+                              data.status.displayStatusForViewByRequest,
                             ),
                           ),
                         ],
