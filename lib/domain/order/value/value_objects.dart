@@ -155,13 +155,8 @@ class MaterialNumber extends ValueObject<String> {
     return MaterialNumber._(validateStringNotEmpty(input));
   }
 
-  String get displayMatNo {
-    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
-  }
-
-  bool isValidMaterial(List<MaterialNumber> validMaterialNumbers) {
-    return validMaterialNumbers.contains(this);
-  }
+  String get displayMatNo =>
+      naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
 
   const MaterialNumber._(this.value);
 }

@@ -139,26 +139,6 @@ void main() {
       final result = valObj.displayMatNo;
       expect(result, '34134');
     });
-
-    test(
-      'should return true when there is Valid Material',
-      () async {
-        const input = '000034134';
-        final valObj = MaterialNumber(input);
-        final result = valObj.isValidMaterial([MaterialNumber('000034134')]);
-        expect(result, true);
-      },
-    );
-
-    test(
-      'should return true when there is not Valid Material',
-      () async {
-        const input = '000034134';
-        final valObj = MaterialNumber(input);
-        final result = valObj.isValidMaterial([MaterialNumber('000052435')]);
-        expect(result, false);
-      },
-    );
   });
 
   group('Material Price Value Object', () {
