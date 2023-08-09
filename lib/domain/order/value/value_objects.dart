@@ -675,6 +675,8 @@ class PaymentTerm extends ValueObject<String> {
     return PaymentTerm._(validateStringNotEmpty(input));
   }
 
+  String get getPaymentTerm => getPaymentTermValue(value.getOrElse(() => ''));
+
   const PaymentTerm._(this.value);
 }
 

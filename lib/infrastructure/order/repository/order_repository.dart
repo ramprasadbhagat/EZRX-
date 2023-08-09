@@ -31,7 +31,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
-import 'package:flutter/material.dart';
 
 class OrderRepository implements IOrderRepository {
   final Config config;
@@ -389,11 +388,7 @@ class OrderRepository implements IOrderRepository {
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
       telephone: data.mobileNumber.getTelephone,
       collectiveNumber: '',
-      paymentTerms: data.paymentTerm
-          .getValue()
-          .characters
-          .getRange(0, data.paymentTerm.getValue().indexOf('-'))
-          .string,
+      paymentTerms: data.paymentTerm.getPaymentTerm,
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,

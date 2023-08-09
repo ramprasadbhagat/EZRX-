@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:flutter/cupertino.dart';
 
 double totalPriceStringAsFixed(String value) {
   return double.parse(value);
@@ -95,3 +96,7 @@ bool checkIfSuccessful(int value) => value == 1;
 
 double getDoubleParsedValue(String value) =>
     value.isEmpty ? 0 : double.parse(value);
+
+String getPaymentTermValue(String value) => value.isEmpty
+    ? ''
+    : value.characters.getRange(0, value.indexOf('-')).string;

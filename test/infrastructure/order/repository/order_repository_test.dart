@@ -422,6 +422,141 @@ void main() {
       );
       expect(submitOrder.blockOrder, true);
     });
+
+    test('get submit order successfully locally with payment term validation ',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+        currency: Currency('PHP'),
+        disablePrincipals: true,
+        principalList: [
+          SalesOrganisationConfigsPrincipal.empty().copyWith(
+            date: DateTimeStringValue('2093041107'),
+            principalCode: PrincipalCode('0000140332'),
+          ),
+          SalesOrganisationConfigsPrincipal.empty().copyWith(
+            date: DateTimeStringValue('2023041107'),
+            principalCode: PrincipalCode('0000000000'),
+          )
+        ],
+      );
+
+      final cartMaterial = <PriceAggregate>[
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023001758'),
+            principalData: PrincipalData.empty()
+                .copyWith(principalCode: PrincipalCode('0000140332')),
+          ),
+          tenderContract: TenderContract.empty().copyWith(
+            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            tenderOrderReason: TenderContractReason('reas'),
+          ),
+          salesOrgConfig: salesOrganisationConfigs,
+        )
+      ];
+
+      final data = DeliveryInfoData.empty().copyWith(
+        poReference: PoReference('CO REF'),
+        contactPerson: ContactPerson('PERSON'),
+        mobileNumber: MobileNumber('123456'),
+        paymentTerm: PaymentTerm(''),
+        deliveryDate: DeliveryDate('01/02/2023'),
+        deliveryInstruction: DeliveryInstruction('test'),
+        // collectiveNumber: CollectiveNumber('543678909'),
+        referenceNote: ReferenceNote('note'),
+      );
+
+      final user = mockUser.copyWith(
+        id: '123456',
+        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
+
+      final submitOrder = SubmitOrder.empty().copyWith(
+        userName: data.contactPerson.getValue().isNotEmpty
+            ? data.contactPerson.getValue()
+            : user.fullName.toString(),
+        poReference: data.poReference.getValue(),
+        referenceNotes: data.referenceNote.getValue(),
+        specialInstructions: data.deliveryInstruction.getValue(),
+        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+        requestedDeliveryDate: data.deliveryDate.getValue(),
+        poDate: data.deliveryDate.getValue(),
+        telephone: data.mobileNumber.getTelephone,
+        collectiveNumber: '',
+        paymentTerms: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          )
+        ].first.tenderContract.contractPaymentTerm.getValue(),
+        customer: SubmitOrderCustomer.empty().copyWith(
+          customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
+          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+          division: mockCustomerCodeInfo.division,
+          salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
+        ),
+        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+            cartMaterial.any((item) => item.checkSalesCutOff),
+        products: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          )
+        ].map((e) => e.toSubmitMaterialInfo()).toList(),
+      );
+
+      when(() => orderLocalDataSource.submitOrder()).thenAnswer(
+        (invocation) async => SubmitOrderResponse.empty().copyWith(
+          salesDocument: 'fake-sales-document',
+          messages: [
+            SubmitOrderResponseMessage.empty().copyWith(
+              message: 'EZRX-b628ca8',
+              type: 'S',
+            ),
+          ],
+        ),
+      );
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: mockUser,
+        cartProducts: cartMaterial,
+        grandTotal: 100.0,
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        data: data,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationConfigs,
+        orderValue: 100.0,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(submitOrder.blockOrder, true);
+    });
     test('get submit order fail locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
