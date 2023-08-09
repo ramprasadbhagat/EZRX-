@@ -135,6 +135,8 @@ class _AnnouncementInfoDetailsPageState
                             _isBackButtonEnableForAppbar
                                 ? const SizedBox.shrink()
                                 : IconButton(
+                                    key: WidgetKeys
+                                        .announcementDetailsBackButton,
                                     onPressed: () => context.router.pop(),
                                     icon: const CircleAvatar(
                                       maxRadius: 13,
@@ -263,15 +265,17 @@ class _TitleSection extends StatelessWidget {
                             ),
                       ),
                     ),
-                    FittedBox(
-                      child: Text(
-                        details.title,
-                        style: Theme.of(context).textTheme.labelSmall,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
+                    details.title.isNotEmpty
+                        ? FittedBox(
+                            child: Text(
+                              details.title,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                     details.sourceAndOrAuthorLabel.isNotEmpty
                         ? FittedBox(
                             child: Text(
@@ -421,6 +425,9 @@ class _BottomSheet extends StatelessWidget {
                         : LoadingShimmer.withChild(
                             enabled: isLoading,
                             child: GestureDetector(
+                              key: WidgetKeys.announcementDetailsItem(
+                                index.toString(),
+                              ),
                               onTap: () {
                                 changeState();
                                 context.read<AnnouncementInfoDetailsBloc>().add(

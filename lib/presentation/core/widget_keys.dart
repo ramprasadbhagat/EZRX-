@@ -385,6 +385,10 @@ class WidgetKeys {
   static const Key announcementListPageKey = Key('announcementListPageKey');
   static const Key announcementNotFoundRecordKey =
       Key('announcementNotFoundRecordKey');
+  static const Key announcementDetailsBackButton =
+      Key('announcementDetailsBackButton');
+  static Key announcementDetailsItem(String index) =>
+      Key('announcementDetailsItem$index');
 
   //============================================================
   //  Return By Item Page
