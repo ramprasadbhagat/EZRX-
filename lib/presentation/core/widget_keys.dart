@@ -391,6 +391,17 @@ class WidgetKeys {
       Key('announcementDetailsItem$index');
 
   //============================================================
+  //  Article
+  //============================================================
+  static const Key articleDetailsPageKey = Key('articleDetailsPageKey');
+  static const Key articleDetailsBottomAppBarKey =
+      Key('articleDetailsBottomAppBarKey');
+  static const Key articleDetailsBackButtonKey =
+      Key('articleDetailsBackButtonKey');
+  static const Key articleDetailsBottomBackButtonKey =
+      Key('articleDetailsBottomBackButtonKey');
+
+  //============================================================
   //  Return By Item Page
   //============================================================
   static Key returnItem(String index) => Key('returnItem$index');

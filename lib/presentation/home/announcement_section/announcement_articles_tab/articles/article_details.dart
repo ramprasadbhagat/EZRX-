@@ -60,6 +60,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.articleDetailsPageKey,
       body: SafeArea(
         child: CustomScrollView(
           controller: _scrollController,
@@ -96,6 +97,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                   _isBackButtonEnableForAppbar
                       ? const SizedBox.shrink()
                       : IconButton(
+                          key: WidgetKeys.articleDetailsBackButtonKey,
                           onPressed: () => context.router.pop(),
                           icon: const CircleAvatar(
                             maxRadius: 16,
@@ -114,9 +116,11 @@ class _ArticleDetailsState extends State<ArticleDetails> {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(offSet),
                 child: AppBar(
+                  key: WidgetKeys.articleDetailsBottomAppBarKey,
                   automaticallyImplyLeading: false,
                   leading: _isBackButtonEnableForAppbar
                       ? IconButton(
+                          key: WidgetKeys.articleDetailsBottomBackButtonKey,
                           onPressed: () => context.router.pop(),
                           icon: const Icon(
                             Icons.arrow_back_ios_rounded,
