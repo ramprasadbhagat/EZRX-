@@ -17,33 +17,33 @@ class ProductDetailDto with _$ProductDetailDto {
   const ProductDetailDto._();
   factory ProductDetailDto({
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
+    required String materialDescription,
     @JsonKey(name: 'principalCode', defaultValue: '')
-        required String principalCode,
+    required String principalCode,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
     @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-        required String unitOfMeasurement,
+    required String unitOfMeasurement,
     @JsonKey(name: 'therapeuticClass', defaultValue: '')
-        required String therapeuticClass,
+    required String therapeuticClass,
     @JsonKey(name: 'genericMaterialName', defaultValue: '')
-        required String genericMaterialName,
+    required String genericMaterialName,
     @JsonKey(name: 'itemBrand', defaultValue: '') required String itemBrand,
     @JsonKey(name: 'materialBrand', defaultValue: '')
-        required String materialBrand,
+    required String materialBrand,
     @JsonKey(name: 'isFavourite', defaultValue: false)
-        required bool isFavourite,
+    required bool isFavourite,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-        required String defaultMaterialDescription,
+    required String defaultMaterialDescription,
     @JsonKey(name: 'country', defaultValue: '') required String country,
     @JsonKey(name: 'countryName', defaultValue: '') required String countryName,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-        required String governmentMaterialCode,
+    required String governmentMaterialCode,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-        required String itemRegistrationNumber,
+    required String itemRegistrationNumber,
   }) = _ProductDetailDto;
 
   MaterialInfo toDomain() => MaterialInfo(
@@ -51,7 +51,7 @@ class ProductDetailDto with _$ProductDetailDto {
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: governmentMaterialCode,
         hidePrice: false,
-        isFavourite: false,
+        isFavourite: isFavourite,
         itemBrand: itemBrand,
         itemRegistrationNumber: itemRegistrationNumber,
         materialDescription: materialDescription,

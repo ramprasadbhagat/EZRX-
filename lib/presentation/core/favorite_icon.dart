@@ -6,18 +6,21 @@ class FavouriteIcon extends StatelessWidget {
   final VisualDensity? visualDensity;
   final VoidCallback onTap;
   final BoxConstraints? constraints;
+  final bool enable;
   const FavouriteIcon({
     Key? key,
     required this.isFavourite,
     this.visualDensity,
     required this.onTap,
     this.constraints,
+    this.enable = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: onTap,
+      splashColor: enable ? ZPColors.transparent : ZPColors.lightGray,
+      onPressed: enable ? null : onTap,
       visualDensity: visualDensity,
       padding: EdgeInsets.zero,
       constraints: constraints,

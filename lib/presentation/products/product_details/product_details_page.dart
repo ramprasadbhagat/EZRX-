@@ -216,21 +216,28 @@ class _Description extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        FavouriteIcon(
-          key: WidgetKeys.materialDetailsFavouriteIcon,
-          isFavourite: materialInfo.isFavourite,
-          constraints: const BoxConstraints(),
-          onTap: () => context.read<ProductDetailBloc>().add(
-                materialInfo.isFavourite
-                    ? ProductDetailEvent.deleteFavourite(
-                        isForSimilarProduct: false,
-                        materialNumber: materialInfo.materialNumber,
-                      )
-                    : ProductDetailEvent.addFavourite(
-                        isForSimilarProduct: false,
-                        materialNumber: materialInfo.materialNumber,
-                      ),
-              ),
+        BlocBuilder<ProductDetailBloc, ProductDetailState>(
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching,
+          builder: (context, state) {
+            return FavouriteIcon(
+              enable: state.isFetching,
+              key: WidgetKeys.materialDetailsFavouriteIcon,
+              isFavourite: materialInfo.isFavourite,
+              constraints: const BoxConstraints(),
+              onTap: () => context.read<ProductDetailBloc>().add(
+                    materialInfo.isFavourite
+                        ? ProductDetailEvent.deleteFavourite(
+                            isForSimilarProduct: false,
+                            materialNumber: materialInfo.materialNumber,
+                          )
+                        : ProductDetailEvent.addFavourite(
+                            isForSimilarProduct: false,
+                            materialNumber: materialInfo.materialNumber,
+                          ),
+                  ),
+            );
+          },
         ),
       ],
     );
