@@ -26,6 +26,7 @@ mixin _$CartProductRequest {
   double get counterOfferPrice => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   String get counterOfferCurrency => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartProductRequestCopyWith<CartProductRequest> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $CartProductRequestCopyWith<$Res> {
       String parentID,
       double counterOfferPrice,
       String comment,
-      String counterOfferCurrency});
+      String counterOfferCurrency,
+      String type});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$CartProductRequestCopyWithImpl<$Res, $Val extends CartProductRequest>
     Object? counterOfferPrice = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -116,6 +119,10 @@ class _$CartProductRequestCopyWithImpl<$Res, $Val extends CartProductRequest>
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -138,7 +145,8 @@ abstract class _$$_CartProductRequestCopyWith<$Res>
       String parentID,
       double counterOfferPrice,
       String comment,
-      String counterOfferCurrency});
+      String counterOfferCurrency,
+      String type});
 }
 
 /// @nodoc
@@ -162,6 +170,7 @@ class __$$_CartProductRequestCopyWithImpl<$Res>
     Object? counterOfferPrice = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
+    Object? type = null,
   }) {
     return _then(_$_CartProductRequest(
       salesOrg: null == salesOrg
@@ -204,6 +213,10 @@ class __$$_CartProductRequestCopyWithImpl<$Res>
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -221,7 +234,8 @@ class _$_CartProductRequest extends _CartProductRequest {
       required this.parentID,
       required this.counterOfferPrice,
       required this.comment,
-      required this.counterOfferCurrency})
+      required this.counterOfferCurrency,
+      required this.type})
       : super._();
 
   @override
@@ -244,10 +258,12 @@ class _$_CartProductRequest extends _CartProductRequest {
   final String comment;
   @override
   final String counterOfferCurrency;
+  @override
+  final String type;
 
   @override
   String toString() {
-    return 'CartProductRequest(salesOrg: $salesOrg, customerCode: $customerCode, shipToId: $shipToId, productNumber: $productNumber, quantity: $quantity, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency)';
+    return 'CartProductRequest(salesOrg: $salesOrg, customerCode: $customerCode, shipToId: $shipToId, productNumber: $productNumber, quantity: $quantity, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type)';
   }
 
   @override
@@ -273,7 +289,8 @@ class _$_CartProductRequest extends _CartProductRequest {
                 other.counterOfferPrice == counterOfferPrice) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
-                other.counterOfferCurrency == counterOfferCurrency));
+                other.counterOfferCurrency == counterOfferCurrency) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
@@ -288,7 +305,8 @@ class _$_CartProductRequest extends _CartProductRequest {
       parentID,
       counterOfferPrice,
       comment,
-      counterOfferCurrency);
+      counterOfferCurrency,
+      type);
 
   @JsonKey(ignore: true)
   @override
@@ -309,7 +327,8 @@ abstract class _CartProductRequest extends CartProductRequest {
       required final String parentID,
       required final double counterOfferPrice,
       required final String comment,
-      required final String counterOfferCurrency}) = _$_CartProductRequest;
+      required final String counterOfferCurrency,
+      required final String type}) = _$_CartProductRequest;
   const _CartProductRequest._() : super._();
 
   @override
@@ -332,6 +351,8 @@ abstract class _CartProductRequest extends CartProductRequest {
   String get comment;
   @override
   String get counterOfferCurrency;
+  @override
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductRequestCopyWith<_$_CartProductRequest> get copyWith =>

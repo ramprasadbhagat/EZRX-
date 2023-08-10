@@ -58,7 +58,9 @@ class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
         if (priceAggregate.price.isPriceOverride)
           ValueOverrideDto.fromDomain(
             ValueOverride.empty().copyWith(
-              price: priceAggregate.price.finalPrice.getOrDefaultValue(0),
+              price: priceAggregate.materialInfo.type.typeBundle
+                  ? priceAggregate.bundle.currentBundleInfo.rate
+                  : priceAggregate.price.finalPrice.getOrDefaultValue(0),
               currency: priceAggregate.salesOrgConfig.currency,
             ),
           ),

@@ -475,6 +475,20 @@ SubmitOrderCustomer _getSubmitOrderCustomer({
 
 List<SubmitMaterialInfo> _getMaterialInfoList({
   required List<PriceAggregate> cartProducts,
-}) {
-  return cartProducts.map((e) => e.toSubmitMaterialInfo()).toList();
-}
+}) =>
+    cartProducts
+        .expand(
+          (element) => !element.materialInfo.type.typeBundle
+              ? [element.toSubmitMaterialInfo()]
+              : element.bundle.materials.map(
+                  (el) => PriceAggregate.empty()
+                      .copyWith(
+                        materialInfo: el,
+                        quantity: el.quantity,
+                        salesOrgConfig: element.salesOrgConfig,
+                        bundle: element.bundle,
+                      )
+                      .toSubmitMaterialInfo(),
+                ),
+        )
+        .toList();

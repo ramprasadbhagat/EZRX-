@@ -188,24 +188,20 @@ class CartState with _$CartState {
         0;
   }
 
-  double get totalMaterialsPrice => cartProducts.fold(
+  double get totalMaterialsPrice => cartProducts
+      .where((element) => !element.materialInfo.type.typeBundle)
+      .fold(
         0,
         (previousValue, element) =>
             previousValue +
             (element.price.finalPrice.getValue() * element.quantity),
       );
 
-  double get totalPriceWithTax => cartProducts.fold(
-        0,
-        (previousValue, element) =>
-            previousValue +
-            (element.price.finalPrice.getValue() *
-                element.quantity *
-                (100 + element.salesOrgConfig.vatValue) /
-                100),
-      );
+  double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
 
-  double get tax => cartProducts.fold(
+  double get taxMaterial => cartProducts
+      .where((element) => !element.materialInfo.type.typeBundle)
+      .fold(
         0,
         (previousValue, element) =>
             previousValue +
@@ -265,5 +261,30 @@ class CartState with _$CartState {
             itemBundlePrice(bundleCode: element.bundle.bundleCode),
       );
 
+  double get taxBundle => cartProducts
+      .where((element) => element.materialInfo.type.typeBundle)
+      .fold(
+        0,
+        (previousValue, element) =>
+            previousValue +
+            (itemBundlePrice(bundleCode: element.bundle.bundleCode) *
+                element.salesOrgConfig.vatValue /
+                100),
+      );
+
+  double get totalBundlePriceWithTax => totalBundlesPrice + taxBundle;
+
+  double get totalTax => taxMaterial + taxBundle;
+
   double get totalPrice => totalMaterialsPrice + totalBundlesPrice;
+
+  double get totalPriceWithTax =>
+      totalMaterialPriceWithTax + totalBundlePriceWithTax;
+
+  int get totalItems => cartProducts.fold(
+        0,
+        (previousValue, element) => !element.materialInfo.type.typeBundle
+            ? previousValue + 1
+            : previousValue + element.bundle.materials.length,
+      );
 }

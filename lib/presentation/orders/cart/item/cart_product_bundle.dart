@@ -406,7 +406,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               minusPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
               addPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
               onSubmit: (value) => _callCartUpsertItemsEvent(quantity: value),
-              isLoading: context.read<CartBloc>().state.isUpserting,
+              isLoading: context.read<CartBloc>().state.isUpserting &&
+                  widget.cartItem.quantity.toString() != _controller.text,
               minimumQty: totalQuantityOfProductBundle >
                       (widget.bundle.bundleInformation.firstOrNull?.quantity ??
                           1)

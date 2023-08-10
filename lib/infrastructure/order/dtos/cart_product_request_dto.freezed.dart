@@ -43,6 +43,8 @@ mixin _$CartProductRequestDto {
   String get comment => throw _privateConstructorUsedError;
   @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
   String get counterOfferCurrency => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -78,7 +80,9 @@ abstract class $CartProductRequestDtoCopyWith<$Res> {
       @JsonKey(name: 'Comment', defaultValue: '')
           String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          String counterOfferCurrency});
+          String counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '')
+          String type});
 }
 
 /// @nodoc
@@ -106,6 +110,7 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
     Object? counterOfferPrice = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -152,6 +157,10 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -186,7 +195,9 @@ abstract class _$$_CartProductRequestDtoCopyWith<$Res>
       @JsonKey(name: 'Comment', defaultValue: '')
           String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          String counterOfferCurrency});
+          String counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '')
+          String type});
 }
 
 /// @nodoc
@@ -211,6 +222,7 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
     Object? counterOfferPrice = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
+    Object? type = null,
   }) {
     return _then(_$_CartProductRequestDto(
       salesOrg: null == salesOrg
@@ -257,6 +269,10 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -286,7 +302,9 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       @JsonKey(name: 'Comment', defaultValue: '')
           required this.comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          required this.counterOfferCurrency})
+          required this.counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '')
+          required this.type})
       : super._();
 
   factory _$_CartProductRequestDto.fromJson(Map<String, dynamic> json) =>
@@ -325,10 +343,13 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
   @override
   @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
   final String counterOfferCurrency;
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  final String type;
 
   @override
   String toString() {
-    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency)';
+    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type)';
   }
 
   @override
@@ -355,7 +376,8 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
                 other.counterOfferPrice == counterOfferPrice) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
-                other.counterOfferCurrency == counterOfferCurrency));
+                other.counterOfferCurrency == counterOfferCurrency) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
@@ -372,7 +394,8 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       parentID,
       counterOfferPrice,
       comment,
-      counterOfferCurrency);
+      counterOfferCurrency,
+      type);
 
   @JsonKey(ignore: true)
   @override
@@ -391,29 +414,30 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
 
 abstract class _CartProductRequestDto extends CartProductRequestDto {
   const factory _CartProductRequestDto(
-          {@JsonKey(name: 'SalesOrg', defaultValue: '')
-              required final String salesOrg,
-          @JsonKey(name: 'CustomerCode', defaultValue: '')
-              required final String customerCode,
-          @JsonKey(name: 'ShipToID', defaultValue: '')
-              required final String shipTo,
-          @JsonKey(name: 'ProductID', defaultValue: '')
-              required final String productNumber,
-          @JsonKey(name: 'Quantity', defaultValue: 0)
-              required final int quantity,
-          @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
-              required final String itemSource,
-          @JsonKey(name: 'Language', defaultValue: 'EN')
-              required final String language,
-          @JsonKey(name: 'ParentID', defaultValue: '')
-              required final String parentID,
-          @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
-              required final double counterOfferPrice,
-          @JsonKey(name: 'Comment', defaultValue: '')
-              required final String comment,
-          @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-              required final String counterOfferCurrency}) =
-      _$_CartProductRequestDto;
+      {@JsonKey(name: 'SalesOrg', defaultValue: '')
+          required final String salesOrg,
+      @JsonKey(name: 'CustomerCode', defaultValue: '')
+          required final String customerCode,
+      @JsonKey(name: 'ShipToID', defaultValue: '')
+          required final String shipTo,
+      @JsonKey(name: 'ProductID', defaultValue: '')
+          required final String productNumber,
+      @JsonKey(name: 'Quantity', defaultValue: 0)
+          required final int quantity,
+      @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
+          required final String itemSource,
+      @JsonKey(name: 'Language', defaultValue: 'EN')
+          required final String language,
+      @JsonKey(name: 'ParentID', defaultValue: '')
+          required final String parentID,
+      @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
+          required final double counterOfferPrice,
+      @JsonKey(name: 'Comment', defaultValue: '')
+          required final String comment,
+      @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
+          required final String counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '')
+          required final String type}) = _$_CartProductRequestDto;
   const _CartProductRequestDto._() : super._();
 
   factory _CartProductRequestDto.fromJson(Map<String, dynamic> json) =
@@ -452,6 +476,9 @@ abstract class _CartProductRequestDto extends CartProductRequestDto {
   @override
   @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
   String get counterOfferCurrency;
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductRequestDtoCopyWith<_$_CartProductRequestDto> get copyWith =>

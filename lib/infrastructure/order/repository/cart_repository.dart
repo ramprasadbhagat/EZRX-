@@ -1053,6 +1053,7 @@ class CartRepository implements ICartRepository {
             counterOfferDetails.counterOfferPrice.counterOfferValue,
         counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
         comment: counterOfferDetails.comment.getOrDefaultValue(''),
+        type: materialInfo.type.getValue(),
       );
 
       final productList = await cartRemoteDataSource.upsertCart(

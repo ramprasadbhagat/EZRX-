@@ -841,6 +841,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 price: priceAggregate.price,
                 addedBonusList: priceAggregate.addedBonusList,
                 bundle: priceAggregate.bundle,
+                salesOrgConfig: e.salesOrganisationConfigs,
               );
             }
             add(
@@ -932,6 +933,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
                 price: priceAggregate.price,
                 addedBonusList: priceAggregate.addedBonusList,
+                salesOrgConfig: e.salesOrganisationConfigs,
               );
             }
             emit(

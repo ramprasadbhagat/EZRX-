@@ -25,6 +25,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
     @JsonKey(name: 'Comment', defaultValue: '') required String comment,
     @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
         required String counterOfferCurrency,
+    @JsonKey(name: 'Type', defaultValue: '') required String type,
   }) = _CartProductRequestDto;
 
   factory CartProductRequestDto.fromDomain(
@@ -42,6 +43,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       counterOfferPrice: cartProductRequest.counterOfferPrice,
       comment: cartProductRequest.comment,
       counterOfferCurrency: cartProductRequest.counterOfferCurrency,
+      type: cartProductRequest.type,
     );
   }
 
@@ -57,6 +59,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       counterOfferPrice: counterOfferPrice,
       comment: comment,
       counterOfferCurrency: counterOfferCurrency,
+      type: type,
     );
   }
 

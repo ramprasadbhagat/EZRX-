@@ -89,7 +89,8 @@ class PriceAggregate with _$PriceAggregate {
   bool get didPriceOrBonusOverride =>
       price.priceOverride.isValid() ||
       anyDealBonusOverride ||
-      additionalBonusOverride;
+      additionalBonusOverride ||
+      materialInfo.type.typeBundle;
 
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
@@ -111,11 +112,13 @@ class PriceAggregate with _$PriceAggregate {
           ),
         ),
       ).toDomain(),
-      price: price.finalPrice.getValue(),
-
-      ///Todo: revisit
-      productType: 'MATERIAL',
-      parentID: materialInfo.parentID,
+      price: materialInfo.type.typeBundle
+          ? bundle.currentBundleInfo.rate
+          : price.finalPrice.getValue(),
+      productType: materialInfo.type.getValue().toUpperCase(),
+      parentID: materialInfo.type.typeBundle
+          ? bundle.bundleCode
+          : materialInfo.parentID,
     );
   }
 

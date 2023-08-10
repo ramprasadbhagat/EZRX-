@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_item.dart';
@@ -36,6 +37,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
     DeliveryInfoLabel.mobileNumber: FocusNode(),
     DeliveryInfoLabel.paymentTerm: FocusNode(),
   };
+
+  late CartState cartState;
+
+  @override
+  void initState() {
+    cartState = context.read<CartBloc>().state;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -77,17 +86,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
       body: CustomScrollView(
         slivers: [
           const _SummaryInfo(),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 32.0,
-            ),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
           DeliveryInfo(focusNodes: _focusNodes),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 24.0,
-            ),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
           const SliverToBoxAdapter(
             child: Divider(
               indent: 0,
@@ -97,17 +98,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               color: ZPColors.extraLightGrey2,
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 32.0,
-            ),
-          ),
-          const _ManufactureScrollList(),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 8.0,
-            ),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
+          const SliverToBoxAdapter(child: _TotalItems()),
+          const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+          _ManufactureScrollList(cartState: cartState),
+          const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
         ],
       ),
       bottomNavigationBar: Column(
@@ -120,54 +115,43 @@ class _CheckoutPageState extends State<CheckoutPage> {
             height: 1,
             color: ZPColors.extraLightGrey2,
           ),
-          BlocBuilder<CartBloc, CartState>(
-            builder: (context, state) {
-              return ListTile(
-                onTap: () {
-                  _showOrderSumary(context);
-                },
-                dense: true,
-                visualDensity: VisualDensity.compact,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
+          ListTile(
+            onTap: () => _showOrderSumary(context, cartState),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+            title: Text(
+              '${cartState.totalItems} items',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price: cartState.totalPriceWithTax.toString(),
+                  title: 'Grand Total: '.tr(),
+                  priceLabelStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.extraLightGrey4,
+                          ),
+                  currencyCodeTextStyle:
+                      Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: ZPColors.primary,
+                          ),
+                  priceTextStyle:
+                      Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.primary,
+                          ),
                 ),
-                title: Text(
-                  '${state.cartProducts.length} items',
-                  style: Theme.of(context).textTheme.titleSmall,
+                const SizedBox(width: 8),
+                const Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  size: 16,
+                  color: ZPColors.neutralsBlack,
                 ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PriceComponent(
-                      salesOrgConfig:
-                          context.read<SalesOrgBloc>().state.configs,
-                      price: state.totalPriceWithTax.toString(),
-                      title: 'Grand Total: '.tr(),
-                      priceLabelStyle:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: ZPColors.extraLightGrey4,
-                              ),
-                      currencyCodeTextStyle:
-                          Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: ZPColors.primary,
-                              ),
-                      priceTextStyle:
-                          Theme.of(context).textTheme.labelMedium?.copyWith(
-                                color: ZPColors.primary,
-                              ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 16,
-                      color: ZPColors.neutralsBlack,
-                    ),
-                  ],
-                ),
-              );
-            },
+              ],
+            ),
           ),
           SafeArea(
             child: Container(
@@ -272,7 +256,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  void _showOrderSumary(BuildContext context) {
+  void _showOrderSumary(BuildContext context, CartState cartState) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -282,21 +266,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
         return Wrap(
           children: [
             Padding(
-              padding: const EdgeInsets.all(
-                20,
-              ),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  const _OrderSummary(),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  _OrderSummary(cartState: cartState),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        context.router.pop();
-                      },
+                      onPressed: () => context.router.pop(),
                       child: Text(
                         'Close'.tr(),
                         style:
@@ -335,9 +313,7 @@ class _SummaryInfo extends StatelessWidget {
                     color: ZPColors.white,
                   ),
             ),
-            const SizedBox(
-              height: 16.0,
-            ),
+            const SizedBox(height: 16.0),
             Text(
               'Customer Code: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}'
                   .tr(),
@@ -345,9 +321,7 @@ class _SummaryInfo extends StatelessWidget {
                     color: ZPColors.white,
                   ),
             ),
-            const SizedBox(
-              height: 8.0,
-            ),
+            const SizedBox(height: 8.0),
             Text(
               context
                   .read<CustomerCodeBloc>()
@@ -358,18 +332,14 @@ class _SummaryInfo extends StatelessWidget {
                     color: ZPColors.white,
                   ),
             ),
-            const SizedBox(
-              height: 16.0,
-            ),
+            const SizedBox(height: 16.0),
             Text(
               'Deliver to: ${context.read<CustomerCodeBloc>().state.shipToInfo.shipToCustomerCode}',
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: ZPColors.white,
                   ),
             ),
-            const SizedBox(
-              height: 8.0,
-            ),
+            const SizedBox(height: 8.0),
             Text(
               context.read<CustomerCodeBloc>().state.shipToInfo.deliveryAddress,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -384,42 +354,44 @@ class _SummaryInfo extends StatelessWidget {
 }
 
 class _ManufactureScrollList extends StatelessWidget {
-  const _ManufactureScrollList({Key? key}) : super(key: key);
+  final CartState cartState;
+  const _ManufactureScrollList({Key? key, required this.cartState})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      builder: (context, state) {
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  index == 0 ||
-                          state.cartProducts[index].materialInfo.principalData
-                                  .principalName
-                                  .getValue() !=
-                              state.cartProducts[index - 1].materialInfo
-                                  .principalData.principalName
-                                  .getValue()
-                      ? _TitleScrollList(
-                          cartProduct: state.cartProducts[index].materialInfo,
-                        )
-                      : const SizedBox.shrink(),
-                  CheckoutProductItem(cartItem: state.cartProducts[index]),
-                  state.cartProducts[index].addedBonusList.isNotEmpty
-                      ? CheckoutProductBonusItem(
-                          cartItem: state.cartProducts[index],
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              );
-            },
-            childCount: state.cartProducts.length, // 1000 list items
-          ),
-        );
-      },
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              index == 0 ||
+                      cartState.cartProducts[index].materialInfo.principalData
+                              .principalName
+                              .getValue() !=
+                          cartState.cartProducts[index - 1].materialInfo
+                              .principalData.principalName
+                              .getValue()
+                  ? _TitleScrollList(
+                      cartProduct: cartState.cartProducts[index].materialInfo,
+                    )
+                  : const SizedBox.shrink(),
+              cartState.cartProducts[index].materialInfo.type.typeBundle
+                  ? CheckoutBundleItem(cartItem: cartState.cartProducts[index])
+                  : CheckoutProductItem(
+                      cartItem: cartState.cartProducts[index],
+                    ),
+              cartState.cartProducts[index].addedBonusList.isNotEmpty
+                  ? CheckoutProductBonusItem(
+                      cartItem: cartState.cartProducts[index],
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          );
+        },
+        childCount: cartState.cartProducts.length, // 1000 list items
+      ),
     );
   }
 }
@@ -444,179 +416,207 @@ class _TitleScrollList extends StatelessWidget {
 }
 
 class _OrderSummary extends StatelessWidget {
-  const _OrderSummary({Key? key}) : super(key: key);
+  final CartState cartState;
+  const _OrderSummary({Key? key, required this.cartState}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Order summary'.tr(),
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(height: 24.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Order summary'.tr(),
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              'Subtotal (excl.tax):'.tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            const SizedBox(height: 24.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Subtotal (excl.tax):'.tr(),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-                Text(
-                  'MRY ${state.totalPrice.toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${'Tax at'.tr()}${context.read<SalesOrgBloc>().state.configs.vatValue}%',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
-                    ),
-                    Text(
-                      'MYR ${state.tax.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
-                    ),
-                  ],
-                ),
-                // Text(
-                //   'Applies to materials with full tax'.tr(),
-                //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                //         color: ZPColors.neutralsBlack,
-                //         fontSize: 10,
-                //       ),
-                // )
-              ],
-            ),
-            const SizedBox(height: 8.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Stamp duty:'.tr(),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-                Text(
-                  'MYR 0'.tr(),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Small order fee'.tr(),
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
-                    ),
-
-                    ///ToDo: hard code
-                    Text(
-                      'MYR 0',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
-                    ),
-                  ],
-                ),
-                // Text(
-                //   'Applies to orders less than MYR 2,000,000.00'.tr(),
-                //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                //         color: ZPColors.neutralsBlack,
-                //         fontSize: 10,
-                //       ),
-                // ),
-              ],
-            ),
-            const SizedBox(height: 4.0),
-            const Divider(
-              thickness: 1,
-              color: ZPColors.extraLightGrey3,
-              indent: 0,
-              endIndent: 0,
-            ),
-            const SizedBox(height: 8.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Grand Total: '.tr(),
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-                RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'MYR ',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: ZPColors.neutralsBlack,
-                                ),
-                      ),
-                      TextSpan(
-                        text: (state.totalPriceWithTax).toStringAsFixed(2),
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: ZPColors.neutralsBlack,
-                                ),
-                      ),
-                    ],
+            Text(
+              'MRY ${cartState.totalPrice.toStringAsFixed(2)}',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Total savings:'.tr(),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-                Text(
-                  'MYR 0'.tr(),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-              ],
             ),
           ],
-        );
-      },
+        ),
+        const SizedBox(height: 8.0),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${'Tax at '.tr()}${context.read<SalesOrgBloc>().state.configs.vatValue}%',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+                ),
+                PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price: cartState.totalTax.toString(),
+                  priceTextStyle:
+                      Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ZPColors.neutralsBlack,
+                          ),
+                  currencyCodeTextStyle:
+                      Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ZPColors.neutralsBlack,
+                          ),
+                ),
+              ],
+            ),
+            // Text(
+            //   'Applies to materials with full tax'.tr(),
+            //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            //         color: ZPColors.neutralsBlack,
+            //         fontSize: 10,
+            //       ),
+            // )
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Stamp duty:'.tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              price: 0.toString(),
+              priceTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+              currencyCodeTextStyle:
+                  Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Small order fee'.tr(),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+                ),
+
+                ///ToDo: hard code
+                PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price: 0.toString(),
+                  priceTextStyle:
+                      Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ZPColors.neutralsBlack,
+                          ),
+                  currencyCodeTextStyle:
+                      Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ZPColors.neutralsBlack,
+                          ),
+                ),
+              ],
+            ),
+            // Text(
+            //   'Applies to orders less than MYR 2,000,000.00'.tr(),
+            //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            //         color: ZPColors.neutralsBlack,
+            //         fontSize: 10,
+            //       ),
+            // ),
+          ],
+        ),
+        const SizedBox(height: 4.0),
+        const Divider(
+          thickness: 1,
+          color: ZPColors.extraLightGrey3,
+          indent: 0,
+          endIndent: 0,
+        ),
+        const SizedBox(height: 8.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Grand Total: '.tr(),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              price: cartState.totalPriceWithTax.toString(),
+              priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+              currencyCodeTextStyle:
+                  Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Total savings:'.tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              price: 0.toString(),
+              priceTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+              currencyCodeTextStyle:
+                  Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _TotalItems extends StatelessWidget {
+  const _TotalItems({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Text(
+        '${'Your items '.tr()}(${context.read<CartBloc>().state.totalItems})',
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(color: ZPColors.neutralsBlack),
+      ),
     );
   }
 }

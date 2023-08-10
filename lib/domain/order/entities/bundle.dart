@@ -45,4 +45,16 @@ class Bundle with _$Bundle {
             '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}',
       )
       .toList();
+
+  BundleInfo get currentBundleInfo {
+    final totalMaterial = materials.fold(
+      0,
+      (int previousValue, element) => previousValue + element.quantity,
+    );
+
+    return sortedBundleInformation.lastWhere(
+      (bundleInfo) => totalMaterial >= bundleInfo.quantity,
+      orElse: () => BundleInfo.empty(),
+    );
+  }
 }

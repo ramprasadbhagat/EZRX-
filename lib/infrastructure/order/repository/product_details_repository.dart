@@ -55,6 +55,7 @@ class ProductDetailRepository implements IProductDetailRepository {
               materialNumber: materialNumber,
               salesOrganisation: salesOrganisation,
               shipToInfo: shipToInfo,
+              type: type,
             )
           : await getMaterialDetail(
               customerCodeInfo: customerCodeInfo,
@@ -62,6 +63,7 @@ class ProductDetailRepository implements IProductDetailRepository {
               materialNumber: materialNumber,
               salesOrganisation: salesOrganisation,
               shipToInfo: shipToInfo,
+              type: type,
             );
 
   @override
@@ -71,6 +73,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
+    required MaterialInfoType type,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -92,7 +95,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );
 
-      return Right(productDetail);
+      return Right(productDetail.copyWith(type: type));
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -105,6 +108,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
+    required MaterialInfoType type,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -123,7 +127,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           customerCode: customerCodeInfo.customerCodeSoldTo,
           shipToCode: shipToInfo.shipToCustomerCode,
-          type: 'bundle',
+          type: type.getValue(),
         );
 
         return Right(

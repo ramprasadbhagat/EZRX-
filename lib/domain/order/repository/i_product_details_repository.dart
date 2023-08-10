@@ -25,6 +25,7 @@ abstract class IProductDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
+    required MaterialInfoType type,
   });
 
   Future<Either<ApiFailure, MaterialInfo>> getBundleDetail({
@@ -33,6 +34,7 @@ abstract class IProductDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
+    required MaterialInfoType type,
   });
 
   Future<Either<ApiFailure, StockInfo>> getStockInfo({

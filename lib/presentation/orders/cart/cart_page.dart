@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
@@ -118,7 +119,8 @@ class _CartPageState extends State<CartPage> {
           }
           state.apiFailureOrSuccessOption.fold(
             () {
-              if (!state.isUpserting || !state.isClearing) {
+              if ((!state.isUpserting || !state.isClearing) &&
+                  context.router.current.path == 'orders/cart') {
                 CustomSnackBar(
                   messageText: 'Item has been removed from cart.'.tr(),
                 ).show(context);
@@ -325,27 +327,22 @@ class _CheckoutSection extends StatelessWidget {
                 '${state.cartProducts.length} items',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              trailing: RichText(
-                text: TextSpan(
-                  text: 'Grand total: ',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.extraLightGrey4,
-                      ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'MYR ',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
-                    ),
-                    TextSpan(
-                      text: state.totalPrice.toStringAsFixed(2),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
-                    ),
-                  ],
-                ),
+              trailing: PriceComponent(
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: state.totalPrice.toString(),
+                title: 'Grand total: '.tr(),
+                priceLabelStyle:
+                    Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: ZPColors.extraLightGrey4,
+                        ),
+                currencyCodeTextStyle:
+                    Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: ZPColors.primary,
+                        ),
+                priceTextStyle:
+                    Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.primary,
+                        ),
               ),
             ),
             SafeArea(
