@@ -334,19 +334,22 @@ class _TextFormFieldState extends State<_TextFormField> {
   }) {
     switch (label) {
       case DeliveryInfoLabel.poReference:
-        return context
-            .read<AdditionalDetailsBloc>()
-            .state
-            .deliveryInfoData
-            .poReference
-            .value
-            .fold(
-              (f) => f.maybeMap(
-                empty: (_) => 'PO reference is a required field.'.tr(),
-                orElse: () => null,
-              ),
-              (_) => null,
-            );
+        return context.read<SalesOrgBloc>().state.configs.poNumberRequired
+            ? context
+                .read<AdditionalDetailsBloc>()
+                .state
+                .deliveryInfoData
+                .poReference
+                .value
+                .fold(
+                  (f) => f.maybeMap(
+                    empty: (_) => 'PO reference is a required field.'.tr(),
+                    orElse: () => null,
+                  ),
+                  (_) => null,
+                )
+            : null;
+
       case DeliveryInfoLabel.contactPerson:
         return context
             .read<AdditionalDetailsBloc>()

@@ -145,8 +145,10 @@ class AdditionalDetailsBloc
         showErrorMessages: false,
       ),
     );
-    final isCustomerPoReferenceValid =
-        state.deliveryInfoData.poReference.isValid();
+    final isCustomerPoReferenceValid = config.poNumberRequired
+        ? state.deliveryInfoData.poReference.isValid()
+        : true;
+
     final isReferenceNoteValid = config.enableReferenceNote
         ? state.deliveryInfoData.referenceNote.isValid()
         : true;
