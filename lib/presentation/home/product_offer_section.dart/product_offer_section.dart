@@ -132,7 +132,12 @@ class ProductsOnOffer extends StatelessWidget {
               previous.isFetching != current.isFetching,
           builder: (context, state) {
             return state.isFetching
-                ? const _ProductOnOfferLoadingShimmer()
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
+                    ),
+                  )
                 : _BodyContent(ctx: ctx);
           },
         ),
@@ -369,25 +374,6 @@ class _PriceLabel extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         );
       },
-    );
-  }
-}
-
-class _ProductOnOfferLoadingShimmer extends StatelessWidget {
-  const _ProductOnOfferLoadingShimmer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: LoadingShimmer.withChild(
-        child: const SizedBox(
-          height: 150,
-          child: CustomCard(
-            child: ListTile(),
-          ),
-        ),
-      ),
     );
   }
 }

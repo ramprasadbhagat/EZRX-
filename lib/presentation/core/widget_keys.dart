@@ -219,6 +219,9 @@ class WidgetKeys {
   static const Key loadMoreLoader = Key('loadIndicator');
   static const Key noRecordsFoundSearchIcon = Key('noRecordsFoundSearchIcon');
   static const Key loaderImage = Key('loaderImage');
+  static const Key bundleSectionLoaderImage = Key('bundleSectionLoaderImage');
+  static const Key recentOrderSectionLoaderImage =
+      Key('recentOrderSectionLoaderImage');
   static const Key loader = Key('loader');
   static const Key webview = Key('webview');
   static Key balanceTextRow(String keyText, String valueText) =>

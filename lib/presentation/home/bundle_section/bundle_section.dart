@@ -16,6 +16,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class BundleSection extends StatelessWidget {
   const BundleSection({
     Key? key,
@@ -64,7 +66,12 @@ class BundleSection extends StatelessWidget {
                         ),
                       ),
                       state.isFetching
-                          ? const _BundleSectionLoadingShimmer()
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: LoadingShimmer.logo(
+                                key: WidgetKeys.bundleSectionLoaderImage,
+                              ),
+                            )
                           : SizedBox(
                               height: 220,
                               child: ListView(
@@ -221,34 +228,5 @@ class _BundleSectionItem extends StatelessWidget {
           ),
         );
     context.router.pushNamed('orders/bundle_detail_page');
-  }
-}
-
-class _BundleSectionLoadingShimmer extends StatelessWidget {
-  const _BundleSectionLoadingShimmer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: LoadingShimmer.withChild(
-        child: SizedBox(
-          height: 220,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(
-              4,
-              (index) => CustomCard(
-                margin: const EdgeInsets.all(10),
-                width: Responsive.isMobile(context)
-                    ? MediaQuery.of(context).size.width * 0.85
-                    : MediaQuery.of(context).size.width * 0.4,
-                child: const ListTile(),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

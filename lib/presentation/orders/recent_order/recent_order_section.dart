@@ -38,7 +38,12 @@ class RecentOrdersSection extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return state.isFetching
-            ? const _RecentOrderLoadingShimmer()
+            ? Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: LoadingShimmer.logo(
+                  key: WidgetKeys.recentOrderSectionLoaderImage,
+                ),
+              )
             : const _BodyContent();
       },
     );
@@ -243,25 +248,6 @@ class _PriceLabel extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         );
       },
-    );
-  }
-}
-
-class _RecentOrderLoadingShimmer extends StatelessWidget {
-  const _RecentOrderLoadingShimmer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: LoadingShimmer.withChild(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.13,
-          child: const CustomCard(
-            child: ListTile(),
-          ),
-        ),
-      ),
     );
   }
 }
