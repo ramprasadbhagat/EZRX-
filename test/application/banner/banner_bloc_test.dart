@@ -77,14 +77,6 @@ void main() {
       ),
       setUp: () {
         when(
-          () => mockBannerRepository.getBanner(
-            isPreSalesOrg: false,
-            salesOrganisation: mockSalesOrganisation,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('mock-error')),
-        );
-        when(
           () => mockBannerRepository.getEZReachBanner(
             salesOrganisation: mockSalesOrganisation,
             country: country,
@@ -122,14 +114,6 @@ void main() {
       ),
       setUp: () {
         when(
-          () => mockBannerRepository.getBanner(
-            isPreSalesOrg: false,
-            salesOrganisation: salesOrganisation2601,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right([BannerItem.empty()]),
-        );
-        when(
           () => mockBannerRepository.getEZReachBanner(
             salesOrganisation: salesOrganisation2601,
             country: country,
@@ -154,7 +138,6 @@ void main() {
       expect: () => [
         BannerState.initial().copyWith(
           banner: [
-            BannerItem.empty(),
             BannerItem.empty(),
           ],
           bannerFailureOrSuccessOption: none(),
@@ -169,14 +152,6 @@ void main() {
       ),
       setUp: () {
         when(
-          () => mockBannerRepository.getBanner(
-            isPreSalesOrg: false,
-            salesOrganisation: mockSalesOrganisation,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right([BannerItem.empty()]),
-        );
-        when(
           () => mockBannerRepository.getEZReachBanner(
             salesOrganisation: mockSalesOrganisation,
             country: country,
@@ -201,7 +176,6 @@ void main() {
       expect: () => [
         BannerState.initial().copyWith(
           banner: [
-            BannerItem.empty(),
             BannerItem.empty(),
           ],
         )

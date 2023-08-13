@@ -22,32 +22,6 @@ class BannerRepository implements IBannerRepository {
   });
 
   @override
-  Future<Either<ApiFailure, List<BannerItem>>> getBanner({
-    required bool isPreSalesOrg,
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final banners = await localDataSource.getBanners();
-
-        return Right(banners);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-    try {
-      final banners = await remoteDataSource.getBanners(
-        isPreSalesOrg: isPreSalesOrg,
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-      );
-
-      return Right(banners);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
   Future<Either<ApiFailure, List<BannerItem>>> getEZReachBanner({
     required SalesOrganisation salesOrganisation,
     required String country,

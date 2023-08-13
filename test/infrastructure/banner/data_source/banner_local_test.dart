@@ -19,11 +19,17 @@ void main() {
   group('Banners Local', () {
     test('Get Banners Test', () async {
       final res = json.decode(
-        await rootBundle.loadString('assets/json/getBannersResponse.json'),
+        await rootBundle
+            .loadString('assets/json/getEZReachBannerResponse.json'),
       );
-      final result = await localDataSource.getBanners();
+      final result = await localDataSource.getEZReachBanners(
+        bannerType: 'banner_carousel',
+      );
 
-      expect(result.length, List.from(res['data']['getBanners']).length);
+      expect(
+        result.length,
+        List.from(res['data']['getLiveCampaigns']['data']).length,
+      );
     });
   });
 }

@@ -30,49 +30,21 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
           bannerType: e.bannerType,
         );
 
-        //Fetch eZRx Banner
-        final eZRxFailureOrSuccess = await bannerRepository.getBanner(
-          isPreSalesOrg: e.isPreSalesOrg,
-          salesOrganisation: e.salesOrganisation,
-        );
-
         eZReachFailureOrSuccess.fold(
           //eZReach Banner failed
-          (failure) {
-            eZRxFailureOrSuccess.fold(
-              (failure) => emit(
-                state.copyWith(
-                  banner: [BannerItem.empty()], //Both banners failed
-                  bannerFailureOrSuccessOption: optionOf(eZRxFailureOrSuccess),
-                ),
-              ),
-              (eZRxBannerList) => emit(
-                state.copyWith(
-                  banner: eZRxBannerList, // Only eZRx banner success
-                  bannerFailureOrSuccessOption: none(),
-                ),
-              ),
-            );
-          },
-
+          (failure) => emit(
+            state.copyWith(
+              banner: [BannerItem.empty()],
+              bannerFailureOrSuccessOption: optionOf(eZReachFailureOrSuccess),
+            ),
+          ),
           //eZReach Banner success
-          (eZReachBannerList) {
-            eZRxFailureOrSuccess.fold(
-              (failure) => emit(
-                state.copyWith(
-                  banner: eZReachBannerList, // Only eZReach banner success
-                  bannerFailureOrSuccessOption: none(),
-                ),
-              ),
-              (eZRxBannerList) => emit(
-                state.copyWith(
-                  banner:
-                      eZReachBannerList + eZRxBannerList, // Both banner success
-                  bannerFailureOrSuccessOption: none(),
-                ),
-              ),
-            );
-          },
+          (eZReachBannerList) => emit(
+            state.copyWith(
+              banner: eZReachBannerList, // Only eZReach banner success
+              bannerFailureOrSuccessOption: none(),
+            ),
+          ),
         );
       },
     );
