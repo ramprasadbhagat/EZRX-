@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
@@ -124,6 +125,14 @@ class _UsernameField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Enter username'.tr(),
             ),
+            inputFormatters: [
+              TextInputFormatter.withFunction(
+                (oldValue, newValue) => TextEditingValue(
+                  text: newValue.text.toLowerCase(),
+                  selection: newValue.selection,
+                ),
+              ),
+            ],
             controller: controller,
             validator: (text) => Username(text ?? '').value.fold(
                   (f) => f.mapOrNull(

@@ -159,6 +159,31 @@ void main() {
 
         expect(find.text('Username cannot be empty.'), findsNothing);
       });
+      testWidgets('Username should not contain Capital letters',
+          (tester) async {
+        final expectedStates = [
+          ForgotPasswordState.initial().copyWith(
+            username: Username('ezrxtest05'),
+            showErrorMessages: false,
+            isSubmitting: false,
+          ),
+        ];
+        when(() => forgotPasswordBlocMock.state).thenReturn(
+          ForgotPasswordState.initial().copyWith(
+            username: Username('ezrxtest05'),
+            showErrorMessages: true,
+            isSubmitting: true,
+          ),
+        );
+        whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final usernameFinder = find.byKey(WidgetKeys.forgotUsernameField);
+        expect(usernameFinder, findsOneWidget);
+        await tester.enterText(usernameFinder, 'EZRXtest05');
+        await tester.pumpAndSettle();
+        expect(find.text('ezrxtest05'), findsOneWidget);
+      });
     });
 
     group(' -> navigates to forgot password confirmation page', () {
