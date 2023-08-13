@@ -1,8 +1,13 @@
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 double totalPriceStringAsFixed(String value) {
   return double.parse(value);
+}
+
+bool isZero(String value) {
+  return double.parse(value) == 0.0;
 }
 
 bool materialIsFOC(String materialGroup) {
@@ -42,6 +47,10 @@ String materialGroup4Type(bool isFoc) {
 bool checkMaterialType(String type) {
   return type == 'Comm';
 }
+bool checkMaterialTypeBonus(String type) {
+  return type == 'Bonus';
+}
+
 
 bool contractIs730(String tenderReason) {
   return tenderReason == '730';
@@ -100,3 +109,5 @@ double getDoubleParsedValue(String value) =>
 String getPaymentTermValue(String value) => value.isEmpty
     ? ''
     : value.characters.getRange(0, value.indexOf('-')).string;
+    
+

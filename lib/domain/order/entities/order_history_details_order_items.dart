@@ -1,11 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -36,6 +38,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required PrincipalName principalName,
     required ProductImages productImages,
     required String governmentMaterialCode,
+    required MaterialStockInfo materialStockInfo,
+    required PriceAggregate priceAggregate,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -59,6 +63,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         principalName: PrincipalName(''),
         productImages: ProductImages.empty(),
         governmentMaterialCode: '',
+        materialStockInfo: MaterialStockInfo.empty(),
+        priceAggregate: PriceAggregate.empty(),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
@@ -79,6 +85,25 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
             ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
             : unitPrice,
       );
+  StatusType get productTag {
+    if (type.isMaterialTypeBonus && unitPrice.isZPPriceZero) {
+      return StatusType('Bonus');
+    }
+    if (priceAggregate.salesOrgConfig.addOosMaterials &&
+        (materialStockInfo.stockInfos.isEmpty ||
+            !materialStockInfo.stockInfos
+                .any((element) => element.inStock.isMaterialInStock))) {
+      return StatusType('Preorder');
+    }
+    if (!priceAggregate.salesOrgConfig.addOosMaterials &&
+        (materialStockInfo.stockInfos.isEmpty ||
+            !materialStockInfo.stockInfos
+                .any((element) => element.inStock.isMaterialInStock))) {
+      return StatusType('Out of Stock');
+    }
+
+    return StatusType('');
+  }
 }
 
 extension ViewByOrderDetailsListExtension

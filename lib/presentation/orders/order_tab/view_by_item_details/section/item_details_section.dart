@@ -55,7 +55,7 @@ class ItemDetailsSection extends StatelessWidget {
             quantity: orderHistoryItem.qty.toString(),
             materialNumber: orderHistoryItem.materialNumber,
             isQuantityBelowImage: false,
-            tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
+            statusTag: orderHistoryItem.productTag,
             headerText:
                 'Batch ${orderHistoryItem.batch}\n(EXP: ${orderHistoryItem.expiryDate.dateString})',
           ),

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -15,7 +16,9 @@ import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
@@ -29,6 +32,10 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 
@@ -36,6 +43,10 @@ class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
   final OrderRemoteDataSource remoteDataSource;
+  final ViewByOrderDetailsLocalDataSource orderDetailLocalDataSource;
+  final ViewByOrderDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
+  final StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  final StockInfoLocalDataSource stockInfoLocalDataSource;
   final Encryption encryption;
 
   late MixpanelService mixpanelService;
@@ -46,6 +57,10 @@ class OrderRepository implements IOrderRepository {
     required this.localDataSource,
     required this.remoteDataSource,
     required this.encryption,
+    required this.orderDetailLocalDataSource,
+    required this.orderHistoryDetailsRemoteDataSource,
+    required this.stockInfoRemoteDataSource,
+    required this.stockInfoLocalDataSource,
   });
 
   @override
@@ -318,6 +333,88 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
+  @override
+  Future<Either<ApiFailure, OrderHistoryDetails>> getOrderConfirmationDetail({
+    required SubmitOrderResponse orderResponse,
+    required User user,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final result = user.role.type.isSalesRepRole
+            ? await orderDetailLocalDataSource
+                .getOrderHistoryDetailsForSalesRep()
+            : await orderDetailLocalDataSource.getOrderHistoryDetails();
+
+        return Right(result);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    var apiRetryCounter = 15;
+    var orderHistoryDetails = OrderHistoryDetails.empty();
+    do {
+      try {
+        orderHistoryDetails = user.role.type.isSalesRepRole
+            ? await orderHistoryDetailsRemoteDataSource
+                .getOrderHistoryDetailsForSalesRep(
+                companyName: '',
+                orderId: orderResponse.salesDocument,
+                language: user.preferredLanguage,
+                userName: user.username.getOrCrash(),
+              )
+            : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
+                orderId: orderResponse.salesDocument,
+                language: user.preferredLanguage,
+              );
+      } catch (e) {
+        apiRetryCounter--;
+        if (apiRetryCounter == 0) {
+          return Left(
+            FailureHandler.handleFailure(e),
+          );
+        }
+      }
+    } while (apiRetryCounter > 0 &&
+        orderHistoryDetails == OrderHistoryDetails.empty());
+
+    return Right(orderHistoryDetails);
+  }
+
+  @override
+  Future<Either<ApiFailure, List<MaterialStockInfo>>>
+      getConfirmedOrderStockInfo({
+    required OrderHistoryDetails orderHistoryDetails,
+    required SalesOrg salesOrg,
+    required CustomerCodeInfo customerCodeInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final stockInfoList =
+            await stockInfoLocalDataSource.getMaterialStockInfoList();
+            
+        return Right(stockInfoList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final stockInfoList =
+          await stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: orderHistoryDetails.orderHistoryDetailsOrderItem
+            .map((e) => e.materialNumber.getOrDefaultValue(''))
+            .toList(),
+        salesOrg: salesOrg.getOrCrash(),
+        selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
+      );
+
+      return Right(stockInfoList);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
 //TODO : Will revisit
   SavedOrder _getCreateDraftOrderRequest({
     required ShipToInfo shipToInfo,
@@ -381,8 +478,8 @@ class OrderRepository implements IOrderRepository {
           ? data.contactPerson.getValue()
           : user.fullName.toString(),
       poReference: data.poReference.getValue(),
-      referenceNotes: data.referenceNote.getValue(),
-      specialInstructions: data.deliveryInstruction.getValue(),
+      referenceNotes: data.referenceNote.getOrDefaultValue(''),
+      specialInstructions: data.deliveryInstruction.getOrDefaultValue(''),
       companyName: CompanyName(shipToInfo.shipToName.toString()),
       requestedDeliveryDate: data.deliveryDate.getValue(),
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),

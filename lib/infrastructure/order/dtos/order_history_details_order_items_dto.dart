@@ -1,7 +1,10 @@
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_tender_contract_details_dto.dart';
@@ -114,7 +117,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       ),
       principalName: PrincipalName(principalName),
       productImages: ProductImages.empty(),
-      governmentMaterialCode: governmentMaterialCode,
+      governmentMaterialCode:governmentMaterialCode, 
+      materialStockInfo: MaterialStockInfo.empty(),
+       priceAggregate: PriceAggregate.empty(),
     );
   }
 

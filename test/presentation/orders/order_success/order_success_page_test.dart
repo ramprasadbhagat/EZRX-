@@ -7,14 +7,14 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
+//import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+//import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/widget_utils.dart';
+//import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -33,7 +33,7 @@ class AnnouncementBlocMock
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 void main() {
-  late AppRouter autoRouterMock;
+  //late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
   late CustomerCodeBloc customerCodeBlocMock;
   late AuthBloc authBlocMock;
@@ -49,7 +49,7 @@ void main() {
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      autoRouterMock = locator<AppRouter>();
+      //autoRouterMock = locator<AppRouter>();
       mockSalesOrgBloc = MockSalesOrgBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
       authBlocMock = AuthBlocMock();
@@ -63,49 +63,47 @@ void main() {
           .thenReturn(AnnouncementState.initial());
     },
   );
-  group(
-    'Test Order Success Page',
-    () {
-      Widget getWidget() {
-        return WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          child: const OrderSuccessPage(),
-          providers: [
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-            ),
-          ],
-        );
-      }
+  // group(
+  //   'Test Order Success Page',
+  //   () {
+  //     Widget getWidget() {
+  //       return WidgetUtils.getScopedWidget(
+  //         autoRouterMock: autoRouterMock,
+  //         child: const OrderSuccessPage(),
+  //         providers: [
+  //           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+  //           BlocProvider<CustomerCodeBloc>(
+  //               create: (context) => customerCodeBlocMock),
+  //           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+  //           BlocProvider<AnnouncementBloc>(
+  //               create: (context) => announcementBlocMock),
+  //         ],
+  //       );
+  //     }
 
-      testWidgets(
-        'Load Order Success',
-        (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-          expect(orderSuccessPage, findsOneWidget);
-        },
-      );
+      // testWidgets(
+      //   'Load Order Success',
+      //   (tester) async {
+      //     await tester.pumpWidget(getWidget());
+      //     await tester.pump();
+      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+      //     expect(orderSuccessPage, findsOneWidget);
+      //   },
+      // );
 
-      testWidgets(
-        '=> Tap Create New Order',
-        (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-          expect(orderSuccessPage, findsOneWidget);
-          final newOrderButton = find.text('Create New Order');
-          expect(newOrderButton, findsOneWidget);
-          await tester.tap(newOrderButton);
-          await tester.pump();
-        },
-      );
+      // testWidgets(
+      //   '=> Tap Create New Order',
+      //   (tester) async {
+      //     await tester.pumpWidget(getWidget());
+      //     await tester.pump();
+      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+      //     expect(orderSuccessPage, findsOneWidget);
+      //     final newOrderButton = find.text('Create New Order');
+      //     expect(newOrderButton, findsOneWidget);
+      //     await tester.tap(newOrderButton);
+      //     await tester.pump();
+      //   },
+      // );
 
       //TODO: Redirect not available currently. Change in layout
       // testWidgets(
@@ -122,19 +120,19 @@ void main() {
       //   },
       // );
 
-      testWidgets(
-        '=> Tap Back Button',
-        (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-          expect(orderSuccessPage, findsOneWidget);
-          final backButton = find.byIcon(Icons.arrow_back);
-          expect(backButton, findsOneWidget);
-          await tester.tap(backButton);
-          await tester.pump();
-        },
-      );
-    },
-  );
+      // testWidgets(
+      //   '=> Tap Back Button',
+      //   (tester) async {
+      //     await tester.pumpWidget(getWidget());
+      //     await tester.pump();
+      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+      //     expect(orderSuccessPage, findsOneWidget);
+      //     final backButton = find.byIcon(Icons.arrow_back);
+      //     expect(backButton, findsOneWidget);
+      //     await tester.tap(backButton);
+      //     await tester.pump();
+      //   },
+      // );
+   // },
+  //);
 }

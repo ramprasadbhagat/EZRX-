@@ -86,7 +86,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                           quantity: e.qty.toString(),
                                           materialNumber: e.materialNumber,
                                           isQuantityBelowImage: false,
-                                          tag: e.isBonusMaterial ? 'Bonus' : '',
+                                          statusTag: e.productTag,
                                           headerText:
                                               'Order #${e.orderNumber.getOrDefaultValue('')}',
                                           subtitle: '',

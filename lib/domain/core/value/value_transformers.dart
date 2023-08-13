@@ -232,6 +232,9 @@ Color getStatusLabelColor(String statusType) {
     'Approved for Return': ZPColors.lightSecondary,
     'FAILED': ZPColors.lightSecondary,
     'APPROVED': ZPColors.lightSecondary,
+    'Preorder': ZPColors.lightYellow,
+    'Bonus': ZPColors.primary,
+
   };
 
   final lightRedStatusColor = {
@@ -304,6 +307,10 @@ Color getStatusTextColor(String statusType) {
       return ZPColors.returnSummaryStatusTextColor;
     case 'REJECTED':
       return ZPColors.darkGray;
+    case 'Preorder':
+      return ZPColors.black;
+    case 'Bonus':
+      return ZPColors.white;
 
     default:
       return ZPColors.white;

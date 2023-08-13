@@ -955,6 +955,10 @@ void setupLocator() {
       remoteDataSource: locator<OrderRemoteDataSource>(),
       mixpanelService: locator<MixpanelService>(),
       encryption: locator<Encryption>(),
+      orderDetailLocalDataSource: locator<ViewByOrderDetailsLocalDataSource>(),
+      orderHistoryDetailsRemoteDataSource: locator<ViewByOrderDetailsRemoteDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
     ),
   );
 

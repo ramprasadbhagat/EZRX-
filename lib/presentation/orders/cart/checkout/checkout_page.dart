@@ -19,8 +19,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
 
@@ -215,13 +213,28 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     state.apiFailureOrSuccessOption.fold(
                       () {
                         if (!state.isSubmitting) {
-                          context
-                              .read<CartBloc>()
-                              .add(const CartEvent.clearCart());
-                          Navigator.pop(context);
-                          CustomSnackBar(
-                            messageText: 'Order submitted'.tr(),
-                          ).show(context);
+                          context.read<OrderSummaryBloc>().add(
+                                OrderSummaryEvent.orderConfirmationDetail(
+                                  user: context.read<UserBloc>().state.user,
+                                  salesOrg: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrg,
+                                  customerCodeInfo: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  salesOrgConfig: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .configs,
+                                  priceAggregate: context
+                                      .read<CartBloc>()
+                                      .state
+                                      .cartProducts,    
+                                ),
+                              );
+                          context.router.pushNamed('orders/order_confirmation');
                         }
                       },
                       (either) => {},

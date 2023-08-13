@@ -73,6 +73,9 @@ class OrderHistoryItem with _$OrderHistoryItem {
             ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
             : unitPrice,
       );
+  StatusType get productTag {
+    return StatusType(isBonusMaterial ? 'Bonus' : '');
+  }
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

@@ -1,7 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,11 @@ class CommonTileItem extends StatelessWidget {
     required this.materialNumber,
     required this.title,
     required this.subtitle,
-    required this.headerText,
-    required this.statusWidget,
     required this.quantity,
     required this.isQuantityBelowImage,
-    this.tag = '',
+    this.headerText,
+    this.statusWidget,
+    this.statusTag,
     this.footerWidget,
     this.priceComponent,
     this.isQuantityRequired = true,
@@ -27,12 +28,12 @@ class CommonTileItem extends StatelessWidget {
   final MaterialNumber materialNumber;
   final String title;
   final String subtitle;
-  final String headerText;
+  final String? headerText;
   final Widget? priceComponent;
-  final Widget statusWidget;
+  final Widget? statusWidget;
   final String quantity;
   final bool isQuantityBelowImage;
-  final String tag;
+  final StatusType? statusTag;
   final Widget? footerWidget;
   final bool isQuantityRequired;
   final VoidCallback? onTap;
@@ -46,10 +47,11 @@ class CommonTileItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 5),
-            _HeaderItem(
-              header: headerText,
-              statusWidget: statusWidget,
-            ),
+            if (headerText != null && statusWidget != null)
+              _HeaderItem(
+                header: headerText!,
+                statusWidget: statusWidget!,
+              ),
             Row(
               children: [
                 _ImageBox(
@@ -70,32 +72,12 @@ class CommonTileItem extends StatelessWidget {
                               label,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                            tag.isNotEmpty
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Chip(
-                                      label: Text(
-                                        tag,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall!
-                                            .copyWith(
-                                              color: ZPColors.white,
-                                            ),
-                                      ).tr(),
-                                      visualDensity: const VisualDensity(
-                                        horizontal: -4,
-                                        vertical: -4,
-                                      ),
-                                      backgroundColor: ZPColors.darkerGreen,
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      labelPadding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0,
-                                      ),
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
+                            if (statusTag != null &&
+                                statusTag!.getOrDefaultValue('').isNotEmpty)
+                              StatusLabel(
+                                status: statusTag!,
+                                valueColor: statusTag!.displayStatusTextColor,
+                              ),
                           ],
                         ),
                         Padding(
@@ -267,10 +249,10 @@ class _ImageBox extends StatelessWidget {
             showBorder: true,
             showShadow: false,
             clipBehavior: Clip.antiAlias,
-            margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
+            margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
             child: ProductImage(
               width: MediaQuery.of(context).size.height * 0.06,
-              height: MediaQuery.of(context).size.height * 0.06,
+              height: MediaQuery.of(context).size.height * 0.08,
               materialNumber: materialNumber,
               fit: BoxFit.fitHeight,
             ),

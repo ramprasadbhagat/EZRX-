@@ -38,6 +38,10 @@ import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 // import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -61,10 +65,22 @@ class OrderLocalDataSourceMock extends Mock implements OrderLocalDataSource {}
 
 class OrderRemoteDataSourceMock extends Mock implements OrderRemoteDataSource {}
 
+class ViewByOrderDetailsRemoteDataSourceMock extends Mock
+    implements ViewByOrderDetailsRemoteDataSource {}
+
 class MixpanelServiceMock extends Mock implements MixpanelService {}
+
+class ViewByOrderDetailsLocalDataSourceMock extends Mock
+    implements ViewByOrderDetailsLocalDataSource {}
 
 class SalesOrganisationConfigsMock extends Mock
     implements SalesOrganisationConfigs {}
+
+class StockInfoRemoteDataSourceMock extends Mock
+    implements StockInfoRemoteDataSource {}
+
+class StockInfoLocalDataSourceMock extends Mock
+    implements StockInfoLocalDataSource {}
 
 class EncryptionMock extends Mock implements Encryption {}
 
@@ -74,7 +90,10 @@ void main() {
   late OrderLocalDataSource orderLocalDataSource;
   late OrderRemoteDataSource orderRemoteDataSource;
   late Encryption encryption;
-
+  late ViewByOrderDetailsLocalDataSource viewByOrderDetailsLocalDataSource;
+  late ViewByOrderDetailsRemoteDataSource viewByOrderDetailsRemoteDataSource;
+  late StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  late StockInfoLocalDataSource stockInfoLocalDataSource;
   final mockUser = User.empty();
   final mockSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -150,16 +169,24 @@ void main() {
 
     mixpanelService = MixpanelServiceMock();
     salesOrganisationConfigs = SalesOrganisationConfigsMock();
-
+    viewByOrderDetailsLocalDataSource = ViewByOrderDetailsLocalDataSourceMock();
+    viewByOrderDetailsRemoteDataSource =
+        ViewByOrderDetailsRemoteDataSourceMock();
+    stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
+    stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     encryption = EncryptionMock();
 
     orderRepository = OrderRepository(
-      config: mockConfig,
-      localDataSource: orderLocalDataSource,
-      remoteDataSource: orderRemoteDataSource,
-      mixpanelService: mixpanelService,
-      encryption: encryption,
-    );
+        config: mockConfig,
+        localDataSource: orderLocalDataSource,
+        remoteDataSource: orderRemoteDataSource,
+        mixpanelService: mixpanelService,
+        encryption: encryption,
+        orderDetailLocalDataSource: viewByOrderDetailsLocalDataSource,
+        orderHistoryDetailsRemoteDataSource: viewByOrderDetailsRemoteDataSource,
+        stockInfoRemoteDataSource: stockInfoRemoteDataSource,
+        stockInfoLocalDataSource: stockInfoLocalDataSource,
+        );
   });
 
   group('OrderRepository should - ', () {

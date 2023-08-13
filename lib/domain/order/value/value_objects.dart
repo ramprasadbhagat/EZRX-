@@ -79,6 +79,8 @@ class ZpPrice extends ValueObject<String> {
     return totalPriceStringAsFixed(value.getOrElse(() => '0'));
   }
 
+  bool get isZPPriceZero => isZero(value.getOrElse(() => '0'));
+
   const ZpPrice._(this.value);
 }
 
@@ -460,6 +462,10 @@ class OrderItemType extends ValueObject<String> {
 
   bool get isMaterialTypeComm {
     return checkMaterialType(value.getOrElse(() => ''));
+  }
+
+  bool get isMaterialTypeBonus {
+    return checkMaterialTypeBonus(value.getOrElse(() => ''));
   }
 
   const OrderItemType._(this.value);
@@ -911,3 +917,4 @@ class FavouriteResponse extends ValueObject<int> {
 
   bool get isSuccessful => checkIfSuccessful(value.getOrElse(() => 0));
 }
+

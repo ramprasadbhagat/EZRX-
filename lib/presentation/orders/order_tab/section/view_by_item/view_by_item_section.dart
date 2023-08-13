@@ -207,7 +207,7 @@ class _ViewByOrderItem extends StatelessWidget {
             materialNumber: orderHistoryItem.materialNumber,
             isQuantityBelowImage: false,
             isQuantityRequired: true,
-            tag: orderHistoryItem.isBonusMaterial ? 'Bonus' : '',
+            statusTag: orderHistoryItem.productTag,
           ),
         ],
       ),

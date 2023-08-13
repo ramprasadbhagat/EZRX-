@@ -314,6 +314,8 @@ class WidgetKeys {
   static const Key materialDescription = Key('materialDescription');
   static const Key orderPriceLoading = Key('priceLoading');
   static const Key startBrowsingViewByItem = Key('startBrowsingViewByItem');
+  static const Key orderSuccess = Key('orderSuccessKey');
+  
 
   //============================================================
   //  Order History
