@@ -486,16 +486,14 @@ class PriceAggregate with _$PriceAggregate {
   bool get isZdp5DiscountEligible =>
       salesOrgConfig.salesOrg.isVN && salesOrgConfig.enableZDP5;
 
-  bool hasZdp5Validation(int quantity) =>
-      isZdp5DiscountEligible &&
-      price.zdp5RemainingQuota.hasZdp5Discount(quantity);
+  bool get hasZdp5Validation =>
+      isZdp5DiscountEligible && quantity > price.zdp5RemainingQuota.intValue;
 
   bool get isRemainingQuantityNotExceeded =>
-      !exceedQuantity && price.zdp5RemainingQuota.hasZdp5Discount(quantity);
+      !exceedQuantity && quantity > price.zdp5RemainingQuota.intValue;
 
   bool get isRemainingQuantityExceeded =>
-      exceedQuantity &&
-      price.zdp5RemainingQuota.validateIfQuantityExceeded(quantity);
+      exceedQuantity && quantity <= price.zdp5RemainingQuota.intValue;
 
   bool get hasRemainingQuotaReached =>
       isRemainingQuantityNotExceeded || isRemainingQuantityExceeded;

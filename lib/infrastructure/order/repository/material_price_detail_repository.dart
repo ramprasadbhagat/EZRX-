@@ -253,7 +253,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
     final shipToCode = shipToInfo.shipToCustomerCode;
-    final exceedQuantity = cartItem.hasZdp5Validation(cartItem.quantity);
+    final exceedQuantity = cartItem.hasZdp5Validation;
 
     try {
       if (cartItem.isPriceUpdateAvailable) {

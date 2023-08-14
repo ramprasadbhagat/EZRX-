@@ -979,8 +979,7 @@ class CartRepository implements ICartRepository {
       final customerCode = customerCodeInfo.customerCodeSoldTo;
       final shipToCode = shipToInfo.shipToCustomerCode;
       final price = item.materials.first.price;
-      final exceedQuantity =
-          item.materials.first.hasZdp5Validation(item.materials.first.quantity);
+      final exceedQuantity = item.materials.first.hasZdp5Validation;
 
       final priceData =
           await discountOverrideRemoteDataSource.getMaterialOverridePriceList(

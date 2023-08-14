@@ -53,10 +53,12 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
     }
   }
 
-  void _validateZdp5Quantity(BuildContext context, int value) {
+  void _validateZdp5Quantity(
+    BuildContext context,
+  ) {
     if (!widget.cartItem.isZdp5DiscountEligible) return;
 
-    final isZdp5Eligible = widget.cartItem.hasZdp5Validation(value);
+    final isZdp5Eligible = widget.cartItem.hasZdp5Validation;
 
     if (isZdp5Eligible) {
       CustomSnackBar(
@@ -122,15 +124,21 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
             controller: _controller,
             onFieldChange: (val) {
               widget.onQuantityChanged.call(val);
-              _validateZdp5Quantity(context, val);
+              _validateZdp5Quantity(
+                context,
+              );
             },
             minusPressed: (val) {
               widget.onQuantityChanged.call(val);
-              _validateZdp5Quantity(context, int.parse(_controller.text));
+              _validateZdp5Quantity(
+                context,
+              );
             },
             addPressed: (val) {
               widget.onQuantityChanged.call(val);
-              _validateZdp5Quantity(context, int.parse(_controller.text));
+              _validateZdp5Quantity(
+                context,
+              );
             },
           ),
         ),
