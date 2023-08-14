@@ -129,9 +129,5 @@ class ReturnQuantity extends ValueObject<String> {
 
   int get getIntValue => getIntegerReturnQuantity(value.getOrElse(() => ''));
 
-  String returnValue(double unitPrice) =>
-      (getIntegerReturnQuantity(value.getOrElse(() => '')) * unitPrice)
-          .toStringAsFixed(2);
-
   const ReturnQuantity._(this.value);
 }
