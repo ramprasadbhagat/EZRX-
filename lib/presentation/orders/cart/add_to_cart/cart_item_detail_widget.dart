@@ -184,10 +184,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                     tenderContract: state.selectedTenderContract,
                     price: widget.cartItem.price.copyWith(
                       finalPrice: MaterialPrice(
-                        state.selectedTenderContract.tenderPrice
-                            .tenderPriceByPricingUnit(
-                          state.selectedTenderContract.pricingUnit,
-                        ),
+                        state.selectedTenderContract.tenderPriceByPricingUnit,
                       ),
                     ),
                   );

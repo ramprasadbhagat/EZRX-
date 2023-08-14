@@ -177,8 +177,7 @@ class PriceAggregate with _$PriceAggregate {
     var finalPrice = 0.0;
 
     finalPrice = tenderContract.tenderPrice.tenderPrice != 0
-        ? tenderContract.tenderPrice
-            .tenderPriceByPricingUnit(tenderContract.pricingUnit)
+        ? tenderContract.tenderPriceByPricingUnit
         : isSpecialOrderTypeNotTH
             ? 0.0
             : (price.isDiscountEligible && !isSpecialOrderType)

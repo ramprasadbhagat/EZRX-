@@ -62,6 +62,9 @@ class TenderContract with _$TenderContract {
           tenderContact.tenderContractReference,
         ),
       );
+
+  double get tenderPriceByPricingUnit =>
+      pricingUnit == 0 ? 0 : tenderPrice.tenderPrice / pricingUnit;
 }
 
 extension TenderContractListExtension on List<TenderContract> {

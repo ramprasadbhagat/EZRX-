@@ -106,22 +106,6 @@ void main() {
       final result = tenderPrice.tenderPrice;
       expect(result, 5.0);
     });
-
-    test('should return double value as 0 when tender price by pricing unit 0',
-        () async {
-      const input = '5';
-      final tenderPrice = TenderPrice(input);
-      final result = tenderPrice.tenderPriceByPricingUnit(0);
-      expect(result, 0);
-    });
-
-    test('should return double value as 8 when tender price by pricing unit 2',
-        () async {
-      const input = '8';
-      final tenderPrice = TenderPrice(input);
-      final result = tenderPrice.tenderPriceByPricingUnit(2);
-      expect(result, 4);
-    });
   });
 
   group('Tender Contract Number value object', () {

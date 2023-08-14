@@ -479,15 +479,7 @@ class TenderPrice extends ValueObject<String> {
     return TenderPrice._(Right(input));
   }
 
-  double get tenderPrice {
-    return totalPriceStringAsFixed(value.getOrElse(() => '0'));
-  }
-
-  double tenderPriceByPricingUnit(int pricingUnit) {
-    return pricingUnit == 0
-        ? 0
-        : totalPriceStringAsFixed(value.getOrElse(() => '0')) / pricingUnit;
-  }
+  double get tenderPrice => totalPriceStringAsFixed(value.getOrElse(() => '0'));
 
   const TenderPrice._(this.value);
 }
