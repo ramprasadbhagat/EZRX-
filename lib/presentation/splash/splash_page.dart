@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -847,7 +848,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               ),
             );
       }
-
+      context.read<NotificationBloc>().add(
+            const NotificationEvent.fetch(),
+          );
       context.read<PaymentCustomerInformationBloc>().add(
             PaymentCustomerInformationEvent.fetch(
               customeCodeInfo: customerCodeInfo,

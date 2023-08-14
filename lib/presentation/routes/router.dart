@@ -17,7 +17,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_me
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
-import 'package:ezrxmobile/presentation/notification/notificatoin_tab.dart';
+import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';

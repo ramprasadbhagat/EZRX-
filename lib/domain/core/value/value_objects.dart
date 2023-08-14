@@ -141,6 +141,11 @@ class DateTimeStringValue extends ValueObject<String> {
   int get intValue => getDateTimeIntValue(_valueOrEmpty);
 
   DateTime get dateTime => getDateTimeByDateString(_valueOrEmpty);
+  String get differenceTime => calculateDifferenceTime(_valueOrEmpty);
+  String get notificationDateTime => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.displayNotificationDateTimeFormat,
+      );
 
   const DateTimeStringValue._(this.value);
 }

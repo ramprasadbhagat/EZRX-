@@ -1,0 +1,64 @@
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+IconData notificationIcon(
+  String title,
+) {
+  final iconMap = {
+    'Order Created': Icons.receipt_long_outlined,
+    'Return request created': Icons.electric_rickshaw,
+    'Return request failed': Icons.close,
+    'Payment advice deleted': Icons.close,
+    'Return request reviewed': Icons.electric_rickshaw,
+    'Payment Advice created': Icons.account_balance_wallet_outlined,
+    'Reminder: Payment advice expiring': Icons.error,
+  };
+
+  return iconMap[title] ?? Icons.receipt_long_outlined;
+}
+
+Color getIconBGColor(
+  String title,
+) {
+  final accentColor = {
+    'Order Created': ZPColors.accentColor,
+    'Return request created': ZPColors.accentColor,
+    'Payment Advice created': ZPColors.accentColor,
+  };
+  final lightRed = {
+    'Return request failed': ZPColors.lightRed,
+    'Payment advice deleted': ZPColors.lightRed,
+    'Reminder: Payment advice expiring': ZPColors.lightRed,
+  };
+
+  final titleMap = {
+    ...accentColor,
+    ...lightRed,
+    'Return request reviewed': ZPColors.lightSecondary,
+  };
+
+  return titleMap[title] ?? ZPColors.accentColor;
+}
+
+Color getIconColor(
+  String title,
+) {
+  final primary = {
+    'Order Created': ZPColors.primary,
+    'Return request created': ZPColors.primary,
+    'Payment advice created': ZPColors.primary,
+  };
+  final red = {
+    'Return request failed': ZPColors.red,
+    'Payment advice deleted': ZPColors.red,
+    'Reminder: Payment advice expiring': ZPColors.red,
+  };
+
+  final titleMap = {
+    ...primary,
+    ...red,
+    'Return request reviewed': ZPColors.lightGreen,
+  };
+
+  return titleMap[title] ?? ZPColors.primary;
+}

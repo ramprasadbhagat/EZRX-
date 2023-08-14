@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -206,6 +207,10 @@ class CreditAndInvoiceDetailsMockBloc
 class LoginFormMockBloc extends MockBloc<LoginFormEvent, LoginFormState>
     implements LoginFormBloc {}
 
+class NotificationMockBloc
+    extends MockBloc<NotificationEvent, NotificationState>
+    implements NotificationBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -245,6 +250,7 @@ void main() {
   late RemoteConfigService remoteConfigServiceMock;
   late DeepLinkingBloc deepLinkingBlocMock;
   late ViewByItemsBloc mockViewByItemsBloc;
+  late NotificationBloc mockNotificationBloc;
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockViewByOrderBloc = ViewByOrderMockBloc();
@@ -293,6 +299,7 @@ void main() {
 
     locator.registerLazySingleton(() => mockViewByItemsBloc);
     locator.registerLazySingleton(() => mockMaterialPriceBloc);
+    locator.registerLazySingleton(() => mockNotificationBloc);
   });
 
   group('Splash Screen', () {
@@ -333,6 +340,7 @@ void main() {
       productDetailBloc = ProductDetailMockBloc();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
       loginFormBloc = LoginFormMockBloc();
+      mockNotificationBloc = NotificationMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
@@ -401,6 +409,8 @@ void main() {
       when(() => creditAndInvoiceDetailsBloc.state)
           .thenReturn(CreditAndInvoiceDetailsState.initial());
       when(() => loginFormBloc.state).thenReturn(LoginFormState.initial());
+      when(() => mockNotificationBloc.state)
+          .thenReturn(NotificationState.initial());
     });
 
     Future getWidget(tester) async {
@@ -503,6 +513,9 @@ void main() {
               create: (context) => creditAndInvoiceDetailsBloc,
             ),
             BlocProvider<LoginFormBloc>(create: (context) => loginFormBloc),
+            BlocProvider<NotificationBloc>(
+              create: (context) => mockNotificationBloc,
+            ),
           ],
           child: const SplashPage(),
         ),

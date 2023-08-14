@@ -184,6 +184,23 @@ DateTime? tryParseDateTime(String input) {
 DateTime getDateTimeByDateString(String value) =>
     tryParseDateTime(value) ?? DateTime.now();
 
+String calculateDifferenceTime(String value) {
+  final dateTime = getDateTimeByDateString(value);
+  final difference = DateTime.now().difference(dateTime);
+  final minutes = difference.inMinutes;
+  if (minutes >= 1440) {
+   final days = difference.inDays;
+
+    return '$days d';
+  } else if (minutes >= 60) {
+    final hours = difference.inHours;
+
+    return '$hours h';
+  } else {
+    return '$minutes m';
+  }
+}
+
 String getDateStringByDateTime(DateTime dateTime) =>
     DateFormat(DateTimeFormatString.apiDateFormat).format(dateTime);
 
@@ -234,7 +251,6 @@ Color getStatusLabelColor(String statusType) {
     'APPROVED': ZPColors.lightSecondary,
     'Preorder': ZPColors.lightYellow,
     'Bonus': ZPColors.primary,
-
   };
 
   final lightRedStatusColor = {

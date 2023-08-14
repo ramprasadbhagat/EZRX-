@@ -26,6 +26,7 @@ import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
@@ -125,6 +126,8 @@ import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
+import 'package:ezrxmobile/infrastructure/notification/datasource/notification_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/notification/repository/notification_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -451,6 +454,9 @@ import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_q
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
 
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
+
+import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
+import 'package:ezrxmobile/infrastructure/notification/datasource/notification_remote.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -3171,6 +3177,37 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ContactUsBloc(
       contactUsRepository: locator<ContactUsRepository>(),
+    ),
+  );
+  //============================================================
+  //  Notification
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => NotificationLocalDataSource());
+
+  locator.registerLazySingleton(() => NotificationQuery());
+
+  locator.registerLazySingleton(
+    () => NotificationRemoteDataSource(
+      httpService: locator<HttpService>(),
+      notificationQuery: locator<NotificationQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => NotificationRepository(
+      config: locator<Config>(),
+      localDataSource: locator<NotificationLocalDataSource>(),
+      remoteDataSource: locator<NotificationRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => NotificationBloc(
+      notificationRepository: locator<NotificationRepository>(),
     ),
   );
 }

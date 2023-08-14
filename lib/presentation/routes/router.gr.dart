@@ -87,7 +87,7 @@ import '../home/home_tab.dart' as _i70;
 import '../home_tab.dart' as _i34;
 import '../intro/intro_page.dart' as _i57;
 import '../more/more_tab.dart' as _i73;
-import '../notification/notificatoin_tab.dart' as _i74;
+import '../notification/notification_tab.dart' as _i74;
 import '../orders/cart/add_to_cart/add_to_cart.dart' as _i48;
 import '../orders/cart/add_to_cart/update_cart.dart' as _i49;
 import '../orders/cart/bonus/search_bonus_page.dart' as _i35;
