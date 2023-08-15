@@ -44,7 +44,7 @@ class CreditDetailsSection extends StatelessWidget {
             children: [
               BalanceTextRow(
                 keyText: 'Document date',
-                valueText: creditItem.documentDate.dateString,
+                valueText: creditItem.postingDate.dateString,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
