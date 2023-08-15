@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_co
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
+import 'package:ezrxmobile/presentation/faq/faq.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
@@ -397,6 +398,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       page: SalesOrgSearch,
       path: 'salesOrg_search',
     ),
+      AutoRoute(
+      page: FAQPage,
+      path: 'faq_page',
+    ),
     AutoRoute(
       page: NewRequestPage,
       path: 'returns/new_request',
@@ -413,6 +418,7 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
           page: ReturnReviewTab,
           path: 'returns/new_request/return_review',
         ),
+       
       ],
     ),
   ],

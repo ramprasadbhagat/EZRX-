@@ -210,6 +210,7 @@ class LoginFormMockBloc extends MockBloc<LoginFormEvent, LoginFormState>
 class NotificationMockBloc
     extends MockBloc<NotificationEvent, NotificationState>
     implements NotificationBloc {}
+    
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

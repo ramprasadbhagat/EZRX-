@@ -23,12 +23,15 @@ class MoreDetailsTile {
     this.onTap,
   });
 
-  factory MoreDetailsTile.faq() => const MoreDetailsTile(
-        icon: Icon(
+  factory MoreDetailsTile.faq(BuildContext context) => MoreDetailsTile(
+        icon: const Icon(
           Icons.contact_support_outlined,
-          color: ZPColors.lightGray,
+          color: ZPColors.greenIconColor,
         ),
         label: 'FAQ',
+        onTap: () => context.navigateTo(
+          const FAQPageRoute(),
+        ),
       );
 
   factory MoreDetailsTile.userGuide() => const MoreDetailsTile(

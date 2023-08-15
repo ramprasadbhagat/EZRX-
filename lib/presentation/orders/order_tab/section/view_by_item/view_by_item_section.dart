@@ -51,6 +51,12 @@ class ViewByItemsPage extends StatelessWidget {
             svgImage: SvgImage.emptyOrder,
             actionButton: ElevatedButton(
               key: WidgetKeys.startBrowsingViewByItem,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(
+                  double.maxFinite,
+                  50,
+                ),
+              ),
               onPressed: () => context.navigateTo(const ProductsTabRoute()),
               child: const Text('Start browsing').tr(),
             ),

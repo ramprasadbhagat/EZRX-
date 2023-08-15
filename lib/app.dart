@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
+import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
@@ -563,6 +564,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<NotificationBloc>(
           create: (context) => locator<NotificationBloc>(),
+        ),
+        BlocProvider<FaqBloc>(
+          create: (context) => locator<FaqBloc>(),
         ),
       ],
       child: MaterialApp.router(

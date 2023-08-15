@@ -7,7 +7,7 @@ class HelpAndSupportTile extends StatelessWidget {
   const HelpAndSupportTile({Key? key}) : super(key: key);
   List<MoreDetailsTile> moreHelpAndSupportTiles(BuildContext context) =>
       <MoreDetailsTile>[
-        MoreDetailsTile.faq(),
+        MoreDetailsTile.faq(context),
         MoreDetailsTile.userGuide(),
         MoreDetailsTile.aboutUs(),
         MoreDetailsTile.chatSupport(context),

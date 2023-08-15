@@ -25,6 +25,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
@@ -126,6 +127,9 @@ import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/repository/product_images_repository.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
+import 'package:ezrxmobile/infrastructure/faq/datasource/faq_local.dart';
+import 'package:ezrxmobile/infrastructure/faq/datasource/faq_remote.dart';
+import 'package:ezrxmobile/infrastructure/faq/repository/faq_repository.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/notification/repository/notification_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
@@ -457,6 +461,8 @@ import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_l
 
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_remote.dart';
+
+import 'package:ezrxmobile/infrastructure/faq/datasource/faq_query_mutaion.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -962,7 +968,8 @@ void setupLocator() {
       mixpanelService: locator<MixpanelService>(),
       encryption: locator<Encryption>(),
       orderDetailLocalDataSource: locator<ViewByOrderDetailsLocalDataSource>(),
-      orderHistoryDetailsRemoteDataSource: locator<ViewByOrderDetailsRemoteDataSource>(),
+      orderHistoryDetailsRemoteDataSource:
+          locator<ViewByOrderDetailsRemoteDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
     ),
@@ -3208,6 +3215,35 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => NotificationBloc(
       notificationRepository: locator<NotificationRepository>(),
+    ),
+  );
+  //============================================================
+  //  FAQ
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => FAQInfoQueryMutation());
+  locator.registerLazySingleton(() => FAQInfoLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => FAQInfoRemoteDataSource(
+      httpService: locator<HttpService>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+      queryMutation: locator<FAQInfoQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => FAQInfoRepository(
+      config: locator<Config>(),
+      localDataSource: locator<FAQInfoLocalDataSource>(),
+      remoteDataSource: locator<FAQInfoRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => FaqBloc(
+      faqInfoRepository: locator<FAQInfoRepository>(),
     ),
   );
 }

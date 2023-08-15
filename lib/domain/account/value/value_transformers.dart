@@ -420,3 +420,20 @@ String countryArticlePath(String country) {
 
   return salesOrgCountryMap[country] ?? '';
 }
+
+String countryFaqPath(String country) {
+  final salesOrgCountryMap = {
+    'MY': '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
+    'PH': '0D1637B9-8DB1-4ADB-869C-F5EAAED85110',
+    'SG': '02C19C05-556A-49E6-837E-D00EB6ACFC52',
+    'ID': '066686D3-8661-4F5B-9BD6-B9921F5474F8',
+    'KH': 'D4343F90-CA28-4337-9FA3-7D9C3AE1F7BB',
+    'KR': '66854331-3FEF-4F0C-ACC8-8A9A49663B10',
+    'MM': 'A052DF06-CFF8-49F6-B078-B31E1DB9E580',
+    'TH': '0AA3EE9A-4D93-4F71-B01D-57DF09D84F9A',
+    'TW': '1DD9C115-E3E7-4185-8E71-DE2071A6E6D7',
+    'VN': 'D12B1FAC-5F95-4B0B-9434-42B2FEDB1776',
+  };
+
+  return salesOrgCountryMap[country] ?? '';
+}

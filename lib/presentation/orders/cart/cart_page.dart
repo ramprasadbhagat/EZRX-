@@ -212,6 +212,12 @@ class _CartScrollList extends StatelessWidget {
                 'Looks like you haven’t added anything to your cart yet.'.tr(),
             actionButton: ElevatedButton(
               key: WidgetKeys.startBrowsingProducts,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(
+                  double.maxFinite,
+                  50,
+                ),
+              ),
               onPressed: () {
                 context.router.popUntilRouteWithPath('main');
                 context.router.pushNamed('main/products');
