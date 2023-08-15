@@ -48,7 +48,12 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
         add(SalesOrgEvent.selected(salesOrganisation: salesOrg));
       },
       selected: (e) async {
-        emit(state.copyWith(salesOrganisation: e.salesOrganisation));
+        emit(
+          state.copyWith(
+            salesOrganisation: e.salesOrganisation,
+            isLoading: true,
+          ),
+        );
         await salesOrgRepository.storeSalesOrg(
           salesOrg: e.salesOrganisation.salesOrg.fullName,
         );
@@ -60,6 +65,7 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
               state.copyWith(
                 configs: SalesOrganisationConfigs.empty(),
                 salesOrgFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
               ),
             );
           },
@@ -67,6 +73,7 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
             state.copyWith(
               configs: configs,
               salesOrgFailureOrSuccessOption: none(),
+              isLoading: false,
             ),
           ),
         );

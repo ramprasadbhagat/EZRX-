@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
@@ -18,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -49,25 +52,34 @@ class HomeTab extends StatelessWidget {
       //SingleChildScrollView and Column is needed
       //as the ListView is rebuilding the BrowseProduct & BundleSection
       //and it was recreating the BlocProvider
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AnnouncementWidget(
-              currentPath: const HomeTabRoute().path,
-              key: WidgetKeys.homeTabAnnouncementWidget,
+      body: RefreshIndicator(
+        onRefresh: () async => context.read<SalesOrgBloc>().add(
+              SalesOrgEvent.loadSavedOrganisation(
+                salesOrganisations:
+                    context.read<UserBloc>().state.userSalesOrganisations,
+              ),
             ),
-            const EdiUserBanner(),
-            const AccountSuspendedBanner(),
-            const QuickAccessMenuPanel(),
-            const CarouselBanner(),
-            const ProductsOnOffer(),
-            const BundleSection(),
-            const RecentOrdersSection(),
-            const BrowseProduct(),
-            const TopAdvertBoxBanner(),
-            const KRBanners(),
-            const AnnouncementSection(),
-          ],
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              AnnouncementWidget(
+                currentPath: const HomeTabRoute().path,
+                key: WidgetKeys.homeTabAnnouncementWidget,
+              ),
+              const EdiUserBanner(),
+              const AccountSuspendedBanner(),
+              const QuickAccessMenuPanel(),
+              const CarouselBanner(),
+              const ProductsOnOffer(),
+              const BundleSection(),
+              const RecentOrdersSection(),
+              const BrowseProduct(),
+              const TopAdvertBoxBanner(),
+              const KRBanners(),
+              const AnnouncementSection(),
+            ],
+          ),
         ),
       ),
     );

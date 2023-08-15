@@ -37,6 +37,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
             selectedOrderType: e.selectedOrderType,
+            isLoading: true,
           ),
         );
         final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
@@ -51,6 +52,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
               ),
             );
           },
@@ -58,6 +60,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             emit(
               state.copyWith(
                 failureOrSuccessOption: none(),
+                isLoading: false,
               ),
             );
           },

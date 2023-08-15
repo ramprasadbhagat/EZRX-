@@ -509,6 +509,7 @@ mixin _$EligibilityState {
   OrderDocumentType get selectedOrderType => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EligibilityStateCopyWith<EligibilityState> get copyWith =>
@@ -528,7 +529,8 @@ abstract class $EligibilityStateCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       OrderDocumentType selectedOrderType,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      bool isLoading});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -558,6 +560,7 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
     Object? shipToInfo = null,
     Object? selectedOrderType = null,
     Object? failureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -588,6 +591,10 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -656,7 +663,8 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       OrderDocumentType selectedOrderType,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      bool isLoading});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -690,6 +698,7 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? selectedOrderType = null,
     Object? failureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_EligibilityState(
       user: null == user
@@ -720,6 +729,10 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -734,7 +747,8 @@ class _$_EligibilityState extends _EligibilityState {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.selectedOrderType,
-      required this.failureOrSuccessOption})
+      required this.failureOrSuccessOption,
+      required this.isLoading})
       : super._();
 
   @override
@@ -751,10 +765,12 @@ class _$_EligibilityState extends _EligibilityState {
   final OrderDocumentType selectedOrderType;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading)';
   }
 
   @override
@@ -774,7 +790,9 @@ class _$_EligibilityState extends _EligibilityState {
             (identical(other.selectedOrderType, selectedOrderType) ||
                 other.selectedOrderType == selectedOrderType) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
@@ -786,7 +804,8 @@ class _$_EligibilityState extends _EligibilityState {
       customerCodeInfo,
       shipToInfo,
       selectedOrderType,
-      failureOrSuccessOption);
+      failureOrSuccessOption,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -803,8 +822,8 @@ abstract class _EligibilityState extends EligibilityState {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final OrderDocumentType selectedOrderType,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_EligibilityState;
+      required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      required final bool isLoading}) = _$_EligibilityState;
   const _EligibilityState._() : super._();
 
   @override
@@ -821,6 +840,8 @@ abstract class _EligibilityState extends EligibilityState {
   OrderDocumentType get selectedOrderType;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_EligibilityStateCopyWith<_$_EligibilityState> get copyWith =>

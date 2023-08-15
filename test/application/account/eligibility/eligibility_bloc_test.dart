@@ -156,6 +156,15 @@ void main() {
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
           failureOrSuccessOption: const None(),
+          isLoading: true,
+        ),
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          salesOrganisation: fakeSaleOrg,
+          salesOrgConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeShipToInfo,
+          failureOrSuccessOption: const None(),
         ),
       ],
     );
@@ -198,6 +207,7 @@ void main() {
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
           failureOrSuccessOption: const None(),
+          isLoading: true,
         ),
         EligibilityState.initial().copyWith(
           user: fakeUser,

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -36,9 +37,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
       create: (context) => locator<BannerBloc>(),
       child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
         listenWhen: (previous, current) =>
-            current != CustomerCodeState.initial() &&
-            previous.customerCodeInfo.customerCodeSoldTo !=
-                current.customerCodeInfo.customerCodeSoldTo,
+            previous.isFetching != current.isFetching && !current.isFetching,
         listener: (context, state) {
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
@@ -70,7 +69,9 @@ class _CarouselBannerState extends State<CarouselBanner> {
               ),
             );
           },
-          buildWhen: (previous, current) => previous.banner != current.banner,
+          buildWhen: (previous, current) =>
+              previous.banner != current.banner ||
+              previous.isLoading != current.isLoading,
           builder: (context, state) {
             bannerTimer?.cancel();
             if (state.banner.isEmpty) {
@@ -91,35 +92,39 @@ class _CarouselBannerState extends State<CarouselBanner> {
                       final visiblePercentage = info.visibleFraction * 100;
                       isBannerVisible = visiblePercentage >= 80;
                     },
-                    child: PageView.builder(
-                      key: WidgetKeys.homeBanner,
-                      controller: _controller,
-                      allowImplicitScrolling: true,
-                      itemBuilder: (_, index) {
-                        final banner =
-                            state.banner[index % state.banner.length];
-                        if (isBannerVisible &&
-                            banner != BannerItem.empty() &&
-                            index > 1) {
-                          trackMixpanelEvent(
-                            MixpanelEvents.bannerImpression,
-                            props: {
-                              MixpanelProps.bannerId: banner.id.toString(),
-                              MixpanelProps.bannerTitle: banner.title,
-                            },
-                          );
-                        }
+                    child: state.isLoading
+                        ? const _CarouselBannerLoadingShimmer()
+                        : PageView.builder(
+                            key: WidgetKeys.homeBanner,
+                            controller: _controller,
+                            allowImplicitScrolling: true,
+                            itemBuilder: (_, index) {
+                              final banner =
+                                  state.banner[index % state.banner.length];
+                              if (isBannerVisible &&
+                                  banner != BannerItem.empty() &&
+                                  index > 1) {
+                                trackMixpanelEvent(
+                                  MixpanelEvents.bannerImpression,
+                                  props: {
+                                    MixpanelProps.bannerId:
+                                        banner.id.toString(),
+                                    MixpanelProps.bannerTitle: banner.title,
+                                  },
+                                );
+                              }
 
-                        return CarouselBannerTile(
-                          key: Key(
-                            state.banner[index % state.banner.length].id
-                                .toString(),
+                              return CarouselBannerTile(
+                                key: Key(
+                                  state.banner[index % state.banner.length].id
+                                      .toString(),
+                                ),
+                                bannerPosition: index % state.banner.length,
+                                banner:
+                                    state.banner[index % state.banner.length],
+                              );
+                            },
                           ),
-                          bannerPosition: index % state.banner.length,
-                          banner: state.banner[index % state.banner.length],
-                        );
-                      },
-                    ),
                   ),
                 ),
                 state.banner.isNotEmpty
@@ -234,6 +239,24 @@ class _CircleButton extends StatelessWidget {
         child: Icon(
           iconData,
           color: ZPColors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class _CarouselBannerLoadingShimmer extends StatelessWidget {
+  const _CarouselBannerLoadingShimmer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: LoadingShimmer.withChild(
+        child: Container(
+          color: ZPColors.white,
+          height: 200,
+          width: double.infinity,
         ),
       ),
     );

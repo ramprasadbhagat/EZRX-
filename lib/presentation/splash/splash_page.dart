@@ -610,7 +610,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.salesOrganisation != current.salesOrganisation ||
               previous.configs != current.configs ||
               previous.salesOrgFailureOrSuccessOption !=
-                  current.salesOrgFailureOrSuccessOption,
+                  current.salesOrgFailureOrSuccessOption ||
+              previous.isLoading != current.isLoading,
           listener: (context, state) {
             state.salesOrgFailureOrSuccessOption.fold(
               () {},
@@ -622,34 +623,37 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 (_) {},
               ),
             );
-            if (!state.haveSelectedSalesOrganisation) {
-              _initBlocs(context);
-            }
-            if (state.haveSelectedSalesOrganisation &&
-                state.configs != SalesOrganisationConfigs.empty()) {
-              context.read<AnnouncementInfoBloc>().add(
-                    AnnouncementInfoEvent.fetch(
-                      salesOrg: state.salesOrg,
-                    ),
-                  );
-              context.read<ArticlesInfoBloc>().add(
-                    ArticlesInfoEvent.getArticles(
-                      salesOrg: state.salesOrg,
-                      user: context.read<UserBloc>().state.user,
-                    ),
-                  );
+            if (!state.isLoading) {
+              if (!state.haveSelectedSalesOrganisation) {
+                _initBlocs(context);
+              }
+              if (state.haveSelectedSalesOrganisation &&
+                  state.configs != SalesOrganisationConfigs.empty()) {
+                context.read<AnnouncementInfoBloc>().add(
+                      AnnouncementInfoEvent.fetch(
+                        salesOrg: state.salesOrg,
+                      ),
+                    );
+                context.read<ArticlesInfoBloc>().add(
+                      ArticlesInfoEvent.getArticles(
+                        salesOrg: state.salesOrg,
+                        user: context.read<UserBloc>().state.user,
+                      ),
+                    );
 
-              context.read<CustomerCodeBloc>().add(
-                    CustomerCodeEvent.loadStoredCustomerCode(
-                      hideCustomer: state.hideCustomer,
-                      selectedSalesOrg: state.salesOrganisation,
-                      userInfo: context.read<UserBloc>().state.user,
-                    ),
-                  );
-              context.read<ProductSearchBloc>().add(
-                    const ProductSearchEvent
-                        .fetchProductSearchSuggestionHistory(),
-                  );
+                context.read<CustomerCodeBloc>().add(
+                      CustomerCodeEvent.loadStoredCustomerCode(
+                        hideCustomer: state.hideCustomer,
+                        selectedSalesOrg: state.salesOrganisation,
+                        userInfo: context.read<UserBloc>().state.user,
+                      ),
+                    );
+                context.read<ProductSearchBloc>().add(
+                      const ProductSearchEvent
+                          .fetchProductSearchSuggestionHistory(),
+                    );
+                // context.read<HomePageBloc>().add(const HomePageEvent.refresh());
+              }
             }
           },
         ),
@@ -658,7 +662,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.apiFailureOrSuccessOption !=
                   current.apiFailureOrSuccessOption ||
               previous.customerCodeInfo != current.customerCodeInfo ||
-              previous.shipToInfo != current.shipToInfo,
+              previous.shipToInfo != current.shipToInfo ||
+              (previous.isFetching != current.isFetching &&
+                  !current.isFetching),
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
               () {},

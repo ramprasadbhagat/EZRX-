@@ -955,6 +955,7 @@ mixin _$SalesOrgState {
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrgStateCopyWith<SalesOrgState> get copyWith =>
@@ -971,7 +972,8 @@ abstract class $SalesOrgStateCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
       List<SalesOrganisation> availableSalesOrg,
-      Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
+      bool isLoading});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -994,6 +996,7 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
     Object? configs = null,
     Object? availableSalesOrg = null,
     Object? salesOrgFailureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       salesOrganisation: null == salesOrganisation
@@ -1012,6 +1015,10 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
           ? _value.salesOrgFailureOrSuccessOption
           : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -1044,7 +1051,8 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
       List<SalesOrganisation> availableSalesOrg,
-      Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
+      bool isLoading});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -1067,6 +1075,7 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
     Object? configs = null,
     Object? availableSalesOrg = null,
     Object? salesOrgFailureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_SalesOrgState(
       salesOrganisation: null == salesOrganisation
@@ -1085,6 +1094,10 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
           ? _value.salesOrgFailureOrSuccessOption
           : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1096,7 +1109,8 @@ class _$_SalesOrgState extends _SalesOrgState {
       {required this.salesOrganisation,
       required this.configs,
       required final List<SalesOrganisation> availableSalesOrg,
-      required this.salesOrgFailureOrSuccessOption})
+      required this.salesOrgFailureOrSuccessOption,
+      required this.isLoading})
       : _availableSalesOrg = availableSalesOrg,
         super._();
 
@@ -1115,10 +1129,12 @@ class _$_SalesOrgState extends _SalesOrgState {
 
   @override
   final Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, availableSalesOrg: $availableSalesOrg, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption)';
+    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, availableSalesOrg: $availableSalesOrg, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption, isLoading: $isLoading)';
   }
 
   @override
@@ -1134,7 +1150,9 @@ class _$_SalesOrgState extends _SalesOrgState {
             (identical(other.salesOrgFailureOrSuccessOption,
                     salesOrgFailureOrSuccessOption) ||
                 other.salesOrgFailureOrSuccessOption ==
-                    salesOrgFailureOrSuccessOption));
+                    salesOrgFailureOrSuccessOption) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
@@ -1143,7 +1161,8 @@ class _$_SalesOrgState extends _SalesOrgState {
       salesOrganisation,
       configs,
       const DeepCollectionEquality().hash(_availableSalesOrg),
-      salesOrgFailureOrSuccessOption);
+      salesOrgFailureOrSuccessOption,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -1158,7 +1177,8 @@ abstract class _SalesOrgState extends SalesOrgState {
       required final SalesOrganisationConfigs configs,
       required final List<SalesOrganisation> availableSalesOrg,
       required final Option<Either<ApiFailure, dynamic>>
-          salesOrgFailureOrSuccessOption}) = _$_SalesOrgState;
+          salesOrgFailureOrSuccessOption,
+      required final bool isLoading}) = _$_SalesOrgState;
   const _SalesOrgState._() : super._();
 
   @override
@@ -1169,6 +1189,8 @@ abstract class _SalesOrgState extends SalesOrgState {
   List<SalesOrganisation> get availableSalesOrg;
   @override
   Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>

@@ -8,6 +8,7 @@ class SalesOrgState with _$SalesOrgState {
     required SalesOrganisationConfigs configs,
     required List<SalesOrganisation> availableSalesOrg,
     required Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
+    required bool isLoading,
   }) = _SalesOrgState;
 
   factory SalesOrgState.initial() => SalesOrgState(
@@ -15,6 +16,7 @@ class SalesOrgState with _$SalesOrgState {
         configs: SalesOrganisationConfigs.empty(),
         availableSalesOrg: <SalesOrganisation>[],
         salesOrgFailureOrSuccessOption: none(),
+        isLoading: false,
       );
 
   bool get haveSelectedSalesOrganisation =>

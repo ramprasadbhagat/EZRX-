@@ -408,6 +408,7 @@ mixin _$BannerState {
   List<BannerItem> get banner => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get bannerFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerStateCopyWith<BannerState> get copyWith =>
@@ -422,7 +423,8 @@ abstract class $BannerStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<BannerItem> banner,
-      Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -440,6 +442,7 @@ class _$BannerStateCopyWithImpl<$Res, $Val extends BannerState>
   $Res call({
     Object? banner = null,
     Object? bannerFailureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       banner: null == banner
@@ -450,6 +453,10 @@ class _$BannerStateCopyWithImpl<$Res, $Val extends BannerState>
           ? _value.bannerFailureOrSuccessOption
           : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -464,7 +471,8 @@ abstract class _$$_BannerStateCopyWith<$Res>
   @useResult
   $Res call(
       {List<BannerItem> banner,
-      Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -480,6 +488,7 @@ class __$$_BannerStateCopyWithImpl<$Res>
   $Res call({
     Object? banner = null,
     Object? bannerFailureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_BannerState(
       banner: null == banner
@@ -490,6 +499,10 @@ class __$$_BannerStateCopyWithImpl<$Res>
           ? _value.bannerFailureOrSuccessOption
           : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -499,7 +512,8 @@ class __$$_BannerStateCopyWithImpl<$Res>
 class _$_BannerState implements _BannerState {
   const _$_BannerState(
       {required final List<BannerItem> banner,
-      required this.bannerFailureOrSuccessOption})
+      required this.bannerFailureOrSuccessOption,
+      required this.isLoading})
       : _banner = banner;
 
   final List<BannerItem> _banner;
@@ -512,10 +526,12 @@ class _$_BannerState implements _BannerState {
 
   @override
   final Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'BannerState(banner: $banner, bannerFailureOrSuccessOption: $bannerFailureOrSuccessOption)';
+    return 'BannerState(banner: $banner, bannerFailureOrSuccessOption: $bannerFailureOrSuccessOption, isLoading: $isLoading)';
   }
 
   @override
@@ -527,14 +543,17 @@ class _$_BannerState implements _BannerState {
             (identical(other.bannerFailureOrSuccessOption,
                     bannerFailureOrSuccessOption) ||
                 other.bannerFailureOrSuccessOption ==
-                    bannerFailureOrSuccessOption));
+                    bannerFailureOrSuccessOption) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_banner),
-      bannerFailureOrSuccessOption);
+      bannerFailureOrSuccessOption,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -547,12 +566,15 @@ abstract class _BannerState implements BannerState {
   const factory _BannerState(
       {required final List<BannerItem> banner,
       required final Option<Either<ApiFailure, dynamic>>
-          bannerFailureOrSuccessOption}) = _$_BannerState;
+          bannerFailureOrSuccessOption,
+      required final bool isLoading}) = _$_BannerState;
 
   @override
   List<BannerItem> get banner;
   @override
   Option<Either<ApiFailure, dynamic>> get bannerFailureOrSuccessOption;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_BannerStateCopyWith<_$_BannerState> get copyWith =>

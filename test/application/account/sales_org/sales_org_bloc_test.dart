@@ -66,6 +66,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('mockSalesOrg'),
           ),
+          isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -105,6 +106,7 @@ void main() {
       expect: () => [
         SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),
+          isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
           configs: SalesOrganisationConfigs.empty().copyWith(
@@ -154,6 +156,7 @@ void main() {
       expect: () => [
         SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),
+          isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
           configs: SalesOrganisationConfigs.empty().copyWith(
@@ -204,6 +207,7 @@ void main() {
       expect: () => [
         SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),
+          isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),

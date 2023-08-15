@@ -157,8 +157,8 @@ void main() {
 
       final expectedCustomerCodeInfo = [
         CustomerCodeState.initial()
-            .copyWith(customerCodeInfo: fakeCustomerCodeInfo),
-        CustomerCodeState.initial(),
+            .copyWith(customerCodeInfo: fakeCustomerCodeInfo, isFetching: true),
+        CustomerCodeState.initial().copyWith(isFetching: false),
       ];
       whenListen(
         mockCustomerCodeBloc,

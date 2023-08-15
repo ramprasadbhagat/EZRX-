@@ -101,6 +101,11 @@ void main() {
       expect: () => [
         BannerState.initial().copyWith(
           banner: [BannerItem.empty()],
+          bannerFailureOrSuccessOption: none(),
+          isLoading: true,
+        ),
+        BannerState.initial().copyWith(
+          banner: [BannerItem.empty()],
           bannerFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
         )
@@ -141,6 +146,13 @@ void main() {
             BannerItem.empty(),
           ],
           bannerFailureOrSuccessOption: none(),
+          isLoading: true,
+        ),
+        BannerState.initial().copyWith(
+          banner: [
+            BannerItem.empty(),
+          ],
+          bannerFailureOrSuccessOption: none(),
         )
       ],
     );
@@ -174,6 +186,12 @@ void main() {
         );
       },
       expect: () => [
+        BannerState.initial().copyWith(
+          banner: [
+            BannerItem.empty(),
+          ],
+          isLoading: true,
+        ),
         BannerState.initial().copyWith(
           banner: [
             BannerItem.empty(),

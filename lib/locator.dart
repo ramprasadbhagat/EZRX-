@@ -3182,6 +3182,7 @@ void setupLocator() {
       contactUsRepository: locator<ContactUsRepository>(),
     ),
   );
+
   //============================================================
   //  Notification
   //
