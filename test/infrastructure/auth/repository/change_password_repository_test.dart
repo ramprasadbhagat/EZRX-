@@ -7,7 +7,6 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
@@ -29,8 +28,6 @@ class FirebaseAnalyticsMock extends Mock implements FirebaseAnalytics {}
 class MockTokenStorage extends Mock implements TokenStorage {}
 
 class CredStorageMock extends Mock implements CredStorage {}
-
-class CartStorageMock extends Mock implements CartStorage {}
 
 class AccountSelectorStorageMock extends Mock
     implements AccountSelectorStorage {}

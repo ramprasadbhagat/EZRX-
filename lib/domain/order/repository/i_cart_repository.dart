@@ -7,8 +7,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -20,64 +18,9 @@ abstract class ICartRepository {
     required List<MaterialNumber> materialNumbers,
   });
 
-  Either<ApiFailure, List<CartItem>> fetchCart();
-
   //TODO: evaluate which methods will be removed with addition to this
   Future<Either<ApiFailure, Unit>> clearCart();
 
-  Future<Either<ApiFailure, List<CartItem>>> clearCartOnlySelectedItems({
-    required List<String> selectedItemIds,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> addItemToCart({
-    required CartItem cartItem,
-    required bool override,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required bool doNotAllowOutOfStockMaterials,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> updateMaterialQtyInCartItem({
-    required CartItem cartItem,
-    required PriceAggregate updatedQtyItem,
-    required bool override,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required bool doNotAllowOutOfStockMaterials,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> discountOverride({
-    required CartItem cartItem,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> deleteFromCart({
-    required CartItem item,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> addRemarkToCartItem({
-    required CartItem item,
-    required String remarkMessage,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> addBonusToCartItem({
-    required CartItem item,
-    required MaterialItemBonus newBonus,
-    required bool overrideQty,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required bool doNotAllowOutOfStockMaterials,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> deleteBonusFromCartItem({
-    required CartItem item,
-    required MaterialItemBonus deletedBonus,
-  });
   Future<Either<ApiFailure, List<PriceAggregate>>> updateMaterialDealBonus({
     required List<PriceAggregate> materials,
     required CustomerCodeInfo customerCodeInfo,
@@ -86,27 +29,8 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, List<CartItem>>> addRemarkToBonusItem({
-    required CartItem item,
-    required MaterialItemBonus bonus,
-    required String remarkMessage,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> overrideCartItemPrice({
-    required CartItem item,
-    required List<Price> overridePriceList,
-  });
-
   List<CartItem> updateDiscountQty({
     required List<CartItem> items,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> updateSelectionInCart({
-    required CartItem updatedItem,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> updateAllSelectionInCart({
-    required List<CartItem> currentCart,
   });
 
   Future<Either<ApiFailure, List<CartItem>>> saveToCartWithUpdatedStockInfo({
@@ -132,20 +56,6 @@ abstract class ICartRepository {
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> replaceCartWithItems({
-    required List<CartItem> items,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required bool doNotAllowOutOfStockMaterials,
-  });
-
-  Future<Either<ApiFailure, List<CartItem>>> updatedBatchInCartItem({
-    required CartItem item,
-    required StockInfo stockInfo,
   });
 
   //TODO: evaluate which methods will be removed with addition to this

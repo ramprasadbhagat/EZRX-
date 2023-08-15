@@ -10,20 +10,21 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -103,7 +104,9 @@ class _CartPageState extends State<CartPage> {
       },
       child: BlocConsumer<CartBloc, CartState>(
         listenWhen: (previous, current) =>
-            previous.cartProducts.length != current.cartProducts.length,
+            previous.cartProducts.length != current.cartProducts.length &&
+            (previous.isUpserting != current.isUpserting ||
+                previous.isClearing != current.isClearing),
         listener: (context, state) {
           if (state.cartProducts.isEmpty) {
             context.read<AdditionalDetailsBloc>().add(
@@ -202,68 +205,137 @@ class _CartScrollList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: ScrollList<PriceAggregate>(
-          noRecordFoundWidget: NoRecordFound(
-            title: 'Your cart is empty'.tr(),
-            subTitle:
-                'Looks like you haven’t added anything to your cart yet.'.tr(),
-            actionButton: ElevatedButton(
-              key: WidgetKeys.startBrowsingProducts,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(
-                  double.maxFinite,
-                  50,
-                ),
-              ),
-              onPressed: () {
-                context.router.popUntilRouteWithPath('main');
-                context.router.pushNamed('main/products');
-              },
-              child: const Text('Start browsing').tr(),
-            ),
-            svgImage: SvgImage.shoppingCart,
-          ),
-          controller: ScrollController(),
-          onRefresh: () {},
-          isLoading: state.isFetching && state.cartProducts.isEmpty ||
-              state.isClearing,
-          itemBuilder: (context, index, item) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                index == 0 ||
-                        state.cartProducts[index].materialInfo.principalData
-                                .principalName
-                                .getValue() !=
-                            state.cartProducts[index - 1].materialInfo
-                                .principalData.principalName
-                                .getValue()
-                    ? _ManufacturerName(
-                        cartProduct: item.materialInfo,
-                      )
-                    : const SizedBox(),
-                item.materialInfo.type.typeBundle
-                    ? CartProductBundle(
-                        cartItem: item,
-                      )
-                    : CartProductTile(
-                        cartItem: item,
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.cartProducts.length != current.cartProducts.length,
+      listener: (context, state) {
+        state.apiFailureOrSuccessOption.fold(
+          () {
+            if (!state.isFetching) {
+              if (context.read<CartBloc>().state.cartProducts.isNotEmpty) {
+                context.read<MaterialPriceBloc>().add(
+                      MaterialPriceEvent.fetchPriceCartProduct(
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        salesConfigs:
+                            context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<CustomerCodeBloc>().state.shipToInfo,
+                        comboDealEligible: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .comboDealEligible,
+                        products: context
+                            .read<CartBloc>()
+                            .state
+                            .cartProducts
+                            .where(
+                              (element) =>
+                                  !element.materialInfo.type.typeBundle,
+                            )
+                            .map((e) => e.materialInfo)
+                            .toList(),
                       ),
-                state.cartProducts[index].addedBonusList.isNotEmpty
-                    ? CartProductTileBonus(
-                        cartItem: item,
-                        index: index,
-                      )
-                    : const SizedBox.shrink(),
-              ],
-            );
+                    );
+              }
+            }
           },
-          items: state.cartProducts,
-        ),
-      ),
+          (either) => {},
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.cartProducts.length != current.cartProducts.length ||
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
+        return Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: state.isFetching && state.cartProducts.isEmpty
+                ? LoadingShimmer.logo(
+                    key: WidgetKeys.loaderImage,
+                  )
+                : ScrollList<PriceAggregate>(
+                    noRecordFoundWidget: NoRecordFound(
+                      title: 'Your cart is empty'.tr(),
+                      subTitle:
+                          'Looks like you haven’t added anything to your cart yet.'
+                              .tr(),
+                      actionButton: ElevatedButton(
+                        key: WidgetKeys.startBrowsingProducts,
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(
+                            double.maxFinite,
+                            50,
+                          ),
+                        ),
+                        onPressed: () {
+                          context.router.popUntilRouteWithPath('main');
+                          context.router.pushNamed('main/products');
+                        },
+                        child: const Text('Start browsing').tr(),
+                      ),
+                      svgImage: SvgImage.shoppingCart,
+                    ),
+                    controller: ScrollController(),
+                    onRefresh: () => context.read<CartBloc>().add(
+                          CartEvent.fetchProductsAddedToCart(
+                            salesOrg: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            config: context.read<SalesOrgBloc>().state.configs,
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            shipToInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .shipToInfo,
+                            comboDealEligible: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .comboDealEligible,
+                          ),
+                        ),
+                    isLoading: state.isFetching && state.cartProducts.isEmpty ||
+                        state.isClearing,
+                    itemBuilder: (context, index, item) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          state.showManufacturerName(index)
+                              ? _ManufacturerName(
+                                  cartProduct: item.materialInfo,
+                                )
+                              : const SizedBox(),
+                          item.materialInfo.type.typeBundle
+                              ? CartProductBundle(
+                                  cartItem: item,
+                                )
+                              : CartProductTile(
+                                  cartItem: item,
+                                ),
+                          state.cartProducts[index].addedBonusList.isNotEmpty
+                              ? CartProductTileBonus(
+                                  cartItem: item,
+                                  index: index,
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      );
+                    },
+                    items: state.cartProducts,
+                  ),
+          ),
+        );
+      },
     );
   }
 }

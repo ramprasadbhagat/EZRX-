@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,8 +14,6 @@ import 'package:mocktail/mocktail.dart';
 
 class OrderDocumentTypeRepositoryMock extends Mock
     implements OrderDocumentTypeRepository {}
-
-class CartStorageMock extends Mock implements CartStorage {}
 
 void main() {
   final orderDocumentTypeRepository = OrderDocumentTypeRepositoryMock();

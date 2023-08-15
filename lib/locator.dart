@@ -215,7 +215,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -521,7 +520,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => CredStorage(secureStorage: locator<SecureStorage>()),
   );
-  locator.registerLazySingleton(() => CartStorage());
   locator.registerLazySingleton(() => SettingStorage());
   locator.registerLazySingleton(() => OrderStorage());
   locator.registerLazySingleton(
@@ -604,7 +602,6 @@ void setupLocator() {
       localDataSource: locator<AuthLocalDataSource>(),
       tokenStorage: locator<TokenStorage>(),
       credStorage: locator<CredStorage>(),
-      cartStorage: locator<CartStorage>(),
       settingStorage: locator<SettingStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
       pushNotificationService: locator<PushNotificationService>(),
@@ -1851,7 +1848,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => CartRepository(
       mixpanelService: locator<MixpanelService>(),
-      cartStorage: locator<CartStorage>(),
       config: locator<Config>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),

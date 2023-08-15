@@ -20,24 +20,6 @@ mixin _$CartEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -47,16 +29,6 @@ mixin _$CartEvent {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -64,7 +36,6 @@ mixin _$CartEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -84,11 +55,7 @@ mixin _$CartEvent {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -99,7 +66,13 @@ mixin _$CartEvent {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -139,24 +112,6 @@ mixin _$CartEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -166,16 +121,6 @@ mixin _$CartEvent {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -183,7 +128,6 @@ mixin _$CartEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -202,10 +146,7 @@ mixin _$CartEvent {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -216,7 +157,13 @@ mixin _$CartEvent {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -256,24 +203,6 @@ mixin _$CartEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -283,16 +212,6 @@ mixin _$CartEvent {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -300,7 +219,6 @@ mixin _$CartEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -319,10 +237,7 @@ mixin _$CartEvent {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -332,7 +247,13 @@ mixin _$CartEvent {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -372,15 +293,9 @@ mixin _$CartEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -388,12 +303,7 @@ mixin _$CartEvent {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -411,24 +321,14 @@ mixin _$CartEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -444,24 +344,14 @@ mixin _$CartEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -533,24 +423,6 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -560,16 +432,6 @@ class _$_Initialized implements _Initialized {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -577,7 +439,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -597,11 +458,7 @@ class _$_Initialized implements _Initialized {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -612,7 +469,13 @@ class _$_Initialized implements _Initialized {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -655,24 +518,6 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -682,16 +527,6 @@ class _$_Initialized implements _Initialized {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -699,7 +534,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -718,10 +552,7 @@ class _$_Initialized implements _Initialized {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -732,7 +563,13 @@ class _$_Initialized implements _Initialized {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -775,24 +612,6 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -802,16 +621,6 @@ class _$_Initialized implements _Initialized {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -819,7 +628,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -838,10 +646,7 @@ class _$_Initialized implements _Initialized {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -851,7 +656,13 @@ class _$_Initialized implements _Initialized {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -897,15 +708,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -913,12 +718,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -939,24 +739,14 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -975,24 +765,14 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -1013,1969 +793,6 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements CartEvent {
   const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisationConfigs salesOrganisationConfigs,
-      SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      bool doNotAllowOutOfStockMaterials,
-      bool comboDealEligible,
-      bool isSpecialOrderType});
-
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-}
-
-/// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisationConfigs = null,
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? doNotAllowOutOfStockMaterials = null,
-    Object? comboDealEligible = null,
-    Object? isSpecialOrderType = null,
-  }) {
-    return _then(_$_Fetch(
-      salesOrganisationConfigs: null == salesOrganisationConfigs
-          ? _value.salesOrganisationConfigs
-          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      doNotAllowOutOfStockMaterials: null == doNotAllowOutOfStockMaterials
-          ? _value.doNotAllowOutOfStockMaterials
-          : doNotAllowOutOfStockMaterials // ignore: cast_nullable_to_non_nullable
-              as bool,
-      comboDealEligible: null == comboDealEligible
-          ? _value.comboDealEligible
-          : comboDealEligible // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSpecialOrderType: null == isSpecialOrderType
-          ? _value.isSpecialOrderType
-          : isSpecialOrderType // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(
-        _value.salesOrganisationConfigs, (value) {
-      return _then(_value.copyWith(salesOrganisationConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required this.salesOrganisationConfigs,
-      required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.doNotAllowOutOfStockMaterials,
-      required this.comboDealEligible,
-      this.isSpecialOrderType = false});
-
-  @override
-  final SalesOrganisationConfigs salesOrganisationConfigs;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final bool doNotAllowOutOfStockMaterials;
-  @override
-  final bool comboDealEligible;
-  @override
-  @JsonKey()
-  final bool isSpecialOrderType;
-
-  @override
-  String toString() {
-    return 'CartEvent.fetch(salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotAllowOutOfStockMaterials: $doNotAllowOutOfStockMaterials, comboDealEligible: $comboDealEligible, isSpecialOrderType: $isSpecialOrderType)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
-            (identical(
-                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
-                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.doNotAllowOutOfStockMaterials,
-                    doNotAllowOutOfStockMaterials) ||
-                other.doNotAllowOutOfStockMaterials ==
-                    doNotAllowOutOfStockMaterials) &&
-            (identical(other.comboDealEligible, comboDealEligible) ||
-                other.comboDealEligible == comboDealEligible) &&
-            (identical(other.isSpecialOrderType, isSpecialOrderType) ||
-                other.isSpecialOrderType == isSpecialOrderType));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      salesOrganisationConfigs,
-      salesOrganisation,
-      customerCodeInfo,
-      shipToInfo,
-      doNotAllowOutOfStockMaterials,
-      comboDealEligible,
-      isSpecialOrderType);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return fetch(
-        salesOrganisationConfigs,
-        salesOrganisation,
-        customerCodeInfo,
-        shipToInfo,
-        doNotAllowOutOfStockMaterials,
-        comboDealEligible,
-        isSpecialOrderType);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return fetch?.call(
-        salesOrganisationConfigs,
-        salesOrganisation,
-        customerCodeInfo,
-        shipToInfo,
-        doNotAllowOutOfStockMaterials,
-        comboDealEligible,
-        isSpecialOrderType);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (fetch != null) {
-      return fetch(
-          salesOrganisationConfigs,
-          salesOrganisation,
-          customerCodeInfo,
-          shipToInfo,
-          doNotAllowOutOfStockMaterials,
-          comboDealEligible,
-          isSpecialOrderType);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return fetch(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return fetch?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (fetch != null) {
-      return fetch(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Fetch implements CartEvent {
-  const factory _Fetch(
-      {required final SalesOrganisationConfigs salesOrganisationConfigs,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final bool doNotAllowOutOfStockMaterials,
-      required final bool comboDealEligible,
-      final bool isSpecialOrderType}) = _$_Fetch;
-
-  SalesOrganisationConfigs get salesOrganisationConfigs;
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  bool get doNotAllowOutOfStockMaterials;
-  bool get comboDealEligible;
-  bool get isSpecialOrderType;
-  @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_DiscountOverrideCopyWith<$Res> {
-  factory _$$_DiscountOverrideCopyWith(
-          _$_DiscountOverride value, $Res Function(_$_DiscountOverride) then) =
-      __$$_DiscountOverrideCopyWithImpl<$Res>;
-  @useResult
-  $Res call({PriceAggregate item});
-
-  $PriceAggregateCopyWith<$Res> get item;
-}
-
-/// @nodoc
-class __$$_DiscountOverrideCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_DiscountOverride>
-    implements _$$_DiscountOverrideCopyWith<$Res> {
-  __$$_DiscountOverrideCopyWithImpl(
-      _$_DiscountOverride _value, $Res Function(_$_DiscountOverride) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? item = null,
-  }) {
-    return _then(_$_DiscountOverride(
-      item: null == item
-          ? _value.item
-          : item // ignore: cast_nullable_to_non_nullable
-              as PriceAggregate,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PriceAggregateCopyWith<$Res> get item {
-    return $PriceAggregateCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_DiscountOverride implements _DiscountOverride {
-  const _$_DiscountOverride({required this.item});
-
-  @override
-  final PriceAggregate item;
-
-  @override
-  String toString() {
-    return 'CartEvent.discountOverride(item: $item)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_DiscountOverride &&
-            (identical(other.item, item) || other.item == item));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, item);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_DiscountOverrideCopyWith<_$_DiscountOverride> get copyWith =>
-      __$$_DiscountOverrideCopyWithImpl<_$_DiscountOverride>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return discountOverride(item);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return discountOverride?.call(item);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (discountOverride != null) {
-      return discountOverride(item);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return discountOverride(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return discountOverride?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (discountOverride != null) {
-      return discountOverride(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DiscountOverride implements CartEvent {
-  const factory _DiscountOverride({required final PriceAggregate item}) =
-      _$_DiscountOverride;
-
-  PriceAggregate get item;
-  @JsonKey(ignore: true)
-  _$$_DiscountOverrideCopyWith<_$_DiscountOverride> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_AddBundleToCartCopyWith<$Res> {
-  factory _$$_AddBundleToCartCopyWith(
-          _$_AddBundleToCart value, $Res Function(_$_AddBundleToCart) then) =
-      __$$_AddBundleToCartCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {List<PriceAggregate> bundleItems,
-      SalesOrganisationConfigs salesOrganisationConfigs,
-      SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      bool doNotallowOutOfStockMaterial});
-
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-}
-
-/// @nodoc
-class __$$_AddBundleToCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_AddBundleToCart>
-    implements _$$_AddBundleToCartCopyWith<$Res> {
-  __$$_AddBundleToCartCopyWithImpl(
-      _$_AddBundleToCart _value, $Res Function(_$_AddBundleToCart) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? bundleItems = null,
-    Object? salesOrganisationConfigs = null,
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? doNotallowOutOfStockMaterial = null,
-  }) {
-    return _then(_$_AddBundleToCart(
-      bundleItems: null == bundleItems
-          ? _value._bundleItems
-          : bundleItems // ignore: cast_nullable_to_non_nullable
-              as List<PriceAggregate>,
-      salesOrganisationConfigs: null == salesOrganisationConfigs
-          ? _value.salesOrganisationConfigs
-          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      doNotallowOutOfStockMaterial: null == doNotallowOutOfStockMaterial
-          ? _value.doNotallowOutOfStockMaterial
-          : doNotallowOutOfStockMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(
-        _value.salesOrganisationConfigs, (value) {
-      return _then(_value.copyWith(salesOrganisationConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_AddBundleToCart implements _AddBundleToCart {
-  const _$_AddBundleToCart(
-      {required final List<PriceAggregate> bundleItems,
-      required this.salesOrganisationConfigs,
-      required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.doNotallowOutOfStockMaterial})
-      : _bundleItems = bundleItems;
-
-  final List<PriceAggregate> _bundleItems;
-  @override
-  List<PriceAggregate> get bundleItems {
-    if (_bundleItems is EqualUnmodifiableListView) return _bundleItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bundleItems);
-  }
-
-  @override
-  final SalesOrganisationConfigs salesOrganisationConfigs;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final bool doNotallowOutOfStockMaterial;
-
-  @override
-  String toString() {
-    return 'CartEvent.addBundleToCart(bundleItems: $bundleItems, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotallowOutOfStockMaterial: $doNotallowOutOfStockMaterial)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AddBundleToCart &&
-            const DeepCollectionEquality()
-                .equals(other._bundleItems, _bundleItems) &&
-            (identical(
-                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
-                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.doNotallowOutOfStockMaterial,
-                    doNotallowOutOfStockMaterial) ||
-                other.doNotallowOutOfStockMaterial ==
-                    doNotallowOutOfStockMaterial));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_bundleItems),
-      salesOrganisationConfigs,
-      salesOrganisation,
-      customerCodeInfo,
-      shipToInfo,
-      doNotallowOutOfStockMaterial);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AddBundleToCartCopyWith<_$_AddBundleToCart> get copyWith =>
-      __$$_AddBundleToCartCopyWithImpl<_$_AddBundleToCart>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return addBundleToCart(
-        bundleItems,
-        salesOrganisationConfigs,
-        salesOrganisation,
-        customerCodeInfo,
-        shipToInfo,
-        doNotallowOutOfStockMaterial);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return addBundleToCart?.call(
-        bundleItems,
-        salesOrganisationConfigs,
-        salesOrganisation,
-        customerCodeInfo,
-        shipToInfo,
-        doNotallowOutOfStockMaterial);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (addBundleToCart != null) {
-      return addBundleToCart(
-          bundleItems,
-          salesOrganisationConfigs,
-          salesOrganisation,
-          customerCodeInfo,
-          shipToInfo,
-          doNotallowOutOfStockMaterial);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return addBundleToCart(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return addBundleToCart?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (addBundleToCart != null) {
-      return addBundleToCart(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddBundleToCart implements CartEvent {
-  const factory _AddBundleToCart(
-      {required final List<PriceAggregate> bundleItems,
-      required final SalesOrganisationConfigs salesOrganisationConfigs,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final bool doNotallowOutOfStockMaterial}) = _$_AddBundleToCart;
-
-  List<PriceAggregate> get bundleItems;
-  SalesOrganisationConfigs get salesOrganisationConfigs;
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  bool get doNotallowOutOfStockMaterial;
-  @JsonKey(ignore: true)
-  _$$_AddBundleToCartCopyWith<_$_AddBundleToCart> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3171,24 +988,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -3198,16 +997,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3215,7 +1004,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -3235,11 +1023,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3250,7 +1034,13 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3300,24 +1090,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -3327,16 +1099,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3344,7 +1106,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -3363,10 +1124,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3377,7 +1135,13 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3427,24 +1191,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -3454,16 +1200,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3471,7 +1207,6 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -3490,10 +1225,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3503,7 +1235,13 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3556,15 +1294,9 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -3572,12 +1304,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -3598,24 +1325,14 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -3634,24 +1351,14 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -3690,751 +1397,6 @@ abstract class _AddComboDealToCart implements CartEvent {
   @JsonKey(ignore: true)
   _$$_AddComboDealToCartCopyWith<_$_AddComboDealToCart> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_UpdateMaterialQtyInCartItemCopyWith<$Res> {
-  factory _$$_UpdateMaterialQtyInCartItemCopyWith(
-          _$_UpdateMaterialQtyInCartItem value,
-          $Res Function(_$_UpdateMaterialQtyInCartItem) then) =
-      __$$_UpdateMaterialQtyInCartItemCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {CartItem currentItem,
-      PriceAggregate updatedQtyItem,
-      bool overrideQty,
-      SalesOrganisationConfigs salesOrganisationConfigs,
-      SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      bool doNotallowOutOfStockMaterial});
-
-  $CartItemCopyWith<$Res> get currentItem;
-  $PriceAggregateCopyWith<$Res> get updatedQtyItem;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-}
-
-/// @nodoc
-class __$$_UpdateMaterialQtyInCartItemCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdateMaterialQtyInCartItem>
-    implements _$$_UpdateMaterialQtyInCartItemCopyWith<$Res> {
-  __$$_UpdateMaterialQtyInCartItemCopyWithImpl(
-      _$_UpdateMaterialQtyInCartItem _value,
-      $Res Function(_$_UpdateMaterialQtyInCartItem) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? currentItem = null,
-    Object? updatedQtyItem = null,
-    Object? overrideQty = null,
-    Object? salesOrganisationConfigs = null,
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? doNotallowOutOfStockMaterial = null,
-  }) {
-    return _then(_$_UpdateMaterialQtyInCartItem(
-      currentItem: null == currentItem
-          ? _value.currentItem
-          : currentItem // ignore: cast_nullable_to_non_nullable
-              as CartItem,
-      updatedQtyItem: null == updatedQtyItem
-          ? _value.updatedQtyItem
-          : updatedQtyItem // ignore: cast_nullable_to_non_nullable
-              as PriceAggregate,
-      overrideQty: null == overrideQty
-          ? _value.overrideQty
-          : overrideQty // ignore: cast_nullable_to_non_nullable
-              as bool,
-      salesOrganisationConfigs: null == salesOrganisationConfigs
-          ? _value.salesOrganisationConfigs
-          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      doNotallowOutOfStockMaterial: null == doNotallowOutOfStockMaterial
-          ? _value.doNotallowOutOfStockMaterial
-          : doNotallowOutOfStockMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CartItemCopyWith<$Res> get currentItem {
-    return $CartItemCopyWith<$Res>(_value.currentItem, (value) {
-      return _then(_value.copyWith(currentItem: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PriceAggregateCopyWith<$Res> get updatedQtyItem {
-    return $PriceAggregateCopyWith<$Res>(_value.updatedQtyItem, (value) {
-      return _then(_value.copyWith(updatedQtyItem: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(
-        _value.salesOrganisationConfigs, (value) {
-      return _then(_value.copyWith(salesOrganisationConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
-  const _$_UpdateMaterialQtyInCartItem(
-      {required this.currentItem,
-      required this.updatedQtyItem,
-      this.overrideQty = true,
-      required this.salesOrganisationConfigs,
-      required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.doNotallowOutOfStockMaterial});
-
-  @override
-  final CartItem currentItem;
-  @override
-  final PriceAggregate updatedQtyItem;
-  @override
-  @JsonKey()
-  final bool overrideQty;
-  @override
-  final SalesOrganisationConfigs salesOrganisationConfigs;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final bool doNotallowOutOfStockMaterial;
-
-  @override
-  String toString() {
-    return 'CartEvent.updateMaterialQtyInCartItem(currentItem: $currentItem, updatedQtyItem: $updatedQtyItem, overrideQty: $overrideQty, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotallowOutOfStockMaterial: $doNotallowOutOfStockMaterial)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_UpdateMaterialQtyInCartItem &&
-            (identical(other.currentItem, currentItem) ||
-                other.currentItem == currentItem) &&
-            (identical(other.updatedQtyItem, updatedQtyItem) ||
-                other.updatedQtyItem == updatedQtyItem) &&
-            (identical(other.overrideQty, overrideQty) ||
-                other.overrideQty == overrideQty) &&
-            (identical(
-                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
-                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.doNotallowOutOfStockMaterial,
-                    doNotallowOutOfStockMaterial) ||
-                other.doNotallowOutOfStockMaterial ==
-                    doNotallowOutOfStockMaterial));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentItem,
-      updatedQtyItem,
-      overrideQty,
-      salesOrganisationConfigs,
-      salesOrganisation,
-      customerCodeInfo,
-      shipToInfo,
-      doNotallowOutOfStockMaterial);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_UpdateMaterialQtyInCartItemCopyWith<_$_UpdateMaterialQtyInCartItem>
-      get copyWith => __$$_UpdateMaterialQtyInCartItemCopyWithImpl<
-          _$_UpdateMaterialQtyInCartItem>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return updateMaterialQtyInCartItem(
-        currentItem,
-        updatedQtyItem,
-        overrideQty,
-        salesOrganisationConfigs,
-        salesOrganisation,
-        customerCodeInfo,
-        shipToInfo,
-        doNotallowOutOfStockMaterial);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return updateMaterialQtyInCartItem?.call(
-        currentItem,
-        updatedQtyItem,
-        overrideQty,
-        salesOrganisationConfigs,
-        salesOrganisation,
-        customerCodeInfo,
-        shipToInfo,
-        doNotallowOutOfStockMaterial);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (updateMaterialQtyInCartItem != null) {
-      return updateMaterialQtyInCartItem(
-          currentItem,
-          updatedQtyItem,
-          overrideQty,
-          salesOrganisationConfigs,
-          salesOrganisation,
-          customerCodeInfo,
-          shipToInfo,
-          doNotallowOutOfStockMaterial);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return updateMaterialQtyInCartItem(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return updateMaterialQtyInCartItem?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (updateMaterialQtyInCartItem != null) {
-      return updateMaterialQtyInCartItem(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateMaterialQtyInCartItem implements CartEvent {
-  const factory _UpdateMaterialQtyInCartItem(
-          {required final CartItem currentItem,
-          required final PriceAggregate updatedQtyItem,
-          final bool overrideQty,
-          required final SalesOrganisationConfigs salesOrganisationConfigs,
-          required final SalesOrganisation salesOrganisation,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final bool doNotallowOutOfStockMaterial}) =
-      _$_UpdateMaterialQtyInCartItem;
-
-  CartItem get currentItem;
-  PriceAggregate get updatedQtyItem;
-  bool get overrideQty;
-  SalesOrganisationConfigs get salesOrganisationConfigs;
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  bool get doNotallowOutOfStockMaterial;
-  @JsonKey(ignore: true)
-  _$$_UpdateMaterialQtyInCartItemCopyWith<_$_UpdateMaterialQtyInCartItem>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -4624,24 +1586,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -4651,16 +1595,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4668,7 +1602,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -4688,11 +1621,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4703,7 +1632,13 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4747,24 +1682,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -4774,16 +1691,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4791,7 +1698,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -4810,10 +1716,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4824,7 +1727,13 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4868,24 +1777,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -4895,16 +1786,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4912,7 +1793,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -4931,10 +1811,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4944,7 +1821,13 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4991,15 +1874,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -5007,12 +1884,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -5033,24 +1905,14 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -5069,24 +1931,14 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -5124,570 +1976,6 @@ abstract class _VerifyMaterialDealBonus implements CartEvent {
   @JsonKey(ignore: true)
   _$$_VerifyMaterialDealBonusCopyWith<_$_VerifyMaterialDealBonus>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_RemoveFromCartCopyWith<$Res> {
-  factory _$$_RemoveFromCartCopyWith(
-          _$_RemoveFromCart value, $Res Function(_$_RemoveFromCart) then) =
-      __$$_RemoveFromCartCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CartItem item});
-
-  $CartItemCopyWith<$Res> get item;
-}
-
-/// @nodoc
-class __$$_RemoveFromCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_RemoveFromCart>
-    implements _$$_RemoveFromCartCopyWith<$Res> {
-  __$$_RemoveFromCartCopyWithImpl(
-      _$_RemoveFromCart _value, $Res Function(_$_RemoveFromCart) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? item = null,
-  }) {
-    return _then(_$_RemoveFromCart(
-      item: null == item
-          ? _value.item
-          : item // ignore: cast_nullable_to_non_nullable
-              as CartItem,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CartItemCopyWith<$Res> get item {
-    return $CartItemCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_RemoveFromCart implements _RemoveFromCart {
-  const _$_RemoveFromCart({required this.item});
-
-  @override
-  final CartItem item;
-
-  @override
-  String toString() {
-    return 'CartEvent.removeFromCart(item: $item)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RemoveFromCart &&
-            (identical(other.item, item) || other.item == item));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, item);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RemoveFromCartCopyWith<_$_RemoveFromCart> get copyWith =>
-      __$$_RemoveFromCartCopyWithImpl<_$_RemoveFromCart>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return removeFromCart(item);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return removeFromCart?.call(item);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (removeFromCart != null) {
-      return removeFromCart(item);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return removeFromCart(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return removeFromCart?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (removeFromCart != null) {
-      return removeFromCart(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _RemoveFromCart implements CartEvent {
-  const factory _RemoveFromCart({required final CartItem item}) =
-      _$_RemoveFromCart;
-
-  CartItem get item;
-  @JsonKey(ignore: true)
-  _$$_RemoveFromCartCopyWith<_$_RemoveFromCart> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -5775,24 +2063,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -5802,16 +2072,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5819,7 +2079,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -5839,11 +2098,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5854,7 +2109,13 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5897,24 +2158,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -5924,16 +2167,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5941,7 +2174,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -5960,10 +2192,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5974,7 +2203,13 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6017,24 +2252,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -6044,16 +2261,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6061,7 +2268,6 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -6080,10 +2286,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6093,7 +2296,13 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6139,15 +2348,9 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -6155,12 +2358,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -6181,24 +2379,14 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -6217,24 +2405,14 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -6480,24 +2658,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -6507,16 +2667,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6524,7 +2674,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -6544,11 +2693,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6559,7 +2704,13 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6610,24 +2761,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -6637,16 +2770,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6654,7 +2777,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -6673,10 +2795,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6687,7 +2806,13 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6738,24 +2863,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -6765,16 +2872,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6782,7 +2879,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -6801,10 +2897,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6814,7 +2907,13 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6868,15 +2967,9 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -6884,12 +2977,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -6910,24 +2998,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -6946,24 +3024,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -7104,24 +3172,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -7131,16 +3181,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7148,7 +3188,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -7168,11 +3207,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7183,7 +3218,13 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7226,24 +3267,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -7253,16 +3276,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7270,7 +3283,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -7289,10 +3301,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7303,7 +3312,13 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7346,24 +3361,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -7373,16 +3370,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7390,7 +3377,6 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -7409,10 +3395,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7422,7 +3405,13 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7468,15 +3457,9 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -7484,12 +3467,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -7510,24 +3488,14 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -7546,24 +3514,14 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -7698,24 +3656,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -7725,16 +3665,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7742,7 +3672,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -7762,11 +3691,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7777,7 +3702,13 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7820,24 +3751,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -7847,16 +3760,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7864,7 +3767,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -7883,10 +3785,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7897,7 +3796,13 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7940,24 +3845,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -7967,16 +3854,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7984,7 +3861,6 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -8003,10 +3879,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8016,7 +3889,13 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8062,15 +3941,9 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -8078,12 +3951,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -8104,24 +3972,14 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -8140,24 +3998,14 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -8286,24 +4134,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -8313,16 +4143,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8330,7 +4150,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -8350,11 +4169,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8365,7 +4180,13 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8408,24 +4229,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -8435,16 +4238,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8452,7 +4245,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -8471,10 +4263,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8485,7 +4274,13 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8528,24 +4323,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -8555,16 +4332,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8572,7 +4339,6 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -8591,10 +4357,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8604,7 +4367,13 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8650,15 +4419,9 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -8666,12 +4429,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -8692,24 +4450,14 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -8728,24 +4476,14 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -8774,1094 +4512,6 @@ abstract class _OverrideCartItemPrice implements CartEvent {
   @JsonKey(ignore: true)
   _$$_OverrideCartItemPriceCopyWith<_$_OverrideCartItemPrice> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_SelectButtonTappedCopyWith<$Res> {
-  factory _$$_SelectButtonTappedCopyWith(_$_SelectButtonTapped value,
-          $Res Function(_$_SelectButtonTapped) then) =
-      __$$_SelectButtonTappedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CartItem cartItem});
-
-  $CartItemCopyWith<$Res> get cartItem;
-}
-
-/// @nodoc
-class __$$_SelectButtonTappedCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_SelectButtonTapped>
-    implements _$$_SelectButtonTappedCopyWith<$Res> {
-  __$$_SelectButtonTappedCopyWithImpl(
-      _$_SelectButtonTapped _value, $Res Function(_$_SelectButtonTapped) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? cartItem = null,
-  }) {
-    return _then(_$_SelectButtonTapped(
-      cartItem: null == cartItem
-          ? _value.cartItem
-          : cartItem // ignore: cast_nullable_to_non_nullable
-              as CartItem,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CartItemCopyWith<$Res> get cartItem {
-    return $CartItemCopyWith<$Res>(_value.cartItem, (value) {
-      return _then(_value.copyWith(cartItem: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_SelectButtonTapped implements _SelectButtonTapped {
-  const _$_SelectButtonTapped({required this.cartItem});
-
-  @override
-  final CartItem cartItem;
-
-  @override
-  String toString() {
-    return 'CartEvent.selectButtonTapped(cartItem: $cartItem)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SelectButtonTapped &&
-            (identical(other.cartItem, cartItem) ||
-                other.cartItem == cartItem));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, cartItem);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SelectButtonTappedCopyWith<_$_SelectButtonTapped> get copyWith =>
-      __$$_SelectButtonTappedCopyWithImpl<_$_SelectButtonTapped>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return selectButtonTapped(cartItem);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return selectButtonTapped?.call(cartItem);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (selectButtonTapped != null) {
-      return selectButtonTapped(cartItem);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return selectButtonTapped(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return selectButtonTapped?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (selectButtonTapped != null) {
-      return selectButtonTapped(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SelectButtonTapped implements CartEvent {
-  const factory _SelectButtonTapped({required final CartItem cartItem}) =
-      _$_SelectButtonTapped;
-
-  CartItem get cartItem;
-  @JsonKey(ignore: true)
-  _$$_SelectButtonTappedCopyWith<_$_SelectButtonTapped> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_SelectAllButtonTappedCopyWith<$Res> {
-  factory _$$_SelectAllButtonTappedCopyWith(_$_SelectAllButtonTapped value,
-          $Res Function(_$_SelectAllButtonTapped) then) =
-      __$$_SelectAllButtonTappedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_SelectAllButtonTappedCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_SelectAllButtonTapped>
-    implements _$$_SelectAllButtonTappedCopyWith<$Res> {
-  __$$_SelectAllButtonTappedCopyWithImpl(_$_SelectAllButtonTapped _value,
-      $Res Function(_$_SelectAllButtonTapped) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
-  const _$_SelectAllButtonTapped();
-
-  @override
-  String toString() {
-    return 'CartEvent.selectAllButtonTapped()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SelectAllButtonTapped);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return selectAllButtonTapped();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return selectAllButtonTapped?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (selectAllButtonTapped != null) {
-      return selectAllButtonTapped();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return selectAllButtonTapped(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return selectAllButtonTapped?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (selectAllButtonTapped != null) {
-      return selectAllButtonTapped(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SelectAllButtonTapped implements CartEvent {
-  const factory _SelectAllButtonTapped() = _$_SelectAllButtonTapped;
 }
 
 /// @nodoc
@@ -9904,24 +4554,6 @@ class _$_ClearCart implements _ClearCart {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -9931,16 +4563,6 @@ class _$_ClearCart implements _ClearCart {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -9948,7 +4570,6 @@ class _$_ClearCart implements _ClearCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -9968,11 +4589,7 @@ class _$_ClearCart implements _ClearCart {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -9983,7 +4600,13 @@ class _$_ClearCart implements _ClearCart {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10026,24 +4649,6 @@ class _$_ClearCart implements _ClearCart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -10053,16 +4658,6 @@ class _$_ClearCart implements _ClearCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10070,7 +4665,6 @@ class _$_ClearCart implements _ClearCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -10089,10 +4683,7 @@ class _$_ClearCart implements _ClearCart {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10103,7 +4694,13 @@ class _$_ClearCart implements _ClearCart {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10146,24 +4743,6 @@ class _$_ClearCart implements _ClearCart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -10173,16 +4752,6 @@ class _$_ClearCart implements _ClearCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10190,7 +4759,6 @@ class _$_ClearCart implements _ClearCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -10209,10 +4777,7 @@ class _$_ClearCart implements _ClearCart {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10222,7 +4787,13 @@ class _$_ClearCart implements _ClearCart {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -10268,15 +4839,9 @@ class _$_ClearCart implements _ClearCart {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -10284,12 +4849,7 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -10310,24 +4870,14 @@ class _$_ClearCart implements _ClearCart {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -10346,24 +4896,14 @@ class _$_ClearCart implements _ClearCart {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -10384,573 +4924,6 @@ class _$_ClearCart implements _ClearCart {
 
 abstract class _ClearCart implements CartEvent {
   const factory _ClearCart() = _$_ClearCart;
-}
-
-/// @nodoc
-abstract class _$$_ClearSelectedItemsFromCartCopyWith<$Res> {
-  factory _$$_ClearSelectedItemsFromCartCopyWith(
-          _$_ClearSelectedItemsFromCart value,
-          $Res Function(_$_ClearSelectedItemsFromCart) then) =
-      __$$_ClearSelectedItemsFromCartCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<String> selectedItemIds});
-}
-
-/// @nodoc
-class __$$_ClearSelectedItemsFromCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_ClearSelectedItemsFromCart>
-    implements _$$_ClearSelectedItemsFromCartCopyWith<$Res> {
-  __$$_ClearSelectedItemsFromCartCopyWithImpl(
-      _$_ClearSelectedItemsFromCart _value,
-      $Res Function(_$_ClearSelectedItemsFromCart) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedItemIds = null,
-  }) {
-    return _then(_$_ClearSelectedItemsFromCart(
-      selectedItemIds: null == selectedItemIds
-          ? _value._selectedItemIds
-          : selectedItemIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
-  const _$_ClearSelectedItemsFromCart(
-      {required final List<String> selectedItemIds})
-      : _selectedItemIds = selectedItemIds;
-
-  final List<String> _selectedItemIds;
-  @override
-  List<String> get selectedItemIds {
-    if (_selectedItemIds is EqualUnmodifiableListView) return _selectedItemIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedItemIds);
-  }
-
-  @override
-  String toString() {
-    return 'CartEvent.clearSelectedItemsFromCart(selectedItemIds: $selectedItemIds)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ClearSelectedItemsFromCart &&
-            const DeepCollectionEquality()
-                .equals(other._selectedItemIds, _selectedItemIds));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_selectedItemIds));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ClearSelectedItemsFromCartCopyWith<_$_ClearSelectedItemsFromCart>
-      get copyWith => __$$_ClearSelectedItemsFromCartCopyWithImpl<
-          _$_ClearSelectedItemsFromCart>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)
-        addComboDealToCart,
-    required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
-    required TResult Function(CartItem item, String message)
-        addRemarkToCartItem,
-    required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
-    required TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)
-        addRemarkToBonusItem,
-    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
-        overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
-    required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
-    required TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        replaceWithOrderItems,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
-        upsertCart,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)
-        upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updatePriceProduct,
-    required TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        updateProductStock,
-  }) {
-    return clearSelectedItemsFromCart(selectedItemIds);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
-    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult? Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
-    TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult? Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult? Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-  }) {
-    return clearSelectedItemsFromCart?.call(selectedItemIds);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
-            List<PriceAggregate> comboDealItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial,
-            bool overrideQty)?
-        addComboDealToCart,
-    TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
-            PriceAggregate item,
-            List<PriceAggregate> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
-    TResult Function(CartItem item, String message)? addRemarkToCartItem,
-    TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
-    TResult Function(
-            CartItem item, MaterialItemBonus bonusItem, String message)?
-        addRemarkToBonusItem,
-    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
-        overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
-    TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
-    TResult Function(
-            List<CartItem> items,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        replaceWithOrderItems,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate,
-            int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            PriceAggregate priceAggregate)?
-        upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(
-            Map<MaterialNumber, Price> priceProducts,
-            Price overriddenProductPrice,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updatePriceProduct,
-    TResult Function(
-            List<PriceAggregate> products,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (clearSelectedItemsFromCart != null) {
-      return clearSelectedItemsFromCart(selectedItemIds);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
-    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
-    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
-    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
-    required TResult Function(_OverrideCartItemPrice value)
-        overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
-    required TResult Function(_ReplaceWithOrderItems value)
-        replaceWithOrderItems,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-  }) {
-    return clearSelectedItemsFromCart(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
-    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
-    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-  }) {
-    return clearSelectedItemsFromCart?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
-    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
-    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
-    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
-    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
-    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    required TResult orElse(),
-  }) {
-    if (clearSelectedItemsFromCart != null) {
-      return clearSelectedItemsFromCart(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ClearSelectedItemsFromCart implements CartEvent {
-  const factory _ClearSelectedItemsFromCart(
-          {required final List<String> selectedItemIds}) =
-      _$_ClearSelectedItemsFromCart;
-
-  List<String> get selectedItemIds;
-  @JsonKey(ignore: true)
-  _$$_ClearSelectedItemsFromCartCopyWith<_$_ClearSelectedItemsFromCart>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -11132,24 +5105,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -11159,16 +5114,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11176,7 +5121,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -11196,11 +5140,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11211,7 +5151,13 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11260,24 +5206,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -11287,16 +5215,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11304,7 +5222,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -11323,10 +5240,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11337,7 +5251,13 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11386,24 +5306,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -11413,16 +5315,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11430,7 +5322,6 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -11449,10 +5340,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11462,7 +5350,13 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11514,15 +5408,9 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -11530,12 +5418,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -11556,24 +5439,14 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -11592,24 +5465,14 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -11744,24 +5607,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -11771,16 +5616,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11788,7 +5623,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -11808,11 +5642,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11823,7 +5653,13 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11866,24 +5702,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -11893,16 +5711,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11910,7 +5718,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -11929,10 +5736,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11943,7 +5747,13 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -11986,24 +5796,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -12013,16 +5805,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12030,7 +5812,6 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -12049,10 +5830,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12062,7 +5840,13 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12108,15 +5892,9 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -12124,12 +5902,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -12150,24 +5923,14 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -12186,24 +5949,14 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -12240,6 +5993,18 @@ abstract class _$$_FetchProductsAddedToCartCopyWith<$Res> {
           _$_FetchProductsAddedToCart value,
           $Res Function(_$_FetchProductsAddedToCart) then) =
       __$$_FetchProductsAddedToCartCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrg,
+      SalesOrganisationConfigs config,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      bool comboDealEligible});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrg;
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -12249,50 +6014,130 @@ class __$$_FetchProductsAddedToCartCopyWithImpl<$Res>
   __$$_FetchProductsAddedToCartCopyWithImpl(_$_FetchProductsAddedToCart _value,
       $Res Function(_$_FetchProductsAddedToCart) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrg = null,
+    Object? config = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? comboDealEligible = null,
+  }) {
+    return _then(_$_FetchProductsAddedToCart(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      comboDealEligible: null == comboDealEligible
+          ? _value.comboDealEligible
+          : comboDealEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrg {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrg, (value) {
+      return _then(_value.copyWith(salesOrg: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
-  const _$_FetchProductsAddedToCart();
+  const _$_FetchProductsAddedToCart(
+      {required this.salesOrg,
+      required this.config,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.comboDealEligible});
+
+  @override
+  final SalesOrganisation salesOrg;
+  @override
+  final SalesOrganisationConfigs config;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final bool comboDealEligible;
 
   @override
   String toString() {
-    return 'CartEvent.fetchProductsAddedToCart()';
+    return 'CartEvent.fetchProductsAddedToCart(salesOrg: $salesOrg, config: $config, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, comboDealEligible: $comboDealEligible)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchProductsAddedToCart);
+            other is _$_FetchProductsAddedToCart &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
+            (identical(other.config, config) || other.config == config) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.comboDealEligible, comboDealEligible) ||
+                other.comboDealEligible == comboDealEligible));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, salesOrg, config,
+      customerCodeInfo, shipToInfo, comboDealEligible);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchProductsAddedToCartCopyWith<_$_FetchProductsAddedToCart>
+      get copyWith => __$$_FetchProductsAddedToCartCopyWithImpl<
+          _$_FetchProductsAddedToCart>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
     required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12303,16 +6148,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12320,7 +6155,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -12340,11 +6174,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12355,7 +6185,13 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12390,31 +6226,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             ShipToInfo shipToInfo)
         updateProductStock,
   }) {
-    return fetchProductsAddedToCart();
+    return fetchProductsAddedToCart(
+        salesOrg, config, customerCodeInfo, shipToInfo, comboDealEligible);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
     TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12425,16 +6244,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12442,7 +6251,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -12461,10 +6269,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12475,7 +6280,13 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12510,31 +6321,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             ShipToInfo shipToInfo)?
         updateProductStock,
   }) {
-    return fetchProductsAddedToCart?.call();
+    return fetchProductsAddedToCart?.call(
+        salesOrg, config, customerCodeInfo, shipToInfo, comboDealEligible);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
     TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12545,16 +6339,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12562,7 +6346,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -12581,10 +6364,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12594,7 +6374,13 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -12631,7 +6417,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
-      return fetchProductsAddedToCart();
+      return fetchProductsAddedToCart(
+          salesOrg, config, customerCodeInfo, shipToInfo, comboDealEligible);
     }
     return orElse();
   }
@@ -12640,15 +6427,9 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -12656,12 +6437,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -12682,24 +6458,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -12718,24 +6484,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -12755,7 +6511,21 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
 }
 
 abstract class _FetchProductsAddedToCart implements CartEvent {
-  const factory _FetchProductsAddedToCart() = _$_FetchProductsAddedToCart;
+  const factory _FetchProductsAddedToCart(
+      {required final SalesOrganisation salesOrg,
+      required final SalesOrganisationConfigs config,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final bool comboDealEligible}) = _$_FetchProductsAddedToCart;
+
+  SalesOrganisation get salesOrg;
+  SalesOrganisationConfigs get config;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  bool get comboDealEligible;
+  @JsonKey(ignore: true)
+  _$$_FetchProductsAddedToCartCopyWith<_$_FetchProductsAddedToCart>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -12959,24 +6729,6 @@ class _$_UpsertCart implements _UpsertCart {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -12986,16 +6738,6 @@ class _$_UpsertCart implements _UpsertCart {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13003,7 +6745,6 @@ class _$_UpsertCart implements _UpsertCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -13023,11 +6764,7 @@ class _$_UpsertCart implements _UpsertCart {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13038,7 +6775,13 @@ class _$_UpsertCart implements _UpsertCart {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13088,24 +6831,6 @@ class _$_UpsertCart implements _UpsertCart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -13115,16 +6840,6 @@ class _$_UpsertCart implements _UpsertCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13132,7 +6847,6 @@ class _$_UpsertCart implements _UpsertCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -13151,10 +6865,7 @@ class _$_UpsertCart implements _UpsertCart {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13165,7 +6876,13 @@ class _$_UpsertCart implements _UpsertCart {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13215,24 +6932,6 @@ class _$_UpsertCart implements _UpsertCart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -13242,16 +6941,6 @@ class _$_UpsertCart implements _UpsertCart {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13259,7 +6948,6 @@ class _$_UpsertCart implements _UpsertCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -13278,10 +6966,7 @@ class _$_UpsertCart implements _UpsertCart {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13291,7 +6976,13 @@ class _$_UpsertCart implements _UpsertCart {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13344,15 +7035,9 @@ class _$_UpsertCart implements _UpsertCart {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -13360,12 +7045,7 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -13386,24 +7066,14 @@ class _$_UpsertCart implements _UpsertCart {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -13422,24 +7092,14 @@ class _$_UpsertCart implements _UpsertCart {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -13643,24 +7303,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -13670,16 +7312,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13687,7 +7319,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -13707,11 +7338,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13722,7 +7349,13 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13766,24 +7399,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -13793,16 +7408,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13810,7 +7415,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -13829,10 +7433,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13843,7 +7444,13 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13887,24 +7494,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -13914,16 +7503,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13931,7 +7510,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -13950,10 +7528,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -13963,7 +7538,13 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14010,15 +7591,9 @@ class _$_UpsertCartItems implements _UpsertCartItems {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -14026,12 +7601,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -14052,24 +7622,14 @@ class _$_UpsertCartItems implements _UpsertCartItems {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -14088,24 +7648,14 @@ class _$_UpsertCartItems implements _UpsertCartItems {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -14221,24 +7771,6 @@ class _$_GetDetailsProductsAddedToCart
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -14248,16 +7780,6 @@ class _$_GetDetailsProductsAddedToCart
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14265,7 +7787,6 @@ class _$_GetDetailsProductsAddedToCart
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -14285,11 +7806,7 @@ class _$_GetDetailsProductsAddedToCart
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14300,7 +7817,13 @@ class _$_GetDetailsProductsAddedToCart
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14343,24 +7866,6 @@ class _$_GetDetailsProductsAddedToCart
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -14370,16 +7875,6 @@ class _$_GetDetailsProductsAddedToCart
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14387,7 +7882,6 @@ class _$_GetDetailsProductsAddedToCart
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -14406,10 +7900,7 @@ class _$_GetDetailsProductsAddedToCart
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14420,7 +7911,13 @@ class _$_GetDetailsProductsAddedToCart
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14463,24 +7960,6 @@ class _$_GetDetailsProductsAddedToCart
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -14490,16 +7969,6 @@ class _$_GetDetailsProductsAddedToCart
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14507,7 +7976,6 @@ class _$_GetDetailsProductsAddedToCart
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -14526,10 +7994,7 @@ class _$_GetDetailsProductsAddedToCart
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14539,7 +8004,13 @@ class _$_GetDetailsProductsAddedToCart
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14585,15 +8056,9 @@ class _$_GetDetailsProductsAddedToCart
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -14601,12 +8066,7 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -14627,24 +8087,14 @@ class _$_GetDetailsProductsAddedToCart
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -14663,24 +8113,14 @@ class _$_GetDetailsProductsAddedToCart
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -14897,24 +8337,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -14924,16 +8346,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14941,7 +8353,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -14961,11 +8372,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -14976,7 +8383,13 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15025,24 +8438,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -15052,16 +8447,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15069,7 +8454,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -15088,10 +8472,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15102,7 +8483,13 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15151,24 +8538,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -15178,16 +8547,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15195,7 +8554,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -15214,10 +8572,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15227,7 +8582,13 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15279,15 +8640,9 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -15295,12 +8650,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -15321,24 +8671,14 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -15357,24 +8697,14 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
@@ -15578,24 +8908,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)
-        fetch,
-    required TResult Function(PriceAggregate item) discountOverride,
-    required TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        addBundleToCart,
-    required TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -15605,16 +8917,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             bool overrideQty)
         addComboDealToCart,
     required TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
-        updateMaterialQtyInCartItem,
-    required TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15622,7 +8924,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         verifyMaterialDealBonus,
-    required TResult Function(CartItem item) removeFromCart,
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
@@ -15642,11 +8943,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         addRemarkToBonusItem,
     required TResult Function(List<Price> overridenPrice, CartItem cartItem)
         overrideCartItemPrice,
-    required TResult Function(CartItem cartItem) selectButtonTapped,
-    required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
-    required TResult Function(List<String> selectedItemIds)
-        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15657,7 +8954,13 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         replaceWithOrderItems,
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)
+        fetchProductsAddedToCart,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15701,24 +9004,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult? Function(PriceAggregate item)? discountOverride,
-    TResult? Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult? Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -15728,16 +9013,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             bool overrideQty)?
         addComboDealToCart,
     TResult? Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult? Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15745,7 +9020,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult? Function(CartItem item)? removeFromCart,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
             CartItem item,
@@ -15764,10 +9038,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         addRemarkToBonusItem,
     TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult? Function(CartItem cartItem)? selectButtonTapped,
-    TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
-    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15778,7 +9049,13 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         replaceWithOrderItems,
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult? Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15822,24 +9099,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible,
-            bool isSpecialOrderType)?
-        fetch,
-    TResult Function(PriceAggregate item)? discountOverride,
-    TResult Function(
-            List<PriceAggregate> bundleItems,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        addBundleToCart,
-    TResult Function(
             List<PriceAggregate> comboDealItems,
             SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
@@ -15849,16 +9108,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             bool overrideQty)?
         addComboDealToCart,
     TResult Function(
-            CartItem currentItem,
-            PriceAggregate updatedQtyItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
-        updateMaterialQtyInCartItem,
-    TResult Function(
             PriceAggregate item,
             List<PriceAggregate> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15866,7 +9115,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         verifyMaterialDealBonus,
-    TResult Function(CartItem item)? removeFromCart,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
             CartItem item,
@@ -15885,10 +9133,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         addRemarkToBonusItem,
     TResult Function(List<Price> overridenPrice, CartItem cartItem)?
         overrideCartItemPrice,
-    TResult Function(CartItem cartItem)? selectButtonTapped,
-    TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
-    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15898,7 +9143,13 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             bool doNotallowOutOfStockMaterial)?
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool comboDealEligible)?
+        fetchProductsAddedToCart,
     TResult Function(
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -15945,15 +9196,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_DiscountOverride value) discountOverride,
-    required TResult Function(_AddBundleToCart value) addBundleToCart,
     required TResult Function(_AddComboDealToCart value) addComboDealToCart,
-    required TResult Function(_UpdateMaterialQtyInCartItem value)
-        updateMaterialQtyInCartItem,
     required TResult Function(_VerifyMaterialDealBonus value)
         verifyMaterialDealBonus,
-    required TResult Function(_RemoveFromCart value) removeFromCart,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
     required TResult Function(_RemoveBonusFromCartItem value)
@@ -15961,12 +9206,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
-    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
-    required TResult Function(_SelectAllButtonTapped value)
-        selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_ClearSelectedItemsFromCart value)
-        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
     required TResult Function(_UpdateBatchInCartItem value)
@@ -15987,24 +9227,14 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_DiscountOverride value)? discountOverride,
-    TResult? Function(_AddBundleToCart value)? addBundleToCart,
     TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult? Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_RemoveFromCart value)? removeFromCart,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
@@ -16023,24 +9253,14 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DiscountOverride value)? discountOverride,
-    TResult Function(_AddBundleToCart value)? addBundleToCart,
     TResult Function(_AddComboDealToCart value)? addComboDealToCart,
-    TResult Function(_UpdateMaterialQtyInCartItem value)?
-        updateMaterialQtyInCartItem,
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
     TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
-    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
-    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_ClearSelectedItemsFromCart value)?
-        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,

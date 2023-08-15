@@ -106,7 +106,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_st
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
@@ -186,7 +185,6 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<CredStorage>().init();
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
-  await locator<CartStorage>().init();
   await locator<SettingStorage>().init();
   await locator<OrderStorage>().init();
   await locator<DeviceStorage>().init();

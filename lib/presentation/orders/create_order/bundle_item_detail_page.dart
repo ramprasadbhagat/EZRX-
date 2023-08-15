@@ -1,20 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
@@ -138,8 +130,6 @@ class BundleItemDetailPage extends StatelessWidget {
                         onPressed: () {
                           _addToCartPressed(
                             context,
-                            bundleAggregate.bundle,
-                            quantityControllerList,
                           );
                         },
                         child: const Text('Add to Cart').tr(),
@@ -156,8 +146,6 @@ class BundleItemDetailPage extends StatelessWidget {
 
   void _addToCartPressed(
     BuildContext context,
-    Bundle bundle,
-    Map<String, TextEditingController> list,
   ) {
     if (context.read<CartBloc>().state.containCovidMaterial) {
       CustomSnackBar(
@@ -165,47 +153,6 @@ class BundleItemDetailPage extends StatelessWidget {
             'Commercial bundle cannot be combined with covid material.'.tr(),
       ).show(context);
     } else {
-      final materialPriceDetailBloc = context.read<MaterialPriceDetailBloc>();
-      final priceAggregateList = bundleAggregate.materialInfos.map((material) {
-        final itemInfo =
-            materialPriceDetailBloc.state.materialDetails[material.queryInfo];
-        if (itemInfo != null) {
-          return PriceAggregate(
-            banner: BannerItem.empty(),
-            price: itemInfo.price,
-            materialInfo: itemInfo.info,
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-            quantity:
-                int.parse(list[material.materialNumber.getOrCrash()]!.text),
-            bundle: bundle,
-            addedBonusList: [],
-            stockInfo: StockInfo.empty().copyWith(
-              materialNumber: itemInfo.info.materialNumber,
-            ),
-            tenderContract: TenderContract.empty(),
-            comboDeal: ComboDeal.empty(),
-          );
-        }
-
-        return PriceAggregate.empty();
-      }).toList();
-      context.read<CartBloc>().add(
-            CartEvent.addBundleToCart(
-              bundleItems: priceAggregateList,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              salesOrganisationConfigs:
-                  context.read<SalesOrgBloc>().state.configs,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              doNotallowOutOfStockMaterial: context
-                  .read<EligibilityBloc>()
-                  .state
-                  .doNotAllowOutOfStockMaterials,
-            ),
-          );
-
       //TODO: Will revisit
       context.router.pushNamed('orders/cart');
     }

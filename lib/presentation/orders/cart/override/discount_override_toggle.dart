@@ -16,8 +16,6 @@ import 'package:ezrxmobile/application/order/cart/discount_override/discount_ove
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-
 class DiscountOverrideToggle extends StatelessWidget {
   final PriceAggregate cartItem;
 
@@ -42,13 +40,13 @@ class DiscountOverrideToggle extends StatelessWidget {
           ),
         );
 
-        context.read<CartBloc>().add(
+        /*context.read<CartBloc>().add(
               CartEvent.discountOverride(
                 item: cartItem.copyWith(
                   price: state.materialPrice,
                 ),
               ),
-            );
+            );*/
       },
       builder: ((context, state) {
         return Column(

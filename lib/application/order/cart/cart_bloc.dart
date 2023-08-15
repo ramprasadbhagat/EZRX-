@@ -34,113 +34,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Future<void> _onEvent(CartEvent event, Emitter<CartState> emit) async {
     await event.map(
       initialized: (e) async => emit(CartState.initial()),
-      fetch: (e) async {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-            cartItems: <CartItem>[],
-          ),
-        );
-
-        final failureOrSuccess = repository.fetchCart();
-        await failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) async {
-            final result = await repository.saveToCartWithUpdatedStockInfo(
-              cartItem: cartItemList,
-              customerCodeInfo: e.customerCodeInfo,
-              salesOrganisationConfigs: e.salesOrganisationConfigs,
-              salesOrganisation: e.salesOrganisation,
-              shipToInfo: e.shipToInfo,
-            );
-            final cartWithStockInfo = result.getOrElse(() => <CartItem>[]);
-
-            if (cartWithStockInfo.allOutOfStock(
-              allowOutOfStock: !e.doNotAllowOutOfStockMaterials,
-            )) {
-              emit(
-                state.copyWith(
-                  isFetching: false,
-                ),
-              );
-              add(const _ClearCart());
-
-              return;
-            }
-
-            if (!e.comboDealEligible) {
-              emit(
-                state.copyWith(
-                  isFetching: false,
-                ),
-              );
-
-              final comboDealCartItemIds = cartWithStockInfo
-                  .where((item) => item.itemType == CartItemType.comboDeal)
-                  .map((item) => item.id)
-                  .toList();
-
-              add(
-                _ClearSelectedItemsFromCart(
-                  selectedItemIds: comboDealCartItemIds,
-                ),
-              );
-
-              return;
-            }
-
-            emit(
-              state.copyWith(
-                cartItems: repository.updateDiscountQty(
-                  items: cartWithStockInfo,
-                ),
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
-      },
-      discountOverride: (e) async {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-
-        final failureOrSuccess = await repository.discountOverride(
-          cartItem: CartItem.material(e.item),
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
-      },
       verifyMaterialDealBonus: (e) async {
         final material = e.item;
         if (material != PriceAggregate.empty()) {
@@ -189,84 +82,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      addBundleToCart: (e) async {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-
-        final failureOrSuccess = await repository.addItemToCart(
-          cartItem: CartItem.bundle(e.bundleItems),
-          override: false,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
-      },
-      updateMaterialQtyInCartItem: (e) async {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-
-        final failureOrSuccess = await repository.updateMaterialQtyInCartItem(
-          cartItem: e.currentItem,
-          updatedQtyItem: e.updatedQtyItem,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-          override: e.overrideQty,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
-      },
-      removeFromCart: (e) async {
+      addRemarkToCartItem: (e) {
         emit(
           state.copyWith(
             isFetching: true,
@@ -274,39 +90,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.deleteFromCart(
-          item: e.item,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: repository.updateDiscountQty(items: cartItemList),
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
-      },
-      addRemarkToCartItem: (e) async {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
-
-        final failureOrSuccess = await repository.addRemarkToCartItem(
+        /*final failureOrSuccess = await repository.addRemarkToCartItem(
           remarkMessage: e.message,
           item: e.item,
         );
@@ -329,9 +113,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
+        );*/
       },
-      addBonusToCartItem: (e) async {
+      addBonusToCartItem: (e) {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
@@ -339,7 +123,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.addBonusToCartItem(
+        /*final failureOrSuccess = await repository.addBonusToCartItem(
           item: e.item,
           newBonus: e.bonusItem,
           overrideQty: e.overrideQty,
@@ -368,9 +152,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
+        );*/
       },
-      removeBonusFromCartItem: (e) async {
+      removeBonusFromCartItem: (e) {
         emit(
           state.copyWith(
             isFetching: true,
@@ -378,7 +162,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.deleteBonusFromCartItem(
+        /*final failureOrSuccess = await repository.deleteBonusFromCartItem(
           item: e.item,
           deletedBonus: e.bonusItem,
         );
@@ -401,9 +185,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
+        );*/
       },
-      addRemarkToBonusItem: (e) async {
+      addRemarkToBonusItem: (e) {
         emit(
           state.copyWith(
             isFetching: true,
@@ -411,7 +195,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.addRemarkToBonusItem(
+        /*final failureOrSuccess = await repository.addRemarkToBonusItem(
           remarkMessage: e.message,
           item: e.item,
           bonus: e.bonusItem,
@@ -435,9 +219,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
+        );*/
       },
-      overrideCartItemPrice: (e) async {
+      overrideCartItemPrice: (e) {
         emit(
           state.copyWith(
             isFetching: true,
@@ -445,7 +229,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.overrideCartItemPrice(
+        /*final failureOrSuccess = await repository.overrideCartItemPrice(
           item: e.cartItem,
           overridePriceList: e.overridenPrice,
         );
@@ -468,71 +252,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
-      },
-      selectButtonTapped: (e) async {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
-
-        final failureOrSuccess = await repository.updateSelectionInCart(
-          updatedItem: e.cartItem,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
-      },
-      selectAllButtonTapped: (e) async {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
-
-        final failureOrSuccess = await repository.updateAllSelectionInCart(
-          currentCart: state.cartItems,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );
+        );*/
       },
       clearCart: (e) async {
         emit(
@@ -557,33 +277,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
       },
-      clearSelectedItemsFromCart: (e) async {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isClearing: true,
-          ),
-        );
-
-        final failureOrSuccess = await repository.clearCartOnlySelectedItems(
-          selectedItemIds: e.selectedItemIds,
-        );
-        failureOrSuccess.fold(
-          (failure) => emit(
-            state.copyWith(
-              isClearing: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (cartItemList) => emit(
-            state.copyWith(
-              isClearing: false,
-              cartItems: cartItemList,
-            ),
-          ),
-        );
-      },
-      replaceWithOrderItems: (e) async {
+      replaceWithOrderItems: (e) {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
@@ -591,7 +285,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.replaceCartWithItems(
+        /*final failureOrSuccess = await repository.replaceCartWithItems(
           items: e.items,
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisationConfigs: e.salesOrganisationConfigs,
@@ -653,10 +347,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               );
             }
           },
-        );
+        );*/
       },
-      addComboDealToCart: (e) async {
-        emit(
+      addComboDealToCart: (e) {
+        /*emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
             isFetching: true,
@@ -671,14 +365,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ? item
               : item.copyWithIncreasedQty(qty: currentMaterialInCart.totalQty);
         }).toList();
-
-        await Future.wait(
-          comboDealItems.map(
-            (item) => repository.deleteFromCart(
-              item: CartItem.material(item),
-            ),
-          ),
-        );
 
         final failureOrSuccess = await repository.addItemToCart(
           cartItem: CartItem.comboDeal(comboDealItems),
@@ -708,9 +394,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
+        );*/
       },
-      updateBatchInCartItem: (e) async {
+      updateBatchInCartItem: (e) {
         emit(
           state.copyWith(
             isFetching: true,
@@ -718,7 +404,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.updatedBatchInCartItem(
+        /*final failureOrSuccess = await repository.updatedBatchInCartItem(
           item: e.item,
           stockInfo: e.stockInfo,
         );
@@ -741,13 +427,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-        );
+        );*/
       },
       fetchProductsAddedToCart: (e) async {
+        if (state.isFetching) return;
+
         emit(
           state.copyWith(
             isFetching: true,
             apiFailureOrSuccessOption: none(),
+            cartProducts: <PriceAggregate>[],
           ),
         );
 
@@ -778,6 +467,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
+
+            if (state.cartProducts.isNotEmpty) {
+              add(
+                _GetDetailsProductsAddedToCart(
+                  cartProducts: state.cartProducts,
+                ),
+              );
+
+              add(
+                _UpdateProductStock(
+                  products: state.cartProducts,
+                  salesOrganisationConfigs: e.config,
+                  salesOrganisation: e.salesOrg,
+                  customerCodeInfo: e.customerCodeInfo,
+                  shipToInfo: e.shipToInfo,
+                ),
+              );
+            }
           },
         );
       },

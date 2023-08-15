@@ -13,7 +13,6 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -46,8 +45,6 @@ class MockTokenStorage extends Mock implements TokenStorage {}
 
 class CredStorageMock extends Mock implements CredStorage {}
 
-class CartStorageMock extends Mock implements CartStorage {}
-
 class SettingStorageMock extends Mock implements SettingStorage {}
 
 class AccountSelectorStorageMock extends Mock
@@ -67,7 +64,6 @@ void main() {
   late AuthLocalDataSource localDataSourceMock;
   late TokenStorage tokenStorageMock;
   late CredStorage credStorageMock;
-  late CartStorage cartStorageMock;
   late SettingStorage settingStorageMock;
   late AccountSelectorStorage accountSelectorStorageMock;
   late OktaLoginServices oktaLoginServicesMock;
@@ -100,7 +96,6 @@ void main() {
       tokenStorageMock = MockTokenStorage();
       remoteDataSourceMock = AuthRemoteDataSourceMock();
       accountSelectorStorageMock = AccountSelectorStorageMock();
-      cartStorageMock = CartStorageMock();
       settingStorageMock = SettingStorageMock();
       credStorageMock = CredStorageMock();
       localAuthenticationMock = LocalAuthenticationMock();
@@ -116,7 +111,6 @@ void main() {
         localDataSource: localDataSourceMock,
         tokenStorage: tokenStorageMock,
         accountSelectorStorage: accountSelectorStorageMock,
-        cartStorage: cartStorageMock,
         credStorage: credStorageMock,
         localAuthentication: localAuthenticationMock,
         oktaLoginServices: oktaLoginServicesMock,
@@ -139,9 +133,6 @@ void main() {
       ).thenAnswer((invocation) async => null);
       when(
         () => accountSelectorStorageMock.delete(),
-      ).thenAnswer((invocation) async => '');
-      when(
-        () => cartStorageMock.clear(),
       ).thenAnswer((invocation) async => '');
       when(
         () async => repository.initTokenStorage(),
@@ -215,7 +206,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -256,7 +246,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -288,7 +277,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -319,7 +307,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -351,7 +338,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -382,7 +368,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -416,7 +401,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -450,7 +434,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -478,7 +461,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -516,7 +498,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -543,7 +524,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -575,7 +555,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           settingStorage: settingStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -606,7 +585,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -641,7 +619,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -664,7 +641,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -699,7 +675,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -729,7 +704,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -747,9 +721,6 @@ void main() {
         verify(
           () => accountSelectorStorageMock.delete(),
         ).called(1);
-        verify(
-          () => cartStorageMock.clear(),
-        ).called(1);
       },
     );
 
@@ -763,7 +734,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -798,7 +768,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -851,7 +820,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
@@ -885,7 +853,6 @@ void main() {
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
-          cartStorage: cartStorageMock,
           credStorage: credStorageMock,
           settingStorage: settingStorageMock,
           localAuthentication: localAuthenticationMock,

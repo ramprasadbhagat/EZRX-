@@ -287,4 +287,18 @@ class CartState with _$CartState {
             ? previousValue + 1
             : previousValue + element.bundle.materials.length,
       );
+
+  bool showManufacturerName(int index) {
+    return index == 0 ||
+        cartProducts[index]
+                .materialInfo
+                .principalData
+                .principalName
+                .getValue() !=
+            cartProducts[index - 1]
+                .materialInfo
+                .principalData
+                .principalName
+                .getValue();
+  }
 }
