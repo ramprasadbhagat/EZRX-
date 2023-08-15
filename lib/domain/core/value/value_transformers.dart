@@ -533,3 +533,7 @@ bool isEligibleStatusForZyllem(String status) {
           'Out for delivery'.toLowerCase() ||
       getOrderStatus(status).toLowerCase() == 'Delivered'.toLowerCase();
 }
+
+String getCountryFlag(String country) {
+  return 'assets/svg/flags/${country.toLowerCase()}.svg';
+}

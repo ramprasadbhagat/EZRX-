@@ -18,6 +18,8 @@ class AppMarket extends ValueObject<String> {
 
   String get marketName => getMarketName(value.getOrElse(() => ''));
 
+  String get countryFlag => getCountryFlag(value.getOrElse(() => ''));
+  
   const AppMarket._(this.value);
 }
 

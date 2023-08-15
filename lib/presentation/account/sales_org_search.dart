@@ -115,13 +115,12 @@ class _SalesOrgItem extends StatelessWidget {
             context.router.pop();
           },
           contentPadding: EdgeInsets.zero,
-          leading: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(25.0)),
+          leading: ClipOval(
             child: SizedBox(
               height: 25.0,
               width: 25.0,
               child: SvgPicture.asset(
-                'assets/svg/flags/${salesOrganisation.salesOrg.country.toLowerCase()}.svg',
+                salesOrganisation.salesOrg.countryFlag,
                 fit: BoxFit.fill,
               ),
             ),

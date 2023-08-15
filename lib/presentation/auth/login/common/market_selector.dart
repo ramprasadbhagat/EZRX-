@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MarketSelector extends StatefulWidget {
   const MarketSelector({Key? key}) : super(key: key);
@@ -17,17 +18,18 @@ class MarketSelector extends StatefulWidget {
 }
 
 class _MarketSelectorState extends State<MarketSelector> {
-  List<String> markets = [
-    'hk',
-    'kh',
-    'kr',
-    'mm',
-    'ph',
-    'sg',
-    'th',
-    'tw',
-    'vn',
-    'my',
+  List<AppMarket> markets = [
+    AppMarket('kh'),
+    AppMarket('hk'),
+    AppMarket('id'),
+    AppMarket('kr'),
+    AppMarket('my'),
+    AppMarket('mm'),
+    AppMarket('ph'),
+    AppMarket('sg'),
+    AppMarket('tw'),
+    AppMarket('th'),
+    AppMarket('vn'),
   ];
 
   @override
@@ -64,11 +66,61 @@ class _MarketSelectorState extends State<MarketSelector> {
                   color: ZPColors.black,
                 ),
               ),
+              selectedItemBuilder: (context) {
+                return markets.map<Widget>((AppMarket item) {
+                  return Row(
+                    children: [
+                      ClipOval(
+                        child: SizedBox(
+                          height: 20.0,
+                          width: 20.0,
+                          child: SvgPicture.asset(
+                            item.countryFlag,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(state.currentMarket.marketName),
+                    ],
+                  );
+                }).toList();
+              },
               items:
-                  markets.map((e) => AppMarket(e)).toList().map((marketType) {
+                  markets.map((marketType) {
                 return DropdownMenuItem<AppMarket>(
                   value: marketType,
-                  child: Text(marketType.marketName),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          ClipOval(
+                            child: SizedBox(
+                              height: 20.0,
+                              width: 20.0,
+                              child: SvgPicture.asset(
+                                marketType.countryFlag,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(marketType.marketName),
+                        ],
+                      ),
+                      state.currentMarket == marketType
+                          ? const Icon(
+                              Icons.check,
+                              color: ZPColors.black,
+                            )
+                          : const SizedBox.shrink(),
+                    ],
+                  ),
                 );
               }).toList(),
               value: state.currentMarket,

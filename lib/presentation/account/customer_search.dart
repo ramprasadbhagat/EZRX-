@@ -86,14 +86,12 @@ class CustomerSearchPage extends StatelessWidget {
                 },
                 child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(25.0)),
+                    ClipOval(
                       child: SizedBox(
                         height: 25.0,
                         width: 25.0,
                         child: SvgPicture.asset(
-                          'assets/svg/flags/${state.salesOrg.country.toLowerCase()}.svg',
+                          state.salesOrg.countryFlag,
                           fit: BoxFit.fill,
                         ),
                       ),

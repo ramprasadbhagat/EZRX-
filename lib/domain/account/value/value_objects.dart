@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/bu_contact.dart';
 import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,10 @@ class SalesOrg extends ValueObject<String> {
   Locale get locale => Locale(languageCode, country);
 
   String get announcementVariablePath => countryAnnouncementPath(country);
+
   String get articleVariablePath => countryArticlePath(country);
+  
+  String get countryFlag => getCountryFlag(country);
 
   const SalesOrg._(this.value);
 }

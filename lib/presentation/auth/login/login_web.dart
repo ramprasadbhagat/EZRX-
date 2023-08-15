@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/announcement.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/login_button.dart';
+import 'package:ezrxmobile/presentation/auth/login/common/market_selector.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/password_field.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/remember_password.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/username_field.dart';
@@ -190,6 +191,8 @@ class _LoginFormWeb extends StatelessWidget {
                         const SizedBox(
                           height: 25,
                         ),
+                        const MarketSelector(),
+                        const SizedBox(height: 25),
                         const UsernameField(),
                         const SizedBox(height: 25),
                         const PasswordField(),
