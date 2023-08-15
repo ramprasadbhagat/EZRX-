@@ -84,7 +84,7 @@ void main() {
         () async {
       const input = '0000000000100822';
       final principalCode = PrincipalCode(input);
-      final result = principalCode.isSubmitAllowedForClient();
+      final result = principalCode.clientSubmitAllowed;
       expect(result, true);
     });
 
@@ -93,7 +93,63 @@ void main() {
         () async {
       const input = '0000000000150822';
       final principalCode = PrincipalCode(input);
-      final result = principalCode.isSubmitAllowedForClient();
+      final result = principalCode.clientSubmitAllowed;
+      expect(result, false);
+    });
+
+    test('should return true when principal code submit allowed for sales rep',
+        () async {
+      const input = '0000000000100225';
+      final principalCode = PrincipalCode(input);
+      final result = principalCode.salesRepSubmitAllowed;
+      expect(result, true);
+    });
+
+    test(
+        'should return false when principal code submit not allowed for sales rep',
+        () async {
+      const input = '0000000000110225';
+      final principalCode = PrincipalCode(input);
+      final result = principalCode.salesRepSubmitAllowed;
+      expect(result, false);
+    });
+
+    test(
+        'should return true when principal code is principal code for all material',
+        () async {
+      const input = '0000000000';
+      final principalCode = PrincipalCode(input);
+      final result = principalCode.isAllMaterial;
+      expect(result, true);
+    });
+
+    test(
+        'should return false when principal code is not principal code for all material',
+        () async {
+      const input = '0000000001';
+      final principalCode = PrincipalCode(input);
+      final result = principalCode.isAllMaterial;
+      expect(result, false);
+    });
+
+    test('should return true when principal code is PnG principal code',
+        () async {
+      var input = '0000000000105307';
+      var principalCode = PrincipalCode(input);
+      var result = principalCode.isPnG;
+      expect(result, true);
+
+      input = '0000000000101308';
+      principalCode = PrincipalCode(input);
+      result = principalCode.isPnG;
+      expect(result, true);
+    });
+
+    test('should return false when principal code is not PnG principal code',
+        () async {
+      const input = '0000000000105303';
+      final principalCode = PrincipalCode(input);
+      final result = principalCode.isPnG;
       expect(result, false);
     });
   });

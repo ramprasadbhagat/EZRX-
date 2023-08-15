@@ -72,21 +72,17 @@ bool materialTaxClassificationIsFullTax(String taxClassification) {
   return taxClassification == 'Product : Full Tax';
 }
 
-bool havingSubmitPrincipalForClient(String principalCode) {
-  return principalCode == '100822';
-}
+bool havingPrincipalCodeForAllMaterial(String principalCode) =>
+    principalCode == '0000000000';
 
-bool havingPnGPrincipalCode(String principalCode) {
-  return principalCode == '105307' || principalCode == '101308';
-}
+bool havingSubmitPrincipalForClient(String principalCode) =>
+    principalCode == '100822';
 
-bool isPrincipalCodeForAll(String principalCode) {
-  return principalCode == '0000000000';
-}
+bool havingSubmitPrincipalForSalesRep(String principalCode) =>
+    principalCode == '100225';
 
-bool havingSubmitPrincipalForSalesRep(String principalCode) {
-  return principalCode == '100225';
-}
+bool havingPnGPrincipalCode(String principalCode) =>
+    principalCode == '105307' || principalCode == '101308';
 
 int getParsedValue(String zDP5Value) =>
     zDP5Value.isEmpty ? 0 : int.parse(zDP5Value);

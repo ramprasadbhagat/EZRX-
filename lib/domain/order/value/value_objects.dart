@@ -124,29 +124,18 @@ class PrincipalCode extends ValueObject<String> {
 
   const PrincipalCode._(this.value);
 
-  bool isSubmitAllowedForClient() {
-    return havingSubmitPrincipalForClient(
-      removeLeadingZero(
-        value.getOrElse(() => ''),
-      ),
-    );
-  }
+  String get _valueOrEmpty => value.getOrElse(() => '');
 
-  bool get checkIsPrincipalCodeForAll => isPrincipalCodeForAll(
-        value.getOrElse(() => ''),
-      );
+  String get _shortValue => removeLeadingZero(_valueOrEmpty);
 
-  bool get isPnGPrinciple => havingPnGPrincipalCode(
-        removeLeadingZero(
-          value.getOrElse(() => ''),
-        ),
-      );
+  bool get clientSubmitAllowed => havingSubmitPrincipalForClient(_shortValue);
 
-  bool get isSubmitAllowedForSalesRep => havingSubmitPrincipalForSalesRep(
-        removeLeadingZero(
-          value.getOrElse(() => ''),
-        ),
-      );
+  bool get salesRepSubmitAllowed =>
+      havingSubmitPrincipalForSalesRep(_shortValue);
+
+  bool get isAllMaterial => havingPrincipalCodeForAllMaterial(_valueOrEmpty);
+
+  bool get isPnG => havingPnGPrincipalCode(_shortValue);
 }
 
 class MaterialNumber extends ValueObject<String> {

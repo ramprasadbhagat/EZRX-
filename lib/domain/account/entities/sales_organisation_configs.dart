@@ -207,7 +207,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   SalesOrganisationConfigsPrincipal get checkIsPrincipalCodeForAllMaterial =>
       principalList.firstWhere(
-        (principal) => principal.principalCode.checkIsPrincipalCodeForAll,
+        (principal) => principal.principalCode.isAllMaterial,
         orElse: () => SalesOrganisationConfigsPrincipal.empty(),
       );
 }
