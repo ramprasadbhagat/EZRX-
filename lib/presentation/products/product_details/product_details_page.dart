@@ -266,6 +266,16 @@ class _FooterState extends State<_Footer> {
     super.dispose();
   }
 
+  bool _isEligibleForAddToCart({
+    required BuildContext context,
+    required Price price,
+  }) {
+    final materialWithoutPrice =
+        context.read<SalesOrgBloc>().state.configs.materialWithoutPrice;
+
+    return !(price.finalPrice.isEmpty && !materialWithoutPrice);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -303,6 +313,12 @@ class _FooterState extends State<_Footer> {
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
                     builder: (context, stateDetail) {
+                      final price =
+                          context.read<MaterialPriceBloc>().state.materialPrice[
+                                  stateDetail.productDetailAggregate
+                                      .materialInfo.materialNumber] ??
+                              Price.empty();
+
                       return BlocConsumer<CartBloc, CartState>(
                         listenWhen: (previous, current) =>
                             previous.isUpserting != current.isUpserting,
@@ -324,7 +340,11 @@ class _FooterState extends State<_Footer> {
                         },
                         builder: (context, stateCart) {
                           return ElevatedButton(
-                            onPressed: stateCart.isUpserting
+                            onPressed: stateCart.isUpserting ||
+                                    !_isEligibleForAddToCart(
+                                      context: context,
+                                      price: price,
+                                    )
                                 ? null
                                 : () {
                                     context.read<CartBloc>().add(
@@ -350,15 +370,7 @@ class _FooterState extends State<_Footer> {
                                               materialInfo: stateDetail
                                                   .productDetailAggregate
                                                   .materialInfo,
-                                              price: context
-                                                          .read<MaterialPriceBloc>()
-                                                          .state
-                                                          .materialPrice[
-                                                      stateDetail
-                                                          .productDetailAggregate
-                                                          .materialInfo
-                                                          .materialNumber] ??
-                                                  Price.empty(),
+                                              price: price,
                                               salesOrgConfig: context
                                                   .read<SalesOrgBloc>()
                                                   .state
