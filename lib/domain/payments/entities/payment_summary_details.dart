@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -62,6 +63,17 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentBatchAdditionalInfo: '',
         accountingDocExternalReference: '',
       );
+
+  String get adviceExpiryText => status.getIsSuccessful
+      ? 'NA'.tr()
+      : 'in ${adviceExpiry.displayDashIfEmpty}'.tr();
+
+  String get paymentDate =>
+      status.getIsSuccessful ? valueDate.dateString.tr() : '-'.tr();
+
+  String get dateOrExpiry => status.getIsSuccessful
+      ? 'Payment date: ${createdDate.dateString}'
+      : 'Expires in ${adviceExpiry.displayDashIfEmpty}';
 }
 
 extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {

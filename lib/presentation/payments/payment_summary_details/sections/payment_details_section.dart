@@ -114,11 +114,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Advice expiry'.tr(),
-                valueText: paymentSummaryDetails.status
-                    .adviceExpiry(
-                      paymentSummaryDetails.adviceExpiry.displayDashIfEmpty,
-                    )
-                    .tr(),
+                valueText: paymentSummaryDetails.adviceExpiryText,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -128,11 +124,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Payment date'.tr(),
-                valueText: paymentSummaryDetails.status
-                    .paymentDate(
-                      paymentSummaryDetails.valueDate.dateString,
-                    )
-                    .tr(),
+                valueText: paymentSummaryDetails.paymentDate,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

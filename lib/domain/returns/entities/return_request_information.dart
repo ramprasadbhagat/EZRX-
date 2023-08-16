@@ -63,4 +63,8 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
   double get calculatedUnitPrice {
     return double.parse((totalPrice / int.parse(returnQuantity)).toString());
   }
+
+  String get displayBapiStatus => !bapiStatus.isSuccess
+      ? bapiStatus.getIntermediateStatus
+      : bapiSalesDocNumber;
 }

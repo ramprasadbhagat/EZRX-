@@ -294,8 +294,7 @@ class _ApprovalDetailsSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Approval number'.tr(),
-                valueText: requestInformation.bapiStatus
-                    .getbapiStatusType(requestInformation.bapiSalesDocNumber),
+                valueText: requestInformation.displayBapiStatus,
               ),
               _CustomListTile(
                 imageUrlList: requestInformation.imageUrl,

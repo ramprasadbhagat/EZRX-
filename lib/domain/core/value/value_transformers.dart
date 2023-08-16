@@ -1,11 +1,10 @@
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
@@ -391,29 +390,6 @@ String getReturnSummaryStatusInList(String statusType) {
   }
 }
 
-String getStatusMessage(
-  String status,
-  PaymentSummaryDetails paymentSummaryDetails,
-) {
-  return isSuccessful(status)
-      ? 'Payment date: ${paymentSummaryDetails.createdDate.dateString}'
-      : 'Expires in ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}';
-}
-
-String getPaymentDate(
-  String status,
-  String date,
-) {
-  return isSuccessful(status) ? date : '-';
-}
-
-String getAdviceExpiry(
-  String status,
-  String data,
-) {
-  return isSuccessful(status) ? 'NA' : 'in $data';
-}
-
 bool isSuccessful(String status) => status == 'Successful';
 
 Color getDisplayStatusTextColor(String status) {
@@ -424,33 +400,14 @@ bool isApproved(String status) {
   return status == 'APPROVED';
 }
 
-String sAPROCreationValue(
-  String status,
-  String bapiStatus,
-  String bapiSalesDocNumber,
-) {
-  switch (status) {
-    case 'APPROVED':
-    case 'COMPLETED':
-    case 'PENDING':
-      return bapiStatusType(bapiStatus, bapiSalesDocNumber);
-
-    case 'REJECTED':
-      return '-';
-
-    default:
-      return '-';
-  }
-}
-
-String bapiStatusType(String bapiStatus, String bapiSalesDocNumber) {
+String bapiStatusType(String bapiStatus) {
   switch (bapiStatus) {
     case 'FAILED':
       return 'Request Failed';
     case 'PENDING':
       return 'Pending';
     case 'SUCCESS':
-      return bapiSalesDocNumber;
+      return 'Success';
     case '':
       return '-';
 
@@ -495,33 +452,29 @@ IconData getOrderStatusIcon(String status) {
   }
 }
 
-List<String> getOrderStatusDetails(String status) {
+List<StatusType> getOrderStatusDetails(String status) {
   switch (status) {
     case 'Order being prepared':
-      return [
-        'Order being prepared',
-        'Order Created',
-      ];
-
     case 'Cancelled':
       return [
-        'Cancelled',
-        'Order Created',
+        StatusType(status),
+        StatusType('Order Created'),
       ];
 
     default:
-      final orderStatusList = <String>[
-        'Delivered',
-        'Out for delivery',
-        'Picking in progress',
-        'Pending release',
-        'Order Created',
+      final orderStatusList = <StatusType>[
+        StatusType('Delivered'),
+        StatusType('Out for delivery'),
+        StatusType('Picking in progress'),
+        StatusType('Pending release'),
+        StatusType('Order Created'),
       ];
       return orderStatusList
           .skip(
             orderStatusList.indexWhere(
               (item) =>
-                  item.toLowerCase() == getOrderStatus(status).toLowerCase(),
+                  item.getOrDefaultValue('').toLowerCase() ==
+                  getOrderStatus(status).toLowerCase(),
             ),
           )
           .toList();

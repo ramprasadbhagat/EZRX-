@@ -6,8 +6,6 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-
 @immutable
 abstract class ValueObject<T> {
   const ValueObject();
@@ -220,11 +218,6 @@ class StatusType extends ValueObject<String> {
   factory StatusType(String input) =>
       StatusType._(validateStringNotEmpty(input));
 
-  bool statusContains(StatusType statusType) => value
-      .getOrElse(() => '')
-      .toLowerCase()
-      .contains(statusType.getOrDefaultValue('').toLowerCase());
-
   String get displayStatusInList =>
       getReturnSummaryStatusInList(value.getOrElse(() => ''));
 
@@ -253,38 +246,26 @@ class StatusType extends ValueObject<String> {
   Color get getPaymentDisplayStatusTextColor =>
       getDisplayStatusTextColor(value.getOrElse(() => ''));
 
-  String message(
-    PaymentSummaryDetails paymentSummaryDetails,
-  ) =>
-      getStatusMessage(value.getOrElse(() => ''), paymentSummaryDetails);
   bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
-
-  String paymentDate(String date) =>
-      getPaymentDate(value.getOrElse(() => ''), date);
-  String adviceExpiry(String date) =>
-      getAdviceExpiry(value.getOrElse(() => ''), date);
 
   bool get getIsSuccessful => isSuccessful(value.getOrElse(() => ''));
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 
-  String getSAPROCreationValue(String bapiStatus, String bapiSalesDocNumber) =>
-      sAPROCreationValue(
+  String get getIntermediateStatus => bapiStatusType(
         value.getOrElse(() => ''),
-        bapiStatus,
-        bapiSalesDocNumber,
       );
-  String getbapiStatusType(String bapiSalesDocNumber) =>
-      bapiStatusType(value.getOrElse(() => ''), bapiSalesDocNumber);
+  bool get isSuccess => getIntermediateStatus == 'Success';
 
   String get displayOrderStatus => getOrderStatus(value.getOrElse(() => ''));
 
-  IconData displayOrderStatusIcon(String status) => getOrderStatusIcon(status);
+  IconData get displayOrderStatusIcon =>
+      getOrderStatusIcon(value.getOrElse(() => ''));
 
   bool get getDisplayZyllemStatus =>
       isEligibleStatusForZyllem(value.getOrElse(() => ''));
 
-  List<String> get displayOrderStatusDetails =>
+  List<StatusType> get displayOrderStatusDetails =>
       getOrderStatusDetails(value.getOrElse(() => ''));
 
   const StatusType._(this.value);

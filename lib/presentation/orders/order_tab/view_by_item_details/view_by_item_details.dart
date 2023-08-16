@@ -106,12 +106,10 @@ void _showDEtailsPagePage({
             customStep: state.orderHistoryItem.status.displayOrderStatusDetails
                 .mapIndexed((index, e) {
               return CustomStep(
-                status: e,
+                status: e.getOrDefaultValue(''),
                 subtitle: '10.00am MYR',
                 title: '16 Mar',
-                icon: state.orderHistoryItem.status.displayOrderStatusIcon(
-                  e,
-                ),
+                icon: e.displayOrderStatusIcon,
                 state: index == 0
                     ? CustomStepState.active
                     : CustomStepState.disabled,

@@ -120,7 +120,7 @@ class _PaymentSummaryTiles extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                paymentSummaryDetails.status.message(paymentSummaryDetails),
+                paymentSummaryDetails.dateOrExpiry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: paymentSummaryDetails
                           .status.getPaymentDisplayStatusTextColor,
