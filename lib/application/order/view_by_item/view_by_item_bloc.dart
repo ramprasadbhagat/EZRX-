@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dar
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'view_by_item_bloc.freezed.dart';
 
@@ -27,8 +28,30 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
     required this.viewByItemRepository,
   }) : super(ViewByItemsState.initial()) {
     on<_Initialized>((event, emit) => emit(ViewByItemsState.initial()));
+    on<_AutoSearchProduct>(
+      (e, emit) {
+        if (e.searchKey.isValid()) {
+          add(
+            _Fetch(
+              customerCodeInfo: e.customerCodeInfo,
+              salesOrgConfigs: e.salesOrgConfigs,
+              shipToInfo: e.shipToInfo,
+              user: e.user,
+              viewByItemHistoryFilter: e.viewByItemHistoryFilter,
+              searchKey: e.searchKey,
+            ),
+          );
+        } else {
+          emit(state.copyWith(searchKey: e.searchKey));
+        }
+      },
+      transformer: (events, mapper) => events
+          .debounceTime(const Duration(milliseconds: 3000))
+          .asyncExpand(mapper),
+    );
     on<_Fetch>(
       (e, emit) async {
+        if (e.searchKey.isNotEmpty && e.searchKey == state.searchKey) return;
         emit(
           state.copyWith(
             isFetching: true,

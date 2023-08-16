@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+//Please note use CustomSearchBar widget instead of SearchBar
 class SearchBar extends StatefulWidget {
   const SearchBar({
     required this.onSearchChanged,

@@ -23,14 +23,14 @@ mixin _$ProductSearchEvent {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -50,14 +50,14 @@ mixin _$ProductSearchEvent {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -77,14 +77,14 @@ mixin _$ProductSearchEvent {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
@@ -166,7 +166,7 @@ abstract class _$$_AutoSearchProductCopyWith<$Res> {
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      String searchKey});
+      SearchKey searchKey});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -211,7 +211,7 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
     ));
   }
 
@@ -267,7 +267,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   final ShipToInfo shipToInfo;
   @override
-  final String searchKey;
+  final SearchKey searchKey;
 
   @override
   String toString() {
@@ -309,14 +309,14 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -340,14 +340,14 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -371,14 +371,14 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
@@ -454,13 +454,13 @@ abstract class _AutoSearchProduct implements ProductSearchEvent {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final String searchKey}) = _$_AutoSearchProduct;
+      required final SearchKey searchKey}) = _$_AutoSearchProduct;
 
   SalesOrganisation get salesOrganization;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
-  String get searchKey;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
@@ -477,7 +477,7 @@ abstract class _$$_SearchProductCopyWith<$Res> {
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      String searchKey});
+      SearchKey searchKey});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -522,7 +522,7 @@ class __$$_SearchProductCopyWithImpl<$Res>
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
     ));
   }
 
@@ -578,7 +578,7 @@ class _$_SearchProduct implements _SearchProduct {
   @override
   final ShipToInfo shipToInfo;
   @override
-  final String searchKey;
+  final SearchKey searchKey;
 
   @override
   String toString() {
@@ -619,14 +619,14 @@ class _$_SearchProduct implements _SearchProduct {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -650,14 +650,14 @@ class _$_SearchProduct implements _SearchProduct {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -681,14 +681,14 @@ class _$_SearchProduct implements _SearchProduct {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
@@ -764,13 +764,13 @@ abstract class _SearchProduct implements ProductSearchEvent {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final String searchKey}) = _$_SearchProduct;
+      required final SearchKey searchKey}) = _$_SearchProduct;
 
   SalesOrganisation get salesOrganization;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
-  String get searchKey;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_SearchProductCopyWith<_$_SearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
@@ -919,14 +919,14 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -950,14 +950,14 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -981,14 +981,14 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
@@ -1117,14 +1117,14 @@ class _$_ClearSearch implements _ClearSearch {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -1147,14 +1147,14 @@ class _$_ClearSearch implements _ClearSearch {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -1177,14 +1177,14 @@ class _$_ClearSearch implements _ClearSearch {
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
@@ -1305,14 +1305,14 @@ class _$_FetchProductSearchSuggestionHistory
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -1335,14 +1335,14 @@ class _$_FetchProductSearchSuggestionHistory
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -1365,14 +1365,14 @@ class _$_FetchProductSearchSuggestionHistory
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
@@ -1495,14 +1495,14 @@ class _$_ClearProductSearchSuggestionHistory
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)
+            SearchKey searchKey)
         searchProduct,
     required TResult Function(
             SalesOrganisation salesOrganization,
@@ -1525,14 +1525,14 @@ class _$_ClearProductSearchSuggestionHistory
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult? Function(
             SalesOrganisation salesOrganization,
@@ -1555,14 +1555,14 @@ class _$_ClearProductSearchSuggestionHistory
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            String searchKey)?
+            SearchKey searchKey)?
         searchProduct,
     TResult Function(
             SalesOrganisation salesOrganization,

@@ -448,6 +448,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     user: context.read<UserBloc>().state.user,
                     sortDirection: 'desc',
                     filter: ViewByOrderHistoryFilter.empty(),
+                    searchKey: SearchKey.searchFilter(''),
                   ),
                 );
 

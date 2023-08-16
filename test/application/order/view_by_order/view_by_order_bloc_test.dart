@@ -105,7 +105,7 @@ void main() {
           user: user,
           sortDirection: 'desc',
           filter: viewByOrderHistoryFilter,
-          searchKey: 'fake-key',
+          searchKey: SearchKey.searchFilter('fake-key'),
         ),
       ),
       expect: () => [
@@ -162,7 +162,7 @@ void main() {
           user: user,
           sortDirection: 'desc',
           filter: viewByOrderHistoryFilter,
-          searchKey: 'fake-key',
+          searchKey: SearchKey.searchFilter('fake-key'),
         ),
       ),
       expect: () => [
@@ -303,62 +303,6 @@ void main() {
           appliedFilter: viewByOrderHistoryFilter,
           searchKey: searchKey,
         )
-      ],
-    );
-    blocTest<ViewByOrderBloc, ViewByOrderState>(
-      ' -> Search with different searchKey',
-      seed: () => ViewByOrderState.initial().copyWith(
-        searchKey: searchKey,
-      ),
-      build: () => ViewByOrderBloc(
-        viewByOrderRepository: viewByOrderRepository,
-      ),
-      setUp: () {
-        when(
-          () => viewByOrderRepository.getViewByOrderHistory(
-            orderBy: 'datetime',
-            salesOrgConfig: salesOrgConfig,
-            soldTo: customerCodeInfo,
-            shipTo: shipToInfo,
-            user: user,
-            pageSize: pageSize,
-            offset: offSet,
-            sort: 'desc',
-            searchKey: SearchKey('diff-search-key'),
-            creatingOrderIds: <String>[],
-            viewByOrder: ViewByOrder.empty(),
-            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            viewByOrderMockData,
-          ),
-        );
-      },
-      act: (bloc) => bloc.add(
-        ViewByOrderEvent.searchByOrder(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          user: user,
-          shipToInfo: shipToInfo,
-          searchKey: 'diff-search-key',
-          sortDirection: 'desc',
-          filter: viewByOrderHistoryFilter,
-        ),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
-          searchKey: SearchKey('diff-search-key'),
-          isFetching: true,
-          canLoadMore: true,
-          appliedFilter: viewByOrderHistoryFilter,
-        ),
-        ViewByOrderState.initial().copyWith(
-          isFetching: false,
-          canLoadMore: true,
-          searchKey: SearchKey('diff-search-key'),
-          appliedFilter: viewByOrderHistoryFilter,
-        ),
       ],
     );
   });

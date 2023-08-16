@@ -20,7 +20,7 @@ class ViewByItemsState with _$ViewByItemsState {
         isFetching: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.searchFilter(''),
         appliedFilter: ViewByItemHistoryFilter.empty(),
       );
 }

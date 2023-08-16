@@ -17,7 +17,7 @@ class ViewByOrderState with _$ViewByOrderState {
         canLoadMore: true,
         isFetching: false,
         nextPageIndex: 0,
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.searchFilter(''),
         failureOrSuccessOption: none(),
         appliedFilter: ViewByOrderHistoryFilter.empty(),
       );

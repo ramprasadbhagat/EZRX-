@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'product_search_event.dart';
 part 'product_search_state.dart';
@@ -32,7 +33,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
       : super(ProductSearchState.initial()) {
     on<_AutoSearchProduct>(
       (e, emit) {
-        if (e.searchKey != state.searchKey.getValue()) {
+        if (e.searchKey.isValid()) {
           add(
             _SearchProduct(
               configs: e.configs,
@@ -42,15 +43,21 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
               searchKey: e.searchKey,
             ),
           );
+        } else {
+          emit(state.copyWith(searchKey: e.searchKey));
         }
       },
+      transformer: (events, mapper) => events
+          .debounceTime(const Duration(milliseconds: 3000))
+          .asyncExpand(mapper),
     );
 
     on<_SearchProduct>(
       (e, emit) async {
+        if (e.searchKey.isNotEmpty && e.searchKey == state.searchKey) return;
         emit(
           state.copyWith(
-            searchKey: SearchKey(e.searchKey),
+            searchKey: e.searchKey,
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
             canLoadMore: true,
@@ -64,7 +71,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           salesOrgConfig: e.configs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          searchKey: state.searchKey,
+          searchKey: e.searchKey,
           pageSize: _pageSize,
           offset: state.suggestedProductList.length,
         );
@@ -142,7 +149,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
       (e, emit) {
         emit(
           state.copyWith(
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.search(''),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],

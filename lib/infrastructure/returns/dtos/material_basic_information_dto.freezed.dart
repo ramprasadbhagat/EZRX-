@@ -136,12 +136,10 @@ class __$$_MaterialBasicInformationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialBasicInformationDto extends _MaterialBasicInformationDto {
   const _$_MaterialBasicInformationDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
-      @JsonKey(name: 'partnerRole', defaultValue: '')
-          required this.partnerRole,
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
+      @JsonKey(name: 'partnerRole', defaultValue: '') required this.partnerRole,
       @JsonKey(name: 'partnerNumber', defaultValue: '')
-          required this.partnerNumber})
+      required this.partnerNumber})
       : super._();
 
   factory _$_MaterialBasicInformationDto.fromJson(Map<String, dynamic> json) =>
@@ -198,13 +196,12 @@ class _$_MaterialBasicInformationDto extends _MaterialBasicInformationDto {
 abstract class _MaterialBasicInformationDto
     extends MaterialBasicInformationDto {
   const factory _MaterialBasicInformationDto(
-          {@JsonKey(name: 'salesOrg', defaultValue: '')
-              required final String salesOrg,
-          @JsonKey(name: 'partnerRole', defaultValue: '')
-              required final String partnerRole,
-          @JsonKey(name: 'partnerNumber', defaultValue: '')
-              required final String partnerNumber}) =
-      _$_MaterialBasicInformationDto;
+      {@JsonKey(name: 'salesOrg', defaultValue: '')
+      required final String salesOrg,
+      @JsonKey(name: 'partnerRole', defaultValue: '')
+      required final String partnerRole,
+      @JsonKey(name: 'partnerNumber', defaultValue: '')
+      required final String partnerNumber}) = _$_MaterialBasicInformationDto;
   const _MaterialBasicInformationDto._() : super._();
 
   factory _MaterialBasicInformationDto.fromJson(Map<String, dynamic> json) =

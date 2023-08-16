@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'view_by_order_event.dart';
 part 'view_by_order_state.dart';
@@ -26,15 +27,40 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
     on<_Initialized>(
       (event, emit) => emit(ViewByOrderState.initial()),
     );
+    on<_AutoSearchProduct>(
+      (e, emit) {
+        if (e.searchKey.isValid()) {
+          add(
+            _Fetch(
+              customerCodeInfo: e.customerCodeInfo,
+              salesOrgConfigs: e.salesOrgConfigs,
+              shipToInfo: e.shipToInfo,
+              user: e.user,
+              filter: e.filter,
+              searchKey: e.searchKey,
+              sortDirection: e.sortDirection,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(searchKey: e.searchKey),
+          );
+        }
+      },
+      transformer: (events, mapper) => events
+          .debounceTime(const Duration(milliseconds: 3000))
+          .asyncExpand(mapper),
+    );
     on<_Fetch>(
       (e, emit) async {
+        if (e.searchKey.isNotEmpty && e.searchKey == state.searchKey) return;
         emit(
           state.copyWith(
             isFetching: true,
             viewByOrderList: ViewByOrder.empty(),
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
-            searchKey: SearchKey(e.searchKey),
+            searchKey: e.searchKey,
             appliedFilter: e.filter,
           ),
         );
@@ -50,7 +76,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           viewByOrderHistoryFilter: e.filter,
           orderBy: 'datetime',
           sort: e.sortDirection,
-          searchKey: state.searchKey,
+          searchKey: e.searchKey,
           creatingOrderIds: <String>[],
           viewByOrder: state.viewByOrderList,
         );
@@ -111,22 +137,6 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           ),
         ),
       );
-    });
-
-    on<_SearchByOrder>((e, emit) {
-      if (e.searchKey != state.searchKey.getValue()) {
-        add(
-          ViewByOrderEvent.fetch(
-            customerCodeInfo: e.customerCodeInfo,
-            filter: e.filter,
-            salesOrgConfigs: e.salesOrgConfigs,
-            shipToInfo: e.shipToInfo,
-            sortDirection: e.sortDirection,
-            user: e.user,
-            searchKey: e.searchKey,
-          ),
-        );
-      }
     });
   }
 }

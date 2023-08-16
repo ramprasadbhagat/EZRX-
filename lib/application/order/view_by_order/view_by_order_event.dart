@@ -10,8 +10,17 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required User user,
     required String sortDirection,
     required ViewByOrderHistoryFilter filter,
-    @Default('') String searchKey,
+    required SearchKey searchKey,
   }) = _Fetch;
+  const factory ViewByOrderEvent.autoSearchProduct({
+    required SalesOrganisationConfigs salesOrgConfigs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required User user,
+    required String sortDirection,
+    required ViewByOrderHistoryFilter filter,
+    required SearchKey searchKey,
+  }) = _AutoSearchProduct;
   const factory ViewByOrderEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
@@ -20,13 +29,4 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required String sortDirection,
   }) = _LoadMore;
 
-  const factory ViewByOrderEvent.searchByOrder({
-    required SalesOrganisationConfigs salesOrgConfigs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required User user,
-    required String sortDirection,
-    required ViewByOrderHistoryFilter filter,
-    required String searchKey,
-  }) = _SearchByOrder;
 }

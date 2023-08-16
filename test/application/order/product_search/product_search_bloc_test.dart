@@ -95,12 +95,12 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-            searchKey: 'diff-search-key',
+            searchKey: SearchKey.search('diff-search-key'),
           ),
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
-            searchKey: SearchKey('diff-search-key'),
+            searchKey: SearchKey.search('diff-search-key'),
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
             canLoadMore: true,
@@ -137,7 +137,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-            searchKey: searchKey.getValue(),
+            searchKey: SearchKey.search(searchKey.getValue()),
           ),
         ),
         expect: () => [
@@ -182,7 +182,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-            searchKey: searchKey.getValue(),
+            searchKey: SearchKey.search(searchKey.getValue()),
           ),
         ),
         expect: () => [
@@ -233,9 +233,10 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-            searchKey: 'diff-search-key',
+            searchKey: SearchKey.search('diff-search-key'),
           ),
         ),
+        wait: const Duration(milliseconds: 3000),
         expect: () => [
           ProductSearchState.initial().copyWith(
             searchKey: SearchKey('diff-search-key'),
@@ -419,13 +420,13 @@ void main() {
         act: (bloc) => bloc.add(const ProductSearchEvent.clearSearch()),
         expect: () => [
           ProductSearchState.initial().copyWith(
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.search(''),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],
           ),
           ProductSearchState.initial().copyWith(
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.search(''),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],

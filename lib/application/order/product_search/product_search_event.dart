@@ -7,7 +7,7 @@ class ProductSearchEvent with _$ProductSearchEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String searchKey,
+    required SearchKey searchKey,
   }) = _AutoSearchProduct;
 
   const factory ProductSearchEvent.searchProduct({
@@ -15,7 +15,7 @@ class ProductSearchEvent with _$ProductSearchEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required String searchKey,
+    required SearchKey searchKey,
   }) = _SearchProduct;
 
   const factory ProductSearchEvent.loadMoreProductList({

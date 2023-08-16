@@ -46,13 +46,14 @@ abstract class $ReturnMaterialListDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          List<ReturnMaterialDto> items});
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      List<ReturnMaterialDto> items});
 }
 
 /// @nodoc
@@ -95,13 +96,14 @@ abstract class _$$_ReturnMaterialListDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          List<ReturnMaterialDto> items});
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      List<ReturnMaterialDto> items});
 }
 
 /// @nodoc
@@ -136,13 +138,14 @@ class __$$_ReturnMaterialListDtoCopyWithImpl<$Res>
 class _$_ReturnMaterialListDto extends _ReturnMaterialListDto {
   const _$_ReturnMaterialListDto(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          required final List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      required final List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          required final List<ReturnMaterialDto> items})
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      required final List<ReturnMaterialDto> items})
       : _basicInformations = basicInformations,
         _items = items,
         super._();
@@ -214,14 +217,14 @@ class _$_ReturnMaterialListDto extends _ReturnMaterialListDto {
 abstract class _ReturnMaterialListDto extends ReturnMaterialListDto {
   const factory _ReturnMaterialListDto(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          required final List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      required final List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          required final List<ReturnMaterialDto>
-              items}) = _$_ReturnMaterialListDto;
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      required final List<ReturnMaterialDto> items}) = _$_ReturnMaterialListDto;
   const _ReturnMaterialListDto._() : super._();
 
   factory _ReturnMaterialListDto.fromJson(Map<String, dynamic> json) =

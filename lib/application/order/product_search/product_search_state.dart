@@ -17,6 +17,6 @@ class ProductSearchState with _$ProductSearchState {
         canLoadMore: false,
         productSuggestionHistory: ProductSuggestionHistory.empty(),
         suggestedProductList: <MaterialInfo>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.search(''),
       );
 }

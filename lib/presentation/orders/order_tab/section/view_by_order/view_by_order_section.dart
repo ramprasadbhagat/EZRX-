@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
@@ -69,6 +70,7 @@ class ViewByOrdersPage extends StatelessWidget {
                     user: context.read<UserBloc>().state.user,
                     sortDirection: 'desc',
                     filter: ViewByOrderHistoryFilter.empty(),
+                    searchKey: SearchKey.searchFilter(''),
                   ),
                 );
           },

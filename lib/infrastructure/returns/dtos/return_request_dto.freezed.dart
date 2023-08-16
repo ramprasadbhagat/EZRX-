@@ -47,15 +47,16 @@ abstract class $ReturnRequestDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
-          bool isSearchComplete,
+      bool isSearchComplete,
       @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
-          List<ReturnItemDto> items});
+          name: 'materials',
+          fromJson: _unmarshallMaterialItem,
+          defaultValue: <ReturnItemDto>[])
+      List<ReturnItemDto> items});
 }
 
 /// @nodoc
@@ -102,15 +103,16 @@ abstract class _$$_ReturnRequestDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
-          bool isSearchComplete,
+      bool isSearchComplete,
       @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
-          List<ReturnItemDto> items});
+          name: 'materials',
+          fromJson: _unmarshallMaterialItem,
+          defaultValue: <ReturnItemDto>[])
+      List<ReturnItemDto> items});
 }
 
 /// @nodoc
@@ -150,15 +152,16 @@ class __$$_ReturnRequestDtoCopyWithImpl<$Res>
 class _$_ReturnRequestDto extends _ReturnRequestDto {
   const _$_ReturnRequestDto(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
-          required this.isSearchComplete,
+      required this.isSearchComplete,
       @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          required final List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      required final List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
-          required final List<ReturnItemDto> items})
+          name: 'materials',
+          fromJson: _unmarshallMaterialItem,
+          defaultValue: <ReturnItemDto>[])
+      required final List<ReturnItemDto> items})
       : _basicInformations = basicInformations,
         _items = items,
         super._();
@@ -235,15 +238,16 @@ class _$_ReturnRequestDto extends _ReturnRequestDto {
 abstract class _ReturnRequestDto extends ReturnRequestDto {
   const factory _ReturnRequestDto(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
-          required final bool isSearchComplete,
+      required final bool isSearchComplete,
       @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          required final List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      required final List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
-          required final List<ReturnItemDto> items}) = _$_ReturnRequestDto;
+          name: 'materials',
+          fromJson: _unmarshallMaterialItem,
+          defaultValue: <ReturnItemDto>[])
+      required final List<ReturnItemDto> items}) = _$_ReturnRequestDto;
   const _ReturnRequestDto._() : super._();
 
   factory _ReturnRequestDto.fromJson(Map<String, dynamic> json) =

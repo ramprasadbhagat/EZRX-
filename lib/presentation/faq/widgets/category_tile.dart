@@ -16,7 +16,7 @@ class _CategoryTile extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            !state.searchKey.validFilterSearchKey &&
+            !state.searchKey.isNotEmpty &&
                     state.selectedCategory.getOrDefaultValue('') !=
                         faqCategoryGroup.displayName
                 ? Text(

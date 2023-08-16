@@ -27,6 +27,14 @@ mixin _$ViewByItemsEvent {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)
         fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        autoSearchProduct,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         loadMore,
@@ -44,6 +52,14 @@ mixin _$ViewByItemsEvent {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)?
         fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
@@ -68,6 +84,14 @@ mixin _$ViewByItemsEvent {
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
             User user)?
         loadMore,
     TResult Function()? fetchProductImage,
@@ -78,6 +102,7 @@ mixin _$ViewByItemsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchProductImage value) fetchProductImage,
   }) =>
@@ -86,6 +111,7 @@ mixin _$ViewByItemsEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) =>
@@ -94,6 +120,7 @@ mixin _$ViewByItemsEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
@@ -166,6 +193,14 @@ class _$_Initialized implements _Initialized {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)
         fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        autoSearchProduct,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         loadMore,
@@ -186,6 +221,14 @@ class _$_Initialized implements _Initialized {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)?
         fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
@@ -213,6 +256,14 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
             User user)?
         loadMore,
     TResult Function()? fetchProductImage,
@@ -229,6 +280,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
@@ -240,6 +292,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
@@ -251,6 +304,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
@@ -444,6 +498,14 @@ class _$_Fetch implements _Fetch {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)
         fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        autoSearchProduct,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         loadMore,
@@ -465,6 +527,14 @@ class _$_Fetch implements _Fetch {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)?
         fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
@@ -493,6 +563,14 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
             User user)?
         loadMore,
     TResult Function()? fetchProductImage,
@@ -510,6 +588,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
@@ -521,6 +600,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
@@ -532,6 +612,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
@@ -560,6 +641,333 @@ abstract class _Fetch implements ViewByItemsEvent {
   SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AutoSearchProductCopyWith<$Res> {
+  factory _$$_AutoSearchProductCopyWith(_$_AutoSearchProduct value,
+          $Res Function(_$_AutoSearchProduct) then) =
+      __$$_AutoSearchProductCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisationConfigs salesOrgConfigs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      ViewByItemHistoryFilter viewByItemHistoryFilter,
+      SearchKey searchKey});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $ViewByItemHistoryFilterCopyWith<$Res> get viewByItemHistoryFilter;
+}
+
+/// @nodoc
+class __$$_AutoSearchProductCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_AutoSearchProduct>
+    implements _$$_AutoSearchProductCopyWith<$Res> {
+  __$$_AutoSearchProductCopyWithImpl(
+      _$_AutoSearchProduct _value, $Res Function(_$_AutoSearchProduct) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrgConfigs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? viewByItemHistoryFilter = null,
+    Object? searchKey = null,
+  }) {
+    return _then(_$_AutoSearchProduct(
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      viewByItemHistoryFilter: null == viewByItemHistoryFilter
+          ? _value.viewByItemHistoryFilter
+          : viewByItemHistoryFilter // ignore: cast_nullable_to_non_nullable
+              as ViewByItemHistoryFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ViewByItemHistoryFilterCopyWith<$Res> get viewByItemHistoryFilter {
+    return $ViewByItemHistoryFilterCopyWith<$Res>(
+        _value.viewByItemHistoryFilter, (value) {
+      return _then(_value.copyWith(viewByItemHistoryFilter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AutoSearchProduct implements _AutoSearchProduct {
+  const _$_AutoSearchProduct(
+      {required this.salesOrgConfigs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.viewByItemHistoryFilter,
+      required this.searchKey});
+
+  @override
+  final SalesOrganisationConfigs salesOrgConfigs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final ViewByItemHistoryFilter viewByItemHistoryFilter;
+  @override
+  final SearchKey searchKey;
+
+  @override
+  String toString() {
+    return 'ViewByItemsEvent.autoSearchProduct(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemHistoryFilter: $viewByItemHistoryFilter, searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AutoSearchProduct &&
+            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
+                other.salesOrgConfigs == salesOrgConfigs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(
+                    other.viewByItemHistoryFilter, viewByItemHistoryFilter) ||
+                other.viewByItemHistoryFilter == viewByItemHistoryFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
+      customerCodeInfo, shipToInfo, user, viewByItemHistoryFilter, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
+      __$$_AutoSearchProductCopyWithImpl<_$_AutoSearchProduct>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        autoSearchProduct,
+    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+        loadMore,
+    required TResult Function() fetchProductImage,
+  }) {
+    return autoSearchProduct(salesOrgConfigs, customerCodeInfo, shipToInfo,
+        user, viewByItemHistoryFilter, searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        loadMore,
+    TResult? Function()? fetchProductImage,
+  }) {
+    return autoSearchProduct?.call(salesOrgConfigs, customerCodeInfo,
+        shipToInfo, user, viewByItemHistoryFilter, searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        fetch,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        loadMore,
+    TResult Function()? fetchProductImage,
+    required TResult orElse(),
+  }) {
+    if (autoSearchProduct != null) {
+      return autoSearchProduct(salesOrgConfigs, customerCodeInfo, shipToInfo,
+          user, viewByItemHistoryFilter, searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchProductImage value) fetchProductImage,
+  }) {
+    return autoSearchProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchProductImage value)? fetchProductImage,
+  }) {
+    return autoSearchProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchProductImage value)? fetchProductImage,
+    required TResult orElse(),
+  }) {
+    if (autoSearchProduct != null) {
+      return autoSearchProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AutoSearchProduct implements ViewByItemsEvent {
+  const factory _AutoSearchProduct(
+      {required final SalesOrganisationConfigs salesOrgConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final ViewByItemHistoryFilter viewByItemHistoryFilter,
+      required final SearchKey searchKey}) = _$_AutoSearchProduct;
+
+  SalesOrganisationConfigs get salesOrgConfigs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  User get user;
+  ViewByItemHistoryFilter get viewByItemHistoryFilter;
+  SearchKey get searchKey;
+  @JsonKey(ignore: true)
+  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -710,6 +1118,14 @@ class _$_LoadMore implements _LoadMore {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)
         fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        autoSearchProduct,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         loadMore,
@@ -730,6 +1146,14 @@ class _$_LoadMore implements _LoadMore {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)?
         fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
@@ -757,6 +1181,14 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
             User user)?
         loadMore,
     TResult Function()? fetchProductImage,
@@ -773,6 +1205,7 @@ class _$_LoadMore implements _LoadMore {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
@@ -784,6 +1217,7 @@ class _$_LoadMore implements _LoadMore {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
@@ -795,6 +1229,7 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),
@@ -869,6 +1304,14 @@ class _$_FetchProductImage implements _FetchProductImage {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)
         fetch,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)
+        autoSearchProduct,
     required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
         loadMore,
@@ -889,6 +1332,14 @@ class _$_FetchProductImage implements _FetchProductImage {
             ViewByItemHistoryFilter viewByItemHistoryFilter,
             SearchKey searchKey)?
         fetch,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
@@ -916,6 +1367,14 @@ class _$_FetchProductImage implements _FetchProductImage {
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
+            User user,
+            ViewByItemHistoryFilter viewByItemHistoryFilter,
+            SearchKey searchKey)?
+        autoSearchProduct,
+    TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
             User user)?
         loadMore,
     TResult Function()? fetchProductImage,
@@ -932,6 +1391,7 @@ class _$_FetchProductImage implements _FetchProductImage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchProductImage value) fetchProductImage,
   }) {
@@ -943,6 +1403,7 @@ class _$_FetchProductImage implements _FetchProductImage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchProductImage value)? fetchProductImage,
   }) {
@@ -954,6 +1415,7 @@ class _$_FetchProductImage implements _FetchProductImage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchProductImage value)? fetchProductImage,
     required TResult orElse(),

@@ -1,10 +1,10 @@
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/presentation/products/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -44,9 +44,10 @@ class _BodyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductSearchBloc, ProductSearchState>(
-      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      buildWhen: (previous, current) =>
+          previous.searchKey.isNotEmpty != current.searchKey.isNotEmpty,
       builder: (context, state) {
-        return state.searchKey.validFilterSearchKey
+        return state.searchKey.isNotEmpty
             ? const _ProductSuggestionSection()
             : const _ProductSearchHistorySuggestionSection();
       },
@@ -59,58 +60,62 @@ class _ProductSearchSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ProductSearchBloc>().add(
+          const ProductSearchEvent.clearSearch(),
+        );
+
     return BlocBuilder<ProductSearchBloc, ProductSearchState>(
       buildWhen: (previous, current) =>
           previous.isSearching != current.isSearching ||
-          !current.searchKey.validFilterSearchKey,
+          previous.apiFailureOrSuccessOption !=
+              current.apiFailureOrSuccessOption,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(right: 20),
-          child: ProductSearchBar(
+          child: CustomSearchBar(
             key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
             autofocus: true,
             initialValue: state.searchKey.getOrDefaultValue(''),
             enabled: !state.isSearching,
-            onSearchChanged: (value) {
-              context.read<ProductSearchBloc>().add(
-                    ProductSearchEvent.autoSearchProduct(
-                      salesOrganization:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      searchKey: value,
-                    ),
-                  );
-            },
-            onSearchSubmitted: (value) {
-              context.read<ProductSearchBloc>().add(
-                    ProductSearchEvent.searchProduct(
-                      salesOrganization:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      searchKey: value,
-                    ),
-                  );
-            },
-            customValidator: () =>
-                SearchKey.search(state.searchKey.searchValueOrEmpty).isValid(),
-            onClear: () {
-              context.read<ProductSearchBloc>().add(
-                    const ProductSearchEvent.clearSearch(),
-                  );
-            },
-            border: InputBorder.none,
+            onSearchChanged: (value) => context.read<ProductSearchBloc>().add(
+                  ProductSearchEvent.autoSearchProduct(
+                    salesOrganization:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    searchKey: SearchKey.search(value),
+                  ),
+                ),
+            onSearchSubmitted: (value) => context.read<ProductSearchBloc>().add(
+                  ProductSearchEvent.searchProduct(
+                    salesOrganization:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                    searchKey: SearchKey.search(value),
+                  ),
+                ),
+            //customValidator : we are not taking the value from the state, as there is auto-search.
+            //It take time for 1 sec to emit the state, so we have used from local.
+            customValidator: (value) => SearchKey.search(value).isValid(),
+            onClear: () => context.read<ProductSearchBloc>().add(
+                  const ProductSearchEvent.clearSearch(),
+                ),
+            clearIconKey: WidgetKeys.productSearchClearKey,
+            searchSuffixIcon: IconButton(
+              splashRadius: 1,
+              key: WidgetKeys.productScanCameraKey,
+              icon: const Icon(
+                Icons.camera_alt_outlined,
+              ),
+              onPressed: () => {},
+            ),
           ),
         );
       },
@@ -316,7 +321,9 @@ class _HistoryTile extends StatelessWidget {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
-                    searchKey: productSearchObject.getOrDefaultValue(''),
+                    searchKey: SearchKey.search(
+                      productSearchObject.getOrDefaultValue(''),
+                    ),
                   ),
                 );
           },
