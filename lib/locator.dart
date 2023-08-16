@@ -2917,6 +2917,8 @@ void setupLocator() {
     () => ChatBotRepository(
       chatBotService: locator<ChatBotService>(),
       tokenStorage: locator<TokenStorage>(),
+      config: locator<Config>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
