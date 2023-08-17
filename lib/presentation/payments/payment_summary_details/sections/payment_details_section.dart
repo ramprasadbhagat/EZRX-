@@ -1,8 +1,3 @@
-//ignore_for_file: unused-code
-
-//ignore_for_file: unused-class
-
-//ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
@@ -76,7 +71,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'Payment #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                  '${'PA'.tr()} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
@@ -119,7 +114,8 @@ class _PaymentDetailsSection extends StatelessWidget {
                       color: ZPColors.white,
                     ),
                 valueTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: ZPColors.white,
+                      color:
+                          paymentSummaryDetails.status.getAdviceExpiryTextColor,
                     ),
               ),
               BalanceTextRow(

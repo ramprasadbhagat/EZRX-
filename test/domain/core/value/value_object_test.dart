@@ -181,4 +181,32 @@ void main() {
       expect(dateTimeStringValue.dateTimeOrDashString, '20 Jul 2023 10:30:00');
     });
   });
+
+  group('StatusType Value Object', () {
+    test(
+      'StatusType display dash If Empty',
+      () {
+        final valObj = StatusType('');
+        expect(
+          valObj.displayStringValue,
+          '-',
+        );
+      },
+    );
+    test(
+      'check true false if status is processed or successful',
+      () {
+        final valObjForSuccess = StatusType('Successful');
+        expect(
+          valObjForSuccess.getIsSuccessfulOrProcessed,
+          true,
+        );
+        final valObjForProcessed = StatusType('Processed');
+        expect(
+          valObjForProcessed.getIsSuccessfulOrProcessed,
+          true,
+        );
+      },
+    );
+  });
 }

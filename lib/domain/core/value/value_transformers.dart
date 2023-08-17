@@ -393,10 +393,15 @@ String getReturnSummaryStatusInList(String statusType) {
   }
 }
 
-bool isSuccessful(String status) => status == 'Successful';
+bool isSuccessfulOrProcessed(String status) =>
+    status == 'Successful' || status == 'Processed';
 
 Color getDisplayStatusTextColor(String status) {
-  return isSuccessful(status) ? ZPColors.black : ZPColors.red;
+  return isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;
+}
+
+Color getAdviceExpiryColor(String status) {
+  return isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
 }
 
 bool isApproved(String status) {

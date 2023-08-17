@@ -436,4 +436,11 @@ class WidgetKeys {
   static const Key phoneNumberKey = Key('phoneNumberKey');
   static const Key contactMessageKey = Key('contactMessageKey');
   static const Key sendMessageButtonKey = Key('sendMessageButtonKey');
+
+  //============================================================
+  //  Payment summary details page
+  //============================================================
+  static const Key deleteAdviceButtonKey = Key('deleteAdviceButton');
+  static const Key downloadAdviceButtonKey = Key('downloadAdviceButton');
+  static const Key buttonRowKey = Key('buttonRow');
 }

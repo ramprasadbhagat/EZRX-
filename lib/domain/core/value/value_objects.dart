@@ -69,9 +69,8 @@ class SearchKey extends ValueObject<String> {
       )),
     );
   }
-  
-  bool get isNotEmpty =>
-      searchValueOrEmpty.isNotEmpty;
+
+  bool get isNotEmpty => searchValueOrEmpty.isNotEmpty;
 
   String get searchValueOrEmpty => value.getOrElse(() => '');
 
@@ -245,10 +244,13 @@ class StatusType extends ValueObject<String> {
 
   Color get getPaymentDisplayStatusTextColor =>
       getDisplayStatusTextColor(value.getOrElse(() => ''));
+  Color get getAdviceExpiryTextColor =>
+      getAdviceExpiryColor(value.getOrElse(() => ''));
 
   bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
 
-  bool get getIsSuccessful => isSuccessful(value.getOrElse(() => ''));
+  bool get getIsSuccessfulOrProcessed =>
+      isSuccessfulOrProcessed(value.getOrElse(() => ''));
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 

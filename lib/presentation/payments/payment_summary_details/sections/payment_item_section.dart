@@ -1,10 +1,3 @@
-//ignore_for_file: unused-code
-
-//ignore_for_file: unused-class
-
-//ignore_for_file: unused-files
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
@@ -31,30 +24,6 @@ class PaymentItemSection extends StatelessWidget {
             showDivider: paymentItemState.paymentItemList.indexOf(e) != 0,
           ),
         ),
-        isSuccessful
-            ? const SizedBox.shrink()
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: ZPColors.red,
-                      ),
-                    ),
-                    child: Text(
-                      'Delete payment advice'.tr(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(color: ZPColors.red),
-                    ).tr(),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
       ],
     );
   }

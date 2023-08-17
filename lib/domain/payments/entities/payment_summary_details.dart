@@ -64,14 +64,14 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         accountingDocExternalReference: '',
       );
 
-  String get adviceExpiryText => status.getIsSuccessful
+  String get adviceExpiryText => status.getIsSuccessfulOrProcessed
       ? 'NA'.tr()
       : 'in ${adviceExpiry.displayDashIfEmpty}'.tr();
 
   String get paymentDate =>
-      status.getIsSuccessful ? valueDate.dateString.tr() : '-'.tr();
+      status.getIsSuccessfulOrProcessed ? valueDate.dateString.tr() : '-'.tr();
 
-  String get dateOrExpiry => status.getIsSuccessful
+  String get dateOrExpiry => status.getIsSuccessfulOrProcessed
       ? 'Payment date: ${createdDate.dateString}'
       : 'Expires in ${adviceExpiry.displayDashIfEmpty}';
 }

@@ -60,9 +60,53 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
                     top: 16,
                     bottom: 30,
                   ),
-                  child: OutlinedButton(
-                    child: const Text('Download payment advice').tr(),
-                    onPressed: () {},
+                  child: Row(
+                    key: WidgetKeys.buttonRowKey,
+                    children: [
+                      if (!widget.paymentSummaryDetails.status
+                          .getIsSuccessfulOrProcessed)
+                        Expanded(
+                          child: OutlinedButton(
+                            key: WidgetKeys.deleteAdviceButtonKey,
+                            style: OutlinedButton.styleFrom(
+                              side: const BorderSide(
+                                color: ZPColors.red,
+                              ),
+                            ),
+                            child: Text(
+                              'Delete advice'.tr(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(color: ZPColors.red),
+                            ).tr(),
+                            onPressed: () {},
+                          ),
+                        ),
+                      if (!widget.paymentSummaryDetails.status
+                          .getIsSuccessfulOrProcessed)
+                        const SizedBox(
+                          width: 16,
+                        ),
+                      Expanded(
+                        child: OutlinedButton(
+                          key: WidgetKeys.downloadAdviceButtonKey,
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(
+                              color: ZPColors.primary,
+                            ),
+                          ),
+                          child: Text(
+                            'Download advice'.tr(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: ZPColors.primary),
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
                   ),
                 );
         },
@@ -105,8 +149,8 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
                           ),
                           PaymentItemSection(
                             paymentItemState: state,
-                            isSuccessful: widget
-                                .paymentSummaryDetails.status.getIsSuccessful,
+                            isSuccessful: widget.paymentSummaryDetails.status
+                                .getIsSuccessfulOrProcessed,
                           ),
                         ],
                       ),

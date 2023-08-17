@@ -425,4 +425,29 @@ void main() {
       expect(result, '-');
     },
   );
+
+  test(
+    'should return true if input is successful or Processed',
+    () async {
+      const inputForSuccessful = 'Successful';
+      final resultForSuccessful = isSuccessfulOrProcessed(
+        inputForSuccessful,
+      );
+      const inputForProcessed = 'Processed';
+      final resultForProcessed = isSuccessfulOrProcessed(
+        inputForProcessed,
+      );
+      expect(
+        resultForProcessed,
+        true,
+      );
+      expect(resultForSuccessful, true);
+
+      const inputForInProgress = 'In Progress';
+      final resultForInProgress = isSuccessfulOrProcessed(
+        inputForInProgress,
+      );
+      expect(resultForInProgress, false);
+    },
+  );
 }
