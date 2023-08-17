@@ -29,21 +29,23 @@ class LoginWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ResponsiveRowColumn(
-          isRow: Responsive.isLargerThan(context, Breakpoint.desktop),
-          children: [
-            _LoginBanner(
-              height: Responsive.isLargerThan(context, Breakpoint.desktop)
-                  ? MediaQuery.of(context).size.height
-                  : 500,
-              width: Responsive.isLargerThan(context, Breakpoint.desktop)
-                  ? MediaQuery.of(context).size.width * 0.5
-                  : MediaQuery.of(context).size.width,
-            ),
-            _LoginFormWeb(
-              state: state,
-            ),
-          ],
+        SingleChildScrollView(
+          child: ResponsiveRowColumn(
+            isRow: Responsive.isLargerThan(context, Breakpoint.desktop),
+            children: [
+              _LoginBanner(
+                height: Responsive.isLargerThan(context, Breakpoint.desktop)
+                    ? MediaQuery.of(context).size.height
+                    : 500,
+                width: Responsive.isLargerThan(context, Breakpoint.desktop)
+                    ? MediaQuery.of(context).size.width * 0.5
+                    : MediaQuery.of(context).size.width,
+              ),
+              _LoginFormWeb(
+                state: state,
+              ),
+            ],
+          ),
         ),
         const Announcement(),
       ],
@@ -151,63 +153,57 @@ class _LoginFormWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      alignment: Alignment.center,
       width: Responsive.isLargerThan(context, Breakpoint.desktop)
           ? MediaQuery.of(context).size.width * 0.5
           : MediaQuery.of(context).size.width,
-      height: Responsive.isLargerThan(context, Breakpoint.desktop) ? null : 600,
+      height: Responsive.isLargerThan(context, Breakpoint.desktop) ? null : 700,
       child: Form(
         autovalidateMode: state.showErrorMessages
             ? AutovalidateMode.always
             : AutovalidateMode.disabled,
         child: Column(
           children: [
-            Expanded(
-              flex: 7,
-              child: FractionallySizedBox(
-                widthFactor: 0.83,
-                child: Column(
-                  mainAxisAlignment:
-                      Responsive.isLargerThan(context, Breakpoint.desktop)
-                          ? MainAxisAlignment.center
-                          : MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: Responsive.isLargerThan(
-                            context,
-                            Breakpoint.desktop,
-                          )
-                              ? 0
-                              : 16,
-                        ),
-                        const _Logo(),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        const _Welcome(),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        const MarketSelector(),
-                        const SizedBox(height: 25),
-                        const UsernameField(),
-                        const SizedBox(height: 25),
-                        const PasswordField(),
-                        const SizedBox(height: 25),
-                        const RememberPassword(),
-                        const SizedBox(height: 15),
-                        const LoginButton(),
-                        const SizedBox(height: 25),
-                        const _TermsOfUse(),
-                        const SizedBox(height: 25),
-                        const _CreateAccount(),
-                      ],
-                    ),
-                  ],
-                ),
+            FractionallySizedBox(
+              widthFactor: 0.83,
+              child: Column(
+                mainAxisAlignment:
+                    Responsive.isLargerThan(context, Breakpoint.desktop)
+                        ? MainAxisAlignment.center
+                        : MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: Responsive.isLargerThan(
+                      context,
+                      Breakpoint.desktop,
+                    )
+                        ? 0
+                        : 16,
+                  ),
+                  const _Logo(),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const _Welcome(),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const MarketSelector(),
+                  const SizedBox(height: 25),
+                  const UsernameField(),
+                  const SizedBox(height: 25),
+                  const PasswordField(),
+                  const SizedBox(height: 25),
+                  const RememberPassword(),
+                  const SizedBox(height: 15),
+                  const LoginButton(),
+                  const SizedBox(height: 25),
+                  const _TermsOfUse(),
+                  const SizedBox(height: 6),
+                  const _CreateAccount(),
+                ],
               ),
             ),
             const _SSOLogin(
@@ -262,7 +258,7 @@ class _CreateAccount extends StatelessWidget {
             child: TextButton(
               key: WidgetKeys.createAccountButton,
               child: Text(
-                'Create an account'.tr(),
+                'Sign Up'.tr(),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: ZPColors.primary,
@@ -273,7 +269,7 @@ class _CreateAccount extends StatelessWidget {
                 context.router.push(
                   WebViewPageRoute(
                     url: locator<Config>().createAccountUrl,
-                    titleText: 'Create Account',
+                    titleText: 'Sign Up',
                   ),
                 );
               },
@@ -291,8 +287,9 @@ class _SSOLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: ColoredBox(
         color: ZPColors.extraLightGrey5,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
