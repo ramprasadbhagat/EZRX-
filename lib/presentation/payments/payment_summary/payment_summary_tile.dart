@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -41,7 +42,7 @@ class PaymentSummaryGroupSection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 16),
               child: Text(
-                'Created on ${paymentSummaryGroup.createdDate.dateString}',
+                '${'Created on'.tr()} ${paymentSummaryGroup.createdDate.dateString}',
                 style: Theme.of(context)
                     .textTheme
                     .labelSmall
@@ -104,7 +105,7 @@ class _PaymentSummaryTiles extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                'Payment #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                '${'PA'.tr()} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
