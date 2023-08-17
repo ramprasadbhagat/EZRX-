@@ -73,16 +73,6 @@ class AvailableCreditsTab extends StatelessWidget {
                     .creditLimit
                     .creditBalance
                     .getOrDefaultValue('0'),
-                currencyCodeTextStyle:
-                    Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: ZPColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                priceTextStyle:
-                    Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: ZPColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
               ),
             ],
           ),

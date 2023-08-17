@@ -245,19 +245,6 @@ class _ReturnItem extends StatelessWidget {
                             title: 'Return value: '.tr(),
                             salesOrgConfig: config,
                             price: data.totalPrice.toStringAsFixed(2),
-                            currencyCodeTextStyle: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: ZPColors.primary,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                            priceTextStyle: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: ZPColors.primary,
-                                ),
                             priceLabelStyle:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: ZPColors.darkerGrey,

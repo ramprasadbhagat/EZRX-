@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 
@@ -10,24 +11,29 @@ class PriceComponent extends StatelessWidget {
     required this.salesOrgConfig,
     required this.price,
     this.title = '',
-    this.priceTextStyle,
-    this.currencyCodeTextStyle,
     this.priceLabelStyle,
     this.obscured = false,
+    this.type = PriceStyle.commonPrice,
   }) : super(key: key);
 
   final SalesOrganisationConfigs salesOrgConfig;
   final String price;
   final String title;
-  final TextStyle? priceTextStyle;
-  final TextStyle? currencyCodeTextStyle;
   final TextStyle? priceLabelStyle;
   final bool obscured;
+  final PriceStyle type;
 
   List<TextSpan> _getTextSpan(BuildContext context) {
     final textSpans = <TextSpan>[];
     final notPrice = price.contains(RegExp(r'[A-Za-z]'));
-    final defaultStyle = Theme.of(context).textTheme.labelSmall;
+    final priceTextStyle = _priceStyle(
+      context,
+      type,
+    );
+    final currencyCodeTextStyle = _currencyCodeTextStyle(
+      context,
+      type,
+    );
 
     final priceValue = notPrice
         ? price.tr()
@@ -38,7 +44,7 @@ class PriceComponent extends StatelessWidget {
       textSpans.add(
         TextSpan(
           text: title,
-          style: priceLabelStyle ?? priceTextStyle ?? defaultStyle,
+          style: priceLabelStyle ?? priceTextStyle,
         ),
       );
     }
@@ -46,7 +52,7 @@ class PriceComponent extends StatelessWidget {
       textSpans.add(
         TextSpan(
           text: obscured ? obscuredValue : priceValue,
-          style: priceTextStyle ?? defaultStyle,
+          style: priceTextStyle,
         ),
       );
 
@@ -57,14 +63,14 @@ class PriceComponent extends StatelessWidget {
     textSpans.add(
       TextSpan(
         text: priceValue.replaceAll(amount, ''),
-        style: currencyCodeTextStyle ?? defaultStyle,
+        style: currencyCodeTextStyle,
       ),
     );
     //amount
     textSpans.add(
       TextSpan(
         text: obscured ? obscuredValue : amount,
-        style: priceTextStyle ?? defaultStyle,
+        style: priceTextStyle,
       ),
     );
 
@@ -82,5 +88,47 @@ class PriceComponent extends StatelessWidget {
       ),
       overflow: TextOverflow.ellipsis,
     );
+  }
+}
+
+enum PriceStyle { commonPrice, bundlePice, counterOfferPrice }
+
+TextStyle _priceStyle(BuildContext context, PriceStyle type) {
+  switch (type) {
+    case PriceStyle.commonPrice:
+      return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.primary,
+          );
+    case PriceStyle.counterOfferPrice:
+      return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.darkGray,
+            decoration: TextDecoration.lineThrough,
+          );
+
+    default:
+      return Theme.of(context)
+          .textTheme
+          .labelSmall!
+          .copyWith(color: ZPColors.black);
+  }
+}
+
+TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
+  switch (type) {
+    case PriceStyle.commonPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.primary,
+          );
+    case PriceStyle.counterOfferPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.darkGray,
+            decoration: TextDecoration.lineThrough,
+          );
+
+    default:
+      return Theme.of(context)
+          .textTheme
+          .titleSmall!
+          .copyWith(color: ZPColors.black);
   }
 }

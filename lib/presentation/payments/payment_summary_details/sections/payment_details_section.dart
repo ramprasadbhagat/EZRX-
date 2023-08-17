@@ -234,8 +234,6 @@ class _PriceWidget extends StatelessWidget {
         PriceComponent(
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           price: price,
-          currencyCodeTextStyle: Theme.of(context).textTheme.bodyLarge,
-          priceTextStyle: priceStyle ?? Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );

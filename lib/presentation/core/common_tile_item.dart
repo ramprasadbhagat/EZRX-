@@ -46,7 +46,6 @@ class CommonTileItem extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 5),
             if (headerText != null && statusWidget != null)
               _HeaderItem(
                 header: headerText!,
@@ -71,6 +70,9 @@ class CommonTileItem extends StatelessWidget {
                             Text(
                               label,
                               style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            const SizedBox(
+                              width: 5,
                             ),
                             if (statusTag != null &&
                                 statusTag!.getOrDefaultValue('').isNotEmpty)

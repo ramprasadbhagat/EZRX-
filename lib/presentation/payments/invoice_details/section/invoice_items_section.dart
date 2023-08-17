@@ -119,22 +119,12 @@ class _InvoiceItemDetail extends StatelessWidget {
           PriceComponent(
             salesOrgConfig: salesOrgConfigs,
             price: customerDocumentDetail.grossAmount.toString(),
-            priceTextStyle: Theme.of(context).textTheme.labelSmall,
-            currencyCodeTextStyle: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
       ),
       priceComponent: PriceComponent(
         salesOrgConfig: salesOrgConfigs,
         price: customerDocumentDetail.grossAmount.toString(),
-        priceTextStyle: Theme.of(context)
-            .textTheme
-            .bodySmall
-            ?.copyWith(color: ZPColors.darkGray),
-        currencyCodeTextStyle: Theme.of(context)
-            .textTheme
-            .bodySmall
-            ?.copyWith(color: ZPColors.darkGray),
       ),
     );
   }

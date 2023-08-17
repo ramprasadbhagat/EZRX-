@@ -6,11 +6,6 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
-          color: ZPColors.extraLightGrey4,
-          decoration: TextDecoration.none,
-        );
-
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,8 +38,6 @@ class _MaterialDetails extends StatelessWidget {
           PriceComponent(
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             price: cartItem.finalPrice.toStringAsFixed(2),
-            currencyCodeTextStyle: textStyle,
-            priceTextStyle: textStyle,
           ),
         ],
       ),

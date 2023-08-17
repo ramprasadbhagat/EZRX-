@@ -267,10 +267,6 @@ class _ItemCardState extends State<_ItemCard> {
                             salesOrgConfig:
                                 context.read<SalesOrgBloc>().state.configs,
                             price: e.value.value,
-                            priceTextStyle:
-                                Theme.of(context).textTheme.labelMedium,
-                            currencyCodeTextStyle:
-                                Theme.of(context).textTheme.titleMedium,
                             obscured: obscured,
                           ),
                         ),

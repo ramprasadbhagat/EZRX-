@@ -46,15 +46,6 @@ class CreditItemCard extends StatelessWidget {
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                   price:
                       customerOpenItem.amountInTransactionCurrency.toString(),
-                  currencyCodeTextStyle:
-                      Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ZPColors.primary,
-                          ),
-                  priceTextStyle:
-                      Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ZPColors.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
                 ),
               ],
             ),

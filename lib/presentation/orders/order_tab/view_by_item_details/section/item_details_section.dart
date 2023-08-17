@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,10 +41,7 @@ class ItemDetailsSection extends StatelessWidget {
             priceComponent: PriceComponent(
               price: orderHistoryItem.totalPrice.totalPrice.toStringAsFixed(2),
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              currencyCodeTextStyle:
-                  Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
+              
             ),
             statusWidget: StatusLabel(
               status: StatusType(

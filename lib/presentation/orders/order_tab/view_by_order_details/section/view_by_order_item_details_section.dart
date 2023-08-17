@@ -68,12 +68,6 @@ class OrderItemDetailsSection extends StatelessWidget {
                                             .read<SalesOrgBloc>()
                                             .state
                                             .configs,
-                                        currencyCodeTextStyle: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall
-                                            ?.copyWith(
-                                              color: ZPColors.darkGray,
-                                            ),
                                       ),
                                       statusWidget: StatusLabel(
                                         status: StatusType(

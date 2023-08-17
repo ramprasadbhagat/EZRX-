@@ -168,19 +168,6 @@ class NewPaymentPage extends StatelessWidget {
                                       .state
                                       .configs,
                                   price: state.amountTotal.toString(),
-                                  currencyCodeTextStyle: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        color: ZPColors.primary,
-                                      ),
-                                  priceTextStyle: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        color: ZPColors.primary,
-                                        fontWeight: FontWeight.bold,
-                                      ),
                                 ),
                                 const Spacer(),
                                 if (step == 1)

@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,14 +54,6 @@ class InvoiceItemCard extends StatelessWidget {
           PriceComponent(
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             price: customerOpenItem.amountInTransactionCurrency.toString(),
-            currencyCodeTextStyle:
-                Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ZPColors.primary,
-                    ),
-            priceTextStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ZPColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
           ),
         ],
       ),

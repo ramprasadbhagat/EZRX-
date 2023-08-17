@@ -247,13 +247,6 @@ class _QuantityAndPrice extends StatelessWidget {
           PriceComponent(
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             price: cartItem.finalPriceTotal.toString(),
-            priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: ZPColors.primary,
-                ),
-            currencyCodeTextStyle:
-                Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: ZPColors.primary,
-                    ),
           ),
         ],
       ),

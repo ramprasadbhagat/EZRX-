@@ -150,13 +150,6 @@ class _ItemSubTotalSection extends StatelessWidget {
             child: PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: cartProduct.finalPriceTotal.toString(),
-              currencyCodeTextStyle:
-                  Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: ZPColors.primary,
-                      ),
-              priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.primary,
-                  ),
             ),
           ),
         ],
@@ -228,30 +221,13 @@ class _MaterialDetails extends StatelessWidget {
                         price: cartItem.price.lastPrice
                             .getOrDefaultValue(0)
                             .toString(),
-                        currencyCodeTextStyle:
-                            Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  color: ZPColors.darkGray,
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                        priceTextStyle:
-                            Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  color: ZPColors.darkGray,
-                                  decoration: TextDecoration.lineThrough,
-                                ),
+                      type: PriceStyle.counterOfferPrice,
                       )
                     : const SizedBox.shrink(),
                 PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                   price:
                       cartItem.price.finalPrice.getOrDefaultValue(0).toString(),
-                  currencyCodeTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
-                  priceTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
                 ),
               ],
             ),

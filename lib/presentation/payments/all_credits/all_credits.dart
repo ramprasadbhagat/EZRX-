@@ -265,15 +265,6 @@ class _CreditsItem extends StatelessWidget {
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
                     .toString(),
-                currencyCodeTextStyle:
-                    Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ZPColors.primary,
-                        ),
-                priceTextStyle:
-                    Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ZPColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
               ),
             ],
           ),

@@ -195,15 +195,6 @@ class _ReturnMaterialState extends State<_ReturnMaterial> {
                         salesOrgConfig:
                             context.read<SalesOrgBloc>().state.configs,
                         price: widget.data.unitPrice.apiParameterValue,
-                        currencyCodeTextStyle:
-                            Theme.of(context).textTheme.titleSmall!.copyWith(
-                                  color: ZPColors.primary,
-                                ),
-                        priceTextStyle:
-                            Theme.of(context).textTheme.titleSmall!.copyWith(
-                                  color: ZPColors.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
                       ),
                     ],
                   ),
@@ -491,13 +482,6 @@ class _MaterialInfo extends StatelessWidget {
           PriceComponent(
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             price: data.unitPrice.apiParameterValue,
-            currencyCodeTextStyle:
-                Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ZPColors.darkGray,
-                    ),
-            priceTextStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ZPColors.darkGray,
-                ),
           ),
         ],
       ),

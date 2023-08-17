@@ -34,13 +34,6 @@ class _TotalQtySection extends StatelessWidget {
                 .state
                 .itemBundlePrice(bundleCode: cartProduct.bundle.bundleCode)
                 .toString(),
-            currencyCodeTextStyle:
-                Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: ZPColors.primary,
-                    ),
-            priceTextStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-                  color: ZPColors.primary,
-                ),
           ),
         ],
       ),

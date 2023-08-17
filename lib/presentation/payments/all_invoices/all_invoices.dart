@@ -282,14 +282,6 @@ class _InvoiceItem extends StatelessWidget {
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: invoiceItem.amountInTransactionCurrency.toString(),
-              currencyCodeTextStyle:
-                  Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ZPColors.primary,
-                      ),
-              priceTextStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ZPColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
             ),
           ],
         ),

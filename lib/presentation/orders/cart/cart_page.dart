@@ -410,14 +410,6 @@ class _CheckoutSection extends StatelessWidget {
                     Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.extraLightGrey4,
                         ),
-                currencyCodeTextStyle:
-                    Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: ZPColors.primary,
-                        ),
-                priceTextStyle:
-                    Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.primary,
-                        ),
               ),
             ),
             SafeArea(

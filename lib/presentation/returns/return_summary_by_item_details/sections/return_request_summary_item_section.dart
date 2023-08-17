@@ -61,14 +61,6 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
       priceComponent: PriceComponent(
         salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
         price: widget.requestInformation.calculatedUnitPrice.toString(),
-        currencyCodeTextStyle: Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ?.copyWith(color: ZPColors.extraLightGrey4),
-        priceTextStyle: Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ?.copyWith(color: ZPColors.extraLightGrey4),
       ),
       statusWidget: StatusLabel(
         status: StatusType(
@@ -93,10 +85,6 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
                 priceLabelStyle: Theme.of(context)
                     .textTheme
                     .labelSmall
-                    ?.copyWith(color: ZPColors.primary),
-                currencyCodeTextStyle: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
                     ?.copyWith(color: ZPColors.primary),
               ),
             ],

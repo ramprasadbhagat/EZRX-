@@ -38,8 +38,6 @@ class InvoiceSummary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,
                 price: invoiceItem.amountInTransactionCurrency.toString(),
-                priceTextStyle: Theme.of(context).textTheme.titleSmall,
-                currencyCodeTextStyle: Theme.of(context).textTheme.titleSmall,
               ),
             ],
           ),
@@ -57,8 +55,6 @@ class InvoiceSummary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,
                 price: invoiceItem.amountInTransactionCurrency.toString(),
-                priceTextStyle: Theme.of(context).textTheme.labelMedium,
-                currencyCodeTextStyle: Theme.of(context).textTheme.titleSmall,
               ),
             ],
           ),

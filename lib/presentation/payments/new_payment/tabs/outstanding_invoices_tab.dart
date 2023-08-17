@@ -72,16 +72,6 @@ class OutstandingInvoicesTab extends StatelessWidget {
                     .state
                     .outstandingBalance
                     .amount,
-                currencyCodeTextStyle:
-                    Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: ZPColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                priceTextStyle:
-                    Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: ZPColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
               ),
             ],
           ),

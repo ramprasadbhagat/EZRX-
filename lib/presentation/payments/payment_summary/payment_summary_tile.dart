@@ -133,10 +133,6 @@ class _PaymentSummaryTiles extends StatelessWidget {
               PriceComponent(
                 price: paymentSummaryDetails.paymentAmount.toString(),
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                currencyCodeTextStyle:
-                    Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: ZPColors.primary,
-                        ),
                 priceLabelStyle: Theme.of(context).textTheme.labelMedium,
               ),
             ],

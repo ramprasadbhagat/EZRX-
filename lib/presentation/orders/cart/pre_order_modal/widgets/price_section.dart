@@ -9,12 +9,6 @@ class _PriceSection extends StatelessWidget {
     return PriceComponent(
       salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
       price: cartProduct.finalPriceTotal.toString(),
-      currencyCodeTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: ZPColors.primary,
-          ),
-      priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-            color: ZPColors.primary,
-          ),
     );
   }
 }

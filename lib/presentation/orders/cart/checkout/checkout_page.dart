@@ -133,14 +133,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.extraLightGrey4,
                           ),
-                  currencyCodeTextStyle:
-                      Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
-                  priceTextStyle:
-                      Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.primary,
-                          ),
+                 
                 ),
                 const SizedBox(width: 8),
                 const Icon(
@@ -231,7 +224,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   priceAggregate: context
                                       .read<CartBloc>()
                                       .state
-                                      .cartProducts,    
+                                      .cartProducts,
                                 ),
                               );
                           context.router.pushNamed('orders/order_confirmation');
@@ -477,14 +470,7 @@ class _OrderSummary extends StatelessWidget {
                 PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                   price: cartState.totalTax.toString(),
-                  priceTextStyle:
-                      Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
-                  currencyCodeTextStyle:
-                      Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
+                  
                 ),
               ],
             ),
@@ -510,13 +496,6 @@ class _OrderSummary extends StatelessWidget {
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: 0.toString(),
-              priceTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-              currencyCodeTextStyle:
-                  Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
             ),
           ],
         ),
@@ -538,14 +517,6 @@ class _OrderSummary extends StatelessWidget {
                 PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                   price: 0.toString(),
-                  priceTextStyle:
-                      Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
-                  currencyCodeTextStyle:
-                      Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ZPColors.neutralsBlack,
-                          ),
                 ),
               ],
             ),
@@ -578,13 +549,6 @@ class _OrderSummary extends StatelessWidget {
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: cartState.totalPriceWithTax.toString(),
-              priceTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-              currencyCodeTextStyle:
-                  Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
             ),
           ],
         ),
@@ -601,13 +565,6 @@ class _OrderSummary extends StatelessWidget {
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: 0.toString(),
-              priceTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-              currencyCodeTextStyle:
-                  Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
             ),
           ],
         ),
