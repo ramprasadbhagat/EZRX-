@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
 import 'package:flutter/material.dart';
 
@@ -202,7 +203,10 @@ class _MaterialDetails extends StatelessWidget {
                 const SizedBox(
                   width: 4,
                 ),
-                const _OrderTag(),
+                StatusLabel(
+                  status: cartItem.productTag,
+                  valueColor: cartItem.productTag.displayStatusTextColor,
+                ),
               ],
             ),
             Padding(
@@ -497,24 +501,3 @@ class _OfferTag extends StatelessWidget {
   }
 }
 
-class _OrderTag extends StatelessWidget {
-  const _OrderTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: const BoxDecoration(
-        color: ZPColors.lightYellow,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Text(
-        'Preorder'.tr(),
-        style: Theme.of(context)
-            .textTheme
-            .titleSmall
-            ?.copyWith(fontWeight: FontWeight.w500, fontSize: 10),
-      ),
-    );
-  }
-}

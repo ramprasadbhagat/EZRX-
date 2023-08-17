@@ -188,7 +188,7 @@ String calculateDifferenceTime(String value) {
   final difference = DateTime.now().difference(dateTime);
   final minutes = difference.inMinutes;
   if (minutes >= 1440) {
-   final days = difference.inDays;
+    final days = difference.inDays;
 
     return '$days d';
   } else if (minutes >= 60) {
@@ -305,6 +305,7 @@ Color getStatusLabelColor(String statusType) {
     // 'In Progress': ZPColors.lightGray,
     'PENDING': ZPColors.lightRed,
     'REJECTED': ZPColors.darkGray,
+    'Out of stock': ZPColors.lightGray2,
   };
 
   return statusTypeMap[statusType] ?? ZPColors.lightYellow;
@@ -326,6 +327,8 @@ Color getStatusTextColor(String statusType) {
       return ZPColors.black;
     case 'Bonus':
       return ZPColors.white;
+    case 'Out of stock':
+      return ZPColors.black;
 
     default:
       return ZPColors.white;
@@ -489,4 +492,16 @@ bool isEligibleStatusForZyllem(String status) {
 
 String getCountryFlag(String country) {
   return 'assets/svg/flags/${country.toLowerCase()}.svg';
+}
+
+String getOosMaterialTag(bool value) {
+  return value ? 'Preorder' : 'Out of stock';
+}
+
+Color getOosMaterialTagColor(bool value) {
+  return value ? ZPColors.orange : ZPColors.lightGray;
+}
+
+Color getOosMaterialTagLabelColor(bool value) {
+  return value ? ZPColors.darkerGrey : ZPColors.black;
 }

@@ -89,13 +89,13 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     if (type.isMaterialTypeBonus && unitPrice.isZPPriceZero) {
       return StatusType('Bonus');
     }
-    if (priceAggregate.salesOrgConfig.addOosMaterials &&
+    if (priceAggregate.salesOrgConfig.addOosMaterials.getOrDefaultValue(false) &&
         (materialStockInfo.stockInfos.isEmpty ||
             !materialStockInfo.stockInfos
                 .any((element) => element.inStock.isMaterialInStock))) {
       return StatusType('Preorder');
     }
-    if (!priceAggregate.salesOrgConfig.addOosMaterials &&
+    if (!priceAggregate.salesOrgConfig.addOosMaterials.getOrDefaultValue(false) &&
         (materialStockInfo.stockInfos.isEmpty ||
             !materialStockInfo.stockInfos
                 .any((element) => element.inStock.isMaterialInStock))) {

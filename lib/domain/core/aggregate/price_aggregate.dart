@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
@@ -497,9 +498,17 @@ class PriceAggregate with _$PriceAggregate {
   bool get isPriceUpdateAvailable =>
       isZdp5DiscountEligible && hasRemainingQuotaReached;
 
-  bool get isPreOrder => stockInfoList.any(
+  bool get isPreOrder =>
+      stockInfoList.any(
         (e) => !e.inStock.isMaterialInStock,
-      );
+      ) &&
+      salesOrgConfig.addOosMaterials.getOrDefaultValue(false);
+
+  StatusType get productTag => isPreOrder
+      ? StatusType('Preorder')
+      : !stockInfoList.any((e) => e.inStock.isMaterialInStock)
+          ? StatusType('Out of stock')
+          : StatusType('');
 }
 
 enum PriceType {

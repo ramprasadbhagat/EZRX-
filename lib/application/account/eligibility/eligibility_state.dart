@@ -112,8 +112,8 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get doNotAllowOutOfStockMaterials {
-    return !(salesOrgConfigs.addOosMaterials ||
-        (salesOrgConfigs.addOosMaterials && validateOutOfStockValue));
+    return !(salesOrgConfigs.addOosMaterials.getValue() ||
+        (salesOrgConfigs.addOosMaterials.getValue() && validateOutOfStockValue));
   }
 
   bool get isBonusOverrideEnable => user.role.type.isSalesRepRole

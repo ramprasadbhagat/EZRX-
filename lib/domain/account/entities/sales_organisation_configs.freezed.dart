@@ -57,7 +57,7 @@ mixin _$SalesOrganisationConfigs {
   bool get hideStockDisplay => throw _privateConstructorUsedError;
   bool get expiryDateDisplay => throw _privateConstructorUsedError;
   bool get batchNumDisplay => throw _privateConstructorUsedError;
-  bool get addOosMaterials => throw _privateConstructorUsedError;
+  OosMaterial get addOosMaterials => throw _privateConstructorUsedError;
   OosValue get oosValue => throw _privateConstructorUsedError;
   bool get enableRemarks => throw _privateConstructorUsedError;
   bool get enableOHPrice => throw _privateConstructorUsedError;
@@ -126,7 +126,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool hideStockDisplay,
       bool expiryDateDisplay,
       bool batchNumDisplay,
-      bool addOosMaterials,
+      OosMaterial addOosMaterials,
       OosValue oosValue,
       bool enableRemarks,
       bool enableOHPrice,
@@ -374,7 +374,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       addOosMaterials: null == addOosMaterials
           ? _value.addOosMaterials
           : addOosMaterials // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as OosMaterial,
       oosValue: null == oosValue
           ? _value.oosValue
           : oosValue // ignore: cast_nullable_to_non_nullable
@@ -488,7 +488,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool hideStockDisplay,
       bool expiryDateDisplay,
       bool batchNumDisplay,
-      bool addOosMaterials,
+      OosMaterial addOosMaterials,
       OosValue oosValue,
       bool enableRemarks,
       bool enableOHPrice,
@@ -734,7 +734,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       addOosMaterials: null == addOosMaterials
           ? _value.addOosMaterials
           : addOosMaterials // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as OosMaterial,
       oosValue: null == oosValue
           ? _value.oosValue
           : oosValue // ignore: cast_nullable_to_non_nullable
@@ -946,7 +946,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool batchNumDisplay;
   @override
-  final bool addOosMaterials;
+  final OosMaterial addOosMaterials;
   @override
   final OosValue oosValue;
   @override
@@ -1183,7 +1183,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool hideStockDisplay,
       required final bool expiryDateDisplay,
       required final bool batchNumDisplay,
-      required final bool addOosMaterials,
+      required final OosMaterial addOosMaterials,
       required final OosValue oosValue,
       required final bool enableRemarks,
       required final bool enableOHPrice,
@@ -1280,7 +1280,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get batchNumDisplay;
   @override
-  bool get addOosMaterials;
+  OosMaterial get addOosMaterials;
   @override
   OosValue get oosValue;
   @override

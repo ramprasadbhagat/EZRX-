@@ -86,7 +86,7 @@ void main() {
     disableDeliveryDate: false,
     enableBillTo: true,
     showPOAttachment: false,
-    addOosMaterials: false,
+    addOosMaterials: OosMaterial(false),
     expiryDateDisplay: false,
     hideStockDisplay: false,
     oosValue: OosValue(0),
@@ -375,7 +375,7 @@ void main() {
         ),
         salesOrganisation: fakeSaleOrg,
         salesOrgConfigs: fakeSaleOrgConfig.copyWith(
-          addOosMaterials: true,
+          addOosMaterials: OosMaterial(true),
         ),
         customerCodeInfo: fakeCustomerInfo,
         shipToInfo: fakeShipToInfo,

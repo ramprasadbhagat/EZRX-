@@ -270,3 +270,20 @@ class StatusType extends ValueObject<String> {
 
   const StatusType._(this.value);
 }
+
+class OosMaterial extends ValueObject<bool> {
+  @override
+  final Either<ValueFailure<bool>, bool> value;
+
+  factory OosMaterial(bool input) => OosMaterial._(Right(input));
+
+  String get oosMaterialTag => getOosMaterialTag(value.getOrElse(() => false));
+
+  Color get oosMaterialTagColor =>
+      getOosMaterialTagColor(value.getOrElse(() => false));
+
+  Color get oosMaterialTagLabelColor =>
+      getOosMaterialTagLabelColor(value.getOrElse(() => false));
+
+  const OosMaterial._(this.value);
+}

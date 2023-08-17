@@ -77,7 +77,7 @@ void main() {
     showPOAttachment: false,
     expiryDateDisplay: false,
     hideStockDisplay: false,
-    addOosMaterials: false,
+    addOosMaterials: OosMaterial(false),
     oosValue: OosValue(0),
     enableRemarks: false,
     enableOHPrice: true,

@@ -50,7 +50,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool hideStockDisplay,
     required bool expiryDateDisplay,
     required bool batchNumDisplay,
-    required bool addOosMaterials,
+    required OosMaterial addOosMaterials,
     required OosValue oosValue,
     required bool enableRemarks,
     required bool enableOHPrice,
@@ -105,7 +105,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         showPOAttachment: false,
         hideStockDisplay: false,
         expiryDateDisplay: false,
-        addOosMaterials: false,
+        addOosMaterials: OosMaterial(false),
         oosValue: OosValue(0),
         enableRemarks: false,
         enableOHPrice: true,
@@ -210,4 +210,5 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         (principal) => principal.principalCode.isAllMaterial,
         orElse: () => SalesOrganisationConfigsPrincipal.empty(),
       );
+      
 }
