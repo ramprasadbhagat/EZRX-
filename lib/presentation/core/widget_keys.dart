@@ -355,6 +355,8 @@ class WidgetKeys {
       Key('materialDetailsQuantityInput');
   static const Key materialDetailsAddToCartButton =
       Key('materialDetailsAddToCartButton');
+  static const Key materialDetailsAddToCartSnackBar =
+      Key('materialDetailsAddToCartSnackBar');
   //============================================================
   //  Return
   //============================================================

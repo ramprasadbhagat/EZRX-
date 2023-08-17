@@ -330,10 +330,11 @@ class _FooterState extends State<_Footer> {
                           state.apiFailureOrSuccessOption.fold(
                             () {
                               if (!state.isUpserting &&
-                                  state.cartProducts.isNotEmpty &&
                                   context.router.current.path ==
                                       'orders/material_details') {
                                 CustomSnackBar(
+                                  key: WidgetKeys
+                                      .materialDetailsAddToCartSnackBar,
                                   messageText:
                                       'Item has been added to cart'.tr(),
                                 ).show(context);
