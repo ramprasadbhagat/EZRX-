@@ -33,59 +33,64 @@ class CartProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSlidable(
-      extentRatio: 0.24,
-      endActionPaneActions: [
-        CustomSlidableAction(
-          label: '',
-          icon: Icons.delete_outline,
-          onPressed: (v) {
-            context.read<CartBloc>().add(
-                  CartEvent.upsertCart(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    priceAggregate: cartItem,
-                    quantity: 0,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
-                  ),
-                );
-            context
-                .read<PriceOverrideBloc>()
-                .add(const PriceOverrideEvent.initialized());
-          },
-        ),
-      ],
-      borderRadius: 8,
-      child: CustomCard(
-        margin: const EdgeInsets.only(top: 25.0),
-        child: Column(
-          children: [
-            _MaterialDetailsSection(
-              cartItem: cartItem,
-            ),
-            const Divider(
-              indent: 0,
-              endIndent: 0,
-              color: ZPColors.accentColor,
-            ),
-            _ItemSubTotalSection(
-              cartProduct: cartItem,
-            ),
-            const Divider(
-              indent: 0,
-              endIndent: 0,
-              color: ZPColors.accentColor,
-            ),
-            _BonusPriceCounterSection(
-              cartItem: cartItem,
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 25.0),
+      child: CustomSlidable(
+        extentRatio: 0.24,
+        endActionPaneActions: [
+          CustomSlidableAction(
+            label: '',
+            icon: Icons.delete_outline,
+            onPressed: (v) {
+              context.read<CartBloc>().add(
+                    CartEvent.upsertCart(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<CustomerCodeBloc>().state.shipToInfo,
+                      priceAggregate: cartItem,
+                      quantity: 0,
+                      salesOrganisationConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
+                      counterOfferDetails: RequestCounterOfferDetails.empty(),
+                    ),
+                  );
+              context
+                  .read<PriceOverrideBloc>()
+                  .add(const PriceOverrideEvent.initialized());
+            },
+          ),
+        ],
+        borderRadius: 8,
+        child: CustomCard(
+          margin: EdgeInsets.zero,
+          child: Column(
+            children: [
+              _MaterialDetailsSection(
+                cartItem: cartItem,
+              ),
+              const Divider(
+                indent: 0,
+                endIndent: 0,
+                color: ZPColors.accentColor,
+              ),
+              _ItemSubTotalSection(
+                cartProduct: cartItem,
+              ),
+              const Divider(
+                indent: 0,
+                endIndent: 0,
+                color: ZPColors.accentColor,
+              ),
+              _BonusPriceCounterSection(
+                cartItem: cartItem,
+              ),
+            ],
+          ),
         ),
       ),
     );
