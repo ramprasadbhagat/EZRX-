@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -14,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/language_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_dto.freezed.dart';
@@ -69,8 +71,12 @@ class UserDto with _$UserDto {
       defaultValue: <PaymentAdviceExpiryNotificationDto>[],
     )
         required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
-    @JsonKey(name: 'preferredLanguage', defaultValue: '')
+    @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
         required String preferredLanguage,
+    @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
+        required List<LanguageDto> supportedLanguages,
+    @JsonKey(name: 'MobileNumber', defaultValue: '')
+        required String mobileNumber,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -100,7 +106,9 @@ class UserDto with _$UserDto {
           .settings.paymentNotification.paymentAdviceExpiryNotificationList
           .map((e) => PaymentAdviceExpiryNotificationDto.fromDomain(e))
           .toList(),
-      preferredLanguage: user.preferredLanguage,
+      preferredLanguage: user.preferredLanguage.languageString,
+      mobileNumber: user.mobileNumber.getOrDefaultValue(''),
+      supportedLanguages: <LanguageDto>[],
     );
   }
   static const emptyUserDto = UserDto(
@@ -123,6 +131,8 @@ class UserDto with _$UserDto {
     disablePaymentNotification: false,
     paymentNotification: <PaymentAdviceExpiryNotificationDto>[],
     preferredLanguage: '',
+    mobileNumber: '',
+    supportedLanguages: <LanguageDto>[],
   );
   User toDomain() {
     return User(
@@ -155,7 +165,9 @@ class UserDto with _$UserDto {
       disableCreateOrder: disableCreateOrder,
       disableReturns: disableReturns,
       hasPriceOverride: hasPriceOverride,
-      preferredLanguage: preferredLanguage,
+      preferredLanguage: LanguageValue(preferredLanguage),
+      mobileNumber: MobileNumber(mobileNumber),
+      supportedLanguages: _getLanguage(supportedLanguages),
     );
   }
 
@@ -232,4 +244,21 @@ String handleEmptyLanguagePreference(Map json, String key) {
   }
 
   return languagePreference;
+}
+
+List<Language> _getLanguage(List<LanguageDto> languages) {
+  final supportedLanguages = languages
+      .where((e) => LanguageValue(e.subTag).isValid())
+      .map((e) => e.toDomain)
+      .toList();
+      
+  return supportedLanguages.isNotEmpty
+      ? supportedLanguages
+      : [
+          Language(
+            subTag: LanguageValue(
+              ApiLanguageCode.english,
+            ),
+          ),
+        ];
 }

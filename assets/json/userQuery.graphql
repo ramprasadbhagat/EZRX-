@@ -71,6 +71,10 @@
             salesOrganizationTwo
             languagePreference
             preferredLanguage
+            supportedLanguages {
+              language
+              searchFilter
+            }
             userSalesOrganisationList {
               SalesOrg
               CustomerCode

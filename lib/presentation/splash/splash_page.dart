@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/language/language_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
@@ -143,6 +144,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthBloc, AuthState>(
@@ -204,6 +206,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.user.id != current.user.id,
           listener: (context, state) {
             _welcomeUserMessage(state);
+            context.read<LanguageBloc>().add(
+                  LanguageEvent.setLanguages(
+                    defaultLanguage: state.user.defaultLanguage,
+                    languages: state.user.supportedLanguages,
+                  ),
+                );
+            context.setLocale(state.user.defaultLanguage.subTag.toLocal);
           },
         ),
         BlocListener<UserBloc, UserState>(

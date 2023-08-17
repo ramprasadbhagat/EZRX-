@@ -2,6 +2,8 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
@@ -16,8 +18,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import '../../order/repository/order_repository_test.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -38,6 +38,14 @@ class FirebaseCrashlyticsMock extends Mock implements FirebaseCrashlytics {}
 
 class DatadogServiceMock extends Mock implements DatadogService {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
+class LanguageLocalDataSourceMock extends Mock
+    implements LanguageLocalDataSource {}
+
+class LanguageRemoteDataSourceMock extends Mock
+    implements LanguageRemoteDataSource {}
+
 void main() {
   late UserRepository repository;
   late Config configMock;
@@ -56,7 +64,8 @@ void main() {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
   late MockClevertapService mockClevertapService;
   late DatadogService datadogServiceMock;
-
+  late LanguageLocalDataSource languageLocalDataSource;
+  late LanguageRemoteDataSource languageRemoteDataSource;
   setUpAll(
     () async {
       configMock = ConfigMock();
@@ -77,6 +86,8 @@ void main() {
       );
       mockClevertapService = MockClevertapService();
       datadogServiceMock = DatadogServiceMock();
+      languageLocalDataSource = LanguageLocalDataSourceMock();
+      languageRemoteDataSource = LanguageRemoteDataSourceMock();
       repository = UserRepository(
         clevertapService: mockClevertapService,
         firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
@@ -87,6 +98,8 @@ void main() {
         tokenStorage: tokenStorageMock,
         mixpanelService: mixpanelService,
         datadogService: datadogServiceMock,
+        languageLocalDataSource: languageLocalDataSource,
+        languageRemoteDataSource: languageRemoteDataSource,
       );
     },
   );
@@ -104,6 +117,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor)
@@ -133,6 +148,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor)
@@ -162,6 +179,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -194,6 +213,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -318,6 +339,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor)
@@ -344,6 +367,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor)
@@ -370,6 +395,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -395,6 +422,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -419,6 +448,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor)
@@ -445,6 +476,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor)
@@ -471,6 +504,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -518,6 +553,8 @@ void main() {
           tokenStorage: tokenStorageMock,
           mixpanelService: mixpanelService,
           datadogService: datadogServiceMock,
+          languageLocalDataSource: languageLocalDataSource,
+          languageRemoteDataSource: languageRemoteDataSource,
         );
         when(() => tokenStorageMock.get())
             .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));

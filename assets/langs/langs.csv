@@ -387,14 +387,6 @@ Select Principal,Select Principal,เลือก Principal,選擇原廠,ကု�
 Select Therapeutic Class,Select Therapeutic Class,เลือกประเภทกลุ่มยา,選擇類別,ဆေးအမျိုးအစား အုပ်စု ရွေးချယ်ပါ,Chọn lớp trị liệu,ជ្រើសរើសកម្រិតព្យាបាល,
 Server Error,Server Error,เซิร์ฟเวอร์ผิดพลาด,服務器錯誤,ဆာဗာ အမှား,Lỗi máy chủ,កំហុសម៉ាស៊ីនមេ,
 Server time out,Server time out,Server time out,Server time out,Server time out,Hệ thống hết thời gian chờ,Server អស់ម៉ោង,
-Server timed out, please refresh the page.
-If this happens often, please logout and login again,Server timed out, please refresh the page.
-If this happens often, please logout and login again,Server timed out, please refresh the page.
-If this happens often, please logout and login again,Server timed out, please refresh the page.
-If this happens often, please logout and login again,Server timed out, please refresh the page.
-If this happens often, please logout and login again,Hệ thống hết thời gian chờ, vui lòng làm mới trang.
- Nếu điều này xảy ra thường xuyên, vui lòng đăng xuất và đăng nhập lại.,អស់ពេលម៉ាស៊ីនមេ សូមផ្ទុកទំព័រឡើងវិញ។
-ប្រសិនបើរឿងនេះកើតឡើងញឹកញាប់ សូមចេញពីគណនី ហើយចូលម្តងទៀត,
 Session token is Expired,Session token is Expired,โทเค็นเซสชันหมดอายุ,登入憑證已過期,စက်ရှင် တိုကင်သည် သက်တမ်းကုန်သွားပါပြီ။,Mã thông báo phiên đã hết hạn,សញ្ញាសម្ងាត់សម័យគឺផុតកំណត់,
 Set Up Notifications,Set Up Notifications,ตั้งค่าการแจ้งเตือน,設定通知,အသိပေးချက်များကို သတ်မှတ်ပါ,Thiết lập thông báo,បង្កើតការការជូនដំណឹង,
 Settings,Settings,การตั้งค่า,設定,ချိန်ညှိချက်များ,Cài đặt,ការកំណត់,
@@ -766,3 +758,13 @@ FAQ,FAQ,FAQ,FAQ,FAQ,FAQ,FAQ,
 Created on,Created on,Created on,Created on,Created on,Created on,Created on,
 On offer,On offer,On offer,On offer,On offer,On offer,On offer,
 PA,PA,PA,PA,PA,PA,PA,
+Looks like you don`t have any license here,Looks like you don`t have any license here,Looks like you don`t have any license here,Looks like you don`t have any license here,Looks like you don`t have any license here,Looks like you don`t have any license here,Looks like you don`t have any license here,
+First name,First name,First name,First name,First name,First name,First name,
+Last name,Last name,Last name,Last name,Last name,Last name,Last name,
+License no:,License no:,License no:,License no:,License no:,License no:,License no:,
+Expiring in 7 days,Expiring in 7 days,Expiring in 7 days,Expiring in 7 days,Expiring in 7 days,Expiring in 7 days,Expiring in 7 days,
+Account & business details:,Account & business details:,Account & business details:,Account & business details:,Account & business details:,Account & business details:,Account & business details:,
+License information:,License information:,License information:,License information:,License information:,License information:,License information:,
+Language changed successfully,Language changed successfully,Language changed successfully,Language changed successfully,Language changed successfully,Language changed successfully,Language changed successfully,
+Clear changes,Clear changes,Clear changes,Clear changes,Clear changes,Clear changes,Clear changes,
+Save,Save,Save,Save,Save,Save,Save,

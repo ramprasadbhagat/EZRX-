@@ -50,6 +50,9 @@ class ApiFailure with _$ApiFailure {
   //deep link route failure
   const factory ApiFailure.materialDetailRoute() = _MaterialDetailRoute;
   const factory ApiFailure.historyDetailRoute() = _HistoryDetailRoute;
+
+  const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
+  
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -89,5 +92,6 @@ extension ApiFailureExt on ApiFailure {
         historyDetailRoute: (_) =>
             'This order history is not available on your account',
         passwordResetFail: (_) => 'Unable to reset password',
+        languageChangeFail: (_) => 'Unable to change language',
       );
 }

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,7 +32,9 @@ class User with _$User {
     required bool disableCreateOrder,
     required bool disableReturns,
     required bool hasPriceOverride,
-    required String preferredLanguage,
+    required LanguageValue preferredLanguage,
+    required List<Language> supportedLanguages,
+    required MobileNumber mobileNumber,
   }) = _User;
 
   factory User.empty() => User(
@@ -55,7 +58,9 @@ class User with _$User {
         disableCreateOrder: false,
         disableReturns: false,
         hasPriceOverride: false,
-        preferredLanguage: '',
+        preferredLanguage: LanguageValue(''),
+        supportedLanguages: <Language>[],
+        mobileNumber: MobileNumber(''),
       );
 
   bool get userCanCreateOrder {
@@ -91,4 +96,6 @@ class User with _$User {
     // [accessRight.orders]  should be true
     return accessRight.orders;
   }
+
+  Language get defaultLanguage => Language(subTag: preferredLanguage);
 }

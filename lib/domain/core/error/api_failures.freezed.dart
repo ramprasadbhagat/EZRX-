@@ -44,6 +44,7 @@ mixin _$ApiFailure {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,6 +75,7 @@ mixin _$ApiFailure {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -104,6 +106,7 @@ mixin _$ApiFailure {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,6 +149,7 @@ mixin _$ApiFailure {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -181,6 +185,7 @@ mixin _$ApiFailure {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -216,6 +221,7 @@ mixin _$ApiFailure {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -327,6 +333,7 @@ class _$_Other implements _Other {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return other(message);
   }
@@ -360,6 +367,7 @@ class _$_Other implements _Other {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return other?.call(message);
   }
@@ -393,6 +401,7 @@ class _$_Other implements _Other {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -441,6 +450,7 @@ class _$_Other implements _Other {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return other(this);
   }
@@ -479,6 +489,7 @@ class _$_Other implements _Other {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return other?.call(this);
   }
@@ -517,6 +528,7 @@ class _$_Other implements _Other {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -625,6 +637,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return serverError(message);
   }
@@ -658,6 +671,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return serverError?.call(message);
   }
@@ -691,6 +705,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -739,6 +754,7 @@ class _$_ServerError implements _ServerError {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return serverError(this);
   }
@@ -777,6 +793,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return serverError?.call(this);
   }
@@ -815,6 +832,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -897,6 +915,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return poorConnection();
   }
@@ -930,6 +949,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return poorConnection?.call();
   }
@@ -963,6 +983,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1011,6 +1032,7 @@ class _$_PoorConnection implements _PoorConnection {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return poorConnection(this);
   }
@@ -1049,6 +1071,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return poorConnection?.call(this);
   }
@@ -1087,6 +1110,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1164,6 +1188,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return serverTimeout();
   }
@@ -1197,6 +1222,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return serverTimeout?.call();
   }
@@ -1230,6 +1256,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1278,6 +1305,7 @@ class _$_ServerTimeout implements _ServerTimeout {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return serverTimeout(this);
   }
@@ -1316,6 +1344,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1354,6 +1383,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1431,6 +1461,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return userNotFound();
   }
@@ -1464,6 +1495,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return userNotFound?.call();
   }
@@ -1497,6 +1529,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1545,6 +1578,7 @@ class _$_UserNotFound implements _UserNotFound {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return userNotFound(this);
   }
@@ -1583,6 +1617,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return userNotFound?.call(this);
   }
@@ -1621,6 +1656,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1703,6 +1739,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -1736,6 +1773,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1769,6 +1807,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1817,6 +1856,7 @@ class _$_InvalidEmailAndPasswordCombination
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1855,6 +1895,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1893,6 +1934,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1971,6 +2013,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return accountLocked();
   }
@@ -2004,6 +2047,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return accountLocked?.call();
   }
@@ -2037,6 +2081,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2085,6 +2130,7 @@ class _$_AccountLocked implements _AccountLocked {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return accountLocked(this);
   }
@@ -2123,6 +2169,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return accountLocked?.call(this);
   }
@@ -2161,6 +2208,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2238,6 +2286,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return accountExpired();
   }
@@ -2271,6 +2320,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return accountExpired?.call();
   }
@@ -2304,6 +2354,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2352,6 +2403,7 @@ class _$_AccountExpired implements _AccountExpired {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return accountExpired(this);
   }
@@ -2390,6 +2442,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return accountExpired?.call(this);
   }
@@ -2428,6 +2481,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2505,6 +2559,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return tokenExpired();
   }
@@ -2538,6 +2593,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return tokenExpired?.call();
   }
@@ -2571,6 +2627,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2619,6 +2676,7 @@ class _$_TokenExpired implements _TokenExpired {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return tokenExpired(this);
   }
@@ -2657,6 +2715,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return tokenExpired?.call(this);
   }
@@ -2695,6 +2754,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2772,6 +2832,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return authenticationFailed();
   }
@@ -2805,6 +2866,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return authenticationFailed?.call();
   }
@@ -2838,6 +2900,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2886,6 +2949,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return authenticationFailed(this);
   }
@@ -2924,6 +2988,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -2962,6 +3027,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3043,6 +3109,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -3076,6 +3143,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -3109,6 +3177,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3157,6 +3226,7 @@ class _$_ProxyLoginRolePermissionNotMatch
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -3195,6 +3265,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -3233,6 +3304,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3315,6 +3387,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -3348,6 +3421,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -3381,6 +3455,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -3429,6 +3504,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -3467,6 +3543,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -3505,6 +3582,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -3586,6 +3664,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -3619,6 +3698,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -3652,6 +3732,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3700,6 +3781,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -3738,6 +3820,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -3776,6 +3859,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3854,6 +3938,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return passwordResetFail();
   }
@@ -3887,6 +3972,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return passwordResetFail?.call();
   }
@@ -3920,6 +4006,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -3968,6 +4055,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return passwordResetFail(this);
   }
@@ -4006,6 +4094,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return passwordResetFail?.call(this);
   }
@@ -4044,6 +4133,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -4124,6 +4214,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -4157,6 +4248,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -4190,6 +4282,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -4238,6 +4331,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -4276,6 +4370,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -4314,6 +4409,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -4391,6 +4487,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return cannotCheckBiometrics();
   }
@@ -4424,6 +4521,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -4457,6 +4555,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -4505,6 +4604,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -4543,6 +4643,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -4581,6 +4682,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -4658,6 +4760,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return noSupportedBiometrics();
   }
@@ -4691,6 +4794,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -4724,6 +4828,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -4772,6 +4877,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -4810,6 +4916,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -4848,6 +4955,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -4925,6 +5033,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return invalidBiometric();
   }
@@ -4958,6 +5067,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return invalidBiometric?.call();
   }
@@ -4991,6 +5101,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -5039,6 +5150,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return invalidBiometric(this);
   }
@@ -5077,6 +5189,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -5115,6 +5228,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -5192,6 +5306,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return priceOverrideNotFound();
   }
@@ -5225,6 +5340,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -5258,6 +5374,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -5306,6 +5423,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -5344,6 +5462,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -5382,6 +5501,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -5459,6 +5579,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return productOutOfStock();
   }
@@ -5492,6 +5613,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return productOutOfStock?.call();
   }
@@ -5525,6 +5647,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -5573,6 +5696,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return productOutOfStock(this);
   }
@@ -5611,6 +5735,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -5649,6 +5774,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -5726,6 +5852,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return photoPermissionFailed();
   }
@@ -5759,6 +5886,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -5792,6 +5920,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -5840,6 +5969,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return photoPermissionFailed(this);
   }
@@ -5878,6 +6008,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -5916,6 +6047,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -5994,6 +6126,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return storagePermissionFailed();
   }
@@ -6027,6 +6160,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -6060,6 +6194,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -6108,6 +6243,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return storagePermissionFailed(this);
   }
@@ -6146,6 +6282,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -6184,6 +6321,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -6261,6 +6399,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return invalidFileFormat();
   }
@@ -6294,6 +6433,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return invalidFileFormat?.call();
   }
@@ -6327,6 +6467,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -6375,6 +6516,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return invalidFileFormat(this);
   }
@@ -6413,6 +6555,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -6451,6 +6594,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -6529,6 +6673,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return uploadCountExcideLimit();
   }
@@ -6562,6 +6707,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -6595,6 +6741,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -6643,6 +6790,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -6681,6 +6829,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -6719,6 +6868,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -6796,6 +6946,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return materialDetailRoute();
   }
@@ -6829,6 +6980,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return materialDetailRoute?.call();
   }
@@ -6862,6 +7014,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -6910,6 +7063,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return materialDetailRoute(this);
   }
@@ -6948,6 +7102,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return materialDetailRoute?.call(this);
   }
@@ -6986,6 +7141,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -7063,6 +7219,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     required TResult Function() uploadCountExcideLimit,
     required TResult Function() materialDetailRoute,
     required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
   }) {
     return historyDetailRoute();
   }
@@ -7096,6 +7253,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult? Function()? uploadCountExcideLimit,
     TResult? Function()? materialDetailRoute,
     TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
   }) {
     return historyDetailRoute?.call();
   }
@@ -7129,6 +7287,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult Function()? uploadCountExcideLimit,
     TResult Function()? materialDetailRoute,
     TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
     required TResult orElse(),
   }) {
     if (historyDetailRoute != null) {
@@ -7177,6 +7336,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
         uploadCountExcideLimit,
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
     required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
   }) {
     return historyDetailRoute(this);
   }
@@ -7215,6 +7375,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
   }) {
     return historyDetailRoute?.call(this);
   }
@@ -7253,6 +7414,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
     TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
     required TResult orElse(),
   }) {
     if (historyDetailRoute != null) {
@@ -7264,4 +7426,277 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
 
 abstract class _HistoryDetailRoute implements ApiFailure {
   const factory _HistoryDetailRoute() = _$_HistoryDetailRoute;
+}
+
+/// @nodoc
+abstract class _$$_LanguageChangeFailCopyWith<$Res> {
+  factory _$$_LanguageChangeFailCopyWith(_$_LanguageChangeFail value,
+          $Res Function(_$_LanguageChangeFail) then) =
+      __$$_LanguageChangeFailCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LanguageChangeFailCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_LanguageChangeFail>
+    implements _$$_LanguageChangeFailCopyWith<$Res> {
+  __$$_LanguageChangeFailCopyWithImpl(
+      _$_LanguageChangeFail _value, $Res Function(_$_LanguageChangeFail) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_LanguageChangeFail implements _LanguageChangeFail {
+  const _$_LanguageChangeFail();
+
+  @override
+  String toString() {
+    return 'ApiFailure.languageChangeFail()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_LanguageChangeFail);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
+  }) {
+    return languageChangeFail();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
+  }) {
+    return languageChangeFail?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
+    required TResult orElse(),
+  }) {
+    if (languageChangeFail != null) {
+      return languageChangeFail();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+  }) {
+    return languageChangeFail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+  }) {
+    return languageChangeFail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    required TResult orElse(),
+  }) {
+    if (languageChangeFail != null) {
+      return languageChangeFail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LanguageChangeFail implements ApiFailure {
+  const factory _LanguageChangeFail() = _$_LanguageChangeFail;
 }

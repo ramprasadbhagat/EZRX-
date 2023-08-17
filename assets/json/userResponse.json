@@ -74,6 +74,12 @@
          "salesOrganizationTwo": "",
          "languagePreference": "E",
          "preferredLanguage": "EN",
+         "supportedLanguages": [
+            {
+               "language": "EN",
+               "searchFilter": true
+            }
+         ],
          "userSalesOrganisationList": [
             {
                "SalesOrg": "2001",

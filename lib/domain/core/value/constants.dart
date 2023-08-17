@@ -11,7 +11,7 @@ class ApiLanguageCode {
   static const String shortEnglish = 'E';
   static const String english = 'EN';
   static const String thai = 'TH';
-  static const String mandarin = 'TW';
+  static const String mandarin = 'ZH';
   static const String burmese = 'MM';
   static const String vietnamese = 'VN';
   static const String khmer = 'KH';

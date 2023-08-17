@@ -144,6 +144,7 @@ class DateTimeStringValue extends ValueObject<String> {
         DateTimeFormatString.displayNotificationDateTimeFormat,
       );
 
+  bool get aWeekDifference => differenceNGTWeek(dateTime);
   const DateTimeStringValue._(this.value);
 }
 
@@ -156,6 +157,8 @@ class LanguageValue extends ValueObject<String> {
   }
 
   String get languageString => getLanguageString(value.getOrElse(() => ''));
+  
+  Locale get toLocal => toLocale(value.getOrElse(() => 'en'));
 
   const LanguageValue._(this.value);
 }
@@ -288,4 +291,21 @@ class OosMaterial extends ValueObject<bool> {
       getOosMaterialTagLabelColor(value.getOrElse(() => false));
 
   const OosMaterial._(this.value);
+}
+
+class MobileNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MobileNumber(String input) {
+    return MobileNumber._(validateStringNotEmpty(input));
+  }
+
+  String get getTelephone {
+    return getTelephoneNotGreaterThan16(value.getOrElse(() => ''));
+  }
+
+  String get displayLabel => naIfEmpty(getTelephone);
+
+  const MobileNumber._(this.value);
 }

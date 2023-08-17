@@ -52,24 +52,16 @@ abstract class $AccessRightDtoCopyWith<$Res> {
       _$AccessRightDtoCopyWithImpl<$Res, AccessRightDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Users', defaultValue: false)
-          bool users,
-      @JsonKey(name: 'Orders', defaultValue: false)
-          bool orders,
-      @JsonKey(name: 'Promos', defaultValue: false)
-          bool promos,
-      @JsonKey(name: 'HCPHUB', defaultValue: false)
-          bool hCPHUB,
-      @JsonKey(name: 'Products', defaultValue: false)
-          bool products,
-      @JsonKey(name: 'Services', defaultValue: false)
-          bool services,
-      @JsonKey(name: 'Analytics', defaultValue: false)
-          bool analytics,
-      @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
-          bool loyaltyScheme,
+      {@JsonKey(name: 'Users', defaultValue: false) bool users,
+      @JsonKey(name: 'Orders', defaultValue: false) bool orders,
+      @JsonKey(name: 'Promos', defaultValue: false) bool promos,
+      @JsonKey(name: 'HCPHUB', defaultValue: false) bool hCPHUB,
+      @JsonKey(name: 'Products', defaultValue: false) bool products,
+      @JsonKey(name: 'Services', defaultValue: false) bool services,
+      @JsonKey(name: 'Analytics', defaultValue: false) bool analytics,
+      @JsonKey(name: 'LoyaltyScheme', defaultValue: false) bool loyaltyScheme,
       @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
-          bool adminPOAttachment});
+      bool adminPOAttachment});
 }
 
 /// @nodoc
@@ -145,24 +137,16 @@ abstract class _$$_AccessRightDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Users', defaultValue: false)
-          bool users,
-      @JsonKey(name: 'Orders', defaultValue: false)
-          bool orders,
-      @JsonKey(name: 'Promos', defaultValue: false)
-          bool promos,
-      @JsonKey(name: 'HCPHUB', defaultValue: false)
-          bool hCPHUB,
-      @JsonKey(name: 'Products', defaultValue: false)
-          bool products,
-      @JsonKey(name: 'Services', defaultValue: false)
-          bool services,
-      @JsonKey(name: 'Analytics', defaultValue: false)
-          bool analytics,
-      @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
-          bool loyaltyScheme,
+      {@JsonKey(name: 'Users', defaultValue: false) bool users,
+      @JsonKey(name: 'Orders', defaultValue: false) bool orders,
+      @JsonKey(name: 'Promos', defaultValue: false) bool promos,
+      @JsonKey(name: 'HCPHUB', defaultValue: false) bool hCPHUB,
+      @JsonKey(name: 'Products', defaultValue: false) bool products,
+      @JsonKey(name: 'Services', defaultValue: false) bool services,
+      @JsonKey(name: 'Analytics', defaultValue: false) bool analytics,
+      @JsonKey(name: 'LoyaltyScheme', defaultValue: false) bool loyaltyScheme,
       @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
-          bool adminPOAttachment});
+      bool adminPOAttachment});
 }
 
 /// @nodoc
@@ -231,24 +215,17 @@ class __$$_AccessRightDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AccessRightDto extends _AccessRightDto {
   const _$_AccessRightDto(
-      {@JsonKey(name: 'Users', defaultValue: false)
-          required this.users,
-      @JsonKey(name: 'Orders', defaultValue: false)
-          required this.orders,
-      @JsonKey(name: 'Promos', defaultValue: false)
-          required this.promos,
-      @JsonKey(name: 'HCPHUB', defaultValue: false)
-          required this.hCPHUB,
-      @JsonKey(name: 'Products', defaultValue: false)
-          required this.products,
-      @JsonKey(name: 'Services', defaultValue: false)
-          required this.services,
-      @JsonKey(name: 'Analytics', defaultValue: false)
-          required this.analytics,
+      {@JsonKey(name: 'Users', defaultValue: false) required this.users,
+      @JsonKey(name: 'Orders', defaultValue: false) required this.orders,
+      @JsonKey(name: 'Promos', defaultValue: false) required this.promos,
+      @JsonKey(name: 'HCPHUB', defaultValue: false) required this.hCPHUB,
+      @JsonKey(name: 'Products', defaultValue: false) required this.products,
+      @JsonKey(name: 'Services', defaultValue: false) required this.services,
+      @JsonKey(name: 'Analytics', defaultValue: false) required this.analytics,
       @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
-          required this.loyaltyScheme,
+      required this.loyaltyScheme,
       @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
-          required this.adminPOAttachment})
+      required this.adminPOAttachment})
       : super._();
 
   factory _$_AccessRightDto.fromJson(Map<String, dynamic> json) =>
@@ -329,24 +306,20 @@ class _$_AccessRightDto extends _AccessRightDto {
 
 abstract class _AccessRightDto extends AccessRightDto {
   const factory _AccessRightDto(
-      {@JsonKey(name: 'Users', defaultValue: false)
-          required final bool users,
-      @JsonKey(name: 'Orders', defaultValue: false)
-          required final bool orders,
-      @JsonKey(name: 'Promos', defaultValue: false)
-          required final bool promos,
-      @JsonKey(name: 'HCPHUB', defaultValue: false)
-          required final bool hCPHUB,
+      {@JsonKey(name: 'Users', defaultValue: false) required final bool users,
+      @JsonKey(name: 'Orders', defaultValue: false) required final bool orders,
+      @JsonKey(name: 'Promos', defaultValue: false) required final bool promos,
+      @JsonKey(name: 'HCPHUB', defaultValue: false) required final bool hCPHUB,
       @JsonKey(name: 'Products', defaultValue: false)
-          required final bool products,
+      required final bool products,
       @JsonKey(name: 'Services', defaultValue: false)
-          required final bool services,
+      required final bool services,
       @JsonKey(name: 'Analytics', defaultValue: false)
-          required final bool analytics,
+      required final bool analytics,
       @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
-          required final bool loyaltyScheme,
+      required final bool loyaltyScheme,
       @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
-          required final bool adminPOAttachment}) = _$_AccessRightDto;
+      required final bool adminPOAttachment}) = _$_AccessRightDto;
   const _AccessRightDto._() : super._();
 
   factory _AccessRightDto.fromJson(Map<String, dynamic> json) =

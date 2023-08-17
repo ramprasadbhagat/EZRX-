@@ -32,7 +32,9 @@ mixin _$User {
   bool get disableCreateOrder => throw _privateConstructorUsedError;
   bool get disableReturns => throw _privateConstructorUsedError;
   bool get hasPriceOverride => throw _privateConstructorUsedError;
-  String get preferredLanguage => throw _privateConstructorUsedError;
+  LanguageValue get preferredLanguage => throw _privateConstructorUsedError;
+  List<Language> get supportedLanguages => throw _privateConstructorUsedError;
+  MobileNumber get mobileNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -59,7 +61,9 @@ abstract class $UserCopyWith<$Res> {
       bool disableCreateOrder,
       bool disableReturns,
       bool hasPriceOverride,
-      String preferredLanguage});
+      LanguageValue preferredLanguage,
+      List<Language> supportedLanguages,
+      MobileNumber mobileNumber});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
@@ -96,6 +100,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? disableReturns = null,
     Object? hasPriceOverride = null,
     Object? preferredLanguage = null,
+    Object? supportedLanguages = null,
+    Object? mobileNumber = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -161,7 +167,15 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       preferredLanguage: null == preferredLanguage
           ? _value.preferredLanguage
           : preferredLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageValue,
+      supportedLanguages: null == supportedLanguages
+          ? _value.supportedLanguages
+          : supportedLanguages // ignore: cast_nullable_to_non_nullable
+              as List<Language>,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as MobileNumber,
     ) as $Val);
   }
 
@@ -220,7 +234,9 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool disableCreateOrder,
       bool disableReturns,
       bool hasPriceOverride,
-      String preferredLanguage});
+      LanguageValue preferredLanguage,
+      List<Language> supportedLanguages,
+      MobileNumber mobileNumber});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -257,6 +273,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? disableReturns = null,
     Object? hasPriceOverride = null,
     Object? preferredLanguage = null,
+    Object? supportedLanguages = null,
+    Object? mobileNumber = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -322,7 +340,15 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       preferredLanguage: null == preferredLanguage
           ? _value.preferredLanguage
           : preferredLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageValue,
+      supportedLanguages: null == supportedLanguages
+          ? _value._supportedLanguages
+          : supportedLanguages // ignore: cast_nullable_to_non_nullable
+              as List<Language>,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as MobileNumber,
     ));
   }
 }
@@ -346,8 +372,11 @@ class _$_User extends _User {
       required this.disableCreateOrder,
       required this.disableReturns,
       required this.hasPriceOverride,
-      required this.preferredLanguage})
+      required this.preferredLanguage,
+      required final List<Language> supportedLanguages,
+      required this.mobileNumber})
       : _userSalesOrganisations = userSalesOrganisations,
+        _supportedLanguages = supportedLanguages,
         super._();
 
   @override
@@ -388,11 +417,22 @@ class _$_User extends _User {
   @override
   final bool hasPriceOverride;
   @override
-  final String preferredLanguage;
+  final LanguageValue preferredLanguage;
+  final List<Language> _supportedLanguages;
+  @override
+  List<Language> get supportedLanguages {
+    if (_supportedLanguages is EqualUnmodifiableListView)
+      return _supportedLanguages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_supportedLanguages);
+  }
+
+  @override
+  final MobileNumber mobileNumber;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
   }
 
   @override
@@ -428,7 +468,11 @@ class _$_User extends _User {
             (identical(other.hasPriceOverride, hasPriceOverride) ||
                 other.hasPriceOverride == hasPriceOverride) &&
             (identical(other.preferredLanguage, preferredLanguage) ||
-                other.preferredLanguage == preferredLanguage));
+                other.preferredLanguage == preferredLanguage) &&
+            const DeepCollectionEquality()
+                .equals(other._supportedLanguages, _supportedLanguages) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber));
   }
 
   @override
@@ -449,7 +493,9 @@ class _$_User extends _User {
       disableCreateOrder,
       disableReturns,
       hasPriceOverride,
-      preferredLanguage);
+      preferredLanguage,
+      const DeepCollectionEquality().hash(_supportedLanguages),
+      mobileNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -475,7 +521,9 @@ abstract class _User extends User {
       required final bool disableCreateOrder,
       required final bool disableReturns,
       required final bool hasPriceOverride,
-      required final String preferredLanguage}) = _$_User;
+      required final LanguageValue preferredLanguage,
+      required final List<Language> supportedLanguages,
+      required final MobileNumber mobileNumber}) = _$_User;
   const _User._() : super._();
 
   @override
@@ -509,7 +557,11 @@ abstract class _User extends User {
   @override
   bool get hasPriceOverride;
   @override
-  String get preferredLanguage;
+  LanguageValue get preferredLanguage;
+  @override
+  List<Language> get supportedLanguages;
+  @override
+  MobileNumber get mobileNumber;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

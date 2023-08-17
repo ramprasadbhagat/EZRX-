@@ -5,8 +5,10 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -399,7 +401,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final result = validateContainUserNameOrName(input, user);
         expect(result, const Right(input));
@@ -431,7 +435,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'), 
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -468,7 +474,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -505,7 +513,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final result = validateContainUserNameOrName(input, user);
         expect(

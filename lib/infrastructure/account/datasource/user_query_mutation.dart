@@ -79,6 +79,9 @@ class UserQueryMutation {
             salesOrganizationTwo
             languagePreference
             preferredLanguage
+            supportedLanguages {
+              language
+            }
             userSalesOrganisationList {
               SalesOrg
               CustomerCode

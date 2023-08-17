@@ -61,7 +61,7 @@ class ViewByItemRepository implements IViewByItemRepository {
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
               offset: offset,
-              language: user.preferredLanguage,
+              language: user.preferredLanguage.getOrCrash(),
               userName: user.username.getOrCrash(),
               filterQuery:
                   ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
@@ -73,7 +73,7 @@ class ViewByItemRepository implements IViewByItemRepository {
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
               offset: offset,
-              language: user.preferredLanguage,
+              language: user.preferredLanguage.getOrCrash(),
               filterQuery:
                   ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
                       .toJson(),

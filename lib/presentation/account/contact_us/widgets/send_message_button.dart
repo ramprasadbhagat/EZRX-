@@ -31,7 +31,8 @@ class _SendMessageButton extends StatelessWidget {
                               .read<UserBloc>()
                               .state
                               .user
-                              .preferredLanguage,
+                              .preferredLanguage
+                              .getOrDefaultValue(''),
                         ),
                       );
                 },

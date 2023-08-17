@@ -6,7 +6,9 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -439,7 +441,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.isValid();
@@ -474,7 +478,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -515,7 +521,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -556,7 +564,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -597,7 +607,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -638,7 +650,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -680,7 +694,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -722,7 +738,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -763,7 +781,9 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: 'EN',
+          preferredLanguage: LanguageValue('EN'),
+          mobileNumber: MobileNumber(''),
+          supportedLanguages: <Language>[],
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(

@@ -5,9 +5,13 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
+import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -28,6 +32,8 @@ class UserRepository implements IUserRepository {
   final MixpanelService mixpanelService;
   final ClevertapService clevertapService;
   final DatadogService datadogService;
+  final LanguageLocalDataSource languageLocalDataSource;
+  final LanguageRemoteDataSource languageRemoteDataSource;
 
   UserRepository({
     required this.config,
@@ -39,6 +45,8 @@ class UserRepository implements IUserRepository {
     required this.mixpanelService,
     required this.clevertapService,
     required this.datadogService,
+    required this.languageLocalDataSource,
+    required this.languageRemoteDataSource,
   });
 
   @override
@@ -131,6 +139,38 @@ class UserRepository implements IUserRepository {
       );
 
       return Right(user);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, UpdateLanguageResponse>> updateLanguage({
+    required Language language,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final updateLanguageResponse =
+            await languageLocalDataSource.getCustomerLicense();
+
+        if (updateLanguageResponse.success) {
+          return Right(updateLanguageResponse);
+        }
+
+        return const Left(ApiFailure.languageChangeFail());
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final updateLanguageResponse = await languageRemoteDataSource
+          .changeLanguage(language.subTag.getOrCrash());
+
+      if (updateLanguageResponse.success) {
+        return Right(updateLanguageResponse);
+      }
+
+      return const Left(ApiFailure.languageChangeFail());
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

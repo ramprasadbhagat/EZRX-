@@ -1,6 +1,8 @@
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/language/language_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
@@ -81,9 +83,15 @@ import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_qu
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_query.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_query_mutation.dart';
@@ -92,6 +100,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mu
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/contact_us_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/customer_license_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/deduction_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_remote.dart';
@@ -619,7 +628,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => LoginFormBloc(
       authRepository: locator<AuthRepository>(),
-      deviceRepository: locator<DeviceRepository>(),
+      deviceRepository: locator<DeviceRepository>(), 
     ),
   );
 
@@ -695,7 +704,21 @@ void setupLocator() {
   //  User
   //
   //============================================================
+  locator.registerLazySingleton(
+    () => LanguageMutation(),
+  );
 
+  locator.registerLazySingleton(
+    () => LanguageLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => LanguageRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      languageMutation: locator<LanguageMutation>(),
+    ),
+  );
   locator.registerLazySingleton(() => UserQueryMutation());
   locator.registerLazySingleton(
     () => UserLocalDataSource(tokenStorage: locator<TokenStorage>()),
@@ -719,7 +742,9 @@ void setupLocator() {
       firebaseCrashlyticsService: locator<FirebaseCrashlyticsService>(),
       tokenStorage: locator<TokenStorage>(),
       mixpanelService: locator<MixpanelService>(),
-      datadogService: locator<DatadogService>(),
+      datadogService: locator<DatadogService>(), 
+      languageLocalDataSource: locator<LanguageLocalDataSource>(),
+      languageRemoteDataSource: locator<LanguageRemoteDataSource>(),
     ),
   );
 
@@ -3154,7 +3179,7 @@ void setupLocator() {
     () => NewRequestBloc(),
   );
 
-  //============================================================
+ //============================================================
   //  Contact Us
   //============================================================
 
@@ -3244,5 +3269,48 @@ void setupLocator() {
     () => FaqBloc(
       faqInfoRepository: locator<FAQInfoRepository>(),
     ),
+  );
+
+  //============================================================
+  //  Customer License
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => CustomerLicenseQuery(),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerLicenseLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerLicenseRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      customerLicenseQuery: locator<CustomerLicenseQuery>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => CustomerLicenseRepository(
+      config: locator<Config>(),
+      localDataSource: locator<CustomerLicenseLocalDataSource>(),
+      remoteDataSource: locator<CustomerLicenseRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerLicenseBloc(
+      customerLicenseRepository: locator<CustomerLicenseRepository>(),
+    ),
+  );
+
+
+  //============================================================
+  //  Language
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => LanguageBloc(),
   );
 }

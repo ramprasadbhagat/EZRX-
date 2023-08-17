@@ -628,21 +628,6 @@ class CollectiveNumber extends ValueObject<String> {
   const CollectiveNumber._(this.value);
 }
 
-class MobileNumber extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory MobileNumber(String input) {
-    return MobileNumber._(validateStringNotEmpty(input));
-  }
-
-  String get getTelephone {
-    return getTelephoneNotGreaterThan16(value.getOrElse(() => ''));
-  }
-
-  const MobileNumber._(this.value);
-}
-
 class ContactPerson extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

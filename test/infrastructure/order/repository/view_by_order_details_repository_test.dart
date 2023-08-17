@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -29,7 +30,8 @@ void main() {
 
   final orderHistoryDetailsMockList = OrderHistoryDetails.empty();
 
-  final mockUser = User.empty();
+  final mockUser =
+      User.empty().copyWith(preferredLanguage: LanguageValue('EN'));
 
   final mockOrderHistoryItem = OrderHistoryDetailsOrderHeader.empty();
 
@@ -175,9 +177,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-          orderId: '200012',
-          language: '',
-        ),
+            orderId: '200012', language: 'EN',),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(

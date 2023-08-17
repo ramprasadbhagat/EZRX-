@@ -26,6 +26,7 @@ mixin _$UserEvent {
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$UserEvent {
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,6 +51,7 @@ mixin _$UserEvent {
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,6 +64,7 @@ mixin _$UserEvent {
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
         updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +76,7 @@ mixin _$UserEvent {
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,6 +88,7 @@ mixin _$UserEvent {
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,6 +157,7 @@ class _$_Initialized implements _Initialized {
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
   }) {
     return initialized();
   }
@@ -166,6 +173,7 @@ class _$_Initialized implements _Initialized {
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
   }) {
     return initialized?.call();
   }
@@ -180,6 +188,7 @@ class _$_Initialized implements _Initialized {
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -198,6 +207,7 @@ class _$_Initialized implements _Initialized {
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
         updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
   }) {
     return initialized(this);
   }
@@ -212,6 +222,7 @@ class _$_Initialized implements _Initialized {
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
   }) {
     return initialized?.call(this);
   }
@@ -226,6 +237,7 @@ class _$_Initialized implements _Initialized {
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -311,6 +323,7 @@ class _$_Fetch implements _Fetch {
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
   }) {
     return fetch(isLoginOnBehalf);
   }
@@ -326,6 +339,7 @@ class _$_Fetch implements _Fetch {
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
   }) {
     return fetch?.call(isLoginOnBehalf);
   }
@@ -340,6 +354,7 @@ class _$_Fetch implements _Fetch {
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -358,6 +373,7 @@ class _$_Fetch implements _Fetch {
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
         updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
   }) {
     return fetch(this);
   }
@@ -372,6 +388,7 @@ class _$_Fetch implements _Fetch {
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
   }) {
     return fetch?.call(this);
   }
@@ -386,6 +403,7 @@ class _$_Fetch implements _Fetch {
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -450,6 +468,7 @@ class _$_AcceptTnc implements _AcceptTnc {
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
   }) {
     return acceptTnc();
   }
@@ -465,6 +484,7 @@ class _$_AcceptTnc implements _AcceptTnc {
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
   }) {
     return acceptTnc?.call();
   }
@@ -479,6 +499,7 @@ class _$_AcceptTnc implements _AcceptTnc {
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
@@ -497,6 +518,7 @@ class _$_AcceptTnc implements _AcceptTnc {
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
         updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
   }) {
     return acceptTnc(this);
   }
@@ -511,6 +533,7 @@ class _$_AcceptTnc implements _AcceptTnc {
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
   }) {
     return acceptTnc?.call(this);
   }
@@ -525,6 +548,7 @@ class _$_AcceptTnc implements _AcceptTnc {
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
     required TResult orElse(),
   }) {
     if (acceptTnc != null) {
@@ -625,6 +649,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
   }) {
     return updateNotificationSettings(languagePreference, emailNotifications);
   }
@@ -640,6 +665,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
   }) {
     return updateNotificationSettings?.call(
         languagePreference, emailNotifications);
@@ -655,6 +681,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
     required TResult orElse(),
   }) {
     if (updateNotificationSettings != null) {
@@ -673,6 +700,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
         updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
   }) {
     return updateNotificationSettings(this);
   }
@@ -687,6 +715,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
   }) {
     return updateNotificationSettings?.call(this);
   }
@@ -701,6 +730,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
     required TResult orElse(),
   }) {
     if (updateNotificationSettings != null) {
@@ -812,6 +842,7 @@ class _$_UpdatePaymentNotificationSettings
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
   }) {
     return updatePaymentNotificationSettings(paymentNotification);
   }
@@ -827,6 +858,7 @@ class _$_UpdatePaymentNotificationSettings
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
   }) {
     return updatePaymentNotificationSettings?.call(paymentNotification);
   }
@@ -841,6 +873,7 @@ class _$_UpdatePaymentNotificationSettings
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
     required TResult orElse(),
   }) {
     if (updatePaymentNotificationSettings != null) {
@@ -859,6 +892,7 @@ class _$_UpdatePaymentNotificationSettings
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
         updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
   }) {
     return updatePaymentNotificationSettings(this);
   }
@@ -873,6 +907,7 @@ class _$_UpdatePaymentNotificationSettings
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
   }) {
     return updatePaymentNotificationSettings?.call(this);
   }
@@ -887,6 +922,7 @@ class _$_UpdatePaymentNotificationSettings
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
         updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
     required TResult orElse(),
   }) {
     if (updatePaymentNotificationSettings != null) {
@@ -906,6 +942,188 @@ abstract class _UpdatePaymentNotificationSettings implements UserEvent {
   _$$_UpdatePaymentNotificationSettingsCopyWith<
           _$_UpdatePaymentNotificationSettings>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateLanguageCopyWith<$Res> {
+  factory _$$_UpdateLanguageCopyWith(
+          _$_UpdateLanguage value, $Res Function(_$_UpdateLanguage) then) =
+      __$$_UpdateLanguageCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Language language});
+
+  $LanguageCopyWith<$Res> get language;
+}
+
+/// @nodoc
+class __$$_UpdateLanguageCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_UpdateLanguage>
+    implements _$$_UpdateLanguageCopyWith<$Res> {
+  __$$_UpdateLanguageCopyWithImpl(
+      _$_UpdateLanguage _value, $Res Function(_$_UpdateLanguage) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? language = null,
+  }) {
+    return _then(_$_UpdateLanguage(
+      null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as Language,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LanguageCopyWith<$Res> get language {
+    return $LanguageCopyWith<$Res>(_value.language, (value) {
+      return _then(_value.copyWith(language: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateLanguage implements _UpdateLanguage {
+  const _$_UpdateLanguage(this.language);
+
+  @override
+  final Language language;
+
+  @override
+  String toString() {
+    return 'UserEvent.updateLanguage(language: $language)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateLanguage &&
+            (identical(other.language, language) ||
+                other.language == language));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, language);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateLanguageCopyWith<_$_UpdateLanguage> get copyWith =>
+      __$$_UpdateLanguageCopyWithImpl<_$_UpdateLanguage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() acceptTnc,
+    required TResult Function(
+            LanguageValue languagePreference, bool emailNotifications)
+        updateNotificationSettings,
+    required TResult Function(PaymentNotification paymentNotification)
+        updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
+  }) {
+    return updateLanguage(language);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? acceptTnc,
+    TResult? Function(
+            LanguageValue languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    TResult? Function(PaymentNotification paymentNotification)?
+        updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
+  }) {
+    return updateLanguage?.call(language);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? acceptTnc,
+    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    TResult Function(PaymentNotification paymentNotification)?
+        updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
+    required TResult orElse(),
+  }) {
+    if (updateLanguage != null) {
+      return updateLanguage(language);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
+    required TResult Function(_UpdatePaymentNotificationSettings value)
+        updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
+  }) {
+    return updateLanguage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    TResult? Function(_UpdatePaymentNotificationSettings value)?
+        updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
+  }) {
+    return updateLanguage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    TResult Function(_UpdatePaymentNotificationSettings value)?
+        updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
+    required TResult orElse(),
+  }) {
+    if (updateLanguage != null) {
+      return updateLanguage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateLanguage implements UserEvent {
+  const factory _UpdateLanguage(final Language language) = _$_UpdateLanguage;
+
+  Language get language;
+  @JsonKey(ignore: true)
+  _$$_UpdateLanguageCopyWith<_$_UpdateLanguage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

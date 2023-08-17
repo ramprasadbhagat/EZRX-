@@ -1,5 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/language/language_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -166,13 +171,33 @@ class MoreDetailsTile {
             .copyWith(fontSize: 10, color: ZPColors.lightGray),
       );
 
-  factory MoreDetailsTile.profile() => const MoreDetailsTile(
-        icon: Icon(
-          Icons.perm_identity_outlined,
-          color: ZPColors.lightGray,
-        ),
-        label: 'Profile',
-      );
+  factory MoreDetailsTile.profile(BuildContext context) => MoreDetailsTile(
+      icon: const Icon(
+        Icons.perm_identity_outlined,
+        color: ZPColors.greenIconColor,
+      ),
+      label: 'Profile',
+      onTap: () {
+        context
+            .read<CustomerLicenseBloc>()
+            .add(
+              CustomerLicenseEvent.fetch(
+                customerInfo:
+                    context.read<EligibilityBloc>().state.customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                user: context.read<EligibilityBloc>().state.user,
+              ),
+            );
+        context.read<LanguageBloc>().add(
+                LanguageEvent.changeLanguage(
+                context.read<UserBloc>().state.user.defaultLanguage,
+              ),
+            );
+        context.navigateTo(
+          const ProfilePageRoute(),
+        );
+      },);
 
   factory MoreDetailsTile.security() => const MoreDetailsTile(
         icon: Icon(

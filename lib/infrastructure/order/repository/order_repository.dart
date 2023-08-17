@@ -359,12 +359,12 @@ class OrderRepository implements IOrderRepository {
                 .getOrderHistoryDetailsForSalesRep(
                 companyName: '',
                 orderId: orderResponse.salesDocument,
-                language: user.preferredLanguage,
+                language: user.preferredLanguage.getOrCrash(),
                 userName: user.username.getOrCrash(),
               )
             : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
                 orderId: orderResponse.salesDocument,
-                language: user.preferredLanguage,
+                language: user.preferredLanguage.getOrCrash(),
               );
       } catch (e) {
         apiRetryCounter--;

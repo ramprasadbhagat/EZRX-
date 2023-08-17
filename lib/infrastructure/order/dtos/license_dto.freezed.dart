@@ -46,16 +46,20 @@ abstract class $LicenseDtoCopyWith<$Res> {
       _$LicenseDtoCopyWithImpl<$Res, LicenseDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'licenceType', defaultValue: '')
-          String licenceType,
+      {@JsonKey(name: 'licenceType', defaultValue: '') String licenceType,
       @JsonKey(name: 'licenseDescription', defaultValue: '')
-          String licenseDescription,
-      @JsonKey(name: 'licenseNumber', defaultValue: '')
-          String licenseNumber,
-      @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          String validFrom,
-      @JsonKey(name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          String validTo});
+      String licenseDescription,
+      @JsonKey(name: 'licenseNumber', defaultValue: '') String licenseNumber,
+      @JsonKey(
+          name: 'validFrom',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      String validFrom,
+      @JsonKey(
+          name: 'validTo',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      String validTo});
 }
 
 /// @nodoc
@@ -111,16 +115,20 @@ abstract class _$$_licenseDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'licenceType', defaultValue: '')
-          String licenceType,
+      {@JsonKey(name: 'licenceType', defaultValue: '') String licenceType,
       @JsonKey(name: 'licenseDescription', defaultValue: '')
-          String licenseDescription,
-      @JsonKey(name: 'licenseNumber', defaultValue: '')
-          String licenseNumber,
-      @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          String validFrom,
-      @JsonKey(name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          String validTo});
+      String licenseDescription,
+      @JsonKey(name: 'licenseNumber', defaultValue: '') String licenseNumber,
+      @JsonKey(
+          name: 'validFrom',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      String validFrom,
+      @JsonKey(
+          name: 'validTo',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      String validTo});
 }
 
 /// @nodoc
@@ -170,15 +178,21 @@ class __$$_licenseDtoCopyWithImpl<$Res>
 class _$_licenseDto extends _licenseDto {
   const _$_licenseDto(
       {@JsonKey(name: 'licenceType', defaultValue: '')
-          required this.licenceType,
+      required this.licenceType,
       @JsonKey(name: 'licenseDescription', defaultValue: '')
-          required this.licenseDescription,
+      required this.licenseDescription,
       @JsonKey(name: 'licenseNumber', defaultValue: '')
-          required this.licenseNumber,
-      @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          required this.validFrom,
-      @JsonKey(name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          required this.validTo})
+      required this.licenseNumber,
+      @JsonKey(
+          name: 'validFrom',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      required this.validFrom,
+      @JsonKey(
+          name: 'validTo',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      required this.validTo})
       : super._();
 
   factory _$_licenseDto.fromJson(Map<String, dynamic> json) =>
@@ -245,15 +259,21 @@ class _$_licenseDto extends _licenseDto {
 abstract class _licenseDto extends LicenseDto {
   const factory _licenseDto(
       {@JsonKey(name: 'licenceType', defaultValue: '')
-          required final String licenceType,
+      required final String licenceType,
       @JsonKey(name: 'licenseDescription', defaultValue: '')
-          required final String licenseDescription,
+      required final String licenseDescription,
       @JsonKey(name: 'licenseNumber', defaultValue: '')
-          required final String licenseNumber,
-      @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          required final String validFrom,
-      @JsonKey(name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
-          required final String validTo}) = _$_licenseDto;
+      required final String licenseNumber,
+      @JsonKey(
+          name: 'validFrom',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      required final String validFrom,
+      @JsonKey(
+          name: 'validTo',
+          defaultValue: '',
+          readValue: dateTimeStringFormatCheck)
+      required final String validTo}) = _$_licenseDto;
   const _licenseDto._() : super._();
 
   factory _licenseDto.fromJson(Map<String, dynamic> json) =

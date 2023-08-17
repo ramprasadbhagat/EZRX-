@@ -11,6 +11,7 @@ class ScrollList<T> extends StatefulWidget {
   final bool isLoading;
   final List<T> items;
   final Widget noRecordFoundWidget;
+  final Widget header;
   final ScrollController controller;
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   const ScrollList({
@@ -20,6 +21,7 @@ class ScrollList<T> extends StatefulWidget {
     required this.items,
     required this.noRecordFoundWidget,
     required this.controller,
+    this.header = const SizedBox.shrink(),
     this.onRefresh,
     this.onLoadingMore,
   }) : super(key: key);
@@ -36,8 +38,9 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
     _controller = widget.controller;
     _controller.addListener(
       () {
-        if (_controller.position.pixels >=
-            _controller.position.maxScrollExtent) {
+        if ((_controller.position.pixels >=
+                _controller.position.maxScrollExtent) &&
+            widget.items.isNotEmpty) {
           widget.onLoadingMore?.call();
         }
       },
@@ -63,8 +66,11 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
         controller: _controller,
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
+          SliverToBoxAdapter(
+            child: widget.header,
+          ),
           widget.items.isEmpty && !widget.isLoading
-              ? SliverFillRemaining(
+              ? SliverToBoxAdapter(
                   child: widget.noRecordFoundWidget,
                 )
               : SliverList(

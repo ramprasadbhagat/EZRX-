@@ -228,6 +228,21 @@ String getLanguageString(String apiLanguageCode) {
   }
 }
 
+Locale toLocale(String apiLanguageCode) {
+  final languageLocal = {
+    'EN': const Locale('en'),
+    'E': const Locale('en'),
+    'TH': const Locale('th'),
+    'TW': const Locale('zh'),
+    'ZH': const Locale('zh'),
+    'MM': const Locale('my'),
+    'VN': const Locale('vi'),
+    'KH': const Locale('kh'),
+  };
+
+  return languageLocal[apiLanguageCode] ?? const Locale('en');
+}
+
 String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;
 }
@@ -250,6 +265,7 @@ Color getStatusLabelColor(String statusType) {
     'APPROVED': ZPColors.lightSecondary,
     'Preorder': ZPColors.lightYellow,
     'Bonus': ZPColors.primary,
+    'Active': ZPColors.lightSecondary,
   };
 
   final lightRedStatusColor = {
@@ -262,6 +278,7 @@ Color getStatusLabelColor(String statusType) {
     'Cancelled by buyer': ZPColors.lightRedStatusColor,
     'Cancelled by Seller': ZPColors.lightRedStatusColor,
     'Overdue': ZPColors.lightRedStatusColor,
+    'Expired': ZPColors.lightRedStatusColor,
   };
 
   final lightYellow = {
@@ -285,6 +302,7 @@ Color getStatusLabelColor(String statusType) {
     'Pending release - seller approval required': ZPColors.lightYellow,
     'order pending': ZPColors.lightYellow,
     'Order packed and ready for delivery': ZPColors.lightYellow,
+    'Expiring': ZPColors.lightYellow,
   };
 
   final secondary = {
@@ -402,6 +420,13 @@ Color getDisplayStatusTextColor(String status) {
 
 Color getAdviceExpiryColor(String status) {
   return isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
+}
+
+
+bool differenceNGTWeek(DateTime date) {
+  final diff = DateTime.now().difference(date).inDays;
+
+  return (!diff.isNegative) && diff < 7;
 }
 
 bool isApproved(String status) {

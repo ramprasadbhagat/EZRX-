@@ -6,12 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 class SettingsTile extends StatelessWidget {
   const SettingsTile({Key? key}) : super(key: key);
 
-  List<MoreDetailsTile> get moreSettingTiles => [
-        MoreDetailsTile.profile(),
-        MoreDetailsTile.security(),
-        MoreDetailsTile.notifications(),
-        MoreDetailsTile.privacy(),
-      ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +22,7 @@ class SettingsTile extends StatelessWidget {
           top: 18.0,
         ),
         shrinkWrap: true,
-        children: moreSettingTiles.map((item) {
+        children: _moreSettingTiles(context).map((item) {
           return InkWell(
             onTap: item.onTap,
             child: Column(
@@ -51,4 +45,11 @@ class SettingsTile extends StatelessWidget {
       ),
     );
   }
+
+  List<MoreDetailsTile> _moreSettingTiles(BuildContext context) => [
+        MoreDetailsTile.profile(context),
+        MoreDetailsTile.security(),
+        MoreDetailsTile.notifications(),
+        MoreDetailsTile.privacy(),
+      ];
 }

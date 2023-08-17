@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -101,6 +102,32 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               ),
             ),
           ),
+        );
+      },
+      updateLanguage: (_UpdateLanguage e) async {
+        emit(
+          state.copyWith(
+            userFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccessOption =
+            await userRepository.updateLanguage(language: e.language);
+        failureOrSuccessOption.fold(
+          (failure) => emit(
+            state.copyWith(
+              userFailureOrSuccessOption: optionOf(failureOrSuccessOption),
+            ),
+          ),
+          (_) {
+            emit(
+              state.copyWith(
+                userFailureOrSuccessOption: none(),
+                user: state.user.copyWith(
+                  preferredLanguage: e.language.subTag,
+                ),
+              ),
+            );
+          },
         );
       },
     );

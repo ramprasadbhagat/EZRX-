@@ -1,6 +1,7 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
+import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_passoword_confirmation_page.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
@@ -181,6 +182,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       page: PaymentPage,
       path: 'payments',
+    ),
+    AutoRoute(
+      page: ProfilePage,
+      path: 'profile',
     ),
     AutoRoute(
       path: 'payments/payment_summary',

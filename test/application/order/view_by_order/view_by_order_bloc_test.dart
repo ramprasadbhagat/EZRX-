@@ -33,14 +33,15 @@ void main() {
     shipToCustomerCode: 'fake-shipto',
   );
   final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: 'EN',
+      username: Username('fake-name'),
+      role: Role(
+        description: 'fake-desc',
+        id: 'id',
+        name: 'fake-name',
+        type: RoleType('fake-type'),
+      ),
+    preferredLanguage: LanguageValue('EN'),
+    mobileNumber: MobileNumber(''),
   );
   final searchKey = SearchKey('fake-key');
   final fakeFromDate = DateTime.parse('2023-07-12 15:56:56.01');

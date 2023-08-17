@@ -58,7 +58,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         soldTo: soldTo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        language: user.preferredLanguage,
+        language: user.preferredLanguage.getOrCrash(),
         searchKey: searchKey.getOrCrash(),
         orderBy: orderBy,
         creatingOrderIds: creatingOrderIds,

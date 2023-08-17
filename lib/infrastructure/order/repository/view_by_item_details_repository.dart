@@ -41,7 +41,7 @@ class ViewByItemDetailsRepository implements IViewByItemDetailsRepository {
       final viewByItemDetailsList =
           await orderHistoryRemoteDataSource.getViewByItemDetails(
         soldTo: soldTo.customerCodeSoldTo,
-        language: user.preferredLanguage,
+        language: user.preferredLanguage.getOrCrash(),
         orderNumber: orderNumber.getOrDefaultValue(''),
       );
 
