@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -270,6 +271,9 @@ class _FooterState extends State<_Footer> {
     required BuildContext context,
     required Price price,
   }) {
+    final disableCreateOrder =
+        !context.read<UserBloc>().state.user.userCanCreateOrder;
+    if (disableCreateOrder) return false;
     final materialWithoutPrice =
         context.read<SalesOrgBloc>().state.configs.materialWithoutPrice;
 
