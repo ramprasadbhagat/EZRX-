@@ -35,6 +35,15 @@ class FAQPage extends StatelessWidget {
             style: Theme.of(context).textTheme.labelLarge,
           ),
           centerTitle: false,
+          leading: IconButton(
+            key: WidgetKeys.materialDetailsPageBack,
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.chevron_left,
+              color: ZPColors.black,
+              size: 30,
+            ),
+          ),
         ),
         body: BlocBuilder<FaqBloc, FaqState>(
           buildWhen: (previous, current) =>
@@ -70,7 +79,7 @@ class FAQPage extends StatelessWidget {
                           horizontal: 16.0,
                         ),
                         child: Text(
-                          '${'Search result for:'.tr()}${state.searchKey.getOrDefaultValue('')}',
+                          '${'Search results for:'.tr()} ${state.searchKey.getOrDefaultValue('')}',
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       )
