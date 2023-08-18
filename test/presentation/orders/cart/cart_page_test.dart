@@ -2,6 +2,10 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -643,6 +647,88 @@ void main() {
         // verify(() => authBlocMock.add(const AuthEvent.authCheck()));
       });
 
+      testWidgets('Delete item from cart by swapping', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemWithDataList2,
+            isFetching: true,
+            isClearing: false,
+            isUpserting: false,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final listWidget = find.byType(CartProductTile);
+        expect(listWidget, findsOneWidget);
+        await tester.drag(listWidget, const Offset(-500, 0));
+        await tester.pump();
+        final deleteIcon = find.byIcon(Icons.delete_outline);
+        expect(deleteIcon, findsOneWidget);
+
+        await tester.tap(
+          deleteIcon,
+          warnIfMissed: true,
+        );
+        await tester.pump(const Duration(seconds: 1));
+
+        verify(
+          () => cartBloc.add(
+            CartEvent.upsertCart(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2601')),
+              customerCodeInfo:
+                  CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1234'),
+              shipToInfo: ShipToInfo.empty(),
+              priceAggregate: mockCartItemWithDataList2.first,
+              quantity: 0,
+              salesOrganisationConfigs:
+                  SalesOrganisationConfigs.empty().copyWith(
+                enableReferenceNote: true,
+                enableVat: true,
+                enableFutureDeliveryDay: true,
+                enableMobileNumber: true,
+                enableSpecialInstructions: true,
+                disableOrderType: false,
+                enableCollectiveNumber: true,
+                enablePaymentTerms: true,
+                enableRemarks: true,
+                priceOverride: true,
+              ),
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+            ),
+          ),
+        ).called(1);
+      });
+      testWidgets(
+          'Test SnackBarMessage when delete the item from cart by swapping',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemWithDataList2,
+            isClearing: true,
+            isUpserting: true,
+          ),
+        );
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartProducts: [
+              ...mockCartItemWithDataList2,
+              ...mockCartItemWithDataList2
+            ],
+            isClearing: false,
+            isUpserting: false,
+          ),
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        await tester.pump(const Duration(seconds: 1));
+        final msg = find.textContaining(
+          'Item has been removed from cart.'.tr(),
+        );
+        expect(msg, findsOneWidget);
+      });
       // testWidgets('Test have cart item list and Refresh', (tester) async {
       //   when(() => cartBloc.state).thenReturn(
       //     CartState.initial().copyWith(
@@ -689,18 +775,18 @@ void main() {
       //     () => cartBloc.add(
       //       CartEvent.fetch(
       //         salesOrganisationConfigs:
-      //             SalesOrganisationConfigs.empty().copyWith(
-      //           enableReferenceNote: true,
-      //           enableVat: true,
-      //           enableFutureDeliveryDay: true,
-      //           enableMobileNumber: true,
-      //           enableSpecialInstructions: true,
-      //           disableOrderType: false,
-      //           enableCollectiveNumber: true,
-      //           enablePaymentTerms: true,
-      //           enableRemarks: true,
-      //           priceOverride: true,
-      //         ),
+      //     SalesOrganisationConfigs.empty().copyWith(
+      //   enableReferenceNote: true,
+      //   enableVat: true,
+      //   enableFutureDeliveryDay: true,
+      //   enableMobileNumber: true,
+      //   enableSpecialInstructions: true,
+      //   disableOrderType: false,
+      //   enableCollectiveNumber: true,
+      //   enablePaymentTerms: true,
+      //   enableRemarks: true,
+      //   priceOverride: true,
+      // ),
       //         salesOrganisation: SalesOrganisation.empty()
       //             .copyWith(salesOrg: SalesOrg('2601')),
       //         customerCodeInfo:
@@ -844,49 +930,6 @@ void main() {
       //   expect(remarkWidget, findsOneWidget);
       // });
 
-      // testWidgets('Test have cart item list and remove from cart by swapping',
-      //     (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItems: mockCartItemWithDataList2
-      //           .map((e) => CartItem.material(e))
-      //           .toList(),
-      //       isFetching: true,
-      //     ),
-      //   );
-
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
-
-      //   await tester.pump();
-      //   final item = find.byKey(Key(
-      //       'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrCrash()}'));
-      //   expect(item, findsOneWidget);
-      //   final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-      //   expect(listWidget, findsOneWidget);
-
-      //   await tester.drag(listWidget, const Offset(-500, 0));
-      //   await tester.pump();
-      //   final deleteIcon = find.byIcon(Icons.delete_outline);
-      //   expect(deleteIcon, findsOneWidget);
-      //   final text = find.text('Delete');
-      //   expect(text, findsOneWidget);
-      //   await tester.tap(
-      //     text,
-      //   );
-      //   await tester.pump();
-      //   verify(
-      //     () => cartBloc.add(
-      //       CartEvent.removeFromCart(
-      //         item: mockCartItemWithDataList2
-      //             .map((e) => CartItem.material(e))
-      //             .toList()
-      //             .first,
-      //       ),
-      //     ),
-      //   ).called(1);
-      // });
       // testWidgets('Test have cart item list and Material price loading NA',
       //     (tester) async {
       //   when(() => cartBloc.state).thenReturn(

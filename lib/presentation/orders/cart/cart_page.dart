@@ -209,6 +209,11 @@ class _CartScrollList extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.cartProducts.length != current.cartProducts.length,
       listener: (context, state) {
+        if (!state.isUpserting || !state.isClearing) {
+          CustomSnackBar(
+            messageText: 'Item has been removed from cart.'.tr(),
+          ).show(context);
+        }
         state.apiFailureOrSuccessOption.fold(
           () {
             if (!state.isFetching) {
