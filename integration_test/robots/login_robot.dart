@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class LoginRobot {
@@ -15,23 +15,27 @@ class LoginRobot {
   final nextButton = find.text('Next'.tr());
   final forgotUsernameField = find.byKey(const Key('forgotUsernameField'));
   final marketSelector = find.byKey(const Key('appMarketSelector'));
+  final loginUsernameField = find.byKey(const Key('loginUsernameField'));
+  final loginPasswordField = find.byKey(const Key('loginPasswordField'));
+  final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
+  final getStartedButton = find.byKey(const Key('getStarted'));
+  final signUp = find.text('Sign up'.tr());
+  final loginWithSSO = find.text('Sign up'.tr());
 
   Future<void> login(String username, String password) async {
-    final loginUsernameField = find.byKey(const Key('loginUsernameField'));
     expect(loginUsernameField, findsOneWidget);
-    final loginPasswordField = find.byKey(const Key('loginPasswordField'));
     expect(loginPasswordField, findsOneWidget);
-    final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-
     expect(loginSubmitButton, findsOneWidget);
 
     await tester.enterText(loginUsernameField, username);
-    await tester.pump();
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump(const Duration(seconds: 1));
 
     await tester.enterText(loginPasswordField, password);
-    await tester.pump();
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump(const Duration(seconds: 1));
 
-    await tester.ensureVisible(loginSubmitButton);
+    expect(loginSubmitButton, findsOneWidget);
     await tester.tap(loginSubmitButton);
     await tester.pumpAndSettle();
   }
@@ -43,8 +47,25 @@ class LoginRobot {
     }
   }
 
+  void findUsernameField() {
+    expect(loginUsernameField, findsOneWidget);
+  }
+
+  void findPasswordField() {
+    expect(loginPasswordField, findsOneWidget);
+  }
+
+  void findSubmitButton() {
+    expect(loginSubmitButton, findsOneWidget);
+  }
+
   void findRememberMeCheckbox() {
     expect(rememberMeCheckbox, findsOneWidget);
+  }
+
+  void verifyRememberMeCheckboxUnchecked() {
+    final checkbox = tester.firstWidget<Checkbox>(rememberMeCheckbox);
+    expect(checkbox.value, false);
   }
 
   Future<void> tapToRememberMe() async {
@@ -83,6 +104,33 @@ class LoginRobot {
     expect(marketSelector, findsOneWidget);
   }
 
+  void findGetStartedButton() {
+    expect(getStartedButton, findsOneWidget);
+  }
+
+  Future<void> tapGetStartedButton() async {
+    await tester.tap(getStartedButton);
+    //TODO : In maximum attempt we are facing loading banner on homtap,
+    //Fow now it's better not to wait for api data/loader, used pump()
+    //we can convert to pumpAndSettle once we get proper response on time in future.
+    await tester.pump(const Duration(seconds: 2));
+  }
+
+  void verifyDefaultValueSelector(String marketValue) {
+    final dropdownItemValue = find.text(marketValue).last;
+    expect(dropdownItemValue, findsOneWidget);
+  }
+
+  void verifyDefaultUsernameField() {
+    final inputUsername = tester.widget<TextFormField>(loginUsernameField);
+    expect(inputUsername.initialValue, isEmpty);
+  }
+
+  void verifyDefaultPasswordField() {
+    final inputPassword = tester.widget<TextFormField>(loginPasswordField);
+    expect(inputPassword.initialValue, isEmpty);
+  }
+
   Future<void> tapToMarketSelector() async {
     await tester.tap(marketSelector);
     await tester.pumpAndSettle();
@@ -92,6 +140,10 @@ class LoginRobot {
     final dropdownItemToSelect = find.text(market).last;
     await tester.tap(dropdownItemToSelect);
     await tester.pumpAndSettle();
+  }
+
+  void verifySelectedMarket(String market) {
+    expect(find.text(market).last, findsOneWidget);
   }
 
   void verifyErrorMessageWithoutUserName() {
@@ -133,5 +185,13 @@ class LoginRobot {
   void verifyMessageSentEmail() {
     final emailSendToYou = find.text('Email sent to you!');
     expect(emailSendToYou, findsOneWidget);
+  }
+
+  void findSignUpLink() {
+    expect(signUp, findsOneWidget);
+  }
+
+  void findLoginWithSSOButton() {
+    expect(loginWithSSO, findsOneWidget);
   }
 }

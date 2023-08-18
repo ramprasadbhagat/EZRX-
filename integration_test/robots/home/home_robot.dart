@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class HomeRobot {
@@ -18,6 +19,8 @@ class HomeRobot {
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
   final homeTabAnnouncementWidget =
       find.byKey(const Key('homeTabAnnouncementWidget'));
+  final moreTab = find.text('More'.tr());
+  final logout = find.text('Log out');
 
   void verify() {
     final home = find.byKey(const Key('homeScreen'));
@@ -143,6 +146,31 @@ class HomeRobot {
   Future<void> tapSavedOrders() async {
     await tester.pumpAndSettle();
     await tester.tap(savedOrders);
+    await tester.pumpAndSettle();
+  }
+
+  void findMoreTab() {
+    expect(moreTab, findsOneWidget);
+  }
+
+  Future<void> tapMoreTab() async {
+    await tester.tap(moreTab);
+    await tester.pump(const Duration(milliseconds: 300));
+  }
+
+  Future<void> findLogout() async {
+    final listMore = find.byType(ListView).last;
+    await tester.dragUntilVisible(
+      logout,
+      listMore,
+      const Offset(0, -250),
+      duration: const Duration(seconds: 2),
+    );
+    expect(logout, findsOneWidget);
+  }
+
+  Future<void> tapLogout() async {
+    await tester.tap(logout);
     await tester.pumpAndSettle();
   }
 }

@@ -53,6 +53,7 @@ class IntroStep extends StatelessWidget {
                 ),
                 const Spacer(),
                 OutlinedButton(
+                  key: const Key('getStarted'),
                   style: Theme.of(context).outlinedButtonTheme.style!.copyWith(
                         backgroundColor: MaterialStateProperty.all(
                           introObject.buttonBGColor,
